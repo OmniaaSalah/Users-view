@@ -9,9 +9,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { DivisionService } from '../../../services/division/division.service';
-import { pairwise, skip } from 'rxjs/operators';
-import { el } from 'date-fns/locale';
-import { IndexesService } from '../../../../indexes/service/indexes.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-students-rate',
@@ -20,6 +18,8 @@ import { IndexesService } from '../../../../indexes/service/indexes.service';
 })
 export class StudentsRateComponent implements OnInit {
 
+  get claimsEnum () {return ClaimsEnum}
+  
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
   

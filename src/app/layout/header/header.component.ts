@@ -91,7 +91,6 @@ export class HeaderComponent implements OnInit {
        {
         this.guardianName=this.userService.getCurrentUserName();
         this.getSchoolYearsList();
-        console.log(this.guardianName)
         // this.userService.currentUserName.subscribe((res)=>{this.guardianName=res;})
       
           this.getNotficationNumber()

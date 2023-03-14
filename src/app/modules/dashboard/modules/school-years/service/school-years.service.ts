@@ -7,6 +7,7 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -34,24 +35,11 @@ export class SchoolYearsService {
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
 
 
-  
-
-    this.precentage=["50%","60%","70%","80%","85%","90%","100%"]
-  
-    this.cities = [
-      "2022",
-       "Rome",
-       "London",
-       "Istanbul",
-       "Paris"
-  ];
-
-
   this.schoolYearsStatus=[
-    {'id':1,'name':{ar:this.translate.instant('Sent'),en:'Sent'}},
-    {'id':2,'name':{ar:this.translate.instant('Draft'),en:'Draft'}},
-    {'id':3,'name':{ar:this.translate.instant('Current'),en:'Current'}},
-    {'id':4,'name':{ar:this.translate.instant('Finished'),en:'Finished'}}
+    {value:SchoolYearEnum.Sent,name:this.translate.instant('Sent')},
+    {value:SchoolYearEnum.Draft,name:this.translate.instant('Draft')},
+    {value:SchoolYearEnum.Current,name:this.translate.instant('Current')},
+    {value:SchoolYearEnum.Finished,name:this.translate.instant('Finished')}
   ]
    }
 

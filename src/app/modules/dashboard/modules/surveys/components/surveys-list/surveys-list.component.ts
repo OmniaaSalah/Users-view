@@ -1,8 +1,6 @@
 
-import { ISurvey } from 'src/app/core/Models/ISurvey';
-import { Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { Component, ElementRef, OnInit, ViewChild,inject } from '@angular/core';
+import { Component,  OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -16,9 +14,9 @@ import { SurveyService } from '../../service/survey.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { Filter } from 'src/app/core/models/filter/filter';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 
 @Component({
@@ -28,25 +26,13 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 })
 export class SurveysListComponent implements OnInit {
   lang = inject(TranslationService).lang
+  get StatusEnum() { return StatusEnum }
+  get ClaimsEnum(){return ClaimsEnum}
   surveyType;
   surveyStatus ;
- 
-  page: number = 1;
-  first = 1
-  rows = 6
-  pagesArrOptions = []
-  totalItems: number = 1;
-  currentActivePage = { page: 1 }
-  paginationState: paginationState = { ...paginationInitialState }
-  assignmentList: ISurvey[] = [];
-  pageNum = 1;
-  pageSize = 50;
-  searchKey: string = '';
-  faEllipsisVertical = faEllipsisVertical;
-  indexListType;
-  indexStatusList;
-  get StatusEnum() { return StatusEnum }
   filtration  = {...Filtration, SurveyType: '', SurveyStatus:null}
+  paginationState: paginationState = { ...paginationInitialState }
+  faEllipsisVertical = faEllipsisVertical;
   surveyList={
     totalAllData:0,
     total:0,
@@ -63,7 +49,6 @@ export class SurveysListComponent implements OnInit {
     private headerService: HeaderService,
     public translationService: TranslationService,
     private translate: TranslateService,
-    private router: Router,
     private sharedService:SharedService,
     private Surveyservice: SurveyService,
     private toastrService:ToastService,
@@ -101,7 +86,7 @@ export class SurveysListComponent implements OnInit {
   })
   }
   onSort(e){
-    console.log(e);
+
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
     this.getSurveyList()

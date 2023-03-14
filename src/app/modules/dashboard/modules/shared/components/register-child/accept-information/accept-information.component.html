@@ -16,11 +16,26 @@
 
     </ng-container>
 
+
+<ng-container *ngIf="mode=='edit'">
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary " 
+        [disabled]="(this.childService.loading$ |async )|| !studentForm.valid" 
+        (click)="onFormSubmited.emit()">
+            <span>{{'shared.saveChanges'| translate}}</span>
+            <div class="spinner-border text-light" role="status" *ngIf="this.childService.loading$ |async"></div>
+        </button>
+        <button  (click)="mode=='view'" ><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+    </div>
+    <hr class="my-5">
+</ng-container>
+
+
 <ng-container *ngIf="student$ |async as student">
 
-    <ng-container *ngIf="mode=='view' && !(childService.onEditMode$ | async)">
-
-        <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentAcceptanceInfo">
+    <ng-container *ngIf="mode=='view'">
+        <!-- *permit="claimsEnum.SEG_U_StudentAcceptanceInfo" -->
+        <div class="float-btn " (click)="mode='edit';modeChange.emit(mode)" >
             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
         </div>
 
@@ -90,7 +105,7 @@
 
 
 
-<ng-container *ngIf="mode=='edit' || (childService.onEditMode$ | async)">
+<ng-container *ngIf="mode=='edit'">
 
     <form >
 
@@ -144,7 +159,7 @@
                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Unregestered' | translate}}</span>
                             </p>
                             <p *ngSwitchCase="registrationStatusEnum.Withdrawal">
-                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Withdrawn' | translate}}</span>
+                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Withdrawal' | translate}}</span>
                             </p>
                             <p *ngSwitchCase="registrationStatusEnum.ReEnrolment">
                                  <span class="color-primary mb-2 fs-3">{{'shared.allStatus.ReEnrolment' | translate}}</span>

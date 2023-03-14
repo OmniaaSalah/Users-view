@@ -20,49 +20,20 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
-                    <!-- <p-dropdown [options]="(curriculums$ | async)" [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.curriculumId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown> -->
                     <p-multiSelect  [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
                 </div>
                 
                 <div class="col-md-4" >
                     <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
-                    <!-- <p-dropdown 
-                    [options]="(schools$| async)?.data"
-                    [ngModelOptions]="{standalone: true}"
-                    [(ngModel)]="filtration.SchoolId" 
-                    (ngModelChange)="schoolSelected($event)"
-                    (onClear)="isSchoolSelected=false"
-                    optionValue="id"
-                    [showClear]="true" 
-                    placeholder="{{'shared.chooseSchool'|translate }}" 
-                    optionLabel="name.ar"></p-dropdown> -->
                     <p-multiSelect  [options]="(schools$| async)?.data"    [ngModelOptions]="{standalone: true}"  display="chip"    [(ngModel)]="filtration.SchoolId"    optionValue="id" optionLabel="name.ar"    placeholder="{{'shared.chooseSchool'|translate }}"></p-multiSelect>
                 </div>
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                    <!-- <p-dropdown 
-                    [options]="(AllGrades$ | async)" 
-                    [(ngModel)]="filtration.GradeId" 
-                    [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="onGradeSelected($event)"
-                    (onClear)="isGradeSelected=false"
-                    [showClear]="true"  optionValue="id"
-                     optionLabel="name.ar" 
-                     placeholder="{{'dashboard.students.chooseClasse' |translate}}" 
-                     ></p-dropdown> -->
                      <p-multiSelect      [options]="(AllGrades$ | async)"     [ngModelOptions]="{standalone: true}"  display="chip"       [(ngModel)]="filtration.GradeId"    optionValue="id" optionLabel="name.ar"     placeholder="{{'dashboard.students.chooseClasse' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.divisions'| translate}}</label>
-                    <!-- <p-dropdown 
-                    [ngModelOptions]="{standalone: true}"
-                    [options]="(schoolDivisions$ | async)" 
-                    [showClear]="true"  
-                    [(ngModel)]="filtration.DivisionId" 
-                    optionValue="id" 
-                    optionLabel="name.ar" 
-                    placeholder="{{'dashboard.students.choosedivision' |translate}}" ></p-dropdown> -->
                     <p-multiSelect       [options]="(schoolDivisions$ | async)"     [ngModelOptions]="{standalone: true}"  display="chip"    [(ngModel)]="filtration.DivisionId"    optionValue="id" optionLabel="name.ar"      placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-multiSelect>
 
                 </div>

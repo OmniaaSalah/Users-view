@@ -1,8 +1,10 @@
-<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'">
+
+<ng-container *permit="ClaimsEnum.S_C_User">
+         <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'"></app-add-btn>
+</ng-container>
 
 
 
-</app-add-btn>
 <div class="parents" >
     <div class="prim-table" *ngIf="users.totalAllData|| users.loading">
         <p-table #dt [value]="users.list"   [scrollable]="true" [lazy]="true" (onSort)="sortMe($event)">
@@ -69,7 +71,7 @@
                         </div>
                     </td>
                     <td class="actions">
-                        <div  role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}">
+                        <div  role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}" *permit="ClaimsEnum.S_U_User">
                            {{'shared.edit'|translate}} <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
                         </div>
 

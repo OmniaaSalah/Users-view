@@ -126,13 +126,13 @@ export class ExamUploadComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', file, file.name);
     this.pdfFile.name = file.name;
-    this.assignmentService.onFileUpload(formData).subscribe(res => {
-      if (res && res.url) {
-        this.onFileUpload.emit({url: res.url, name: this.pdfFile.name});
-        this.pdfFile.url = res.url;
-        // this.url = res.url;
-      }
-    });
+    // this.assignmentService.onFileUpload(formData).subscribe(res => {
+    //   if (res && res.url) {
+    //     this.onFileUpload.emit({url: res.url, name: this.pdfFile.name});
+    //     this.pdfFile.url = res.url;
+    //     // this.url = res.url;
+    //   }
+    // });
 
   }
 
@@ -147,12 +147,12 @@ export class ExamUploadComponent implements OnInit {
     const formData = new FormData();
     this.audioFile.name = file.name;
     formData.append('file', file, file.name);
-    this.assignmentService.onFileUpload(formData).subscribe(res => {
-      if (res && res.url) {
-        this.onFileUpload.emit({url: res.url, name: this.audioFile.name});
-        this.audioFile.url = res.url;
-      }
-    });
+    // this.assignmentService.onFileUpload(formData).subscribe(res => {
+    //   if (res && res.url) {
+    //     this.onFileUpload.emit({url: res.url, name: this.audioFile.name});
+    //     this.audioFile.url = res.url;
+    //   }
+    // });
     // console.log(file);
 
     // const FORM_DATA = new FormData()

@@ -1,0 +1,20 @@
+
+
+:host{flex-grow: 1; position: relative;}
+
+.float-btn{
+    top: 0rem !important;
+    inset-inline-end: -2rem !important;
+}
+
+
+.details{
+
+    p-inputNumber {
+        width: 65% !important;
+    }
+    ::ng-deep  p-dropdown .p-dropdown {
+        width: 50% !important;
+    }
+}
+

@@ -39,12 +39,13 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	speaEmpForm: FormGroup
 	imagesResult =[]
 	messagesTypes = []
-	get claimsEnum () {return ClaimsEnum}
     checkedStatus:boolean=true;
 	notCheckedStatus:boolean=false;
-
-
+	
+	
+	get claimsEnum () {return ClaimsEnum}
 	get userScope() { return UserScope }
+
 	currentUserScope = inject(UserService).getCurrentUserScope()
 	
 
@@ -87,6 +88,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		private messageService: MessageService,
 		private toastr:ToastrService,
 		private formbuilder:FormBuilder,
+		private userService:UserService,
 		private index:IndexesService) { }
 
 	ngOnInit(): void {
@@ -119,12 +121,76 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		if(routeExist) setTimeout(()=>this.setActiveTab(this.sharedService.currentActiveStep$.value))
 		else setTimeout(()=>this.setActiveTab(0))
 	}
+
+	steps=[
+		{
+			title: this.translate.instant('dashboard.schools.generalInfo'),
+			index:0,
+			claims:[],
+			isActive:true
+		},
+		{
+			title: this.translate.instant('dashboard.schools.schoolAddress'),
+			index:1,
+			claims:[],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.schools.schoolEmployee'),
+			index:2,
+			claims:[this.claimsEnum.E_MenuItem_SchoolEmployee],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.schools.schoolClasses'),
+			index:3,
+			claims:[this.claimsEnum.E_MenuItem_SchoolGrades],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.schools.schoolTracks'),
+			index:4,
+			claims:[this.claimsEnum.E_MenuItem_SchoolDivisions],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.schools.editableList'),
+			index:5,
+			claims:[this.claimsEnum.E_MenuItem_EditList],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.schools.schoolSubjects'),
+			index:6,
+			claims:[this.claimsEnum.E_MenuItem_Subjects],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.schools.annualHolidays'),
+			index:7,
+			claims:[this.claimsEnum.E_MenuItem_AnnualHolidays],
+			isActive:false
+		}
+
+
+	]
 	
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
-	setActiveTab(stepIndex?){
-		let navItemsList =this.nav.nativeElement?.children
-		this.navListLength = navItemsList?.length
-		this.step = stepIndex	
+	setActiveTab(stepIndex=0){
+		this.steps.forEach(el=>el.isActive=false)
+		
+		let allowedSteps = this.steps.filter(el => this.userService.isUserAllowedTo(el.claims))
+		this.navListLength = allowedSteps.length
+
+		let el =this.steps.find(el => (el.index==stepIndex && this.userService.isUserAllowedTo(el.claims)))
+		if(el) {
+			el.isActive =true
+			this.step=el.index
+		}else{
+			allowedSteps[0].isActive =true
+			this.step = allowedSteps[0].index
+		}
+
 		this.sharedService.currentActiveStep$.next(stepIndex)	
 
 	}

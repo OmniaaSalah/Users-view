@@ -25,16 +25,20 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   styleUrls: ['./school-grade.component.scss']
 })
 export class SchoolGradeComponent implements OnInit, OnDestroy {
+  faPlus=faPlus
+
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  lang = inject(TranslationService).lang
   onDestroy$ = new Subject()
 
-  faPlus=faPlus
-  lang = inject(TranslationService).lang
   get claimsEnum () {return ClaimsEnum}
+  
+  get userScope() { return UserScope };
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
   currentSchool="";
   gradeId = this.route.snapshot.paramMap.get('gradeId')
-  currentUserScope = inject(UserService).getCurrentUserScope()
-  get userScope() { return UserScope };
+
+
   // << DASHBOARD HEADER DATA >>
   componentHeaderData: IHeader={
     breadCrump: [],

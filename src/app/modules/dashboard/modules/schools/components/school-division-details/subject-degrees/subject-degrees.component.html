@@ -1,8 +1,12 @@
-<div class="d-flex gap-4 mx-4" *ngIf="subjectDegrees.total && subjectStatus=='Pending'">
-    <button class="btn btn-sm reject" (click)="approveOrRejectDegrees(3)">{{'shared.Reject' |translate}}</button>
-    <button class="btn btn-sm accept" (click)="approveOrRejectDegrees(2)">{{'shared.accept' |translate}}</button>
-    <!-- <button class="btn btn-sm btn-outline-primary">{{'shared.edit' |translate}}</button> -->
-</div>
+
+<ng-container *permit="claimsEnum.E_AcceptOrRejectSubjectDegress">
+    <div class="d-flex gap-4 mx-4" *ngIf="subjectDegrees.total && subjectStatus=='Pending'">
+        <button class="btn btn-sm reject" (click)="approveOrRejectDegrees(3)">{{'shared.Reject' |translate}}</button>
+        <button class="btn btn-sm accept" (click)="approveOrRejectDegrees(2)">{{'shared.accept' |translate}}</button>
+        <!-- <button class="btn btn-sm btn-outline-primary">{{'shared.edit' |translate}}</button> -->
+    </div>
+</ng-container>
+
 
 <div class="prim-table mt-4" *ngIf="subjectDegrees.totalAllData || subjectDegrees.loading">
     <p-table #dt [value]="subjectDegrees.list" (onSort)="onSort($event)" [lazy]="true"> 
@@ -36,7 +40,9 @@
                 <td>{{student.studentGPA || 'shared.notFound'|translate}}</td>
                 <td>{{student.studentHour || 'shared.notFound'|translate}}</td>
                 <td *ngIf="subjectStatus=='Pending'">
-                    <div role="button" class="color-skyBlue-600" (click)="stuentToImproveDegree =student;editDegreeModelOpened =true">
+                    <div role="button" class="color-skyBlue-600" 
+                    *permit="claimsEnum.E_U_StudentDegree"
+                    (click)="stuentToImproveDegree =student;editDegreeModelOpened =true">
                         {{'shared.edit' |translate}}
                     </div>
                 </td>

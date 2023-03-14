@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -21,7 +20,7 @@ import { TeachersReportsService } from '../../services/teachers-reports/teachers
 export class TeachersReportsComponent implements OnInit {
   tableColumns = [];
   schools$ = inject(SchoolsService).getAllSchools()
-  subjects$ = inject(SubjectService).getAllSubjects()
+  subjects$ = inject(SubjectService).getAllSubjectsWithoutDuplicated()
   filtration = {...Filtration,schoolIds:[],subjectIds:[]}
   paginationState = { ...paginationInitialState };
   teachersReport = {

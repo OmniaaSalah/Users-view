@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output,OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {  faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { IHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { Subscription } from 'rxjs';
@@ -20,7 +19,6 @@ export class HolidayModelComponent implements OnInit {
    avaliableChangeStatus=true;
    get statusEnum () {return StatusEnum}
   @Input('Title')  Title:string;
-  // @Input('isBtnLoadingInModal') isBtnLoadingInModal:boolean=false;
   @Output() onSave = new EventEmitter();
   holiday;
   editedStatus;
@@ -29,7 +27,7 @@ export class HolidayModelComponent implements OnInit {
   curriculamList;
   curriculamListEdited;
   annualCalendarName;
-   year;
+  year;
   holidayFormGrp:FormGroup;
   subscription:Subscription;
    

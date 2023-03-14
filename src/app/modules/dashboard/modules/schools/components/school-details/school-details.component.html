@@ -25,14 +25,19 @@
             </div>
             <!-- Navigations Options -->
             <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
-                <li class="tabView__nav__link" [class.active]="step==0" (click)="setActiveTab(0)"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
-                <li class="tabView__nav__link" [class.active]="step==1" (click)="setActiveTab(1);loadMap()"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
-                <li class="tabView__nav__link" [class.active]="step==2" (click)="setActiveTab(2)"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
-                <li class="tabView__nav__link" [class.active]="step==3" (click)="setActiveTab(3)"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
-                <li class="tabView__nav__link" [class.active]="step==4" (click)="setActiveTab(4)"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
-                <li class="tabView__nav__link" [class.active]="step==5" (click)="setActiveTab(5)"><span>{{ 'dashboard.schools.editableList'|translate }}</span></li>
-                <li class="tabView__nav__link" [class.active]="step==6" (click)="setActiveTab(6)"><span>{{ 'dashboard.schools.schoolSubjects'|translate }}</span></li>
-                <li class="tabView__nav__link" [class.active]="step==7" (click)="setActiveTab(7)"><span>{{ 'dashboard.schools.annualHolidays'|translate }}</span></li>
+                <ng-container *ngFor="let step of steps; let first=first">
+                    <li class="tabView__nav__link" *permit="step.claims" [class.active]="step.isActive" (click)="setActiveTab(step.index)"><span>{{step.title}}</span> </li>
+                </ng-container>
+                
+
+                <!-- <li class="tabView__nav__link" data-step="0" *permit="claimsEnum.E_MenuItem_EditList" [class.active]="step==0" (click)="setActiveTab(0)"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="1" [class.active]="step==1" (click)="setActiveTab(1);loadMap()"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="2" *permit="claimsEnum.E_MenuItem_SchoolEmployee" [class.active]="step==2" (click)="setActiveTab(2)"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="3" *permit="claimsEnum.E_MenuItem_SchoolDivisions" [class.active]="step==3" (click)="setActiveTab(3)"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="4" *permit="claimsEnum.E_MenuItem_SchoolGrades" [class.active]="step==4" (click)="setActiveTab(4)"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="5"  *permit="claimsEnum.E_MenuItem_EditList"  [class.active]="step==5" (click)="setActiveTab(5)"><span>{{ 'dashboard.schools.editableList'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="6" *permit="claimsEnum.E_MenuItem_Subjects" [class.active]="step==6" (click)="setActiveTab(6)"><span>{{ 'dashboard.schools.schoolSubjects'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="7" *permit="claimsEnum.E_MenuItem_AnnualHolidays" [class.active]="step==7" (click)="setActiveTab(7)"><span>{{ 'dashboard.schools.annualHolidays'|translate }}</span></li> -->
             </ul>
             <!-- Navigations Options -->
     

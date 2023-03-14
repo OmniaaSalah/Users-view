@@ -35,7 +35,7 @@
                         <button class="btn btn-primary btn-sm" (click)="getSubjects();filterApplied=true" [disabled]="!subjectsObj.isGradeSelected">تطبيق</button>
                     </div> -->
                     <div class="">
-                        <button class="btn btn-primary btn--sm px-5"  (click)="sendDataToAddSubject()">
+                        <button *permit="claimsEnum.E_C_GradeSubject" class="btn btn-primary btn--sm px-5"  (click)="sendDataToAddSubject()">
                             <span>{{'dashboard.schools.addSubjectToschool'| translate}}</span>
                         </button>
                        

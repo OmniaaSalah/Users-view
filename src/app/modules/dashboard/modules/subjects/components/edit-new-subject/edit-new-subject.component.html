@@ -4,7 +4,7 @@
         <div class=" d-flex align-items-center justify-content-end ">
             <div class="Btn-group d-flex  gap-3 align-items-center justify-content-end">
               
-                <button type="submit" (click)="succeeded()" class="btn  btn-primary" [disabled]="subjectFormGrp.invalid||isBtnLoading">
+                <button type="submit" (click)="succeeded()" class="btn  btn-primary" [disabled]="subjectFormGrp.invalid||isBtnLoading" *permit="[ClaimsEnum.S_U_Subject,ClaimsEnum.S_C_Subject]">
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                 </button>

@@ -8,7 +8,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { HttpClientModule } from '@angular/common/http';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 
 import { ViewListOfUsersComponent } from './components/users-list/users-list.component';
@@ -25,7 +24,6 @@ import { AddNewUserInformationComponent } from './components/add-new-user-inform
    SharedModule ,
    FormsModule,
    FontAwesomeModule,
-   HttpClientModule,
    TranslateModule
   
   ]

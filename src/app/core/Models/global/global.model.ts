@@ -60,3 +60,6 @@ export interface Division{
   isAcceptStudent?:boolean
 
 }
+
+
+export type Mode = 'edit'| 'view'

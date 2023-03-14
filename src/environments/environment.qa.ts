@@ -7,5 +7,6 @@ export const environment = {
   env: 'QA',
   version: packageJson.version,
   defaultLang: 'ar',
-  logoutRedirectUrl: 'https://daleel-qa-app.azurewebsites.net/auth/login'
+  logoutRedirectUrl: 'https://daleel-qa-app.azurewebsites.net/auth/login',
+  clientUrl:"https://daleel-qa-app.azurewebsites.net"
 };

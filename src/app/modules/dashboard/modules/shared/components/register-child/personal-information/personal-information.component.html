@@ -14,15 +14,26 @@
 
     </ng-container>
 
+    <ng-container *ngIf="mode=='edit'">
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-primary " 
+          [disabled]="(this.childService.loading$ |async) || !studentForm.valid" 
+          (click)="onFormSubmitted.emit()">
+              <span>{{'shared.saveChanges'| translate}}</span>
+              <div class="spinner-border text-light" role="status" *ngIf="this.childService.loading$ |async"></div>
+          </button>
+          <button  (click)="mode=='view'"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+         </div>
+          <hr class="my-5">
+      </ng-container>
 
     <ng-container *ngIf="(student$ |async) as student">
-        <ng-container *ngIf="!(childService.onEditMode$| async)">
-            <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentInfo">
+        <ng-container *ngIf="mode=='view'">
+            <div class="float-btn " (click)="mode='edit'; modeChange.emit(mode)" *permit="claimsEnum.SEG_U_StudentInfo">
                 <img src="assets/images/shared/pen-blue-filled.svg" alt="">
             </div>
             <div class="row gx-5">
                 <div class="col-md-4">
-
                     <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Information'|translate}}</h3>
                     <app-identity-info [formGroup]="studentForm"></app-identity-info>
 
@@ -197,7 +208,7 @@
 <!----------------edit mode------------------->
 
 <ng-container *ngIf="student$ |async as student">
-    <ng-container *ngIf="(childService.onEditMode$ | async)">
+    <ng-container *ngIf="mode=='edit'">
         <div class="row gx-5" [formGroup]="studentForm">
             <div class="col-md-4">
                 <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Information'|translate}}</h3>
@@ -495,7 +506,7 @@
 </ng-container>
 
 
-<app-payments [formGroup]="studentForm"></app-payments>
+
 
 
 

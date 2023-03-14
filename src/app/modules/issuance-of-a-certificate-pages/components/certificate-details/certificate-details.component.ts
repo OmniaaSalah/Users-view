@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { MediaService } from 'src/app/shared/services/media/media.service';
+import { environment } from 'src/environments/environment';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 
 @Component({
@@ -15,16 +15,13 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
   styleUrls: ['./certificate-details.component.scss']
 })
 export class CertificateDetailsComponent implements OnInit {
-
-  @ViewChild(PdfViewerComponent, {static: false})
-  private pdfComponent: PdfViewerComponent;
   
   get certificateTypeEnum() { return CertificatesEnum }
   
   location="https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448"
 
 
-  certificateType = this.route.snapshot.queryParamMap.get('type')
+  certificateType
   certificateId = this.route.snapshot.paramMap.get('id')
   certificate
   certificateQrc=""
@@ -41,9 +38,9 @@ export class CertificateDetailsComponent implements OnInit {
   }
 
   getCertificate(){
-    this.certificateQrc= `http://localhost:4200/certificate/${this.certificateId}?type=ContinuingEducationCertificate`
     this.issueCertificateService.getCertificateDetails(this.certificateId).subscribe(res=>{
-      // this.certificateType = res.result.certificateType 
+      this.certificateType = res.result.certificateType 
+      this.certificateQrc= `${environment.clientUrl}/certificate/${this.certificateId}`
       this.certificate = this.isJSON(res?.result?.jsonObj) ? JSON.parse(res.result.jsonObj) :"npt"
       
       console.log(this.certificate);

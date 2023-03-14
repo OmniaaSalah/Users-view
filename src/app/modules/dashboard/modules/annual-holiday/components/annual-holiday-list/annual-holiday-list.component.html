@@ -1,12 +1,7 @@
 
-
-  
-
- 
-  
-   
- <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/annual-holiday/new-holiday'" [content]="'dashboard.AnnualHoliday.Define Annual Holidays Calendar'"></app-add-btn>
-  
+<ng-container *permit="ClaimsEnum.S_C_Holiday">
+    <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/annual-holiday/new-holiday'" [content]="'dashboard.AnnualHoliday.Define Annual Holidays Calendar'"></app-add-btn>
+</ng-container>
  <div class="prim-table mt-4" *ngIf="annualHolidays.totalAllData || annualHolidays.loading">
     <p-table  #dt [value]="annualHolidays.list" [lazy]="true" (onSort)="sortMe($event)"   dataKey="id"   >
      
@@ -61,7 +56,7 @@
                 <td  class="boldaction">{{e?.annualCalenderName|currentLang}}</td>
                 <td  class="boldaction" >{{e?.year}}</td>
                 <td class="actions"> 
-                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
+                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center justify-content-end mx-4" routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}" *permit="ClaimsEnum.S_U_Holiday">
                             {{'shared.edit'|translate}}   <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
                         </div>
                 </td>

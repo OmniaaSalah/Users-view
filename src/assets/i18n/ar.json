@@ -432,6 +432,7 @@
         "noUnregisteredSonsForThisGuardian": "لا يوجد أي أبناء  غير مسجلين لهذا الاب",
         "noRegisteredSonsForThisGuardian": "لا يوجد أي أبناء  مسجلين لهذا الاب",
         "noRegisteredSons":"لا يوجد أبناء مسجلين لديك حتي الآن",
+        "chidrenNotAllowed":"لايوجد ابناء مسموح لهم باصدار هذه الشهادة",
         "noChildren":"لا يوجد أبناء",
         "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'إضافة أبن جديد'",
         "employee": "يبدو أنه لا يوجد موظفين فى الوقت الحالي",
@@ -685,7 +686,12 @@
             "rejected":"مرفوض",
             "Transferd":"منقول",
             "ReEnrolment":"إعادة قيد",
-            "Withdrawal":"منسحب"
+            "Withdrawal":"منسحب",
+            "SonsOfArabs":"أبناء العرب",
+            "SonsOfNonArabs":"أبيناء غير العرب",
+            "IsChildOfAMartyr":"أبناء الشهداء",
+            "IsChildOfCitizens":"أبناء المواطنات",
+            "Citizens":"المواطنين"
         },
 
         "addNewFile":"إضافه ملف جديد",
@@ -1221,9 +1227,9 @@
             "reRegistration":"إعادة التسجيل",
             "specialEducationtype": "نوع التربية الخاصة",
             "parentInfo":"معلومات ولي الأمر",
-            "pendingRequestNum":"عدد الطلبات  التي حالتها 'قيد الاجراء معلق'",
+            "pendingRequestNum":"عدد الطلبات  التي حالتها 'قيد الاجراء معلق",
             "relatedStudent":"عدد الطلاب المرتبطة بي",
-            "emirateUid":"رقم الهوية الشخصية الإماراتية.",
+            "emirateUid":"رقم الهوية الشخصية الإماراتية",
             "registedDate":"تاريخ التسجيل",
             "requiredAttachment":"المرفقات المطلوبة",
             "registerInSchool":"سجل الإبن فى مدرسة",
@@ -1233,6 +1239,10 @@
 
         },
         "students": {
+            "CitizenStudentNumbers":"عدد الطلاب المواطنين",
+            "Citizen":"مواطن",
+            "StudentCategory":"فئة الطالب",
+            "SelectStudentCategory":"أختر فئة الطالب",
             "FromSpetialAbilitiesPeople":"من اصحاب الهمم",
             "TransferStudentGroup":"إرسال طلب نقل جماعي",
             "studentsMangement":"إدارة الطلاب",
@@ -1814,7 +1824,7 @@
             "Save":"حفظ",
             "academic year": "السنة الدراسية",
             "Add the required information - Academic Sequence Certificate" : "إضافة المعلومات المطلوبة - شهادة التسلسل الدراسي",
-            "please" : "يرجى من حضرتك تاكيد المعلومات التالية أو تعديلها لارسال طلب لهيئة الشارقة للتعليم الخاص من اجل مراجعة طلبكم",
+            "please" : "يرجى تأكيد المعلومات التالية أو تعديلها لإرسال طلب لهيئة الشارقة للتعليم الخاص من اجل مراجعة طلبكم",
             "Class": "الصف",
             "schoolName": "أسم المدرسة",
             "student name": "أسم الطالب",

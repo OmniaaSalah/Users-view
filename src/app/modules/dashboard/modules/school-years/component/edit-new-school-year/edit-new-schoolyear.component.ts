@@ -18,6 +18,8 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-edit-new-schoolyear',
@@ -25,6 +27,8 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   styleUrls: ['./edit-new-schoolyear.component.scss']
 })
 export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
+  get ClaimsEnum(){return ClaimsEnum}
+  get schoolYearEnum() {return SchoolYearEnum}
   lang = inject(TranslationService).lang
   curriculumsIds=[];
   topStudentIds=null;
@@ -380,7 +384,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 }
  onSearch()
  {
-  if(this.schoolYear?.schoolYearStatus.name.en=='Finished')
+  if(this.schoolYear?.schoolYearStatus.name.en==SchoolYearEnum.Finished)
   {
   
     this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res;})
@@ -503,7 +507,7 @@ closeRow()
  
   checkSchoolYearStatus()
   {
-    if(this.schoolYearStatus=='Finished'||this.schoolYearStatus=='Current'||this.urlParameter)
+    if(this.schoolYearStatus==SchoolYearEnum.Finished||this.schoolYearStatus==SchoolYearEnum.Current||this.urlParameter)
     {
       this.step=2;
     }

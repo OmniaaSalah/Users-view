@@ -29,7 +29,7 @@ const routes: Routes = [
         path: 'school-management/requests-list',
         loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule),
         canActivate: [ClaimsGuard],
-        data:{allowedClaims: ClaimsEnum.E_MenuItem_Requests}
+        // data:{allowedClaims: ClaimsEnum.E_MenuItem_Requests}
       },
       
       {
@@ -166,7 +166,7 @@ const routes: Routes = [
         path: 'performance-managment/RequestList',
         loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule),
         canActivate: [ClaimsGuard],
-        data:{allowedClaims: ClaimsEnum.S_MenuItem_Request}
+        // data:{allowedClaims: ClaimsEnum.S_MenuItem_Request}
       },
 
       
