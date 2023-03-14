@@ -25,7 +25,7 @@
 
     .dropdown-menu {
         display: block;
-        transform: translate3d(15px, -20px, 0px) !important;
+        // transform: translate3d(15px, -20px, 0px) !important;
         border: 1px solid $color-gray-100;
         border-radius: 15px;
         inset: 0 auto auto 0  !important;
@@ -35,7 +35,7 @@
         transition: all .3s ease-in-out;
 
         &:lang(en){
-            transform: translate3d(-120px, -20px, 0px) !important;
+            // transform: translate3d(-120px, -20px, 0px) !important;
         }
 
         &.show{

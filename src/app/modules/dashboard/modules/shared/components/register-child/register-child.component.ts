@@ -237,6 +237,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
  
 
   currentMode :Mode='view'
+  stuentProhiptedCurrentMode :Mode='view'
   paymentCurrentMode :Mode='view'
 
   constructor(
@@ -294,14 +295,15 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.studentsService.getStudent(studentId).subscribe((res) =>{
       this.schoolId = res.result?.school?.id || 2
       this.gradeId = res.result?.grade?.id || 1
-      // res.result.birthDate = new Date(res?.result?.birthDate)
-      // res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
+      res.result.birthDate = new Date(res?.result?.birthDate)
+      res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
       this.currentStudent = res?.result
       this.childService.Student$.next(res?.result)
       this.studentForm.patchValue(res?.result as any)
       this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
       this.studentForm.controls.nationalityId.setValue(res.result?.nationality?.id)
       this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)
+      this.studentForm.controls.specialEducation.patchValue({name:{ar:"",en:''}})
       this.currentStudentDivision = res?.result?.division
       this.transferStudentForm.currentDivisionId = res.result?.division.id
 
@@ -336,6 +338,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       // this.childService.onPaymentsEditMode$.next(null)
       // this.childService.onEditMode$.next(false)
       this.currentMode='view'
+      this.stuentProhiptedCurrentMode='view'
       this.paymentCurrentMode='view'
     }))
     .subscribe(res=>{
