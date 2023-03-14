@@ -1,6 +1,6 @@
 
 
-<div class="submit-btn d-flex gap-4 justify-content-end position-absolute">
+<div class="submit-btn d-flex gap-4 justify-content-end position-absolute" *permit="claimsEnum.E_RaiseDivisionDegrees">
     <button class="btn btn-outline-primary btn--md" (click)="degreeseModelOpened=true">
         <span>{{'dashboard.schools.raisDegrees'|translate}}</span>
     </button>
@@ -92,7 +92,7 @@
 
 
 
-<p-dialog [(visible)]="degreeseModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw', minHeight:'70vh'}">
+<p-dialog [(visible)]="degreeseModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw', minHeight:'90vh'}">
     <ng-template pTemplate="header">
         <div class="">
             <h3 class="heading heading--tertiary">{{'dashboard.schools.raisDegrees'| translate}} ({{selectedSemesterLable}})</h3>
@@ -117,7 +117,7 @@
             optionValue="id" 
             optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" 
             placeholder="{{'dashboard.schools.chooseSubject'| translate}}"></p-dropdown>
-            <p *ngIf="isDegreesUploadedBefore" class="color-red-500 fs-5 mt-2">هناك بالفعل درجات محفوظة لهذه المادة في هذا الفصل الدراسي ، وبهذا التحميل ستحل محل البيانات السابقة</p>
+            <p *ngIf="subjectDegreesStatus=='Rejected' || subjectDegreesStatus=='Pending' " class="color-red-500 fs-5 mt-2">هناك بالفعل درجات محفوظة لهذه المادة في هذا الفصل الدراسي ، وبهذا التحميل ستحل محل البيانات السابقة</p>
         </div>
         <div class="py-6" *ngIf="!selectedSubjectId"></div>
 

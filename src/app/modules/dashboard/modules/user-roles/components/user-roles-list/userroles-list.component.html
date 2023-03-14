@@ -1,6 +1,7 @@
 
-<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-roles/new-role'" [content]="'dashboard.UserRole.Add New Role'"></app-add-btn>
-    
+<ng-container *permit="ClaimsEnum.S_C_Role">
+                                <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-roles/new-role'" [content]="'dashboard.UserRole.Add New Role'"></app-add-btn>
+</ng-container>
 <div class="prim-table mt-4" *ngIf="roles.totalAllData || roles.loading">
     <p-table  #dt [value]="roles.list" (onSort)="sortMe($event)" [lazy]="true"  >
      
@@ -54,20 +55,19 @@
                         
                     </div>
                 </td>
-                <td class="dropdown actions"> 
-                        
+                <td class="dropdown "> 
+                        <div class="d-grid justify-content-end mx-3">
                         <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <button class="btn action-btn">{{'shared.RoleMangment'|translate}}</button>
-                          
+                            <span role="button" class="color-primary link  d-flex" >{{'shared.RoleMangment'|translate}}<img  class=" mt-2 rotate270"  src="assets/images/shared/blue-arrow.svg" alt=""></span>  
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                            <li class="dropdown-item">
+                            <li class="dropdown-item" >
                                 <a class="link"  routerLink="/dashboard/manager-tools/user-roles/role-details/{{e.id}}">
                                   <img src="assets/images/shared/file.svg" alt="">
                                   <p>{{'shared.Show Details'|translate}}</p>
                                 </a>
                             </li>
-                            <li class="dropdown-item">
+                            <li class="dropdown-item" *permit="ClaimsEnum.S_D_Role">
                                 <a class="link" (click)="this.confirmModelService.openModel();  selectedRole=e;" >
        
                                   <img src="assets/images/shared/delete.svg" alt="">
@@ -75,7 +75,7 @@
                                 </a>
                             </li>
                         </ul>
-                  
+                    </div>
                 </td>
             
             </tr>

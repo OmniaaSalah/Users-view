@@ -1,18 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component,  OnInit } from '@angular/core';
+import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { passwordMatchValidator } from './password-validators';
-import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user/user.service';
+import {  faExclamationCircle, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import Validation from '../../models/utils/validation';
 import { IRole } from 'src/app/core/Models/IRole';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserInformationService } from '../../service/user-information.service';
-import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 import { ToastrService } from 'ngx-toastr';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 
 @Component({
@@ -21,25 +18,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-new-user-information.component.scss']
 })
 export class AddNewUserInformationComponent implements OnInit {
+  get ClaimsEnum(){return ClaimsEnum}
   accountModel;
-  value1: string;
+  roles: IRole[] = [];
   isBtnLoading:boolean=false;
-  @Input('content') content='';
-  isShown:boolean=false;
-  checked:boolean=true;
-  checkIcon = faCheck;
+  openPasswordModel:boolean=false
   eyeIcon = faEye;
   slashEyeIcon = faEyeSlash;
   exclamationIcon = faExclamationCircle;
-  cities: string[];
-  faEllipsisVertical = faEllipsisVertical;
-  selectedCities: string[];
-  roles: IRole[] = [];
-  selectedRole:IRole
-  rightIcon = faArrowRight;
   userFormGrp: FormGroup;
-  isUnique: number = 0;
-  openPasswordModel:boolean=false
   userId = this.route.snapshot.paramMap.get('userId')
   constructor(
     private route: ActivatedRoute,

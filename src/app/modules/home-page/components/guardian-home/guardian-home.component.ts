@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/core/services/authentication/auth
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 import { AddChildService } from 'src/app/modules/guardian/services/add-child.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
@@ -16,7 +17,8 @@ import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/stat
 export class GuardianHomeComponent implements OnInit {
 
   get registrationStatus() {return RegistrationStatus}
-
+  get claimsEnum () {return ClaimsEnum}
+  
   guardian={id:'',name:{}}
 
   navigatedRouter:string = ''

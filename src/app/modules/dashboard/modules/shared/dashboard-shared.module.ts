@@ -18,6 +18,7 @@ import { SchoolsComponent } from './components/schools/schools.component';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { IdentityInfoComponent } from './components/register-child/identity-info/identity-info.component';
 import { PaymentsComponent } from './components/register-child/payments/payments.component';
+import { StudentProhibitedStatusComponent } from './components/register-child/student-prohibited-status/student-prohibited-status.component';
 
 
 
@@ -38,7 +39,8 @@ import { PaymentsComponent } from './components/register-child/payments/payments
     SchoolRecordComponent,
     WithdrawalRequestComponent,
     IdentityInfoComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    StudentProhibitedStatusComponent
   ],
   imports: [
     CommonModule,

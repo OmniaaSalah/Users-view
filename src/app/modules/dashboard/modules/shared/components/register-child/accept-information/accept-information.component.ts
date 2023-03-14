@@ -1,6 +1,7 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Mode } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
@@ -10,14 +11,17 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
+
 @Component({
   selector: 'app-accept-information',
   templateUrl: './accept-information.component.html',
   styleUrls: ['./accept-information.component.scss']
 })
 export class AcceptInformationComponent implements OnInit {
-  @Input('mode') mode : 'edit'| 'view'= 'view'
   @Input('formGroup') studentForm:FormGroup
+  @Input('mode') mode : Mode= 'view'
+  @Output() modeChange = new EventEmitter();
+  @Output() onFormSubmited = new EventEmitter();
   
   get claimsEnum() {return ClaimsEnum}
   

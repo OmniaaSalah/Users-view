@@ -4,14 +4,9 @@ import { AssignmentServiceService } from './../../service/assignment-service.ser
 import { Router } from '@angular/router';
 import {  faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
-import { Component, OnInit, ViewChild ,inject} from '@angular/core';
-
+import { Component, OnInit,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Paginator } from 'primeng/paginator';
-
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-
-import { Iassignments } from '../../../../../../core/Models/Iassignments';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -22,9 +17,6 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-
-
-
 
 @Component({
   selector: 'app-assignments-list',

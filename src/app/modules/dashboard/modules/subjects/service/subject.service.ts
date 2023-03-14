@@ -120,4 +120,9 @@ export class SubjectService {
       return this.translate.instant('Grades');
     }
   }
+  getAllSubjectsWithoutDuplicated()
+  {
+ 
+    return this.http.get('/Subject/dropdown').pipe(take(1));
+  }
 }

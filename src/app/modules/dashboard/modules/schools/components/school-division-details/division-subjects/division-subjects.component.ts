@@ -7,6 +7,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
@@ -27,6 +28,8 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   ngDestroy$=new Subject()
 
   get statusEnum() {return StatusEnum}
+  get claimsEnum () {return ClaimsEnum}
+  
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 

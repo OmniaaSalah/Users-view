@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map, shareReplay } from 'rxjs';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { GradeCalenderEvent } from 'src/app/core/models/schools/school.model';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 
 
@@ -23,7 +24,8 @@ export class ClassScheduleComponent implements OnInit {
     // << ICONS >>
     faPlus = faPlus
     faCheck = faCheck
-
+    
+    get claimsEnum () {return ClaimsEnum}
     
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
   gradeId = this.route.snapshot.paramMap.get('gradeId')

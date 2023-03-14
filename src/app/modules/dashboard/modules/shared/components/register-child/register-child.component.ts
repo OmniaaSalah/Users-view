@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, filter, finalize, first, last, map, Observable, share, Subject, takeUntil, throwError } from 'rxjs';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
-import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
+import { Division, Mode, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -40,7 +40,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   get scopeEnum() { return UserScope }
   
   lang =inject(TranslationService).lang;
-  @Input('mode') mode : 'edit'| 'view'= 'view'
+  mode : Mode= 'view'
   @ViewChild('nav') nav: ElementRef
   get userScope() { return UserScope }
   currentUserScope = inject(UserService).getCurrentUserScope();
@@ -62,7 +62,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
     {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool},
     {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
-    {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest,routerLink:`/certificates/ask-certificate/${this.childId}`}
+    {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
     // {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
@@ -143,11 +143,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       ministerialId:['', Validators.required],
       manhalNumber:['', Validators.required],
       isSpecialAbilities:[],//
-      isChildOfAMartyr:['',Validators.required],
-      isHasInternet:["", Validators.required],
-      isHasPhone:["", Validators.required],
-      isUsePublicTransportation:["", Validators.required],
-      isSpecialEducation:['', Validators.required],//
+      isChildOfAMartyr:[''],
+      isHasInternet:["",],
+      isHasPhone:["",],
+      isUsePublicTransportation:["",],
+      isSpecialEducation:['',],//
       studentBehavior: this.fb.group({ //
         id: 0,
         descrition: []
@@ -234,6 +234,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       studentId: this.childId ||this.studentId,
       subjectId: null
     }
+ 
+
+  currentMode :Mode='view'
+  stuentProhiptedCurrentMode :Mode='view'
+  paymentCurrentMode :Mode='view'
 
   constructor(
     private fb:FormBuilder,
@@ -260,10 +265,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
 
 
-    this.childService.submitBtnClicked$.pipe(takeUntil(this.ngDestroy$)).subscribe(val =>{
+    // this.childService.submitBtnClicked$.pipe(takeUntil(this.ngDestroy$)).subscribe(val =>{
       
-      if(val && this.step!=4  &&  this.step!=7) this.updateStudent(this.studentId || this.childId)
-    })
+    //   if(val && this.step==1) this.updateStudent()
+    // })
 
     if(this.childId) this.getStudent(this.childId)
     else this.getStudent(this.studentId)
@@ -285,19 +290,20 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
   getStudent(studentId){
-
+    
     this.childService.Student$.next(null)
     this.studentsService.getStudent(studentId).subscribe((res) =>{
       this.schoolId = res.result?.school?.id || 2
       this.gradeId = res.result?.grade?.id || 1
-      // res.result.birthDate = new Date(res?.result?.birthDate)
-      // res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
+      res.result.birthDate = new Date(res?.result?.birthDate)
+      res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
       this.currentStudent = res?.result
       this.childService.Student$.next(res?.result)
       this.studentForm.patchValue(res?.result as any)
       this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
       this.studentForm.controls.nationalityId.setValue(res.result?.nationality?.id)
       this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)
+      this.studentForm.controls.specialEducation.patchValue({name:{ar:"",en:''}})
       this.currentStudentDivision = res?.result?.division
       this.transferStudentForm.currentDivisionId = res.result?.division.id
 
@@ -306,10 +312,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     
   }
   
-  submitButtonClicked(){
+  // submitButtonClicked(){
 
-    this.childService.submitBtnClicked$.next(true)
-  }
+  //   this.childService.submitBtnClicked$.next(true)
+  // }
+
   initializeState(student){
     this.gradeDivisions$ = this.gradeService.getGradeDivision(this.schoolId, this.gradeId)
     .pipe(
@@ -322,21 +329,25 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.subjectsExemption$ = this.studentsService.getStudentSubjectsThatAllowedToExemption({schoolId:this.schoolId, gradeId:this.gradeId, studentId:this.studentId||this.childId})
   }
 
-  updateStudent(studentId){
-    console.log(this.studentForm.value)
+  updateStudent(){
+    this.childService.loading$.next(true)
     this.studentsService.updateStudent(this.studentId || this.childId,this.studentForm.value)
     .pipe(finalize(()=> {
-      this.childService.submitBtnClicked$.next(null)
-      this.childService.onPaymentsEditMode$.next(null)
-      this.childService.onEditMode$.next(false)
+      this.childService.loading$.next(false)
+      // this.childService.submitBtnClicked$.next(null)
+      // this.childService.onPaymentsEditMode$.next(null)
+      // this.childService.onEditMode$.next(false)
+      this.currentMode='view'
+      this.stuentProhiptedCurrentMode='view'
+      this.paymentCurrentMode='view'
     }))
     .subscribe(res=>{
-      this.toastr.success('تم التعديل بنجاح')
-      this.getStudent(studentId)
+      this.toastr.success(this.translate.instant('toasterMessage.successUpdate'))
+      this.getStudent(this.studentId)
 
 
 
-    },err =>{this.toastr.error('التعديل لم يتم يرجى المحاوله مره اخرى')})
+    },err =>{this.toastr.error(this.translate.instant('toasterMessage.error'))})
   } 
 
 

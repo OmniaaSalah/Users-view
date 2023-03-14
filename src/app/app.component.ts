@@ -13,8 +13,6 @@ import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 import { SharedService } from './shared/services/shared/shared.service';
 import { ClaimsEnum } from './shared/enums/claims/claims.enum';
-import { HttpHandlerService } from './core/services/http/http-handler.service';
-import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
 import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
 import { IndexesService } from './modules/dashboard/modules/indexes/service/indexes.service';
@@ -65,7 +63,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
   constructor(
     private translationService: TranslationService,
     private router:Router,
-    private http :HttpClient,
     private userService:UserService,
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,

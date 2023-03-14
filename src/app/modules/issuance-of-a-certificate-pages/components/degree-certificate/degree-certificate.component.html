@@ -1,1 +1,63 @@
-<p>degree-certificate works!</p>
+<div class="submitBtn d-flex">
+    <button class="btn btn-primary mx-2" (click)="submitDegreeCertificate()"
+        [disabled]="!degreeForm.valid||onSubmit">{{'dashboard.issue of certificate.Save' | translate}}
+        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+    </button>
+    <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+    <button class="btn btn-light" *ngIf="studentId" (click)="onCancel.emit()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+</div>
+
+
+
+
+<div class="custom-form mt-5 mb-6" >
+    <h4 class="mb-5 fw-bold color-primary" > {{'dashboard.issue of certificate.Add the required information - Degree Certificate' | translate}} </h4>
+    <!-- <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.Please fill in the following information' | translate}} </span> -->
+
+    <form [formGroup]="degreeCertificateForm" class="">
+
+        <div class="border-dark radius-15 p-5 mb-6" *ngFor="let student of studentsCtr.controls; let i = index">
+            <div class="d-flex gap-3 mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <img  style="width:1.75rem" src="assets/images/home/student/student.svg" alt="">
+                    <h3 class="heading heading--secondary color-primary">{{'dashboard.schools.student' | translate}} :- </h3>
+                    <span class="color-skyBlue-500 fw-bold">{{choosenStudents[i].name |currentLang}}</span>
+                </div>
+    
+            </div>
+
+            <hr class="w-75">
+    
+            <div class="row gx-5" formArrayName="students">
+                <ng-container [formGroupName]="i">
+                    <div class="col-md-4 my-4">
+                        <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  <span class="star">*</span></label> 
+                        <div class="nav__dropdown custom-form">
+                            <div class="icon arrow" (click)="dropdown.show()">
+                                <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+                            </div>
+        
+                            <p-dropdown #dropdown
+                                [options]="schoolYearsList$ |async"
+                                optionLabel="name.ar" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
+                            </p-dropdown>
+                            <div class="icon calendar" (click)="dropdown.show()">
+                                <img src="assets/images/navBar/calendar.svg" alt=""> 
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-4 my-4" *ngIf="isTypeRequired(student)">
+                        <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}} <span class="star">*</span></label>
+                        <p-dropdown
+                            placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
+                            formControlName="gradeCertificateType" [options]="degreescertificates" optionLabel="name" optionValue="value">
+                        </p-dropdown>
+                    </div>
+                </ng-container>
+                
+            </div>
+        </div>
+
+    </form>
+</div>

@@ -107,8 +107,7 @@ export class NotificationListComponent implements OnInit {
   
   showDetails(pageLink){
  
-          window.location.href=pageLink
-    
+           window.open(pageLink, '_blank')
   }
 
 

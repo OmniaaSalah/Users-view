@@ -23,9 +23,15 @@
       
    }
    .curriclums{
+    max-height:20rem;
     flex-wrap:wrap;
     line-height: 4rem;
-    max-width: 90rem;
+    &.scroll{
+      overflow-y:scroll;
+      overflow-x: hidden;
+      
+      
+      }
    }
    .actions{text-align: center;max-width:6rem;width: 3rem;}
 
@@ -79,3 +85,13 @@
           }
   
         }
+
+        .contain{
+          height:40rem;
+          &.scroll{
+          overflow-y:scroll;
+          overflow-x: hidden;
+          
+          
+          }
+       }  

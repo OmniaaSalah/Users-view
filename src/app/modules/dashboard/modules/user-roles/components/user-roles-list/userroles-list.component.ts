@@ -1,6 +1,6 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { faEllipsisVertical,faClose } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-user-roles',
@@ -31,6 +32,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   displayUserList: boolean;
   roleStatusList;
   get statusEnum () {return StatusEnum}
+  get ClaimsEnum(){return ClaimsEnum}
   selectedRole;
   subscription:Subscription;
   filtration = {...Filtration,isactive:''};

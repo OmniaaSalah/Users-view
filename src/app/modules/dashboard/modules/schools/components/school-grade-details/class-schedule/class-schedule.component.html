@@ -1,7 +1,7 @@
 
 
 <ng-container *ngIf="events">
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end" *permit="claimsEnum.E_C_GradeLecture">
         <button class="btn btn-outline-primary btn--md mb-5" (click)="openAddClassModel()">
             <span>{{'dashboard.schools.addClass'|translate}} </span>
             <fa-icon class="icon" [icon]="faPlus"></fa-icon>

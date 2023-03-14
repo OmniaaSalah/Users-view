@@ -106,43 +106,6 @@ export class MessageDetailsComponent implements OnInit {
     }
 
   }
-  onFileUpload(data: { files: Array<File> }): void {
-
-    const requests = [];
-
-    data.files.forEach(file => {
-
-      const formData = new FormData();
-
-      formData.append('file', file, file.name);
-
-      requests.push(this.messageService.onFileUpload(formData));
-
-    });
-
-    forkJoin(requests).subscribe((res: Array<{ url: string }>) => {
-      console.log(res);
-
-      if (res && res.length > 0) {
-
-        res.forEach(item => {
-          console.log(item);
-
-          const extension = item.url.split('.').pop();
-          console.log(extension);
-
-
-          console.log(item.url);
-
-          this.imagesResult.push(item.url)
-          console.log(this.imagesResult);
-        });
-
-      }
-
-    });
-
-  }
   messageUpload(files) {
     this.imagesResult = files
     // console.log(this.imagesResult);

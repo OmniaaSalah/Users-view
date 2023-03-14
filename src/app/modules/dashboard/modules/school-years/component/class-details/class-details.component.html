@@ -1,6 +1,6 @@
-<div class=" d-flex align-items-center justify-content-end " *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
+<div class=" d-flex align-items-center justify-content-end " *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
     <div class="Btn-group d-flex gap-3">
-        <button type="submit" class="btn  btn-primary" (click)="saveClass()"  [disabled]="schoolYearClassFormGrp.invalid||isBtnLoading" >
+        <button type="submit" class="btn  btn-primary" (click)="saveClass()"  [disabled]="schoolYearClassFormGrp.invalid||isBtnLoading" *permit="[ClaimsEnum.S_SchoolYear_C_Grade,ClaimsEnum.S_SchoolYear_U_Grade]">
             {{'shared.save'|translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
         </button>
@@ -11,8 +11,8 @@
 
 <div class="justify-content-center status" *ngIf="schoolYearUrlParameter">
     <span  class="heading--secondary">{{schoolYearName|currentLang}}</span>             
-    <div   *ngIf="schoolYearStatus?.en=='Current'" class='alerting danger mx-4'>{{schoolYearStatus|currentLang}}</div>
-    <div   *ngIf="schoolYearStatus?.en=='Finished'" class='alerting success mx-4'>{{schoolYearStatus|currentLang}}</div>
+    <div   *ngIf="schoolYearStatus?.en==schoolYearEnum.Current" class='alerting danger mx-4'>{{schoolYearStatus|currentLang}}</div>
+    <div   *ngIf="schoolYearStatus?.en==schoolYearEnum.Finished" class='alerting success mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en=='Sent'" class='alerting primary mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en=='Draft'" class='alerting dark mx-4'>{{schoolYearStatus|currentLang}}</div>
     <ng-container *ngIf="!schoolYearStatus">
@@ -33,7 +33,7 @@
    
     <div class=" custom-form custom-validation-form " >
         <form [formGroup]="schoolYearClassFormGrp" class="container-fluid  ">
-            <div class="row mb-5" *ngIf="schoolYearStatus?.en=='Finished'||schoolYearStatus?.en=='Current'">
+            <div class="row mb-5" *ngIf="schoolYearStatus?.en==schoolYearEnum.Finished||schoolYearStatus?.en==schoolYearEnum.Current">
                 <div class="col-4">
 
                        <div class="row">
@@ -63,7 +63,7 @@
                </div>     
          
            </div>  
-           <div class="row mb-5"  *ngIf="schoolYearStatus?.en=='Finished'||schoolYearStatus?.en=='Current'" >
+           <div class="row mb-5"  *ngIf="schoolYearStatus?.en==schoolYearEnum.Finished||schoolYearStatus?.en==schoolYearEnum.Current" >
             <div class="col-4">
 
                    <div class="row">
@@ -98,7 +98,7 @@
            </div>     
      
        </div>  
-    <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
+    <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
            <div class="col-xs-4 col-lg-4" >
                <label class="label" for="nationality">{{'dashboard.SchoolYear.Related curriculum'|translate }} <span class="star">*</span> </label>
                <div class="col-6 value mt-5" *ngIf="classUrlParameter">{{class?.curriculum|currentLang}}</div>
@@ -130,7 +130,7 @@
           
           </div>
      </div>
-     <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
+     <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
        <div class="col-xs-4 col-lg-4">
            <label class="label" for="nationality">{{'dashboard.SchoolYear.Are you need to Activate Age for this class'|translate}} <span class="star">*</span></label>
            <div class="Status">
@@ -183,7 +183,7 @@
   
     </form>
    </div>
-   <div  *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'" role="button" class=" mb-5 color-primary d-flex color-gray-50 align-items-center justify-content-center gap-3 p-3" (click)="openSubjectModel()" >
+   <div  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current" role="button" class=" mb-5 color-primary d-flex color-gray-50 align-items-center justify-content-center gap-3 p-3" (click)="openSubjectModel()" >
     <fa-icon [icon]="faPlus"></fa-icon>
     <span>{{'dashboard.SchoolYear.add subject' |translate}}</span>
    </div>
@@ -199,7 +199,7 @@
               <th  style="min-width:19rem" pSortableColumn="inFinalResult"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.SchoolYear.Is in finalresult'|translate}}</th>
               <th   pSortableColumn="isThereGPA"><p-sortIcon field="isThereGPA"></p-sortIcon>{{'dashboard.SchoolYear.GPA'|translate}}</th>
               <th  style="min-width:21.5rem" pSortableColumn="maxGPA"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.SchoolYear.Maximum GPA'|translate}}</th>
-              <th pSortableColumn="edit" class="actions"  *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'"></th>
+              <th pSortableColumn="edit" class="actions"  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current"></th>
 
               
             </tr>
@@ -217,7 +217,7 @@
               
              
           
-                <td class="edit"  *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
+                <td class="edit"  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
                         <button (click)="tittle='dashboard.SchoolYear.Edit subject to this class';editSubject(e)" >
                             {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
                          </button>

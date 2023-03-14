@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter, finalize, map, pluck } from 'rxjs';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
@@ -35,9 +36,11 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
   attachments=[]
   loading
+  onSubmit
 
   constructor(
     private fb:FormBuilder,
+    private translate:TranslateService,
     private studentService: StudentsService,
     public childService :RegisterChildService,
     private toaster:ToastrService,
@@ -48,9 +51,6 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // this.childService.submitBtnClicked$.subscribe(val =>{
-    //   if(val && this.step!=4) this.updateStudent(this.studentId)
-    // })
 
     this.childService.submitBtnClicked$
     .pipe(filter(val=> val))
@@ -84,15 +84,19 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
   updateStudentAttachment(studentId, attachments){
     // let att = attachments.splice(0,2)
+    this.onSubmit=true
     this.studentService.updateStudentAttachment(studentId,attachments)
-    .pipe(finalize(()=> {
-      this.childService.submitBtnClicked$.next(null)
-      this.childService.onEditMode$.next(false)
-    })).subscribe(res=>{
+    .subscribe(res=>{
 
       // this.attachments = res
+      this.mode='view'
+      this.onSubmit=false
       this.getAttachment()
       this.toaster.success('تم التعديل بنجاح')
+    },err=>{
+      this.mode='view'
+      this.onSubmit=false
+      this.translate.instant('toasterMessage.error')
     })
   }
 

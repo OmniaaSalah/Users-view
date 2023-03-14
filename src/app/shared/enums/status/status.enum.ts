@@ -15,6 +15,12 @@ export enum StatusEnum {
     Withdrawal="Withdrawal",
     //اعادة قيد
     ReEnrolment="ReEnrolment",
+
+    SonsOfArabs="SonsOfArabs",
+    SonsOfNonArabs="SonsOfNonArabs",
+    IsChildOfAMartyr="IsChildOfAMartyr",
+    IsChildOfCitizens="IsChildOfCitizens",
+    Citizens="Citizens",
     //----------------------------------------------
 
     Pending = 'Pending',

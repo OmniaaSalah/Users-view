@@ -19,9 +19,12 @@
                 <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
                 <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
                 <th pSortableColumn="surname">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
-                <th pSortableColumn="track">{{'shared.track'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
+                <th pSortableColumn="track" >{{'shared.track'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
                 <th pSortableColumn="nationalityId">{{'shared.personalId'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
-                <th class="actions" *ngIf="isGradeHaveTracks"></th>
+                <ng-container *ngIf="isGradeHaveTracks">
+                    <th class="actions" *permit="claimsEnum.E_U_StudentTrack" ></th>
+                </ng-container>
+                
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student >
@@ -31,10 +34,10 @@
                 <td *ngIf="currentUserScope==userScope.SPEA" ><a [style.height.rem]="'8'" [routerLink]="['/dashboard/schools-and-students/students/student/'+student.id]" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a></td>
                 <td *ngIf="currentUserScope==userScope.Employee" ><a [style.height.rem]="'8'" [routerLink]="['/dashboard/student-management/students/student/'+student.id]" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a></td>
                 <td>{{student.surname |currentLang }}</td>
-                <td>{{student.track?.name |currentLang}}</td>
+                <td >{{student.track?.name |currentLang}}</td>
                 <td>{{student.nationalityId}}</td>
                 <td *ngIf="isGradeHaveTracks">
-                    <div class="d-flex align-items-center gap-4" role="button" (click)="openChangeTrackModel(student)">
+                    <div *permit="claimsEnum.E_U_StudentTrack" class="d-flex align-items-center gap-4" role="button" (click)="openChangeTrackModel(student)">
                         <span class="color-skyBlue-400">تعديل مسار</span>
                         <img src="assets/images/shared/left-arrow.svg" alt="">
                     </div>

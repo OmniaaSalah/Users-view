@@ -1,7 +1,7 @@
 import { Component, OnInit ,OnDestroy,inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { faAngleLeft, faAngleRight, faCheck, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {  faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AssessmentService } from '../../service/assessment.service';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -27,30 +27,17 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
   selectedRate;
-  isShown:boolean=false;
-  isShownfiltration:boolean=false;
-  checked:boolean=true;
   get claimsEnum () {return ClaimsEnum}
   faEllipsisVertical = faEllipsisVertical;
   paginationState= {...paginationInitialState}
-  //assessmentList: IAssesment[] = [];
-  first = 0;
-  rows = 3;
-  cities: string[];
-  faAngleLeft = faAngleLeft
-  faAngleRight = faAngleRight
   plusIcon = faPlus;
-  checkIcon= faCheck;
-  status = '';
   filtration: Filter = { ...Filtration , status : null }
   subscription:Subscription;
- 
-  selectedStatus:any;
   filteration_status = [
     {name:this.translate.instant('shared.yes'), code: true},
     {name: this.translate.instant('shared.no'), code: false}
 ];
-  // rateList: Array<IRate> = [];
+
   assessmentList = {
     totalAllData: 0,
     total: 0,
@@ -63,15 +50,9 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
 
   constructor(public confirmModelService: ConfirmModelService,private exportService: ExportService, private headerService: HeaderService,private toastService: ToastService,
     private assessmentService: AssessmentService, private translate: TranslateService, private router: Router) { }
-   isAdmin =false;
+
   ngOnInit(): void {
     this.confirmDeleteListener();
-    let userRole =JSON.parse(localStorage.getItem('$AJ$user'));
-    userRole.roles.forEach(element => {
-      if(element.name=='Admin'){
-        this.isAdmin=true;
-      }
-    });
     this.checkDashboardHeader();
     this.getRate();
   }
@@ -118,7 +99,6 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
   clearFilter() {
     this.filtration.KeyWord = ''
     this.filtration.status = null
-    this.selectedStatus = null
     this.filtration.Page=1;
     this.getRate()
   }

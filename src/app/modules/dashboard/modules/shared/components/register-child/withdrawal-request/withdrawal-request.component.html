@@ -11,18 +11,18 @@
         <span role="button" class="color-red-500 text-decoration-underline" (click)="childService.showWithdrawalReqScreen$.next(false)">{{'shared.cancel' |translate}}</span>
     </div>
 
-    <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.withdrawalReq'|translate}} <span class="color-gray-300">({{student.school?.name |currentLang}})</span></h3>
+    <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.withdrawalReq'|translate}} <span class="color-gray-300">({{student.school?.name |currentLang}})</span></h3>
 
-    <app-workflow [steps]="[{ar:'موافقة الهيئة /المدرسة', en:'Spea / School Approval'}]"></app-workflow>
+    <app-workflow [steps]="[{ar:'موافقة الهيئة / المدرسة', en:'Spea / School Approval'}]"></app-workflow>
 
-    <div class="row gx-5 custom-form">
+    <div class="row gx-5 custom-form mt-6">
         <div class="col-md-4 form-set">
             <label class="label required" for="description">{{'dashboard.students.withdrawalType'| translate}}</label>
-            <p-dropdown  [options]="transferType" [(ngModel)]="reqForm.withdrawalType" name="type" optionValue="value" optionLabel="name" [required]="true" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+            <p-dropdown  [options]="transferType" [(ngModel)]="reqForm.withdrawalType" name="type" optionValue="value" optionLabel="name" [required]="true" placeholder="{{'dashboard.students.withdrawalType' |translate}}"></p-dropdown>
         </div>
         <div class="col-md-4 form-set">
             <label class="label required" for="description">{{'dashboard.students.withdrawalCause'| translate}}</label>
-            <p-dropdown  [options]="reasonForRepeateStudyPhase$|async" name="cause" [(ngModel)]="reqForm.withdrawalReasonId"  optionValue="id"  optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" [required]="true" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+            <p-dropdown  [options]="reasonForRepeateStudyPhase$|async" name="cause" [(ngModel)]="reqForm.withdrawalReasonId"  optionValue="id"  optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" [required]="true" placeholder="{{'dashboard.students.withdrawalCause' |translate}}"></p-dropdown>
          </div>
     </div>
 

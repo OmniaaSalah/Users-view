@@ -106,14 +106,14 @@
                     (onSearch)="search($event)"
                     (onClear)="clearFilter()">
     
-                    <div class="row gx-5 form-set">
+                    <!-- <div class="row gx-5 form-set">
                         <div class="col-6">
                             <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
                             <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="id"    formControlName="curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row gx-5 form-set">
-                        <div class="col-6">
+                        <div class="col-4 mx-4">
                             <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
                             <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="value"     formControlName="status" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
                         </div>
@@ -237,7 +237,7 @@
 
                 <div class=" d-flex align-items-center justify-content-end ">
                     <div class="Btn-group d-flex gap-3">
-                      <button class="btn  btn-primary addBtn" type="submit" (click)="saveHoliday()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading">
+                      <button class="btn  btn-primary addBtn" type="submit" (click)="saveHoliday()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading" *permit="[ClaimsEnum.S_C_Holiday,ClaimsEnum.S_U_Holiday]">
                         {{'shared.save'|translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                       </button>
