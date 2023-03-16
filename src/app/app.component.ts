@@ -18,7 +18,7 @@ import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
 import { IndexesService } from './modules/dashboard/modules/indexes/service/indexes.service';
 import { SettingsService } from './modules/dashboard/modules/system-setting/services/settings/settings.service';
 import { FileEnum } from './shared/enums/file/file.enum';
-import { CoreService } from './core/services/core.service';
+import { ClaimsService } from './core/services/claims.service';
 
 @Component({
   selector: 'app-root',
@@ -65,7 +65,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private translationService: TranslationService,
     private router:Router,
     private userService:UserService,
-    private coreSercice:CoreService,
+    private coreSercice:ClaimsService,
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,

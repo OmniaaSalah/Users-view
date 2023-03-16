@@ -5,12 +5,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, EMPTY, map, of, take } from 'rxjs';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 import { environment } from 'src/environments/environment';
 import { ArrayOperations } from '../../classes/array';
 import { IUser, Token } from '../../Models/base.models';
 import { GenericResponse } from '../../models/global/global.model';
-import { CoreService } from '../core.service';
+import { ClaimsService } from '../claims.service';
 
 
 @Injectable({
@@ -24,7 +25,7 @@ export class UserService {
   isUserLogged$ =new BehaviorSubject(false);
 
 
-  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
+  // userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
   
   // getUserClaims(){
     
@@ -176,22 +177,22 @@ export class UserService {
    
 }
 
-   /**
-   * @param  {ClaimsEnum|ClaimsEnum[]} permission
-   */
-  public isUserAllowedTo(claim) {
-    if(claim instanceof Array){
-    if(!claim.length) return true
-      if(claim.some(item=> this.userClaims[item])) return true;
-      return false;
-    }else{
-      if(!claim) return true
-       if(this.userClaims[claim]) return true;
-       return false;
-    }
-     // let userClaims = this.getCurrentUserClaims() || [];
-     // return userClaims.indexOf(claim) >= 0;
-  }
+  //  /**
+  //  * @param  {ClaimsEnum|ClaimsEnum[]} permission
+  //  */
+  // public isUserAllowedTo(claim) {
+  //   if(claim instanceof Array){
+  //   if(!claim.length) return true
+  //     if(claim.some(item=> this.sharedService.userClaims[item])) return true;
+  //     return false;
+  //   }else{
+  //     if(!claim) return true
+  //      if(this.sharedService.userClaims[claim]) return true;
+  //      return false;
+  //   }
+  //    // let userClaims = this.getCurrentUserClaims() || [];
+  //    // return userClaims.indexOf(claim) >= 0;
+  // }
 
   
   /**

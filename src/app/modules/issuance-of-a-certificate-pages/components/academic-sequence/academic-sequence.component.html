@@ -53,7 +53,7 @@
 
                                 <div class="d-flex align-items-center gap-4">
                                     <label class="color-primary" for="description">يمكنك إختار شهادة سابقة للتصديق من الهيئة</label>
-                                    <p-inputSwitch name="att" [ngModelOptions]="{standalone: true}"  (onChange)="getAttachments(student.value.id, i)"></p-inputSwitch>
+                                    <p-inputSwitch name="att" [ngModelOptions]="{standalone: true}"  (onChange)="getAttachments(student.value.studentId, i)"></p-inputSwitch>
                                     <span class="mb-2">{{showAttchments ? ('shared.yes' |translate) : ('shared.no' |translate)}}</span>
                                 </div>
                             </div>

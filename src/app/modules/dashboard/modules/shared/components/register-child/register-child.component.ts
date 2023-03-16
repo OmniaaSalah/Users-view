@@ -8,6 +8,7 @@ import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Division, Mode, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { Student } from 'src/app/core/models/student/student.model';
+import { ClaimsService } from 'src/app/core/services/claims.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
@@ -254,6 +255,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private userService:UserService,
     private router:Router,
     private settingServcice:SettingsService,
+    private cliamsService:ClaimsService,
     private indexesService:IndexesService) { }
 
     onEditMode
@@ -274,7 +276,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     else this.getStudent(this.studentId)
 
     this.items.forEach(element => {
-      if(this.userService.isUserAllowedTo(element.claims))
+      if(this.cliamsService.isUserAllowedTo(element.claims))
       {this.displayStudentActionbtn=true}
     });
    
