@@ -746,7 +746,7 @@
                 <h4 class="color-primary">{{requestDetails.schoolYear  |currentLang}}</h4>
             </div>
                 
-            <div class="col-4 d-flex align-items-center gap-5">
+            <div class="col-4 d-flex align-items-center gap-5" *ngIf="requestDetails?.gradeCertificateType">
                 <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.degreesCertificateType' | translate}}</p>
                 <h4 class="color-primary">{{'dashboard.issue of certificate.' + requestDetails.gradeCertificateType | translate}}</h4>
             </div>

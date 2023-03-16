@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter } from 'rxjs';
+import { ClaimsService } from 'src/app/core/services/claims.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -24,7 +25,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
 
   get claimsEnum() {return ClaimsEnum}
 
-  isSpeaNurse =  this.userService.isUserAllowedTo(this.claimsEnum.S_N_U_StudentHeightAndWeight)
+  isSpeaNurse =  this.cliamsService.isUserAllowedTo(this.claimsEnum.S_N_U_StudentHeightAndWeight)
   
   step=0
   booleanOptions = this.sharedService.booleanOptions
@@ -70,6 +71,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     public childService:RegisterChildService,
     private userService:UserService,
     private toaster:ToastrService,
+    private cliamsService:ClaimsService,
     private sharedService:SharedService) { }
 
 

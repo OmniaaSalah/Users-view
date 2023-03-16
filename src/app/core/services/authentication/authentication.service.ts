@@ -6,7 +6,7 @@ import {  BehaviorSubject, map,  take } from 'rxjs';
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
 import { environment } from 'src/environments/environment';
-import { CoreService } from '../core.service';
+import { ClaimsService } from '../claims.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class AuthenticationService {
   constructor(
     private http: HttpHandlerService, 
     private userService:UserService,
-    private coreService:CoreService,
+    private claimsService:ClaimsService,
     private router: Router) { 
 
  
@@ -179,7 +179,6 @@ export class AuthenticationService {
    localStorage.removeItem('$AJ$currentGuardian');
    localStorage.removeItem('$AJ$yearId');
    this.userService.clear();
-   this.coreService.userClaims={};
-   this.userService.userClaims={}
+   this.claimsService.userClaims={};
   }
 }

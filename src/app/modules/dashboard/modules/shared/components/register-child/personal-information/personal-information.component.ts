@@ -16,6 +16,7 @@ import { StudentsService } from '../../../../students/services/students/students
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsService } from 'src/app/core/services/claims.service';
 
 @Component({
   selector: 'app-personal-information',
@@ -37,7 +38,7 @@ export class PersonalInformationComponent implements OnInit {
 
   faXmark =faXmark
 
-  isAccountant = this.userService.isUserAllowedTo(this.claimsEnum.E_Acc_R_StudentPayments)
+  isAccountant = this.cliamsService.isUserAllowedTo(this.claimsEnum.E_Acc_R_StudentPayments)
 
   classType;
   student$: Observable<Student> = this.childService.Student$
@@ -76,7 +77,7 @@ export class PersonalInformationComponent implements OnInit {
     private sharedService: SharedService,
     private CountriesService:CountriesService,
     private route: ActivatedRoute,
-    private userService:UserService,
+    private cliamsService:ClaimsService,
     private studentsService: StudentsService,
     public childService:RegisterChildService,
     private translate:TranslateService,

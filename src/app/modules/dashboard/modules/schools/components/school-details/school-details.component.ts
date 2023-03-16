@@ -18,6 +18,7 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ClaimsService } from 'src/app/core/services/claims.service';
 
 
 
@@ -89,6 +90,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		private toastr:ToastrService,
 		private formbuilder:FormBuilder,
 		private userService:UserService,
+		private cliamsService:ClaimsService,
 		private index:IndexesService) { }
 
 	ngOnInit(): void {
@@ -180,10 +182,10 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		if(stepIndex==1) this.loadMap()
 		this.steps.forEach(el=>el.isActive=false)
 		
-		let allowedSteps = this.steps.filter(el => this.userService.isUserAllowedTo(el.claims))
+		let allowedSteps = this.steps.filter(el => this.cliamsService.isUserAllowedTo(el.claims))
 		this.navListLength = allowedSteps.length
 
-		let el =this.steps.find(el => (el.index==stepIndex && this.userService.isUserAllowedTo(el.claims)))
+		let el =this.steps.find(el => (el.index==stepIndex && this.cliamsService.isUserAllowedTo(el.claims)))
 		if(el) {
 			el.isActive =true
 			this.step=el.index
