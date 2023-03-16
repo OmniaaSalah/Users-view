@@ -61,52 +61,53 @@
                            
                 </div>
                 
-                    <div class="row" *ngIf="jobRole">
+                    <div class="row mb-5 mt-5" *ngIf="jobRole">
+                               
                                 <div class="col-7">
-
-                                    <div class="row mb-5">
-                                            <div class="col-2 label" >{{'dashboard.UserRole.Job Role Description'|translate}}</div>
-                                            <div class="col-10 value late-2" *ngIf="jobRole">{{jobRole?.description|currentLang}}</div>
-                                          
-                                    </div>
-                            
+                                    <div class="row">
+                                            <div class="col-4 label  mt-5">{{'dashboard.UserRole.RestrictedInformation assigned to Role'|translate}}</div>
+                                            <div class="col-7 value  mt-5" *ngIf="jobRole&&roleRestrictionLevel">{{roleRestrictionLevel|translate}}</div>
+                                            <div class="col-7 value  mt-5" *ngIf="jobRole&&!roleRestrictionLevel">-</div>
+                                   </div>
                                 </div>
-                                <div class="col-5">
-
-                                    <div class="col-12 label mb-3">{{'dashboard.UserRole.RolePowers assigned to Role'|translate}}</div>
-                                    <div class="col-5" >
-                                       <div class="contain" [ngClass]="jobRole?.rolePowers.length>5?'scroll':''" *ngIf="jobRole">
-                                            <div  *ngFor="let item of jobRole?.rolePowers" >
-                                                        <div class="row value mb-4" >  
-                                                            <span class="items" > {{item.name|currentLang}}</span> 
-                                                            
-                                                        </div> 
-                                                    </div>
-                                            </div>
-                                        
-                                    </div> 
-                            
+                                <div class="col-5 ">
+                                    <div class="row">
+                                            <div class="col-4 label  mt-5 " >{{'dashboard.UserRole.Job Role Description'|translate}}</div>
+                                            <div class="col-8 value  mt-5" *ngIf="jobRole">{{jobRole?.description|currentLang}}</div>
+                               
+                                        </div>
                                 </div>
-                              
 
                     </div>
                    
-                    <div  *ngIf="jobRole" >
-                                <div class="row information">
-                                    <div class="col-5">
-
-                                        <div class="row" >
-                                                <div class="col-4 label ">{{'dashboard.UserRole.RestrictedInformation assigned to Role'|translate}}</div>
-                                                 <div class="col-8 value" *ngIf="jobRole&&roleRestrictionLevel">{{roleRestrictionLevel|translate}}</div>
-                                                 <div class="col-8 value" *ngIf="jobRole&&!roleRestrictionLevel">-</div>
-                                               
-                                        </div>
-                                
-                                    </div>
-
-                                </div>
+                    <!-- <div class="row mb-5 mt-5" *ngIf="jobRole" >
+                                       
+                                                <div class="col-3 label  mt-5">{{'dashboard.UserRole.RestrictedInformation assigned to Role'|translate}}</div>
+                                                 <div class="col-9 value  mt-5" *ngIf="jobRole&&roleRestrictionLevel">{{roleRestrictionLevel|translate}}</div>
+                                                 <div class="col-9 value  mt-5" *ngIf="jobRole&&!roleRestrictionLevel">-</div>
+      
                  
-                    </div> 
+                    </div>  -->
+                    <hr class="my-6">
+                    <div class="row mb-5 " *ngIf="jobRole" >
+                      
+                            <div class="fw-bold color-black">{{'dashboard.UserRole.RolePowers assigned to Role'|translate}}</div>
+                            
+                            
+                               <div class="contain row mt-5" [ngClass]="jobRole?.rolePowers.length>5?'scroll':''" *ngIf="jobRole">
+                                    <div  *ngFor="let item of jobRole?.rolePowers;let i=index" class="col-4" >
+                                                <div class=" value mb-4" >  
+                                                    <span class="items" >{{i+1}} - {{item.name|currentLang}}</span> 
+                                                    
+                                                </div> 
+                                            </div>
+                              </div>
+                                
+                          
+
+                      
+         
+               </div> 
 
 
   </div>
