@@ -47,7 +47,7 @@
                         </div>
                     </div>
         
-                    <div class="col-md-4 my-4" *ngIf="isTypeRequired(student)">
+                    <div class="col-md-4 my-4" *ngIf="isTypeRequired(choosenStudents[i])">
                         <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}} <span class="star">*</span></label>
                         <p-dropdown
                             placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
