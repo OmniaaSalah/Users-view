@@ -293,8 +293,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     
     this.childService.Student$.next(null)
     this.studentsService.getStudent(studentId).subscribe((res) =>{
-      this.schoolId = res.result?.school?.id || 2
-      this.gradeId = res.result?.grade?.id || 1
+      this.schoolId = res.result?.school?.id
+      this.gradeId = res.result?.grade?.id
       res.result.birthDate = new Date(res?.result?.birthDate)
       res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
       this.currentStudent = res?.result
