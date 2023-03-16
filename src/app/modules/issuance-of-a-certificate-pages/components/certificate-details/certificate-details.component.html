@@ -16,12 +16,12 @@
   <div [ngSwitch]="certificateType" class="p-6" id="certificate">
     <div *ngSwitchCase="certificateTypeEnum.AcademicSequenceCertificate">
 
-      <ng-container *ngIf="certificate?.Attachments.length">
+      <ng-container *ngIf="certificate?.Attachments && certificate?.Attachments?.length">
         <img class="w-100" [src]="certificate?.Attachments[0]" alt="">      
         <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
       </ng-container>
       
-      <ng-container *ngIf="!certificate?.Attachments.length">
+      <ng-container *ngIf="!certificate?.Attachments?.length">
           <header>
             <div class="text-end">
                 <img class="logo" src="assets/images/home/tab-logo.png" alt="">

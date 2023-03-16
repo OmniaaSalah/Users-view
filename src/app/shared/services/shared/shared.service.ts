@@ -17,6 +17,7 @@ import { SettingsService } from 'src/app/modules/dashboard/modules/system-settin
   providedIn: 'root'
 })
 export class SharedService {
+
   openSelectSchoolsModel = new BehaviorSubject(false);
   currentSchoolEmployee = new BehaviorSubject(0);
   indexListType=[];

@@ -2,6 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Student } from 'src/app/core/models/student/student.model';
+import { ClaimsService } from 'src/app/core/services/claims.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
@@ -24,13 +25,14 @@ export class IdentityInfoComponent implements OnInit {
   genderOptions=this.sharedService.genderOptions
   religions$= this.sharedService.getReligion()
 
-  allowToEditIdentityInfo = this.userService.isUserAllowedTo(ClaimsEnum.S_UpdateStudentIdentity)
+  allowToEditIdentityInfo = this.cliamsService.isUserAllowedTo(ClaimsEnum.S_UpdateStudentIdentity)
   
   constructor(
     private sharedService: SharedService,
     private countriesService:CountriesService,
     public childService:RegisterChildService,
-    private userService:UserService
+    private userService:UserService,
+    private cliamsService:ClaimsService,
   ) { }
 
   ngOnInit(): void {

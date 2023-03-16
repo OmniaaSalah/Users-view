@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Inject, inject, Injectable } from '@angular/core';
-import { map, take, catchError, EMPTY } from 'rxjs';
+import {  Injectable } from '@angular/core';
+import { map, take} from 'rxjs';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { environment } from 'src/environments/environment';
 import { ArrayOperations } from '../classes/array';
 import { GenericResponse } from '../models/global/global.model';
@@ -11,10 +11,10 @@ import { UserService } from './user/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CoreService {
+export class ClaimsService {
 
   // http = inject(HttpHandlerService)
-  constructor(private http:HttpHandlerService, 
+  constructor(private http:HttpHandlerService, private sharedService:SharedService
     ) { }
 
   userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
@@ -48,4 +48,26 @@ export class CoreService {
       }),
       take(1))
   }
+
+
+     /**
+   * @param  {ClaimsEnum|ClaimsEnum[]} permission
+   */
+     public isUserAllowedTo(claim) {
+      if(claim instanceof Array){
+      if(!claim.length) return true
+        if(claim.some(item=> this.userClaims[item])) return true;
+        return false;
+      }else{
+        if(!claim) return true
+         if(this.userClaims[claim]) return true;
+         return false;
+      }
+       // let userClaims = this.getCurrentUserClaims() || [];
+       // return userClaims.indexOf(claim) >= 0;
+    }
+
+    
 }
+
+
