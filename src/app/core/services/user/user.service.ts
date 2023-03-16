@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, of, take } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, map, of, take } from 'rxjs';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { ArrayOperations } from '../../classes/array';
 import { IUser, Token } from '../../Models/base.models';
 import { GenericResponse } from '../../models/global/global.model';
+import { CoreService } from '../core.service';
 
 
 @Injectable({
@@ -25,35 +26,39 @@ export class UserService {
 
   userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
   
-  getUserClaims(){
+  // getUserClaims(){
     
-    // if(Object.keys(this.userClaims).length) return of(this.userClaims)
-    let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append(
-      'Authorization',
-      `Bearer ${this.getAccessTokenId()}`
-    );
-    return this.http.get(environment.serverUrl+'/current-user/get-claims', {headers})
-    .pipe(
-      map((res: GenericResponse<any>)=> res.result),
-      map((res)=> res.map(val => val.code)),
-      map((claims:any)=> {
-        let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
-        this.userClaims = {...claimsMap}
+  //   // if(Object.keys(this.userClaims).length) return of(this.userClaims)
+  //   let headers: HttpHeaders = new HttpHeaders();
+  //   headers = headers.append(
+  //     'Authorization',
+  //     `Bearer ${this.getAccessTokenId()}`
+  //   );
+  //   return this.http.get(environment.serverUrl+'/current-user/get-claims', {headers})
+  //   .pipe(
+  //     map((res: GenericResponse<any>)=> res.result),
+  //     map((res)=> res.map(val => val.code)),
+  //     map((claims:any)=> {
+  //       let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
+  //       this.userClaims = {...claimsMap}
 
-        // if(this.getCurrentUserScope()==UserScope.SPEA){
-        //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.SpeaClaims)
-        // }else if(this.getCurrentUserScope()==UserScope.Employee){
-        //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.EmployeeClaims)
-        // }else if (this.getCurrentUserScope()==UserScope.Guardian){
-        //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
-        // }
+  //       // if(this.getCurrentUserScope()==UserScope.SPEA){
+  //       //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.SpeaClaims)
+  //       // }else if(this.getCurrentUserScope()==UserScope.Employee){
+  //       //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.EmployeeClaims)
+  //       // }else if (this.getCurrentUserScope()==UserScope.Guardian){
+  //       //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
+  //       // }
        
-        return this.userClaims
-      }),
-      take(1)
-    )
-  }
+  //       return this.userClaims
+  //     }),
+  //     take(1),
+  //     catchError(err=>{
+  //       if(err.status===401 || err.status===0) 
+  //       return EMPTY
+  //     })
+  //   )
+  // }
 
  
   
@@ -64,7 +69,7 @@ export class UserService {
   // schoolId;
   // schoolName;
   usersList: IUser[] = [];
-  constructor( private http: HttpClient) {
+  constructor() {
 
     
     this.token.user = this.load('user');

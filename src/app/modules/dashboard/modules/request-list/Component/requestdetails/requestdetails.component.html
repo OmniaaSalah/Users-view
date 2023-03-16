@@ -759,7 +759,7 @@
                 <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
             </div>
 
-            <div class="row mb-4" *ngFor="let item of requestDetails.schoolYears" >
+            <div class="row mb-4" *ngFor="let item of requestDetails?.schoolYears" >
                 <div class="col-4 d-flex align-items-center gap-5">
                     <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
                     <h4 class="color-primary">{{item.schoolYear?.name  |currentLang}}</h4>
@@ -772,6 +772,11 @@
                     <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
                     <h4 class="color-primary">{{item.gradeName?.name |currentLang}}</h4>
                 </div>
+            </div>
+
+            <div class="col-md-12 d-flex align-items-center mt-5 gap-5">
+                <span class="flex-shrink-0">{{'dashboard.Requests.requestAttachments' | translate}} </span>
+                <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
             </div>
         </div>
 
