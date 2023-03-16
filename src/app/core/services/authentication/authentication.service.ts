@@ -6,6 +6,7 @@ import {  BehaviorSubject, map,  take } from 'rxjs';
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
 import { environment } from 'src/environments/environment';
+import { CoreService } from '../core.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,11 @@ export class AuthenticationService {
   public isNewAccountOpened= new BehaviorSubject<boolean>(false);
   public isForgetModelOpened= new BehaviorSubject<boolean>(false);
  
-  constructor(private http: HttpHandlerService, private userService:UserService,private router: Router) { 
+  constructor(
+    private http: HttpHandlerService, 
+    private userService:UserService,
+    private coreService:CoreService,
+    private router: Router) { 
 
  
   }
@@ -174,6 +179,7 @@ export class AuthenticationService {
    localStorage.removeItem('$AJ$currentGuardian');
    localStorage.removeItem('$AJ$yearId');
    this.userService.clear();
-   this.userService.userClaims={};
+   this.coreService.userClaims={};
+   this.userService.userClaims={}
   }
 }

@@ -18,6 +18,7 @@ import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
 import { IndexesService } from './modules/dashboard/modules/indexes/service/indexes.service';
 import { SettingsService } from './modules/dashboard/modules/system-setting/services/settings/settings.service';
 import { FileEnum } from './shared/enums/file/file.enum';
+import { CoreService } from './core/services/core.service';
 
 @Component({
   selector: 'app-root',
@@ -64,6 +65,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private translationService: TranslationService,
     private router:Router,
     private userService:UserService,
+    private coreSercice:CoreService,
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
@@ -105,7 +107,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
           this.currentUserName=this.userService.getCurrentUserName();
           this.settingsService.initializeFileRules()
           this.currentUserScope=this.userService.getCurrentUserScope();
-          this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
+          this.coreSercice.getUserClaims().subscribe(res =>this.claimsLoaded = true)
           if(this.currentUserScope == this.userScope.Employee) 
           {
           this.getMessagesTypes()
