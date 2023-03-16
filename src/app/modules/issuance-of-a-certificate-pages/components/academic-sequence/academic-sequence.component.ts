@@ -76,7 +76,6 @@ export class AcademicSequenceComponent implements OnInit {
     let requests = forkJoin(studentsIds.map(id => this.studentService.getCetificateManually(id)))
 
     requests.subscribe((res: any[])=>{
-      console.log(res);
       this.isLoading=false
 
       this.studentsSchoolYears =this.studentsSchoolYearsMapped(this.choosenStudents, res)
@@ -100,7 +99,7 @@ export class AcademicSequenceComponent implements OnInit {
   fillStudentsFormArr(students){
     students.forEach(el=>{
       this.StudenstArrCtr.push(this.fb.group({
-        id: el.id,
+        studentId: el.id,
         certificatedType: CertificatesEnum.AcademicSequenceCertificate,
         attachments:[[]],
         certificates: this.fillStudentCertificates(el.certificates)
@@ -124,19 +123,7 @@ export class AcademicSequenceComponent implements OnInit {
 
 
 
-  validationStep(){
 
-    let studentsSchoolYearsToCompare = this.stdAcademicForm.value.studentEducationCertificates
-    studentsSchoolYearsToCompare.forEach((el:any, studentIndex ) =>{
-
-      el.certificates = el.certificates.filter((schoolYear, index)=>{
-        return JSON.stringify(schoolYear) != JSON.stringify(this.studentsSchoolYears[studentIndex].certificates[index])
-      })
-
-    })
-
-    return studentsSchoolYearsToCompare
-  }
 
   sendAcademiccertificateReq(){
     this.isBtnLoading=true;
@@ -167,6 +154,20 @@ export class AcademicSequenceComponent implements OnInit {
   }
 
 
+
+  validationStep(){
+
+    let studentsSchoolYearsToCompare = this.stdAcademicForm.value.studentEducationCertificates
+    studentsSchoolYearsToCompare.forEach((el:any, studentIndex ) =>{
+
+      el.certificates = el.certificates.filter((schoolYear, index)=>{
+        return JSON.stringify(schoolYear) != JSON.stringify(this.studentsSchoolYears[studentIndex].certificates[index])
+      })
+
+    })
+
+    return studentsSchoolYearsToCompare
+  }
 
 
   onAttachmentSelected(attachment, index) {

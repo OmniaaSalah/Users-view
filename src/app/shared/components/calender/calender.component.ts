@@ -42,6 +42,7 @@ import { WeekDays } from '../../enums/global/global.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsService } from 'src/app/core/services/claims.service';
 
 @Component({
   selector: 'app-calender',
@@ -90,7 +91,7 @@ export class CalenderComponent implements OnInit, OnChanges {
   viewPeriod: ViewPeriod;
 
 
-  constructor(private gradeService:GradesService, private userService:UserService) {}
+  constructor(private gradeService:GradesService, private userService:UserService,private cliamsService:ClaimsService,) {}
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -145,7 +146,7 @@ export class CalenderComponent implements OnInit, OnChanges {
   }
 
   eventClicked(e :CalendarEvent){
-    if(!this.userService.isUserAllowedTo(this.claimsEnum.E_U_DivisionLecuture)) return
+    if(!this.cliamsService.isUserAllowedTo(this.claimsEnum.E_U_DivisionLecuture)) return
     this.eventEditMode =true
     if(this.editableEvents) this.onEventClicked.emit(e)
     

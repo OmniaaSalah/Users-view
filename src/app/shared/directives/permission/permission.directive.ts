@@ -1,20 +1,18 @@
-import { Directive, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
-import { CoreService } from 'src/app/core/services/core.service';
-import { UserService } from 'src/app/core/services/user/user.service';
+import { Directive, Input, OnInit,TemplateRef, ViewContainerRef } from '@angular/core';
+import { ClaimsService } from 'src/app/core/services/claims.service';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';
-import { SharedService } from '../../services/shared/shared.service';
 
 @Directive({
   selector: '[permit]'
 })
 export class PermissionDirective implements OnInit {
 
-  userClaims = this.coreService.userClaims
+  userClaims = this.claimsService.userClaims
 
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
-    private coreService:CoreService,
+    private claimsService:ClaimsService,
   ) { }
 
   ngOnInit(): void {
