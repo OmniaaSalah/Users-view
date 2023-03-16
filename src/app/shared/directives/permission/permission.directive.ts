@@ -1,4 +1,5 @@
 import { Directive, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import { CoreService } from 'src/app/core/services/core.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';
 import { SharedService } from '../../services/shared/shared.service';
@@ -8,12 +9,12 @@ import { SharedService } from '../../services/shared/shared.service';
 })
 export class PermissionDirective implements OnInit {
 
-  userClaims = this.userService.userClaims
+  userClaims = this.coreService.userClaims
 
   constructor(
-    private userService: UserService,
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
+    private coreService:CoreService,
   ) { }
 
   ngOnInit(): void {

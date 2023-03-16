@@ -98,7 +98,7 @@
                       للتحقق من صحه هذا الايصال يرجى عمل مسح ضوئى للرمز
                   </p>
                   <div class="text-center">
-                    <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+                    <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
                   </div>
                   <p dir="ltr" class="font-en text-start">
                       This is an auto created receipt, issued by Sharjah Private Education Authority.
@@ -162,7 +162,7 @@
       <header>
         <div class="row">
           <div class="col-md-3">
-            <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
           </div>
 
           <div class="col-md-6 text-center">
@@ -499,7 +499,7 @@
       <header>
         <div class="row">
           <div class="col-md-3">
-            <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
           </div>
 
           <div class="col-md-6 text-center">
@@ -558,13 +558,13 @@
             <span>{{certificate?.DivisionAr}}</span>
 
             <span class="">اسم المدرسة:</span>
-            <span>{{certificate?.StudentArabicName}}</span>
+            <span>{{certificate?.SchoolArabicName}}</span>
 
             <span class="">سبب القبول:</span>
             <span></span>
 
             <span class="">سبب الانسحاب:</span>
-            <span>{{certificate?.TransferReason}}</span>
+            <span>{{certificate?.ResonOfWithdrow}}</span>
 
             <span class="">الجنسية:</span>
             <span></span>
@@ -702,12 +702,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>2018</td>
-                <td>الأمريكية للإبداع العلمي</td>
-                <td>الرابع</td>
-                <td>85.4</td>
-                <td>مرفع</td>
+              <tr *ngFor="let year of certificate?.FinalDegrees">
+                <td>{{year?.schoolyear}}</td>
+                <td>{{year?.schoolName}}</td>
+                <td>{{year?.GradeName}}</td>
+                <td>{{year?.FinalResult}}</td>
+                <td>{{year?.Degree}}</td>
               </tr>
             </tbody>
           </table>
@@ -803,7 +803,7 @@
       <header>
         <div class="row">
           <div class="col-md-3">
-            <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
           </div>
 
           <div class="col-md-6 text-center">
@@ -1031,14 +1031,14 @@
       <header>
         <div class="row">
           <div class="col-md-3">
-            <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
           </div>
 
           <div class="col-md-6 text-center">
             <h1 class="fw-bold mb-3">بطاقة تقييم العام الدراسي</h1>
             <p class="d-flex mb-3 fs-2 justify-content-center gap-5 fw-bold ">
               <span>العام الدراسي</span>
-              <span class="font-en">{{certificate?.SchoolYearName.Ar}}</span>
+              <span class="font-en">{{certificate?.SchoolYear}}</span>
               <span class="font-en">Academic Year</span>
             </p>
             <!-- <p class="fw-bold "> {{certificate?.StudentArabicName}} ( {{certificate?.StudentNumber}})</p> -->
@@ -1058,42 +1058,42 @@
               <div class="d-flex fs-2 fs-4">
                 <div class="col-md-6 grid-container">
                   <span class="">مدرسة:</span>
-                  <span>{{certificate?.SchoolName.Ar}}</span>
+                  <span>{{certificate?.SchoolArabicName}}</span>
       
                   <span class="">منهاج المدرسة:</span>
-                  <span>{{certificate?.SchoolCurriculumName.Ar }}</span>
+                  <span>{{certificate?.Curriculum }}</span>
       
                   <span class="">الفترة الإختبارية:</span>
                   <span>{{certificate?.TransferDate}}</span>
       
                   <span class="">إسم الطالب:</span>
-                  <span>{{certificate?.StudentName.Ar}} </span>
+                  <span>{{certificate?.StudentArabicName}} </span>
       
                   <span class="">رقم الطالب:</span>
                   <span>{{certificate?.StudentNumber }}</span>
       
                   <span class="">الصف:</span>
-                  <span>{{certificate?.StudentGrade.Ar}} </span>
+                  <span>{{certificate?.GradeAr}} </span>
                 </div>
       
                 <div class="col-md-6 grid-container font-en text-start" dir="ltr">
                   <span class="">School:</span>
-                  <span>{{certificate?.SchoolName.En}}</span>
+                  <span>{{certificate?.SchoolEnglishName}}</span>
       
                   <span class="">School curriculum:</span>
-                  <span>{{certificate?.SchoolCurriculumName.En}}</span>
+                  <span>{{certificate?.CurriculumEn}}</span>
       
                   <span class="">Reporting Period:</span>
                   <span></span>
       
                   <span class="">Student Name:</span>
-                  <span>{{certificate?.StudentName.En}}</span>
+                  <span>{{certificate?.StudentEnglishName}}</span>
                   
                   <span class="">Student #:</span>
                   <span>{{certificate?.StudentNumber}}</span>
   
                   <span class="">Grade:</span>
-                  <span>{{certificate?.StudentGrade.En}}</span>
+                  <span>{{certificate?.GradeEn}}</span>
   
                 </div>
               </div>

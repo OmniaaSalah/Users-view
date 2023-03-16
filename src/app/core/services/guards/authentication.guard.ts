@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { CoreService } from '../core.service';
 
 
 @Injectable({
@@ -12,7 +13,8 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 export class AuthenticationGuard implements CanActivate {
   constructor(
     private router: Router,
-    private userService: UserService) { }
+    private userService: UserService,
+    private coreSercice:CoreService,) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any> | boolean {
         
@@ -25,7 +27,7 @@ export class AuthenticationGuard implements CanActivate {
 
 
 
-    return this.userService.getUserClaims()
+    return this.coreSercice.getUserClaims()
     .pipe(map((res)=>{
         if(res)  return true
        
