@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
         },
      
         list: [
-          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'/dashboard/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.S_MenuItem_Exam]},
+          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'/dashboard/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
           {label:this.translate.instant('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
 
         ]
@@ -192,7 +192,7 @@ export class HomeComponent implements OnInit {
           {label:this.translate.instant('sideBar.educationalSettings.children.School Years'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/dashboard/educational-settings/school-year/school-years-list', claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
           {label:this.translate.instant('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/educational-setting/micro.svg',url:'/dashboard/educational-settings/subject/subjects-list', claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
           {label:this.translate.instant('sideBar.educationalSettings.children.surveysList'), icon:'assets/images/home/educational-setting/note-list.svg', url:'/dashboard/educational-settings/surveys',claims:[ClaimsEnum.S_MenuItem_Survey]},
-          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/educational-setting/note-marked.svg',url:'/dashboard/educational-settings/assessments/assements-list',claims:[ClaimsEnum.S_MenuItem_Rate]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/educational-setting/note-marked.svg',url:'/dashboard/educational-settings/assessments/assements-list',claims:[ClaimsEnum.SE_MenuItem_Rate]},
         ]
       }
 
@@ -261,8 +261,8 @@ export class HomeComponent implements OnInit {
         },
      
         list: [
-          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
-          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/school-performance-managent/assignments/assignments-list',claims:[ClaimsEnum.E_MenuItem_Exams]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.SE_MenuItem_Rate]},
+          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/school-performance-managent/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
         ]
       }
     },

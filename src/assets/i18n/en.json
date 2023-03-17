@@ -1689,6 +1689,7 @@
             "waitingRequests":"Waiting Requests",
             "FlexibleHolidayRequest":"FlexibleHoliday Request",
             "StudentRegradingRequest":"StudentRegrading Request",
+            "DiplomaCertificateRequest":"DiplomaCertificate Request",
             "DeleteStudentRequest":"DeleteStudent Request",
             "RegestrationApplicationRequest": "RegestrationApplication Request",
             "MassTransferRequest":"MassTransfer Request",

@@ -84,7 +84,7 @@ export class StudentsService {
   }
 
   getStudent(id): Observable<GenericResponse<Student>>{
-    return this.http.get(`/Student/${id}`,{yearId:1}).pipe(take(1))
+    return this.http.get(`/Student/${id}`).pipe(take(1))
   }
 
   updateStudent(id, studentData){

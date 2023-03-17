@@ -142,9 +142,8 @@ export class IssueCertificateComponent implements OnInit {
       this.issuance.getParentsChild(this.guardian.id)
       .subscribe(res => {
         this.choosenStudents.push(res.students.find(s=>s.id==this.studentId))
+        this.onStepChanged();
       })
-      this.onStepChanged();
-
     }
     else{
       this.step=2;

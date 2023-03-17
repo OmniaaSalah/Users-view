@@ -123,7 +123,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       messageType: ['', [Validators.required]],
     });
 
-     if(this.currentUserscope == UserScope.SPEA) this.getIsSelectedSchoolList()
+     
     this.sharedService.openSelectSchoolsModel.subscribe((res) => {
       this.selectSchoolModelOpened = res;
     });
@@ -159,6 +159,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   }
 
   openSelectSchoolsModel() {
+    if(this.currentUserscope == UserScope.SPEA) this.getIsSelectedSchoolList()
     this.sharedService.openSelectSchoolsModel.next(true);
   }
 
