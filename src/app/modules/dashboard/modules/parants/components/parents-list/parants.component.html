@@ -10,10 +10,6 @@
                     <div class="row gx-5 form-set">
                         <div class="col-md-3">
                             <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                            <!-- <p-dropdown 
-                            [filter]="true"
-                            filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                            [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown> -->
                             <p-multiSelect [options]="(countries$ | async)" display="chip"[(ngModel)]="filtration.NationalityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
                         </div>
                         <div class="col-md-3">

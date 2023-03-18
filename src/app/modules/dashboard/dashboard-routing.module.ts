@@ -94,13 +94,13 @@ const routes: Routes = [
           path: 'school-performance-managent/assessments',
           loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule),
           canActivate: [ClaimsGuard],
-          data:{allowedClaims: ClaimsEnum.E_MenuItem_Exams}
+          data:{allowedClaims: ClaimsEnum.SE_MenuItem_Exam}
         },
         {
           path: 'educational-settings/assessments',
           loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule),
           canActivate: [ClaimsGuard],
-          data:{allowedClaims: ClaimsEnum.S_MenuItem_Rate}
+          data:{allowedClaims: ClaimsEnum.SE_MenuItem_Rate}
         },
         {
           path: 'educational-settings/school-year',
@@ -159,7 +159,7 @@ const routes: Routes = [
         path: 'school-performance-managent/assignments',
         loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule),
         canActivate: [ClaimsGuard],
-        data:{allowedClaims: ClaimsEnum.E_MenuItem_Exams}
+        data:{allowedClaims: ClaimsEnum.SE_MenuItem_Exam}
       },
 
       {
