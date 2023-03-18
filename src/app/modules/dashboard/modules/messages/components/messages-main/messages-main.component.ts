@@ -18,14 +18,10 @@ import { MessageService } from '../../service/message.service';
 })
 export class MessagesMainComponent implements OnInit {
 
-  cities=[]
-
-  text: string;
-  results: string[];
   @ViewChild('readBtn', { read: ElementRef, static:false }) readBtn: ElementRef;
   @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
 
-  searchModel2 = {
+  searchModel = {
     "keyword": null,
     "sortBy": null,
     "page": 1,
@@ -52,10 +48,10 @@ export class MessagesMainComponent implements OnInit {
   skeletonLoading:boolean = false
   checkLanguage:boolean = false
   filterationForm: FormGroup
-  componentHeaderData: IHeader={ 
+  componentHeaderData: IHeader={
 		breadCrump: [
 			{label: this.translate.instant('المحادثات'), routerLink:'/dashboard/messages/messages' }
-			
+
 		],
 		mainTitle:{ main:this.translate.instant('المحادثات'),sub:this.messageTotal},
 	}
@@ -65,69 +61,69 @@ export class MessagesMainComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getMessages(this.searchModel2)
+    this.getMessages(this.searchModel)
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
     }else{
       this.checkLanguage = false
-    }    
+    }
 
-    
+
     this.filterationForm = this.formbuilder.group({
       DateFrom : '',
       DateTo : ''
-    });    
+    });
 
     this.filterationForm.get('DateFrom').valueChanges.subscribe(res=>{
       this.filterationForm.value.DateFrom = new Date(res[0]).toISOString()
-      this.searchModel2.DateFrom =  this.filterationForm.value.DateFrom
+      this.searchModel.DateFrom =  this.filterationForm.value.DateFrom
       if(res[1]){
       this.filterationForm.value.DateTo = new Date(res[1]).toISOString()
-      this.searchModel2.DateTo =  this.filterationForm.value.DateTo
+      this.searchModel.DateTo =  this.filterationForm.value.DateTo
       }
-      if(this.searchModel2.DateTo != null){
-      this.getMessages(this.searchModel2)
+      if(this.searchModel.DateTo != null){
+      this.getMessages(this.searchModel)
       }
     })
   }
 
-  getMessages(searchModel2){
+  getMessages(searchModel){
     this.skeletonLoading = true
     this.showSpinner = false
     this.loading=true
     if(this.scope == "Guardian"){
-    this.messageService.getMessagesGuardian(this.useId,searchModel2).subscribe(res=>{
+    this.messageService.getMessagesGuardian(this.useId,searchModel).subscribe(res=>{
       this.skeletonLoading= false
       this.loading=false
       this.messagesList = res.data
       this.messageTotal = res.total
       this.componentHeaderData.mainTitle.sub = `(${res.total})`
-      this.headerService.changeHeaderdata(this.componentHeaderData);  
-      this.showSpinner = true  
+      this.headerService.changeHeaderdata(this.componentHeaderData);
+      this.showSpinner = true
     })
   }
 
   if(this.scope == "Employee"){
-    this.messageService.getMessagesSchoolEmp(this.useId,searchModel2).subscribe(res=>{
+    this.messageService.getMessagesSchoolEmp(this.useId,searchModel).subscribe(res=>{
       this.skeletonLoading= false
       this.loading=false
       this.messagesList = res.data
       this.messageTotal = res.total
       this.componentHeaderData.mainTitle.sub = `(${res.total})`
-      this.headerService.changeHeaderdata(this.componentHeaderData);  
-      this.showSpinner = true  
+      this.headerService.changeHeaderdata(this.componentHeaderData);
+      this.showSpinner = true
     })
   }
 
   if(this.scope == "SPEA"){
-    this.messageService.getMessagesSpea(this.useId,searchModel2).subscribe(res=>{
+    this.messageService.getMessagesSpea(this.useId,searchModel).subscribe(res=>{
       this.skeletonLoading= false
       this.loading=false
       this.messagesList = res.data
       this.messageTotal = res.total
       this.componentHeaderData.mainTitle.sub = `(${res.total})`
-      this.headerService.changeHeaderdata(this.componentHeaderData);  
-      this.showSpinner = true  
+      this.headerService.changeHeaderdata(this.componentHeaderData);
+      this.showSpinner = true
     })
   }
 
@@ -135,7 +131,7 @@ export class MessagesMainComponent implements OnInit {
 
 
 
- 
+
 
   showDialog() {
     if(this.scope =="SPEA"){
@@ -152,22 +148,22 @@ export class MessagesMainComponent implements OnInit {
   {
     this.readBtn.nativeElement.classList.remove('activeBtn')
     this.notReadBtn.nativeElement.classList.add('activeBtn')
-    this.searchModel2.keyword = null
-    this.searchModel2.page = 1
-    this.searchModel2.pageSize = 3
-    this.searchModel2.MessageStatus = 0
-    this.getMessages(this.searchModel2)
+    this.searchModel.keyword = null
+    this.searchModel.page = 1
+    this.searchModel.pageSize = 3
+    this.searchModel.MessageStatus = 0
+    this.getMessages(this.searchModel)
 
   }
   getReadable()
   {
     this.readBtn.nativeElement.classList.add('activeBtn')
     this.notReadBtn.nativeElement.classList.remove('activeBtn')
-    this.searchModel2.keyword = null
-    this.searchModel2.page = 1
-    this.searchModel2.pageSize = 3
-    this.searchModel2.MessageStatus = 1
-    this.getMessages(this.searchModel2)
+    this.searchModel.keyword = null
+    this.searchModel.page = 1
+    this.searchModel.pageSize = 3
+    this.searchModel.MessageStatus = 1
+    this.getMessages(this.searchModel)
   }
   onScroll()
   {
@@ -177,23 +173,23 @@ export class MessagesMainComponent implements OnInit {
     }else{
         this.loadMore();
     }
-    
+
   }
- 
+
   loadMore()
   {
-    
-    this.searchModel2.page = 1
-    this.searchModel2.pageSize += 3
-    this.getMessages(this.searchModel2)
-    
+
+    this.searchModel.page = 1
+    this.searchModel.pageSize += 3
+    this.getMessages(this.searchModel)
+
   }
   onSearch(e) {
-    
-    this.searchModel2.keyword = e.target.value
-    this.searchModel2.page = 1
+
+    this.searchModel.keyword = e.target.value
+    this.searchModel.page = 1
     setTimeout(()=>{
-    this.getMessages(this.searchModel2)
+    this.getMessages(this.searchModel)
     },1500)
     if(this.messagesList.length == 0){
       this.skeletonLoading = false
@@ -203,5 +199,5 @@ export class MessagesMainComponent implements OnInit {
     this.router.navigate(['/dashboard/messages/message-detail/', MessageId]);
   }
 
-        
+
 }

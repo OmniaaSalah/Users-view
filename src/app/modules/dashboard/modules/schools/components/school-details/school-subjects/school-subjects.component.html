@@ -103,7 +103,7 @@
     </p-table>
 
     <div class=""*ngIf="subjectsObj.total > paginationState.rows">
-        <app-pagination [totalItems]="subjects.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [totalItems]="subjectsObj.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 

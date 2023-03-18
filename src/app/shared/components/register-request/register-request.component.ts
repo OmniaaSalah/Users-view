@@ -202,6 +202,7 @@ export class RegisterRequestComponent implements OnInit {
   }
 
   getRegistrationRequiresFiles(reqType:requestTypeEnum = requestTypeEnum.RegestrationApplicationRequest ){
+
     this.settingServcice.getRequestRquiredFiles(reqType).subscribe(res=>{
       this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
     },err=>{
@@ -280,7 +281,8 @@ export class RegisterRequestComponent implements OnInit {
     this.schools.loading=true
     this.schools.list=[]
   
-    this.schoolsService.getAllSchools(this.filtration)
+    this.settingServcice.schoolsAllowedForRegistration(this.filtration)
+    .pipe(map(res => res.result))
     .subscribe(res =>{
       this.schools.loading = false
       this.schools.list = res.data

@@ -183,10 +183,10 @@
             (onClear)="clearFilter()">
     
                 <div class="row gx-5 form-set">
-                    <div class="col">
+                    <!-- <div class="col">
                         <label class="label" for="region">{{'shared.state'|translate }}  </label>
                         <p-dropdown [showClear]="true" [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
-                    </div>
+                    </div> -->
                     <div class="col">
                         <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
                         <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>

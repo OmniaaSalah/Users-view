@@ -22,7 +22,7 @@ export class SettingsService {
 
   get userScope() { return UserScope }
 	currentUserScope = inject(UserService).getCurrentUserScope()
-  
+
   fileRules$ = new BehaviorSubject<Partial<MapedFileRule> |null>(null)
 
   filesSettings :RequestRule[]=[
@@ -52,7 +52,7 @@ export class SettingsService {
         //   type:'',
         //   size: 2
         // },
-  
+
       ]
     },
     {
@@ -113,10 +113,10 @@ export class SettingsService {
     },
   ]
 
-  constructor(private http:HttpHandlerService, 
+  constructor(private http:HttpHandlerService,
     private translate:TranslateService,
     private tableLoaderService: LoaderService) { }
-  
+
 
   getSchoolInGracePeriod(){
     let arr={
@@ -167,7 +167,7 @@ export class SettingsService {
       }))
   }
 
-  
+
   getGracePeriodListToExport(filter:Filter): Observable<GenericResponse<any>>{
 
     return this.http.get('/system-settings/grace-period/search', filter)
@@ -180,7 +180,7 @@ export class SettingsService {
             [this.translate.instant('dashboard.SystemSetting.ClassNumber')]: gracePeriod.allowedGradesCount,
             [this.translate.instant('dashboard.SystemSetting.TimeFrom')]: gracePeriod.dateFrom,
             [this.translate.instant('dashboard.SystemSetting.TimeTo')]: gracePeriod.dateTo,
-            [this.translate.instant('dashboard.SystemSetting.CreatedBy')]: gracePeriod.createdBy,
+            [this.translate.instant('dashboard.SystemSetting.CreatedBy')]: getLocalizedValue(gracePeriod.createdBy),
             [this.translate.instant('dashboard.SystemSetting.CreatedDate')]: gracePeriod.createdDate  ,
 
           }
@@ -197,7 +197,7 @@ export class SettingsService {
     return this.http.post('/system-settings/grace-period', bodyData).pipe(take(1))
   }
 
-  
+
   updateGarcePeriod(bodyData){
     return this.http.put('/system-settings/grace-period', bodyData).pipe(take(1))
   }
@@ -233,9 +233,19 @@ export class SettingsService {
   }
 
 
-  schoolsAllowedToAcceptGroup(filter:Filter): Observable<GenericResponse<any>>{
+  schoolsAllowedToAcceptStudentsGroup(filter:Filter): Observable<GenericResponse<any>>{
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/system-settings/grace-period/search-to-schools`, filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  schoolsAllowedForRegistration(filter:Filter): Observable<GenericResponse<any>>{
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/system-settings/grace-period/search-allowed-schools`, filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -328,7 +338,7 @@ export class SettingsService {
       })
     ).subscribe((res: MapedFileRule)=>{
       this.fileRules$.next(res)
-      
+
     })
   }
 
