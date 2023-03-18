@@ -266,7 +266,7 @@ onScroll()
         title:this.translate.instant('breadcrumb.performanceMangement'),
           claims:[ClaimsEnum.S_Menu_PeformanceManagment],
         links:[
-          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.S_MenuItem_Exam],},
+          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.SE_MenuItem_Exam],},
           {name: this.translate.instant('dashboard.Requests.RequestList'),url:'/dashboard/performance-managment/RequestList/', claims:[ClaimsEnum.S_MenuItem_Request],},
 
         ]
@@ -311,7 +311,7 @@ onScroll()
           {name: this.translate.instant('sideBar.educationalSettings.children.School Years'), url:'/dashboard/educational-settings/school-year/school-years-list',   claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
           {name: this.translate.instant('sideBar.educationalSettings.children.Subjects'),url:'/dashboard/educational-settings/subject/subjects-list',   claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
           {name: this.translate.instant('sideBar.educationalSettings.children.surveysList'), url:'/dashboard/educational-settings/surveys',   claims:[ClaimsEnum.S_MenuItem_Survey]},
-          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),url:'/dashboard/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.S_MenuItem_Rate]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),url:'/dashboard/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.SE_MenuItem_Rate]},
         ]
       },
   
@@ -353,8 +353,8 @@ onScroll()
         title:this.translate.instant('breadcrumb.performanceMangement'),
         claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
         links:[
-          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), url:'/dashboard/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
-          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/school-performance-managent/assignments/assignments-list', claims:[ClaimsEnum.E_MenuItem_Exams]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), url:'/dashboard/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.SE_MenuItem_Rate]},
+          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/school-performance-managent/assignments/assignments-list', claims:[ClaimsEnum.SE_MenuItem_Exam]},
         ]
       },
       {

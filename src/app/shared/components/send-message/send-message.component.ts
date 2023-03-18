@@ -158,6 +158,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   }
 
   openSelectSchoolsModel() {
+    if(this.currentUserscope == UserScope.SPEA) this.getIsSelectedSchoolList()
     this.sharedService.openSelectSchoolsModel.next(true);
   }
 

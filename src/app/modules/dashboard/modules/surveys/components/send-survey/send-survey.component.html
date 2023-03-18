@@ -113,21 +113,11 @@
                             
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                                <!-- <p-dropdown 
-                                [options]="(AllGrades$ | async)" 
-                                [(ngModel)]="filtration.gradeId" 
-                                (onChange)="getParentList()"
-                                optionValue="id"
-                                [showClear]="true" StopProp 
-                                optionLabel="name.ar" 
-                                placeholder="{{'dashboard.students.chooseClasse' |translate}}" 
-                                emptyMessage="لايوجد عناصر"></p-dropdown> -->
                                 <p-multiSelect [options]="(AllGrades$ | async)" display="chip" [(ngModel)]="filtration.gradeId"   optionLabel="name.ar"  optionValue="id"  placeholder="{{'dashboard.students.chooseClasse' |translate}}" ></p-multiSelect>
                             </div>
     
                             <div class="col-md-4">
                                 <label class="label" for="schools">{{'Schools'|translate }}  </label>
-                                <!-- <p-dropdown  [options]="(schools$| async)?.data" [(ngModel)]="filtration.schoolId" [showClear]="true" StopProp  (onChange)="getParentList()" optionValue="id" inputId="schools" optionLabel="name.ar" placeholder="{{'shared.chooseSchool'|translate }}"></p-dropdown> -->
                                 <p-multiSelect  [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.schoolId"   optionLabel="name.ar"  optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" ></p-multiSelect>
                             </div>
                             

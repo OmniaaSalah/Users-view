@@ -81,7 +81,7 @@ export class StudentsListComponent implements OnInit {
   // << DATA PLACEHOLDER >> //
   countries$ = this.countriesService.getCountries()
   curriculums$ = this.sharedService.getAllCurriculum()
-  schools$ = this.schoolsService.getAllSchools()
+  schools$ = this.schoolsService.getSchoolsDropdown()
   AllTracks$ =this.sharedService.getAllTraks()
   AllGrades$;
   AllDivisions$;

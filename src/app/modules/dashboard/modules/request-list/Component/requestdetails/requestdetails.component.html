@@ -158,10 +158,6 @@
                 <div [ngSwitch]="requestDetails?.requestType">
                     <!-- NOTE:--------------  طلب تعديل اجازه مرنه-->
                     <div *ngSwitchCase="requestTypeEnum.FlexibleHolidayRequest">
-                        <div class="col-4 d-flex align-items-center gap-5 mb-5">
-                            <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
-                            <h4 class="color-primary">{{requestDetails?.schoolName|currentLang}}</h4>
-                        </div>
 
                         <div class="row g-5">
                             <div class="fw-bold  fs-4 color-primary mb-4">{{'dashboard.Requests.holidayDetails' | translate}}</div>

@@ -1713,6 +1713,7 @@
             "TentativelyAccepted":"مقبول بشكل مبدأى",
             "myRequests":"الطلبات المرسلة",
             "waitingRequests":"طلبات قيد الإنتظار",
+            "DiplomaCertificateRequest":"طلب إصدار شهادة الدبلوم",
             "FlexibleHolidayRequest":"طلب تعديل إجازة مرنة",
             "StudentRegradingRequest":"طلب إعادة مرحله دراسية",
             "StudentRegradingRequestForSchool":"طلب إعادة مرحله دراسية",
