@@ -1,4 +1,4 @@
-import { EMPTY, map, Subject, Subscription, take, takeUntil } from 'rxjs';
+import { EMPTY, map, Subject, Subscription, takeUntil } from 'rxjs';
 import { IndexesEnum } from '../../../../../shared/enums/indexes/indexes.enum';
 import { Component, OnInit,inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -75,7 +75,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
 
   minimumDate = new Date();
   subscription:Subscription;
-  StudentId;
+
 
   constructor(private fb:FormBuilder, private translate: TranslateService, 
     private router:Router,
@@ -132,14 +132,6 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
     return this.registerWithoutIdentityForm.controls['PassportNumberExpirationDate'];
   }
 
-  charactersOnly(event): boolean {
-    const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return true;
-    }
-    return false;
-
-  }
 
 
   messageUpload1(files){
@@ -176,9 +168,19 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
     this.isBtnLoading=true;
     this.imageResult1.map(er=>{
         er.comment = this.registerWithoutIdentityForm.value.note
+        er.titel= {
+          en: 'Not Identity Image',
+          ar: 'صورة اثبات عدم وجود هوية'
+        }
     })
 
-    this.imageResult3.map(er=>{er.comment = this.registerWithoutIdentityForm.value.note2})
+    this.imageResult3.map(er=>{
+      er.comment = this.registerWithoutIdentityForm.value.note2
+      er.titel={
+        en: 'birth certificate',
+        ar: 'صورة اثبات تاريخ الميلاد'
+      }
+    })
 
     let data = {
       'relativeRelationId':  this.registerWithoutIdentityForm.value.relativity,

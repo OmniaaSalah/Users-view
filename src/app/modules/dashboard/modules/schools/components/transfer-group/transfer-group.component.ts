@@ -153,7 +153,7 @@ export class TransferGroupComponent implements OnInit {
     this.schools.list = []
     this.schools.loading=true
 
-    this.settingService.schoolsAllowedToAcceptGroup(this.filteration).subscribe(res=>{
+    this.settingService.schoolsAllowedToAcceptStudentsGroup(this.filteration).subscribe(res=>{
       this.schools.list = res.result.data.filter(el => el.id!=this.schoolId)
       this.schools.total = res.result.total     
       this.schools.totalAllData = res.result.totalAllData

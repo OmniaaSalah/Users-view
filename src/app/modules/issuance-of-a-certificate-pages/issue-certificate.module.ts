@@ -11,6 +11,7 @@ import { BoardCertificateComponent } from './components/board-certificate/board-
 import { DegreeCertificateComponent } from './components/degree-certificate/degree-certificate.component';
 import { IssueCertificateComponent } from './issue-certificate.component';
 import { DiplomaCertificateComponent } from './components/diploma-certificate/diploma-certificate.component';
+import { ViewCertificatesComponent } from './components/view-certificates/view-certificates.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { DiplomaCertificateComponent } from './components/diploma-certificate/di
     BoardCertificateComponent,
     DegreeCertificateComponent,
     DiplomaCertificateComponent,
+    ViewCertificatesComponent,
   ],
   imports: [
     CommonModule,
