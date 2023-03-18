@@ -31,16 +31,15 @@ import { UserScope } from '../../enums/user/user.enum';
   styleUrls: ['./send-message.component.scss'],
 })
 export class SendMessageComponent implements OnInit, OnDestroy {
-  get fileTypesEnum() {
-    return FileEnum;
-  }
+  get fileTypesEnum() { return FileEnum;}
+  onSubmit
   studentSchool;
-  // @ViewChild("messagesMain") messageMain: MessagesMainComponent;
+
   @Input() set schoolId(id: any) {
     this.studentSchool = id;
   }
   @Output() hiddenDialog = new EventEmitter();
-  currentUserscope = this.userService.getCurrentUserScope()
+  currentUserscope = this.userService.getCurrentUserScope();
   searchModel = {
     keyword: null,
     sortBy: null,
@@ -92,7 +91,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     private router: Router,
     private User: UserService,
     private index: IndexesService,
-    private userService:UserService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -123,7 +122,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       messageType: ['', [Validators.required]],
     });
 
-     if(this.currentUserscope == UserScope.SPEA) this.getIsSelectedSchoolList()
+    if (this.currentUserscope == UserScope.SPEA) this.getIsSelectedSchoolList();
     this.sharedService.openSelectSchoolsModel.subscribe((res) => {
       this.selectSchoolModelOpened = res;
     });
@@ -162,7 +161,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.sharedService.openSelectSchoolsModel.next(true);
   }
 
-  unSelectMe(id) {
+  onSchoolSelected(id) {
     this.schoolIsSelectedList.forEach((school) => {
       if (school.id == id) {
         school.isSelected = false;
@@ -240,77 +239,92 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       this.isShown2 = false;
     }
   }
+
+
+
   sendMessage() {
     this.hiddenDialog.emit(false);
+    this.onSubmit = true
+    if (this.currentUserscope == 'SPEA') this.sendMessageFromSpeaToSchool()
+    if (this.currentUserscope == 'Guardian') this.sendMessageFromGuardianToSchool()
+    if (this.currentUserscope == 'Employee') this.sendMessageFromEmployeeToGuardian()
+
+  }
+
+
+  sendMessageFromSpeaToSchool(){
     let schoolIds = [];
-    if (this.currentUserscope == 'SPEA') {
-      this.schoolIsSelectedList.forEach((school) => {
-        if (school.isSelected == true) schoolIds.push(school.id);
-      });
+    this.schoolIsSelectedList.forEach((school) => {
+      if (school.isSelected == true) schoolIds.push(school.id);
+    });
 
-      const form = {
-        senderId: Number(localStorage.getItem('$AJ$userId')),
-        // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
-        messageTypeId: this.speaEmpForm.value.messageType,
-        schoolIds: schoolIds,
-        title: this.speaEmpForm.value.title,
-        confirmationRecive: this.speaEmpForm.value.switch1,
-        replyPossibility: this.speaEmpForm.value.switch2,
-        showSenderName: this.speaEmpForm.value.switch3,
-        messegeText: this.speaEmpForm.value.description,
-        attachments:
-          this.imagesResult.map((attachment) => {
-            return attachment.url;
-          }) || null,
-      };
-      this.messageService.sendDataFromSpeaToEmp(form).subscribe(
-        (res) => {
-          this.toastr.success('تم الارسال بنجاح');
-          this.isShown = false;
-          this.isShown1 = false;
-          this.isShown2 = false;
-          this.speaEmpForm.reset();
-          this.router.navigate(['/dashboard/messages/messages']);
-        },
-        (err) => {
-          this.toastr.error(err);
-        }
-      );
-      this.sharedService.openSelectSchoolsModel.next(false);
-    }
+    const form = {
+      senderId: Number(localStorage.getItem('$AJ$userId')),
+      // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+      messageTypeId: this.speaEmpForm.value.messageType,
+      schoolIds: schoolIds,
+      title: this.speaEmpForm.value.title,
+      confirmationRecive: this.speaEmpForm.value.switch1,
+      replyPossibility: this.speaEmpForm.value.switch2,
+      showSenderName: this.speaEmpForm.value.switch3,
+      messegeText: this.speaEmpForm.value.description,
+      attachments:
+        this.imagesResult.map((attachment) => {
+          return attachment.url;
+        }) || null,
+    };
+    this.messageService.sendDataFromSpeaToEmp(form).subscribe(
+      (res) => {
+        this.toastr.success('تم الارسال بنجاح');
+        this.isShown = false;
+        this.isShown1 = false;
+        this.isShown2 = false;
+        this.speaEmpForm.reset();
+        this.router.navigate(['/dashboard/messages/messages']);
+        this.onSubmit = false
+      },
+      (err) => {
+        this.toastr.error(err);
+        this.onSubmit = false
+      }
+    );
+    this.sharedService.openSelectSchoolsModel.next(false);
+  }
 
-    if (this.currentUserscope == 'Guardian') {
-      const form = {
-        senderId: Number(localStorage.getItem('$AJ$userId')),
-        // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
-        title: this.parentForm.value.title,
-        messegeText: this.parentForm.value.description,
-        messageTypeId: this.parentForm.value.messageType,
-        // "schoolId": Number(localStorage.getItem('schoolId')),
-        schoolId: this.studentSchool,
-        attachment:
-          this.imagesResult.map((attachment) => {
-            return attachment.url;
-          }) || null,
-      };
-      
-      this.messageService.sendDataFromGuardianToSchool(form).subscribe(
-        (res) => {
-        
-          this.router.navigate(['/dashboard/messages/message-detail/' + res]);
-          this.toastr.success('تم الارسال بنجاح');
-          this.isShown = false;
-          this.isShown1 = false;
-          this.isShown2 = false;
-          this.parentForm.reset();
-        },
-        (err) => {
-          this.toastr.error(err);
-        }
-      );
-    }
+  sendMessageFromGuardianToSchool(){
+    const form = {
+      senderId: Number(localStorage.getItem('$AJ$userId')),
+      // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+      title: this.parentForm.value.title,
+      messegeText: this.parentForm.value.description,
+      messageTypeId: this.parentForm.value.messageType,
+      // "schoolId": Number(localStorage.getItem('schoolId')),
+      schoolId: this.studentSchool,
+      attachment:
+        this.imagesResult.map((attachment) => {
+          return attachment.url;
+        }) || null,
+    };
 
-    if (this.currentUserscope == 'Employee') {
+    this.messageService.sendDataFromGuardianToSchool(form).subscribe(
+      (res) => {
+        this.router.navigate(['/dashboard/messages/message-detail/' + res]);
+        this.toastr.success('تم الارسال بنجاح');
+        this.isShown = false;
+        this.isShown1 = false;
+        this.isShown2 = false;
+        this.parentForm.reset();
+        this.onSubmit = false
+      },
+      (err) => {
+        this.toastr.error(err);
+        this.onSubmit = false
+      }
+    );
+  }
+
+  sendMessageFromEmployeeToGuardian(){
+
       const form = {
         senderId: Number(localStorage.getItem('$AJ$userId')),
         // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
@@ -331,13 +345,17 @@ export class SendMessageComponent implements OnInit, OnDestroy {
           this.isShown1 = false;
           this.isShown2 = false;
           this.schoolEmpForm.reset();
+          this.onSubmit = false
         },
         (err) => {
           this.toastr.error(err);
+          this.onSubmit = false
         }
       );
-    }
+
   }
+
+
   ngOnDestroy(): void {
     this.sharedService.openSelectSchoolsModel.next(false);
     this.userRolesService.MarkedListLength.next((this.MarkedListLength = 0));

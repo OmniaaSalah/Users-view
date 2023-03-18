@@ -6,12 +6,12 @@
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
 
-            <app-table-caption 
+            <app-table-caption
             [hasFilter]="false"
-            (onFilter)="getPeriods()" 
+            (onFilter)="getPeriods()"
             (onExport)="onExport($event)"
-            (onSearch)="filtration.KeyWord = $event; getPeriods()" 
-            (onClear)="clearFilter()">></app-table-caption>
+            (onSearch)="filtration.KeyWord = $event; getPeriods()"
+            (onClear)="clearFilter()"></app-table-caption>
 
         </ng-template>
         <ng-template pTemplate="header">
