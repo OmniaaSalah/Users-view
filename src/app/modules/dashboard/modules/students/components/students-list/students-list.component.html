@@ -45,6 +45,10 @@
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
                     <p-multiSelect [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
                 </div>
+                <!-- <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.StudentCategory'| translate}}</label>
+                    <p-multiSelect    [options]="studentCategoryList"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.NationalityCategoryId" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.SelectStudentCategory' |translate}}"></p-multiSelect>
+                </div> -->
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.sonsOfMartyrs'| translate}}</label>
                     <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsChildOfAMartyr" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>

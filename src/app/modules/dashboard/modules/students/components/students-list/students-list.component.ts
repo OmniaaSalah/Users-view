@@ -33,7 +33,7 @@ import { StudentsService } from '../../services/students/students.service';
 export class StudentsListComponent implements OnInit {
 
   lang = inject(TranslationService).lang
-
+  studentCategoryList=[];
   currentUserScope = inject(UserService).getCurrentUserScope()
   get claimsEnum(){ return ClaimsEnum }
   // << ICONS >> //
@@ -51,7 +51,7 @@ export class StudentsListComponent implements OnInit {
 
 
 
-  filtration:Filter = {
+  filtration= {
     ...Filtration, 
     schoolYearId:1,
     SchoolId:null, 
@@ -61,6 +61,7 @@ export class StudentsListComponent implements OnInit {
     TrackId:null,
     NationalityId:null,
     IsPassed:null,
+    NationalityCategoryId:null,
     IsChildOfAMartyr: null, 
     TalentId: null,
     IsSpecialAbilities:null,
@@ -142,7 +143,7 @@ export class StudentsListComponent implements OnInit {
         
      
     })
-
+    this.studentsService.getStudentNatioaniliteCategories().subscribe((res)=>{this.studentCategoryList=res});
   }
 
 
@@ -244,6 +245,7 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsSpecialClass= null
     this.filtration.IsInFusionClass= null
     this.filtration.IsSpecialAbilities = null
+    this.filtration.NationalityCategoryId=null
     this.checkStudentList();
   }
 
