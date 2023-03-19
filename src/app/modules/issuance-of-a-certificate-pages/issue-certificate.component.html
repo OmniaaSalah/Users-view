@@ -5,8 +5,8 @@
             <app-header-dashboard></app-header-dashboard>
         </div>
     </div>
-    
-    
+
+
     <div *ngIf="step==1" class="issune-certificate-content">
         <div class="custom-form radius-15 border-dark p-5">
 
@@ -14,18 +14,18 @@
                 <img style="width:1.75rem" src="assets/images/shared/certificate.svg" alt="">
                 <h3 class="fw-bold color-primary">{{'dashboard.issue of certificate.issueNewCertificate' | translate}}</h3>
             </div>
-    
+
             <div class="title d-flex">
                 <div class="form-group mt-3">
                     <h4 class="mb-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</h4>
-               
-                    <p-dropdown 
-                    placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" 
-                    [options]="certificatesList$ |async" optionLabel="name.ar" 
+
+                    <p-dropdown
+                    placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
+                    [options]="certificatesList$ |async" optionLabel="name.ar"
                     [(ngModel)]="selectedCertificate">
                     </p-dropdown>
                     <!-- <label class="Label color-skyBlue-400 mt-2"  *ngIf="dropValue !== undefined||null">{{certificateName|currentLang}}</label> -->
-                 
+
                 </div>
 
                 <ng-container *ngIf="selectedCertificate != undefined||null">
@@ -35,15 +35,15 @@
                              <span class="color-gray-300">{{'dashboard.issue of certificate.Certificate fee' |translate}}</span>
                               <span class="color-red-500">{{selectedCertificate?.fees}} درهم</span>
                          </div>
-                        <a class="color-skyBlue-500 text-decoration-underline " *ngIf="!studentId||selectedCertificate.value==certificateType.BoardCertificate||selectedCertificate.value==certificateType.AcademicSequenceCertificate||selectedCertificate.value==certificateType.GradesCertificate||selectedCertificate.value==certificateType.GoodBehaviorCertificate"  (click)="showChildreens()">{{'dashboard.issue of certificate.Click here to add the required information' |translate}}</a>
+                        <a class="color-skyBlue-500 text-decoration-underline " *ngIf="!studentId||selectedCertificate.value==certificateType.BoardCertificate||selectedCertificate.value==certificateType.AcademicSequenceCertificate||selectedCertificate.value==certificateType.GradesCertificate||selectedCertificate.value==certificateType.GoodBehaviorCertificate"  (click)="showChildreens()">{{'dashboard.issue of certificate.addRequiredInfo' |translate}}</a>
                         <button type="submit" class="btn  btn-primary" *ngIf="studentId&&selectedCertificate.value!=certificateType.BoardCertificate&&selectedCertificate.value!=certificateType.AcademicSequenceCertificate&&selectedCertificate.value!=certificateType.GradesCertificate&&selectedCertificate.value!=certificateType.GoodBehaviorCertificate" (click)="onStepChanged(item)" [disabled]="isBtnLoading">
                             {{'shared.save'|translate}}
                             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                         </button>
                     </div>
-    
+
                 </ng-container>
-                
+
                 <!-- <button  class="btn btn-light topBTTn" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button> -->
             </div>
 
@@ -67,17 +67,17 @@
 
 
 
-    
+
     <div *ngIf="step==2" class="issune-certificate-content position-relative" >
         <h4>{{'dashboard.issue of certificate.Please select a student' | translate}} <b class="color-primary">{{certificateName|currentLang}}</b></h4>
         <div class="cards mt-4">
-    
+
             <div *ngIf="skeletonShown " class="row mt-6">
                 <div class="col-md-4" *ngFor="let item of [1,2,3]">
                     <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
                 </div>
             </div>
-    
+
             <div class="row g-5 my-6" style="margin-left: 2rem;">
                 <div class="col-sm-6 col-md-4 col-xxl-3 my-3" *ngFor="let item of childList; let i = index">
                     <app-card-student [student]="item" [choosenStudents]="choosenStudents"  (addStudent)="selectedStudentsChanged($event,item)"></app-card-student>
@@ -85,18 +85,18 @@
                 <app-informative-block *ngIf="childList.length == 0 " subTitle="{{'emptyList.chidrenNotAllowed' |translate}}"></app-informative-block>
             </div>
         </div>
-       
+
         <div class=" d-flex align-items-center justify-content-end ">
             <div class="Btn-group d-flex gap-3">
                 <p class="topPara">{{'dashboard.issue of certificate.choose children' | translate}} <span>{{choosenStudents.length}}</span> {{'dashboard.issue of certificate.from childrens' | translate}}</p>
-                <button class="btn btn-primary" 
-                *ngIf="isNextStepRequired()" 
-                (click)="onStepChanged(item)" 
+                <button class="btn btn-primary"
+                *ngIf="isNextStepRequired()"
+                (click)="onStepChanged(item)"
                 [disabled]="!choosenStudents.length" >{{'Next'| translate}}</button>
 
-                <button type="submit" class="btn  btn-primary" 
-                *ngIf="!isNextStepRequired()" 
-                (click)="onOtherCertificatesSubmitted(item)" 
+                <button type="submit" class="btn  btn-primary"
+                *ngIf="!isNextStepRequired()"
+                (click)="onOtherCertificatesSubmitted(item)"
                 [disabled]="!choosenStudents?.length || isBtnLoading">
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
@@ -105,28 +105,28 @@
                 <button (click)="goToFirst()" ><a  class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
             </div>
         </div>
-    
+
     </div>
-    
+
     <div class="content">
-    
+
         <div *ngIf="step==3" class="issune-certificate-content">
             <app-academic-sequence [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-academic-sequence>
-        
+
         </div>
-        
-        
+
+
         <div *ngIf="step==4" class="issune-certificate-content">
             <app-board-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-board-certificate>
         </div>
-    
+
     </div>
 
     <div *ngIf="step==5" class="issune-certificate-content">
         <app-degree-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-degree-certificate>
     </div>
 
-    
+
     <div *ngIf="step==6" class="issune-certificate-content">
         <app-diploma-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-diploma-certificate>
     </div>

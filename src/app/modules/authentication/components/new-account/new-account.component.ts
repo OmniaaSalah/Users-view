@@ -44,7 +44,7 @@ export class NewAccountComponent implements OnInit {
     private sharedService:SharedService,
     private toastService: ToastService,
     private authService:AuthenticationService,
-    private formbuilder: FormBuilder) { 
+    private formbuilder: FormBuilder) {
     this.registrationWayFormGrp=formbuilder.group({
       registrationWay:['',Validators.required],
       phoneWay:[''],
@@ -72,7 +72,7 @@ export class NewAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tittle=this.translate.instant("sign up.New account of parent");
+    this.tittle=this.translate.instant("login.Create New User Account");
     this.getAuthenticationWays();
   }
   get registrationWay() {
@@ -128,7 +128,7 @@ export class NewAccountComponent implements OnInit {
   }
   closeModel()
   {
-  
+
     this.authService.isNewAccountOpened.next(false)
     localStorage.removeItem('accountWay');
     localStorage.removeItem('notificationSource');
@@ -141,12 +141,12 @@ export class NewAccountComponent implements OnInit {
       this.showPhoneField=true;
       this.showIdentityField=false;
       this.emairatesWay.clearValidators();
-      this.emairatesWay.updateValueAndValidity();  
+      this.emairatesWay.updateValueAndValidity();
       this.emailWay.clearValidators();
-      this.emailWay.updateValueAndValidity(); 
+      this.emailWay.updateValueAndValidity();
       this.phoneWay.setValidators([Validators.required,Validators.pattern('[05]{1}[0-9]{9}')]);
       this.account.notificationSource=this.registrationWayFormGrp.value.phoneWay
-    
+
     }
     else if(e==RegistrationEnum.Email)
     {
@@ -155,9 +155,9 @@ export class NewAccountComponent implements OnInit {
       this.showPhoneField=false;
       this.showIdentityField=false;
       this.emairatesWay.clearValidators();
-      this.emairatesWay.updateValueAndValidity(); 
+      this.emairatesWay.updateValueAndValidity();
       this.phoneWay.clearValidators();
-      this.phoneWay.updateValueAndValidity(); 
+      this.phoneWay.updateValueAndValidity();
       this.emailWay.setValidators([Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]);
       this.account.notificationSource=this.registrationWayFormGrp.value.emailWay
     }
@@ -167,9 +167,9 @@ export class NewAccountComponent implements OnInit {
       this.showPhoneField=false;
       this.showIdentityField=true;
       this.phoneWay.clearValidators();
-      this.phoneWay.updateValueAndValidity(); 
+      this.phoneWay.updateValueAndValidity();
       this.emailWay.clearValidators();
-      this.emailWay.updateValueAndValidity(); 
+      this.emailWay.updateValueAndValidity();
       this.emairatesWay.setValidators([Validators.required,Validators.minLength(14),Validators.maxLength(15)]);
       this.account.notificationSource=this.registrationWayFormGrp.value.emairatesWay
     }
@@ -177,7 +177,7 @@ export class NewAccountComponent implements OnInit {
   }
   saveRegistrationWay()
   {
-  
+
    this.account.accountWay=this.registrationWayFormGrp.value.registrationWay;
    this.changeRegistrationField(this.registrationWayFormGrp.value.registrationWay);
    localStorage.setItem('accountWay', this.account.accountWay);
@@ -186,7 +186,7 @@ export class NewAccountComponent implements OnInit {
     // this.openOTPModel=true;
     this.sendOtp();
   }
-  
+
 sendOtp()
 {
   this.isBtnLoading=true;
@@ -197,7 +197,7 @@ sendOtp()
     this.step=2;
     this.timeLeft=600;
     this.startTimer();
-  },(err)=>{ 
+  },(err)=>{
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
 }
@@ -219,7 +219,7 @@ getCurrentRegistrationWay()
     "registrationSource": this.account.notificationSource,
     "password": this.passwordsFormGrp.value.newUserPassword
   }
- 
+
   this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});
   this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).subscribe((res)=>{this.noIdentityReasonList=res});
   this.authService.savePassword(password).subscribe((res)=>{
@@ -230,7 +230,7 @@ getCurrentRegistrationWay()
   },(err)=>{this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
   })
- 
+
 }
 savePersonalInformation()
 {
@@ -264,7 +264,7 @@ savePersonalInformation()
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
   })
-  
+
 }
 
 onFileUpload(file:CustomFile[]): void {
@@ -314,6 +314,6 @@ confirmOTP()
     this.timeLeft=600;
     this.startTimer();
   })
-  
+
 }
 }
