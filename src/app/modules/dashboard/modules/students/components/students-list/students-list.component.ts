@@ -40,7 +40,7 @@ export class StudentsListComponent implements OnInit {
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
 
- 
+
   isCollapsed=true
 
   // << HRADER DATA >> //
@@ -52,16 +52,16 @@ export class StudentsListComponent implements OnInit {
 
 
   filtration:Filter = {
-    ...Filtration, 
+    ...Filtration,
     schoolYearId:1,
-    SchoolId:null, 
-    curriculumId:null, 
+    SchoolId:null,
+    curriculumId:null,
     GradeId:null,
     DivisionId:null,
     TrackId:null,
     NationalityId:null,
     IsPassed:null,
-    IsChildOfAMartyr: null, 
+    IsChildOfAMartyr: null,
     TalentId: null,
     IsSpecialAbilities:null,
     // انواع الفصول الخاصه
@@ -86,21 +86,22 @@ export class StudentsListComponent implements OnInit {
   AllGrades$;
   AllDivisions$;
   gradeTracks$
-  schoolDivisions$ 
+  schoolDivisions$
 
   talents$ = this.studentsService.getTalents()
   booleanOptions = this.sharedService.booleanOptions
 
   passedOptions = [
-    {name: this.translate.instant('shared.allStatus.Passed'), value:true}, 
-    {name: this.translate.instant('shared.allStatus.notPassed'), value:false}
+    {name: this.translate.instant('shared.allStatus.Passed'), value:true},
+    {name: this.translate.instant('shared.allStatus.notPassed'), value:false},
+    {name: this.translate.instant('shared.allStatus.notComplete'), value:false}
   ]
 
   specialClassOptions = [
     {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
     {name: this.translate.instant('shared.fusionClass'), value:'fusionClass'}
   ]
-  
+
 
   students ={
     total:0,
@@ -125,22 +126,22 @@ export class StudentsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDashboardHeader();
-    
-  
+
+
     this.checkStudentList();
-    this.userService.currentUserSchoolId$.subscribe(id =>{ 
-       
+    this.userService.currentUserSchoolId$.subscribe(id =>{
+
         this.schoolId=id;
-        if(id){ 
-          
+        if(id){
+
           this.schoolSelected(id);
           this.isSchoolAllowToTransferGroup$=this.settings.isSchoolAllowToTransferGroup(this.schoolId)
         }
         else{id=''}
         this.AllDivisions$ =this.sharedService.getAllDivisions(id)
         this.AllGrades$ =this.sharedService.getAllGrades(id)
-        
-     
+
+
     })
 
   }
@@ -157,12 +158,12 @@ export class StudentsListComponent implements OnInit {
     }
     else
     {this.isSchoolSelected = false}
-    
+
   }
 
   onGradeSelected(GradeId){
    if(GradeId)
-   { if(!GradeId.length) 
+   { if(!GradeId.length)
       {this.isGradeSelected=false}
     else
       {
@@ -176,7 +177,7 @@ export class StudentsListComponent implements OnInit {
   }
 
 
-  
+
   getStudents(){
     this.students.loading=true
     this.students.list=[]
@@ -185,7 +186,7 @@ export class StudentsListComponent implements OnInit {
       this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
-      this.students.total =res.total 
+      this.students.total =res.total
 
     },err=> {
       this.students.loading=false
@@ -200,13 +201,13 @@ export class StudentsListComponent implements OnInit {
       this.students.loading=false
       this.students.list = res.result.data
       this.students.totalAllData = res.result.totalAllData
-      this.students.total =res.result.total 
+      this.students.total =res.result.total
 
     },err=> {
       this.students.loading=false
       this.students.total=0
     })
-  
+
   }
 
 
@@ -261,15 +262,15 @@ export class StudentsListComponent implements OnInit {
     this.checkStudentList();
 
   }
-  get userScope() 
-  { 
-    return UserScope 
+  get userScope()
+  {
+    return UserScope
   }
 
   checkDashboardHeader(){
     if(this.currentUserScope==UserScope.Employee) this.componentHeaderData.breadCrump = [{label:this.translate.instant('dashboard.schools.studentsList') ,routerLink:'/dashboard/student-management/students'},]
     else if (this.currentUserScope==UserScope.SPEA) this.componentHeaderData.breadCrump = [{label:this.translate.instant('dashboard.schools.studentsList'),routerLink:'/dashboard/schools-and-students/students'},]
-    
+
     this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
@@ -277,7 +278,7 @@ export class StudentsListComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee){
         this.userService.currentUserSchoolId$.subscribe(id => this.getStudentsInSpecificSchool(id))
     }else { this.getStudents() }
-    
+
   }
 
 }

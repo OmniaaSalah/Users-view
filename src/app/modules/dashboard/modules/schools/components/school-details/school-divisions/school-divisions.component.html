@@ -16,10 +16,10 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="code">{{'dashboard.schools.sectionName' |translate}}
+                <th pSortableColumn="code">{{'shared.division' |translate}}
                     <p-sortIcon field="code"></p-sortIcon>
                 </th>
-                <th pSortableColumn="name">{{'dashboard.schools.gradeName' |translate}}
+                <th pSortableColumn="name">{{'shared.grade' |translate}}
                     <p-sortIcon field="name"></p-sortIcon>
                 </th>
                 <th pSortableColumn="category">{{'dashboard.schools.roomNumber' |translate}}
@@ -50,7 +50,7 @@
                         <span>{{'shared.edit' |translate}}</span>
                         <img  src="assets/images/shared/arrow.svg" alt="">
                     </button> -->
-                  
+
                     <ng-container *ngIf="currentUserScope==userScope.Employee">
                         <div class="d-flex justify-content-center">
                             <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/divisions/division/{{division.id}}" >

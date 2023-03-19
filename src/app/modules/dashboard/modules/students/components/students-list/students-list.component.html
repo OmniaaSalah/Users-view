@@ -12,12 +12,12 @@
 
     <div class="search-box bg-gray-30 mb-5 border-dark radius-15">
         <div class="d-flex justify-content-between p-5 " role="button" (click)="isCollapsed = !isCollapsed">
-            <span class="fs-2 color-primary">{{'dashboard.students.searchForStudent' |translate}}</span>
+            <span class="fs-2 color-primary">{{'dashboard.students.searchCriteria' |translate}}</span>
             <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
         </div>
-        
+
         <div class="custom-form p-5 " *ngIf="isCollapsed">
-            
+
            <div class="row g-5 form-set" >
                 <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
                     <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
@@ -29,18 +29,18 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.classes'| translate}}</label>
+                    <label class="label">{{'shared.grade'| translate}}</label>
                      <p-multiSelect [options]="(AllGrades$ | async)" display="chip" (ngModelChange)="onGradeSelected($event)"  (onClear)="isGradeSelected=false" [(ngModel)]="filtration.GradeId"   optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.chooseClasse' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.divisions'| translate}}</label>
+                    <label class="label">{{'shared.division'| translate}}</label>
                     <p-multiSelect  [disabled]="!isSchoolSelected"    [options]="(schoolDivisions$ | async)" display="chip"   [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="name.ar"    placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.tracks'| translate}}</label>
+                    <label class="label">{{'shared.track'| translate}}</label>
                     <p-multiSelect  [options]="(gradeTracks$ | async)?.data"  [disabled]="(!this.isGradeSelected || !this.isSchoolSelected)"  display="chip"    [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.chooserack' |translate}}"></p-multiSelect>
                 </div>
-               
+
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
                     <p-multiSelect [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
@@ -58,7 +58,7 @@
                     <label class="label">{{'shared.classroom'| translate}}</label>
                     <p-dropdown [options]="specialClassOptions"  [showClear]="true"  ngModel (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
                 </div>
-    
+
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.finalScore'| translate}}</label>
                     <p-dropdown [options]="passedOptions" [showClear]="true"  [(ngModel)]="filtration.IsPassed" optionValue="value" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
@@ -93,20 +93,20 @@
         </div>
 
     </div>
-    
+
 
     <div class="prim-table mt-4" *ngIf="students.totalAllData || students.loading">
-        <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true"> 
+        <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption
-                [hasFilter]="false" 
-                (onExport)="onExport($event)" 
-                (onFilter)="checkStudentList()" 
-                (onSearch)="filtration.KeyWord = $event; checkStudentList()" 
+                [hasFilter]="false"
+                (onExport)="onExport($event)"
+                (onFilter)="checkStudentList()"
+                (onSearch)="filtration.KeyWord = $event; checkStudentList()"
                 (onClear)="clearFilter()"></app-table-caption>
             </ng-template>
-            
+
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <!-- <th *ngFor="let col of cols">
@@ -157,7 +157,7 @@
                         <ng-container *ngIf="!students.total &&  !students.loading">
                             <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
-                        
+
                         <app-loader></app-loader>
                     </td>
                 </tr>
