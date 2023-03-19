@@ -19,14 +19,14 @@
     <div class=" row gx-5">
         <div class="col ">
 
-            <app-file-upload (onFileUpload)="onLogoFileUpload($event)" accept="image/*" [imgUrl]="school?.schoolLogoPath" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label="{{'dashboard.schools.enterForAttachSchoolLogo' |translate}}"></app-file-upload>
+            <app-file-upload (onFileUpload)="onLogoFileUpload($event)" accept="image/*" [imgUrl]="school?.schoolLogoPath" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" ></app-file-upload>
         </div>
         <div class="col flex-grow-0">
             <p-divider layout="vertical"></p-divider>
         </div>
         <div class="col">
 
-            <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" accept="image/*" [imgUrl]="school?.diplomaLogoPath" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label="{{'dashboard.schools.enterForAttachRliableLogo' |translate}}"></app-file-upload>
+            <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" accept="image/*" [imgUrl]="school?.diplomaLogoPath" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" ></app-file-upload>
         </div>
 
     </div>
@@ -59,7 +59,7 @@
 
             <!-- <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
             <p class="color-primary">{{school?.type}}</p> -->
-            
+
             <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
             <p class="color-primary">
                 <span class="status" *ngIf="school?.status=='Active'" >{{'shared.yes'|translate}}</span>
@@ -102,7 +102,7 @@
         <div class="row bg-gray-30 radius-15 p-4">
             <div class="col-md-7 ps-5 pe-0 ">
                 <div class="map-container">
-            
+
                     <div class="row map-container mb-2">
                         <!-- Google Map -->
                         <div id="map" class="map"></div>
@@ -110,14 +110,14 @@
                     <!-- <p class="paragraph mb-5 color-gray-400 fw-normal">الإحداثيات: 25.081622124 - 55.2164479587 </p> -->
                 </div>
             </div>
-        
+
             <div class="col-md-5 align-self-center grid-container bg-gray-30 radius-15 p-4">
                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
                 <p class="color-primary"> {{(school?.address?.city |currentLang) || 'ابو ظبى'}}</p>
-        
+
                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
                 <p class="color-primary">{{(school?.address?.state.name |currentLang) || 'الشارقه'}}</p>
-        
+
                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
                 <p class="color-primary">{{(school?.address?.street.name |currentLang) || 'شارع الأنوار، مجمع النخيل'}}</p>
             </div>

@@ -84,28 +84,28 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
-    
+
+
     this.userService.isUserLogged$.subscribe((res)=>{
-       if(res) 
+       if(res)
        {
         this.guardianName=this.userService.getCurrentUserName();
         this.getSchoolYearsList();
         // this.userService.currentUserName.subscribe((res)=>{this.guardianName=res;})
-      
+
           this.getNotficationNumber()
-           this.notificationService.unReadNotificationNumber.subscribe((response) => { 
+           this.notificationService.unReadNotificationNumber.subscribe((response) => {
             if(response!=0)
             {this.notificationNumber = response;}
             else
             {this.notificationNumber = '';}
            });
-      } 
+      }
 
       });
 
     this.userService.currentUserSchoolId$.subscribe(id => {this.loadMenuItems(id)});
-    
+
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
     }else{
@@ -124,7 +124,7 @@ export class HeaderComponent implements OnInit {
     this.notificationService.getAllNotifications(searchModel).subscribe(res=> this.notificationsList = res.data)
   }
 
-  
+
   getNotReadable()
   {
     this.searchModel.keyword = null
@@ -177,7 +177,7 @@ export class HeaderComponent implements OnInit {
       },320)
     }
     this.activeMenuItem = this.menuItems[index];
-   
+
 
   }
 
@@ -223,7 +223,7 @@ markAsRead(){
     this.toastr.success(res.message)
     this.getNotficationNumber();
     this.getNotReadable();
- 
+
   },err=>{
     this.toastr.error(err.message)
   })
@@ -245,11 +245,11 @@ onScroll()
 
   loadMenuItems(currentSchoolId)
   {
-    
+
 
     this.menuItems=[
       {
-  
+
         id:1,
         enum: RouteEnums.SCHOOLS_AND_STUDENTS,
         title:this.translate.instant('sideBar.schoolsAndStudents.title'),
@@ -314,8 +314,8 @@ onScroll()
           {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),url:'/dashboard/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.SE_MenuItem_Rate]},
         ]
       },
-  
-      // Employee Scope 
+
+      // Employee Scope
       {
         id:6,
         enum: RouteEnums.Student_Management,
@@ -327,7 +327,7 @@ onScroll()
 
         ]
       },
-  
+
       {
         id:7,
         enum: RouteEnums.Grades_Divisions_Management,
@@ -372,13 +372,13 @@ onScroll()
 
         ]
       },
-  
-  
-  
+
+
+
     ]
   }
 
-  
+
   onYearSelected(schoolYearId){
     this.userService.persist('yearId',schoolYearId);
     window.location.reload();
@@ -388,7 +388,7 @@ onScroll()
     this.authService.logOut();
   }
 
- 
+
 
   getNotficationNumber()
   {
@@ -396,7 +396,7 @@ onScroll()
     this.searchModel.isRead=null;
     this.notificationService.getAllNotifications(this.searchModel).subscribe((res)=>{
       var unReadCount=0;
-      this.notificationService.notificationNumber.next(res.total); 
+      this.notificationService.notificationNumber.next(res.total);
       res.data.forEach(element => {
         if(!element.isRead)
         {unReadCount++;}

@@ -13,16 +13,16 @@
     <p-table  [lazy]="true" [value]=" assignments.list" (onSort)="onSort($event)" [scrollable]="true">
             <ng-template pTemplate="caption">
                 <app-table-caption
-                (onExport)="onExport($event)" 
-                (onFilter)="filtration.Page=1;getAssignmentList()" 
-                (onSearch)="filtration.Page=1; filtration.KeyWord = $event; getAssignmentList()" 
+                (onExport)="onExport($event)"
+                (onFilter)="filtration.Page=1;getAssignmentList()"
+                (onSearch)="filtration.Page=1; filtration.KeyWord = $event; getAssignmentList()"
                 (onClear)="clearFilter()">
                 <div class="row gx-5 form-set">
                     <div class="col-4">
                         <label class="label" for="flexibilityStatus">{{'dashboard.Assignments.Assignment Status'|translate }}  </label>
-                        <p-dropdown [options]="examStatusList" [showClear]="true" StopProp optionLabel="name" optionValue="value" [(ngModel)]="filtration.Status" inputId="Status"  placeholder="{{'dashboard.Assignments.Select Assignment Status'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="examStatusList" [showClear]="true" optionLabel="name" optionValue="value" [(ngModel)]="filtration.Status" inputId="Status"  placeholder="{{'dashboard.Assignments.Select Assignment Status'|translate }}"></p-dropdown>
                     </div>
-                   
+
                 </div>
             </app-table-caption>
             </ng-template>
@@ -33,7 +33,7 @@
                 <th pSortableColumn="name.ar">
                     <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}
                 </th>
-                <th pSortableColumn="name.ar">
+                <th pSortableColumn="name.ar" *ngIf="currentUserScope==userScope.SPEA">
                     <p-sortIcon field="name.ar"></p-sortIcon>{{'shared.school' | translate}}
                 </th>
                 <th pSortableColumn="gradeName.ar">
@@ -72,7 +72,7 @@
         <ng-template pTemplate="body" let-assignment>
             <tr>
                 <td>{{assignment.name |currentLang}}</td>
-                <td>{{assignment.schoolName|currentLang}}</td>
+                <td *ngIf="currentUserScope==userScope.SPEA">{{assignment.schoolName|currentLang}}</td>
                 <td>{{assignment.gradeName |currentLang}}</td>
                 <td *ngIf="currentUserScope!=userScope.Employee">{{assignment.curriculmName |currentLang}}</td>
                 <td style="min-width: 12rem;" *ngIf="currentUserScope!=userScope.Employee">{{assignment.schoolCount}}</td>
@@ -101,7 +101,7 @@
                     <div class="d-grid justify-content-end mx-3">
                     <div class="dropdown" *ngIf="currentUserScope==userScope.SPEA || (assignment.examStatus === 'Available' && currentUserScope==userScope.Employee)">
                         <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <span role="button" class="color-primary link  d-flex" >{{'shared.ExamFileMangment'|translate}}<img  class=" mt-2 rotate270"  src="assets/images/shared/blue-arrow.svg" alt=""></span>  
+                            <span role="button" class="color-primary link  d-flex" >{{'shared.ExamFileMangment'|translate}}<img  class=" mt-2 rotate270"  src="assets/images/shared/blue-arrow.svg" alt=""></span>
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                             <li class="dropdown-item">
@@ -122,7 +122,7 @@
                  </div>
                 </td>
 
-               
+
 
             </tr>
         </ng-template>

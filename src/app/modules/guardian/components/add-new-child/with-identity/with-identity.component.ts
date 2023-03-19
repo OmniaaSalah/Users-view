@@ -25,10 +25,10 @@ import { UserService } from 'src/app/core/services/user/user.service';
 
 export class WithIdentityComponent implements OnInit {
   ngDestroy$ =new Subject()
-  
+
   lang =inject(TranslationService).lang
   get fileTypesEnum () {return FileEnum}
-  
+
   currentGuardianId = this.userService.getCurrentGuardian().id
 
   identityAttach={
@@ -64,10 +64,10 @@ export class WithIdentityComponent implements OnInit {
 
   setAttachment(attachRef, files:CustomFile[]){
     console.log(attachRef, files);
-    
+
     // files.length ? attachRef={...attachRef, ...files[0]} : attachRef={...attachRef, name:'',url:''}
-    files.length ? 
-    ((attachRef.url=files[0].url) && (attachRef.name=files[0].name) ) : 
+    files.length ?
+    ((attachRef.url=files[0].url) && (attachRef.name=files[0].name) ) :
     (attachRef.url='') && (attachRef.name='' )
 
   }
@@ -91,18 +91,18 @@ export class WithIdentityComponent implements OnInit {
     breadCrump: [
       {
         label: this.translate.instant(
-          'dashboard.parentHome.Add New Child'
+          'dashboard.parentHome.newStudent'
         ),
         routerLink: '/parent/AddChild/Addchild-WithNationality',
         routerLinkActiveOptions: { exact: true },
       },
     ],
     mainTitle: {
-      main: this.translate.instant('dashboard.parentHome.Add New Child'),
+      main: this.translate.instant('dashboard.parentHome.newStudent'),
     },
   };
 
-  constructor(private fb:FormBuilder,  
+  constructor(private fb:FormBuilder,
     private addChildService:AddChildService,
     private userService:UserService,
     private translate: TranslateService,private headerService: HeaderService,
@@ -129,7 +129,7 @@ export class WithIdentityComponent implements OnInit {
           if(res.statusCode==HttpStatusCodeEnum.NotAcceptable){
             this.confirmModelService.openModel({message: this.translate.instant('toasterMessage.childExistForAnotherGaurdian')})
             this.confirmModelLister()
-            this.onSubmit=false;  
+            this.onSubmit=false;
             this.childToRelinkWithNewGuardian={
                   studentId: res.studentId,
                   childId: res.childId,
@@ -143,13 +143,13 @@ export class WithIdentityComponent implements OnInit {
             // throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
 
           }
-         
+
         }else{
           return res
         }
     }))
-    .subscribe(res=>{      
-      this.onSubmit=false;    
+    .subscribe(res=>{
+      this.onSubmit=false;
       this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
 
       this.router.navigate(['/']);
@@ -163,7 +163,7 @@ export class WithIdentityComponent implements OnInit {
 
 
 
-   
+
    sendRelinkChildReq(){
     this.onSubmit=true;
     this.addChildService.sendRelinkChildReq(this.childToRelinkWithNewGuardian).subscribe(res=>{

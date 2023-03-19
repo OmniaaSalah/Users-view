@@ -56,10 +56,10 @@
         <p-table #dt [value]="employees.list" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption 
-                (onFilter)="this.filtration.Page=1;getEmployees()" 
-                (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getEmployees()" 
-                (onExport)="onExport($event)" 
+                <app-table-caption
+                (onFilter)="this.filtration.Page=1;getEmployees()"
+                (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getEmployees()"
+                (onExport)="onExport($event)"
                 (onClear)="clearFilter()">
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
@@ -79,7 +79,7 @@
 
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
-                  
+
                     <th pSortableColumn="code">{{'dashboard.schools.employeeId'|translate }}
                         <p-sortIcon field="code"></p-sortIcon>
                     </th>
@@ -95,6 +95,11 @@
                     <th pSortableColumn="quantity">{{'shared.email'|translate }}
                         <p-sortIcon field="quantity"></p-sortIcon>
                     </th>
+
+                    <!-- <th pSortableColumn="phoneNumber">{{'shared.phoneNumber'|translate }}
+                      <p-sortIcon field="phoneNumber"></p-sortIcon>
+                  </th> -->
+
                     <th pSortableColumn="price">{{'shared.personalId'|translate }}
                         <p-sortIcon field="price"></p-sortIcon>
                     </th>
@@ -104,16 +109,17 @@
             </ng-template>
             <ng-template pTemplate="body" let-employee let-columns="columns">
                 <tr>
-                 
+
                     <td>{{employee?.employeeIdNumber}}</td>
                     <td>{{employee?.name |currentLang}}</td>
                     <td>{{employee?.surName |currentLang}}</td>
                     <td>{{employee?.jobTitle | currentLang}}</td>
                     <td>{{employee?.email}}</td>
+                    <!-- <td>{{employee?.phoneNumber}}</td> -->
                     <td>{{employee?.emiratesIdNumber}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
-                         
+
                             <span [ngSwitch]="employee?.status">
                               <div class="alerting success" *ngSwitchCase="statusEnum.Active">{{'shared.allStatus.Active'|translate}}</div>
                               <div class="alerting danger"  *ngSwitchCase="statusEnum.Inactive">{{'shared.allStatus.Inactive'|translate}}</div>
@@ -169,12 +175,12 @@
                     <div class="row gx-5 form-set">
                         <div class="col-md-6">
                             <label class="label" for="password">{{'shared.password' | translate}}</label>
-                            <p-password 
-                            #inputPass 
-                            (onFocus)="managerFormCtr.password.markAsTouched()" 
+                            <p-password
+                            #inputPass
+                            (onFocus)="managerFormCtr.password.markAsTouched()"
                             (onBlur)="managerFormCtr.password.markAsUntouched()"
-                            iconPos="left" 
-                            formControlName="password" 
+                            iconPos="left"
+                            formControlName="password"
                             [feedback]="false" [toggleMask]="true" name="password" placeholder="**************" ></p-password>
 
                             <div class="hint-group" *ngIf="managerFormCtr.password.touched && !managerFormCtr.password.dirty">
@@ -305,9 +311,9 @@
                         <div class="col-md-6">
                             <label class="label" for="jobTitle">{{'dashboard.schools.employeeRole' | translate}}</label>
                             <!-- <input pInputText formControlName="jobTitle"> -->
-                            <p-dropdown 
-                            formControlName="jobTitleId" 
-                            [ngClass]="{'ng-invalid ng-dirty': employeeFormCtr.jobTitleId.errors && employeeFormCtr.jobTitleId.errors?.['required']}" 
+                            <p-dropdown
+                            formControlName="jobTitleId"
+                            [ngClass]="{'ng-invalid ng-dirty': employeeFormCtr.jobTitleId.errors && employeeFormCtr.jobTitleId.errors?.['required']}"
                             [options]="jobTitleOptions$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                             optionValue="id" placeholder="{{'dashboard.schools.employeeRole' | translate}}"></p-dropdown>
 
@@ -325,7 +331,7 @@
                         </div>
                     </div>
                     <!-- <div class="py-6"></div> -->
-                  
+
                 </form>
             </div>
         </div>
