@@ -1,10 +1,10 @@
-<div class="prim-table" *ngIf="allCertificates.totalAllData || allCertificates.loading"> 
+<div class="prim-table" *ngIf="allCertificates.totalAllData || allCertificates.loading">
     <app-table-caption [hasExport]="false" (onFilter)="filtration.Page=1;getAllCertificates()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllCertificates()" (onClear)="clearFilter()">
         <div class="row gx-5 form-set">
             <div class="col-lg-3">
-                <label class="label">{{'dashboard.students.academic year'|translate}}</label> 
+                <label class="label">{{'dashboard.students.academic year'|translate}}</label>
                 <p-multiSelect   [options]="schoolYearsList" [(ngModel)]="filtration.SchoolYearId" display="chip"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"     placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" ></p-multiSelect>
-                
+
             </div>
             <div class="col-lg-3">
                 <label class="label">{{'Student Name'| translate}}</label>
@@ -28,17 +28,17 @@
         <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 
-    
+
     <div class="body  radius-15 bg-gray-30 p-5" *ngIf="allCertificates.list.length">
-        
+
         <div class="d-flex justify-content-between mb-5">
             <div class="d-flex align-items-center gap-3">
                 <img style="width:2.5rem" src="assets/images/shared/certificate.svg" alt="">
-                <h3 class="heading heading--secondary color-primary">{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h3>
+                <h3 class="heading heading--secondary color-primary">{{'dashboard.issue of certificate.selectCertificateToPrint' | translate}}</h3>
             </div>
-       
+
             <div class="buttons d-flex px-5">
-                <button class="btn btn-primary mx-2 mb-5" (click)="goToPayment()" [disabled]="!certificatesIds.length">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                <button class="btn btn-primary mx-2 mb-5" (click)="goToPayment()" [disabled]="!certificatesIds.length">{{'dashboard.issue of certificate.payment' | translate}}</button>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
             <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
             <span class="color-gray-800">" {{'dashboard.issue of certificate.you should only select certificate that has pending for payment status only'|translate}} "</span>
         </div>
-        <div class="elcard d-flex justify-content-between radius-15 my-5 bg-white px-4 py-5  border-danger" 
+        <div class="elcard d-flex justify-content-between radius-15 my-5 bg-white px-4 py-5  border-danger"
         *ngFor="let certificate of allCertificates.list;let i = index">
             <div class="certificates-list d-flex  w-100">
 
@@ -63,7 +63,7 @@
                     <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
                     <span class="fw-bold fs-4">{{'dashboard.issue of certificate.'+certificate.certificateType| translate}}</span>
                 </div>
-                <div class="elcard-pay px-3">
+                <div class="elcard-payment px-3">
                     <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
                     <span class="fw-bold fs-4">{{certificate.fees}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                 </div>
@@ -97,14 +97,14 @@
                         <img src="assets/images/shared/rect-xmark.svg" alt="" (click)="removeRequest(certificate.commonCertificateRequestId)">
                     </div>
                 </div>
-               
+
             </div>
-    
+
 
         </div>
 
     </div>
-    
+
     <div *ngIf="allCertificates.total> 6" class="mb-5">
         <app-pagination [totalItems]="allCertificates.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
@@ -113,4 +113,4 @@
         <app-skeleton  width="130rem" height="10rem" [style]="{'margin-bottom': '5rem'}" count="6"></app-skeleton>
     </div>
 
-</div> 
+</div>

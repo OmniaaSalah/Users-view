@@ -18,7 +18,7 @@ import { TransferGroupComponent } from './components/transfer-group/transfer-gro
 
 const routes: Routes = [
   {
-    path: '', component: SchoolListComponent, 
+    path: '', component: SchoolListComponent,
     data:{ RouteKey: RouteEnums.Schools,allowedClaims: ClaimsEnum.S_MenuItem_SchoolMenu},
     canActivate: [ClaimsGuard]
   },
@@ -79,7 +79,7 @@ const routes: Routes = [
     canActivate: [ClaimsGuard],
     data:{allowedClaims: ClaimsEnum.E_MenuItem_SchoolDivisions}
   },
-    
+
   {
     path: ':schoolId/divisions/division/:divisionId', loadChildren: () => import('./components/school-division-details/school-division.module').then(m => m.SchoolDivisionModule) },
 // -------------------------------------------------------------------

@@ -1,12 +1,12 @@
 
 
 <div class="container-fluid auth-container">
-  
-  
+
+
     <div class="row All-content">
         <div class="col-lg-4 sidebar d-none d-sm-block" >
-           
-           
+
+
         </div>
         <div class="col-lg-8 end-side">
             <div class="inner">
@@ -19,36 +19,36 @@
                      </div>
 
                 </div>
-                
+
                   <div class="content" >
-                    
-               
+
+
                     <div class="form-header">
                         <h4 class="color-gray-400">{{'Welcome'|translate}}<img class="handimg" src="assets/images/Login/hand.png"></h4>
                         <h1 class="mb-4 color-primary"><b>{{'Login' | translate}}</b></h1>
                         <h6>{{'Please enter your email and password' | translate}}</h6>
                     </div>
-            
+
 
                     <div class="custom-form custom-validation-form mt-5 container position-relative">
                         <form  [formGroup]="loginForm" (ngSubmit)="onNext()" autocomplete="off">
-                            
+
                             <!-- <input type="text" style="position: absolute; opacity: 0;">
                             <input type="password" style="position: absolute; opacity: 0;"> -->
 
                             <div class="row gx-5 mb-4">
                                 <div class="col-md-12">
                                     <label for="email" class="label">{{'shared.User Name'|translate}} <span class="star">*</span></label>
-                                    <input type="text" 
+                                    <input type="text"
                                     readonly onclick="this.removeAttribute('readonly')"
-                                     pInputText formControlName="account"  (ngModelChange)="checkValidators($event)" class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email"> 
-                                
+                                     pInputText formControlName="account"  (ngModelChange)="checkValidators($event)" class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email">
+
                                     <div [hidden]=" account.valid || account.untouched" class="passerror">
                                         <small *ngIf="account?.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                             {{'shared.This Field is Required'|translate}}
                                         <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                    
+
                                         <small *ngIf="account?.errors?.['pattern']&&isEmail" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                             {{'shared.Must be Valid Email'|translate}}
                                             <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
@@ -58,14 +58,14 @@
                                             <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div class="row gx-5 mb-1">
                                 <div class=" col-md-12">
 
                                      <label for="PID6" class="label">{{'Password'| translate}} <span class="star">*</span></label>
-                                    <p-password iconPos="left" formControlName="password"   [ngClass]="{'ng-invalid ng-dirty':password.errors?.['required']&& password.touched||password.errors?.['pattern'] && password.touched}"  [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password> 
+                                    <p-password iconPos="left" formControlName="password"   [ngClass]="{'ng-invalid ng-dirty':password.errors?.['required']&& password.touched||password.errors?.['pattern'] && password.touched}"  [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password>
                                     <div [hidden]="password.valid || password.untouched" class="passerror">
                                     <small *ngIf="password.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                     {{'shared.This Field is Required'|translate}}
@@ -81,14 +81,14 @@
                            <button class="btn btn-primary mb-4" [disabled]="isBtnLoading" >{{'Login'| translate}}
                                 <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
                            </button>
-                            
-                           
+
+
                         </form>
                         <button (click)="signWithIdentity()" class="btn mb-4 identity"  >
                             <img src="assets/images/Login/identity.svg" alt="">
                             <p>{{'Sign in with UAE PASS' | translate}}</p>
                         </button>
-                        
+
                         <div class="d-flex justify-content-center " >
                             <button class="color-gray-600 position-relative fs-4" #container  tooltipPosition="bottom" [fitContent]="true" [appendTo]="container" pTooltip="{{'UAE PASS is a single trusted digital identity for all citizens, residents to United Arab Emirates' | translate}}">
                                 {{'What is UAE PASS' | translate}}
@@ -96,17 +96,17 @@
                             </button>
                         </div>
                     </div>
-                    
-               
+
+
                 <div class="signup">
-                    <span class="mx-2" >{{'Login with' | translate}}</span><button (click)="openNewAccount()"><a  class="color-skyBlue-400" >{{'login.New account of parent' | translate}}</a></button>
+                    <span class="mx-2" >{{'Login with' | translate}}</span><button (click)="openNewAccount()"><a  class="color-skyBlue-400" >{{'login.Create New User Account' | translate}}</a></button>
                 </div>
             </div>
 
             </div>
         </div>
     </div>
-    
+
 </div>
 <ng-container *ngIf="openNewAccountModel">
     <app-new-account openModel="openNewAccountModel"></app-new-account>

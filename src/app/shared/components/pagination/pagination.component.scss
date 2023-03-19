@@ -34,25 +34,32 @@
     .p-paginator-right-content{margin: 0 1.5rem 0 0 !important;}
 
     .p-paginator-left-content{
-        margin:0; 
+        margin:0;
         margin-inline-start: auto;
         display: flex;
         align-items: center;
 
-        span{color: #9E9E9E; margin-inline-end: 1.3rem;}
+        span{ margin-inline-end: 1.3rem;}
         button{margin: 0 1.5rem 0 0;}
-        
+
         ::ng-deep p-dropdown{
             .p-dropdown{
-                border: none;
-                
+                // border: none;
+
                 .p-inputtext{
-                    font-size: 1.4rem; 
+                    font-size: 1.4rem;
                     display: flex;
                     align-items: center;
+                    font-weight: bold;
                 }
 
+
+
                 &-label{ padding: 1rem;}
+
+                .p-dropdown-item {
+                  span{ font-size: 1.5rem; font-weight: 600;}
+                }
             }
         }
     }
@@ -64,7 +71,7 @@
         .p-paginator-page{
             border-radius: 5px;
             font-size: 1.6rem;
-            
+
             &.p-highlight{
                 background-color: $color-blue-100;
                 color: $color-primary;

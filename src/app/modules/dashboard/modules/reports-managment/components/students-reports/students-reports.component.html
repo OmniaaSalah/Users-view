@@ -1,25 +1,25 @@
 <div class="report form-set custom-form">
 
-    
+
     <div class="search-box bg-gray-30 mb-5 border-dark radius-15">
         <div class="d-flex justify-content-between p-5 " role="button" (click)="isCollapsed = !isCollapsed">
-            <span class="fs-2 color-primary">{{'dashboard.students.searchForStudent' |translate}}</span>
+            <span class="fs-2 color-primary">{{'dashboard.students.searchCriteria' |translate}}</span>
             <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
         </div>
-        
+
         <div class="custom-form p-5 " *ngIf="isCollapsed">
-            
+
            <div class="row g-5 form-set" >
             <div class="col-md-4">
                 <label class="label">{{'reports.Registration date and time (from-to)' | translate}}</label>
-                <p-calendar  [(ngModel)]="acceptanceDate" [showIcon]="true" inputId="icon" selectionMode="range" 
+                <p-calendar  [(ngModel)]="acceptanceDate" [showIcon]="true" inputId="icon" selectionMode="range"
                      placeholder="{{'dd/mm/yy'|translate}} - {{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy" >
                 </p-calendar>
             </div>
 
             <div class="col-md-4">
                 <label class="label">{{'shared.birthday (from-to)'| translate}}</label>
-                <p-calendar   [(ngModel)]="birthDate" [showIcon]="true" inputId="icon" selectionMode="range"  
+                <p-calendar   [(ngModel)]="birthDate" [showIcon]="true" inputId="icon" selectionMode="range"
                      placeholder="{{'dd/mm/yy'|translate}} - {{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy">
                 </p-calendar>
             </div>
@@ -29,7 +29,7 @@
                     <!-- <p-dropdown [options]="(curriculums$ | async)" [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.CurriculumId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown> -->
                     <p-multiSelect  [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.CurriculumId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
                 </div>
-                
+
                 <div class="col-md-4" >
                     <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
                     <p-multiSelect  [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.SchoolId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseSchool'|translate }}" ></p-multiSelect>
@@ -43,7 +43,7 @@
                     <label class="label">{{'dashboard.students.divisions'| translate}}</label>
                     <p-multiSelect       [options]="(schoolDivisions$ | async)"     [ngModelOptions]="{standalone: true}"  display="chip"    [(ngModel)]="filtration.DivisionId"    optionValue="id" optionLabel="name.ar"      placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-multiSelect>
                 </div>
-            
+
                 <div class="col-md-4">
                     <label class="label"> {{'dashboard.addChild.gender' | translate}} </label>
                     <p-dropdown [options]="genderList"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.Gender"  [showClear]="true"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
@@ -70,14 +70,14 @@
                     <label class="label">{{'dashboard.students.withDisabilities'| translate}}</label>
                     <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsSpecialAbilities" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
-               
+
 
                 <div class="col-md-4">
                     <label class="label"> {{'reports.Students age (from)' | translate}} </label>
                     <input  type="number" pInputText class="form-control" placeholder="{{'reports.Students age (from)' | translate}} " [max]="filtration.AgeTo" [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="filtration.AgeFrom">
                 </div>
- 
+
                 <div class="col-md-4">
                     <label class="label">   {{'reports.Students age (to)' | translate}}   </label>
                     <input  type="number"  pInputText class="form-control" placeholder="{{'reports.Students age (to)' | translate}} " [min]="filtration.AgeFrom"  [ngModelOptions]="{standalone: true}"
@@ -92,7 +92,7 @@
                 <div class="col-md-4">
                     <label class="label">  {{'Active' | translate}}  </label>
                     <p-inputSwitch [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.IsActive"
-                        class="px-3"></p-inputSwitch>  
+                        class="px-3"></p-inputSwitch>
                         <span *ngIf="filtration.IsActive">{{'true'|translate}}</span>
                         <span *ngIf="!filtration.IsActive">{{'false'|translate}}</span>
                 </div>
@@ -101,12 +101,12 @@
                 <div class="col-md-4">
                     <label class="label">  {{'reports.Show first students only' | translate}}  </label>
                     <p-inputSwitch [ngModelOptions]="{standalone: true}"
-                    [(ngModel)]="filtration.IsTopStudent"    class="px-3"></p-inputSwitch>  
+                    [(ngModel)]="filtration.IsTopStudent"    class="px-3"></p-inputSwitch>
                     <span *ngIf="filtration.IsTopStudent">{{'true'|translate}}</span>
                     <span *ngIf="!filtration.IsTopStudent">{{'false'|translate}}</span>
                 </div>
 
-             
+
 
 
 
@@ -118,7 +118,7 @@
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'reports.Clear all' | translate}}</span>
                 <button class="btn btn--md btn-primary" (click)="filtration.Page=1;getStudents()" >
                      {{'reports.Generate the report'|translate}}
-                   
+
                 </button>
 
 
@@ -174,16 +174,16 @@
             <ng-template pTemplate="caption">
                 <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getStudents()" (onClear)="clearFilter()">
                 </app-table-caption>
-    
+
             </ng-template>
 
 
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
-                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true"> 
+                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true">
                             <!-- studentsReportsArray -->
-                       <ng-container >{{column.name }}</ng-container> 
+                       <ng-container >{{column.name }}</ng-container>
                        <p-sortIcon field="{{column.name }}"></p-sortIcon>
                     </th>
                     </ng-container>
@@ -235,8 +235,8 @@
                             {{student?.age | LocalizeDate}}
                         </td>
                         <td *ngIf="tableColumns[14].isSelected == true">
-                           <span *ngIf="student?.registrationStatus">{{'shared.allStatus.'+student?.registrationStatus|translate}}</span> 
-                           <span *ngIf="!student?.registrationStatus">{{'shared.notFound' | translate}}</span> 
+                           <span *ngIf="student?.registrationStatus">{{'shared.allStatus.'+student?.registrationStatus|translate}}</span>
+                           <span *ngIf="!student?.registrationStatus">{{'shared.notFound' | translate}}</span>
                         </td>
                         <td *ngIf="tableColumns[15].isSelected == true">
                             <span *ngIf="student?.isActive">{{'true'|translate}}</span>
@@ -251,7 +251,7 @@
                         </td>
 
                     </ng-container>
-                    
+
                 </tr>
             </ng-template>
 

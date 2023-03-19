@@ -35,7 +35,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.setPaginagationReport()
   }
 
-  ngOnChanges(changes: SimpleChanges): void {    
+  ngOnChanges(changes: SimpleChanges): void {
     this.currentPage =1
     this.paginationState.page = 1
     this.paginationState.first=0
@@ -44,7 +44,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
   setPaginagationReport(){
     this.PageReport={
-      ar:`إظهار {first} إلى {last} من أصل  ${this.totalItems} من العناصر`, 
+      ar:`إظهار {first} إلى {last} من أصل  ${this.totalItems}`,
       en:`Show {first} إلى {last} from ${this.totalItems} Of total Items`
     }
   }
@@ -88,7 +88,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     return this.totalItems ? (this.paginationState.first >= this.totalItems -  this.paginationState.rows) :true;
   }
 
-  isFirstPage(): boolean {  
+  isFirstPage(): boolean {
     return this.totalItems ? this.paginationState.first === 0 : true;
   }
 

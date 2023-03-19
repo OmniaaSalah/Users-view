@@ -21,21 +21,10 @@ export class MessageDetailsComponent implements OnInit {
   attachmentsName = []
   display: boolean = false;
   routeSub
-  time;
-  messagesDetails: any[] = []
-  // searchModel2 = {
-  //   "keyword": null,
-  //   "sortBy": null,
-  //   "page": 1,
-  //   "pageSize": 3,
-  //   "SortColumn": null,
-  //   "SortDirection": null,
-  //   "curricuulumId": null,
-  //   "StateId": null,
-  //   "MessageStatus":null,
-  //   "DateFrom": null,
-  //   "DateTo": null
-  // }
+  messageDetails;
+  messagesReplies: any[] = []
+
+  onSubmit
 
   constructor(private headerService: HeaderService, private route: ActivatedRoute, private messageService: MessageService, private toastr: ToastrService, private formbuilder: FormBuilder, private router: Router, private translate: TranslateService) { }
 
@@ -49,8 +38,8 @@ export class MessageDetailsComponent implements OnInit {
       messegeText: ['', [Validators.required, Validators.maxLength(512)]],
     });
     this.getMessageDetail()
-   
-    
+
+
     // this.attachmentList.forEach(file => {
     //   //  this.visit.addVisit(newAdHocVisit).pipe(
     //   //    mergeMap((res1) => this.visit.sendAttachment(file,res1.id))
@@ -78,18 +67,16 @@ export class MessageDetailsComponent implements OnInit {
 
   getMessageDetail(){
     this.messageService.getMessageDetailsById(this.routeSub).subscribe(res=>{
-      this.time = res.createdDate
-      this.messagesDetails = res.messageReplies || []
-      let unique: any[] = [...new Set(this.messagesDetails.map(item => item.userName.ar))];
-      this.messagesDetails.map(element => {
+      this.messageDetails = res
+      this.messagesReplies = res.messageReplies || []
+      let unique: any[] = [...new Set(this.messagesReplies.map(item => item.userName.ar))];
+      this.messagesReplies.map(element => {
         element.color = "first-message"
         if (unique.length > 1 && element.userName.ar == unique[1]) {
             element.color = "second-message"
         }
       })
-      // console.log(this.messagesDetails);
-      // console.log(res.createdDate);
-      
+
     })
   }
 
@@ -119,18 +106,23 @@ export class MessageDetailsComponent implements OnInit {
 
   }
   sendReply() {
+    this.onSubmit=true
     const form = {
       "userId": Number(localStorage.getItem('$AJ$userId')),
       // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
       "messegeText": this.replayForm.value.messegeText,
       'attachment': this.imagesResult || null
     }
-    console.log(form);
+
     this.messageService.sendReply(this.routeSub, form).subscribe(res => {
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
       this.replayForm.reset();
       this.display = false
+       this.onSubmit=false
+
+       this.getMessageDetail()
     }, err => {
+       this.onSubmit=false
       this.toastr.error(err)
     })
 

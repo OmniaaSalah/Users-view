@@ -34,12 +34,12 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
   componentHeaderData: IHeader = {
     breadCrump: [
       {
-        label: this.translate.instant('dashboard.parentHome.Add New Child'),
+        label: this.translate.instant('dashboard.parentHome.newStudent'),
         routerLink: '/parent/AddChild/Addchild-WithoutNationality',
         routerLinkActiveOptions: { exact: true },
       },
     ],
-    mainTitle: {main: this.translate.instant('dashboard.parentHome.Add New Child')},
+    mainTitle: {main: this.translate.instant('dashboard.parentHome.newStudent')},
   };
 
   ngDestroy$ =new Subject()
@@ -65,7 +65,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
   imageResult1 = []
   imageResult2 = []
   imageResult3 = []
-  
+
   genderList =this.sharedService.genderOptions;
   Nationalities$  = this.sharedService.getAllNationalities()
   religions$ = this.sharedService.getReligion()
@@ -77,7 +77,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
   subscription:Subscription;
 
 
-  constructor(private fb:FormBuilder, private translate: TranslateService, 
+  constructor(private fb:FormBuilder, private translate: TranslateService,
     private router:Router,
     private addChildService:AddChildService,
     private headerService: HeaderService,
@@ -135,24 +135,24 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
 
 
   messageUpload1(files){
-    this.imageResult1 = files    
+    this.imageResult1 = files
    }
-  
+
   messageDeleted1(event){
       this.imageResult1 = event
    }
 
   messageUpload2(files){
-    this.imageResult2 = files    
+    this.imageResult2 = files
    }
-  
+
   messageDeleted2(event){
       this.imageResult2 = event
    }
    messageUpload3(files){
-    this.imageResult3 = files    
+    this.imageResult3 = files
    }
-  
+
     messageDeleted3(event){
       this.imageResult3 = event
    }
@@ -164,7 +164,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
 
 
    addNewChild(){
-    
+
     this.isBtnLoading=true;
     this.imageResult1.map(er=>{
         er.comment = this.registerWithoutIdentityForm.value.note
@@ -198,7 +198,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
       'childAttachments':[...this.imageResult1,...this.imageResult3],
 
     }
- 
+
     this.addChildService.postChildWithoudIdentity(data)
     .pipe(
       map(res=>{
@@ -206,7 +206,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
           if(res.statusCode==HttpStatusCodeEnum.NotAcceptable){
             this.confirmModel.openModel({message: this.translate.instant('toasterMessage.childExistForAnotherGaurdian')})
             this.confirmModelLister()
-            this.isBtnLoading=false;  
+            this.isBtnLoading=false;
             this.childToRelinkWithNewGuardian={
                   studentId: res.studentId,
                   childId: res.childId,
@@ -220,14 +220,14 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
             // throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
 
           }
-         
+
         }else{
           return res
         }
     }))
-    .subscribe(res=>{  
+    .subscribe(res=>{
 
-      this.isBtnLoading=false;    
+      this.isBtnLoading=false;
       this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
 
       this.router.navigate(['/']);
@@ -266,7 +266,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
     })
    }
 
- 
+
   ngOnDestroy(): void {
     this.ngDestroy$.next(null)
     this.ngDestroy$.complete()

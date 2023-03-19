@@ -16,7 +16,7 @@
             <div class="row gx-5  mb-6">
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.The reason for the lack of identification' | translate}} <span class="star">*</span></label>
-                    <p-dropdown [options]="NoIdentityReason|async"  
+                    <p-dropdown [options]="NoIdentityReason|async"
                     [ngClass]="{'ng-invalid ng-dirty':reason.errors?.['required'] && reason.touched}" formControlName="reason"  optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id"  placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
                     <div [hidden]="reason.valid || reason.untouched">
                         <small *ngIf="reason.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -26,27 +26,14 @@
                     </div>
                 </div>
             </div>
-        
+
 
         <!-----------------------------add row------------------------------->
-     
-            <div class="row gx-5 form-set  subjects ">
-                <div class="col-md-4 ">
-                    <P>{{'sign up.pleaze upload image to approve that you don’t have digital identity' |translate}} <span class="star">*</span></P>
-                    <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="messageUpload1($event)" (onFileDelete)="messageDeleted1($event)"></app-file-upload>
-                </div>
-                <div class="col-md-4">
-                    <P class="pb-4 ">{{'dashboard.addChild.note (optional)' | translate}}</P>
-                    <textarea [cols]="30" class="w-100 rounded textareaBorder" [rows]="9" placeholder="{{'dashboard.addChild.note (optional)' | translate}}" formControlName="note" pInputTextarea [autoResize]="true"></textarea>
-                </div>
-                <div class="col-md-4">
-                    <P>{{'dashboard.addChild.Sons profile picture' | translate}}</P>
-                    <app-file-upload [accept]="fileTypesEnum.Image" view="full" (onFileUpload)="messageUpload2($event)" (onFileDelete)="messageDeleted2($event)"></app-file-upload>
-                </div>
-            </div>
-        
+
+
+
             <hr class="mb-5">
-        
+
             <div class="row gx-5 form-set   mb-5">
 
                 <div class="col-md-4">
@@ -75,7 +62,7 @@
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'dashboard.addChild.Nationality' | translate}} <span class="star">*</span> </label>
-                    <p-dropdown  [options]=" Nationalities$|async" 
+                    <p-dropdown  [options]=" Nationalities$|async"
                     [filter]="true"
                     filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                     [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.['required'] && nationality.touched}" formControlName="nationality" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
@@ -87,6 +74,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row gx-5 form-set  mb-5">
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'sign up.NickName (in Arabic)' | translate}} <span class="star">*</span></label>
@@ -98,7 +86,7 @@
                         <small *ngIf="arabicNickName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                             {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
                         </small>
-                    </div> 
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'sign up.NickName (in English)' | translate}} <span class="star">*</span></label>
@@ -124,6 +112,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="row gx-5 form-set mb-5">
 
                 <div class="col-md-4">
@@ -136,11 +126,11 @@
 
                 </div>
                 </div>
-            
+
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}} <span class="star">*</span></label>
-                    <p-dropdown [options]="relatives$|async" 
-                    [ngClass]="{'ng-invalid ng-dirty':relativity.errors?.['required'] && relativity.touched}" 
+                    <p-dropdown [options]="relatives$|async"
+                    [ngClass]="{'ng-invalid ng-dirty':relativity.errors?.['required'] && relativity.touched}"
                     formControlName="relativity" optionLabel="{{lang == 'ar'?'arabicName' : 'englishName'}}" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
                     <div [hidden]="relativity.valid || relativity.untouched">
                         <small *ngIf="relativity.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -151,8 +141,8 @@
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Religion' | translate}} <span class="star">*</span></label>
-                    <p-dropdown  [options]="religions$ |async" 
-                    [ngClass]="{'ng-invalid ng-dirty':religion.errors?.['required'] && religion.touched}"  
+                    <p-dropdown  [options]="religions$ |async"
+                    [ngClass]="{'ng-invalid ng-dirty':religion.errors?.['required'] && religion.touched}"
                     formControlName="religion" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
                     <div [hidden]="religion.valid || religion.untouched">
                         <small *ngIf="religion.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -190,16 +180,32 @@
             </div>
 
             <hr class="my-5">
-    
-            <h3 class="mb-4 fw-bold">{{'dashboard.addChild.required attachments' | translate}}</h3>
+
+            <h3 class="mb-5 fw-bold">{{'dashboard.addChild.required attachments' | translate}}</h3>
+
+            <div class="row gx-5 form-set  subjects ">
+              <div class="col-md-4 ">
+                  <P>{{'sign up.pleaze upload image to approve that you don’t have digital identity' |translate}} <span class="star">*</span></P>
+                  <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="messageUpload1($event)" (onFileDelete)="messageDeleted1($event)"></app-file-upload>
+              </div>
+              <div class="col-md-4">
+                  <P class="pb-4 ">{{'shared.note' | translate}}</P>
+                  <textarea [cols]="30" class="w-100 rounded textareaBorder" [rows]="9" placeholder="{{'shared.note' | translate}}" formControlName="note" pInputTextarea [autoResize]="true"></textarea>
+              </div>
+              <div class="col-md-4">
+                  <P>{{'dashboard.addChild.personalPicture' | translate}}</P>
+                  <app-file-upload [accept]="fileTypesEnum.Image" view="full" (onFileUpload)="messageUpload2($event)" (onFileDelete)="messageDeleted2($event)"></app-file-upload>
+              </div>
+          </div>
+
             <div class="row gx-5 form-set  subjects ">
                 <div class="col-md-4">
-                    <P>{{'dashboard.addChild.Copy of date of birth proof' | translate}} <span class="star">*</span></P>
+                    <P>{{'dashboard.addChild.birthCertificate' | translate}} <span class="star">*</span></P>
                     <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="messageUpload3($event)" (onFileDelete)="messageDeleted3($event)"></app-file-upload>
                 </div>
                 <div class="col-md-4">
-                    <P class="pb-4">{{'dashboard.addChild.note (optional)' | translate}}</P>
-                    <textarea class="textareaBorder" [rows]="9" placeholder="{{'dashboard.addChild.note (optional)' | translate}}" formControlName="note2" [cols]="45" pInputTextarea [autoResize]="true"></textarea>
+                    <P class="pb-4">{{'shared.note' | translate}}</P>
+                    <textarea class="textareaBorder" [rows]="9" placeholder="{{'shared.note' | translate}}" formControlName="note2" [cols]="45" pInputTextarea [autoResize]="true"></textarea>
                 </div>
             </div>
 

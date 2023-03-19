@@ -176,7 +176,6 @@
     "Wednesday":"Wednesday",
     "Thursday":"Thursday",
     "sign up": {
-        "New account of parent":"New account of parent",
         "Next": "Next",
         "with": "Sign Up With",
         "select...": "select...",
@@ -198,7 +197,7 @@
         "return": "Return",
         "in case identity not exist":  "In case identity not exist",
         "reason of identity not exist": "Reason of identity not exist",
-        "pleaze upload image to approve that you don’t have digital identity":"Pleaze upload image to approve that you don’t have digital identity",
+        "pleaze upload image to approve that you don’t have digital identity":"Please upload File to approve that you don’t have personal identity",
         "Name (in Arabic)":  "Name (in Arabic)",
         "Name (in English)":  "Name (in English)",
         "Enter Name":  "Enter Name",
@@ -221,7 +220,7 @@
         "IdentityNumber,Email,PhoneNumber.Example:971500000000": "IdentityNumber,Email,PhoneNumber.Example:971500000000",
         "remember me": "remember me",
         "wrong,pleaze check examples and try again": "wrong,pleaze check examples and try again",
-        "New account of parent": "New account of parent",
+        "Create New User Account": "Create New User Account",
         "Identity exist":  "Identity exist",
         "Identity not exist": "Identity not exist",
         "Available": "Available",
@@ -334,7 +333,7 @@
 
     },
     "emptyList": {
-      
+
         "noData": "No Data",
         "noDataMatch": "No Data Match Your Search ! Try Again",
         "Holidays List is empty": "Holidays List is empty",
@@ -455,7 +454,7 @@
         "Numbres Of Characters must not more than 32 character": "Numbres Of Characters must not more than 32 character",
         "Age must more than or equal 1 year": "Age must more than or equal 1 year",
         "Age must less than or equal 32 year": "Age must less than or equal 32 year",
-        "This Field is Required": "This Field is Required",
+        "This Field is Required": "Field is Required",
         "Show Details": "Details",
         "User Name": "UserName",
         "Write User Name": "Write User Name",
@@ -493,7 +492,7 @@
         "transportationType": "Transportation Type",
         "searchBySchoolName": "Search By School Name",
         "clickToUploadFiles": "click To Upload Files",
-        "clickToUploadFile": "Click To Upload File",
+        "clickToUploadFile": "Upload File",
         "percentage": "Percentage",
         "CreatedDate And Time": "CreatedDate And Time",
         "From": "From",
@@ -516,6 +515,7 @@
             "Inactive": "In active",
             "Active":   "Active",
             "Passed":"Passed",
+            "notComplete": "Not Complete",
             "notPassed":"Not Passed",
             "Deleted": "Deleted",
             "Failed": "Failed",
@@ -586,7 +586,7 @@
         "division":   "Division",
         "track": "Track",
         "yesOrNo":  "Yes Or No",
-        "choosePassedOrnot":  "Choose Passed Or Not",
+        "choosePassedOrnot":  "Passed / Faild / Uncomplete",
         "dateFrom": "Date From",
         "dateTo":  "Date To",
         "cause":  "Cause",
@@ -704,7 +704,7 @@
                 "gradesReport":"Grades Report",
                 "EmployeesReport":"Employees Report",
                 "TeachersReport":"Teachers Report",
-                "subjectsReport": "Subjects Report"      
+                "subjectsReport": "Subjects Report"
 
             }
 
@@ -795,7 +795,7 @@
             "AssessmentStatus": "Assessment status",
             "To":"To",
             "sign": "Sign",
-            "degreeLimit": "Degree limit",
+            "degreeLimit": "Degree Range",
             "RatingCode": "Rating code",
             "maxdegree": "Max degree",
             "mindegree": "Min degree",
@@ -805,7 +805,7 @@
             "should be more than the minmum deserving degree":"Should be more than the minmum deserving degree"
         },
         "schools": {
-            "StudentDensity":"Student Density",
+            "StudentDensity":"Grade Density",
             "Typeofcertificate": "Type of Certificate",
             "SchoolYear": "School Year",
             "Dateofapplicationforthecertificate": "Date Of Certificate App",
@@ -843,7 +843,7 @@
             "educationalInstitution":"Educational Institution",
             "schoolLocation": "School Location",
             "schoolEmployeeList":"SchoolEmployee List",
-            "employeeId": "Employee Id",
+            "employeeId": "Employee Number",
             "employeeName": "Employee Name",
             "employeeNickname":"Employee NickName",
             "jobTitle": "job Title",
@@ -854,7 +854,7 @@
             "tracks": "Tracks",
             "sectionName":  "Division Name",
             "gradeName": "Grade Name",
-            "roomNumber":  "Room Number",
+            "roomNumber":  "Tarkhes Number",
             "spetialAbilities": "Spechial Abilities",
             "sectionTeacher":  "Division Teacher",
             "enterGrades": "Enter Grades",
@@ -1011,7 +1011,7 @@
 
         },
         "Assignments": {
-            "Assignment Name": "Assignment Name",
+            "Assignment Name": "Assignment",
             "Select Assignment Status":"Select Assignment Status",
             "Assignment Status":"Assignment Status",
             "School Name": "School Name",
@@ -1382,7 +1382,7 @@
             "registrationRoles":"ٌRegistration Role"
 
         },
-        
+
         "Subjects": {
             "Subject Name in Arabic": "Subject Name in Arabic",
             "Subject Name in English": "Subject Name in English",
@@ -1518,10 +1518,10 @@
            "Send survey":"Send survey",
            "Mandatory Surveies": "Mandatory Surveies",
            "Survey": "Survey"
-          
+
 
         },
-        
+
         "Indexes": {
 
             "Add Item": "Add Item",
@@ -1555,7 +1555,7 @@
             "Class": "Class",
             "TransferStudentGroup":"Send Transfer Student Group Request",
             "studentsMangement":"Students Mangement",
-            "searchForStudent": "Search For Student",
+            "searchCriteria": "Search Criteria",
             "curriculum": "Curriculum",
             "chooseCurriculum": "Choose Curriculum",
             "classes": "Classes",
@@ -1817,8 +1817,8 @@
             "CertificateStatus": "Certificate Status",
             "SelectCertificateStatus": "Select Certificate Status",
             "Please select a student": "Please select one or more students to issue a certificate",
-            "Click here to add the required information": "Click here to add the required information",
-            "Certificates to be issued": "Certificates to be issued",
+            "addRequiredInfo": "Add Required Information",
+            "selectCertificateToPrint": "Select Certificate To Print",
             "Certificate name": "Certificate name",
             "Certificate fee": "Certificate fee",
             "sons name": "son's name",
@@ -1828,7 +1828,7 @@
             "choose children": "You have selected",
             "from childrens": "of the sons",
             "type of certificate": "type of certificate",
-            "pay": "Pay",
+            "payment": "payment",
             "previous": "Previous",
             "Add the required information - Degree Certificate" : "Add the required information - Degree Certificate",
             "Please fill in the following information" : "Please fill in the following information",
@@ -1884,6 +1884,7 @@
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"Please choose whether or not your child has a personal ID to complete the addition process.",
             "Add New Child": "Add New Child",
+            "newStudent":"New Student",
             "having an identity": "having an identity",
             "No identity": "No identity",
             "Next": "Next",
@@ -1900,17 +1901,17 @@
         "addChild":{
             "Identification Number":"Identification Number",
             "Relevance Type": "Relevance Type",
-            "Please attach a photo ID":"Please attach a photo ID",
-            "Sons profile picture": "Son's profile picture",
+            "identityPhoto":"Identity Photo",
+            "personalPicture": "personal picture",
             "required attachments": "required attachments",
-            "Copy of date of birth proof": "Copy of date of birth proof",
+            "birthCertificate": "Birth Certificate",
             "note (optional)": "note (optional)",
             "ID expiration date":"ID expiration date",
             "The expiry date of the passport":"The expiry date of the passport",
 
             "The reason for the lack of identification":"The reason for the lack of identification",
             "name":"name",
-            "nickname": "nickname",
+            "nickname": "Family Name",
             "gender": "gender",
             "Date of Birth": "Date of Birth",
             "Nationality": "Nationality",
@@ -1942,7 +1943,7 @@
             "The request is associated with": "The request is associated with"
         },
         "replySurvey":{
-         
+
             "Question options (inArabic)": "Question options (inArabic)",
             "Question options (inEnglish)":"Question options (inEnglish)",
             "Survey is suibmitted successfully":"Survey is suibmitted successfully",
@@ -1969,7 +1970,7 @@
             "Attach a file":"attached",
             "grade":"Grade",
             "Submit a registration request":"Submit a registration request",
-            "Available schools":"Available schools" 
+            "Available schools":"Available schools"
         },
         "request-group":{
             "from Students":"of the students",
@@ -2007,7 +2008,7 @@
     "cities": {
         "SharjahCity": "Sharjah city",
         "CentralRegion": "Central region",
-        "EasternProvince":"Eastern region" 
+        "EasternProvince":"Eastern region"
     },
     "Available": "Available",
     "Unavailable": "Unavailable",

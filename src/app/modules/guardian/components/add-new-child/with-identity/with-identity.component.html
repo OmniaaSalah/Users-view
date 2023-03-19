@@ -6,20 +6,20 @@
         <div class="row gx-5 form-set  custom-form ">
             <div class="col-md-4">
                 <label class="label" for="day">{{'dashboard.addChild.Identification Number' | translate}} <span class="star">*</span></label>
-                <!-- <p-inputNumber 
+                <!-- <p-inputNumber
                 name="identity"
                 [ngClass]="{'ng-invalid ng-dirty': IdentityNumCtr.errors && IdentityNumCtr.errors?.['pattern']}"
                 formControlName="identityNumber"
-                [useGrouping]="false" [maxlength]="15" [minlength]="15" 
+                [useGrouping]="false" [maxlength]="15" [minlength]="15"
                 (onInput)="IdentityNumCtr.setValue($event.value)"
                 required placeholder="{{'dashboard.addChild.Identification Number' | translate}}"></p-inputNumber> -->
-                
-                <input 
-                [LangRestrict]="'numb'" 
-                formControlName="identityNumber" 
+
+                <input
+                [LangRestrict]="'numb'"
+                formControlName="identityNumber"
                 [ngClass]="{'ng-invalid ng-dirty': IdentityNumCtr.errors && IdentityNumCtr.errors?.['pattern']}"
-                id="day" 
-                pInputText 
+                id="day"
+                pInputText
                 placeholder="{{'dashboard.addChild.Identification Number' | translate}}" />
                 <div *ngIf="IdentityNumCtr.errors?.['pattern']" class="mt-2 color-red-500 fs-4"> {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}</div>
             </div>
@@ -43,17 +43,17 @@
         <ul class="subjects">
             <div class="row">
                 <div class="col-md-6 m-4">
-                    <P>{{'dashboard.addChild.Please attach a photo ID' | translate}} <span class="star">*</span></P>
-                    <app-file-upload 
-                    [accept]="fileTypesEnum.Pdf" 
-                    view="full" 
+                    <P>{{'dashboard.addChild.identityPhoto' | translate}} <span class="star">*</span></P>
+                    <app-file-upload
+                    [accept]="fileTypesEnum.Pdf"
+                    view="full"
                     (onFileUpload)="setAttachment(identityAttach,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-4 m-4">
-                    <P>{{'dashboard.addChild.Sons profile picture' | translate}}</P>
-                    <app-file-upload 
-                    [accept]="fileTypesEnum.Image" 
-                    view="full" 
+                    <P>{{'dashboard.addChild.personalPicture' | translate}}</P>
+                    <app-file-upload
+                    [accept]="fileTypesEnum.Image"
+                    view="full"
                     (onFileUpload)="setAttachment(personalPhoto,$event)" ></app-file-upload>
                 </div>
             </div>
@@ -65,19 +65,19 @@
             <h3>{{'dashboard.addChild.required attachments' | translate}}</h3>
             <div class="row mt-5 g-5">
                 <div class="col-md-6 gap-3">
-                    <P>{{'dashboard.addChild.Copy of date of birth proof' | translate}} <span class="star">*</span></P>
+                    <P>{{'dashboard.addChild.birthCertificate' | translate}} <span class="star">*</span></P>
                     <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="setAttachment(birthDate,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-4 gap-3">
-                    <P class="mb-4">{{'dashboard.addChild.note (optional)' | translate}}</P>
+                    <P class="mb-4">{{'shared.note' | translate}}</P>
                     <textarea  [rows]="6" [(ngModel)]="birthDate.comment"  [ngModelOptions]="{standalone: true}" [cols]="40" pInputTextarea [autoResize]="true"></textarea>
                 </div>
             </div>
         </ul>
     </div>
-    <button class="btn btn-primary submitBtn" 
+    <button class="btn btn-primary submitBtn"
     [disabled]="!newChildForm.valid|| !birthDate.url.length ||  !identityAttach.url.length || onSubmit">
-        {{'dashboard.issue of certificate.Save' | translate}} 
+        {{'dashboard.issue of certificate.Save' | translate}}
         <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
     </button>
 </form>

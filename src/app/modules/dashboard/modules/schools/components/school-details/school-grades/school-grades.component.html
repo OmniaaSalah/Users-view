@@ -1,10 +1,10 @@
 <div class="prim-table" *ngIf="grades.totalAllData || grades.loading">
     <p-table #dt [value]="grades.list" [lazy]="true">
         <ng-template pTemplate="caption">
-            <app-table-caption 
-            [hasFilter]="false" 
-            (onExport)="onExport($event)" 
-            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchoolGrades()" 
+            <app-table-caption
+            [hasFilter]="false"
+            (onExport)="onExport($event)"
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchoolGrades()"
             (onClear)="clearFilter()">
             </app-table-caption>
         </ng-template>
@@ -15,17 +15,17 @@
                   {{col.header}}
               </th>
               <th pSortableColumn="actions"></th> -->
-                <th pSortableColumn="name">{{'dashboard.schools.gradeName'|translate}}
+                <th pSortableColumn="name">{{'shared.grade'|translate}}
                     <p-sortIcon field="name"></p-sortIcon>
                 </th>
                 <!-- <th pSortableColumn="name">{{'dashboard.schools.classeNumberPerWeak'|translate}} <p-sortIcon field="name"></p-sortIcon></th> -->
-                <th pSortableColumn="trackCount">{{'dashboard.schools.tracksNumber'|translate}}
+                <th pSortableColumn="trackCount">{{'shared.track'|translate}}
                     <p-sortIcon field="trackCount"></p-sortIcon>
                 </th>
-                <th pSortableColumn="divisionCount">{{'dashboard.schools.sectionsNumber'|translate}}
+                <th pSortableColumn="divisionCount">{{'shared.division'|translate}}
                     <p-sortIcon field="divisionCount"></p-sortIcon>
                 </th>
-                <th pSortableColumn="studentCount">{{'dashboard.schools.studentsNumber'|translate}}
+                <th pSortableColumn="studentCount">{{'shared.students'|translate}}
                     <p-sortIcon field="studentCount"></p-sortIcon>
                 </th>
                 <th pSortableColumn="actions" class="actions"></th>
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </ng-container>
-                    
+
                     <ng-container *ngIf="currentUserScope==userScope.SPEA">
                         <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" [routerLink]="['grade',grade.id]">
                             <!-- <img class="icon" src="assets/images/shared/pen.svg" alt=""> -->
@@ -72,7 +72,7 @@
                             <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
                         </div>
                     </ng-container>
-                    
+
                 </td>
             </tr>
         </ng-template>
@@ -111,7 +111,7 @@
                 </div>
 
             </div>
-        
+
         </ng-container>
 
         <ul class="color-primary border-top-gray mb-5" *ngIf="gradeTracks">
