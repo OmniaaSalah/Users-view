@@ -244,7 +244,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
 
 
   sendMessage() {
-    this.hiddenDialog.emit(false);
+
     this.onSubmit = true
     if (this.currentUserscope == 'SPEA') this.sendMessageFromSpeaToSchool()
     if (this.currentUserscope == 'Guardian') this.sendMessageFromGuardianToSchool()
@@ -283,6 +283,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
         this.speaEmpForm.reset();
         this.router.navigate(['/dashboard/messages/messages']);
         this.onSubmit = false
+        this.hiddenDialog.emit(false);
       },
       (err) => {
         this.toastr.error(err);
@@ -316,6 +317,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
         this.isShown2 = false;
         this.parentForm.reset();
         this.onSubmit = false
+        this.hiddenDialog.emit(false);
       },
       (err) => {
         this.toastr.error(err);
@@ -347,6 +349,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
           this.isShown2 = false;
           this.schoolEmpForm.reset();
           this.onSubmit = false
+          this.hiddenDialog.emit(false);
         },
         (err) => {
           this.toastr.error(err);
