@@ -282,4 +282,15 @@ export class SchoolsService {
       return this.http.post('/Student/mass-transfer-request',data)
     }
 
+    getAllSchoolsInPopUp(filter?:Partial<Filter>){
+      this.tableLoaderService.isLoading$.next(true)
+  
+      return this.http.post('/School/Custom-Search',filter)
+      .pipe(
+        take(1),
+        finalize(()=> {
+          this.tableLoaderService.isLoading$.next(false)
+        }))
+    }
+
 }
