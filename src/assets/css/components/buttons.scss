@@ -139,7 +139,7 @@
     background: $color-skyBlue-400;
     border: 1px solid $color-skyBlue-400;
     &:hover {
-        background-color: $color-skyBlue-350;
+        background-color: $color-skyBlue-350 !important;
         color: #ffff !important;
         border: 1px solid transparent;
     }

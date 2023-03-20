@@ -14,8 +14,8 @@ export class ButtonGroupComponent implements OnInit {
   ngOnInit(): void {
     let index = this.items.findIndex(el=> el.active)
     if(index > -1) this.setActive(index)
-    else this.setActive(0)
-    
+    // else this.setActive(0)
+
   }
 
   setActive(index){
