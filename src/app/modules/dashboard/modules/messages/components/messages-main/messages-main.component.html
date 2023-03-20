@@ -1,151 +1,169 @@
 <div class="main-message-header dashboard d-flex justify-content-between">
-    <div class="left d-flex align-items-center ">
+  <div class="left d-flex align-items-center">
+    <button *ngIf="scope != 'Guardian'" class="btn btn-primary" (click)="showDialog()">
+      {{"dashboard.Messages.Send a new message" | translate}}
+    </button>
 
-        <button *ngIf="scope != 'Guardian'" class="btn btn-primary" (click)="showDialog()">{{'dashboard.Messages.new message' | translate}}</button>
-        
-        <p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
-            [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
-
-            <app-send-message (hiddenDialog)="closeDialog()"></app-send-message>
-
-        </p-dialog>
-    </div>
-
+    <p-dialog header="{{ 'dashboard.Messages.Send a new message' | translate }}" [draggable]="false" [resizable]="false"
+      [modal]="true" [(visible)]="display" [style]="{ width: '50vw' }" class="dialog-header" [baseZIndex]="10000">
+      <app-send-message (hiddenDialog)="closeDialog()"></app-send-message>
+    </p-dialog>
+  </div>
 </div>
 
 <div id="notification-content">
+  <!-- <div class="col-5">
+    <div class="myInput myInput--full myInput--search p-input-icon-right mt-6">
+      <i class="pi pi-search fs-3 "></i>
+      <input class="input" [formControl]="messagetSearchText" type="text" pInputText placeholder="{{'shared.Search...'|translate}}"/>
+    </div>
+  </div> -->
 
-    <div class="d-flex group ">
+  <!-- <div class="d-flex group ">
         <div class="myInput myInput--md myInput--search p-input-icon-left  ">
             <i class="pi pi-search fs-3"></i>
             <input class="input rounded-4" type="text" (keyup)="onSearch($event)" pInputText placeholder="{{'Search...' | translate}}" />
         </div>
-    </div>
-    <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500"
-        (scrolled)="onScroll()">
-        <form [formGroup]="filterationForm">
-        <div class="row mt-4" *ngIf="messagesList.length !==0">
-            <div class="filter-data-with-date d-flex custom-form">
-               
-                <div class="col-md-4 g-5 form-set">
-                    <div class="form-group">
-                        <label class="label" for="">
-                            {{'dashboard.Messages.date (from - to)' | translate}}
-                        </label>
-                        <div class="field col-12 md:col-4">
+    </div> -->
+  <div class="search-results"
+  infiniteScroll
+  [infiniteScrollDistance]="0.1"
+  [infiniteScrollThrottle]="1000"
+  (scrolled)="onScroll()">
 
-                            <p-calendar  formControlName="DateFrom" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
-                                placeholder="dd/mm/yy" [readonlyInput]="true" >
-                            </p-calendar>
+      <form [formGroup]="filterationForm">
+        <app-table-caption [hasFilter]="false" (onSearch)="this.searchModel.keyword = $event; getMessages(searchModel)">
 
-                        </div>
-                    </div>
-                </div>   
-                <div class="col-md-4"></div>        
-                <div class="col-md-4 typeOfRead">
-                    <button class="btn btn-primary " #notReadBtn (click)="getNotReadable()">{{'dashboard.Messages.pending' | translate}}</button>
-                    <button class="btn btn-primary "  #readBtn (click)="getReadable()">{{'dashboard.Messages.answered' | translate}}</button>
+          <div class="row mt-5" *ngIf="messages.list.length !== 0">
+            <div class="d-flex align-items-center custom-form">
+              <div class="col-md-4 g-5 form-set">
+                <div class="form-group">
+                  <label class="label" for="">{{
+                    "dashboard.Messages.date (from - to)" | translate
+                    }}</label>
+
+                  <p-calendar formControlName="DateFrom" [showIcon]="true" inputId="icon" selectionMode="range"
+                    appValidation placeholder="يوم - شهر - سنه" [readonlyInput]="true">
+                  </p-calendar>
                 </div>
+              </div>
+              <div class="col-md-4"></div>
+
+              <div class="col-md-4 d-flex justify-content-end">
+                <!-- <button class="btn btn-primary" #notReadBtn (click)="getNotReadable()">
+                  {{ "dashboard.Messages.pending" | translate }}
+                </button>
+                <button class="btn btn-primary" #readBtn (click)="getReadable()">
+                  {{ "dashboard.Messages.answered" | translate }}
+                </button> -->
+                <app-button-group [items]="btnGroupItems"
+                  (onClick)="searchModel.MessageStatus=$event; getMessages(searchModel)"></app-button-group>
+              </div>
+
+
+
             </div>
-        </div>
-    </form>
-        <div class="Notifications__cards mt-5" *ngIf="messagesList.length !==0">
+          </div>
+        </app-table-caption>
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class=" col-11 p-0 mb-4" *ngFor="let card of messagesList; let i=index">
-                        <div class="cardd">
-                            <div class="card-body d-flex justify-content-between">
-                                <div class="name-description">
-                                    <div class="title">
-                                        <img class="NotReadable" src="assets/images/shared/bluecircle.svg"
-                                            *ngIf="!card.isRead">
-                                        <img class="cardimage" src="assets/images/shared/Person.jpg">
-                                        <span class="tittle" *ngIf="checkLanguage">{{card?.userName?.ar}}</span>
-                                        <span class="tittle" *ngIf="!checkLanguage">{{card?.userName?.en}}</span>
-                                        <span>/</span>
-                                        <span class="headerName" *ngIf="checkLanguage">{{card?.jobTitleName?.ar}}</span>
-                                        <span class="headerName" *ngIf="!checkLanguage">{{card?.jobTitleName?.en}}</span>
-                                    </div>
-                                    <div class="Description">
-                                        <span class="tittle">{{'Notifications.Description'|translate}}</span>
-                                        <p class="paragraph ">{{card.title}}</p>
-                                    </div>
-                                    <span class="receviedTime">{{card.createdDate|date |translate}}</span>
-                                </div>
-                                <div class="Details align-items-center">
-                                    <p > <img class="icon-mess" src="assets/images/shared/cardmessage.svg" alt="">
-                                        {{card.messageCount}}</p>
-                                    <button class="btn btn-primary detail-btn p-relative"
-                                        (click)="showDetails(card.id)">
-                                        {{'shared.Show Details'|translate}}
-                                        <img class="second-icon-mess" src="assets/images/shared/detail-arrow.png">
-                                    </button>
-                                </div>
 
-                            </div>
-                        </div>
+      </form>
+      <div class="Notifications__cards" *ngIf="messages.list.length !== 0">
+        <div class="container-fluid">
+          <div class="row">
 
-                    </div>
-                    <!-- <button class="btn btn-primary LoadMore" (click)="loadMore()"    [disabled]="activeLoadBtn">
-                        
-                        {{'shared.Load More'|translate}}
-                    </button> -->
+            <div class="cardd border-dark mb-5" *ngFor="let message of messages.list; let i = index">
+              <div class="card-body p-4 d-flex justify-content-between">
+                <div class="name-description">
+                  <div class="title">
+                    <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!message.isRead" />
+                    <img class="cardimage" src="assets/images/shared/Person.jpg" />
+                    <span class="tittle" *ngIf="checkLanguage">{{message?.userName?.ar}}</span>
+                    <span class="tittle" *ngIf="!checkLanguage">{{message?.userName?.en}}</span>
+                    <span>/</span>
+                    <span class="headerName" *ngIf="checkLanguage">{{message?.jobTitleName?.ar}}</span>
+                    <span class="headerName" *ngIf="!checkLanguage">{{message?.jobTitleName?.en}}</span>
+                  </div>
+                  <div class="Description">
+                    <span class="tittle">{{
+                      "Notifications.Description" | translate
+                      }}</span>
+                    <p class="paragraph">{{ message.title }}</p>
+                  </div>
+                  <span class="receviedTime">{{
+                    message.createdDate | date | translate
+                    }}</span>
                 </div>
+                <div class="Details align-items-center">
+                  <p>
+                    <img class="icon-mess" src="assets/images/shared/cardmessage.svg" alt="" />
+                    {{ message.messageCount }}
+                  </p>
+
+                  <button class="btn btn-primary detail-btn p-relative" [routerLink]="[
+                        '/dashboard/messages/message-detail',
+                        message.id
+                      ]">
+                    {{ "shared.Show Details" | translate }}
+                    <img class="second-icon-mess" src="assets/images/shared/detail-arrow.png" />
+                  </button>
+                </div>
+              </div>
             </div>
+
+            <!-- <button class="btn btn-primary LoadMore" (click)="loadMore()"    [disabled]="activeLoadBtn">
+
+                          {{'shared.Load More'|translate}}
+                      </button> -->
+          </div>
         </div>
+      </div>
 
+      <button *ngIf="messages.total !== messages.list?.length" class="btn btn-primary LoadMore" type="button" disabled
+        [ngClass]="showSpinner ? 'shown-spinner' : 'hidden-spineer'">
+        {{ messages.total }}{{ "shared.From" | translate
+        }}{{ messages.list?.length }}
 
-        <button *ngIf="messageTotal !== messagesList?.length" class="btn btn-primary LoadMore" type="button"
-            disabled [ngClass]="showSpinner?'shown-spinner':'hidden-spineer'">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      </button>
+  </div>
 
-            {{notificationTotal}}{{'shared.From'|translate}}{{messagesList?.length}}
+  <div class="Empty" *ngIf="!messages.total && !messages.loading">
+    <app-informative-block subTitle="لا توجد لديك محادثات"></app-informative-block>
+  </div>
 
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        </button>
-    </div>
-    <div class="Empty">
-        <app-informative-block *ngIf="messagesList.length==0"
-            title="لا توجد لديك محادثات"
-            src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    </div>
 
 </div>
 
-
-<div *ngIf="skeletonLoading" id="notification-content">
-    <div class="Notifications__cards mt-5">
-        <div class="container-fluid">
-            <div class="row">
-                <div class=" col-11 p-0 mb-4" *ngFor="let card of [1,2,3] let i=index">
-                    <div class="cardd">
-                        <div class="card-body d-flex">
-                            <div class="name-description">
-                                <div class="title d-flex">
-                                    <p-skeleton width="4rem" height="4rem" shape="circle" class="cardimage">
-                                    </p-skeleton>
-                                    <p-skeleton width="15rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                    <p-skeleton width="5rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                    <p-skeleton width="15rem" styleClass="p-mb-2" class="headerName"></p-skeleton>
-                                </div>
-                                <div class="Description">
-                                    <p-skeleton width="7rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                    <p-skeleton width="62rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                    <p-skeleton width="50rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                </div>
-                                <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                            </div>
-                            <div class="Details">
-
-                                <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                            </div>
-
-                        </div>
-                    </div>
-
+<div *ngIf="messages.loading " id="notification-content">
+  <div class="Notifications__cards mt-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-11 p-0 mb-4" *ngFor="let card of [1, 2, 3]; let i = index">
+          <div class="cardd">
+            <div class="card-body d-flex">
+              <div class="name-description">
+                <div class="title d-flex">
+                  <p-skeleton width="4rem" height="4rem" shape="circle" class="cardimage">
+                  </p-skeleton>
+                  <p-skeleton width="15rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                  <p-skeleton width="5rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                  <p-skeleton width="15rem" styleClass="p-mb-2" class="headerName"></p-skeleton>
                 </div>
+                <div class="Description">
+                  <p-skeleton width="7rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                  <p-skeleton width="62rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                  <p-skeleton width="50rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                </div>
+                <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+              </div>
+              <div class="Details">
+                <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-
+  </div>
 </div>

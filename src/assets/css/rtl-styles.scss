@@ -42,69 +42,70 @@
 
 [lang="en"] body {
     text-align: left !important;
-    
+
      // ------------- notification-list-------------
      .notification-header{
         &.dashboard{
         margin-left: 4.3rem;
         margin-top: 16rem;
-    
-    }   
+
+    }
     .left{
         margin-right: 12rem;
     }
     }
 
-    #notification-content{
-        // margin-left: 4rem;
-        margin-top: 1.5rem;
-        .myInput{
-            margin-left: 3rem;
-        }
-        .cardd,.carddd{
-            .card-body{
-              padding-left: 2.5rem;
-              .Description{
-                margin-left: 6rem;
-                padding-left: 2rem;
-                border-left: 3px solid #B4B4B4;
-              }
-            }.Details{
-                position: relative;
-                img{
-                    left: 8rem;
-                    position: absolute;
-                    top: 1.9rem;
-                    transform: rotate(180deg);
-                }
-                button{
-                    position: absolute;
-                    right: -70rem;                
-                }
-            }
-        }
-    }
+    // #notification-content{
+    //     // margin-left: 4rem;
+    //     margin-top: 1.5rem;
+    //     .myInput{
+    //         margin-left: 3rem;
+    //     }
+    //     .cardd,.carddd{
+    //         .card-body{
+    //           padding-left: 2.5rem;
+    //           .Description{
+    //             margin-left: 6rem;
+    //             padding-left: 2rem;
+    //             border-left: 3px solid #B4B4B4;
+    //           }
+    //         }.Details{
+    //             position: relative;
+    //             img{
+    //                 left: 8rem;
+    //                 position: absolute;
+    //                 top: 1.9rem;
+    //                 transform: rotate(180deg);
+    //             }
+    //             button{
+    //                 position: absolute;
+    //                 right: -70rem;
+    //             }
+    //         }
+    //     }
+    // }
+
     .notification-sendreply{
         margin-left: 5rem;
         .sendbtn{
             right: 142px;
-       
+
         img{
             transform : rotate(180deg)
-       }  
+       }
          }
        }
 
     p-breadcrumb .p-breadcrumb .p-breadcrumb-chevron {
         transform: rotate(1deg);
-    }   
+    }
     // --------------------------------------------
         // ---------- navbar notifications---------
         .nav__notifications{
             .header-notification{
             .left{
                 ::ng-deep select{
-                    background-position: left 8rem center ;  
+                    background-position: left 8rem center ;
                    }
                 }
             }
@@ -148,7 +149,7 @@
                 padding-left: 2rem;
             }
         }
-       
+
       }
  .messages{
             .title-Message{
@@ -167,7 +168,7 @@
     margin-right: 4.3rem;
     margin-top: 16rem;
 
-}   
+}
 
 .left{
     margin-left: 12rem;
@@ -175,52 +176,52 @@
 }
 
 
-#notification-content{
-    // margin-right: 4rem;
-    margin-top: 1.5rem;
-    .myInput{
-        margin-right: 3rem;
-    }
-    .cardd,.carddd{
-        .card-body{
-          padding-right: 2.5rem;
-          .Description{
-            margin-right: 6rem;
-            padding-right: 2rem;
-            border-right: 3px solid #B4B4B4;
-          }
-        }
-        .Details{
-            position: relative;
-            img{
-                position: absolute;
-                left: 3rem;
-                top: 5rem;            
-            }
-            button{
-                padding-right: 0;
-                padding-left: 0;
-                height: 35px;
-                width: 155px;
-            }
-        }
-    }
-  
-}
+// #notification-content{
+//     // margin-right: 4rem;
+//     margin-top: 1.5rem;
+//     .myInput{
+//         margin-right: 3rem;
+//     }
+//     .cardd,.carddd{
+//         .card-body{
+//           padding-right: 2.5rem;
+//           .Description{
+//             margin-right: 6rem;
+//             padding-right: 2rem;
+//             border-right: 3px solid #B4B4B4;
+//           }
+//         }
+//         .Details{
+//             position: relative;
+//             img{
+//                 position: absolute;
+//                 left: 3rem;
+//                 top: 5rem;
+//             }
+//             button{
+//                 padding-right: 0;
+//                 padding-left: 0;
+//                 height: 35px;
+//                 width: 155px;
+//             }
+//         }
+//     }
 
-  .notification-sendreply{
-        margin-right: 6.3rem;
-        .sendbtn{
-            left: 126px;
-        }
-       }
+// }
+.notification-sendreply {
+  margin-right: 6.3rem;
+
+  .sendbtn {
+    left: 126px;
+  }
+}
     // --------------------------------------------
     // ---------- navbar notifications---------
     .nav__notifications{
         .header-notification{
         .left{
             ::ng-deep select{
-                background-position: right 8rem center;  
+                background-position: right 8rem center;
                }
             }
         }
@@ -244,7 +245,7 @@
           top: -8rem;
         }
       }
-      
+
       #main-message-content{
         .cardd{
             .Details{
@@ -258,7 +259,7 @@
             padding-right: 2rem;
             }
         }
-      
+
       }
         .messages{
             .title-Message{
