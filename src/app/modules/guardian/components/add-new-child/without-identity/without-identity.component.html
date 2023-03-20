@@ -153,7 +153,7 @@
                 </div>
             </div>
 
-            <div class="row gx-5 form-set mb-5">
+            <!-- <div class="row gx-5 form-set mb-5">
 
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Passport number' | translate}} <span class="star">*</span></label>
@@ -177,7 +177,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <hr class="my-5">
 
@@ -206,6 +206,10 @@
                 <div class="col-md-4">
                     <P class="pb-4">{{'shared.note' | translate}}</P>
                     <textarea class="textareaBorder" [rows]="9" placeholder="{{'shared.note' | translate}}" formControlName="note2" [cols]="45" pInputTextarea [autoResize]="true"></textarea>
+                </div>
+                <div class="col-md-4">
+                    <P>{{'dashboard.addChild.PassportPicture' | translate}}</P>
+                    <app-file-upload [accept]="fileTypesEnum.Image" view="full" (onFileUpload)="messageUpload4($event)" (onFileDelete)="messageDeleted4($event)"></app-file-upload>
                 </div>
             </div>
 

@@ -1,10 +1,10 @@
 @import "../../../../assets/css/utils/variables.scss";
 @import 'src/assets/css/components/primng-table';
-@import "../../../../../src/assets/css/components/input";
-@import "../../../../../src/assets/css/components/buttons";
+// @import "../../../../../src/assets/css/components/input";
+// @import "../../../../../src/assets/css/components/buttons";
 @import "../../../../assets/css/components/forms.scss";
-@import "../../../../assets/css/components/validation-form.scss";
-@import '../../../../../src/assets/css/components/inputswitch';
+// @import "../../../../assets/css/components/validation-form.scss";
+// @import '../../../../../src/assets/css/components/inputswitch';
 
 #content{
   width: 100%;
@@ -12,16 +12,16 @@
       position: absolute;
       bottom:100% ;
       padding-bottom: 2.6%;
-  
 
-   
+
+
   }
   .switch{
 
     .Label{margin-right: 0.5rem;margin-top: 0.5rem;}
      .status{margin-top: 2rem;}
      .text{margin-top: 0.5rem;}
-    
+
  }
  .curriclums{
   flex-wrap:wrap;
@@ -30,7 +30,7 @@
  }
  .actions{text-align: center;max-width:6rem;width: 3rem;}
 
- 
+
 }
 
 .alert{
@@ -50,7 +50,7 @@ background-color: rgba(239, 253, 255, 0.72);
 ::ng-deep app-informative-block{
 
        .informative-block{
-            
+
                   min-height: 20rem !important;
                   justify-content: start !important;
                   position: relative;
@@ -79,65 +79,17 @@ background-color: rgba(239, 253, 255, 0.72);
     top: 4.2rem;
     }
     }
-   
-}
-
-
-
-
-.uploaded {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.uploadfilecontainer {
-  text-align: center;
-  font-size: 1.3rem;
-  padding: 60px 0;
-  height: 200px;
-  width: 100%;
-  border: 1px solid #D7D7D7;
-  border-radius: 10px;
-  img{
-    width: 4rem;
-    padding: 1rem;
-    border-radius: 45%;
-    background-color: #F5F8FF;
-  }
-}
-
-.uploadfilecontainer:hover {
-  cursor: pointer;
-  background-color: #9ecbec !important;
-  opacity: 0.8;
-}
-
-.files-list {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  border: 1px solid #2F4576;
-  border-radius: 12px;
-  padding: 5px;
-  margin: 2rem 0;
 
 }
 
-.files-list .delete-file {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
 
-.files-list .delete-file img {
-  width: 30px;
-}
+
 
 ::ng-deep .p-autocomplete {
   display: block !important;
   ul{
     padding: 0rem 1rem !important;
-    border-radius: 2rem !important;
+    border-radius: 15px !important;
     .p-autocomplete-token,.p-autocomplete-item {
       margin-right: 1.5rem !important;
       height: 4rem !important;
@@ -154,6 +106,7 @@ background-color: rgba(239, 253, 255, 0.72);
       input{
         padding: 0 !important;
         font-size: 1.5rem !important;
+        background-color: transparent;
         &:focus{
         box-shadow: none !important
         }

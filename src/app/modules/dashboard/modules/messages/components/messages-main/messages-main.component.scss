@@ -1,18 +1,16 @@
 @import "../../../../../../../assets/css/utils/variables.scss";
-@import "src/assets/css/components/primng-table";
-@import "src/assets/css/components/input";
-@import "src/assets/css/components/buttons";
+// @import "src/assets/css/components/primng-table";
+// @import "src/assets/css/components/input";
+// @import "src/assets/css/components/buttons";
 @import "../../../../../../../assets/css/components/forms.scss";
-@import "../../../../../../../assets/css/components/validation-form.scss";
+// @import "../../../../../../../assets/css/components/validation-form.scss";
 
 .main-message-header {
   .left {
     position: absolute;
   }
 }
-.left {
-  margin-left: 12rem;
-}
+
 
 #notification-content {
   margin-right: 4rem;
@@ -44,8 +42,8 @@
 
   .Notifications__cards {
     .cardd {
-      border-radius: 12px;
-      box-shadow: 0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
+      border-radius: 15px;
+      // box-shadow: 0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
 
       .card-header {
         padding-right: 2.5rem;
@@ -69,10 +67,10 @@
         }
       }
       .card-body {
-        margin-top: 3rem;
-        padding-right: 2.5rem;
-        margin-bottom: 0.7rem;
-        padding-bottom: 1rem;
+        // margin-top: 3rem;
+        // padding-right: 2.5rem;
+        // margin-bottom: 0.7rem;
+        // padding-bottom: 1rem;
         .name-description {
           margin-top: 2rem;
           .tittle {
@@ -152,14 +150,14 @@
             width: 155px;
             background: transparent;
             color: #5bcedd;
-            
+
             .second-icon-mess{
               position: absolute;
                 left: 3rem;
                 top: 10.9rem;
 
             }
-           
+
             &:hover {
               background-color: transparent !important;
             }
