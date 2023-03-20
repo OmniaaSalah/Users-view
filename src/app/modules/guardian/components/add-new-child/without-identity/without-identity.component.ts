@@ -65,6 +65,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
   imageResult1 = []
   imageResult2 = []
   imageResult3 = []
+  imageResult4;
 
   genderList =this.sharedService.genderOptions;
   Nationalities$  = this.sharedService.getAllNationalities()
@@ -156,6 +157,14 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
     messageDeleted3(event){
       this.imageResult3 = event
    }
+   messageUpload4(event)
+   {
+    this.imageResult4=event;
+   }
+   messageDeleted4(event)
+   {
+    this.imageResult4=event;
+   }
 
 
    childToRelinkWithNewGuardian={
@@ -196,7 +205,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
       'reasonForNotHavingEmiratesId': this.registerWithoutIdentityForm.value.reason,
       'religionId': this.registerWithoutIdentityForm.value.religion,
       'childAttachments':[...this.imageResult1,...this.imageResult3],
-
+      'passportImage':this.imageResult4.map(er=>er.url).toString()
     }
 
     this.addChildService.postChildWithoudIdentity(data)
