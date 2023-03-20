@@ -1,5 +1,5 @@
 <div class="prim-table mt-4" *ngIf="holidays.totalAllData || holidays.loading">
-    <div class="color-red-500 mb-4" *ngIf="currentUserScope==userScope.Employee">{{'dashboard.AnnualHoliday.you can request to edit flexible holiday only'|translate}}</div>
+    <!-- <div class="color-red-500 mb-4" *ngIf="currentUserScope==userScope.Employee">{{'dashboard.AnnualHoliday.you can request to edit flexible holiday only'|translate}}</div> -->
     <p-table  [lazy]="true" [value]="holidays.list" (onSort)="onSort($event)" >
         <ng-template pTemplate="caption">
             <app-table-caption
@@ -21,9 +21,10 @@
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="annualCalendarName"> <p-sortIcon field="annualCalendarName"></p-sortIcon>{{'dashboard.schools.annulCalendarName' |translate}}</th>
-                <th pSortableColumn="year"><p-sortIcon field="year"></p-sortIcon>{{'dashboard.AnnualHoliday.Year' |translate}} </th>
+                <th pSortableColumn="year"><p-sortIcon field="year"></p-sortIcon>{{'dashboard.schools.SchoolYear' |translate}} </th>
                 <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.holidayName' |translate}} </th>
-                <th pSortableColumn="dateRange"><p-sortIcon field="dateRange"></p-sortIcon>{{'shared.date' |translate}} </th>
+                <th pSortableColumn="dateRange"><p-sortIcon field="dateRange"></p-sortIcon>{{'dashboard.AnnualHoliday.HolidayStartDate' |translate}} </th>
+                <th pSortableColumn="dateRange"><p-sortIcon field="dateRange"></p-sortIcon>{{'dashboard.AnnualHoliday.HolidayEndDate' |translate}} </th>
                 <th pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date' |translate}} </th>
                 <th class="expand"  pSortableColumn="flexibilityStatus"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
                 <th class="actions"></th>
@@ -34,7 +35,8 @@
                 <td>{{holiday?.annualCalendarName|currentLang}}</td>
                 <td>{{holiday?.year}}</td>
                 <td>{{holiday?.name |currentLang}}</td>
-                <td>{{'shared.From'|translate}} {{holiday?.dateFrom | LocalizeDate}} - {{'shared.To'|translate}} {{holiday?.dateTo | LocalizeDate}}</td>
+                <td>{{holiday?.dateFrom | LocalizeDate}}</td>
+                <td>{{holiday?.dateTo | LocalizeDate}}</td>
                 <td>
                     {{holiday?.createdDate | LocalizeDate}}
                 </td>

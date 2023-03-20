@@ -46,16 +46,19 @@
                       {{col.header}}
                   </th> -->
                   <!-- <th pSortableColumn="actions"></th> -->
-                    <th pSortableColumn="schoolname">{{'dashboard.schools.schoolName'|translate}}
+                    <th pSortableColumn="schoolname">{{'School'|translate}}
                         <p-sortIcon field="schoolname"></p-sortIcon>
                     </th>
+                    <!-- <th pSortableColumn="cityname">{{'dashboard.schools.SchoolEmail'|translate}}
+                        <p-sortIcon field="cityname"></p-sortIcon>
+                    </th> -->
                     <th pSortableColumn="cityname">{{'shared.city'|translate}}
                         <p-sortIcon field="cityname"></p-sortIcon>
                     </th>
                     <th pSortableColumn="statename">{{'shared.state'|translate}}
                         <p-sortIcon field="statename"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="curriculumname">{{'shared.curriculum'|translate}}
+                    <th pSortableColumn="curriculumname">{{'dashboard.schools.SchoolCurriculum'|translate}}
                         <p-sortIcon field="curriculumname"></p-sortIcon>
                     </th>
                     <th pSortableColumn="StudentNumber">{{'dashboard.schools.studentsNumber'|translate}}
@@ -76,6 +79,7 @@
                 </tr> -->
                     <tr [routerLink]="['school/', school.id]" class="clickable">
                         <td>{{school.name|currentLang}}</td>
+                        <!-- <td>{{school.email|currentLang}}</td> -->
                         <td>{{school.city |currentLang}}</td>
                         <td>{{school.state|currentLang}}</td>
                         <td>{{school.curriculum|currentLang}}</td>

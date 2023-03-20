@@ -20,11 +20,11 @@
 
            <div class="row g-5 form-set" >
                 <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
-                    <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
+                    <label class="label">{{'dashboard.schools.SchoolCurriculum'| translate}}</label>
                     <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId"  optionValue="id" optionLabel="name.ar"  placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
                 </div>
                 <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
-                    <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
+                    <label class="label">{{'School'|translate}}</label>
                     <p-multiSelect  [options]="(schools$| async)"   (ngModelChange)="schoolSelected($event)" display="chip" (onClear)="isSchoolSelected=false" [(ngModel)]="filtration.SchoolId"  optionValue="id" optionLabel="name.ar"  placeholder="{{'shared.chooseSchool'|translate }}"></p-multiSelect>
                 </div>
 
@@ -45,6 +45,10 @@
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
                     <p-multiSelect [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
                 </div>
+                <!-- <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.StudentCategory'| translate}}</label>
+                    <p-multiSelect    [options]="studentCategoryList"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.NationalityCategoryId" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.SelectStudentCategory' |translate}}"></p-multiSelect>
+                </div> -->
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.sonsOfMartyrs'| translate}}</label>
                     <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsChildOfAMartyr" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
@@ -96,7 +100,7 @@
 
 
     <div class="prim-table mt-4" *ngIf="students.totalAllData || students.loading">
-        <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true">
+        <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption
@@ -113,11 +117,14 @@
                         {{col.header}}
                     </th>
                     <th pSortableColumn="actions"></th> -->
-                    <th pSortableColumn="studentDaleelNumber">{{'dashboard.students.daleelNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                    <th pSortableColumn="arabicName">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
+                    <th pSortableColumn="studentDaleelNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                    <th pSortableColumn="studentMinisterialNumber">{{'dashboard.parents.ministerialNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                    <th pSortableColumn="studentNumber">{{'dashboard.students.daleelNumber1'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                    <th pSortableColumn="studentEmiratesNumber">{{'sign up.digitalIdentity'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                    <th pSortableColumn="arabicName">{{'dashboard.schools.student'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
                     <th pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
                     <th pSortableColumn="nationality">{{'shared.nationality'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
-                    <th pSortableColumn="currentSchoolName" *ngIf="currentUserScope!=userScope.Employee">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
+                    <th pSortableColumn="currentSchoolName" *ngIf="currentUserScope!=userScope.Employee">{{'School'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
                     <th pSortableColumn="guardianName">{{'dashboard.students.parent'|translate}}  <p-sortIcon field="guardianName"></p-sortIcon></th>
                     <th pSortableColumn="gradeName">{{'shared.grade'|translate}}</th>
                     <th pSortableColumn="divisionName">{{'shared.division'|translate}}</th>
@@ -126,7 +133,10 @@
             </ng-template>
             <ng-template pTemplate="body" let-student >
                 <tr [routerLink]="['student/', student.id]" class="clickable">
-                    <td>{{student.id}}</td>
+                    <td>{{student.studentDaleelNumber}}</td>
+                    <td>{{student.studentMinisterialNumber}}</td>
+                    <td>{{student.studentNumber}}</td>
+                    <td>{{student.studentEmiratesNumber}}</td>
                     <td>{{student.name |currentLang}}</td>
                     <td>{{student.surName |currentLang }}</td>
                     <td>{{student.nationality |currentLang}}</td>
@@ -153,7 +163,7 @@
 
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                    <td [attr.colspan]="20">
+                    <td [attr.colspan]="20" class="search">
                         <ng-container *ngIf="!students.total &&  !students.loading">
                             <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>

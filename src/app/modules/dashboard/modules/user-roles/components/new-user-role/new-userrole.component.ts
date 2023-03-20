@@ -443,7 +443,7 @@ export class NewUserRoleComponent implements OnInit {
     this.schoolIsSelectedList=[];
     // this.filtration.Page=null;
     this.filtration.PageSize=this.schools.totalAllData;
-    this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
+    this.schoolsService.getAllSchoolsInPopUp(this.filtration).subscribe((res)=>{
       this.schoolIsSelectedList=res.data.map(school=>{return {
                 'id':school.id,
                 'name':{'ar':school.name?.ar,'en':school.name?.en},

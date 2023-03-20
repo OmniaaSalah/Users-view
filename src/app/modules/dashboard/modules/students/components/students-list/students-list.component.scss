@@ -15,3 +15,34 @@
     }
 }
 
+.prim-table{
+           ::ng-deep app-loader{
+               width:117rem;
+           }
+           .search{
+           ::ng-deep app-informative-block{
+   
+               .informative-block{
+                       width:100%;
+                       min-height: 30rem !important;
+                       position: relative;
+                       right:35rem;
+                       .title{
+                           width: 90% !important;
+                       
+                       }
+                   }
+               }
+       
+           }
+       
+       ::ng-deep p-table{
+           thead.p-datatable-thead tr th{
+               min-width: 22rem;
+           }
+      .p-datatable-tbody tr td{ 
+       min-width: 22rem;
+  
+          }
+       }
+   }
