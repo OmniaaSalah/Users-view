@@ -65,20 +65,26 @@ export class HomeComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private translate:TranslateService) { }
 
-  ngOnInit(): void { 
-  
-    this.userService.currentUserSchoolId$.subscribe(id =>{  
+  ngOnInit(): void {
+
+    this.userService.currentUserSchoolId$.subscribe(id =>{
       this.loadCardsItems(id);
     })
-    this.userService.currentUserSchoolName$.subscribe(res =>{  
-   this.currentSchoolName=res;
+
+    this.userService.currentUserSchoolName$.subscribe(res =>{
+         this.currentSchoolName=res;
     })
-   if(this.currentUserScope==UserScope.Employee)
-   { 
-     this.authService.getSchoolUrgentMessage(this.userService.getCurrentUserId()).subscribe((res)=>{
+
+   if(this.currentUserScope==UserScope.Employee) this.getUregentMessages()
+
+  }
+
+
+  getUregentMessages(){
+    this.authService.getSchoolUrgentMessage(this.userService.getCurrentUserId()).subscribe((res)=>{
       this.messages=res;
       this.userService.setschoolUrgentMessages(this.messages?.length);
-      console.log(res?.length)
+
       res.forEach((message,i) => {
         this.isOpend[i]=true;
         // this.messages.push(message);
@@ -86,10 +92,10 @@ export class HomeComponent implements OnInit {
 
 
      })
-   }
   }
-  confirm(i,messageId)
-  {
+
+  confirm(i,messageId){
+
     var readMessages=[];
     readMessages.push(messageId);
     this.authService.markSchoolUrgentMessage({"messageIds":readMessages}).subscribe((res)=>{
@@ -98,6 +104,8 @@ export class HomeComponent implements OnInit {
       this.userService.setschoolUrgentMessages(this.messages?.length);
     })
   }
+
+
 
   loadCardsItems(currentSchoolId)
   {
@@ -110,7 +118,7 @@ export class HomeComponent implements OnInit {
           title:this.translate.instant('sideBar.schoolsAndStudents.title'),
           bgColor:'#5CD0DF'
         },
-       
+
         list: [
           {label:this.translate.instant('sideBar.schoolsAndStudents.chidren.schools'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:'/dashboard/schools-and-students/schools',claims:[ClaimsEnum.S_MenuItem_SchoolMenu]},
           {label:this.translate.instant('sideBar.schoolsAndStudents.chidren.students'), icon:'assets/images/home/schools-students/user-graduate.svg', url:'/dashboard/schools-and-students/students',claims:[ClaimsEnum.S_MenuItem_StudentMenu]},
@@ -126,7 +134,7 @@ export class HomeComponent implements OnInit {
           title:this.translate.instant('breadcrumb.performanceMangement'),
           bgColor:'#F8C073'
         },
-     
+
         list: [
           {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'/dashboard/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
           {label:this.translate.instant('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
@@ -143,7 +151,7 @@ export class HomeComponent implements OnInit {
           title:this.translate.instant('sideBar.managerTools.title'),
           bgColor:'#D644B1'
         },
-       
+
         list: [
           {label:this.translate.instant('sideBar.managerTools.children.Users'), icon:'assets/images/home/system-manager-tools/users.svg',url:'/dashboard/manager-tools/user-information/users-list',claims:[ClaimsEnum.S_MenuItem_user]},
           {label: this.translate.instant('sideBar.managerTools.children.Job Roles'), icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/manager-tools/user-roles/user-roles-list',claims:[ClaimsEnum.S_MenuItem_Role]},
@@ -164,7 +172,7 @@ export class HomeComponent implements OnInit {
           title: this.translate.instant('sideBar.reportsManagment.title'),
           bgColor:'#CD578A'
         },
-       
+
         list: [
           {label:this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/dashboard/reports-managment/students-reports',claims:[ClaimsEnum.S_MenuItem_StudentReport]},
           {label:this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'), icon:'assets/images/home/report-managment/report.svg', url:'/dashboard/reports-managment/parents-reports',claims:[ClaimsEnum.S_MenuItem_GuardianReport]},
@@ -186,7 +194,7 @@ export class HomeComponent implements OnInit {
           title:this.translate.instant('sideBar.educationalSettings.title'),
           bgColor:'#EF8071'
         },
-      
+
         list: [
           {label:this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/educational-setting/calender.svg',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list', claims:[ClaimsEnum.S_MenuItem_Holiday]},
           {label:this.translate.instant('sideBar.educationalSettings.children.School Years'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/dashboard/educational-settings/school-year/school-years-list', claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
@@ -198,7 +206,7 @@ export class HomeComponent implements OnInit {
 
     },
 
-  
+
 
 
     {
@@ -209,11 +217,11 @@ export class HomeComponent implements OnInit {
           title:this.translate.instant('dashboard.students.studentsMangement'),
           bgColor:'#EF8071'
         },
-      
+
         list: [
           {label: this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'), icon:'assets/images/home/educational-setting/calender.svg',url:'/dashboard/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
           {label:this.translate.instant('sideBar.schoolsAndStudents.chidren.students'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/dashboard/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
-     
+
         ]
       }
 
@@ -227,11 +235,11 @@ export class HomeComponent implements OnInit {
           title:this.translate.instant('breadcrumb.GradesAndDivisionsMangement'),
           bgColor:'#5CD0DF'
         },
-       
+
         list: [
           {label: this.translate.instant('dashboard.schools.schoolClasses'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/grades`,claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
           {label:this.translate.instant('dashboard.schools.schoolTracks'), icon:'assets/images/home/schools-students/user-graduate.svg', url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
-         
+
         ]
       }
     },
@@ -243,14 +251,14 @@ export class HomeComponent implements OnInit {
           title: this.translate.instant('dashboard.schools.schoolEmployeeMangement'),
           bgColor:'#CD578A'
         },
-     
+
         list: [
           {label:this.translate.instant('breadcrumb.Employees'), icon:'assets/images/home/report-managment/report-user.svg', url:'/dashboard/schoolEmployee-management/school/2/employees',claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
 
         ]
       }
     },
-    
+
     {
       image:'assets/images/home/manager-tools.png',
       claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
@@ -259,7 +267,7 @@ export class HomeComponent implements OnInit {
           title: this.translate.instant('breadcrumb.performanceMangement'),
           bgColor:'#D644B1'
         },
-     
+
         list: [
           {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.SE_MenuItem_Rate]},
           {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/school-performance-managent/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
@@ -274,7 +282,7 @@ export class HomeComponent implements OnInit {
           title:this.translate.instant('dashboard.schools.schoolMangement'),
           bgColor:'#F8C073'
         },
-     
+
         list: [
           {label:this.translate.instant('dashboard.schools.generalInfo'), icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${currentSchoolId}`,claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
           {label:this.translate.instant('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${currentSchoolId}/subjects`,claims:[ClaimsEnum.E_MenuItem_Subjects]},

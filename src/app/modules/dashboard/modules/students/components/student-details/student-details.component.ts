@@ -29,7 +29,7 @@ export class StudentDetailsComponent implements OnInit {
   // << ICONS >> //
   componentHeaderData: IHeader={
 		breadCrump: [],
-    mainTitle:{main: this.translate.instant('dashboard.students.editStudentInfo')}
+    mainTitle:{main: this.translate.instant('dashboard.students.StudentInfo')}
 	}
 
 
@@ -59,7 +59,7 @@ export class StudentDetailsComponent implements OnInit {
       this.componentHeaderData.breadCrump=
       [
         {label: this.translate.instant('dashboard.students.studentsList'),routerLink:'/dashboard/student-management/students',routerLinkActiveOptions:{exact: true}},
-        {label: this.translate.instant('dashboard.students.editStudentInfo'),routerLink:'/dashboard/student-management/students/student/'+this.studentId }
+        {label: this.translate.instant('dashboard.students.StudentInfo'),routerLink:'/dashboard/student-management/students/student/'+this.studentId }
       ]
 
       
@@ -69,7 +69,7 @@ export class StudentDetailsComponent implements OnInit {
       this.componentHeaderData.breadCrump=
          [
           {label: this.translate.instant('dashboard.students.studentsList'),routerLink:'/dashboard/schools-and-students/students',routerLinkActiveOptions:{exact: true}},
-          {label: this.translate.instant('dashboard.students.editStudentInfo'),routerLink:'/dashboard/schools-and-students/students/student/'+this.studentId }
+          {label: this.translate.instant('dashboard.students.StudentInfo'),routerLink:'/dashboard/schools-and-students/students/student/'+this.studentId }
         ]
 
       

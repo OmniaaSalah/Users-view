@@ -4,7 +4,7 @@
     <ng-container *ngIf="userType != userEnum.U_PARENTS">
         <div class="search w-50">
             <div class="p-inputgroup">
-                <input type="text" class="rounded-4 p-3" pInputText placeholder="بحث...">         
+                <input type="text" class="rounded-4 p-3" pInputText placeholder="بحث...">
                 <button type="button" class="rounded-4" pButton pRipple icon="pi pi-search"></button>
             </div>
         </div>
@@ -30,27 +30,6 @@
         </div>
     </div>
 
-    <div class="confirm-model">
-       
-      <ng-container *ngFor="let item of isOpend;let i=index;">
-        <p-dialog [(visible)]="isOpend[i]" [closable]="false"  [style]="{width: '35vw'}" >
-            <ng-template pTemplate="content">
-               <div class="d-flex flex-column gap-4">
-    
-                <p><span class="color-primary fw-bold">{{'dashboard.Messages.Sender'|translate}} : </span>{{messages[i]?.userName|currentLang}}</p>
-                <p><span class="color-primary fw-bold">{{'dashboard.Messages.SendDate'|translate}} : </span>{{messages[i]?.createdDate|LocalizeDate}}</p>
-                <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageTittle'|translate}} : </span>{{messages[i]?.title}}</p>
-                <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageText'|translate}} : </span>{{messages[i]?.messageText}}</p>
-               
-                <div class="d-flex justify-content-center align-items-center gap-4 mt-5">
-                    <button (click)="confirm(i,messages[i]?.id)" class="btn btn-secondary">{{'dashboard.Messages.yes,IsawIt' |translate}}</button>
-
-                </div>
-               </div>
-            </ng-template>
-        </p-dialog>
-    </ng-container>
-    </div>
 
     <div class="home__cards">
         <div class="container" >
@@ -68,25 +47,25 @@
                     </div>
                     <div class="card__content" [class.show]="cardsContentStatus[i].active">
                         <div class="card__content__header"
-                        [class.reduce-fs]="cardsHoverStatus[i].active" 
+                        [class.reduce-fs]="cardsHoverStatus[i].active"
                         [style.backgroundColor]="card.content.header.bgColor"
                         (click)="cardsContentStatus[i].active= !cardsContentStatus[i].active">
 
                             <div class="text">{{card.content.header.title}}</div>
 
                             <fa-icon  [icon]="faChevronUp" *ngIf="cardsContentStatus[i].active"></fa-icon>
-                            <fa-icon 
-                            class="icon-up" 
-                            [class.slideUp]="cardsHoverStatus[i].active" 
-                            [icon]="faChevronDown" 
+                            <fa-icon
+                            class="icon-up"
+                            [class.slideUp]="cardsHoverStatus[i].active"
+                            [icon]="faChevronDown"
                             *ngIf="!cardsContentStatus[i].active " ></fa-icon>
 
                         </div>
                         <div class="card__content__body">
                             <ul class="list" [class]="card?.class || ''">
                                 <ng-container *ngFor="let item of card.content.list">
-                                <li 
-                                class="list__item" 
+                                <li
+                                class="list__item"
                                 [class.reduce-fs]="cardsHoverStatus[i].active"
                                  [routerLink]="item.url" [queryParams]="item?.queryParams" *permit="item.claims">
                                     <div class="img">
@@ -101,10 +80,37 @@
                  </ng-container>
                 </div>
             </ng-container>
-               
+
             </div>
         </div>
     </div>
 
 
+</div>
+
+
+
+
+
+
+<div class="confirm-model">
+
+  <ng-container *ngFor="let item of isOpend;let i=index;">
+    <p-dialog [(visible)]="isOpend[i]" [closable]="false"  [style]="{width: '35vw'}" >
+        <ng-template pTemplate="content">
+           <div class="d-flex flex-column gap-4">
+
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.Sender'|translate}} : </span>{{messages[i]?.userName|currentLang}}</p>
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.SendDate'|translate}} : </span>{{messages[i]?.createdDate|LocalizeDate}}</p>
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageTittle'|translate}} : </span>{{messages[i]?.title}}</p>
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageText'|translate}} : </span>{{messages[i]?.messageText}}</p>
+
+            <div class="d-flex justify-content-center align-items-center gap-4 mt-5">
+                <button (click)="confirm(i,messages[i]?.id)" class="btn btn-secondary">{{'dashboard.Messages.yes,IsawIt' |translate}}</button>
+
+            </div>
+           </div>
+        </ng-template>
+    </p-dialog>
+</ng-container>
 </div>
