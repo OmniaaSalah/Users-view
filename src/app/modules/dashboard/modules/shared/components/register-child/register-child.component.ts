@@ -39,7 +39,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngDestroy$ = new Subject()
   scope = this.userService.getCurrentUserScope()
   get scopeEnum() { return UserScope }
-  
+
   lang =inject(TranslationService).lang;
   mode : Mode= 'view'
   @ViewChild('nav') nav: ElementRef
@@ -48,7 +48,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   get claimsEnum(){ return ClaimsEnum }
   get registrationStatusEnum() {return RegistrationStatus}
   get fileTypesEnum () {return FileEnum}
-  
+
   studentId = +this.route.snapshot.paramMap.get('id')
   childId = +this.route.snapshot.paramMap.get('childId')
   schoolId ;
@@ -130,13 +130,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       nationalityId:[0 , Validators.required],
       religionId:[1, Validators.required],
       isTalented: ['', Validators.required],
-      
+
       reasonForNotHavingEmiratesId:[null],
       passportId:[],
       passportIdExpirationDate:[],
       isSpecialClass:[],
       isInFusionClass:[],
-    
       hasShadower:[],
       // id:['', Validators.required],
       daleelId: ['', Validators.required],//remove
@@ -180,9 +179,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       }),
       studentTalent:[[]]
     })
-    
 
- 
+
+
 
 
     // Transfer From Division To Division
@@ -193,7 +192,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       trackId: '',
       electiveSubjectId: []
     }
-    
+
 
     requiredFiles:RequestRule
     get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
@@ -230,12 +229,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       requestReasonId: null
     }
 
-    
+
     exemptionFromStudySubjectReqForm={
       studentId: this.childId ||this.studentId,
       subjectId: null
     }
- 
+
 
   currentMode :Mode='view'
   stuentProhiptedCurrentMode :Mode='view'
@@ -268,7 +267,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     // this.childService.submitBtnClicked$.pipe(takeUntil(this.ngDestroy$)).subscribe(val =>{
-      
+
     //   if(val && this.step==1) this.updateStudent()
     // })
 
@@ -279,20 +278,20 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       if(this.cliamsService.isUserAllowedTo(element.claims))
       {this.displayStudentActionbtn=true}
     });
-   
+
   }
 
 
 
   ngAfterViewInit() {
     setTimeout(()=> this.setActiveTab(0))
-    		
+
 	}
 
 
 
   getStudent(studentId){
-    
+
     this.childService.Student$.next(null)
     this.studentsService.getStudent(studentId).subscribe((res) =>{
       this.schoolId = res.result?.school?.id
@@ -311,9 +310,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
       this.initializeState(res?.result)
     });
-    
+
   }
-  
+
   // submitButtonClicked(){
 
   //   this.childService.submitBtnClicked$.next(true)
@@ -350,7 +349,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     },err =>{this.toastr.error(this.translate.instant('toasterMessage.error'))})
-  } 
+  }
 
 
   // Transfer Student To Another Division Logic
@@ -380,7 +379,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   }
 
-  
+
   getSubjects(parms){
     this.optionalSubjectsList=null
     this.sharedService.getAllOptionalSubjects(parms).subscribe(res=>{
@@ -428,11 +427,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.onSubmit=false
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
 
-    }, (err:Error) =>{ 
+    }, (err:Error) =>{
       this.changeIdentityNumModelOpened =false
       this.onSubmit=false
       this.toastr.error(this.translate.instant('toasterMessage.'+err.message))
-      
+
     })
   }
 
@@ -448,7 +447,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.changeStudentIdentityInfoModelOpened =false
       this.onSubmit=false
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
-    }, err =>{ 
+    }, err =>{
       this.changeStudentIdentityInfoModelOpened =false
       this.onSubmit=false
       this.toastr.error(err)
@@ -462,7 +461,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
   }
 
-  
+
   onFileUpload(files, fileTitle, index){
     this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
     this.changeIdentityNumForm.attachments = this.uploadedFiles
@@ -498,7 +497,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         this.onSubmit=false
       })
     }
-  
+
 
 
   dropdownItemClicked(index){
@@ -509,7 +508,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         this.getModifyIdentityRequestRequiresFiles()
         this.changeIdentityNumModelOpened=true
       }
-      
+
     }
     if (index== 5) this.childService.showWithdrawalReqScreen$.next(true)
     if(index==6) this.exemptionFromStudyModelOpend=true
@@ -556,7 +555,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   showDialog() {
       this.display = true;
     }
-    
+
     closeDialog(){
       this.display = false;
       this.router.navigate(['/dashboard/messages/messages'])

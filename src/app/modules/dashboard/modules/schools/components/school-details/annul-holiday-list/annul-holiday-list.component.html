@@ -3,9 +3,9 @@
     <p-table  [lazy]="true" [value]="holidays.list" (onSort)="onSort($event)" >
         <ng-template pTemplate="caption">
             <app-table-caption
-            (onExport)="onExport($event)" 
-            (onFilter)="this.filtration.Page=1;getHolidays()" 
-            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getHolidays()" 
+            (onExport)="onExport($event)"
+            (onFilter)="this.filtration.Page=1;getHolidays()"
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getHolidays()"
             (onClear)="clearFilter()">
             <div class="row gx-5 form-set">
                 <div class="col-md-3">
@@ -13,11 +13,11 @@
                     <p-dropdown [options]="holidayStatusList" StopProp [showClear]="true" optionLabel="name" optionValue="value" [(ngModel)]="filtration.flexibilityStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
 
                 </div>
-               
+
             </div>
         </app-table-caption>
         </ng-template>
-        
+
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="annualCalendarName"> <p-sortIcon field="annualCalendarName"></p-sortIcon>{{'dashboard.schools.annulCalendarName' |translate}}</th>
@@ -42,7 +42,7 @@
                 </td>
                 <td  >
                     <div class="d-flex align-items-center gap-4">
-                       
+
                         <div *ngIf="holiday?.flexibilityStatus==statusEnum.Flexible" class='alerting success'>{{'shared.allStatus.Flexible'|translate}}</div>
                         <div *ngIf="holiday?.flexibilityStatus==statusEnum.NotFlexible" class='alerting danger'>{{'shared.allStatus.NotFlexible'|translate}}</div>
                     </div>
@@ -50,12 +50,13 @@
                 <td class="actions">
 
                     <ng-container *ngIf="currentUserScope==userScope.Employee">
-                    
-                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center " [ngClass]="holiday.flexibilityStatus==statusEnum.Flexible ? '':'my-disable'" (click)="editFlexableHoliday(holiday)"  *permit="claimsEnum.E_EditFlexableHoliday">
-                            {{'dashboard.schools.sendEditHolidayReq'|translate}}  
+
+                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center "
+                        [ngClass]="holiday.flexibilityStatus==statusEnum.Flexible ? '':'my-disable'" (click)="editFlexableHoliday(holiday)"  *permit="claimsEnum.E_EditFlexableHoliday">
+                            {{'dashboard.schools.sendEditHolidayReq'|translate}}
                         </div>
                     </ng-container>
-                   
+
                 </td>
             </tr>
         </ng-template>
@@ -93,7 +94,7 @@
         <div class="">
             <div class="fw-bold fs-3">{{'dashboard.schools.editHolidayReq' | translate}}</div>
             <div class="paragraph paragraph--sm color-gray-200 mt-2">
-                يرجى تحديد تاريخ بداية الاجازة المرنة وتاريخ نهاية الاجازة المرنة بحيث لا تتجاوز عدد أيام العطلة عدد الأيام المحددة مُسبقاً من قبل هيئة الشارقة للتعليم الخاص 
+                يرجى تحديد تاريخ بداية الاجازة المرنة وتاريخ نهاية الاجازة المرنة بحيث لا تتجاوز عدد أيام العطلة عدد الأيام المحددة مُسبقاً من قبل هيئة الشارقة للتعليم الخاص
             </div>
         </div>
     </ng-template>
@@ -109,13 +110,13 @@
                             <label class="label"  for="password">{{'shared.dateFrom' | translate}}</label>
                             <p-calendar formControlName="dateFrom" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="--/--/--"></p-calendar>
                         </div>
-        
+
                         <div class="col-md-6">
                             <label class="label"  for="password">{{'shared.dateTo' | translate}}</label>
-                            <p-calendar 
-                            [ngClass]="{'ng-invalid ng-dirty': holidayForm.dateTo.errors && holidayForm.dateTo.errors?.['not']}" 
-                            formControlName="dateTo" 
-                            [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" 
+                            <p-calendar
+                            [ngClass]="{'ng-invalid ng-dirty': holidayForm.dateTo.errors && holidayForm.dateTo.errors?.['not']}"
+                            formControlName="dateTo"
+                            [style]="{'font-size': '1.6rem'}" icon="pi pi-clock"
                             [showIcon]="true" placeholder="--/--/--"></p-calendar>
 
                             <div class="errors" *ngIf="holidayForm.dateTo.invalid && (holidayForm.dateTo.dirty)">
@@ -140,18 +141,18 @@
                     </div>
 
                     <div class="d-flex  align-items-center justify-content-end mt-6" *ngIf="reqInstance" >
-                        <button class="btn btn-primary " 
-                        [disabled]="editHolidayForm.invalid || submitted"  
+                        <button class="btn btn-primary "
+                        [disabled]="editHolidayForm.invalid || submitted"
                         *ngFor="let action of actions"
                         (click)="resendFlexabelHolidayReq(action.id)">
-                        
+
                             <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
                             <span>{{action.title | currentLang}}</span>
                             <!-- <span>{{'dashboard.Requests.resendRegstrationRequest' | translate}}</span> -->
-                            
+
                         </button>
                     </div>
-            
+
                 </form>
             </div>
         </div>

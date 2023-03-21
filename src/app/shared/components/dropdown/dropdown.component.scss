@@ -3,7 +3,7 @@
 
 .dropdown{
     width: fit-content;
-   
+
     #dropdownMenuButton1{
         .link{
             border-bottom: solid 2px $color-primary;
@@ -12,7 +12,7 @@
             img{width: 0.7rem;}
         }
         cursor: pointer;
-        
+
         fa-icon{
             color: $color-primary;
             transition:  all .2s ease-in-out;
@@ -24,7 +24,7 @@
     }
 
     .dropdown-menu {
-        display: block;
+        // display: block;
         // transform: translate3d(15px, -20px, 0px) !important;
         border: 1px solid $color-gray-100;
         border-radius: 15px;
@@ -71,14 +71,14 @@
                     p{color: $color-skyBlue-400;}
                }
             }
-            
+
             &:not(:last-child){ border-bottom: 1px solid $color-gray-50;}
 
             &:active{
                 background-color: transparent;
             }
         }
-        
+
     }
 
     &.borderless .dropdown-menu .dropdown-item{ border: none;}

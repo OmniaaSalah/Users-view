@@ -4,19 +4,19 @@
 @import 'src/assets/css/components/message.scss';
 
 .All-content{
-          
+
             .sidebar{
-                
+
                 background-image: url("/assets/images/Login/loginSidebar.svg");
                 position: fixed;
                 display: flexbox;
                 background-size: cover;
-                margin-top: 0.3rem;
+                margin: 1rem 0;
                 border-radius: 12px;
                 width:48rem;
-                height: 99%;
-        
-            
+                height: 97%;
+
+
             }
             .header-images{
                 display: flexbox;
@@ -28,7 +28,7 @@
                 margin-inline-start: 0.7rem;
             }
          .end-side{
-          
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,13 +36,13 @@
             padding: 0 12%;
             .inner {
                 width: 100%;
-        
+
                 &>* {
                     width: 100%;
                 }
             }
             .content{
-             
+
                margin-inline-start: 50rem;
                 max-width:50.5rem ;
                 .handimg{margin-inline-start: 0.5rem;width: 4%;}
@@ -69,13 +69,13 @@
 
                 .signup{
                     text-align: center;
-                  
+
                     margin-top: 2rem;
                         a{
                             font-size: 16px;
                             text-decoration-line: underline;
                         }
-                     
+
                    }
                    .identity{
                     &.btn{
@@ -92,7 +92,7 @@
                             }
                        }
                     }
-                
+
             }
         }
 

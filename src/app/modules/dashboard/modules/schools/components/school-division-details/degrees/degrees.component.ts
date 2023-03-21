@@ -39,9 +39,9 @@ export class DegreesComponent implements OnInit {
 
   filtration:Filter = {...Filtration, semester:0}
   paginationState= {...paginationInitialState}
-  
+
   btnGroupItems=[
-    {label:this.translate.instant('shared.firstSemester'), active: false, value:SemesterEnum.FirstSemester},
+    {label:this.translate.instant('shared.firstSemester'), active: true, value:SemesterEnum.FirstSemester},
     {label:this.translate.instant('shared.lastSemester'), active: false, value:SemesterEnum.LastSemester},
     {label:this.translate.instant('shared.finalResult'), active: false, value:SemesterEnum.FinalResult}
   ]
@@ -65,7 +65,7 @@ export class DegreesComponent implements OnInit {
     isHaveStudentPerformance:null
   }
 
-  
+
   constructor(
     private translate:TranslateService,
     private TranslationService:TranslationService,
@@ -78,10 +78,10 @@ export class DegreesComponent implements OnInit {
     this.getDivisionDegrees()
   }
 
-  semesterChanged(semester){    
+  semesterChanged(semester){
     console.log(semester);
-    
-    this.filtration.semester=semester; 
+
+    this.filtration.semester=semester;
     this.selectedSemesterLable = this.btnGroupItems.find(el=>el.value===semester).label
     this.getDivisionDegrees()
   }
@@ -97,7 +97,7 @@ export class DegreesComponent implements OnInit {
       this.degrees.list = res.data
       this.degrees.isHaveStudentPerformance =this.degrees.list[0]?.isHaveStudentPerformance
       this.degrees.totalAllData = res.totalAllData
-      this.degrees.total =res.total 
+      this.degrees.total =res.total
 
     },err=> {
       this.degrees.loading=false
@@ -132,23 +132,23 @@ export class DegreesComponent implements OnInit {
     .pipe(map(res=>{
       if(!res.result){
         let error ='حدث خطأ يرجى المحاوله مره اخرى';
-        
+
           switch (res.statusCode) {
             case HttpStatusCodeEnum.BadRequest:
               error = 'حدث خطأ يرجى المحاوله مره اخرى'
             break;
             case HttpStatusCodeEnum.MethodNotAllowed:
               error = 'يرجى ادخال الدرجات فى الملف المرفق'
-  
+
             break;
             case HttpStatusCodeEnum.NonAuthoritativeInformation:
               error = 'المستخدم الحالى ليس لديه صلاحيه لرفع الدرجات'
             break;
-            case HttpStatusCodeEnum.NotAcceptable: 
+            case HttpStatusCodeEnum.NotAcceptable:
             // Created
             error =  res?.errorLocalized ? res?.errorLocalized[this.lang] : "يرجعى مراجعه البيانات فى الملف المرفق"
             break;
-       
+
           }
           throw  new Error(error)
       }else{
@@ -169,7 +169,7 @@ export class DegreesComponent implements OnInit {
       this.toaster.error(err.message)
     })
   }
-  
+
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'

@@ -29,7 +29,7 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
 
   get statusEnum() {return StatusEnum}
   get claimsEnum () {return ClaimsEnum}
-  
+
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 
@@ -37,7 +37,7 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   paginationState= {...paginationInitialState}
 
   btnGroupItems=[
-    {label: this.translate.instant('shared.firstSemester'), active: false, value: SemesterEnum.FirstSemester},
+    {label: this.translate.instant('shared.firstSemester'), active: true, value: SemesterEnum.FirstSemester},
     {label: this.translate.instant('shared.lastSemester'), active: false, value:SemesterEnum.LastSemester},
     {label: this.translate.instant('shared.finalResult'), active: false, value:SemesterEnum.FinalResult}
   ]
@@ -50,7 +50,7 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
       list:[],
       loading:false
     }
-    
+
   constructor(
     private route:ActivatedRoute,
     private divisionService:DivisionService,
@@ -74,7 +74,7 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
       this.subjects.loading=false
       this.subjects.list = res.data
       this.subjects.totalAllData = res.totalAllData
-      this.subjects.total =res.total 
+      this.subjects.total =res.total
 
     },err=> {
       this.subjects.loading=false
@@ -82,7 +82,7 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
     })
   }
 
-  
+
   openSubjectDegrees(subject){
     const ref = this.dialogService.open(SubjectDegreesComponent, {
       data: {
@@ -100,11 +100,11 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   });
   }
 
-  
-  semesterChanged(semester){    
+
+  semesterChanged(semester){
     console.log(semester);
-    
-    this.filtration.semester=semester; 
+
+    this.filtration.semester=semester;
     // this.selectedSemesterLable = this.btnGroupItems.find(el=>el.value===semester).label
     this.getSubjects()
   }
