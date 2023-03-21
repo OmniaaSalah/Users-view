@@ -41,6 +41,10 @@
                         {{'shared.gender'|translate }}
                         <p-sortIcon field="gender"></p-sortIcon>
                     </th>
+                    <!-- <th pSortableColumn="relativeRelation">
+                        {{'dashboard.parents.relativeRelation'|translate }}
+                        <p-sortIcon field="gender"></p-sortIcon>
+                    </th> -->
                     <th pSortableColumn="birthdate">
                         {{'shared.birthDay'|translate }}
                         <p-sortIcon field="birthDate"></p-sortIcon>
@@ -72,6 +76,7 @@
                     <td>{{parent.surname |currentLang}}</td>
                     <td>{{parent.emiratesIdNumber}}</td>
                     <td>{{'shared.genderType.'+parent.gender |translate}}</td>
+                    <!-- <td>{{parent?.relativeRelation |LocalizeDate}}</td> -->
                     <td>{{parent.birthDate |LocalizeDate}}</td>
                     <td>{{parent.nationalityName |currentLang}}</td>
                     <td>{{parent.mobile}}</td>

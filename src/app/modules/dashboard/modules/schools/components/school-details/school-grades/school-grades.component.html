@@ -58,18 +58,17 @@
                 <td class="actions">
                     <ng-container *ngIf="currentUserScope==userScope.Employee">
                         <div class="d-flex justify-content-center">
-                            <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/grades/grade/{{grade.id}}" >
-                                <span>{{'shared.edit' |translate}}</span>
-                                <img  [class.rotate180]="lang=='en'"  src="assets/images/shared/arrow.svg" alt="">
+                            <div role="button" class=" d-flex gap-3 justify-content-end align-items-center" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/grades/grade/{{grade.id}}" >
+                                <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
+                            <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                             </div>
                         </div>
                     </ng-container>
 
                     <ng-container *ngIf="currentUserScope==userScope.SPEA">
-                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" [routerLink]="['grade',grade.id]">
-                            <!-- <img class="icon" src="assets/images/shared/pen.svg" alt=""> -->
-                            <span>{{'shared.edit' |translate}}</span>
-                            <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                        <div role="button" class=" d-flex gap-3 justify-content-end align-items-center" [routerLink]="['grade',grade.id]">
+                            <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
+                            <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                         </div>
                     </ng-container>
 

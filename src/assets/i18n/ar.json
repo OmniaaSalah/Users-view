@@ -298,7 +298,7 @@
             }
         },
         "performanceManagment": {
-            "title": "إدارة الأداء",
+            "title": "إدارة التقييم الاكاديمي",
             "chidren": {
                 "exams": "الامتحانات",
                 "missions": "الطلبات"
@@ -456,7 +456,7 @@
 
 
     "breadcrumb": {
-        "performanceMangement":"إدارة الأداء",
+        "performanceMangement":"إدارة التقييم الاكاديمي",
         "Employees":"الموظفين",
         "GradesAndDivisionsMangement":"إدارة الصفوف والشعب",
         "createNewSurvey": "إنشاء استبيان جديد",
@@ -581,6 +581,7 @@
         "confirmPassword": "تأكيد كلمة المرور",
         "editPassword": "تعديل كلمة المرور",
         "Created Date": "تاريخ الإنشاء",
+        "End Date": "تاريخ الإنتهاء",
         "date": "التاريخ",
         "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن 265 حرف",
         "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن 65 حرف",
@@ -1130,6 +1131,7 @@
             "certificateList": "قائمة الشهادات",
             "studentBehavior": "سلوك الطالب",
             "studentName": "أسم الطالب",
+            "hasShadower":"يحتاج معلم ظل",
             "studentNickname": "كنية الطالب",
             "Chronicdiseases": "الأمراض المزمنة",
             "SonofDetermination": "الأبن من ذوي الهمم",
@@ -1153,7 +1155,7 @@
             "parentsList": "قائمة أولياء  الأمور",
             "childrenList": "قائمة الأبناء",
             "parents": "أولياء الأمور",
-            "parentName": "أسم ولي الأمر",
+            "parentName": "ولي الأمر",
             "childName": "أسم الأبن",
             "parentNickname": "كنية ولي الأمر",
             "childrenNumber": "عدد الأبناء",
@@ -1183,6 +1185,7 @@
             "viewComment": "عرض التعليق",
             "acceptanceDate": "تاريخ القبول",
             "studentEnrollmentStatus": "حالة قيد الطالب",
+            "studentEnrollmentType":"نوع الإلتحاق",
             "specialEducation": "التربية الخاصة",
             "attendancePercentage": "نسبة الحضور",
             "absencePercentage": "نسبة الغياب",
@@ -1478,10 +1481,10 @@
             "createdDate": "تاريخ الإنشاء",
             "createdBefore": "أنشأ من قبل",
             "Sent": "مرسل",
-            "New": "جديد",
+            "New": "مسودة",
             "Closed": "مغلق",
             "Canceled":"مُلغى",
-            "Apparent":"ظاهر",
+            "Apparent":"منجز",
             "sendedBy": "تمّ الإرسال من قبل",
             "sendDate": "تاريخ الإرسال",
             "seenDate": "تاريخ الظهور",
@@ -1685,10 +1688,10 @@
             "List Of Users": "قائمة المستخدمين",
             "Add User": "إضافة مستخدم",
             "Edit User": "تعديل مستخدم",
-            "Determine Private Role":"تحديد الدور الخاص",
-            "Private Role":"الدور الخاص",
+            "Determine Private Role":"تحديد المسمي الوظيفي",
+            "Private Role":"المسمي الوظيفي",
             "User Status": "حالة المستخدم",
-            "Select Private Role": "أختر الدور الخاص",
+            "Select Private Role": "أختر المسمي الوظيفي",
             "UserName (in Arabic)":"أسم المستخدم (باللغة العربية)",
             "UserName (in English)":"أسم المستخدم (باللغة الإنجليزية)",
             "lastLoginDate":"تاريخ أخر تسجيل دخول",

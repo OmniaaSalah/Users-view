@@ -324,17 +324,17 @@
           <ng-container *ngIf="step==2">
               <div class="d-flex justify-content-end" *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished&&schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Current">
                  <div class="curriculum d-flex">
-                      <div class="btn btn-outline-primary " role="button" (click)="addCurriculumsModelOpened=true;" *permit="ClaimsEnum.S_SchoolYear_C_Curriculums">
+                      <div class="btn btn-primary " role="button" (click)="addCurriculumsModelOpened=true;" *permit="ClaimsEnum.S_SchoolYear_C_Curriculums">
                         <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                         {{'dashboard.SchoolYear.Add curriculum'|translate}}
                      </div>
                      <ng-container *permit="ClaimsEnum.S_SchoolYear_C_Grade">
-                            <button *ngIf="!urlParameter" class="btn btn-outline-primary class"     [disabled]="curriculumClassList?.length==0" routerLink='/dashboard/educational-settings/school-year/new-school-year/class-details' >
+                            <button *ngIf="!urlParameter" class="btn btn-primary class"     [disabled]="curriculumClassList?.length==0" routerLink='/dashboard/educational-settings/school-year/new-school-year/class-details' >
                               <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                               {{'dashboard.SchoolYear.Add Class'|translate}}
                             </button>
                     
-                          <button *ngIf="urlParameter" class="btn btn-outline-primary class"  [disabled]="curriculumClassList?.length==0" routerLink="/dashboard/educational-settings/school-year/display-school-year/{{urlParameter}}/class-details" >
+                          <button *ngIf="urlParameter" class="btn btn-primary class"  [disabled]="curriculumClassList?.length==0" routerLink="/dashboard/educational-settings/school-year/display-school-year/{{urlParameter}}/class-details" >
                             <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                             {{'dashboard.SchoolYear.Add Class'|translate}}
                           </button>

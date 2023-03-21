@@ -23,7 +23,7 @@
         <div class="tabView__content">
 
             <div class="actions-btn d-flex align-items-center gap-4">
-                <button *ngIf="step==1" routerLink="grace-period/new" class="btn btn-outline-primary">{{'dashboard.SystemSetting.newGracePeriod' | translate}}</button>
+                <button *ngIf="step==1" routerLink="grace-period/new" class="btn btn-primary">{{'dashboard.SystemSetting.newGracePeriod' | translate}}</button>
                 <button *ngIf="step==3" (click)="updateRoles()" class="btn btn-primary" [disabled]="onSubmitForm">
                     {{'shared.saveChanges' | translate}}
                     <div class="spinner-border" role="status" *ngIf="onSubmitForm"></div>

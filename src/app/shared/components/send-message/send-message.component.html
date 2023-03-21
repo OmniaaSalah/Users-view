@@ -3,7 +3,7 @@
     <!-- SelectSchools -->
     <div class="d-flex align-items-center   ">
 
-      <div class="btn btn-outline-skyBlue " role="button" (click)="openSelectSchoolsModel()">
+      <div class="btn btn-primary " role="button" (click)="openSelectSchoolsModel()">
         {{'dashboard.UserRole.Select School'|translate}}
       </div>
       <span class="star">*</span>
@@ -78,7 +78,7 @@
 
                 <button (click)="onSchoolSelected(school.id)">
 
-                  <img src="assets/images/shared/cancel.svg" alt="">
+                  <img src="assets/images/shared/rect-xmark.svg" alt="">
 
                 </button>
 
@@ -147,30 +147,31 @@
       </div>
     </div>
 
-    <div class="d-flex El-form my-4">
-      <div class="form-group d-flex field1">
-        <label class="px-3" for="">{{'dashboard.Messages.Require confirmation of receipt' | translate}}</label>
-        <p-inputSwitch (onChange)="isToggleLabel($event)" class="px-3" formControlName="switch1"></p-inputSwitch>
+    <div class="d-flex  my-4 gap-5">
+      <div class=" d-flex gap-3  align-items-center">
+        <label  for="">{{'dashboard.Messages.Require confirmation of receipt' | translate}}</label>
+        <p-inputSwitch (onChange)="isToggleLabel($event)" formControlName="switch1"></p-inputSwitch>
 
         <!-- <span class="Label" *ngIf="!isShown">{{'shared.no'|translate}}</span>
                 <span class="Label" *ngIf="isShown">{{'shared.yes'|translate}}</span> -->
 
       </div>
-      <div class="form-group d-flex">
-        <label class="px-3" for=""> {{'dashboard.Messages.Possibility to reply' | translate}} <span
+      <div class="d-flex gap-3  align-items-center">
+        <label  for=""> {{'dashboard.Messages.Possibility to reply' | translate}} <span
             class="star">*</span></label>
-        <p-inputSwitch (onChange)="isToggleLabel1($event)" class="px-3" formControlName="switch2"></p-inputSwitch>
+        <p-inputSwitch (onChange)="isToggleLabel1($event)" formControlName="switch2"></p-inputSwitch>
         <!-- <span class="Label" *ngIf="!isShown1">{{'shared.no'|translate}}</span>
                 <span class="Label" *ngIf="isShown1">{{'shared.yes'|translate}}</span> -->
       </div>
+      
+      <div class="d-flex gap-3  align-items-center">
+        <label  for="">{{'dashboard.Messages.senderName' | translate}}</label>
+        <p-inputSwitch (onChange)="isToggleLabel2($event)"  formControlName="switch3"></p-inputSwitch>
+        <!-- <span class="Label" *ngIf="!isShown2">{{'shared.no'|translate}}</span>
+              <span class="Label" *ngIf="isShown2">{{'shared.yes'|translate}}</span> -->
+      </div>
     </div>
 
-    <div class="form-group d-flex mb-3 mx-3">
-      <label for="">{{'dashboard.Messages.senderName' | translate}}</label>
-      <p-inputSwitch (onChange)="isToggleLabel2($event)" class="px-5" formControlName="switch3"></p-inputSwitch>
-      <!-- <span class="Label" *ngIf="!isShown2">{{'shared.no'|translate}}</span>
-            <span class="Label" *ngIf="isShown2">{{'shared.yes'|translate}}</span> -->
-    </div>
 
     <div class="form-group">
       <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span

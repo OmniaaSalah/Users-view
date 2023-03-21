@@ -319,7 +319,7 @@
         "AddASSesment": "Add Assesment",
         "Add": "Add",
         "Request to issue a certificate": "Request to issue a certificate",
-        "performanceMangement":"Performance Mangement",
+        "performanceMangement":"Evaluation Mangement",
         "Employees":"Employees",
         "GradesAndDivisionsMangement":"Grades & Divisions Mangement",
         "Addassignment":"Download files",
@@ -448,6 +448,7 @@
         "password": "Password",
         "confirmPassword": "Confirm Password",
         "Created Date": "Created Date",
+        "End Date": "End Date",
         "Numbres Of Characters Must not More than 256 character": "Numbres Of Characters Must not More than 256 character",
         "Numbres Of Characters must not more than 65 character": "Numbres Of Characters must not more than 500 character",
         "Numbres Of Characters must not more than 500 character": "Numbres Of Characters must not more than 500 character",
@@ -656,7 +657,7 @@
 
         "performanceManagment": {
 
-            "title": "Performance Managment",
+            "title": "Evaluation Managment",
             "chidren": {
                 "exams":   "Exams",
                 "missions":  "Requests"
@@ -1092,11 +1093,11 @@
             "studentBehavior": "Student Behavior",
             "studentName": "Student Name",
             "studentNickname": "Student Nickname",
-
+            "hasShadower":"Has Shadower",
             "parentsList": "Parents List",
             "childrenList": "Children List",
             "parents": "Parents",
-            "parentName": "Parent Name",
+            "parentName": "Parent",
             "childName": "Child Name",
             "parentNickname": "Parent Nickname",
             "childrenNumber": "Children Number",
@@ -1132,6 +1133,7 @@
             "viewComment": "View Comment",
             "acceptanceDate": "Acceptance Date",
             "studentEnrollmentStatus": "Student Enrollment Status",
+            "studentEnrollmentType":"student Enrollment Type",
             "specialEducation": "Special Education",
             "attendancePercentage": "Attendance Percentage",
             "absencePercentage": "Absence Percentage",
@@ -1480,7 +1482,7 @@
             "createdDate": "Created date",
             "createdBefore": "Created before",
             "Sent":  "Sent",
-            "New": "New",
+            "New": "Draft",
             "Closed": "Closed",
             "Canceled": "Canceled",
             "Apparent": "Apparent",

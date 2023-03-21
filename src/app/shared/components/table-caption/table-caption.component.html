@@ -53,7 +53,7 @@
     <ng-content></ng-content>
 
     <div *ngIf="hasFilter" class="actions mb-4 mx-4 d-flex align-items-center justify-content-end mt-3 gap-5">
-            <span role="button" class="color-red-500 text-decoration-underline" [ngClass]="small?'sm':''" (click)="clearFilter()">امسح الكل</span>
+            <span role="button" class="color-red-500 text-decoration-underline" [ngClass]="small?'sm':''" (click)="clearFilter()">{{'shared.deleteAll'|translate}}</span>
             <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
         </div>
 
