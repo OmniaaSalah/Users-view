@@ -70,10 +70,12 @@ export class ViewListOfUsersComponent implements OnInit {
     this.users.loading=true
     this.users.list =[];
     this.userInformation.getUsersList(this.filtration).subscribe(response => {
+      this.sharedService.filterLoading.next(false);
       this.users.list = [...response?.data];
       this.users.totalAllData = response.totalAllData
       this.users.total =response.total;
       this.users.loading = false;
+      this.sharedService.filterLoading.next(false);
    
 
     },err=> {

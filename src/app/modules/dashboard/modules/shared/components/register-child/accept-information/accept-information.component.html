@@ -46,7 +46,7 @@
                     <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | LocalizeDate}}</span>
                 </div>
                 <div class="col-sm-3 d-flex align-items-baseline gap-5">
-                    <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
+                    <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentType'|translate }}</p>
                     <span [ngSwitch]="student.studentStatus">
                         <p *ngSwitchCase="registrationStatusEnum.Registered">
                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Registered' | translate}}</span>
@@ -89,6 +89,12 @@
                     <span class="color-primary mb-2" *ngIf="student?.specialEducation">{{'shared.yes'|translate}}</span>
                     <span class="color-primary mb-2" *ngIf="!student?.specialEducation">{{'shared.no'|translate}}</span>
                 </div>
+
+                <!-- <div class="col-sm-3 d-flex align-items-center gap-5">
+                    <p class="color-gray-300 ">{{ 'dashboard.parents.hasShadower'|translate }}</p>
+                    <span class="color-primary mb-2" *ngIf="student?.shadower">{{'shared.yes'|translate}}</span>
+                    <span class="color-primary mb-2" *ngIf="!student?.shadower">{{'shared.no'|translate}}</span>
+                </div> -->
             </div>
     
             <!-- <div class="d-flex justify-content-end mt-auto">
@@ -142,6 +148,12 @@
                     <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
                 </div>
             </div>
+            <!-- <div class="col-md-4">
+                <div class="form-set">
+                    <label class="label required" for="description">{{ 'dashboard.parents.hasShadower'| translate}}</label>
+                    <p-dropdown formControlName="hasShadower" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                </div>
+            </div> -->
 
             <div class="col-md-8 align-self-center gap-5"  *ngIf="student$ |async as student">
                 <div class="row">
@@ -150,7 +162,7 @@
                         <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | LocalizeDate}}</span>
                     </div>
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
-                        <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
+                        <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentType'|translate }}</p>
                         <span [ngSwitch]="student.studentStatus">
                             <p *ngSwitchCase="registrationStatusEnum.Registered">
                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Registered' | translate}}</span>

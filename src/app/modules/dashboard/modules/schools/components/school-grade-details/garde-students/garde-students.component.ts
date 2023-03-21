@@ -59,7 +59,8 @@ export class GardeStudentsComponent implements OnInit {
       private gradeService:GradesService,
       private fb:FormBuilder,
       private exportService:ExportService,
-      private translate:TranslateService
+      private translate:TranslateService,
+      private sharedService:SharedService
 
     ) { }
 
@@ -74,6 +75,7 @@ export class GardeStudentsComponent implements OnInit {
     .getGradeStudents(this.schoolId,this.gradeId,this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res=>{
+      this.sharedService.filterLoading.next(false);
       this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
@@ -82,6 +84,7 @@ export class GardeStudentsComponent implements OnInit {
     },err=> {
       this.students.loading=false
       this.students.total=0
+      this.sharedService.filterLoading.next(false);
     })
   }
 

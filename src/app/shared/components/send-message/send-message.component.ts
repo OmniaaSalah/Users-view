@@ -312,12 +312,6 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       (res) => {
         this.router.navigate(['/dashboard/messages/message-detail/' + res]);
         this.toastr.success('تم الارسال بنجاح');
-        this.isShown = false;
-        this.isShown1 = false;
-        this.isShown2 = false;
-        this.parentForm.reset();
-        this.onSubmit = false
-        this.hiddenDialog.emit(false);
       },
       (err) => {
         this.toastr.error(err);

@@ -1,6 +1,6 @@
 
 <ng-container *permit="ClaimsEnum.S_C_Role">
-                                <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-roles/new-role'" [content]="'dashboard.UserRole.Add New Role'"></app-add-btn>
+                                <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/manager-tools/user-roles/new-role'" [content]="'dashboard.UserRole.Add New Role'"></app-add-btn>
 </ng-container>
 <div class="prim-table mt-4" *ngIf="roles.totalAllData || roles.loading">
     <p-table  #dt [value]="roles.list" (onSort)="sortMe($event)" [lazy]="true"  >

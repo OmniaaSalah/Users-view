@@ -141,6 +141,7 @@ export class AnnulHolidayListComponent implements OnInit {
     this.holidays.list=[]
     this.schoolsService.getSchoolAnnualHolidays(this.schoolId,this.filtration)
     .subscribe(res=>{
+      this.sharedService.filterLoading.next(false);
       this.holidays.loading = false
       this.holidays.list = res.data
       this.holidays.totalAllData = res.totalAllData
@@ -148,6 +149,7 @@ export class AnnulHolidayListComponent implements OnInit {
     },err=> {
       this.holidays.loading=false
       this.holidays.total=0
+      this.sharedService.filterLoading.next(false);
     })
   }
 

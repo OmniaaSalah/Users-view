@@ -319,7 +319,7 @@
         "AddASSesment": "Add Assesment",
         "Add": "Add",
         "Request to issue a certificate": "Request to issue a certificate",
-        "performanceMangement":"Performance Mangement",
+        "performanceMangement":"Evaluation Mangement",
         "Employees":"Employees",
         "GradesAndDivisionsMangement":"Grades & Divisions Mangement",
         "Addassignment":"Download files",
@@ -398,6 +398,8 @@
 
 
     "shared": {
+        "RoleMangment": "Role Mangment",
+        "ExamFileMangment":"Exam File Mangment",
         "SchoolYear": "School Year",
         "Total Number":"Total Number",
         "gotothem":"Go to them",
@@ -448,6 +450,7 @@
         "password": "Password",
         "confirmPassword": "Confirm Password",
         "Created Date": "Created Date",
+        "End Date": "End Date",
         "Numbres Of Characters Must not More than 256 character": "Numbres Of Characters Must not More than 256 character",
         "Numbres Of Characters must not more than 65 character": "Numbres Of Characters must not more than 500 character",
         "Numbres Of Characters must not more than 500 character": "Numbres Of Characters must not more than 500 character",
@@ -537,7 +540,7 @@
 
         },
 
-        "deleteAll":"Delete All",
+        "deleteAll":"Reset",
         "in date":"In date",
         "students":"Students",
         "not found": "Not found",
@@ -656,7 +659,7 @@
 
         "performanceManagment": {
 
-            "title": "Performance Managment",
+            "title": "Evaluation Managment",
             "chidren": {
                 "exams":   "Exams",
                 "missions":  "Requests"
@@ -1092,11 +1095,11 @@
             "studentBehavior": "Student Behavior",
             "studentName": "Student Name",
             "studentNickname": "Student Nickname",
-
+            "hasShadower":"Has Shadower",
             "parentsList": "Parents List",
             "childrenList": "Children List",
             "parents": "Parents",
-            "parentName": "Parent Name",
+            "parentName": "Parent",
             "childName": "Child Name",
             "parentNickname": "Parent Nickname",
             "childrenNumber": "Children Number",
@@ -1132,6 +1135,7 @@
             "viewComment": "View Comment",
             "acceptanceDate": "Acceptance Date",
             "studentEnrollmentStatus": "Student Enrollment Status",
+            "studentEnrollmentType":"student Enrollment Type",
             "specialEducation": "Special Education",
             "attendancePercentage": "Attendance Percentage",
             "absencePercentage": "Absence Percentage",
@@ -1480,7 +1484,7 @@
             "createdDate": "Created date",
             "createdBefore": "Created before",
             "Sent":  "Sent",
-            "New": "New",
+            "New": "Draft",
             "Closed": "Closed",
             "Canceled": "Canceled",
             "Apparent": "Apparent",
@@ -1992,7 +1996,7 @@
         "Students age (to)":"Students age (to)",
         "students status":"students status",
         "Show first students only":"Show first students only",
-        "Clear all":"Clear all",
+        "Clear all":"Reset",
         "Generate the report":"Generate the report",
         "Children of female citizens":"Children of female citizens",
         "non-native":"non-native"

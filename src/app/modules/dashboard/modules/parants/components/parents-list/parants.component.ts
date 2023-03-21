@@ -66,7 +66,8 @@ export class ParantsComponent implements OnInit {
 		public loaderService:LoaderService,
 		private toastr: ToastrService,
 		private router :Router,
-		private route:ActivatedRoute
+		private route:ActivatedRoute,
+		private sharedService:SharedService
 	) { }
 
 
@@ -82,7 +83,7 @@ export class ParantsComponent implements OnInit {
 		this.parentService.getAllParents(this.filtration)
 		.subscribe(res => {
          if(res.data){
-
+			this.sharedService.filterLoading.next(false);
 			this.parent.list = res.data
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
@@ -91,6 +92,7 @@ export class ParantsComponent implements OnInit {
 		},err=> {
 			this.parent.loading=false
 			this.parent.total=0;
+			this.sharedService.filterLoading.next(false);
 
 		  })
 	  }
@@ -100,7 +102,7 @@ export class ParantsComponent implements OnInit {
 		this.parent.list=[]
 		this.parentService.getAllParentsInSpecificSchool(schoolId,this.filtration).subscribe(res => {
          if(res.data){
-
+			this.sharedService.filterLoading.next(false);
 			this.parent.list = res.data
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
@@ -109,7 +111,7 @@ export class ParantsComponent implements OnInit {
 		},err=> {
 			   this.parent.loading=false
 			   this.parent.total=0;
-
+			   this.sharedService.filterLoading.next(false);
 		  })
 	  }
 	onSort(e){

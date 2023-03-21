@@ -48,9 +48,9 @@
 
                     <ng-container *ngIf="!weightEditMode">
                         <p class="color-gray-300 fs-4">{{'dashboard.parents.weight'|translate }}</p>
-                        <div class="d-flex align-items-baseline gap-3">
+                        <div class="d-flex gap-3">
                             <span class="color-primary mb-2">{{medicalFile.weight}} كغ</span>
-                            <img *ngIf="isSpeaNurse" (click)="weightEditMode=true;editMode=true" src="assets/images/shared/pen.svg" alt="edit" role="button">
+                            <img *ngIf="isSpeaNurse" (click)="weightEditMode=true;editMode=true" src="assets/images/shared/rect-bluepen.svg"  alt="edit" role="button">
                         </div>
                     </ng-container>
 
@@ -98,9 +98,9 @@
 
                     <ng-container *ngIf="!heightEditMode">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Length'|translate }}</p>
-                        <div class="d-flex align-items-baseline gap-3">
+                        <div class="d-flex gap-3">
                             <span class="color-primary mb-2">{{medicalFile.height}} {{'shared.cm' |translate}} </span>
-                            <img *ngIf="isSpeaNurse" (click)="heightEditMode=true;editMode=true" src="assets/images/shared/pen.svg" alt="edit" role="button">
+                            <img *ngIf="isSpeaNurse" (click)="heightEditMode=true;editMode=true" src="assets/images/shared/rect-bluepen.svg" alt="edit" role="button">
                         </div>
                     </ng-container>
 

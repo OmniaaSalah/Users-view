@@ -22,6 +22,7 @@ import { StudentsService } from '../../../students/services/students/students.se
   styleUrls: ['./students-reports.component.scss']
 })
 export class StudentsReportsComponent implements OnInit {
+  isBtnLoading: boolean=false;
   nationalityList=[];
   studentCategoryList=[];
   birthDate;
@@ -121,6 +122,7 @@ export class StudentsReportsComponent implements OnInit {
   }
 
   getStudents() {
+    this.isBtnLoading=true;
     if(this.birthDate)
     { 
       this.filtration.BirthDateFrom=this.formateDate(this.birthDate[0])
@@ -136,6 +138,7 @@ export class StudentsReportsComponent implements OnInit {
     this.studentsReport.list = []
     this.studentsReportService.getAllStudents(this.filtration)
       .subscribe(res => {
+        this.isBtnLoading=false;
         this.felmaleStudentCount=res.felmaleStudentCount;
         this.maleStudentCount=res.maleStudentCount;
         this.emiratesStudentsCounts=res.emiratesStudents;
@@ -148,6 +151,7 @@ export class StudentsReportsComponent implements OnInit {
       }, err => {
         this.studentsReport.loading = false
         this.studentsReport.total = 0
+         this.isBtnLoading=false;
       })
   }
 

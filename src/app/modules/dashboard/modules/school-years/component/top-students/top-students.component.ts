@@ -41,7 +41,7 @@ export class TopStudentsComponent implements OnInit {
    this.allTopStudentsList.loading=true;
    this.allTopStudentsList.list=[];
    this.schoolYearService.getAllTopStudents(Number(this.schoolYearId),this.filtration).subscribe((res)=>{
- 
+    this.sharedService.filterLoading.next(false);
        this.allTopStudentsList.loading=false;
        this.allTopStudentsList.total=res.result.total;
        this.allTopStudentsList.totalAllData=res.result.totalAllData;
@@ -50,6 +50,7 @@ export class TopStudentsComponent implements OnInit {
      
      },(err)=>{this.allTopStudentsList.loading = false;
        this.allTopStudentsList.total=0
+       this.sharedService.filterLoading.next(false);
      });
   }
   clearFilter(){
