@@ -28,7 +28,7 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
   ngUnSubscribe =new Subject()
   lang = inject(TranslationService).lang
   get claimsEnum () {return ClaimsEnum}
-  
+
   faClose=faClose
 
   isSubmited
@@ -36,7 +36,7 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
     date: null,
     studentAbsences:[]
    }
-   
+
  schoolId = this.route.snapshot.paramMap.get('schoolId')
  divisionId = this.route.snapshot.paramMap.get('divisionId')
 
@@ -48,9 +48,9 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
 
   absenceModelOpened=false
 
-  
+
   btnGroupItems=[
-    {label:this.translate.instant('shared.firstSemester'), active: false, value:SemesterEnum.FirstSemester},
+    {label:this.translate.instant('shared.firstSemester'), active: true, value:SemesterEnum.FirstSemester},
     {label:this.translate.instant('shared.lastSemester'), active: false, value:SemesterEnum.LastSemester},
   ]
 
@@ -117,13 +117,13 @@ lastDate
   confirmDeleteListener(){
     this.confirmModelService.confirmed$.subscribe(val => {
       if (val) this.deleteRecord(this.selectedRecord)
-      
+
     })
   }
 
 
   // <<<<<<<<<<<<<<<<<<<<<< Add students To Absence Records >>>>>>>>>>>>>>>>>>>>>>>>
-  
+
   studentSearchText =new FormControl('')
   isLoading=false
 
@@ -148,7 +148,7 @@ lastDate
     .subscribe(students=>{
           this.students =students
           this.absenceStudentsForm.studentAbsences = students
-        
+
     })
   }
 
@@ -175,7 +175,7 @@ lastDate
 
   }
 
-  // isAbsenteStudentsSelected(){ 
+  // isAbsenteStudentsSelected(){
   //   return  this.absenceStudentsForm.studentAbsences.some(el => el.isAbsencent)
   //  }
 
@@ -196,7 +196,7 @@ lastDate
 
   deleteRecord(index) {
     // this.absencStudents.splice(index, 1)
-    
+
     this.divisionService.deleteAbsentStudent(this.schoolId, this.divisionId,this.selectedRecord.student.id,this.filtration.date)
     .subscribe(res=>{
       this.absenceRecord.list.splice(index, 1)
@@ -238,7 +238,7 @@ lastDate
   formateDate(date :Date){
     let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
     return d.split('.')[0]
-    
+
   }
 
   ngOnDestroy(): void {

@@ -17,6 +17,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 
 @Component({
   selector: 'app-assignments-list',
@@ -42,6 +43,12 @@ export class AssignmentsListComponent implements OnInit {
         breadCrump: []
       }
 
+
+      items: MenuItem[]=[
+        {label: this.translate.instant('shared.downloadfile'), icon:'assets/images/shared/download.svg'},
+        {label: this.translate.instant('shared.downloadaudio'), icon:'assets/images/shared/download.svg'}
+      ]
+
   constructor(
     private headerService: HeaderService,
     private exportService: ExportService,
@@ -51,7 +58,7 @@ export class AssignmentsListComponent implements OnInit {
     private toastrService:ToastService) { }
 
 
-  
+
 
 
   ngOnInit(): void {
@@ -60,7 +67,7 @@ export class AssignmentsListComponent implements OnInit {
     this.examStatusList=this.assignmentservice.examStatusList;
   }
   getAssignmentList() {
-   
+
     this.assignments.loading=true;
     this.assignments.list=[];
     this.assignmentservice.getAssignmentList(this.filtration).subscribe(response => {
@@ -69,7 +76,7 @@ export class AssignmentsListComponent implements OnInit {
         this.assignments.list = response.data;
         this.assignments.totalAllData = response.totalAllData;
         this.assignments.total=response.total;
-       
+
 
       }
           },err=> {
@@ -96,7 +103,7 @@ export class AssignmentsListComponent implements OnInit {
 
    onExport(fileType: FileEnum){
     let filter = {...this.filtration, PageSize:null}
-    this.assignmentservice.assignmentsToExport(filter).subscribe( (res) =>{      
+    this.assignmentservice.assignmentsToExport(filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('Assignments List'))
     })
   }
@@ -108,6 +115,12 @@ export class AssignmentsListComponent implements OnInit {
      this.getAssignmentList()
 
    }
+
+
+  dropdownItemClicked(index,assignment){
+    if(index == 0) this.exportPdf(assignment?.examPdfPath)
+    if(index == 1) this.exportAudio(assignment?.examAudioPath)
+  }
 
   exportPdf(fileUrl : string): void {
     if (fileUrl) {
@@ -134,11 +147,11 @@ export class AssignmentsListComponent implements OnInit {
      {
        this.componentHeaderData.breadCrump=
        [
-      
+
         { label: this.translate.instant('Assignments List'), routerLink: '/dashboard/school-performance-managent/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
        ]
- 
-       
+
+
      }
      else if (this.currentUserScope==UserScope.SPEA)
      {
@@ -146,10 +159,10 @@ export class AssignmentsListComponent implements OnInit {
           [
           { label: this.translate.instant('Assignments List'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
          ]
- 
-       
+
+
      }
- 
+
      this.headerService.changeHeaderdata(this.componentHeaderData)
    }
 }

@@ -33,7 +33,7 @@
                 <th pSortableColumn="name.ar">
                     <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}
                 </th>
-                <th pSortableColumn="name.ar" *ngIf="currentUserScope==userScope.SPEA">
+                <th style="min-width: 20rem;" pSortableColumn="name.ar" *ngIf="currentUserScope==userScope.SPEA">
                     <p-sortIcon field="name.ar"></p-sortIcon>{{'shared.school' | translate}}
                 </th>
                 <th pSortableColumn="gradeName.ar">
@@ -44,12 +44,12 @@
                     <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}}
                 </th>
 
-                <th  style="min-width: 12rem;" pSortableColumn="schoolName" *ngIf="currentUserScope!=userScope.Employee">
-                    <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}
+                <th pSortableColumn="schoolCount" *ngIf="currentUserScope!=userScope.Employee">
+                    <p-sortIcon field="schoolCount"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}
                 </th>
 
 
-                <th pSortableColumn="subjectName.ar">
+                <th style="min-width: 15rem;" pSortableColumn="subjectName.ar">
                     <p-sortIcon field="subjectName.ar"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}
                 </th>
                 <th  style="min-width: 23rem;" pSortableColumn="examShowDate">
@@ -64,19 +64,18 @@
                 <th pSortableColumn="examStatus">
                     <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}
                 </th>
-                <th class="actions"></th>
-
-
+                <th style="min-width: 17rem;"></th>
             </tr>
         </ng-template>
+
         <ng-template pTemplate="body" let-assignment>
             <tr>
                 <td>{{assignment.name |currentLang}}</td>
-                <td *ngIf="currentUserScope==userScope.SPEA">{{assignment.schoolName|currentLang}}</td>
+                <td style="min-width: 20rem;" *ngIf="currentUserScope==userScope.SPEA">{{assignment.schoolName|currentLang}}</td>
                 <td>{{assignment.gradeName |currentLang}}</td>
                 <td *ngIf="currentUserScope!=userScope.Employee">{{assignment.curriculmName |currentLang}}</td>
-                <td style="min-width: 12rem;" *ngIf="currentUserScope!=userScope.Employee">{{assignment.schoolCount}}</td>
-                <td>{{assignment.subjectName|currentLang}}</td>
+                <td  *ngIf="currentUserScope!=userScope.Employee">{{assignment.schoolCount}}</td>
+                <td style="min-width: 15rem;">{{assignment.subjectName|currentLang}}</td>
                 <td  style="min-width: 23rem;">
                     <div class="d-flex flex-shrink-0">
                         {{assignment.examShowDate | LocalizeDate}}&nbsp;-&nbsp;{{assignment.examShowTime}}
@@ -89,6 +88,7 @@
                 </td>
 
                 <td>{{assignment.userFullName}}</td>
+
                 <td>
                     <div class="d-flex align-items-center gap-4">
 
@@ -97,29 +97,12 @@
 
                     </div>
                 </td>
-                <td class="dropdown" >
-                    <div class="d-grid justify-content-end mx-3">
-                    <div class="dropdown" *ngIf="currentUserScope==userScope.SPEA || (assignment.examStatus === 'Available' && currentUserScope==userScope.Employee)">
-                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <span role="button" class="color-primary link  d-flex" >{{'shared.ExamFileMangment'|translate}}<img  class=" mt-2 rotate270"  src="assets/images/shared/blue-arrow.svg" alt=""></span>
-                        </div>
-                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                            <li class="dropdown-item">
-                                <button class="link" (click)="exportPdf(assignment?.examPdfPath)">
-                                  <img src="assets/images/shared/download.svg" alt="">
-                                  <p>{{'shared.downloadfile'|translate}}</p>
-                              </button>
-                            </li>
-                            <li class="dropdown-item">
-                                <button class="link" (click)="exportAudio(assignment?.examAudioPath)" [di]>
+                <td style="min-width: 17rem;" >
+                    <div class="" *ngIf="currentUserScope==userScope.SPEA || (assignment.examStatus === 'Available' && currentUserScope==userScope.Employee)">
 
-                                  <img src="assets/images/shared/download.svg" alt="">
-                                  <p>{{'shared.downloadaudio'|translate}}</p>
-                              </button>
-                            </li>
-                        </ul>
+                        <app-dropdown [items]="items" label="{{'shared.ExamFileMangment' | translate}}"
+                          (onItemClicked)="dropdownItemClicked($event, assignment)"></app-dropdown>
                     </div>
-                 </div>
                 </td>
 
 

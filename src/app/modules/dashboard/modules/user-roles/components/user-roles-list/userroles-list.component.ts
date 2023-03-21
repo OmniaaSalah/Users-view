@@ -55,35 +55,35 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
           { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'),routerLink:'/dashboard/manager-tools/user-roles/user-roles-list'}],
       }
     );
-   
+
     this.roleStatusList = this.userRolesService.roleStatusList;
- 
+
   }
   confirmDeleteListener(){
     this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
       if (val) this.deleteRole(this.selectedRole)
-      
+
     })
   }
 
 
   deleteRole(role)
-  { 
+  {
 
-  
+
         this.userRolesService.deleteRole(role.id).subscribe((res)=>{
-       
+
           this.getAllRole();
           this.toastService.success(this.translate.instant('dashboard.UserRole.Job Role deleted Successfully'));
           this.confirmModelService.confirmed$.next(null);
           },(err)=>{
-         
+
             this.getAllRole();
             this.toastService.error(this.translate.instant('dashboard.UserRole.error,please try again'));
             this.confirmModelService.confirmed$.next(null);
 
           });
-        
+
  }
 
   getAllRole()
@@ -103,7 +103,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
   }
   clearFilter(){
-    
+
     this.filtration.KeyWord =''
     this.filtration.isactive= null;
     this.filtration.Page=1;
@@ -115,6 +115,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     {this.filtration.SortBy="update"+e.field;}
     else
     {this.filtration.SortBy="old"+e.field;}
+
     this.filtration.Page=1;
     this.getAllRole();
   }
@@ -123,7 +124,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   onExport(fileType: FileEnum, table:Table){
     let filter = {...this.filtration, PageSize:null}
     this.userRolesService.rolesToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserRole.List Of Job Roles'))
     })
   }
@@ -135,7 +136,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
   }
   showUserList(roleId:number) {
-   
+
     this.showLoader=true;
     this.userRolesService.getRoleByID(roleId).subscribe((res)=>{
       this.showLoader=false;

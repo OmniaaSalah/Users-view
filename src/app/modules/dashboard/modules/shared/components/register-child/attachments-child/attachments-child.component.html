@@ -20,7 +20,7 @@
         <img src="assets/images/shared/pen-blue-filled.svg" alt="">
     </div>
     <ng-container *ngIf="attachments && attachments.length">
-    
+
         <div class="">
             <div class="row mt-5">
                 <ng-container *ngFor="let file of attachments; let i = index">
@@ -28,11 +28,11 @@
                         <app-file [file]="file" [clickable]="true"></app-file>
                     </div>
                 </ng-container>
-    
+
             </div>
         </div>
     </ng-container>
-    
+
 
     <ng-container *ngIf="!attachments?.length && !loading">
         <app-informative-block subTitle="{{'emptyList.noAttachments' |translate}}" ></app-informative-block>
@@ -45,18 +45,19 @@
 
     <div class="d-flex justify-content-end gap-3">
         <button class="btn btn-primary bg-skyBlue-600" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
-        
-        <button class="btn btn-primary " 
-        [disabled]="onSubmit" 
-        (click)="updateStudentAttachment(studentId || childId, attachments)">
-        <span>{{'shared.saveChanges'| translate}}</span>
-        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-    </button>
-    <button  (click)="childService.onEditMode$.next(false)"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+
+      <button class="btn btn-primary "
+      [disabled]="onSubmit"
+      (click)="updateStudentAttachment(studentId || childId, attachments)">
+          <span>{{'shared.saveChanges'| translate}}</span>
+          <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+      </button>
+
+    <button  (click)="mode='view'"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
     </div>
 
     <div class="mt-5 row gx-5 border-dark radius-15 p-5" *ngIf="addMode" [formGroup]="fileForm">
-        <ng-container formGroupName="titel">                    
+        <ng-container formGroupName="titel">
             <div class="col-md-4">
                 <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
                 <input pInputText formControlName="ar" >
@@ -76,7 +77,7 @@
             <button class="btn btn-primary" (click)="addNewAttachment()" [disabled]="!fileForm.valid">{{'shared.save' |translate}}</button>
             <button class="fs-3" ><a (click)="addMode=false" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
         </div>
-        
+
     </div>
 
     <hr class="my-5">
@@ -89,7 +90,7 @@
                 </div>
             </div>
         </div>
-   
+
     </div>
 </ng-container>
 

@@ -14,7 +14,6 @@ import { SharedModule } from './shared/shared.module';
 
 import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
-import { AuthInterceptor } from './interseptors/AuthInterceptor';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import {  DropdownModule } from 'primeng/dropdown';

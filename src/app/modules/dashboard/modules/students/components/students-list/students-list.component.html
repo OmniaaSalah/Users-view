@@ -121,13 +121,13 @@
                     </th>
                     <th pSortableColumn="actions"></th> -->
                     <th pSortableColumn="studentDaleelNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                    <th pSortableColumn="studentMinisterialNumber">{{'dashboard.parents.ministerialNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                    <th style="min-width: 22rem;" pSortableColumn="arabicName">{{'dashboard.schools.student'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
+                    <th style="min-width: 16rem;" pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
+                    <th pSortableColumn="studentMinisterialNumber">{{ ('dashboard.parents.ministerialNumber' |translate)}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
                     <th pSortableColumn="studentNumber">{{'dashboard.students.daleelNumber1'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                    <th pSortableColumn="studentEmiratesNumber">{{'sign up.digitalIdentity'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                    <th pSortableColumn="arabicName">{{'dashboard.schools.student'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
-                    <th pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
+                    <th style="min-width: 15rem;" pSortableColumn="studentEmiratesNumber">{{'sign up.digitalIdentity'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
                     <th pSortableColumn="nationality">{{'shared.nationality'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
-                    <th pSortableColumn="currentSchoolName" *ngIf="currentUserScope!=userScope.Employee">{{'School'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
+                    <th style="min-width: 22rem;" pSortableColumn="currentSchoolName" *ngIf="currentUserScope!=userScope.Employee">{{'School'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
                     <th pSortableColumn="guardianName">{{'dashboard.students.parent'|translate}}  <p-sortIcon field="guardianName"></p-sortIcon></th>
                     <th pSortableColumn="gradeName">{{'shared.grade'|translate}}</th>
                     <th pSortableColumn="divisionName">{{'shared.division'|translate}}</th>
@@ -137,13 +137,13 @@
             <ng-template pTemplate="body" let-student >
                 <tr [routerLink]="['student/', student.id]" class="clickable">
                     <td>{{student.studentDaleelNumber}}</td>
+                    <td style="min-width: 22rem;">{{student.name |currentLang}}</td>
+                    <td style="min-width: 16rem;">{{student.surName |currentLang }}</td>
                     <td>{{student.studentMinisterialNumber}}</td>
                     <td>{{student.studentNumber}}</td>
-                    <td>{{student.studentEmiratesNumber}}</td>
-                    <td>{{student.name |currentLang}}</td>
-                    <td>{{student.surName |currentLang }}</td>
+                    <td style="min-width: 15rem;" >{{student.studentEmiratesNumber}}</td>
                     <td>{{student.nationality |currentLang}}</td>
-                    <td class="p-0" *ngIf="currentUserScope!=userScope.Employee" [routerLink]="['/dashboard/schools-and-students/schools/school/2']">
+                    <td style="min-width: 22rem;" class="p-0" *ngIf="currentUserScope!=userScope.Employee" [routerLink]="['/dashboard/schools-and-students/schools/school/2']">
                         <a  [style.height.rem]="'8'"  class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.currentSchoolName |currentLang}}</a>
                     </td>
                     <td>
@@ -171,7 +171,9 @@
                             <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
 
-                        <app-loader></app-loader>
+                        <div  class="w-100">
+                          <app-loader></app-loader>
+                        </div>
                     </td>
                 </tr>
             </ng-template>

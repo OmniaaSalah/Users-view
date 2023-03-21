@@ -21,7 +21,7 @@
            }
            .search{
            ::ng-deep app-informative-block{
-   
+
                .informative-block{
                        width:100%;
                        min-height: 30rem !important;
@@ -29,20 +29,20 @@
                        right:35rem;
                        .title{
                            width: 90% !important;
-                       
+
                        }
                    }
                }
-       
+
            }
-       
+
        ::ng-deep p-table{
            thead.p-datatable-thead tr th{
-               min-width: 22rem;
+              //  min-width: 22rem;
            }
-      .p-datatable-tbody tr td{ 
-       min-width: 22rem;
-  
+      .p-datatable-tbody tr td{
+       min-width: 11rem;
+
           }
        }
    }
