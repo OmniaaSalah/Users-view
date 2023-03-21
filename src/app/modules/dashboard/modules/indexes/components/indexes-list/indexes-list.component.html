@@ -1,7 +1,7 @@
 
 <ng-container *permit="ClaimsEnum.S_C_Index">
 
-              <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'"></app-add-btn>
+              <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'"></app-add-btn>
 
 </ng-container>
 <div class="prim-table mt-4" *ngIf="indexes.totalAllData || indexes.loading">
@@ -9,7 +9,7 @@
 
 
         <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllIndexes()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllIndexes()" (onClear)="clearFilter()">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllIndexes()"   (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllIndexes()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
                     <div class="col-4">
@@ -57,9 +57,10 @@
                     </div>
 
                 </td>
-                <td >
-                    <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}" *permit="ClaimsEnum.S_U_Index">
-                        {{'shared.edit'|translate}}   <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                <td class="actions" >
+                    <div role="button" class=" d-flex  align-items-center gap-3 justify-content-end" routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}" *permit="ClaimsEnum.S_U_Index">
+                        <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
+                        <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                     </div>
                 </td>
 

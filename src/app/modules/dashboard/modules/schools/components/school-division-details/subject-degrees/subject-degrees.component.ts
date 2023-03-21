@@ -15,6 +15,8 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { DivisionService } from '../../../services/division/division.service';
+import * as FileSaver from 'file-saver';
+
 
 @Component({
   selector: 'app-subject-degrees',
@@ -51,7 +53,7 @@ export class SubjectDegreesComponent implements OnInit {
     list:[],
     loading:false
   }
-    
+
   constructor(
     private route:ActivatedRoute,
     private divisionService:DivisionService,
@@ -64,7 +66,7 @@ export class SubjectDegreesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
     this.getSubjectDegrees()
   }
 
@@ -78,7 +80,7 @@ export class SubjectDegreesComponent implements OnInit {
       this.subjectDegrees.loading=false
       this.subjectDegrees.list = res.data
       this.subjectDegrees.totalAllData = res.totalAllData
-      this.subjectDegrees.total =res.total 
+      this.subjectDegrees.total =res.total
 
     },err=> {
       this.subjectDegrees.loading=false
@@ -132,10 +134,14 @@ export class SubjectDegreesComponent implements OnInit {
   }
 
   onExport(fileType: FileEnum){
-    let filter = {...this.filtration, PageSize:null}
-    this.divisionService.studentsRateToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsRate'))
+    this.divisionService.getDegreesExel(this.schoolId,this.divisionId, this.subjectId).subscribe(res=>{
+      FileSaver.saveAs(res,'درجات الماده' + new Date().getTime() + '.xlsx');
+
     })
+    // let filter = {...this.filtration, PageSize:null}
+    // this.divisionService.subjectsDegreesToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+    //   this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsRate'))
+    // })
   }
 
   paginationChanged(event: paginationState) {

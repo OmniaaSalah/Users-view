@@ -95,15 +95,15 @@
         </div>
 
 
-        
+
         <div class="actions d-flex align-items-center gap-4 mb-5">
-            <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true" 
-            [disabled]="!currentStudent?.division.id" 
+            <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true"
+            [disabled]="!currentStudent?.division.id"
             *permit="claimsEnum.E_TransferStudentToAnotherDivision">
                     <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
             </button>
             <ng-container *ngIf="displayStudentActionbtn">
-                <app-dropdown [items]="items" label="StudentMangment"  (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
+                <app-dropdown [items]="items" label="{{'shared.StudentMangment' | translate}}"  (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
             </ng-container>
         </div>
     </div>
@@ -112,7 +112,7 @@
 
     <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="mode=='view'">
         <ng-container *ngIf="scope ==scopeEnum.SPEA">
-        
+
             <div class="col-md-3 d-flex align-items-center  gap-4">
                 <span class="color-gray-300">{{'dashboard.students.daleelNumber' |translate}}</span>
                 <span class="color-primary">{{student.id}}</span>
@@ -128,14 +128,14 @@
                 <span class="color-primary">{{student.daleelId}}</span>
             </div>
         </ng-container>
-        
+
         <div class="col-md-3 d-flex align-items-center  gap-4" *ngIf="scope !=scopeEnum.SPEA">
             <span class="color-gray-300">{{ 'dashboard.students.studentSchoolId'|translate }}</span>
             <span class="color-primary">{{student?.studentNumber}}</span>
         </div>
     </div>
 
-    <app-student-prohibited-status 
+    <app-student-prohibited-status
     [(mode)]="stuentProhiptedCurrentMode"
     (onFormSubmitted)="updateStudent()"
     [formGroup]="studentForm"></app-student-prohibited-status>
@@ -173,15 +173,15 @@
         <form class="custom-form">
 
             <ng-container *ngIf="step==1">
-                <app-personal-information 
+                <app-personal-information
                 [(mode)]="currentMode"
-                (onFormSubmitted)="updateStudent()" 
-                (openChangeIdentityModel)="changeIdentityNumModelOpened=true" 
+                (onFormSubmitted)="updateStudent()"
+                (openChangeIdentityModel)="changeIdentityNumModelOpened=true"
                 [formGroup]="studentForm"></app-personal-information>
 
-                <app-payments 
+                <app-payments
                 [(mode)]="paymentCurrentMode"
-                (onFormSubmitted)="updateStudent()" 
+                (onFormSubmitted)="updateStudent()"
                 [formGroup]="studentForm"></app-payments>
             </ng-container>
 
@@ -190,9 +190,9 @@
             </ng-container> -->
 
             <ng-container *ngIf="step==2">
-                <app-accept-information 
-                (onFormSubmited)="updateStudent()" 
-                [(mode)]="currentMode" 
+                <app-accept-information
+                (onFormSubmited)="updateStudent()"
+                [(mode)]="currentMode"
                 [formGroup]="studentForm">
                 </app-accept-information>
             </ng-container>
@@ -246,10 +246,10 @@
                             <div class="grid-container">
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.employeeCreatedBehavior'|translate }}</p>
                                 <span class="color-primary mb-2">{{student.studentBehavior?.createdBy || (student.name |currentLang)}}</span>
-            
+
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.discribeBehaviorDate'|translate }}</p>
                                 <span class="color-primary mb-2">{{student.studentBehavior?.updatedDate || student.birthDate|LocalizeDate}}</span>
-                
+
                             </div>
                         </div>
                     </ng-container>
@@ -266,7 +266,7 @@
                                 <span class="color-primary mb-2">{{student.birthDate |LocalizeDate}}</span>
 
                             </div>
-    
+
                             <div class="col-md-6 form-set" formGroupName="studentBehavior">
                                 <label class="label">{{'dashboard.students.behaviorDescription' | translate}}</label>
                                 <textarea formControlName="descrition" [rows]="6" pInputTextarea ></textarea>
@@ -313,10 +313,10 @@
             <div class="row form-set">
                 <div class="col-md-12">
                     <label class="label" >{{'dashboard.schools.currentDivision'|translate}} </label>
-                    <p-dropdown name="current" 
-                    [options]="[currentStudentDivision]" 
-                    [(ngModel)]="transferStudentForm.currentDivisionId" 
-                    optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" 
+                    <p-dropdown name="current"
+                    [options]="[currentStudentDivision]"
+                    [(ngModel)]="transferStudentForm.currentDivisionId"
+                    optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                     required></p-dropdown>
                 </div>
             </div>
@@ -324,12 +324,12 @@
             <div class="row form-set">
                 <div class="col-md-12">
                     <label class="label">{{'dashboard.schools.divisionToTransferTo'|translate}} </label>
-                    <p-dropdown 
-                    [ngClass]="{'ng-invalid ng-dirty': targetDivision && !targetDivision?.isAcceptStudent}" 
-                    name="taget" 
-                    [options]="gradeDivisions$ | async" 
-                    ngModel #target="ngModel" 
-                    (ngModelChange)="onTargetDivisionSelected($event)" 
+                    <p-dropdown
+                    [ngClass]="{'ng-invalid ng-dirty': targetDivision && !targetDivision?.isAcceptStudent}"
+                    name="taget"
+                    [options]="gradeDivisions$ | async"
+                    ngModel #target="ngModel"
+                    (ngModelChange)="onTargetDivisionSelected($event)"
                     optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                     emptyMessage="  لا يوجد اخرى شعب متاحه"
                     placeholder="{{'shared.chooseDivition'|translate}}"
@@ -351,11 +351,11 @@
 
             <div class="row gx-5 gy-4 form-set" *ngIf="(targetDivision?.hasTrack && isTrackSelected) || ( targetDivision && !targetDivision?.hasTrack)">
                 <label *ngIf="optionalSubjectsList?.length" class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
-                
+
                 <!-- Loader -->
                 <ng-container *ngIf="!optionalSubjectsList; then optionalSubjectsLoader"></ng-container>
                 <!-- Loader -->
-                    
+
                 <ng-container *ngFor="let subject of optionalSubjectsList">
                     <div class="col-md-6 d-flex align-items-center gap-4">
                         <p-checkbox  name="subjects" [value]="subject.id" [(ngModel)]="transferStudentForm.electiveSubjectId"></p-checkbox>
@@ -385,12 +385,12 @@
 
         <div class="custom-form" ngForm #f="ngForm">
             <label class="label">{{'dashboard.students.caseOfRepeateStudyPhase'| translate}}</label>
-            <p-dropdown 
+            <p-dropdown
             [(ngModel)]="repeateStudyPhaseReqForm.requestReasonId"
             name="cause"
-            [options]="reasonForRepeateStudyPhase$|async" 
+            [options]="reasonForRepeateStudyPhase$|async"
             optionValue="id"
-            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" 
+            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
             placeholder="{{'dashboard.students.caseOfRepeateStudyPhase'|translate}}" [required]="true"></p-dropdown>
         </div>
         <div class="d-flex justify-content-end mt-6 mb-4" >
@@ -411,12 +411,12 @@
 
         <div class="custom-form" ngForm #f="ngForm">
             <label class="label">{{'dashboard.schools.chooseSubject'| translate}}</label>
-            <p-dropdown 
+            <p-dropdown
             [(ngModel)]="exemptionFromStudySubjectReqForm.subjectId"
             name="cause"
-            [options]="subjectsExemption$|async" 
+            [options]="subjectsExemption$|async"
             optionValue="id"
-            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" 
+            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
             placeholder="{{'dashboard.schools.chooseSubject'|translate}}" [required]="true" emptyMessage="لايوجد مواد قابلة للاعفاء فى مواد الطالب"></p-dropdown>
         </div>
         <div class="d-flex justify-content-end mt-6 mb-4" >
@@ -439,12 +439,12 @@
         <ng-container  ngForm #form="ngForm">
 
             <div class="custom-form mt-5">
-                <p-inputNumber 
-                name="identity" 
+                <p-inputNumber
+                name="identity"
                 #identity="ngModel"
                 [ngClass]="{'ng-invalid ng-dirty': identity.errors &&identity.errors?.pattern}"
-                [(ngModel)]="changeIdentityNumForm.identityNumber" 
-                [useGrouping]="false" [maxlength]="15" [minlength]="15" 
+                [(ngModel)]="changeIdentityNumForm.identityNumber"
+                [useGrouping]="false" [maxlength]="15" [minlength]="15"
                 [pattern]="'[784]{1}[0-9]{14}'"
                 (onInput)="changeIdentityNumForm.identityNumber=$event.value"
                 required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
@@ -452,19 +452,19 @@
 
             </div>
 
-    
-            <ng-container *ngIf="requiredFiles">             
+
+            <ng-container *ngIf="requiredFiles">
                 <div class="mt-6" *ngFor="let file of requiredFiles.files; let i =index">
                     <label class="label fw-bold" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label>
                     <app-file-upload [accept]="file.type" [maxFileSize]="file.size" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" label=" انقر لإرفاق ملف"></app-file-upload>
                 </div>
-           
+
             </ng-container>
 
-            <!-- <app-file-upload 
-            [accept]="fileTypesEnum.Pdf" 
-            label="{{'shared.clickToUploadFile'| translate}}" 
-            view="full" 
+            <!-- <app-file-upload
+            [accept]="fileTypesEnum.Pdf"
+            label="{{'shared.clickToUploadFile'| translate}}"
+            view="full"
             (onFileUpload)="changeIdentityNumForm.identityAttachmentPath=($event[0].url || null);"
             (onFileDelete)="changeIdentityNumForm.identityAttachmentPath=''"></app-file-upload> -->
 
@@ -493,7 +493,7 @@
                                 <label class="label">{{'dashboard.students.studentNameAr'|translate}}</label>
                                 <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
                             </div>
-                
+
                         </div>
                         <div class="col-md-6">
                             <div class="">
@@ -502,7 +502,7 @@
                             </div>
                         </div>
                     </ng-container>
-                    
+
                     <ng-container formGroupName="studentSurName">
                         <div class="col-md-6">
                             <div class="">
@@ -517,7 +517,7 @@
                             </div>
                         </div>
                     </ng-container>
-                    <div class="col-md-12"> 
+                    <div class="col-md-12">
                         <div class="">
                             <label class="label">{{'shared.birthDay'|translate}}</label>
                             <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
@@ -528,11 +528,11 @@
                             <label class="label">{{'shared.gender'|translate}}</label>
                             <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name" [autoDisplayFirst]="false"></p-dropdown>
                         </div>
-                    </div> 
+                    </div>
                     <div class="col-md-4">
                         <div class="">
                             <label class="label">{{'shared.nationality'|translate}}</label>
-                            <p-dropdown formControlName="nationalityId" 
+                            <p-dropdown formControlName="nationalityId"
                             [filter]="true"
                             filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                             [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
@@ -544,21 +544,21 @@
                             <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
                         </div>
                     </div>
- 
+
                 </div>
             </div>
-    
+
             <div class="py-6"></div>
             <div class="d-flex justify-content-end mt-4" >
-                <button 
-                class="btn btn-primary" 
+                <button
+                class="btn btn-primary"
                 (click)="updateIdentityInfoReq(changeStudentInfoReqForm.value)"
                  [disabled]="!changeStudentInfoReqForm.valid || onSubmit">
                  <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
                  {{'shared.send'| translate}}</button>
             </div>
         </ng-container>
-        
+
     </ng-template>
 
 </p-dialog>

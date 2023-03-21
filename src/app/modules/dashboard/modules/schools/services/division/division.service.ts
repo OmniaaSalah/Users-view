@@ -114,7 +114,7 @@ export class DivisionService {
   getDivisionTracks( divisionId){
     return this.http.get(`/Track/${divisionId}/division-tracks`).pipe(take(1))
   }
-  
+
 
   transferStudentToAnotherDivision(data){
     return this.http.put('/Division/transfer/student', data).pipe(take(1))
@@ -195,7 +195,7 @@ export class DivisionService {
             [this.translate.instant('dashboard.parents.Credithour')]: student.studentHour,
           }
           if(student.isHaveStudentPerformance) obj[this.translate.instant('dashboard.parents.studentperformance')] = student.studentPerformance
-          
+
           return obj
         })
       }))
@@ -243,7 +243,7 @@ export class DivisionService {
         this.tableLoaderService.isLoading$.next(false)
       }))
   }
-  
+
 
   subjectsToExport(schoolId,divisionId,filter){
     return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
@@ -257,7 +257,7 @@ export class DivisionService {
             [this.translate.instant('dashboard.schools.speaSubjects')]: subject.isAcdmicSubject ? this.translate.instant("shared.no") : this.translate.instant("shared.yes"),
             [this.translate.instant('dashboard.schools.subjectDegreesStatus')]: this.translatedStatus(subject.subjecttStatus),
           }
- 
+
         })
       }))
 
@@ -290,6 +290,10 @@ export class DivisionService {
       }))
   }
 
+  getDegreesExel(schoolId, divisionId,subjectId){
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/get-excel-with-degree?subjectid=${subjectId}`, {},{'content-type':'file'}).pipe(take(1))
+  }
+
   subjectsDegreesToExport(schoolId,divisionId,filter){
     return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject-degree`,filter)
     .pipe(
@@ -303,11 +307,11 @@ export class DivisionService {
             [this.translate.instant('dashboard.parents.GPA')]: student.studentGPA,
             [this.translate.instant('dashboard.parents.Credithour')]: student.studentHour,
           }
- 
+
         })
       }))
   }
-  
+
 
   getDivisionStudentsRate(schoolId,divisionId,filter){
     this.tableLoaderService.isLoading$.next(true)
@@ -323,14 +327,14 @@ export class DivisionService {
     return this.http.get(`/school/${schoolId}/division/${divisionId}/division-final-degree`,filter)
     .pipe(
       map(res=>{
-        return res.data.map(student =>{
+        return res.result.data.map(student =>{
           return {
             [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
             [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
-            [this.translate.instant('dashboard.schools.studentDegree')]: student.isFinalPass ? this.translate.instant('shared.allStatus.passed') : this.translate.instant('shared.allStatus.notPassed'),
+            [this.translate.instant('dashboard.schools.studentDegree')]: student.isFinalPass ? this.translate.instant('shared.allStatus.Passed') : this.translate.instant('shared.allStatus.notPassed'),
             [this.translate.instant('dashboard.schools.failedSubjecteNumber')]: student.numberOfFaildSubject,
           }
- 
+
         })
       }))
   }

@@ -51,6 +51,7 @@ import { RequestListComponent } from '../modules/dashboard/modules/request-list/
 import { TrauncateTextPipe } from './pipes/truncate-text/trauncate-text.pipe';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { SafePipe } from './pipes/safe.pipe';
+import { ConfirmDialogDirective } from './directives/confirm-dialog/confirm-dialog.directive';
 
 registerLocaleData(localeAr);
 
@@ -93,7 +94,8 @@ registerLocaleData(localeAr);
     RequestListComponent,
     TrauncateTextPipe,
     WorkflowComponent,
-    SafePipe
+    SafePipe,
+    ConfirmDialogDirective
 
   ],
   imports: [

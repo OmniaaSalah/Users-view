@@ -63,7 +63,7 @@ export class SchoolyearsListComponent implements OnInit {
     this.schoolYears.loading=true;
     this.schoolYears.list=[];
     this.schoolYearService.getAllSchoolYears(this.filtration).subscribe((res)=>{
-
+      this.sharedService.filterLoading.next(false);
         this.schoolYears.loading=false;
         this.schoolYears.total=res.total;
         this.schoolYears.totalAllData=res.totalAllData;
@@ -72,6 +72,7 @@ export class SchoolyearsListComponent implements OnInit {
       
       },(err)=>{this.schoolYears.loading = false;
         this.schoolYears.total=0
+        this.sharedService.filterLoading.next(false);
       });
 
 

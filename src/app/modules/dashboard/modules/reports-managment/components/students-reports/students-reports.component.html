@@ -114,9 +114,9 @@
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'reports.Clear all' | translate}}</span>
-                <button class="btn btn--md btn-primary" (click)="filtration.Page=1;getStudents()" >
-                     {{'reports.Generate the report'|translate}}
-
+                <button class="btn btn--md btn-primary" (click)="filtration.Page=1;getStudents()" [disabled]="isBtnLoading" >
+                    {{'Search'|translate}}
+                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                 </button>
 
 

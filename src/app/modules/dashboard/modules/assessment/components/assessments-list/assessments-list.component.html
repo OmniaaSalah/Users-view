@@ -1,5 +1,5 @@
 <ng-container *permit="claimsEnum.S_AddEvaluation">
-<app-add-btn bg-primary [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
+<app-add-btn bg-primary [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
     <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
 </app-add-btn>
 </ng-container>
@@ -10,7 +10,7 @@
 
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getRate()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getRate()" (onClear)="clearFilter()">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getRate()"   (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getRate()" (onClear)="clearFilter()">
                 <div class="row gx-5 form-set">
                     <div class="col-lg-4">
                         <label class="label">{{'shared.activated'|translate}}</label>

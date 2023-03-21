@@ -17,10 +17,10 @@
     <div *ngSwitchCase="certificateTypeEnum.AcademicSequenceCertificate">
 
       <ng-container *ngIf="certificate?.Attachments && certificate?.Attachments?.length">
-        <img class="w-100" [src]="certificate?.Attachments[0]" alt="">      
+        <img class="w-100" [src]="certificate?.Attachments[0]" alt="">
         <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
       </ng-container>
-      
+
       <ng-container *ngIf="!certificate?.Attachments?.length">
           <header>
             <div class="text-end">
@@ -41,7 +41,7 @@
                 </div>
             </div>
           </header>
-    
+
           <section>
               <p class="mb-2 mt-6 fw-bold"> تشهد هيئه الشارقه للتعليم الخاص بأن :</p>
               <table class="blue-theme">
@@ -58,7 +58,7 @@
                       <td>78511115526688</td>
                   </tr>
               </table>
-        
+
               <p class="mb-2 mt-6 fw-bold">قد التحق بالمدارس على النحو التالى :</p>
               <table class="blue-theme">
                   <thead>
@@ -78,7 +78,7 @@
                           <th>Grade</th>
                       </tr>
                   </thead>
-        
+
                   <tbody>
                       <tr *ngFor="let year of certificate?.StudyPhases | slice:0:5">
                           <td class="text-center">{{year.GradeName.Name.Ar}}</td>
@@ -89,7 +89,7 @@
                   </tbody>
               </table>
           </section>
-      
+
           <section class="mt-6">
               <div class="d-grid grid-cols-3 align-items-center">
                   <p>
@@ -133,14 +133,14 @@
                     </ul>
                       <a>web : spea.shj.ae</a>
                   </div>
-                
+
                   <!-- <div class="d-flex gap-3 align-center justify-self-end">
                       <span>010201202012</span>
                       |
                       <span>010201202012</span>
                       <img src="assets/images/shared/call.svg" alt="">
                   </div> -->
-        
+
                   <div class="d-flex gap-3 justify-content-end">
                     <div class="text-start color-primary font-en">
                       <p>TEL : 065045444</p>
@@ -149,9 +149,9 @@
                     </div>
                     <img src="assets/images/shared/call.svg" alt="">
                 </div>
-        
+
               </div>
-        
+
           </footer>
       </ng-container>
 
@@ -245,8 +245,8 @@
         </div>
 
         <div class="row fs-2 border-black p-3 border-2">
-        
-   
+
+
             <div class="col-md-6 ">
               <div class="">
                 <div class="d-flex  mb-4 align-items-md-center gap-5">
@@ -261,11 +261,11 @@
                   <span class="">تاريخ الاصدار:</span>
                   <span></span>
                 </div>
-              
+
               </div>
-    
+
             </div>
-    
+
             <div class="col-md-6  justify-content-end" dir="ltr">
               <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
                 <span class="">Issued By:</span>
@@ -280,7 +280,7 @@
                 <span></span>
               </div>
             </div>
-   
+
 
           <div class="d-flex justify-content-between">
             <span>اعتماد مدير المدرسة</span>
@@ -393,7 +393,7 @@
         </div>
 
         <div class="row fs-2 border-black p-3 border-2">
-   
+
             <div class="col-md-6 ">
               <div class="">
                 <div class="d-flex  mb-4 align-items-md-center gap-5">
@@ -408,11 +408,11 @@
                   <span class="">تاريخ الاصدار:</span>
                   <span></span>
                 </div>
-              
+
               </div>
-    
+
             </div>
-    
+
             <div class="col-md-6  justify-content-end" dir="ltr">
               <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
                 <span class="">Issued By:</span>
@@ -427,7 +427,7 @@
                 <span></span>
               </div>
             </div>
-   
+
 
           <div class="d-flex justify-content-between">
             <span>اعتماد مدير المدرسة</span>
@@ -446,7 +446,7 @@
         </div>
 
         <div class="row fs-2 border-black p-3 border-2">
-   
+
             <div class="col-md-6 ">
               <div class="">
                 <div class="d-flex  mb-4 align-items-md-center gap-5">
@@ -461,11 +461,11 @@
                   <span class="">تاريخ الاصدار:</span>
                   <span></span>
                 </div>
-              
+
               </div>
-    
+
             </div>
-    
+
             <div class="col-md-6  justify-content-end" dir="ltr">
               <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
                 <span class="">Issued By:</span>
@@ -480,7 +480,7 @@
                 <span></span>
               </div>
             </div>
-   
+
 
           <div class="d-flex justify-content-between">
             <span>اعتماد مدير خدمة العملاء</span>
@@ -616,16 +616,16 @@
 
           </div>
         </div>
-    
-   
+
+
         <div class="mt-6">
           <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
             <div class="col-md-6 fs-2">للاستخدام الرسمي فقط</div>
             <div class="col-md-6 fs-2 text-start font-en" dir="ltr">For Official Use Only by School</div>
           </div>
-  
+
           <div class="row fs-2 border-black p-3 border-2">
-     
+
               <div class="col-md-6 ">
                 <div class="">
                   <div class="d-flex  mb-4 align-items-md-center gap-5">
@@ -637,7 +637,7 @@
                     <span></span>
                   </div>
                 </div>
-      
+
               </div>
 
             <div class="d-flex justify-content-between">
@@ -646,7 +646,7 @@
               <span class="col-md-3" >الطابع / الخاتم</span>
             </div>
           </div>
-  
+
         </div>
 
         <div class="mt-6">
@@ -677,7 +677,7 @@
                 </span>
               </td>
               <td>العلاج</td>
-              
+
             </tr>
             <tr>
               <td></td>
@@ -735,9 +735,9 @@
           <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
             <div class="col-md-6 fs-2">للاستخدام الرسمي فقط</div>
           </div>
-  
+
           <div class="row fs-2 border-black p-3 border-2">
-     
+
               <div class="col-md-6 ">
                 <div class="">
                   <div class="d-flex  mb-4 align-items-md-center gap-5">
@@ -749,7 +749,7 @@
                     <span></span>
                   </div>
                 </div>
-      
+
               </div>
 
             <div class="d-flex justify-content-between">
@@ -758,7 +758,7 @@
               <span class="col-md-3" >الطابع / الخاتم</span>
             </div>
           </div>
-  
+
         </div>
 
 
@@ -767,14 +767,14 @@
     </div>
 
     <div *ngSwitchCase="certificateTypeEnum.BoardCertificate">
-      <img class="w-100" [src]="certificate?.Attachments[0]" alt="">      
+      <img class="w-100" [src]="certificate?.Attachments[0]" alt="">
       <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
 
     </div>
-    
+
     <div *ngSwitchCase="certificateTypeEnum.DiplomaCertificate">
 
-      <img class="w-100" [src]="certificate?.Attachments[0]" alt="">      
+      <img class="w-100" [src]="certificate?.Attachments[0]" alt="">
       <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
       <!-- <header>
         <div class="row">
@@ -807,7 +807,7 @@
           </div>
 
           <div class="col-md-6 text-center">
-            <h1 class="fw-bold mb-3">بطاقة تقييم العام الدراسي</h1>
+            <h1 class="fw-bold mb-3">شهادة الدرجات</h1>
             <p class="d-flex mb-3 fs-2 justify-content-center gap-5 fw-bold ">
               <span>العام الدراسي</span>
               <span class="font-en">{{certificate?.SchoolYearName.Ar}}</span>
@@ -822,7 +822,7 @@
       </header>
 
       <table class="mt-6 fs-4">
-     
+
 
         <thead>
           <tr>
@@ -831,42 +831,42 @@
                 <div class="col-md-6 grid-container">
                   <span class="">مدرسة:</span>
                   <span>{{certificate?.SchoolName.Ar}}</span>
-      
+
                   <span class="">منهاج المدرسة:</span>
                   <span>{{certificate?.SchoolCurriculumName.Ar }}</span>
-      
+
                   <span class="">الفترة الإختبارية:</span>
                   <span>{{certificate?.TransferDate}}</span>
-      
+
                   <span class="">إسم الطالب:</span>
                   <span>{{certificate?.StudentName.Ar}} </span>
-      
+
                   <span class="">رقم الطالب:</span>
                   <span>{{certificate?.StudentNumber }}</span>
-      
+
                   <span class="">الصف:</span>
                   <span>{{certificate?.StudentGrade.Ar}} </span>
                 </div>
-      
+
                 <div class="col-md-6 grid-container font-en text-start" dir="ltr">
                   <span class="">School:</span>
                   <span>{{certificate?.SchoolName.En}}</span>
-      
+
                   <span class="">School curriculum:</span>
                   <span>{{certificate?.SchoolCurriculumName.En}}</span>
-      
+
                   <span class="">Reporting Period:</span>
                   <span></span>
-      
+
                   <span class="">Student Name:</span>
                   <span>{{certificate?.StudentName.En}}</span>
-                  
+
                   <span class="">Student #:</span>
                   <span>{{certificate?.StudentNumber}}</span>
-  
+
                   <span class="">Grade:</span>
                   <span>{{certificate?.StudentGrade.En}}</span>
-  
+
                 </div>
               </div>
             </td>
@@ -972,7 +972,7 @@
 
 
       <div class="fs-2 border-black p-4 border-2 fs-4 mt-4">
-   
+
         <div class="d-flex ">
           <div class="col-md-6 ">
             <div class="">
@@ -980,39 +980,39 @@
                 <span class="">اسم الموظف المختص :</span>
                 <span></span>
               </div>
-   
+
               <div class="d-flex  mb-4 align-items-md-center gap-5">
                 <span class="">تاريخ الاصدار:</span>
                 <span></span>
               </div>
-  
+
               <div class="d-flex align-items-md-center gap-5 mb-4">
                 <span class="">يعتمد</span>
                 <span></span>
               </div>
-            
+
             </div>
-  
+
           </div>
-  
+
           <div class="col-md-6  justify-content-end" dir="ltr">
             <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
               <span class="">Issued By:</span>
               <span></span>
             </div>
-           
+
             <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
               <span class="">Date of Issue:</span>
               <span></span>
             </div>
-  
+
             <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
               <span class="">Approved</span>
               <span></span>
             </div>
           </div>
         </div>
-        
+
         <div class="d-flex justify-content-between">
           <span>مدير المدرسة</span>
           <span class="font-en">Seal / الخاتم</span>
@@ -1020,14 +1020,14 @@
         </div>
       </div>
 
-      
+
 
     </div>
 
 
 
     <div *ngSwitchCase="certificateTypeEnum.SchoolInternalSubjectsCertificate">
-      
+
       <header>
         <div class="row">
           <div class="col-md-3">
@@ -1035,7 +1035,9 @@
           </div>
 
           <div class="col-md-6 text-center">
-            <h1 class="fw-bold mb-3">بطاقة تقييم العام الدراسي</h1>
+            <!-- <h1 class="fw-bold mb-3">بطاقة تقييم العام الدراسي</h1> -->
+            <h1 class="fw-bold mb-3">شهادة المواد الداخلية</h1>
+
             <p class="d-flex mb-3 fs-2 justify-content-center gap-5 fw-bold ">
               <span>العام الدراسي</span>
               <span class="font-en">{{certificate?.SchoolYear}}</span>
@@ -1050,7 +1052,7 @@
       </header>
 
       <table class="mt-6 fs-4">
-     
+
 
         <thead>
           <tr>
@@ -1059,42 +1061,42 @@
                 <div class="col-md-6 grid-container">
                   <span class="">مدرسة:</span>
                   <span>{{certificate?.SchoolArabicName}}</span>
-      
+
                   <span class="">منهاج المدرسة:</span>
                   <span>{{certificate?.Curriculum }}</span>
-      
+
                   <span class="">الفترة الإختبارية:</span>
                   <span>{{certificate?.TransferDate}}</span>
-      
+
                   <span class="">إسم الطالب:</span>
                   <span>{{certificate?.StudentArabicName}} </span>
-      
+
                   <span class="">رقم الطالب:</span>
                   <span>{{certificate?.StudentNumber }}</span>
-      
+
                   <span class="">الصف:</span>
                   <span>{{certificate?.GradeAr}} </span>
                 </div>
-      
+
                 <div class="col-md-6 grid-container font-en text-start" dir="ltr">
                   <span class="">School:</span>
                   <span>{{certificate?.SchoolEnglishName}}</span>
-      
+
                   <span class="">School curriculum:</span>
                   <span>{{certificate?.CurriculumEn}}</span>
-      
+
                   <span class="">Reporting Period:</span>
                   <span></span>
-      
+
                   <span class="">Student Name:</span>
                   <span>{{certificate?.StudentEnglishName}}</span>
-                  
+
                   <span class="">Student #:</span>
                   <span>{{certificate?.StudentNumber}}</span>
-  
+
                   <span class="">Grade:</span>
                   <span>{{certificate?.GradeEn}}</span>
-  
+
                 </div>
               </div>
             </td>
@@ -1116,8 +1118,8 @@
         </thead>
 
         <tr class="text-center" *ngFor="let subject of certificate?.Subjects">
-          <td style="width: 10%;">{{subject.SubjectName.Ar}}</td>
-          <td class="font-en" style="width: 10%;">{{subject.SubjectName.En}}</td>
+          <td style="width: 10%;">{{subject.SubjectName?.Ar}}</td>
+          <td class="font-en" style="width: 10%;">{{subject.SubjectName?.En}}</td>
           <td style="width: 10%;">{{subject.SubjectMinmumDegree}}</td>
           <td style="width: 10%;">{{subject.SubjectMaxmumDegree}}</td>
           <td style="width: 10%;">{{subject.Degree}}</td>
@@ -1192,15 +1194,15 @@
 
       <div class="border-black border-3 d-flex align-items-center mt-4 p-3">
         <div class="col-md-3">النتيجة</div>
-        <div class="col-md-3">يرفع إلى {{certificate?.NextGrade.Ar}}</div>
-        <div class="col-md-3 text-start font-en">Promoted to {{certificate?.NextGrade.En}}</div>
+        <div class="col-md-3">يرفع إلى {{certificate?.NextGrade?.Ar}}</div>
+        <div class="col-md-3 text-start font-en">Promoted to {{certificate?.NextGrade?.En}}</div>
         <div class="col-md-3 text-start font-en">Result</div>
 
       </div>
 
 
       <div class="fs-2 border-black p-4 border-2 fs-4 mt-4">
-   
+
         <div class="d-flex ">
           <div class="col-md-6 ">
             <div class="">
@@ -1208,39 +1210,39 @@
                 <span class="">اسم الموظف المختص :</span>
                 <span></span>
               </div>
-   
+
               <div class="d-flex  mb-4 align-items-md-center gap-5">
                 <span class="">تاريخ الاصدار:</span>
                 <span></span>
               </div>
-  
+
               <div class="d-flex align-items-md-center gap-5 mb-4">
                 <span class="">يعتمد</span>
                 <span></span>
               </div>
-            
+
             </div>
-  
+
           </div>
-  
+
           <div class="col-md-6  justify-content-end" dir="ltr">
             <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
               <span class="">Issued By:</span>
               <span></span>
             </div>
-           
+
             <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
               <span class="">Date of Issue:</span>
               <span></span>
             </div>
-  
+
             <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
               <span class="">Approved</span>
               <span></span>
             </div>
           </div>
         </div>
-        
+
         <div class="d-flex justify-content-between">
           <span>مدير المدرسة</span>
           <span class="font-en">Seal / الخاتم</span>
@@ -1257,5 +1259,5 @@
 
   </div>
 
- 
+
 </div>

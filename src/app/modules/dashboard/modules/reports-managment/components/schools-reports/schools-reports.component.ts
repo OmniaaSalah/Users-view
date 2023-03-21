@@ -49,10 +49,10 @@ export class SchoolsReportsComponent implements OnInit {
   getschoolsReportList()
   {
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
-   
     this.schoolsReport.loading=true
     this.schoolsReport.list=[]
     this.schoolReportService.getAllSchools(this.filtration).subscribe((res)=>{
+      this.sharedService.filterLoading.next(false);
       this.schoolsReport.loading = false
       this.schoolsReport.list = res.data
       this.schoolsReport.totalAllData = res.totalAllData
@@ -61,6 +61,7 @@ export class SchoolsReportsComponent implements OnInit {
     },err=> {
       this.schoolsReport.loading=false
       this.schoolsReport.total=0
+      this.sharedService.filterLoading.next(false);
     })
   }
   clearFilter(){

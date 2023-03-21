@@ -12,6 +12,7 @@ import { Table } from 'primeng/table';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { AttendanceReportsServicesService } from '../../services/attendance/attendance-reports-services.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-attendance-reports',
@@ -19,6 +20,7 @@ import { AttendanceReportsServicesService } from '../../services/attendance/atte
   styleUrls: ['./attendance-reports.component.scss']
 })
 export class AttendanceReportsComponent implements OnInit {
+  isBtnLoading: boolean=false;
   date;
   shownTable:boolean=false;
   isCollapsed=true;
@@ -49,7 +51,8 @@ export class AttendanceReportsComponent implements OnInit {
 		loading:true
   }
   tableColumns = []
-  constructor(   
+  constructor(  
+    private toastr:ToastrService, 
      private exportService: ExportService,
     private headerService: HeaderService, 
     private translate: TranslateService,
@@ -131,12 +134,14 @@ export class AttendanceReportsComponent implements OnInit {
 
   getAllAbbsenceAndAttendance()
   {
+    this.isBtnLoading=true;
     if(this.date)
     {this.filtration.date=this.formateDate(this.date)}
     this.studentsReport.loading = true
     this.studentsReport.list = []
     this.attendanceReportsServices.getAllAbbsenceAndAttendance(this.filtration)
       .subscribe(res => {
+        this.isBtnLoading=false;
         this.studentsReport.loading = false
         this.studentsReport.list = res.result.data
         this.studentsReport.totalAllData =res.result.totalAllData
@@ -146,6 +151,7 @@ export class AttendanceReportsComponent implements OnInit {
       }, err => {
         this.studentsReport.loading = false
         this.studentsReport.total = 0
+        this.isBtnLoading=false;
       })
   }
   
@@ -153,6 +159,19 @@ export class AttendanceReportsComponent implements OnInit {
   {
     let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
     return d.split('.')[0]
+  }
+
+  checkAvalibility()
+  {
+    if(this.date)
+    {
+      this.filtration.Page=1;
+      this.getAllAbbsenceAndAttendance()
+    }
+    else
+    {
+      this.toastr.warning(this.translate.instant('dashboard.reports.you should choose the date that you need view it’s absence and attendance data first'));
+    }
   }
 
 }

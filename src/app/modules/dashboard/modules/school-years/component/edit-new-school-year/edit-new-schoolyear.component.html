@@ -1,5 +1,5 @@
 <div class="justify-content-center status" *ngIf="urlParameter">
-  <span  class="heading--secondary">{{schoolYear?.schoolYearName|currentLang}}</span>             
+  <span  class="heading--secondary">{{schoolYear?.schoolYearName|currentLang}}</span>
   <div   *ngIf="schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Current" class='alerting danger mx-4'>{{schoolYear?.schoolYearStatus?.name|currentLang}}</div>
   <div   *ngIf="schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Finished" class='alerting success mx-4'>{{schoolYear?.schoolYearStatus?.name|currentLang}}</div>
   <div   *ngIf="schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Sent" class='alerting primary mx-4'>{{schoolYear?.schoolYearStatus?.name|currentLang}}</div>
@@ -31,11 +31,11 @@
         <button  ><a routerLink="/dashboard/educational-settings/school-year/school-years-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
 
       </div>
- 
+
     </div>
     <!-- <div class="Btn-group d-flex" *ngIf="schoolYear?.schoolYearStatus?.name.en=='Draft'&&urlParameter">
 
-    
+
       <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading">
         {{'save and continue'|translate}}
         <div class="spinner-border text-light" role="status" *ngIf="isContinueBtnLoading"></div>
@@ -47,9 +47,9 @@
       <button type="submit" class="btn  btn-primary"  (click)="sendModelOpened=true">
         {{'shared.send'|translate}}
       </button>
-    
-     
-    
+
+
+
     </div> -->
     <div class="tabView">
 
@@ -69,33 +69,33 @@
             <div class=" custom-form custom-validation-form " >
               <ng-container *ngIf="!schoolYear&&urlParameter">
                 <div class="row g-5">
-                   
+
                         <app-skeleton count="6"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-                
+
                 </div>
-            
+
              </ng-container>
             <form [formGroup]="schoolYearFormGrp" class="container-fluid  " *ngIf="schoolYear||!urlParameter">
-              
+
                 <div class="row mb-5" *ngIf="urlParameter">
                   <div class="col-4">
 
                          <div class="row">
                                   <div class="col-5 label">{{'dashboard.SchoolYear.last publishdate'|translate}}</div>
                                   <div class="col-6 value ">{{schoolYear?.lastPublishdDate|LocalizeDate}}</div>
-                                
+
                          </div>
-                  
+
                   </div>
                   <div class="col-4">
 
                       <div class="row">
                                   <div class="col-5 label">{{'dashboard.SchoolYear.last editeddate'|translate}}</div>
                                   <div class="col-6 value value-1" >{{schoolYear?.lastEditedDate|LocalizeDate}}</div>
-                               
+
                       </div>
-               
-                 </div>                       
+
+                 </div>
 
               </div>
               <div class="row mb-5"  *ngIf="urlParameter&&(schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Finished||schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Current)" >
@@ -104,39 +104,39 @@
                        <div class="row">
                                 <div class="col-6 label">{{'dashboard.SchoolYear.School Year Name in Arabic'|translate}}</div>
                                 <div class="col-6 value ">{{schoolYear?.schoolYearName|currentLang}}</div>
-                               
+
                        </div>
-                
+
                 </div>
                 <div class="col-4">
 
                        <div class="row">
                                 <div class="col-6 label">{{'dashboard.SchoolYear.School Year Name in English'|translate}}</div>
                                 <div class="col-6 value ">{{schoolYear?.schoolYearName|currentLang}}</div>
-                               
+
                        </div>
-                
+
                 </div>
                 <div class="col-4">
 
                     <div class="row">
                                 <div class="col-5 label">{{'dashboard.SchoolYear.School Year StartDate'|translate}}</div>
                                 <div class="col-6 value value-1" >{{schoolYear?.schoolYearStartDate|LocalizeDate}}</div>
-                              
-                    </div>
-             
-               </div>     
-         
-           </div>                   
 
-          
+                    </div>
+
+               </div>
+
+           </div>
+
+
             <div class="row mb-5" *ngIf="urlParameter&&(schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Finished||schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Current)" >
               <div class="col-4">
 
                 <div class="row">
                             <div class="col-5 label">{{'dashboard.SchoolYear.School Year EndDate'|translate}}</div>
                             <div class="col-6 value value-1" >{{schoolYear?.schoolYeaEndDate|LocalizeDate}}</div>
-                          
+
                 </div>
               </div>
               <div class="col-4">
@@ -144,76 +144,76 @@
                      <div class="row">
                               <div class="col-5 label">{{'dashboard.SchoolYear.AnnualHolidays'|translate}}</div>
                               <div class="col-6 value ">
-                                <ng-container *ngFor="let item of annualCalendersList "> 
+                                <ng-container *ngFor="let item of annualCalendersList ">
                                   <ng-container  *ngFor="let annual of schoolYear?.annualCalenders;  let i=index">
                                     <ng-container *ngIf="annual==item.id">
-                                      {{item.name.ar|translate}} 
-                                      <ng-container *ngIf="i<schoolYear?.annualCalenders.length-1">,</ng-container> 
+                                      {{item.name.ar|translate}}
+                                      <ng-container *ngIf="i<schoolYear?.annualCalenders.length-1">,</ng-container>
                                     </ng-container>
                                   </ng-container>
                               </ng-container>
                               </div>
-                            
+
                      </div>
-              
+
               </div>
               <div class="col-4">
 
                   <div class="row">
                               <div class="col-5 label">{{'dashboard.SchoolYear.WeekEnd Days'|translate}}</div>
                               <div class="col-6 value value-1" >
-                                <ng-container *ngFor="let item of weekendsList "> 
+                                <ng-container *ngFor="let item of weekendsList ">
                                   <ng-container  *ngFor="let day of schoolYear?.weekendDays;  let i=index">
                                     <ng-container *ngIf="day==item.id">
-                                      {{item.name.ar|translate}} 
-                                      <ng-container *ngIf="i<schoolYear?.weekendDays.length-1">,</ng-container> 
+                                      {{item.name.ar|translate}}
+                                      <ng-container *ngIf="i<schoolYear?.weekendDays.length-1">,</ng-container>
                                     </ng-container>
                                   </ng-container>
                               </ng-container>
-                                
+
                               </div>
-                              
+
                   </div>
-           
-             </div>     
-                 
+
+             </div>
+
 
           </div>
           <div class="row mb-5" *ngIf="urlParameter&&(schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Finished||schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Current)" >
- 
+
            <div class="col-4">
 
             <div class="row">
                         <div class="col-5 label">{{'dashboard.SchoolYear.AgeDetermination Date'|translate}}</div>
                         <div class="col-6 value value-1" >{{schoolYear.ageDeterminationDate|LocalizeDate}}</div>
-                       
+
             </div>
-     
-          </div>                   
+
+          </div>
 
         </div>
                 <div class=" row gx-5 form-set " *ngIf="!urlParameter">
                     <div class="col-xs-2 col-lg-4">
-                      <label class="label">{{'dashboard.SchoolYear.SelectSchoolYearThatYouNeedcopyFrom'|translate}}</label>  
-                      <p-dropdown  
+                      <label class="label">{{'dashboard.SchoolYear.SelectSchoolYearThatYouNeedcopyFrom'|translate}}</label>
+                      <p-dropdown
                       (onChange)="copySchoolYearData($event.value)"
                       [options]="schoolYearsList"
                       optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
                       </p-dropdown>
                     </div>
                 </div>
-       
+
                 <div class=" row gx-5 form-set " *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished&&schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Current||!urlParameter">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label">{{'dashboard.SchoolYear.School Year Name in Arabic'|translate}} <span class="star">*</span></label>
-                        <input type="text" pInputText formControlName="schoolYearArabicName"  class="form-control " [LangRestrict]="'ar'"  placeholder="{{'dashboard.SchoolYear.Write School Year Name'|translate}}" name="PID" id="PID"> 
-                        
+                        <input type="text" pInputText formControlName="schoolYearArabicName"  class="form-control " [LangRestrict]="'ar'"  placeholder="{{'dashboard.SchoolYear.Write School Year Name'|translate}}" name="PID" id="PID">
+
                           <div [hidden]="schoolYearArabicName.valid || schoolYearArabicName.untouched">
                               <small *ngIf="schoolYearArabicName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
                                  <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
-                             
+
                               <small *ngIf="schoolYearArabicName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                   {{'shared.Numbres Of Characters must not more than 32 character'|translate}}
                                   <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
@@ -222,14 +222,14 @@
                     </div>
                     <div class="col-xs-2 col-lg-4">
                       <label for="PID" class="label">{{'dashboard.SchoolYear.School Year Name in English'|translate}} <span class="star">*</span></label>
-                      <input type="text" pInputText formControlName="schoolYearEnglishName"  class="form-control leftaction" [LangRestrict]="'en'"  placeholder="{{'dashboard.SchoolYear.Write School Year Name'|translate}}" name="PID" id="PID"> 
-                      
+                      <input type="text" pInputText formControlName="schoolYearEnglishName"  class="form-control leftaction" [LangRestrict]="'en'"  placeholder="{{'dashboard.SchoolYear.Write School Year Name'|translate}}" name="PID" id="PID">
+
                         <div [hidden]="schoolYearEnglishName.valid || schoolYearEnglishName.untouched">
                             <small *ngIf="schoolYearEnglishName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                               {{'shared.This Field is Required'|translate}}
                                <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
-                           
+
                             <small *ngIf="schoolYearEnglishName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'shared.Numbres Of Characters must not more than 32 character'|translate}}
                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
@@ -245,13 +245,13 @@
                                 {{'shared.This Field is Required'|translate}}
                                  <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
-                             
+
                            </div>
-                              
+
                       </div>
                   </div>
                 </div>
-              
+
                 <div class=" row gx-5 form-set " *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished&&schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Current||!urlParameter">
                   <div class="col-xs-4 col-lg-4">
                     <label for="PID7" class="label">{{'dashboard.SchoolYear.School Year EndDate'|translate}} <span class="star">*</span></label>
@@ -262,9 +262,9 @@
                               {{'shared.This Field is Required'|translate}}
                                <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
-                           
+
                          </div>
-                            
+
                     </div>
                 </div>
                 <div class="col-xs-4 col-lg-4">
@@ -276,9 +276,9 @@
                             {{'shared.This Field is Required'|translate}}
                              <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                           </small>
-                         
+
                        </div>
-                          
+
                   </div>
               </div>
                   <div class="col-xs-4 col-lg-4">
@@ -290,9 +290,9 @@
                                 {{'shared.This Field is Required'|translate}}
                                  <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
-                             
+
                            </div>
-                              
+
                       </div>
                   </div>
               </div>
@@ -306,35 +306,35 @@
                           {{'shared.This Field is Required'|translate}}
                            <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
-                       
+
                      </div>
-                        
+
                 </div>
             </div>
-   
+
             </div>
 
-             
-          
+
+
             </form>
-          </div>                   
+          </div>
 
           </ng-container>
           <!-- curriculum-->
           <ng-container *ngIf="step==2">
               <div class="d-flex justify-content-end" *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished&&schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Current">
                  <div class="curriculum d-flex">
-                      <div class="btn btn-outline-primary " role="button" (click)="addCurriculumsModelOpened=true;" *permit="ClaimsEnum.S_SchoolYear_C_Curriculums">
+                      <div class="btn btn-primary " role="button" (click)="addCurriculumsModelOpened=true;" *permit="ClaimsEnum.S_SchoolYear_C_Curriculums">
                         <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                         {{'dashboard.SchoolYear.Add curriculum'|translate}}
                      </div>
                      <ng-container *permit="ClaimsEnum.S_SchoolYear_C_Grade">
-                            <button *ngIf="!urlParameter" class="btn btn-outline-primary class"     [disabled]="curriculumClassList?.length==0" routerLink='/dashboard/educational-settings/school-year/new-school-year/class-details' >
+                            <button *ngIf="!urlParameter" class="btn btn-primary class"     [disabled]="curriculumClassList?.length==0" routerLink='/dashboard/educational-settings/school-year/new-school-year/class-details' >
                               <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                               {{'dashboard.SchoolYear.Add Class'|translate}}
                             </button>
                     
-                          <button *ngIf="urlParameter" class="btn btn-outline-primary class"  [disabled]="curriculumClassList?.length==0" routerLink="/dashboard/educational-settings/school-year/display-school-year/{{urlParameter}}/class-details" >
+                          <button *ngIf="urlParameter" class="btn btn-primary class"  [disabled]="curriculumClassList?.length==0" routerLink="/dashboard/educational-settings/school-year/display-school-year/{{urlParameter}}/class-details" >
                             <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                             {{'dashboard.SchoolYear.Add Class'|translate}}
                           </button>
@@ -344,42 +344,49 @@
                 </div>
                  <div class="prim-table mt-5" *ngIf="curriculumClassList?.length">
                   <p-table  [lazy]="true"  #dt [value]="curriculumClassList"   sortMode="single"  dataKey="curriculumId" [scrollable]="true" scrollHeight="480px" [virtualScroll]="true" [virtualRowHeight]="95"  >
-       
+
                     <ng-template pTemplate="header" >
                           <tr  >
                             <th style="max-width: 0rem"  ></th>
-                            <th   pSortableColumn="name" >{{'dashboard.SchoolYear.curriculum Name'|translate}}</th>
+                            <th style="max-width: 34rem"   pSortableColumn="name" >{{'dashboard.SchoolYear.curriculum Name'|translate}}</th>
                             <th   pSortableColumn="id">{{'dashboard.SchoolYear.Class Number'|translate}}</th>
-                            <th   pSortableColumn="id">{{'dashboard.SchoolYear.Top Students Number'|translate}}</th>
-    
                           </tr>
                       </ng-template>
                       <ng-template pTemplate="body" let-e  let-expanded="expanded" >
                           <tr [ngClass]="expanded ? 'expandrow' : ''"  >
                               <td style="max-width:11rem">
-                                   
+
                                    <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" (click)="expanded ? closeRow():openRow(e?.curriculumId);" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                               </td>
                               <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e?.name|currentLang}}</td>
                               <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e?.gradesCount||0}} {{'dashboard.SchoolYear.classes'|translate}}</td>
                               <td  ></td>
-                              
+
                           </tr>
                       </ng-template>
                       <ng-template  pTemplate="rowexpansion" let-e>
                         <tr>
                             <td colspan="15"  class="expand ">
                                 <div class="" *ngIf="e.classTopStudentList?.length  || e.loading" >
-            
-                                
+
+
                                         <p-table  #dt [value]="e?.classTopStudentList"  dataKey="gradeId"  >
+                                            <ng-template pTemplate="header" >
+                                              <tr >
+                                                <th class="expand"  style="max-width: 0rem"  ></th>
+                                                <th  class="expand"  pSortableColumn="name" ></th>
+                                                <th class="expand"  pSortableColumn="id">{{'shared.grade'|translate}}</th>
+                                                <th  class="expand" pSortableColumn="id">{{'dashboard.SchoolYear.Top Students Number'|translate}}</th>
+                        
+                                              </tr>
+                                            </ng-template>
                                             <ng-template pTemplate="body" let-class  let-expanded="expanded">
                                                 <tr class="border-bottom-0" >
-                                                    
+
                                                     <td class="color-gray-50" style="min-width:45rem"></td>
                                                     <td  class=" color-gray-50" style="min-width:37rem">{{class?.name|currentLang}}</td>
                                               
-                                                    <td *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished||!urlParameter" class="color-gray-50" style="min-width:18rem"><span>-</span></td>
+                                                    <td *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished||!urlParameter" class="color-gray-50" style="min-width:18rem"><span>{{'shared.notFound'|translate}}</span></td>
                                                     <td *ngIf="schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Finished&&class?.topStudentsNumber>0" class="color-gray-50" style="min-width:18rem"><a class="color-skyBlue-400 number" (click)="TopStudentsModelOpened=true;schoolYearClass=class;schoolYearCurriculum=e;selectTopStudents(urlParameter,e?.curriculumId,class?.gradeId);">{{class?.topStudentsNumber}} {{'dashboard.SchoolYear.students'|translate}}</a></td>
                                                     <td *ngIf="schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Finished&&class?.topStudentsNumber==0" class="color-gray-50" style="min-width:18rem"><a class="color-red-500 nonnumber" (click)="TopStudentsModelOpened=true;schoolYearClass=class;schoolYearCurriculum=e;selectTopStudents(urlParameter,e?.curriculumId,class?.gradeId);">{{'dashboard.SchoolYear.undefined'|translate}}</a></td>
                                                     <td class=" color-gray-50"  style="min-width: 15.4rem">
@@ -392,19 +399,19 @@
                                                     </td>
 
                                                 </tr>
-                                            </ng-template> 
+                                            </ng-template>
                                             <ng-template pTemplate="emptymessage" let-columns>
-              
+
                                               <tr>
 
                                                   <app-loader></app-loader>
- 
+
                                               </tr>
-                                  
+
                                             </ng-template>
-                
+
                                          </p-table>
-                                      
+
 
                                 </div>
                                 <ng-container *ngIf="!e.classTopStudentList?.length  && !e.loading">
@@ -417,22 +424,22 @@
 
 
                     </ng-template>
-            
-              
+
+
                       <ng-template pTemplate="emptymessage" let-columns>
-              
+
                           <tr>
-              
+
                             <app-loader></app-loader>
-              
+
                           </tr>
-              
+
                         </ng-template>
                   </p-table>
-                
-                
-                  
-                  
+
+
+
+
                   </div>
                   <ng-container *ngIf="!curriculumClassList?.length">
                     <div class="small">
@@ -445,36 +452,36 @@
 
        <!--Top Students-->
        <ng-container *ngIf="step==3">
-       
+
         <app-top-students schoolYearId="{{urlParameter}}"></app-top-students>
 
        </ng-container>
 
-      
+
           </div>
          </div>
-    
-      
-   
-      
+
+
+
+
     </div>
- 
+
   </div>
 
 
   <!-- send -->
-<p-dialog [closable]="false"  [resizable]="false" [(visible)]="sendModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+<p-dialog [closable]="false"  [(visible)]="sendModelOpened" [modal]="true" styleClass="school-year-modal" [style]="{width: '40vw'}">
   <ng-template pTemplate="header">
    <p-dialog-header>
-      
+
    <div class="header ">
     <span class="headeritem send">{{'dashboard.SchoolYear.Send'| translate}}\{{'dashboard.SchoolYear.Post schoolYear'| translate}}</span>
     <button (click)="sendModelOpened=false" class="md" ><i class="pi pi-times  " ></i></button>
    </div>
-   
+
    </p-dialog-header>
   </ng-template>
- 
+
   <ng-template pTemplate="content">
       <h5 class="mt-5 mb-5">
        {{'dashboard.SchoolYear.Are you sure that you want'|translate}} {{'dashboard.SchoolYear.Send'| translate}}\{{'dashboard.SchoolYear.Post schoolYear'| translate}} ؟
@@ -506,7 +513,7 @@
 <p-dialog  [closable]="false" [resizable]="false" [(visible)]="addCurriculumsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
   <ng-template pTemplate="header">
    <p-dialog-header>
-      
+
    <div class="header">
     <span class="headeritem ">{{'dashboard.SchoolYear.Add curriculum for schoolyear'| translate}}</span>
     <button (click)="addCurriculumsModelOpened=false" ><i class="pi pi-times  " ></i></button>
@@ -519,10 +526,10 @@
    </div>
    </p-dialog-header>
   </ng-template>
- 
+
   <ng-template pTemplate="content">
       <div class="custom-form parent-modal">
-     
+
 
           <div class="row gx-5 gy-4 form-set">
               <h2 class="heading heading--tertiary mb-3 mt-5">{{'dashboard.SchoolYear.Curriculum List' | translate}}</h2>
@@ -536,12 +543,12 @@
                 <app-informative-block title="{{'emptyList.noDataMatch'  |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
               </ng-container>
           </div>
-          
+
       </div>
   </ng-template>
 
   <ng-template pTemplate="footer">
-   
+
   <div class="d-flex mt-5 justify-content-between">
     <span class="footeritem">{{'dashboard.SchoolYear.you select'|translate}} {{curriculumsIds.length}} {{'dashboard.SchoolYear.From curriculums'|translate}}</span>
     <button class="btn btn-primary " (click)="saveCurriculumsIds()" [disabled]="isCurriculumBtnLoading">
@@ -559,7 +566,7 @@
 <p-dialog  styleClass="block" [closable]="false" [resizable]="false" [(visible)]="TopStudentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
   <ng-template pTemplate="header">
    <p-dialog-header >
-      
+
    <div class="header mb-5">
     <span class="headeritem ">{{'dashboard.SchoolYear.choose Top Students'| translate}}</span>
     <button class="md" (click)="TopStudentsModelOpened=false"><i class="pi pi-times " ></i></button>
@@ -598,10 +605,10 @@
   </div>
    </p-dialog-header>
   </ng-template>
- 
+
   <ng-template pTemplate="content">
       <div class="custom-form parent-modal">
-     
+
 
           <div class="row gx-5 gy-4 form-set" >
               <h2 class="heading heading--tertiary mb-3 ">{{'dashboard.SchoolYear.Student List' | translate}} ( {{studentsList.length}} )</h2>
@@ -609,7 +616,7 @@
                   <div class="col-md-6 d-flex gap-4 align-items-center">
                       <!-- <p-checkbox  name="students" binary="true" (onChange)="getTopStudentsNumber()" [(ngModel)]="student.isSelected" [inputId]="i" ></p-checkbox> -->
                       <p-checkbox  name="students" [value]="student?.id" name="student" (onChange)="getTopStudentsNumber()" [(ngModel)]="topStudentIds"  ></p-checkbox>
-                      <label class="label label--sm col-md-12" [for]="i"> 
+                      <label class="label label--sm col-md-12" [for]="i">
                         <div class="row">
                           <div class="col-2">{{student?.id}}</div>
                           <div class="col-7">{{student?.name|currentLang}}</div>
@@ -619,12 +626,12 @@
                   </div>
               </ng-container>
           </div>
-          
+
       </div>
   </ng-template>
 
   <ng-template pTemplate="footer">
-    
+
     <div class="d-flex justify-content-between  mt-5 ">
       <span class="footeritem">{{'dashboard.SchoolYear.you select'|translate}} {{topStudentIds.length}} {{'dashboard.SchoolYear.from students'|translate}} . {{'dashboard.SchoolYear.you can select 10 top students at max'|translate}}</span>
       <button class="btn btn-primary btn--sm  " (click)="TopStudentsModelOpened=false;saveTopStudent(schoolYearCurriculum.curriculumId,schoolYearClass.gradeId)">
