@@ -60,6 +60,9 @@
                     <th  class="actions--lg" pSortableColumn="createdDate"><p-sortIcon  field="createdDate">
                          </p-sortIcon>{{'shared.Created Date'|translate}}
                     </th>
+                    <!-- <th  class="actions--lg" pSortableColumn="createdDate"><p-sortIcon  field="createdDate">
+                    </p-sortIcon>{{'shared.End Date'|translate}}
+                    </th> -->
                     <th class="actions"></th>
 
 
@@ -90,9 +93,11 @@
                         </div>
                     </td>
                     <td>{{product.createdDate| LocalizeDate}}</td>
+                    <!-- <td>{{product?.EndDate| LocalizeDate}}</td> -->
                     <td >
-                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/educational-settings/surveys/Survey/{{product.id}}">
-                                {{'shared.details'|translate}} <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg " alt=" ">
+                        <div role="button" class=" d-flex gap-3 justify-content-end align-items-center" routerLink="/dashboard/educational-settings/surveys/Survey/{{product.id}}">
+                            <span class="color-skyBlue-400">{{'shared.details'|translate}}</span>
+                            <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                         </div>
                     </td>
                 </tr>

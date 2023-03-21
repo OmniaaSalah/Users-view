@@ -26,7 +26,6 @@ import { SubjectsService } from '../../services/subjects/subjects.service';
   styleUrls: ['./subjects-reports.component.scss']
 })
 export class SubjectsReportsComponent implements OnInit {
-
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.reports.generateSubjectsReport'),routerLink: '/dashboard/reports-managment/subjects-reports' },
@@ -55,6 +54,7 @@ export class SubjectsReportsComponent implements OnInit {
 
 
   constructor(
+    private sharedService:SharedService,
     private translate: TranslateService,
     private headerService: HeaderService,
     private exportService: ExportService,
@@ -77,6 +77,7 @@ export class SubjectsReportsComponent implements OnInit {
     this.subjectsReport.list = []
     this.subjectReportService.getAllSubjects(this.filtration)
       .subscribe(res => {
+        this.sharedService.filterLoading.next(false);
         this.subjectsReport.loading = false
         this.subjectsReport.list = res.data
         this.subjectsReport.totalAllData = res.totalAllData
@@ -86,6 +87,7 @@ export class SubjectsReportsComponent implements OnInit {
       }, err => {
         this.subjectsReport.loading = false
         this.subjectsReport.total = 0
+        this.sharedService.filterLoading.next(false);
       })
   }
 

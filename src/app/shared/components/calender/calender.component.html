@@ -87,9 +87,9 @@
         </div>
 
         <div class="actions d-flex align-items-center position-absolute" *ngIf="showActions">
-          <img *permit="claimsEnum.E_U_GradeLecture" class="edit" src="assets/images/shared/pen.svg" alt="edit" StopProp (click)="onEdit.emit(weekEvent.event)">
-          <img *permit="claimsEnum.E_D_GradeLecture" src="assets/images/shared/cancel.svg" alt="delete" StopProp (click)="onDelete.emit(weekEvent.event)">
-
+          <img *permit="claimsEnum.E_U_GradeLecture"  src="assets/images/shared/rect-bluepen.svg" alt="edit" StopProp (click)="onEdit.emit(weekEvent.event)">
+          <img *permit="claimsEnum.E_D_GradeLecture" src="assets/images/shared/rect-xmark.svg" alt="delete" StopProp (click)="onDelete.emit(weekEvent.event)">
+         
         </div>
       </div>
 

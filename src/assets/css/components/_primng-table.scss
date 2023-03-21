@@ -45,7 +45,7 @@
             }
 
             &.actions--sm{min-width: 2rem; }
-            &.actions{min-width: 4rem; text-align: end; padding: 1.5rem;}
+            &.actions{  justify-content: end;}
 
             &:first-of-type {
                 border-top-right-radius: 12px;

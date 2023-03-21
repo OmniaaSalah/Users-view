@@ -21,6 +21,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
   styleUrls: ['./degrees-reports.component.scss']
 })
 export class DegreesReportsComponent implements OnInit {
+  isBtnLoading: boolean=false;
   shownTable:boolean=false;
   tableColumns = [];
   schoolYearsList=[];
@@ -108,11 +109,11 @@ export class DegreesReportsComponent implements OnInit {
 
   getDegreesList(){
   
-    
+    this.isBtnLoading=true;
     this.degreessReport.loading=true
     this.degreessReport.list =[];
     this.degreesReportService.getAllDegrees(this.filtration).subscribe(res => {
-
+      this.isBtnLoading=false;
       this.degreessReport.list = res.data;
       this.degreessReport.totalAllData = res.totalAllData
       this.degreessReport.total =res.total;
@@ -121,6 +122,7 @@ export class DegreesReportsComponent implements OnInit {
     },err=> {
       this.degreessReport.loading=false
       this.degreessReport.total=0;
+      this.isBtnLoading=false;
     })
   }
 

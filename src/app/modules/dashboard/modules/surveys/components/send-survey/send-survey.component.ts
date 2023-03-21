@@ -99,7 +99,7 @@ this.surveyFormGrp= this.fb.group({
     this.filtration.PageSize+=10;
     this.surveyService.getGuardians(this.filtration).subscribe(res => {
     if(res.data){
-
+      this.sharedService.filterLoading.next(false);
 			this.parent.list = res.data
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
@@ -109,6 +109,7 @@ this.surveyFormGrp= this.fb.group({
 		},err=> {
 			this.parent.loading=false
 			this.parent.total=0;
+      this.sharedService.filterLoading.next(false);
 
 		  })
 	  }

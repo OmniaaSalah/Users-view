@@ -11,6 +11,7 @@ import { SharedService } from '../../services/shared/shared.service';
   styleUrls: ['./table-caption.component.scss']
 })
 export class TableCaptionComponent implements OnInit, OnDestroy {
+  loadingFilter: boolean=false;
   @Input('hasFilter') hasFilter:boolean=true
   @Input('hasExport') hasExport:boolean=true
   @Input('hasSearch') hasSearch:boolean=true
@@ -21,7 +22,6 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   @Output() onSearch = new EventEmitter();
   @Output() onFilter = new EventEmitter();
   @Output() onClear = new EventEmitter();
-
   ngUnSubscribe =new Subject()
 
   showExportModel:boolean=false;
@@ -37,7 +37,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-
+    this.sharedService.filterLoading.subscribe((res)=>this.loadingFilter=res)
     this.seachListener()
   }
 
@@ -55,6 +55,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   }
 
   onFilterActivated(){
+    this.sharedService.filterLoading.next(true);
     this.showFilterModel=!this.showFilterModel
     Filtration.Page = 1
     this.onFilter.emit()

@@ -146,6 +146,7 @@ export class SchoolEmployeesComponent implements OnInit {
 		this.employees.loading=true
 		this.employees.list=[]
 		this.schoolsService.getSchoolEmployees(this.schoolId, this.filtration).subscribe((res )=>{
+			this.sharedService.filterLoading.next(false);
 			this.employees.loading = false
 			this.employees.list = res.data
 			this.employees.totalAllData = res.totalAllData
@@ -153,6 +154,7 @@ export class SchoolEmployeesComponent implements OnInit {
 		}, err => {
 			this.employees.loading = false;
 			this.employees.total=0
+			this.sharedService.filterLoading.next(false);
 		})
 	}
 

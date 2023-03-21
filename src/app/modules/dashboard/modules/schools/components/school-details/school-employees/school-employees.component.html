@@ -19,7 +19,7 @@
             <div class="" *ngIf="schoolManager">
                 <div class="d-flex justify-content-between align-items-baseline">
                     <h3 class=" heading heading--tertiary mb-3 color-primary">{{'dashboard.schools.SchoolManager' |translate}} </h3>
-                    <button class="btn btn-outline-primary" (click)="patchManagerForm(schoolManager); isManagerModelOpened=true" *permit="claimsEnum.S_EditMangerInformation" >
+                    <button class="btn btn-primary" (click)="patchManagerForm(schoolManager); isManagerModelOpened=true" *permit="claimsEnum.S_EditMangerInformation" >
                         {{'shared.edit' |translate}}
                     </button>
                 </div>
@@ -129,8 +129,9 @@
                     </td>
 
                     <td class="actions">
-                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" (click)="patchForm(employee)">
-                            {{'shared.edit'|translate}}   <img  [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                        <div role="button" class=" d-flex gap-3 justify-content-end align-items-center" (click)="patchForm(employee)">
+                            <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
+                            <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                         </div>
                    </td>
                 </tr>

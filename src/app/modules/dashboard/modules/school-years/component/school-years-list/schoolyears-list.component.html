@@ -1,5 +1,5 @@
 <ng-container *permit="ClaimsEnum.S_C_SchoolYear">
-                      <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
+                      <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
 </ng-container>
 
 <div class="prim-table mt-4" *ngIf="schoolYears.totalAllData|| schoolYears.loading">
@@ -64,8 +64,9 @@
              
           
                 <td >
-                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/educational-settings/school-year/display-school-year/{{e.id}}">
-                            {{'shared.details'|translate}}   <img  [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                        <div role="button" class=" d-flex gap-3 justify-content-end align-items-center" routerLink="/dashboard/educational-settings/school-year/display-school-year/{{e.id}}">
+                            <span class="color-skyBlue-400">{{'shared.details'|translate}}</span>
+                            <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                         </div>
                 </td>
                 

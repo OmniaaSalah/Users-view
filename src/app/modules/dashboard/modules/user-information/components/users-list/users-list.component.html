@@ -1,6 +1,6 @@
 
 <ng-container *permit="ClaimsEnum.S_C_User">
-         <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'"></app-add-btn>
+         <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'"></app-add-btn>
 </ng-container>
 
 
@@ -46,7 +46,7 @@
                         <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                     <th pSortableColumn="status">
                         <p-sortIcon field="status"></p-sortIcon>{{'dashboard.UserInformation.User Status'|translate}}</th>
-                    <th pSortableColumn="status" class="actions"></th>
+                    <th pSortableColumn="status" class="actions" ></th>
 
 
 
@@ -70,8 +70,9 @@
                         </div>
                     </td>
                     <td class="actions">
-                        <div  role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}" *permit="ClaimsEnum.S_U_User">
-                           {{'shared.edit'|translate}} <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                        <div  role="button" class=" d-flex align-items-center gap-3 justify-content-end" routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}" *permit="ClaimsEnum.S_U_User">
+                           <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
+                           <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                         </div>
 
                     </td>

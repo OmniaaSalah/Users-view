@@ -38,8 +38,9 @@
                 <td>{{gracePeriod.createdBy |currentLang}}</td>
                 <td>{{gracePeriod.createdDate |LocalizeDate}}</td>
                 <td class="actions">
-                    <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" (click)="editGracePeriod(gracePeriod)">
-                        {{'shared.edit'|translate}}   <img  [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                    <div role="button" class=" d-flex  align-items-center gap-3 justify-content-end" (click)="editGracePeriod(gracePeriod)">
+                        <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
+                        <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                     </div>
                </td>
 

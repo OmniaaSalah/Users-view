@@ -51,6 +51,33 @@
           margin-right: 1rem;
         }
       }
+        &.nonnumber {
+            &:hover{
+            color:$color-red-500;
+        }
+      
+       }
+    }
+    ::ng-deep p-table{
+        thead.p-datatable-thead tr th{
+            &.expand{
+                background-color: $color-gray-50; ;color: #AAAAAA;
+
+        } 
+    }  
+        .p-datatable-tbody tr{     
+            &.expandrow{ border-bottom: none ;}  
+        }
+        
+        .p-datatable-tbody tr td{  
+            &.action{
+                color: $color-black;
+                &-b{font-weight: 700;}
+            }
+            &:first-child{
+                &.expand{padding:0rem}
+            }
+        } 
     }
   }
 }
