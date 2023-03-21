@@ -3,18 +3,18 @@
 
 <router-outlet></router-outlet>
 <ng-container *ngIf="claimsLoaded">
-    
+
     <app-confirm-model></app-confirm-model>
     <div *ngIf="hideHeader">
         <app-header></app-header>
     </div>
-    
 
-    
+
+
     <ng-container *ngIf="currentUserScope!=userScope.Guardian">
-        
+
         <div class="panal-wrapper" *ngIf="hideToolPanal">
-        
+
             <div class="befor" [class.show]="firstChildHoverd"></div>
             <div class="panal">
                 <ul class="panal__list">
@@ -34,14 +34,16 @@
                             <span>{{lang=='ar' ? 'English': 'عربى'}}</span>
                         </div>
                     </li>
-                    <li class="panal__list__item" *permit="ClaimsEnum.SE_ShowUserIcon">
+
+                    <!-- *permit="ClaimsEnum.SE_ShowUserIcon" -->
+                    <li class="panal__list__item"  *ngIf="currentUserScope!=userScope.Guardian" >
                         <div class="icon">
                             <img src="assets/images/home/panal/user.svg" alt="">
                         </div>
                         <div class="lable" >
                             <span>{{currentUserName|currentLang}}</span>
                         </div>
-                       
+
                     </li>
                     <!-- <li class="panal__list__item">
                         <div class="icon">
@@ -52,7 +54,7 @@
                                 <i class="pi pi-search fs-3"></i>
                                 <input class="input" type="text" pInputText placeholder="{{'shared.search' |translate}}" [(ngModel)]="searchText" />
                             </div>
-        
+
                             <span></span>
                         </div>
                     </li> -->
@@ -74,7 +76,7 @@
                             <span>{{'Contact with Spea Employee' |translate}}</span>
                         </div>
                     </li>
-                    <!-- 
+                    <!--
                     <li class="panal__list__item">
                         <div class="icon">
                             <img src="assets/images/home/panal/help.svg" alt="">
@@ -91,7 +93,7 @@
                             <span>الملفات</span>
                         </div>
                     </li> -->
-        
+
                     <li class="panal__list__item" (click)="logout();lastChildHoverd = false" (mouseover)="onLastChildHoverd()" (mouseleave)="onLastChildLeaved()">
                         <div class="icon">
                             <img src="assets/images/home/panal/logout.svg" alt="">
@@ -100,13 +102,13 @@
                             <span>{{'Loginout' |translate}}</span>
                         </div>
                     </li>
-        
+
                 </ul>
-        
+
             </div>
             <div class="after" [class.show]="lastChildHoverd"></div>
         </div>
-        
+
     </ng-container>
     <div class="here">
         <p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
@@ -125,7 +127,7 @@
                 <small *ngIf="elform.title?.errors?.['maxlength']">{{'dashboard.Messages.maxLengtho' | translate}}</small>
             </div> -->
                     </div>
-        
+
                     <div class="form-group my-3">
                         <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span class="star">*</span></label>
                         <textarea class="form-control" formControlName="description" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
@@ -134,7 +136,7 @@
                             <small *ngIf="parentForm.get('description')?.errors?.['maxlength']">{{'dashboard.Messages.maxLength' | translate}}</small>
                         </div>
                     </div>
-        
+
                     <div class="form-group">
                         <label for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
                         <p-dropdown [options]="messagesTypes" optionLabel="name.ar" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id" appValidation></p-dropdown>
@@ -150,20 +152,20 @@
                             <span class="Label" *ngIf="isShown1">{{'shared.yes'|translate}}</span>
                         </div>
                     </div>
-        
+
                     <app-file-upload [accept]="fileTypesEnum.Pdf"  view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
-        
+
                 </div>
             </form>
             <ng-template pTemplate="footer">
-                <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="parentForm.invalid || onSubmit"> 
+                <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="parentForm.invalid || onSubmit">
                     {{'dashboard.Messages.Send' | translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
 
                 </button>
             </ng-template>
         </p-dialog>
-    
+
     </div>
 </ng-container>
 

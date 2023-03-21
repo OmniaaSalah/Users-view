@@ -3,6 +3,7 @@
 // @import "src/assets/css/components/input";
 // @import "src/assets/css/components/buttons";
 @import "../../../../../../../assets/css/components/forms.scss";
+@import "../../../../../../../assets/css/components/model";
 // @import "../../../../../../../assets/css/components/validation-form.scss";
 
 .main-message-header {
@@ -204,15 +205,15 @@
   }
 }
 
-.dialog-header {
-  ::ng-deep .p-dialog {
-    .p-dialog-header {
-      .p-dialog-title {
-        font-weight: 700 !important;
-      }
-    }
-  }
-}
+// .dialog-header {
+//   ::ng-deep .p-dialog {
+//     .p-dialog-header {
+//       .p-dialog-title {
+//         font-weight: 700 !important;
+//       }
+//     }
+//   }
+// }
 
 .custom-form{
     font-size: 1.5rem;
