@@ -508,7 +508,7 @@
         "gotothem":"إذهب إليهم",
         "notFound":"لا يوجد",
         "age":"العمر",
-        "deleteAll":"امسح الكل",
+        "deleteAll":"إعادة تعيين البحث",
         "in date":"بتاريخ",
         "students":"الطلبة",
         "not found": "لا توجد",
@@ -1984,7 +1984,7 @@
         "Students age (to)":"عمر الطلاب (إلي) ",
         "students status":"حالة الطلاب",
         "Show first students only":"عرض الطلاب الأوائل فقط",
-        "Clear all":"امسح الكل",
+        "Clear all":"إعادة تعيين البحث",
         "Generate the report":"إنشاء التقرير",
         "Children of female citizens":" أبناء المواطنات",
         "non-native":"غير الناطقين"

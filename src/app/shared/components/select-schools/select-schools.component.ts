@@ -43,6 +43,7 @@ export class SelectSchoolsComponent implements OnInit {
     this.schools.loading=true
     this.schools.list=[];
     this.schoolsService.getAllSchoolsInPopUp(this.filtration).subscribe((res)=>{
+      this.sharedService.filterLoading.next(false);
       this.schools.loading = false
       this.schools.list = res.data
       this.schools.totalAllData = res.totalAllData
@@ -60,6 +61,7 @@ export class SelectSchoolsComponent implements OnInit {
     },err=> {
       this.schools.loading=false
       this.schools.total=0
+      this.sharedService.filterLoading.next(false);
     });
   
  

@@ -9,7 +9,7 @@
 
 
         <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllIndexes()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllIndexes()" (onClear)="clearFilter()">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllIndexes()"   (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllIndexes()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
                     <div class="col-4">

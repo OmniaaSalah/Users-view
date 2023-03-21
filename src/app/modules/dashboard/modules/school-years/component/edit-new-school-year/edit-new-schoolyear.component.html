@@ -348,10 +348,8 @@
                     <ng-template pTemplate="header" >
                           <tr  >
                             <th style="max-width: 0rem"  ></th>
-                            <th   pSortableColumn="name" >{{'dashboard.SchoolYear.curriculum Name'|translate}}</th>
+                            <th style="max-width: 34rem"   pSortableColumn="name" >{{'dashboard.SchoolYear.curriculum Name'|translate}}</th>
                             <th   pSortableColumn="id">{{'dashboard.SchoolYear.Class Number'|translate}}</th>
-                            <th   pSortableColumn="id">{{'dashboard.SchoolYear.Top Students Number'|translate}}</th>
-    
                           </tr>
                       </ng-template>
                       <ng-template pTemplate="body" let-e  let-expanded="expanded" >
@@ -373,13 +371,22 @@
             
                                 
                                         <p-table  #dt [value]="e?.classTopStudentList"  dataKey="gradeId"  >
+                                            <ng-template pTemplate="header" >
+                                              <tr >
+                                                <th class="expand"  style="max-width: 0rem"  ></th>
+                                                <th  class="expand"  pSortableColumn="name" ></th>
+                                                <th class="expand"  pSortableColumn="id">{{'shared.grade'|translate}}</th>
+                                                <th  class="expand" pSortableColumn="id">{{'dashboard.SchoolYear.Top Students Number'|translate}}</th>
+                        
+                                              </tr>
+                                            </ng-template>
                                             <ng-template pTemplate="body" let-class  let-expanded="expanded">
                                                 <tr class="border-bottom-0" >
                                                     
                                                     <td class="color-gray-50" style="min-width:45rem"></td>
                                                     <td  class=" color-gray-50" style="min-width:37rem">{{class?.name|currentLang}}</td>
                                               
-                                                    <td *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished||!urlParameter" class="color-gray-50" style="min-width:18rem"><span>-</span></td>
+                                                    <td *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished||!urlParameter" class="color-gray-50" style="min-width:18rem"><span>{{'shared.notFound'|translate}}</span></td>
                                                     <td *ngIf="schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Finished&&class?.topStudentsNumber>0" class="color-gray-50" style="min-width:18rem"><a class="color-skyBlue-400 number" (click)="TopStudentsModelOpened=true;schoolYearClass=class;schoolYearCurriculum=e;selectTopStudents(urlParameter,e?.curriculumId,class?.gradeId);">{{class?.topStudentsNumber}} {{'dashboard.SchoolYear.students'|translate}}</a></td>
                                                     <td *ngIf="schoolYear?.schoolYearStatus?.name.en==schoolYearEnum.Finished&&class?.topStudentsNumber==0" class="color-gray-50" style="min-width:18rem"><a class="color-red-500 nonnumber" (click)="TopStudentsModelOpened=true;schoolYearClass=class;schoolYearCurriculum=e;selectTopStudents(urlParameter,e?.curriculumId,class?.gradeId);">{{'dashboard.SchoolYear.undefined'|translate}}</a></td>
                                                     <td class=" color-gray-50"  style="min-width: 15.4rem">

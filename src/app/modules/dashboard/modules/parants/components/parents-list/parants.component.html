@@ -5,7 +5,7 @@
         <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" (onFilter)="checkParentList()" (onSearch)="filtration.KeyWord = $event; checkParentList()" (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="checkParentList()"    (onSearch)="filtration.KeyWord = $event; checkParentList()" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-3">

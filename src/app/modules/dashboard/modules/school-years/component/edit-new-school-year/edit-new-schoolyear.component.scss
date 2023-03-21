@@ -181,6 +181,12 @@
        }
     }
     ::ng-deep p-table{
+        thead.p-datatable-thead tr th{
+            &.expand{
+                background-color: $color-gray-50; ;color: #AAAAAA;
+
+        } 
+    }  
         .p-datatable-tbody tr{     
             &.expandrow{ border-bottom: none ;}  
         }

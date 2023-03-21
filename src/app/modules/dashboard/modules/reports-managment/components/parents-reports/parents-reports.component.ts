@@ -19,6 +19,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
   styleUrls: ['./parents-reports.component.scss']
 })
 export class ParentsReportsComponent implements OnInit {
+  isBtnLoading: boolean=false;
   date;
   tableColumns = [];
   schools$ = inject(SchoolsService).getAllSchools();
@@ -53,7 +54,7 @@ export class ParentsReportsComponent implements OnInit {
 
 
   getParentReportList() {
-    
+    this.isBtnLoading=true;
  if(this.date)
  { 
    this.filtration.RegisterationStartDate=this.formateDate(this.date[0])
@@ -63,8 +64,8 @@ export class ParentsReportsComponent implements OnInit {
 		this.parentsReport.loading=true
 		this.parentsReport.list=[]
 		this.parentReportService.getAllParents(this.filtration).subscribe(res => {
+      this.isBtnLoading=false;
          if(res.data){
-
 			this.parentsReport.list = res.data
 			this.parentsReport.totalAllData = res.totalAllData
 			this.parentsReport.total =res.total
@@ -74,6 +75,7 @@ export class ParentsReportsComponent implements OnInit {
 		},err=> {
 			this.parentsReport.loading=false
 			this.parentsReport.total=0;
+      this.isBtnLoading=false;
 
 		  })
 	  }

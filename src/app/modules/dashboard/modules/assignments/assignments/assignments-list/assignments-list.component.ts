@@ -17,6 +17,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-assignments-list',
@@ -43,6 +44,7 @@ export class AssignmentsListComponent implements OnInit {
       }
 
   constructor(
+    private sharedService:SharedService,
     private headerService: HeaderService,
     private exportService: ExportService,
     private translate: TranslateService,
@@ -65,17 +67,16 @@ export class AssignmentsListComponent implements OnInit {
     this.assignments.list=[];
     this.assignmentservice.getAssignmentList(this.filtration).subscribe(response => {
       if(response.data){
+        this.sharedService.filterLoading.next(false);
         this.assignments.loading = false;
         this.assignments.list = response.data;
         this.assignments.totalAllData = response.totalAllData;
         this.assignments.total=response.total;
-       
-
       }
           },err=> {
+            this.sharedService.filterLoading.next(false);
             this.assignments.loading=false
             this.assignments.total=0;
-
             })
 
 

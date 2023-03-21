@@ -54,7 +54,10 @@
 
     <div *ngIf="hasFilter" class="actions mb-4 mx-4 d-flex align-items-center justify-content-end mt-3 gap-5">
             <span role="button" class="color-red-500 text-decoration-underline" [ngClass]="small?'sm':''" (click)="clearFilter()">{{'shared.deleteAll'|translate}}</span>
-            <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
+            <button class="btn btn-primary btn-sm" (click)="onFilterActivated()" [disabled]="isBtnLoading">
+                {{'Search'|translate}}
+                <div class="spinner-border text-light" role="status" *ngIf="loadingFilter"></div>
+            </button>
         </div>
 
     <!-- <div class="caption">

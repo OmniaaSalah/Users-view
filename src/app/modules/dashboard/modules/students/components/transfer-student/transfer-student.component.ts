@@ -168,6 +168,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
       }
     }))
     .subscribe(res =>{
+      this.sharedService.filterLoading.next(false);
       this.schools.loading = false
       this.schools.list = res.data
       this.schools.totalAllData = res.totalAllData
@@ -176,6 +177,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     },err=> {
       this.schools.loading=false
       this.schools.total=0
+      this.sharedService.filterLoading.next(false);
     })
   }
 

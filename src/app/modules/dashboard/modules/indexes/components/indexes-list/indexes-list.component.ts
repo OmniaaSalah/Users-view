@@ -73,7 +73,7 @@ export class IndexesComponent implements OnInit {
     this.indexes.loading=true;
     this.indexes.list=[];
     this.indexesService.getAllIndexes(this.filtration).subscribe((res)=>{
-
+      this.sharedService.filterLoading.next(false);
         this.indexes.loading=false;
         this.indexes.total=res.total;
         this.indexes.list=res.data;
@@ -81,6 +81,7 @@ export class IndexesComponent implements OnInit {
       
       },(err)=>{this.indexes.loading = false;
         this.indexes.total=0
+        this.sharedService.filterLoading.next(false);
       });
 
 

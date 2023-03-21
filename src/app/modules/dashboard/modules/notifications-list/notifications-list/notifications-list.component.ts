@@ -12,6 +12,7 @@ import { HeaderService } from "src/app/core/services/header-service/header.servi
 import { TranslationService } from "src/app/core/services/translation/translation.service"
 import { paginationState } from "src/app/core/models/pagination/pagination.model"
 import { UserInformationService } from "../../user-information/service/user-information.service"
+import { SharedService } from "src/app/shared/services/shared/shared.service"
 
 
 @Component({
@@ -60,6 +61,7 @@ export class NotificationsListComponent implements OnInit {
 
   constructor(
     private settingService:SettingsService,
+    private sharedService:SharedService,
     private userInformation:UserInformationService,
      private fb:FormBuilder,
      private translate:TranslateService,
@@ -76,8 +78,9 @@ export class NotificationsListComponent implements OnInit {
 
   getNotifications(){
     this.settingService.getNotificationsList(this.filtration).subscribe((res)=>{
+      this.sharedService.filterLoading.next(false);
       this.notifications.list=res.data
-    })
+    },(err)=>{  this.sharedService.filterLoading.next(false);})
   }
 
   openNotificationModel(notification:Notification){

@@ -75,6 +75,7 @@ export class SurveysListComponent implements OnInit {
     this.surveyList.loading=true
     this.surveyList.list=[]
     this.Surveyservice.getSurveyList(this.filtration).subscribe((res)=>{
+      this.sharedService.filterLoading.next(false);
       this.surveyList.loading = false
       this.surveyList.total =res.result.total
       this.surveyList.totalAllData = res.result.totalAllData
@@ -83,6 +84,7 @@ export class SurveysListComponent implements OnInit {
   }  ,err=> {
       this.surveyList.loading=false
       this.surveyList.total=0
+      this.sharedService.filterLoading.next(false);
   })
   }
   onSort(e){

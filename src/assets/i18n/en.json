@@ -398,6 +398,8 @@
 
 
     "shared": {
+        "RoleMangment": "Role Mangment",
+        "ExamFileMangment":"Exam File Mangment",
         "SchoolYear": "School Year",
         "Total Number":"Total Number",
         "gotothem":"Go to them",
@@ -538,7 +540,7 @@
 
         },
 
-        "deleteAll":"Delete All",
+        "deleteAll":"Reset",
         "in date":"In date",
         "students":"Students",
         "not found": "Not found",
@@ -1994,7 +1996,7 @@
         "Students age (to)":"Students age (to)",
         "students status":"students status",
         "Show first students only":"Show first students only",
-        "Clear all":"Clear all",
+        "Clear all":"Reset",
         "Generate the report":"Generate the report",
         "Children of female citizens":"Children of female citizens",
         "non-native":"non-native"

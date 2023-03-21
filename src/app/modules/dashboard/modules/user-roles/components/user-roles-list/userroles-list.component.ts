@@ -92,6 +92,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     this.roles.loading=true;
     this.roles.list=[];
     this.userRolesService.getAllRoles(this.filtration).subscribe((res)=>{
+      this.sharedService.filterLoading.next(false);
       this.roles.loading = false;
       this.roles.total=res.total;
       this.roles.totalAllData = res.totalAllData;
@@ -99,6 +100,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
       },(err)=>{this.roles.loading = false;
         this.roles.total=0
+        this.sharedService.filterLoading.next(false);
       });
 
   }
