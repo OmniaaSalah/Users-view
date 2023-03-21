@@ -56,7 +56,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
   items: MenuItem[]=[
-    {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
+    {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/dashboard/schools-and-students/students/student/${this.studentId||this.childId}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
     {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`,claims:ClaimsEnum.E_DeleteStudentRequest},
     {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
     {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest},
