@@ -110,6 +110,7 @@ export class RequestListComponent implements OnInit {
         this.requests.loading=true;
         this.requests.list=[];
         this.systemRequestService.getUserRequests(this.filtration).subscribe((res)=>{
+          this.sharedService.filterLoading.next(false);
             this.requests.loading = false;
             this.requests.total=res.total;
             this.requests.totalAllData = res.totalAllData;
@@ -117,6 +118,7 @@ export class RequestListComponent implements OnInit {
           },(err)=>{
             this.requests.loading = false;
             this.requests.total=0
+            this.sharedService.filterLoading.next(false);
           });
     }
 

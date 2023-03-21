@@ -61,7 +61,8 @@ export class ViewCertificatesComponent implements OnInit {
   {
     this.allCertificates.loading = true
     this.allCertificates.list = []
-    this.issuance.getAllCertificateOfGurdian(this.filtration).subscribe(res => {      
+    this.issuance.getAllCertificateOfGurdian(this.filtration).subscribe(res => {   
+      this.sharedService.filterLoading.next(false);   
       this.allCertificates.loading = false
       this.allCertificates.list = res.data
       this.allCertificates.totalAllData = res.totalAllData
@@ -69,6 +70,7 @@ export class ViewCertificatesComponent implements OnInit {
     }, err => {
       this.allCertificates.loading = false
       this.allCertificates.total = 0
+      this.sharedService.filterLoading.next(false);
     })
 
    

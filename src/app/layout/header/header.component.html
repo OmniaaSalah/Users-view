@@ -26,12 +26,12 @@
             </li>
         </ul>
     </div>
-    
+
     <!--  *permit="claimsEnum.SE_NavBarMenu"-->
     <div class="mx-auto" (clickOutside)="atclickOutside()" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)" >
 
         <div class="nav__menu__container ">
-            <ul class="nav__menu">                
+            <ul class="nav__menu">
                 <ng-container *ngFor="let item of menuItems; let i= index">
                     <li class="nav__menu__item" (click)="openMenu(i)" *permit="item.claims">
                         <a [class.active]="item.enum == (activeRoute$|async)">
@@ -58,7 +58,7 @@
                                 {{link.name}}
                             </li>
                         </ng-container>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -115,7 +115,8 @@
             <div class="dropdown cursorStyle">
 
                 <div class="px-4 message" routerLink="dashboard/messages/messages">
-                    <img src="assets/images/navBar/message.svg" alt="">
+                    <!-- <img src="assets/images/navBar/message.svg" alt=""> -->
+                    <i class="pi pi-comments color-primary fs-2"></i>
                 </div>
             </div>
         </div>
@@ -209,27 +210,27 @@
             <img src="assets/images/navBar/calendar.svg" alt="">
         </div>
     </div> -->
-    
+
     <!-- *permit="claimsEnum.S_SchoolYear"  -->
     <div class="d-flex">
     <span class="color-primary year mt-2 fs-4" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">{{'shared.SchoolYear'|translate}}</span>
     <div class="nav__dropdown custom-form" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
         <!-- <label>hhh</label> -->
-        
+
         <div class="icon arrow" (click)="dropdown.show()">
             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
         </div>
-            <p-dropdown 
-            #dropdown  
-            [options]="schoolYearsList" 
-            [(ngModel)]="schoolYearId"  
-            optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" 
-            optionValue="id" 
+            <p-dropdown
+            #dropdown
+            [options]="schoolYearsList"
+            [(ngModel)]="schoolYearId"
+            optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
+            optionValue="id"
             (onChange)="onYearSelected($event.value)"></p-dropdown>
             <div class="icon calendar" (click)="dropdown.show()">
                 <img src="assets/images/navBar/calendar.svg" alt="">
             </div>
- 
+
     </div>
    </div>
 

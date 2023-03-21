@@ -82,6 +82,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     this.subjects.loading=true;
     this.subjects.list=[];
     this.subjectService.getAllSubjects(this.filtration).subscribe((res)=>{
+      this.sharedService.filterLoading.next(false);
         this.subjects.loading = false;
         this.subjects.total=res.total;
         this.subjects.totalAllData = res.totalAllData;
@@ -90,6 +91,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
       },(err)=>{
         this.subjects.loading = false;
         this.subjects.total=0
+        this.sharedService.filterLoading.next(false);
       });
      
    

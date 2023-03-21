@@ -61,11 +61,7 @@ background-color: rgba(239, 253, 255, 0.72);
 
 .custom-form{
     font-size: 1.5rem;
-    .El-form{
-        .field1{
-            margin-left: 7rem;
-        }
-    }
+   
     .form-group{
        ::ng-deep .p-autocomplete{
       width: 100%!important;

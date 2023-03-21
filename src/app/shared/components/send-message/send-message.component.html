@@ -3,7 +3,7 @@
     <!-- SelectSchools -->
     <div class="d-flex align-items-center   ">
 
-      <div class="btn btn-outline-skyBlue " role="button" (click)="openSelectSchoolsModel()">
+      <div class="btn btn-primary " role="button" (click)="openSelectSchoolsModel()">
         {{'dashboard.UserRole.Select School'|translate}}
       </div>
       <span class="star">*</span>
@@ -46,7 +46,9 @@
               <td>{{school.curriculum.ar}}</td>
               <td class="actions">
                 <button (click)="onSchoolSelected(school.id)">
-                  <img src="assets/images/shared/cancel.svg" alt="">
+
+                  <img src="assets/images/shared/rect-xmark.svg" alt="">
+
                 </button>
               </td>
             </tr>
@@ -100,35 +102,32 @@
       </div>
     </div>
 
-    <div class="d-flex El-form my-4">
-      <div class="d-flex field1">
-        <label class="px-3">{{'dashboard.Messages.Require confirmation of receipt' | translate}}</label>
-        <p-inputSwitch (onChange)="isToggleLabel($event)" class="px-3" formControlName="switch1"></p-inputSwitch>
-
-        <!-- <span class="Label" *ngIf="!isShown">{{'shared.no'|translate}}</span>
-                    <span class="Label" *ngIf="isShown">{{'shared.yes'|translate}}</span> -->
+    <div class="d-flex  my-4 gap-5">
+      <div class=" d-flex gap-3  align-items-center">
+        <label  for="">{{'dashboard.Messages.Require confirmation of receipt' | translate}}</label>
+        <p-inputSwitch (onChange)="isToggleLabel($event)" formControlName="switch1"></p-inputSwitch>
 
       </div>
-      <div class="d-flex">
-        <label class="px-3"> {{'dashboard.Messages.Possibility to reply' | translate}} <span class="star">*</span></label>
-        <p-inputSwitch (onChange)="isToggleLabel1($event)" class="px-3" formControlName="switch2"></p-inputSwitch>
-        <!-- <span class="Label" *ngIf="!isShown1">{{'shared.no'|translate}}</span>
-                    <span class="Label" *ngIf="isShown1">{{'shared.yes'|translate}}</span> -->
+      <div class="d-flex gap-3  align-items-center">
+        <label  for=""> {{'dashboard.Messages.Possibility to reply' | translate}} <span
+            class="star">*</span></label>
+        <p-inputSwitch (onChange)="isToggleLabel1($event)" formControlName="switch2"></p-inputSwitch>
+      
+      </div>
+      
+      <div class="d-flex gap-3  align-items-center">
+        <label  for="">{{'dashboard.Messages.senderName' | translate}}</label>
+        <p-inputSwitch (onChange)="isToggleLabel2($event)"  formControlName="switch3"></p-inputSwitch>
+       
       </div>
     </div>
 
-    <div class="mb-5 d-flex mb-3 mx-3">
-      <label>{{'dashboard.Messages.senderName' | translate}}</label>
-      <p-inputSwitch (onChange)="isToggleLabel2($event)" class="px-5" formControlName="switch3"></p-inputSwitch>
-      <!-- <span class="Label" *ngIf="!isShown2">{{'shared.no'|translate}}</span>
-            <span class="Label" *ngIf="isShown2">{{'shared.yes'|translate}}</span> -->
-    </div>
 
     <div class="mb-5">
-      <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span
+      <label class="label" for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span
           class="star">*</span></label>
       <textarea maxlength="512" class="form-s" formControlName="description"
-        placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30"
+        placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5"
         pInputTextarea></textarea>
       <div class="text-danger"
         *ngIf="this.speaEmpForm.get('description')?.touched && this.speaEmpForm.get('description')?.invalid && this.speaEmpForm.get('description')?.errors">
@@ -153,8 +152,8 @@
 
 <form [formGroup]="parentForm" *ngIf="currentUserscope == 'Guardian'">
   <div class="custom-form">
-    <div class="form-group">
-      <label for="">{{'dashboard.Messages.Enter the message title' | translate}} <span class="star">*</span></label>
+    <div class=" mb-5">
+      <label class="label" for="">{{'dashboard.Messages.Enter the message title' | translate}} <span class="star">*</span></label>
       <input maxlength="32" class="form-control py-s" type="text" formControlName="title"
         placeholder="{{'dashboard.Messages.Enter the message title' | translate}}">
       <div class="text-danger"
@@ -166,8 +165,8 @@
       </div>
     </div>
 
-    <div class="form-s">
-      <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span
+    <div class="mb-5">
+      <label class="label" for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span
           class="star">*</span></label>
       <textarea maxlength="512" class="form-control" formControlName="description"
         placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30"
@@ -181,8 +180,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
+    <div class="mb-5">
+      <label class="label" for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
       <p-dropdown [options]="messagesTypes" optionLabel="name.ar" formControlName="messageType"
         placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id" appValidation></p-dropdown>
       <div class="text-danger"
@@ -195,19 +194,7 @@
 
     <div class="image-uploader__upload upload-btn">
 
-      <!-- <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
-
-                        <ng-template pTemplate="content">
-
-                            <ul *ngIf="uploadedFiles.length">
-
-                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-
-                            </ul>
-
-                        </ng-template>
-
-                    </p-fileUpload> -->
+     
       <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="messageUpload($event)"
         (onFileDelete)="messageDeleted($event)"></app-file-upload>
     </div>
@@ -220,7 +207,7 @@
 
 <form [formGroup]="schoolEmpForm" *ngIf="currentUserscope== 'Employee'">
   <div class="custom-form">
-    <div class="mb-5 mb-4 position-relative">
+    <div class="mb-5  position-relative">
       <label class="label required" for="">{{'dashboard.Messages.add guardian' | translate}}</label>
       <div class="position-relative">
         <p-autoComplete formControlName="guardian" [suggestions]="autoCompleteForParent" field="name.ar"

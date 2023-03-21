@@ -158,7 +158,7 @@
             <div class="row gx-4 gy-5 form-set " *ngIf="showSchoolList">
              
               <div class="d-flex align-items-center   ">
-                <div class="btn btn-outline-skyBlue " role="button" (click)="openSelectSchoolsModel()">
+                <div class="btn btn-primary" role="button" (click)="openSelectSchoolsModel()">
                     {{'dashboard.UserRole.Select School'|translate}}
                 </div>
                 </div>
@@ -197,13 +197,13 @@
                                   <td>{{school.curriculum.ar}}</td>
                                   <td class="actions">
                                     <button   (click)="unSelectMe(school.id)">
-                                      <img  src="assets/images/shared/cancel.svg" alt="">
+                                      <img  src="assets/images/shared/rect-xmark.svg" alt="">
                                    </button>
                                   </td>
                               </tr>
                       </ng-template>
             
-                   
+                     
                     
             
                   </p-table>

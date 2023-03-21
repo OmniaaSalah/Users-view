@@ -284,6 +284,7 @@ export class RegisterRequestComponent implements OnInit {
     this.settingServcice.schoolsAllowedForRegistration(this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res =>{
+      this.sharedService.filterLoading.next(false);
       this.schools.loading = false
       this.schools.list = res.data
       this.schools.totalAllData = res.totalAllData
@@ -292,6 +293,7 @@ export class RegisterRequestComponent implements OnInit {
     },err=> {
       this.schools.loading=false
       this.schools.total=0
+      this.sharedService.filterLoading.next(false);
     })
   }
 

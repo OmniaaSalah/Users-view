@@ -1,21 +1,14 @@
 import { Component, OnInit,OnDestroy,inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, map } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolYearsService } from '../../service/school-years.service';
-import { faArrowRight ,faExclamationCircle,faCheck,faPlus,faClose } from '@fortawesome/free-solid-svg-icons';
-import { IHeader, ISchoolYear } from 'src/app/core/Models';
+import { faArrowRight ,faExclamationCircle,faPlus } from '@fortawesome/free-solid-svg-icons';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { debounceTime, distinctUntilChanged, Subject, Subscription, takeUntil } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { ArrayOperations } from 'src/app/core/classes/array';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
@@ -69,7 +62,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   schoolYearsList;
   schoolYearStatus;
   filtration = {...Filtration,statusId:[]};
-  constructor(private headerService:HeaderService,private exportService: ExportService,private toastService: ToastService, private sharedService: SharedService,private schoolYearService:SchoolYearsService,private route: ActivatedRoute,private translate:TranslateService,private router:Router,private fb: FormBuilder) { 
+  constructor(private headerService:HeaderService,private exportService: ExportService,private toastService: ToastService, private sharedService: SharedService,private schoolYearService:SchoolYearsService,private route: ActivatedRoute,private translate:TranslateService,private router:Router,private fb: FormBuilder) {
 
     this.schoolYearFormGrp= fb.group({
       schoolYearArabicName:['',[Validators.required,Validators.maxLength(32)]],
@@ -79,13 +72,13 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       weekendDays:['',[Validators.required]],
       ageDeterminationDate:['',[Validators.required]],
       annualHolidays:['',[Validators.required]],
-     
+
       });
   }
 
   ngOnInit(): void {
- 
-  
+
+
     this.seachListener();
     this.filtration.PageSize=0;
     this.schoolYearService.getAllSchoolYears(this.filtration).subscribe((res)=>{ this.schoolYearsList=res.data});
@@ -98,11 +91,11 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       this.curriculumsList=res
       this.schoolYearService.curriculumList.next(this.curriculumsList)
     });
-  
+
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolyearId'));
       if(this.urlParameter)
-      { 
+      {
         this.getCurrentSchoolYear(this.urlParameter);
 
       if(localStorage.getItem('addedSchoolYear'))
@@ -111,8 +104,8 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       }
 
       }
-  
-      
+
+
     });
 
 
@@ -128,9 +121,9 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       mainTitle:{main:(this.urlParameter==0||this.urlParameter.toString()=='')? this.translate.instant('breadcrumb.Add New School Year'):this.translate.instant('breadcrumb.School Year Details')}
       }
       );
-      
-   
-     
+
+
+
   }
 
   get neededSchoolYear(){
@@ -205,10 +198,10 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
  bindOldSchoolYear(schoolYear)
  {
-   
+
   this.schoolYearFormGrp.patchValue({
-    schoolYearArabicName:schoolYear?.schoolYearName.ar, 
-    schoolYearEnglishName:schoolYear?.schoolYearName.en, 
+    schoolYearArabicName:schoolYear?.schoolYearName.ar,
+    schoolYearEnglishName:schoolYear?.schoolYearName.en,
     schoolYearStartDate: new Date(schoolYear?.schoolYearStartDate),
     schoolYearEndDate:new Date(schoolYear?.schoolYeaEndDate),
     ageDeterminationDate:schoolYear?.ageDeterminationDate.split('T')[0],
@@ -221,16 +214,16 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
   getCurriculumsInSchoolYear()
   {
-    
+
     this.schoolYearService.getCurriculumsInSchoolYear(this.urlParameter).subscribe((res)=>{
-   
+
        this.curriculumClassList=res;
-      
+
        this.curriculumClassList.forEach(element => {
        this.curriculumsIds.push(element.curriculumId)
      });
-       
-     
+
+
     })
   }
 
@@ -247,13 +240,13 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
           this.isSentYearBtnLoading=false;
           this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
         })
-     
+
 
  }
 
  saveDraftYear(continueId)
  {
- 
+
   this.schoolYearObj={
     'schoolYearName':{ar:this.schoolYearFormGrp.value.schoolYearArabicName,en:this.schoolYearFormGrp.value.schoolYearEnglishName},
     'schoolYearStartDate':this.schoolYearFormGrp.value.schoolYearStartDate,
@@ -266,7 +259,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     {
       this.schoolYearObj.id=this.urlParameter;
     this.schoolYearService.editSchoolYear(this.schoolYearObj).subscribe((res)=>{
-    
+
       if(res.statusCode!='BadRequest')
       {
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.old SchoolYear edited Successfully'));
@@ -274,7 +267,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
         {this.isContinueBtnLoading=false;this.step=2;}
         else
         {this.isSaveBtnLoading=false;this.router.navigate(['/dashboard/educational-settings/school-year/school-years-list']);}
-        
+
 
       }
       else if(res.statusCode=='BadRequest')
@@ -293,12 +286,12 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     {
     this.schoolYearObj.copiedFromSchoolYearId=this.schoolYearCopied ;
     this.schoolYearService.addDraftSchoolYear(this.schoolYearObj).subscribe((res)=>{
-    
-   
+
+
 
       if(res.statusCode!='BadRequest')
       {
-   
+
         localStorage.setItem('addedSchoolYear',JSON.stringify(res.result));
         this.urlParameter=res.result.id;
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.New SchoolYear added Successfully'));
@@ -306,8 +299,8 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
         { this.isContinueBtnLoading=false;this.router.navigate(['/dashboard/educational-settings/school-year/display-school-year/'+this.urlParameter]);}
         else
         { this.isSaveBtnLoading=false;this.router.navigate(['/dashboard/educational-settings/school-year/school-years-list']);}
-        
-        // this.step=2; 
+
+        // this.step=2;
 
       }
       else if(res.statusCode=='BadRequest')
@@ -329,7 +322,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   this.topStudentIds=[];
 
     this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
-  
+
 
       res.forEach(element => {
         this.topStudentIds.push(element.id)
@@ -340,7 +333,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
         this.studentsList.forEach(element => {
           this.precentageList.push(element.percentage)
         });
-  
+
      });
 
   });
@@ -350,17 +343,17 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
  }
  getTopStudentsNumber()
  {
- 
+
   if(this.topStudentIds.length>10)
   {
     this.topStudentIds.pop();
     this.toastService.error(this.translate.instant('dashboard.SchoolYear.you can select 10 top students at max'));
   }
-  
+
  }
  saveTopStudent(curriculmId,gardeId)
  {
- 
+
 
    this.schoolYearService.addTopStudentsToSpecificGrade(
     {'schoolYearId':this.urlParameter,'curriculumId':curriculmId,'gradeId':gardeId,'students':this.topStudentIds}
@@ -386,7 +379,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
  {
   if(this.schoolYear?.schoolYearStatus.name.en==SchoolYearEnum.Finished)
   {
-  
+
     this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res;})
     let keyWord=this.searchInput.value;
     if(keyWord)
@@ -449,7 +442,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   {
   this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
   }
-   
+
  }
  ngOnDestroy(): void {
 
@@ -481,21 +474,21 @@ closeRow()
         this.isCurriculumBtnLoading=false;
         this.addCurriculumsModelOpened=false;
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.Curriculums added Successfully'));
-        this.getCurriculumsInSchoolYear(); 
+        this.getCurriculumsInSchoolYear();
       },(err)=>{
         this.isCurriculumBtnLoading=false;
         this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
       })
-  
-  
+
+
   }
 
   saveSchoolYear(continueId)
   {
-  
+
     if(continueId==1)
     {
-     
+
         this.isContinueBtnLoading=true;
     }
     else
@@ -504,7 +497,7 @@ closeRow()
     }
    this.saveDraftYear(continueId);
   }
- 
+
   checkSchoolYearStatus()
   {
     if(this.schoolYearStatus==SchoolYearEnum.Finished||this.schoolYearStatus==SchoolYearEnum.Current||this.urlParameter)

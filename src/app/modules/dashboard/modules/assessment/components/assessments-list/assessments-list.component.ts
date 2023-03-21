@@ -18,6 +18,7 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 @Component({
   selector: 'app-assessments-list',
   templateUrl: './assessments-list.component.html',
@@ -48,7 +49,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     breadCrump: []
   }
 
-  constructor(public confirmModelService: ConfirmModelService,private exportService: ExportService, private headerService: HeaderService,private toastService: ToastService,
+  constructor(private sharedService:SharedService,public confirmModelService: ConfirmModelService,private exportService: ExportService, private headerService: HeaderService,private toastService: ToastService,
     private assessmentService: AssessmentService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
@@ -76,7 +77,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     this.assessmentList.loading = true
     this.assessmentList.list = []
     this.assessmentService.getRates(this.filtration).subscribe(res => {
-
+      this.sharedService.filterLoading.next(false);
       this.assessmentList.loading = false
       this.assessmentList.list = res.data
       this.assessmentList.totalAllData = res.totalAllData
@@ -84,6 +85,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     }, err => {
       this.assessmentList.loading = false
       this.assessmentList.total = 0
+      this.sharedService.filterLoading.next(false);
     })
   }
 

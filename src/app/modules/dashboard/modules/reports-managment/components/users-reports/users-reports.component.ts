@@ -11,6 +11,7 @@ import { UserInformationService } from '../../../user-information/service/user-i
 import { UsersReportsService } from '../../services/users/users-reports.service';
 import { Table } from 'primeng/table';
 import { SystemRequestService } from '../../../request-list/services/system-request.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-users-reports',
@@ -48,7 +49,8 @@ export class UsersReportsComponent implements OnInit {
     private translate: TranslateService,
      private userInformation: UserInformationService,
      private _report:UsersReportsService,
-     private requestService:SystemRequestService
+     private requestService:SystemRequestService,
+     private sharedService:SharedService
    ) {
     this.tableColumns = this._report.tabelColumns
    }
@@ -80,6 +82,7 @@ export class UsersReportsComponent implements OnInit {
     this.users.loading=true
     this.users.list =[];
     this._report.getAllEmployees(this.filtration).subscribe(res => {
+      this.sharedService.filterLoading.next(false);
       this.allRequestsNumbers=res.result.rquestTotalNumber;
       this.requestsNumbersBasedOnRequestType=res.result.rquestNumberByRequestType;
       this.users.list = res.result.employeesPerformance.data;
@@ -89,6 +92,7 @@ export class UsersReportsComponent implements OnInit {
     },err=> {
       this.users.loading=false
       this.users.total=0;
+      this.sharedService.filterLoading.next(false);
     })
   }
 

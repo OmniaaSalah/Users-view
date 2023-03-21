@@ -382,3 +382,11 @@ hr {
     font-size: 1.5rem;
     font-family: 'Droid' !important;
  }
+
+ img[src='assets/images/shared/rect-bluepen.svg'],
+ img[src='assets/images/shared/rect-xmark.svg']
+ {
+    &:hover{transform:scale(1.2)}
+    transition: all 0.1s;
+ }
+

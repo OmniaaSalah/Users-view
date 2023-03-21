@@ -108,6 +108,7 @@ componentHeaderData: IHeader = {
     this.divisions.loading=true
     this.divisions.list=[]
      this.divisionService.getSchoolDivisions(this.filtration).subscribe(res=>{
+      this.sharedService.filterLoading.next(false);
       this.divisions.loading = false
       this.divisions.list = res.data
       this.divisions.totalAllData = res.totalAllData
@@ -115,6 +116,7 @@ componentHeaderData: IHeader = {
      },(err)=>{
       this.divisions.loading = false;
       this.divisions.total=0;
+      this.sharedService.filterLoading.next(false);
      })
    }
 
