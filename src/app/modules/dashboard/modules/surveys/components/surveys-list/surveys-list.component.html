@@ -8,7 +8,7 @@
 
 
     <div class="prim-table" *ngIf="surveyList.totalAllData|| surveyList.loading">
-        <p-table #dt [lazy]="true" [value]="surveyList.list" (onSort)="onSort($event)">
+        <p-table #dt [lazy]="true" [value]="surveyList.list" (onSort)="onSort($event)" [scrollable]="true">
 
 
             <!-- Table Caption -->
@@ -31,11 +31,11 @@
 
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="surveyNumber">
+                    <th pSortableColumn="surveyNumber" class="lg">
                         <p-sortIcon field="surveyNumber"></p-sortIcon>{{'dashboard.surveys.surveyNumber' | translate}}
                     </th>
 
-                    <th pSortableColumn="title.ar">
+                    <th pSortableColumn="title.ar" class="lg">
                         <p-sortIcon field="title.ar"></p-sortIcon>{{'dashboard.surveys.surveyAddress' | translate}}
                     </th>
 
@@ -60,18 +60,18 @@
                     <th  class="actions--lg" pSortableColumn="createdDate"><p-sortIcon  field="createdDate">
                          </p-sortIcon>{{'shared.Created Date'|translate}}
                     </th>
-                    <!-- <th  class="actions--lg" pSortableColumn="createdDate"><p-sortIcon  field="createdDate">
+                    <th  class="actions--lg" pSortableColumn="disAppearanceDate"><p-sortIcon  field="disAppearanceDate">
                     </p-sortIcon>{{'shared.End Date'|translate}}
-                    </th> -->
-                    <th class="actions"></th>
+                    </th>
+                    <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions"></th>
 
 
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product>
                 <tr>
-                    <td>{{product.surveyNumber}}</td>
-                    <td>{{product.title| currentLang}}</td>
+                    <td class="lg">{{product.surveyNumber}}</td>
+                    <td class="lg">{{product.title| currentLang}}</td>
                     <td class="md">
                         <span *ngIf="product.surveyType==StatusEnum.Mandatory">{{'dashboard.surveys.mandatory'| translate}}</span>
                         <span *ngIf="product.surveyType==StatusEnum.Optional">{{'dashboard.surveys.optional'| translate}}</span>
@@ -83,7 +83,7 @@
                     <td class="md">
                         <div class="d-flex align-items-center">
                             <div [ngSwitch]="product.surveyStatus">
-                                <div class="alerting primary" *ngSwitchCase="StatusEnum.New"> {{'dashboard.surveys.'+StatusEnum.New| translate}}</div>
+                                <div class="alerting primary" *ngSwitchCase="StatusEnum.Draft"> {{'dashboard.surveys.'+StatusEnum.Draft| translate}}</div>
                                 <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
                                 <div class="alerting danger" *ngSwitchCase="StatusEnum.Closed "> {{'dashboard.surveys.'+StatusEnum.Closed | translate}}</div>
                                 <div class="alerting secondary" *ngSwitchCase="StatusEnum.Apparent "> {{'dashboard.surveys.'+StatusEnum.Apparent | translate}}</div>
@@ -93,8 +93,13 @@
                         </div>
                     </td>
                     <td>{{product.createdDate| LocalizeDate}}</td>
-                    <!-- <td>{{product?.EndDate| LocalizeDate}}</td> -->
                     <td >
+                        <span *ngIf="product.surveyStatus==StatusEnum.Sent||product.surveyStatus==StatusEnum.Apparent">{{product?.disAppearanceDate| LocalizeDate}}</span>
+                        <span *ngIf="product.surveyStatus==StatusEnum.Draft">{{'dashboard.surveys.NotDeterminedYet'| translate}}</span>
+                        <span *ngIf="product.surveyStatus==StatusEnum.Closed">{{'dashboard.surveys.Finished'| translate}}</span>
+                        <span *ngIf="product.surveyStatus==StatusEnum.Canceled">{{'dashboard.surveys.Closed'| translate}}</span>
+                    </td>
+                    <td pFrozenColumn [frozen]="true">
                         <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4" routerLink="/dashboard/educational-settings/surveys/Survey/{{product.id}}">
                             <span class="color-skyBlue-400">{{'shared.details'|translate}}</span>
                             <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
