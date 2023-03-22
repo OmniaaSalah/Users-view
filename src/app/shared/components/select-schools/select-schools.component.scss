@@ -17,9 +17,10 @@
     .p-dialog{
         overflow: hidden;
         border-radius: 15px;
+        &.select-school{
         .p-dialog-header{
             padding:1.2rem 3.2rem !important;
-            display: block;
+            display: block !important;
             .headeritem{
                 font-weight: 700;
                 font-size: 20px;
@@ -31,6 +32,7 @@
           }
             
         }
+      }
         .p-dialog-content{
                 overflow: hidden;
         }
