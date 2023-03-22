@@ -62,8 +62,10 @@
     justify-content: center;
     z-index: 10;
     cursor: pointer;
+    transition:all 0.2s;
     &:hover {
         background-color: $color-primary-dark;
+        transform: scale(1.2);
     }
     img {
         width: 1.75rem;
