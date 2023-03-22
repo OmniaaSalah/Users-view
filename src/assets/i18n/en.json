@@ -3,7 +3,11 @@
     "Loginout": "Log out",
     "Main Page for Employee":"Main Page for Employee",
     "Employee": "Employee Of",
+    "Kg":"Kg",
+    "WriteDeleteReason": "Write Delete Reason",
+    "Last Date Of abbsence":"Last Date Of abbsence",
     "You have Mandatory Servies , Reply them first": "You have Mandatory Servies , Reply them first",
+    "You should Read Code from Mobile to get Location in Google Map": "You should Read Code from Mobile to get Location in Google Map",
     "You have Mandatory Messages , See them first":"You have Mandatory Messages , See them first",
     "Related to SPEA":"Related to SPEA",
     "Please enter your email and password": "Please enter your email and password",
@@ -390,7 +394,7 @@
         "noRequestDetails":"Ther is no details for this Request",
         "imageUploaded":"Image Uploaded Successfully",
         "Attendance and Abbsence List is empty":"Attendance and Abbsence List is empty",
-        "divisionDegreeHint":"(اذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به)."
+        "divisionDegreeHint":"(If Division Official not allowed to enter degrees ,The teacher is responsible to enter them for his subject)."
 
 
     },
@@ -398,8 +402,9 @@
 
 
     "shared": {
-        "RoleMangment": "Role Mangment",
+        "RoleMangment":"Role Mangment",
         "ExamFileMangment":"Exam File Mangment",
+        "StudentMangment": "Student Mangment",
         "SchoolYear": "School Year",
         "Total Number":"Total Number",
         "gotothem":"Go to them",
@@ -823,7 +828,7 @@
             "schoolAddress": "School Address",
             "schoolEmployee": "School Employee",
             "schoolClasses":"School Classes",
-            "schoolTracks": "School Tracks",
+            "schoolTracks": "School Divisions",
             "editableList": "Editable List",
             "schoolInfo":"School Info",
             "whoIsSchoolManager": "Who Is School Manager",
@@ -1560,6 +1565,7 @@
             "type of certificate": "Type Of Certificate",
             "academic year": "Academic year",
             "School Name": "School Name",
+            "ChooseTeacher":"Choose Teacher",
             "Class": "Class",
             "TransferStudentGroup":"Send Transfer Student Group Request",
             "studentsMangement":"Students Mangement",

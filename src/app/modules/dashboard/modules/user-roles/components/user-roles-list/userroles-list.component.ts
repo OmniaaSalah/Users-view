@@ -114,9 +114,9 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   sortMe(e)
   {
     if(e.order==-1)
-    {this.filtration.SortBy="update"}
+    {this.filtration.SortBy="ASC"}
     else
-    {this.filtration.SortBy="old"}
+    {this.filtration.SortBy="desc"}
     this.filtration.Page=1;
     this.getAllRole();
   }

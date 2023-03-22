@@ -7,15 +7,14 @@ import { ConfirmModelService } from '../../services/confirm-model/confirm-model.
   selector: '[ConfirmDialog]'
 })
 export class ConfirmDialogDirective implements OnDestroy {
-
+  subscribtion:Subscription;
   @Output() onConfirm = new EventEmitter<void>();
   @Output() onCancel = new EventEmitter<void>();
   @Input('ConfirmDialog') modelData ={message: this.translate.instant('shared.confirmDelete'), img:'assets/images/empty-list/basket.svg'};
 
   constructor(private confirmModelService: ConfirmModelService,private translate:TranslateService) { }
-  subscribtion:Subscription
+  
   @HostListener('click') onClick() {
-    console.log("llll")
     this.confirmModelService.openModel(this.modelData) ;
       this.confirmListener();
 
@@ -33,16 +32,11 @@ export class ConfirmDialogDirective implements OnDestroy {
  }
 
 
- cancel()
- {
-  this.confirmModelService.confirmed$.subscribe(val => {
-    if (val) this.onConfirm.emit();
-    
-  })
- }
+
 
  ngOnDestroy(): void {
-  this.subscribtion.unsubscribe();
+  if(this.subscribtion)
+  {this.subscribtion.unsubscribe();}
 }
 
 

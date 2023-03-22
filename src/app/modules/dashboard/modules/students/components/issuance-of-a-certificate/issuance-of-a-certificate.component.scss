@@ -46,11 +46,11 @@
 .submitBtn{
   position: absolute;
   top: -65px;
-  left: 5px;
+  inset-inline-end: 5px;
 }
 
 img{
   position: absolute;
   top: 5rem;
-  left: 2.7rem;
+  inset-inline-end: 2.7rem;
 }

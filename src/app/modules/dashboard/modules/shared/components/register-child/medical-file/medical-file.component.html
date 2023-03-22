@@ -49,7 +49,7 @@
                     <ng-container *ngIf="!weightEditMode">
                         <p class="color-gray-300 fs-4">{{'dashboard.parents.weight'|translate }}</p>
                         <div class="d-flex gap-3">
-                            <span class="color-primary mb-2">{{medicalFile.weight}} كغ</span>
+                            <span class="color-primary mb-2">{{medicalFile.weight}} {{'Kg'|translate}}</span>
                             <img *ngIf="isSpeaNurse" (click)="weightEditMode=true;editMode=true" src="assets/images/shared/rect-bluepen.svg"  alt="edit" role="button">
                         </div>
                     </ng-container>

@@ -76,7 +76,7 @@
 
         <div class="subjects d-flex mt-1" *ngIf="weekEvent.event.meta?.subjects?.length">
           <ul class="d-flex flex-wrap">
-            <span class="color-red-500">المواد:- </span>
+            <span class="color-red-500">{{'dashboard.schools.subjects'|translate}}:-</span>
             <li class="d-flex" *ngFor="let subject of weekEvent.event.meta?.subjects; let i= index">
               <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
               <!-- <div [ngClass]="{'color-red-500' : (i %2 == 0),'color-skyBlue-500': (i % 2 != 0) }">{{subject}}</div> -->

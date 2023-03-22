@@ -10,6 +10,9 @@
                 .actions--sm{max-width: 4.25rem;}
                 .leftpostion{position: relative;left: 10rem;}
                 ::ng-deep p-table{
+                    .p-datatable-tbody tr td{ 
+                        &.actions{min-width: 11rem !important;justify-content: end; }
+                      }
                         thead.p-datatable-thead tr th{
                             &.expand{
                                 background-color: $color-gray-50; ;color: #AAAAAA;
