@@ -90,7 +90,7 @@
                                 (onSearch)="fromSchoolsFiltration.KeyWord= $event;fromSchoolsFiltration.page=1; getGracePeriodFromSchools()">
                                 </app-table-caption>
                             </div>
-                            <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 p-3"
+                            <div role="button" class="btn btn-primary  d-flex align-items-center justify-content-center gap-3 p-3"
                             (click)="openSchoolsModel('TransferFrom')">
                                 <fa-icon [icon]="faPlus"></fa-icon>
                                 <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
@@ -156,7 +156,7 @@
                                 (onSearch)="toSchoolsFiltration.KeyWord= $event;toSchoolsFiltration.page=1; getGracePeriodToSchools()">
                                 </app-table-caption>
                             </div>
-                            <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 p-3"
+                            <div role="button" class="btn btn-primary  d-flex align-items-center justify-content-center gap-3 p-3"
                             (click)="openSchoolsModel('TransferTo')">
                                 <fa-icon [icon]="faPlus"></fa-icon>
                                 <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
@@ -224,7 +224,7 @@
                             (onSearch)="allowedSchoolsFiltration.KeyWord= $event;allowedSchoolsFiltration.page=1; getGracePeriodSchools()">
                             </app-table-caption>
                         </div>
-                        <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 p-3"
+                        <div role="button" class="btn btn-primary d-flex align-items-center justify-content-center gap-3 p-3"
                         (click)="openSchoolsModel()">
                             <fa-icon [icon]="faPlus"></fa-icon>
                             <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>

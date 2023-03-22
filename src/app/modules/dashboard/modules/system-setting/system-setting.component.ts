@@ -104,6 +104,7 @@ export class SystemSettingComponent implements OnInit {
 
   deleteRole(index){
     this.rolesCtr.removeAt(index)
+    this.toastr.success(this.translate.instant('mission Succeeded'))
   }
 
 }

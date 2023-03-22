@@ -73,9 +73,10 @@
 
        .p-datatable-tbody tr td{ 
         min-width: 16rem;
+        &.actions{min-width: 11rem !important;justify-content: end; }
        }
         }
-     
+       
     }
 
     .custom-validation-form
