@@ -4,7 +4,7 @@ export enum requestTypeEnum {
     StudentRegradingRequest = "StudentRegradingRequest",
     StudentRegradingRequestForSchool="StudentRegradingRequestForSchool",
     DeleteStudentRequest = "DeleteStudentRequest",
-    
+
     RegestrationApplicationRequest = "RegestrationApplicationRequest",
     PrimarySchoolRegestrationApplicationRequest = "PrimarySchoolRegestrationApplicationRequest",
     KgRegestrationApplicationRequest = "KgRegestrationApplicationRequest",
@@ -17,6 +17,7 @@ export enum requestTypeEnum {
     MassTransferRequest = "MassTransferRequest",
     GradesCertificateRequest = "GradesCertificateRequest",
     AcademicSequenceCertificateRequest  = "AcademicSequenceCertificateRequest",
+    DiplomaCertificateRequest="DiplomaCertificateRequest",
     ModifyIdentityRequestCaseStudentNotHaveId = "ModifyIdentityRequestCaseStudentNotHaveId",
     RelinkChildToGuardianRequestToScool = "RelinkChildToGuardianRequestToScool",
     RelinkChildToGuardianRequestToSPEA = "RelinkChildToGuardianRequestToSPEA",

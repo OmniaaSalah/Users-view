@@ -32,7 +32,7 @@
   (scrolled)="onScroll()">
 
       <form [formGroup]="filterationForm">
-        <app-table-caption [hasFilter]="false" (onSearch)="this.searchModel.keyword = $event; getMessages(searchModel)">
+        <app-table-caption [hasFilter]="false" [hasExport]="false" (onSearch)="this.searchModel.keyword = $event; getMessages(searchModel)">
 
           <div class="row mt-5" *ngIf="messages.list.length !== 0">
             <div class="d-flex align-items-center custom-form">
