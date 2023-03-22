@@ -60,11 +60,11 @@
             <!-- <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
             <p class="color-primary">{{school?.type}}</p> -->
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
-            <p class="color-primary">
-                <span class="status" *ngIf="school?.status=='Active'" >{{'shared.yes'|translate}}</span>
-                <span class="status" *ngIf="school?.status!='Active'" >{{'shared.no'|translate}}</span>
-             </p>
+             <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
+             <p class="color-primary mx-5">
+                 <span class="status" *ngIf="school?.status=='Active'" >{{'shared.yes'|translate}}</span>
+                 <span class="status" *ngIf="school?.status!='Active'" >{{'shared.no'|translate}}</span>
+              </p>
 
             <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
             <p class="color-primary">{{school?.terkhisNumber}}</p>
