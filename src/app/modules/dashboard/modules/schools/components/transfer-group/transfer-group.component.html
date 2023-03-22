@@ -1,7 +1,7 @@
 <div class="student">
 
     <div class="submitBtn d-flex gap-4">
-        <button (click)="sendRequestData()" class="btn btn-primary " 
+        <button (click)="sendRequestData()" class="btn btn-primary "
         [disabled]="!this.requestForm.valid || !selectedStudents.length || spinner">
             <div class="spinner-border text-light" role="status" *ngIf="spinner"></div>
             <p >    {{'dashboard.request-group.Submit a collective transfer request' | translate}}</p>
@@ -10,18 +10,21 @@
     </div>
 
 
-    <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'}]"></app-workflow>
+    <div class="mt-6">
+
+      <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'}]"></app-workflow>
+    </div>
 
 
     <form [formGroup]="requestForm">
-        <div class="row form-set custom-form"> 
+        <div class="row form-set custom-form">
             <div class="col-md-3">
-                <label class="label required">{{'shared.choose'|translate}} {{'shared.grade'|translate}}</label> 
+                <label class="label required">{{'shared.choose'|translate}} {{'shared.grade'|translate}}</label>
                 <p-dropdown (onChange)="onGradeSelected($event.value)" [options]="grades$|async" formControlName="gradeId" optionLabel="{{lang=='ar'?'name.ar': 'name.en'}}" placeholder="{{'shared.choose'|translate}} {{'shared.grade'|translate}}" optionValue="id"></p-dropdown>
             </div>
 
             <div class="col-md-3" *ngIf="gradeCtr.value">
-                <label class="label">{{'shared.choose'|translate}} {{'shared.division'|translate}}</label> 
+                <label class="label">{{'shared.choose'|translate}} {{'shared.division'|translate}}</label>
                 <p-dropdown (onChange)="onDivisionSelected($event.value)" [options]="gradeDivisions$|async" formControlName="divisionId"  optionValue="id"  optionLabel="{{lang=='ar'?'name.ar': 'name.en'}}" placeholder="{{'shared.choose'|translate}} {{'shared.division'|translate}}"></p-dropdown>
             </div>
         </div>
@@ -39,9 +42,9 @@
 
             <ng-container *ngIf="studentFilteration.GradeId && students.total" >
                 <div class="prim-table">
-                    <app-table-caption 
-                    (onSearch)="studentFilteration.keyWord=$event;getAllStudents(); " 
-                    [hasFilter]="false" 
+                    <app-table-caption
+                    (onSearch)="studentFilteration.keyWord=$event;getAllStudents(); "
+                    [hasFilter]="false"
                     [hasExport]="false"></app-table-caption>
                 </div>
                 <div class="row custom-form">
@@ -57,14 +60,14 @@
                         </div>
                     </ng-container>
                     <span class="fs-4 fw-bold color-primary">
-                        {{'dashboard.issue of certificate.choose children' | translate}} 
-                        <span class="color-skyBlue-600">{{selectedStudents.length}}</span> 
-                        {{'dashboard.request-group.from Students' | translate}} 
+                        {{'dashboard.issue of certificate.choose children' | translate}}
+                        <span class="color-skyBlue-600">{{selectedStudents.length}}</span>
+                        {{'dashboard.request-group.from Students' | translate}}
                     </span>
-    
+
                 </div>
             </ng-container>
-            
+
             <app-informative-block *ngIf="!students.total  && studentFilteration.GradeId" subTitle="{{ 'emptyList.noDataMatch' | translate}}"></app-informative-block>
             <app-informative-block *ngIf="!studentFilteration.GradeId" subTitle="{{ 'emptyList.youShouldSelectGarde' | translate}}"></app-informative-block>
             <app-loader></app-loader>
@@ -81,20 +84,20 @@
         <div class="mb-4">{{'dashboard.request-group.Please choose from the following schools' | translate}}</div>
 
             <div class="prim-table">
-                <app-table-caption 
-                (onSearch)="filteration.KeyWord=$event; getAllSchools();" 
-                [hasFilter]="false" 
+                <app-table-caption
+                (onSearch)="filteration.KeyWord=$event; getAllSchools();"
+                [hasFilter]="false"
                 [hasExport]="false"></app-table-caption>
             </div>
 
-        
+
             <div class="cards row g-4" *ngIf="!schools.loading">
                 <div  class="col-md-4 "
                 style="cursor: pointer;"
                 *ngFor="let school of schools.list; let i=index" (click)="onSelectSchool(i, school)">
 
                     <div class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100"
-                    [ngClass]="selectedSchool?.value?.id == school?.id ? 'schoolSelected' : ''">   
+                    [ngClass]="selectedSchool?.value?.id == school?.id ? 'schoolSelected' : ''">
 
                         <div class="">
                             <img src="assets/images/school-logo.svg" alt="">
@@ -111,15 +114,15 @@
                 </div>
 
                 <app-informative-block *ngIf="!schools.total  && filteration.GradeId" subTitle="{{ 'emptyList.noDataMatch' | translate}}"></app-informative-block>
-                
+
             </div>
-            
+
         <!-- <div *ngIf="skeletonShown " class="row">
             <div class="col-md-4" *ngFor="let item of [1,2,3]">
                 <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
             </div>
         </div> -->
-        
+
     </div>
 
     <app-informative-block *ngIf="!studentFilteration.GradeId" subTitle="{{ 'emptyList.youShouldSelectGarde' | translate}}"></app-informative-block>
