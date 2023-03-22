@@ -69,15 +69,6 @@ span.textSuvey {
     ;
 }
 
-::ng-deep .caption .actions .filter {
-    position: relative;
-    display: none;
-}
-
-::ng-deep .caption__filter.caption__filter--actions {
-    position: relative;
-    display: none !important;
-}
 
 .surveyQuestions,
 .surveyQuestions2 {

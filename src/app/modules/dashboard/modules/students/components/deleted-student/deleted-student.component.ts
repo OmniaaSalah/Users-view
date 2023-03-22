@@ -30,7 +30,7 @@ export class DeletedStudentComponent implements OnInit {
 
   componentHeaderData:IHeader = {
     breadCrump: [
-      { label: 'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('Students List'),routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
       { label: this.translate.instant('dashboard.students.deletStudentFromSchool'),routerLink:`/dashboard/student-management/students/delete-student/${this.studentId}` }
     ],
     mainTitle: { main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)' }

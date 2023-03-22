@@ -1,4 +1,4 @@
-<form [formGroup]="certificateFormGrp" class="container-fluid " (ngSubmit)="sendData()">
+<form [formGroup]="certificateFormGrp" class="container-fluid " >
     <div class="custom-form">
         <h4 class="mb-4">{{'dashboard.students.Issuance of certificate'|translate}} ( {{studentName}} )</h4>
         <div class="row gx-5 form-set">
@@ -10,7 +10,7 @@
         </div>
          
     <div class="d-flex submitBtn">
-    <button [disabled]="certificateFormGrp.invalid||isBtnLoading" class="btn btn-primary mx-4 ">
+    <button [disabled]="certificateFormGrp.invalid||isBtnLoading" class="btn btn-primary mx-4 " (click)="sendData()">
         {{'dashboard.students.Issuance of certificate'|translate}}
         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
     </button>

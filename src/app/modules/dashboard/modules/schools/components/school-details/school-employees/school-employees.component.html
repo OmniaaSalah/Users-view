@@ -237,7 +237,7 @@
                         <div class="col-md-4 align-self-end mb-3">
                             <!-- <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label> -->
                             <div class="d-flex align-items-center gap-4">
-                                <div class="fs-4">تفعيل</div>
+                                <div class="fs-4">{{'shared.allStatus.active'|translate}}</div>
                                 <span class="fs-4" *ngIf="managerFormCtr.status.value === statusEnum.Active">{{'shared.yes' |translate}}</span>
                                 <span class="fs-4" *ngIf="managerFormCtr.status.value === statusEnum.Inactive">{{'shared.no' |translate}}</span>
                                 <p-inputSwitch name="status" #status formControlName="status" [trueValue]="statusEnum.Inactive" [falseValue]="statusEnum.Active"></p-inputSwitch>
@@ -324,7 +324,7 @@
                         <div class="col-md-4 align-self-end mb-3">
                             <!-- <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label> -->
                             <div class="d-flex align-items-center gap-4">
-                                <div class="fs-4">تفعيل</div>
+                                <div class="fs-4">{{'shared.allStatus.active'|translate}}</div>
                                 <span class="fs-4" *ngIf="employeeFormCtr.status.value === statusEnum.Active">{{'shared.yes' |translate}}</span>
                                 <span class="fs-4" *ngIf="employeeFormCtr.status.value === statusEnum.Inactive">{{'shared.no' |translate}}</span>
                                 <p-inputSwitch name="status" #status formControlName="status" [trueValue]="statusEnum.Active" [falseValue]="statusEnum.Inactive"></p-inputSwitch>
