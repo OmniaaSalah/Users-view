@@ -39,7 +39,7 @@
                 <td dir="ltr" class="text-end">{{notification.content.en |truncate}}</td>
                 <td>{{'dashboard.SystemSetting.' + notification.channal | translate}}</td>
                 <td>
-                    <div class="d-flex align-items-center gap-3 justify-content-end" role="button" (click)="openNotificationModel(notification)">
+                    <div class="d-flex align-items-center gap-3 justify-content-end mx-4" role="button" (click)="openNotificationModel(notification)">
                         <span class="color-skyBlue-400">{{'shared.edit' |translate}}</span>
                         <fa-icon [class.rotate180]="lang=='en'" class="color-skyBlue-400 fs-6" [icon]="faChevronLeft"></fa-icon>
                     </div>

@@ -218,7 +218,7 @@
              
           
                 <td class="actions"  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
-                        <button class=" d-flex  align-items-center gap-3 justify-content-end" (click)="tittle='dashboard.SchoolYear.Edit subject to this class';editSubject(e)" >
+                        <button class=" d-flex  align-items-center gap-3 justify-content-end mx-4" (click)="tittle='dashboard.SchoolYear.Edit subject to this class';editSubject(e)" >
                           <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                           <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                          </button>

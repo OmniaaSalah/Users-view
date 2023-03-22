@@ -37,7 +37,7 @@
                 <td >{{student.track?.name |currentLang}}</td>
                 <td>{{student.nationalityId}}</td>
                 <td *ngIf="isGradeHaveTracks">
-                    <div *permit="claimsEnum.E_U_StudentTrack" class="d-flex align-items-center gap-4" role="button" (click)="openChangeTrackModel(student)">
+                    <div *permit="claimsEnum.E_U_StudentTrack" class="d-flex align-items-center gap-3 justify-content-end mx-4" role="button" (click)="openChangeTrackModel(student)">
                         <span class="color-skyBlue-400">{{'dashboard.schools.updateStudentTrack'|translate}}</span>
                         <img src="assets/images/shared/left-arrow.svg" alt="">
                     </div>
