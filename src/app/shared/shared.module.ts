@@ -160,7 +160,8 @@ registerLocaleData(localeAr);
     RequestListComponent,
     TrauncateTextPipe,
     WorkflowComponent,
-    SafePipe
+    SafePipe,
+    ConfirmDialogDirective
   ],
   providers:[SharedService]
 })

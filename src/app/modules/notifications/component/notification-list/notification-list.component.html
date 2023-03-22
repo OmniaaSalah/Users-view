@@ -49,10 +49,10 @@
                                 </div>
                                 <div class="Details">
 
-                                    <button class="btn btn-primary detail-btn p-relative"
+                                    <button class=" d-flex  align-items-center gap-3 justify-content-end"
                                         (click)="showDetails(card.pageLink)">
-                                        {{'shared.Show Details'|translate}}
-                                        <img src="assets/images/shared/detail-arrow.png">
+                                        <span class="color-skyBlue-400">{{'shared.Show Details'|translate}}</span>
+                                        <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                                     </button>
                                 </div>
 

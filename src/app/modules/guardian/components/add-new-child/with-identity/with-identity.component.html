@@ -75,9 +75,12 @@
             </div>
         </ul>
     </div>
-    <button class="btn btn-primary submitBtn"
-    [disabled]="!newChildForm.valid|| !birthDate.url.length ||  !identityAttach.url.length || onSubmit">
-        {{'dashboard.issue of certificate.Save' | translate}}
-        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-    </button>
+    <div class="submitBtn d-flex gap-3">
+            <button class="btn btn-primary"
+            [disabled]="!newChildForm.valid|| !birthDate.url.length ||  !identityAttach.url.length || onSubmit">
+                {{'dashboard.issue of certificate.Save' | translate}}
+                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            </button>
+            <button  ><a routerLink="/" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
+   </div>
 </form>

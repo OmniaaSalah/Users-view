@@ -386,7 +386,8 @@ hr {
  img[src='assets/images/shared/rect-bluepen.svg'],
  img[src='assets/images/shared/rect-xmark.svg']
  {
-    &:hover{transform:scale(1.2)}
+    transform:scale(1.1);
+    &:hover{transform:scale(1.4)}
     transition: all 0.1s;
  }
 

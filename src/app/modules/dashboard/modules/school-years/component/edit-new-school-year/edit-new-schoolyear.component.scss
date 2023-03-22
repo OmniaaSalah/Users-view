@@ -45,12 +45,7 @@
           }
         }
       }
-      .curriculum {
-        margin-left: 0.5rem;
-        .class {
-          margin-right: 1rem;
-        }
-      }
+  
         &.nonnumber {
             &:hover{
             color:$color-red-500;
@@ -91,15 +86,12 @@
 
 ::ng-deep  {
   .school-year-modal.p-dialog {
-    &.large {
-      margin-top: 12rem;
-    }
-    border: none;
-    &.block {
-      .p-dialog-header {
+    .p-dialog-header {
         display: block !important;
       }
-    }
+ 
+    border: none;
+   
     .p-dialog-header {
       font-family: "Droid";
       border-top-right-radius: 12px;

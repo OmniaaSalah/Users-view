@@ -188,7 +188,7 @@
                                                     formControlName="id" optionValue="id" 
                                                     [showClear]="true" 
                                                     optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" 
-                                                    placeholder="اختر المدرس"></p-dropdown>
+                                                    placeholder="{{'dashboard.students.ChooseTeacher'|translate}}"></p-dropdown>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,7 +212,7 @@
                             <ng-container *ngIf="step==4">
                                 <div class="d-flex align-items-center gap-3 mb-6" *permit="claimsEnum.E_U_DivisionLecuture">
                                     <img src="assets/images/shared/info-skyBlue.svg" alt="">
-                                    <p class="color-primary">ملاحظة: يمكنك الضغط على الحصة لإضافة المواد</p>
+                                    <p class="color-primary">{{'dashboard.schools.abilityToClickOnClassAndAddSubjects'|translate}}</p>
                                 </div>
 
                                 <app-calender *ngIf="events" [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>

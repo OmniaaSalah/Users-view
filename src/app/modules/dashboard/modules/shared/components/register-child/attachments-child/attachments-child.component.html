@@ -44,16 +44,19 @@
 
 
     <div class="d-flex justify-content-end gap-3">
-        <button class="btn btn-primary bg-skyBlue-600" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
+        <button class="btn btn-primary" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
 
-      <button class="btn btn-primary "
-      [disabled]="onSubmit"
-      (click)="updateStudentAttachment(studentId || childId, attachments)">
-          <span>{{'shared.saveChanges'| translate}}</span>
-          <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-      </button>
+        <ng-container *ngIf="attachments?.length">
+          <button class="btn btn-primary "
+          [disabled]="onSubmit"
+          (click)="updateStudentAttachment(studentId || childId, attachments)">
+              <span>{{'shared.saveChanges'| translate}}</span>
+              <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+          </button>
 
-    <button  (click)="mode='view'"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+          <button  (click)="mode='view'"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+        </ng-container>
+
     </div>
 
     <div class="mt-5 row gx-5 border-dark radius-15 p-5" *ngIf="addMode" [formGroup]="fileForm">

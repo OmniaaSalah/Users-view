@@ -30,6 +30,9 @@
       right: 5rem;
     }
     ::ng-deep p-table {
+      .p-datatable-tbody tr td{ 
+        &.actions{min-width: 11rem !important;justify-content: end; }
+      }
       .p-datatable-tbody {
         &.p-scroller-content {
           min-height: 90%;
