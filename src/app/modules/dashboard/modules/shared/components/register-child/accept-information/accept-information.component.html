@@ -81,8 +81,7 @@
                 </div>
                 <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{ 'shared.publicTransport'|translate }}</p>
-                    <span class="color-primary mb-2" *ngIf="student?.isUsePublicTransportation">{{'shared.yes'|translate}}</span>
-                    <span class="color-primary mb-2" *ngIf="!student?.isUsePublicTransportation">{{'shared.no'|translate}}</span>
+                    <span class="color-primary mb-2 fs-3">{{'shared.'+student?.isUsePublicTransportation | translate}}</span>
                 </div>
                 <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{ 'dashboard.parents.specialEducation'|translate }}</p>
@@ -90,11 +89,11 @@
                     <span class="color-primary mb-2" *ngIf="!student?.specialEducation">{{'shared.no'|translate}}</span>
                 </div>
 
-                <!-- <div class="col-sm-3 d-flex align-items-center gap-5">
+                <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{ 'dashboard.parents.hasShadower'|translate }}</p>
-                    <span class="color-primary mb-2" *ngIf="student?.shadower">{{'shared.yes'|translate}}</span>
-                    <span class="color-primary mb-2" *ngIf="!student?.shadower">{{'shared.no'|translate}}</span>
-                </div> -->
+                    <span class="color-primary mb-2" *ngIf="student?.hasShadower">{{'shared.yes'|translate}}</span>
+                    <span class="color-primary mb-2" *ngIf="!student?.hasShadower">{{'shared.no'|translate}}</span>
+                </div>
             </div>
     
             <!-- <div class="d-flex justify-content-end mt-auto">
@@ -132,7 +131,7 @@
             <div class="col-md-4">
                 <div class="form-set">
                     <label class="label required" for="description">{{'shared.publicTransport'| translate}}</label>
-                    <p-dropdown formControlName="isUsePublicTransportation" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <p-dropdown formControlName="isUsePublicTransportation" [options]="transportaionTypes" optionValue="value" optionLabel="name" placeholder="{{'shared.SchoolBus/PrivateCar' |translate}}"></p-dropdown>
                 </div>
             </div>
             <div class="col-md-4">
@@ -148,12 +147,12 @@
                     <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
                 </div>
             </div>
-            <!-- <div class="col-md-4">
+            <div class="col-md-4">
                 <div class="form-set">
                     <label class="label required" for="description">{{ 'dashboard.parents.hasShadower'| translate}}</label>
                     <p-dropdown formControlName="hasShadower" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
-            </div> -->
+            </div>
 
             <div class="col-md-8 align-self-center gap-5"  *ngIf="student$ |async as student">
                 <div class="row">

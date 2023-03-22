@@ -12,7 +12,7 @@
 
         <form  [formGroup]="surveyFormGrp">
             <ng-container >
-                <div class="mt-5 d-flex  align-items-center justify-content-end " *ngIf="editSurvey?.surveyStatus==StatusEnum.New">
+                <div class="mt-5 d-flex  align-items-center justify-content-end " *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft">
                     <button type="button" class="btn btn-primary mx-3" [disabled]="!surveyFormGrp.valid||!savedGuardianIds?.length||isBtnLoading" (click)="openMessage()" icon="pi pi-info-circle" label="Show">
                     <span>{{'dashboard.surveys.Send survey'| translate}} </span>
                     <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
@@ -26,8 +26,8 @@
                 <div class="row gx-5 form-set">
                     <div class="col-md-4">
                         <label class="label" for="day">{{'dashboard.surveys.Survey appearanceDate'|translate}} <span class="star">*</span></label>
-                        <p-calendar formControlName="appearanceDate" *ngIf="editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" [disabled]="true" [ngClass]="{'ng-invalid ng-dirty':appearanceDate.errors?.['required'] &&appearanceDate.touched}"  [showIcon]="true" inputId="icon" [minDate]="currentDate" [maxDate]="disAppearanceDate.value"  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
-                        <p-calendar formControlName="appearanceDate" *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId"  [ngClass]="{'ng-invalid ng-dirty':appearanceDate.errors?.['required'] &&appearanceDate.touched}"  [showIcon]="true" inputId="icon" [minDate]="currentDate" [maxDate]="disAppearanceDate.value"  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                        <p-calendar formControlName="appearanceDate" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Draft&&surveyId" [disabled]="true" [ngClass]="{'ng-invalid ng-dirty':appearanceDate.errors?.['required'] &&appearanceDate.touched}"  [showIcon]="true" inputId="icon" [minDate]="currentDate" [maxDate]="disAppearanceDate.value"  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                        <p-calendar formControlName="appearanceDate" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId"  [ngClass]="{'ng-invalid ng-dirty':appearanceDate.errors?.['required'] &&appearanceDate.touched}"  [showIcon]="true" inputId="icon" [minDate]="currentDate" [maxDate]="disAppearanceDate.value"  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
                         <div>
                             
                             <div [hidden]="appearanceDate.valid || appearanceDate.untouched">
@@ -41,8 +41,8 @@
 
                     <div class="col-md-4">
                         <label class="label" for="day">{{'dashboard.surveys.Survey appearanceTime'|translate}} <span class="star">*</span></label>
-                        <p-calendar formControlName="appearanceTime" [minDate]="appearanceDate.value"  *ngIf="editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" [disabled]="true" [ngClass]="{'ng-invalid ng-dirty':appearanceTime.errors?.['required'] &&appearanceTime.touched}" icon="pi pi-clock" [timeOnly]="true" showIcon="true"  [hourFormat]="24" inputId="timeonly"></p-calendar>
-                        <p-calendar formControlName="appearanceTime" [minDate]="appearanceDate.value"  (onFocus)="currentApperanceTime()" *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId" [ngClass]="{'ng-invalid ng-dirty':appearanceTime.errors?.['required'] &&appearanceTime.touched}" icon="pi pi-clock" [timeOnly]="true" showIcon="true"  [hourFormat]="24" inputId="timeonly"></p-calendar>
+                        <p-calendar formControlName="appearanceTime" [minDate]="appearanceDate.value"  *ngIf="editSurvey?.surveyStatus!=StatusEnum.Draft&&surveyId" [disabled]="true" [ngClass]="{'ng-invalid ng-dirty':appearanceTime.errors?.['required'] &&appearanceTime.touched}" icon="pi pi-clock" [timeOnly]="true" showIcon="true"  [hourFormat]="24" inputId="timeonly"></p-calendar>
+                        <p-calendar formControlName="appearanceTime" [minDate]="appearanceDate.value"  (onFocus)="currentApperanceTime()" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId" [ngClass]="{'ng-invalid ng-dirty':appearanceTime.errors?.['required'] &&appearanceTime.touched}" icon="pi pi-clock" [timeOnly]="true" showIcon="true"  [hourFormat]="24" inputId="timeonly"></p-calendar>
                         <div>
                           
                             <div [hidden]="appearanceTime.valid || appearanceTime.untouched">
@@ -60,8 +60,8 @@
                 <div class="row gx-5 form-set">
                     <div class="col-md-4">
                         <label class="label" for="day">{{'dashboard.surveys.Survey disAppearanceDate'|translate}} <span class="star">*</span></label>
-                        <p-calendar formControlName="disAppearanceDate" [disabled]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" [ngClass]="{'ng-invalid ng-dirty':disAppearanceDate.errors?.['required'] && disAppearanceDate.touched}" [showIcon]="true" inputId="icon"  [minDate]="appearanceDate.value"   placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
-                        <p-calendar formControlName="disAppearanceDate" *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId"  [ngClass]="{'ng-invalid ng-dirty':disAppearanceDate.errors?.['required'] && disAppearanceDate.touched}" [showIcon]="true" inputId="icon"  [minDate]="appearanceDate.value"   placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                        <p-calendar formControlName="disAppearanceDate" [disabled]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Draft&&surveyId" [ngClass]="{'ng-invalid ng-dirty':disAppearanceDate.errors?.['required'] && disAppearanceDate.touched}" [showIcon]="true" inputId="icon"  [minDate]="appearanceDate.value"   placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                        <p-calendar formControlName="disAppearanceDate" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId"  [ngClass]="{'ng-invalid ng-dirty':disAppearanceDate.errors?.['required'] && disAppearanceDate.touched}" [showIcon]="true" inputId="icon"  [minDate]="appearanceDate.value"   placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
                         <div>
                             <div [hidden]="disAppearanceDate.valid || disAppearanceDate.untouched">
                                 <small *ngIf="disAppearanceDate.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -74,8 +74,8 @@
 
                     <div class="col-md-4">
                         <label class="label" for="day">{{'dashboard.surveys.Survey disAppearanceTime'|translate}} <span class="star">*</span></label>
-                        <p-calendar  formControlName="disAppearanceTime" *ngIf="editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" [disabled]="true" [ngClass]="{'ng-invalid ng-dirty':disAppearanceTime.errors?.['required'] && disAppearanceTime.touched}" icon="pi pi-clock" [timeOnly]="true" showIcon="true" [hourFormat]="24" inputId="timeonly"></p-calendar>
-                        <p-calendar  formControlName="disAppearanceTime" *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId"  [ngClass]="{'ng-invalid ng-dirty':disAppearanceTime.errors?.['required'] && disAppearanceTime.touched}" icon="pi pi-clock" [timeOnly]="true" showIcon="true" [hourFormat]="24" inputId="timeonly"></p-calendar>
+                        <p-calendar  formControlName="disAppearanceTime" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Draft&&surveyId" [disabled]="true" [ngClass]="{'ng-invalid ng-dirty':disAppearanceTime.errors?.['required'] && disAppearanceTime.touched}" icon="pi pi-clock" [timeOnly]="true" showIcon="true" [hourFormat]="24" inputId="timeonly"></p-calendar>
+                        <p-calendar  formControlName="disAppearanceTime" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId"  [ngClass]="{'ng-invalid ng-dirty':disAppearanceTime.errors?.['required'] && disAppearanceTime.touched}" icon="pi pi-clock" [timeOnly]="true" showIcon="true" [hourFormat]="24" inputId="timeonly"></p-calendar>
                         <div>
                             <div [hidden]="disAppearanceTime.valid || disAppearanceTime.untouched">
                                 <small *ngIf="disAppearanceTime.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -96,8 +96,8 @@
             <ng-container>
 
                 <div>
-                    <p class="fw-bold mb-4" *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId">{{'dashboard.parents.selectParents'|translate}}</p>
-                    <p class="fw-bold mb-4"  *ngIf="editSurvey?.surveyStatus!=StatusEnum.New&&surveyId">{{'dashboard.parents.parents'|translate}}</p>
+                    <p class="fw-bold mb-4" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId">{{'dashboard.parents.selectParents'|translate}}</p>
+                    <p class="fw-bold mb-4"  *ngIf="editSurvey?.surveyStatus!=StatusEnum.Draft&&surveyId">{{'dashboard.parents.parents'|translate}}</p>
                     <ng-container *ngIf="!parent.totalAllData && !parent.loading">
                         <app-informative-block title="{{'emptyList.Parent List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
@@ -138,7 +138,7 @@
                         <app-loader></app-loader>
                     </div>
                     <div *ngIf="parent.list.length" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500" (scrolled)="onScroll()"> 
-                        <div class="d-flex justify-content-end" *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId">
+                        <div class="d-flex justify-content-end" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId">
                             <p-checkbox    binary="true"   (onChange)="selectAllParents($event)"></p-checkbox>
                             <span class="mx-3 ">{{'shared.selectAll'|translate}}</span>
                       
@@ -147,8 +147,8 @@
                         <ng-container *ngFor="let item of parent.list; let i = index">
                             <div class="col-md-4 d-flex gap-4 align-items-center">
                      
-                                <p-checkbox  [value]="item.id" *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId" name="parents"   [(ngModel)]="savedGuardianIds"></p-checkbox>
-                                <p-checkbox  [value]="item.id" *ngIf="editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" name="parents" [disabled]="true"  [(ngModel)]="savedGuardianIds"></p-checkbox>
+                                <p-checkbox  [value]="item.id" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId" name="parents"   [(ngModel)]="savedGuardianIds"></p-checkbox>
+                                <p-checkbox  [value]="item.id" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Draft&&surveyId" name="parents" [disabled]="true"  [(ngModel)]="savedGuardianIds"></p-checkbox>
                                 <label class="label label--sm" for=""> {{item.name|currentLang}} </label>
                             </div>
                         </ng-container>
