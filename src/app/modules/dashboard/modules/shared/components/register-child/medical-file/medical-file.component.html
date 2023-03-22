@@ -4,8 +4,8 @@
 
 <ng-container *ngIf="editMode">
   <div class="d-flex justify-content-end">
-    <button class="btn btn-primary " 
-    [disabled]="onSubmit || !medicalFileForm.valid" 
+    <button class="btn btn-primary "
+    [disabled]="onSubmit || !medicalFileForm.valid"
     (click)="updateMedicalFile(studentId || childId)">
         <span>{{'shared.saveChanges'| translate}}</span>
         <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
@@ -25,7 +25,7 @@
 
         <div class="row gx-5">
             <div class="col-md-4">
-    
+
                 <div class="grid-container">
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Chronicdiseases'|translate }}</p>
                     <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
@@ -33,29 +33,29 @@
                         <li class="d-flex color-primary" *ngFor="let val of medicalFile.chronicDiseases; let i= index">
                         <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
                           <div>{{val}}</div>
-            
+
                         </li>
                     </ul>
-    
+
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.SonofDetermination'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.isTheSonOfDetermination ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
-    
+
                     <p class="color-gray-300 fs-4">{{'dashboard.parents.IQ'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.iq}}%</span>
-    
+
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.increasement'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.raise}}</span>
-    
-                    <ng-container *ngIf="!weightEditMode">                        
+
+                    <ng-container *ngIf="!weightEditMode">
                         <p class="color-gray-300 fs-4">{{'dashboard.parents.weight'|translate }}</p>
                         <div class="d-flex gap-3">
                             <span class="color-primary mb-2">{{medicalFile.weight}} {{'Kg'|translate}}</span>
                             <img *ngIf="isSpeaNurse" (click)="weightEditMode=true;editMode=true" src="assets/images/shared/rect-bluepen.svg"  alt="edit" role="button">
                         </div>
                     </ng-container>
-                    
+
                 </div>
-                
+
                 <ng-container *ngIf="weightEditMode" [formGroup]="medicalFileForm">
                     <div class="mt-5">
                         <label class="label">{{'dashboard.students.weight'| translate}}</label>
@@ -64,12 +64,12 @@
                 </ng-container>
 
             </div>
-    
-    
+
+
             <div class="col-md-4">
-    
+
                 <div class="grid-container gap-y-5">
-    
+
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Allergicdiseases'|translate }}</p>
                     <!-- <span class="color-primary mb-2">
                           <a class="color-primary mb-2"> {{medicalFile.allergicDiseases}} </a>
@@ -78,24 +78,24 @@
                     <li class="d-flex color-primary" *ngFor="let val of medicalFile.allergicDiseases; let i= index">
                         <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
                         <div>{{val}}</div>
-        
+
                     </li>
                     </ul>
-    
+
                     <ng-container *ngIf="getCtr('isTheSonOfDetermination').value">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
                         <span class="color-primary mb-2">{{medicalFile.disabilities || 'لم يَذْكُر'}}</span>
                     </ng-container>
-                    
-    
+
+
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.fats'|translate }}</p>
                     <span class="color-primary mb-2">
                         {{medicalFile.fats}} %
                       </span>
-    
+
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Weightloss'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.shortage}}</span>
-    
+
                     <ng-container *ngIf="!heightEditMode">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Length'|translate }}</p>
                         <div class="d-flex gap-3">
@@ -103,7 +103,7 @@
                             <img *ngIf="isSpeaNurse" (click)="heightEditMode=true;editMode=true" src="assets/images/shared/rect-bluepen.svg" alt="edit" role="button">
                         </div>
                     </ng-container>
-                   
+
                 </div>
 
                 <ng-container *ngIf="heightEditMode" [formGroup]="medicalFileForm">
@@ -113,9 +113,9 @@
                     </div>
                 </ng-container>
             </div>
-    
-    
-    
+
+
+
             <div class="col-md-4">
                 <div class="col-sm-3 grid-container">
                     <p class="color-gray-300 fs-4">{{'dashboard.parents.athlete'|translate }}</p>
@@ -128,9 +128,9 @@
                     </div>
                 </div>
             </div>
-    
+
         </div>
-    
+
         <div class="p-5 px-4 bg-gray-30 mt-6 radius-15">
             <h3 class="heading heading--tertiary">{{'shared.note' |translate}}</h3>
             <!-- <p class="color-gray-800 mb-3">14-09-2022</p> -->
@@ -142,8 +142,8 @@
 
 
 
-    
-    
+
+
     <ng-container *ngIf="editMode && !weightEditMode && !heightEditMode">
         <form class="custom-form" [formGroup]="medicalFileForm">
             <div class="">
@@ -158,14 +158,14 @@
                         <!-- <p-multiSelect [options]="diseases" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect> -->
                         <p-chips name="feelingDiseases" [addOnBlur]="true" formControlName="listOfAllergicDiseases" placeholder=""></p-chips>
                     </div>
-    
+
                     <div class="col-md-4">
                         <label class="label required">{{'dashboard.students.athleteOrNot'|translate}}</label>
                         <p-dropdown [options]="booleanOptions" formControlName="isAthletic" optionValue="value"  optionLabel="name"></p-dropdown>
-    
+
                     </div>
                 </div>
-    
+
                 <div class="row g-5 form-set">
                     <div class="col-md-4">
                         <label class="label required">{{'dashboard.students.childWithDisabilities'| translate}}</label>
@@ -176,31 +176,32 @@
                         <input type="text" id="trackId" formControlName="disabilities" pInputText placeholder="{{'dashboard.students.disabilities'|translate}}" />
                         <!-- <p-dropdown [options]="booleanOptions"  optionValue="value" optionLabel="name"></p-dropdown> -->
                     </div>
-    
+                    <div *ngIf="!getCtr('isTheSonOfDetermination').value" class="col-md-4"></div>
+
                     <div class="col-md-4 position-relative">
                         <label class="label required">{{'dashboard.students.followedDiet'|translate}}</label>
                         <!-- <input type="text" id="trackId" formControlName="dietFollowed" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" /> -->
                         <textarea formControlName="dietFollowed" pInputTextarea placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}"></textarea>
                     </div>
                 </div>
-    
+
                 <div class="row g-5 form-set">
                     <div class="col-md-4">
                         <label class="label required">{{'dashboard.students.iQRatio'|translate}}</label>
                         <p-inputNumber formControlName="iq" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
                     </div>
-    
-    
+
+
                     <div class="col-md-4">
                         <label class="label required">{{'dashboard.students.fats'|translate}}</label>
                         <p-inputNumber formControlName="fats" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
                     </div>
-    
-    
+
+
                 </div>
             </div>
-    
-    
+
+
             <div class="row g-5 form-set">
                 <div class="col-md-4">
                     <label class="label required">{{'dashboard.students.increase'|translate}}</label>
@@ -212,27 +213,27 @@
                     <p-inputNumber formControlName="shortage" [showButtons]="true" placeholder="{{'dashboard.students.writeDecrease'|translate}}"></p-inputNumber>
                     <!-- <input type="text" id="trackId" formControlName="shortage" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" /> -->
                 </div>
-    
+
             </div>
-    
+
             <div class="row g-5 form-set">
-    
+
                 <div class="col-md-4">
                     <label class="label required">{{'dashboard.students.weight'| translate}}</label>
                     <!-- <input type="number" id="trackId" formControlName="weight" pInputText placeholder="{{'dashboard.students.weight'|translate}}" /> -->
                     <p-inputNumber formControlName="weight" [min]="5" [max]="300" [showButtons]="true" placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
-    
+
                 </div>
                 <div class="col-md-4">
                     <label class="label required">{{'dashboard.students.length'|translate}}</label>
                     <!-- <input type="number" id="trackId" formControlName="height" pInputText placeholder="{{'dashboard.students.length'|translate}}" /> -->
                     <p-inputNumber formControlName="height" [min]="5" [max]="300" [showButtons]="true"  placeholder="{{'dashboard.students.length'|translate}}"></p-inputNumber>
-    
+
                 </div>
-    
+
             </div>
-    
-    
+
+
             <div class="row form-set bg-gray-30 p-5 radius-15">
                 <div class="col-md-12">
                     <label class="label required">{{'dashboard.students.anotherNotes'|translate}}</label>
