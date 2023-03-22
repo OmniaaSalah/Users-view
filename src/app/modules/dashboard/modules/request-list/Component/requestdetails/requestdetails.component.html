@@ -1,18 +1,18 @@
 
 
 
- 
+
  <div class="submit-btn d-flex justify-content-end gap-3 mb-5" *ngIf="requestDetails?.requestType==requestTypeEnum.RegestrationApplicationRequest && currentUserScope==userScopeEnum.Guardian">
-    <button class=" btn btn-primary btn--sm px-5" 
+    <button class=" btn btn-primary btn--sm px-5"
     *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Returned"
     (click)="reSendRegistrationReq()">
         <!-- <div class="spinner-border text-light" role="status" *ngIf="loading"></div> -->
         <span>{{'dashboard.Requests.resendRequest' |translate}}</span>
     </button>
 
-    <button class=" btn btn-primary btn--sm px-5" 
+    <button class=" btn btn-primary btn--sm px-5"
     [disabled]="onSubmited"
-    (click)="withdrawReq()" 
+    (click)="withdrawReq()"
     *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Pending || requestDetails?.requestStatus==RequestStatusEnum.Accepted || requestDetails.requestStatus==RequestStatusEnum.Returned">
         <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
         <span>{{'dashboard.Requests.withdrawalReq' |translate}}</span>
@@ -78,10 +78,10 @@
                 <h4 class="color-primary">{{'dashboard.Requests.'+requestDetails.requestStatus || requestDetails?.certificateStatus |translate}}</h4>
             </div>
 
-            
+
             <div class="col-4 d-flex align-items-center gap-5 mb-5" *ngIf="isRequestRelatedToStudent(requestDetails?.requestType)">
                 <p class="color-gray-300 fs-4">{{'dashboard.myRequest.student status' | translate}}</p>
-                <div [ngSwitch]="requestDetails.student?.status ||''">                    
+                <div [ngSwitch]="requestDetails.student?.status ||''">
                     <div class="color-primary" *ngSwitchCase="registrationStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
                     <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Unregistered">{{'shared.allStatus.Unregestered' | translate}}</div>
                     <div class="color-primary" *ngSwitchCase="registrationStatusEnum.ReEnrolment">{{'shared.allStatus.ReEnrolment' | translate}}</div>
@@ -91,7 +91,7 @@
                     <div class="color-primary" *ngSwitchDefault>{{'shared.allStatus.Unregestered' | translate}}</div>
                 </div>
             </div>
-            
+
             <div class="col-4 d-flex align-items-center gap-5 mb-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.myRequest.Creation date and time' | translate}}</p>
                 <h4 class="color-primary">{{requestDetails.createdDate |LocalizeDate:'d MMMM y hh:mm'}}</h4>
@@ -99,7 +99,7 @@
             <div class="col-5 d-flex align-items-center gap-5 mb-5" *ngIf="requestDetails?.rejectionRequestReason && requestDetails.rejectionRequestReason?.en">
                 <p class="color-gray-300 fs-4">{{'dashboard.Requests.rejectReason' | translate}}</p>
                 <h4 class="color-primary">{{requestDetails.rejectionRequestReason |currentLang}}</h4>
-            </div>            
+            </div>
         </div>
 
         <ng-container *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Accepted && currentUserScope==userScopeEnum.Guardian">
@@ -109,7 +109,7 @@
                 <a class="mx-2 color-primary" routerLink="/certificates/ask-certificate">إضغط هنا</a>
             </div>
         </ng-container>
-        
+
 
     </div>
 </div>
@@ -137,13 +137,13 @@
 
                     <hr class="mb-5">
                 </ng-container>
-                
-               
- 
+
+
+
 
                 <div class="fw-bold  mb-5">{{'dashboard.myRequest.Order details' | translate}}</div>
 
-                <ng-container *ngIf="requestDetails?.requestType==requestTypeEnum.AcademicSequenceCertificateRequest  || requestDetails?.requestType==requestTypeEnum.BoardCertificateRequest ||requestDetails?.requestType==requestTypeEnum.GradesCertificateRequest">
+                <ng-container *ngIf="requestDetails?.requestType==requestTypeEnum.DiplomaCertificateRequest  || requestDetails?.requestType==requestTypeEnum.AcademicSequenceCertificateRequest  || requestDetails?.requestType==requestTypeEnum.BoardCertificateRequest ||requestDetails?.requestType==requestTypeEnum.GradesCertificateRequest">
                     <ng-container *ngTemplateOutlet="certificatesRequests; context: {$implicit: requestDetails}" ></ng-container>
                 </ng-container>
 
@@ -153,7 +153,7 @@
                       <a  class="text color-skyBlue-500 fs-3 d-flex align-items-center" routerLink="/dashboard/schools-and-students/schools/school/{{requestDetails?.requestCreator?.school?.id}}">{{requestDetails?.requestCreator?.school?.name|currentLang}}</a>
                   </div>
                 </div>
-                
+
 
                 <div [ngSwitch]="requestDetails?.requestType">
                     <!-- NOTE:--------------  طلب تعديل اجازه مرنه-->
@@ -196,7 +196,7 @@
                             </div>
                         </div>
                     </div>
-                  
+
                     <!-- NOTE:-------------- طلب اعاده مرحله دراسيه -->
                     <div *ngSwitchCase="requestTypeEnum.StudentRegradingRequest">
                         <div class="col-4 d-flex align-items-center gap-5">
@@ -217,7 +217,7 @@
                     <!-- NOTE:-------------- طلب تسجيل الاين-->
                     <div *ngSwitchCase="requestTypeEnum.RegestrationApplicationRequest">
                         <!-- <ng-container *ngTemplateOutlet="studentProfile; context: {$implicit: requestDetails.student}"></ng-container> -->
-                        
+
                         <div class="row g-5">
                             <div class="col-md-4 d-flex align-items-center gap-5">
                                 <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
@@ -250,7 +250,7 @@
                                 <p class="color-gray-300 fs-4">{{'dashboard.parents.specialEducationtype' | translate}}</p>
                                 <h4 class="color-primary">{{requestDetails.specialEducation.name|currentLang}}</h4>
                             </div>
-             
+
                             <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
                         </div>
                     </div>
@@ -289,7 +289,7 @@
                                 <p class="color-gray-300 fs-4">{{'dashboard.parents.specialEducationtype' | translate}}</p>
                                 <h4 class="color-primary">{{requestDetails.student.specialEducation.name|currentLang}}</h4>
                             </div>
-             
+
                             <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.student.attachments}" ></ng-container>
                         </div>
                     </div>
@@ -303,13 +303,13 @@
                                 <p class="color-gray-300 fs-4">{{'dashboard.Requests.schoolToSend' | translate}}</p>
                                 <h4 class="color-primary">{{requestDetails.schoolFrom|currentLang}}</h4>
                             </div>
-                         
+
                             <div class="col-md-4 d-flex align-items-center gap-5">
                                 <p class="color-gray-300 fs-4">{{'dashboard.schools.studentsNumber' | translate}}</p>
                                 <h4 class="color-primary">{{requestDetails.studentNumber}}</h4>
                             </div>
                         </div>
-                        
+
                         <div class="row g-5">
                             <span class="color-primary fw-bold ">{{'shared.To'|translate}}</span>
 
@@ -325,7 +325,7 @@
                                 <p class="color-gray-300 fs-4">{{'shared.division' | translate}}</p>
                                 <h4 class="color-primary">{{requestDetails?.divisionTo|currentLang}}</h4>
                             </div>
-                        
+
 
                         </div>
                     </div>
@@ -368,7 +368,7 @@
                                 <p class="color-gray-300 fs-4">{{'shared.religion' | translate}}</p>
                                 <h4 class="color-primary">{{requestDetails.nationalityName |currentLang}}</h4>
                             </div>
-              
+
                         </div>
                     </div>
 
@@ -396,7 +396,7 @@
                     </div>
 
                     <!-- NOTE:-------------- طلب اعاده ربط الابن بولى امر جديد-->
-                    <div *ngSwitchCase="requestTypeEnum.RelinkChildToGuardianRequestToSPEA">  
+                    <div *ngSwitchCase="requestTypeEnum.RelinkChildToGuardianRequestToSPEA">
                         <div class="col-4 d-flex align-items-center gap-5 mt-5 ">
                             <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.The name of the new guardian' | translate}}</p>
                             <h4 class="color-primary">{{requestDetails.guardian.name |currentLang}}</h4>
@@ -431,11 +431,11 @@
                                     <ng-container *ngFor="let state of states">
 
                                         <ng-container *ngIf="state.status==statusEnum.Completed; then approvedTemp; else  pendingTemp"></ng-container>
-                                        
+
                                         <ng-template #pendingTemp>
                                             <!-- *ngFor="let task of state.tasks | slice :0:1" -->
-                                            <li class="event" 
-                                            [class.active]="timeline.currentState.mappedStatusCode==state.state.mappedStatusCode" 
+                                            <li class="event"
+                                            [class.active]="timeline.currentState.mappedStatusCode==state.state.mappedStatusCode"
                                             *ngFor="let task of state.tasks | slice :0:1"
                                             >
                                                 <ng-container *ngIf="!state.state.isFinal">
@@ -447,21 +447,21 @@
                                                     <div class="event__content">
                                                         <div class="profile__name ">
                                                             <h4 class="color-red-500 fs-3">{{state.state.title | currentLang}}</h4>
-                                                            <!-- <span class="color-black-500 fs-4 ">{{task.action?.title | currentLang}} 
+                                                            <!-- <span class="color-black-500 fs-4 ">{{task.action?.title | currentLang}}
                                                                 <span class="heading heading--tertiary">{{task.rejectThing | currentLang}}</span>
                                                             </span> -->
                                                             <!-- {{task.status.title | currentLang}} -->
                                                             <span class="color-red-500 me-auto"> قيد الانتظار </span>
                                                         </div>
                                                         <!-- <p class="fs-4 color-gray-800 w-75">{{task.content | currentLang}}</p> -->
-                                                
+
                                                         <!-- <div class="icon--file m-4">
                                                             <img src="assets/images/shared/PDFSEC.svg" alt="">
                                                             <span class="text color-primary">{{task.attachment.name}}</span>
                                                         </div> -->
                                                     </div>
                                                 </ng-container>
-                                                
+
                                             </li>
                                         </ng-template>
 
@@ -482,7 +482,7 @@
                                                         <span class="color-skyBlue-500 me-auto">  {{task.action?.title | currentLang}}</span>
                                                     </div>
                                                     <p class="fs-4 color-gray-800 w-75">{{task.action?.comments}}</p>
-                                            
+
                                                     <!-- <ng-container *ngTemplateOutlet="attachments; context: {$implicit: task.action.attachments}"></ng-container> -->
                                                     <div class="row mt-4 mb-5" *ngIf="task.action?.attachments">
                                                         <div  class="col-md-4" *ngFor="let item of task.action?.attachments">
@@ -496,7 +496,7 @@
                                                 </div>
                                             </li>
                                         </ng-template>
-                  
+
                                 </ng-container>
                                 </ul>
                             </div>
@@ -507,7 +507,7 @@
                 </div>
             </ng-container>
 
-            
+
         </div>
     </div>
 
@@ -515,14 +515,14 @@
 <div class="ms-4 mt-4" *ngIf="timeline">
     <form  ngForm #f="ngForm">
 
-        <!-- <ng-container 
+        <!-- <ng-container
         *ngIf="isCommentAllowed()">
             <div class="custom-form mb-4">
                 <label class="label">{{'dashboard.myRequest.comment' | translate}}</label>
                 <input type="text" [(ngModel)]="reqActionsForm.comments" name="comment" pInputText placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"/>
             </div>
-            <app-file-upload 
-            view="full" 
+            <app-file-upload
+            view="full"
             [files]="filesToUpload"
             (onFileUpload)="filesToUpload =$event"></app-file-upload>
         </ng-container>
@@ -536,11 +536,11 @@
             <!-- NOTE:----- incace the currnt user is not  Gurdian -->
             <!-- currentUserScope!=userScopeEnum.Guardian  -->
             <ng-container *ngIf="timeline?.task?.options" >
-                <button 
+                <button
                 [class.d-none]="option?.label.en=='returned' && requestDetails?.requestStatus==RequestStatusEnum.Returned"
                 [disabled]="option.isLoading"
                 [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
-                *ngFor="let option of timeline?.task?.options;let i=index" 
+                *ngFor="let option of timeline?.task?.options;let i=index"
                 (click)="onActionTaken(option,i)"
                 class="btn">
                     {{option.title|currentLang}}
@@ -597,7 +597,7 @@
                         </div>
                     </div>
                 </li>
-                
+
             </ng-container>
         </ul>
         <ng-container *ngIf="!requestDetails?.requestComments.length">
@@ -613,12 +613,12 @@
         <div class="d-flex gap-4 align-items-center h-100 p-4">
             <textarea   [(ngModel)]="reqActionsForm.comments"  [rows]="1" name="comment" pInputTextarea placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"></textarea>
             <!-- <i class="pi-cloud-upload" style="font-size: 2rem"></i> -->
-            <app-file-upload 
-            theme="chat" 
+            <app-file-upload
+            theme="chat"
             [files]="filesToUpload"
             [maxFilesToUpload]="3"
             (onFileUpload)="filesToUpload =$event"></app-file-upload>
-            
+
             <!-- <button [disabled]="!reqActionsForm.comments.length || !filesToUpload.length" (click)="addComment()"  role="button" class="d-flex align-items-center align-items-center p-3 bg-primary radius-full rotate180">
                 <img src="assets/images/shared/send.svg" alt="" *ngIf="!isLoading">
                 <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
@@ -627,8 +627,8 @@
                 {{'shared.send' | translate}}
                 <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
             </button>
-            
-            
+
+
         </div>
     </div>
 
@@ -671,7 +671,7 @@
                         <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Withdrawal">{{'shared.allStatus.Withdrawal' | translate}}</div>
                         <div class="color-gray-500" *ngSwitchCase="registrationStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
                         <div class="color-primary" *ngSwitchDefault>{{'shared.allStatus.Unregestered' | translate}}</div>
-                        
+
                     </div>
                 </div>
                 <div  *ngIf="student?.grade">
@@ -719,7 +719,7 @@
         </div>
         <!-- <div class="col-md-12 d-flex align-items-center mt-5 ">
             <span>{{'dashboard.myRequest.Student attachments' | translate}} </span>
-        
+
             <div *ngFor="let item of student.attachments; let i = index" class="icon--file m-4 ">
                 <app-file [name]="item.name.ar" [url]="item.url"></app-file>
             </div>
@@ -736,12 +736,12 @@
                 <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
                 <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
             </div>
-                  
+
             <div class="col-4 d-flex align-items-center gap-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
                 <h4 class="color-primary">{{requestDetails.schoolYear  |currentLang}}</h4>
             </div>
-                
+
             <div class="col-4 d-flex align-items-center gap-5" *ngIf="requestDetails?.gradeCertificateType">
                 <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.degreesCertificateType' | translate}}</p>
                 <h4 class="color-primary">{{'dashboard.issue of certificate.' + requestDetails.gradeCertificateType | translate}}</h4>
@@ -783,11 +783,11 @@
                     <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
                     <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
                 </div>
-                <div class="col-4 d-flex align-items-center gap-5">
+                <div class="col-4 d-flex align-items-center gap-5" *ngIf="requestDetails.cause">
                     <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
                     <h4 class="color-primary">{{requestDetails.cause}}</h4>
                 </div>
-                          
+
                 <div class="col-md-12 d-flex align-items-center mt-5 gap-5">
                     <span class="flex-shrink-0">{{'dashboard.Requests.requestAttachments' | translate}} </span>
                     <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
@@ -838,7 +838,7 @@
             <app-skeleton count="1" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
         </div>
     </div>
-   
+
 </ng-template>
 
 
@@ -850,21 +850,21 @@
 
         <div class="custom-form" ngForm #f="ngForm">
             <label class="label">{{'dashboard.Requests.rejectReason'| translate}}</label>
-            <input 
+            <input
             *ngIf="!rejectReason$"
-            type="text" 
+            type="text"
             [(ngModel)]="reqActionsForm.rejectionReason"
-            name="comment" pInputText 
+            name="comment" pInputText
             [required]="!rejectReason$"
             placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"/>
 
-            <p-dropdown 
+            <p-dropdown
             [(ngModel)]="reqActionsForm.rejectionReasonId"
             *ngIf="rejectReason$"
             name="cause"
-            [options]="rejectReason$|async" 
+            [options]="rejectReason$|async"
             optionValue="id"
-            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" 
+            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
             placeholder="{{'dashboard.Requests.rejectReason'|translate}}" [required]="rejectReason$"></p-dropdown>
         </div>
 
@@ -873,8 +873,8 @@
 
         <div class="py-5"></div>
         <div class="d-flex justify-content-end mt-6 mb-4" >
-            <button class="btn btn-primary" 
-            (click)="completeRequestAction()" 
+            <button class="btn btn-primary"
+            (click)="completeRequestAction()"
             [disabled]="!f.valid || isLoading">{{'shared.confirm'| translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
         </button>

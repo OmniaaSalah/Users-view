@@ -33,7 +33,7 @@ export class TransferGroupComponent implements OnInit {
 
   filteration:Filter ={...Filtration, curriculumId:1,gradeId: null}
   // studentFilteration:Filter = {...Filtration,SchoolId:this.schoolId, GradeId:'',DivisionId:'',PageSize:null}
-  studentFilteration:Filter = {...Filtration,GradeId:'',DivisionId:'',PageSize:null}
+  studentFilteration:Filter = {...Filtration,GradeId:'',DivisionId:'',PageSize:0}
 
 
   schools={
@@ -70,12 +70,12 @@ export class TransferGroupComponent implements OnInit {
   get divisionCtr () {return this.requestForm.controls['divisionId'] as FormControl}
   get transferTypeCtr () {return this.requestForm.controls['transferType'] as FormControl}
 
-  selectedSchool={ index: null, value: null} 
-  
+  selectedSchool={ index: null, value: null}
+
   allChecked = false
   checkboxSelected = false
   selectedStudents=[];
-  
+
   componentHeaderData: IHeader={
 		breadCrump: [],
 	}
@@ -96,10 +96,10 @@ export class TransferGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDashboardHeader();
-  
 
 
-    
+
+
   }
 
   getAllStudents(){
@@ -108,13 +108,13 @@ export class TransferGroupComponent implements OnInit {
     this.gradeService.getGradeStudents(this.schoolId,this.studentFilteration.GradeId, this.studentFilteration)
     .pipe(map(res => res.result))
     .subscribe(res=>{
-      this.students.list = res.data 
-      this.students.total = res.total     
+      this.students.list = res.data
+      this.students.total = res.total
       this.students.totalAllData = res.totalAllData
       this.students.loading=false
 
-      // this.students.list = res.data.map(er=>er.checkboxSelected)  
-      
+      // this.students.list = res.data.map(er=>er.checkboxSelected)
+
       // this.students.list=res.data.map((student)=>{return {
       //   'id':student.id,
       //   'name':{'ar':student.name.ar,'en':student.name.en },
@@ -131,7 +131,7 @@ export class TransferGroupComponent implements OnInit {
     this.checkboxSelected = false
 
     this.selectedStudents = []
- 
+
     this.studentFilteration.GradeId=  gradeId
     this.filteration.gradeId=  gradeId
     this.divisionCtr.setValue(null)
@@ -155,7 +155,7 @@ export class TransferGroupComponent implements OnInit {
 
     this.settingService.schoolsAllowedToAcceptStudentsGroup(this.filteration).subscribe(res=>{
       this.schools.list = res.result.data.filter(el => el.id!=this.schoolId)
-      this.schools.total = res.result.total     
+      this.schools.total = res.result.total
       this.schools.totalAllData = res.result.totalAllData
       this.schools.loading=false
     },err=>{
@@ -164,36 +164,36 @@ export class TransferGroupComponent implements OnInit {
   }
 
 
-  onSelectSchool(index, school) {    
+  onSelectSchool(index, school) {
     this.selectedSchool.index= index
     this.selectedSchool.value =school
     this.requestForm.controls['transfferdSchoolId'].setValue(school.id)
   }
 
-  // chooseStudent(event,studentId){      
+  // chooseStudent(event,studentId){
   //   if (event.checked) {
   //     this.choosenStudents.push(studentId)
   //   } else {
   //     this.choosenStudents.forEach((item, index) => {
-  //       if (studentId === item) {          
+  //       if (studentId === item) {
   //         this.choosenStudents.splice(index, 1)
   //       }
   //     });
-  //   }    
+  //   }
 
-  //   if(this.choosenStudents.length ==  this.students.list.length){ 
-  //     this.allChecked = true      
-      
+  //   if(this.choosenStudents.length ==  this.students.list.length){
+  //     this.allChecked = true
+
   //   }else{
   //     this.allChecked = false
-      
+
   //   }
   //   // console.log(this.choosenStudents);
   // }
 
 
   checkAll(isChecked){
-    
+
     if (isChecked)  this.selectedStudents = this.students.list.map(el=> el.id)
     else   this.selectedStudents  = []
   }
@@ -232,7 +232,7 @@ export class TransferGroupComponent implements OnInit {
         { label: this.translate.instant('dashboard.students.TransferStudentGroup'), routerLink: `/dashboard/school-management/school/${this.schoolId}/transfer-students`},
       ]
 
-      
+
     }
     else if (this.currentUserScope==UserScope.SPEA)
     {
@@ -242,11 +242,11 @@ export class TransferGroupComponent implements OnInit {
           { label: this.translate.instant('dashboard.students.TransferStudentGroup'), routerLink: `/dashboard/schools-and-students/schools/transfer-students`},
         ]
 
-      
+
     }
 
     this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
- 
+
 }

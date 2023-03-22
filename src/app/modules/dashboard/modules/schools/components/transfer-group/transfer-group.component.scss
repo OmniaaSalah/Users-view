@@ -4,13 +4,13 @@
 
 .submitBtn{
   position: absolute;
-  top: -6rem;
+  top: -7rem;
   left: 4rem;
   ::ng-deep .p-progress-spinner{
     width: 3rem !important;
   }
 
-  
+
 }
 ::ng-deep .p-progress-spinner-circle {
   stroke: red !important;
