@@ -19,8 +19,14 @@ export enum StatusEnum {
     SonsOfArabs="SonsOfArabs",
     SonsOfNonArabs="SonsOfNonArabs",
     IsChildOfAMartyr="IsChildOfAMartyr",
-    IsChildOfCitizens="IsChildOfCitizens",
+    ChildOfCitizens="ChildOfCitizens",
     Citizens="Citizens",
+    SonsOfTheFirstLineOfDefens="SonsOfTheFirstLineOfDefens",
+    EmiratesCitizens="EmiratesCitizens",
+    GCCNational="GCCNational",
+    IsSpecialAbilities="IsSpecialAbilities",
+    Arabs="Arabs",
+    NonArab= 'NonArab',
     //----------------------------------------------
 
     Pending = 'Pending',
@@ -28,7 +34,7 @@ export enum StatusEnum {
     Accepted = 'Accepted',
     Rejected = 'Rejected',
     Sent = 'Sent',
-    New = 'New',
+    Draft = 'Draft',
     Closed = 'Closed',
     Apparent= 'Apparent',
     
@@ -77,4 +83,9 @@ export enum UserRequestsStatus{
     //معتمد
     Approved = "Approved",
     SentForApproval  ="SentForApproval"
+}
+
+export enum TransportaionType{
+    SchoolBus="SchoolBus",
+    PrivateCar="PrivateCar"
 }

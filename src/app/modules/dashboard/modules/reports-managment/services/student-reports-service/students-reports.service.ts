@@ -11,33 +11,10 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   providedIn: 'root'
 })
 export class StudentsReportsService {
-  StudentCategoryList=[]
   studentsStatus = []
   lang = inject(TranslationService).lang;
   constructor(private translate:TranslateService,private http: HttpHandlerService,
     private tableLoaderService: LoaderService) {
-    this.StudentCategoryList=[
-      {
-        value:StatusEnum.Citizens,
-        name: this.translate.instant("shared.allStatus."+StatusEnum.Citizens)
-      },
-      {
-        value:StatusEnum.SonsOfArabs,
-        name: this.translate.instant("shared.allStatus."+StatusEnum.SonsOfArabs)
-      },
-      {
-        value:StatusEnum.SonsOfNonArabs,
-        name: this.translate.instant("shared.allStatus."+StatusEnum.SonsOfNonArabs)
-      },
-      {
-        value:StatusEnum.IsChildOfAMartyr,
-        name: this.translate.instant("shared.allStatus."+StatusEnum.IsChildOfAMartyr)
-      },
-      {
-        value:StatusEnum.IsChildOfCitizens,
-        name: this.translate.instant("shared.allStatus."+StatusEnum.IsChildOfCitizens)
-      }
-    ]
     this.studentsStatus = [
       {
         value:StatusEnum.Registered,
