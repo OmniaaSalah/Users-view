@@ -30,7 +30,7 @@ export class SurveyService {
       { name:this.translate.instant('dashboard.surveys.SurveyRateQuestion'), value: QuestionsTypeEnum.SurveyRateQuestion }
     ]
     this.surveyStatus= [
-      { name:this.translate.instant('dashboard.surveys.New'), value:StatusEnum.New },
+      { name:this.translate.instant('dashboard.surveys.Draft'), value:StatusEnum.Draft },
       { name:this.translate.instant('dashboard.surveys.Sent'), value: StatusEnum.Sent },
       { name:this.translate.instant('dashboard.surveys.Closed'), value:StatusEnum.Closed },
       { name:this.translate.instant('dashboard.surveys.Apparent'), value: StatusEnum.Apparent},

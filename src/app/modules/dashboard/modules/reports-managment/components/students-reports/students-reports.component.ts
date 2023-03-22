@@ -15,6 +15,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsReportsService } from '../../services/student-reports-service/students-reports.service';
 import { StudentsService } from '../../../students/services/students/students.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
   selector: 'app-students-reports',
@@ -23,6 +24,7 @@ import { StudentsService } from '../../../students/services/students/students.se
 })
 export class StudentsReportsComponent implements OnInit {
   isBtnLoading: boolean=false;
+  get statusEnum(){ return StatusEnum }
   nationalityList=[];
   studentCategoryList=[];
   birthDate;
@@ -52,7 +54,7 @@ export class StudentsReportsComponent implements OnInit {
     IsTopStudent: false,
     NationalityId:null,
     TalentId: null,
-    NationalityCategoryId:null
+    StudentCategory:null
   };
   rangeValues: number[];
   felmaleStudentCount;
@@ -110,7 +112,7 @@ export class StudentsReportsComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getStudents()
     this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});
-    this.studentService.getStudentNatioaniliteCategories().subscribe((res)=>{this.studentCategoryList=res});
+    this.studentCategoryList=this.sharedService.studentCategoryList;
   }
 
 
@@ -199,7 +201,7 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.IsActive=null;
     this.acceptanceDate=null,
     this.filtration.TalentId=null,
-    this.filtration.NationalityCategoryId=null,
+    this.filtration.StudentCategory=null,
     this.filtration.Page=1;
     this.getStudents()
   }

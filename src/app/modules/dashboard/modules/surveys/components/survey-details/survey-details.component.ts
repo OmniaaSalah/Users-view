@@ -155,7 +155,7 @@ getSurveyById()
 
       this.addDatatoQuestion(item,i);
 
-      if(this.editSurvey?.surveyStatus!=StatusEnum.Sent&&this.editSurvey?.surveyStatus!=StatusEnum.New&&this.surveyId)
+      if(this.editSurvey?.surveyStatus!=StatusEnum.Sent&&this.editSurvey?.surveyStatus!=StatusEnum.Draft&&this.surveyId)
       {
         // this.surveyQuestionType.enable();
       }

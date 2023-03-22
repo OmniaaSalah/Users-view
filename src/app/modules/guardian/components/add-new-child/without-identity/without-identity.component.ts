@@ -49,7 +49,8 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
     reason:['',Validators.required],
     note:[''],
     note2:[''],
-    PassportNumberExpirationDate:['',Validators.required],
+    note3:[''],
+    // PassportNumberExpirationDate:['',Validators.required],
     arabicName:['',[Validators.required, Validators.maxLength(64)]],
     englishName:['',[Validators.required, Validators.maxLength(64)]],
     arabicNickName:['',[Validators.required, Validators.maxLength(64)]],
@@ -57,7 +58,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
     gender:['',Validators.required],
     nationality:['',Validators.required],
     relativity:['',Validators.required],
-    travelId:['',Validators.required],
+    // travelId:['',Validators.required],
     religion:['',Validators.required],
     birthdate:['',Validators.required],
   })
@@ -191,12 +192,20 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
       }
     })
 
+    this.imageResult4.map(er=>{
+      er.comment = this.registerWithoutIdentityForm.value.note3
+      er.titel={
+        en: 'Passport Image',
+        ar: 'ًصورة جواز السفر'
+      }
+    })
+
     let data = {
       'relativeRelationId':  this.registerWithoutIdentityForm.value.relativity,
       'name': {ar:this.registerWithoutIdentityForm.value.arabicName,en:this.registerWithoutIdentityForm.value.englishName},
       'surName': {ar:this.registerWithoutIdentityForm.value.arabicNickName,en:this.registerWithoutIdentityForm.value.englishNickName},
-      'passportNumber': this.registerWithoutIdentityForm.value.travelId,
-      'passportNumberExpirationDate': new Date(this.registerWithoutIdentityForm.value.PassportNumberExpirationDate).toISOString(),
+      // 'passportNumber': this.registerWithoutIdentityForm.value.travelId,
+      // 'passportNumberExpirationDate': new Date(this.registerWithoutIdentityForm.value.PassportNumberExpirationDate).toISOString(),
       'birthDate': new Date(this.registerWithoutIdentityForm.value.birthdate).toISOString(),
       'gender': this.registerWithoutIdentityForm.value.gender,
       'nationlityId': this.registerWithoutIdentityForm.value.nationality,
@@ -204,8 +213,8 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
       'guardianId': Number(JSON.parse(localStorage.getItem('$AJ$currentGuardian')).id),
       'reasonForNotHavingEmiratesId': this.registerWithoutIdentityForm.value.reason,
       'religionId': this.registerWithoutIdentityForm.value.religion,
-      'childAttachments':[...this.imageResult1,...this.imageResult3],
-      'passportImage':this.imageResult4.map(er=>er.url).toString()
+      'childAttachments':[...this.imageResult1,...this.imageResult3,...this.imageResult4],
+      // 'passportImage':this.imageResult4.map(er=>er.url).toString()
     }
 
     this.addChildService.postChildWithoudIdentity(data)
