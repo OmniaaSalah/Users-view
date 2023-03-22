@@ -3,10 +3,10 @@
     <!-- <app-add-btn fs-4 [backGroundColor]="'btn-primary'" [route]="'register'" [content]="'breadcrumb.Studentregister'"></app-add-btn> -->
     <div class="d-flex align-items-center justify-content-between bg-white">
         <div class="profile d-flex align-items-center">
-            <input type="file" 
-            #uploadImg 
-            accept="image/*" 
-            [hidden]="true" 
+            <input type="file"
+            #uploadImg
+            accept="image/*"
+            [hidden]="true"
             (change)="uploadProfileImage($event)">
             <div *ngIf="currentUserScope!=userScope.Guardian" class="profile__avatar position-relative" >
                 <img [src]="child?.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
@@ -94,7 +94,7 @@
                         <app-skeleton count="3" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
                     </div>
                 </div>
-                
+
             </ng-container>
 
             <ng-container *ngIf="!editMode && child">
@@ -103,7 +103,7 @@
                         <img src="assets/images/shared/pen-blue-filled.svg" alt="">
                     </div>
                 </ng-container>
-                
+
                 <div class="">
                     <div class="row g-5">
                         <div class="col-3 d-flex align-items-center gap-5">
@@ -136,12 +136,12 @@
                             <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.nationlity?.name |currentLang}}</h4>
                         </div>
-    
+
                         <div class="col-2 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.relativeRelation?.name |currentLang }}</h4>
                         </div>
-    
+
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.passportNumber}}</h4>
@@ -157,19 +157,19 @@
                                 <label class="label required">{{'shared.nameAr'|translate}}</label>
                                 <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
                             </div>
-    
+
                             <div class="form-set  col-md-4">
                                 <label class="label required">{{'shared.nameEn'|translate}}</label>
                                 <input type="text" formControlName="en"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
                             </div>
                         </ng-container>
-                        
+
                         <ng-container formGroupName="surname" >
                             <div class="form-set col-md-4" >
                                 <label class="label required">{{'shared.surnameAr'|translate}}</label>
                                 <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
                             </div>
-    
+
                             <div class="form-set col-md-4">
                                 <label class="label required">{{'shared.surnameEn'|translate}}</label>
                                 <input type="text" formControlName="en" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
@@ -180,22 +180,22 @@
                             <label class="label required">{{'shared.gender'|translate}}</label>
                             <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
                         </div>
-            
+
                         <div class="form-set col-md-4">
                             <label class="label required">{{'shared.birthDay'|translate}}</label>
                             <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
                         </div>
-            
-            
+
+
                         <div class="form-set col-md-4">
                             <label class="label required">{{'shared.nationality'|translate}}</label>
                             <!-- <input type="text" formControlName="nationalityId" pInputText placeholder="اماراتى" /> -->
-                            <p-dropdown 
+                            <p-dropdown
                             [filter]="true"
                             filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                             formControlName="nationlityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
                         </div>
-        
+
                         <div class="form-set col-md-4">
                             <label class="label required">{{'dashboard.parents.relatedType'|translate}}</label>
                             <p-dropdown formControlName="relativeRelationId" [options]="relativeRelation$|async" optionValue="id" optionLabel="arabicName"></p-dropdown>
@@ -214,7 +214,7 @@
                         <img src="assets/images/shared/pen-blue-filled.svg" alt="">
                     </div>
                 </ng-container>
-                
+
                 <div class="row mt-5">
                     <ng-container *ngFor="let file of attachmentsList.controls; let i = index">
                         <div class="col-md-4 mt-6">
@@ -233,11 +233,11 @@
                                         <span class="comment" *ngIf="file.value.comment">{{file.value?.comment}}</span>
                                     </p>
                                 </ng-container>
-                                
+
                             </div>
                         </div> -->
                     </ng-container>
-        
+
                 </div>
 
                 <ng-container *ngIf="!attachmentsList?.controls.length">
@@ -245,15 +245,15 @@
                 </ng-container>
 
             </ng-container>
-            
+
             <ng-container *ngIf="AttachmentEditMode">
 
                 <div class="d-flex justify-content-end gap-3">
-                    <button class="btn btn-primary add-attach" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
+                    <button class="btn btn-primary" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
                 </div>
-            
+
                 <div class="mt-5 row gx-5 border-dark radius-15 p-5 custom-form" *ngIf="addMode" [formGroup]="fileForm">
-                    <ng-container formGroupName="titel">                    
+                    <ng-container formGroupName="titel">
                         <div class="col-md-4">
                             <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
                             <input pInputText formControlName="ar" >
@@ -263,17 +263,17 @@
                             <input pInputText formControlName="en" >
                         </div>
                     </ng-container>
-            
+
                     <div class="col-md-2">
                         <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
                         <p-dropdown formControlName="fileType" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
                     </div>
-            
+
                     <div class="col mb-2 gap-3 align-self-end d-flex justify-content-end">
                         <button class="btn btn-primary" (click)="addNewFileUpload()" [disabled]="!fileForm.valid">{{'shared.save' |translate}}</button>
                         <button class="fs-3" ><a (click)="addMode=false" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
                     </div>
-                    
+
                 </div>
 
                 <hr class="my-5">
@@ -281,12 +281,12 @@
                 <div class="row g-5">
                     <div class="col-md-4"  *ngFor="let file of attachmentsList.controls; let i=index">
                         <div class="" >
-                            <app-file-upload 
-                            [files]="[{url: file.value?.url,name:file.value?.name, comment:file.value?.comment}]"  
-                            [title]="file.value.titel.ar" [accept]="'.pdf'" 
-                            [hasComment]="true" 
-                            view="full" 
-                            (onFileUpload)="addnewAttachmentTo($event, i)" 
+                            <app-file-upload
+                            [files]="[{url: file.value?.url,name:file.value?.name, comment:file.value?.comment}]"
+                            [title]="file.value.titel.ar" [accept]="'.pdf'"
+                            [hasComment]="true"
+                            view="full"
+                            (onFileUpload)="addnewAttachmentTo($event, i)"
                             ></app-file-upload>
                         </div>
                     </div>

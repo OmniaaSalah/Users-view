@@ -1,7 +1,7 @@
 <div *ngIf="!isSkeletonVisible">
 
 
-    
+
     <div class="row gap-6 radius-15 border-dark p-5 mb-5 bg-white" *ngIf="currentUserScope!=userScope.Guardian">
         <ng-container *ngIf="guardianData">
             <div class="col-4 d-flex align-items-center gap-5 mb-5">
@@ -20,13 +20,13 @@
                 <p class="color-gray-300 fs-4">{{'shared.phoneNumber' | translate}}</p>
                 <h4 class="color-primary">{{ guardianData.mobile}}</h4>
             </div>
-    
+
             <div class="col-4 d-flex align-items-center gap-5 mb-5">
                 <p class="color-gray-300 fs-4">{{'shared.email' | translate}}</p>
                 <h4 class="color-primary">{{guardianData.email}}</h4>
-    
+
             </div>
-    
+
             <div class="col-4 d-flex align-items-center gap-5 mb-5">
                 <p class="color-gray-300 fs-4">{{'shared.birthDay' | translate}}</p>
                 <h4 class="color-primary">{{guardianData.birthDate |LocalizeDate}}</h4>
@@ -77,7 +77,7 @@
 
                         <div class=" border-top-gray p-4 ">
                             <div class="grid-container gap-4 pt-2 mb-4">
-                                
+
                                 <p class="color-gray-300 fs-4">{{ 'shared.school'|translate }}</p>
                                 <span class="color-gray-800 mb-2">{{student.school | currentLang}}</span>
 
@@ -102,10 +102,10 @@
     </div>
 
 
-    
-    
-    
-    
+
+
+
+
     <!-- Withdrawn Children -->
     <div *ngIf="currentUserScope!=userScope.Employee && studentsWithdrawal?.length">
         <hr class="my-6">
@@ -224,7 +224,7 @@
                     </div>
                 </div>
 
-                <app-informative-block *ngIf="!chiledren.length"  subTitle="{{'emptyList.noUnregisteredSonsForThisGuardian' |translate}}" subTitle="{{'emptyList.addNewSon' |translate}}"></app-informative-block>
+                <app-informative-block *ngIf="!chiledren.length"  subTitle="{{'emptyList.noUnregisteredSonsForThisGuardian' |translate}}"></app-informative-block>
             </div>
         </div>
         <div class="py-6"></div>

@@ -10,7 +10,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { ParentService } from '../../services/parent.service';
@@ -24,13 +24,13 @@ import { ParentService } from '../../services/parent.service';
 })
 export class ChildrenListComponent implements OnInit {
   faChevronLeft = faChevronLeft;
-  
+
   currentSchool;
   currentSchoolId;
   parentId = Number(this._router.snapshot.paramMap.get('parentId'));
   currentUserScope = inject(UserService).getCurrentUserScope()
 
-  
+
   get claimsEnum () {return ClaimsEnum}
   get registrationStatus() {return RegistrationStatus}
 
@@ -69,9 +69,9 @@ export class ChildrenListComponent implements OnInit {
     this.checkChildrenList()
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.userService.currentUserSchoolName$?.subscribe((res)=>{this.currentSchool=res})
-  
-  
- 
+
+
+
   }
   getChildernByParentId(){
     this.parentService.getChildernByParentId(this.parentId).subscribe(response => {
@@ -106,7 +106,7 @@ export class ChildrenListComponent implements OnInit {
   {
       if(this.currentUserScope==UserScope.Employee)
     {
-   
+
 		this.componentHeaderData={
       breadCrump: [
         { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/student-management/all-parents/',routerLinkActiveOptions:{exact: true} },
@@ -126,17 +126,17 @@ export class ChildrenListComponent implements OnInit {
     }
     }
   }
-  get userScope() 
-  { 
-    return UserScope 
+  get userScope()
+  {
+    return UserScope
   }
 
   checkChildrenList()
   {
     if(this.currentUserScope==this.userScope.Employee)
     {
-    this.userService.currentUserSchoolId$.subscribe(id =>{      
-      
+    this.userService.currentUserSchoolId$.subscribe(id =>{
+
       this.getChildernByParentIdInSpecificSchool(id);
     })
   }
