@@ -1,6 +1,6 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy,inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -18,6 +18,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-user-roles',
@@ -26,6 +27,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
   providers: [ConfirmationService, MessageService]
 })
 export class UserRolesListComponent implements OnInit,OnDestroy {
+  lang = inject(TranslationService).lang
   faEllipsisVertical = faEllipsisVertical;
   userListForSpecificRole:string[]=[];
   showLoader:boolean=false;
@@ -117,6 +119,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     {this.filtration.SortBy="ASC"}
     else
     {this.filtration.SortBy="desc"}
+    this.filtration.SortColumnName=e.field;
     this.filtration.Page=1;
     this.getAllRole();
   }

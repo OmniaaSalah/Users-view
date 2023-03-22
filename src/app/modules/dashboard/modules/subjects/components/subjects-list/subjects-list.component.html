@@ -64,7 +64,7 @@
             <td  *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
           
             <td  class="actions"> 
-                <div role="button" class=" d-flex gap-3 justify-content-end align-items-center"  routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}" *permit="ClaimsEnum.S_U_Subject">
+                <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4"  routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}" *permit="ClaimsEnum.S_U_Subject">
                     <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                     <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                 </div>

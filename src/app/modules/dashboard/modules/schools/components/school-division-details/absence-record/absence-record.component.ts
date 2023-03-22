@@ -1,7 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, distinctUntilChanged, finalize, map, shareReplay, startWith, Subject, switchMap, takeUntil } from 'rxjs';
@@ -28,9 +27,6 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
   ngUnSubscribe =new Subject()
   lang = inject(TranslationService).lang
   get claimsEnum () {return ClaimsEnum}
-
-  faClose=faClose
-
   isSubmited
   absenceStudentsForm={
     date: null,
