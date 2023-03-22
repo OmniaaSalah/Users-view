@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy,inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -13,12 +13,14 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-class-details',
   templateUrl: './class-details.component.html',
   styleUrls: ['./class-details.component.scss']
 })
 export class ClassDetailsComponent implements OnInit,OnDestroy {
+  lang = inject(TranslationService).lang
   get schoolYearEnum() {return SchoolYearEnum}
   get ClaimsEnum(){return ClaimsEnum}
   addSubjectModelOpened:boolean=false;

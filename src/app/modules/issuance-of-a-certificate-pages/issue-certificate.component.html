@@ -33,7 +33,7 @@
                          <span class="color-primary fw-bold">{{selectedCertificate?.name |currentLang}}</span>
                          <div class="d-flex gap-4 align-items-center">
                              <span class="color-gray-300">{{'dashboard.issue of certificate.Certificate fee' |translate}}</span>
-                              <span class="color-red-500">{{selectedCertificate?.fees}} درهم</span>
+                              <span class="color-red-500">{{selectedCertificate?.fees}} {{'dashboard.issue of certificate.dirham'|translate}}</span>
                          </div>
                         <a class="color-skyBlue-500 text-decoration-underline " *ngIf="!studentId||selectedCertificate.value==certificateType.BoardCertificate||selectedCertificate.value==certificateType.AcademicSequenceCertificate||selectedCertificate.value==certificateType.GradesCertificate||selectedCertificate.value==certificateType.GoodBehaviorCertificate"  (click)="showChildreens()">{{'dashboard.issue of certificate.addRequiredInfo' |translate}}</a>
                         <button type="submit" class="btn  btn-primary" *ngIf="studentId&&selectedCertificate.value!=certificateType.BoardCertificate&&selectedCertificate.value!=certificateType.AcademicSequenceCertificate&&selectedCertificate.value!=certificateType.GradesCertificate&&selectedCertificate.value!=certificateType.GoodBehaviorCertificate" (click)="onStepChanged(item)" [disabled]="isBtnLoading">

@@ -26,7 +26,7 @@
 }
 
 #notification-content{
-    // margin-right: 4rem;
+    margin-inline-start: 4rem;
     // margin-top: 1.5rem;
     .Readingstatus{
         font-weight: 500;
@@ -62,7 +62,7 @@
             box-shadow:  0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
            
             .card-header{
-                padding-right: 2.5rem;
+                padding-inline-start: 2.5rem;
                 padding-bottom: 0.7rem;
                 padding-top: 0.7rem;
                 background-color: #fff;
@@ -76,7 +76,7 @@
                 .receivedtime{
                     color:$color-gray-250;
                     font-weight: 400;
-                    padding-right: 90.5rem;
+                    padding-inline-start: 90.5rem;
                 }
             }
             .card-body{
@@ -120,7 +120,7 @@
                                 font-weight: 400;
                             
                             }
-                            .calendaricon{margin-right: 0.7rem;padding-bottom: 8px;}
+                            .calendaricon{margin-inline-start: 0.7rem;padding-bottom: 8px;}
                             }
                             .tittle{font-weight: 500;}
                 
@@ -141,10 +141,10 @@
                 }
 
                 .Details{
-                    padding-right: 23.2rem;
+                  padding-inline-start: 23.2rem;
                     padding-top: 3.7rem;
                     margin: auto;
-                    margin-left: 2rem;
+                   margin-inline-end: 2rem;
                     .btn-primary{
                         background: transparent;
                         color: #5BCEDD;    

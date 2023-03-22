@@ -5,15 +5,12 @@
 
         <ng-template pTemplate="caption">
             <app-table-caption
-            (onExport)="onExport($event)" 
+            (onExport)="onExport($event)"
             [hasFilter]="false"
-            (onFilter)="getStudentRecord()" 
-            (onSearch)="filtration.KeyWord = $event; getStudentRecord()" 
+            (onFilter)="getStudentRecord()"
+            (onSearch)="filtration.KeyWord = $event; getStudentRecord()"
             (onClear)="clearFilter()"></app-table-caption>
-            <div class="d-flex justify-content-between">       
-                <!-- <app-button-group [items]="btnGroupItems" (onClick)="filtration.status=$event; getDivisionDegrees()"></app-button-group> -->
 
-            </div>
         </ng-template>
 
 

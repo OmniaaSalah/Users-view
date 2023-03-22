@@ -119,6 +119,7 @@ export class AttachmentConditionsComponent implements OnInit {
 
   deleteConditionFromSchool(index){
     this.employeesCtr.removeAt(index)
+    this.toastr.success(this.translate.instant('mission Succeeded'))
   }
 
 
@@ -132,6 +133,7 @@ export class AttachmentConditionsComponent implements OnInit {
  
   deleteConditionFromParents(index){
     this.guardiansCtr.removeAt(index)
+    this.toastr.success(this.translate.instant('mission Succeeded'))
   }
 
 
@@ -145,6 +147,7 @@ export class AttachmentConditionsComponent implements OnInit {
  
   deleteConditionFromSpea(index){
     this.speaCtr.removeAt(index)
+    this.toastr.success(this.translate.instant('mission Succeeded'))
   }
 
     

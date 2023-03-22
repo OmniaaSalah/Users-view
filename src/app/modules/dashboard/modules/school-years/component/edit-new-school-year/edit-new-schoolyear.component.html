@@ -13,18 +13,18 @@
 
   <div class="content" >
     <div class=" d-flex align-items-center justify-content-end ">
-      <div class="Btn-group d-flex">
+      <div class="Btn-group d-flex gap-3">
        <ng-container *permit="[ClaimsEnum.S_U_SchoolYear,ClaimsEnum.S_C_SchoolYear]">
-            <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading" *ngIf="schoolYearStatus!=schoolYearEnum.Current && schoolYearStatus!=schoolYearEnum.Finished">
+            <button class="btn  btn-primary " (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading" *ngIf="schoolYearStatus!=schoolYearEnum.Current && schoolYearStatus!=schoolYearEnum.Finished">
               {{'save and continue'|translate}}
               <div class="spinner-border text-light" role="status" *ngIf="isContinueBtnLoading"></div>
             </button>
-            <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading"  *ngIf="schoolYearStatus!=schoolYearEnum.Current && schoolYearStatus!=schoolYearEnum.Finished">
+            <button class="btn  btn-primary " (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading"  *ngIf="schoolYearStatus!=schoolYearEnum.Current && schoolYearStatus!=schoolYearEnum.Finished">
               {{'save'|translate}}
               <div class="spinner-border text-light" role="status" *ngIf="isSaveBtnLoading"></div>
             </button>
       </ng-container>
-        <button type="submit" class="btn  btn-primary ms-4"  (click)="sendModelOpened=true" *ngIf="schoolYearStatus==schoolYearEnum.Draft&&urlParameter">
+        <button type="submit" class="btn  btn-primary "  (click)="sendModelOpened=true" *ngIf="schoolYearStatus==schoolYearEnum.Draft&&urlParameter">
           {{'shared.send'|translate}}
         </button>
 
@@ -323,7 +323,7 @@
           <!-- curriculum-->
           <ng-container *ngIf="step==2">
               <div class="d-flex justify-content-end" *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished&&schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Current">
-                 <div class="curriculum d-flex">
+                 <div class="curriculum d-flex gap-3">
                       <div class="btn btn-primary " role="button" (click)="addCurriculumsModelOpened=true;" *permit="ClaimsEnum.S_SchoolYear_C_Curriculums">
                         <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                         {{'dashboard.SchoolYear.Add curriculum'|translate}}
@@ -510,7 +510,7 @@
 
 
 <!-- Add Curriculum -->
-<p-dialog  [closable]="false" [resizable]="false" [(visible)]="addCurriculumsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
+<p-dialog styleClass="school-year-modal" [closable]="false" [resizable]="false" [(visible)]="addCurriculumsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
   <ng-template pTemplate="header">
    <p-dialog-header>
 

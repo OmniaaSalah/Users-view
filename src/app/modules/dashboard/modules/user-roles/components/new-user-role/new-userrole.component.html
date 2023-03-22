@@ -6,7 +6,7 @@
    
 
     
-        <div class="container mt-5 custom-form custom-validation-form border" style="padding-bottom: 21rem;">
+        <div class=" mt-5 custom-form custom-validation-form border" style="padding-bottom: 21rem;">
           <ng-container *ngIf="!jobRole&&urlParameter">
             <div class="row g-5">
                
@@ -15,7 +15,7 @@
             </div>
         
          </ng-container>
-            <form [formGroup]="roleFormGrp" class="container-fluid  " (ngSubmit)="succeeded()" *ngIf="jobRole||!urlParameter">
+            <form [formGroup]="roleFormGrp" class="container-fluid  "  *ngIf="jobRole||!urlParameter">
                 <div class=" row gx-5 form-set ">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name In Arabic'|translate}} <span class="star">*</span></label>
@@ -196,8 +196,8 @@
                                   <td>{{school.state.ar}}</td>
                                   <td>{{school.curriculum.ar}}</td>
                                   <td class="actions">
-                                    <button   (click)="unSelectMe(school.id)">
-                                      <img  src="assets/images/shared/rect-xmark.svg" alt="">
+                                    <button (click)="unSelectMe(school.id)"  >
+                                      <img    src="assets/images/shared/rect-xmark.svg" alt="">
                                    </button>
                                   </td>
                               </tr>
@@ -245,7 +245,7 @@
 
               <div class=" d-flex align-items-center justify-content-end ">
                     <div class="Btn-group d-flex gap-3">
-                      <button class="btn  btn-primary addBtn" [disabled]="roleFormGrp.invalid||isBtnLoading||!rolePowersIdList.length" *permit="[ClaimsEnum.S_C_Role,ClaimsEnum.S_U_Role]">
+                      <button class="btn  btn-primary addBtn" (click)="succeeded()" [disabled]="roleFormGrp.invalid||isBtnLoading||!rolePowersIdList.length" *permit="[ClaimsEnum.S_C_Role,ClaimsEnum.S_U_Role]">
                         {{'shared.save'|translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                       </button>

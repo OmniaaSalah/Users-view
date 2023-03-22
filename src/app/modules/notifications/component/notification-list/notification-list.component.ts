@@ -1,10 +1,11 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {  NgxSpinnerService } from 'ngx-spinner';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { INotification } from 'src/app/core/Models/inotification';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { NotificationService } from '../../service/notification.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { NotificationService } from '../../service/notification.service';
   styleUrls: ['./notification-list.component.scss']
 })
 export class NotificationListComponent implements OnInit {
-
+  lang = inject(TranslationService).lang
   @ViewChild('readBtn', { read: ElementRef, static:false }) readBtn: ElementRef;
   @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
   notificationsList=[]
