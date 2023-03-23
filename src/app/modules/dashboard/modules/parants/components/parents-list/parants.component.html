@@ -82,11 +82,11 @@
                     <td>{{parent.mobile}}</td>
                     <td>{{parent.childrenCount? parent.childrenCount : ('shared.notFound' |translate) }}</td>
                     <td ><span class="position-relative" pTooltip="{{parent.email}}" [autoHide]="true" tooltipPosition="top">{{parent.email | truncate:15}}</span></td>
-                    <td>{{parent.requestCount}}</td>
+                    <td class="text-center">{{parent.requestCount}}</td>
                     <td  pFrozenColumn [frozen]="true" (click)="parent.childrenCount == 0 ? showToastr(parent.childrenCount) :null;   ">
                         <div>
-                            <a role="button" 
-                            [ngClass]="{'my-disable':parent.childrenCount === 0 ,'shown':parent.childrenCount> 0}" 
+                            <a role="button"
+                            [ngClass]="{'my-disable':parent.childrenCount === 0 ,'shown':parent.childrenCount> 0}"
                             class="gap-2 fs-4" (click)="navigatToChildren(parent)">
                                 <p><span class=""></span>&nbsp;<span>{{'dashboard.parents.viewChildrenList'|translate }}</span></p>
                             </a>

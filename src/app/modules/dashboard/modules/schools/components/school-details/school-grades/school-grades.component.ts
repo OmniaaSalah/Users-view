@@ -1,6 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Track } from 'src/app/core/Models/global/global.model';
@@ -37,7 +36,7 @@ export class SchoolGradesComponent implements OnInit {
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-		
+
 			{ label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`},
 		],
 		mainTitle: { main: this.currentSchool }
@@ -70,10 +69,10 @@ export class SchoolGradesComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee)
     {
       this.userService.currentUserSchoolName$?.subscribe((res)=>{
-        if(res)  
+        if(res)
         {
           this.currentSchool=res;
-        
+
           this.componentHeaderData.mainTitle.main=this.currentSchool;
         }
       })
@@ -128,7 +127,7 @@ export class SchoolGradesComponent implements OnInit {
   onExport(fileType: FileEnum){
     let filter = {...this.filtration, PageSize:null}
     this.gradesService.gradesToExport(this.schoolId,filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolClasses'))
     })
   }

@@ -1,9 +1,7 @@
-import { Name } from './../../../core/Models/Survey/IAddSurvey';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models';
@@ -15,13 +13,11 @@ import { CountriesService } from 'src/app/shared/services/countries/countries.se
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../modules/dashboard/modules/indexes/service/indexes.service';
 import { SchoolsService } from '../../../modules/dashboard/modules/schools/services/schools/schools.service';
-import { FileEnum } from '../../enums/file/file.enum';
 import { UserScope } from '../../enums/user/user.enum';
-import { ExportService } from '../../services/export/export.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ToastrService } from 'ngx-toastr';
-import { RegistrationStatus, StatusEnum } from '../../enums/status/status.enum';
+import { RegistrationStatus } from '../../enums/status/status.enum';
 import { CustomFile } from '../file-upload/file-upload.component';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
@@ -29,7 +25,7 @@ import { WorkflowOptions } from 'src/app/core/models/system-requests/requests.mo
 import { catchError, map, switchMap, throwError } from 'rxjs';
 import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
 import { requestTypeEnum } from '../../enums/system-requests/requests.enum';
-import { FileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
+import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { HttpStatusCodeEnum } from '../../enums/http-status-code/http-status-code.enum';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 import { FirstGradeCodeEnum } from '../../enums/school/school.enum';
@@ -75,20 +71,20 @@ export class RegisterRequestComponent implements OnInit {
 
   filtration :Filter = {...Filtration, curriculumId:'', StateId: '',GradeId:''}
   paginationState= {...paginationInitialState}
-  
-  
+
+
   AllGrades
   curriculums$ = this.sharedService.getAllCurriculum()
   states$ = this.countriesService.getAllStates()
 
-  
+
   schools={
     totalAllData:0,
     total:0,
     list:[],
     loading:true
   }
-  
+
   submitted
 
   requiredFiles:Partial<RequestRule>
@@ -97,12 +93,12 @@ export class RegisterRequestComponent implements OnInit {
   //   {Titel:{ar:"صورة القيد",en:"Identity Image"}, fileSize:4},
   //   {Titel:{ar:"صورة شهاده الميلاد",en:"Identity Image"}, fileSize:4}
   // ]
-  
-  
+
+
   selectedSchoolId
   selectedGrade
 
-    // ارسال طلب تسجيل للابن او الطالب المنسحب 
+    // ارسال طلب تسجيل للابن او الطالب المنسحب
   registerReqForm:FormGroup = this.fb.group({
     id:[],
     childId:[this.childId],
@@ -146,13 +142,13 @@ export class RegisterRequestComponent implements OnInit {
 
     this.sharedService.getAllGrades('').subscribe(res=> this.AllGrades=res || [])
     this.prepareHeaderData()
-    this.getStudentInfo()  
+    this.getStudentInfo()
 
     if(this.scope==UserScope.Guardian) {
       this.parentId = this.userService.getCurrentGuardian()?.id
       this.registerReqForm.controls['guardianId'].setValue(this.parentId)
     }
-    
+
     if(this.requestId) {
       this.patchReturnedRequestData(this.returnedReqData)
       this.getRequestOptions()
@@ -160,7 +156,7 @@ export class RegisterRequestComponent implements OnInit {
 
 
     this.getRegistrationRequiresFiles()
-    
+
     this.childRegistrationStatus==RegistrationStatus.Withdrawal && this.setSelectedGradeForWithdrawalStudent()
 
     this.initValidation()
@@ -176,12 +172,12 @@ export class RegisterRequestComponent implements OnInit {
       }
 
     })
-    
+
   }
 
 
   setSelectedGradeForWithdrawalStudent(){
-   
+
     this._parent.getSelectedGradeForWithdrawalStudent(this.childId || this.studentId)
     .pipe(
       map(res=> {
@@ -244,13 +240,13 @@ export class RegisterRequestComponent implements OnInit {
     }
 
   }
-  
+
   getStudentInfo(){
     if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
       this.studentService.getStudent(this.route.snapshot.params['childId']).subscribe(res=>{
         this.childData = res.result
       })
-      
+
     }else{
       this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
         this.childData = res
@@ -259,28 +255,28 @@ export class RegisterRequestComponent implements OnInit {
   }
 
 
-  
-    
+
+
   onGradeSelected(gradeId){
- 
+
     // this.registerReqForm.controls['gradeId'].setValue(garde.id)
     this.selectedGrade = this.AllGrades.filter(el => el.id ==gradeId)[0]
-    
+
     this.filtration.GradeId = gradeId
 
     if(this.selectedGrade?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
     else if(this.selectedGrade?.code==FirstGradeCodeEnum.PrimarySchool) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
 
     this.selectedSchoolId =null
-    
+
     this.getSchools()
   }
 
-  
+
   getSchools(){
     this.schools.loading=true
     this.schools.list=[]
-  
+
     this.settingServcice.schoolsAllowedForRegistration(this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res =>{
@@ -289,7 +285,7 @@ export class RegisterRequestComponent implements OnInit {
       this.schools.list = res.data
       this.schools.totalAllData = res.totalAllData
       this.schools.total =res.total
-  
+
     },err=> {
       this.schools.loading=false
       this.schools.total=0
@@ -302,16 +298,16 @@ export class RegisterRequestComponent implements OnInit {
     this.selectedSchoolId =schoolId
     this.registerReqForm.controls['schoolId'].setValue(schoolId)
   }
-  
+
 
   attachments :CustomFile[] = []
 
 
 
-  onFileUpload(uploadedFiles:CustomFile[],file,index){    
+  onFileUpload(uploadedFiles:CustomFile[],file,index){
     if(uploadedFiles.length) this.attachments[index]= {Titel:file.name, ...uploadedFiles[0]}
    }
-  
+
    onFileDelete(index){
     this.attachments.splice(index,1)
    }
@@ -347,7 +343,7 @@ export class RegisterRequestComponent implements OnInit {
       this.toaster.error(err.message)
       this.onSubmit=false
     })
-    
+
   }
 
   updateRegistrationReq(optionId){
@@ -381,7 +377,7 @@ export class RegisterRequestComponent implements OnInit {
 
   registerChildWithSpea(){
     this.onSubmit=true
-    
+
     let data = {
       attachmentPaths:this.attachments,
       gradeId:this.selectedGrade.id,
@@ -390,7 +386,7 @@ export class RegisterRequestComponent implements OnInit {
 
     this._parent.registerChildBySpea(this.childId, data)
     .subscribe(res=>{
-      
+
       this.onSubmit=false
       this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`)
       this.toaster.success(this.translate.instant('toasterMessage.childRegistedSuccesfully'))

@@ -211,7 +211,7 @@
     <div class="border-dark radius-15 p-5" *ngIf="selectedGracePeriod.currentValue != gracePeriodEnum.transferStudents && selectedGracePeriod.currentValue" >
 
         <div class="prim-table mt-4" >
-            <p-table #dt [lazy]="true" [value]="gracePeriodSchools.schools.list.reverse()">
+            <p-table styleClass="schools-table" #dt [lazy]="true" [value]="gracePeriodSchools.schools.list.reverse()">
                 <!-- Table Caption -->
                 <ng-template pTemplate="caption">
                     <div class="d-flex align-items-center justify-content-between">
