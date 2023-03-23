@@ -81,12 +81,12 @@
                 </div>
                 <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{ 'shared.publicTransport'|translate }}</p>
-                    <span class="color-primary mb-2 fs-3">{{'shared.'+student?.isUsePublicTransportation | translate}}</span>
+                    <span class="color-primary mb-2 fs-3">{{'shared.'+student?.transportationType | translate}}</span>
                 </div>
                 <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{ 'dashboard.parents.specialEducation'|translate }}</p>
-                    <span class="color-primary mb-2" *ngIf="student?.specialEducation">{{'shared.yes'|translate}}</span>
-                    <span class="color-primary mb-2" *ngIf="!student?.specialEducation">{{'shared.no'|translate}}</span>
+                    <span class="color-primary mb-2" *ngIf="student?.isSpecialEducation">{{'shared.yes'|translate}}</span>
+                    <span class="color-primary mb-2" *ngIf="!student?.isSpecialEducation">{{'shared.no'|translate}}</span>
                 </div>
 
                 <div class="col-sm-3 d-flex align-items-center gap-5">
@@ -131,7 +131,7 @@
             <div class="col-md-4">
                 <div class="form-set">
                     <label class="label required" for="description">{{'shared.publicTransport'| translate}}</label>
-                    <p-dropdown formControlName="isUsePublicTransportation" [options]="transportaionTypes" optionValue="value" optionLabel="name" placeholder="{{'shared.SchoolBus/PrivateCar' |translate}}"></p-dropdown>
+                    <p-dropdown formControlName="transportationType" [options]="transportaionTypes" optionValue="value" optionLabel="name" placeholder="{{'shared.SchoolBus/PrivateCar' |translate}}"></p-dropdown>
                 </div>
             </div>
             <div class="col-md-4">

@@ -85,10 +85,9 @@
                     <span class="headerName" *ngIf="!checkLanguage">{{message?.jobTitleName?.en}}</span>
                   </div>
                   <div class="Description">
-                    <span class="tittle">{{
-                      "Notifications.Description" | translate
-                      }}</span>
-                    <p class="paragraph">{{ message.title }}</p>
+                    <!-- <span class="tittle">{{"Notifications.Description" | translate}}</span> -->
+                    <span>{{ message.title }}</span>
+                    <p class="paragraph">{{ message.messageText }}</p>
                   </div>
                   <span class="receviedTime">{{
                     message.createdDate | date | translate
