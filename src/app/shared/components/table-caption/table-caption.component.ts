@@ -50,7 +50,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
       takeUntil(this.ngUnSubscribe)
     )
     .subscribe(val =>{
-      this.onSearch.emit(val);
+      this.onSearch.emit(val?.trim());
     })
   }
 
