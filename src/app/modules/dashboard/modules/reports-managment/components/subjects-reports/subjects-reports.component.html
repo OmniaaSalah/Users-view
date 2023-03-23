@@ -8,7 +8,7 @@
                 (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getSubjects()" (onClear)="clearFilter()">
 
                 <div class="col-md-4" >
-                    <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
+                    <label class="label">{{'School'| translate}}</label>
                     <p-multiSelect 
                     [options]="(schools$| async)?.data"  
                     display="chip"

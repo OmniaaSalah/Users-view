@@ -41,7 +41,7 @@ export class ParentsReportsService {
         isDisabled: true,
       },
       {
-        name: this.translate.instant('dashboard.parents.parentNationality'),
+        name: this.translate.instant('Nationality'),
         isSelected: true,
         isDisabled: true,
       },
@@ -57,7 +57,7 @@ export class ParentsReportsService {
       },
     
       {
-        name:this.translate.instant('dashboard.issue of certificate.student name'),
+        name:this.translate.instant('dashboard.schools.student'),
         isSelected: true,
         isDisabled: true,
       },
