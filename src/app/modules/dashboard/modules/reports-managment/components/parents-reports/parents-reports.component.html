@@ -24,7 +24,7 @@
                 </div>
                 
                 <div class="col-md-4" >
-                    <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
+                    <label class="label">{{'School'| translate}}</label>
                     <p-multiSelect  [options]="(schools$| async)?.data"    [ngModelOptions]="{standalone: true}"  display="chip"    [(ngModel)]="filtration.SchoolId"    optionValue="id" optionLabel="name.ar"    placeholder="{{'shared.chooseSchool'|translate }}"></p-multiSelect>
                 </div>
 

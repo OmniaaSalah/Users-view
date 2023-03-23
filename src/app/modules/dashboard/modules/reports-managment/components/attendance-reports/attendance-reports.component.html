@@ -14,7 +14,7 @@
             </div>
 
             <div class="col-md-4">
-                <label class="label mt-3">{{'dashboard.students.schoolName'| translate}}</label>
+                <label class="label mt-3">{{'School'| translate}}</label>
                 <p-multiSelect  [options]="(schools$| async)?.data"    display="chip" [(ngModel)]="filtration.schoolId"  optionValue="id" optionLabel="name.ar"  placeholder="{{'shared.chooseSchool'|translate }}"></p-multiSelect>
             </div>
 
@@ -122,16 +122,16 @@
                             <td *ngIf="tableColumns[6].isSelected == true">
                                 {{student?.studentName | currentLang}}
                             </td>
-                            <td *ngIf="tableColumns[7].isSelected == true">
+                            <!-- <td *ngIf="tableColumns[7].isSelected == true">
                                 {{student?.studentSurName | currentLang}}
-                            </td>
-                            <td *ngIf="tableColumns[8].isSelected == true">
+                            </td> -->
+                            <td *ngIf="tableColumns[7].isSelected == true">
                                 {{student?.daleelId}}
                             </td>
-                            <td *ngIf="tableColumns[9].isSelected == true">
+                            <td *ngIf="tableColumns[8].isSelected == true">
                                 {{student?.manhalNumber}}
                             </td>
-                            <td *ngIf="tableColumns[10].isSelected == true">
+                            <td *ngIf="tableColumns[9].isSelected == true">
                                 {{student?.guardianName | currentLang}}
                             </td>
 
