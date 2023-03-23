@@ -206,7 +206,8 @@ export class HeaderComponent implements OnInit {
     }
 }
 goToNotificationDetails(pageLink){
-  this.router.navigate([pageLink])
+
+  window.open(pageLink, '_blank')
 }
 
 markAsRead(){

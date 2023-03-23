@@ -16,6 +16,7 @@ import { SchoolsService } from '../../../schools/services/schools/schools.servic
 import { StudentsReportsService } from '../../services/student-reports-service/students-reports.service';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-students-reports',
@@ -23,6 +24,7 @@ import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
   styleUrls: ['./students-reports.component.scss']
 })
 export class StudentsReportsComponent implements OnInit {
+  lang = inject(TranslationService).lang
   isBtnLoading: boolean=false;
   get statusEnum(){ return StatusEnum }
   nationalityList=[];
@@ -72,7 +74,7 @@ export class StudentsReportsComponent implements OnInit {
   isGradeSelected = false
   talents$ = inject(StudentsService).getTalents()
   curriculums$ = this.sharedService.getAllCurriculum()
-  schools$ = this.schoolsService.getAllSchools()
+  schools$ = this.schoolsService.getSchoolsDropdown()
   AllTracks$ = this.sharedService.getAllTraks()
   AllGrades$ =this.sharedService.getAllGrades('');
   schoolDivisions$ =inject(SharedService).getAllDivisions('')

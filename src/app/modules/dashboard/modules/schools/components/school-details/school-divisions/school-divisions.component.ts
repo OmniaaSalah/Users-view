@@ -1,14 +1,11 @@
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
-import { Table } from 'primeng/table';
 import { map } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models';
-import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -20,7 +17,6 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../services/division/division.service';
 import { GradesService } from '../../../services/grade/grade.service';
-import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
   selector: 'app-school-divisions',
@@ -39,14 +35,14 @@ lang = inject(TranslationService).lang
 
 componentHeaderData: IHeader = {
   breadCrump:  [
-    
+
     { label: this.translate.instant('dashboard.schools.schoolTracks'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true}}
 
   ],
   mainTitle: { main:  this.currentSchool  }
 }
 
-  filtration={...Filtration, gradeid: this.selectedGradeId,schoolId:[this.schoolId]}
+  filtration={...Filtration, gradeid: [this.selectedGradeId],schoolId:[this.schoolId]}
   paginationState={...paginationInitialState}
   schoolGrades$ = this.gradesService.getSchoolGardes(this.schoolId).pipe(map(res=>res.data))
 
@@ -59,15 +55,7 @@ componentHeaderData: IHeader = {
 
 
 
-//   menuItems: MenuItem[]=[
-//    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
-//    {label: this.translate.instant('dashboard.schools.raseAttendance'), icon:'assets/images/shared/clock.svg',routerLink:'division/1/absence-records'},
-//    {label: this.translate.instant('dashboard.schools.defineSchedule'), icon:'assets/images/shared/list.svg',routerLink:''},
-//    {label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/shared/edit.svg',routerLink:''},
-//  ];
    constructor(
-
-    private schoolsService:SchoolsService,
      public translate: TranslateService,
      private exportService :ExportService,
      private route: ActivatedRoute,
@@ -79,7 +67,7 @@ componentHeaderData: IHeader = {
 
     ngOnChanges(changes: SimpleChanges): void {
 
-      if(changes['selectedGradeId']) this.filtration.gradeid = changes['selectedGradeId'].currentValue
+      if(changes['selectedGradeId']) this.filtration.gradeid = [changes['selectedGradeId'].currentValue]
 
     }
 
@@ -87,16 +75,16 @@ componentHeaderData: IHeader = {
     if(this.currentUserScope==this.userScope.Employee)
     {
       this.userService.currentUserSchoolName$?.subscribe((res)=>{
-        if(res)  
+        if(res)
         {
           this.currentSchool=res;
-        
+
           this.componentHeaderData.mainTitle.main=this.currentSchool;
         }
       })
     }
-    
-    
+
+
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
      this.getSchoolDivisions()
@@ -139,7 +127,7 @@ componentHeaderData: IHeader = {
    onExport(fileType: FileEnum){
     let filter = {...this.filtration, PageSize:this.divisions.totalAllData}
     this.divisionService.divisionsToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolTracks'))
     })
   }
@@ -150,6 +138,6 @@ componentHeaderData: IHeader = {
 
    }
 
-   
+
 
 }
