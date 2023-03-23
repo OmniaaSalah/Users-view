@@ -96,7 +96,7 @@
             </ng-template>
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                    <td [attr.colspan]="20">
+                    <td [attr.colspan]="20" class="search">
                         <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">
                             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
