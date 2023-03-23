@@ -25,7 +25,7 @@ export class SubjectsService {
 
   tabelColumns = [
     {
-      name:this.translate.instant('dashboard.issue of certificate.schoolName'),
+      name:this.translate.instant('School'),
       isSelected: true,
       isDisabled: true,
     },

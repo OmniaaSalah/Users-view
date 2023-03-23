@@ -17,12 +17,12 @@ export class TeachersReportsService {
   {
     return [
       {
-        name:this.translate.instant('dashboard.issue of certificate.schoolName'),
+        name:this.translate.instant('School'),
         isSelected: true,
         isDisabled: true,
       },
       {
-        name:this.translate.instant('dashboard.reports.subjectName'),
+        name:this.translate.instant('dashboard.SchoolYear.Subject'),
         isSelected: true,
         isDisabled: true,
       },

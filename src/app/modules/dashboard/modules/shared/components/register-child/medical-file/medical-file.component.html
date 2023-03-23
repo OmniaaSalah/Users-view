@@ -24,20 +24,29 @@
         </div>
 
         <div class="row gx-5">
+        
+            <h3 class="heading heading--tertiary mb-5">{{ 'dashboard.parents.HealthStatus'|translate }} :</h3>
+
             <div class="col-md-4">
 
                 <div class="grid-container">
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Chronicdiseases'|translate }}</p>
-                    <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
-                    <ul class="d-flex flex-wrap">
-                        <li class="d-flex color-primary" *ngFor="let val of medicalFile.chronicDiseases; let i= index">
-                        <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
-                          <div>{{val}}</div>
 
-                        </li>
-                    </ul>
+                    <p class="color-gray-300 fs-4">{{'dashboard.parents.SufferFromChronicdiseases'| translate}}</p>
+                    <span class="color-primary mb-2">{{medicalFile.chronicDiseases.length? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.SonofDetermination'|translate }}</p>
+                    <ng-container *ngIf="medicalFile.chronicDiseases.length">
+                            <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Chronicdiseases'|translate }}</p>
+                            <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
+                            <ul class="d-flex flex-wrap">
+                                <li class="d-flex color-primary" *ngFor="let val of medicalFile.chronicDiseases; let i= index">
+                                <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
+                                <div>{{val}}</div>
+
+                                </li>
+                            </ul>
+                    </ng-container>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.students.withDisabilities'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.isTheSonOfDetermination ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
 
                     <p class="color-gray-300 fs-4">{{'dashboard.parents.IQ'|translate }}</p>
