@@ -11,8 +11,9 @@
 }
 
 
-::ng-deep p-table{
+::ng-deep .schools-table {
     .p-datatable-tbody tr td{
+      padding: 1rem .5rem !important;
         &:first-child{padding: 1rem !important;}
     }
 }
