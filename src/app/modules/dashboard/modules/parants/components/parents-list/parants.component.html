@@ -25,44 +25,44 @@
                 <tr>
                     <th pSortableColumn="name.ar" >
                         <div class="content">
-                            {{'dashboard.parents.parentName'|translate }}
-                            <p-sortIcon field="name.ar"></p-sortIcon>
+                            
+                            <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.parents.parentName'|translate }}
                         </div>
                     </th>
                     <th pSortableColumn="surname.ar">
-                        {{'dashboard.parents.parentNickname'|translate }}
-                        <p-sortIcon field="surname.ar"></p-sortIcon>
+                        
+                        <p-sortIcon field="surname.ar"></p-sortIcon>{{'dashboard.parents.parentNickname'|translate }}
                     </th>
                     <th pSortableColumn="emiratesIdNumber">
-                        {{'shared.Identity Number'|translate }}
-                        <p-sortIcon field="emiratesIdNumber"></p-sortIcon>
+                        
+                        <p-sortIcon field="emiratesIdNumber"></p-sortIcon>{{'shared.Identity Number'|translate }}
                     </th>
                     <th pSortableColumn="gender">
-                        {{'shared.gender'|translate }}
-                        <p-sortIcon field="gender"></p-sortIcon>
+                        
+                        <p-sortIcon field="gender"></p-sortIcon>{{'shared.gender'|translate }}
                     </th>
-                    <!-- <th pSortableColumn="relativeRelation">
-                        {{'dashboard.parents.relativeRelation'|translate }}
-                        <p-sortIcon field="gender"></p-sortIcon>
-                    </th> -->
+                    <th pSortableColumn="relativeRelation">
+                        
+                        <p-sortIcon field="gender"></p-sortIcon>{{'dashboard.parents.relativeRelation'|translate }}
+                    </th>
                     <th pSortableColumn="birthdate">
-                        {{'shared.birthDay'|translate }}
-                        <p-sortIcon field="birthDate"></p-sortIcon>
+                        
+                        <p-sortIcon field="birthDate"></p-sortIcon>{{'shared.birthDay'|translate }}
                     </th>
-                    <th pSortableColumn="nationalityName.ar">{{'shared.nationality'|translate }}
-                        <p-sortIcon field="nationalityName.ar"></p-sortIcon>
+                    <th pSortableColumn="nationalityName.ar">
+                        <p-sortIcon field="nationalityName.ar"></p-sortIcon>{{'shared.nationality'|translate }}
                     </th>
-                    <th pSortableColumn="mobile">{{'shared.phoneNumber'|translate }}
-                        <p-sortIcon field="mobile"></p-sortIcon>
+                    <th pSortableColumn="mobile">
+                        <p-sortIcon field="mobile"></p-sortIcon>{{'shared.phoneNumber'|translate }}
                     </th>
-                    <th pSortableColumn="childrenCount">{{'dashboard.parents.childrenNumber'|translate }}
-                        <p-sortIcon field="childrenCount"></p-sortIcon>
+                    <th pSortableColumn="childrenCount">
+                        <p-sortIcon field="childrenCount"></p-sortIcon>{{'dashboard.parents.childrenNumber'|translate }}
                     </th>
-                    <th  pSortableColumn="email">{{'shared.email'|translate }}
-                        <p-sortIcon field="email"></p-sortIcon>
+                    <th  pSortableColumn="email">
+                        <p-sortIcon field="email"></p-sortIcon>{{'shared.email'|translate }}
                     </th>
-                    <th pSortableColumn="requestCount">{{'dashboard.parents.pendingRequests'|translate }}
-                        <p-sortIcon field="requestCount"></p-sortIcon>
+                    <th pSortableColumn="requestCount">
+                        <p-sortIcon field="requestCount"></p-sortIcon>{{'dashboard.parents.pendingRequests'|translate }}
                     </th>
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>
                 </tr>
@@ -76,7 +76,7 @@
                     <td>{{parent.surname |currentLang}}</td>
                     <td>{{parent.emiratesIdNumber}}</td>
                     <td>{{'shared.genderType.'+parent.gender |translate}}</td>
-                    <!-- <td>{{parent?.relativeRelation |LocalizeDate}}</td> -->
+                    <td>{{parent?.relativeRelation|currentLang}}</td>
                     <td>{{parent.birthDate |LocalizeDate}}</td>
                     <td>{{parent.nationalityName |currentLang}}</td>
                     <td>{{parent.mobile}}</td>

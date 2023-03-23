@@ -82,8 +82,9 @@
                         <div class="alerting success">
                             <span class="fw-bold color-skyBlue-600">غائب</span>
                         </div>
-                        <fa-icon role="button" class=" icon-close color-red-500" 
-                        [icon]="faClose" (click)="this.confirmModelService.openModel(); selectedRecord=studentObj"></fa-icon>
+                        <div role="button" (click)="this.confirmModelService.openModel(); selectedRecord=studentObj">
+                                <img   src="assets/images/shared/rect-xmark.svg" alt="">
+                       </div>
                     </div>
                 </td>
             </tr>

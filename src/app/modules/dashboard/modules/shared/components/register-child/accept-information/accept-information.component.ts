@@ -24,7 +24,7 @@ export class AcceptInformationComponent implements OnInit {
   @Output() onFormSubmited = new EventEmitter();
   
   get claimsEnum() {return ClaimsEnum}
-  
+  transportaionTypes=[];
   lang =inject(TranslationService).lang;
   booleanOptions = this.sharedService.booleanOptions
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
@@ -39,6 +39,7 @@ export class AcceptInformationComponent implements OnInit {
   student$: Observable<Student> = this.childService.Student$
 
   ngOnInit(): void {
+    this.transportaionTypes=this.sharedService.transportaionTypes;
   }
 
 

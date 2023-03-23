@@ -14,6 +14,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -36,6 +37,8 @@ export class StudentsListComponent implements OnInit {
   studentCategoryList=[];
   currentUserScope = inject(UserService).getCurrentUserScope()
   get claimsEnum(){ return ClaimsEnum }
+
+  get statusEnum(){ return StatusEnum }
   // << ICONS >> //
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
@@ -62,7 +65,7 @@ export class StudentsListComponent implements OnInit {
     TrackId:null,
     NationalityId:null,
     IsPassed:null,
-    NationalityCategoryId:null,
+    StudentCategory:null,
     IsChildOfAMartyr: null, 
     TalentId: null,
     IsSpecialAbilities:null,
@@ -145,7 +148,7 @@ export class StudentsListComponent implements OnInit {
 
 
     })
-    this.studentsService.getStudentNatioaniliteCategories().subscribe((res)=>{this.studentCategoryList=res});
+   this.studentCategoryList=this.sharedService.studentCategoryList;
   }
 
 
@@ -247,7 +250,7 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsSpecialClass= null
     this.filtration.IsInFusionClass= null
     this.filtration.IsSpecialAbilities = null
-    this.filtration.NationalityCategoryId=null
+    this.filtration.StudentCategory=null
     this.checkStudentList();
   }
 

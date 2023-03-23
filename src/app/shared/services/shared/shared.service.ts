@@ -9,7 +9,7 @@ import { FileEnum, FileExtentions } from '../../enums/file/file.enum';
 import { GenderEnum, ReligionEnum, SemesterEnum } from '../../enums/global/global.enum';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
-import { StatusEnum } from '../../enums/status/status.enum';
+import { StatusEnum, TransportaionType } from '../../enums/status/status.enum';
 import { IndexesEnum } from '../../enums/indexes/indexes.enum';
 import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
 
@@ -78,6 +78,55 @@ export class SharedService {
     {label:this.translate.instant('shared.firstSemester'), active: true, value:SemesterEnum.FirstSemester},
     {label:this.translate.instant('shared.lastSemester'), active: false, value:SemesterEnum.LastSemester},
     {label:this.translate.instant('shared.finalResult'), active: false, value:SemesterEnum.FinalResult}
+  ]
+
+ studentCategoryList=[
+    {
+      value:StatusEnum.Citizens,
+      name: this.translate.instant("shared.allStatus."+StatusEnum.Citizens)
+    },
+    {
+      value:StatusEnum.Arabs,
+      name: this.translate.instant("shared.allStatus."+StatusEnum.Arabs)
+    },
+    {
+      value:StatusEnum.NonArab,
+      name: this.translate.instant("shared.allStatus."+StatusEnum.NonArab)
+    },
+    {
+      value:StatusEnum.IsChildOfAMartyr,
+      name: this.translate.instant("shared.allStatus."+StatusEnum.IsChildOfAMartyr)
+    },
+    {
+      value:StatusEnum.ChildOfCitizens,
+      name: this.translate.instant("shared.allStatus."+StatusEnum.ChildOfCitizens)
+    },
+    {
+      value:StatusEnum.EmiratesCitizens,
+      name: this.translate.instant("shared.allStatus."+StatusEnum.EmiratesCitizens)
+    },
+    {
+      value:StatusEnum.IsSpecialAbilities,
+      name: this.translate.instant("shared.allStatus."+StatusEnum.IsSpecialAbilities)
+    },
+    {
+      value:StatusEnum.SonsOfTheFirstLineOfDefens,
+      name: this.translate.instant("shared.allStatus."+StatusEnum.SonsOfTheFirstLineOfDefens)
+    },
+    {
+      value:StatusEnum.GCCNational,
+      name: this.translate.instant("shared.allStatus."+StatusEnum.GCCNational)
+    }
+  ]
+  transportaionTypes=[
+    {
+      value:TransportaionType.PrivateCar,
+      name: this.translate.instant("shared."+TransportaionType.PrivateCar)
+    },
+    {
+      value:TransportaionType.SchoolBus,
+      name: this.translate.instant("shared."+TransportaionType.SchoolBus)
+    }
   ]
 
   constructor(
