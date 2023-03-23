@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="col-md-4" >
-                    <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
+                    <label class="label">{{'School'| translate}}</label>
                     <p-multiSelect  [options]="(schools$| async)" display="chip" [(ngModel)]="filtration.SchoolId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseSchool'|translate }}" ></p-multiSelect>
                 </div>
 

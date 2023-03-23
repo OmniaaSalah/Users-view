@@ -30,7 +30,7 @@ export class SchoolsReportsService {
   {
     return [
       {
-        name:this.translate.instant('dashboard.issue of certificate.schoolName'),
+        name:this.translate.instant('School'),
         isSelected: true,
         isDisabled: true,
       },
@@ -55,17 +55,17 @@ export class SchoolsReportsService {
         isDisabled: true,
       },
       {
-        name:this.translate.instant('shared.curriculumName'),
+        name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
         isSelected: true,
         isDisabled: true,
       },
       {
-        name:this.translate.instant('shared.gradeName'),
+        name:this.translate.instant('shared.grade'),
         isSelected: false,
         isDisabled: false,
       },
       {
-        name:this.translate.instant('shared.divisionName'),
+        name:this.translate.instant('shared.division'),
         isSelected: false,
         isDisabled: false,
       },
