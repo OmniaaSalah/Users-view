@@ -7,7 +7,6 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
@@ -45,7 +44,7 @@ export class GardeStudentsComponent implements OnInit {
       list:[],
       loading:false
     }
-  
+
 
     changeTrackForm= this.fb.group({
       studentId: ['', Validators.required],
@@ -79,7 +78,7 @@ export class GardeStudentsComponent implements OnInit {
       this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
-      this.students.total =res.total 
+      this.students.total =res.total
 
     },err=> {
       this.students.loading=false
@@ -109,7 +108,7 @@ export class GardeStudentsComponent implements OnInit {
   onExport(fileType:FileEnum){
     let filter = {...this.filtration, PageSize:this.students.totalAllData}
     this.gradeService.gradeStudentsToExport(this.schoolId,this.gradeId,filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.gradeStudents'))
     })
   }
