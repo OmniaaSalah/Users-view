@@ -1,14 +1,15 @@
 
 
 
-<ng-container *ngIf="mode=='view'">
+<!-- <ng-container *ngIf="mode=='view'">
     <div class="float-btn" (click)="mode='edit'" *permit="claimsEnum.SEG_U_StudentInfo">
         <img src="assets/images/shared/pen-blue-filled.svg" alt="">
     </div>
-</ng-container>
+</ng-container> -->
 
 
-<div class="row gx-5 mt-6 details" [formGroup]="studentForm" *ngIf="(student$ |async) as student">
+<div class="row gx-5details" [formGroup]="studentForm" *ngIf="(student$ |async) as student">
+
     <div class="col-md-5" *ngIf="mode=='edit'">
         <div class="grid-container align-items-center">
             <ng-container *ngIf="currentUserScope ==scopeEnum.SPEA">
@@ -35,7 +36,7 @@
     </div>
 
     <ng-container formGroupName="prohibited">
-        <div class="col">
+        <div class="col-md-4">
 
             <h3 class="heading heading--tertiary mb-4" *permit="[claimsEnum.S_U_ProhibitedFromWithdrawingFromSpea,claimsEnum.SE_U_ProhibitedFromWithdrawingFromSchool]">{{'dashboard.students.forbiddenFromWithdrow' | translate}}</h3>
             <div class="grid-container align-items-center">
@@ -101,7 +102,7 @@
 
 </div>
 
-
+<!--
 <ng-container *ngIf="mode=='edit'">
     <hr class="my-5">
     <div class="d-flex justify-content-end">
@@ -113,5 +114,5 @@
       </button>
       <button (click)="mode='view'"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
     </div>
-</ng-container>
+</ng-container> -->
 

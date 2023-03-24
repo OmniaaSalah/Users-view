@@ -19,6 +19,7 @@ import { LayoutModule } from 'src/app/layout/layout.module';
 import { IdentityInfoComponent } from './components/register-child/identity-info/identity-info.component';
 import { PaymentsComponent } from './components/register-child/payments/payments.component';
 import { StudentProhibitedStatusComponent } from './components/register-child/student-prohibited-status/student-prohibited-status.component';
+import { StudentOperationsDropdownComponent } from './components/register-child/student-operations-dropdown/student-operations-dropdown.component';
 
 
 
@@ -40,7 +41,8 @@ import { StudentProhibitedStatusComponent } from './components/register-child/st
     WithdrawalRequestComponent,
     IdentityInfoComponent,
     PaymentsComponent,
-    StudentProhibitedStatusComponent
+    StudentProhibitedStatusComponent,
+    StudentOperationsDropdownComponent
   ],
   imports: [
     CommonModule,
