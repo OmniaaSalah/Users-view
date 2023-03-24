@@ -30,19 +30,19 @@ export class DegreeReportService {
 {
   return [
     {
-      name:this.translate.instant('dashboard.issue of certificate.schoolName'),
+      name:this.translate.instant('School'),
       isSelected: true,
       isDisabled: true,
     },
     {
  
-      name:this.translate.instant('shared.divisionName'),
+      name:this.translate.instant('shared.division'),
       isSelected: true,
       isDisabled: true,
     },
     {
    
-      name: this.translate.instant('shared.gradeName'),
+      name: this.translate.instant('shared.grade'),
       isSelected: true,
       isDisabled: true,
     },
@@ -77,7 +77,7 @@ export class DegreeReportService {
     },
     {
   
-      name: this.translate.instant('dashboard.issue of certificate.student name') ,
+      name: this.translate.instant('dashboard.schools.student') ,
       isSelected: false,
       isDisabled: false,
     },
@@ -107,7 +107,7 @@ export class DegreeReportService {
     },
     {
    
-      name:this.translate.instant('dashboard.reports.subjectName'),
+      name:this.translate.instant('dashboard.SchoolYear.Subject'),
       isSelected: false,
       isDisabled: false,
     },

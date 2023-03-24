@@ -119,7 +119,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       isChildOfAMartyr:[''],
       isHasInternet:["",],
       isHasPhone:["",],
-      isUsePublicTransportation:["",],
+      transportationType:["",],
       studentBehavior: this.fb.group({
         id: 0,
         descrition: []
