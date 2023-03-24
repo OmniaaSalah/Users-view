@@ -92,25 +92,19 @@
                     </div>
                 </div>
             </div>
-        </div>
+          </div>
 
 
 
-        <div class="actions d-flex align-items-center gap-4 mb-5">
-            <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true"
-            [disabled]="!currentStudent?.division.id"
-            *permit="claimsEnum.E_TransferStudentToAnotherDivision">
-                    <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
-            </button>
-            <ng-container *ngIf="displayStudentActionbtn">
-                <app-dropdown [items]="items" label="{{'shared.StudentMangment' | translate}}"  (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
+
+            <ng-container *ngIf="currentStudent">
+              <app-student-operations-dropdown [student]="currentStudent" (refreshStudent)="getStudent(studentId)"></app-student-operations-dropdown>
             </ng-container>
-        </div>
-    </div>
+      </div>
 
 
 
-    <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="mode=='view'">
+    <div class="row gx-5 p-4 bg-gray-30 mt-5" *ngIf="mode=='view'">
         <ng-container *ngIf="scope ==scopeEnum.SPEA">
 
             <div class="col-md-3 d-flex align-items-center  gap-4">
@@ -135,10 +129,10 @@
         </div>
     </div>
 
-    <app-student-prohibited-status
+    <!-- <app-student-prohibited-status
     [(mode)]="stuentProhiptedCurrentMode"
     (onFormSubmitted)="updateStudent()"
-    [formGroup]="studentForm"></app-student-prohibited-status>
+    [formGroup]="studentForm"></app-student-prohibited-status> -->
 
 </div>
 
@@ -155,16 +149,16 @@
     </div>
     <!-- Navigations Options -->
     <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentInfo" data-step="1" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAcceptanceInfo" data-step="2" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAbsenceAndAttendance" data-step="3" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAttachments" data-step="4" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentCertificates" data-step="5" [class.active]="step==5" (click)="step=5"><span> {{ 'dashboard.parents.certificateList'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentBehavior" data-step="6" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentMedicalFile" data-step="7" [class.active]="step==7" (click)="step=7" ><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
-        <!-- <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentEditList" data-step="8" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li> -->
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentSubjectsAndDegrees" data-step="9" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.subjectsAndDegrees'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentRecord" data-step="10" [class.active]="step==10" (click)="step=10"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentInfo" data-step="1" [class.active]="step==1" (click)="step=1; currentMode='view'"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAcceptanceInfo" data-step="2" [class.active]="step==2" (click)="step=2; currentMode='view'"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAbsenceAndAttendance" data-step="3" [class.active]="step==3" (click)="step=3; currentMode='view'"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAttachments" data-step="4" [class.active]="step==4" (click)="step=4; currentMode='view'"><span>{{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentCertificates" data-step="5" [class.active]="step==5" (click)="step=5; currentMode='view'"><span> {{ 'dashboard.parents.certificateList'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentBehavior" data-step="6" [class.active]="step==6" (click)="step=6; currentMode='view'"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentMedicalFile" data-step="7" [class.active]="step==7" (click)="step=7; currentMode='view'" ><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
+        <!-- <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentEditList" data-step="8" [class.active]="step==8" (click)="step=8; currentMode='view'"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li> -->
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentSubjectsAndDegrees" data-step="9" [class.active]="step==9" (click)="step=9; currentMode='view'"><span>{{ 'dashboard.parents.subjectsAndDegrees'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentRecord" data-step="10" [class.active]="step==10" (click)="step=10; currentMode='view'"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
 
     </ul>
     <!-- Table Caption -->
@@ -173,6 +167,8 @@
         <form class="custom-form">
 
             <ng-container *ngIf="step==1">
+
+
                 <app-personal-information
                 [(mode)]="currentMode"
                 (onFormSubmitted)="updateStudent()"
@@ -231,8 +227,8 @@
                 </ng-container>
 
                 <ng-container *ngIf="student$ |async as student">
-                    <ng-container *ngIf="mode=='view' && !(childService.onEditMode$ | async)">
-                        <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentBehavior">
+                    <ng-container *ngIf="mode=='view'">
+                        <div class="float-btn " (click)="mode='edit'" *permit="claimsEnum.SEG_U_StudentBehavior">
                             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
                         </div>
 
@@ -255,7 +251,19 @@
                     </ng-container>
 
 
-                    <ng-container *ngIf="mode=='edit' || (childService.onEditMode$ | async)">
+                    <ng-container *ngIf="mode=='edit'">
+
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary "
+                            [disabled]="(this.childService.loading$ |async )|| !studentForm.valid"
+                            (click)="updateStudent()">
+                                <span>{{'shared.saveChanges'| translate}}</span>
+                                <div class="spinner-border text-light" role="status" *ngIf="this.childService.loading$ |async"></div>
+                            </button>
+                            <button  (click)="mode='view'" ><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+                        </div>
+                        <hr class="my-5">
+
                         <form [formGroup]="studentForm" class="custom-form">
                             <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.studentBehavior'| translate}}</h3>
                             <div class="grid-container mb-5">
@@ -306,295 +314,11 @@
 
 
 
-<!-- transfer Student to another division Dialog -->
-<p-dialog header="{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}" [(visible)]="transferStudentModelOpened" [modal]="true" [style]="{width: '40vw'}">
-    <ng-template pTemplate="content">
-        <div class="custom-form" ngForm #f="ngForm">
-            <div class="row form-set">
-                <div class="col-md-12">
-                    <label class="label" >{{'dashboard.schools.currentDivision'|translate}} </label>
-                    <p-dropdown name="current"
-                    [options]="[currentStudentDivision]"
-                    [(ngModel)]="transferStudentForm.currentDivisionId"
-                    optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                    required></p-dropdown>
-                </div>
-            </div>
-
-            <div class="row form-set">
-                <div class="col-md-12">
-                    <label class="label">{{'dashboard.schools.divisionToTransferTo'|translate}} </label>
-                    <p-dropdown
-                    [ngClass]="{'ng-invalid ng-dirty': targetDivision && !targetDivision?.isAcceptStudent}"
-                    name="taget"
-                    [options]="gradeDivisions$ | async"
-                    ngModel #target="ngModel"
-                    (ngModelChange)="onTargetDivisionSelected($event)"
-                    optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                    emptyMessage="  لا يوجد اخرى شعب متاحه"
-                    placeholder="{{'shared.chooseDivition'|translate}}"
-                    [required]="true"></p-dropdown>
-
-                    <div *ngIf="targetDivision &&!targetDivision?.isAcceptStudent" class="mt-2 color-red-500 fs-4">لا يمكن تجاوز العدد الاعظمي للطلاب في الشعبة.</div>
-                </div>
-            </div>
-
-
-            <div class="row form-set" *ngIf="targetDivision?.hasTrack">
-                <div class="col-md-12">
-                    <label class="label">{{'shared.track'|translate}} </label>
-                    <p-dropdown name="track" [options]="divisionTracks$ | async" [(ngModel)]="transferStudentForm.trackId" (ngModelChange)="onTrackSelected($event)" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseTrack'|translate}}"
-                        [required]="targetDivision?.hasTrack"></p-dropdown>
-                </div>
-            </div>
-
-
-            <div class="row gx-5 gy-4 form-set" *ngIf="(targetDivision?.hasTrack && isTrackSelected) || ( targetDivision && !targetDivision?.hasTrack)">
-                <label *ngIf="optionalSubjectsList?.length" class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
-
-                <!-- Loader -->
-                <ng-container *ngIf="!optionalSubjectsList; then optionalSubjectsLoader"></ng-container>
-                <!-- Loader -->
-
-                <ng-container *ngFor="let subject of optionalSubjectsList">
-                    <div class="col-md-6 d-flex align-items-center gap-4">
-                        <p-checkbox  name="subjects" [value]="subject.id" [(ngModel)]="transferStudentForm.electiveSubjectId"></p-checkbox>
-                        <label class="label label--sm" for="">{{subject.name |currentLang}}</label>
-                    </div>
-                </ng-container>
-            </div>
-
-            <div class="d-flex  align-items-center justify-content-end mt-5">
-                <button class="btn btn-primary btn--sm" (click)="transferStudent()" [disabled]="onSubmit || transferNotAllawed || !f.valid">
-                  <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
-                  <span>{{'shared.save'| translate}} </span>
-                  <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-              </button>
-            </div>
-        </div>
-    </ng-template>
-</p-dialog>
-
-
-<!-- ارسال طلب اعاده مرحله دراسيه -->
-<p-dialog header="{{'dashboard.students.sendRepeateStudyPhaseReqest' | translate}}" [(visible)]="RepeateStudyPhaseModelOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
-
-    <ng-template pTemplate="content">
-
-        <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'},{ar:'إعتماد الهيئة', en:'Spea Approval'}]"></app-workflow>
-
-        <div class="custom-form" ngForm #f="ngForm">
-            <label class="label">{{'dashboard.students.caseOfRepeateStudyPhase'| translate}}</label>
-            <p-dropdown
-            [(ngModel)]="repeateStudyPhaseReqForm.requestReasonId"
-            name="cause"
-            [options]="reasonForRepeateStudyPhase$|async"
-            optionValue="id"
-            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-            placeholder="{{'dashboard.students.caseOfRepeateStudyPhase'|translate}}" [required]="true"></p-dropdown>
-        </div>
-        <div class="d-flex justify-content-end mt-6 mb-4" >
-            <button class="btn btn-primary" (click)="sendRepeateStudyPhaseReq()" [disabled]="!f.valid || onSubmit">
-                {{'shared.send'| translate}}
-                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-            </button>
-        </div>
-    </ng-template>
-
-</p-dialog>
-
-<!-- ارسال طلب الاعفاء من ماده دراسيه -->
-<p-dialog header="{{'dashboard.students.exemptionFromSubjectStudey' | translate}}" [(visible)]="exemptionFromStudyModelOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
-
-    <ng-template pTemplate="content">
-        <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'}]"></app-workflow>
-
-        <div class="custom-form" ngForm #f="ngForm">
-            <label class="label">{{'dashboard.schools.chooseSubject'| translate}}</label>
-            <p-dropdown
-            [(ngModel)]="exemptionFromStudySubjectReqForm.subjectId"
-            name="cause"
-            [options]="subjectsExemption$|async"
-            optionValue="id"
-            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-            placeholder="{{'dashboard.schools.chooseSubject'|translate}}" [required]="true" emptyMessage="لايوجد مواد قابلة للاعفاء فى مواد الطالب"></p-dropdown>
-        </div>
-        <div class="d-flex justify-content-end mt-6 mb-4" >
-            <button class="btn btn-primary" (click)="sendExemptionFromStudySubjectReq()" [disabled]="!f.valid || onSubmit">
-                {{'shared.send'| translate}}
-                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-            </button>
-        </div>
-    </ng-template>
-
-</p-dialog>
-
-
-<!-- طلب تعديل هويه فى حاله الطالب يملك هويه -->
-<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeIdentityNumModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
-
-    <ng-template pTemplate="content">
-        <app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
-
-        <ng-container  ngForm #form="ngForm">
-
-            <div class="custom-form mt-5">
-                <p-inputNumber
-                name="identity"
-                #identity="ngModel"
-                [ngClass]="{'ng-invalid ng-dirty': identity.errors &&identity.errors?.pattern}"
-                [(ngModel)]="changeIdentityNumForm.identityNumber"
-                [useGrouping]="false" [maxlength]="15" [minlength]="15"
-                [pattern]="'[784]{1}[0-9]{14}'"
-                (onInput)="changeIdentityNumForm.identityNumber=$event.value"
-                required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
-                <div *ngIf="identity.errors?.pattern" class="mt-2 color-red-500 fs-4"> {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}</div>
-
-            </div>
-
-
-            <ng-container *ngIf="requiredFiles">
-                <div class="mt-6" *ngFor="let file of requiredFiles.files; let i =index">
-                    <label class="label fw-bold" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label>
-                    <app-file-upload [accept]="file.type" [maxFileSize]="file.size" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" ></app-file-upload>
-                </div>
-
-            </ng-container>
-
-            <!-- <app-file-upload
-            [accept]="fileTypesEnum.Pdf"
-            label="{{'shared.clickToUploadFile'| translate}}"
-            view="full"
-            (onFileUpload)="changeIdentityNumForm.identityAttachmentPath=($event[0].url || null);"
-            (onFileDelete)="changeIdentityNumForm.identityAttachmentPath=''"></app-file-upload> -->
-
-            <div class="d-flex justify-content-end mt-4" >
-                <button class="btn btn-primary" (click)="updateIdentity(changeIdentityNumForm)" [disabled]="!form.valid || onSubmit  ||(changeIdentityNumForm.attachments.length!=requiredFiles?.filesCount &&requiredFiles?.isRequired)">
-                    {{'shared.send'| translate}}
-                    <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-                </button>
-            </div>
-        </ng-container>
-    </ng-template>
-</p-dialog>
-
-
-<!-- طلب تعديل هويه فى حاله الطالب لا يملك هويه -->
-<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeStudentIdentityInfoModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw', height:'87vh'}">
-    <ng-template pTemplate="content">
-        <ng-container>
-            <app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
-
-            <div class="custom-form mt-4" [formGroup]="changeStudentInfoReqForm">
-                <div class="row gx-5 gy-4">
-                    <ng-container formGroupName="studentName">
-                        <div class="col-md-6">
-                            <div class="" >
-                                <label class="label">{{'dashboard.students.studentNameAr'|translate}}</label>
-                                <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
-                            </div>
-
-                        </div>
-                        <div class="col-md-6">
-                            <div class="">
-                                <label class="label">{{'dashboard.students.studentNameEn'|translate}}</label>
-                                <input type="text" formControlName="en"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
-                            </div>
-                        </div>
-                    </ng-container>
-
-                    <ng-container formGroupName="studentSurName">
-                        <div class="col-md-6">
-                            <div class="">
-                                <label class="label">{{'dashboard.students.studentsurnameAr'|translate}}</label>
-                                <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="">
-                                <label class="label">{{'dashboard.students.studentsurnameEn'|translate}}</label>
-                                <input type="text" formControlName="en" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
-                            </div>
-                        </div>
-                    </ng-container>
-                    <div class="col-md-12">
-                        <div class="">
-                            <label class="label">{{'shared.birthDay'|translate}}</label>
-                            <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="">
-                            <label class="label">{{'shared.gender'|translate}}</label>
-                            <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name" [autoDisplayFirst]="false"></p-dropdown>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="">
-                            <label class="label">{{'shared.nationality'|translate}}</label>
-                            <p-dropdown formControlName="nationalityId"
-                            [filter]="true"
-                            filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                            [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="">
-                            <label class="label">{{'shared.religion'|translate}}</label>
-                            <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="py-6"></div>
-            <div class="d-flex justify-content-end mt-4" >
-                <button
-                class="btn btn-primary"
-                (click)="updateIdentityInfoReq(changeStudentInfoReqForm.value)"
-                 [disabled]="!changeStudentInfoReqForm.valid || onSubmit">
-                 <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-                 {{'shared.send'| translate}}</button>
-            </div>
-        </ng-container>
-
-    </ng-template>
-
-</p-dialog>
-
-
-
-
 
 <p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
- [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+[(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
 
-  <app-send-message [schoolId]="schoolId" (hiddenDialog)="closeDialog()"></app-send-message>
+    <app-send-message [schoolId]="schoolId" (hiddenDialog)="closeDialog()"></app-send-message>
 
 </p-dialog>
 
-
-
-
-<ng-template #optionalSubjectsLoader>
-    <div class="row gx-5">
-        <div class="col-md-3">
-            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-        </div>
-        <div class="col-md-3">
-            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-        </div>
-
-    </div>
-
-    <div class="row gx-5">
-        <div class="col-md-3">
-            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-        </div>
-        <div class="col-md-3">
-            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-        </div>
-
-    </div>
-</ng-template>

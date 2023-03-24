@@ -30,7 +30,7 @@ export class PersonalInformationComponent implements OnInit {
 
   @Input() mode : 'edit'| 'view'= 'view'
   @Output() modeChange = new EventEmitter();
-  
+
   lang =inject(TranslationService).lang;
   get claimsEnum(){ return ClaimsEnum }
   get scopeEnum(){ return UserScope }
@@ -50,7 +50,7 @@ export class PersonalInformationComponent implements OnInit {
   studentId = +this.route.snapshot.paramMap.get('id')
 
   changeIdentityModelOpened=false
-  
+
     // << DATA PLACEHOLDER >> //
 
   genderOptions=this.sharedService.genderOptions
@@ -64,6 +64,8 @@ export class PersonalInformationComponent implements OnInit {
   countries$ = this.CountriesService.getCountries()
   religions$= this.sharedService.getReligion()
   reasonForNotHaveIdentityOptions$=this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).pipe(debounceTime(1000))
+
+  educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
 
   specialClassOptions = [
     {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
@@ -88,14 +90,14 @@ export class PersonalInformationComponent implements OnInit {
     this.setClassType()
   }
 
-  
+
   get isSpecialClass() {
     return this.studentForm.controls['isSpecialClass'] as FormControl;
   }
   get isInFusionClass() {
     return this.studentForm.controls['isInFusionClass'] as FormControl;
   }
- 
+
   get isSpecialAbilities() {
     return this.studentForm.controls['isSpecialAbilities'] as FormControl;
   }
@@ -111,20 +113,20 @@ export class PersonalInformationComponent implements OnInit {
   onSpecialClassSelected(val){
     if(val === 'specialClass') {this.isSpecialClass.setValue(true); this.isInFusionClass.setValue(false)}
     else if(val === 'fusionClass') {this.isInFusionClass.setValue(true); this.isSpecialClass.setValue(false)}
-   
+
   }
 
   setClassType(){
       this.student$.subscribe((res)=>{
 
-       if(res?.isSpecialAbilities){ 
+       if(res?.isSpecialAbilities){
             if(res?.isSpecialClass) this.classType='specialClass';
             else if(!res?.isSpecialClass) this.classType= 'fusionClass';
         }
-        
+
     });
-       
-            
+
+
   }
 
 
