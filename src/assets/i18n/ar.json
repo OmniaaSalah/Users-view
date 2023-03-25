@@ -155,6 +155,8 @@
     "Draft":"مسودة",
     "true":"نعم",
     "false":"لا",
+    "null":"غير محدد",
+    "undefined":"غير محدد",
     "ModificationOnEmployee":"تعديل في الموظفين",
     "ModificationOnDivision":"تعديل في الشعب",
     "ModificationOnGrade":"تعديل في الصفوف",

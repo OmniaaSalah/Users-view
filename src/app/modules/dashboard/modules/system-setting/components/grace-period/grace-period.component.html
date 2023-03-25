@@ -242,7 +242,7 @@
 
                 <ng-template pTemplate="body" let-school>
 
-                    <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
+                    <tr [routerLink]="gracePeriodId ? ['school/',school.id]:[]" [class.clickable]="gracePeriodId">
                         <td>{{school.name|currentLang}}</td>
                         <td class="actions d-flex justify-content-end ms-5" StopProp>
                             <img  role="button" src="assets/images/shared/rect-xmark.svg" (click)="deleteSelectdSchool(school.id, 'allowdSchools')">

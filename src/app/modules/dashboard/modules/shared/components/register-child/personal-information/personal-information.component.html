@@ -31,6 +31,14 @@
       </ng-container>
 
     <ng-container *ngIf="(student$ |async) as student">
+
+      <app-student-prohibited-status
+      [(mode)]="mode"
+      (onFormSubmitted)="updateStudent()"
+      [formGroup]="studentForm"></app-student-prohibited-status>
+
+      <hr class="my-5">
+
         <ng-container *ngIf="mode=='view'">
             <div class="float-btn " (click)="mode='edit'; modeChange.emit(mode)" *permit="claimsEnum.SEG_U_StudentInfo">
                 <img src="assets/images/shared/pen-blue-filled.svg" alt="">
@@ -55,7 +63,7 @@
                         <p class="color-gray-300 fs-4">{{ 'shared.mostUsedLanguage'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.mostUsedLanguage?.name | currentLang}}</span>
                     </div>
-                 
+
 
                     <ng-container *ngIf="student.emiratesId">
                         <div class="d-flex gap-5 align-items-center mt-4 fs-4">
@@ -142,6 +150,11 @@
                         <p class="color-gray-300 fs-4" *ngIf="student?.isSpecialAbilities">{{'shared.classroom'| translate}}</p>
                         <span class="color-primary mb-2" *ngIf="student?.isSpecialAbilities">{{student?.isSpecialClass? ('shared.specialClass'| translate) : ('shared.fusionClass' | translate)}}</span>
 
+                        <ng-container *ngIf="student?.isSpecialClass">
+                          <p class="color-gray-300 ">{{ 'dashboard.parents.specialEducation'|translate }}</p>
+                          <span class="color-primary mb-2 fs-3">{{student?.specialEducation?.name | currentLang}}</span>
+                        </ng-container>
+
 
                     </div>
                 </div>
@@ -168,11 +181,11 @@
 
 
 
-               
+
 
             </div>
 
-          
+
         </ng-container>
     </ng-container>
 
@@ -335,6 +348,11 @@
                         <div class="form-set"*ngIf="isSpecialAbilities.value">
                             <label class="label" for="description">{{'shared.classroom'| translate}}</label>
                             <p-dropdown [(ngModel)]="classType" [ngModelOptions]="{standalone: true}" [options]="specialClassOptions" optionValue="value" (onChange)="onSpecialClassSelected($event.value)" optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
+                        </div>
+
+                        <div class="form-set"*ngIf="isSpecialClass.value"  formGroupName="specialEducation">
+                          <label class="label" for="description">{{'shared.classroom'| translate}}</label>
+                          <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="value" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}"></p-dropdown>
                         </div>
 
                         <div class="form-set">

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { Mode } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
@@ -22,7 +23,7 @@ export class AcceptInformationComponent implements OnInit {
   @Input('mode') mode : Mode= 'view'
   @Output() modeChange = new EventEmitter();
   @Output() onFormSubmited = new EventEmitter();
-  
+
   get claimsEnum() {return ClaimsEnum}
   transportaionTypes=[];
   lang =inject(TranslationService).lang;
@@ -31,7 +32,14 @@ export class AcceptInformationComponent implements OnInit {
 
   get registrationStatusEnum() {return RegistrationStatus}
 
+  disabilitiesOptions = [
+    {name: this.translate.instant('shared.specialClass'), value:'SpecialClass'},
+    {name: this.translate.instant('shared.fusionClass'), value: 'FusionClass'}
+  ]
+
+
   constructor(
+    private translate:TranslateService,
     public childService:RegisterChildService,
     private sharedService:SharedService,
     private indexService :IndexesService) { }
@@ -44,6 +52,6 @@ export class AcceptInformationComponent implements OnInit {
 
 
   onSpecialEducationChanged(val:boolean){
-    if(!val) this.studentForm.controls['specialEducation'].setValue(null) 
+    if(!val) this.studentForm.controls['specialEducation'].setValue(null)
   }
 }
