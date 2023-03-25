@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, map, shareReplay, Subject, take, takeUntil, tap } from 'rxjs';
+import { delay, filter, map, shareReplay, Subject, take, takeUntil, tap } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -56,10 +56,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   selectedFromSchools=[]
   selectedToSchools=[]
 
-  selectedSchoolToDelete={
-    id:null,
-    type: null
-  }
+  isSchooDeletedMode:boolean=false;
 
   gracePeriodSchools={
     // for Other Grace Periods 
@@ -224,6 +221,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
 
   onGracePeriodChange(choosenGracePeriod: GracePeriodEnum){
+    this.isSchooDeletedMode=false
     if(!this.selectedGracePeriod.previousValue) this.selectedGracePeriod.previousValue =choosenGracePeriod //run on first time you selecte item from dropdown
     else this.selectedGracePeriod.nextValue = choosenGracePeriod
     
@@ -253,14 +251,11 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   confirmModelListener(){
     this.confirmModalService.confirmed$
-    .pipe( takeUntil(this.ngUnsubscribe))
+    .pipe(delay(100),takeUntil(this.ngUnsubscribe))
     .subscribe(val => { 
       if(val) {
-        if(!this.gracePeriodId){
+        if(!this.gracePeriodId&&!this.isSchooDeletedMode){
           this.setupNewGracePeriod() 
-        }
-        else{
-          this.deleteSchool(this.selectedSchoolToDelete.id ,this.selectedSchoolToDelete.type)
         }
       }
     })
@@ -398,38 +393,24 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
    
   }
 
-  
-  deleteSelectdSchool(schoolId, schoolType:SchoolType){
 
-    this.selectedSchoolToDelete.id=schoolId
-    this.selectedSchoolToDelete.type=schoolType
-
-    if(this.gracePeriodId){
-      this.confirmModalService.openModel()
-    }else{
-      this.deleteSchool(schoolId,schoolType)
-    }
-  }
-  
-  
-  
   deleteSchool(schoolId,  schoolType:SchoolType){
-    console.log(this.selectedSchools);
-    
+    this.isSchooDeletedMode=true;
     let index =this.selectedSchools.findIndex(id => id==schoolId)
     if(index >= 0) {
+      console.log({e:this.selectedSchools,r:this.schoolsDialogFor})
       this.selectedSchools.splice(index ,1)
       if(this.schoolsDialogFor=='TransferFrom') this.gracePeriodSchools.fromSchools.list.splice(index ,1)
       else if(this.schoolsDialogFor=='TransferTo') this.gracePeriodSchools.toSchools.list.splice(index ,1)
       else this.gracePeriodSchools.schools.list.splice(index ,1)
-
+      // this.isSchooDeletedMode=false
     }
 
 
     if(this.gracePeriodId){
       this.settingService.deleteSchoolFromGracePeriod(this.gracePeriodId,schoolId,schoolType)
       .subscribe(res=>{
-  
+        // this.isSchooDeletedMode=false;
         this.getGracePeriodMainData(this.gracePeriodId)
         this.toaster.success('تم حذف المدرسه بنجاح')
       },()=>{
