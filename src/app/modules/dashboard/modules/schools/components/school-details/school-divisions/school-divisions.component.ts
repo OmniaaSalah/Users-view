@@ -24,7 +24,7 @@ import { GradesService } from '../../../services/grade/grade.service';
   styleUrls: ['./school-divisions.component.scss']
 })
 export class SchoolDivisionsComponent implements OnInit,OnChanges {
-@Input('selectedGradeId') selectedGradeId=null
+@Input('selectedGradeId') selectedGradeId
 currentSchool="";
 currentUserScope = inject(UserService).getCurrentUserScope()
 get userScope() { return UserScope }
@@ -42,7 +42,7 @@ componentHeaderData: IHeader = {
   mainTitle: { main:  this.currentSchool  }
 }
 
-  filtration={...Filtration, gradeid: [this.selectedGradeId],schoolId:[this.schoolId]}
+  filtration={...Filtration, gradeid: [],schoolId:[this.schoolId]}
   paginationState={...paginationInitialState}
   schoolGrades$ = this.gradesService.getSchoolGardes(this.schoolId).pipe(map(res=>res.data))
 
@@ -66,8 +66,9 @@ componentHeaderData: IHeader = {
      private sharedService:SharedService) { }
 
     ngOnChanges(changes: SimpleChanges): void {
+console.log(changes);
 
-      if(changes['selectedGradeId']) this.filtration.gradeid = [changes['selectedGradeId'].currentValue]
+      if(changes['selectedGradeId'].currentValue) this.filtration.gradeid = [changes['selectedGradeId'].currentValue]
 
     }
 

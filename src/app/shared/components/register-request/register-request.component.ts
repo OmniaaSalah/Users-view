@@ -384,7 +384,7 @@ export class RegisterRequestComponent implements OnInit {
       schoolId: this.registerReqForm.controls['schoolId'].value
     };
 
-    this._parent.registerChildBySpea(this.childId, data)
+    this._parent.registerChildBySpea(this.childRegistrationStatus,this.childId, data)
     .subscribe(res=>{
 
       this.onSubmit=false

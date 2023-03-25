@@ -3,11 +3,11 @@
     <p-table #dt [value]="certificates.list" [lazy]="true" (onSort)="onSort($event)">
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
-            <app-table-caption 
-            [hasFilter]="false" 
-            (onExport)="onExport($event)" 
-            (onFilter)="getCertificate()" 
-            (onSearch)="filtration.KeyWord = $event; getCertificate()" 
+            <app-table-caption
+            [hasFilter]="false"
+            (onExport)="onExport($event)"
+            (onFilter)="getCertificate()"
+            (onSearch)="filtration.KeyWord = $event; getCertificate()"
             (onClear)="clearFilter()"></app-table-caption>
 
         </ng-template>
@@ -41,7 +41,7 @@
                 <td>{{certificate.issuanceDate |LocalizeDate}}</td>
 
                 <td class="actions">
-                    <div class="d-flex gap-2 align-items-baseline justify-content-end" (click)="downloadCertificate(certificate?.url)">
+                    <div class="d-flex gap-2 align-items-baseline justify-content-end" (click)="viewCertificate(certificate)">
                         <img src="../../../../../../../assets/images/shared/eye.svg" alt="">
                         <a class="color-skyBlue-500">{{'shared.view' |translate}}</a>
                     </div>
@@ -55,7 +55,7 @@
                     <ng-container *ngIf="!certificates.total &&  !certificates.loading">
                         <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
-                    
+
                     <app-loader></app-loader>
                 </td>
             </tr>
