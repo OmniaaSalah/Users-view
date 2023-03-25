@@ -6,7 +6,7 @@
 
     </div>
     <div class="prim-table mt-4" *ngIf="schools.totalAllData || schools.loading">
-        <p-table #dt [columns]="cols" [lazy]="true" [value]="schools.list" (onSort)="onSort($event)">
+        <p-table #dt [columns]="cols" [lazy]="true" [value]="schools.list" (onSort)="onSort($event)" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption 
@@ -52,6 +52,12 @@
                     <!-- <th pSortableColumn="cityname">{{'dashboard.schools.SchoolEmail'|translate}}
                         <p-sortIcon field="cityname"></p-sortIcon>
                     </th> -->
+                    <th pSortableColumn="cityname">{{'dashboard.schools.schoolNumber'|translate}}
+                        <p-sortIcon field="cityname"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="cityname">{{'dashboard.schools.schoolGrades'|translate}}
+                        <p-sortIcon field="cityname"></p-sortIcon>
+                    </th>
                     <th pSortableColumn="cityname">{{'shared.city'|translate}}
                         <p-sortIcon field="cityname"></p-sortIcon>
                     </th>
@@ -68,6 +74,7 @@
                         <p-sortIcon field="EstablishmentDate"></p-sortIcon>
                     </th>
                     <th pSortableColumn="actions">{{'dashboard.schools.schoolStatus'|translate}}</th>
+                    <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions"></th>
                 </tr>
             </ng-template>
 
@@ -77,9 +84,18 @@
                         {{rowData[col.field] |currentLang}}
                     </td>
                 </tr> -->
-                    <tr [routerLink]="['school/', school.id]" class="clickable">
+                    <tr >
                         <td>{{school.name|currentLang}}</td>
-                        <!-- <td>{{school.email|currentLang}}</td> -->
+                        <!-- <td>{{school.email}}</td> -->
+                         <td>{{school.number}}</td>
+                         <td >
+                            <div class="color-skyBlue-700 " *ngIf="school?.grageNumber">
+                                <a role="button"  (click)="showGrades(school.id)">
+                                  <span class="color-skyBlue-700  text-decoration-underline fs-3">{{school?.grageNumber}}</span>
+                                </a>
+                            </div>
+                            <span *ngIf="!school?.grageNumber" class="color-gray-300">{{'shared.notFound' |translate}}</span>
+                        </td>
                         <td>{{school.city |currentLang}}</td>
                         <td>{{school.state|currentLang}}</td>
                         <td>{{school.curriculum|currentLang}}</td>
@@ -88,6 +104,12 @@
                         <td>
                             <div class="alerting" [ngClass]="{'success':school.status == StatusEnum.Active, 'danger': school.status == StatusEnum.Inactive}">
                                 {{ school.status == StatusEnum.Active ? ('shared.allStatus.SchoolActive'| translate) : ('shared.allStatus.SchoolInactive'| translate) }}
+                            </div>
+                        </td>
+                        <td pFrozenColumn [frozen]="true" class="actions">
+                            <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4" [routerLink]="['school/', school.id]">
+                                <span class="color-skyBlue-400">{{'shared.details'|translate}}</span>
+                                <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                             </div>
                         </td>
                     </tr>
@@ -105,7 +127,7 @@
 
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                    <td [attr.colspan]="20">
+                    <td [attr.colspan]="20" class="search">
                         <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
                             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
@@ -135,3 +157,29 @@
         <h2 class="number-chart">{{model.chartData.totalSchoolCount}}</h2>
     </div>
 </ng-template>
+
+
+
+
+<!-- gradesDialog -->
+
+<p-dialog header="{{'dashboard.schools.SchoolGradesList'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayGradesList" [style]="{width: '28vw'}">
+    <div class="container">
+        <div class="mb-5" >
+                <div class="row" *ngIf="!showLoader">
+                    <div *ngFor="let grade of gradesList;let i=index " class="col-lg-6">
+                       {{i+1}}- {{grade.name|currentLang}}
+                    </div>
+
+                </div>
+
+                <div class="row" *ngIf="showLoader">
+                    <app-skeleton count="7"  height="2rem"></app-skeleton>
+                   
+                </div>
+        </div>
+
+    </div>
+
+    
+   </p-dialog>

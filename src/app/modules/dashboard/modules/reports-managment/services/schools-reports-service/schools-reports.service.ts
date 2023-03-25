@@ -86,14 +86,14 @@ export class SchoolsReportsService {
         return res.data.map(school =>{
         
           return {
-            [this.translate.instant('dashboard.schools.schoolName')]: school.schoolName[this.lang],
+            [this.translate.instant('School')]: school.schoolName[this.lang],
             [this.translate.instant('shared.state')]: school.state[this.lang],
             [this.translate.instant('dashboard.schools.TeachersNumbers')]: school.teachersNumbers,
             [this.translate.instant('dashboard.schools.studentsNumber')]: school.studentsNumber,
             [this.translate.instant('dashboard.schools.SchoolStudentsPercentge')]: school.studentsPercentageInSchool +' %',
-            [this.translate.instant('shared.curriculumName')]: school.curriculumName[this.lang],
-            [this.translate.instant('shared.gradeName')]: school.gradeName[this.lang],
-            [this.translate.instant('shared.divisionName')]: school.divisionName[this.lang],
+            [this.translate.instant('dashboard.schools.SchoolCurriculum')]: school.curriculumName[this.lang],
+            [this.translate.instant('shared.grade')]: school.gradeName[this.lang],
+            [this.translate.instant('shared.division')]: school.divisionName[this.lang],
             [this.translate.instant('dashboard.schools.studentPercentgeInDivision')]: school.studentsPercentageInDivision +' %'
 
           }

@@ -80,7 +80,7 @@ const routes: Routes = [
         path: 'educational-settings/surveys',
         loadChildren: () => import('./modules/surveys/surveys.module').then(m => m.SurveysModule),
         canActivate: [ClaimsGuard],
-        data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}
+        // data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}
       },
 
 

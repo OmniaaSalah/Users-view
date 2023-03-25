@@ -71,7 +71,8 @@ export class StudentsListComponent implements OnInit {
     IsSpecialAbilities:null,
     // انواع الفصول الخاصه
     IsInFusionClass:null,
-    IsSpecialClass:null
+    IsSpecialClass:null,
+    StudentDegreeResultFilter:null
   }
   paginationState= {...paginationInitialState}
 
@@ -97,9 +98,9 @@ export class StudentsListComponent implements OnInit {
   booleanOptions = this.sharedService.booleanOptions
 
   passedOptions = [
-    {name: this.translate.instant('shared.allStatus.Passed'), value:true},
-    {name: this.translate.instant('shared.allStatus.notPassed'), value:false},
-    {name: this.translate.instant('shared.allStatus.notComplete'), value:false}
+    {name: this.translate.instant('shared.allStatus.Passed'), value:StatusEnum.Passed},
+    {name: this.translate.instant('shared.allStatus.notPassed'), value:StatusEnum.Failed},
+    {name: this.translate.instant('shared.allStatus.notComplete'), value:StatusEnum.Incomplete}
   ]
 
   specialClassOptions = [
@@ -251,6 +252,7 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsInFusionClass= null
     this.filtration.IsSpecialAbilities = null
     this.filtration.StudentCategory=null
+    this.filtration.StudentDegreeResultFilter=null
     this.checkStudentList();
   }
 

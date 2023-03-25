@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -6,12 +6,14 @@ import { AuthenticationService } from 'src/app/core/services/authentication/auth
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import Validation from 'src/app/modules/dashboard/modules/user-information/models/utils/validation';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit {
+  lang = inject(TranslationService).lang
   urlOtp;
   urlEmail;
   tittle;
@@ -76,12 +78,13 @@ export class ForgetPasswordComponent implements OnInit {
   }
     
     this.authService.forgotPassword(account).subscribe((res)=>{
+  
       this.step=2;
       this.tittle=""
       this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
+    
     },(err)=>{
-
-      this.toastService.error(this.translate.instant(err.message));
+      this.toastService.error(err[this.lang]);
      
     })
   }

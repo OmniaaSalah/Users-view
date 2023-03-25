@@ -51,7 +51,7 @@ export class SubjectsService {
       map(res=>{
         return res.data.map(subject =>{
           return {
-            [this.translate.instant('dashboard.schools.schoolName')]: subject?.schoolName[this.lang],
+            [this.translate.instant('School')]: subject?.schoolName[this.lang],
             [this.translate.instant('shared.state')]: subject?.state[this.lang],
             [this.translate.instant('dashboard.reports.subjectCount')]: subject?.subjectsCount
 
