@@ -134,7 +134,8 @@ h2 {
         min-width: 15rem;
     }
 .p-datatable-tbody tr td{
-min-width: 15rem;
+        min-width: 15rem;
+        &.actions{justify-content: end;}
 
    }
 }
