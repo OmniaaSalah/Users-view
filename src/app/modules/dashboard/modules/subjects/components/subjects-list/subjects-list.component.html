@@ -31,6 +31,8 @@
           <th   pSortableColumn="subjectCode" ><p-sortIcon  field="subjectName" ></p-sortIcon>{{'dashboard.Subjects.subject Code'|translate}}</th>
           <th   pSortableColumn="subjectName" ><p-sortIcon  field="subjectName" ></p-sortIcon>{{'dashboard.SchoolYear.Subject'|translate}}</th>
           <th pSortableColumn="schoolName">{{'dashboard.schools.schoolName'|translate}}<p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="schoolName">{{'dashboard.schools.schoolNumber'|translate}}<p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="schoolName">{{'dashboard.schools.SchoolCurriculum'|translate}}<p-sortIcon field="name"></p-sortIcon></th>
           <th   pSortableColumn="evaluationType"><p-sortIcon  field="evaluationType"></p-sortIcon>{{'dashboard.Subjects.Evaluation System'|translate}}</th>
           <th   pSortableColumn="creatorName" ><p-sortIcon  field="creatorName" ></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
           <th   pSortableColumn="createdDate"><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
@@ -50,6 +52,8 @@
             <td  >{{e?.subjectName|currentLang}}</td>
             <td   *ngIf="e?.schoolName[lang]">{{e?.schoolName|currentLang}}</td>
             <td  *ngIf="!e?.schoolName[lang]" >{{'SPEA'|translate}}</td>
+            <td   >{{e?.curriculumsName|currentLang}}</td>
+            <td  >{{e?.schoolCode}}</td>
             <td   >{{e?.evaluationType|translate}}</td>
             <td   *ngIf="e?.creatorName">{{e?.creatorName}}</td>
             <td  *ngIf="!e?.creatorName" >{{'shared.notFound'|translate}}</td>

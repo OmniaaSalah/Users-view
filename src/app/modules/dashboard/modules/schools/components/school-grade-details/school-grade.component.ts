@@ -320,6 +320,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   deleteTrackSubjects(subjectId ,trackIndex, subjectIndex){
     this.subjectsToDelete.push(subjectId)
     this.getTrackSubjects(trackIndex).removeAt(subjectIndex)
+    this.toaster.success(this.translate.instant('mission Succeeded'))
   }
 
   newTrackGroup(){
@@ -341,6 +342,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   deleteTrack(trackIndex){
     this.subjectsToDelete = this.getTrackSubjects(trackIndex).value.map(el=>el.gradeSubjectId)
     this.gradeTracks.removeAt(trackIndex)
+    this.toaster.success(this.translate.instant('mission Succeeded'))
   }
 
   resetTracks(){

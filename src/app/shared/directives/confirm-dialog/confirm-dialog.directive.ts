@@ -24,10 +24,8 @@ export class ConfirmDialogDirective implements OnDestroy {
 
  confirmListener()
  {
-
-  this.subscribtion=this.confirmModelService.confirmed$.subscribe(val => {
+    this.confirmModelService.confirmed$.subscribe(val => {
     if (val) this.onConfirm.emit();
-    
   })
  }
 
@@ -35,8 +33,7 @@ export class ConfirmDialogDirective implements OnDestroy {
 
 
  ngOnDestroy(): void {
-  if(this.subscribtion)
-  {this.subscribtion.unsubscribe();}
+ this.confirmModelService.confirmed$.next(false)
 }
 
 

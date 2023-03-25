@@ -41,6 +41,7 @@ export enum StatusEnum {
 
     Passed = 'Passed', 
     Failed = 'Failed',
+    Incomplete='Incomplete',   
     FinalFaild='FinalFaild',
     
     Flexible='Flexible',

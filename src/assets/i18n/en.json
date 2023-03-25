@@ -828,6 +828,8 @@
             "SchoolCurriculum":"Curriculum",
             "SchoolEmail":"School Email",
             "schoolsList": "Schools List",
+            "schoolGrades": "School Grades",
+            "SchoolGradesList":"School Grades List",
             "schoolStablishmentDate": "Request Stablishment Date",
             "studentsNumber":"Students Number",
             "schoolName": "School Name",

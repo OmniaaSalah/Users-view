@@ -94,7 +94,7 @@
                     </div>
 
                     <div *ngIf="certificate.status!=certificateStatus.Payed" class=" " role="button">
-                        <img src="assets/images/shared/rect-xmark.svg" alt="" (click)="removeRequest(certificate.commonCertificateRequestId)">
+                        <img src="assets/images/shared/rect-xmark.svg" alt="" ConfirmDialog (onConfirm)="removeRequest(certificate.commonCertificateRequestId)" >
                     </div>
                 </div>
 

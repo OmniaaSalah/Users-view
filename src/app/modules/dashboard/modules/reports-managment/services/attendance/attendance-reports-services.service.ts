@@ -56,12 +56,16 @@ export class AttendanceReportsServicesService {
       isSelected: false,
       isDisabled: false,
     },
-    // {
-     
-    //   name: this.translate.instant('Students nickname'),
-    //   isSelected: false,
-    //   isDisabled: false,
-    // },
+    {
+      name: this.translate.instant('shared.Identity Number'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+      name: this.translate.instant('dashboard.parents.ChildWithoutNationality'),
+      isSelected: false,
+      isDisabled: false,
+    },
     {
    
       name:this.translate.instant('dashboard.students.daleelNumber'),
@@ -100,14 +104,15 @@ export class AttendanceReportsServicesService {
       map(res=>{
         return res.result.data.map(student =>{
           return {
-            [this.translate.instant('shared.divisionName')]:student?.devisionName ? student?.devisionName[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('shared.gradeName')]:student?.gradeName ? student?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.division')]:student?.devisionName ? student?.devisionName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.grade')]:student?.gradeName ? student?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.reports.AttendanceNumbers')]: student?.attendantCount ,
             [this.translate.instant('dashboard.reports.AbsenceNumbers')]:student?.absenceCount,
             [this.translate.instant('dashboard.parents.attendancePercentage')]:student?.attendantPersentage +'%',
             [this.translate.instant('dashboard.parents.absencePercentage')]: student?.absencePersentage +'%',
-            [this.translate.instant('dashboard.issue of certificate.student name')]: student?.studentName? student?.studentName[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('Students nickname')]:student?.studentSurName ? student?.studentSurName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.schools.student')]: student?.studentName? student?.studentName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.Identity Number')]:student?.emiratesId ? student?.emiratesId : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.parents.ChildWithoutNationality')]: student?.reasonForNotHavingEmiratesId[this.lang] ? student?.reasonForNotHavingEmiratesId[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.daleelNumber')]: student?.daleelId ? student?.daleelId : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.manhalNumber')]: student?.manhalNumber ? student?.manhalNumber : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.parentName')]: student?.guardianName ? student?.guardianName[this.lang] : this.translate.instant('shared.notFound'),

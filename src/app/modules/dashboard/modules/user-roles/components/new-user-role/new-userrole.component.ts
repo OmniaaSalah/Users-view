@@ -483,7 +483,7 @@ export class NewUserRoleComponent implements OnInit {
     });
 
     this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
-
+    this.toastService.success(this.translate.instant('mission Succeeded'))
   }
  
   openSelectSchoolsModel()

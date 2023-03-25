@@ -122,16 +122,19 @@
                             <td *ngIf="tableColumns[6].isSelected == true">
                                 {{student?.studentName | currentLang}}
                             </td>
-                            <!-- <td *ngIf="tableColumns[7].isSelected == true">
-                                {{student?.studentSurName | currentLang}}
-                            </td> -->
                             <td *ngIf="tableColumns[7].isSelected == true">
-                                {{student?.daleelId}}
+                                {{student?.emiratesId}}
                             </td>
                             <td *ngIf="tableColumns[8].isSelected == true">
-                                {{student?.manhalNumber}}
+                                {{student?.reasonForNotHavingEmiratesId | currentLang}}
                             </td>
                             <td *ngIf="tableColumns[9].isSelected == true">
+                                {{student?.daleelId}}
+                            </td>
+                            <td *ngIf="tableColumns[10].isSelected == true">
+                                {{student?.manhalNumber}}
+                            </td>
+                            <td *ngIf="tableColumns[11].isSelected == true">
                                 {{student?.guardianName | currentLang}}
                             </td>
 

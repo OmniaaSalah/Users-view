@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,7 @@ import { DateValidators } from 'src/app/core/classes/validation';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 import { GradesService } from '../../../services/grade/grade.service';
 import { ToastrService } from 'ngx-toastr';
-import { map, shareReplay } from 'rxjs';
+import { map, shareReplay, Subscription } from 'rxjs';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { GradeCalenderEvent } from 'src/app/core/models/schools/school.model';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
@@ -19,8 +19,8 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
   templateUrl: './class-schedule.component.html',
   styleUrls: ['./class-schedule.component.scss']
 })
-export class ClassScheduleComponent implements OnInit {
-
+export class ClassScheduleComponent implements OnInit ,OnDestroy{
+  subscription:Subscription;
     // << ICONS >>
     faPlus = faPlus
     faCheck = faCheck
@@ -75,7 +75,7 @@ export class ClassScheduleComponent implements OnInit {
   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<  Calender  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   confirmDeletObsever(){
-    this.confirmModelService.confirmed$
+    this.subscription=this.confirmModelService.confirmed$
     .subscribe(isConfirmed=>{
       if(isConfirmed) this.deleteEvent(this.eventIdToDelete)
     })
@@ -227,5 +227,9 @@ private getDate(date:Date , dayOfWeek:Day){
     this.addClassModelOpened = true
     this.mode='add'
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+  
 
 }

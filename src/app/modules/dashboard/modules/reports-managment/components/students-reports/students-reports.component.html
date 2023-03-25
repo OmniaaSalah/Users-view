@@ -243,6 +243,23 @@
                             <span *ngIf="student?.local">{{'true'|translate}}</span>
                             <span *ngIf="!student?.local">{{'false'|translate}}</span>
                         </td>
+                        <td *ngIf="tableColumns[18].isSelected == true">
+                           <span *ngIf="student?.gender">{{'shared.genderType.'+student?.gender|translate}}</span>
+                           <span *ngIf="!student?.gender">{{'shared.notFound' | translate}}</span>
+                        </td>
+                        <td *ngIf="tableColumns[19].isSelected == true">
+                            {{student?.state }}
+                        </td>
+                        <td *ngIf="tableColumns[20].isSelected == true">
+                            {{student?.city }}
+                        </td>
+                        <td *ngIf="tableColumns[21].isSelected == true">
+                            {{student?.nationality | currentLang}}
+                        </td>
+                        <td *ngIf="tableColumns[22].isSelected == true">
+                            <span *ngIf="student?.studentCategory">{{'shared.allStatus.'+student?.studentCategory|translate}}</span>
+                            <span *ngIf="!student?.studentCategory">{{'shared.notFound' | translate}}</span>
+                        </td>
 
                     </ng-container>
 
