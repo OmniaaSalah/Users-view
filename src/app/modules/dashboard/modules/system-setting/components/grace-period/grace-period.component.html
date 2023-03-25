@@ -112,7 +112,7 @@
                         <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                             <td>{{school.name|currentLang}}</td>
                             <!-- <td>{{school.city |currentLang}}</td> -->
-                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img role="button" (click)="deleteSelectdSchool(school.id, fromSchools)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img role="button"   ConfirmDialog (onConfirm)="deleteSchool(school.id, fromSchools)"   src="assets/images/shared/rect-xmark.svg" alt=""></td>
                         </tr>
                     </ng-template>
 
@@ -179,7 +179,7 @@
                         <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                             <td>{{school.name|currentLang}}</td>
                             <!-- <td>{{school.city |currentLang}}</td> -->
-                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img  role="button" (click)="deleteSelectdSchool(school.id, toSchools)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img  role="button" ConfirmDialog (onConfirm)="deleteSchool(school.id, toSchools)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
                         </tr>
                     </ng-template>
 
@@ -245,7 +245,7 @@
                     <tr [routerLink]="gracePeriodId ? ['school/',school.id]:[]" [class.clickable]="gracePeriodId">
                         <td>{{school.name|currentLang}}</td>
                         <td class="actions d-flex justify-content-end ms-5" StopProp>
-                            <img  role="button" src="assets/images/shared/rect-xmark.svg" (click)="deleteSelectdSchool(school.id, 'allowdSchools')">
+                            <img  role="button" src="assets/images/shared/rect-xmark.svg" ConfirmDialog (onConfirm)="deleteSchool(school.id, 'allowdSchools')" >
                         </td>
                     </tr>
                 </ng-template>

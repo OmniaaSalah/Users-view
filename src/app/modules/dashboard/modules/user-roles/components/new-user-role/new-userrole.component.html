@@ -196,8 +196,8 @@
                                   <td>{{school.state.ar}}</td>
                                   <td>{{school.curriculum.ar}}</td>
                                   <td class="actions">
-                                    <button (click)="unSelectMe(school.id)"  >
-                                      <img    src="assets/images/shared/rect-xmark.svg" alt="">
+                                    <button >
+                                      <img  ConfirmDialog (onConfirm)="unSelectMe(school.id)"  src="assets/images/shared/rect-xmark.svg" alt="">
                                    </button>
                                   </td>
                               </tr>

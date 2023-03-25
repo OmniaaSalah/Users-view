@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { map, throwError } from 'rxjs';
+import { map } from 'rxjs';
 
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -13,12 +13,10 @@ import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { DivisionService } from '../../../services/division/division.service';
 import * as FileSaver from 'file-saver';
-import { HttpStatusCode } from '@angular/common/http';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
   selector: 'app-degrees',
@@ -128,7 +126,7 @@ export class DegreesComponent implements OnInit {
 
   addSubjectDegrees(){
     this.isSubmited=true
-    this.divisionService.addSubjectDegrees(this.schoolId,this.divisionId,this.degreesFileUrl,{subjectid: this.selectedSubjectId,semester:1})
+    this.divisionService.addSubjectDegrees(this.schoolId,this.divisionId,this.degreesFileUrl,{subjectid: this.selectedSubjectId,semester:this.filtration.semester})
     .pipe(map(res=>{
       if(!res.result){
         let error ='حدث خطأ يرجى المحاوله مره اخرى';

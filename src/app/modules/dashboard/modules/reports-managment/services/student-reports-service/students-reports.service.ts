@@ -138,6 +138,31 @@ export class StudentsReportsService {
       name: this.translate.instant('dashboard.students.Citizen'),
       isSelected: false,
       isDisabled: false,
+    },
+    {
+      name: this.translate.instant('shared.gender'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+      name: this.translate.instant('shared.state'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+      name: this.translate.instant('shared.city'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+      name: this.translate.instant('Nationality'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+      name: this.translate.instant('dashboard.students.StudentCategory'),
+      isSelected: false,
+      isDisabled: false,
     }
   ];
   getAllStudents(filter?:Partial<Filter>){
@@ -160,21 +185,26 @@ export class StudentsReportsService {
           return {
             [this.translate.instant('dashboard.students.daleelNumber')]: student?.daleelId ? student?.daleelId : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.manhalNumber')]: student?.manhalNumber ? student?.manhalNumber : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.issue of certificate.student name')]: student?.name? student?.name[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.schools.student')]: student?.name? student?.name[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('Students nickname')]:student?.surName ? student?.surName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.parentName')]: student?.guardianName ? student?.guardianName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.issue of certificate.schoolName')]: student?.schoolName ? student?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('shared.gradeName')]:student?.gradeName ? student?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('shared.divisionName')]:student?.divisionName ? student?.divisionName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.grade')]:student?.gradeName ? student?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.division')]:student?.divisionName ? student?.divisionName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.Identity Number')]: student?.emiratesId ? student?.emiratesId :this.translate.instant('shared.notFound'),
-            [this.translate.instant('TheReasonForLackOfIdentification')]:student?.reasonForNotHavingEmiratesId[this.lang] ? student?.reasonForNotHavingEmiratesId[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('shared.curriculumName')]:student?.curriculumName ? student?.curriculumName[this.lang] :this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.parents.ChildWithoutNationality')]:student?.reasonForNotHavingEmiratesId[this.lang] ? student?.reasonForNotHavingEmiratesId[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.schools.SchoolCurriculum')]:student?.curriculumName ? student?.curriculumName[this.lang] :this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.registedDate')]: student?.dateOfAcceptance ? student?.dateOfAcceptance :this.translate.instant('shared.notFound'),
             [this.translate.instant('sign up.Birthday')]: student?.birthDate ? student?.birthDate :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.age')]: student?.age ? student?.age :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.status')]: student?.registrationStatus ? student?.registrationStatus :this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isChildOfAMartyr ? student?.isChildOfAMartyr :this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.students.Citizen')]: student?.local ? this.translate.instant('true') :this.translate.instant('false')
+            [this.translate.instant('dashboard.students.Citizen')]: student?.local ? this.translate.instant('true') :this.translate.instant('false'),
+            [this.translate.instant('shared.gender')]: student?.gender ? this.translate.instant('shared.genderType.'+student?.gender):this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.state')]: student?.state ? student?.state :this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.city')]: student?.city ? student?.city :this.translate.instant('shared.notFound'),
+            [this.translate.instant('Nationality')]: student?.nationality[this.lang] ? student?.nationality[this.lang] :this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.students.StudentCategory')]: student?.studentCategory ? this.translate.instant('shared.allStatus.'+student?.studentCategory) :this.translate.instant('shared.notFound')
 
           }
         })

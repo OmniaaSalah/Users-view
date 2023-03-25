@@ -263,14 +263,6 @@ export class IssuanceOfACertificateComponent implements OnInit  {
     }
    }
 
-  
-
-  //  checkDisabilityOfBtn()
-  //  {
-  //   console.log("kkk")
-  
-  //   setTimeout(() => {certificateFormGrp.invalid||isBtnLoading }, );
-  //  }
   checkDashboardHeader()
   {
       if(!this.parentId)
