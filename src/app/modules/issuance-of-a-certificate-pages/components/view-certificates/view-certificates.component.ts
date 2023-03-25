@@ -61,8 +61,8 @@ export class ViewCertificatesComponent implements OnInit {
   {
     this.allCertificates.loading = true
     this.allCertificates.list = []
-    this.issuance.getAllCertificateOfGurdian(this.filtration).subscribe(res => {   
-      this.sharedService.filterLoading.next(false);   
+    this.issuance.getAllCertificateOfGurdian(this.filtration).subscribe(res => {
+      this.sharedService.filterLoading.next(false);
       this.allCertificates.loading = false
       this.allCertificates.list = res.data
       this.allCertificates.totalAllData = res.totalAllData
@@ -73,7 +73,7 @@ export class ViewCertificatesComponent implements OnInit {
       this.sharedService.filterLoading.next(false);
     })
 
-   
+
   }
 
   clearFilter(){
@@ -108,10 +108,10 @@ export class ViewCertificatesComponent implements OnInit {
       "guardianId":this.guardian.id,
       "commonCertificateRequestIds":this.certificatesIds
     }
- 
+
    this.issuance.payCertificates(obj).subscribe((res)=>{
      if(res.statusCode=="OK") window.location.href=res.result
- 
+
       else{
           if(res?.errorLocalized) this.toastr.error( res?.errorLocalized[this.lang])
           else this.toastr.error(this.translate.instant('error happened'))
@@ -121,13 +121,13 @@ export class ViewCertificatesComponent implements OnInit {
    })
   }
   completePaymentProccess(){
-   
+
     this.issuance.completepaymentProcess(this.paymentRef.toString()).subscribe(()=>{
       this.getAllCertificates()
       this.router.navigate([])
     })
   }
-  getSchoolYearsList(){ 
+  getSchoolYearsList(){
     this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
   }
   viewCertificate(certificate){
