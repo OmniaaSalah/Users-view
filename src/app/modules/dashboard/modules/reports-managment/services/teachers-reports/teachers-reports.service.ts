@@ -68,8 +68,8 @@ export class TeachersReportsService {
       map(res=>{
         return res.data.map(teacher =>{
           return {
-            [this.translate.instant('dashboard.issue of certificate.schoolName')]: teacher?.schoolName ? teacher?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.reports.subjectName')]: teacher?.subjectName ? teacher?.subjectName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('School')]: teacher?.schoolName ? teacher?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.SchoolYear.Subject')]: teacher?.subjectName ? teacher?.subjectName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.reports.SubjectsTeachersNumbers')]: teacher?.teachersCount,
             [this.translate.instant('dashboard.reports.TeacherName')]:teacher?.teacherName ? teacher?.teacherName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.reports.TeacherSpeciality')]: teacher?.teacherField ? teacher?.teacherField[this.lang] : this.translate.instant('shared.notFound'),

@@ -17,6 +17,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { TranslateService } from '@ngx-translate/core';
 import { School } from 'src/app/core/models/schools/school.model';
+import { GradesService } from '../../services/grade/grade.service';
 
 
 
@@ -27,7 +28,9 @@ import { School } from 'src/app/core/models/schools/school.model';
 })
 export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   lang =inject(TranslationService).lang
-
+  displayGradesList:boolean=false
+  showLoader:boolean=false
+  gradesList=[];
   curriculums$ = this.sharedService.getAllCurriculum()
   // cities = this.CountriesService.cities
   cities$ = this.CountriesService.getCities()
@@ -82,6 +85,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
 
   constructor(
+    private gradeService:GradesService,
     private headerService: HeaderService,
     private exportService: ExportService,
     private schoolsService:SchoolsService,
@@ -161,6 +165,18 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
     this.filtration.Page = event.page
     this.getSchools()
 
+  }
+  showGrades(schoolId)
+  {
+    console.log(schoolId)
+    this.gradesList=[];
+    this.showLoader=true;
+    this.displayGradesList = true;
+    this.gradeService.getSchoolGardes(schoolId).subscribe((res)=>{
+      this.showLoader=false;
+      this.gradesList=res.data;
+    });
+     
   }
 
   ngOnDestroy(): void {

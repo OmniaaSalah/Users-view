@@ -42,9 +42,6 @@
             <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.arSchoolName'|translate }}</span>
             <p class="color-primary">{{school?.name.en}}</p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolNumber'|translate }}</span>
-            <p class="color-primary">{{school?.number}}</p>
-
             <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolId'|translate }}</span>
             <p class="color-primary">{{school?.code}}</p>
 
@@ -112,14 +109,17 @@
             </div>
 
             <div class="col-md-5 align-self-center grid-container bg-gray-30 radius-15 p-4">
-                <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
-                <p class="color-primary"> {{(school?.address?.city |currentLang) || 'ابو ظبى'}}</p>
+                <span class="paragraph paragraph--sm color-gray-200">{{'dashboard.schools.schoolNumber'|translate }}</span>
+                <p class="color-primary"> {{school?.number}}</p>
 
                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
                 <p class="color-primary">{{(school?.address?.state.name |currentLang) || 'الشارقه'}}</p>
 
                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
                 <p class="color-primary">{{(school?.address?.street.name |currentLang) || 'شارع الأنوار، مجمع النخيل'}}</p>
+
+                <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
+                <p class="color-primary"> {{(school?.address?.city |currentLang) || 'ابو ظبى'}}</p>
             </div>
         </div>
     </div>
