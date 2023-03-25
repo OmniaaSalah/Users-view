@@ -8,6 +8,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { environment } from 'src/environments/environment';
 import { StudentsService } from '../../../../students/services/students/students.service';
 
 @Component({
@@ -50,7 +51,7 @@ export class CertificateListComponent implements OnInit {
       this.certificates.loading=false
       this.certificates.list = res.data
       this.certificates.totalAllData = res.totalAllData
-      this.certificates.total =res.total 
+      this.certificates.total =res.total
     },err=>{
       this.certificates.loading=false
       this.certificates.total=0
@@ -58,12 +59,8 @@ export class CertificateListComponent implements OnInit {
   }
 
 
-  downloadCertificate(fileUrl : string){
-    if (fileUrl) {
-      window.open(fileUrl, '_blank').focus();
-    } else {
-      this.toastrService.warning(this.translate.instant('noURLFound'))
-    }
+  viewCertificate(certificate){
+    window.open(`${environment.clientUrl}/certificate/${certificate?.id}`)
    }
 
 
@@ -81,7 +78,7 @@ export class CertificateListComponent implements OnInit {
   onExport(fileType: FileEnum){
     let filter = {...this.filtration, PageSize:null}
     this.studentService.certificatesToExport(this.studentId||this.childId,filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.certificateList'))
     })
   }

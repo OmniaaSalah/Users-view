@@ -6,6 +6,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Guardian } from 'src/app/core/models/guardian/guardian.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
@@ -13,7 +14,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class ParentService {
 
-  
+
   constructor(private http: HttpHandlerService,
     private translate:TranslateService,
     private tableLoaderService: LoaderService) {
@@ -100,8 +101,14 @@ export class ParentService {
   }
 
 
-  registerChildBySpea(childId, childData){
-    return this.http.post(`/Student/enroll/${childId}`,childData).pipe(take(1));
+  registerChildBySpea(studentRegistrationStatus,childId, childData){
+    if(studentRegistrationStatus===RegistrationStatus.Withdrawal){
+      return this.http.post(`/Student//enroll-withdrawal-student/${childId}`,childData).pipe(take(1));
+    }else{
+
+      return this.http.post(`/Student/enroll/${childId}`,childData).pipe(take(1));
+    }
+
   }
   getGuardianById(guardianId)
   {
