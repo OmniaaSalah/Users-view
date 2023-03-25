@@ -50,7 +50,7 @@ export class AcademicSequenceComponent implements OnInit {
   getStudentCertificteCtr(index) { return this.getStudentCertifictesArrCtr(index).controls[index] as FormGroup}
 
 
-  
+
   constructor(
     private fb: FormBuilder,
     private toastr:ToastrService,
@@ -80,7 +80,7 @@ export class AcademicSequenceComponent implements OnInit {
 
       this.studentsSchoolYears =this.studentsSchoolYearsMapped(this.choosenStudents, res)
      this.fillStudentsFormArr([...this.studentsSchoolYears])
-      
+
     })
   }
 
@@ -116,7 +116,7 @@ export class AcademicSequenceComponent implements OnInit {
 
     return formArr
   }
-  
+
 
 
 
@@ -140,7 +140,7 @@ export class AcademicSequenceComponent implements OnInit {
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.onCancel.emit();
       }else{
-     if(result?.errorLocalized) 
+     if(result?.errorLocalized)
      {this.toastr.error( result?.errorLocalized[this.lang])}
      else
      {this.toastr.error(this.translate.instant('error happened'))}
@@ -176,9 +176,9 @@ export class AcademicSequenceComponent implements OnInit {
 
 
     if(!isImage){
-      this.showError =true; 
+      this.showError =true;
       return
-    }else this.showError =false; 
+    }else this.showError =false;
 
     let i = this.getStudentCtr(index).value.attachments.indexOf(attachment.id);
     if (i >= 0) {
@@ -202,7 +202,7 @@ export class AcademicSequenceComponent implements OnInit {
       return
     }
     else {this.showAttchments[index] =true}
-    
+
     this.attachLoading =true
 
     this.studentService
@@ -215,9 +215,7 @@ export class AcademicSequenceComponent implements OnInit {
       this.attachLoading =false
     });
 
-    // this.choosenStudents.forEach((student) => {
-   
-    // });
+
   }
 
 
