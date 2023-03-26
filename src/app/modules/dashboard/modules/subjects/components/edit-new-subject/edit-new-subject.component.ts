@@ -85,8 +85,8 @@ export class EditNewSubjectComponent implements OnInit {
       {
         this.addFieldsinFormArray();
       }
-
-     this.subjectServise.getSubjectByID(Number(this.urlParameter)).subscribe((res)=>{this.subject=res;this.bindOldSubject(this.subject);});
+     
+    if(this.urlParameter)  this.subjectServise.getSubjectByID(Number(this.urlParameter)).subscribe((res)=>{this.subject=res;this.bindOldSubject(this.subject);});
     });
 
    if(!this.schoolId)
