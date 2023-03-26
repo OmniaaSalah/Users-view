@@ -53,7 +53,7 @@
 
     <h3 class="heading heading--tertiary ">{{'dashboard.schools.schoolEmployeeList'|translate }}</h3>
     <div class="prim-table mt-4" *ngIf="employees.totalAllData || employees.loading">
-        <p-table #dt [value]="employees.list" [lazy]="true">
+        <p-table #dt [value]="employees.list" [lazy]="true" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption
@@ -80,31 +80,31 @@
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
 
-                    <th pSortableColumn="code">{{'dashboard.schools.employeeId'|translate }}
-                        <p-sortIcon field="code"></p-sortIcon>
+                    <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.schools.employeeId'|translate }}
+                       
                     </th>
-                    <th pSortableColumn="name">{{'dashboard.schools.employeeName'|translate }}
-                        <p-sortIcon field="name"></p-sortIcon>
+                    <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.employeeName'|translate }}
+                        
                     </th>
-                    <th pSortableColumn="category">{{'dashboard.schools.employeeNickname'|translate }}
-                        <p-sortIcon field="category"></p-sortIcon>
+                    <th pSortableColumn="category"><p-sortIcon field="category"></p-sortIcon>{{'dashboard.schools.employeeNickname'|translate }}
+                        
                     </th>
-                    <th pSortableColumn="category">{{'dashboard.schools.jobTitle'|translate }}
-                        <p-sortIcon field="category"></p-sortIcon>
+                    <th pSortableColumn="category"><p-sortIcon field="category"></p-sortIcon>{{'dashboard.schools.jobTitle'|translate }}
+                        
                     </th>
-                    <th pSortableColumn="quantity">{{'shared.email'|translate }}
-                        <p-sortIcon field="quantity"></p-sortIcon>
+                    <th pSortableColumn="quantity"><p-sortIcon field="quantity"></p-sortIcon>{{'shared.email'|translate }}
+                        
                     </th>
 
-                    <!-- <th pSortableColumn="phoneNumber">{{'shared.phoneNumber'|translate }}
-                      <p-sortIcon field="phoneNumber"></p-sortIcon>
-                  </th> -->
+                    <th pSortableColumn="phoneNumber"><p-sortIcon field="phoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate }}
+                      
+                  </th>
 
-                    <th pSortableColumn="price">{{'shared.personalId'|translate }}
-                        <p-sortIcon field="price"></p-sortIcon>
+                    <th pSortableColumn="price"><p-sortIcon field="price"></p-sortIcon>{{'shared.personalId'|translate }}
+                        
                     </th>
-                    <th pSortableColumn="actions">{{'dashboard.schools.employeeStatus'|translate }}</th>
-                    <th class="actions"></th>
+                    <th pSortableColumn="actions"><p-sortIcon field="price"></p-sortIcon>{{'dashboard.schools.employeeStatus'|translate }}</th>
+                    <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-employee let-columns="columns">
@@ -114,8 +114,8 @@
                     <td>{{employee?.name |currentLang}}</td>
                     <td>{{employee?.surName |currentLang}}</td>
                     <td>{{employee?.jobTitle | currentLang}}</td>
-                    <td>{{employee?.email}}</td>
-                    <!-- <td>{{employee?.phoneNumber}}</td> -->
+                    <td ><span class="position-relative" pTooltip="{{employee?.email}}" [autoHide]="true" tooltipPosition="top">{{employee?.email | truncate:15}}</span></td>
+                    <td>{{employee?.phoneNumber}}</td>
                     <td>{{employee?.emiratesIdNumber}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
@@ -128,7 +128,7 @@
                         </div>
                     </td>
 
-                    <td class="actions">
+                    <td pFrozenColumn [frozen]="true" class="actions">
                         <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4" (click)="patchForm(employee)">
                             <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                             <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
@@ -139,7 +139,7 @@
 
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                    <td [attr.colspan]="20">
+                    <td [attr.colspan]="20" class="search">
                         <ng-container *ngIf="employees.totalAllData && employees.list.length == 0 &&  !employees.loading">
                             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>

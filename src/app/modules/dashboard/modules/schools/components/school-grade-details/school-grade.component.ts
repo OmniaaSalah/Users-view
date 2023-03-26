@@ -226,8 +226,8 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
       this.hasTracks= this.willHasTrack
       this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
 
-      if(this.hasTracks) this.resetSubjects() 
-      else this.resetTracks()
+      if(this.hasTracks) {this.resetSubjects();console.log("subjects") }
+      else {this.resetTracks();console.log("tracks")}
       
     })
   }
