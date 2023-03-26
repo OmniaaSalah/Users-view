@@ -89,14 +89,14 @@ export class SchoolDivisionComponent implements OnInit {
     abilityToAddDegrees: [],
     name: this.fb.group({en: [''],ar: ['']})
   }),
-  subjectsTeachers:this.fb.array([]) 
+  subjectsTeachers:this.fb.array([])
  })
 
  get subjectsTeachersCtr (){ return this.divisionTeachersForm.controls['subjectsTeachers'] as FormArray}
  get isAllowToAddDegrees(){ return this.divisionTeachersForm.get('supervisior.abilityToAddDegrees') as FormControl}
 
  addStudentForm:FormGroup
- 
+
 
  constructor(
    private translate: TranslateService,
@@ -134,11 +134,11 @@ export class SchoolDivisionComponent implements OnInit {
 				  }
 
 		})
-    
-    
+
+
   }
   this.checkDashboardHeader();
-	  
+
   this.getDivisionInfo()
 }
 
@@ -167,7 +167,7 @@ getDivisionInfo(){
     this.headerService.changeHeaderdata(this.componentHeaderData)
   })
  }
- 
+
  updateDivisionInfo(){
   this.isSubmited=true
   this.divisionService.updateDivisionInfo(this.divisionId ,this.divisionInfoForm.value)
@@ -202,6 +202,7 @@ getDivisionInfo(){
       this.isSubmited=false
     },err=>{
       this.isSubmited=false
+      this.toasterService.error(this.translate.instant('toasterMessage.error'))
     })
   }
 
@@ -232,7 +233,7 @@ getDivisionInfo(){
     .valueChanges
     .subscribe(val=>{
       if(!val) {
-        
+
         this.subjectsTeachersCtr.controls.forEach(el =>{
 
           el.get('teacher.id').setValidators(Validators.required)
@@ -242,7 +243,7 @@ getDivisionInfo(){
       else {
         this.subjectsTeachersCtr.controls.forEach(el =>{
           el.get('teacher.id').removeValidators(Validators.required)
-          el.get('teacher.id').updateValueAndValidity()          
+          el.get('teacher.id').updateValueAndValidity()
         })
       }
 
@@ -253,7 +254,7 @@ getDivisionInfo(){
   getSchoolTeachers(){
     this.divisionService.getSchoolTeachers(this.schoolId)
   }
-  
+
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<< Add Student To Division >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 addStudentToDivision(data){
@@ -312,7 +313,7 @@ getGradeClassEvents(){
 
  eventClicked(event){
   this.eventSubjects=event.meta.subjects
-   this.selectedEventId= event.lectureId 
+   this.selectedEventId= event.lectureId
    this.openSubjectsModel=true
  }
 
@@ -322,7 +323,7 @@ getGradeClassEvents(){
   //  let selectedEvent = this.events.find((e)=> e.id == id)
   //  selectedEvent.meta.subjects = [...selectedEvent.meta.subjects,...this.eventSubjects]
   //  this.events = [...this.events]
-   
+
    this.gradeService.addSubjectToClassEvent(lectureId, this.divisionId,this.eventSubjects).subscribe(res=>{
     this.getGradeClassEvents()
     this.isSubmited = false
@@ -349,12 +350,12 @@ getGradeClassEvents(){
     {
       this.componentHeaderData.breadCrump=
       [
-     
+
         { label: this.translate.instant('dashboard.schools.schoolTracks'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true},visible:false},
         { label: this.translate.instant('breadcrumb.editTrack'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions/division/${this.divisionId}`},
       ]
 
-      
+
     }
     else if (this.currentUserScope==UserScope.SPEA)
     {
@@ -365,7 +366,7 @@ getGradeClassEvents(){
           {label:this.translate.instant('breadcrumb.editTrack'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/division/${this.divisionId}`},
         ]
 
-      
+
     }
 
     this.headerService.changeHeaderdata(this.componentHeaderData)
