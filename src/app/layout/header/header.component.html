@@ -110,7 +110,7 @@
 
     </div>
 
-    <div class="nav__messages mt-3">
+    <div class="nav__messages">
         <div class="">
             <div class="dropdown cursorStyle">
 
@@ -122,7 +122,7 @@
         </div>
     </div>
 
-    <div class="nav__notifications mt-3">
+    <div class="nav__notifications ">
         <div class="">
             <div class="dropdown cursorStyle">
 
@@ -212,8 +212,8 @@
     </div> -->
 
     <!-- *permit="claimsEnum.S_SchoolYear"  -->
-    <div class="text-center year">
-      <span class="color-primary  mb-2 fs-4" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">{{'shared.SchoolYear'|translate}}</span>
+    <div class="d-flex align-items-center">
+      <span class="color-primary year  mb-2 fs-4" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">{{'shared.SchoolYear'|translate}}</span>
       <div class="nav__dropdown custom-form" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
           <!-- <label>hhh</label> -->
 

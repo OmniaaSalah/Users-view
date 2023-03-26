@@ -66,12 +66,12 @@ export class CalenderComponent implements OnInit, OnChanges {
 
   lang = inject(TranslationService).lang
   get claimsEnum () {return ClaimsEnum}
-  
+
 
   counter=0
   faPlus =faPlus
   rerender=true
-  
+
   CalendarView = CalendarView;
   view: CalendarView = CalendarView.Week;
 
@@ -101,9 +101,9 @@ export class CalenderComponent implements OnInit, OnChanges {
       // this.viewPeriod=null
       this.refresh.next()
       console.log(this.events);
-      
+
     }
-    
+
   }
   excludeDays
   weekDays =[0,1,2,3,4,5,6]
@@ -115,13 +115,14 @@ export class CalenderComponent implements OnInit, OnChanges {
     .pipe(map(res=> res.map(el=> el.day)))
     .subscribe((workDays: WeekDays[])=>{
       this.excludeDays = this.weekDays.filter(day => !workDays.includes(day))
+      this.refresh.next()
     })
   }
 
 
 
   cellClicked(e){
-    
+
   }
 
 
@@ -149,11 +150,11 @@ export class CalenderComponent implements OnInit, OnChanges {
     if(!this.cliamsService.isUserAllowedTo(this.claimsEnum.E_U_DivisionLecuture)) return
     this.eventEditMode =true
     if(this.editableEvents) this.onEventClicked.emit(e)
-    
+
   }
 
   addSubject(subjectName){
-    
+
     this.subjects.push(subjectName)
     this.subjectName=''
   }
