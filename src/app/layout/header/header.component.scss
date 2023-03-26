@@ -16,7 +16,7 @@
 
 
 .nav{
-    
+
  padding: 2rem;
     position: fixed;
     top: 0;
@@ -43,7 +43,7 @@
 
         }
         &--daleel{
-           
+
         }
     }
 
@@ -55,12 +55,12 @@
 
     &__menu {
         display: flex;
-        gap: 3rem;
+        gap: 2rem;
         margin: 0 auto;
         &:lang(en){
             gap: 2rem;
         }
-        
+
 
         &__item{
 
@@ -81,16 +81,16 @@
                     // margin: 0;
                     fa-icon{font-size: 1.3rem;}
                     color: #000;
-                    
+
                 }
                 .text{
-                    color: #000; 
+                    color: #000;
                     transition: all .2s ease-out;
                 }
 
                 &.active{
                     .text{
-                        // color: $color-primary; 
+                        // color: $color-primary;
                         text-shadow: 0px 0px 1px #000, 0px 0px 1px #000;
                     }
                 }
@@ -100,7 +100,7 @@
                         // color: $color-primary;
                     }
                     .text{
-                        // color: $color-primary; 
+                        // color: $color-primary;
                         text-shadow: 0px 0px 1px #000, 0px 0px 1px #000;
                     }
                 }
@@ -125,7 +125,7 @@
             color: $color-primary;
             z-index: 10;
             cursor: pointer;
-            
+
             &.calendar{
                 inset-inline-end: 1rem;
 
@@ -157,13 +157,13 @@
                             font-weight: 500;
                         }
                     }
-                    
+
                 }
 
                 .p-placeholder{
                     color: $color-gray-250;
                 }
-    
+
                 &.p-calendar-w-btn{
                     border: 2px solid $color-primary;
                     &:not(.p-calendar-disabled).p-focus{border-width: 1px;}
@@ -172,7 +172,7 @@
                 .pi{
                     display: none;
                 }
-    
+
                 input{
                     border: none;
                     border-radius: 12px;
@@ -184,7 +184,7 @@
                         padding: .5rem;
                         padding: .5rem 3.5rem .5rem 1rem;
                     }
-    
+
                     &::placeholder{color: $color-gray-250;}
                     &:enabled:focus{box-shadow: none;}
                 }
@@ -206,7 +206,7 @@
             color: $color-primary;
             z-index: 10;
             cursor: pointer;
-            
+
             &.calendar{
                 inset-inline-end: 1rem;
 
@@ -217,12 +217,12 @@
         }
 
         ::ng-deep p-dropdown{
-           
+
             .p-dropdown{
                 width: 18rem;
                 height: 40px;
                 border: 1px solid $color-primary;
-              
+
                 .p-dropdown-label.p-inputtext{
                     padding: 0;
                     padding-inline-start: 3rem;
@@ -239,12 +239,12 @@
                         border-radius: 15px;
                     }
                 }
-                
+
 
                 .pi{
                     display: none;
                 }
-    
+
         }
      }
 
@@ -296,7 +296,7 @@
                         font-size: 1.7rem;
                     }
                 }
-                
+
             }
             img{ width: 1.7rem;}
         }
@@ -432,7 +432,7 @@
         }
         .left{
              ::ng-deep select{
-                // background-position: right 8rem center !important;  
+                // background-position: right 8rem center !important;
                 border: none!important;
                 font-size: 1.3rem!important;
                 width: 10rem;
@@ -458,14 +458,14 @@
             p{
                  color: $color-gray-700  !important;
             }
-           
+
         }
     }
     .rightNotification{
         // text-align: right!important;
         // background-color: #F8F8F8;
     }
-    
+
     #notification-content{
         .container-fluid{
             width: 40rem;
@@ -475,7 +475,7 @@
                 // padding-right: 2rem;
                 .paragraph{
                     white-space: pre-wrap;
-            
+
                 }
             }
             .name-description{
@@ -500,7 +500,7 @@
                 }
             }
         }
-        
+
         .cardimage{
         width: 3rem;
         height: 3rem;
