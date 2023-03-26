@@ -142,10 +142,10 @@
                             <h4 class="color-primary mb-2">{{child?.relativeRelation?.name |currentLang }}</h4>
                         </div>
 
-                        <div class="col-3 d-flex align-items-center gap-5">
+                        <!-- <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.passportNumber}}</h4>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </ng-container>
@@ -250,6 +250,7 @@
 
                 <div class="d-flex justify-content-end gap-3">
                     <button class="btn btn-primary" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
+                    <button  (click)="addMode=false;AttachmentEditMode=false" ><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
                 </div>
 
                 <div class="mt-5 row gx-5 border-dark radius-15 p-5 custom-form" *ngIf="addMode" [formGroup]="fileForm">
