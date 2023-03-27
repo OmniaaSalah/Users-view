@@ -96,7 +96,7 @@ this.surveyFormGrp= this.fb.group({
 
     this.parent.loading=true
     this.filtration.Page +=1
-    this.filtration.PageSize=4;
+    this.filtration.PageSize=10;
     this.surveyService.getGuardians(this.filtration).subscribe(res => {
     if(res.data){
       this.sharedService.filterLoading.next(false);
