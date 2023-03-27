@@ -131,10 +131,10 @@ h2 {
 
 ::ng-deep p-table{
     thead.p-datatable-thead tr th{
-        min-width: 15rem;
+        min-width: 18rem;
     }
 .p-datatable-tbody tr td{
-        min-width: 15rem;
+        min-width: 18rem;
         &.actions{justify-content: end;}
 
    }

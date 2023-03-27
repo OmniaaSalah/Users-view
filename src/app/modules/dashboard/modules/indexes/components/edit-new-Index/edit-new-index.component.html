@@ -19,7 +19,7 @@
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label">{{'dashboard.Indexes.List Type'|translate}} <span class="star">*</span></label>
 
-                        <p-dropdown  [options]="indexListType" optionLabel="indexType" optionValue="value" formControlName="indexType"     [ngClass]="{'ng-invalid ng-dirty':indexType.errors?.required && indexType.touched}"     placeholder="{{'dashboard.Indexes.Select Index Type'|translate}}"   ></p-dropdown>
+                        <p-dropdown [filter]="true" filterBy="indexType" [options]="indexListType" optionLabel="indexType" optionValue="value" formControlName="indexType"     [ngClass]="{'ng-invalid ng-dirty':indexType.errors?.required && indexType.touched}"     placeholder="{{'dashboard.Indexes.Select Index Type'|translate}}"   ></p-dropdown>
                         <div>
                             <div [hidden]="indexType.valid || indexType.untouched">
                                 <small *ngIf="indexType.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
