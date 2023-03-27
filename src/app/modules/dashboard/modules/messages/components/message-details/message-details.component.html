@@ -1,7 +1,7 @@
 <div class="main-message-header dashboard d-flex justify-content-between">
     <div class="left d-flex align-items-center ">
 
-        <button class="btn btn-primary" (click)="showDialog()">{{'dashboard.Messages.Send Reply' | translate}}</button>
+        <button class="btn btn-primary" (click)="showDialog()" *ngIf="messageDetails?.replyPossibility">{{'dashboard.Messages.Send Reply' | translate}}</button>
         <button class=" btn  custom-btn px-4 mx-3" routerLink='/dashboard/messages/messages' >{{'dashboard.Messages.close the conversation' | translate}}</button>
 
 
@@ -64,7 +64,7 @@
 <div class="messages">
 
     <div class="title">
-        <p class="title-Message">{{'dashboard.Messages.title message' | translate}}</p>
+        <p class="title-Message">{{messageDetails?.title}}</p>
         <p class="time">{{messageDetails?.createdDate | customDate}}</p>
     </div>
     <div class="first-message">
