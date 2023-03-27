@@ -11,12 +11,14 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.scss']
 })
 export class NewAccountComponent implements OnInit {
+  lang = inject(TranslationService).lang
   isBtnLoading:boolean=false;
   currentDate=new Date();
   exclamationIcon=faExclamationCircle;

@@ -21,6 +21,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 export class UsersReportsComponent implements OnInit {
   allRequestsNumbers;
   requestsNumbersBasedOnRequestType;
+  requestTypes=[]
   date;
   requestsList=[];
   filtration = {
@@ -83,8 +84,9 @@ export class UsersReportsComponent implements OnInit {
     this.users.list =[];
     this._report.getAllEmployees(this.filtration).subscribe(res => {
       this.sharedService.filterLoading.next(false);
-      this.allRequestsNumbers=res.result.rquestTotalNumber;
-      this.requestsNumbersBasedOnRequestType=res.result.rquestNumberByRequestType;
+      this.allRequestsNumbers=res.result?.rquestTotalNumber;
+      this.requestsNumbersBasedOnRequestType=res.result?.rquestNumberByRequestType;
+      this.requestTypes=res.result?.countPerReuestTypes;
       this.users.list = res.result.employeesPerformance.data;
       this.users.totalAllData = res.result.employeesPerformance.totalAllData
       this.users.total =res.result.employeesPerformance.total;

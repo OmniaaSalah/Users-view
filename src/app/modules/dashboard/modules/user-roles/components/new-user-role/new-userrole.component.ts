@@ -82,11 +82,14 @@ export class NewUserRoleComponent implements OnInit {
     this.userRolesService.getAllClaims().subscribe((res)=>{this.rolePowersList=res.result})
     this.route.paramMap.subscribe(param => {
       this.urlParameter =param.get('roleId');
-      this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{
+      if(this.urlParameter)
+      {
+        this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{
         this.jobRole=res; 
         this.getIsSelectedSchoolList();
       
-      },(err)=>{this.getIsSelectedSchoolList();});
+        },(err)=>{this.getIsSelectedSchoolList();});
+      }
       
     });
     

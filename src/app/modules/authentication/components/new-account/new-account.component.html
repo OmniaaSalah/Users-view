@@ -265,7 +265,8 @@
                             <div class="row gx-5 form-set">
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.Nationality'|translate }} <span class="star">*</span> </label>
-                                    <p-dropdown [options]="nationalityList" formControlName="nationality"     [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.required && nationality.touched}" optionLabel="name.ar" optionValue="id"  inputId="nationality" placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
+                                    <p-dropdown [options]="nationalityList" formControlName="nationality"   [filter]="true"
+                                    filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"   [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.required && nationality.touched}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id"  inputId="nationality" placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
                                     <div [hidden]="nationality.valid || nationality.untouched">
                                         <small *ngIf="nationality.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}

@@ -49,9 +49,9 @@
                     <th pSortableColumn="schoolname">{{'School'|translate}}
                         <p-sortIcon field="schoolname"></p-sortIcon>
                     </th>
-                    <!-- <th pSortableColumn="cityname">{{'dashboard.schools.SchoolEmail'|translate}}
+                    <th pSortableColumn="cityname">{{'dashboard.schools.SchoolEmail'|translate}}
                         <p-sortIcon field="cityname"></p-sortIcon>
-                    </th> -->
+                    </th>
                     <th pSortableColumn="cityname">{{'dashboard.schools.schoolNumber'|translate}}
                         <p-sortIcon field="cityname"></p-sortIcon>
                     </th>
@@ -86,7 +86,7 @@
                 </tr> -->
                     <tr >
                         <td>{{school.name|currentLang}}</td>
-                        <!-- <td>{{school.email}}</td> -->
+                        <td><span class="position-relative" pTooltip="{{school.email}}" [autoHide]="true" tooltipPosition="top">{{school.email}}</span></td>
                          <td>{{school.number}}</td>
                          <td >
                             <div class="color-skyBlue-700 " *ngIf="school?.grageNumber">
