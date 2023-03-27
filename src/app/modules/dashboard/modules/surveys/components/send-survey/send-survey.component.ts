@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription} from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -21,6 +22,7 @@ import { SurveyService } from '../../service/survey.service';
 export class SendSurveyComponent implements OnInit ,OnDestroy{
   exclamationIcon = faExclamationCircle;
   allSelectedGuardian=[];
+  lang = inject(TranslationService).lang;
   guardianIds=[];
   currentDate=new Date()
   isBtnLoading: boolean=false;
@@ -66,10 +68,9 @@ this.surveyFormGrp= this.fb.group({
   
     this.getSurveyById();
     
-    this.filtration.PageSize=0;
+    this.filtration.Page=0;
     this.getParentList();
-
-  
+    
    var date=new Date();
   
 
@@ -94,13 +95,12 @@ this.surveyFormGrp= this.fb.group({
 		
 
     this.parent.loading=true
-		this.parent.list=[]
-    this.filtration.Page = 1
-    this.filtration.PageSize+=10;
+    this.filtration.Page +=1
+    this.filtration.PageSize=4;
     this.surveyService.getGuardians(this.filtration).subscribe(res => {
     if(res.data){
       this.sharedService.filterLoading.next(false);
-			this.parent.list = res.data
+			this.parent.list.push(...res.data);
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
       this.parent.loading = false
@@ -126,7 +126,7 @@ this.surveyFormGrp= this.fb.group({
         "disAppearanceDate":this.formateDate(this.surveyFormGrp.value.disAppearanceDate),
         "appearanceTime": this.surveyFormGrp.value.appearanceTime,
         "disAppearanceTime": this.surveyFormGrp.value.disAppearanceTime,
-        "surveyLink": `https://daleel-qa-app.azurewebsites.net/dashboard/educational-settings/surveys/reply-survey/${this.surveyId}`
+        // "surveyLink": `https://daleel-qa-app.azurewebsites.net/dashboard/educational-settings/surveys/reply-survey/${this.surveyId}`
       }
    
       this.surveyService.sendSurvey(survey).subscribe(response=>{
@@ -205,7 +205,7 @@ formateDate(date :Date)
  onScroll()
  {
 
-   if(this.filtration.PageSize<=this.parent.totalAllData){
+   if(this.parent.list.length<this.parent.total){
  
        this.loadMore();
    }

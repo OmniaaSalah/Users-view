@@ -7,6 +7,7 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
+  inject
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -24,6 +25,7 @@ import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/servic
 import { IndexesEnum } from '../../enums/indexes/indexes.enum';
 import { FileEnum } from '../../enums/file/file.enum';
 import { UserScope } from '../../enums/user/user.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-send-message',
@@ -34,7 +36,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   get fileTypesEnum() { return FileEnum;}
   onSubmit
   studentSchool;
-
+  lang = inject(TranslationService).lang
   @Input() set schoolId(id: any) {
     this.studentSchool = id;
   }

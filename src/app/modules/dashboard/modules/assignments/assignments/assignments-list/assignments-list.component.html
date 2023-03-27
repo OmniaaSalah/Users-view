@@ -64,7 +64,8 @@
                 <th pSortableColumn="examStatus">
                     <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}
                 </th>
-                <th style="min-width: 17rem;"></th>
+                <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions" class="actions"></th>
+                <!-- <th style="min-width: 17rem;"></th> -->
             </tr>
         </ng-template>
 
@@ -97,7 +98,7 @@
 
                     </div>
                 </td>
-                <td style="min-width: 17rem;" >
+                <td pFrozenColumn [frozen]="true" class="actions" >
                     <div class="" *ngIf="currentUserScope==userScope.SPEA || (assignment.examStatus === 'Available' && currentUserScope==userScope.Employee)">
 
                         <app-dropdown [items]="items" label="{{'shared.ExamFileMangment' | translate}}"

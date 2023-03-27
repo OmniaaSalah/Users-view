@@ -151,7 +151,7 @@
                 </div>
                 <div class="col-4 mb-5">
                     <p class="color-gray-300  label">{{ 'shared.nationality'|translate }}</p>
-                    <p-dropdown [options]="nationalityList" formControlName="nationality"     [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.required && nationality.touched}" optionLabel="name.ar" optionValue="id"  inputId="nationality" placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
+                    <p-dropdown [options]="nationalityList" formControlName="nationality"     [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.required && nationality.touched}" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"  inputId="nationality" placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
                     <div [hidden]="nationality.valid || nationality.untouched">
                         <small *ngIf="nationality.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                           {{'shared.This Field is Required'|translate}}

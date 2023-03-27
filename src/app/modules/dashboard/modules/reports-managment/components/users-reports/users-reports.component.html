@@ -58,7 +58,7 @@
                             optionValue="id" 
                             [ngModelOptions]="{standalone: true}" 
                             placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}" 
-                            optionLabel="name.ar"></p-multiSelect>
+                            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
                         </div>
 
                         <div class="col-4">

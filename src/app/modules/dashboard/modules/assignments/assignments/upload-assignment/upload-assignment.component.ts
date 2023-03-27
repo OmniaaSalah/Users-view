@@ -1,5 +1,5 @@
 import { AssignmentServiceService } from './../../service/assignment-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import {  faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -16,6 +16,7 @@ import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.co
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SubjectService } from '../../../subjects/service/subject.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -23,6 +24,7 @@ import { SubjectService } from '../../../subjects/service/subject.service';
 })
 export class UploadAssignmentComponent implements OnInit {
   get fileTypesEnum () {return FileEnum}
+  lang = inject(TranslationService).lang
   assignmentFormGrp: FormGroup;
   curriculumId:number;
   gradesList: Igrade[] = [];

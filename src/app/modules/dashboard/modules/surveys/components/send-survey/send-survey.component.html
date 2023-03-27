@@ -107,18 +107,18 @@
     
                 <div class="custom-form parent-modal" *ngIf="parent.totalAllData || parent.loading">
 
-                    <app-table-caption [hasExport]="false" (onFilter)="filtration.Page=1;getParentList()"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getParentList()" >
+                    <app-table-caption [hasExport]="false" (onFilter)="parent.list=[];filtration.Page=0;getParentList()"  (onSearch)="parent.list=[];filtration.Page=0;filtration.KeyWord = $event; getParentList()" >
                         <div class="row gx-5 form-set">
         
                             
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                                <p-multiSelect [options]="(AllGrades$ | async)" display="chip" [(ngModel)]="filtration.gradeId"   optionLabel="name.ar"  optionValue="id"  placeholder="{{'dashboard.students.chooseClasse' |translate}}" ></p-multiSelect>
+                                <p-multiSelect [options]="(AllGrades$ | async)" display="chip" [(ngModel)]="filtration.gradeId"   optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  optionValue="id"  placeholder="{{'dashboard.students.chooseClasse' |translate}}" ></p-multiSelect>
                             </div>
     
                             <div class="col-md-4">
                                 <label class="label" for="schools">{{'Schools'|translate }}  </label>
-                                <p-multiSelect  [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.schoolId"   optionLabel="name.ar"  optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" ></p-multiSelect>
+                                <p-multiSelect  [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.schoolId"   optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" ></p-multiSelect>
                             </div>
                             
                             <div class="col-md-4">

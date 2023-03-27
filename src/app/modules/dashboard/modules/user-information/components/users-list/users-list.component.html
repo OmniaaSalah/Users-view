@@ -46,7 +46,7 @@
                         <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                     <th pSortableColumn="status">
                         <p-sortIcon field="status"></p-sortIcon>{{'dashboard.UserInformation.User Status'|translate}}</th>
-                    <th pSortableColumn="status" class="actions" ></th>
+                    <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>
 
 
 
@@ -69,7 +69,7 @@
                             <div *ngIf="!e?.isActive" [ngClass]="!e?.isActive?'alerting danger' : 'alerting success'">{{'Inactive'|translate}} </div>
                         </div>
                     </td>
-                    <td class="actions">
+                    <td pFrozenColumn [frozen]="true" class="actions">
                         <div  role="button" class=" d-flex align-items-center gap-3 justify-content-end mx-4" routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}" *permit="ClaimsEnum.S_U_User">
                            <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                            <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
