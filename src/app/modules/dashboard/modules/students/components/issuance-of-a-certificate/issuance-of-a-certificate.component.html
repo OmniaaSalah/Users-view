@@ -5,7 +5,7 @@
             <div class="col-lg-4">
                 <label class="label">{{'dashboard.students.type of certificate'|translate}} <span class="star">*</span></label> 
                 <p-dropdown placeholder="{{'dashboard.students.type of certificate'|translate}}" [options]="certificatesList"
-                    optionLabel="name.ar" (onChange)="checkCertificateType()" formControlName="certificateName"  optionValue="value" ></p-dropdown>
+                    optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" (onChange)="checkCertificateType()" formControlName="certificateName"  optionValue="value" ></p-dropdown>
            </div>
         </div>
          
@@ -26,7 +26,7 @@
                       <label class="label"> {{'dashboard.issue of certificate.academic year' | translate}} <span class="star">*</span>  </label> 
                       <p-dropdown #dropdown  [dropdownIcon]="'none'" 
                         [options]="schoolYearsList" 
-                        optionLabel="name.ar" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
+                        optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
                         </p-dropdown>
                       <img src="assets/images/navBar/calendar.svg" alt="">
                   </div>
@@ -54,7 +54,7 @@
                     <label class="label">{{'dashboard.students.academic year'|translate}} <span class="star">*</span></label> 
                     <p-dropdown #dropdown  [dropdownIcon]="'none'" 
                     [options]="schoolYearsList" 
-                    optionLabel="name.ar" formControlName="schoolYearId" optionValue="id" placeholder="2022 / 2023">
+                    optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="schoolYearId" optionValue="id" placeholder="2022 / 2023">
                     </p-dropdown>
                  <img src="assets/images/navBar/calendar.svg" alt="">
 
@@ -62,13 +62,13 @@
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.School Name'| translate}} <span class="star">*</span></label> 
                     <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
-                      (onChange)="takeSchoolId($event.value)"  formControlName="schoolId" optionLabel="name.ar" optionValue="id" ></p-dropdown>
+                      (onChange)="takeSchoolId($event.value)"  formControlName="schoolId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" ></p-dropdown>
 
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.Class'|translate}} <span class="star">*</span></label> 
                     <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
-                        formControlName="gradeId" optionLabel="name.ar" optionValue="id" (onChange)="checkRequiredAcademic()"></p-dropdown>
+                        formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" (onChange)="checkRequiredAcademic()"></p-dropdown>
                 </div>
 
             </div>

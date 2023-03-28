@@ -1,4 +1,4 @@
-<ng-container *ngIf="!(student$ |async)">
+<ng-container *ngIf="!(student$ |async) && viewStudentInfo">
     <div class="row mb-4">
         <div class="col-4 d-flex gap-4 align-items-center">
             <app-skeleton size="7rem"></app-skeleton>
@@ -135,6 +135,8 @@
     [formGroup]="studentForm"></app-student-prohibited-status> -->
 
 </div>
+
+
 
 
 

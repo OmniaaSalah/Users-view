@@ -30,18 +30,18 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="name.ar">
-                    <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}
+                <th pSortableColumn="name">
+                    <p-sortIcon field="name"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}
                 </th>
-                <th style="min-width: 20rem;" pSortableColumn="name.ar" *ngIf="currentUserScope==userScope.SPEA">
-                    <p-sortIcon field="name.ar"></p-sortIcon>{{'shared.school' | translate}}
+                <th style="min-width: 20rem;" pSortableColumn="schoolName" *ngIf="currentUserScope==userScope.SPEA">
+                    <p-sortIcon field="schoolName"></p-sortIcon>{{'shared.school' | translate}}
                 </th>
-                <th pSortableColumn="gradeName.ar">
-                    <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}
+                <th pSortableColumn="gradeName">
+                    <p-sortIcon field="gradeName"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}
                 </th>
 
-                <th pSortableColumn="curriculmName.ar" *ngIf="currentUserScope!=userScope.Employee">
-                    <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}}
+                <th pSortableColumn="curriculmName" *ngIf="currentUserScope!=userScope.Employee">
+                    <p-sortIcon field="curriculmName"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}}
                 </th>
 
                 <th pSortableColumn="schoolCount" *ngIf="currentUserScope!=userScope.Employee">
@@ -49,8 +49,8 @@
                 </th>
 
 
-                <th style="min-width: 15rem;" pSortableColumn="subjectName.ar">
-                    <p-sortIcon field="subjectName.ar"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}
+                <th style="min-width: 15rem;" pSortableColumn="subjectName">
+                    <p-sortIcon field="subjectName"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}
                 </th>
                 <th  style="min-width: 23rem;" pSortableColumn="examShowDate">
                     <p-sortIcon field="examShowDate"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}}
@@ -58,13 +58,14 @@
                 <th  style="min-width: 22rem;" pSortableColumn="createdDate">
                     <p-sortIcon field="createdDate"></p-sortIcon>{{'dashboard.surveys.createdDate' | translate}}
                 </th>
-                <th  pSortableColumn="createdBefore">
-                    <p-sortIcon field="createdBefore"></p-sortIcon>{{'dashboard.surveys.createdBefore' | translate}}
+                <th  pSortableColumn="userFullName">
+                    <p-sortIcon field="userFullName"></p-sortIcon>{{'dashboard.surveys.createdBefore' | translate}}
                 </th>
                 <th pSortableColumn="examStatus">
                     <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}
                 </th>
-                <th style="min-width: 17rem;"></th>
+                <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions" class="actions"></th>
+                <!-- <th style="min-width: 17rem;"></th> -->
             </tr>
         </ng-template>
 
@@ -97,7 +98,7 @@
 
                     </div>
                 </td>
-                <td style="min-width: 17rem;" >
+                <td pFrozenColumn [frozen]="true" class="actions" >
                     <div class="" *ngIf="currentUserScope==userScope.SPEA || (assignment.examStatus === 'Available' && currentUserScope==userScope.Employee)">
 
                         <app-dropdown [items]="items" label="{{'shared.ExamFileMangment' | translate}}"

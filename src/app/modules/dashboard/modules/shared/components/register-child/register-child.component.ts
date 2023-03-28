@@ -54,7 +54,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   childId = +this.route.snapshot.paramMap.get('childId')
   schoolId
 
-
+ viewStudentInfo:boolean = this.claimsService.isUserAllowedTo([ClaimsEnum.SEG_R_StudentInfo, ClaimsEnum.SEG_R_StudentAcceptanceInfo,ClaimsEnum.SEG_R_StudentBehavior])
 
 
   step
@@ -167,13 +167,17 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private sharedService: SharedService,
     private toastr: ToastrService,
     private userService:UserService,
+    private claimsService:ClaimsService,
     private router:Router) { }
 
 
   ngOnInit(): void {
 
-    if(this.childId) this.getStudent(this.childId)
-    else this.getStudent(this.studentId)
+
+    if(this.viewStudentInfo){
+          if(this.childId) this.getStudent(this.childId)
+          else this.getStudent(this.studentId)
+    }
 
   }
 

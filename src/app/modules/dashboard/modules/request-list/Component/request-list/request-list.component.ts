@@ -32,7 +32,7 @@ export class RequestListComponent implements OnInit {
   get requestStatusEnum(){return UserRequestsStatus}
   faEllipsisVertical = faEllipsisVertical
 
-  componentHeaderData: IHeader={ 
+  componentHeaderData: IHeader={
 		breadCrump: []
 	}
 
@@ -61,7 +61,7 @@ export class RequestListComponent implements OnInit {
     {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
     {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
     {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
-  
+
   ]
     // openResponsesModel = false
 
@@ -89,12 +89,12 @@ export class RequestListComponent implements OnInit {
       private exportService: ExportService,
       private sharedService: SharedService,
       private route :ActivatedRoute
-    ) { 
+    ) {
     }
 
-    ngOnInit(): void {      
+    ngOnInit(): void {
       this.setDashboardHeaderData();
-  
+
       if(this.currentUserScope == UserScope.Guardian) this.getMyRequests()
       if(this.currentUserScope == UserScope.SPEA ) this.getRequests()
       if(this.currentUserScope == UserScope.Employee){
@@ -122,7 +122,7 @@ export class RequestListComponent implements OnInit {
           });
     }
 
-    
+
     applyFilter(){
       if(this.currentUserScope == UserScope.Guardian) this.getMyRequests()
       if(this.currentUserScope == UserScope.SPEA ) this.getRequests()
@@ -138,11 +138,13 @@ export class RequestListComponent implements OnInit {
       this.requests.loading=true;
       this.requests.list=[];
       this.systemRequestService.getMyRequests(this.filtration).subscribe(res=>{
+        this.sharedService.filterLoading.next(false);
         this.requests.loading = false;
         this.requests.total=res.total;
         this.requests.totalAllData = res.totalAllData;
         this.requests.list=res.data;
       },(err)=>{
+        this.sharedService.filterLoading.next(false);
         this.requests.loading = false;
         this.requests.total=0
 
@@ -157,21 +159,21 @@ export class RequestListComponent implements OnInit {
 
       this.applyFilter()
     }
-  
-  
+
+
     sortMe(e){
       if(e.order==1) this.filtration.SortBy= 'old'
       else if(e.order == -1) this.filtration.SortBy= 'update'
       this.filtration.Page=1;
-  
+
       this.applyFilter()
     }
 
 
     onExport(fileType: FileEnum){
-      
+
       let filter = {...this.filtration, PageSize:this.requests.totalAllData}
-      
+
       let requestsList$
 
       if(this.currentUserScope == UserScope.Guardian)  requestsList$ = this.systemRequestService.myReqsToExport(filter)
@@ -189,7 +191,7 @@ export class RequestListComponent implements OnInit {
     paginationChanged(event: paginationState) {
       this.filtration.Page = event.page;
      this.applyFilter()
-      
+
     }
 
     setDashboardHeaderData(){
@@ -207,7 +209,7 @@ export class RequestListComponent implements OnInit {
       }
 
       this.headerService.changeHeaderdata(this.componentHeaderData)
-      
+
     }
 
 

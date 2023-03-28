@@ -17,7 +17,7 @@
                 </div>
                 <div class="profile__info">
                     <div class="profile__name ">
-                        <h4 class="heading heading--tertiary">{{student.name.ar}}</h4>
+                        <h4 class="heading heading--tertiary">{{student.name|currentLang}}</h4>
                         <div class="" *ngIf="student.isGifted">
                             <img src="assets/images/shared/medal.svg" alt="">
                             <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
@@ -91,7 +91,7 @@
             <div class="col-md-4 " *ngIf="transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate">
                 <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
                 <h2 class="heading heading--tertiary mb-3">{{'shared.grade'| translate}}</h2>
-                <p-dropdown name="grade" #Grade [options]="(AllGrades$ | async)" [(ngModel)]="transferForm.gradeId" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
+                <p-dropdown name="grade" #Grade [options]="(AllGrades$ | async)" [(ngModel)]="transferForm.gradeId" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
             </div>
         </div>
     
@@ -115,7 +115,7 @@
                             [options]="(gradeDivisions$ | async)" 
                             [(ngModel)]="transferForm.divisionId" 
                             (ngModelChange)="onDivisionSelected($event)" 
-                            optionValue="id" optionLabel="name.ar" 
+                            optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
                             placeholder="{{'dashboard.students.choosedivision' |translate}}" 
                             emptyMessage="لايوجد شعب فى هذا الصف" [required]="availableGradeDivisions.length"></p-dropdown>
                         </div>
@@ -127,7 +127,7 @@
                             [(ngModel)]="transferForm.trackId" 
                             (ngModelChange)="onTrackSelected($event)" 
                             optionValue="id" 
-                            optionLabel="name.ar" 
+                            optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
                             [required]="selectedDivision?.hasTrack" 
                             placeholder="{{'dashboard.students.chooserack' |translate}}" 
                             emptyMessage="لايوجد مسارات فى هذه الشعبه"></p-dropdown>
@@ -170,7 +170,7 @@
                             <ng-container *ngFor="let subject of optionalSubjectsList">
                                 <div class="col-md-6 d-flex align-items-center gap-4">
                                     <p-checkbox  name="subjects" [value]="subject.id" [(ngModel)]="transferForm.subjects"></p-checkbox>
-                                    <label class="label label--sm" for="">{{subject.name.ar}}</label>
+                                    <label class="label label--sm" for="">{{subject.name|currentLang}}</label>
                                 </div>
                             </ng-container>
                             
@@ -193,11 +193,11 @@
                 <div class="row gx-5 form-set">
                     <div class="col">
                         <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                        <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
                     </div>
                     <div class="col">
                         <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                        <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" inputId="curriculum" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                     </div>
                 </div>
             </app-table-caption>
@@ -219,7 +219,7 @@
                             <img src="assets/images/school-logo.svg" alt="">
                         </div>
                         <div class="">
-                            <p class="color-primary fs-3">{{school.name.ar}}</p>
+                            <p class="color-primary fs-3">{{school.name|currentLang}}</p>
                             <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
                                 <img src="assets/images/shared/location.svg" alt="">
                                 <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->

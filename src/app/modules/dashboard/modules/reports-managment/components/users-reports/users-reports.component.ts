@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ import { UsersReportsService } from '../../services/users/users-reports.service'
 import { Table } from 'primeng/table';
 import { SystemRequestService } from '../../../request-list/services/system-request.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-users-reports',
@@ -21,6 +22,8 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 export class UsersReportsComponent implements OnInit {
   allRequestsNumbers;
   requestsNumbersBasedOnRequestType;
+  lang = inject(TranslationService).lang
+  requestTypes=[]
   date;
   requestsList=[];
   filtration = {
@@ -83,8 +86,9 @@ export class UsersReportsComponent implements OnInit {
     this.users.list =[];
     this._report.getAllEmployees(this.filtration).subscribe(res => {
       this.sharedService.filterLoading.next(false);
-      this.allRequestsNumbers=res.result.rquestTotalNumber;
-      this.requestsNumbersBasedOnRequestType=res.result.rquestNumberByRequestType;
+      this.allRequestsNumbers=res.result?.rquestTotalNumber;
+      this.requestsNumbersBasedOnRequestType=res.result?.rquestNumberByRequestType;
+      this.requestTypes=res.result?.countPerReuestTypes;
       this.users.list = res.result.employeesPerformance.data;
       this.users.totalAllData = res.result.employeesPerformance.totalAllData
       this.users.total =res.result.employeesPerformance.total;

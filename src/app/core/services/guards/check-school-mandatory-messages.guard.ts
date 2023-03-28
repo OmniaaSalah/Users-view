@@ -23,5 +23,5 @@ export class CheckSchoolMandatoryMessagesGuard implements CanActivate {
       }
     return true;
   }
-  
+
 }

@@ -161,7 +161,7 @@
                 <div class=" row gx-5 form-set mt-5 container-fluid " *ngIf="showEvaluation">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID8" class="label">{{'dashboard.Subjects.select evaluation from old known evaluation'|translate}} <span class="star">*</span></label>
-                          <p-dropdown [options]="oldAssesmentList" optionLabel="name.ar" optionValue="id"  formControlName="oldEvaluation"   placeholder="{{'dashboard.Subjects.select evaluation from old known evaluation'|translate}}" name="PID8" id="PID8"   ></p-dropdown>
+                          <p-dropdown [options]="oldAssesmentList" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"  formControlName="oldEvaluation"   placeholder="{{'dashboard.Subjects.select evaluation from old known evaluation'|translate}}" name="PID8" id="PID8"   ></p-dropdown>
                     </div>
                  
                 </div>  

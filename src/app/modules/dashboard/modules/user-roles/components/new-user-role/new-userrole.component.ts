@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +15,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { RestrictionLevelEnum } from 'src/app/shared/enums/user/restriction-level.enum';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-new-user-role',
   templateUrl: './new-userrole.component.html',
@@ -23,6 +24,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 export class NewUserRoleComponent implements OnInit {
   get ClaimsEnum(){return ClaimsEnum}
   exclamationIcon = faExclamationCircle;
+  lang = inject(TranslationService).lang;
   schoolIds;
   curriculumIds;
   jobRole;
@@ -82,11 +84,14 @@ export class NewUserRoleComponent implements OnInit {
     this.userRolesService.getAllClaims().subscribe((res)=>{this.rolePowersList=res.result})
     this.route.paramMap.subscribe(param => {
       this.urlParameter =param.get('roleId');
-      this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{
+      if(this.urlParameter)
+      {
+        this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{
         this.jobRole=res; 
         this.getIsSelectedSchoolList();
       
-      },(err)=>{this.getIsSelectedSchoolList();});
+        },(err)=>{this.getIsSelectedSchoolList();});
+      }
       
     });
     

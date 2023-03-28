@@ -943,8 +943,8 @@
             "newCurriculum": "المناهج الجديدة",
             "fileSettingList": "قائمة شروط المطلوبة ",
             "maxFilesAllowedToUpload": "عدد الملفات المسموح ارفاقها",
-            "fileNameAr": "أسم الملف المطلوب باللغة العربية",
-            "fileNameEn": "أسم الملف المطلوب باللغة الانجليزية",
+            "fileNameAr": "أسم الملف باللغة العربية",
+            "fileNameEn": "أسم الملف باللغة الانجليزية",
             "addNewCondition": "إضافة شرط جديد",
             "chooseRequest": " اختيار الطلب",
             "attachmentType": "نوع المرفق",
@@ -1388,7 +1388,8 @@
             "payments":"مدفوعات",
             "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-إلي",
             "exemptionFromSubjectStudey":"طلب إعفاء من دراسة مادة دراسية",
-            "newIdentityInfo":"معلومات الهوبة الجديدة"
+            "newIdentityInfo":"معلومات الهوبة الجديدة",
+            "attachmentsToAdd":"المرفقات التى يمكن اضافتها"
 
         },
         "Assignments": {

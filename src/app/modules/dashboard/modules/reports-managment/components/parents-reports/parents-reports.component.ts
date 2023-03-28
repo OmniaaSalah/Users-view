@@ -13,12 +13,14 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-parents-reports',
   templateUrl: './parents-reports.component.html',
   styleUrls: ['./parents-reports.component.scss']
 })
 export class ParentsReportsComponent implements OnInit {
+  lang = inject(TranslationService).lang
   isBtnLoading: boolean=false;
   date;
   tableColumns = [];
