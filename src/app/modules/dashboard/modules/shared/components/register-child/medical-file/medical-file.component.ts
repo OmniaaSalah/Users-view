@@ -53,6 +53,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       raise: ['', Validators.required],
       shortage: [4,Validators.required],
       dietFollowed: ['اكتب النظام الغذائي المتبع لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء ',Validators.required],
+      vaccinationBook:[''],
       isAthletic: ['',Validators.required],
       weight: ['',Validators.required],
       height:['',Validators.required],
@@ -94,6 +95,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
   }
   onSubmit=false
   updateMedicalFile(studentId){
+    console.log(this.medicalFileForm.value)
     this.onSubmit=true
     this.studentsService.updateStudentMedicalfile(studentId,this.medicalFileForm.value)
     .subscribe(res =>{

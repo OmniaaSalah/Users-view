@@ -126,14 +126,22 @@
 
 
             <div class="col-md-4">
-                <div class="col-sm-3 grid-container">
+                <div class="col-sm-3 grid-container mb-5">
                     <p class="color-gray-300 fs-4">{{'dashboard.parents.athlete'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.isAthletic ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                 </div>
-                <div class="mt-5">
-                    <p class="color-gray-300 fs-4 mb-4">{{ 'dashboard.parents.Diet'|translate }}</p>
+                <div  class="mb-5">
+                    <p class="color-gray-300 fs-4 mb-2">{{ 'dashboard.parents.Diet'|translate }}</p>
+                    <!-- <span class="color-primary mb-2">{{medicalFile.dietFollowed}}</span> -->
                     <div class="d-flex align-items-center gap-3">
                         <p class="color-primary mb-2 w-75">{{medicalFile.dietFollowed}}</p>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <p class="color-gray-300 fs-4 mb-2">{{'dashboard.parents.VaccinationBook'|translate }}</p>
+                    <!-- <span class="color-primary mb-2">{{medicalFile.vaccinationBook}}</span> -->
+                    <div class="d-flex align-items-center gap-3">
+                        <p class="color-primary mb-2 w-75">{{medicalFile.vaccinationBook}}</p>
                     </div>
                 </div>
             </div>
@@ -173,6 +181,7 @@
                         <p-dropdown [options]="booleanOptions" formControlName="isAthletic" optionValue="value"  optionLabel="name"></p-dropdown>
 
                     </div>
+                  
                 </div>
 
                 <div class="row g-5 form-set">
@@ -192,6 +201,8 @@
                         <!-- <input type="text" id="trackId" formControlName="dietFollowed" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" /> -->
                         <textarea formControlName="dietFollowed" pInputTextarea placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}"></textarea>
                     </div>
+
+                   
                 </div>
 
                 <div class="row g-5 form-set">
@@ -222,6 +233,11 @@
                     <p-inputNumber formControlName="shortage" [showButtons]="true" placeholder="{{'dashboard.students.writeDecrease'|translate}}"></p-inputNumber>
                     <!-- <input type="text" id="trackId" formControlName="shortage" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" /> -->
                 </div>
+                <div class="col-md-4 position-relative">
+                    <label class="label required">{{'dashboard.parents.VaccinationBook'|translate}}</label>
+                    <!-- <input type="text" id="trackId" formControlName="dietFollowed" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" /> -->
+                    <textarea formControlName="vaccinationBook" pInputTextarea placeholder="{{'dashboard.parents.VaccinationBook'|translate}}"></textarea>
+                </div>
 
             </div>
 
@@ -239,7 +255,7 @@
                     <p-inputNumber formControlName="height" [min]="5" [max]="300" [showButtons]="true"  placeholder="{{'dashboard.students.length'|translate}}"></p-inputNumber>
 
                 </div>
-
+               
             </div>
 
 
