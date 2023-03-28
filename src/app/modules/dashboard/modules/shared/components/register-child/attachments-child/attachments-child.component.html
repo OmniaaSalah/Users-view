@@ -59,29 +59,37 @@
 
     </div>
 
-    <div class="mt-5 row gx-5 border-dark radius-15 p-5" *ngIf="addMode" [formGroup]="fileForm">
-        <ng-container formGroupName="titel">
-            <div class="col-md-4">
-                <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
-                <input pInputText formControlName="ar" >
-            </div>
-            <div class="col-md-4">
-                <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
-                <input pInputText formControlName="en" >
-            </div>
-        </ng-container>
+    <div class="mt-5 border-dark radius-15 p-5" *ngIf="addMode">
+      <div class="row gx-5 "  [formGroup]="fileForm">
+        <div class="col-md-4">
+            <label class="label required">{{'dashboard.students.attachmentsToAdd'|translate}}</label>
+            <p-dropdown formControlName="indexId" [options]="gurdiansAttachmentsTypes$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.chooseAttachment' |translate}}"></p-dropdown>
+          </div>
+          <ng-container formGroupName="titel">
 
-        <div class="col-md-2">
-            <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
-            <p-dropdown formControlName="fileType" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
+              <div class="col-md-3">
+                  <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
+                  <input pInputText formControlName="ar" >
+              </div>
+              <div class="col-md-3">
+                  <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
+                  <input pInputText formControlName="en" >
+              </div>
+          </ng-container>
+
+          <div class="col-md-2">
+              <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
+              <p-dropdown formControlName="fileType" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.attachmentType'|translate}}"></p-dropdown>
+          </div>
+
         </div>
 
-        <div class="col mb-2 gap-3 align-self-end d-flex justify-content-end">
+        <div class="col mb-2 gap-3 align-self-end d-flex justify-content-end mt-4">
             <button class="btn btn-primary" (click)="addNewAttachment()" [disabled]="!fileForm.valid">{{'shared.save' |translate}}</button>
             <button class="fs-3" ><a (click)="addMode=false" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
         </div>
-
     </div>
+
 
     <hr class="my-5">
 

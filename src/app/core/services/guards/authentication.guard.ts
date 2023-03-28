@@ -14,23 +14,23 @@ export class AuthenticationGuard implements CanActivate {
   constructor(
     private router: Router,
     private userService: UserService,
-    private coreSercice:ClaimsService,) { }
+    private claimsSercice:ClaimsService,) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any> | boolean {
-        
+
     // check authorization
     if (!this.userService.isUserLogged()) {
       this.router.navigate(['/auth/login'],{ queryParams: { returnUrl: state.url }});
       return false;
     }
-   
 
 
 
-    return this.coreSercice.getUserClaims()
+
+    return this.claimsSercice.getUserClaims()
     .pipe(map((res)=>{
         if(res)  return true
-       
+
     }))
 
 

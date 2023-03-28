@@ -31,10 +31,10 @@
   [infiniteScrollThrottle]="1000"
   (scrolled)="onScroll()">
 
-      <form [formGroup]="filterationForm">
+      <form [formGroup]="filterationForm"  *ngIf="messages.totalAllData">
         <app-table-caption [hasFilter]="false" [hasExport]="false" (onSearch)="this.searchModel.keyword = $event; getMessages(searchModel)">
 
-          <div class="row mt-5" *ngIf="messages.list.length !== 0">
+          <div class="row mt-5">
             <div class="d-flex align-items-center custom-form">
               <div class="col-md-4 g-5 form-set">
                 <div class="form-group">
@@ -65,9 +65,9 @@
             </div>
           </div>
         </app-table-caption>
-
-
       </form>
+
+
       <div class="Notifications__cards" *ngIf="messages.list.length !== 0">
         <div class="container-fluid">
           <div class="row">
@@ -99,13 +99,13 @@
                     {{ message.messageCount }}
                   </p>
 
-                  <button class="btn btn-primary detail-btn p-relative" [routerLink]="[
-                        '/dashboard/messages/message-detail',
-                        message.id
-                      ]">
-                    {{ "shared.Show Details" | translate }}
-                    <img class="second-icon-mess" src="assets/images/shared/detail-arrow.png" />
-                  </button>
+                  <div class="d-flex align-content-center gap-2">
+                    <button class="btn btn-primary detail-btn p-relative" [routerLink]="['/dashboard/messages/message-detail',message.id]">
+                      {{ "shared.Show Details" | translate }}
+                      <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
+                    </button>
+                  </div>
+
                 </div>
               </div>
             </div>
