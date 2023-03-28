@@ -6,17 +6,17 @@
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
 
-            <app-table-caption 
+            <app-table-caption
             [hasExport]="false"
-            (onFilter)="getNotifications()" 
-            (onSearch)="filtration.KeyWord = $event; getNotifications()" 
+            (onFilter)="getNotifications()"
+            (onSearch)="filtration.KeyWord = $event; getNotifications()"
             (onClear)="clearFilter()">
             <div class="row gx-5 form-set">
                 <div class="col-4">
                     <label class="label" for="indexType">{{'dashboard.SystemSetting.Receiver'|translate}} </label>
                     <p-multiSelect [options]="roles" display="chip" [(ngModel)]="filtration.recievedBy" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.Receiver'|translate}}"></p-multiSelect>
                 </div>
- 
+
             </div>
         </app-table-caption>
 
@@ -88,26 +88,26 @@
                     <p class="color-gray-300 fs-4">{{ 'dashboard.SystemSetting.NotficationReason'|translate }}</p>
                     <span class="color-primary mb-2">{{selectedNotification?.cause |currentLang}}</span>
                 </div>
-    
+
                 <div class="col d-flex align-items-center gap-5">
                     <p class="color-gray-300 fs-4">{{ 'dashboard.SystemSetting.Receiver'|translate }}</p>
                     <span class="color-primary mb-2">{{selectedNotification?.receivedBy|currentLang}} </span>
                 </div>
             </div>
-    
+
             <div class="row mb-5 gx-5 custom-form" formGroupName="content" *ngIf="selectedNotification?.channal !=channelEnum.SMS || selectedNotification?.channal !=channelEnum.Email ">
                 <div class="col">
                     <label class="label">{{ 'dashboard.SystemSetting.NotificationContentAr'|translate }}</label>
                     <textarea [rows]="4" formControlName="ar" pInputTextarea placeholder="{{'shared.addText' |translate}}"></textarea>
-    
+
                 </div>
                 <div class="col">
                     <label class="label">{{ 'dashboard.SystemSetting.NotificationContentEN'|translate }}</label>
                     <textarea [rows]="4" formControlName="en" pInputTextarea placeholder="{{'shared.addText' |translate}}"></textarea>
-    
+
                 </div>
             </div>
-    
+
             <div class="row mb-5  custom-form">
                 <h3 class="heading heading--tertiary mb-4">{{'dashboard.SystemSetting.NotificationChannel'|translate}}</h3>
                 <div class="col d-flex align-items-center gap-3">
@@ -125,7 +125,7 @@
                     <p-radioButton  label="{{'shared.inActive'|translate}}" formControlName="channelId"  [value]="channelEnum.None"></p-radioButton>
                 </div>
             </div>
-    
+
             <div class="d-flex  align-items-center justify-content-end mt-6">
                 <button class="btn btn-primary btn--md" (click)="updateNotification()" [disabled]="!notificationForm.valid || onSubmit">
                     <span>{{'shared.save'| translate}} </span>
@@ -135,5 +135,5 @@
         </ng-container>
 
     </ng-template>
-        
+
 </p-dialog>

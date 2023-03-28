@@ -11,9 +11,9 @@
         border-color: $color-gray-150;
         font-size: 1.6rem;
         height: 55px;
-      
+
         &::placeholder {
-          
+
             color: $color-gray-300;
             font-weight: 400;
             font-family: 'Droid';
@@ -115,7 +115,7 @@
                 border-color: $color-gray-150;
                 .p-placeholder {
                     color: $color-gray-250;
-                    
+
                 }
                 &.p-focus {
                     background-color: #fff;
@@ -150,11 +150,12 @@
                     font-size: 1.6rem;
                     width: 100%;
                     border-radius: 15px;
-                    
+                    z-index: 100 !important;
+
                     .p-dropdown-header {
                         .pi{font-size: 1.6rem;}
                         .p-dropdown-filter{
-                            padding-right:0; 
+                            padding-right:0;
                             margin-right: 0;
                         }
 
@@ -188,7 +189,7 @@
 
 
         p-inputnumber {
-           
+
             display: flex;
             .p-inputnumber {
                 height: 55px;
@@ -518,7 +519,7 @@
         }
 
         p-radiobutton{
-        
+
             .p-radiobutton {
                 .p-radiobutton-box{
                    &.p-highlight{
@@ -532,7 +533,7 @@
                         width: 8px;
                     }
 
-                
+
                 }
             }
             label.p-radiobutton-label{
@@ -548,9 +549,9 @@
                 width: 3.67rem;
                 height: 2.15rem;
                 display: flex;
-                
+
                 &:lang(en){ transform: rotate(0);}
-                
+
                 .p-inputswitch-slider {
                     border-radius: 30px;
                     background: rgba(91, 205, 219, 0.31);

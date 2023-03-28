@@ -60,7 +60,7 @@
                 padding: 3rem;
                 &.sm{
                     width: 30vw;
-            
+
                 }
                 .actions{
                     .sm{
@@ -77,7 +77,7 @@
             position: relative;
             &.sm{
                 display: none;
-        
+
             }
             &__model{
 
@@ -95,6 +95,7 @@
 
 }
 
+.pi-times{ inset-inline-end: 2rem; top: 50%; transform: translate(-50%, -50%);}
 .custom-form{
     ::ng-deep .form-set{margin-bottom: 2rem!important}
 }

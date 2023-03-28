@@ -4,8 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter, finalize, map, pluck } from 'rxjs';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
@@ -16,7 +19,8 @@ import { RegisterChildService } from '../../../services/register-child/register-
 })
 export class AttachmentsChildComponent implements OnInit, OnDestroy {
   @Input('mode') mode : 'edit'| 'view'= 'view'
-  
+
+  lang = inject(TranslationService).lang
   get claimsEnum(){ return ClaimsEnum }
 
   addMode =false
@@ -27,6 +31,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   filesTypesOptions = [...this.sharedService.fileTypesOptions]
 
   fileForm= this.fb.group({
+    indexId:[],
     titel: this.fb.group({
       ar:[, Validators.required],
       en:[, Validators.required]
@@ -38,6 +43,8 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   loading
   onSubmit
 
+  gurdiansAttachmentsTypes$=this.indexsService.getIndext(IndexesEnum.TheTypeOfFileAttachmentForTheParent)
+
   constructor(
     private fb:FormBuilder,
     private translate:TranslateService,
@@ -45,6 +52,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     public childService :RegisterChildService,
     private toaster:ToastrService,
     private sharedService:SharedService,
+    private indexsService:IndexesService,
     private route: ActivatedRoute) { }
 
 
@@ -55,12 +63,12 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     this.childService.submitBtnClicked$
     .pipe(filter(val=> val))
     .subscribe(val =>{
-      
+
       if(val) this.updateStudentAttachment(this.studentId || this.childId, this.attachments)
       // this.childService.submitBtnClicked$.next(null)
-      
+
     })
- 
+
      this.getAttachment()
 
   }
@@ -101,7 +109,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   }
 
   onFileUpload(file, i){
-    
+
     file= file[0]
     this.attachments[i] = {...this.attachments[i], url: file.url,name:file.name, comment: file.comment}
   }

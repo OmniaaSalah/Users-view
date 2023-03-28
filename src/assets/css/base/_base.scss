@@ -33,7 +33,11 @@ html {
 
 
     font-size: 62.5%; //1rem = 10px -- 10/16= 62.5%
-    
+
+    @media screen and (max-width: 1292px) {
+      font-size: 61.5%;
+    }
+
     @media screen and (max-width: 992px) {
         font-size: 56.25%; //1rem = 9px -- 9/16= 56.25%
     }
@@ -56,25 +60,25 @@ html {
     ::-webkit-scrollbar {
         width: 7px;
         height: 6px;
-    
-        
+
+
     }
-      
+
     ::-webkit-scrollbar-thumb {
           border-radius: 20px;
           background: #B6B6B6;
           transition: all .3s ease-in-out;
           &:hover{
               background: #2E50A3;
-            
+
         }
       }
-      
+
     ::-webkit-scrollbar-track {
         // margin-top: 80px;
         background-color: #F2F2F2;
-    
-      
+
+
       }
 }
 
