@@ -40,14 +40,14 @@
           </ng-template>
 
           <ng-template pTemplate="body" let-school>
-            <tr *ngIf="school.isSelected">
+            <tr >
               <td style="min-width:27rem">{{school.name|currentLang}}</td>
               <td>{{school.state|currentLang}}</td>
               <td>{{school.curriculum|currentLang}}</td>
               <td class="actions">
-                <button (click)="onSchoolSelected(school.id)">
+                <button >
 
-                  <img src="assets/images/shared/rect-xmark.svg" alt="">
+                  <img ConfirmDialog (onConfirm)="unSelectSchool(school.id)" src="assets/images/shared/rect-xmark.svg" alt="">
 
                 </button>
               </td>

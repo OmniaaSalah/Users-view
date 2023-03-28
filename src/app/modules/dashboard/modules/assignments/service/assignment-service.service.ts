@@ -24,9 +24,9 @@ export class AssignmentServiceService {
   }
 
 
-  getAssignmentList(filter) {
+  getAssignmentList(filter,schoolId?) {
     this.tableLoaderService.isLoading$.next(true);
-    return this.http.get(`/Exam`,filter).pipe(take(1),finalize(()=> {
+    return this.http.get(`/Exam?schoolId=${schoolId}`,filter).pipe(take(1),finalize(()=> {
       this.tableLoaderService.isLoading$.next(false)
     }));
   }
