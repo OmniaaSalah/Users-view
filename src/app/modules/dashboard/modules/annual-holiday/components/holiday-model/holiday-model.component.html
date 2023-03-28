@@ -56,7 +56,7 @@
          
           <div class="col-6">
             <label class="label" for="nationality">{{'dashboard.AnnualHoliday.curriculum'|translate}} <span class="star">*</span></label>
-            <p-multiSelect [options]="curriculamList"    (ngModelChange)="curriculumSelected($event)" optionLabel="name.ar" optionValue="id" display="chip" formControlName="curriculumName"  [ngClass]="{'ng-invalid ng-dirty':curriculumName.errors?.['required'] &&curriculumName.touched}"   styleClass="p-multiselect"  defaultLabel="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"></p-multiSelect>
+            <p-multiSelect [options]="curriculamList"    (ngModelChange)="curriculumSelected($event)" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" display="chip" formControlName="curriculumName"  [ngClass]="{'ng-invalid ng-dirty':curriculumName.errors?.['required'] &&curriculumName.touched}"   styleClass="p-multiselect"  defaultLabel="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"></p-multiSelect>
             <div [hidden]="curriculumName.valid||curriculumName.untouched">
               <small *ngIf="curriculumName.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
           </div>

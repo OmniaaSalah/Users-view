@@ -41,9 +41,9 @@
 
           <ng-template pTemplate="body" let-school>
             <tr *ngIf="school.isSelected">
-              <td style="min-width:27rem">{{school.name.ar}}</td>
-              <td>{{school.state.ar}}</td>
-              <td>{{school.curriculum.ar}}</td>
+              <td style="min-width:27rem">{{school.name|currentLang}}</td>
+              <td>{{school.state|currentLang}}</td>
+              <td>{{school.curriculum|currentLang}}</td>
               <td class="actions">
                 <button (click)="onSchoolSelected(school.id)">
 
@@ -92,7 +92,8 @@
 
     <div class="mb-5">
       <label class="label">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-      <p-dropdown [options]="messagesTypes" optionLabel="name.ar" optionValue="id" formControlName="messageType"
+      <p-dropdown [options]="messagesTypes" [filter]="true"
+      filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" formControlName="messageType"
         placeholder="{{'dashboard.Messages.MessageType' | translate}}"></p-dropdown>
       <div class="text-danger"
         *ngIf="this.speaEmpForm.get('messageType')?.touched && this.speaEmpForm.get('messageType')?.invalid && this.speaEmpForm.get('messageType')?.errors">
@@ -182,7 +183,8 @@
 
     <div class="mb-5">
       <label class="label" for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-      <p-dropdown [options]="messagesTypes" optionLabel="name.ar" formControlName="messageType"
+      <p-dropdown [options]="messagesTypes" [filter]="true"
+      filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" formControlName="messageType"
         placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id" appValidation></p-dropdown>
       <div class="text-danger"
         *ngIf="this.parentForm.get('messageType')?.touched && this.parentForm.get('messageType')?.invalid && this.parentForm.get('messageType')?.errors">
@@ -239,7 +241,8 @@
 
     <div class="mb-5">
       <label class="label">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-      <p-dropdown [options]="messagesTypes" optionLabel="name.ar" formControlName="messageType"
+      <p-dropdown [options]="messagesTypes" [filter]="true"
+      filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" formControlName="messageType"
         placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id" appValidation></p-dropdown>
       <div class="text-danger"
         *ngIf="this.schoolEmpForm.get('messageType')?.touched && this.schoolEmpForm.get('messageType')?.invalid && this.schoolEmpForm.get('messageType')?.errors">

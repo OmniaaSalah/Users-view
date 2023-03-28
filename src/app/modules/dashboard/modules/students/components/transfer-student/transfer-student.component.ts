@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild ,inject} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -23,6 +23,7 @@ import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 type transeferBy = 'parent' | 'commission';
 type Mode = 'transfer' | 'register'
@@ -38,7 +39,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   faPlus = faPlus
   @ViewChild('f',{static: false}) form :NgForm
 
-
+  lang = inject(TranslationService).lang;
   get TransferTypeEnum(){ return TransferType}
 
   mode:Mode = this.route.snapshot.data['mode']

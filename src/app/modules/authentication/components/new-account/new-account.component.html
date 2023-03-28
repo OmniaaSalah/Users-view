@@ -276,7 +276,7 @@
                                 </div>
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.reason of identity not exist'|translate }} <span class="star">*</span> </label>
-                                    <p-dropdown [options]="noIdentityReasonList" formControlName="identityReasonId"     [ngClass]="{'ng-invalid ng-dirty':identityReasonId.errors?.required && identityReasonId.touched}" optionLabel="name.ar" optionValue="id"  inputId="nationality" placeholder="{{'sign up.reason of identity not exist'|translate }}"></p-dropdown>
+                                    <p-dropdown [options]="noIdentityReasonList" formControlName="identityReasonId"     [ngClass]="{'ng-invalid ng-dirty':identityReasonId.errors?.required && identityReasonId.touched}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id"  inputId="nationality" placeholder="{{'sign up.reason of identity not exist'|translate }}"></p-dropdown>
                                     <div [hidden]="identityReasonId.valid || identityReasonId.untouched">
                                         <small *ngIf="identityReasonId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}

@@ -13,6 +13,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { AttendanceReportsServicesService } from '../../services/attendance/attendance-reports-services.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-attendance-reports',
@@ -21,6 +22,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AttendanceReportsComponent implements OnInit {
   isBtnLoading: boolean=false;
+  lang = inject(TranslationService).lang
   date;
   shownTable:boolean=false;
   isCollapsed=true;
