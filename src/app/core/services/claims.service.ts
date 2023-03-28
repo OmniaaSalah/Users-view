@@ -1,5 +1,5 @@
 import {  Injectable } from '@angular/core';
-import { map, take} from 'rxjs';
+import { map, take,of} from 'rxjs';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { environment } from 'src/environments/environment';
@@ -18,11 +18,11 @@ export class ClaimsService {
     ) { }
 
   userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
-  
+
 
   getUserClaims(){
-    
-    // if(Object.keys(this.userClaims).length) return of(this.userClaims)
+
+    if(Object.keys(this.userClaims).length) return of(this.userClaims)
     // let headers: HttpHeaders = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
@@ -43,7 +43,7 @@ export class ClaimsService {
         // }else if (this.getCurrentUserScope()==UserScope.Guardian){
         //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
         // }
-       
+
         return this.userClaims
       }),
       take(1))
@@ -54,11 +54,16 @@ export class ClaimsService {
    * @param  {ClaimsEnum|ClaimsEnum[]} permission
    */
      public isUserAllowedTo(claim) {
+
       if(claim instanceof Array){
-      if(!claim.length) return true
+
+        if(!claim.length) return true
+
         if(claim.some(item=> this.userClaims[item])) return true;
+
         return false;
       }else{
+
         if(!claim) return true
          if(this.userClaims[claim]) return true;
          return false;
@@ -67,7 +72,7 @@ export class ClaimsService {
        // return userClaims.indexOf(claim) >= 0;
     }
 
-    
+
 }
 
 

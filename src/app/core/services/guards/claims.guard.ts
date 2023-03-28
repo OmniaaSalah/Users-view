@@ -11,20 +11,19 @@ export class ClaimsGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private cliamsService:ClaimsService,
+    private claimsService:ClaimsService,
    ) { }
-    
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      
-      
+
+
       const allowedClaims = route.data["allowedClaims"];
-      let claimFound =this.cliamsService.isUserAllowedTo(allowedClaims)
-      
+      let claimFound =this.claimsService.isUserAllowedTo(allowedClaims)
         if(!claimFound) this.router.navigate(['/']);
 
         return claimFound
   }
-  
+
 }

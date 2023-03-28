@@ -37,12 +37,12 @@ export class SchoolSubjectsComponent implements OnInit {
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			
+
 			{ label: this.translate.instant('dashboard.schools.schoolSubjectMangement'), routerLink: `/dashboard/school-management/school/${this.schoolId}/subjects`},
 		],
 		mainTitle: { main:  this.currentSchool }
 	}
-  
+
   subjectsObj={
     total:0,
     list:[],
@@ -55,14 +55,14 @@ export class SchoolSubjectsComponent implements OnInit {
 
   gardeId = this.route.snapshot.queryParamMap.get('gradeId')
   trackId = this.route.snapshot.queryParamMap.get('trackId')
-  
+
   filtration={...Filtration, GradeId: this.gardeId, TrackId:this.trackId ,SchoolId :this.schoolId}
 
   paginationState={...paginationInitialState}
-  
+
   schoolGrades$ =this.schoolsService.getSchoolGardes(this.schoolId).pipe(finalize(()=>{
       // this.filtration.GradeId = this.gardeId
-      // this.filtration.TrackId = this.trackId    
+      // this.filtration.TrackId = this.trackId
       // // if(this.gardeId) this.onGradeSelected()
   }));
   gradeTracks$;
@@ -85,15 +85,15 @@ export class SchoolSubjectsComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee)
 	{
 		this.userService.currentUserSchoolName$?.subscribe((res)=>{
-      if(res)  
+      if(res)
       {
         this.currentSchool=res;
-      
+
         this.componentHeaderData.mainTitle.main=this.currentSchool;
       }
 	  })
 	}
-  
+
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
     // this.getSubjects()
@@ -124,20 +124,20 @@ export class SchoolSubjectsComponent implements OnInit {
     })
   }
 
-  onGradeSelected(){    
+  onGradeSelected(){
     this.subjectsObj.isGradeSelected=true;
     this.filtration.TrackId=null
     this.getSubjects()
     this.getTracks()
   }
-  
+
   // getSchoolClasses(){
   //   this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe()
   // }
 
-  getTracks(){   
+  getTracks(){
     this.gradeTracks$ =this.gradesService.getGradeTracks([this.schoolId],[this.filtration.GradeId])
-    
+
   }
 
 
@@ -160,7 +160,7 @@ export class SchoolSubjectsComponent implements OnInit {
   onExport(fileType: FileEnum){
     let filter = {...this.filtration, PageSize:null}
     this.schoolsService.subjectsToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolSubjectMangement'))
     })
   }

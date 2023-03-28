@@ -1692,7 +1692,8 @@
             "payments":"Payments",
             "RegistrationDateAndTimeFrom-To":"Registration Date And Time From-To",
             "exemptionFromSubjectStudey":"Exemption From Subject",
-            "newIdentityInfo":"New Identity Info"
+            "newIdentityInfo":"New Identity Info",
+            "attachmentsToAdd":"Attachments To Adding"
 
         },
         "Requests": {
