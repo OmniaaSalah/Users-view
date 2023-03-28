@@ -1,7 +1,7 @@
 import { Component, OnInit,inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {  faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle,faPlus} from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -34,6 +34,7 @@ export class EditNewSubjectComponent implements OnInit {
   successStatusList;
   isBtnLoading: boolean=false;
   exclamationIcon = faExclamationCircle;
+  plusIcon=faPlus
   subjectFormGrp: FormGroup;
   urlParameter: string='';
   evaluationTypeList;
@@ -214,10 +215,10 @@ export class EditNewSubjectComponent implements OnInit {
       this.showEvaluation=true;
 
       this.oldEvaluation.setValidators([Validators.required]);
-      this.minmumDegree.clearValidators();
-      this.minmumDegree.updateValueAndValidity(); 
-      this.maximumDegree.clearValidators();
-      this.maximumDegree.updateValueAndValidity(); 
+
+      this.clearDegreesField();
+
+      this.clearDescriptionnField();
 
     }
     else if(e==AssessmentsEnum.Grades)
@@ -229,7 +230,10 @@ export class EditNewSubjectComponent implements OnInit {
 
       this.minmumDegree.setValidators([Validators.required,Validators.min(0)]);
       this.maximumDegree.setValidators([Validators.required,Validators.min(0)]);
-   
+
+      this.clearDescriptionnField();
+      
+      this.clearEvaluationField();
 
     }
     else if(e==AssessmentsEnum.IPpoints)
@@ -241,8 +245,10 @@ export class EditNewSubjectComponent implements OnInit {
 
       this.minmumDegree.setValidators([Validators.required,Validators.min(0)]);
       this.maximumDegree.setValidators([Validators.required,Validators.min(0)]);
-      
 
+      this.clearDescriptionnField();
+
+      this.clearEvaluationField();
 
 
     }
@@ -259,11 +265,9 @@ export class EditNewSubjectComponent implements OnInit {
        descriptionArrGrp.controls['description'].setValidators([Validators.required]);
        descriptionArrGrp.controls['successfulRetry'].setValidators([Validators.required]);
 
-        this.minmumDegree.clearValidators();
-        this.minmumDegree.updateValueAndValidity(); 
-        this.maximumDegree.clearValidators();
-        this.maximumDegree.updateValueAndValidity(); 
-  
+       this.clearDegreesField();
+
+       this.clearEvaluationField();
 
     }
     else
@@ -273,12 +277,11 @@ export class EditNewSubjectComponent implements OnInit {
   addNew() {
     var availableadd = 1;
 
-
- 
     for(let i in this.descriptionArr.controls)
     {
+     
 
-      if ((this.descriptionArr.controls[i].value.meaning=='' ) || (this.descriptionArr.controls[i].value.successfulRetry=='' ) || (this.descriptionArr.controls[i].value.description==''))
+      if ((this.descriptionArr.controls[i].value.meaning=='' )  || (this.descriptionArr.controls[i].value.description==''))
 
 
         { 
@@ -292,7 +295,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.descriptionArr.push(this.fb.group({
         description: [''],
         meaning: [''],
-        successfulRetry: ['']
+        successfulRetry: [true]
       }));
    
     }
@@ -334,7 +337,7 @@ export class EditNewSubjectComponent implements OnInit {
      {
       this.addedSubject.subjectDescriptions=[];
       this.subjectFormGrp.value.descriptionArr.forEach((element,i) => {
-          if(element.meaning==''&&element.description==''&&element.successfulRetry=='')
+          if(element.meaning==''&&element.description=='')
           { }
           else
           {
@@ -455,11 +458,37 @@ export class EditNewSubjectComponent implements OnInit {
     this.descriptionArr.push(this.fb.group({
       description: [''],
       meaning: [''],
-      successfulRetry: ['']
+      successfulRetry: [true]
     }));
   }
 
+  clearDescriptionnField()
+  {
+    for(let i in this.descriptionArr.controls)
+    {
+      let descriptionArrGrp= this.descriptionArr.controls[i] as FormGroup 
+      descriptionArrGrp.controls['meaning'].clearValidators();
+      descriptionArrGrp.controls['description'].clearValidators();
+      descriptionArrGrp.controls['successfulRetry'].clearValidators();
+      descriptionArrGrp.controls['meaning'].updateValueAndValidity(); 
+      descriptionArrGrp.controls['description'].updateValueAndValidity(); 
+      descriptionArrGrp.controls['successfulRetry'].updateValueAndValidity(); 
+    }
+  }
+  clearDegreesField()
+  {
+    this.minmumDegree.clearValidators();
+    this.minmumDegree.updateValueAndValidity(); 
+    this.maximumDegree.clearValidators();
+    this.maximumDegree.updateValueAndValidity(); 
+  }
 
+  clearEvaluationField()
+  {
+    this.oldEvaluation.clearValidators();
+    this.oldEvaluation.updateValueAndValidity(); 
+  
+  }
 
 }
 
