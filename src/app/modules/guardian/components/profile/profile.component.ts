@@ -8,6 +8,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,7 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 })
 export class ProfileComponent implements OnInit {
   isBtnLoading:boolean=false;
+  lang = inject(TranslationService).lang;
   genderList=inject(SharedService).genderOptions;
   nationalityList=[];
   exclamationIcon = faExclamationCircle;

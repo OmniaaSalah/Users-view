@@ -30,7 +30,7 @@
                        </div>
                          <div class="col">
                              <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                             <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
+                             <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
                          </div>
                      </div>
                  </app-table-caption>
@@ -68,9 +68,9 @@
                          </ng-container>
                      
                        </td>
-                         <td  style="min-width:23rem">{{school.name.ar}}</td>
-                         <td style="min-width:14rem">{{school.state?.ar}}</td>
-                         <td>{{school.curriculum?.ar}}</td>
+                         <td  style="min-width:23rem">{{school.name|currentLang}}</td>
+                         <td style="min-width:14rem">{{school.state|currentLang}}</td>
+                         <td>{{school.curriculum|currentLang}}</td>
    
                      </tr>
              </ng-template>

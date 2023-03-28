@@ -40,7 +40,7 @@
           <th   pSortableColumn="lastEditedDate"><p-sortIcon field="lastEditedDate"></p-sortIcon>{{'dashboard.Subjects.Last EditDate'|translate}}</th>
           <th   pSortableColumn="subjectMinmumDegree"><p-sortIcon field="subjectMinmumDegree"></p-sortIcon>{{'dashboard.Assessment.Minmum Degree'|translate}}</th>
           <th   pSortableColumn="subjectMinmumDegree"><p-sortIcon field="subjectMinmumDegree"></p-sortIcon>{{'dashboard.Assessment.Maximum Degree'|translate}}</th>
-          <th   pSortableColumn="edit" class="actions"></th>
+          <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>
         
 
           
@@ -67,7 +67,7 @@
             <td  *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.maximumDegree}}</td>
             <td  *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
           
-            <td  class="actions"> 
+            <td pFrozenColumn [frozen]="true" class="actions"> 
                 <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4"  routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}" *permit="ClaimsEnum.S_U_Subject">
                     <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                     <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">

@@ -15,7 +15,7 @@
                     [(ngModel)]="filtration.schoolIds" 
                     optionValue="id" 
                     placeholder="{{'shared.chooseSchool'|translate }}" 
-                    optionLabel="name.ar"></p-multiSelect>
+                    optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
                 </div>
 
                
@@ -40,13 +40,28 @@
                 <tr>
                     <ng-container>
                         <td>
-                            {{subject?.schoolName|currentLang}}
+                            {{subject?.school|currentLang}}
+                        </td>
+                        <td>
+                            {{subject?.schoolCode}}
                         </td>
                         <td>
                             {{subject?.state | currentLang}} 
                         </td>
                         <td>
-                            {{subject?.subjectsCount}}
+                            {{subject?.subjectsCountPerSchool}}
+                        </td>
+                        <td>
+                            {{subject?.curriculum|currentLang}}
+                        </td>
+                        <td>
+                            {{subject?.grade | currentLang}} 
+                        </td>
+                        <td>
+                            {{subject?.division | currentLang}}
+                        </td>
+                        <td>
+                            {{subject?.track | currentLang}}
                         </td>
                        
                     </ng-container>
@@ -69,7 +84,7 @@
         </p-table>
 
         <div class="" *ngIf="subjectsReport.total  > paginationState.rows">
-            <app-pagination [totalItems]="studentReport.total"
+            <app-pagination [totalItems]="subjectsReport.total"
                 (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>

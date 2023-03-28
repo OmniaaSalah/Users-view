@@ -9,12 +9,13 @@
 
     ::ng-deep p-table{
         thead.p-datatable-thead tr th{
-            // min-width: 11rem;
-
+            min-width: 11rem;
+        
+            &.actions{min-width: 17rem; }
         }
         .p-datatable-tbody tr td{
         min-width: 11rem;
-
+        &.actions{justify-content: end;min-width: 17rem; }
        }
     }
 

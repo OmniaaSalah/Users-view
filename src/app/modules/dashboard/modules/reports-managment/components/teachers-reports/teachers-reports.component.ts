@@ -6,6 +6,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -20,6 +21,7 @@ import { TeachersReportsService } from '../../services/teachers-reports/teachers
 })
 export class TeachersReportsComponent implements OnInit {
   tableColumns = [];
+  lang = inject(TranslationService).lang
   schools$ = inject(SchoolsService).getAllSchools()
   subjects$ = inject(SubjectService).getAllSubjectsWithoutDuplicated()
   filtration = {...Filtration,schoolIds:[],subjectIds:[]}

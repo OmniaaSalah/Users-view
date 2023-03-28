@@ -70,7 +70,7 @@
                         <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
                         </div> -->
-                        <div class="content" role="button" routerLink="/dashboard/manager-tools/settings" (click)="isMenuOpend=false">
+                        <div class="content" role="button" routerLink="/dashboard/reports-managment/degrees-reports" (click)="isMenuOpend=false">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">{{'Score report'|translate}}</h4>
                                 <fa-icon [class.rotate180]="lang=='en'" [icon]="faArrowLeft"></fa-icon>
@@ -110,7 +110,7 @@
 
     </div>
 
-    <div class="nav__messages mt-3">
+    <div class="nav__messages">
         <div class="">
             <div class="dropdown cursorStyle">
 
@@ -122,7 +122,7 @@
         </div>
     </div>
 
-    <div class="nav__notifications mt-3">
+    <div class="nav__notifications ">
         <div class="">
             <div class="dropdown cursorStyle">
 
@@ -190,7 +190,7 @@
                     </li>
                     <button *ngIf="notificationsList.length !==0" class="detail-btn p-relative" routerLink="/notifications/notifications-list">
                         {{'Notifications.Show All' | translate}}
-                        <img src="assets/images/shared/detail-arrow.png">
+                        <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                     </button>
                 </ul>
             </div>
@@ -212,8 +212,8 @@
     </div> -->
 
     <!-- *permit="claimsEnum.S_SchoolYear"  -->
-    <div class="text-center year">
-      <span class="color-primary  mb-2 fs-4" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">{{'shared.SchoolYear'|translate}}</span>
+    <div class="d-flex align-items-center">
+      <span class="color-primary year  mb-2 fs-4" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">{{'shared.SchoolYear'|translate}}</span>
       <div class="nav__dropdown custom-form" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
           <!-- <label>hhh</label> -->
 

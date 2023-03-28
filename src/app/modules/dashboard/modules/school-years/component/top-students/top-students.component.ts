@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,inject } from '@angular/core';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -9,6 +9,7 @@ import { SchoolYearsService } from '../../service/school-years.service';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { TranslateService } from '@ngx-translate/core';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-top-students',
   templateUrl: './top-students.component.html',
@@ -17,6 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class TopStudentsComponent implements OnInit {
   @Input('schoolYearId') schoolYearId='';
   nationalityList=[];
+  lang = inject(TranslationService).lang
   gradesList=[];
   curriculumClassList=[];
   filtration = {...Filtration,GradeId:null,CurriculumId:null,NationlaityId:null};

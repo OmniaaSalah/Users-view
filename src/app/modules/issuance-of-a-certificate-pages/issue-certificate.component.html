@@ -21,7 +21,7 @@
 
                     <p-dropdown
                     placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
-                    [options]="certificatesList$ |async" optionLabel="name.ar"
+                    [options]="certificatesList$ |async" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
                     [(ngModel)]="selectedCertificate">
                     </p-dropdown>
                     <!-- <label class="Label color-skyBlue-400 mt-2"  *ngIf="dropValue !== undefined||null">{{certificateName|currentLang}}</label> -->

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output,OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output,OnDestroy,inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {  faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-holiday-model',
@@ -15,6 +16,7 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 })
 export class HolidayModelComponent implements OnInit {
   exclamationIcon = faExclamationCircle;
+  lang = inject(TranslationService).lang
    isOpened:boolean=false;
    avaliableChangeStatus=true;
    get statusEnum () {return StatusEnum}

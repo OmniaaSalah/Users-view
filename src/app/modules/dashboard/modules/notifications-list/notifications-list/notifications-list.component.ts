@@ -31,12 +31,12 @@ export class NotificationsListComponent implements OnInit {
 
 
   selectedValue='val1'
-  
+
   filtration={...Filtration,recievedBy:null}
   paginationState= {...paginationInitialState}
-  
+
   notificationModelOpend = false
-  
+
   notifications={
     totalAllData:0,
     total:0,
@@ -57,7 +57,7 @@ export class NotificationsListComponent implements OnInit {
     channelId: [null]
   })
 
-  
+
 
   constructor(
     private settingService:SettingsService,
@@ -74,12 +74,15 @@ export class NotificationsListComponent implements OnInit {
     this.userInformation.GetRoleList().subscribe(response => {this.roles = response;})
   }
 
-  
+
 
   getNotifications(){
+    this.notifications.list=[]
     this.settingService.getNotificationsList(this.filtration).subscribe((res)=>{
       this.sharedService.filterLoading.next(false);
       this.notifications.list=res.data
+      this.notifications.total=res.total
+      this.notifications.totalAllData=res.totalAllData
     },(err)=>{  this.sharedService.filterLoading.next(false);})
   }
 

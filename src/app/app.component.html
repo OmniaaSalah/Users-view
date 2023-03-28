@@ -22,7 +22,7 @@
                         <div class="icon">
                             <img src="assets/images/home/panal/home.svg" alt="">
                         </div>
-                        <div class="lable">
+                        <div class="lable" role="button" routerLink="/">
                             <span>{{'Home Page' |translate}}</span>
                         </div>
                     </li>
@@ -139,7 +139,7 @@
         
                     <div class="mb-5">
                         <label class="label" for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-                        <p-dropdown [options]="messagesTypes" optionLabel="name.ar" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id" appValidation></p-dropdown>
+                        <p-dropdown [options]="messagesTypes" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id" appValidation></p-dropdown>
                         <div class="text-danger" *ngIf="this.parentForm.get('messageType')?.touched && this.parentForm.get('messageType')?.invalid && this.parentForm.get('messageType')?.errors">
                             <small *ngIf="this.parentForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
                         </div>

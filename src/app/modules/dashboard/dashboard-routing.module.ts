@@ -22,7 +22,7 @@ const routes: Routes = [
         path: 'school-management/school',
         loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
         canActivate: [ClaimsGuard],
-        data:{allowedClaims: ClaimsEnum.E_Menu_ManageSchool}
+        data:{allowedClaims: [ClaimsEnum.E_Menu_ManageSchool, , ClaimsEnum.E_MenuItem_Subjects]}
       },
 
       {
@@ -31,7 +31,7 @@ const routes: Routes = [
         canActivate: [ClaimsGuard],
         // data:{allowedClaims: ClaimsEnum.E_MenuItem_Requests}
       },
-      
+
       {
         path: 'schoolEmployee-management/school',
         loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
@@ -71,7 +71,7 @@ const routes: Routes = [
         path: 'student-management/students',
         loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule),
         canActivate: [ClaimsGuard],
-        data:{allowedClaims: ClaimsEnum.E_menu_ManageStudents}
+        data:{allowedClaims: [ClaimsEnum.E_menu_ManageStudents]}
       },
 
 
@@ -169,7 +169,7 @@ const routes: Routes = [
         // data:{allowedClaims: ClaimsEnum.S_MenuItem_Request}
       },
 
-      
+
       {
         path: 'reports-managment',
         loadChildren: () => import('./modules/reports-managment/reports-managment.module').then(m => m.ReportsManagmentModule),

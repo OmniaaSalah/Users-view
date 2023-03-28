@@ -12,9 +12,9 @@ import { SharedService } from '../../services/shared/shared.service';
 })
 export class TableCaptionComponent implements OnInit, OnDestroy {
   loadingFilter: boolean=false;
-  @Input('hasFilter') hasFilter:boolean=true
-  @Input('hasExport') hasExport:boolean=true
-  @Input('hasSearch') hasSearch:boolean=true
+  @Input() hasFilter:boolean=true
+  @Input() hasExport:boolean=true
+  @Input() hasSearch:boolean=true
   @Input() template :TemplateRef<any>
   @Input('size') small:string;
   @Input() styles ={};
