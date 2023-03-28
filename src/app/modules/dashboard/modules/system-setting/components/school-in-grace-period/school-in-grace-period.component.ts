@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,inject} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map, take } from 'rxjs';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class SchoolInGracePeriodComponent implements OnInit {
 
   gracePeriodId= this.route.snapshot.paramMap.get('id')
   schoolId= this.route.snapshot.paramMap.get('schoolId')
-
+  lang = inject(TranslationService).lang;
   dashboardHeaderData:IHeader ={
     breadCrump:[
       { label: this.translate.instant('sideBar.managerTools.children.systemSettings'),routerLink: '/dashboard/manager-tools/settings',routerLinkActiveOptions:{exact: true} },

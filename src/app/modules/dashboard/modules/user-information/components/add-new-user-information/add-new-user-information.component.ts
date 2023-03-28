@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  OnInit ,inject } from '@angular/core';
 import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -18,6 +18,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
   styleUrls: ['./add-new-user-information.component.scss']
 })
 export class AddNewUserInformationComponent implements OnInit {
+  lang = inject(TranslationService).lang;
   get ClaimsEnum(){return ClaimsEnum}
   accountModel;
   roles: IRole[] = [];

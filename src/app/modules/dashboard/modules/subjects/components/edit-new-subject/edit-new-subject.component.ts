@@ -14,6 +14,7 @@ import { degreesMatchValidator } from './degrees-validators';
 import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 import { LocationStrategy } from '@angular/common';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 
@@ -25,6 +26,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 export class EditNewSubjectComponent implements OnInit {
   get ClaimsEnum(){return ClaimsEnum}
   isLabelShown:boolean=false;
+  lang = inject(TranslationService).lang;
   subject;
   addedSubject;
   subjectList:ISubject[] = [];

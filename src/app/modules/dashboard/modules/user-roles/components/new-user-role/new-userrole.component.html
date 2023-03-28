@@ -124,7 +124,7 @@
                           
                 <label for="PID3" class="label">{{'dashboard.UserRole.DataRestrictionLevel'|translate}} <span class="star">*</span></label>
 
-                  <p-dropdown [options]="dataRestrictionLevelList" (onChange)="changedRestriction($event.value)" optionLabel="name.ar" optionValue="name.en" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}"      [ngClass]="{'ng-invalid ng-dirty':datarestrictionLevel.errors?.required && datarestrictionLevel.touched}" name="PID3" id="PID3"  ></p-dropdown>
+                  <p-dropdown [options]="dataRestrictionLevelList" (onChange)="changedRestriction($event.value)" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="name.en" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}"      [ngClass]="{'ng-invalid ng-dirty':datarestrictionLevel.errors?.required && datarestrictionLevel.touched}" name="PID3" id="PID3"  ></p-dropdown>
                   <div>
                     <div [hidden]="datarestrictionLevel.valid || datarestrictionLevel.untouched">
                         <small *ngIf="datarestrictionLevel.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -148,7 +148,7 @@
                         <div class=" d-flex gap-2 align-items-center col-lg-3"  >
                         
                             <p-checkbox *ngIf="curriculamList[i]?.name.ar" class="col-lg-1" [formControlName]="i" binary="true" (onChange)="getCurriculumsAdded($event,curriculamList[i].id)"  [inputId]="i" ></p-checkbox>
-                            <label class="label label--sm  col-lg-7" > {{curriculamList[i]?.name.ar}}</label>
+                            <label class="label label--sm  col-lg-7" > {{curriculamList[i]?.name|currentLang}}</label>
                         </div>
                      
                     </ng-container>
@@ -192,9 +192,9 @@
                           
                               <tr *ngIf="school.isSelected">
                                
-                                  <td style="min-width:27rem">{{school.name.ar}}</td>
-                                  <td>{{school.state.ar}}</td>
-                                  <td>{{school.curriculum.ar}}</td>
+                                  <td style="min-width:27rem">{{school.name|currentLang}}</td>
+                                  <td>{{school.state|currentLang}}</td>
+                                  <td>{{school.curriculum|currentLang}}</td>
                                   <td class="actions">
                                     <button >
                                       <img  ConfirmDialog (onConfirm)="unSelectMe(school.id)"  src="assets/images/shared/rect-xmark.svg" alt="">

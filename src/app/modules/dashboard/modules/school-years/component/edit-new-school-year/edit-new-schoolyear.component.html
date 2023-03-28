@@ -283,7 +283,7 @@
               </div>
                   <div class="col-xs-4 col-lg-4">
                       <label for="PID6" class="label">{{'dashboard.SchoolYear.WeekEnd Days'|translate}} <span class="star">*</span></label>
-                        <p-multiSelect [options]="weekendsList" optionLabel="name.ar" optionValue="id" display="chip" formControlName="weekendDays"  [ngClass]="{'ng-invalid ng-dirty':weekendDays.errors?.['required'] && weekendDays.touched}"  styleClass="p-multiselect"  defaultLabel="{{'dashboard.SchoolYear.Select WeekEnd Days'|translate}}"></p-multiSelect>
+                        <p-multiSelect [options]="weekendsList" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" display="chip" formControlName="weekendDays"  [ngClass]="{'ng-invalid ng-dirty':weekendDays.errors?.['required'] && weekendDays.touched}"  styleClass="p-multiselect"  defaultLabel="{{'dashboard.SchoolYear.Select WeekEnd Days'|translate}}"></p-multiSelect>
                       <div>
                           <div [hidden]="weekendDays.valid || weekendDays.untouched">
                               <small *ngIf="weekendDays.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -299,7 +299,7 @@
               <div class=" row gx-5 form-set " *ngIf="schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Finished&&schoolYear?.schoolYearStatus?.name.en!=schoolYearEnum.Current||!urlParameter">
               <div class="col-xs-4 col-lg-4">
                 <label for="PID5" class="label">{{'dashboard.SchoolYear.AnnualHolidays'|translate}} <span class="star">*</span></label>
-                  <p-multiSelect [options]="annualCalendersList" optionLabel="name.ar" optionValue="id" display="chip" formControlName="annualHolidays"  [ngClass]="{'ng-invalid ng-dirty':annualHolidays.errors?.['required'] && annualHolidays.touched}"  styleClass="p-multiselect"  defaultLabel="{{'dashboard.SchoolYear.AnnualHolidays'|translate}}"></p-multiSelect>
+                  <p-multiSelect [options]="annualCalendersList" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" display="chip" formControlName="annualHolidays"  [ngClass]="{'ng-invalid ng-dirty':annualHolidays.errors?.['required'] && annualHolidays.touched}"  styleClass="p-multiselect"  defaultLabel="{{'dashboard.SchoolYear.AnnualHolidays'|translate}}"></p-multiSelect>
                 <div>
                     <div [hidden]="annualHolidays.valid || annualHolidays.untouched">
                         <small *ngIf="annualHolidays.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -595,7 +595,7 @@
    <div class="row gx-5 form-set">
           <div class="col-6">
               <label class="label" for="nationality">{{'dashboard.SchoolYear.Nationality'|translate }} </label>
-              <p-dropdown [options]="nationalityList" [showClear]="true" StopProp optionLabel="name.ar" optionValue="id" (onChange)="getStudentsFiltration()" [(ngModel)]="nationalityId" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Nationality'|translate }}"></p-dropdown>
+              <p-dropdown [options]="nationalityList" [showClear]="true" StopProp optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" (onChange)="getStudentsFiltration()" [(ngModel)]="nationalityId" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Nationality'|translate }}"></p-dropdown>
           </div>
           <div class="col-6">
               <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Precantage'|translate }} </label>

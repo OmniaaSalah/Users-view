@@ -30,6 +30,11 @@ export class SubjectsService {
       isDisabled: true,
     },
     {
+      name:this.translate.instant('dashboard.schools.schoolNumber'),
+      isSelected: true,
+      isDisabled: true,
+    },
+    {
      
       name:this.translate.instant('shared.state'),
       isSelected: true,
@@ -38,6 +43,26 @@ export class SubjectsService {
     {
       
       name:this.translate.instant('dashboard.reports.subjectCount'),
+      isSelected: true,
+      isDisabled: true,
+    },
+    {
+      name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
+      isSelected: true,
+      isDisabled: true,
+    },
+    {
+      name:this.translate.instant('shared.grade'),
+      isSelected: true,
+      isDisabled: true,
+    },
+    {
+      name:this.translate.instant('shared.division'),
+      isSelected: true,
+      isDisabled: true,
+    },
+    {
+      name:this.translate.instant('shared.track'),
       isSelected: true,
       isDisabled: true,
     }
@@ -51,9 +76,14 @@ export class SubjectsService {
       map(res=>{
         return res.data.map(subject =>{
           return {
-            [this.translate.instant('School')]: subject?.schoolName[this.lang],
+            [this.translate.instant('School')]: subject?.school[this.lang],
+            [this.translate.instant('dashboard.schools.schoolNumber')]: subject?.schoolCode,
             [this.translate.instant('shared.state')]: subject?.state[this.lang],
-            [this.translate.instant('dashboard.reports.subjectCount')]: subject?.subjectsCount
+            [this.translate.instant('dashboard.reports.subjectCount')]: subject?.subjectsCountPerSchool,
+            [this.translate.instant('shared.grade')]: subject?.grade[this.lang],
+            [this.translate.instant('shared.division')]: subject?.division[this.lang],
+            [this.translate.instant('shared.track')]: subject?.track[this.lang]
+
 
 
           }

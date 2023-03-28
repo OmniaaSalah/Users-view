@@ -1,10 +1,12 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit ,Input, inject} from '@angular/core';
 import { UserRolesService } from 'src/app/modules/dashboard/modules/user-roles/service/user-roles.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-select-schools',
@@ -23,7 +25,7 @@ export class SelectSchoolsComponent implements OnInit {
     loading:true
   }
   states$ = this.CountriesService.getAllStates();
-  
+  lang = inject(TranslationService).lang
   curriculums$ = this.sharedService.getAllCurriculum()
   constructor(private CountriesService:CountriesService,private schoolsService:SchoolsService,private sharedService: SharedService,private userRolesService: UserRolesService) { }
 

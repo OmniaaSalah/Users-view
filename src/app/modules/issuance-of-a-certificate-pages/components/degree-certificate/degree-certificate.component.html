@@ -39,7 +39,7 @@
         
                             <p-dropdown #dropdown
                                 [options]="schoolYearsList$ |async"
-                                optionLabel="name.ar" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
+                                optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
                             </p-dropdown>
                             <div class="icon calendar" (click)="dropdown.show()">
                                 <img src="assets/images/navBar/calendar.svg" alt=""> 
