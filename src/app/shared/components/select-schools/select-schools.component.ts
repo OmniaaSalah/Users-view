@@ -17,7 +17,8 @@ export class SelectSchoolsComponent implements OnInit {
   @Input('selectSchoolModelOpened') selectSchoolModelOpened:boolean=false;
   MarkedListLength:number=0;
   filtration :Filter = {...Filtration,curriculumId:null,StateId: null};
-  schoolIsSelectedList;
+  schoolIsSelectedList=[];
+  selectedSchoolIds=[];
   schools={
     totalAllData:0,
     total:0,
@@ -34,8 +35,17 @@ export class SelectSchoolsComponent implements OnInit {
     this.userRolesService.MarkedListLength.subscribe((res)=>{this.MarkedListLength=res});
     this.getSchools();
     this.userRolesService.schoolSelectedList.subscribe((res)=>{
-      this.schoolIsSelectedList=res;
-      this.getSchools();
+      console.log(res)
+      // this.selectedSchoolIds=res;
+       res.forEach(school => {
+      this.selectedSchoolIds.push(school.id)
+      });
+      // this.getSchools();
+    //   this.schoolIsSelectedList.forEach(selectedSchool => {
+    //     if(selectedSchool.isSelected==true)
+    //     {this.selectedSchoolIds.push(selectedSchool.id)}
+
+    //  });
     
     });
   }
@@ -50,15 +60,8 @@ export class SelectSchoolsComponent implements OnInit {
       this.schools.list = res.data
       this.schools.totalAllData = res.totalAllData
       this.schools.total =res.total;
-      this.schools.list.forEach(school => {
-        this.schoolIsSelectedList.forEach(selectedSchool => {
-          if(school.id==selectedSchool.id)
-          {
-            school.isSelected=selectedSchool.isSelected;
-          }
-          
-        });
-      });
+      
+      
       
     },err=> {
       this.schools.loading=false
@@ -69,37 +72,38 @@ export class SelectSchoolsComponent implements OnInit {
  
   }
 
-  getSelectedSchool(e,id)
+  getSelectedSchool()
   {
 
-    this.schoolIsSelectedList.forEach(school => {
-      if(id==school.id)
-      {
+    this.MarkedListLength=this.selectedSchoolIds.length;
+    // this.schoolIsSelectedList.forEach(school => {
+    //   if(id==school.id)
+    //   {
 
-       if(e.checked)
-        { school.isSelected=true;
-          this.userRolesService.MarkedListLength.next(this.MarkedListLength+=1); 
-          this.schools.list.forEach(element => {
-            if(element.id==id)
-            {
-              element.isSelected=true;
+    //    if(e.checked)
+    //     { school.isSelected=true;
+    //       this.userRolesService.MarkedListLength.next(this.MarkedListLength+=1); 
+    //       this.schools.list.forEach(element => {
+    //         if(element.id==id)
+    //         {
+    //           element.isSelected=true;
         
-            }
-          });
-        }
-        else
-        {school.isSelected=false;
-          this.userRolesService.MarkedListLength.next(this.MarkedListLength-=1); 
-          this.schools.list.forEach(element => {
-            if(element.id==id)
-            {
-              element.isSelected=false;
+    //         }
+    //       });
+    //     }
+    //     else
+    //     {school.isSelected=false;
+    //       this.userRolesService.MarkedListLength.next(this.MarkedListLength-=1); 
+    //       this.schools.list.forEach(element => {
+    //         if(element.id==id)
+    //         {
+    //           element.isSelected=false;
              
-            }
-          });
-        }
-      }
-    });
+    //         }
+    //       });
+    //     }
+    //   }
+    // });
   
 
   }
@@ -128,8 +132,17 @@ closeModel()
 }
 showSelectedSchool()
 {
+  this.schools.list.forEach(school => {
+    this.selectedSchoolIds.forEach(id => {
+      if(school.id==id)
+      {
+        this.schoolIsSelectedList.push(school)
+      }
+    });
+   
+  });
   this.sharedService.openSelectSchoolsModel.next(false); 
-
+  this.userRolesService.MarkedListLength.next(this.MarkedListLength)
   this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
 
 }

@@ -176,6 +176,7 @@ export class AuthenticationService {
    }else{
      this.router.navigate(['/auth/login']);
    }
+   this.userService.currentUserSchoolId$.next('');
    localStorage.removeItem('$AJ$currentGuardian');
    localStorage.removeItem('$AJ$yearId');
    this.userService.clear();

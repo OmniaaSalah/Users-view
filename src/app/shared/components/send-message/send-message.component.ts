@@ -130,6 +130,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     });
     this.userRolesService.schoolSelectedList.subscribe((res) => {
       this.schoolIsSelectedList = res;
+      console.log(res)
     });
     this.userRolesService.MarkedListLength.subscribe((res) => {
       this.MarkedListLength = res;
@@ -140,23 +141,12 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.schoolIsSelectedList = [];
     // this.filtration.Page=null;
     this.filtration.PageSize = this.schools.totalAllData;
-    this.schoolsService.getAllSchoolsInPopUp(this.filtration).subscribe((res) => {
-      this.schoolIsSelectedList = res.data.map((school) => {
-        return {
-          id: school.id,
-          name: { ar: school.name?.ar, en: school.name?.en },
-          state: { ar: school.state?.ar, en: school.state?.en },
-          curriculum: { ar: school.curriculum?.ar, en: school.curriculum?.en },
-          isSelected: false,
-        };
+    this.schoolsService.getAllSchoolsInPopUp(this.filtration).subscribe((res)=>{
+     
+      this.schools.list=res.data;
+
       });
-      this.schools.list = res.data;
-      this.schools.list.forEach((school) => {
-        school.isSelected = false;
-      });
-      //  console.log("hello")
-      this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
-    });
+    
   }
 
   openSelectSchoolsModel() {
@@ -164,21 +154,13 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.sharedService.openSelectSchoolsModel.next(true);
   }
 
-  onSchoolSelected(id) {
-    this.schoolIsSelectedList.forEach((school) => {
-      if (school.id == id) {
-        school.isSelected = false;
-        this.userRolesService.MarkedListLength.next(
-          (this.MarkedListLength -= 1)
-        );
-      }
-    });
-    this.schools.list.forEach((element) => {
-      if (element.id == id) {
-        element.isSelected = false;
-      }
-    });
+  unSelectSchool(schoolId) {
+    
+    this.userRolesService.MarkedListLength.next(this.MarkedListLength-=1);
+    let index =this.schoolIsSelectedList.findIndex(school => school.id==schoolId)
+    this.schoolIsSelectedList.splice(index, 1)
     this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
+    this.toastr.success(this.translate.instant('mission Succeeded'))
   }
 
   getCurr() {

@@ -28,6 +28,7 @@ import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 export class AssignmentsListComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
+  schoolId=''
   get claimsEnum () {return ClaimsEnum}
   paginationState: paginationState = { ...paginationInitialState }
   filtration = {...Filtration,Status: ''};
@@ -55,7 +56,7 @@ export class AssignmentsListComponent implements OnInit {
     private headerService: HeaderService,
     private exportService: ExportService,
     private translate: TranslateService,
-    private router: Router,
+    private userService:UserService,
     private assignmentservice: AssignmentServiceService,
     private toastrService:ToastService) { }
 
@@ -64,7 +65,8 @@ export class AssignmentsListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAssignmentList();
+    this.userService.currentUserSchoolId$.subscribe(id => {this.schoolId=id;this.getAssignmentList()});
+
    this.checkDashboardHeader();
     this.examStatusList=this.assignmentservice.examStatusList;
   }
@@ -72,7 +74,7 @@ export class AssignmentsListComponent implements OnInit {
 
     this.assignments.loading=true;
     this.assignments.list=[];
-    this.assignmentservice.getAssignmentList(this.filtration).subscribe(response => {
+    this.assignmentservice.getAssignmentList(this.filtration,this.schoolId).subscribe(response => {
       if(response.data){
         this.sharedService.filterLoading.next(false);
         this.assignments.loading = false;

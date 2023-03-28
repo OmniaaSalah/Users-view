@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-
+import { faListDots} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-mandatory-survey',
   templateUrl: './mandatory-survey.component.html',
@@ -12,8 +12,8 @@ import { UserService } from 'src/app/core/services/user/user.service';
 })
 export class MandatorySurveyComponent implements OnInit {
   surveys=[];
-openReply:boolean=false;
-
+  openReply:boolean=false;
+  faListDots=faListDots;
 componentHeaderData: IHeader = {
   breadCrump: [
     { label: this.translate.instant('dashboard.surveys.Mandatory Surveies') ,routerLink:'/parent/mandatory-survey',routerLinkActiveOptions:{exact: true}},

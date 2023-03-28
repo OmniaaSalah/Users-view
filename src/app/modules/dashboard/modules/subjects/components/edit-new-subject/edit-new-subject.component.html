@@ -37,19 +37,19 @@
                             <div [hidden]="subjectNameInArabic.valid || subjectNameInArabic.untouched">
                                 <small *ngIf="subjectNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                                 <small *ngIf="subjectNameInArabic.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
 
                               
                              </div>
                              <small *ngIf="isSubjectNotUnique && !subjectNameInArabic.errors?.['maxlength'] && !subjectNameInArabic.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                                 
                             </div>
@@ -62,18 +62,18 @@
                             <div [hidden]="subjectNameInEnglish.valid || subjectNameInEnglish.untouched">
                                 <small *ngIf="subjectNameInEnglish.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                                 <small *ngIf="subjectNameInEnglish.errors?.['maxlength']" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                           
                              </div>
                              <small *ngIf="isSubjectNotUnique && !subjectNameInEnglish.errors?.['maxlength'] && !subjectNameInEnglish.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                                 
                             </div>
@@ -98,17 +98,17 @@
                             <div [hidden]="nameInResultsScreenInArabic.valid || nameInResultsScreenInArabic.untouched">
                                 <small *ngIf="nameInResultsScreenInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                                 <small *ngIf="nameInResultsScreenInArabic.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                              </div>
                              <small *ngIf="isSubjectNotUnique && !nameInResultsScreenInArabic.errors?.['maxlength'] && !nameInResultsScreenInArabic.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                                 
                         </div>
@@ -122,17 +122,17 @@
                             <div [hidden]="nameInResultsScreenInEnglish.valid || nameInResultsScreenInEnglish.untouched">
                                 <small *ngIf="nameInResultsScreenInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                                 <small *ngIf="nameInResultsScreenInEnglish.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                              </div>
                              <small *ngIf="isSubjectNotUnique && !nameInResultsScreenInEnglish.errors?.['maxlength'] && !nameInResultsScreenInEnglish.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                                 
                         </div>
@@ -175,13 +175,13 @@
                             <div [hidden]="minmumDegree.valid || minmumDegree.untouched">
                                 <small *ngIf="minmumDegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                             </div>
                             <div [hidden]="!subjectFormGrp.errors?.['degreesMisMatch']||minmumDegree.errors?.['required']  ">
                                 <small *ngIf="subjectFormGrp.errors?.['degreesMisMatch']" id="helpId3" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'dashboard.Subjects.minimum degree Must Less than maxmumDegree'|translate}}
-                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                 
                              </div>
@@ -196,14 +196,14 @@
                             <div [hidden]="maximumDegree.valid || maximumDegree.untouched">
                                 <small *ngIf="maximumDegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                             </div>
                             <div [hidden]="!subjectFormGrp.errors?.['degreesMisMatch']||maximumDegree.errors?.['required']">
                                
                                 <small *ngIf="subjectFormGrp.errors?.['degreesMisMatch']" id="helpId3" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'dashboard.Subjects.maximum degree Must More than minmumDegree'|translate}}
-                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                              </div>
                         </div>
