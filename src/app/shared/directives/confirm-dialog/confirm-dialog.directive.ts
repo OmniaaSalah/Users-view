@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output,OnDestroy } from '@angular/core';
+import { Directive, EventEmitter, HostListener, Input, Output,OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { ConfirmModelService } from '../../services/confirm-model/confirm-model.service';
@@ -9,7 +9,6 @@ import { ConfirmModelService } from '../../services/confirm-model/confirm-model.
 export class ConfirmDialogDirective implements OnDestroy {
   subscribtion:Subscription;
   @Output() onConfirm = new EventEmitter<void>();
-  @Output() onCancel = new EventEmitter<void>();
   @Input('ConfirmDialog') modelData ={message: this.translate.instant('shared.confirmDelete'), img:'assets/images/empty-list/basket.svg'};
 
   constructor(private confirmModelService: ConfirmModelService,private translate:TranslateService) { }
