@@ -11,6 +11,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SurveyService } from 'src/app/modules/dashboard/modules/surveys/service/survey.service';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -98,6 +99,7 @@ export class AuthenticationMainComponent implements OnInit {
 
           this.getCurrentYear();
         },err=>{
+          window.open(`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`);
           this.toastService.error(this.languge=='ar'? err?.Ar : err?.En)
           this.router.navigate(['/auth/login']);
         });

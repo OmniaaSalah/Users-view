@@ -80,7 +80,7 @@ export class AuthenticationService {
     return this.http.post("/User/ResetPassword", account)
   }
   signInWithIdentity(lang){
-    return this.http.get("/Account/UAEPASS",lang)
+    return this.http.get(`/Account/UAEPASS?language=${lang}`)
   }
   getUAEUSER(code){
     return this.http.get(`/Account/UAEPASS/GetToken?authenticationCode=${code}`)
