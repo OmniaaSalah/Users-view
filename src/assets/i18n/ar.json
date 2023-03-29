@@ -1135,7 +1135,8 @@
             "SchoolStudentsPercentge":"عدد الطلاب في المدرسة",
             "studentPercentgeInDivision":"عدد الطلاب في الشعبة",
             "hasSpecialClasses":"لديه فصول تربية خاصة",
-            "SelectClassType":"أختر نوع الفصل"
+            "SelectClassType":"أختر نوع الفصل",
+            "EnrolledStudentNumbers":"عدد الطلاب المنسحبين"
         },
         "parents": {
             "HaveChildreen":"يمتلك أبناء",
