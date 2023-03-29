@@ -242,8 +242,9 @@
         "new password":"كلمة المرور الجديدة",
         "write new password":"أكتب كلمة المرور الجديدة",
         "confirmed new password":"إعادة كلمة المرور الجديدة",
-        "user not complete Login with UEA pass":"قام المستخدم بإلغاء تسجيل الدخول"
-
+        "user not complete Login with UEA pass":"قام المستخدم بإلغاء تسجيل الدخول",
+        "unVerifiedUser":"أنت غير مؤهل للوصول إلى هذه الخدمة. إما أن حسابك لم تتم ترقيته أو لديك حساب زائر. يرجى الاتصال بـ <اسم الجهة> لتتمكن من الوصول إلى الخدمة.",
+        "":""
 
     },
 
@@ -1135,7 +1136,8 @@
             "SchoolStudentsPercentge":"عدد الطلاب في المدرسة",
             "studentPercentgeInDivision":"عدد الطلاب في الشعبة",
             "hasSpecialClasses":"لديه فصول تربية خاصة",
-            "SelectClassType":"أختر نوع الفصل"
+            "SelectClassType":"أختر نوع الفصل",
+            "EnrolledStudentNumbers":"عدد الطلاب المنسحبين"
         },
         "parents": {
             "HaveChildreen":"يمتلك أبناء",
