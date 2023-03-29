@@ -99,9 +99,10 @@ export class AuthenticationMainComponent implements OnInit {
 
           this.getCurrentYear();
         },err=>{
-          window.open(`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`);
+          
           this.toastService.error(this.languge=='ar'? err?.Ar : err?.En)
-          this.router.navigate(['/auth/login']);
+          window.open(`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`);
+          // this.router.navigate(['/auth/login']);
         });
      }
   }
