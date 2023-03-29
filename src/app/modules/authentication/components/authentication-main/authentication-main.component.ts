@@ -38,7 +38,7 @@ export class AuthenticationMainComponent implements OnInit {
   lang;
   loginForm: FormGroup;
   code=this.activatedRoute.snapshot.queryParamMap.get('code');
-  error_description=this.activatedRoute.snapshot.queryParamMap.get('error_description');
+  error_description=this.activatedRoute.snapshot.queryParamMap.get('error');
   constructor(
     private formbuilder: FormBuilder,
     private authService: AuthenticationService,
@@ -75,7 +75,10 @@ export class AuthenticationMainComponent implements OnInit {
     if(this.error_description)
       {
 
-        this.toastService.error(this.translate.instant('login.user not complete Login with UEA pass'));
+        if(this.error_description=='invalid_request') this.toastService.error(this.translate.instant('login.user not complete Login with UEA pass'));
+        // if(this.error_description=='access_denied') this.toastService.error(this.translate.instant('login.user not complete Login with UEA pass'));
+        if(this.error_description=='access_denied') this.toastService.error(this.translate.instant('login.unVerifiedUser'));
+
         this.router.navigate(['/auth/login']);
       }
      else if(this.code)
