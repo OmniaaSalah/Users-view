@@ -75,10 +75,7 @@ export class AuthenticationMainComponent implements OnInit {
     if(this.error_description)
       {
 
-        if(this.error_description=='invalid_request') this.toastService.error(this.translate.instant('login.user not complete Login with UEA pass'));
-        // if(this.error_description=='access_denied') this.toastService.error(this.translate.instant('login.user not complete Login with UEA pass'));
-        if(this.error_description=='access_denied') this.toastService.error(this.translate.instant('login.unVerifiedUser'));
-
+         this.toastService.error(this.translate.instant('login.user not complete Login with UEA pass'));
         this.router.navigate(['/auth/login']);
       }
      else if(this.code)
@@ -91,16 +88,16 @@ export class AuthenticationMainComponent implements OnInit {
           localStorage.setItem('UaeLogged','true')
           if(res.scope==UserScope.Employee)
           {
-           this.getCurrentEmployeeData(); 
+           this.getCurrentEmployeeData();
            }
            else if(res.scope==UserScope.Guardian)
            {
              this.getCurrentGuardianData();
            }
-     
+
           this.getCurrentYear();
         },err=>{
-          this.toastService.success(this.translate.instant('toasterMessage.error'))
+          this.toastService.error(this.lang=='ar'? err?.Ar : err?.En)
           this.router.navigate(['/auth/login']);
         });
      }
@@ -195,13 +192,13 @@ export class AuthenticationMainComponent implements OnInit {
 
      if(res.user.scope==UserScope.Employee)
      {
-      
+
       this.getCurrentEmployeeData();
-      
+
       }
       else if(res.user.scope==UserScope.Guardian)
       {
-       
+
         this.getCurrentGuardianData();
       }
 
@@ -211,7 +208,7 @@ export class AuthenticationMainComponent implements OnInit {
       }
 
       this.getCurrentYear()
-     
+
       this.showSuccess();
 
 
@@ -327,7 +324,7 @@ getCurrentEmployeeData()
       this.userService.currentUserSchoolId$.next(schoolId)
       this.userService.setSchoolId(schoolId);
     }
-  
+
 
   });
   this.authService.getSchoolNameRelatedToCurrentEmployee().subscribe((schoolName)=>{
@@ -336,7 +333,7 @@ getCurrentEmployeeData()
       this.userService.currentUserSchoolName$.next(schoolName);
       this.userService.setSchoolName(schoolName);
     }
-  
+
 
   });
 }
@@ -345,14 +342,14 @@ getCurrentGuardianData()
   this.authService.getCurrentGuardian().subscribe((guardian)=>{
     this.userService.currentGuardian.next(guardian)
     this.userService.setCurrentGuardian(guardian);
-  
+
   });
 }
 
 getCurrentYear()
 {
-  this.sharedService.getCurrentYear().subscribe((res)=>{ 
-    this.userService.persist('yearId',res?.id); 
+  this.sharedService.getCurrentYear().subscribe((res)=>{
+    this.userService.persist('yearId',res?.id);
    this.router.navigateByUrl(this.returnUrl);
   })
 }
