@@ -86,6 +86,7 @@ export class AuthenticationMainComponent implements OnInit {
           this.userService.setScope(res.scope)
           localStorage.setItem('$AJ$token',res.token)
           localStorage.setItem('UaeLogged','true')
+          this.userService.isUserLogged$.next(true);
           if(res.scope==UserScope.Employee)
           {
            this.getCurrentEmployeeData();

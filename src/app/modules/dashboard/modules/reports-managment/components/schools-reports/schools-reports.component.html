@@ -80,7 +80,7 @@
                             {{school?.studentsNumber }}
                         </td>
                         <td>
-                            {{school?.studentsPercentageInSchool }} %
+                            {{school?.studentsCountInSchool}} 
                         </td>
                         <td>
                             {{school?.curriculumName | currentLang}}
@@ -94,7 +94,13 @@
                             {{school?.divisionName | currentLang}}
                         </td>
                         <td *ngIf="tableColumns[8].isSelected == true">
-                            {{school?.studentsPercentageInDivision}} %
+                            {{school?.studentsCountInDivision}} 
+                        </td>
+                        <!-- <td *ngIf="tableColumns[9].isSelected == true">
+                            {{school?.studentsCountInDivision}} 
+                        </td> -->
+                        <td *ngIf="tableColumns[9].isSelected == true">
+                            {{school?.specialClassesCountPerSchool}} 
                         </td>
                        
                     </ng-container>
