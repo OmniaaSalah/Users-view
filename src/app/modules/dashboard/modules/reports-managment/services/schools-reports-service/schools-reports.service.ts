@@ -73,7 +73,18 @@ export class SchoolsReportsService {
         name:this.translate.instant('dashboard.schools.studentPercentgeInDivision'),
         isSelected: false,
         isDisabled: false,
+      },
+      // {
+      //   name:this.translate.instant('dashboard.schools.EnrolledStudentNumbers'),
+      //   isSelected: false,
+      //   isDisabled: false,
+      // },
+      {
+        name:this.translate.instant('dashboard.schools.SpecialClassesNumbers'),
+        isSelected: false,
+        isDisabled: false,
       }
+      
      
     ];
   }
@@ -90,12 +101,13 @@ export class SchoolsReportsService {
             [this.translate.instant('shared.state')]: school.state[this.lang],
             [this.translate.instant('dashboard.schools.TeachersNumbers')]: school.teachersNumbers,
             [this.translate.instant('dashboard.schools.studentsNumber')]: school.studentsNumber,
-            [this.translate.instant('dashboard.schools.SchoolStudentsPercentge')]: school.studentsPercentageInSchool +' %',
+            [this.translate.instant('dashboard.schools.SchoolStudentsPercentge')]: school.studentsCountInSchool,
             [this.translate.instant('dashboard.schools.SchoolCurriculum')]: school.curriculumName[this.lang],
             [this.translate.instant('shared.grade')]: school.gradeName[this.lang],
             [this.translate.instant('shared.division')]: school.divisionName[this.lang],
-            [this.translate.instant('dashboard.schools.studentPercentgeInDivision')]: school.studentsPercentageInDivision +' %'
-
+            [this.translate.instant('dashboard.schools.studentPercentgeInDivision')]: school.studentsCountInDivision,
+            // [this.translate.instant('dashboard.schools.EnrolledStudentNumbers')]: school.divisionName[this.lang],
+            [this.translate.instant('dashboard.schools.SpecialClassesNumbers')]: school.specialClassesCountPerSchool,
           }
         })
       }))

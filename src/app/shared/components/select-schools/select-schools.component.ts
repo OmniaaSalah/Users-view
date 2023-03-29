@@ -76,35 +76,6 @@ export class SelectSchoolsComponent implements OnInit {
   {
 
     this.MarkedListLength=this.selectedSchoolIds.length;
-    // this.schoolIsSelectedList.forEach(school => {
-    //   if(id==school.id)
-    //   {
-
-    //    if(e.checked)
-    //     { school.isSelected=true;
-    //       this.userRolesService.MarkedListLength.next(this.MarkedListLength+=1); 
-    //       this.schools.list.forEach(element => {
-    //         if(element.id==id)
-    //         {
-    //           element.isSelected=true;
-        
-    //         }
-    //       });
-    //     }
-    //     else
-    //     {school.isSelected=false;
-    //       this.userRolesService.MarkedListLength.next(this.MarkedListLength-=1); 
-    //       this.schools.list.forEach(element => {
-    //         if(element.id==id)
-    //         {
-    //           element.isSelected=false;
-             
-    //         }
-    //       });
-    //     }
-    //   }
-    // });
-  
 
   }
 
@@ -144,8 +115,9 @@ showSelectedSchool()
   this.sharedService.openSelectSchoolsModel.next(false); 
   this.userRolesService.MarkedListLength.next(this.MarkedListLength)
   this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
-
+ console.log(this.schoolIsSelectedList)
 }
-  
+
+
 
 }

@@ -35,6 +35,11 @@ export class DegreeReportService {
       isDisabled: true,
     },
     {
+      name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
+      isSelected: true,
+      isDisabled: true,
+    },
+    {
  
       name:this.translate.instant('shared.division'),
       isSelected: true,
@@ -66,8 +71,8 @@ export class DegreeReportService {
     {
      
       name:this.translate.instant('dashboard.reports.SemesterStudentResult'),
-      isSelected: true,
-      isDisabled: true,
+      isSelected: false,
+      isDisabled: false,
     },
     {
       
@@ -171,6 +176,7 @@ degreesToExport(filter)
       return res.data.map(e =>{
         return {
           [this.translate.instant('School')]: e?.schoolName ? e?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.schools.SchoolCurriculum')]: e?.curriculumName ? e?.curriculumName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('shared.division')]: e?.divisionName ? e?.divisionName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('shared.grade')]: e?.gradeName? e?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.SchoolYear.school year')]:e?.schoolYearName ? e?.schoolYearName[this.lang] : this.translate.instant('shared.notFound'),
