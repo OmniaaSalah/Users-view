@@ -89,6 +89,7 @@ export class AuthenticationService {
       return {
         token:res.token,
         scope:res.scope,
+        userId:res.userId,
         user:{...res}
       }
 
