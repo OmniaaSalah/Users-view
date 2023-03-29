@@ -83,7 +83,16 @@ export class AuthenticationMainComponent implements OnInit {
           this.userService.setScope(res.scope)
           localStorage.setItem('$AJ$token',res.token)
           localStorage.setItem('UaeLogged','true')
-          this.router.navigateByUrl('');
+          if(res.scope==UserScope.Employee)
+          {
+           this.getCurrentEmployeeData(); 
+           }
+           else if(res.scope==UserScope.Guardian)
+           {
+             this.getCurrentGuardianData();
+           }
+     
+          this.getCurrentYear();
         },err=>{
           this.toastService.success(this.translate.instant('toasterMessage.error'))
           this.router.navigate(['/auth/login']);
@@ -180,34 +189,14 @@ export class AuthenticationMainComponent implements OnInit {
     
      if(res.user.scope==UserScope.Employee)
      {
-      this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
-        if(schoolId)
-        {
-          this.userService.currentUserSchoolId$.next(schoolId)
-          this.userService.setSchoolId(schoolId);
-        }
       
-
-      });
-      this.authService.getSchoolNameRelatedToCurrentEmployee().subscribe((schoolName)=>{
-        if(schoolName)
-        {
-          this.userService.currentUserSchoolName$.next(schoolName);
-          this.userService.setSchoolName(schoolName);
-        }
-      
-
-      });
+      this.getCurrentEmployeeData();
       
       }
       else if(res.user.scope==UserScope.Guardian)
       {
-        this.authService.getCurrentGuardian().subscribe((guardian)=>{
-          console.log(guardian)
-          this.userService.currentGuardian.next(guardian)
-          this.userService.setCurrentGuardian(guardian);
-        
-        });
+       
+        this.getCurrentGuardianData();
       }
 
 
@@ -215,10 +204,7 @@ export class AuthenticationMainComponent implements OnInit {
         this.userService.currentUserName.next(res.user.fullName)
       }
 
-      this.sharedService.getCurrentYear().subscribe((res)=>{ 
-        this.userService.persist('yearId',res?.id); 
-       this.router.navigateByUrl(this.returnUrl);
-      })
+      this.getCurrentYear()
      
       this.showSuccess();
 
@@ -324,5 +310,44 @@ checkValidators(event)
 
 changeLanguage(): void {
   this.translationService.handleLanguageChange();
+}
+
+getCurrentEmployeeData()
+{
+
+  this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
+    if(schoolId)
+    {
+      this.userService.currentUserSchoolId$.next(schoolId)
+      this.userService.setSchoolId(schoolId);
+    }
+  
+
+  });
+  this.authService.getSchoolNameRelatedToCurrentEmployee().subscribe((schoolName)=>{
+    if(schoolName)
+    {
+      this.userService.currentUserSchoolName$.next(schoolName);
+      this.userService.setSchoolName(schoolName);
+    }
+  
+
+  });
+}
+getCurrentGuardianData()
+{
+  this.authService.getCurrentGuardian().subscribe((guardian)=>{
+    this.userService.currentGuardian.next(guardian)
+    this.userService.setCurrentGuardian(guardian);
+  
+  });
+}
+
+getCurrentYear()
+{
+  this.sharedService.getCurrentYear().subscribe((res)=>{ 
+    this.userService.persist('yearId',res?.id); 
+   this.router.navigateByUrl(this.returnUrl);
+  })
 }
 }
