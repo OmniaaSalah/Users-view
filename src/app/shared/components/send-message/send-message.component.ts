@@ -124,7 +124,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       messageType: ['', [Validators.required]],
     });
 
-    if (this.currentUserscope == UserScope.SPEA) this.getIsSelectedSchoolList();
+    if (this.currentUserscope == UserScope.SPEA) this.getSchoolList();
     this.sharedService.openSelectSchoolsModel.subscribe((res) => {
       this.selectSchoolModelOpened = res;
     });
@@ -137,9 +137,8 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     });
   }
 
-  getIsSelectedSchoolList() {
-    this.schoolIsSelectedList = [];
-    // this.filtration.Page=null;
+  getSchoolList() {
+   
     this.filtration.PageSize = this.schools.totalAllData;
     this.schoolsService.getAllSchoolsInPopUp(this.filtration).subscribe((res)=>{
      
@@ -150,7 +149,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   }
 
   openSelectSchoolsModel() {
-    if(this.currentUserscope == UserScope.SPEA) this.getIsSelectedSchoolList()
+    if(this.currentUserscope == UserScope.SPEA) this.getSchoolList()
     this.sharedService.openSelectSchoolsModel.next(true);
   }
 
