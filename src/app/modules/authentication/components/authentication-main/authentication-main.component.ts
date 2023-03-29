@@ -50,7 +50,7 @@ export class AuthenticationMainComponent implements OnInit {
     private activatedRoute:ActivatedRoute,
     private sharedService:SharedService,
     public surveyService:SurveyService
-  
+
   ) {
 
 
@@ -62,23 +62,26 @@ export class AuthenticationMainComponent implements OnInit {
 
      this.checkUAEPassLogin();
      this.initLoginForm();
-    
+
      this.authService.isNewAccountOpened.subscribe((res)=>{this.openNewAccountModel=res})
      this.authService.isForgetModelOpened.subscribe((res)=>{this.openForgetPasswordModel=res})
      this.checkOpenResetPasswoedForm();
+
   }
 
 
   checkUAEPassLogin(){
+    localStorage.setItem('Query', this.activatedRoute.snapshot.queryParamMap)
     if(this.error_description)
       {
-       
+
         this.toastService.error(this.translate.instant('login.user not complete Login with UEA pass'));
         this.router.navigate(['/auth/login']);
       }
      else if(this.code)
      {
-        this.authService.getUAEUSER(this.code).subscribe(res=>{
+        this.authService.getUAEUSER(this.code).subscribe((res:any)=>{
+          this.userService.setToken(res)
           this.userService.setUser(res.user);
           this.userService.setScope(res.scope)
           localStorage.setItem('$AJ$token',res.token)
@@ -98,7 +101,7 @@ export class AuthenticationMainComponent implements OnInit {
       password: [null, [Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
     })
   }
-  
+
 
   get account() {
     return this.loginForm.controls['account'] as FormControl;
@@ -110,9 +113,9 @@ export class AuthenticationMainComponent implements OnInit {
 
 
 
- 
+
   onNext() {
-   
+
 
     this.login();
 
@@ -162,7 +165,7 @@ export class AuthenticationMainComponent implements OnInit {
         this.router.navigateByUrl('/dashboard')
       }, err => {
         this.isBtnLoading = false
-     
+
       })
     }
   }
@@ -170,14 +173,14 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
 
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
-    
+
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
-     
+
       this.userService.setScope(res.user.scope);
       this.userService.isUserLogged$.next(true);
-    
+
      if(res.user.scope==UserScope.Employee)
      {
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
@@ -186,7 +189,7 @@ export class AuthenticationMainComponent implements OnInit {
           this.userService.currentUserSchoolId$.next(schoolId)
           this.userService.setSchoolId(schoolId);
         }
-      
+
 
       });
       this.authService.getSchoolNameRelatedToCurrentEmployee().subscribe((schoolName)=>{
@@ -195,10 +198,10 @@ export class AuthenticationMainComponent implements OnInit {
           this.userService.currentUserSchoolName$.next(schoolName);
           this.userService.setSchoolName(schoolName);
         }
-      
+
 
       });
-      
+
       }
       else if(res.user.scope==UserScope.Guardian)
       {
@@ -206,7 +209,7 @@ export class AuthenticationMainComponent implements OnInit {
           console.log(guardian)
           this.userService.currentGuardian.next(guardian)
           this.userService.setCurrentGuardian(guardian);
-        
+
         });
       }
 
@@ -215,11 +218,11 @@ export class AuthenticationMainComponent implements OnInit {
         this.userService.currentUserName.next(res.user.fullName)
       }
 
-      this.sharedService.getCurrentYear().subscribe((res)=>{ 
-        this.userService.persist('yearId',res?.id); 
+      this.sharedService.getCurrentYear().subscribe((res)=>{
+        this.userService.persist('yearId',res?.id);
        this.router.navigateByUrl(this.returnUrl);
       })
-     
+
       this.showSuccess();
 
 
@@ -228,10 +231,10 @@ export class AuthenticationMainComponent implements OnInit {
 
 
   validate() {
-  
+
     this.authService.validateUsername(this.account.value).subscribe((res: any) => {
       this.token = res.token
-   
+
       this.authenticate();
 
     },err=>{this.isBtnLoading = false;this.showError(); })
@@ -260,7 +263,7 @@ export class AuthenticationMainComponent implements OnInit {
   onSubmit(form: FormGroup) {
     if (form.valid) {
       this.loading = true;
-     
+
     }
   }
 
@@ -277,19 +280,19 @@ export class AuthenticationMainComponent implements OnInit {
 
 openNewAccount()
 {
- 
+
   this.authService.isNewAccountOpened.next(true)
 }
 openForgetModel()
 {
- 
+
   this.authService.isForgetModelOpened.next(true)
-  
+
 }
 
 checkOpenResetPasswoedForm()
 {
-  
+
   this.urlOtp=this.activatedRoute.snapshot.queryParamMap.get('otp');
   this.urlEmail=this.activatedRoute.snapshot.queryParamMap.get('email');
 
@@ -301,15 +304,15 @@ checkOpenResetPasswoedForm()
 
 checkValidators(event)
 {
- 
+
   var input=event;
   this.account.setValidators([Validators.required,Validators.pattern('[05]{1}[0-9]{9}')]);
   this.isEmail=false;
 
   for (let index = 0; index < input.length; index++) {
    if( input[index]!=0&&input[index]!=1&&input[index]!=2&&input[index]!=3&&input[index]!=4&&input[index]!=5&&input[index]!=6&&input[index]!=7&&input[index]!=8&&input[index]!=9)
-   { 
-   
+   {
+
        this.isEmail=true;
 
    }
