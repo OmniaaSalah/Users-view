@@ -35,7 +35,7 @@ export class AuthenticationMainComponent implements OnInit {
   token: any;
   setPasswordForm: any;
   isBtnLoading: boolean=false;
-  lang;
+
   loginForm: FormGroup;
   code=this.activatedRoute.snapshot.queryParamMap.get('code');
   error_description=this.activatedRoute.snapshot.queryParamMap.get('error');
@@ -98,7 +98,7 @@ export class AuthenticationMainComponent implements OnInit {
 
           this.getCurrentYear();
         },err=>{
-          this.toastService.error(this.lang=='ar'? err?.Ar : err?.En)
+          this.toastService.error(this.languge=='ar'? err?.Ar : err?.En)
           this.router.navigate(['/auth/login']);
         });
      }
@@ -259,7 +259,7 @@ export class AuthenticationMainComponent implements OnInit {
 
   }
   signWithIdentity(){
-    this.authService.signInWithIdentity(this.lang).subscribe(res=>{
+    this.authService.signInWithIdentity(this.languge).subscribe(res=>{
       window.location.href = res.massege
 
     })
