@@ -1,6 +1,7 @@
 ::ng-deep {
     .toast-container .ngx-toastr {
         width: max-content;
+        max-width:60vw;
         color: #fff;
         // position: fixed !important;
         // bottom: 1%;
