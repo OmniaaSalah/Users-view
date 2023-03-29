@@ -71,7 +71,7 @@ export class AuthenticationMainComponent implements OnInit {
 
 
   checkUAEPassLogin(){
-    localStorage.setItem('Query', this.activatedRoute.snapshot.queryParamMap)
+    localStorage.setItem('Query', JSON.stringify(this.activatedRoute.snapshot.queryParamMap))
     if(this.error_description)
       {
 
