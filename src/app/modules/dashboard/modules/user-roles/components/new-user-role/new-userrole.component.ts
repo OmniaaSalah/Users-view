@@ -78,7 +78,7 @@ export class NewUserRoleComponent implements OnInit,OnDestroy {
     this.userRolesService.MarkedListLength.next(0);
     this.userRolesService.schoolSelectedList.subscribe((res)=>{
       this.schoolIsSelectedList=res;
-
+      console.log(res)
     });
     this.userRolesService.MarkedListLength.subscribe((res)=>{this.MarkedListLength=res});
     this.dataRestrictionLevelList=this.userRolesService.dataRestrictionLevelList;
@@ -433,8 +433,7 @@ export class NewUserRoleComponent implements OnInit,OnDestroy {
 
   getSchoolList()
   {
-    this.schoolIsSelectedList=[];
-    // this.filtration.Page=null;
+    
     this.filtration.PageSize=this.schools.totalAllData;
     this.schoolsService.getAllSchoolsInPopUp(this.filtration).subscribe((res)=>{
      
