@@ -992,7 +992,8 @@
             "SchoolStudentsPercentge":"Students Numbers In School",
             "studentPercentgeInDivision":"Students Numbers In Division",
             "hasSpecialClasses": "Has Special Classes",
-            "SelectClassType":"Select ClassType"
+            "SelectClassType":"Select ClassType",
+            "EnrolledStudentNumbers":"Enrolled Student Numbers"
 
         },
         "AnnualHoliday": {
