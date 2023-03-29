@@ -15,6 +15,7 @@ import { StudentsService } from '../../../students/services/students/students.se
 import { Table } from 'primeng/table';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-degrees-reports',
   templateUrl: './degrees-reports.component.html',
@@ -23,6 +24,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 export class DegreesReportsComponent implements OnInit {
   isBtnLoading: boolean=false;
   shownTable:boolean=false;
+  lang = inject(TranslationService).lang
   tableColumns = [];
   schoolYearsList=[];
   subjectList;
