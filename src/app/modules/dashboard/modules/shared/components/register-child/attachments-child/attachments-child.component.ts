@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import {  Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, finalize, map, pluck } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
@@ -42,6 +42,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   attachments=[]
   loading
   onSubmit
+  showErrMess = false
 
   gurdiansAttachmentsTypes$=this.indexsService.getIndext(IndexesEnum.TheTypeOfFileAttachmentForTheParent)
 
@@ -114,12 +115,22 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     this.attachments[i] = {...this.attachments[i], url: file.url,name:file.name, comment: file.comment}
   }
 
+  fileTypeChanged(indexId){
+    let isExist= this.attachments.findIndex(el => el?.indexId === indexId) > -1 ? true : false
+
+    if(isExist) this.showErrMess=true
+    else this.showErrMess =false
+  }
 
   addNewAttachment(){
-    this.attachments.unshift({url: '', name: '', titel:this.fileForm.value.titel, comment:''})
+    let index = this.attachments.findIndex(el => el?.indexId === this.fileForm.value.indexId)
+    if(index > -1) this.attachments.splice(index, 1)
+
+    this.attachments.unshift({url: '', name: '', titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId})
     this.addMode=false
     this.fileForm.reset()
   }
+
 
   ngOnDestroy(): void {
     this.childService.onEditMode$.next(false)
