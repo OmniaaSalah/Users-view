@@ -192,9 +192,7 @@
                         <td>
                             {{student?.manhalNumber}}
                         </td>
-                        <td>
-                            {{student?.name | currentLang}}
-                        </td>
+                        <td  ><a [style.height.rem]="'6'"  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+student?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.name |currentLang}}</a></td>
                         <td>
                            {{student?.surName | currentLang}}
                         </td>

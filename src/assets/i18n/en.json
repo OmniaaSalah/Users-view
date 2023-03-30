@@ -551,7 +551,12 @@
             "GCCNational":"GCC National",
             "IsSpecialAbilities": "Special Abilities",
             "Arabs":"Arabs",
-            "NonArab": "Non Arabs"
+            "NonArab": "Non Arabs",
+            "TransferredWithinTheEmirate":"Transferred Within The Emirate",
+            "TransferredFromOutsideTheEmirate":"Transferred From Outside The Emirate",
+            "TransferredFromOutsideTheCountry":"Transferred From Outside The Country",
+            "Newbie":"Newbie",
+            "LevelSetting":"Level Setting"
 
         },
 
