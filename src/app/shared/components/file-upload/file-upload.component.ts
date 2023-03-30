@@ -176,8 +176,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
       let uploadedFiles = res.map((res, index)=> {
         // let file = {url: res.url, name: this.uploadedFilesName[index]}
         let file
-        if(this.extractFormData) file = {url: res.url, name: res.fileName, formData: this.uploadedFilesFormData[index]}
-        else file = {url: res.url, name: res.fileName}
+        if(this.extractFormData) file = {url: res?.url, name: res?.fileName, formData: this.uploadedFilesFormData[index]}
+        else file = {url: res?.url, name: res?.fileName}
 
         if(this.hasComment) file['comment']=''
         return file

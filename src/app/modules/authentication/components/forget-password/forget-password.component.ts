@@ -84,8 +84,9 @@ export class ForgetPasswordComponent implements OnInit {
       this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
     
     },(err)=>{
-      this.toastService.error(err[this.lang]);
-     
+ 
+      this.lang=='ar' ? this.toastService.error(err['Ar']) : this.toastService.error(err['En'])
+
     })
   }
 
