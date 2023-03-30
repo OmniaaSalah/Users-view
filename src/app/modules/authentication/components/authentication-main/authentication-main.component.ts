@@ -98,6 +98,7 @@ export class AuthenticationMainComponent implements OnInit {
            }
 
           this.getCurrentYear();
+          this.showSuccess();
         },err=>{
           
           this.toastService.error(this.languge=='ar'? err?.Ar : err?.En)

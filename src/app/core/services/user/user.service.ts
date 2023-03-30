@@ -172,7 +172,7 @@ export class UserService {
   }
 
   public getCurrentUserName() :any {
-   
+   console.log(this.token.user)
     return typeof this.token.user === 'string'? JSON.parse( this.token.user)?.fullName:this.token.user?.fullName
    
 }
