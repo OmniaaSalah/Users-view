@@ -80,7 +80,8 @@ export class AuthenticationMainComponent implements OnInit {
       }
      else if(this.code)
      {
-        this.authService.getUAEUSER(this.code).subscribe((res:any)=>{
+        this.authService
+        .getUAEUSER(this.code).subscribe((res:any)=>{
           this.userService.setToken(res)
           this.userService.setUser(res.user);
           this.userService.setScope(res.scope)
