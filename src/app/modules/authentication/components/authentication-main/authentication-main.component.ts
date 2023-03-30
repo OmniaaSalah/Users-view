@@ -67,7 +67,7 @@ export class AuthenticationMainComponent implements OnInit {
      this.authService.isNewAccountOpened.subscribe((res)=>{this.openNewAccountModel=res})
      this.authService.isForgetModelOpened.subscribe((res)=>{this.openForgetPasswordModel=res})
      this.checkOpenResetPasswoedForm();
-
+     
   }
 
 
@@ -101,7 +101,10 @@ export class AuthenticationMainComponent implements OnInit {
         },err=>{
           
           this.toastService.error(this.languge=='ar'? err?.Ar : err?.En)
-          window.open(`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`);
+          setTimeout(() => {
+            window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
+           },2500);
+       
           // this.router.navigate(['/auth/login']);
         });
      }
