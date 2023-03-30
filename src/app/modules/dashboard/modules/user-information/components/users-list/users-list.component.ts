@@ -28,8 +28,9 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 })
 export class ViewListOfUsersComponent implements OnInit {
   get ClaimsEnum(){return ClaimsEnum}
+  speaRolecode= 'Admin';
   lang = this.translationService.lang
-  filtration = {...Filtration, roleId: [1],isactive:true}
+  filtration = {...Filtration, roleId:[],isactive:true}
   paginationState= {...paginationInitialState}
   roles: any[] = [];
   usersStatus= this.userInformation.usersStatusList;
@@ -96,6 +97,7 @@ export class ViewListOfUsersComponent implements OnInit {
 
     this.userInformation.GetRoleList().subscribe(response => {
 		  this.roles = response;
+      this.filtration.roleId=this.roles.find(role=>role?.code==this.speaRolecode)?.id
 		})
   }
 

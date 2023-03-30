@@ -119,7 +119,7 @@
                         </td>
                       
                         <td>
-                            {{parent?.studentName| currentLang }}
+                            <a [style.height.rem]="'6'"  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+parent?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{parent?.studentName |currentLang}}</a>
                         </td>
 
                         <td *ngIf="tableColumns[6].isSelected == true">

@@ -90,7 +90,6 @@ export class HeaderComponent implements OnInit {
        if(res)
        {
         this.guardianName=this.userService.getCurrentUserName();
-        console.log(this.guardianName)
         this.getSchoolYearsList();
         // this.userService.currentUserName.subscribe((res)=>{this.guardianName=res;})
 

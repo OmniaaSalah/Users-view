@@ -74,6 +74,17 @@ export enum RegistrationStatus{
     ReEnrolment='ReEnrolment'
 }
 
+export enum ReEnrollmentType{
+    TransferredWithinTheEmirate='TransferredWithinTheEmirate',
+    TransferredFromOutsideTheEmirate='TransferredFromOutsideTheEmirate',
+    TransferredFromOutsideTheCountry='TransferredFromOutsideTheCountry',
+    //مستجد
+    Newbie='Newbie',
+    //تحديد مستوي
+    LevelSetting='LevelSetting',
+    ReEnrolment='ReEnrolment'
+}
+
 export enum UserRequestsStatus{
     Pending = "Pending",
     TentativelyAccepted = "TentativelyAccepted",
