@@ -70,6 +70,7 @@ export class AuthenticationMainComponent implements OnInit {
      this.checkOpenResetPasswoedForm();
   }
 
+  loginInProgress =false
 
   checkUAEPassLogin(){
     localStorage.setItem('Query', JSON.stringify(this.activatedRoute.snapshot.queryParamMap))
@@ -81,7 +82,10 @@ export class AuthenticationMainComponent implements OnInit {
       }
      else if(this.code)
      {
+      this.loginInProgress=true
         this.authService.getUAEUSER(this.code).subscribe((res:any)=>{
+          this.loginInProgress=false
+
           if(res.statusCode=="OK")
           {
               this.userService.setToken(res?.result)
@@ -101,21 +105,25 @@ export class AuthenticationMainComponent implements OnInit {
 
               this.getCurrentYear();
               this.showSuccess();
+
           }
           else if (res?.statusCode=="NotFound")
           {
             this.toastService.error(res?.errorLocalized[this.languge])
             this.openUAEAccount(res);
           }
-          else 
+          else
           {
             this.toastService.error(res?.errorLocalized[this.languge])
             setTimeout(() => {
               window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
              },2500);
           }
+
+
+
         },err=>{
-          
+          this.loginInProgress=false
           this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
         });
      }
