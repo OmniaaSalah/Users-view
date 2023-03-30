@@ -183,7 +183,7 @@ export class DivisionService {
     return this.http.get(`/school/${schoolId}/division/${divisionId}/division-allsubject-degree`,filter)
     .pipe(
       map(res=>{
-        return res.data.map(student =>{
+        return res.result?.data.map(student =>{
           let obj= {
             [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
             [this.translate.instant('dashboard.students.studentName')]: student.name.ar,

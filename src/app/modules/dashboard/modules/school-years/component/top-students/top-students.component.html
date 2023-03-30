@@ -40,7 +40,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e?.student|currentLang}}</td>
+                <td  ><a [style.height.rem]="'6'"  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+e.studentId]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{e?.student |currentLang}}</a></td>
                 <td   >{{e?.nationality|currentLang}}</td>
                 <td   >{{e?.grade|currentLang}}</td>
                 <td   >{{e?.curricuulm|currentLang}}</td>

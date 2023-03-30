@@ -31,6 +31,10 @@ export class AuthenticationService {
   {
     return this.http.post("/Account/send-otp",account)
   }
+  createUAEPassAccount(account)
+  {
+    return this.http.post("/Account/UAEPASS/registration",account)
+  }
   confirmOtp(account,otp)
   {
     return this.http.post(`/Account/otp-validation?otp=${otp}`,account)
