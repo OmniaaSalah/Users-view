@@ -241,7 +241,7 @@
         "new password": "New password",
         "write new password":"Write new password",
         "confirmed new password":"Confirmed new password",
-        "user not complete Login with UEA pass": "User not complete Login with UEA pass",
+        "user not complete Login with UEA pass": "User cancelled the login",
         "unVerifiedUser":"You are not eligible to access this service. Your account is either not upgraded or you have a visitor account. Please contact <SP Name> to access the services"
 
 
