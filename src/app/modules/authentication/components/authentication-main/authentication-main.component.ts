@@ -69,7 +69,7 @@ export class AuthenticationMainComponent implements OnInit {
      this.authService.isForgetModelOpened.subscribe((res)=>{this.openForgetPasswordModel=res})
      this.checkOpenResetPasswoedForm();
   }
-
+  loginInProgress =false
 
   checkUAEPassLogin(){
     localStorage.setItem('Query', JSON.stringify(this.activatedRoute.snapshot.queryParamMap))
@@ -81,7 +81,9 @@ export class AuthenticationMainComponent implements OnInit {
       }
      else if(this.code)
      {
+      this.loginInProgress=true
         this.authService.getUAEUSER(this.code).subscribe((res:any)=>{
+          this.loginInProgress=false
           if(res?.statusCode=="OK")
           {
               this.userService.setToken(res?.user)
@@ -115,7 +117,7 @@ export class AuthenticationMainComponent implements OnInit {
              },2500);
           }
         },err=>{
-          
+          this.loginInProgress=false
           this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
         });
      }
