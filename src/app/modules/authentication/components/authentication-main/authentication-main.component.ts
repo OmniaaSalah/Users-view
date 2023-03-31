@@ -82,7 +82,7 @@ export class AuthenticationMainComponent implements OnInit {
      else if(this.code)
      {
         this.authService.getUAEUSER(this.code).subscribe((res:any)=>{
-          if(res?.user?.statusCode=="OK")
+          if(res?.statusCode=="OK")
           {
               this.userService.setToken(res?.user)
               this.userService.setUser(res?.user);
