@@ -31,6 +31,10 @@ export class AuthenticationService {
   {
     return this.http.post("/Account/send-otp",account)
   }
+  createUAEPassAccount(account)
+  {
+    return this.http.post("/Account/UAEPASS/registration",account)
+  }
   confirmOtp(account,otp)
   {
     return this.http.post(`/Account/otp-validation?otp=${otp}`,account)
@@ -87,10 +91,13 @@ export class AuthenticationService {
     .pipe(take(1),
     map((res)=>{
       return {
-        token:res.token,
-        scope:res.scope,
-        userId:res.userId,
-        user:{...res}
+        token:res?.result?.token,
+        scope:res?.result?.scope,
+        userId:res?.result?.userId,
+        user:{...res?.result},
+        errorLocalized:res?.errorLocalized,
+        statusCode:res?.statusCode
+
       }
 
      }

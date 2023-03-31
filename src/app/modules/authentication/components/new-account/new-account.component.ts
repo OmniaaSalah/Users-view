@@ -12,6 +12,7 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
@@ -76,6 +77,7 @@ export class NewAccountComponent implements OnInit {
   ngOnInit(): void {
     this.tittle=this.translate.instant("login.Create New User Account");
     this.getAuthenticationWays();
+    this.checkOpenUAEModelAutomatic()
   }
   get registrationWay() {
     return this.registrationWayFormGrp.controls['registrationWay'] as FormControl;
@@ -134,6 +136,13 @@ export class NewAccountComponent implements OnInit {
     this.authService.isNewAccountOpened.next(false)
     localStorage.removeItem('accountWay');
     localStorage.removeItem('notificationSource');
+    if(localStorage.getItem('redirectToUAEPassSignUp'))   
+    {
+     setTimeout(() => {
+     window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
+    },100);
+    localStorage.removeItem('redirectToUAEPassSignUp');
+   }
   }
   changeRegistrationField(e)
   {
@@ -192,7 +201,25 @@ export class NewAccountComponent implements OnInit {
 sendOtp()
 {
   this.isBtnLoading=true;
-  this.authService.sendOtpToUser(this.account).subscribe((res)=>{
+  if(this.account.accountWay==RegistrationEnum.EmiratesId)
+  {
+    this.authService.createUAEPassAccount({IDn:this.account.notificationSource}).subscribe((res)=>{
+      this.isBtnLoading=false;
+      this.closeModel();
+      this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+      if(localStorage.getItem('redirectToUAEPassSignUp'))   
+       {
+        setTimeout(() => {
+        window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
+       },2500);
+      }
+    },(err)=>{
+      this.isBtnLoading=false;
+      this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
+  }
+  else
+  {
+    this.authService.sendOtpToUser(this.account).subscribe((res)=>{
     this.isBtnLoading=false;
     this.toastService.success(this.translate.instant('shared.Otp send successfully'));
     this.tittle=this.translate.instant('sign up.confirmed with OTP')
@@ -202,6 +229,7 @@ sendOtp()
   },(err)=>{
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
+  }
 }
 sendOtpAgain()
 {
@@ -317,5 +345,16 @@ confirmOTP()
     this.startTimer();
   })
 
+}
+checkOpenUAEModelAutomatic()
+{
+  this.changeRegistrationField(RegistrationEnum.EmiratesId);
+   if(localStorage.getItem('accountWay'))
+   {
+    this.registrationWayFormGrp.patchValue({
+      registrationWay:localStorage.getItem('accountWay'),
+      emairatesWay:localStorage.getItem('notificationSource')
+    })
+   }
 }
 }

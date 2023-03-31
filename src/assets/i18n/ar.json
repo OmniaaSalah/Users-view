@@ -707,7 +707,12 @@
             "GCCNational":"مواطني دول مجلس التعاون الخليجي",
             "IsSpecialAbilities":"أصحاب الهمم",
             "Arabs":"الغير مواطنين (العرب)",
-            "NonArab":"الغير مواطنين ( الغير عرب )"
+            "NonArab":"الغير مواطنين ( الغير عرب )",
+            "TransferredWithinTheEmirate":"منقول داخل الامارة",
+            "TransferredFromOutsideTheEmirate":"منقول من خارج الامارة",
+            "TransferredFromOutsideTheCountry":"منقول من خارج الدولة",
+            "Newbie":"مستجد",
+            "LevelSetting":"تحديد المستوى"
         },
 
         "addNewFile":"إضافه ملف جديد",
