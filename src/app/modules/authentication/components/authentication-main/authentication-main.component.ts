@@ -70,7 +70,6 @@ export class AuthenticationMainComponent implements OnInit {
      this.checkOpenResetPasswoedForm();
   }
 
-  loginInProgress =false
 
   checkUAEPassLogin(){
     localStorage.setItem('Query', JSON.stringify(this.activatedRoute.snapshot.queryParamMap))
@@ -82,51 +81,41 @@ export class AuthenticationMainComponent implements OnInit {
       }
      else if(this.code)
      {
-      this.loginInProgress=true
         this.authService.getUAEUSER(this.code).subscribe((res:any)=>{
-          this.loginInProgress=false
-          console.log(res);
-
-          if(res.statusCode=="OK")
+          if(res?.user?.statusCode=="OK")
           {
-              this.userService.setToken(res?.result)
-              this.userService.setUser(res?.result?.user);
-              this.userService.setScope(res?.result?.scope)
-              localStorage.setItem('$AJ$token',res?.result?.token)
+              this.userService.setToken(res?.user)
+              this.userService.setUser(res?.user);
+              this.userService.setScope(res?.scope)
+              localStorage.setItem('$AJ$token',res?.token)
               localStorage.setItem('UaeLogged','true')
               this.userService.isUserLogged$.next(true);
-              if(res?.result?.scope==UserScope.Employee)
+              if(res?.scope==UserScope.Employee)
               {
               this.getCurrentEmployeeData();
               }
-              else if(res?.result?.scope==UserScope.Guardian)
+              else if(res?.scope==UserScope.Guardian)
               {
                 this.getCurrentGuardianData();
               }
 
               this.getCurrentYear();
               this.showSuccess();
-
           }
           else if (res?.statusCode=="NotFound")
           {
-            console.log(res);
-
-            this.toastService.error(res?.errorLocalized[this.languge] || res?.errorLocalized?.ar)
-            this.openUAEAccount(res);
+            this.toastService.error(res?.errorLocalized[this.languge])
+            this.openUAEAccount(res?.user?.idn);
           }
-          else
+          else 
           {
             this.toastService.error(res?.errorLocalized[this.languge])
             setTimeout(() => {
               window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
              },2500);
           }
-
-
-
         },err=>{
-          this.loginInProgress=false
+          
           this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
         });
      }
@@ -383,11 +372,11 @@ getCurrentYear()
   })
 }
 
-openUAEAccount(res)
+openUAEAccount(idn)
 {
   this.openNewAccount();
   localStorage.setItem('accountWay',RegistrationEnum.EmiratesId);
-  localStorage.setItem('notificationSource', res?.result?.idn);
+  localStorage.setItem('notificationSource', idn);
   localStorage.setItem('redirectToUAEPassSignUp', 'true');
 }
 }
