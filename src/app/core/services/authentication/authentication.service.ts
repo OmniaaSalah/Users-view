@@ -91,9 +91,9 @@ export class AuthenticationService {
     .pipe(take(1),
     map((res)=>{
       return {
-        token:res?.result.token,
-        scope:res?.result.scope,
-        userId:res?.result.userId,
+        token:res?.result?.token,
+        scope:res?.result?.scope,
+        userId:res?.result?.userId,
         user:{...res?.result},
         errorLocalized:res?.errorLocalized,
         statusCode:res?.statusCode

@@ -140,7 +140,7 @@ export class NewAccountComponent implements OnInit {
     {
      setTimeout(() => {
      window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
-    },2500);
+    },100);
     localStorage.removeItem('redirectToUAEPassSignUp');
    }
   }
