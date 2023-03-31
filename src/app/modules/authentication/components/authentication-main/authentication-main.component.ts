@@ -85,6 +85,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.loginInProgress=true
         this.authService.getUAEUSER(this.code).subscribe((res:any)=>{
           this.loginInProgress=false
+          console.log(res);
 
           if(res.statusCode=="OK")
           {
@@ -109,7 +110,9 @@ export class AuthenticationMainComponent implements OnInit {
           }
           else if (res?.statusCode=="NotFound")
           {
-            this.toastService.error(res?.errorLocalized[this.languge])
+            console.log(res);
+
+            this.toastService.error(res?.errorLocalized[this.languge] || res?.errorLocalized?.ar)
             this.openUAEAccount(res);
           }
           else
