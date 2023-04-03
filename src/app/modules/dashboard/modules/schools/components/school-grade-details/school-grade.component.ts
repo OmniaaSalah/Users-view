@@ -1,5 +1,5 @@
 import { Component, OnInit ,inject, OnDestroy} from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -32,7 +32,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   onDestroy$ = new Subject()
 
   get claimsEnum () {return ClaimsEnum}
-  
+
   get userScope() { return UserScope };
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
   currentSchool="";
@@ -61,7 +61,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   willHasTrack:boolean
 
   isSubmited:boolean
-    
+
   gradeData:SchoolGrade
   subjectsList=[]
 
@@ -104,48 +104,29 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    if(this.currentUserScope==this.userScope.Employee){
-    
-      this.userService.currentUserSchoolName$?.subscribe((res)=>{
-        if(res)  {
-          this.currentSchool=res;
-          this.componentHeaderData.mainTitle.main=this.currentSchool;
-        }
-      })
-    }
-    else if(this.currentUserScope==this.userScope.SPEA)
-    {
-      this.schoolsService.getSchool(this.schoolId).subscribe(res =>{
-  
-          if(localStorage.getItem('preferredLanguage')=='ar'){
-            this.currentSchool=res.name.ar;
-            this.componentHeaderData.mainTitle.main=this.currentSchool;
-            }
-            else{
-              this.currentSchool=res.name.en;
-              this.componentHeaderData.mainTitle.main=this.currentSchool;
-            }
-  
-      })
-  
-     
-    }
-      
-    this.checkDashboardHeader();
-    
+
+
+    this.setHeaderData();
+
     this.getGradeDetails()
     this.getSubjectsList(this.schoolId)
-    
+    this.initListener()
+  }
+
+  initListener(){
     this.confirmModelListener()
     this.onConfirmModelClosed()
   }
-  
+
+
   getSubjectsList(schoolId){
     this.gradeService.getGradeSubjects(schoolId, this.gradeId).subscribe(res=>{
       this.subjectsList = res
     })
+
+
   }
-  
+
   getGradeDetails(){
     this.gradeData=null
     this.gradeService.getGrade(this.schoolId, this.gradeId).subscribe((res :SchoolGrade)=>{
@@ -153,7 +134,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
       // this.gradeForm.patchValue(res as any)
       this.componentHeaderData.subTitle.sub = ` (${getLocalizedValue(res.name)})`
       this.headerService.changeHeaderdata(this.componentHeaderData)
-      
+
       this.initForm(res)
       this.gradeData = res
     })
@@ -172,10 +153,10 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         this.isSubmited=false
         this.subjectsToDelete=[]
         this.getGradeDetails()
-        this.toaster.success('تم التعديل بنجاح')
+        this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
       },(err)=>{
         this.isSubmited=false
-        this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+        this.toaster.error(this.translate.instant('toasterMessage.error'))
       })
     }else{
 
@@ -183,25 +164,25 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         this.isSubmited=false
         this.subjectsToDelete=[]
         this.getGradeDetails()
-        this.toaster.success('تم التعديل بنجاح')
+        this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
       },(err)=>{
         this.isSubmited=false
-        this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
-      })
+        this.toaster.error(this.translate.instant('toasterMessage.error'))      })
     }
   }
 
 
-  
+
 
 
   onTracksModeChange(isChecked:boolean){
     // if(this.gradeForm.pristine) return
     this.willHasTrack = isChecked
-    
+
     if(!isChecked){ //لايوجد مسارات
       if(this.gradeData.tracks?.length){
-        this.confirmModelService.openModel({message:'يرجعى العلم انه سيتم حذف جميع المسارات والمواد المعرفه سابقا'})
+        this.confirmModelService.openModel({message: this.translate.instant('dashboard.schools.trackWillBeDeleted')})
+
       } else{
         this.hasTracks = this.willHasTrack
         this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
@@ -209,7 +190,8 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     }
     else if(isChecked) { // يوجد مسارات
       if(this.gradeData.subjects?.length){
-        this.confirmModelService.openModel({message:'يرجع العلم انه سيتم حذف جميع المواد المعرفه سابقا!'})
+        this.confirmModelService.openModel({message:this.translate.instant('dashboard.schools.subjectsWillBeDeleted')})
+
         // this.hasTracks= false
       }else{
         this.hasTracks = this.willHasTrack
@@ -226,9 +208,9 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
       this.hasTracks= this.willHasTrack
       this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
 
-      if(this.hasTracks) this.resetSubjects() 
+      if(this.hasTracks) this.resetSubjects()
       else this.resetTracks()
-      
+
     })
   }
 
@@ -245,15 +227,15 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   // <<<<<<<<<<<<<<<<<<<<< Incase there is Tracks >>>>>>>>>>>>>>>>>>>>>>>>>
 
-  initForm(formData:SchoolGrade){   
-    this.gradeForm.patchValue(formData as any) 
+  initForm(formData:SchoolGrade){
+    this.gradeForm.patchValue(formData as any)
     if(this.hasTracks) this.fillTracks(formData.tracks)
     else this.fillSubjects(formData.subjects)
   }
 
   newSubjectGroup(){
     return this.fb.group({
-      id:[null],
+      id:[null, Validators.required],
       // name:this.fb.group({
       //   ar:[''],
       //   en:['']
@@ -270,8 +252,8 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     })
   }
 
-  
-  fillTracks(tracks){    
+
+  fillTracks(tracks){
     this.gradeTracks.clear()
     tracks.forEach((el, index) => {
       this.gradeTracks.push(this.fb.group({
@@ -283,7 +265,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         subjects: this.fillTrackSubjects(index, el.subjects)
       }))
     })
-    
+
   }
 
 
@@ -316,7 +298,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   addSubjectToTrack(trackIndex){
     this.getTrackSubjects(trackIndex).push(this.newSubjectGroup())
   }
-  
+
   deleteTrackSubjects(subjectId ,trackIndex, subjectIndex){
     this.subjectsToDelete.push(subjectId)
     this.getTrackSubjects(trackIndex).removeAt(subjectIndex)
@@ -347,7 +329,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   resetTracks(){
     this.subjectsToDelete = this.gradeTracks.value.map(track=> track.subjects).map(subjectArr =>subjectArr[0].gradeSubjectId)
-    
+
     this.gradeTracks.clear()
   }
 
@@ -394,15 +376,22 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
 
 
-  checkDashboardHeader(){
+  setHeaderData(){
 
-      if(this.currentUserScope==UserScope.Employee){
-      this.componentHeaderData.breadCrump=[ 
+    if(this.currentUserScope==UserScope.Employee){
+      this.componentHeaderData.breadCrump=[
         { label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`,routerLinkActiveOptions:{exact: true},visible:false},
         { label: this.translate.instant('breadcrumb.editClass'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades/grade/${this.gradeId}`},
       ]
 
-      
+
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
+        if(res)  {
+          this.currentSchool=res;
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+        }
+      })
+
     }
     else if (this.currentUserScope==UserScope.SPEA)
     {
@@ -411,6 +400,20 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
           {label:this.translate.instant('breadcrumb.showSchoolListDetails'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
           {label:this.translate.instant('breadcrumb.editClass'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/grade/${this.gradeId}`},
         ]
+
+
+      this.schoolsService.getSchool(this.schoolId).subscribe(res =>{
+
+        if(localStorage.getItem('preferredLanguage')=='ar'){
+          this.currentSchool=res.name.ar;
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+          }
+          else{
+            this.currentSchool=res.name.en;
+            this.componentHeaderData.mainTitle.main=this.currentSchool;
+          }
+
+      })
     }
 
   }

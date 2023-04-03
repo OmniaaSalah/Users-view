@@ -391,7 +391,11 @@
         "schoolsAddedToGracePeriod":"تم اضافه المدارس الى فتره السماح بنجاح",
         "transferStudentFaild":"النقل لم يتم. يرجى اختيار شعبة أخرى",
         "studentTransfered":"تم نقل الطالب بنجاح",
-        "requestResend":"تم إعادة ارسال الطلب بنجاح"
+        "requestResend":"تم إعادة ارسال الطلب بنجاح",
+        "lectureDeleted":"تم حذف الحصه بنجاج",
+        "lectureCreated":"تم اضافه الحصه بنجاج",
+        "lectureUpdated":"تم تعديل الحصه بنجاج"
+
 
     },
 
@@ -1143,7 +1147,10 @@
             "hasSpecialClasses":"لديه فصول تربية خاصة",
             "SelectClassType":"أختر نوع الفصل",
             "EnrolledStudentNumbers":"عدد الطلاب المنسحبين",
-            "SpecialClassesNumbers":"عدد الفصول الخاصة"
+            "SpecialClassesNumbers":"عدد الفصول الخاصة",
+            "trackWillBeDeleted":"يرجعى العلم انه سيتم حذف جميع المسارات والمواد المعرفه سابقا",
+            "subjectsWillBeDeleted":"يرجعى العلم انه سيتم حذف جميع المواد المعرفه سابقا"
+
         },
         "parents": {
             "HaveChildreen":"يمتلك أبناء",
