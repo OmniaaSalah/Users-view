@@ -119,6 +119,9 @@ export class AuthenticationMainComponent implements OnInit {
         },err=>{
           this.loginInProgress=false
           this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
+          setTimeout(() => {
+            window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
+           },2500);
         });
      }
   }
