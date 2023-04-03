@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:"details/:id",component:RequestdetailsComponent},
 
   { path: "my-requests", component:RequestListComponent ,data:{ RouteKey: RouteEnums.MyRequests}},
-  { path: "my-requests/details/:id", component:RequestListComponent },
+  { path: "my-requests/details/:id", component:RequestdetailsComponent },
 ];
 
 @NgModule({

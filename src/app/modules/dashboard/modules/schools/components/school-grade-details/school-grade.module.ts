@@ -1,11 +1,10 @@
-import { NgModule ,OnInit} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SchoolGradeRoutingModule } from './school-grade-routing.module';
 import { SchoolGradeComponent } from './school-grade.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
-import { TranslateModule } from '@ngx-translate/core';
 import { ClassScheduleComponent } from './class-schedule/class-schedule.component';
 import { GardeStudentsComponent } from './garde-students/garde-students.component';
 
@@ -14,16 +13,15 @@ import { GardeStudentsComponent } from './garde-students/garde-students.componen
   declarations: [
     SchoolGradeComponent,
     ClassScheduleComponent,
-    GardeStudentsComponent
+    GardeStudentsComponent,
   ],
   imports: [
     CommonModule,
     SchoolGradeRoutingModule,
     SharedModule,
     PrimngModule,
-    TranslateModule
   ]
 })
-export class SchoolGradeModule { 
+export class SchoolGradeModule {
 
 }

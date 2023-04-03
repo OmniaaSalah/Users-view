@@ -1,0 +1,20 @@
+<div class="profile__name d-flex gap-2">
+    <div class="" *ngIf="isStudentTalented">
+        <span class="position-relative" pTooltip="{{'dashboard.students.isGifted' |translate}}" [autoHide]="true" tooltipPosition="top"><img src="assets/images/shared/medal.svg" alt=""></span>
+    </div>
+    <div *ngIf="isStudentGifted">
+        <span class="position-relative" pTooltip="{{'dashboard.students.isFromTheFirst' |translate}}" [autoHide]="true" tooltipPosition="top"><img src="assets/images/shared/medal-cup.svg" alt=""></span>
+    </div>
+    <ng-container *ngFor="let item of studentCategory">
+        <div *ngIf="item==statusEnum.IsChildOfAMartyr">
+            <span class="position-relative" pTooltip="{{'shared.allStatus.IsChildOfAMartyr' |translate}}" [autoHide]="true" tooltipPosition="top"><img src="assets/images/shared/medal-flag.svg" alt=""></span>
+        </div>
+        <div *ngIf="item==statusEnum.IsSpecialAbilities">
+            <span class="position-relative" pTooltip="{{'shared.allStatus.IsSpecialAbilities' |translate}}" [autoHide]="true" tooltipPosition="top"><img src="assets/images/shared/medal-green.svg" alt=""></span>
+        </div>
+        <div *ngIf="item==statusEnum.ChildOfCitizens">
+            <span class="position-relative" pTooltip="{{'shared.allStatus.ChildOfCitizens'|translate}}" [autoHide]="true" tooltipPosition="top"><img src="assets/images/shared/medal-blue.svg" alt=""></span>
+        </div>
+    </ng-container>
+   
+</div>

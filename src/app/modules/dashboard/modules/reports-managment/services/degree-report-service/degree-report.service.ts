@@ -176,7 +176,7 @@ degreesToExport(filter)
       return res.data.map(e =>{
         return {
           [this.translate.instant('School')]: e?.schoolName ? e?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
-          [this.translate.instant('dashboard.schools.SchoolCurriculum')]: e?.curriculumName ? e?.curriculumName[this.lang] : this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.schools.SchoolCurriculum')]: e?.curriculum ? e?.curriculum[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('shared.division')]: e?.divisionName ? e?.divisionName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('shared.grade')]: e?.gradeName? e?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.SchoolYear.school year')]:e?.schoolYearName ? e?.schoolYearName[this.lang] : this.translate.instant('shared.notFound'),
@@ -184,7 +184,7 @@ degreesToExport(filter)
           [this.translate.instant('dashboard.reports.semester')]: e?.semesterName ? this.translate.instant('shared.'+e?.semesterName) : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.SemesterStudentResult')]:e?.studentSemesterResult ? this.translate.instant('shared.allStatus.'+e?.studentSemesterResult) : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.subjectCount')]:e?.subjectsCount,
-          [this.translate.instant('dashboard.schools.student')]: e?.studentFullName ? e?.studentFullName[this.lang] :this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.schools.student')]: e?.student?.name ? e?.student?.name[this.lang] :this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.students.daleelNumber')]:e?.studentDaleelId ? e?.studentDaleelId : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.students.manhalNumber')]:e?.studentManhalId ? e?.studentManhalId :this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.successPercentage')]: e?.sucessPercentagePerGrade ? e?.sucessPercentagePerGrade +'%' :this.translate.instant('shared.notFound'),

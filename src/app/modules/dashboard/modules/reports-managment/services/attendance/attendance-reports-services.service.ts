@@ -110,7 +110,7 @@ export class AttendanceReportsServicesService {
             [this.translate.instant('dashboard.reports.AbsenceNumbers')]:student?.absenceCount,
             [this.translate.instant('dashboard.parents.attendancePercentage')]:student?.attendantPersentage +'%',
             [this.translate.instant('dashboard.parents.absencePercentage')]: student?.absencePersentage +'%',
-            [this.translate.instant('dashboard.schools.student')]: student?.studentName? student?.studentName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.schools.student')]: student?.student?.name ? student?.student?.name[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.Identity Number')]:student?.emiratesId ? student?.emiratesId : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.ChildWithoutNationality')]: student?.reasonForNotHavingEmiratesId[this.lang] ? student?.reasonForNotHavingEmiratesId[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.daleelNumber')]: student?.daleelId ? student?.daleelId : this.translate.instant('shared.notFound'),
