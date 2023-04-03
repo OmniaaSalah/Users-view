@@ -30,9 +30,11 @@
        ::ng-deep p-table{
            thead.p-datatable-thead tr th{
                min-width: 20rem;
+               &.lg{min-width: 28rem;}
            }
       .p-datatable-tbody tr td{ 
        min-width: 20rem;
+       &.lg{min-width: 28rem;}
   
           }
        }

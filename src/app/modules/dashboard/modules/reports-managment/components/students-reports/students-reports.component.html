@@ -175,7 +175,8 @@
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
-                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true">
+                    
+                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true" [ngClass]="column==tableColumns[2]?'lg':''">
                             <!-- studentsReportsArray -->
                        <ng-container >{{column.name }}</ng-container>
                        <p-sortIcon field="{{column.name }}"></p-sortIcon>
@@ -192,7 +193,9 @@
                         <td>
                             {{student?.manhalNumber}}
                         </td>
-                        <td  ><a [style.height.rem]="'6'"  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+student?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.name |currentLang}}</a></td>
+                        <td  class="lg d-flex gap-2">
+                            <!-- <app-student-badges isStudentTalented="true" isStudentGifted="true" [studentCategory]='["IsChildOfAMartyr", "ChildOfCitizens", "IsSpecialAbilities"]'></app-student-badges> -->
+                            <a   target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+student?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.student?.name |currentLang}}</a></td>
                         <td>
                            {{student?.surName | currentLang}}
                         </td>

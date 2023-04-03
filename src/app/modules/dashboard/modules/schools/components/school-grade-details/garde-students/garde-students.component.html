@@ -25,7 +25,7 @@
                 </th>
                 <th pSortableColumn="actions"></th> -->
                 <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="name" class="lg">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
                 <th pSortableColumn="surname">{{'shared.division'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
                 <th pSortableColumn="track">{{'dashboard.parents.ministerialNumber'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
                 <th pSortableColumn="nationalityId">{{'shared.personalId'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
@@ -35,8 +35,14 @@
             <!-- [routerLink]="['student/', student.id]" class="clickable" -->
             <tr >
                 <td>{{student.studentNumber}}</td>
-                <td *ngIf="currentUserScope==userScope.SPEA" ><a [style.height.rem]="'8'"  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a></td>
-                <td *ngIf="currentUserScope==userScope.Employee" ><a [style.height.rem]="'8'" target="_blank" [routerLink]="['/dashboard/student-management/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a></td>
+                <td class="lg gap-2 d-flex" *ngIf="currentUserScope==userScope.SPEA" >
+                    <!-- <app-student-badges isStudentTalented="true" isStudentGifted="true" [studentCategory]='["IsChildOfAMartyr", "ChildOfCitizens", "IsSpecialAbilities"]'></app-student-badges> -->
+                    <a  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
+                </td>
+                <td class="lg gap-2 d-flex" *ngIf="currentUserScope==userScope.Employee" >
+                    <!-- <app-student-badges isStudentTalented="true" isStudentGifted="true" [studentCategory]='["IsChildOfAMartyr", "ChildOfCitizens", "IsSpecialAbilities"]'></app-student-badges> -->
+                    <a  target="_blank" [routerLink]="['/dashboard/student-management/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
+                </td>
                 <td>{{student.divisionName |currentLang }}</td>
                 <td>{{student.ministerialNumber}}</td>
                 <td>{{student?.nationalityId || 12255555555558784}}</td>
