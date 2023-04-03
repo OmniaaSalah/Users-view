@@ -217,7 +217,7 @@
 
                 <div class="row mt-5">
                     <ng-container *ngFor="let file of attachmentsList.controls; let i = index">
-                        <div class="col-md-4 mt-6">
+                        <div class="col-md-4 mt-6" *ngIf="file?.value?.url">
                             <app-file [file]="file.value" ></app-file>
                         </div>
                         <!-- <div class="col-md-4 mt-6" *ngIf="file?.value.name || file?.value.url">

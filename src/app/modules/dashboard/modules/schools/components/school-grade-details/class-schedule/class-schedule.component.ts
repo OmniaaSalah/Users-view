@@ -11,6 +11,7 @@ import { map, shareReplay, Subscription } from 'rxjs';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { GradeCalenderEvent } from 'src/app/core/models/schools/school.model';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -24,9 +25,9 @@ export class ClassScheduleComponent implements OnInit ,OnDestroy{
     // << ICONS >>
     faPlus = faPlus
     faCheck = faCheck
-    
+
     get claimsEnum () {return ClaimsEnum}
-    
+
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
   gradeId = this.route.snapshot.paramMap.get('gradeId')
 
@@ -46,16 +47,16 @@ export class ClassScheduleComponent implements OnInit ,OnDestroy{
       startTime: [null, Validators.required],
       endTime: [null, Validators.required]
     },{validators: [
-        DateValidators.greaterThan('startTime', 'endTime'), 
+        DateValidators.greaterThan('startTime', 'endTime'),
         DateValidators.dateRange('startTime', 'endTime')
       ]})
-  
+
     get sessionFormCtr () { return this.sessionTimeForm.controls}
-  
 
 
 
-    events: GradeCalenderEvent[] 
+
+    events: GradeCalenderEvent[]
 
 
   constructor(
@@ -65,6 +66,7 @@ export class ClassScheduleComponent implements OnInit ,OnDestroy{
     private gradeService :GradesService,
     private toaster:ToastrService,
     public confirmModelService:ConfirmModelService,
+    private translate:TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -93,7 +95,7 @@ getGradeClassEvents(){
   .subscribe((res:GradeCalenderEvent[])=>{
     this.events = [...res]
     console.log(res);
-    
+
   })
 }
 
@@ -104,9 +106,9 @@ prepareEventStep(event){
   let {day,startTime ,endTime} = this.sessionTimeForm.value as any
 
   let startTimeDate = this.getDate(startTime, day)
-  let endTimeDate = this.getDate(endTime, day)  
+  let endTimeDate = this.getDate(endTime, day)
 
-  
+
   let calenderEvent: GradeCalenderEvent = {
     start: startTimeDate,
     end : endTimeDate,
@@ -115,22 +117,22 @@ prepareEventStep(event){
       subjects:[]
     }
   }
-  
+
   this.events = [...this.events, calenderEvent]
 
   if(this.mode=='edit') {
-    this.updateClassEvent({ 
-      id: this.eventIdToEdit, 
-      weekDayId:day, 
-      startDate:this.formateDate(startTimeDate), 
+    this.updateClassEvent({
+      id: this.eventIdToEdit,
+      weekDayId:day,
+      startDate:this.formateDate(startTimeDate),
       endDate : this.formateDate(endTimeDate),
       title:'',
       meta:''
     })
   } else if(this.mode=='add') {
-    this.addClassEvent({ 
-      weekDayId:day, 
-      startDate: this.formateDate(startTimeDate), 
+    this.addClassEvent({
+      weekDayId:day,
+      startDate: this.formateDate(startTimeDate),
       endDate : this.formateDate(endTimeDate),
       title:'',
       meta:''
@@ -143,18 +145,18 @@ prepareEventStep(event){
 formateDate(date :Date){
   let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
   return d.split('.')[0]
-  
+
 }
 
 addClassEvent(classEvent){
   this.isSubmitted=true
   this.gradeService.addClassEvent(this.schoolId,this.gradeId, classEvent).subscribe(res=>{
     this.getGradeClassEvents()
-    this.toaster.success('تم اضافه الحصه بنجاج')
+    this.toaster.success(this.translate.instant('toasterMessage.lectureCreated'))
     this.addClassModelOpened=false
       this.isSubmitted=false
   },err=>{
-    this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+    this.toaster.error(this.translate.instant('toasterMessage.error'))
     this.isSubmitted=false
   })
 }
@@ -163,11 +165,11 @@ updateClassEvent(classEvent){
   this.isSubmitted=true
   this.gradeService.updateClassEvent(this.schoolId,this.gradeId, classEvent).subscribe(res=>{
     this.getGradeClassEvents()
-    this.toaster.success('تم تعديل الحصه بنجاج')
+    this.toaster.success(this.translate.instant('toasterMessage.lectureUpdated'))
     this.addClassModelOpened=false
       this.isSubmitted=false
   },err=>{
-    this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+    this.toaster.error(this.translate.instant('toasterMessage.error'))
     this.isSubmitted=false
   })
 }
@@ -195,26 +197,26 @@ onEventEdited(event){
   //   this.toaster.success('تم تعديل الحصه بنجاج')
 
   // })
-  
+
 }
 
 deleteEvent(id){
   this.gradeService.deleteClassEvent(id).subscribe(res=>{
     this.getGradeClassEvents()
-    this.toaster.success('تم حذف الحصه بنجاج')
+    this.toaster.success(this.translate.instant("toasterMessage.lectureDeleted"))
   })
 
 }
 
 private getDate(date:Date , dayOfWeek:Day){
-  
+
   const DAY = date.getDay()
   const HOURS = date.getHours()
   const MINUTS = date.getMinutes()
-  
+
   let DATE = new Date(date)
-  
-  DATE = addDays(startOfWeek(DATE), dayOfWeek)  
+
+  DATE = addDays(startOfWeek(DATE), dayOfWeek)
   DATE = addHours(DATE,HOURS)
   DATE = addMinutes(DATE,MINUTS)
 
@@ -229,7 +231,8 @@ private getDate(date:Date , dayOfWeek:Day){
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    // this.confirmModelService.confirmed$.next(null)
   }
-  
+
 
 }

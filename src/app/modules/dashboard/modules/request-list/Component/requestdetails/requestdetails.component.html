@@ -720,6 +720,7 @@
           <div class="profile__name ">
               <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.SPEA" target="_blank" [routerLink]="['/dashboard/schools-and-students/students/student/'+student.id]">{{student.name |currentLang}}</a>
               <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Employee" target="_blank" [routerLink]="['/dashboard/student-management/students/student/'+student.id]">{{student.name |currentLang}}</a>
+              <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Guardian">{{student.name |currentLang}}</a>
 
               <div class="" *ngIf="student.isTalented">
                   <img src="assets/images/shared/medal.svg" alt="">

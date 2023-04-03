@@ -24,7 +24,7 @@
         <div class="">
             <div class="row mt-5">
                 <ng-container *ngFor="let file of attachments; let i = index">
-                    <div class="col-md-4 mt-4">
+                    <div class="col-md-4 mt-4" *ngIf="file?.url">
                         <app-file [file]="file" [clickable]="true"></app-file>
                     </div>
                 </ng-container>
@@ -61,10 +61,10 @@
 
     <div class="mt-5 border-dark radius-15 p-5" *ngIf="addMode">
       <div class="row gx-5 "  [formGroup]="fileForm">
-        <div class="col-md-4">
-            <label class="label required">{{'dashboard.students.attachmentsToAdd'|translate}}</label>
-            <p-dropdown formControlName="indexId" (ngModelChange)="fileTypeChanged($event)" [options]="gurdiansAttachmentsTypes$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.chooseAttachment' |translate}}"></p-dropdown>
-            <p *ngIf="showErrMess" class="color-red-500 fs-4 mt-3">هناك بالفعل مرفقات محفوظه لهذا النوع ، وبهذا الحفظ ستحل محل البيانات السابقة</p>
+          <div class="col-md-4">
+              <label class="label required">{{'dashboard.students.attachmentsToAdd'|translate}}</label>
+              <p-dropdown formControlName="indexId" (ngModelChange)="fileTypeChanged($event)" [options]="gurdiansAttachmentsTypes$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.chooseAttachment' |translate}}"></p-dropdown>
+              <p *ngIf="showErrMess" class="color-red-500 fs-4 mt-3">هناك بالفعل مرفقات محفوظه لهذا النوع ، وبهذا الحفظ ستحل محل البيانات السابقة</p>
           </div>
           <ng-container formGroupName="titel">
 
