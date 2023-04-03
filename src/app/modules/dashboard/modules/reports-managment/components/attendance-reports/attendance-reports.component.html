@@ -89,7 +89,7 @@
                     <tr>
                       
                         <ng-container *ngFor="let column of tableColumns">
-                            <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true">
+                            <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true" [ngClass]="column==tableColumns[6]?'lg':''">
                                 <!-- studentsReportsArray -->
                                 <ng-container>{{column.name }}</ng-container>
                                 <p-sortIcon field="{{column.name }}"></p-sortIcon>
@@ -119,8 +119,9 @@
                                 {{student?.absencePersentage}} %
                             </td>
                            
-                            <td *ngIf="tableColumns[6].isSelected == true">
-                                <a [style.height.rem]="'6'"  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+student?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.studentName |currentLang}}</a>
+                            <td *ngIf="tableColumns[6].isSelected == true" class="lg d-flex gap-2">
+                                <!-- <app-student-badges isStudentTalented="true" isStudentGifted="true" [studentCategory]='["IsChildOfAMartyr", "ChildOfCitizens", "IsSpecialAbilities"]'></app-student-badges> -->
+                                <a   target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+student?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.student?.name |currentLang}}</a>
                             </td>
                             <td *ngIf="tableColumns[7].isSelected == true">
                                 {{student?.emiratesId}}
