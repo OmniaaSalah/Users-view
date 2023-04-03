@@ -193,7 +193,7 @@ AddAccount(){
 }
 
 getUserById(){
-
+  this.email.disable();
   this.userInformation.getUsersById(Number(this.userId)).subscribe(response => {
     
     this.accountModel= response;

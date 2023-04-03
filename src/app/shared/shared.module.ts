@@ -52,6 +52,7 @@ import { TrauncateTextPipe } from './pipes/truncate-text/trauncate-text.pipe';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { ConfirmDialogDirective } from './directives/confirm-dialog/confirm-dialog.directive';
+import { StudentBadgesComponent } from './components/student-badges/student-badges.component';
 
 registerLocaleData(localeAr);
 
@@ -95,7 +96,9 @@ registerLocaleData(localeAr);
     TrauncateTextPipe,
     WorkflowComponent,
     SafePipe,
-    ConfirmDialogDirective
+    ConfirmDialogDirective,
+    StudentBadgesComponent,
+    StudentBadgesComponent
 
   ],
   imports: [
@@ -161,7 +164,8 @@ registerLocaleData(localeAr);
     TrauncateTextPipe,
     WorkflowComponent,
     SafePipe,
-    ConfirmDialogDirective
+    ConfirmDialogDirective,
+    StudentBadgesComponent
   ],
   providers:[SharedService]
 })

@@ -790,7 +790,11 @@
         "schoolsAddedToGracePeriod":"Schools Added to grace period succesfully",
         "transferStudentFaild":"Transfer failed, please Choose another division",
         "studentTransfered":"student Transferd succesfully",
-        "requestResend":"Request Resend succesfully"
+        "requestResend":"Request Resend succesfully",
+        "lectureDeleted":"Lecture Deleted Successfully",
+        "lectureCreated":"Lecture Created Successfully",
+        "lectureUpdated":"Lecture Updated Successfully"
+
 
 
     },
@@ -999,7 +1003,10 @@
             "hasSpecialClasses": "Has Special Classes",
             "SelectClassType":"Select ClassType",
             "EnrolledStudentNumbers":"Enrolled Student Numbers",
-            "SpecialClassesNumbers":"Special Classes Numbers"
+            "SpecialClassesNumbers":"Special Classes Numbers",
+            "trackWillBeDeleted":"Please Note That All Predefined tracks and subjects will deleted",
+            "subjectsWillBeDeleted":"Please Note That All Predefined subjects will deleted"
+
 
         },
         "AnnualHoliday": {

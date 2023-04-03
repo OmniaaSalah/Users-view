@@ -29,7 +29,7 @@ export class UnregisterChildComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
   get claimsEnum () {return ClaimsEnum}
-  
+
   child : IunregisterChild;
   childId = +this._route.snapshot.paramMap.get('childId');
 
@@ -120,7 +120,7 @@ export class UnregisterChildComponent implements OnInit {
 
 
 
-  
+
   getUnregisterChild(){
     this.child = null
 
@@ -138,12 +138,12 @@ export class UnregisterChildComponent implements OnInit {
     })
   }
 
-  setNationality(nationlityId) { 
-    this.countries$.subscribe(res=> this.child.nationality= res.filter(el => el.id==nationlityId)[0]) 
+  setNationality(nationlityId) {
+    this.countries$.subscribe(res=> this.child.nationality= res.filter(el => el.id==nationlityId)[0])
   }
 
   setRelativeRelation(relativeRelationId){
-    this.relativeRelation$.subscribe(res=> this.child.relativeRelation= res.filter(el => el.id==relativeRelationId)[0]) 
+    this.relativeRelation$.subscribe(res=> this.child.relativeRelation= res.filter(el => el.id==relativeRelationId)[0])
   }
 
   updateChild(childData){
@@ -161,7 +161,7 @@ export class UnregisterChildComponent implements OnInit {
     })
   }
 
-  attachmentGroup(item){    
+  attachmentGroup(item){
     return this.fb.group({
       url:[item.url?? ''],
       titel: this.fb.group({
@@ -181,7 +181,9 @@ export class UnregisterChildComponent implements OnInit {
   }
 
   addnewAttachmentTo(attachment:CustomFile[], index){
-    let attach = attachment[0]
+
+    let attach = attachment[0]? attachment[0] : {url:"", name:"",comment:""}
+
     this.attachmentsList.at(index).patchValue({...attach})
     // this.attachmentsList.at(index).patchValue({religionId:1,passportNumber:2545,emiratesIdNumber:562})
 
@@ -230,7 +232,7 @@ export class UnregisterChildComponent implements OnInit {
   navigateToRequestPage(){
     if (this.currentUserScope==this.userScope.Guardian) this.router.navigate([`/parent/child/${this.childId}/register-request`],{queryParams:{status:RegistrationStatus.Unregistered}})
     else this.router.navigate(['register'], {relativeTo:this._route,queryParams:{status:RegistrationStatus.Unregistered}})
-    
+
   }
 
   uploading=false
@@ -241,7 +243,7 @@ export class UnregisterChildComponent implements OnInit {
     FORM_DATA.append('file', file)
 
     this.uploading = true
-    
+
     this.mediaService.uploadMedia(FORM_DATA).subscribe(res=>{
 
       this.childForm.controls['imagePath'].setValue(res.url)

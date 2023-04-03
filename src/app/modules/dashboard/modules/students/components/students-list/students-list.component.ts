@@ -67,7 +67,7 @@ export class StudentsListComponent implements OnInit {
     IsPassed:null,
     StudentCategory:null,
     IsChildOfAMartyr: null, 
-    TalentId: null,
+    talentId: null,
     IsSpecialAbilities:null,
     // انواع الفصول الخاصه
     IsInFusionClass:null,
@@ -246,7 +246,7 @@ export class StudentsListComponent implements OnInit {
     this.filtration.TrackId = null
     this.filtration.NationalityId= null
     this.filtration.IsChildOfAMartyr = null
-    this.filtration.TalentId = null
+    this.filtration.talentId = null
     this.filtration.IsPassed = null
     this.filtration.IsSpecialClass= null
     this.filtration.IsInFusionClass= null

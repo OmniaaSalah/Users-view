@@ -475,9 +475,23 @@ checkExistInGPA(valueChecked)
    this.inFinalResult.setValue(true);
   }
 
-  checkSubjectSelected(event)
+  checkSubjectSelected(selectedSubjectId)
   {
-    console.log(event)
+    var selectedSubject=this.subjectList.find(s=>s.id==selectedSubjectId);
+    if(selectedSubject.evaluationSystem==AssessmentsEnum.Discription)
+    {
+      this.inFinalResult.setValue(false);
+      this.inFinalResult.disable();
+      this.isThereGPA.setValue(false);
+      this.isThereGPA.disable();
+    }
+    else
+    {
+      this.inFinalResult.setValue(true);
+      this.inFinalResult.enable();
+      this.isThereGPA.setValue(true);
+      this.isThereGPA.enable();
+    }
   
   }
 }

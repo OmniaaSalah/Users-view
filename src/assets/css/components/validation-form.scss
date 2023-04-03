@@ -20,6 +20,7 @@
     }
 
     .alert-danger{ color: #EF525B;}
+    .form-control:disabled {background-color: $color-white;}
     .form-control.ng-touched.ng-invalid{
         border-radius: 16px !important;
         box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;

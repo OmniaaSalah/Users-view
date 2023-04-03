@@ -102,17 +102,19 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
       this.onSubmit=false
       this.getAttachment()
       this.toaster.success('تم التعديل بنجاح')
+      this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
+
     },err=>{
       this.mode='view'
       this.onSubmit=false
-      this.translate.instant('toasterMessage.error')
+      this.toaster.error(this.translate.instant('toasterMessage.error'))
     })
   }
 
   onFileUpload(file, i){
 
-    file= file[0]
-    this.attachments[i] = {...this.attachments[i], url: file.url,name:file.name, comment: file.comment}
+    file= file[0] ? file[0] : {url:"", name:"",comment:""}
+    this.attachments[i] = {...this.attachments[i], url: file?.url,name:file?.name, comment: file?.comment}
   }
 
   fileTypeChanged(indexId){

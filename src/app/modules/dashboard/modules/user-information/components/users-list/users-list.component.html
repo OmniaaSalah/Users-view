@@ -57,7 +57,7 @@
                     <!-- <td>{{translationService.lang=='ar'?e.fullName.ar :e.fullName.en}}</td> -->
                     <td>{{e?.fullName|currentLang}}</td>
                     <td>{{e?.roleName|currentLang}}</td>
-                    <td>{{e?.email}}</td>
+                    <td><span class="position-relative" pTooltip="{{e?.email}}" [autoHide]="true" tooltipPosition="top">{{e?.email | truncate:15}}</span></td>
                     <td *ngIf="e?.lastLoginDate">{{e?.lastLoginDate|LocalizeDate}}</td>
                     <td *ngIf="!e?.lastLoginDate" >-</td>
                     <td>{{e?.emiratesIdNumber}}</td>

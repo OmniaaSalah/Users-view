@@ -10,9 +10,9 @@ interface modelData{
   providedIn: 'root'
 })
 export class ConfirmModelService {
-
+  confirmMessage = {message: this.translate.instant('shared.confirmDelete'), img:'assets/images/empty-list/basket.svg'};
   isOpend$ = new BehaviorSubject(false)
-  confirmModelData$ = new BehaviorSubject<modelData>({message: this.translate.instant('shared.confirmDelete'), img:'assets/images/empty-list/basket.svg'})
+  confirmModelData$ = new BehaviorSubject<modelData>(this.confirmMessage)
   confirmed$ = new BehaviorSubject(null)
   onClose$ = new BehaviorSubject(null)
 
@@ -20,8 +20,8 @@ export class ConfirmModelService {
 
   constructor(private translate:TranslateService) { }
 
-  openModel(config?: modelData){
-    if(config) this.confirmModelData$.next(config)
+  openModel(config: modelData =this.confirmMessage){
+    this.confirmModelData$.next(config)
     this.isOpend$.next(true)
   }
 

@@ -2,3 +2,17 @@
 @import '../../../../../../../../assets/css/components/primng-table';
 @import '../../../../../../../../assets/css/components/model';
 @import'src/assets/css/components/forms';
+
+.prim-table{
+
+       
+    ::ng-deep p-table{
+        thead.p-datatable-thead tr th{
+          &.lg{min-width: 20rem;}
+        }
+   .p-datatable-tbody tr td{ 
+    &.lg{min-width: 20rem;}
+
+       }
+    }
+}
