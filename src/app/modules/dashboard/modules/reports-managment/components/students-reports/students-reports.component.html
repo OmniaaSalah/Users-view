@@ -194,7 +194,7 @@
                             {{student?.manhalNumber}}
                         </td>
                         <td  class="lg d-flex gap-2">
-                            <!-- <app-student-badges isStudentTalented="true" isStudentGifted="true" [studentCategory]='["IsChildOfAMartyr", "ChildOfCitizens", "IsSpecialAbilities"]'></app-student-badges> -->
+                            <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
                             <a   target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+student?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.student?.name |currentLang}}</a></td>
                         <td>
                            {{student?.surName | currentLang}}

@@ -18,8 +18,8 @@
                 <div class="flex-grow-1">
                     <app-table-caption
                     [hasFilter]="false"
-                    (onExport)="onExport($event)" 
-                    (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getDivisionDegrees()" 
+                    (onExport)="onExport($event)"
+                    (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getDivisionDegrees()"
                     (onClear)="clearFilter()"></app-table-caption>
                 </div>
                 <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentsModelOpened=true">
@@ -28,7 +28,7 @@
                 </button> -->
             </div>
         </ng-template>
-        
+
     <ng-template pTemplate="header" let-columns="columns">
             <tr>
                 <th pSortableColumn="code">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
@@ -65,14 +65,14 @@
             </tr>
         </ng-template>
 
-        
+
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
                     <ng-container *ngIf="!degrees.total &&  !degrees.loading">
                         <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
-                    
+
                     <app-loader></app-loader>
                 </td>
             </tr>
@@ -101,7 +101,7 @@
 
     </ng-template>
     <ng-template pTemplate="content">
-        
+
         <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3">
             <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
             <span class="color-gray-800">"يرجى العلم انه بعد رفع درجات المادة سوف ترسل للعتماد من قبل المسؤل المختص كما يمكنك الإطلاع على حالة المادة من صفحة مواد الشعبة " </span>
@@ -109,13 +109,14 @@
 
         <div class="custom-form">
             <label class="label">{{'dashboard.schools.subject'| translate}}</label>
-            <p-dropdown 
-            [filter]="true" 
-            filterBy="{{lang=='ar'?'name.ar':'name.en'}}" 
-            [options]="subjects$|async" 
-            ngModel (ngModelChange)="checkDegreesExist($event)" 
-            optionValue="id" 
-            optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" 
+            <p-dropdown
+            [filter]="true"
+            filterBy="{{lang=='ar'?'name.ar':'name.en'}}"
+            [options]="subjects$|async"
+            [(ngModel)]="selectedSubjectId"
+            (ngModelChange)="checkDegreesExist($event)"
+            optionValue="id"
+            optionLabel="{{lang=='ar'?'name.ar':'name.en'}}"
             placeholder="{{'dashboard.schools.chooseSubject'| translate}}"></p-dropdown>
             <p *ngIf="subjectDegreesStatus=='Rejected' || subjectDegreesStatus=='Pending' " class="color-red-500 fs-5 mt-2">هناك بالفعل درجات محفوظة لهذه المادة في هذا الفصل الدراسي ، وبهذا التحميل ستحل محل البيانات السابقة</p>
         </div>
@@ -133,7 +134,7 @@
         </div>
 
         <div class="d-flex justify-content-end mt-6">
-            <button class="btn btn-primary" [disabled]="!degreesFileUrl||isSubmited" (click)="addSubjectDegrees()">
+            <button class="btn btn-primary" [disabled]="!degreesFileUrl||isSubmited || !selectedSubjectId" (click)="addSubjectDegrees()">
                 <div class="spinner-border text-light" role="status"  *ngIf="isSubmited"></div>
                 {{'shared.export'| translate}}
             </button>

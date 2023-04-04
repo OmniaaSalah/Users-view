@@ -257,8 +257,8 @@
             <div class="">
                 <app-file-upload
                 view="full"
-                [accept]="file.size"
-                [maxFileSize]="file.type"
+                [maxFileSize]="file.size"
+                [accept]="file.type"
                 (onFileUpload)="onFileUpload($event,file,i)"
                 (onFileDelete)="onFileDelete(i)" title="{{file.name | currentLang}}"
                 ></app-file-upload>

@@ -36,11 +36,11 @@
             <tr >
                 <td>{{student.studentNumber}}</td>
                 <td class="lg gap-2 d-flex" *ngIf="currentUserScope==userScope.SPEA" >
-                    <!-- <app-student-badges isStudentTalented="true" isStudentGifted="true" [studentCategory]='["IsChildOfAMartyr", "ChildOfCitizens", "IsSpecialAbilities"]'></app-student-badges> -->
+                    <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
                     <a  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
                 </td>
                 <td class="lg gap-2 d-flex" *ngIf="currentUserScope==userScope.Employee" >
-                    <!-- <app-student-badges isStudentTalented="true" isStudentGifted="true" [studentCategory]='["IsChildOfAMartyr", "ChildOfCitizens", "IsSpecialAbilities"]'></app-student-badges> -->
+                    <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
                     <a  target="_blank" [routerLink]="['/dashboard/student-management/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
                 </td>
                 <td>{{student.divisionName |currentLang }}</td>

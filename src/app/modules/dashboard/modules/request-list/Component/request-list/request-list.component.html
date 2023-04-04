@@ -1,16 +1,16 @@
 <!-- emptymessage -->
-<div class="schools">
+<div class="mb-6">
     <!-- <div class="d-flex gap-5 mx-5 custom-form" *ngIf="currentUserScope==userScope.Employee">
         <div class="d-flex gap-4">
             <label class="fs-4 fw-bold color-primary" for="description">{{'dashboard.Requests.myRequests'|translate}}</label>
-            <p-inputSwitch name="'myRequests" [(ngModel)]="showMyReqs.currentValue" (ngModelChange)="applyFilter()" [binary]="true"></p-inputSwitch>  
+            <p-inputSwitch name="'myRequests" [(ngModel)]="showMyReqs.currentValue" (ngModelChange)="applyFilter()" [binary]="true"></p-inputSwitch>
         </div>
 
     </div> -->
-    
+
     <div class="prim-table mt-4" *ngIf="requests.totalAllData || requests.loading">
         <div class="parents">
-            <div class="prim-table mt-4">   
+            <div class="prim-table mt-4">
                 <!-- [(rows)]="rows" [(first)]="first" -->
                 <p-table #dt [value]="requests.list" [lazy]="true" (onSort)="sortMe($event)" >
                     <!-- Table Caption -->
@@ -22,13 +22,13 @@
 
                     <ng-template pTemplate="caption">
 
-                        <app-table-caption 
-                        (onExport)="onExport($event)" 
-                        (onFilter)="applyFilter()" 
-                        (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; applyFilter()" 
+                        <app-table-caption
+                        (onExport)="onExport($event)"
+                        (onFilter)="applyFilter()"
+                        (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; applyFilter()"
                         (onClear)="clearFilter()">
-            
-                            
+
+
                             <div class="row gx-5 form-set">
                                 <div class="col-4">
                                     <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
@@ -41,9 +41,9 @@
                                     <p-multiSelect [options]="reqsTypes" display="chip" [(ngModel)]="filtration.RequestType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-multiSelect>
                                 </div>
                             </div>
-            
+
                         </app-table-caption>
-            
+
                     </ng-template>
 
 
@@ -124,7 +124,7 @@
         <div class="" *ngIf="requests.total  > paginationState.rows">
             <app-pagination [totalItems]="requests.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
-        
+
     </div>
     <ng-container *ngIf="!requests.totalAllData && !requests.loading">
         <app-informative-block subTitle="{{'emptyList.requestList' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>

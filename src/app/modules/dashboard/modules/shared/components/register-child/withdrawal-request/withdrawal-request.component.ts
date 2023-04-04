@@ -1,14 +1,15 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs';
+import { map, of, switchMap } from 'rxjs';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
+import { Student } from 'src/app/core/models/student/student.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { TransferType } from 'src/app/shared/enums/school/school.enum';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
@@ -21,7 +22,7 @@ import { RegisterChildService } from '../../../services/register-child/register-
   styleUrls: ['./withdrawal-request.component.scss']
 })
 export class WithdrawalRequestComponent implements OnInit {
-  @Input()student
+  student
   lang= inject(TranslationService).lang
   get fileTypesEnum () {return FileEnum}
 
@@ -29,6 +30,16 @@ export class WithdrawalRequestComponent implements OnInit {
   childId = +this.route.snapshot.paramMap.get('childId') //in case the page reached throw child (registered) route
 
   reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.ReasonsForWithdrawingTheStudentFromTheCurrentSchool)
+
+
+  componentHeaderData:IHeader = {
+    breadCrump: [
+      { label: this.translate.instant('Students List'),routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('dashboard.students.withdrawalReq'),routerLink:`/dashboard/schools-and-students/students/student/${this.studentId}/withdraw-request` }
+    ],
+    mainTitle: { main: this.translate.instant('dashboard.students.withdrawalReq'), sub: '' }
+  }
+
 
   transferType= [
     {name:this.translate.instant('dashboard.students.insideEmara'), value: 0},
@@ -53,11 +64,29 @@ export class WithdrawalRequestComponent implements OnInit {
     private indexesService:IndexesService,
     private route: ActivatedRoute,
     private toastr:ToastrService,
-    public childService:RegisterChildService,
+    public registerChildService:RegisterChildService,
     private settingServcice:SettingsService,
+    private router:Router,
+    private headerService:HeaderService,
     private studentService:StudentsService) { }
 
   ngOnInit(): void {
+
+    this.registerChildService.Student$
+    .pipe(
+      switchMap(res=>{
+        console.log(res);
+
+        if(!res) return this.studentService.getStudent(this.studentId).pipe(map(res => res?.result))
+        return of(res)
+      })
+    )
+    .subscribe((res:Student)=>{
+      this.student=res
+      this.componentHeaderData.mainTitle.sub = `(${res.name[this.lang]})`
+      this.headerService.changeHeaderdata(this.componentHeaderData)
+    })
+
     this.getWithdrawRequestRequiresFiles()
   }
 
@@ -81,10 +110,10 @@ export class WithdrawalRequestComponent implements OnInit {
     .subscribe(()=>{
       this.isLoading=false
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
-      this.childService.showWithdrawalReqScreen$.next(false)
+      this.router.navigate(['/dashboard/schools-and-students/students/student', this.studentId])
 
     },()=>{
-      this.childService.showWithdrawalReqScreen$.next(false)
+
       this.isLoading=false
       this.toastr.error(this.translate.instant('toasterMessage.This student is prohibited from withdrawing'))
     })

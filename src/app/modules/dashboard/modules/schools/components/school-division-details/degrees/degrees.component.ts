@@ -10,7 +10,6 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
-import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { DivisionService } from '../../../services/division/division.service';
 import * as FileSaver from 'file-saver';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
@@ -50,6 +49,7 @@ export class DegreesComponent implements OnInit {
   selectedSemesterLable=this.btnGroupItems[0].label
   selectedSubjectId
   subjectDegreesStatus:'Accepted' | 'Rejected' | 'Pending' | null=null
+
   degreesFileUrl
   isSubmited=false
 
@@ -129,22 +129,22 @@ export class DegreesComponent implements OnInit {
     this.divisionService.addSubjectDegrees(this.schoolId,this.divisionId,this.degreesFileUrl,{subjectid: this.selectedSubjectId,semester:this.filtration.semester})
     .pipe(map(res=>{
       if(!res.result){
-        let error ='حدث خطأ يرجى المحاوله مره اخرى';
+        let error:any =this.toaster.error(this.translate.instant("toasterMessage.error"))
 
           switch (res.statusCode) {
             case HttpStatusCodeEnum.BadRequest:
-              error = 'حدث خطأ يرجى المحاوله مره اخرى'
+              error = this.toaster.error(this.translate.instant("toasterMessage.degreesShouldBeEntered"))
             break;
             case HttpStatusCodeEnum.MethodNotAllowed:
-              error = 'يرجى ادخال الدرجات فى الملف المرفق'
+              error = this.toaster.error(this.translate.instant("toasterMessage.userNotAllowedToUploadDegrees"))
 
             break;
             case HttpStatusCodeEnum.NonAuthoritativeInformation:
-              error = 'المستخدم الحالى ليس لديه صلاحيه لرفع الدرجات'
+              error = this.toaster.error(this.translate.instant("toasterMessage.userNotAllowedToUploadDegrees"))
             break;
             case HttpStatusCodeEnum.NotAcceptable:
             // Created
-            error =  res?.errorLocalized ? res?.errorLocalized[this.lang] : "يرجعى مراجعه البيانات فى الملف المرفق"
+            error =  res?.errorLocalized ? res?.errorLocalized[this.lang] : this.toaster.error(this.translate.instant("toasterMessage.fileDataShouldBeReviewed"))
             break;
 
           }
@@ -155,7 +155,7 @@ export class DegreesComponent implements OnInit {
     }))
     .subscribe(res=>{
       this.isSubmited=false
-      this.toaster.success('تم رفع درجات الماده بنجاح')
+      this.toaster.success(this.translate.instant("toasterMessage.degreesUploaded"))
       this.degreeseModelOpened=false
       this.degreesFileUrl=null
       this.subjectDegreesStatus=null

@@ -315,7 +315,7 @@ checkValidators(event)
 {
 
   var input=event;
-  this.account.setValidators([Validators.required,Validators.pattern('[05]{1}[0-9]{9}')]);
+  this.account.setValidators([Validators.required,Validators.pattern('(05)[0-9]{8}')]);
   this.isEmail=false;
 
   for (let index = 0; index < input.length; index++) {

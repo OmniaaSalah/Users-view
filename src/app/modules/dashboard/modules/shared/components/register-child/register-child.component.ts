@@ -39,7 +39,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngDestroy$ = new Subject()
   scope = this.userService.getCurrentUserScope()
   get scopeEnum() { return UserScope }
-
+  get statusEnum() {return StatusEnum}
   lang =inject(TranslationService).lang;
   mode : Mode= 'view'
   @ViewChild('nav') nav: ElementRef
@@ -98,7 +98,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       gender:['', Validators.required],
       nationalityId:[0 , Validators.required],
       religionId:[1, Validators.required],
-      isTalented: ['', Validators.required],
+      isGifted: ['', Validators.required],
 
       reasonForNotHavingEmiratesId:[null],
       passportId:[],
@@ -128,7 +128,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       motherLanguage: this.localizeFormGroup,
       languageAtHome: this.localizeFormGroup,
       mostUsedLanguage: this.localizeFormGroup,
-
+      guardianId:['', Validators.required],
       studentPayments: this.fb.group({
         fullAmountToBePaid: [],
         paidAmount: [],

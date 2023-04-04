@@ -8,9 +8,9 @@
 
             <app-table-caption
             [hasFilter]="false"
-            (onFilter)="getPeriods()"
+            (onFilter)="getGracePeriodsList()"
             (onExport)="onExport($event)"
-            (onSearch)="filtration.KeyWord = $event; getPeriods()"
+            (onSearch)="filtration.KeyWord = $event; getGracePeriodsList()"
             (onClear)="clearFilter()"></app-table-caption>
 
         </ng-template>

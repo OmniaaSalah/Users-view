@@ -1,9 +1,7 @@
-import { MessagesMainComponent } from './../../../modules/dashboard/modules/messages/components/messages-main/messages-main.component';
 import {
   Component,
   OnInit,
   Input,
-  ViewChild,
   Output,
   EventEmitter,
   OnDestroy,
@@ -13,7 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { forkJoin } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { MessageService } from 'src/app/modules/dashboard/modules/messages/service/message.service';
@@ -138,14 +135,14 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   }
 
   getSchoolList() {
-   
+
     this.filtration.PageSize = this.schools.totalAllData;
     this.schoolsService.getAllSchoolsInPopUp(this.filtration).subscribe((res)=>{
-     
+
       this.schools.list=res.data;
 
       });
-    
+
   }
 
   openSelectSchoolsModel() {
@@ -154,7 +151,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   }
 
   unSelectSchool(schoolId) {
-    
+
     this.userRolesService.MarkedListLength.next(this.MarkedListLength-=1);
     let index =this.schoolIsSelectedList.findIndex(school => school.id==schoolId)
     this.schoolIsSelectedList.splice(index, 1)
