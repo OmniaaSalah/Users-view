@@ -19,6 +19,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 
 @Component({
   selector: 'app-user-roles',
@@ -45,6 +46,10 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     list:[],
     loading:true
   }
+  items: MenuItem[]=[
+    {label: this.translate.instant('shared.Show Details'), icon:'assets/images/shared/file.svg'},
+    {label: this.translate.instant('dashboard.UserRole.Delete Job Role'), icon:'assets/images/shared/delete.svg'}
+  ]
   constructor(private exportService: ExportService,private sharedService:SharedService,public confirmModelService: ConfirmModelService,private toastService: ToastService,private confirmationService: ConfirmationService,private headerService: HeaderService,  private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
@@ -147,6 +152,16 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
       this.userListForSpecificRole=res.users;
     });
      this.displayUserList = true;
+}
+dropdownItemClicked(index,role){
+  if(index == 0) 
+   {
+    this.router.navigate([`/dashboard/manager-tools/user-roles/role-details/${role.id}`]);
+  }
+  if(index == 1) 
+   {
+    this.confirmModelService.openModel();  this.selectedRole=role;
+  }
 }
 
 ngOnDestroy(): void {

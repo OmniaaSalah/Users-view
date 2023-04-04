@@ -108,7 +108,7 @@ export class ProfileComponent implements OnInit {
   {
     
     this.email.clearValidators();
-    this.phone.setValidators([Validators.required,Validators.pattern('[05]{1}[0-9]{9}')]);
+    this.phone.setValidators([Validators.required,Validators.pattern('(05)[0-9]{8}')]);
   }
   setEmairatesIdValidators(event)
   {

@@ -139,7 +139,7 @@
                         </td>
                        
                         <td *ngIf="tableColumns[9].isSelected == true" class="lg d-flex gap-2">
-                        <!-- <app-student-badges isStudentTalented="true" isStudentGifted="true" [studentCategory]='["IsChildOfAMartyr", "ChildOfCitizens", "IsSpecialAbilities"]'></app-student-badges> -->
+                            <app-student-badges [isTopStudent]="e?.isTopStudent" [isGifted]="e?.isGifted" [studentCategory]='e?.studentCategory'></app-student-badges>
                           <a  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+e?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{e?.student?.name |currentLang}}</a>
                         </td>
                         <td *ngIf="tableColumns[10].isSelected == true">

@@ -7,8 +7,8 @@ import { StatusEnum } from '../../enums/status/status.enum';
   styleUrls: ['./student-badges.component.scss']
 })
 export class StudentBadgesComponent implements OnInit {
-  @Input('isStudentGifted') isStudentGifted:boolean=false;
-  @Input('isStudentTalented')  isStudentTalented:boolean=false;
+  @Input('isGifted') isGifted:boolean=false;
+  @Input('isTopStudent')  isTopStudent:boolean=false;
   @Input('studentCategory')   studentCategory:string[]=[];
 
   get statusEnum() {return StatusEnum}
