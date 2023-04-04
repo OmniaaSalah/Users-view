@@ -82,9 +82,8 @@ export class AuthenticationMainComponent implements OnInit{
     localStorage.setItem('Query', JSON.stringify(this.activatedRoute.snapshot.queryParamMap))
     if(this.error_description)
       {
-
-         this.toastService.error(this.translate.instant('login.user not complete Login with UEA pass'));
-        this.router.navigate(['/auth/login']);
+        this.openConfimModel=true
+        this.confirmationMessage=this.translate.instant('login.user not complete Login with UEA pass');
       }
      else if(this.code)
      {
@@ -381,10 +380,11 @@ getCurrentGuardianData()
 
 getCurrentYear()
 {
+  this.loginInProgress=true;
   this.sharedService.getCurrentYear().subscribe((res)=>{
     this.userService.persist('yearId',res?.id);
    this.router.navigateByUrl(this.returnUrl);
-  })
+  },(err)=>{this.loginInProgress=false})
 }
 
 openUAEAccount()
