@@ -128,7 +128,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       motherLanguage: this.localizeFormGroup,
       languageAtHome: this.localizeFormGroup,
       mostUsedLanguage: this.localizeFormGroup,
-
+      guardianId:['', Validators.required],
       studentPayments: this.fb.group({
         fullAmountToBePaid: [],
         paidAmount: [],

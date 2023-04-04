@@ -394,9 +394,11 @@
         "requestResend":"تم إعادة ارسال الطلب بنجاح",
         "lectureDeleted":"تم حذف الحصه بنجاج",
         "lectureCreated":"تم اضافه الحصه بنجاج",
-        "lectureUpdated":"تم تعديل الحصه بنجاج"
-
-
+        "lectureUpdated":"تم تعديل الحصه بنجاج",
+        "degreesUploaded":"تم رفع درجات الماده بنجاح",
+        "degreesShouldBeEntered":"يرجى ادخال الدرجات فى الملف المرفق",
+        "userNotAllowedToUploadDegrees":"المستخدم الحالى ليس لديه صلاحيه لرفع الدرجات",
+        "fileDataShouldBeReviewed":"يرجعى مراجعه البيانات فى الملف المرفق"
     },
 
     "emptyList": {
@@ -1081,7 +1083,7 @@
             "sectionNumber": "رقم الشعبة من نظام تراخيص ",
             "maxStudentsNumber": "عدد الطلاب الأقصى",
             "sectionForSpetialAbilitiesStudents": "الشعبة لطلاب اصحاب الهمم ",
-            "sectionManager": "مسؤول الشعبة",
+            "sectionManager": "معلم الشعبة",
             "abilityToEnterDegree": "مسموح لادخال الدرجات ام لا",
             "subjectsTeachers": "معلمين المواد",
             "subjects": "المواد الدراسية",
@@ -1812,13 +1814,13 @@
             "You should enter Valid Data First": "لابد أن تدخل المعلومات بشكل صحيح أولاً"
         },
         "Messages": {
-            "messages": "الرسائل",
+            "messages": "المحادثات",
             "title message": "عنوان الرسالة",
             "Show Details": "إضغط لقراءة المزيد",
             "new message": "رسالة جديدة",
             "from": "من تاريخ",
             "to": "إلي تاريخ",
-            "Messages List is empty": " لا توجد لديك رسائل",
+            "Messages List is empty": " لا توجد لديك محادثات",
             "Send a new message": "إرسال رسالة جديدة",
             "Enter the message title": "إدخال عنوان الرسالة",
             "Require confirmation of receipt": "الرسالة عاجلة",
