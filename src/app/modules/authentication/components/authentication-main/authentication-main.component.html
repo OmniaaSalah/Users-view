@@ -146,3 +146,27 @@
 <ng-container *ngIf="openResetModel">
   <app-forget-password openResetModel="openResetModel"></app-forget-password>
 </ng-container>
+
+
+
+<div class="confirm-model">
+
+  <p-dialog [(visible)]="openConfimModel" [closable]="false" [modal]="true" [style]="{width: '35vw'}" >
+      <ng-template pTemplate="content">
+         <div class="d-flex flex-column justify-content-center align-items-center gap-4">
+
+          <img src="assets/images/Login/identity.svg" alt="">
+          <p class="fs-3 text-center" > {{confirmationMessage}}</p>
+
+          <!-- <p class="fs-3">{{'shared.confirmDelete' |translate}}</p> -->
+          <div class="d-flex align-items-center gap-4 mt-5">
+            <ng-container *ngIf="statusCode=='NotFound'">
+              <button (click)="openUAEAccount()" class="btn btn-primary">{{'sign up.SignUp' |translate}}</button>
+              <button (click)="closeConfirmationModel()" class="btn btn-primary " >{{'sign up.BackToLogin' |translate}}</button>
+            </ng-container>
+                <button *ngIf="statusCode!='NotFound'" (click)="closeConfirmationModel()" class="btn btn-primary">{{'shared.close' |translate}}</button>
+          </div>
+         </div>
+      </ng-template>
+  </p-dialog>
+</div>

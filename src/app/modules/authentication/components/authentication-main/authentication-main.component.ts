@@ -1,4 +1,4 @@
-import { Component, OnInit,inject } from '@angular/core';
+import { Component, OnInit,inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,6 +13,8 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SurveyService } from 'src/app/modules/dashboard/modules/surveys/service/survey.service';
 import { environment } from 'src/environments/environment';
 import { RegistrationEnum } from 'src/app/shared/enums/registration/registration-ways.enum';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -23,7 +25,10 @@ import { RegistrationEnum } from 'src/app/shared/enums/registration/registration
   providers: [MessageService]
 
 })
-export class AuthenticationMainComponent implements OnInit {
+export class AuthenticationMainComponent implements OnInit{
+  openConfimModel:boolean=false
+  statusCode;
+  confirmationMessage;
   languge= inject(TranslationService).lang;
   returnUrl=this.activatedRoute.snapshot.queryParamMap.get('returnUrl')||'/';
   isEmail:boolean=false;
@@ -37,8 +42,9 @@ export class AuthenticationMainComponent implements OnInit {
   token: any;
   setPasswordForm: any;
   isBtnLoading: boolean=false;
-
+  UAEUnregisteredUser;
   loginForm: FormGroup;
+  subscription:Subscription;
   code=this.activatedRoute.snapshot.queryParamMap.get('code');
   error_description=this.activatedRoute.snapshot.queryParamMap.get('error');
   constructor(
@@ -51,7 +57,8 @@ export class AuthenticationMainComponent implements OnInit {
     private toastService: ToastService,
     private activatedRoute:ActivatedRoute,
     private sharedService:SharedService,
-    public surveyService:SurveyService
+    public surveyService:SurveyService,
+    public confirmModelService: ConfirmModelService
 
   ) {
 
@@ -61,7 +68,7 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+  
      this.checkUAEPassLogin();
      this.initLoginForm();
 
@@ -83,6 +90,7 @@ export class AuthenticationMainComponent implements OnInit {
      {
       this.loginInProgress=true
         this.authService.getUAEUSER(this.code).subscribe((res:any)=>{
+          this.statusCode=res?.statusCode;
           this.loginInProgress=false
           if(res?.statusCode=="OK")
           {
@@ -106,20 +114,22 @@ export class AuthenticationMainComponent implements OnInit {
           }
           else if (res?.statusCode=="NotFound")
           {
-            this.toastService.error(res?.errorLocalized[this.languge])
-            this.openUAEAccount(res?.user?.idn);
+            this.openConfimModel=true
+            this.confirmationMessage=res?.errorLocalized[this.languge];
+            this.UAEUnregisteredUser=res?.user;
           }
           else 
           {
-            this.toastService.error(res?.errorLocalized[this.languge])
-            setTimeout(() => {
-              window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
-             },2500);
+            this.openConfimModel=true
+            this.confirmationMessage=res?.errorLocalized[this.languge];
+            // this.toastService.error(res?.errorLocalized[this.languge])
+           
           }
         },err=>{
           this.loginInProgress=false
           this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
           setTimeout(() => {
+            this.router.navigate(['/auth/login'], {replaceUrl: true});
             window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
            },2500);
         });
@@ -377,11 +387,23 @@ getCurrentYear()
   })
 }
 
-openUAEAccount(idn)
+openUAEAccount()
 {
+  this.openConfimModel=false;
   this.openNewAccount();
   localStorage.setItem('accountWay',RegistrationEnum.EmiratesId);
-  localStorage.setItem('notificationSource', idn);
-  localStorage.setItem('redirectToUAEPassSignUp', 'true');
+  localStorage.setItem('notificationSource',this.UAEUnregisteredUser.idn);
+  localStorage.setItem('UAEUnregisteredUser',JSON.stringify(this.UAEUnregisteredUser) );
+
 }
+
+closeConfirmationModel()
+{
+  this.openConfimModel=false;
+  this.router.navigate(['/auth/login'], {replaceUrl: true});
+  window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
+  
+}
+
+
 }
