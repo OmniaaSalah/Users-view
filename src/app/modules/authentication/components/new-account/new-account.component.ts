@@ -141,7 +141,7 @@ export class NewAccountComponent implements OnInit {
     localStorage.removeItem('notificationSource');
     if(localStorage.getItem('UAEUnregisteredUser'))   
     {
-      this.router.navigate(['/auth/login'], {replaceUrl: true});
+    this.router.navigate(['/auth/login'], {replaceUrl: true});
      window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
      localStorage.removeItem('UAEUnregisteredUser');
    }
@@ -202,10 +202,11 @@ export class NewAccountComponent implements OnInit {
 
 sendOtp()
 {
+  var IDn;
   this.isBtnLoading=true;
   if(this.account.accountWay==RegistrationEnum.EmiratesId)
   {
-    this.authService.createUAEPassAccount({IDn:this.account.notificationSource}).subscribe((res)=>{
+    this.authService.createUAEPassAccount(IDn).subscribe((res)=>{
       this.isBtnLoading=false;
       this.closeModel();
       this.toastService.success(this.translate.instant('sign up.account saved successfully'));
