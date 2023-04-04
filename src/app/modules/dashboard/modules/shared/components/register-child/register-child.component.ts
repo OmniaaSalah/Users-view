@@ -98,7 +98,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       gender:['', Validators.required],
       nationalityId:[0 , Validators.required],
       religionId:[1, Validators.required],
-      isTalented: ['', Validators.required],
+      isGifted: ['', Validators.required],
 
       reasonForNotHavingEmiratesId:[null],
       passportId:[],

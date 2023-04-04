@@ -52,6 +52,10 @@
                         <p class="color-gray-300 fs-4">{{ 'shared.nationalityCategory'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
 
+                        <p class="color-gray-300 fs-4">{{'dashboard.students.isGifted'| translate}}</p>
+                        <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
+                        <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
+
                         <p class="color-gray-300 fs-4">{{ 'shared.nativeLanguage'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.motherLanguage?.name | currentLang}}</span>
 
@@ -361,7 +365,7 @@
                         </div>
                         <div class="form-set">
                             <label class="label" for="description">{{'dashboard.students.isGifted'| translate}}</label>
-                            <p-dropdown #isGifted formControlName="isTalented" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                            <p-dropdown #isGifted formControlName="isGifted" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                         </div>
 
                         <div class="form-set" *ngIf="isGifted.value">
