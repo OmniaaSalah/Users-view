@@ -30,7 +30,7 @@
   </ng-template>
       <ng-template pTemplate="header" >
             <tr  >
-              <th   pSortableColumn="student" ><p-sortIcon  field="student" ></p-sortIcon>{{'dashboard.SchoolYear.StudentName'|translate}}</th>
+              <th   pSortableColumn="student" class="lg"><p-sortIcon  field="student" ></p-sortIcon>{{'dashboard.SchoolYear.StudentName'|translate}}</th>
               <th   pSortableColumn="nationality"><p-sortIcon  field="nationality" ></p-sortIcon>{{'dashboard.SchoolYear.Nationality'|translate}}</th>
               <th   pSortableColumn="grade"><p-sortIcon  field="grade" ></p-sortIcon>{{'dashboard.SchoolYear.Class'|translate}}</th>
               <th   pSortableColumn="curricuulm"><p-sortIcon  field="curricuulm" ></p-sortIcon>{{'dashboard.SchoolYear.Curriculum'|translate}}</th>
@@ -40,7 +40,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  ><a [style.height.rem]="'6'"  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+e.studentId]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{e?.student |currentLang}}</a></td>
+                <td class="lg gap-2 d-flex" >
+                    <app-student-badges isTopStudent="true" [isGifted]="e.isGifted" [studentCategory]='e.studentCategory'></app-student-badges>
+                    <a   target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+e.studentId]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{e?.student |currentLang}}</a>
+                </td>
                 <td   >{{e?.nationality|currentLang}}</td>
                 <td   >{{e?.grade|currentLang}}</td>
                 <td   >{{e?.curricuulm|currentLang}}</td>

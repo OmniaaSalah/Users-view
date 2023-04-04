@@ -76,7 +76,7 @@ export class WithIdentityComponent implements OnInit {
   onSubmit=false
 
   newChildForm: FormGroup = this.fb.group({
-    identityNumber:[ null,[Validators.required, Validators.pattern('[784]{1}[0-9]{14}')]],
+    identityNumber:[ null,[Validators.required, Validators.pattern('(784)[0-9]{12}')]],
     relativityType:['',Validators.required],
   })
 

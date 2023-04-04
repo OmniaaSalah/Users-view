@@ -221,12 +221,12 @@ markAsRead(){
   })
 
   this.notificationService.updateNotifications(sentData).subscribe(res=>{
-    this.toastr.success(res.message)
+    // this.toastr.success(res.message)
     this.getNotficationNumber();
     this.getNotReadable();
 
   },err=>{
-    this.toastr.error(err.message)
+    this.toastr.error(this.translate.instant('Request cannot be processed, Please contact support.'))
   })
 
 }

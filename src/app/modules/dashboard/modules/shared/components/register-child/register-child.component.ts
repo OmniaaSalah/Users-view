@@ -39,7 +39,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngDestroy$ = new Subject()
   scope = this.userService.getCurrentUserScope()
   get scopeEnum() { return UserScope }
-
+  get statusEnum() {return StatusEnum}
   lang =inject(TranslationService).lang;
   mode : Mode= 'view'
   @ViewChild('nav') nav: ElementRef

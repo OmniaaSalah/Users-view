@@ -44,13 +44,13 @@ export class AddNewUserInformationComponent implements OnInit {
 
       arabicFullName: ['', [Validators.required, Validators.maxLength(65)]],
       englishFullName: ['', [Validators.required, Validators.maxLength(65)]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('[05]{1}[0-9]{9}')]],
+      phoneNumber: ['', [Validators.required, Validators.pattern("(05)[0-9]{8}")]],
       email: ['', [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
       password: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
       confirmPassword: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
       arabicNickName: ['', [Validators.required, Validators.maxLength(65)]],
       englishNickName: ['', [Validators.required, Validators.maxLength(65)]],
-      identityNumber: ['', [Validators.required, Validators.pattern('[784]{1}[0-9]{14}')]],
+      identityNumber: ['', [Validators.required, Validators.pattern('(784)[0-9]{12}')]],
       privateRole: ['', [Validators.required]],
       userStatus: [false]
 
@@ -82,6 +82,10 @@ export class AddNewUserInformationComponent implements OnInit {
     {
       this.getUserById();
       this.clearPasswordModel();
+    }
+    else
+    {
+      this.accountModel={};
     }
 
   }
@@ -131,24 +135,22 @@ export class AddNewUserInformationComponent implements OnInit {
   }
 
 AddAccount(){
- 
-  this.accountModel={};
+
+
   this.accountModel.roles = [];
   this.isBtnLoading=true;
-
   this.accountModel.arabicFullName = this.userFormGrp.value.arabicFullName;
   this.accountModel.fullName = this.userFormGrp.value.englishFullName;
   this.accountModel.phoneNumber = this.userFormGrp.value.phoneNumber;
-  this.accountModel.email = this.userFormGrp.value.email;
   this.accountModel.arabicSurname = this.userFormGrp.value.arabicNickName;
   this.accountModel.englishSurname =this.userFormGrp.value.englishNickName;
   this.accountModel.isActive= this.userFormGrp.value.userStatus;
   this.accountModel.emiratesIdNumber =this.userFormGrp.value.identityNumber;
   this.accountModel.password = this.userFormGrp.value.password;
   this.accountModel.roles.push(Number(this.userFormGrp.value.privateRole));
-
   if(!this.userId)
   {
+        this.accountModel.email =this.userFormGrp.value.email;
         this.userService.AddAccount(this.accountModel).subscribe(res => {
         this.isBtnLoading=false;
         if(res.statusCode=='BadRequest')
@@ -193,7 +195,7 @@ AddAccount(){
 }
 
 getUserById(){
-
+  this.email.disable();
   this.userInformation.getUsersById(Number(this.userId)).subscribe(response => {
     
     this.accountModel= response;

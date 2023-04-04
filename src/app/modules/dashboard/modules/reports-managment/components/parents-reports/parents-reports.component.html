@@ -92,7 +92,7 @@
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
-                        <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true"> 
+                        <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true" [ngClass]="column==tableColumns[5]?'lg':''"> 
                            
                             <p-sortIcon field="{{column.name }}"></p-sortIcon>{{column.name }}
                         </th>
@@ -112,14 +112,15 @@
                             {{parent?.parentNationality | currentLang}}
                         </td>
                         <td>
-                            {{parent?.parentEmail }}
+                            <span class="position-relative" pTooltip="{{parent?.parentEmail}}" [autoHide]="true" tooltipPosition="top">{{parent?.parentEmail | truncate:15 }}</span>
                         </td>
                         <td>
                             {{parent?.relationType| currentLang }} 
                         </td>
                       
-                        <td>
-                            <a [style.height.rem]="'6'"  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+parent?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{parent?.studentName |currentLang}}</a>
+                        <td class="lg d-flex gap-2">
+                            <app-student-badges [isTopStudent]="parent?.isTopStudent" [isGifted]="parent?.isGifted" [studentCategory]='parent?.studentCategory'></app-student-badges>
+                            <a  target="_blank"  [routerLink]="['/dashboard/schools-and-students/students/student/'+parent?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{parent?.student?.name |currentLang}}</a>
                         </td>
 
                         <td *ngIf="tableColumns[6].isSelected == true">

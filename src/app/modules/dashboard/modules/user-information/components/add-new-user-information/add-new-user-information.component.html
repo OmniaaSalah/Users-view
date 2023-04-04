@@ -52,7 +52,7 @@
                         <div class="col-xs-2 col-lg-4">
 
                             <label for="PID3" class="label">{{'shared.phoneNumber'|translate}} <span class="star">*</span></label>
-                            <input type="text" pInputText formControlName="phoneNumber" [LangRestrict]="'numb'"  class="form-control "  placeholder="{{'shared.Write phoneNumber'|translate}}">
+                            <input type="text" pInputText formControlName="phoneNumber"  [LangRestrict]="'numb'" maxlength="10" class="form-control "  placeholder="{{'shared.Write phoneNumber'|translate}}">
                             
                             <div [hidden]="phoneNumber.valid || phoneNumber.untouched">
                                     <small *ngIf="phoneNumber.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -133,7 +133,6 @@
 
                     <div class=" row gx-5 form-set ">
                         <div class="col-xs-2 col-lg-4">
-
                             <label for="PID4" class="label">{{'shared.email'|translate}} <span class="star">*</span></label>
                             <input type="text" pInputText formControlName="email"  class="form-control"   placeholder="{{'shared.Write email'|translate}}">
                             

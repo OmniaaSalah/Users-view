@@ -185,7 +185,7 @@ export class StudentsReportsService {
           return {
             [this.translate.instant('dashboard.students.daleelNumber')]: student?.daleelId ? student?.daleelId : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.manhalNumber')]: student?.manhalNumber ? student?.manhalNumber : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.schools.student')]: student?.name? student?.name[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.schools.student')]: student?.student?.name ? student?.student?.name[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('Students nickname')]:student?.surName ? student?.surName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.parentName')]: student?.guardianName ? student?.guardianName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.issue of certificate.schoolName')]: student?.schoolName ? student?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
