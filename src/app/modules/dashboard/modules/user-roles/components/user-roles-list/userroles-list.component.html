@@ -55,27 +55,12 @@
                         
                     </div>
                 </td>
-                <td class="dropdown "> 
-                        <div class="d-grid justify-content-end mx-4">
-                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <span role="button" class="color-primary link  d-flex" >{{'shared.RoleMangment'|translate}}<img  class=" mt-2 rotate270"  src="assets/images/shared/blue-arrow.svg" alt=""></span>  
-                        </div>
-                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                            <li class="dropdown-item" >
-                                <a class="link"  routerLink="/dashboard/manager-tools/user-roles/role-details/{{e.id}}">
-                                  <img src="assets/images/shared/file.svg" alt="">
-                                  <p>{{'shared.Show Details'|translate}}</p>
-                                </a>
-                            </li>
-                            <li class="dropdown-item" *permit="ClaimsEnum.S_D_Role">
-                                <a class="link" (click)="this.confirmModelService.openModel();  selectedRole=e;" >
-       
-                                  <img src="assets/images/shared/delete.svg" alt="">
-                                  <p>{{'dashboard.UserRole.Delete Job Role'|translate}}</p>
-                                </a>
-                            </li>
-                        </ul>
+                <td > 
+                    <div class="d-grid justify-content-end mx-4 actions">
+                        <app-dropdown [items]="items" label="{{'shared.RoleMangment'|translate}}"
+                        (onItemClicked)="dropdownItemClicked($event, e)"></app-dropdown>
                     </div>
+                   
                 </td>
             
             </tr>

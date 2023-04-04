@@ -26,7 +26,6 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 type transeferBy = 'parent' | 'commission';
-type Mode = 'transfer' | 'register'
 
 
 @Component({
@@ -42,7 +41,6 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   lang = inject(TranslationService).lang;
   get TransferTypeEnum(){ return TransferType}
 
-  mode:Mode = this.route.snapshot.data['mode']
   studentId = this.route.snapshot.paramMap.get('id')
   studentSchoolId
   isLoading=true
@@ -60,13 +58,12 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     breadCrump: [
       { label: this.translate.instant('Students List') ,routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
       {
-        label: this.mode == 'transfer' ? this.translate.instant('dashboard.students.transferStudent') :
-        this.translate.instant('dashboard.students.registerChildByCommission'),
-        routerLink: `/dashboard/schools-and-students/students/student/${this.studentId}/${this.mode}`
+        label: this.translate.instant('dashboard.students.transferStudent') ,
+        routerLink: `/dashboard/schools-and-students/students/student/${this.studentId}/transfer`
       }
     ],
     mainTitle: {
-      main: this.mode == 'transfer' ? this.translate.instant('dashboard.students.transferStudent') : this.translate.instant('dashboard.students.registerChildByCommission')
+      main: this.translate.instant('dashboard.students.transferStudent')
     }
   }
 
@@ -160,7 +157,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     this.schools.list=[]
 
     this.schoolsService.getAllSchools(this.filtration)
-    .pipe(map(res => {   
+    .pipe(map(res => {
       let schoolsList =res.data.filter(val => val.id != this.studentSchoolId)
       return {
         data :schoolsList,
@@ -266,7 +263,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
         // this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.selectedSchool.value?.id, gradeId:this.selectedGrade.id, trackId:""}).pipe(share())
         this.getSubjects({schoolId: this.selectedSchool.value?.id, gradeId:this.selectedGrade.id, trackId: ""})
       }
-      
+
       this.divisionTracks$ = this.divisionService.getDivisionTracks(divisionId).pipe(share())
     }
   }

@@ -717,19 +717,34 @@
           <img [src]="student?.parsonalImagePath " onerror="this.src='assets/images/shared/image.svg'"  alt="Avatar ">
       </div>
       <div class="profile__info ">
-          <div class="profile__name ">
-              <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.SPEA" target="_blank" [routerLink]="['/dashboard/schools-and-students/students/student/'+student.id]">{{student.name |currentLang}}</a>
-              <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Employee" target="_blank" [routerLink]="['/dashboard/student-management/students/student/'+student.id]">{{student.name |currentLang}}</a>
-              <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Guardian">{{student.name |currentLang}}</a>
+          <div class="profile__name d-flex flex-wrap">
+                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.SPEA" target="_blank" [routerLink]="['/dashboard/schools-and-students/students/student/'+student.id]">{{student.name |currentLang}}</a>
+                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Employee" target="_blank" [routerLink]="['/dashboard/student-management/students/student/'+student.id]">{{student.name |currentLang}}</a>
+                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Guardian">{{student.name |currentLang}}</a>
 
-              <div class="" *ngIf="student.isTalented">
-                  <img src="assets/images/shared/medal.svg" alt="">
-                  <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
-              </div>
-              <div *ngIf="student.isChildOfAMartyr" >
-                  <img src="assets/images/shared/medal-flag.svg" alt="">
-                  <span class="color-fuchsia-500">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
-              </div>
+                <div class="" *ngIf="student?.isGifted">
+                    <img src="assets/images/shared/medal.svg" alt="">
+                    <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
+                </div>
+                <div *ngIf="student?.isTopStudent">
+                    <img src="assets/images/shared/medal-cup.svg" alt="">
+                    <span class="color-yellow-400">{{'dashboard.students.isFromTheFirst' |translate}}</span>
+                </div>
+            
+                <ng-container *ngFor="let item of student?.studentCategory">
+                    <div *ngIf="item==statusEnum.IsChildOfAMartyr">
+                        <img src="assets/images/shared/medal-flag.svg" alt="">
+                        <span class="color-fuchsia-500">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
+                    </div>
+                    <div *ngIf="item==statusEnum.IsSpecialAbilities">
+                        <img src="assets/images/shared/medal-green.svg" alt="">
+                        <span class="color-pink-500">{{'dashboard.students.withDisabilities' |translate}}</span>
+                    </div>
+                    <div *ngIf="(item!=statusEnum.IsSpecialAbilities&&item!=statusEnum.IsChildOfAMartyr)">
+                        <img src="assets/images/shared/medal-blue.svg" alt="">
+                        <span class="color-skyBlue-300" >{{'shared.allStatus.'+item|translate}}</span>
+                    </div>
+                </ng-container>
           </div>
           <div class="profile__details ">
               <div class="fs-4 ">

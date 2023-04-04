@@ -90,13 +90,6 @@ span.HealthProfile {
     }
 }
 
-::ng-deep textarea {
-    position: absolute;
-    width: 90%;
-    &.p-inputtext {
-        height: 29rem !important;
-    }
-}
 
 .icon--file {
     border: 1px solid #EEEEEE;

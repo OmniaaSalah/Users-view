@@ -5,8 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { el } from 'date-fns/locale';
 import { ToastrService } from 'ngx-toastr';
+import { map, of, switchMap } from 'rxjs';
 import {IHeader } from 'src/app/core/Models/header-dashboard';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
+import { Student } from 'src/app/core/models/student/student.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
@@ -66,7 +68,14 @@ export class DeletedStudentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.registerChildService.Student$.subscribe(res=>{
+    this.registerChildService.Student$
+    .pipe(
+      switchMap(res=>{
+        if(!res) return this.studentService.getStudent(this.studentId).pipe(map(res => res?.result))
+        return of(res)
+      })
+    )
+    .subscribe((res:Student)=>{
       this.componentHeaderData.mainTitle.sub = `(${res.name[this.lang]})`
       this.headerService.changeHeaderdata(this.componentHeaderData)
     })
@@ -84,7 +93,7 @@ export class DeletedStudentComponent implements OnInit {
 
   deleteStudentReq(data){
     this.loading = true
-    
+
     this.studentService.deleteStudent(data).subscribe(res=>{
       this.loading = false
       this.toasterService.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))

@@ -3,7 +3,7 @@
 @import 'src/assets/css/components/buttons';
 @import 'src/assets/css/components/input';
 @import'src/assets/css/components/forms';
-@import 'src/app/shared/components/dropdown/dropdown.component.scss';
+// @import 'src/app/shared/components/dropdown/dropdown.component.scss';
 @import 'src/assets/css/components/message.scss';
 
 .prim-table{
@@ -12,7 +12,16 @@
     color: inherit;
       }
 
-   
+           
+      ::ng-deep .actions{
+               
+                .dropdown-menu {
+             
+                    transform: translate3d(100px, -20px, 0px) !important;
+                  }
+             }
+          
+    
 
     ::ng-deep p-dialog{
     

@@ -99,8 +99,8 @@
                     {{ message.messageCount }}
                   </p>
 
-                  <div class="d-flex align-content-center gap-2">
-                    <button class="btn btn-primary detail-btn p-relative" [routerLink]="['/dashboard/messages/message-detail',message.id]">
+                  <div class="d-flex align-content-center justify-self-end gap-2">
+                    <button class="btn btn-primary" [routerLink]="['/dashboard/messages/message-detail',message.id]">
                       {{ "shared.Show Details" | translate }}
                       <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                     </button>
@@ -128,7 +128,7 @@
   </div>
 
   <div class="Empty" *ngIf="!messages.total && !messages.loading">
-    <app-informative-block subTitle="لا توجد لديك محادثات"></app-informative-block>
+    <app-informative-block subTitle="{{'dashboard.Messages.Messages List is empty' |translate}}"></app-informative-block>
   </div>
 
 

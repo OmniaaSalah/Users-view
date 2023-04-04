@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { debounceTime, Observable, share } from 'rxjs';
+import { debounceTime, map, Observable, share } from 'rxjs';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -17,6 +17,8 @@ import { RegisterChildService } from '../../../services/register-child/register-
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsService } from 'src/app/core/services/claims.service';
+import { MessageService } from '../../../../messages/service/message.service';
+import { Filtration } from 'src/app/core/classes/filtration';
 
 @Component({
   selector: 'app-personal-information',
@@ -66,6 +68,9 @@ export class PersonalInformationComponent implements OnInit {
   reasonForNotHaveIdentityOptions$=this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).pipe(debounceTime(1000))
 
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
+  AllGuardians$ = this.messageService.getGuardian({}).pipe(map(res =>res.data))
+  AllGuardians = []
+  guardiansFilteration={...Filtration}
 
   specialClassOptions = [
     {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
@@ -83,6 +88,7 @@ export class PersonalInformationComponent implements OnInit {
     private studentsService: StudentsService,
     public childService:RegisterChildService,
     private translate:TranslateService,
+    private messageService: MessageService,
     private indexService:IndexesService) { }
 
 
@@ -90,6 +96,22 @@ export class PersonalInformationComponent implements OnInit {
     this.setClassType()
   }
 
+  onLazyLoad(event){
+    console.log(event);
+
+    this.guardiansFilteration.Page = Math.ceil((event.first - 1) / this.guardiansFilteration.PageSize) + 1;
+console.log(this.guardiansFilteration.Page);
+
+    this.getGuardians()
+  }
+  getGuardians(){
+    this.studentsService.getAllStudents(this.guardiansFilteration)
+    .pipe(map(res =>res.data))
+    .subscribe(res =>{
+      // this.AllGuardians = [...this.AllGuardians, ...res]
+      this.AllGuardians = res
+    })
+  }
 
   get isSpecialClass() {
     return this.studentForm.controls['isSpecialClass'] as FormControl;

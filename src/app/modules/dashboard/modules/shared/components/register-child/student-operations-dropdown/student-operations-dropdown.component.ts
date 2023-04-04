@@ -53,7 +53,7 @@ export class StudentOperationsDropdownComponent implements OnInit {
     {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
     {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest},
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
-    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool},
+    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool, routerLink:`/dashboard/schools-and-students/students/student/${this.studentId||this.childId}/withdraw-request/`},
     {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
     {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
     // {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
@@ -352,7 +352,7 @@ export class StudentOperationsDropdownComponent implements OnInit {
       }
 
     }
-    if (index== 5) this.childService.showWithdrawalReqScreen$.next(true)
+    // if (index== 5) this.childService.showWithdrawalReqScreen$.next(true)
     if(index==6) this.exemptionFromStudyModelOpend=true
   }
 
