@@ -45,29 +45,29 @@
                 <img [src]="student?.parsonalImagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
             </div>
             <div class="profile__info">
-                <div class="profile__name d-flex flex-wrap gap-2 ">
+                <div class="profile__name">
                     <h4 class="heading heading--tertiary">{{student.name | currentLang}}</h4>
                     <div class="" *ngIf="student?.isGifted">
                         <img src="assets/images/shared/medal.svg" alt="">
-                        <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
+                        <span class="color-red-500 fs-4">{{'dashboard.students.talent' |translate}}</span>
                     </div>
                     <div *ngIf="student?.isTopStudent">
                         <img src="assets/images/shared/medal-cup.svg" alt="">
-                        <span class="color-yellow-400">{{'dashboard.students.isFromTheFirst' |translate}}</span>
+                        <span class="color-yellow-400 fs-4">{{'dashboard.students.isFromTheFirst' |translate}}</span>
                     </div>
-                   
+
                     <ng-container *ngFor="let item of student?.studentCategory">
                         <div *ngIf="item==statusEnum.IsChildOfAMartyr">
                             <img src="assets/images/shared/medal-flag.svg" alt="">
-                            <span class="color-fuchsia-500">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
+                            <span class="color-fuchsia-500 fs-4">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
                         </div>
                         <div *ngIf="item==statusEnum.IsSpecialAbilities">
                             <img src="assets/images/shared/medal-green.svg" alt="">
-                            <span class="color-pink-500">{{'dashboard.students.withDisabilities' |translate}}</span>
+                            <span class="color-pink-500 fs-4">{{'dashboard.students.withDisabilities' |translate}}</span>
                         </div>
                        <div *ngIf="(item!=statusEnum.IsSpecialAbilities&&item!=statusEnum.IsChildOfAMartyr)">
                         <img src="assets/images/shared/medal-blue.svg" alt="">
-                        <span class="color-skyBlue-300" >{{'shared.allStatus.'+item|translate}}</span>
+                        <span class="color-skyBlue-300 fs-4" >{{'shared.allStatus.'+item|translate}}</span>
                     </div>
                 </ng-container>
                 </div>
@@ -144,7 +144,7 @@
 
 
 
-<div class="tabView " [class.show-controls]="navListLength > 7" *ngIf="!(childService.showWithdrawalReqScreen$|async)">
+<div class="tabView " [class.show-controls]="navListLength > 7" >
     <!-- nav Controls -->
     <div class="arrow-left" (click)="scrollLeft(nav)">
         <img src="assets/images/shared/chevron-left.svg" alt="">
@@ -313,7 +313,7 @@
 </div>
 
 
-<app-withdrawal-request [student]="currentStudent" *ngIf="childService.showWithdrawalReqScreen$|async"></app-withdrawal-request>
+<!-- <app-withdrawal-request [student]="currentStudent" *ngIf="childService.showWithdrawalReqScreen$|async"></app-withdrawal-request> -->
 
 
 

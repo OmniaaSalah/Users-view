@@ -93,14 +93,14 @@ export class IssueCertificateComponent implements OnInit {
     private route:ActivatedRoute,
     private requestsService:SystemRequestService,
 
-  ) { 
+  ) {
   }
 
 
 
   ngOnInit(): void {
 
-  
+
 
     this.userService.currentGuardian.subscribe((res)=> {this.guardian=res;});
 
@@ -115,18 +115,18 @@ export class IssueCertificateComponent implements OnInit {
           "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
         }
       }
-      
+
     }else this.goToFirst();
-    
-    
+
+
 
 
     this.headerService.changeHeaderdata(this.componentHeaderData);
-   
+
   }
 
 
- 
+
 
   getRequestOptions(){
     this.requestsService.getRequestTimline(this.reqInstance).subscribe(res=>{
@@ -154,12 +154,12 @@ export class IssueCertificateComponent implements OnInit {
 
 
   goToFirst(){
-  
+
     this.step=1;
     localStorage.removeItem('currentCertificate')
     this.selectedCertificate=null;
     this.choosenStudents=[];
-    
+
   }
 
 
@@ -183,7 +183,7 @@ export class IssueCertificateComponent implements OnInit {
         })
         this.skeletonShown = false
         return;
-        
+
       }
 
       this.childList = res.students
@@ -193,17 +193,17 @@ export class IssueCertificateComponent implements OnInit {
 
 
   isNextStepRequired(){
-    let arr = [CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate,CertificatesEnum.GoodBehaviorCertificate,CertificatesEnum.DiplomaCertificate]
+    let arr = [CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate,CertificatesEnum.GoodBehaviorCertificate]
     return arr.includes(this.selectedCertificate.value)
   }
-  
+
   selectedStudentsChanged(checked, student) {
-    
+
     if (checked) {
       this.choosenStudents.push(student)
     } else {
       this.choosenStudents.forEach((item, index) => {
-        if (student.id === item.id) { 
+        if (student.id === item.id) {
           this.choosenStudents.splice(index, 1)
         }
       });
@@ -211,7 +211,7 @@ export class IssueCertificateComponent implements OnInit {
   }
 
 
-  
+
   //save other certificate
   onOtherCertificatesSubmitted(){
     this.isBtnLoading=true;
@@ -220,7 +220,7 @@ export class IssueCertificateComponent implements OnInit {
       "certificateType": this.selectedCertificate.value,
       "destination":this.destination || ''
     }
-   
+
       this.issuance.postOtherCertificate(data).subscribe(result=>{
       this.isBtnLoading=false;
       this.display=false;
@@ -228,7 +228,7 @@ export class IssueCertificateComponent implements OnInit {
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.goToFirst();
       }else{
-        if(result?.errorLocalized) 
+        if(result?.errorLocalized)
         {this.toastr.error( result?.errorLocalized[this.lang])}
         else
         {this.toastr.error(this.translate.instant('error happened'))}
@@ -243,26 +243,26 @@ export class IssueCertificateComponent implements OnInit {
   }
 
 
-  onStepChanged() {    
+  onStepChanged() {
 
-    if ( this.selectedCertificate.value == CertificatesEnum.AcademicSequenceCertificate) this.step=3 
+    if ( this.selectedCertificate.value == CertificatesEnum.AcademicSequenceCertificate) this.step=3
 
     if ( this.selectedCertificate.value == CertificatesEnum.BoardCertificate) this.step=4
 
-    if ( this.selectedCertificate.value == CertificatesEnum.GradesCertificate) this.step=5 
+    if ( this.selectedCertificate.value == CertificatesEnum.GradesCertificate) this.step=5
 
-    if ( this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate) this.step=6
+    // if ( this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate) this.step=6
 
 
     if(this.selectedCertificate.value == CertificatesEnum.GoodBehaviorCertificate) this.display = true;
 
     // let arr=[CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate, CertificatesEnum.GoodBehaviorCertificate,'']
     // if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
-    
+
   }
 
 
-  
+
 getFees(certificate) { return Number(this.certificatesFeesList.find(c=>c.certificateType==certificate).fees) }
 
 
@@ -270,6 +270,6 @@ getFees(certificate) { return Number(this.certificatesFeesList.find(c=>c.certifi
 
 goBack() { this.location.back()}
 
-  
+
 
 }

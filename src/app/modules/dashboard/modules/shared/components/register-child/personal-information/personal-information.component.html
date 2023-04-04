@@ -49,6 +49,9 @@
                     <app-identity-info [formGroup]="studentForm"></app-identity-info>
 
                     <div class="grid-container mt-4">
+                      <p class="color-gray-300 fs-4">{{ 'Guardian'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
+
                         <p class="color-gray-300 fs-4">{{ 'shared.nationalityCategory'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
 
@@ -261,6 +264,24 @@
                 </div>
 
                 <ng-container>
+                    <div class="form-set">
+                      <label class="label required">{{'Guardian'|translate}}</label>
+                      <!-- <p-dropdown
+                      [virtualScroll]="true"
+                      [virtualScrollItemSize]="30"
+                      [lazy]="true"
+                      (onLazyLoad)="onLazyLoad($event)"
+                      [filter]="true"
+                      (onFilter)="guardiansFilteration.KeyWord = $event.filter"
+                      formControlName="guardianId"
+                      [options]="AllGuardians"
+                      optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown> -->
+                      <p-dropdown
+                      formControlName="guardianId"
+                      [options]="AllGuardians$ |async"
+                      optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
+                    </div>
+
                     <div class="form-set" formGroupName="motherLanguage">
                         <label class="label required">{{'shared.nativeLanguage'|translate}}</label>
                         <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>

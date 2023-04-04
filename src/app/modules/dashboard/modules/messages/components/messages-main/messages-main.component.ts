@@ -1,5 +1,5 @@
 import { query } from '@angular/animations';
-import { Component, HostBinding, HostListener, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, HostBinding, HostListener, OnInit, EventEmitter, Output, ViewChild, ElementRef, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { tap, forkJoin, debounceTime, distinctUntilChanged, startWith, switchMap, takeUntil } from 'rxjs';
 import { IHeader, INotification } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { MessageService } from '../../service/message.service';
 
@@ -20,6 +21,8 @@ export class MessagesMainComponent implements OnInit {
 
   @ViewChild('readBtn', { read: ElementRef, static:false }) readBtn: ElementRef;
   @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
+
+  lang=inject(TranslationService).lang
 
   messagetSearchText = new FormControl('')
 
@@ -64,10 +67,10 @@ export class MessagesMainComponent implements OnInit {
   filterationForm: FormGroup
   componentHeaderData: IHeader={
 		breadCrump: [
-			{label: this.translate.instant('المحادثات'), routerLink:'/dashboard/messages/messages' }
+			{label: this.translate.instant('dashboard.Messages.messages'), routerLink:'/dashboard/messages/messages' }
 
 		],
-		mainTitle:{ main:this.translate.instant('المحادثات'),sub:this.messages.total},
+		mainTitle:{ main:this.translate.instant('dashboard.Messages.messages'),sub:this.messages.total},
 	}
 
   constructor(private headerService: HeaderService,private formbuilder:FormBuilder, private toastr:ToastrService,private router: Router, private translate: TranslateService, private messageService: MessageService,private spinner:NgxSpinnerService) {

@@ -1,15 +1,15 @@
 <div class="prim-table mt-4" *ngIf="students.totalAllData || students.loading">
-    <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true"> 
+    <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true">
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
             <app-table-caption
-            [hasFilter]="false" 
-            (onExport)="onExport($event)" 
-            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; checkStudentList()" 
+            [hasFilter]="false"
+            (onExport)="onExport($event)"
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; checkStudentList()"
             (onClear)="clearFilter()"
             ></app-table-caption>
         </ng-template>
-        
+
         <ng-template pTemplate="header" let-columns="columns">
             <tr>
                 <!-- <th *ngFor="let col of cols">
@@ -24,7 +24,7 @@
                 <ng-container *ngIf="isGradeHaveTracks">
                     <th class="actions" *permit="claimsEnum.E_U_StudentTrack" ></th>
                 </ng-container>
-                
+
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student >
@@ -57,7 +57,7 @@
                     <ng-container *ngIf="!students.total &&  !students.loading">
                         <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
-                    
+
                     <app-loader></app-loader>
                 </td>
             </tr>
@@ -85,7 +85,7 @@
                 <p class="color-gray-300 fs-4">{{ 'dashboard.schools.student'|translate }}</p>
                 <span class="color-primary mb-2">{{selectedStudent.name |currentLang}}</span>
             </div>
-        
+
 
             <div class="row form-set">
                 <div class="col-md-12">
@@ -94,14 +94,14 @@
                 </div>
             </div>
 
-            <div class="row gx-5 gy-4 form-set">
+            <div class="row gx-5 gy-4 form-set" *ngIf="optionalSubjects$ |async as optionalSubjects">
                 <label class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
-                
-                <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of optionalSubjects$ |async">
+
+                <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of optionalSubjects">
                     <p-checkbox  name="subjects" formControlName="optionalSubjects" [value]="subject.id"></p-checkbox>
                     <label class="label label--sm" for=""> {{subject.name|currentLang}}</label>
                 </div>
-     
+
             </div>
             <div class="d-flex  align-items-center justify-content-end mt-5">
                 <button class="btn btn-primary btn--sm" [disabled]="!changeTrackForm.valid" (click)="changeStudentTrack(changeTrackForm.value)">
