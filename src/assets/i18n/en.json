@@ -793,9 +793,11 @@
         "requestResend":"Request Resend succesfully",
         "lectureDeleted":"Lecture Deleted Successfully",
         "lectureCreated":"Lecture Created Successfully",
-        "lectureUpdated":"Lecture Updated Successfully"
-
-
+        "lectureUpdated":"Lecture Updated Successfully",
+        "degreesUploaded":"ٍSubject Degrees Uploaded Successfully",
+        "degreesShouldBeEntered":"Plesae Enter The Degrees In Attached File",
+        "userNotAllowedToUploadDegrees":"User Not Allowed To Upload Degrees",
+        "fileDataShouldBeReviewed":"Attached File Data Should Be Reviewed"
 
     },
     "dashboard": {
@@ -925,7 +927,7 @@
             "sectionNumber": "Division Number",
             "maxStudentsNumber": "Max StudentsNumber",
             "sectionForSpetialAbilitiesStudents": "Division For Spechial Abilities Students",
-            "sectionManager":"Division Manager",
+            "sectionManager":"Division Teacher",
             "abilityToEnterDegree":  "Ability To Enter Degree",
             "subjectsTeachers": "Subjects Teachers",
             "subjects": "Subjects",
