@@ -624,7 +624,7 @@
         "Write Password": "أكتب كلمة المرور",
         "Write Nick Name": "أكتب كنية المستخدم",
         "Nick Name": "كنية المستخدم",
-        "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic": " كلمة المرور لابد أن لا تقل عن 8 خانات و تحتوي  علي  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي على الأقل",
+        "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic":"كلمة المرور لابد أن لا تقل عن 8 خانات ( تحتوي  علي  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي (#?!@$%^&*-) على الأقل )",
         "Confirm Password Must Match Password": "لابد أن يكون هذ الحقل مطابق لكلمة المرور التي أدخلت ",
         "edit": "تعديل",
         "parentNationalId": "رقم هوية ولي الأمر",

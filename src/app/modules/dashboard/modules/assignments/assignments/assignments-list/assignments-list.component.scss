@@ -9,14 +9,22 @@
 
     ::ng-deep p-table{
         thead.p-datatable-thead tr th{
-            min-width: 11rem;
+            min-width: 12rem;
         
             &.actions{min-width: 17rem; }
         }
         .p-datatable-tbody tr td{
-        min-width: 11rem;
-        &.actions{justify-content: end;min-width: 17rem; }
+        min-width: 12rem;
+        &.actions{
+            justify-content: end;min-width: 17rem;
+            .dropdown-menu {
+         
+                transform: translate3d(100px, -20px, 0px) !important;
+        }
+         }
        }
     }
-
 }
+
+
+

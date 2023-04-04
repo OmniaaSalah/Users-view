@@ -155,7 +155,7 @@ export class NewAccountComponent implements OnInit {
       this.emairatesWay.updateValueAndValidity();
       this.emailWay.clearValidators();
       this.emailWay.updateValueAndValidity();
-      this.phoneWay.setValidators([Validators.required,Validators.pattern('[05]{1}[0-9]{9}')]);
+      this.phoneWay.setValidators([Validators.required,Validators.pattern('(05)[0-9]{8}')]);
       this.account.notificationSource=this.registrationWayFormGrp.value.phoneWay
 
     }
@@ -181,7 +181,7 @@ export class NewAccountComponent implements OnInit {
       this.phoneWay.updateValueAndValidity();
       this.emailWay.clearValidators();
       this.emailWay.updateValueAndValidity();
-      this.emairatesWay.setValidators([Validators.required,Validators.minLength(14),Validators.maxLength(15)]);
+      this.emairatesWay.setValidators([Validators.required,Validators.pattern('(784)[0-9]{12}')]);
       this.account.notificationSource=this.registrationWayFormGrp.value.emairatesWay
     }
     console.log(this.account)

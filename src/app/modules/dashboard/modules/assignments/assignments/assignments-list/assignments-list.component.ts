@@ -19,6 +19,7 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-assignments-list',
@@ -26,6 +27,7 @@ import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
   styleUrls: ['./assignments-list.component.scss']
 })
 export class AssignmentsListComponent implements OnInit {
+  lang = inject(TranslationService).lang
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
   schoolId=''
@@ -91,9 +93,12 @@ export class AssignmentsListComponent implements OnInit {
 
   }
   onSort(e){
-    if(e.order==1) this.filtration.SortBy= 'old'
-    else if(e.order == -1) this.filtration.SortBy= 'update'
-    this.filtration.Page=1
+    if(e.order==-1)
+    {this.filtration.SortBy="ASC"}
+    else
+    {this.filtration.SortBy="desc"}
+    this.filtration.SortColumnName=e.field;
+    this.filtration.Page=1;
      this.getAssignmentList()
    }
 
