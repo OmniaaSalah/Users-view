@@ -61,9 +61,10 @@ export class IndexesComponent implements OnInit {
   sortMe(e)
   {
     if(e.order==-1)
-    {this.filtration.SortBy="update "+e.field;}
+    {this.filtration.SortBy="ASC"}
     else
-    {this.filtration.SortBy="old "+e.field;}
+    {this.filtration.SortBy="desc"}
+    this.filtration.SortColumnName=e.field;
     this.filtration.Page=1;
     this.getAllIndexes();
   }

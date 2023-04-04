@@ -33,7 +33,7 @@ export class AuthenticationService {
   }
   createUAEPassAccount(account)
   {
-    return this.http.post("/Account/UAEPASS/registration",account)
+    return this.http.post(`/Account/UAEPASS/registration?IDn=${account}`)
   }
   confirmOtp(account,otp)
   {

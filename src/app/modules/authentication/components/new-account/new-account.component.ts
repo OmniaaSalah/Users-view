@@ -13,12 +13,14 @@ import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/servic
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.scss']
 })
 export class NewAccountComponent implements OnInit {
+  showInputForm:boolean=true;
   lang = inject(TranslationService).lang
   isBtnLoading:boolean=false;
   currentDate=new Date();
@@ -40,8 +42,9 @@ export class NewAccountComponent implements OnInit {
   registrationWayFormGrp: FormGroup;
   passwordsFormGrp: FormGroup;
   accountFormGrp: FormGroup;
-
+  UAEUnregisteredUser;
   constructor(
+    private router:Router,
     private indexService:IndexesService,
     private translate:TranslateService,
     private sharedService:SharedService,
@@ -136,12 +139,11 @@ export class NewAccountComponent implements OnInit {
     this.authService.isNewAccountOpened.next(false)
     localStorage.removeItem('accountWay');
     localStorage.removeItem('notificationSource');
-    if(localStorage.getItem('redirectToUAEPassSignUp'))   
+    if(localStorage.getItem('UAEUnregisteredUser'))   
     {
-     setTimeout(() => {
+    this.router.navigate(['/auth/login'], {replaceUrl: true});
      window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
-    },100);
-    localStorage.removeItem('redirectToUAEPassSignUp');
+     localStorage.removeItem('UAEUnregisteredUser');
    }
   }
   changeRegistrationField(e)
@@ -200,19 +202,14 @@ export class NewAccountComponent implements OnInit {
 
 sendOtp()
 {
+  var IDn;
   this.isBtnLoading=true;
   if(this.account.accountWay==RegistrationEnum.EmiratesId)
   {
-    this.authService.createUAEPassAccount({IDn:this.account.notificationSource}).subscribe((res)=>{
+    this.authService.createUAEPassAccount(IDn).subscribe((res)=>{
       this.isBtnLoading=false;
       this.closeModel();
       this.toastService.success(this.translate.instant('sign up.account saved successfully'));
-      if(localStorage.getItem('redirectToUAEPassSignUp'))   
-       {
-        setTimeout(() => {
-        window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
-       },2500);
-      }
     },(err)=>{
       this.isBtnLoading=false;
       this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
@@ -349,12 +346,14 @@ confirmOTP()
 checkOpenUAEModelAutomatic()
 {
   this.changeRegistrationField(RegistrationEnum.EmiratesId);
-   if(localStorage.getItem('accountWay'))
+   if(localStorage.getItem('UAEUnregisteredUser'))
    {
     this.registrationWayFormGrp.patchValue({
       registrationWay:localStorage.getItem('accountWay'),
       emairatesWay:localStorage.getItem('notificationSource')
     })
+    this.showInputForm=false
+    this.UAEUnregisteredUser=JSON.parse(localStorage.getItem('UAEUnregisteredUser'))
    }
 }
 }
