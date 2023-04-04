@@ -183,6 +183,8 @@
     "sign up": {
         "Next": "التالي",
         "with": "تسجيل حساب جديد بواسطة",
+        "SignUp":"تسجيل حساب",
+        "BackToLogin":"الدخول بحساب أخر",
         "select...": "أختر...",
         "phoneNumber": "رقم الهاتف المحمول",
         "digitalIdentity": "رقم الهوية الإماراتية",
@@ -731,7 +733,8 @@
         "export": "استيراد ",
         "genderType": {
             "Female": "انثى",
-            "Male": "ذكر"
+            "Male": "ذكر",
+            "Unknown":"غير معروف"
         },
         "addText":"إدخال نص",
         "choose":"أختر",
@@ -1270,7 +1273,7 @@
             "parentInfo":"معلومات ولي الأمر",
             "pendingRequestNum":"عدد الطلبات  التي حالتها 'قيد الاجراء معلق",
             "relatedStudent":"عدد الطلاب المرتبطة بي",
-            "emirateUid":"رقم الهوية الشخصية الإماراتية",
+            "emirateUid":"رقم الهوية الإماراتية",
             "registedDate":"تاريخ التسجيل",
             "requiredAttachment":"المرفقات المطلوبة",
             "registerInSchool":"سجل الإبن فى مدرسة",

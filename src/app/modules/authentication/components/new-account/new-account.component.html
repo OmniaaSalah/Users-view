@@ -1,5 +1,6 @@
 <p-dialog header="{{tittle}}" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openModel" (onHide)="closeModel()" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
-    <ng-template pTemplate="content">
+  <ng-template pTemplate="content">
+    <ng-container *ngIf="showInputForm">
       <ng-container  *ngIf="step==1">
              <div class="sign up">
                 <div class=" mt-5 mb-5 custom-form custom-validation-form " >
@@ -298,13 +299,62 @@
                        </div>
                 </div>
             </ng-container>
+          </ng-container>
+          <ng-container  *ngIf="!showInputForm">
+
+            <div class="row gx-5 mt-5">
+                <div class="col-md-6">
+                    <div class="d-flex mb-5">
+                        <p class="color-gray-300 ">{{ 'shared.Full Name'|translate }}</p>
+                        <span class="color-primary mx-3">{{UAEUnregisteredUser?.fullName|currentLang}}</span>
+                    </div>
+                   
+                    <div class="d-flex mb-5">
+                        <p class="color-gray-300 ">{{ 'shared.birthDay'|translate }}</p>
+                        <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.birthDate|LocalizeDate}}</span>
+                    </div>
+                    <div class="d-flex mb-5">
+                        <p class="color-gray-300 ">{{ 'shared.nationality'|translate }}</p>
+                        <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.nationality|currentLang}}</span>
+                    </div>
+                </div>
+    
+                <div class="col-md-6">
+                  
+                    <div class="d-flex mb-5">
+                        <p class="color-gray-300 ">{{ 'shared.gender'|translate }}</p>
+                        <span class="color-primary mx-3 ">{{'shared.genderType.'+UAEUnregisteredUser?.gender|translate}}</span>
+                    </div>
+                    <div class="d-flex mb-5">
+                        <p class="color-gray-300 ">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                        <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.idn}}</span>
+                    </div>  
+                    <div class="d-flex mb-5">
+                        <p class="color-gray-300 ">{{ 'sign up.phoneNumber'|translate }}</p>
+                        <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.mobile}}</span>
+                    </div> 
+                 
+                </div>
+            </div>
+            <div  class="row gx-5 ">
+                <div class="col-md-12">
+
+                    <div class="d-flex mb-5">
+                        <p class="color-gray-300 ">{{ 'shared.email'|translate }}</p>
+                        <span class="color-primary mx-3 mb-2">{{UAEUnregisteredUser?.email}}</span>
+                    </div>
+
+                </div>
+            </div>
+          </ng-container>
         </ng-template>
         <ng-template pTemplate="footer">
            <ng-container *ngIf="step==1">
             <div class="d-flex align-items-center justify-content-end  ">
               
               <button class="btn btn-primary  " (click)="saveRegistrationWay()" [disabled]="registrationWayFormGrp.invalid||isBtnLoading" >
-                  <span>{{'sign up.Next'| translate}} </span>
+                  <span *ngIf="!showIdentityField">{{'sign up.Next'| translate}} </span>
+                  <span *ngIf="showIdentityField">{{'sign up.SignUp'| translate}} </span>
                   <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
               </button>
           </div>

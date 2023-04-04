@@ -31,12 +31,18 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="indexType">
-                    <p-sortIcon field="indexType"></p-sortIcon>{{'dashboard.Indexes.List Type'|translate}}</th>
-                <th class="mediumrow" pSortableColumn=" indexArabicName">
-                    <p-sortIcon field=" indexArabicName"></p-sortIcon>{{'dashboard.Indexes.Index Name'|translate}}</th>
-                <th class="longrow" pSortableColumn="indexStatus">
-                    <p-sortIcon field="indexStatus"></p-sortIcon>{{'dashboard.Indexes.Index Status'|translate}}</th>
+                <th pSortableColumn="IndexType">
+                    <p-sortIcon field="IndexType"></p-sortIcon>{{'dashboard.Indexes.List Type'|translate}}
+                </th>
+
+                <th class="mediumrow" pSortableColumn="{{lang=='ar' ? 'IndexArabicName' : 'IndexEnglishName'}}">
+                    <p-sortIcon field=" {{lang=='ar' ? 'IndexArabicName' : 'IndexEnglishName'}}"></p-sortIcon>{{'dashboard.Indexes.Index Name'|translate}}
+                </th>
+
+                <th class="longrow" pSortableColumn="IndexStatus">
+                    <p-sortIcon field="IndexStatus"></p-sortIcon>{{'dashboard.Indexes.Index Status'|translate}}
+                </th>
+
                 <th pSortableColumn="edit" class="actions "></th>
 
 
