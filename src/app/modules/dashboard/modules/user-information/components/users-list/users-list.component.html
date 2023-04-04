@@ -30,22 +30,38 @@
 
             <ng-template pTemplate="header" et-columns="columns">
                 <tr>
-                    <th pSortableColumn="fullName">
-                        <p-sortIcon field="fullName"></p-sortIcon>{{'shared.Full Name'|translate}}</th>
-                    <th pSortableColumn="fullName">
-                        <p-sortIcon field="fullName"></p-sortIcon>{{'dashboard.UserInformation.Private Role'|translate}}</th>
-                    <th pSortableColumn="email">
-                        <p-sortIcon field="email"></p-sortIcon>{{'shared.email'|translate}}</th>
-                        <th pSortableColumn="lastLoginDate">
-                            <p-sortIcon field="lastLoginDate"></p-sortIcon>{{'dashboard.UserInformation.lastLoginDate'|translate}}</th>
-                    <th pSortableColumn="emiratesIdNumber">
-                        <p-sortIcon field="emiratesIdNumber"></p-sortIcon>{{'shared.Identity Number'|translate}}</th>
-                    <th pSortableColumn="phoneNumber">
-                        <p-sortIcon field="phoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate}}</th>
-                    <th pSortableColumn="createdDate">
-                        <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-                    <th pSortableColumn="status">
-                        <p-sortIcon field="status"></p-sortIcon>{{'dashboard.UserInformation.User Status'|translate}}</th>
+                    <th pSortableColumn="{{lang=='ar' ? 'ArabicFullName' : 'FullName'}}">
+                        <p-sortIcon field="{{lang=='ar' ? 'ArabicFullName' : 'FullName'}}"></p-sortIcon>{{'shared.Full Name'|translate}}
+                    </th>
+
+                    <th pSortableColumn="{{lang=='ar' ? 'RoleArabicName' : 'RoleEnglishName'}}">
+                        <p-sortIcon field="{{lang=='ar' ? 'RoleArabicName' : 'RoleEnglishName'}}"></p-sortIcon>{{'dashboard.UserInformation.Private Role'|translate}}
+                    </th>
+
+                    <th pSortableColumn="Email">
+                        <p-sortIcon field="Email"></p-sortIcon>{{'shared.email'|translate}}
+                    </th>
+
+                    <th pSortableColumn="LastLoginDate">
+                            <p-sortIcon field="LastLoginDate"></p-sortIcon>{{'dashboard.UserInformation.lastLoginDate'|translate}}
+                    </th>
+
+                    <th pSortableColumn="EmiratesIdNumber">
+                        <p-sortIcon field="EmiratesIdNumber"></p-sortIcon>{{'shared.Identity Number'|translate}}
+                    </th>
+
+                    <th pSortableColumn="PhoneNumber">
+                        <p-sortIcon field="PhoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate}}
+                    </th>
+
+                    <th pSortableColumn="CreatedDate">
+                        <p-sortIcon field="CreatedDate"></p-sortIcon>{{'shared.Created Date'|translate}}
+                    </th>
+
+                    <th pSortableColumn="IsActive">
+                        <p-sortIcon field="IsActive"></p-sortIcon>{{'dashboard.UserInformation.User Status'|translate}}
+                    </th>
+                    
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>
 
 
