@@ -33,7 +33,7 @@ export class NewAccountComponent implements OnInit {
   genderList=inject(SharedService).genderOptions;
   otp:string;
   step:number = 1;
-  timeLeft: number = 600;
+  timeLeft: number = 60;
   interval;
   showPhoneField:boolean=false;
   showIdentityField:boolean=false;
@@ -203,7 +203,8 @@ export class NewAccountComponent implements OnInit {
 sendOtp()
 {
   var IDn;
-  this.isBtnLoading=true;
+  if(this.timeLeft)
+  {this.isBtnLoading=true;}
   if(this.account.accountWay==RegistrationEnum.EmiratesId)
   {
     this.authService.createUAEPassAccount(IDn).subscribe((res)=>{
@@ -221,7 +222,7 @@ sendOtp()
     this.toastService.success(this.translate.instant('shared.Otp send successfully'));
     this.tittle=this.translate.instant('sign up.confirmed with OTP')
     this.step=2;
-    this.timeLeft=600;
+    this.timeLeft=60;
     this.startTimer();
   },(err)=>{
     this.isBtnLoading=false;
@@ -278,7 +279,7 @@ savePersonalInformation()
 
   this.authService.saveAccount(information).subscribe((res)=>{
     this.isBtnLoading=false;
-  if(res.statusCode=="BadRequest")
+  if(res.statusCode!="OK")
   {
     this.toastService.error(this.translate.instant(res.error));
     this.closeModel();
@@ -338,7 +339,7 @@ confirmOTP()
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
     this.step=2;
-    this.timeLeft=600;
+    this.timeLeft=60;
     this.startTimer();
   })
 
