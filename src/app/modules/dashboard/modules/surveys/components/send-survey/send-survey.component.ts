@@ -55,9 +55,7 @@ export class SendSurveyComponent implements OnInit ,OnDestroy{
   ) {
 this.surveyFormGrp= this.fb.group({
   appearanceDate:[null, [Validators.required]],
-  disAppearanceDate:[null, [Validators.required]],
-  appearanceTime:[null, [Validators.required]],
-  disAppearanceTime:[null, [Validators.required]],
+  disAppearanceDate:[null, [Validators.required]]
 
 })
     }
@@ -83,13 +81,6 @@ this.surveyFormGrp= this.fb.group({
     return this.surveyFormGrp.controls['disAppearanceDate'] as FormControl;
   }
 
-  get appearanceTime() {
-    return this.surveyFormGrp.controls['appearanceTime'] as FormControl;
-  }
-
-  get disAppearanceTime() {
-    return this.surveyFormGrp.controls['disAppearanceTime'] as FormControl;
-  }
 
   getParentList() {
 		
@@ -122,13 +113,11 @@ this.surveyFormGrp= this.fb.group({
       var survey={
         "surveyId": Number(this.surveyId),
         "guardianIds": this.savedGuardianIds,
-        "appearanceDate":this.formateDate(this.surveyFormGrp.value.appearanceDate),
-        "disAppearanceDate":this.formateDate(this.surveyFormGrp.value.disAppearanceDate),
-        "appearanceTime": this.surveyFormGrp.value.appearanceTime,
-        "disAppearanceTime": this.surveyFormGrp.value.disAppearanceTime,
-        // "surveyLink": `https://daleel-qa-app.azurewebsites.net/dashboard/educational-settings/surveys/reply-survey/${this.surveyId}`
+        "appearanceDate":this.surveyFormGrp.value.appearanceDate,
+        "disAppearanceDate":this.surveyFormGrp.value.disAppearanceDate,
+        "appearanceTime": this.surveyFormGrp.value.appearanceDate,
+        "disAppearanceTime": this.surveyFormGrp.value.disAppearanceDate
       }
-   
       this.surveyService.sendSurvey(survey).subscribe(response=>{
         this.isBtnLoading=false;
         if(response.statusCode!='BadRequest')
@@ -172,10 +161,7 @@ this.surveyFormGrp= this.fb.group({
    
     this.surveyFormGrp.patchValue({
       disAppearanceDate:this.editSurvey.disApperanceDate?new Date(this.editSurvey.disApperanceDate) :null,
-      appearanceDate:this.editSurvey.apperanceDate? new Date(this.editSurvey.apperanceDate):null,
-      appearanceTime:this.editSurvey.apperanceDate? new Date(this.editSurvey.apperanceDate):null,
-      disAppearanceTime: this.editSurvey.disApperanceDate? new Date(this.editSurvey.disApperanceDate):null
-
+      appearanceDate:this.editSurvey.apperanceDate? new Date(this.editSurvey.apperanceDate):null
     })
     
     this.savedGuardianIds=this.editSurvey.targetGuardianIds;
@@ -187,21 +173,6 @@ this.surveyFormGrp= this.fb.group({
 }
 
 
-
-formateDate(date :Date)
-{
-  let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
-  return d.split('.')[0]
-}
-
- currentApperanceTime()
- {
-  if(!this.appearanceTime.value)
-    {
-      this.appearanceTime.setValue(new Date(this.appearanceDate.value))
-    }
-
- }
  onScroll()
  {
 
@@ -230,6 +201,16 @@ formateDate(date :Date)
     this.allSelectedGuardian=[];
     this.savedGuardianIds=this.allSelectedGuardian
   }
+ }
+ clearFilter()
+ {
+    this.filtration.KeyWord =''
+    this.filtration.emiretesId= null;
+    this.filtration.schoolId= null;
+    this.filtration.gradeId= null;
+    this.parent.list=[];
+    this.filtration.Page=0;
+     this.getParentList()
  }
 
  ngOnDestroy(): void {

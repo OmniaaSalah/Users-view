@@ -13,12 +13,14 @@ import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/servic
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.scss']
 })
 export class NewAccountComponent implements OnInit {
+  showInputForm:boolean=true;
   lang = inject(TranslationService).lang
   isBtnLoading:boolean=false;
   currentDate=new Date();
@@ -31,7 +33,7 @@ export class NewAccountComponent implements OnInit {
   genderList=inject(SharedService).genderOptions;
   otp:string;
   step:number = 1;
-  timeLeft: number = 600;
+  timeLeft: number = 60;
   interval;
   showPhoneField:boolean=false;
   showIdentityField:boolean=false;
@@ -40,8 +42,8 @@ export class NewAccountComponent implements OnInit {
   registrationWayFormGrp: FormGroup;
   passwordsFormGrp: FormGroup;
   accountFormGrp: FormGroup;
-
   constructor(
+    private router:Router,
     private indexService:IndexesService,
     private translate:TranslateService,
     private sharedService:SharedService,
@@ -77,7 +79,6 @@ export class NewAccountComponent implements OnInit {
   ngOnInit(): void {
     this.tittle=this.translate.instant("login.Create New User Account");
     this.getAuthenticationWays();
-    this.checkOpenUAEModelAutomatic()
   }
   get registrationWay() {
     return this.registrationWayFormGrp.controls['registrationWay'] as FormControl;
@@ -136,13 +137,6 @@ export class NewAccountComponent implements OnInit {
     this.authService.isNewAccountOpened.next(false)
     localStorage.removeItem('accountWay');
     localStorage.removeItem('notificationSource');
-    if(localStorage.getItem('redirectToUAEPassSignUp'))   
-    {
-     setTimeout(() => {
-     window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
-    },100);
-    localStorage.removeItem('redirectToUAEPassSignUp');
-   }
   }
   changeRegistrationField(e)
   {
@@ -200,19 +194,15 @@ export class NewAccountComponent implements OnInit {
 
 sendOtp()
 {
-  this.isBtnLoading=true;
+
+  if(this.timeLeft)
+  {this.isBtnLoading=true;}
   if(this.account.accountWay==RegistrationEnum.EmiratesId)
   {
-    this.authService.createUAEPassAccount({IDn:this.account.notificationSource}).subscribe((res)=>{
+    this.authService.createUAEPassAccount(this.account.notificationSource).subscribe((res)=>{
       this.isBtnLoading=false;
       this.closeModel();
       this.toastService.success(this.translate.instant('sign up.account saved successfully'));
-      if(localStorage.getItem('redirectToUAEPassSignUp'))   
-       {
-        setTimeout(() => {
-        window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
-       },2500);
-      }
     },(err)=>{
       this.isBtnLoading=false;
       this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
@@ -224,7 +214,7 @@ sendOtp()
     this.toastService.success(this.translate.instant('shared.Otp send successfully'));
     this.tittle=this.translate.instant('sign up.confirmed with OTP')
     this.step=2;
-    this.timeLeft=600;
+    this.timeLeft=60;
     this.startTimer();
   },(err)=>{
     this.isBtnLoading=false;
@@ -281,7 +271,7 @@ savePersonalInformation()
 
   this.authService.saveAccount(information).subscribe((res)=>{
     this.isBtnLoading=false;
-  if(res.statusCode=="BadRequest")
+  if(res.statusCode!="OK")
   {
     this.toastService.error(this.translate.instant(res.error));
     this.closeModel();
@@ -341,20 +331,10 @@ confirmOTP()
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
     this.step=2;
-    this.timeLeft=600;
+    this.timeLeft=60;
     this.startTimer();
   })
 
 }
-checkOpenUAEModelAutomatic()
-{
-  this.changeRegistrationField(RegistrationEnum.EmiratesId);
-   if(localStorage.getItem('accountWay'))
-   {
-    this.registrationWayFormGrp.patchValue({
-      registrationWay:localStorage.getItem('accountWay'),
-      emairatesWay:localStorage.getItem('notificationSource')
-    })
-   }
-}
+
 }

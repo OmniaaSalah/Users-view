@@ -182,9 +182,11 @@
     "sign up": {
         "Next": "Next",
         "with": "Sign Up With",
+        "SignUp":"Sign Up",
+        "BackToLogin":  "Back To Login",
         "select...": "select...",
         "phoneNumber":  "Phone Number",
-        "digitalIdentity": "UAE Pass",
+        "digitalIdentity": "Emairates ID",
         "email":"Email",
         "phoneNumberInCaseNotHaveEmiratesID": "Phone Number InCase NotHave EmiratesID",
         "emailInCaseNotHaveEmiratesID": "Email InCase NotHave EmiratesID",
@@ -627,7 +629,8 @@
         "export": "Export",
         "genderType": {
             "Female":  "Female",
-            "Male": "Male"
+            "Male": "Male",
+            "Unknown":"Unknown"
         },
         "addText":"Add Text",
         "choose": "Choose",
@@ -1548,8 +1551,8 @@
             "survey added Successfully": "Survey added successfully",
             "survey sent Successfully": "Survey sent successfully",
             "survey edited Successfully": "Survey edited successfully",
-            "Survey disAppearanceDate": "Survey disAppearanceDate",
-            "Survey appearanceDate": "Survey appearanceDate",
+            "SurveyAppearanceDateAndTime": "Survey Appearance Date And Time",
+            "SurveyDisAppearanceDateAndTime": "Survey DisAppearance Date And Time",
             "Survey appearanceTime": "Survey appearanceTime",
             "Survey disAppearanceTime": "Survey disAppearanceTime",
             "Add Guardian":"Add guardian",

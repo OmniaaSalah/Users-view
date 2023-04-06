@@ -155,3 +155,90 @@
 <ng-container *ngIf="openResetModel">
   <app-forget-password openResetModel="openResetModel"></app-forget-password>
 </ng-container>
+
+
+
+<div class="confirm-model">
+
+  <p-dialog [(visible)]="openConfimModel" [closable]="false" [modal]="true" [style]="{width: '45vw'}" >
+      <ng-template pTemplate="content">
+         <div class="d-flex flex-column justify-content-center align-items-center gap-4">
+
+                <img src="assets/images/Login/identity.svg" alt="">
+                <p class="fs-3 text-center" > {{confirmationMessage}}</p>
+         </div>
+          <ng-container *ngIf="statusCode=='NotFound'">
+           
+
+            
+                <div class="row gx-5 mt-5">
+                  <div class="col-md-6">
+                      <div class="d-flex ">
+                          <p class="color-gray-300 ">{{ 'shared.Full Name'|translate }}</p>
+                          <span class="color-primary mx-3">{{UAEUnregisteredUser?.fullName|currentLang}}</span>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="d-flex ">
+                          <p class="color-gray-300 ">{{ 'shared.birthDay'|translate }}</p>
+                          <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.birthDate|LocalizeDate}}</span>
+                      </div>
+                  </div>
+                </div>
+                <div class="row gx-5 mt-4">
+                  <div class="col-md-6">
+                      <div class="d-flex ">
+                          <p class="color-gray-300 ">{{ 'shared.nationality'|translate }}</p>
+                          <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.nationality?.en}}</span>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                   
+                      <div class="d-flex ">
+                          <p class="color-gray-300 ">{{ 'sign up.phoneNumber'|translate }}</p>
+                          <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.mobile}}</span>
+                      </div> 
+                
+                  </div>
+                  </div>
+                  <div class="row gx-5 mt-4">
+                  <div class="col-md-6">
+                    
+                      <div class="d-flex ">
+                          <p class="color-gray-300 ">{{ 'shared.gender'|translate }}</p>
+                          <span class="color-primary mx-3 ">{{'shared.genderType.'+UAEUnregisteredUser?.gender|translate}}</span>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="d-flex ">
+                          <p class="color-gray-300 ">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                          <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.idn}}</span>
+                      </div>  
+                  </div>
+                  </div>
+                  <div class="row gx-5 mt-4">
+                    <div class="col-md-12">
+                      <div class="d-flex ">
+                        <p class="color-gray-300 ">{{ 'shared.email'|translate }}</p>
+                        <span class="color-primary mx-3 mb-2">{{UAEUnregisteredUser?.email}}</span>
+                     </div>
+                    </div>
+                  </div>
+                   
+
+          </ng-container>
+          
+          <div class="d-flex align-items-center gap-4 justify-content-center mt-5">
+            <ng-container *ngIf="statusCode=='NotFound'">
+              <button (click)="openUAEAccount()" class="btn btn-primary" [disabled]="isUAeAccountBtnLoading">
+                {{'sign up.SignUp' |translate}}
+                <div class="spinner-border text-light" role="status" [hidden]="!isUAeAccountBtnLoading"></div>
+              </button>
+              <button (click)="closeConfirmationModel()" class="btn btn-primary " >{{'sign up.BackToLogin' |translate}}</button>
+            </ng-container>
+                <button *ngIf="statusCode!='NotFound'" (click)="closeConfirmationModel()" class="btn btn-primary">{{'shared.close' |translate}}</button>
+          </div>
+     
+      </ng-template>
+  </p-dialog>
+</div>

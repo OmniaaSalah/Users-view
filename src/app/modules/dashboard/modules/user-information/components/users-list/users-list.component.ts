@@ -96,7 +96,7 @@ export class ViewListOfUsersComponent implements OnInit {
 
     this.userInformation.GetRoleList().subscribe(response => {
 		  this.roles = response;
-      this.filtration.roleId=[this.roles.find(role=>role?.code=='SPEA')?.id]
+      this.filtration.roleId=[this.roles.find(role=>role?.code=='Admin')?.id]
       this.getUsersList();
 		})
   }
@@ -117,9 +117,10 @@ export class ViewListOfUsersComponent implements OnInit {
   }
   sortMe(e){   
     if(e.order==-1)
-    {this.filtration.SortBy="update "+e.field;}
+    {this.filtration.SortBy="ASC"}
     else
-    {this.filtration.SortBy="old "+e.field;}
+    {this.filtration.SortBy="desc"}
+    this.filtration.SortColumnName=e.field;
     this.filtration.Page=1;
     this.getUsersList();
   }

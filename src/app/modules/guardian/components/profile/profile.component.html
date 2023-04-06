@@ -8,9 +8,9 @@
     <button  (click)="onEditMode=false"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
   </div>
     <div class="border-dark radius-15 px-5 py-6 bg-white">
-        <div class="float-btn" (click)="onEditMode=true;getGuardianById()" *ngIf="!onEditMode">
+        <!-- <div class="float-btn" (click)="onEditMode=true;getGuardianById()" *ngIf="!onEditMode">
             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
-        </div>
+        </div> -->
         <ng-container *ngIf="!onEditMode">
         <div class="row gx-58 mt-5">
             <div class="col-md-5">

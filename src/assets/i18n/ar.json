@@ -183,6 +183,8 @@
     "sign up": {
         "Next": "التالي",
         "with": "تسجيل حساب جديد بواسطة",
+        "SignUp":"تسجيل حساب",
+        "BackToLogin":"الدخول بحساب أخر",
         "select...": "أختر...",
         "phoneNumber": "رقم الهاتف المحمول",
         "digitalIdentity": "رقم الهوية الإماراتية",
@@ -733,7 +735,8 @@
         "export": "استيراد ",
         "genderType": {
             "Female": "انثى",
-            "Male": "ذكر"
+            "Male": "ذكر",
+            "Unknown":"غير معروف"
         },
         "addText":"إدخال نص",
         "choose":"أختر",
@@ -900,7 +903,7 @@
             "Are you sure that you want": "هل أنت متاكد من كونك تريد",
             "If you confirm this,Notification will be send to every school to inform them to plan to new schoolyear": "بمجرد الضغط على زر التأكيد، سيتم إرسال إشعار إلى كافة مدارس الهيئة لإعلامهم بإمكانية البدء للتخطيط للسنة الدراسيّة التاليّة",
             "add subject": "إضافة مادة",
-            "Is in finalresult": "تندرج ضمن المحموع العام",
+            "Is in finalresult": "تندرج ضمن المجموع النهائي",
             "Maximum GPA": "الحد الأقصي للمعدل التراكمي",
             "GPA": "معدل تراكمي",
             "Enter Maximum GPA": "إدخل الحد الأقصي للمعدل التراكمي",
@@ -1272,7 +1275,7 @@
             "parentInfo":"معلومات ولي الأمر",
             "pendingRequestNum":"عدد الطلبات  التي حالتها 'قيد الاجراء معلق",
             "relatedStudent":"عدد الطلاب المرتبطة بي",
-            "emirateUid":"رقم الهوية الشخصية الإماراتية",
+            "emirateUid":"رقم الهوية الإماراتية",
             "registedDate":"تاريخ التسجيل",
             "requiredAttachment":"المرفقات المطلوبة",
             "registerInSchool":"سجل الإبن فى مدرسة",
@@ -1549,8 +1552,8 @@
             "survey added Successfully": "تمّ إنشاء استبيان جديد بنجاح",
             "survey sent Successfully": "تمّ إرسال الاستبيان بنجاح",
             "survey edited Successfully": "تمّ تعديل استبيان بنجاح",
-            "Survey disAppearanceDate": "تاريخ إختفاء الاستبيان",
-            "Survey appearanceDate": "تاريخ ظهور الاستبيان",
+            "SurveyDisAppearanceDateAndTime": "تاريخ و وقت إختفاء الاستبيان",
+            "SurveyAppearanceDateAndTime": "تاريخ و وقت ظهور الاستبيان",
             "Survey appearanceTime": "وقت ظهور الاستبيان",
             "Survey disAppearanceTime": "وقت إختفاء الاستبيان",
             "Add Guardian":"إضافة أولياء الأمور",

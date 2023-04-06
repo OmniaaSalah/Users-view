@@ -1,5 +1,6 @@
 <p-dialog header="{{tittle}}" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openModel" (onHide)="closeModel()" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
-    <ng-template pTemplate="content">
+  <ng-template pTemplate="content">
+    <ng-container >
       <ng-container  *ngIf="step==1">
              <div class="sign up">
                 <div class=" mt-5 mb-5 custom-form custom-validation-form " >
@@ -78,6 +79,10 @@
                 <div class="OTP pt-3 pb-5">
     
                     {{'sign up.Pleaze enter OTP that send to your Account'|translate}}
+                    <div class="justify-content-center w-50 d-flex" [hidden]="!timeLeft">
+                        <span >{{'sign up.through'|translate}}</span>
+                        <span  ><b>{{timeLeft}} {{'sign up.second'|translate}}</b></span>
+                    </div>
                     
                 </div>
                 <div class="mt-5 mb-5" >
@@ -96,15 +101,13 @@
                 </div>
                 <div class="again-OTP pt-5 pb-5">
                             
-                        <div>
+                        <div  [hidden]="timeLeft">
                             <span>{{'sign up.not have OTP yet ?'|translate}}</span>
-                            <button class="" (click)="sendOtpAgain()"><a class="color-skyBlue-400">{{'sign up.send OTP again'|translate}}</a></button>
-                            <span >{{'sign up.through'|translate}}</span>
+                            <button class="" (click)="sendOtpAgain()" ><a class="color-skyBlue-400">{{'sign up.send OTP again'|translate}}</a></button>
+                            
                         </div>         
                 
-                            <div>
-                                <span class="second" ><b>{{timeLeft}} {{'sign up.second'|translate}}</b></span>
-                            </div>
+                            
                 
                 
                 </div>
@@ -298,15 +301,18 @@
                        </div>
                 </div>
             </ng-container>
+          </ng-container>
         </ng-template>
         <ng-template pTemplate="footer">
            <ng-container *ngIf="step==1">
             <div class="d-flex align-items-center justify-content-end  ">
               
-              <button class="btn btn-primary  " (click)="saveRegistrationWay()" [disabled]="registrationWayFormGrp.invalid||isBtnLoading" >
-                  <span>{{'sign up.Next'| translate}} </span>
+              <button class="btn btn-primary  "  (click)="saveRegistrationWay()" [disabled]="registrationWayFormGrp.invalid||isBtnLoading" >
+                  <span *ngIf="!showIdentityField">{{'sign up.Next'| translate}} </span>
+                  <span *ngIf="showIdentityField">{{'sign up.SignUp'| translate}} </span>
                   <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
               </button>
+              
           </div>
         </ng-container>
         <ng-container  *ngIf="step==2">

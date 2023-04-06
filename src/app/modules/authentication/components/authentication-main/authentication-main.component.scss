@@ -2,7 +2,7 @@
 @import 'src/assets/css/components/forms.scss';
 @import 'src/assets/css/components/validation-form.scss';
 @import 'src/assets/css/components/message.scss';
-
+@import '/src/app/shared/components/confirm-model/confirm-model.component.scss';
 
 .spinner.spinner-border{
   color: $color-primary !important;
