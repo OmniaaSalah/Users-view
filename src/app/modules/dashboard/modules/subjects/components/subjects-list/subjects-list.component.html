@@ -52,8 +52,8 @@
             <td  >{{e?.subjectName|currentLang}}</td>
             <td   *ngIf="e?.schoolName[lang]">{{e?.schoolName|currentLang}}</td>
             <td  *ngIf="!e?.schoolName[lang]" >{{'SPEA'|translate}}</td>
-            <td   >{{e?.curriculumsName|currentLang}}</td>
             <td  >{{e?.schoolCode}}</td>
+            <td   >{{e?.curriculumsName|currentLang}}</td>
             <td   >{{e?.evaluationType|translate}}</td>
             <td   *ngIf="e?.creatorName">{{e?.creatorName}}</td>
             <td  *ngIf="!e?.creatorName" >{{'shared.notFound'|translate}}</td>

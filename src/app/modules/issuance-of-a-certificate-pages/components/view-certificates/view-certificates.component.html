@@ -1,3 +1,6 @@
+
+
+<h3 class="heading heading--secondary color-primary mb-4">{{'dashboard.parents.certificateList' | translate}}</h3>
 <div class="prim-table" *ngIf="allCertificates.totalAllData || allCertificates.loading">
     <app-table-caption [hasExport]="false" (onFilter)="filtration.Page=1;getAllCertificates()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllCertificates()" (onClear)="clearFilter()">
         <div class="row gx-5 form-set">
