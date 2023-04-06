@@ -69,14 +69,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   currentStudent:Student
 
 
-
-    booleanOptions = this.sharedService.booleanOptions
-    genderOptions = this.sharedService.genderOptions
-    countries$ = this.countriesService.getCountries()
-
-
-    isLoading
-
     // << FORMS >> //
     onSubmit =false
 
@@ -98,7 +90,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       gender:['', Validators.required],
       nationalityId:[0 , Validators.required],
       religionId:[1, Validators.required],
-      isTalented: ['', Validators.required],
+      isTalented: [''],
 
       reasonForNotHavingEmiratesId:[null],
       passportId:[],

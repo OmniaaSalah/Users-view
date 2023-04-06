@@ -118,6 +118,12 @@
                             <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.gender=='Female' ? ('shared.genderType.Female'|translate): 'shared.genderType.Male'|translate}}</h4>
                         </div>
+
+                        <div class="col-2 d-flex align-items-center gap-5">
+                          <p class="color-gray-300 fs-4">{{ 'shared.religion'|translate }}</p>
+                          <h4 class="color-primary mb-2">{{child?.religion?.name |currentLang}}</h4>
+                      </div>
+
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.birthDate | LocalizeDate}}</h4>
@@ -182,10 +188,20 @@
                         </div>
 
                         <div class="form-set col-md-4">
+                          <label class="label required">{{'shared.religion'|translate}}</label>
+                          <p-dropdown formControlName="religionId" [options]="religion$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.religion' |translate}}"></p-dropdown>
+                      </div>
+
+                        <div class="form-set col-md-4">
                             <label class="label required">{{'shared.birthDay'|translate}}</label>
                             <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
                         </div>
 
+
+                        <div class="form-set col-md-4">
+                          <label class="label required">{{'TheReasonForLackOfIdentification'|translate}}</label>
+                          <p-dropdown formControlName="reasonForNotHavingEmiratesId" [options]="NoIdentityReason$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
+                        </div>
 
                         <div class="form-set col-md-4">
                             <label class="label required">{{'shared.nationality'|translate}}</label>

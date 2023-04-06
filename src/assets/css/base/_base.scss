@@ -56,7 +56,8 @@ html {
     }
 
     // scroll-behavior: smooth;
-
+    scrollbar-color: #B6B6B6 #F2F2F2;
+    scrollbar-width: thin;
     ::-webkit-scrollbar {
         width: 7px;
         height: 6px;

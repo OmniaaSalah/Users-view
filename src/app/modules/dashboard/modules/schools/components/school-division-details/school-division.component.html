@@ -210,29 +210,37 @@
 
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Calendar >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==4">
+
+                              <ng-container  *ngIf="events.length" >
                                 <div class="d-flex align-items-center gap-3 mb-6" *permit="claimsEnum.E_U_DivisionLecuture">
                                     <img src="assets/images/shared/info-skyBlue.svg" alt="">
                                     <p class="color-primary">{{'dashboard.schools.abilityToClickOnClassAndAddSubjects'|translate}}</p>
                                 </div>
 
-                                <app-calender *ngIf="events" [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
+                                <app-calender [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
+                              </ng-container>
 
-                                <ng-container *ngIf="!events">
-                                    <div class="row g-5">
-                                        <div class="col-md-3">
-                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-                                        </div>
-                                    </div>
-                                </ng-container>
+
+                              <ng-container *ngIf="!events">
+                                  <div class="row g-5">
+                                      <div class="col-md-3">
+                                          <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                      </div>
+                                      <div class="col-md-3">
+                                          <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                      </div>
+                                      <div class="col-md-3">
+                                          <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                      </div>
+                                      <div class="col-md-3">
+                                          <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                      </div>
+                                  </div>
+                              </ng-container>
+
+                                <ng-container *ngIf="!events.length">
+                                  <app-informative-block subTitle="{{'emptyList.noLectures' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                              </ng-container>
 
                             </ng-container>
 

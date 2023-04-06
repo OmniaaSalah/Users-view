@@ -142,7 +142,7 @@ const routes: Routes = [
       },
       {
         path: 'manager-tools/notifications',
-        loadChildren: () => import('./modules/notifications-list/notifications-list.module').then(m => m.NotificationsListModule),
+        loadChildren: () => import('./modules/notifications-list/notifications-setting.module').then(m => m.NotificationsSettingModule),
         canActivate: [ClaimsGuard],
         data:{allowedClaims: ClaimsEnum.S_MenuItem_Setting}
       },

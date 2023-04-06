@@ -73,16 +73,6 @@
                 }
 
 
-                .signup{
-                    text-align: center;
-
-                    margin-top: 2rem;
-                        a{
-                            font-size: 16px;
-                            text-decoration-line: underline;
-                        }
-
-                   }
                    .identity{
                     &.btn{
                         transition: all .2s ease-in-out;
@@ -104,20 +94,30 @@
 
 }
 
-.p-tooltip	{
-    left: 6rem !important;
-    top: 110% !important;
+.toolTip	{
 
-    .p-tooltip-text	{
-        padding: 1.2rem;
-        background-color: $color-gray-50 !important;
-        color: $color-gray-700 !important;
-        font-size: 1.28rem;
-        text-align: center;
-        width: 260%;
-        border-radius: 12px;
-        border: 1px solid $color-gray-400;
+  &:hover{
+    .tip{
+      opacity: 1;
+      visibility: visible;
 
+    }
+  }
+
+  .tip	{
+    visibility: hidden;
+    bottom: -11rem;
+      right: -7rem;
+      padding: 1.2rem;
+      background-color: $color-gray-50 !important;
+      color: $color-gray-700 !important;
+      font-size: 1.28rem;
+      text-align: center;
+      width: 30rem;
+      border-radius: 12px;
+      border: 1px solid $color-gray-400;
+      opacity: 0;
+      transition: opacity .2s ease-in;
     }
 }
 

@@ -46,7 +46,7 @@
             <div class="row gx-5">
                 <div class="col-md-4">
                     <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.StudentInfo'|translate}}</h3>
-                    <app-identity-info [formGroup]="studentForm"></app-identity-info>
+                    <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
 
                     <div class="grid-container mt-4">
                       <p class="color-gray-300 fs-4">{{ 'Guardian'|translate }}</p>
@@ -95,8 +95,8 @@
                             <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
                             <span class="color-primary mb-2">{{student.passportId}}</span>
 
-                            <p class="color-gray-300 fs-4">{{'shared.expireDate'|translate}}</p>
-                            <span class="color-primary mb-2">{{student.passportIdExpirationDate |LocalizeDate}}</span>
+                            <!-- <p class="color-gray-300 fs-4">{{'shared.expireDate'|translate}}</p>
+                            <span class="color-primary mb-2">{{student.passportIdExpirationDate |LocalizeDate}}</span> -->
 
                         </div>
                     </ng-container>
@@ -212,7 +212,7 @@
             <div class="col-md-4">
                 <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Information'|translate}}</h3>
 
-                <app-identity-info [formGroup]="studentForm"></app-identity-info>
+                <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
 
                 <ng-container *ngIf="student.emiratesId">
                     <div class="d-flex gap-5 align-items-center mt-4 fs-4">
@@ -220,18 +220,18 @@
                         <span class="color-primary">{{student.emiratesId}}</span>
                         <a class="color-skyBlue-500" (click)="openChangeIdentityModel.emit()">ارسال طلب تعديل </a>
                     </div>
-                    <div class="grid-container mt-5">
+                    <!-- <div class="grid-container mt-5">
 
                         <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
                         <span class="color-primary mb-2">{{student.emiratesIdExpirationDate | LocalizeDate}}</span>
 
-                    </div>
+                    </div> -->
                 </ng-container>
 
                 <ng-container *ngIf="!student.emiratesId">
                     <div class="grid-container mt-5">
                         <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
-                        <span class="color-primary mb-2">{{'shared.notFound' |translate}}}</span>
+                        <span class="color-primary mb-2">{{'shared.notFound' |translate}}</span>
                     </div>
 
                     <div class=" custom-form mt-4" *ngIf="reasonForNotHaveIdentityOptions$ | async as options">
@@ -245,10 +245,10 @@
                             <p-inputNumber formControlName="passportId" name="identity" [useGrouping]="false" [maxlength]="15" [minlength]="15" placeholder="{{ 'shared.passportId'|translate }}"></p-inputNumber>
                         </div>
 
-                        <div class="form-set">
+                        <!-- <div class="form-set">
                             <label class="label">{{'shared.expireDate'|translate}}</label>
                             <p-calendar formControlName="passportIdExpirationDate"  useUtc dateFormat="DD dd-mm-yy"  icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
-                        </div>
+                        </div> -->
                     </div>
 
 

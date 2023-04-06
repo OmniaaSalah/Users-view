@@ -168,7 +168,7 @@ export class IssueCertificateComponent implements OnInit {
     this.issuance.getParentsChild(id).subscribe(res => {
 
       if(this.selectedCertificate.value == CertificatesEnum.TransferCertificate){
-        this.childList =[...res.students, ...res.studentsWithdrawal ||[]]
+        this.childList =[...res.studentsWithdrawal ||[]]
         this.skeletonShown = false
         return;
 

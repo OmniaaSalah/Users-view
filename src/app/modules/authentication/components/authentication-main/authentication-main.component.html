@@ -7,6 +7,7 @@
 
     </div>
     <div class="col-lg-8 end-side">
+
       <div class="inner">
 
 
@@ -14,7 +15,7 @@
           <img class="first-img" src="assets/images/Login/elSharkaHeader.svg" alt="">
           <div class="language mt-3">
             <a (click)="changeLanguage()">
-              <p>{{languge=='en' ? 'عربي': 'English'}}</p>
+              <p [class]="languge=='ar'? 'font-en' : 'font-ar'">{{languge=='en' ? 'عربي': 'English'}}</p>
             </a>
           </div>
 
@@ -31,7 +32,7 @@
             </div>
 
 
-            <div class="custom-form custom-validation-form mt-5 container position-relative">
+            <div class="custom-form custom-validation-form my-5 container position-relative">
               <form [formGroup]="loginForm" (ngSubmit)="onNext()" autocomplete="off">
 
                 <!-- <input type="text" style="position: absolute; opacity: 0;">
@@ -39,10 +40,10 @@
 
                 <div class="row gx-5 mb-4">
                   <div class="col-md-12">
-                    <label for="email" class="label">{{'shared.User Name'|translate}} <span class="star">*</span></label>
+                    <label for="email" class="label">{{'shared.Write email'|translate}} <span class="star">*</span></label>
                     <input type="text" readonly onclick="this.removeAttribute('readonly')" pInputText
                       formControlName="account" (ngModelChange)="checkValidators($event)" class="form-control "
-                      placeholder="{{'shared.Write User Name'|translate}}" name="email" id="email">
+                      placeholder="{{'shared.Write email'|translate}}" name="email" id="email">
 
                     <div [hidden]=" account.valid || account.untouched" class="passerror">
                       <small *ngIf="account?.errors?.['required']" id="helpId" class="form-text text-muted d-block  "
@@ -98,20 +99,30 @@
               </button>
 
               <div class="d-flex justify-content-center ">
-                <button class="color-gray-600 position-relative fs-4" #container tooltipPosition="bottom"
+
+                <!-- <button class="color-gray-600 position-relative fs-4" #container tooltipPosition="bottom"
                   [fitContent]="true" [appendTo]="container"
                   pTooltip="{{'UAE PASS is a single trusted digital identity for all citizens, residents to United Arab Emirates' | translate}}">
                   {{'What is UAE PASS' | translate}}
                   <i class="pi pi-info-circle" style="font-size: 1.2rem"></i>
+                </button> -->
+                <button class="color-gray-600 position-relative fs-4 toolTip">
+                  {{'What is UAE PASS' | translate}}
+                  <i class="pi pi-info-circle" style="font-size: 1.2rem"></i>
+
+                  <div class="tip position-absolute ">
+                    <p class="mb-2">{{'UAE PASS is a single trusted digital identity for all citizens, residents to United Arab Emirates' | translate}}</p>
+                    <a class="color-gray-800 text-decoration-underline">{{'login.createAccount' |translate}}</a>
+                  </div>
                 </button>
+
               </div>
             </div>
 
 
-            <div class="signup">
-              <button (click)="openNewAccount()"><a class="color-skyBlue-400">{{'login.Create New User Account' |
-                  translate}}</a></button>
-            </div>
+
+            <div class=" text-center" (click)="openNewAccount()"><a class="color-skyBlue-400 text-decoration-underline">{{'login.Create New User Account' |translate}}</a></div>
+
           </ng-container>
 
           <div *ngIf="loginInProgress" class="form-header d-flex flex-column gap-3 align-items-center text-center mt-6">
@@ -125,10 +136,8 @@
 
         </div>
 
-
-
-
       </div>
+      <div class="py-6"></div>
     </div>
   </div>
 

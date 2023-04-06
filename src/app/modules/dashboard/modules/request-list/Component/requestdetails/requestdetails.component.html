@@ -94,7 +94,7 @@
 
             <div class="col-4 d-flex align-items-center gap-5 mb-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.myRequest.Creation date and time' | translate}}</p>
-                <h4 class="color-primary">{{requestDetails.createdDate |LocalizeDate:'d MMMM y hh:mm'}}</h4>
+                <h4 class="color-primary">{{requestDetails.createdDate |LocalizeDate:'d MMMM y hh:mm a'}}</h4>
             </div>
             <div class="col-5 d-flex align-items-center gap-5 mb-5" *ngIf="requestDetails?.rejectionRequestReason && requestDetails.rejectionRequestReason?.en">
                 <p class="color-gray-300 fs-4">{{'dashboard.Requests.rejectReason' | translate}}</p>
@@ -439,7 +439,7 @@
                                             *ngFor="let task of state.tasks | slice :0:1"
                                             >
                                                 <ng-container *ngIf="!state.state.isFinal">
-                                                    <p class="event__time mb-6">{{state.createdDate|LocalizeDate:'d MMMM y - hh:mm'}}</p>
+                                                    <p class="event__time mb-6">{{state.createdDate|LocalizeDate:'d MMMM y - hh:mm a'}}</p>
                                                     <div class="event__separator">
                                                         <div class="event__marker"></div>
                                                         <div class="event__connector"></div>
@@ -467,7 +467,7 @@
 
                                         <ng-template #approvedTemp>
                                             <li class="event" *ngFor="let task of state.tasks">
-                                                <p class="event__time" mb-6 >{{task.createdDate|LocalizeDate:'d MMMM y - hh:mm'}}</p>
+                                                <p class="event__time" mb-6 >{{task.createdDate|LocalizeDate:'d MMMM y - hh:mm a'}}</p>
                                                 <div class="event__separator">
                                                     <div class="event__marker"></div>
                                                     <div class="event__connector"></div>
@@ -730,7 +730,7 @@
                     <img src="assets/images/shared/medal-cup.svg" alt="">
                     <span class="color-yellow-400">{{'dashboard.students.isFromTheFirst' |translate}}</span>
                 </div>
-            
+
                 <ng-container *ngFor="let item of student?.studentCategory">
                     <div *ngIf="item==statusEnum.IsChildOfAMartyr">
                         <img src="assets/images/shared/medal-flag.svg" alt="">

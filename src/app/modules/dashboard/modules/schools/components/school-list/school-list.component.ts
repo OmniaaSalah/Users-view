@@ -129,12 +129,12 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
     console.log(e);
     this.filtration.SortColumnName=e.field
 
-    if(e.field=='EstablishmentDate'){      
+    if(e.field=='EstablishmentDate'){
       if(e.order==1) this.filtration.SortBy= 'old'
       else if(e.order == -1) this.filtration.SortBy= 'update'
     }else{
-      if(e.order==1) this.filtration.SortBy= 'ASC'
-      else if(e.order == -1) this.filtration.SortBy= 'DESC'
+      if(e.order==1) this.filtration.SortBy= 'Asc'
+      else if(e.order == -1) this.filtration.SortBy= 'Desc'
     }
 
 
@@ -156,7 +156,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   onExport(fileType: FileEnum){
     let filter = {...this.filtration, PageSize:this.schools.totalAllData}
     this.schoolsService.schoolsToExport(filter).subscribe( (res: School[]) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolsList'))
     })
   }
@@ -176,10 +176,10 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
       this.showLoader=false;
       this.gradesList=res.data;
     });
-     
+
   }
 
   ngOnDestroy(): void {
-    
+
   }
 }
