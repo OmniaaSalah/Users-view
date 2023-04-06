@@ -42,7 +42,6 @@ export class NewAccountComponent implements OnInit {
   registrationWayFormGrp: FormGroup;
   passwordsFormGrp: FormGroup;
   accountFormGrp: FormGroup;
-  UAEUnregisteredUser;
   constructor(
     private router:Router,
     private indexService:IndexesService,
@@ -80,7 +79,6 @@ export class NewAccountComponent implements OnInit {
   ngOnInit(): void {
     this.tittle=this.translate.instant("login.Create New User Account");
     this.getAuthenticationWays();
-    this.checkOpenUAEModelAutomatic()
   }
   get registrationWay() {
     return this.registrationWayFormGrp.controls['registrationWay'] as FormControl;
@@ -139,12 +137,6 @@ export class NewAccountComponent implements OnInit {
     this.authService.isNewAccountOpened.next(false)
     localStorage.removeItem('accountWay');
     localStorage.removeItem('notificationSource');
-    if(localStorage.getItem('UAEUnregisteredUser'))   
-    {
-    this.router.navigate(['/auth/login'], {replaceUrl: true});
-     window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
-     localStorage.removeItem('UAEUnregisteredUser');
-   }
   }
   changeRegistrationField(e)
   {
@@ -202,12 +194,12 @@ export class NewAccountComponent implements OnInit {
 
 sendOtp()
 {
-  var IDn;
+
   if(this.timeLeft)
   {this.isBtnLoading=true;}
   if(this.account.accountWay==RegistrationEnum.EmiratesId)
   {
-    this.authService.createUAEPassAccount(IDn).subscribe((res)=>{
+    this.authService.createUAEPassAccount(this.account.notificationSource).subscribe((res)=>{
       this.isBtnLoading=false;
       this.closeModel();
       this.toastService.success(this.translate.instant('sign up.account saved successfully'));
@@ -344,17 +336,5 @@ confirmOTP()
   })
 
 }
-checkOpenUAEModelAutomatic()
-{
-  this.changeRegistrationField(RegistrationEnum.EmiratesId);
-   if(localStorage.getItem('UAEUnregisteredUser'))
-   {
-    this.registrationWayFormGrp.patchValue({
-      registrationWay:localStorage.getItem('accountWay'),
-      emairatesWay:localStorage.getItem('notificationSource')
-    })
-    this.showInputForm=false
-    this.UAEUnregisteredUser=JSON.parse(localStorage.getItem('UAEUnregisteredUser'))
-   }
-}
+
 }

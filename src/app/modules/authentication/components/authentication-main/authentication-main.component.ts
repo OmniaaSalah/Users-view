@@ -26,6 +26,7 @@ import { Subscription } from 'rxjs';
 
 })
 export class AuthenticationMainComponent implements OnInit{
+  isBtnLoading:boolean=false;
   openConfimModel:boolean=false
   statusCode;
   confirmationMessage;
@@ -41,7 +42,7 @@ export class AuthenticationMainComponent implements OnInit{
   loading: boolean = false;
   token: any;
   setPasswordForm: any;
-  isBtnLoading: boolean=false;
+  isUAeAccountBtnLoading: boolean=false;
   UAEUnregisteredUser;
   loginForm: FormGroup;
   subscription:Subscription;
@@ -389,11 +390,15 @@ getCurrentYear()
 
 openUAEAccount()
 {
-  this.openConfimModel=false;
-  this.openNewAccount();
-  localStorage.setItem('accountWay',RegistrationEnum.EmiratesId);
-  localStorage.setItem('notificationSource',this.UAEUnregisteredUser.idn);
-  localStorage.setItem('UAEUnregisteredUser',JSON.stringify(this.UAEUnregisteredUser) );
+  this.isUAeAccountBtnLoading=true;
+  this.authService.createUAEPassAutomaticAccount(this.UAEUnregisteredUser).subscribe((res)=>{
+    this.isUAeAccountBtnLoading=false;
+    this.closeConfirmationModel();
+    this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+  },(err)=>{
+    this.isUAeAccountBtnLoading=false;
+    this.closeConfirmationModel();
+    this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
 
 }
 
