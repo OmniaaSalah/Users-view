@@ -3,5 +3,5 @@ export interface MenuItem{
     icon?:string,
     routerLink?:string
     claims?:string
+    disabled?: boolean
   }
-  

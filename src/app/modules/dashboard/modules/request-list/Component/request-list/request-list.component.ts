@@ -46,18 +46,19 @@ export class RequestListComponent implements OnInit {
   ]
 
   reqsTypes=[
-    {name:this.translate.instant('dashboard.Requests.FlexibleHolidayRequest'), value: requestTypeEnum.FlexibleHolidayRequest},
+    {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: requestTypeEnum.RegestrationApplicationRequest},
+    {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
     {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
     {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
-    {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: requestTypeEnum.RegestrationApplicationRequest},
-    {name:this.translate.instant('dashboard.Requests.MassTransferRequest'), value: requestTypeEnum.MassTransferRequest},
+    {name:this.translate.instant('dashboard.Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},
     {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequest'), value: requestTypeEnum.ModifyIdentityRequest},
+    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
+    {name:this.translate.instant('dashboard.Requests.FlexibleHolidayRequest'), value: requestTypeEnum.FlexibleHolidayRequest},
+    {name:this.translate.instant('dashboard.Requests.MassTransferRequest'), value: requestTypeEnum.MassTransferRequest},
     {name:this.translate.instant('dashboard.Requests.BoardCertificateRequest'), value: requestTypeEnum.BoardCertificateRequest},
     {name:this.translate.instant('dashboard.Requests.GradesCertificateRequest'), value: requestTypeEnum.GradesCertificateRequest},
 
     {name:this.translate.instant('dashboard.Requests.AcademicSequenceCertificateRequest'), value: requestTypeEnum.AcademicSequenceCertificateRequest},
-    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
-    {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
     {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
     {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
     {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
@@ -65,7 +66,7 @@ export class RequestListComponent implements OnInit {
   ]
     // openResponsesModel = false
 
-    filtration = {...Filtration,RequestStatus: [UserRequestsStatus.Pending], RequestType:null};
+    filtration = {...Filtration, SortColumnName:'createdDate', SortBy: 'Desc',RequestStatus: [UserRequestsStatus.Pending], RequestType:null};
 
     paginationState= {...paginationInitialState};
     // showMyReqs={
@@ -161,9 +162,11 @@ export class RequestListComponent implements OnInit {
     }
 
 
+
     sortMe(e){
-      if(e.order==1) this.filtration.SortBy= 'old'
-      else if(e.order == -1) this.filtration.SortBy= 'update'
+      this.filtration.SortColumnName=e.field
+      if(e.order==1) this.filtration.SortBy= 'Asc'
+      else if(e.order == -1) this.filtration.SortBy= 'Desc'
       this.filtration.Page=1;
 
       this.applyFilter()

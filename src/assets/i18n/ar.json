@@ -222,6 +222,7 @@
     },
     "login": {
         "Create New User Account": "إنشاء مستخدم جديد",
+        "createAccount":"إنشاء مستخدم جديد",
         "Login Successfully": "تم تسجيل الدخول بنجاح",
         "Something is wrong,Pleaze login again": "حدث خطأ,من فضلك قم بالتسجيل مجددًا",
         "Login With Digital Identity": "الدخول عن طريق الهوية الرقمية",
@@ -465,7 +466,8 @@
         "noComments":"يبدو أنه لا توجد أي تعليقات بعد",
         "noRequestDetails":"يبدو أنه لا يوجد تفاصيل لهذا الطلب",
         "Attendance and Abbsence List is empty":"يبدو أنه لا توجد سجلات للغياب والحضور بعد",
-        "divisionDegreeHint":"(اذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به)."
+        "divisionDegreeHint":"(اذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به).",
+        "noLectures":"يبدو انه لا يوجد حصص دراسية معرفة لهذا الصف"
     },
 
 
@@ -612,8 +614,8 @@
         "Show Details": "التفاصيل",
         "User Name": "أسم المستخدم",
         "Write User Name": "أكتب أسم المستخدم",
-        "Write phoneNumber": "أكتب رقم الهاتف",
-        "Write email": "أكتب البريد الألكتروني",
+        "Write phoneNumber": "أدخل رقم الهاتف",
+        "Write email": "أدخل البريد الألكتروني",
         "Otp send successfully":"تم إرسال رمز إلي حسابك",
         "Mobile Must Start With 05 and Contain 10 Numbers Only": "رقم الهاتف لابد أن يتكون من 10 أرقام فقط ويبدأ ب 05",
         "Must Start With 784 and Contain 15 Numbers Only":"رقم الهوية الشخصية لابد أن يكون مساوي 15 رقم ويبدأ ب 784",

@@ -227,6 +227,7 @@
         "remember me": "remember me",
         "wrong,pleaze check examples and try again": "wrong,pleaze check examples and try again",
         "Create New User Account": "Create New User Account",
+        "createAccount":"Create Account",
         "Identity exist":  "Identity exist",
         "Identity not exist": "Identity not exist",
         "Available": "Available",
@@ -398,8 +399,8 @@
         "noRequestDetails":"Ther is no details for this Request",
         "imageUploaded":"Image Uploaded Successfully",
         "Attendance and Abbsence List is empty":"Attendance and Abbsence List is empty",
-        "divisionDegreeHint":"(If Division Official not allowed to enter degrees ,The teacher is responsible to enter them for his subject)."
-
+        "divisionDegreeHint":"(If Division Official not allowed to enter degrees ,The teacher is responsible to enter them for his subject).",
+        "noLectures": "No Lectures are defined"
 
     },
 

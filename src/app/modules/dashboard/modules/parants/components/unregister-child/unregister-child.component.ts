@@ -10,12 +10,14 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { MediaService } from 'src/app/shared/services/media/media.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { IndexesService } from '../../../indexes/service/indexes.service';
 // import { IunregisterChild } from '../../models/IunregisterChild';
 import { ParentService } from '../../services/parent.service';
 
@@ -37,6 +39,8 @@ export class UnregisterChildComponent implements OnInit {
 
   countries$ = this.countriesService.getCountries()
   relativeRelation$ =this.sharedService.getParentRelative()
+  religion$ =this.sharedService.getReligion()
+  NoIdentityReason$ =this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification)
 
   editMode=false
   AttachmentEditMode=false
@@ -60,6 +64,8 @@ export class UnregisterChildComponent implements OnInit {
     // }),
     passportNumber: [''],
     emiratesIdNumber: [''],
+    reasonForNotHavingEmiratesId:[],
+    religionId:[],
     emiratesIdPath:[''],
     birthDate: [new Date(), Validators.required],
     nationlityId: ['', Validators.required],
@@ -110,6 +116,7 @@ export class UnregisterChildComponent implements OnInit {
      private router: Router,
      private sharedService: SharedService,
      public confirmModelService:ConfirmModelService,
+     private indexService:IndexesService,
      private toastr:ToastrService,
      private translate:TranslateService,
      private mediaService:MediaService) { }
@@ -129,7 +136,9 @@ export class UnregisterChildComponent implements OnInit {
       this.childForm.patchValue({...response})
       this.childForm.controls['birthDate'].patchValue(new Date(response.birthDate))
       this.childForm.controls.nationlityId.setValue(response.nationlity.id)
-      this.childForm.controls.relativeRelationId.setValue(response.relativeRelation.id)
+      this.childForm.controls.religionId.setValue(response?.relation.id)
+      this.childForm.controls.relativeRelationId.setValue(response.relativeRelation?.id)
+      this.childForm.controls.reasonForNotHavingEmiratesId.setValue(response.reasonForNotHavingEmirates?.id)
       this.fillAttachments(response.childAttachments)
 
       // this.setNationality(response.nationlityId)

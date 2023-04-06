@@ -67,9 +67,19 @@
 
                 }
 
-                &:hover{
+                &:not(.disabled) &:hover{
                     p{color: $color-skyBlue-400;}
                }
+            }
+
+            &.disabled{
+
+              pointer-events: unset;
+              background-color: $color-gray-50;
+              opacity: .3;
+
+              .link{cursor: not-allowed; }
+              p{ color: $color-gray-400;}
             }
 
             &:not(:last-child){ border-bottom: 1px solid $color-gray-50;}

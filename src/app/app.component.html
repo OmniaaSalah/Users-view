@@ -28,10 +28,10 @@
                     </li>
                     <li class="panal__list__item lang">
                         <div class="icon" (click)="changeLanguage()">
-                            <span>{{lang=='ar' ? 'عربى': 'English'}}</span>
+                            <span [class]="languge=='en'? 'font-en' : 'font-ar'"> {{lang=='ar' ? 'عربى': 'English'}}</span>
                         </div>
                         <div class="lable" (click)="changeLanguage()">
-                            <span>{{lang=='ar' ? 'English': 'عربى'}}</span>
+                            <span [class]="languge=='ar'? 'font-en' : 'font-ar'"> {{lang=='ar' ? 'English': 'عربى'}}</span>
                         </div>
                     </li>
 

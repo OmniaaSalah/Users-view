@@ -7,7 +7,7 @@
     // margin-right: 4.3rem;
     // margin-top: 16rem;
 
-}   
+}
 
 .left{
     // margin-left: 12rem;
@@ -40,8 +40,8 @@
         border-radius: 12px;
         width: 250px;
         justify-content: center;
-        
-       
+
+
     }
     .myInput{
         width: 87%;
@@ -53,14 +53,14 @@
 }
 
     .Notifications__cards{
-       
 
- 
+
+
         .cardd{
-            
+
             border-radius: 12px 12px 12px 12px;
             box-shadow:  0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
-           
+
             .card-header{
                 padding-inline-start: 2.5rem;
                 padding-bottom: 0.7rem;
@@ -80,24 +80,17 @@
                 }
             }
             .card-body{
-                margin-top: 3rem;
-                // padding-right: 2.5rem;
-                margin-bottom: 0.7rem;
-                padding-bottom: 1rem;
+              margin-top: 3rem;
+              padding: 2rem;
+
                 .name-description{
                     margin-top: 2rem;
-                    .tittle{
-                        font-weight: 700;
-                        margin: 1rem;
-                    }
+
                     .headerName{
                         font-weight: 700;
                         margin: 1rem;
                     }
-                    .receviedTime{
-                         color:$color-gray-250;
-                         margin: 6rem;
-                    }
+
                     .NotReadable{
                         margin-top: -3rem;
 
@@ -109,24 +102,24 @@
                                     height: 40px;
                                     border-radius: 50%;
                                     object-fit: cover;
-                                
+
                                     margin-left: 8px;
-                   
+
                                     }
                             .Date{
                                 margin-top: 1.3rem;
                             .date{
                                 color:$color-gray-250;
                                 font-weight: 400;
-                            
+
                             }
                             .calendaricon{margin-inline-start: 0.7rem;padding-bottom: 8px;}
                             }
-                            .tittle{font-weight: 500;}
-                
+
+
                 .Description{
                     // width:40%;
-                    
+
                     // margin-right: 6rem;
                     margin-top: 1rem;
                     // border-right: 3px solid #B4B4B4;
@@ -134,10 +127,7 @@
                     margin-bottom: 1rem;
 
                     // margin-right: 15rem;
-                    .paragraph{
-                        color:$color-gray-250;
-                        font-weight: 400;
-                    }
+
                 }
 
                 .Details{
@@ -147,22 +137,22 @@
                    margin-inline-end: 2rem;
                     .btn-primary{
                         background: transparent;
-                        color: #5BCEDD;    
+                        color: #5BCEDD;
                         &:hover{
                             background-color: transparent !important;
                         }
                     }
                 }
             }
-           
-            
+
+
         }
-       
+
 
     }
 
     .LoadMore{
-            
+
         // display: none;
         width: 140px;
         height: 35px;

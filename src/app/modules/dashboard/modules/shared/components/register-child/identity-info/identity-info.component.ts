@@ -19,14 +19,15 @@ export class IdentityInfoComponent implements OnInit {
 
   lang = inject(TranslationService).lang
   @Input('formGroup') studentForm:FormGroup
-  mode
+  @Input() mode : 'edit'| 'view'= 'view'
+
   student$: Observable<Student> = this.childService.Student$
   countries$ = this.countriesService.getCountries()
   genderOptions=this.sharedService.genderOptions
   religions$= this.sharedService.getReligion()
 
   allowToEditIdentityInfo = this.cliamsService.isUserAllowedTo(ClaimsEnum.S_UpdateStudentIdentity)
-  
+
   constructor(
     private sharedService: SharedService,
     private countriesService:CountriesService,

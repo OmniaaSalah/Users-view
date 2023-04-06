@@ -1,8 +1,9 @@
+import { RegistrationStatus } from "src/app/shared/enums/status/status.enum"
 import { City } from "../cities/citiy.model"
 import { Curriculum, Division, Grade, Localization, Track } from "../global/global.model"
 
 export interface Student{
-    
+
         id: number
         name: Localization
         surname: Localization
@@ -36,7 +37,8 @@ export interface Student{
         isExemptFromStudyingIslamic: boolean
         dateOfAcceptance: string
 
-        registrationStatus: string
+        // registrationStatus: string
+        studentStatus: RegistrationStatus,
         isOwnsLaptop: boolean
         isHasInternet: boolean
         isUsePublicTransportation: boolean
@@ -100,5 +102,5 @@ export interface Student{
             withdrawingFromSchool : boolean
         },
         studentPayments:{}
-    
+
 }

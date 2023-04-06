@@ -81,10 +81,10 @@
                         <div [ngSwitch]="student.studentStatus">
                             <div class="color-gray-300" *ngSwitchCase="registrationStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
                             <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Unregistered">{{'shared.allStatus.Unregestered' | translate}}</div>
-                            <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.ReEnrolment">{{'shared.allStatus.ReEnrolment' | translate}}</div>
-                            <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
-                            <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Withdrawal">{{'shared.allStatus.Withdrawal' | translate}}</div>
-                            <div class="color-gray-500" *ngSwitchCase="registrationStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
+                            <!-- <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.ReEnrolment">{{'shared.allStatus.ReEnrolment' | translate}}</div> -->
+                            <!-- <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div> -->
+                            <!-- <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Withdrawal">{{'shared.allStatus.Withdrawal' | translate}}</div> -->
+                            <!-- <div class="color-gray-500" *ngSwitchCase="registrationStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div> -->
                             <div class="color-gray-300" *ngSwitchDefault>{{'shared.registerd' | translate}}</div>
                         </div>
                         <!-- <span class="color-gray-300 fs-4">{{'shared.registerd' | translate}}</span> -->
