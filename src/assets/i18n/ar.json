@@ -650,7 +650,7 @@
         "internet": "إنترنت",
         "publicTransport": "وسيلة النقل",
         "attacheFile": "إرفاق ملف",
-        "fileMaxSize": "ملف (الحجم الاقصى : 5 ميجابيت",
+        "fileMaxSize": " {{type}} (الحجم الاقصى : {{size}} ميجابيت)",
         "transportationType": " نوع النقل",
         "chooseTransportationType": "أختر نوع النقل",
         "searchBySchoolName": "البحث عن طريق أسم المدرسة ...",

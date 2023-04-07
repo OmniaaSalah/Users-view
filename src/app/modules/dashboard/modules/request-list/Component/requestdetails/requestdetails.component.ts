@@ -61,7 +61,7 @@ export class RequestdetailsComponent implements OnInit {
   }
 
   step=1
-  componentHeaderData: IHeader={ 
+  componentHeaderData: IHeader={
 		breadCrump: [
 			{label: this.translate.instant('dashboard.myRequest.My requests'),routerLink:'/dashboard/performance-managment/RequestList',routerLinkActiveOptions:{exact: true} },
       // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/dashboard/performance-managment/RequestList/Requestdetails',routerLinkActiveOptions:{exact: true}}
@@ -80,11 +80,11 @@ export class RequestdetailsComponent implements OnInit {
   rejectReason$
 
   getApprovedTask(tasks:any[]){
-    
+
     if(!tasks) return []
     let ApprovedTaskIndex =tasks.findIndex(task => task.status.code ==StatusEnum.Completed)
     // console.log(tasks,ApprovedTaskIndex, tasks.slice(ApprovedTaskIndex,1));
-    
+
     return ApprovedTaskIndex!= -1 ? tasks.slice(ApprovedTaskIndex,1) : tasks.slice(0,1)
   }
 
@@ -127,14 +127,14 @@ export class RequestdetailsComponent implements OnInit {
         }
       });
       console.log(this.states);
-      
+
 
       if(res.task) res.task.options = res?.task?.options?.map(el=>({...el,isLoading:false}))
 
       this.timeline=res
       // this.timeline.task.options.map(el=> el.id)
     })
- 
+
   }
 
   addComment(){
@@ -148,8 +148,8 @@ export class RequestdetailsComponent implements OnInit {
       commonRequestId: commonRequestId,
       comment: this.reqActionsForm.comments,
       attachments: this.filesToUpload
-    }    
-    
+    }
+
     this.requestsService.AddFirstRequestComment(comment).subscribe(res=>{
       this.isLoading =false
       this.reqActionsForm.comments=''
@@ -168,7 +168,7 @@ export class RequestdetailsComponent implements OnInit {
       commentId: commentId,
       reply: this.reqActionsForm.comments,
       attachments: this.filesToUpload
-    }    
+    }
 
     this.requestsService.replayToRequestComment(comment).subscribe(res=>{
       this.isLoading =false
@@ -196,11 +196,11 @@ export class RequestdetailsComponent implements OnInit {
     RegestrationRequestForWithrawan : {rejectReasonType: IndexesEnum.TheMainReasonsForRejectionOfTheApplicationForRegistration},
     WithdrawalRequest : {rejectReasonType: IndexesEnum.TheReasonForRejectingTheWithdrawalRequest},
   }
-  
+
 
   onActionTaken(submittedOption: WorkflowOptions, index){
     this.submittedOption = submittedOption
-    
+
     if(submittedOption.label?.en.includes('reject')){
       if(this.requestsTypes[this.requestDetails?.requestType]){
         this.rejectReason$ = this.indexesService.getIndext(this.requestsTypes[this.requestDetails?.requestType].rejectReasonType )
@@ -209,12 +209,12 @@ export class RequestdetailsComponent implements OnInit {
 
       return;
     }
-    
+
     this.completeRequestAction()
     submittedOption.isLoading=true
     // this.timeline.task.options[index].isLoading = true
   }
-  
+
 
   completeRequestAction(){
     this.isLoading=true
@@ -246,7 +246,7 @@ export class RequestdetailsComponent implements OnInit {
 
       if(err.message && err.message.includes('This student has financial obligations') )this.toaster.error(this.translate.instant('toasterMessage.This student has financial obligations'))
       else this.toaster.error(this.translate.instant('toasterMessage.error'))
-      
+
     })
   }
 
@@ -258,7 +258,6 @@ export class RequestdetailsComponent implements OnInit {
     const requests = [
       'StudentRegradingRequest',
       'DeleteStudentRequest',
-      'RegestrationRequestForWithrawan',
       "RegestrationApplicationRequest",
       'ModifyIdentityRequest',
       'BoardCertificateRequest',
@@ -271,6 +270,10 @@ export class RequestdetailsComponent implements OnInit {
       'RelinkChildToGuardianRequestToSPEA'
    ]
     return requests.includes(requestType)
+  }
+
+  isRequestRelatedToSchool(){
+    return  ['FlexibleHolidayRequest', 'DeleteStudentRequest'].includes(this.requestDetails.requestType)
   }
 
 
@@ -293,7 +296,7 @@ export class RequestdetailsComponent implements OnInit {
 
 
   saveReqData(){
-    let reqData 
+    let reqData
 
     if(!(this.requestDetails.student.status ==RegistrationStatus.Withdrawal)){
       reqData = {
@@ -369,7 +372,7 @@ export class RequestdetailsComponent implements OnInit {
       gradeName: el.gradeName
     }
   })
-  console.log(data);
+
     localStorage.setItem('returnedRequest', JSON.stringify(data))
     this.router.navigate(['/certificates/ask-certificate'],{queryParams:{requestInstance: this.requestDetails.id||this.requestInstance}})
 
@@ -391,7 +394,10 @@ export class RequestdetailsComponent implements OnInit {
       'RelinkChildToGuardianRequestToSPEA'
     ]
     if(reqTypesrelatedToGurdians.includes(this.requestDetails?.requestType ) && this.currentUserScope!=this.userScopeEnum.Guardian){
-      this.router.navigate(['/dashboard/student-management/all-parents/parent',this.requestDetails.guardian.id,'all-children'])
+      if(this.currentUserScope==this.userScopeEnum.Employee)
+        this.router.navigate(['/dashboard/student-management/all-parents/parent',this.requestDetails.guardian.id,'all-children'])
+      else
+        this.router.navigate(['/dashboard/schools-and-students/all-parents/parent',this.requestDetails.guardian.id,'all-children'])
     }
   }
 
@@ -402,13 +408,13 @@ export class RequestdetailsComponent implements OnInit {
    {
        if(this.currentUserScope==UserScope.Employee)
      {
-    
+
      this.componentHeaderData.breadCrump= [
       {label: this.translate.instant('dashboard.Requests.RequestList'),  routerLink:'/dashboard/performance-managment/RequestList',routerLinkActiveOptions:{exact: true}},
       {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/dashboard/performance-managment/RequestList/details/${this.requestInstance}`},
        ]
-    
-   
+
+
      }
      else if (this.currentUserScope==UserScope.SPEA)
      {
@@ -417,9 +423,9 @@ export class RequestdetailsComponent implements OnInit {
       {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/dashboard/performance-managment/RequestList/details/${this.requestInstance}`},
       // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/dashboard/performance-managment/RequestList/Requestdetails'}
        ]
-     
+
      }
-     
+
      else if (this.currentUserScope==UserScope.Guardian)
      {
      this.componentHeaderData.breadCrump= [
@@ -427,9 +433,9 @@ export class RequestdetailsComponent implements OnInit {
       {label: this.translate.instant('dashboard.myRequest.Order details'), routerLink:`/parent/requests-list/details/${this.requestInstance}`},
       // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),}
        ]
-   
+
      }
-     
+
    }
 
 }

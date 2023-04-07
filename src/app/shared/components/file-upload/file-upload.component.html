@@ -4,14 +4,14 @@
         <!-- <i class="pi pi-spin pi-spinner " *ngIf="inProgress"></i> -->
         <div class="spinner-border text-dark" role="status" *ngIf="inProgress"></div>
 
-        <input type="file" 
-        #upload 
+        <input type="file"
+        #upload
         [disabled]="files.length > maxFilesToUpload || inProgress"
-        [accept]="allowedFilesExtentions" 
-        [multiple]="multiple" 
-        [hidden]="true" 
+        [accept]="allowedFilesExtentions"
+        [multiple]="multiple"
+        [hidden]="true"
         (change)="validateSelectedFiles($event)">
-        
+
         <div class="icon-upload sm" role="button" *ngIf="!inProgress">
             <img class="" src="assets/images/shared/upload.svg" alt="upload">
         </div>
@@ -22,24 +22,24 @@
 <div class="image-uploader flex-grow-1" [class]="view" *ngIf="theme=='default'">
     <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
 
-    
+
     <div class=" gx-4 gap-4 gap-xxl-5 file-container" [class.row]="view==='box' || view==='list'">
 
             <div class="image-uploader__upload upload-btn"  (click)="upload.value=null; upload.click()">
                 <!-- <div class="spinner-border text-light" role="status" *ngIf="inProgress"></div> -->
                 <i class=" spinner pi pi-spin pi-spinner " *ngIf="inProgress"></i>
-                <i [class.showSuccess]="uploaded" class="pi pi-check-circle" *ngIf="uploaded && !hideCheck"></i>
-                <i [class.showError]="!uploaded" class="pi pi-times-circle" *ngIf="!uploaded && !hideCheck"></i>
+                <i [class.showSuccess]="uploaded" class="spinner pi pi-check-circle" *ngIf="uploaded && !hideCheck"></i>
+                <i [class.showError]="!uploaded" class="spinner pi pi-times-circle" *ngIf="!uploaded && !hideCheck"></i>
                 <!-- <fa-icon class="showError" [i con]="faFileCircleExclamation"></fa-icon> -->
-                <input type="file" 
+                <input type="file"
 
-                #upload 
+                #upload
                 [disabled]="files.length > maxFilesToUpload || inProgress"
-                [accept]="allowedFilesExtentions" 
-                [multiple]="multiple" 
-                [hidden]="true" 
+                [accept]="allowedFilesExtentions"
+                [multiple]="multiple"
+                [hidden]="true"
                 (change)="validateSelectedFiles($event)">
-                
+
                 <div class="icon-upload position-relative">
                     <img class="" src="assets/images/shared/upload.svg" alt="upload">
                 </div>
@@ -47,7 +47,8 @@
                 <p class="title text-center" *ngIf="!inProgress && (hideCheck && !uploaded) || uploaded">{{ label }}</p>
                 <p class="title text-center color-red-500" *ngIf="!uploaded && !hideCheck">{{'toasterMessage.error' |translate}}</p>
 
-                <!-- <p class="sub-title">Photo (Maximum Size: 5mp)</p> -->
+                <!-- <p class="sub-title">{{allowedFilesType}} (Maximum Size: {{fileSize}}mb)</p> -->
+                <p class="sub-title color-primary">{{'shared.fileMaxSize' |translate:{type :allowedFilesType, size: fileSize} }}</p>
             </div>
 
 
@@ -133,7 +134,7 @@
                             <textarea  *ngIf="editMode" name="comment" [(ngModel)]="files[i].comment" rows="4" (blur)="editMode=false;this.onFileUpload.emit(this.files)"></textarea>
                         </p>
                     </ng-container>
-                    
+
                 </div>
             </ng-container>
         </div>

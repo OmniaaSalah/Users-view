@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, filter, finalize, forkJoin, Observable, of, take, tap } from 'rxjs';
 import { Localization } from 'src/app/core/models/global/global.model';
-import { MapedFileRule } from 'src/app/core/models/settings/settings.model';
 import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
 import { FileEnum, FileExtentions } from '../../enums/file/file.enum';
 import { MediaService } from '../../services/media/media.service';
@@ -28,7 +27,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   @Input() title = ''
   @Input() label = this.translate.instant('shared.clickToUploadFile')
   @Input() imgUrl=''
-  @Input() extractFormData=false // include dormData object in output event "@Output() onFileUpload"
+  @Input() extractFormData=false // include FormData object in output event "@Output() onFileUpload"
   @Input() multiple = false
   @Input() hasComment = false
   @Input() maxFilesToUpload = 1
@@ -40,7 +39,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   // @Input() accept:FileEnum | FileEnum[] = FileEnum.Pdf
   @Input() set accept (value: FileEnum | FileEnum[]) {
     if(!value) {
-      this.allowedFilesExtentions = FileExtentions.Pdf; 
+      this.allowedFilesExtentions = FileExtentions.Pdf;
       this.allowedFilesType= FileEnum.Pdf
       return;
     }
@@ -52,13 +51,13 @@ export class FileUploadComponent implements OnInit,OnChanges {
     }else{
       this.allowedFilesExtentions = FileExtentions[value]
     }
-        
+
   }
 
   @Input() set maxFileSize(size){
     if(size) this.fileSize= size
     else this.setMaxFileSizeAllowed()
-  } 
+  }
 
   fileSize
   private allowedFilesType: FileEnum | FileEnum[] = FileEnum.Pdf
@@ -75,8 +74,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
 
   constructor(
-    private media: MediaService, 
-    private toaster:ToastrService, 
+    private media: MediaService,
+    private toaster:ToastrService,
     private translate:TranslateService,
     private settingService:SettingsService) { }
 
@@ -87,10 +86,10 @@ export class FileUploadComponent implements OnInit,OnChanges {
     })
 
   }
-  
+
   ngOnInit(): void {
-    
-    
+
+
 
     this.settingService.fileRules$.subscribe(res=> {
       this.filesRules =res
@@ -99,24 +98,24 @@ export class FileUploadComponent implements OnInit,OnChanges {
   }
 
 
-  setMaxFileSizeAllowed(){    
+  setMaxFileSizeAllowed(){
     if(this.allowedFilesType instanceof Array){
       this.fileSize = Math.max(...this.allowedFilesType.map(el => this.filesRules[el]?.size))
     }else{
       this.fileSize = this.filesRules[this.allowedFilesType].size
     }
   }
-  
+
 
 
  uploadedFilesName:string[]=[]
  uploadedFilesFormData:FormData[]=[]
-  
+
   validateSelectedFiles(event) {
     let files: File[]=[...event.target.files]
-  
 
-    // Validation Condition 1 
+
+    // Validation Condition 1
     if((files.length + this.files.length) > this.maxFilesToUpload) {
       this.toaster.error(` يجب ان لا يزيد عدد الملفات عن  عدد ${this.maxFilesToUpload} ملف`)
       return;
@@ -133,9 +132,9 @@ export class FileUploadComponent implements OnInit,OnChanges {
       }else{
         const FORM_DATA = new FormData()
         FORM_DATA.append('file', file)
-        
+
         this.uploadedFilesName.push(file.name)
-        this.uploadedFilesFormData.push(FORM_DATA) 
+        this.uploadedFilesFormData.push(FORM_DATA)
 
         let httpCall = this.media.uploadMedia(FORM_DATA)
         .pipe(
@@ -148,9 +147,9 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
         streams.push(httpCall)
       }
-      
+
     })
-    
+
     if(streams.length) this.uploadFiles(streams);
 
 	}
@@ -158,21 +157,21 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
 
   uploadFiles(httpArr){
-    
+
     this.inProgress=true
 
     forkJoin(httpArr)
     .pipe(
-      take(1), 
+      take(1),
       filter((res:any) => res !=null),
       finalize(()=> setTimeout(()=> this.hideCheck=true, 1500) ),
     )
     .subscribe((res:any[]) =>{
 
-      
+
       // special Case for for viewing school logo
       this.imgUrl =res[0]?.url
-      
+
       let uploadedFiles = res.map((res, index)=> {
         // let file = {url: res.url, name: this.uploadedFilesName[index]}
         let file
@@ -187,9 +186,9 @@ export class FileUploadComponent implements OnInit,OnChanges {
         this.files = [...this.files, ...uploadedFiles ]
         this.onFileUpload.emit(this.files)
         this.toaster.success(`تم رفع الملف ${this.uploadedFilesName.join(' | ')} بنجاح`)
-        
+
       }
-      
+
         this.inProgress=false;
         this.uploaded=true
         this.hideCheck=false
@@ -205,10 +204,10 @@ export class FileUploadComponent implements OnInit,OnChanges {
     })
   }
 
-  
+
 
   removeFile(index){
-    
+
     this.files.splice(index, 1)
     this.onFileDelete.emit(this.files)
     this.onFileUpload.emit(this.files)
@@ -225,8 +224,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
    console.log("open")
       if (fileUrl) {
         window.open(fileUrl, '_blank').focus();
-      } 
- 
+      }
+
   }
 
 }
