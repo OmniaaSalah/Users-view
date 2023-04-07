@@ -1,4 +1,4 @@
- 
+
 
 <div class="student">
     <div class="submit-btn d-flex justify-content-end gap-3">
@@ -17,10 +17,10 @@
                 <p-dropdown [options]=" deletsCauseOptions$ | async" formControlName="deleteRequestReasonId" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'WriteDeleteReason'|translate}}"></p-dropdown>
             </div>
 
-            <ng-container *ngIf="requiredFiles">             
-                <div class="col-md-8 mt-6" *ngFor="let file of requiredFiles.files; let i =index">
+            <ng-container *ngIf="requiredFiles">
+                <div class="col-md-4 mt-6" *ngFor="let file of requiredFiles.files; let i =index">
                     <label class="label" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label>
-                    <app-file-upload [accept]="file.type" [maxFileSize]="file.size" (onFileUpload)="onFileUpload($event, file.name,i)" view="list" ></app-file-upload>
+                    <app-file-upload [accept]="file.type" [maxFileSize]="file.size" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" ></app-file-upload>
                 </div>
             </ng-container>
         </div>

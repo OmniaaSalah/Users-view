@@ -505,7 +505,7 @@
         "internet": "Internet",
         "publicTransport": "Public Transport",
         "attacheFile": "Attache File",
-        "fileMaxSize": "fileMaxSize(Max Size:5 MB)",
+        "fileMaxSize": "{{type}} (Max Size: {{size}} MB)",
         "transportationType": "Transportation Type",
         "searchBySchoolName": "Search By School Name",
         "clickToUploadFiles": "click To Upload Files",
