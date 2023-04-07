@@ -130,6 +130,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
     this.attachments.unshift({url: '', name: '', titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId})
     this.addMode=false
+    this.showErrMess =false
     this.fileForm.reset()
   }
 

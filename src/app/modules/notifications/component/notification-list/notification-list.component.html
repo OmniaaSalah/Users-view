@@ -35,17 +35,17 @@
                                         <img class="NotReadable" src="assets/images/shared/bluecircle.svg"
                                             *ngIf="!card.isRead">
                                         <img class="cardimage" src="assets/images/shared/Person.jpg">
-                                        <span class="tittle" *ngIf="checkLanguage && card.userName != null">{{card.userName | currentLang}}</span>
+                                        <span class="fw-bold mx-4 d-inline-block" *ngIf="checkLanguage && card.userName != null">{{card.userName | currentLang}}</span>
                                         <span  *ngIf="checkLanguage && card.userName.ar == null">مستخدم</span>
                                         <span  *ngIf="!checkLanguage && card.userName.en == null">user</span>
-                                        <!-- <span>{{"'Notifications.Ask'|translate"}}</span> -->
-                                        <span class="headerName" *ngIf="checkLanguage && card.title != null">{{card.title | currentLang}}</span>
+                                        <span class="headerName d-inline-block" *ngIf="checkLanguage && card.title != null">{{card.title | currentLang}}</span>
                                     </div>
+
                                     <div class="Description">
-                                        <span class="tittle">{{'Notifications.Description'|translate}}</span>
-                                        <p class="paragraph "*ngIf="checkLanguage">{{card.description | currentLang}}</p>
+                                        <label class="fw-bold mb-3">{{'Notifications.Description'|translate}}</label>
+                                        <p class="color-gray-800 "*ngIf="checkLanguage">{{card.description | currentLang}}</p>
                                     </div>
-                                    <span class="receviedTime">{{card.createdDate|customDate}}</span>
+                                    <p class="color-gray-300 mt-6">{{card.createdDate|customDate}}</p>
                                 </div>
                                 <div class="Details">
 
@@ -60,7 +60,7 @@
                         </div>
 
                     </div>
-                  
+
 
                 </div>
             </div>

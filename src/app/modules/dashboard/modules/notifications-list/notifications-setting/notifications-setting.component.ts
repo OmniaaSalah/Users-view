@@ -16,11 +16,11 @@ import { SharedService } from "src/app/shared/services/shared/shared.service"
 
 
 @Component({
-  selector: 'app-notifications-list',
-  templateUrl: './notifications-list.component.html',
-  styleUrls: ['./notifications-list.component.scss']
+  selector: 'app-notifications-setting',
+  templateUrl: './notifications-setting.component.html',
+  styleUrls: ['./notifications-setting.component.scss']
 })
-export class NotificationsListComponent implements OnInit {
+export class NotificationsSettingComponent implements OnInit {
   roles=[];
   lang = inject(TranslationService).lang
   faChevronLeft=faChevronLeft

@@ -81,9 +81,9 @@
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'shared.deleteAll' |translate}}</span>
-                <button class="btn btn--md btn-primary" (click)="getStudents()" [disabled]="students.loading">
+                <button class="btn btn--md btn-primary" (click)="isSearching =true;getStudents()" [disabled]="isSearching">
                     {{'shared.search' |translate}}
-                    <div class="spinner-border text-light" role="status" *ngIf="students.loading"></div>
+                    <div class="spinner-border text-light" role="status" *ngIf="isSearching"></div>
                 </button>
 
 

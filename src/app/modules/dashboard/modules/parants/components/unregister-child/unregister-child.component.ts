@@ -10,12 +10,14 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { MediaService } from 'src/app/shared/services/media/media.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { IndexesService } from '../../../indexes/service/indexes.service';
 // import { IunregisterChild } from '../../models/IunregisterChild';
 import { ParentService } from '../../services/parent.service';
 
@@ -37,6 +39,8 @@ export class UnregisterChildComponent implements OnInit {
 
   countries$ = this.countriesService.getCountries()
   relativeRelation$ =this.sharedService.getParentRelative()
+  religion$ =this.sharedService.getReligion()
+  NoIdentityReason$ =this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification)
 
   editMode=false
   AttachmentEditMode=false
@@ -44,7 +48,7 @@ export class UnregisterChildComponent implements OnInit {
 
   student
 
-
+  showErrMess = false
   onSubmit=false
 
   childForm = this.fb.group({
@@ -60,6 +64,8 @@ export class UnregisterChildComponent implements OnInit {
     // }),
     passportNumber: [''],
     emiratesIdNumber: [''],
+    reasonForNotHavingEmiratesId:[],
+    religionId:[],
     emiratesIdPath:[''],
     birthDate: [new Date(), Validators.required],
     nationlityId: ['', Validators.required],
@@ -94,7 +100,10 @@ export class UnregisterChildComponent implements OnInit {
 
   filesTypesOptions = [...this.sharedService.fileTypesOptions]
   addMode=false
+  gurdiansAttachmentsTypes$=this.indexsService.getIndext(IndexesEnum.TheTypeOfFileAttachmentForTheParent)
+
   fileForm= this.fb.group({
+    indexId:['', Validators.required],
     titel: this.fb.group({
       ar:[, Validators.required],
       en:[, Validators.required]
@@ -110,8 +119,10 @@ export class UnregisterChildComponent implements OnInit {
      private router: Router,
      private sharedService: SharedService,
      public confirmModelService:ConfirmModelService,
+     private indexService:IndexesService,
      private toastr:ToastrService,
      private translate:TranslateService,
+     private indexsService:IndexesService,
      private mediaService:MediaService) { }
 
   ngOnInit(): void {
@@ -129,7 +140,8 @@ export class UnregisterChildComponent implements OnInit {
       this.childForm.patchValue({...response})
       this.childForm.controls['birthDate'].patchValue(new Date(response.birthDate))
       this.childForm.controls.nationlityId.setValue(response.nationlity.id)
-      this.childForm.controls.relativeRelationId.setValue(response.relativeRelation.id)
+      this.childForm.controls.relativeRelationId.setValue(response.relativeRelation?.id)
+      this.childForm.controls.reasonForNotHavingEmiratesId.setValue(response.reasonForNotHavingEmirates?.id)
       this.fillAttachments(response.childAttachments)
 
       // this.setNationality(response.nationlityId)
@@ -163,6 +175,7 @@ export class UnregisterChildComponent implements OnInit {
 
   attachmentGroup(item){
     return this.fb.group({
+      indexId:[item.indexId??null],
       url:[item.url?? ''],
       titel: this.fb.group({
         ar:[item.titel.ar?? ''],
@@ -185,23 +198,33 @@ export class UnregisterChildComponent implements OnInit {
     let attach = attachment[0]? attachment[0] : {url:"", name:"",comment:""}
 
     this.attachmentsList.at(index).patchValue({...attach})
-    // this.attachmentsList.at(index).patchValue({religionId:1,passportNumber:2545,emiratesIdNumber:562})
-
-
   }
 
 
   addNewFileUpload(){
 
-    this.attachmentsList.push(this.attachmentGroup({url: '', name: '', titel:this.fileForm.value.titel, comment:''}))
+    let index = this.attachmentsList.value.findIndex(el => el?.indexId === this.fileForm.value.indexId)
+    if(index > -1) this.attachmentsList.value.splice(index, 1)
+
+    this.attachmentsList.push(this.attachmentGroup({url: '', name: '', titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId}))
     // this.attachments.unshift({url: '', name: '', titel:this.fileForm.value.titel, comment:''})
     this.addMode=false
+    this.showErrMess =false
     this.fileForm.reset()
   }
+
 
   resetAttachment(index){
     let resetVal = {name:'', url:'', comment:''}
     this.attachmentsList.at(index).patchValue({...this.attachmentsList.at(index).value,...resetVal})
+  }
+
+
+  fileTypeChanged(indexId){
+    let isExist= this.attachmentsList.value.findIndex(el => el?.indexId === indexId) > -1 ? true : false
+
+    if(isExist) this.showErrMess=true
+    else this.showErrMess =false
   }
 
 
