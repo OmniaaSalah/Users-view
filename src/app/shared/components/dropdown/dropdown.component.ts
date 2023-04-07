@@ -12,9 +12,9 @@ import { ClaimsEnum } from '../../enums/claims/claims.enum';
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent implements OnInit {
-  @Input('label') label;
-  @Input('items') items:MenuItem[]
-  @Input('styleClass') styleClass;
+  @Input() label;
+  @Input() items:MenuItem[]
+  @Input() styleClass;
   @Output() onItemClicked = new EventEmitter()
   get claimsEnum () {return ClaimsEnum}
   faEllipsisVertical=faEllipsisVertical

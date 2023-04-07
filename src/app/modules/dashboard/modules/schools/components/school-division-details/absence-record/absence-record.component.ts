@@ -184,7 +184,7 @@ lastDate
       this.absenceModelOpened = false
       this.getAbsenceRecords()
     },err=>{
-      this.toasterService.success('حدث خطأ. يرجى المحاوله مره اخرى');
+      this.toasterService.error(this.translate.instant('toasterMessage.error'));
       this.isSubmited=false
     })
 }

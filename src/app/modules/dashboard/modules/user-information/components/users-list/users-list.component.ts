@@ -96,7 +96,7 @@ export class ViewListOfUsersComponent implements OnInit {
 
     this.userInformation.GetRoleList().subscribe(response => {
 		  this.roles = response;
-      this.filtration.roleId=[this.roles.find(role=>role?.code=='SPEA')?.id]
+      this.filtration.roleId=[this.roles.find(role=>role?.code=='Admin')?.id]
       this.getUsersList();
 		})
   }

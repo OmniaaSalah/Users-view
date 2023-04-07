@@ -33,7 +33,7 @@ export class NewAccountComponent implements OnInit {
   genderList=inject(SharedService).genderOptions;
   otp:string;
   step:number = 1;
-  timeLeft: number = 600;
+  timeLeft: number = 60;
   interval;
   showPhoneField:boolean=false;
   showIdentityField:boolean=false;
@@ -42,7 +42,6 @@ export class NewAccountComponent implements OnInit {
   registrationWayFormGrp: FormGroup;
   passwordsFormGrp: FormGroup;
   accountFormGrp: FormGroup;
-  UAEUnregisteredUser;
   constructor(
     private router:Router,
     private indexService:IndexesService,
@@ -80,7 +79,6 @@ export class NewAccountComponent implements OnInit {
   ngOnInit(): void {
     this.tittle=this.translate.instant("login.Create New User Account");
     this.getAuthenticationWays();
-    this.checkOpenUAEModelAutomatic()
   }
   get registrationWay() {
     return this.registrationWayFormGrp.controls['registrationWay'] as FormControl;
@@ -139,12 +137,6 @@ export class NewAccountComponent implements OnInit {
     this.authService.isNewAccountOpened.next(false)
     localStorage.removeItem('accountWay');
     localStorage.removeItem('notificationSource');
-    if(localStorage.getItem('UAEUnregisteredUser'))   
-    {
-    this.router.navigate(['/auth/login'], {replaceUrl: true});
-     window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
-     localStorage.removeItem('UAEUnregisteredUser');
-   }
   }
   changeRegistrationField(e)
   {
@@ -202,11 +194,12 @@ export class NewAccountComponent implements OnInit {
 
 sendOtp()
 {
-  var IDn;
-  this.isBtnLoading=true;
+
+  if(this.timeLeft)
+  {this.isBtnLoading=true;}
   if(this.account.accountWay==RegistrationEnum.EmiratesId)
   {
-    this.authService.createUAEPassAccount(IDn).subscribe((res)=>{
+    this.authService.createUAEPassAccount(this.account.notificationSource).subscribe((res)=>{
       this.isBtnLoading=false;
       this.closeModel();
       this.toastService.success(this.translate.instant('sign up.account saved successfully'));
@@ -221,7 +214,7 @@ sendOtp()
     this.toastService.success(this.translate.instant('shared.Otp send successfully'));
     this.tittle=this.translate.instant('sign up.confirmed with OTP')
     this.step=2;
-    this.timeLeft=600;
+    this.timeLeft=60;
     this.startTimer();
   },(err)=>{
     this.isBtnLoading=false;
@@ -278,7 +271,7 @@ savePersonalInformation()
 
   this.authService.saveAccount(information).subscribe((res)=>{
     this.isBtnLoading=false;
-  if(res.statusCode=="BadRequest")
+  if(res.statusCode!="OK")
   {
     this.toastService.error(this.translate.instant(res.error));
     this.closeModel();
@@ -338,22 +331,10 @@ confirmOTP()
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
     this.step=2;
-    this.timeLeft=600;
+    this.timeLeft=60;
     this.startTimer();
   })
 
 }
-checkOpenUAEModelAutomatic()
-{
-  this.changeRegistrationField(RegistrationEnum.EmiratesId);
-   if(localStorage.getItem('UAEUnregisteredUser'))
-   {
-    this.registrationWayFormGrp.patchValue({
-      registrationWay:localStorage.getItem('accountWay'),
-      emairatesWay:localStorage.getItem('notificationSource')
-    })
-    this.showInputForm=false
-    this.UAEUnregisteredUser=JSON.parse(localStorage.getItem('UAEUnregisteredUser'))
-   }
-}
+
 }

@@ -56,7 +56,7 @@ export class StudentsListComponent implements OnInit {
 
 
   filtration= {
-    ...Filtration, 
+    ...Filtration,
     schoolYearId:1,
     SchoolId:null,
     curriculumId:null,
@@ -66,7 +66,7 @@ export class StudentsListComponent implements OnInit {
     NationalityId:null,
     IsPassed:null,
     StudentCategory:null,
-    IsChildOfAMartyr: null, 
+    IsChildOfAMartyr: null,
     talentId: null,
     IsSpecialAbilities:null,
     // انواع الفصول الخاصه
@@ -115,6 +115,8 @@ export class StudentsListComponent implements OnInit {
     list:[],
     loading:false
   }
+
+  isSearching =false
 
   constructor(
     private translate: TranslateService,
@@ -208,9 +210,11 @@ export class StudentsListComponent implements OnInit {
       this.students.list = res.result.data
       this.students.totalAllData = res.result.totalAllData
       this.students.total =res.result.total
+      this.isSearching =false
 
     },err=> {
       this.students.loading=false
+      this.isSearching =false
       this.students.total=0
     })
 

@@ -54,14 +54,14 @@
                         <tr>
                             <th pSortableColumn="requestNumber">
                                 <p-sortIcon field="requestNumber"></p-sortIcon>{{'dashboard.Requests.requestNumber'|translate}}</th>
-                            <th pSortableColumn="requestType">
-                                <p-sortIcon field="requestType"></p-sortIcon>{{'dashboard.Requests.requestType'|translate}}</th>
-                            <th pSortableColumn="creatorName">
-                                <p-sortIcon field="creatorName"></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
+                            <th pSortableColumn="requestTypeEnum">
+                                <p-sortIcon field="requestTypeEnum"></p-sortIcon>{{'dashboard.Requests.requestType'|translate}}</th>
+                            <th pSortableColumn="createdNameAr">
+                                <p-sortIcon field="createdNameAr"></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
                             <th pSortableColumn="createdDate">
                                 <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-                            <th pSortableColumn="Status">
-                                <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
+                            <th pSortableColumn="requestStatus">
+                                <p-sortIcon field="requestStatus"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
                             <th *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith">
                                     <p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
                             <th class="actions"></th>
@@ -82,7 +82,7 @@
                                 <span *ngIf="request?.grade" [style.height.rem]="'4'"  class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.grade?.name|currentLang}}</span>
                             </td>
                             <td>{{request.createdBy | currentLang}}</td>
-                            <td>{{request.createdDate |LocalizeDate:'d MMMM y hh:mm'}}</td>
+                            <td>{{request.createdDate |LocalizeDate:'d MMMM y hh:mm a'}}</td>
                             <td>
                                 <span [ngSwitch]="request.requestStatus">
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>

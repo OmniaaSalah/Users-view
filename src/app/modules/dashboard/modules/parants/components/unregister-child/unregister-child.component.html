@@ -118,6 +118,12 @@
                             <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.gender=='Female' ? ('shared.genderType.Female'|translate): 'shared.genderType.Male'|translate}}</h4>
                         </div>
+
+                        <div class="col-2 d-flex align-items-center gap-5">
+                          <p class="color-gray-300 fs-4">{{ 'shared.religion'|translate }}</p>
+                          <h4 class="color-primary mb-2">{{child?.religion?.name |currentLang}}</h4>
+                      </div>
+
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.birthDate | LocalizeDate}}</h4>
@@ -182,10 +188,20 @@
                         </div>
 
                         <div class="form-set col-md-4">
+                          <label class="label required">{{'shared.religion'|translate}}</label>
+                          <p-dropdown formControlName="religionId" [options]="religion$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.religion' |translate}}"></p-dropdown>
+                      </div>
+
+                        <div class="form-set col-md-4">
                             <label class="label required">{{'shared.birthDay'|translate}}</label>
                             <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
                         </div>
 
+
+                        <div class="form-set col-md-4">
+                          <label class="label required">{{'TheReasonForLackOfIdentification'|translate}}</label>
+                          <p-dropdown formControlName="reasonForNotHavingEmiratesId" [options]="NoIdentityReason$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
+                        </div>
 
                         <div class="form-set col-md-4">
                             <label class="label required">{{'shared.nationality'|translate}}</label>
@@ -220,22 +236,6 @@
                         <div class="col-md-4 mt-6" *ngIf="file?.value?.url">
                             <app-file [file]="file.value" ></app-file>
                         </div>
-                        <!-- <div class="col-md-4 mt-6" *ngIf="file?.value.name || file?.value.url">
-                            <label class="mb-3 fw-bold">{{file.value?.titel|currentLang}}</label>
-                            <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
-                                <div class="d-flex align-items-center gap-5">
-                                    <img src="assets/images/shared/pdf.svg" alt="">
-                                    <span> {{file.value?.name}}</span>
-                                </div>
-                                <ng-container *ngIf="file.value.comment">
-                                    <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
-                                        <span class="d-block color-orange-300 mb-2">{{'shared.note'|translate}} :</span>
-                                        <span class="comment" *ngIf="file.value.comment">{{file.value?.comment}}</span>
-                                    </p>
-                                </ng-container>
-
-                            </div>
-                        </div> -->
                     </ng-container>
 
                 </div>
@@ -254,12 +254,18 @@
                 </div>
 
                 <div class="mt-5 row gx-5 border-dark radius-15 p-5 custom-form" *ngIf="addMode" [formGroup]="fileForm">
+                    <div class="col-md-4">
+                      <label class="label required">{{'dashboard.students.attachmentsToAdd'|translate}}</label>
+                      <p-dropdown formControlName="indexId" (ngModelChange)="fileTypeChanged($event)" [options]="gurdiansAttachmentsTypes$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.chooseAttachment' |translate}}"></p-dropdown>
+                      <p *ngIf="showErrMess" class="color-red-500 fs-4 mt-3">هناك بالفعل مرفقات محفوظه لهذا النوع ، وبهذا الحفظ ستحل محل البيانات السابقة</p>
+                    </div>
+
                     <ng-container formGroupName="titel">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
                             <input pInputText formControlName="ar" >
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
                             <input pInputText formControlName="en" >
                         </div>
@@ -270,7 +276,7 @@
                         <p-dropdown formControlName="fileType" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
                     </div>
 
-                    <div class="col mb-2 gap-3 align-self-end d-flex justify-content-end">
+                    <div class="col mb-2 gap-3 align-self-end d-flex justify-content-end mt-4">
                         <button class="btn btn-primary" (click)="addNewFileUpload()" [disabled]="!fileForm.valid">{{'shared.save' |translate}}</button>
                         <button class="fs-3" ><a (click)="addMode=false" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
                     </div>

@@ -21,9 +21,9 @@ export class SharedService {
   openSelectSchoolsModel = new BehaviorSubject(false);
   currentSchoolEmployee = new BehaviorSubject(0);
   indexListType=[];
-  
+
   currentActiveStep$ = new BehaviorSubject(0)
- 
+
 
   private allDivisions:Division[]
   private allCurriculum: Curriculum[]
@@ -45,7 +45,7 @@ export class SharedService {
       {id:5,name:{ar:this.translate.instant('Friday'),en:'Friday'}},
       {id:6,name:{ar:this.translate.instant('Saturday'),en:'Saturday'}}
   ];
-  
+
   booleanOptions= [
     {name: this.translate.instant('shared.yes'), value:true},
     {name: this.translate.instant('shared.no'), value:false}
@@ -147,7 +147,7 @@ export class SharedService {
       {indexType:this.translate.instant('ReasonsForWithdrawingTheStudentFromTheCurrentSchool'),value:IndexesEnum.ReasonsForWithdrawingTheStudentFromTheCurrentSchool},
       {indexType:this.translate.instant('TheReasonForRejectingTheWithdrawalRequest'),value:IndexesEnum.TheReasonForRejectingTheWithdrawalRequest},
       {indexType:this.translate.instant('TheTypeOfTalentOfTheStudent'),value:IndexesEnum.TheTypeOfTalentOfTheStudent},
-      {indexType:this.translate.instant('ReasonsForRepeatingASpecificCourseOrSubject'),value:IndexesEnum.ReasonsForRepeatingASpecificCourseOrSubject},
+      // {indexType:this.translate.instant('ReasonsForRepeatingASpecificCourseOrSubject'),value:IndexesEnum.ReasonsForRepeatingASpecificCourseOrSubject},
       {indexType:this.translate.instant('TheReasonForRejectRegradingRequest'),value:IndexesEnum.TheReasonForRejectRegradingRequest},
       {indexType:this.translate.instant('DiplomaType'),value:IndexesEnum.DiplomaType},
       {indexType:this.translate.instant('TtypeOfCommunicationMessage'),value:IndexesEnum.TtypeOfCommunicationMessage},
@@ -200,7 +200,7 @@ export class SharedService {
       return val.data
     }))
   }
-  
+
   getAllNationalities(){
     if(this.allNationality) return of(this.allNationality)
     return this.http.get(`/Nationality`).pipe(take(1),map(val => {
@@ -235,7 +235,7 @@ export class SharedService {
   {
     return this.http.get('/SchoolYear/dropdown').pipe(take(1))
   }
-  
+
   getParentRelative(){
     return this.http.get('/Child/relative-relation').pipe(map(res => res.data))
    }

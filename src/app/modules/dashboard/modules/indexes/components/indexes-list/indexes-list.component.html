@@ -10,11 +10,11 @@
 
         <ng-template pTemplate="caption">
             <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllIndexes()"   (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllIndexes()" (onClear)="clearFilter()">
-
+             <div class="panel">
                 <div class="row gx-5 form-set">
-                    <div class="col-4">
+                    <div class="col-4 panel">
                         <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
-                        <p-multiSelect [options]="indexListType" display="chip" [(ngModel)]="filtration.IndexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-multiSelect>
+                        <p-multiSelect [options]="indexListType" [filter]="true" filterBy="indexType" display="chip" [(ngModel)]="filtration.IndexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-multiSelect>
                     </div>
                
                     <div class="col-4">
@@ -22,7 +22,7 @@
                         <p-dropdown [options]="indexStatusList" [showClear]="true" StopProp [(ngModel)]="filtration.IndexStatus" inputId="indexStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
                     </div>
                 </div>
-
+            </div>
             </app-table-caption>
 
         </ng-template>

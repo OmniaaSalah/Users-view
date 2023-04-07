@@ -31,6 +31,10 @@ export class AuthenticationService {
   {
     return this.http.post("/Account/send-otp",account)
   }
+  createUAEPassAutomaticAccount(account)
+  {
+    return this.http.post(`/Account/UAEPASS/new-registration`,account)
+  }
   createUAEPassAccount(account)
   {
     return this.http.post(`/Account/UAEPASS/registration?IDn=${account}`)
