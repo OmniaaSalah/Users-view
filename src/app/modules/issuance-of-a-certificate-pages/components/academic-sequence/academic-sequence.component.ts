@@ -1,11 +1,12 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { forkJoin, share, shareReplay } from 'rxjs';
+import { forkJoin, share, shareReplay, switchMap } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
@@ -27,18 +28,22 @@ export class AcademicSequenceComponent implements OnInit {
   lang =inject(TranslationService).lang;
   studentId = +this.route.snapshot.paramMap.get('studentId')
 
-  isBtnLoading
+// incase the request is returned from Spea
+  requestId = +this.route.snapshot.queryParamMap.get('requestId')
+  requestInstance = +this.route.snapshot.queryParamMap.get('requestInstance')
+  studentAcademicSequence = JSON.parse(localStorage.getItem('returnedRequest'))
 
+  isBtnLoading
   isLoading
 
-  showAttchments ={}
-  showError=false
+  // showAttchments ={}
+  // showError=false
 
   schoolYears$ = this.sharedService.getSchoolYearsList().pipe(shareReplay())
   allGrades$ = this.sharedService.getAllGrades().pipe(shareReplay())
   allSchools$ = this.schoolsService.getAllSchoolNames().pipe(shareReplay())
 
-  studentsSchoolYears=[]
+  academicSequence=[]
 
   stdAcademicForm =this.fb.group({
     studentEducationCertificates :this.fb.array([])
@@ -46,9 +51,11 @@ export class AcademicSequenceComponent implements OnInit {
 
   get StudenstArrCtr(){ return this.stdAcademicForm.controls['studentEducationCertificates'] as FormArray}
   getStudentCtr(index) {return this.StudenstArrCtr.controls[index] as FormGroup}
-  getStudentCertifictesArrCtr(index) { return this.getStudentCtr(index).controls['certificates'] as FormArray}
+  getStudentCertifictesArrCtr(index) { return this.getStudentCtr(index).controls['academicSequence'] as FormArray}
   getStudentCertificteCtr(index) { return this.getStudentCertifictesArrCtr(index).controls[index] as FormGroup}
 
+
+  actions
 
 
   constructor(
@@ -60,13 +67,28 @@ export class AcademicSequenceComponent implements OnInit {
     private studentService: StudentsService,
     private sharedService:SharedService,
     private schoolsService: SchoolsService,
-    private st:SettingsService
+    private requestsService:SystemRequestService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
-    this.getStudentsSchoolYears(this.choosenStudents.map(el=> el.id))
     // this.schoolsService.getSchoolGardes('').subscribe()
     // this.st.getGracePeriodList().subscribe()
+    if(this.requestId) {
+      this.getRequestOptions()
+      this.academicSequence =this.studentsSchoolYearsMapped(this.choosenStudents, this.studentAcademicSequence)
+      this.fillStudentsFormArr([...this.academicSequence])
+    }else{
+
+      this.getStudentsSchoolYears(this.choosenStudents.map(el=> el.id))
+    }
+  }
+
+
+  getRequestOptions(){
+    this.requestsService.getRequestTimline(this.requestId).subscribe(res=>{
+      this.actions = res?.task?.options
+    })
   }
 
 
@@ -75,22 +97,22 @@ export class AcademicSequenceComponent implements OnInit {
 
     let requests = forkJoin(studentsIds.map(id => this.studentService.getCetificateManually(id)))
 
-    requests.subscribe((res: any[])=>{
+    requests.subscribe((stdAcademicSequence: any[])=>{
       this.isLoading=false
 
-      this.studentsSchoolYears =this.studentsSchoolYearsMapped(this.choosenStudents, res)
-     this.fillStudentsFormArr([...this.studentsSchoolYears])
+      this.academicSequence =this.studentsSchoolYearsMapped(this.choosenStudents, stdAcademicSequence)
+     this.fillStudentsFormArr([...this.academicSequence])
 
     })
   }
 
 
-  studentsSchoolYearsMapped(students: any[], schoolYears: any[]){
+  studentsSchoolYearsMapped(students: any[], stdAcademicSequence: any[]){
     return students.map((student, i) =>{
       return {
         id: student.id,
         certificatedType : CertificatesEnum.AcademicSequenceCertificate,
-        certificates : schoolYears[i].map(el => ({gradeId: el.gradeName?.id, yearId: el.schoolYearName?.id,  schoolId: el.schoolName?.id,}))
+        academicSequence : stdAcademicSequence[i].map(el => ({gradeId: el.gradeName?.id, yearId: el.schoolYearName?.id,  schoolId: el.schoolName?.id,}))
       }
     })
   }
@@ -102,26 +124,20 @@ export class AcademicSequenceComponent implements OnInit {
         studentId: el.id,
         certificatedType: CertificatesEnum.AcademicSequenceCertificate,
         attachments:[[]],
-        certificates: this.fillStudentCertificates(el.certificates)
+        academicSequence: this.fillStudentstdAcademicSequence(el.academicSequence)
       }))
     })
   }
 
 
-  fillStudentCertificates(certificates:any[]):FormArray{
+  fillStudentstdAcademicSequence(academicSequence:any[]):FormArray{
     let formArr = this.fb.array([]) as FormArray
-    certificates.forEach(el =>{
+    academicSequence.forEach(el =>{
       formArr.push(this.fb.group({...el}))
     })
 
     return formArr
   }
-
-
-
-
-
-
 
 
 
@@ -132,7 +148,8 @@ export class AcademicSequenceComponent implements OnInit {
     //   return {...student, certificates:[]}
     // })
 
-    let body =this.validationStep()
+    // let body =this.validationStep()
+    let body=this.stdAcademicForm.value.studentEducationCertificates
 
     this.certificatesService.postSequenceCertificate({studentEducationCertificates: body}).subscribe(result=>{
       this.isBtnLoading=false;
@@ -155,68 +172,102 @@ export class AcademicSequenceComponent implements OnInit {
 
 
 
-  validationStep(){
+  resendAcademicSequesnceReq(optionId){
 
-    let studentsSchoolYearsToCompare = this.stdAcademicForm.value.studentEducationCertificates
-    studentsSchoolYearsToCompare.forEach((el:any, studentIndex ) =>{
+    this.isBtnLoading = true
 
-      el.certificates = el.certificates.filter((schoolYear, index)=>{
-        return JSON.stringify(schoolYear) != JSON.stringify(this.studentsSchoolYears[studentIndex].certificates[index])
+    let body={
+      requestId: this.requestId,
+      certificates: (this.stdAcademicForm.value.studentEducationCertificates[0] as any).academicSequence
+    }
+
+    this.certificatesService.resendSequenceCertificate(body)
+    .pipe(
+      switchMap(()=>{
+        let reqActionsForm={
+          comments:'',
+          optionId: optionId,
+          rejectionReasonId: 0,
+          rejectionReason:'',
+          attachments:[]
+        }
+        return this.requestsService.changeRequestState(reqActionsForm)
       })
+    ).subscribe(res=>{
 
+      this.isBtnLoading = false
+      this.toastr.success(this.translate.instant('toasterMessage.requestResend'));
+      this.router.navigate(['/parent/requests-list/details/', this.requestInstance])
+
+    }, ()=>{
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
+      this.isBtnLoading = false
     })
-
-    return studentsSchoolYearsToCompare
   }
 
 
-  onAttachmentSelected(attachment, index) {
-    let urlParts =attachment.url?.split(".")
-    let isImage = ['jpge','jpg','png'].includes(urlParts[urlParts.length-1]?.toLowerCase())
+  // validationStep(){
+
+  //   let studentsSchoolYearsToCompare = this.stdAcademicForm.value.studentEducationCertificates
+  //   studentsSchoolYearsToCompare.forEach((el:any, studentIndex ) =>{
+
+  //     el.certificates = el.certificates.filter((schoolYear, index)=>{
+  //       return JSON.stringify(schoolYear) != JSON.stringify(this.studentsSchoolYears[studentIndex].certificates[index])
+  //     })
+
+  //   })
+
+  //   return studentsSchoolYearsToCompare
+  // }
 
 
-    if(!isImage){
-      this.showError =true;
-      return
-    }else this.showError =false;
-
-    let i = this.getStudentCtr(index).value.attachments.indexOf(attachment.id);
-    if (i >= 0) {
-      // this.getStudentCtr(index).controls['attachments'].setValue([])
-
-    } else {
-      this.choosenStudents[index].attachments = this.choosenStudents[index].attachments.map(el=> {
-        if(el.id != attachment.id) return {...el, isSelected:false}
-        else return {...el, isSelected:true}
-      })
-      this.getStudentCtr(index).controls['attachments'].setValue([attachment.id])
-    }
-  }
+  // onAttachmentSelected(attachment, index) {
+  //   let urlParts =attachment.url?.split(".")
+  //   let isImage = ['jpge','jpg','png'].includes(urlParts[urlParts.length-1]?.toLowerCase())
 
 
-  attachLoading=false
+  //   if(!isImage){
+  //     this.showError =true;
+  //     return
+  //   }else this.showError =false;
 
-  getAttachments(studentId, index) {
-    if(this.showAttchments[index]){
-      this.showAttchments[index] =false ;
-      return
-    }
-    else {this.showAttchments[index] =true}
+  //   let i = this.getStudentCtr(index).value.attachments.indexOf(attachment.id);
+  //   if (i >= 0) {
+  //     // this.getStudentCtr(index).controls['attachments'].setValue([])
 
-    this.attachLoading =true
-
-    this.studentService
-    .getStudentAttachment(studentId)
-    .subscribe((attachments) => {
-      this.choosenStudents[index]['attachments'] = attachments.map((attach) => ({
-        ...attach,
-        isSelected: false,
-      }));
-      this.attachLoading =false
-    });
+  //   } else {
+  //     this.choosenStudents[index].attachments = this.choosenStudents[index].attachments.map(el=> {
+  //       if(el.id != attachment.id) return {...el, isSelected:false}
+  //       else return {...el, isSelected:true}
+  //     })
+  //     this.getStudentCtr(index).controls['attachments'].setValue([attachment.id])
+  //   }
+  // }
 
 
-  }
+  // attachLoading=false
+
+  // getAttachments(studentId, index) {
+  //   if(this.showAttchments[index]){
+  //     this.showAttchments[index] =false ;
+  //     return
+  //   }
+  //   else {this.showAttchments[index] =true}
+
+  //   this.attachLoading =true
+
+  //   this.studentService
+  //   .getStudentAttachment(studentId)
+  //   .subscribe((attachments) => {
+  //     this.choosenStudents[index]['attachments'] = attachments.map((attach) => ({
+  //       ...attach,
+  //       isSelected: false,
+  //     }));
+  //     this.attachLoading =false
+  //   });
+
+
+  // }
 
 
 }

@@ -55,6 +55,8 @@
 
     &__menu {
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 2rem;
         margin: 0 auto;
         &:lang(en){

@@ -177,6 +177,7 @@ export class StudentsListComponent implements OnInit {
       {
       this.isGradeSelected=true
       if( this.isGradeSelected && this.isSchoolSelected){
+        console.log("lll")
         this.gradeTracks$ = this.gradesService.getGradeTracks(this.filtration.SchoolId,GradeId)
         this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.schoolId,gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
       }
@@ -195,10 +196,12 @@ export class StudentsListComponent implements OnInit {
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
       this.students.total =res.total
+      this.isSearching =false
 
     },err=> {
       this.students.loading=false
       this.students.total=0
+      this.isSearching =false
     })
   }
   getStudentsInSpecificSchool(schoolId){

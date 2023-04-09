@@ -99,7 +99,7 @@
                                                                 </button>
                                                             </div> -->
                                                             <div  class="col-md-2 d-flex align-items-center justify-content-end color-red-500  ps-4" >
-                                                                <span class="delete-btn" role="button" (click)="$event.stopPropagation();deleteTrack(trackIndex)">{{'shared.delete' |translate}}</span>
+                                                                <span class="delete-btn" role="button" (click)="$event.stopPropagation();deleteConfirmationCase='deleteTrack';deletedTrackIndex=trackIndex;openDeleteConfirmation=true">{{'shared.delete' |translate}}</span>
                                                                 <!-- <img class="pt-5" (click)="deleteTrackSubjects(trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt=""> -->
                                                             </div>
 
@@ -141,7 +141,7 @@
 
 
                                                                                 <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                                                    <img class="pt-5" (click)="deleteTrackSubjects(subject.value.gradeSubjectId,trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                                                    <img class="pt-5" (click)="deleteConfirmationCase='deleteTrackSubjects';deletedTrackIndex=trackIndex;deletedSubjectIndex=subjectIndex;deletedSubjectId=subject.value.gradeSubjectId;openDeleteConfirmation=true" src="assets/images/shared/rect-xmark.svg" alt="">
                                                                                 </div>
                                                                             </div>
 
@@ -238,7 +238,7 @@
                                                             </div>
                                                         </div>
                                                         <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                            <img class="pt-5" (click)="deleteSubject(subject.value.gradeSubjectId ,i)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                            <img class="pt-5" (click)="deleteConfirmationCase='deleteSubject';deletedSubjectId=subject.value.gradeSubjectId;deletedSubjectIndex=i;openDeleteConfirmation=true" src="assets/images/shared/rect-xmark.svg" alt="">
                                                         </div>
                                                     </div>
 
@@ -350,3 +350,23 @@
         </div>
     </div>
 </ng-template>
+
+
+<div class="confirm-model">
+
+    <p-dialog [(visible)]="openDeleteConfirmation" [closable]="false" [modal]="true" [style]="{width: '35vw'}" >
+        <ng-template pTemplate="content">
+           <div class="d-flex flex-column justify-content-center align-items-center gap-4">
+
+            <img src="assets/images/empty-list/basket.svg" alt="">
+            <p class="fs-3">{{'shared.confirmDelete' |translate}}</p>
+            <div class="d-flex align-items-center gap-4 mt-5">
+                <button (click)="checkDeleteCases()" class="btn btn-secondary">{{'shared.yesImSure' |translate}}</button>
+                <button (click)="openDeleteConfirmation=false" class="btn btn-primary ">{{'shared.notSure' |translate}}</button>
+    
+            </div>
+           </div>
+        </ng-template>
+    </p-dialog>
+</div>
+

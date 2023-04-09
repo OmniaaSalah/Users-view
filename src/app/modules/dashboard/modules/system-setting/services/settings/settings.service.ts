@@ -319,7 +319,7 @@ export class SettingsService {
   }
 
   initializeFileRules(){
-    if(this.fileRules$) return this.fileRules$
+    // if(this.fileRules$) return this.fileRules$
     this.getAttachedFileRules()
     .pipe(
       map(res=>{

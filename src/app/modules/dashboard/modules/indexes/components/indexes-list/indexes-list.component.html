@@ -16,10 +16,10 @@
                         <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
                         <p-multiSelect [options]="indexListType" [filter]="true" filterBy="indexType" display="chip" [(ngModel)]="filtration.IndexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-multiSelect>
                     </div>
-               
+
                     <div class="col-4">
                         <label class="label" for="indexStatus">{{'dashboard.Indexes.Index Status'|translate }} </label>
-                        <p-dropdown [options]="indexStatusList" [showClear]="true" StopProp [(ngModel)]="filtration.IndexStatus" inputId="indexStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="indexStatusList" [showClear]="true" [(ngModel)]="filtration.IndexStatus" inputId="indexStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Chart, Color } from 'chart.js';
-import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { ExportService } from 'src/app/shared/services/export/export.service';
+import { Chart } from 'chart.js';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 import { SchoolChartsModel } from './school-chart.models';
@@ -19,13 +17,13 @@ export class SchoolChartsComponent implements OnInit {
   model: SchoolChartsModel;
   value=0
 
+  lang =this.TranslationService.lang
   constructor(
     private schoolService: SchoolsService,
     private translate: TranslateService,
+    private TranslationService:TranslationService,
     public loaderService:LoaderService,
-    private headerService: HeaderService,
-    private exportService: ExportService,
-    private sharedService: SharedService,
+
  ) {
     this.initModels();
     Chart.defaults.font.size = 11;
@@ -65,16 +63,23 @@ export class SchoolChartsComponent implements OnInit {
 
     if (schoolCurriculum) {
       const schoolCurriculumValues = Object.values(schoolCurriculum);
-      const isArabic = this.translate.currentLang === 'ar';
       this.model.schoolCurriculumDatasets = [{data: schoolCurriculumValues, backgroundColor:["#CD578A","#5BCEDD", "#F8C073","#f1f2f4","#93d9d9","#c1d6e1","#ff9776"]}];
+      console.log(schoolCurriculum);
+
       for (const key in schoolCurriculum) {
+        console.log(key);
+
         this.model.shoolCurriculumChartLabels.push({
-          key: isArabic ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length),
+          key: this.lang=='ar' ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length),
           value: schoolCurriculum[key]
         });
       }
+
+      console.log(this.model.shoolCurriculumChartLabels);
+
     }
   }
+
 
 
   private setRegionSchoolsChartData(): void {
@@ -82,10 +87,10 @@ export class SchoolChartsComponent implements OnInit {
     if (schoolCity) {
 
       const schoolCityValues = Object.values(schoolCity);
-      const isArabic = this.translate.currentLang === 'ar';
+
       this.model.schoolCityDatasets = [{data: schoolCityValues, backgroundColor:["#CD578A","#5BCEDD","#5CD0DF", "#fefefe"], barThickness:30,barPercentage:0.7,borderRadius:25,}];
       for (const key in schoolCity) {
-        const name = isArabic ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length);
+        const name = this.lang=='ar' ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length);
         this.model.schoolCityChartLabels.push({
           key: name,
           value: schoolCity[key]

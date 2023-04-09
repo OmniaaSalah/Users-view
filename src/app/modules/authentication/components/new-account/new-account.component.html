@@ -92,7 +92,7 @@
                             
                                 <div class="otp-change d-flex  justify-content-center">
     
-                                    <ng-otp-input  (onInputChange)="onOtpChange($event)"   [config]="{length:6,placeholder:'*'}"></ng-otp-input>   
+                                    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)"   [config]="{length:6,placeholder:'*'}"></ng-otp-input>   
                                     
                                 </div>
     

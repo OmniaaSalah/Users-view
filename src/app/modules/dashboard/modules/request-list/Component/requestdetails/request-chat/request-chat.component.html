@@ -1,0 +1,107 @@
+<div class="chat custom-form">
+  <div class="comments-wrapper ">
+      <div class="d-flex align-items-center gap-3">
+          <img style="width:2.5rem" src="assets/images/shared/contact-us.svg" alt="">
+          <h3 class="heading heading--secondary color-primary">{{'dashboard.Requests.commentsAndReplays' | translate}}</h3>
+      </div>
+
+      <ul class="comments d-flex flex-column gap-4 my-5" *ngIf="requestDetails?.requestComments?.length">
+          <ng-container *ngIf="requestDetails?.requestComments[0] as comment">
+              <li  class="comment sender" *ngIf="comment.comment || comment.attachments.length">
+                  <div class="comment__author fs-4 mx-3  fw-bold mb-3">
+                    <ng-container *ngIf="comment.scope=='SPEA'">
+                      <span>موظف الهيئه</span>
+                    </ng-container>
+                    <ng-container *ngIf="comment.scope!='SPEA'">
+                      <span >{{comment.userName | currentLang}}</span>
+                      -
+                      <span>{{comment.roleName | currentLang}}</span>
+                    </ng-container>
+                  </div>
+                  <div class="comment__message p-4 radius-15">
+                      <p class="paragraph paragraph--sm mb-5 color-gray-800">{{comment.comment}}</p>
+                      <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
+                  </div>
+                  <div class="row mt-4" *ngIf="comment.attachments.length">
+                      <div  class="col-md-4" *ngFor="let item of comment?.attachments">
+                          <app-file [file]="item"></app-file>
+                      </div>
+                  </div>
+
+                  <img class="i-delete"  role="button" src="assets/images/shared/rect-xmark.svg" ConfirmDialog (onConfirm)="deleteComment(comment.id)" >
+
+              </li>
+          </ng-container>
+
+          <ng-container *ngFor="let comment of requestDetails?.requestComments[0].replies">
+              <li class="comment mt-4" [ngClass]="requestDetails?.requestComments[0]?.roleName?.en==comment?.roleName?.en ? 'sender':'replier'" *ngIf="comment.reply || comment.attachments.length">
+                  <div class="comment__author fs-4 mx-3 fw-bold " >
+                    <ng-container *ngIf="comment.scope=='SPEA'">
+                      <span>موظف الهيئه</span>
+                    </ng-container>
+                    <ng-container *ngIf="comment.scope!='SPEA'">
+
+                      <span >{{comment.userName | currentLang}}</span>
+                      -
+                      <span>{{comment.roleName | currentLang}}</span>
+                    </ng-container>
+                  </div>
+                  <div class="comment__message p-4 radius-15 mt-3" *ngIf="comment?.reply?.lengeth">
+                      <p class="paragraph paragraph--sm mb-3 color-gray-800">{{comment.reply}}</p>
+                      <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
+                  </div>
+                  <div class="row" *ngIf="comment.attachments.length">
+                      <div  class="col-md-4" *ngFor="let item of comment.attachments">
+                          <app-file [file]="item"></app-file>
+                      </div>
+                  </div>
+
+                  <img class="i-delete"  role="button" src="assets/images/shared/rect-xmark.svg" ConfirmDialog (onConfirm)="deleteComment(comment.id)" >
+
+              </li>
+
+          </ng-container>
+      </ul>
+      <ng-container *ngIf="!requestDetails?.requestComments.length">
+          <app-informative-block subTitle="{{'emptyList.noComments' |translate}}" ></app-informative-block>
+      </ng-container>
+  </div>
+
+
+  <div ngForm #f="ngForm" class="msg-form bg-gray-30" *ngIf="isCommentAllowed()">
+
+      <ng-container *ngTemplateOutlet="attachments; context: {$implicit: filesToUpload}" ></ng-container>
+
+      <div class="d-flex gap-4 align-items-center h-100 p-4">
+          <textarea   [(ngModel)]="comment"  [rows]="1" name="comment" pInputTextarea placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"></textarea>
+          <!-- <i class="pi-cloud-upload" style="font-size: 2rem"></i> -->
+          <app-file-upload
+          theme="chat"
+          [files]="filesToUpload"
+          [maxFilesToUpload]="3"
+          (onFileUpload)="filesToUpload =$event"></app-file-upload>
+
+          <!-- <button [disabled]="!reqActionsForm.comments.length || !filesToUpload.length" (click)="addComment()"  role="button" class="d-flex align-items-center align-items-center p-3 bg-primary radius-full rotate180">
+              <img src="assets/images/shared/send.svg" alt="" *ngIf="!isLoading">
+              <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+          </button> -->
+          <button  *ngIf="isCommentAllowed()" (click)="addComment()" [disabled]="!comment.length && !filesToUpload.length" class="btn btn-primary">
+              {{'shared.send' | translate}}
+              <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+          </button>
+
+
+      </div>
+  </div>
+
+  <div class="my-6"></div>
+</div>
+
+
+<ng-template #attachments let-attachments>
+  <div class=" d-flex align-items-center mt-5 gap-5" *ngIf="attachments?.length">
+      <div  class="col-md-3" *ngFor="let item of attachments">
+          <app-file [file]="item"></app-file>
+      </div>
+  </div>
+</ng-template>
