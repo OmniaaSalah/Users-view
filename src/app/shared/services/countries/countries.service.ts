@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { map, of, take } from 'rxjs';
 import { City } from 'src/app/core/models/cities/citiy.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CitiesEnum } from '../../enums/cities/city.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountriesService {
-
+  lang = inject(TranslationService).lang
   allCountries
   allCities
   AllStates
@@ -30,7 +31,7 @@ export class CountriesService {
   getCountries(){
     if(this.allCountries) return of(this.allCountries);
     
-    return this.http.get('/Nationality').pipe(
+    return this.http.get(`/Nationality?SortColumnName=${this.lang=='ar'?'ArName':'EnName'}`).pipe(
       take(1),
       map((res) => {
         this.allCountries = res.data

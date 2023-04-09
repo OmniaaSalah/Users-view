@@ -51,8 +51,8 @@ export class MessageDetailsComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('المحادثات'), routerLink: '/dashboard/messages/messages', routerLinkActiveOptions: { exact: true } },
-          { label: this.translate.instant('تفاصيل الرسالة') }
+          { label: this.translate.instant('dashboard.Messages.messages'), routerLink: '/dashboard/messages/messages', routerLinkActiveOptions: { exact: true } },
+          { label: this.translate.instant('dashboard.Messages.MessageDetails') }
         ],
         mainTitle: { main: this.translate.instant('dashboard.Messages.Chat Details') }
       }

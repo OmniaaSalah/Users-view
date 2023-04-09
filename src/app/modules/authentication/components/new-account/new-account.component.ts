@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IRegistrationWay } from 'src/app/core/Models/account/registration-way';
@@ -26,6 +26,7 @@ export class NewAccountComponent implements OnInit {
   currentDate=new Date();
   exclamationIcon=faExclamationCircle;
   @Input('openModel')  openModel:boolean;
+  @ViewChild('ngOtpInput') ngOtpInputRef:any;
   account:IRegistrationWay={} as IRegistrationWay;
   signUpWaysList=[];
   nationalityList=[];
@@ -331,8 +332,7 @@ confirmOTP()
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
     this.step=2;
-    this.timeLeft=60;
-    this.startTimer();
+    this.ngOtpInputRef.setValue('');
   })
 
 }

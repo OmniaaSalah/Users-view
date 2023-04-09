@@ -1624,6 +1624,7 @@
             "AbsenceNumbers":"عدد الغياب",
             "you should choose the date that you need view it’s absence and attendance data first":" يجب عليك اختيار التاريخ الذي تريده لعرض بيانات الغياب والحضور أولاً",
             "you should choose the school , schoolYear and grade that you need view it’s degrees data first":" يجب عليك اختيار السنة الدراسية والمدرسة والصف الذي تريد عرض بيانات الدرجات لهم أولاً",
+            "you should choose the Date that you need view Employee Performance During It":"يجب عليك اختيار الفترة الزمنية التي تريد أن تشاهد أداء الموظفين خلالها",
             "TimeFrom-To":"الفترة الزمنية من - إلي",
             "ReportSummary":"التقارير",
             "RequestNumbersProcessedFromEmployees":"عدد المعاملات المنجزة من قبل الموظفين",
@@ -1826,6 +1827,7 @@
         },
         "Messages": {
             "messages": "المحادثات",
+            "MessageDetails":"تفاصيل الرسالة",
             "title message": "عنوان الرسالة",
             "Show Details": "إضغط لقراءة المزيد",
             "new message": "رسالة جديدة",
