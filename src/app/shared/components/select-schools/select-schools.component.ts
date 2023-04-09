@@ -54,6 +54,7 @@ export class SelectSchoolsComponent implements OnInit {
   
     this.schools.loading=true
     this.schools.list=[];
+    this.filtration.PageSize = this.schools.totalAllData;
     this.schoolsService.getAllSchoolsInPopUp(this.filtration).subscribe((res)=>{
       this.sharedService.filterLoading.next(false);
       this.schools.loading = false

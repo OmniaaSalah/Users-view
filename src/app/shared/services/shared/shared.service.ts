@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, from, map, of, share, shareReplay, take } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
@@ -12,6 +12,7 @@ import { ClaimsEnum } from '../../enums/claims/claims.enum';
 import { StatusEnum, TransportaionType } from '../../enums/status/status.enum';
 import { IndexesEnum } from '../../enums/indexes/indexes.enum';
 import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class SharedService {
   openSelectSchoolsModel = new BehaviorSubject(false);
   currentSchoolEmployee = new BehaviorSubject(0);
   indexListType=[];
+  lang = inject(TranslationService).lang
 
   currentActiveStep$ = new BehaviorSubject(0)
 
@@ -203,7 +205,7 @@ export class SharedService {
 
   getAllNationalities(){
     if(this.allNationality) return of(this.allNationality)
-    return this.http.get(`/Nationality`).pipe(take(1),map(val => {
+    return this.http.get(`/Nationality?SortColumnName=${this.lang=='ar'?'ArName':'EnName'}`).pipe(take(1),map(val => {
       this.allNationality = val.data
       return val.data
     }))

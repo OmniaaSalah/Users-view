@@ -197,17 +197,26 @@ export class StudentsReportsService {
             [this.translate.instant('dashboard.parents.registedDate')]: student?.dateOfAcceptance ? student?.dateOfAcceptance :this.translate.instant('shared.notFound'),
             [this.translate.instant('sign up.Birthday')]: student?.birthDate ? student?.birthDate :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.age')]: student?.age ? student?.age :this.translate.instant('shared.notFound'),
-            [this.translate.instant('shared.status')]: student?.registrationStatus ? student?.registrationStatus :this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isChildOfAMartyr ? student?.isChildOfAMartyr :this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.status')]: student?.registrationStatus ? this.translate.instant('shared.allStatus.'+student?.registrationStatus) :this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isSpecialAbilities ? this.translate.instant('true') :this.translate.instant('false'),
             [this.translate.instant('dashboard.students.Citizen')]: student?.local ? this.translate.instant('true') :this.translate.instant('false'),
             [this.translate.instant('shared.gender')]: student?.gender ? this.translate.instant('shared.genderType.'+student?.gender):this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.state')]: student?.state ? student?.state :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.city')]: student?.city ? student?.city :this.translate.instant('shared.notFound'),
             [this.translate.instant('Nationality')]: student?.nationality[this.lang] ? student?.nationality[this.lang] :this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.students.StudentCategory')]: student?.studentCategory ? this.translate.instant('shared.allStatus.'+student?.studentCategory) :this.translate.instant('shared.notFound')
+            [this.translate.instant('dashboard.students.StudentCategory')]: student?.studentCategory ? this.convertStudentCategory(student?.studentCategory) :this.translate.instant('shared.notFound')
 
           }
         })
       }))
+  }
+
+  convertStudentCategory(list)
+  {
+    var studentCategory=[];
+    list.forEach(element => {
+      studentCategory.push(this.translate.instant('shared.allStatus.'+element))
+    });
+    return studentCategory;
   }
 }
