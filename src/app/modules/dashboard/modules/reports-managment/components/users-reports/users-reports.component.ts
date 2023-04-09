@@ -13,7 +13,8 @@ import { Table } from 'primeng/table';
 import { SystemRequestService } from '../../../request-list/services/system-request.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-
+import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-users-reports',
   templateUrl: './users-reports.component.html',
@@ -21,6 +22,11 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 })
 export class UsersReportsComponent implements OnInit {
   allRequestsNumbers;
+  shownTable:boolean=false;
+  isBtnLoading:boolean=false;
+  isCollapsed=true;
+  faAngleLeft = faAngleLeft
+  faAngleDown = faAngleDown
   requestsNumbersBasedOnRequestType;
   lang = inject(TranslationService).lang
   requestTypes=[]
@@ -46,7 +52,8 @@ export class UsersReportsComponent implements OnInit {
   roles = []
   tableColumns = []
 
-  constructor(   
+  constructor( 
+    private toastr:ToastrService,  
      private exportService: ExportService,
     private headerService: HeaderService, 
     private translate: TranslateService,
@@ -81,8 +88,9 @@ export class UsersReportsComponent implements OnInit {
       this.filtration.dateFrom=this.formateDate(this.date[0])
       this.filtration.dateTo=this.formateDate(this.date[1])
     }
-
+console.log(this.filtration.dateFrom,this.filtration.dateTo)
     this.users.loading=true
+    this.isBtnLoading=true;
     this.users.list =[];
     this._report.getAllEmployees(this.filtration).subscribe(res => {
       this.sharedService.filterLoading.next(false);
@@ -93,7 +101,10 @@ export class UsersReportsComponent implements OnInit {
       this.users.totalAllData = res.result.employeesPerformance.totalAllData
       this.users.total =res.result.employeesPerformance.total;
       this.users.loading = false;
+      this.shownTable=true;
+      this.isBtnLoading=false;
     },err=> {
+      this.isBtnLoading=false;
       this.users.loading=false
       this.users.total=0;
       this.sharedService.filterLoading.next(false);
@@ -145,4 +156,16 @@ export class UsersReportsComponent implements OnInit {
     return d.split('.')[0]
   }
 
+  checkAvalibility()
+  {
+    if(this.date)
+    {
+      this.filtration.Page=1;
+      this.getUsersList()
+    }
+    else
+    {
+      this.toastr.warning(this.translate.instant('dashboard.reports.you should choose the Date that you need view Employee Performance During It'));
+    }
+  }
 }

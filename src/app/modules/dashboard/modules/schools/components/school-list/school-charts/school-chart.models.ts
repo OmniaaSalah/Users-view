@@ -10,7 +10,7 @@ export class SchoolChartsModel {
       responsive: false
     };
 
-    shoolCurriculumChartLabels: Array<KeyValue<string, number>> = [];
+    shoolCurriculumChartLabels: Array<KeyValue<string, string>> = [];
 
     schoolCityDatasets: ChartConfiguration<'bar'>['data']['datasets'];
     schoolCityOptions: ChartConfiguration<'bar'>['options'] = {

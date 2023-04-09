@@ -20,7 +20,9 @@ export class ConfirmModelService {
 
   constructor(private translate:TranslateService) { }
 
-  openModel(config: modelData =this.confirmMessage){
+  openModel(config: modelData = this.confirmMessage){
+    console.log(config);
+
     this.confirmModelData$.next(config)
     this.isOpend$.next(true)
   }

@@ -236,7 +236,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   sendMessageFromSpeaToSchool(){
     let schoolIds = [];
     this.schoolIsSelectedList.forEach((school) => {
-      if (school.isSelected == true) schoolIds.push(school.id);
+      schoolIds.push(school.id);
     });
 
     const form = {
@@ -336,6 +336,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sharedService.openSelectSchoolsModel.next(false);
+    this.userRolesService.schoolSelectedList.next([]);
     this.userRolesService.MarkedListLength.next((this.MarkedListLength = 0));
     this.MarkedListLength = 0;
   }

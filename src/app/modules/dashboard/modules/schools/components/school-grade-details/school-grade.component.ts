@@ -26,7 +26,11 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 })
 export class SchoolGradeComponent implements OnInit, OnDestroy {
   faPlus=faPlus
-
+  openDeleteConfirmation:boolean=false;
+  deleteConfirmationCase;
+  deletedSubjectId;
+  deletedTrackIndex;
+  deletedSubjectIndex;
   currentUserScope = inject(UserService).getCurrentUserScope()
   lang = inject(TranslationService).lang
   onDestroy$ = new Subject()
@@ -423,5 +427,25 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     this.onDestroy$.next(null)
     this.onDestroy$.complete()
     this.confirmModelService.confirmed$.next(null)
+  }
+
+  
+  
+  checkDeleteCases()
+  {
+    
+    if(this.deleteConfirmationCase=='deleteSubject')
+    {
+      this.deleteSubject(this.deletedSubjectId,this.deletedSubjectIndex);
+    }
+    else if(this.deleteConfirmationCase=='deleteTrackSubjects')
+    {
+      this.deleteTrackSubjects(this.deletedSubjectId,this.deletedTrackIndex,this.deletedSubjectIndex);
+    }
+    else if(this.deleteConfirmationCase='deleteTrack')
+    {
+      this.deleteTrack(this.deletedTrackIndex)
+    }
+    this.openDeleteConfirmation=false;
   }
 }

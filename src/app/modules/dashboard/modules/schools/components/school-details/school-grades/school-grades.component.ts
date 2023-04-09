@@ -101,7 +101,7 @@ export class SchoolGradesComponent implements OnInit {
 
   showTracks(gradeId){
     this.gradeTracks=null
-    this.gradesService.getGradeTracks(this.schoolId,gradeId).subscribe(res =>{
+    this.gradesService.getGradeTracks([this.schoolId],[gradeId]).subscribe(res =>{
       this.gradeTracks = res.data
     })
     this.isDialogOpened=true

@@ -64,7 +64,7 @@
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
-                            <p-dropdown [options]="statusOptions" [showClear]="true" [(ngModel)]="filtration.Status" StopProp optionLabel="name" optionValue="value" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="statusOptions" [showClear]="true" [(ngModel)]="filtration.status" StopProp optionLabel="name" optionValue="value" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col-md-4">
                             <label class="label">{{'dashboard.schools.employeeRole'|translate }} </label>
@@ -81,27 +81,27 @@
                 <tr>
 
                     <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.schools.employeeId'|translate }}
-                       
+
                     </th>
                     <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.employeeName'|translate }}
-                        
+
                     </th>
                     <th pSortableColumn="category"><p-sortIcon field="category"></p-sortIcon>{{'dashboard.schools.employeeNickname'|translate }}
-                        
+
                     </th>
                     <th pSortableColumn="category"><p-sortIcon field="category"></p-sortIcon>{{'dashboard.schools.jobTitle'|translate }}
-                        
+
                     </th>
                     <th pSortableColumn="quantity"><p-sortIcon field="quantity"></p-sortIcon>{{'shared.email'|translate }}
-                        
+
                     </th>
 
                     <th pSortableColumn="phoneNumber"><p-sortIcon field="phoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate }}
-                      
+
                   </th>
 
                     <th pSortableColumn="price"><p-sortIcon field="price"></p-sortIcon>{{'shared.personalId'|translate }}
-                        
+
                     </th>
                     <th pSortableColumn="actions"><p-sortIcon field="price"></p-sortIcon>{{'dashboard.schools.employeeStatus'|translate }}</th>
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions"></th>

@@ -666,8 +666,12 @@
         "FirstSemester":"FirstSemester",
         "LastSemester":"LastSemester",
         "FinalResult": "FinalResult",
-        "updateCause":"Update Cause"
-
+        "updateCause":"Update Cause",
+        "Image":"Image",
+        "Pdf":"Pdf",
+        "Csv":"Csv",
+        "Audio":"Audio",
+        "Xlsx":"Xlsx"
     },
     "sideBar": {
 
@@ -1437,7 +1441,7 @@
             "Name in results screen in English": "Name in results screen in English",
             "Write Name in results screen": "Write Name in results screen",
             "Write Subject Name": "Write Subject Name",
-            "subjectHours": "subjectHours",
+            "subjectHours": "Subject Hours",
             "Hours must be more than or equal 1 hour": "Hours must be more than or equal 1 hour",
             "maximum degree Must More than minmumDegree":"maximum degree Must More than minmumDegree",
             "minimum degree Must Less than maxmumDegree":"minimum degree Must Less than maxmumDegree",
@@ -1773,6 +1777,7 @@
         },
         "Messages": {
             "messages": "Messages",
+            "MessageDetails":"Message Details",
             "title message": "Title",
             "Show Details": "Details",
             "new message": "New Message",
@@ -1850,8 +1855,9 @@
             "Search for Student Attendance and Abbsence":"Search for Student Attendance and Abbsence",
             "AttendanceNumbers":"Attendance Numbers",
             "AbsenceNumbers":"Absence Numbers",
-            "you should choose the date that you need view it’s absence and attendance data first":"You should choose the date that you need view it’s absence and attendance data first",
+            "you should choose the date that you need view it’s absence and attendance data first":"You should choose the Date that you need view it’s absence and attendance data first",
             "you should choose the school , schoolYear and grade that you need view it’s degrees data first":"You should choose the school , schoolYear and grade that you need view it’s degrees data first",
+            "you should choose the Date that you need view Employee Performance During It":"You Should Choose the Date that you need view Employee Performance During It",
             "TimeFrom-To":"Time From-To",
             "ReportSummary":"Reports",
             "RequestNumbersProcessedFromEmployees":"Request Numbers Processed From Employees",
