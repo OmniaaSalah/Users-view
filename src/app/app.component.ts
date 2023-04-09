@@ -78,8 +78,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
 
   ngAfterViewInit(): void {
-    
-    
+
+
   }
 
   firstChildHoverd = false
@@ -98,24 +98,24 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
-    
+
     this.translationService.init();
     this.userService.isUserLogged$.subscribe((res)=>{
-      
+
       if(res)
       {
           this.currentUserName=this.userService.getCurrentUserName();
-          this.settingsService.initializeFileRules()
+          // this.settingsService.initializeFileRules()
           this.currentUserScope=this.userService.getCurrentUserScope();
           this.coreSercice.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-          if(this.currentUserScope == this.userScope.Employee) 
+          if(this.currentUserScope == this.userScope.Employee)
           {
           this.getMessagesTypes()
           }
-          
+
         }
-   
-    
+
+
     })
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
@@ -133,11 +133,11 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
     })
 
-   
+
 }
 
 showDialog() {
-  
+
   this.display = true;
 }
 getMessagesTypes(){
@@ -202,7 +202,7 @@ messageUpload(files){
 
    this.authService.logOut();
    this.userService.isUserLogged$.next(false);
-  
+
 
   }
 

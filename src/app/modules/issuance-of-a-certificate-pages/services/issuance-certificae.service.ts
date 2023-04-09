@@ -17,7 +17,7 @@ export class IssuanceCertificaeService {
     {
       value:DegreesCertificatesEnum.MinisterialSubjects,
       name: this.translate.instant("dashboard.issue of certificate.MinisterialSubjects")
-      
+
     },
     // {
     //   value:DegreesCertificatesEnum.NonMinisterialSubjects,
@@ -42,7 +42,7 @@ export class IssuanceCertificaeService {
 
 certificateStatusList;
   constructor(private http: HttpHandlerService, private translate: TranslateService) {
-    
+
     this.certificatesList = [
       {
         "value": CertificatesEnum.BoardCertificate,
@@ -117,7 +117,7 @@ certificateStatusList;
     ]
   }
 
-  // boardsArray = 
+  // boardsArray =
   //   [
   //     {name:"a1",url:"a1"},
   //     {name:"a2",url:"a2"},
@@ -135,12 +135,12 @@ certificateStatusList;
     return this.http.get(`/Certificate/Certificates`)
     .pipe(
       map(res=>{
-     
+
         return res.map(el => ({name: el.certificateName, value:el.certificateType, fees:el.fees}))
       }),
       take(1))
   }
-  
+
 
   getParentsChild(id) {
     return this.http.get(`/Guardian/${id}/Children`).pipe(take(1))
@@ -157,7 +157,7 @@ certificateStatusList;
   sendDiplomaCertificateReq(data){
     return this.http.post('/Certificate/diploma-certificate-request',data).pipe(take(1))
   }
-  
+
   postOtherCertificate(data){
     return this.http.post('/Certificate/certificate-request',data).pipe(take(1))
   }
@@ -169,6 +169,12 @@ certificateStatusList;
   postSequenceCertificate(data){
     return this.http.post('/Certificate/academic-sequencen-certificate-request',data).pipe(take(1))
   }
+
+  resendSequenceCertificate(data){
+    return this.http.put('/Certificate/academic-sequencen-certificate-request',data).pipe(take(1))
+  }
+
+
   getAllCertificateOfGurdian(filtration)
   {
     return this.http.post('/Certificate/certificate-requests',filtration).pipe(take(1))

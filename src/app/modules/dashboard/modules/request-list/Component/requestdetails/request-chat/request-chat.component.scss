@@ -1,0 +1,59 @@
+
+@import '../../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../../assets/css/components/forms.scss';
+
+.chat{
+  ::ng-deep app-file-upload {
+      flex-grow: 0 !important;
+  }
+
+  .comments{
+
+      .comment{
+        position: relative;
+          width: 70%;
+
+          .i-delete{
+            position: absolute;
+            top: 0;
+            inset-inline-end: 1rem;
+          }
+          &.sender{
+              align-self: flex-start;
+
+              .comment__message{background-color:#F3FBFC}
+              .comment__author{ color: $color-skyBlue-500; }
+          }
+          &.replier{
+              align-self: flex-end;
+              .comment__message{background-color: $color-orange-50;}
+              .comment__author{ color: $color-yellow-400; }
+          }
+
+      }
+  }
+
+  .msg-form{
+      // position: absolute;
+      min-height: 7rem;
+      // width: 99%;
+      // left: 1rem;
+      // right: 1rem;
+      // bottom: 1rem;
+      // background-color: $color-gray-50;
+      align-items: center;
+      border-radius: 15px;
+      textarea{
+          flex-grow: 1;
+          border-radius: 15px;
+          font-size: 1.6rem;
+      }
+  }
+
+  ::ng-deep app-informative-block{
+      .app-informative-block{
+          justify-content: flex-start !important;
+          min-height: 45rem !important;
+      }
+  }
+}

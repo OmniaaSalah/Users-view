@@ -12,6 +12,7 @@ import * as L from 'leaflet';
 import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { ToastrService } from 'ngx-toastr';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 
 @Component({
   selector: 'app-school-info',
@@ -24,6 +25,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
   get userScope() { return UserScope }
   get claimsEnum () {return ClaimsEnum}
+  get fileTypeEnum() {return FileEnum}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
 
@@ -31,7 +33,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-		
+
 			{ label: this.translate.instant('breadcrumb.showSchoolListDetails'), routerLink: `/dashboard/school-management/school/${this.schoolId}`},
 		],
 		mainTitle: { main:  this.currentSchool}
@@ -51,10 +53,10 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 	if(this.currentUserScope==this.userScope.Employee)
 	{
 		this.userService.currentUserSchoolName$?.subscribe((res)=>{
-			if(res)  
+			if(res)
 			{
 			  this.currentSchool=res;
-			
+
 			  this.componentHeaderData.mainTitle.main=this.currentSchool;
 			}
 	  })
@@ -67,7 +69,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 }
 
 getSchool(id){
-	
+
 	this.schoolsService.getSchool(id).subscribe((res) =>{
 		this.school = res
 		if(this.currentUserScope==UserScope.Employee) {
@@ -80,8 +82,8 @@ getSchool(id){
 	}
 
   onLogoFileUpload(event: CustomFile[]){
-		
-		
+
+
 		// const file={
 		// 	title:event[0].name,
 		// 	data: event[0].url
@@ -97,7 +99,7 @@ getSchool(id){
 			else this.toaster.success(this.translate.instant('toasterMessage.schoolLogoDeleted'))
 		})
 	}
-	
+
 	onDiplomaFileUpload(event: CustomFile[]){
 		// const file={
 		// 	title:event[0].name,

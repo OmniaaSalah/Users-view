@@ -5,16 +5,16 @@
 @import 'src/assets/css/components/inputswitch';
 @import'src/assets/css/components/forms';
 @import 'src/app/shared/components/dropdown/dropdown.component.scss';
- 
+
 .panel {
-            
+
 
 ::ng-deep {
 
   .p-multiselect {
 
       .p-multiselect-panel {
-       
+
           .p-multiselect-header {
             padding: 1rem 0rem 1rem 0rem;
             display: flex !important;
@@ -24,16 +24,16 @@
             .p-checkbox{display: none;width: 0rem;}
 
             .p-multiselect-filter-container{
-            
+
 
                  input{border: none;&:focus{border: none;box-shadow: none;}}
-                
-              
+
+
                 .p-multiselect-filter-icon{font-size: 1.5rem;left:1rem;right: unset;}
             }
           }
         }
-  
+
       }
     }
   }

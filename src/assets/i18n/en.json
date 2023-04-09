@@ -666,8 +666,12 @@
         "FirstSemester":"FirstSemester",
         "LastSemester":"LastSemester",
         "FinalResult": "FinalResult",
-        "updateCause":"Update Cause"
-
+        "updateCause":"Update Cause",
+        "Image":"Image",
+        "Pdf":"Pdf",
+        "Csv":"Csv",
+        "Audio":"Audio",
+        "Xlsx":"Xlsx"
     },
     "sideBar": {
 
@@ -1437,7 +1441,7 @@
             "Name in results screen in English": "Name in results screen in English",
             "Write Name in results screen": "Write Name in results screen",
             "Write Subject Name": "Write Subject Name",
-            "subjectHours": "subjectHours",
+            "subjectHours": "Subject Hours",
             "Hours must be more than or equal 1 hour": "Hours must be more than or equal 1 hour",
             "maximum degree Must More than minmumDegree":"maximum degree Must More than minmumDegree",
             "minimum degree Must Less than maxmumDegree":"minimum degree Must Less than maxmumDegree",

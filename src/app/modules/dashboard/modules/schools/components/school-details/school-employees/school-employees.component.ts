@@ -40,13 +40,13 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			
+
 			{ label:this.translate.instant('dashboard.schools.schoolEmployee'), routerLink: `/dashboard/schoolEmployee-management/school/${this.schoolId}/employees`},
 		],
 		mainTitle: { main: this.currentSchool}
 	}
 
-	
+
 	// Dropdown Items
 	employeesItems: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
 
@@ -118,10 +118,10 @@ export class SchoolEmployeesComponent implements OnInit {
 		if(this.currentUserScope==this.userScope.Employee)
 		{
 			this.userService.currentUserSchoolName$?.subscribe((res)=>{
-				if(res)  
+				if(res)
 				{
 				  this.currentSchool=res;
-				
+
 				  this.componentHeaderData.mainTitle.main=this.currentSchool;
 				}
 		  })
@@ -130,14 +130,16 @@ export class SchoolEmployeesComponent implements OnInit {
 
 		this.getSchoolManager()
 		this.getEmployees()
-	
+
 	}
 
 	getSchoolManager(){
 		this.schoolManager =null
 		this.schoolsService.getSchoolManager(this.schoolId).subscribe((res: SchoolEmployee) =>{
 			this.schoolManager = res
-		})
+		},err =>{
+
+    })
 	}
 
 
@@ -161,17 +163,17 @@ export class SchoolEmployeesComponent implements OnInit {
 	patchForm(employee){
 		this.isEmployeeModelOpened=true;
 		this.employeeForm.patchValue(employee)
-	}	
-	
+	}
+
 	patchManagerForm(employee){
 		this.managerForm.patchValue(employee)
-	}	
+	}
 
 
 	updateEmployee(employee){
 		this.isSubmited=true
 		let {id, confirmPassword, ...newData} = employee;
-		
+
 		this.schoolsService.updateEmpoyee(id,newData).subscribe((res) =>{
 			this.Toast.success(this.translate.instant('Updated Successfully'))
 			this.isEmployeeModelOpened=false;
@@ -196,7 +198,7 @@ export class SchoolEmployeesComponent implements OnInit {
 			this.getSchoolManager()
 			this.getEmployees()
 			this.Toast.success(this.translate.instant('Updated Successfully'))
-		    
+
 		}, err =>{
 			this.isSubmited=false
 			this.Toast.error(this.translate.instant('error happened in edit ,pleaze try again'))
@@ -229,7 +231,7 @@ export class SchoolEmployeesComponent implements OnInit {
    onExport(fileType: FileEnum){
     let filter = {...this.filtration, PageSize:this.employees.totalAllData}
     this.schoolsService.employeesToExport(this.schoolId,filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolEmployee'))
     })
   }
