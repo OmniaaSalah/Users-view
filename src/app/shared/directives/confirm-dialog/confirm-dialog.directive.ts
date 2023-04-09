@@ -12,13 +12,13 @@ export class ConfirmDialogDirective implements OnDestroy {
   @Input('ConfirmDialog') modelData ={message: this.translate.instant('shared.confirmDelete'), img:'assets/images/empty-list/basket.svg'};
 
   constructor(private confirmModelService: ConfirmModelService,private translate:TranslateService) { }
-  
+
   @HostListener('click') onClick() {
     this.confirmModelService.openModel(this.modelData) ;
       this.confirmListener();
 
    }
-  
+
 
 
  confirmListener()

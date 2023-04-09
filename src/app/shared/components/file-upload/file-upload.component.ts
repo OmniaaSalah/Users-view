@@ -93,6 +93,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
     this.settingService.fileRules$.subscribe(res=> {
       this.filesRules =res
+
       if(!this.fileSize && this.filesRules) this.setMaxFileSizeAllowed()
     })
   }
@@ -103,6 +104,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
       this.fileSize = Math.max(...this.allowedFilesType.map(el => this.filesRules[el]?.size))
     }else{
       this.fileSize = this.filesRules[this.allowedFilesType].size
+      console.log(this.filesRules);
+
     }
   }
 

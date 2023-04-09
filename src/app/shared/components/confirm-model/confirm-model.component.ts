@@ -12,7 +12,6 @@ export class ConfirmModelComponent implements OnInit {
   constructor(public confirmModelService: ConfirmModelService) { }
 
   ngOnInit(): void {
-
     this.confirmModelService.isOpend$.subscribe(val => this.isOpend = val)
   }
 

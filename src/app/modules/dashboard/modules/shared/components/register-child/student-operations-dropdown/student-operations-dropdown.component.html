@@ -92,6 +92,11 @@
 
       <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'},{ar:'إعتماد الهيئة', en:'Spea Approval'}]"></app-workflow>
 
+      <div class="grid-container my-5" >
+        <p class="color-gray-300 ">{{ 'shared.grade'|translate }}</p>
+        <span class="color-primary fs-3">{{student?.grade?.name | currentLang}}</span>
+      </div>
+
       <div class="custom-form" ngForm #f="ngForm">
           <label class="label">{{'dashboard.students.caseOfRepeateStudyPhase'| translate}}</label>
           <p-dropdown

@@ -218,7 +218,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     }))
     .subscribe(res=>{
       this.toastr.success(this.translate.instant('toasterMessage.successUpdate'))
-      this.getStudent(this.studentId)
+      this.getStudent(this.studentId || this.childId)
 
 
 

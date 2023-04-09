@@ -38,15 +38,7 @@ export class RequestdetailsComponent implements OnInit {
   get currentUserSchoolId() { return this. userService.getCurrentSchoollId()}
 
 
-  isCommentAllowed(){
-    let arr=[
-      this.RequestStatusEnum.Approved,
-      this.RequestStatusEnum.Accepted,
-      this.RequestStatusEnum.Canceled,
-      this.RequestStatusEnum.Rejected,
-    ]
-    return !arr.includes(this.requestDetails?.requestStatus)
-  }
+
 
   requestInstance = this.route.snapshot.paramMap.get('id')
   rejectReasonModel
@@ -69,7 +61,7 @@ export class RequestdetailsComponent implements OnInit {
 	}
 
   onSubmited
-  filesToUpload:CustomFile[] =[]
+  // filesToUpload:CustomFile[] =[]
 
   requestDetails:UserRequest
 
@@ -137,50 +129,7 @@ export class RequestdetailsComponent implements OnInit {
 
   }
 
-  addComment(){
-    if(!this.requestDetails.requestComments.length) this.addFirstComment(this.requestDetails.commonRequestId)
-    else this.replayToComment(this.requestDetails.requestComments[0].id)
-  }
 
-  addFirstComment(commonRequestId){
-    this.isLoading =true
-    let comment={
-      commonRequestId: commonRequestId,
-      comment: this.reqActionsForm.comments,
-      attachments: this.filesToUpload
-    }
-
-    this.requestsService.AddFirstRequestComment(comment).subscribe(res=>{
-      this.isLoading =false
-      this.reqActionsForm.comments=''
-      this.filesToUpload =[]
-      this.getRequestDetails()
-      this.toaster.success(this.translate.instant('toasterMessage.messageSend'))
-    },()=>{
-      this.isLoading =false
-       this.toaster.error(this.translate.instant('toasterMessage.sendingFailed'))
-    })
-  }
-
-  replayToComment(commentId){
-    this.isLoading =true
-    let comment={
-      commentId: commentId,
-      reply: this.reqActionsForm.comments,
-      attachments: this.filesToUpload
-    }
-
-    this.requestsService.replayToRequestComment(comment).subscribe(res=>{
-      this.isLoading =false
-      this.reqActionsForm.comments=''
-      this.filesToUpload =[]
-      this.getRequestDetails()
-      this.toaster.success(this.translate.instant('toasterMessage.messageSend'))
-    },()=>{
-      this.isLoading =false
-       this.toaster.error(this.translate.instant('toasterMessage.sendingFailed'))
-    })
-  }
 
   // NOTE :- Request Perform action LOgic
 
@@ -222,7 +171,7 @@ export class RequestdetailsComponent implements OnInit {
     let action={
       ...this.reqActionsForm,
       optionId: this.submittedOption.id,
-      attachments:this.filesToUpload.map(file=> ({title: file.name, absolutePath: file.url.replace('https://valsquad.blob.core.windows.net', '') }))
+      // attachments:this.filesToUpload.map(file=> ({title: file.name, absolutePath: file.url.replace('https://valsquad.blob.core.windows.net', '') }))
     };
 
     this.requestsService.changeRequestState(action)
@@ -233,7 +182,7 @@ export class RequestdetailsComponent implements OnInit {
       this.getRequestTimeline()
 
       this.reqActionsForm.comments=''
-      this.filesToUpload =[]
+      // this.filesToUpload =[]
 
       this.isLoading=false
       this.submittedOption.isLoading=false
@@ -361,20 +310,36 @@ export class RequestdetailsComponent implements OnInit {
 
   reSendCertificateReq(){
 
-  let data = this.requestDetails.schoolYears.map(el => {
-    return {
+    let data= {
       student:{
-        id: this.requestDetails.student.id,
-        name:this.requestDetails.student.name,
+        id: this.requestDetails.student?.id,
+        name:this.requestDetails.student?.name,
       },
-      schoolYearName: el.schoolYear,
-      schoolName: el.schoolName,
-      gradeName: el.gradeName
+      academicSequence: this.requestDetails.schoolYears.map(el => {
+        return {
+          schoolYearName: el.schoolYear,
+          schoolName: el.schoolName,
+          gradeName: el.gradeName,
+          attachments:[]
+        }
+      })
     }
-  })
+
+  // let datas = this.requestDetails.schoolYears.map(el => {
+  //   return {
+  //     student:{
+  //       id: this.requestDetails.student.id,
+  //       name:this.requestDetails.student.name,
+  //     },
+  //     schoolYearName: el.schoolYear,
+  //     schoolName: el.schoolName,
+  //     gradeName: el.gradeName,
+  //     attachments:[]
+  //   }
+  // })
 
     localStorage.setItem('returnedRequest', JSON.stringify(data))
-    this.router.navigate(['/certificates/ask-certificate'],{queryParams:{requestInstance: this.requestDetails.id||this.requestInstance}})
+    this.router.navigate(['/certificates/ask-certificate'],{queryParams:{requestId: this.requestDetails.id, requestInstance: this.requestInstance}})
 
   }
 
