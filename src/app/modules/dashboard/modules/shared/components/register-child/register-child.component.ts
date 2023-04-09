@@ -69,14 +69,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   currentStudent:Student
 
 
-
-    booleanOptions = this.sharedService.booleanOptions
-    genderOptions = this.sharedService.genderOptions
-    countries$ = this.countriesService.getCountries()
-
-
-    isLoading
-
     // << FORMS >> //
     onSubmit =false
 
@@ -97,8 +89,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       birthDate:['', Validators.required],
       gender:['', Validators.required],
       nationalityId:[0 , Validators.required],
-      religionId:[1, Validators.required],
-      isGifted: ['', Validators.required],
+      religionId:[1, ],
+      isTalented: [''],
+      isGifted: [''],
 
       reasonForNotHavingEmiratesId:[null],
       passportId:[],
@@ -204,6 +197,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.studentForm.patchValue(res?.result as any)
       this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
       this.studentForm.controls.nationalityId.setValue(res.result?.nationality?.id)
+      this.studentForm.controls.religionId.setValue(res.result?.religion?.id)
       this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)
       this.studentForm.controls.specialEducation.patchValue({name:{ar:"",en:''}})
 

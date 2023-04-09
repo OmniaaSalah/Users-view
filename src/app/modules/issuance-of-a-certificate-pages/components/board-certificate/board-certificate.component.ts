@@ -76,7 +76,7 @@ export class BoardCertificateComponent implements OnInit {
 
   fillStudentFormArr(students){
     students.forEach(student=>{
-      this.studentsCtr.push( 
+      this.studentsCtr.push(
         this.fb.group({
           studentId: student.id,
           certificatedType: CertificatesEnum.BoardCertificate,
@@ -125,15 +125,19 @@ export class BoardCertificateComponent implements OnInit {
       this.saveBtn = true;
   }
 
+  isBoardFileSelected(){
+    return this.boardCertificateData.filter(el=> el.attachments.length).length == this.choosenStudents?.length
+  }
+
   onAttachmentSelected(attachment, index) {
     let urlParts =attachment.url?.split(".")
     let isImage = ['jpge','jpg','png'].includes(urlParts[urlParts.length-1]?.toLowerCase())
 
 
     if(!isImage){
-      this.showError =true; 
+      this.showError =true;
       return
-    }else this.showError =false; 
+    }else this.showError =false;
 
     let i = this.boardCertificateData[index].attachments.indexOf(attachment.id);
     if (i >= 0) {

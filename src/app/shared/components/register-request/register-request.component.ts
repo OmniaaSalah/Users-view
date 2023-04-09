@@ -201,6 +201,7 @@ export class RegisterRequestComponent implements OnInit {
 
     this.settingServcice.getRequestRquiredFiles(reqType).subscribe(res=>{
       this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
+      this.requiredFiles.files = this.requiredFiles.files.map(el =>({...el, uploadedFiles:[]}))
     },err=>{
       this.requiredFiles = {filesCount: 0, isRequired: false, files:[]}
     })
@@ -301,16 +302,19 @@ export class RegisterRequestComponent implements OnInit {
 
 
   attachments :CustomFile[] = []
+  get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
 
 
+  onFileUpload(files, fileTitle, index){
+    this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
 
-  onFileUpload(uploadedFiles:CustomFile[],file,index){
-    if(uploadedFiles.length) this.attachments[index]= {Titel:file.name, ...uploadedFiles[0]}
+    this.attachments= this.uploadedFiles
+    // if(uploadedFiles.length) this.attachments[index]= {Titel:file.name, ...uploadedFiles[0]}
    }
 
-   onFileDelete(index){
-    this.attachments.splice(index,1)
-   }
+  //  onFileDelete(index){
+  //   this.attachments.splice(index,1)
+  //  }
 
 
 

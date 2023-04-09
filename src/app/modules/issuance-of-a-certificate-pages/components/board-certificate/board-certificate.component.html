@@ -16,7 +16,7 @@
     <div class="d-flex align-items-center justify-content-end">
         <div class="d-flex">
             <button type="submit" class="btn btn-primary mx-2" (click)="sendBoardCertificateReq()"
-                [disabled]="!saveBtn || isBtnLoading">
+                [disabled]="!saveBtn || isBtnLoading || !isBoardFileSelected()">
                 {{ "dashboard.issue of certificate.Save" | translate }}
                 <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
             </button>

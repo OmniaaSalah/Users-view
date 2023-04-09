@@ -1,6 +1,6 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, map, Observable, share, throwError } from 'rxjs';
@@ -9,6 +9,7 @@ import { OptionalSubjects, Division, Track } from 'src/app/core/models/global/gl
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { ClaimsService } from 'src/app/core/services/claims.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
@@ -30,11 +31,12 @@ import { RegisterChildService } from '../../../services/register-child/register-
   templateUrl: './student-operations-dropdown.component.html',
   styleUrls: ['./student-operations-dropdown.component.scss']
 })
-export class StudentOperationsDropdownComponent implements OnInit {
+export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
-  @Input() student :Student
+  @Input() student! :Student
   @Output() refreshStudent = new EventEmitter()
 
+  lang =inject(TranslationService).lang;
   get userScope() { return UserScope }
   currentUserScope = inject(UserService).getCurrentUserScope();
   get claimsEnum(){ return ClaimsEnum }
@@ -47,20 +49,11 @@ export class StudentOperationsDropdownComponent implements OnInit {
   gradeId;
 
 
-  items: MenuItem[]=[
-    {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/dashboard/schools-and-students/students/student/${this.studentId||this.childId}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
-    {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`,claims:ClaimsEnum.E_DeleteStudentRequest},
-    {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
-    {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest},
-    {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
-    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool, routerLink:`/dashboard/schools-and-students/students/student/${this.studentId||this.childId}/withdraw-request/`},
-    {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
-    {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
-    // {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
-    // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
-    // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
-  ];
+  items: MenuItem[]
 
+  booleanOptions = this.sharedService.booleanOptions
+  genderOptions = this.sharedService.genderOptions
+  countries$ = this.countriesService.getCountries()
 
   religions$= this.sharedService.getReligion()
   reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.TheReasonForRegradingRequest)
@@ -154,8 +147,29 @@ export class StudentOperationsDropdownComponent implements OnInit {
     private toastr: ToastrService,
     private settingServcice:SettingsService,
     private cliamsService:ClaimsService,
-    private indexesService:IndexesService
+    private indexesService:IndexesService,
+    private countriesService:CountriesService
   ) { }
+
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.items=[
+      {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/dashboard/schools-and-students/students/student/${this.studentId||this.childId}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
+      {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`,claims:ClaimsEnum.E_DeleteStudentRequest},
+      {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
+      {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest},
+      {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
+      {
+        label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',
+        disabled: this.student?.studentStatus === RegistrationStatus.Withdrawal ,
+        claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool,
+        routerLink:`${this.currentUserScope==this.userScope.Guardian ? 'withdraw-request' : ('/dashboard/schools-and-students/students/student/' + (this.studentId||this.childId) + '/withdraw-request')}`
+      },
+      {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
+      {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
+    ];
+  }
 
   ngOnInit(): void {
 

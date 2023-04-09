@@ -31,9 +31,9 @@
             <app-file-upload (onFileUpload)="onFileUpload($event)" [accept]="fileTypesEnum.Pdf" view="full" title="{{'dashboard.students.attachmentsToDefineWithdrawalCause'| translate}}"></app-file-upload>
         </div> -->
         <ng-container *ngIf="requiredFiles">
-            <div class="col-md-7 mt-6" *ngFor="let file of requiredFiles.files; let i =index">
+            <div class="col-md-4 mt-6" *ngFor="let file of requiredFiles.files; let i =index">
                 <label class="label" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label>
-                <app-file-upload [accept]="file.type" [maxFileSize]="file.size" (onFileUpload)="onFileUpload($event, file.name,i)" view="list" ></app-file-upload>
+                <app-file-upload [accept]="file.type" [maxFileSize]="file.size" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" ></app-file-upload>
             </div>
 
 
