@@ -1,9 +1,9 @@
-import { Component, OnInit,inject, OnDestroy } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { faArrowRight ,faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import {  faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import {MessageService} from 'primeng/api';
@@ -12,7 +12,6 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SurveyService } from 'src/app/modules/dashboard/modules/surveys/service/survey.service';
 import { environment } from 'src/environments/environment';
-import { RegistrationEnum } from 'src/app/shared/enums/registration/registration-ways.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subscription } from 'rxjs';
 
@@ -69,7 +68,7 @@ export class AuthenticationMainComponent implements OnInit{
   }
 
   ngOnInit(): void {
-  
+
      this.checkUAEPassLogin();
      this.initLoginForm();
 
@@ -118,12 +117,12 @@ export class AuthenticationMainComponent implements OnInit{
             this.confirmationMessage=res?.errorLocalized[this.languge];
             this.UAEUnregisteredUser=res?.user;
           }
-          else 
+          else
           {
             this.openConfimModel=true
             this.confirmationMessage=res?.errorLocalized[this.languge];
             // this.toastService.error(res?.errorLocalized[this.languge])
-           
+
           }
         },err=>{
           this.loginInProgress=false
@@ -407,7 +406,7 @@ closeConfirmationModel()
   this.openConfimModel=false;
   this.router.navigate(['/auth/login'], {replaceUrl: true});
   window.location.href =`https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
-  
+
 }
 
 

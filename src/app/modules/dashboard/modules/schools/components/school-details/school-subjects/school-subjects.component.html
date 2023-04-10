@@ -1,5 +1,5 @@
 <div class="prim-table" *ngIf="subjectsObj.totalAllData || subjectsObj.loading">
-    <p-table #dt [value]="subjectsObj.list" [lazy]="true">
+    <p-table #dt [value]="subjectsObj.list" [lazy]="true"  [scrollable]="true">
         <ng-template pTemplate="caption">
 
             <app-table-caption
@@ -64,6 +64,11 @@
                 <th pSortableColumn="speaSubject">{{'dashboard.schools.authoritySubjects'|translate}} <p-sortIcon field="speaSubject"></p-sortIcon></th>
                 <th pSortableColumn="evaluationSystem">{{'dashboard.Subjects.Evaluation System'|translate}} <p-sortIcon field="evaluationSystem"></p-sortIcon></th>
                 <th pSortableColumn="isElective">{{'shared.optionalOrMandatory'|translate}} <p-sortIcon field="isElective"></p-sortIcon></th>
+                <th pSortableColumn="gradeName">{{'dashboard.Subjects.Created by'|translate}}</th>
+                <th pSortableColumn="gradeName">{{'dashboard.Subjects.createdDate'|translate}}</th>
+                <th pSortableColumn="gradeName">{{'dashboard.Subjects.Edited by'|translate}}</th>
+                <th pSortableColumn="gradeName">{{'dashboard.Subjects.Last EditDate'|translate}}</th>
+
 
 
             </tr>
@@ -76,6 +81,10 @@
                 <td>{{subject?.speaSubject ? ('shared.yes'|translate): ('shared.no'|translate)}}</td>
                 <td>{{''+subject?.evaluationSystem |translate}}</td>
                 <td>{{subject?.isElective ? ('shared.optional' |translate) : ('shared.mandatory' |translate) }}</td>
+                <td>{{subject?.createdName|currentLang}}</td>
+                <td>{{subject?.createdDate|LocalizeDate}}</td>
+                <td>{{(subject?.updatedName|currentLang) || '--'}}</td>
+                <td>{{(subject?.lastUpdatedDate|LocalizeDate )|| '--'}}</td>
 
             </tr>
         </ng-template>
