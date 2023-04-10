@@ -252,7 +252,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
       this.isBtnLoading=false;
       this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
 
-      // this.router.navigate(['/']);
+      this.router.navigate(['/']);
 
     },(err:Error)=>{
       this.isBtnLoading=false;

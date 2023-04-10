@@ -102,7 +102,7 @@ export class UnregisterChildComponent implements OnInit {
   addMode=false
   gurdiansAttachmentsTypes$=this.indexsService.getIndext(IndexesEnum.TheTypeOfFileAttachmentForTheParent)
 
-  get deleteDialogData() { return {img: this.child?.imagePath || 'assets/images/shared/image.svg',message:`هل أنت متأكد أنك تريد حذف "${getLocalizedValue(this.child.name)}” من قائمة أبنائك؟`}}
+  get getDialogData() { return {img: this.child?.imagePath || 'assets/images/shared/image.svg',message:`هل أنت متأكد أنك تريد حذف "${getLocalizedValue(this.child?.name)}” من قائمة أبنائك؟`}}
 
 
   fileForm= this.fb.group({
