@@ -43,7 +43,7 @@
         <div class="actions d-flex align-items-center gap-3 mb-5">
 
             <ng-container *permit="claimsEnum.G_DeleteChild">
-                <button class="btn btn-primary bg-skyBlue-600 btn--sm px-5" (click)="openDeleteModel()">
+                <button class="btn btn-primary bg-skyBlue-600 btn--sm px-5" [ConfirmDialog]="deleteDialogData()" (onConfirm)="deleteChilddeleteChild(i)" (click)="openDeleteModel()">
                     <span>{{'shared.delete' |translate}} </span>
                 </button>
             </ng-container>
