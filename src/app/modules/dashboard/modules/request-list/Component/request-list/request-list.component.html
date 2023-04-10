@@ -12,7 +12,7 @@
         <div class="parents">
             <div class="prim-table mt-4">
                 <!-- [(rows)]="rows" [(first)]="first" -->
-                <p-table #dt [value]="requests.list" [lazy]="true" (onSort)="sortMe($event)" >
+                <p-table #dt [value]="requests.list" [lazy]="true" (onSort)="sortMe($event)"  [scrollable]="true">
                     <!-- Table Caption -->
 
                     <!-- <ng-template pTemplate="caption">
@@ -52,19 +52,16 @@
 
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
-                            <th pSortableColumn="requestNumber">
-                                <p-sortIcon field="requestNumber"></p-sortIcon>{{'dashboard.Requests.requestNumber'|translate}}</th>
-                            <th pSortableColumn="requestTypeEnum">
-                                <p-sortIcon field="requestTypeEnum"></p-sortIcon>{{'dashboard.Requests.requestType'|translate}}</th>
-                            <th pSortableColumn="createdNameAr">
-                                <p-sortIcon field="createdNameAr"></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
-                            <th pSortableColumn="createdDate">
-                                <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-                            <th pSortableColumn="requestStatus">
-                                <p-sortIcon field="requestStatus"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
-                            <th *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith">
+                            <th>{{'dashboard.Requests.requestNumber'|translate}}</th>
+                            <th style="min-width: 24rem;" pSortableColumn="requestTypeEnum">{{'dashboard.Requests.requestType'|translate}}</th>
+                            <th pSortableColumn="createdNameAr">{{'dashboard.Subjects.Created by'|translate}}</th>
+                            <th style="min-width: 16rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+                            <th style="min-width: 16rem;"  *ngIf="currentUserScope==userScope.Guardian">{{'dashboard.Subjects.Last EditDate'|translate}}</th>
+                            <th pSortableColumn="requestStatus"><p-sortIcon field="requestStatus"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
+                            <th style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith">
                                     <p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
                             <th class="actions"></th>
+
                         </tr>
                     </ng-template>
 
@@ -74,15 +71,16 @@
                             <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
                       {{product[col.field]}}
                   </td> -->
-                            <td>{{request.requestNumber}}</td>
-                            <td>
+                            <td >{{request.requestNumber}}</td>
+                            <td style="min-width: 24rem;">
                                 {{'dashboard.Requests.'+request.requestType | translate}}
                                 <a *ngIf="request?.schoolCreator" routerLink="/dashboard/schools-and-students/schools/school/{{request?.schoolCreator?.id}}" [style.height.rem]="'4'" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.schoolCreator?.name|currentLang}}</a>
                                 <a *ngIf="request?.school" routerLink="/dashboard/schools-and-students/schools/school/{{request?.school?.id}}" [style.height.rem]="'4'" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.school?.name|currentLang}}</a>
                                 <span *ngIf="request?.grade" [style.height.rem]="'4'"  class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.grade?.name|currentLang}}</span>
                             </td>
                             <td>{{request.createdBy | currentLang}}</td>
-                            <td>{{request.createdDate |LocalizeDate:'d MMMM y hh:mm a'}}</td>
+                            <td style="min-width: 16rem;">{{request.createdDate |LocalizeDate:'d MMMM y hh:mm a'}}</td>
+                            <td style="min-width: 16rem;"  *ngIf="currentUserScope==userScope.Guardian">{{(subject?.lastUpdatedDate|LocalizeDate:'d MMMM y hh:mm a' )|| '--'}}</td>
                             <td>
                                 <span [ngSwitch]="request.requestStatus">
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
@@ -96,7 +94,7 @@
                                 </span>
                                 <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
                             </td>
-                            <td *ngIf="currentUserScope==userScope.Guardian">{{request?.relatedSon | currentLang}}</td>
+                            <td style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian">{{request?.relatedSon | currentLang}}</td>
                             <td >
                                 <div class="d-flex align-items-center gap-3 justify-content-end mx-4" role="button" [routerLink]="['details',request.instanceId]">
                                     <span class="color-skyBlue-400">{{'shared.details' |translate}}</span>

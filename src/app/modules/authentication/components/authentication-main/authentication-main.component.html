@@ -112,7 +112,7 @@
 
                   <div class="tip position-absolute ">
                     <p class="mb-2">{{'UAE PASS is a single trusted digital identity for all citizens, residents to United Arab Emirates' | translate}}</p>
-                    <a class="color-gray-800 text-decoration-underline">{{'login.createAccount' |translate}}</a>
+                    <a class="color-gray-800 text-decoration-underline"  (click)="signWithIdentity()">{{'login.createAccount' |translate}}</a>
                   </div>
                 </button>
 
@@ -168,9 +168,9 @@
                 <p class="fs-3 text-center" > {{confirmationMessage}}</p>
          </div>
           <ng-container *ngIf="statusCode=='NotFound'">
-           
 
-            
+
+
                 <div class="row gx-5 mt-5">
                   <div class="col-md-6">
                       <div class="d-flex ">
@@ -193,17 +193,17 @@
                       </div>
                   </div>
                   <div class="col-md-6">
-                   
+
                       <div class="d-flex ">
                           <p class="color-gray-300 ">{{ 'sign up.phoneNumber'|translate }}</p>
                           <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.mobile}}</span>
-                      </div> 
-                
+                      </div>
+
                   </div>
                   </div>
                   <div class="row gx-5 mt-4">
                   <div class="col-md-6">
-                    
+
                       <div class="d-flex ">
                           <p class="color-gray-300 ">{{ 'shared.gender'|translate }}</p>
                           <span class="color-primary mx-3 ">{{'shared.genderType.'+UAEUnregisteredUser?.gender|translate}}</span>
@@ -213,7 +213,7 @@
                       <div class="d-flex ">
                           <p class="color-gray-300 ">{{ 'dashboard.parents.emirateUid'|translate }}</p>
                           <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.idn}}</span>
-                      </div>  
+                      </div>
                   </div>
                   </div>
                   <div class="row gx-5 mt-4">
@@ -224,10 +224,10 @@
                      </div>
                     </div>
                   </div>
-                   
+
 
           </ng-container>
-          
+
           <div class="d-flex align-items-center gap-4 justify-content-center mt-5">
             <ng-container *ngIf="statusCode=='NotFound'">
               <button (click)="openUAEAccount()" class="btn btn-primary" [disabled]="isUAeAccountBtnLoading">
@@ -238,7 +238,7 @@
             </ng-container>
                 <button *ngIf="statusCode!='NotFound'" (click)="closeConfirmationModel()" class="btn btn-primary">{{'shared.close' |translate}}</button>
           </div>
-     
+
       </ng-template>
   </p-dialog>
 </div>
