@@ -148,7 +148,7 @@ export class SettingsService {
 
   gracePeriodList=[
     {id:1, name:'نقل الطلاب بشكل جماعى' , value:GracePeriodEnum.transferStudents},
-    {id:2, name:'رفع الدرجات', value: GracePeriodEnum.raisDegrees},
+    {id:2, name:'رفع الدرجات', value: GracePeriodEnum.raisDegreesFirstClass},
     {id:3, name:'حذف الطلاب', value: GracePeriodEnum.deleteStudents}
   ]
 
@@ -227,6 +227,13 @@ export class SettingsService {
 
   isSchoolAllowToTransferGroup(schoolId){
     return this.http.get(`/system-settings/grace-period/check-from-school/${schoolId}`)
+    .pipe(
+      map(res=> res.result.valid ? true : false),
+      take(1))
+  }
+
+    isSchoolExistInGracePeriod(query){
+    return this.http.get(`/system-settings/grace-period/check-from-school`, query)
     .pipe(
       map(res=> res.result.valid ? true : false),
       take(1))
@@ -323,7 +330,23 @@ export class SettingsService {
     this.getAttachedFileRules()
     .pipe(
       map(res=>{
-          res = this.currentUserScope==this.userScope.Guardian ? res.guardians : res.employees
+
+          switch (this.currentUserScope) {
+            case this.userScope.Guardian:
+              res =res.guardians
+            break;
+            case this.userScope.Employee:
+              res =res.employees
+            break;
+            case this.userScope.SPEA:
+              res =res.speaEmployees
+            break;
+            default:
+              res =res.speaEmployees
+            break;
+          }
+
+
           return res.map(rule=> {
             return {
               [rule.fileType]:{

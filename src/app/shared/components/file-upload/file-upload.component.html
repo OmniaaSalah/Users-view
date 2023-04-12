@@ -35,7 +35,7 @@
 
                 #upload
                 [disabled]="files.length > maxFilesToUpload || inProgress"
-                [accept]="allowedFilesExtentions"
+                [accept]="allowedFilesExtentions || null"
                 [multiple]="multiple"
                 [hidden]="true"
                 (change)="validateSelectedFiles($event)">
@@ -48,7 +48,7 @@
                 <p class="title text-center color-red-500" *ngIf="!uploaded && !hideCheck">{{'toasterMessage.error' |translate}}</p>
 
                 <!-- <p class="sub-title">{{allowedFilesType}} (Maximum Size: {{fileSize}}mb)</p> -->
-                <p class="sub-title color-primary">{{'shared.fileMaxSize' |translate:{type :('shared.'+allowedFilesType |translate), size: fileSize} }}</p>
+                <p class="sub-title color-primary" *ngIf="allowedFilesType">{{'shared.fileMaxSize' |translate:{type :('shared.'+allowedFilesType |translate) || '', size: fileSize} }}</p>
             </div>
 
 
@@ -74,7 +74,36 @@
 
 
 
-        <ng-container  *ngIf="view=='list'">
+        <ng-container  *ngIf="view=='full'">
+          <div class="gx-5 mt-5 full-file">
+              <ng-container *ngFor="let file of files; let i = index">
+                  <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.url">
+                      <div role="button" (click)="openFile(file?.url)" class="d-flex align-items-center gap-5" >
+                          <img src="assets/images/shared/pdf.svg" alt="">
+                          <span> {{file.name || 'ملف'}}</span>
+                          <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2 cancel" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
+                      </div>
+                      <ng-container *ngIf="hasComment">
+                          <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
+                              <img class="icon" *ngIf="!editMode" (click)="editMode =true" role="button" class="position-absolute" style="top:1.5rem; left:1.5rem;width: 1.3rem; height: 1.3rem;" src="assets/images/shared/pen.svg" alt="">
+                              <span class="d-block color-orange-300 mb-2">ملاحظه :</span>
+                              <span class="comment" *ngIf="!editMode">{{file.comment}}</span>
+                              <textarea  *ngIf="editMode" name="comment" [(ngModel)]="files[i].comment" rows="4" (blur)="editMode=false;this.onFileUpload.emit(this.files)"></textarea>
+                          </p>
+                      </ng-container>
+
+                  </div>
+              </ng-container>
+          </div>
+      </ng-container>
+
+
+
+
+
+
+
+        <!-- <ng-container  *ngIf="view=='list'">
             <div class="list flex-column ">
                 <ul>
                     <ng-container *ngFor="let file of files; let i = index">
@@ -88,9 +117,9 @@
             </div>
         </ng-container>
 
-    </div>
+    </div> -->
 
-
+<!--
     <ng-container  *ngIf="view=='rows'">
         <div class="row gx-5 mt-5 rows">
             <ng-container *ngFor="let file of files; let i = index">
@@ -104,39 +133,11 @@
                 </div>
             </ng-container>
         </div>
-    </ng-container>
+    </ng-container> -->
 
 
 
-    <ng-container  *ngIf="view=='full'">
-        <div class="gx-5 mt-5 full-file">
-            <ng-container *ngFor="let file of files; let i = index">
-                <!-- <div class="ps-6">
-                    <label class="label color-gray-700" for="day">{{'dashboard.students.studentIdentity' |translate}}  </label>
-                    <div class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-3">
-                        <img src="assets/images/shared/pdf.svg" alt="">
-                        <span>{{file?.name}}</span>
-                        <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
-                    </div>
-                </div> -->
 
-                <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.url">
-                    <div role="button" (click)="openFile(file?.url)" class="d-flex align-items-center gap-5" >
-                        <img src="assets/images/shared/pdf.svg" alt="">
-                        <span> {{file.name || 'ملف'}}</span>
-                        <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2 cancel" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
-                    </div>
-                    <ng-container *ngIf="hasComment">
-                        <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
-                            <img class="icon" *ngIf="!editMode" (click)="editMode =true" role="button" class="position-absolute" style="top:1.5rem; left:1.5rem;width: 1.3rem; height: 1.3rem;" src="assets/images/shared/pen.svg" alt="">
-                            <span class="d-block color-orange-300 mb-2">ملاحظه :</span>
-                            <span class="comment" *ngIf="!editMode">{{file.comment}}</span>
-                            <textarea  *ngIf="editMode" name="comment" [(ngModel)]="files[i].comment" rows="4" (blur)="editMode=false;this.onFileUpload.emit(this.files)"></textarea>
-                        </p>
-                    </ng-container>
 
-                </div>
-            </ng-container>
-        </div>
-    </ng-container>
+
 </div>

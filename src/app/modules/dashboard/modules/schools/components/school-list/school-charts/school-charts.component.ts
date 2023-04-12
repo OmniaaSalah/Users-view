@@ -67,12 +67,12 @@ export class SchoolChartsComponent implements OnInit {
       console.log(schoolCurriculum);
 
       for (const key in schoolCurriculum) {
-        console.log(key);
-
+        const name = this.lang=='ar' ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length);
         this.model.shoolCurriculumChartLabels.push({
-          key: this.lang=='ar' ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length),
+          key: name,
           value: schoolCurriculum[key]
         });
+        this.model.shoolCurriculumChartStringLabels.push(name);
       }
 
       console.log(this.model.shoolCurriculumChartLabels);

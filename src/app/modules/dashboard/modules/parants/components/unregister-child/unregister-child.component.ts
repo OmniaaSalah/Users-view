@@ -111,7 +111,7 @@ export class UnregisterChildComponent implements OnInit {
       ar:[, Validators.required],
       en:[, Validators.required]
     }),
-    fileType:[, Validators.required]
+    fileType:[]
   })
 
   constructor(

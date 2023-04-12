@@ -3,7 +3,7 @@
     <ng-container>
 
         <div class="nav__logo nav__logo--main">
-            <img src="assets/images/navBar/sharjah.svg" alt="">
+            <img src="assets/images/spea-logo.png" alt="">
         </div>
         <div class="divider"></div>
     </ng-container>
@@ -116,7 +116,9 @@
 
                 <div class="px-4 message" routerLink="dashboard/messages/messages">
                     <!-- <img src="assets/images/navBar/message.svg" alt=""> -->
-                    <i class="pi pi-comments color-primary fs-2"></i>
+                    <i *ngIf="unReadedMessagesCount" class="pi pi-comments color-primary fs-2" pBadge style="font-size: 2rem;" severity="danger"  [value]="unReadedMessagesCount"></i>
+                    <i *ngIf="!unReadedMessagesCount" class="pi pi-comments color-primary fs-2" style="font-size: 2rem;" ></i>
+
                 </div>
             </div>
         </div>
@@ -159,24 +161,24 @@
                                                     <img src="assets/images/empty-list/empty-list.svg" alt="">
                                                     <h2>{{'emptyList.Notifications List is empty' |translate}}</h2>
                                                 </div>
-                                                <div class="p-0 mb-4" *ngFor="let card of notificationsList; let i=index">
-                                                    <div *ngIf="notificationsList.length !==0" class="name-description" (click)="goToNotificationDetails(card.pageLink)">
+                                                <div class="p-0 mb-4" *ngFor="let notification of notificationsList; let i=index">
+                                                    <div *ngIf="notificationsList.length !==0" class="name-description" (click)="goToNotificationDetails(notification.pageLink)">
                                                         <div class="title position-relative">
-                                                            <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.isRead">
+                                                            <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!notification.isRead">
                                                             <img class="cardimage ms-3" src="assets/images/shared/Person.jpg">
-                                                            <span class="tittle" *ngIf="checkLanguage">{{card.userName.ar}}</span>
-                                                            <span class="tittle" *ngIf="!checkLanguage">{{card.userName.en}}</span>
+                                                            <span class="tittle" *ngIf="checkLanguage">{{notification.userName.ar}}</span>
+                                                            <span class="tittle" *ngIf="!checkLanguage">{{notification.userName.en}}</span>
                                                             <!-- <span>{{'Notifications.Ask'|translate}}</span> -->
-                                                            <span class="headerName" *ngIf="checkLanguage">{{card.title.ar}}</span>
-                                                            <span class="headerName" *ngIf="!checkLanguage">{{card.title.en}}</span>
+                                                            <span class="headerName" *ngIf="checkLanguage">{{notification.title.ar}}</span>
+                                                            <span class="headerName" *ngIf="!checkLanguage">{{notification.title.en}}</span>
                                                         </div>
                                                         <div class="Description my-2">
                                                             <span class="">{{'Notifications.Description'|translate}}</span>
-                                                            <p *ngIf="checkLanguage">{{card.description.ar}}</p>
-                                                            <p *ngIf="!checkLanguage">{{card.description.en}}</p>
+                                                            <p *ngIf="checkLanguage">{{notification.description.ar}}</p>
+                                                            <p *ngIf="!checkLanguage">{{notification.description.en}}</p>
 
                                                         </div>
-                                                        <span class="receviedTime">{{transform(card.createdDate)}}</span>
+                                                        <span class="receviedTime">{{transform(notification.createdDate)}}</span>
                                                     </div>
                                                     <hr>
                                                 </div>

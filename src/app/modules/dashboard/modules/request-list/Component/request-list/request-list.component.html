@@ -108,11 +108,13 @@
                     <ng-template pTemplate="emptymessage" let-columns>
                         <tr>
                             <td [attr.colspan]="20">
-                                <ng-container *ngIf="requests.totalAllData && requests.list.length == 0 &&  !requests.loading">
+                                <div class="w-100" *ngIf="requests.totalAllData && requests.list.length == 0 &&  !requests.loading">
                                     <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                                </ng-container>
+                                </div>
 
-                                <app-loader></app-loader>
+                                <div class="w-100">
+                                  <app-loader></app-loader>
+                                </div>
                             </td>
                         </tr>
                     </ng-template>

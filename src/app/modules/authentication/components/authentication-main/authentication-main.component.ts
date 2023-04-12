@@ -382,6 +382,7 @@ getCurrentYear()
 {
   this.loginInProgress=true;
   this.sharedService.getCurrentYear().subscribe((res)=>{
+    this.loginInProgress=false;
     this.userService.persist('yearId',res?.id);
    this.router.navigateByUrl(this.returnUrl);
   },(err)=>{this.loginInProgress=false})
