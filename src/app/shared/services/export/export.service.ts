@@ -5,11 +5,12 @@ import { Table } from 'primeng/table';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable"
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ExportService {
-
+ 
   constructor() { }
 
 
@@ -42,12 +43,14 @@ export class ExportService {
 
   // <<<<<<<<<<<<<<<<<<< PDF >>>>>>>>>>>>>>>>>>>>>>>
   exportPdf(data:any[], fileName) {
+  
     let exportColumns = this.getColsHead(data).reverse()
     data= data.map(el=>{      
       return Object.values(el).reverse()
     })
     
     const doc = new jsPDF('l', 'pt', 'a2')
+   
     doc.addFont("/assets/font/amiri/Amiri-Regular.ttf", "Amiri-Regular", "normal");
     doc.setFont("Amiri-Regular");
 
@@ -55,6 +58,7 @@ export class ExportService {
       styles:{
         font:'Amiri-Regular',
         halign:'right',
+        cellWidth: 'wrap'
       },
       columns: exportColumns,
       body: data,

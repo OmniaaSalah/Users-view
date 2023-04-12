@@ -68,10 +68,12 @@ export class SchoolChartsComponent implements OnInit {
       const isArabic = this.translate.currentLang === 'ar';
       this.model.schoolCurriculumDatasets = [{data: schoolCurriculumValues, backgroundColor:["#CD578A","#5BCEDD", "#F8C073","#f1f2f4","#93d9d9","#c1d6e1","#ff9776"]}];
       for (const key in schoolCurriculum) {
+        const name = isArabic ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length);
         this.model.shoolCurriculumChartLabels.push({
-          key: isArabic ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length),
+          key: name,
           value: schoolCurriculum[key]
         });
+        this.model.shoolCurriculumChartStringLabels.push(name);
       }
     }
   }

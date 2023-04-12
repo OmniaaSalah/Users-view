@@ -34,6 +34,7 @@ import { StudentsService } from '../../services/students/students.service';
 export class StudentsListComponent implements OnInit {
 
   lang = inject(TranslationService).lang
+  genderList=[];
   studentCategoryList=[];
   currentUserScope = inject(UserService).getCurrentUserScope()
   get claimsEnum(){ return ClaimsEnum }
@@ -72,7 +73,8 @@ export class StudentsListComponent implements OnInit {
     // انواع الفصول الخاصه
     IsInFusionClass:null,
     IsSpecialClass:null,
-    StudentDegreeResultFilter:null
+    StudentDegreeResultFilter:null,
+    gender:null
   }
   paginationState= {...paginationInitialState}
 
@@ -134,7 +136,7 @@ export class StudentsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDashboardHeader();
-
+    this.genderList = this.sharedService.genderOptions
 
     this.checkStudentList();
     this.userService.currentUserSchoolId$.subscribe(id =>{
@@ -258,6 +260,7 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsSpecialAbilities = null
     this.filtration.StudentCategory=null
     this.filtration.StudentDegreeResultFilter=null
+    this.filtration.gender=null
     this.checkStudentList();
   }
 

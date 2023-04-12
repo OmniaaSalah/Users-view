@@ -11,7 +11,8 @@ export class SchoolChartsModel {
     };
 
     shoolCurriculumChartLabels: Array<KeyValue<string, number>> = [];
-
+    shoolCurriculumChartStringLabels: Array<string> = [];
+    
     schoolCityDatasets: ChartConfiguration<'bar'>['data']['datasets'];
     schoolCityOptions: ChartConfiguration<'bar'>['options'] = {
       responsive: false, };
