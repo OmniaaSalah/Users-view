@@ -52,6 +52,9 @@
                       <p class="color-gray-300 fs-4">{{ 'Guardian'|translate }}</p>
                       <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
 
+                      <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span>
+
                         <p class="color-gray-300 fs-4">{{ 'shared.nationalityCategory'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
 
@@ -158,8 +161,8 @@
                                 {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
                             </span>
                         </div>
-                       
-                        
+
+
 
                         <p class="color-gray-300 fs-4">{{'dashboard.students.withDisabilities'| translate}}</p>
                         <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
