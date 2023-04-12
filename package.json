@@ -49,7 +49,6 @@
         "ng2-charts": "^4.0.1",
         "ngx-infinite-scroll": "^14.0.0",
         "ngx-skeleton-loader": "^6.0.0",
-        "ngx-spinner": "^14.0.0",
         "ngx-toaster": "^1.0.1",
         "ngx-toastr": "^15.0.0",
         "ngx-translate-messageformat-compiler": "5.0.1",

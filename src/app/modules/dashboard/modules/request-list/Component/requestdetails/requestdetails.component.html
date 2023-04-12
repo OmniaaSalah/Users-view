@@ -2,7 +2,8 @@
 
 
 
- <div class="submit-btn d-flex justify-content-end gap-3 mb-5" *ngIf="requestDetails?.requestType==requestTypeEnum.RegestrationApplicationRequest && currentUserScope==userScopeEnum.Guardian">
+ <div class="submit-btn d-flex justify-content-end gap-3 mb-5"
+ *ngIf="(isRequestAllowedForWithdrawal | wrapFn : requestDetails?.requestType) && currentUserScope==userScopeEnum.Guardian">
     <button class=" btn btn-primary btn--sm px-5"
     *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Returned"
     (click)="reSendRegistrationReq()">
@@ -18,6 +19,7 @@
         <span>{{'dashboard.Requests.withdrawalReq' |translate}}</span>
     </button>
 </div>
+
 
 <div class="submit-btn d-flex justify-content-end" *ngIf="requestDetails?.requestType==requestTypeEnum.FlexibleHolidayRequest">
     <button class=" btn btn-primary btn--sm px-5" (click)="reSendFlexableHolidayReq()" *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Returned && currentUserScope==userScopeEnum.Employee">
@@ -789,7 +791,7 @@
     <ng-template pTemplate="content">
 
         <div class="custom-form" ngForm #f="ngForm">
-            <label class="label">{{'dashboard.Requests.rejectReason'| translate}}</label>
+            <label class="label required">{{'dashboard.Requests.rejectReason'| translate}}</label>
             <input
             *ngIf="!rejectReason$"
             type="text"
@@ -806,6 +808,11 @@
             optionValue="id"
             optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
             placeholder="{{'dashboard.Requests.rejectReason'|translate}}" [required]="rejectReason$"></p-dropdown>
+
+            <div class="mt-5" *ngIf="requestDetails?.requestType==requestTypeEnum.RegestrationApplicationRequest">
+              <P class="mb-4">{{'dashboard.Requests.addExplanation' | translate}}({{'shared.optional' |translate}})</P>
+              <textarea  [rows]="4" [(ngModel)]="reqActionsForm.comments" pInputTextarea [autoResize]="true" placeholder="{{'dashboard.Requests.addExplanation' | translate}}"></textarea>
+          </div>
         </div>
 
         <!-- Uploader -->

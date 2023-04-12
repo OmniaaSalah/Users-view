@@ -1768,6 +1768,7 @@
             "withdrawalReq":"withdrawal Request",
             "requestAttachments":"Request Attachments",
             "rejectReason": "Reject Reason",
+            "addExplanation":"Add Exeplanation",
             "schoolToSend":"school ToSend",
             "schoolToAccept": "school ToAccept",
             "schoolTo": "To School",

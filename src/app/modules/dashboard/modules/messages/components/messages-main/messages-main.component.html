@@ -74,9 +74,10 @@
 
             <div class="cardd border-dark mb-5" *ngFor="let message of messages.list; let i = index">
               <div class="card-body p-4 d-flex justify-content-between">
+
                 <div class="name-description">
                   <div class="title">
-                    <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!message.isRead" />
+                    <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="message.messageSatus ==messageStatusEnum.Pending" />
                     <img class="cardimage" src="assets/images/shared/Person.jpg" />
                     <span class="tittle" *ngIf="checkLanguage">{{message?.userName?.ar}}</span>
                     <span class="tittle" *ngIf="!checkLanguage">{{message?.userName?.en}}</span>
@@ -93,9 +94,10 @@
                     message.createdDate | date | translate
                     }}</span>
                 </div>
-                <div class="Details align-items-center">
-                  <p>
-                    <img class="icon-mess" src="assets/images/shared/cardmessage.svg" alt="" />
+
+                <div class="Details align-items-center py-3">
+                  <p class=" color-primary">
+                    <img class="" src="assets/images/shared/contact-us.svg" alt="" />
                     {{ message.messageCount }}
                   </p>
 
@@ -107,6 +109,8 @@
                   </div>
 
                 </div>
+
+
               </div>
             </div>
 
