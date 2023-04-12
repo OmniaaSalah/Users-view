@@ -16,6 +16,8 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { DatePipe } from '@angular/common';
+import { MessageService } from 'src/app/modules/dashboard/modules/messages/service/message.service';
+import { MessageStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 interface MenuItem{
   id:number
@@ -79,7 +81,8 @@ export class HeaderComponent implements OnInit {
     private notificationService: NotificationService,
     private sharedService:SharedService,
     private authService:AuthenticationService,
-    private translation:TranslationService
+    private translation:TranslationService,
+    private messageService: MessageService,
     ) { }
 
 
@@ -87,19 +90,19 @@ export class HeaderComponent implements OnInit {
 
 
     this.userService.isUserLogged$.subscribe((res)=>{
-       if(res)
-       {
-        this.guardianName=this.userService.getCurrentUserName();
-        this.getSchoolYearsList();
-        // this.userService.currentUserName.subscribe((res)=>{this.guardianName=res;})
-
+       if(res){
+          this.guardianName=this.userService.getCurrentUserName();
+          this.getSchoolYearsList();
+          // this.userService.currentUserName.subscribe((res)=>{this.guardianName=res;})
+          this.getCurrentUserMessages()
           this.getNotficationNumber()
-           this.notificationService.unReadNotificationNumber.subscribe((response) => {
-            if(response!=0)
-            {this.notificationNumber = response;}
-            else
-            {this.notificationNumber = '';}
-           });
+
+          this.notificationService.unReadNotificationNumber.subscribe((response) => {
+          if(response!=0)
+          {this.notificationNumber = response;}
+          else
+          {this.notificationNumber = '';}
+          });
       }
 
       });
@@ -391,18 +394,31 @@ onScroll()
 
 
 
-  getNotficationNumber()
-  {
-    this.searchModel.pageSize=null;
+  getNotficationNumber(){
+
+    this.searchModel.pageSize=8;
     this.searchModel.isRead=null;
+
     this.notificationService.getAllNotifications(this.searchModel).subscribe((res)=>{
-      var unReadCount=0;
+      let unReadCount=0;
       this.notificationService.notificationNumber.next(res.total);
       res.data.forEach(element => {
         if(!element.isRead)
         {unReadCount++;}
       });
       this.notificationService.unReadNotificationNumber.next(unReadCount)
+    })
+  }
+
+  unReadedMessagesCount=0
+
+  getCurrentUserMessages(){
+    let userId = this.userService.getCurrentUserId();
+    this.messageService.getCurrentUserMessages(userId, this.currentUserScope,{PageSize:100, Page:1})
+    .subscribe(res=>{
+      res?.data.forEach(mes=>{
+        mes.messageSatus== MessageStatus.Pending ? this.unReadedMessagesCount++ : null
+      })
     })
   }
 
@@ -415,4 +431,5 @@ onScroll()
   changeLanguage(): void {
     this.translation.handleLanguageChange();
   }
+
 }

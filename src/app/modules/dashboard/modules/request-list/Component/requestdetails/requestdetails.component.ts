@@ -200,7 +200,10 @@ export class RequestdetailsComponent implements OnInit {
   }
 
 
-
+isRequestAllowedForWithdrawal(requestType){
+  let reqs = ['WithdrawalRequest','StudentRegradingRequest','RegestrationApplicationRequest','ModifyIdentityRequest','ModifyIdentityRequestCaseStudentNotHaveId']
+  return reqs.includes(requestType)
+}
 
 
   isRequestRelatedToStudent(requestType:requestTypeEnum){
@@ -283,7 +286,7 @@ export class RequestdetailsComponent implements OnInit {
 
   withdrawReq(){
     this.onSubmited=true
-    this.requestsService.withdrawReq(this.requestDetails.requestNumber).subscribe(res=>{
+    this.requestsService.withdrawReq(this.requestInstance).subscribe(res=>{
       this.toaster.success(this.translate.instant('toasterMessage.requestWithdrawnSuccesfully'))
       this.router.navigate(['/dashboard/performance-managment/RequestList'])
       this.onSubmited=false

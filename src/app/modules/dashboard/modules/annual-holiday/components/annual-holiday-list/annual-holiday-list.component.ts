@@ -157,9 +157,9 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
    this.annualHolidayService.openModel.next(false);
   }
  
-  editHoliday(holiday)
+  editHoliday(holiday,currentAnnualCalenderName,currentYear)
   {
-
+  this.getHolidayNameAndYear(currentAnnualCalenderName,currentYear)
    this.updatedHolidayId=holiday.id;
    this.annualHolidayService.editedHoliday.next({
     name:holiday.name,
@@ -171,6 +171,12 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   });
    this.annualHolidayService.openModel.next(true);
   }
+
+  getHolidayNameAndYear(currentAnnualCalenderName,currentYear)
+{
+  this.annualHolidayService.annualCalendarName.next(currentAnnualCalenderName[this.lang]);
+  this.annualHolidayService.year.next(currentYear);
+}
 
   saveHoliday(e)
   {

@@ -52,12 +52,12 @@
                       <p class="color-gray-300 fs-4">{{ 'Guardian'|translate }}</p>
                       <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
 
+                      <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span>
+
                         <p class="color-gray-300 fs-4">{{ 'shared.nationalityCategory'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
 
-                        <p class="color-gray-300 fs-4">{{'dashboard.students.isGifted'| translate}}</p>
-                        <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
-                        <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
 
                         <p class="color-gray-300 fs-4">{{ 'shared.nativeLanguage'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.motherLanguage?.name | currentLang}}</span>
@@ -150,6 +150,19 @@
 
                         <p class="color-gray-300 fs-4">{{'dashboard.parents.ministerialNumber' |translate}}</p>
                         <span class="color-primary mb-2">{{student.ministerialId}}</span>
+
+                        <p class="color-gray-300 fs-4">{{'dashboard.students.isGifted'| translate}}</p>
+                        <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
+                        <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
+
+                        <p class="color-gray-300 fs-4">{{'dashboard.students.talent'| translate}}</p>
+                        <div  class="mb-2 d-flex">
+                            <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
+                                {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
+                            </span>
+                        </div>
+
+
 
                         <p class="color-gray-300 fs-4">{{'dashboard.students.withDisabilities'| translate}}</p>
                         <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
@@ -349,7 +362,8 @@
                         <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.studentStatus'|translate }}</p>
-                        <span class="color-primary mb-2">{{student.isPassed ? 'ناجح' : 'راسب'}}</span>
+                        <span class="color-primary mb-2" *ngIf="student.isPassed!=null">{{student.isPassed ? 'ناجح' : 'راسب'}}</span>
+                        <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
 
 
 
@@ -495,8 +509,8 @@
         <div class="custom-form mt-5">
             <input type="text"  pInputText placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}" />
         </div>
-
-        <app-file-upload accept=".pdf" label="{{'shared.clickToUploadFile'| translate}}" view="full" accept=".xlsx, .xls, .csv"></app-file-upload>
+        <!-- accept=".xlsx, .xls, .csv" -->
+        <app-file-upload accept=".pdf" label="{{'shared.clickToUploadFile'| translate}}" view="full" ></app-file-upload>
         <div class="d-flex justify-content-end mt-4">
             <button class="btn btn-primary">{{'shared.send'| translate}}</button>
         </div>

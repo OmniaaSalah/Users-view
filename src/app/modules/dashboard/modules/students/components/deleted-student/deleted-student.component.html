@@ -2,7 +2,8 @@
 
 <div class="student">
     <div class="submit-btn d-flex justify-content-end gap-3">
-        <button class="btn btn-primary btn px-5" [disabled]="loading || !deleteStudentForm.valid ||(attachmentCtr.value.length!=requiredFiles?.filesCount &&requiredFiles?.isRequired)" (click)="deleteStudentReq(deleteStudentForm.value)">
+      <!-- || !deleteStudentForm.valid ||(attachmentCtr.value.length!=requiredFiles?.filesCount &&requiredFiles?.isRequired) -->
+        <button class="btn btn-primary btn px-5" [disabled]="loading|| !deleteStudentForm.valid " (click)="deleteStudentReq(deleteStudentForm.value)">
             <div class="spinner-border text-light" role="status" *ngIf="loading"></div>
             <span>{{'shared.send' |translate}}</span>
         </button>

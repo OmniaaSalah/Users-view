@@ -12,6 +12,7 @@ import { IHeader } from 'src/app/core/Models';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
@@ -29,6 +30,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./annul-holiday-list.component.scss']
 })
 export class AnnulHolidayListComponent implements OnInit {
+  lang = inject(TranslationService).lang
 	currentSchool="";
   get statusEnum () {return StatusEnum}
   get claimsEnum () {return ClaimsEnum}
@@ -214,8 +216,11 @@ export class AnnulHolidayListComponent implements OnInit {
 
   onSort(e){
   
-    if(e.order==1) this.filtration.SortBy= 'old'
-    else if(e.order == -1) this.filtration.SortBy= 'update'
+    if(e.order==-1)
+    {this.filtration.SortBy="ASC"}
+    else
+    {this.filtration.SortBy="desc"}
+    this.filtration.SortColumnName=e.field;
     this.filtration.Page=1;
     this.getHolidays()
   }

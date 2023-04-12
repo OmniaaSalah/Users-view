@@ -178,7 +178,7 @@ export class SharedService {
 
   getAllCurriculum(){
     if(this.allCurriculum) return of(this.allCurriculum)
-    return this.http.get('/Curriculum')
+    return this.http.get(`/Curriculum?SortColumnName=${this.lang=='ar'?'ArabicName':'EnglishName'}`)
     .pipe(
       take(1),
       map((res)=> {

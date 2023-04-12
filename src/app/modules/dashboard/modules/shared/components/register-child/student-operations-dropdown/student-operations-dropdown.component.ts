@@ -14,6 +14,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
 import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
@@ -158,16 +159,25 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
       {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/dashboard/schools-and-students/students/student/${this.studentId||this.childId}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
       {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`,claims:ClaimsEnum.E_DeleteStudentRequest},
       {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
-      {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest},
+      {
+        label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'),
+        isAllowed$ :this.settingServcice.isSchoolExistInGracePeriod({schoolId: this.student?.school?.id, code: GracePeriodEnum.repeatStudyPhase}),
+        icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest
+      },
       {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
       {
         label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',
-        disabled: this.student?.studentStatus === RegistrationStatus.Withdrawal ,
+        disabled: this.student?.studentStatus === RegistrationStatus.Withdrawal ||this. student?.studentProhibited?.withdrawingFromSchool || this.student?.studentProhibited?.withdrawingFromSPEA,
         claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool,
         routerLink:`${this.currentUserScope==this.userScope.Guardian ? 'withdraw-request' : ('/dashboard/schools-and-students/students/student/' + (this.studentId||this.childId) + '/withdraw-request')}`
       },
       {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
-      {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
+      {
+        label: this.translate.instant('breadcrumb.Request to issue a certificate'),
+        disabled: this.student?.studentProhibited?.rCertificateFromSPEA || this.student?.studentProhibited?.certificateFromSchool,
+        icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,
+        routerLink:`/certificates/ask-certificate/${this.childId}`
+      }
     ];
   }
 

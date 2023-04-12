@@ -8,7 +8,7 @@ export interface FileRule{
     name:Localization
     type:string
     size:number,
-    uploadedFiles? :[]  
+    uploadedFiles? :[]
 }
 
 
@@ -35,3 +35,4 @@ export interface Notification{
     recievedBy:Localization
     cause:string
 }
+
