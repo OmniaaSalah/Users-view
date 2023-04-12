@@ -7,7 +7,7 @@
     </div>
 
     <div class="d-flex justify-self-end mb-4">
-      <button (click)="print()" class="btn btn-primary">اطبع الشهادة</button>
+      <button (click)="print()" class="btn btn-primary">تحميل الشهادة</button>
     </div>
   </div>
 
@@ -55,7 +55,7 @@
                   </tr>
                   <tr>
                       <td>الهوية الإماراتية</td>
-                      <td>78511115526688</td>
+                      <td></td>
                   </tr>
               </table>
 
@@ -312,7 +312,7 @@
             <h1 class="fw-bold mb-3">إلى من يهمه الأمر - متابعة الدراسة</h1>
             <p class="d-flex fs-2 justify-content-center gap-5 fw-bold ">
               <span>العام الدراسي</span>
-              <span class="font-en">{{certificate?.SchoolYear}}</span>
+              <span class="font-en">{{certificate?.schoolYearAr}}</span>
               <span class="font-en">Academic Year</span>
             </p>
           </div>
@@ -356,7 +356,7 @@
           <div class="my-6">
             <p>رقم الهوية الوطنية: {{certificate?.EmiratesId }}</p>
             <p>تاريخ الميلاد: {{certificate?.BirthDate |LocalizeDate}}</p>
-            <p>رقم الطالب: {{certificate?.StudentNumber}}</p>
+            <p>رقم الطالب: {{certificate?.StudentId }}</p>
           </div>
           <p>. مقيد/ة بالصف ({{certificate?.GradeAr}} )،قسم (...)، شعبة {{certificate?.DivisionAr ||'...'}}</p>
 

@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { MessageStatus } from 'src/app/shared/enums/status/status.enum';
 import { MessageService } from '../../service/message.service';
 
 @Component({
@@ -67,6 +68,7 @@ export class MessageDetailsComponent implements OnInit {
 
   getMessageDetail(){
     this.messageService.getMessageDetailsById(this.routeSub).subscribe(res=>{
+      if(res.messageSatus ==MessageStatus.Pending) this.changeMessageStatus(res.id)
       this.messageDetails = res
       this.messagesReplies = res.messageReplies || []
       let unique: any[] = [...new Set(this.messagesReplies.map(item => item.userName.ar))];
@@ -126,6 +128,12 @@ export class MessageDetailsComponent implements OnInit {
       this.toastr.error(err)
     })
 
+  }
+
+
+
+  changeMessageStatus(id){
+    this.messageService.changeMessageStatus({messageIds:[id]}).subscribe()
   }
 
 

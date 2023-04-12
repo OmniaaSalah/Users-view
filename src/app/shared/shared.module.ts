@@ -17,7 +17,6 @@ import { TableCaptionComponent } from './components/table-caption/table-caption.
 import { ValidationDirective } from './directives/validation.directive';
 import { ValidatorsInputDirective } from './directives/validators-input.directive';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
-import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -53,6 +52,7 @@ import { WorkflowComponent } from './components/workflow/workflow.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { ConfirmDialogDirective } from './directives/confirm-dialog/confirm-dialog.directive';
 import { StudentBadgesComponent } from './components/student-badges/student-badges.component';
+import { WrapFuncPipe } from './pipes/wrapFunc/wrap-func.pipe';
 
 registerLocaleData(localeAr);
 
@@ -84,13 +84,13 @@ registerLocaleData(localeAr);
     CardStudentComponent,
     RegisterRequestComponent,
     SelectSchoolsComponent,
-    UseUtcDirective, 
+    UseUtcDirective,
     NumberToWordsPipe,
     CustomDatePipe,
     StopPropagationDirective,
     LocalizeSearchPipe,
     FileComponent,
-    LanguageRestrictionDirective, 
+    LanguageRestrictionDirective,
     LocalizeSearchPipe,
     RequestListComponent,
     TrauncateTextPipe,
@@ -98,7 +98,8 @@ registerLocaleData(localeAr);
     SafePipe,
     ConfirmDialogDirective,
     StudentBadgesComponent,
-    StudentBadgesComponent
+    StudentBadgesComponent,
+    WrapFuncPipe
 
   ],
   imports: [
@@ -107,7 +108,6 @@ registerLocaleData(localeAr);
     CommonModule,
     FontAwesomeModule,
     InfiniteScrollModule,
-    NgxSpinnerModule,
     PrimngModule,
     LayoutModule,
     TranslateModule,
@@ -125,7 +125,6 @@ registerLocaleData(localeAr);
     FormsModule,
     FontAwesomeModule,
     InfiniteScrollModule,
-    NgxSpinnerModule,
     PaginationComponent,
     LayoutModule,
     InformativeBlockComponent,
@@ -165,7 +164,8 @@ registerLocaleData(localeAr);
     WorkflowComponent,
     SafePipe,
     ConfirmDialogDirective,
-    StudentBadgesComponent
+    StudentBadgesComponent,
+    WrapFuncPipe
   ],
   providers:[SharedService]
 })

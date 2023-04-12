@@ -6,15 +6,15 @@ export enum StatusEnum {
     Unavailable = 'Unavailable',
 
     // NOTE:------ Student Registration Status------
-    Registered= 'Registered',
-    Unregestered= 'Unregestered',
-    WithdrawnRejected = 'WithdrawnRejected',
+    // Registered= 'Registered',
+    // Unregestered= 'Unregestered',
+    // WithdrawnRejected = 'WithdrawnRejected',
     Deleted ='Deleted',
-    Withdrawn = 'Withdrawn',
-    Transferd="Transferd",
-    Withdrawal="Withdrawal",
-    //اعادة قيد
-    ReEnrolment="ReEnrolment",
+    // Withdrawn = 'Withdrawn',
+    // Transferd="Transferd",
+    // Withdrawal="Withdrawal",
+    // //اعادة قيد
+    // ReEnrolment="ReEnrolment",
 
     SonsOfArabs="SonsOfArabs",
     SonsOfNonArabs="SonsOfNonArabs",
@@ -37,13 +37,13 @@ export enum StatusEnum {
     Draft = 'Draft',
     Closed = 'Closed',
     Apparent= 'Apparent',
-    
 
-    Passed = 'Passed', 
+
+    Passed = 'Passed',
     Failed = 'Failed',
-    Incomplete='Incomplete',   
+    Incomplete='Incomplete',
     FinalFaild='FinalFaild',
-    
+
     Flexible='Flexible',
     NotFlexible='NotFlexible',
 
@@ -100,4 +100,10 @@ export enum UserRequestsStatus{
 export enum TransportaionType{
     SchoolBus="SchoolBus",
     PrivateCar="PrivateCar"
+}
+
+export enum MessageStatus{
+  Pending = "Pending",
+  Read = "Read",
+  Answered = "Answered",
 }

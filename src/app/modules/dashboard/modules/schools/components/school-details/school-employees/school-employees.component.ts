@@ -17,7 +17,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -58,7 +58,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	paginationState={...paginationInitialState}
 
 	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle().pipe(filter(res=> res.name?.en != 'Manager'),shareReplay())
-	statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ StatusEnum.Deleted), value:StatusEnum.Deleted}]
+	statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ RegistrationStatus.Deleted), value:RegistrationStatus.Deleted}]
 	employees$=this.schoolsService.getSchoolEmployees(this.schoolId,this.searchModel).pipe(map(res=>res.data))
 
 

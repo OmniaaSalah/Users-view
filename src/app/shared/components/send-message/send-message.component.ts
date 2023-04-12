@@ -23,6 +23,7 @@ import { IndexesEnum } from '../../enums/indexes/indexes.enum';
 import { FileEnum } from '../../enums/file/file.enum';
 import { UserScope } from '../../enums/user/user.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { CountriesService } from '../../services/countries/countries.service';
 
 @Component({
   selector: 'app-send-message',
@@ -90,7 +91,8 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     private router: Router,
     private User: UserService,
     private index: IndexesService,
-    private userService: UserService
+    private userService: UserService,
+    private countriesService:CountriesService,
   ) {}
 
   ngOnInit(): void {
@@ -160,14 +162,14 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   }
 
   getCurr() {
-    this.messageService.getcurr().subscribe((res) => {
+    this.sharedService.getAllCurriculum().subscribe((res) => {
       this.curricuulum = res.data;
       // console.log(this.curricuulum);
     });
   }
 
   getAddress() {
-    this.messageService.getadd().subscribe((res) => {
+    this.countriesService.getAllStates().subscribe((res) => {
       this.address = res.data;
     });
   }

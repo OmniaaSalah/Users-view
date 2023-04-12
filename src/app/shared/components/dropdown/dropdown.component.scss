@@ -44,6 +44,8 @@
         }
 
         .dropdown-item{
+          position: relative;
+
             .link{
                 display: flex;
                 align-items: center;
@@ -72,14 +74,27 @@
                }
             }
 
+            .overlay{
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 10;
+              display: none;
+            }
             &.disabled{
-
               pointer-events: unset;
+              cursor: not-allowed;
               background-color: $color-gray-50;
               opacity: .3;
 
-              .link{cursor: not-allowed; }
+              .link{pointer-events: none; }
               p{ color: $color-gray-400;}
+
+              .overlay{
+                display: block;
+              }
             }
 
             &:not(:last-child){ border-bottom: 1px solid $color-gray-50;}

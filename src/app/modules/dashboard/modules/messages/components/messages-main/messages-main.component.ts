@@ -1,15 +1,14 @@
 import { query } from '@angular/animations';
-import { Component, HostBinding, HostListener, OnInit, EventEmitter, Output, ViewChild, ElementRef, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component,  OnInit, ViewChild, ElementRef, inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { tap, forkJoin, debounceTime, distinctUntilChanged, startWith, switchMap, takeUntil } from 'rxjs';
-import { IHeader, INotification } from 'src/app/core/Models';
+import { IHeader } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { MessageStatus } from 'src/app/shared/enums/status/status.enum';
 import { MessageService } from '../../service/message.service';
 
 @Component({
@@ -23,6 +22,7 @@ export class MessagesMainComponent implements OnInit {
   @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
 
   lang=inject(TranslationService).lang
+  get messageStatusEnum() { return MessageStatus}
 
   messagetSearchText = new FormControl('')
 
@@ -39,9 +39,9 @@ export class MessagesMainComponent implements OnInit {
     "DateFrom": null,
     "DateTo": null
   }
-  useId=Number(localStorage.getItem('$AJ$userId'))
 
-  scope=JSON.parse(localStorage.getItem('$AJ$user')).scope
+  useId=this.userService.getCurrentUserId()
+  scope=this.userService.getCurrentUserScope()
 
   display: boolean = false;
   activeLoadBtn:boolean=false;
@@ -73,7 +73,12 @@ export class MessagesMainComponent implements OnInit {
 		mainTitle:{ main:this.translate.instant('dashboard.Messages.messages'),sub:this.messages.total},
 	}
 
-  constructor(private headerService: HeaderService,private formbuilder:FormBuilder, private toastr:ToastrService,private router: Router, private translate: TranslateService, private messageService: MessageService,private spinner:NgxSpinnerService) {
+  constructor(
+    private headerService: HeaderService,private formbuilder:FormBuilder,
+    private toastr:ToastrService,private router: Router, private translate: TranslateService,
+    private messageService: MessageService,
+    private userService:UserService
+    ) {
    }
 
   ngOnInit(): void {
@@ -114,6 +119,7 @@ export class MessagesMainComponent implements OnInit {
       this.messages.loading=false
      this.messages.list = res.data
       this.messages.total = res.total
+      this.messages.totalAllData = res.totalAllData
       this.componentHeaderData.mainTitle.sub = `(${res.total})`
       this.headerService.changeHeaderdata(this.componentHeaderData);
     })
@@ -124,6 +130,7 @@ export class MessagesMainComponent implements OnInit {
       this.messages.loading=false
      this.messages.list = res.data
       this.messages.total = res.total
+      this.messages.totalAllData = res.totalAllData
       this.componentHeaderData.mainTitle.sub = `(${res.total})`
       this.headerService.changeHeaderdata(this.componentHeaderData);
     })
@@ -134,6 +141,7 @@ export class MessagesMainComponent implements OnInit {
       this.messages.loading=false
      this.messages.list = res.data
       this.messages.total = res.total
+      this.messages.totalAllData = res.totalAllData
       this.componentHeaderData.mainTitle.sub = `(${res.total})`
       this.headerService.changeHeaderdata(this.componentHeaderData);
     })
@@ -198,32 +206,9 @@ export class MessagesMainComponent implements OnInit {
   }
 
 
-//   onSearch(e) {
-
-//     this.searchModel.keyword = e.target.value
-//     this.searchModel.page = 1
-//     setTimeout(()=>{
-//     this.getMessages(this.searchModel)
-//     },1500)
-//     if(this.messages.list.length == 0){
-//       this.skeletonLoading = false
-//     }
-// }
-
-// onSearchMessagesChanged(){
-//   this.messagetSearchText.valueChanges
-//   .pipe(
-//     debounceTime(800),
-//     distinctUntilChanged()
-//     )
-//   .subscribe(keyword=>{
-//     this.searchModel.keyword = keyword
-//     this.searchModel.page = 1
-//     this.getMessages(this.searchModel)
-
-
-//   })
-// }
+  changeMessageStatus(id){
+    this.messageService.changeMessageStatus([id]).subscribe()
+  }
 
 
 

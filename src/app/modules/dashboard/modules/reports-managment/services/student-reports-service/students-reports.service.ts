@@ -2,7 +2,7 @@ import { Injectable ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { finalize, map, Observable, take } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -17,28 +17,28 @@ export class StudentsReportsService {
     private tableLoaderService: LoaderService) {
     this.studentsStatus = [
       {
-        value:StatusEnum.Registered,
+        value:RegistrationStatus.Registered,
         name: this.translate.instant("shared.allStatus.Registered")
       },
       // {
-      //   value:StatusEnum.Unregestered,
+      //   value:RegistrationStatus.Unregestered,
       //   name: this.translate.instant("shared.allStatus.Unregestered")
       // },
       {
-        value:StatusEnum.Deleted,
+        value:RegistrationStatus.Deleted,
         name:this.translate.instant("shared.allStatus.Deleted")
       },
       {
-        value: StatusEnum.ReEnrolment,
+        value: RegistrationStatus.ReEnrolment,
         name: this.translate.instant("shared.allStatus.ReEnrolment")
       },
       {
-        value: StatusEnum.Withdrawal,
+        value: RegistrationStatus.Withdrawal,
         name: this.translate.instant("shared.allStatus.Withdrawal")
       }
     ];
   }
- 
+
 
   tabelColumns = [
     {
@@ -52,13 +52,13 @@ export class StudentsReportsService {
       isDisabled: true,
     },
     {
-     
+
       name: this.translate.instant('dashboard.schools.student') ,
       isSelected: true,
       isDisabled: true,
     },
     {
-     
+
       name: this.translate.instant('Students nickname'),
       isSelected: true,
       isDisabled: true,
@@ -70,13 +70,13 @@ export class StudentsReportsService {
       isDisabled: true,
     },
     {
-  
+
       name: this.translate.instant('School'),
       isSelected: true,
       isDisabled: true,
     },
     {
-   
+
       name: this.translate.instant('shared.grade'),
       isSelected: false,
       isDisabled: false,
@@ -104,7 +104,7 @@ export class StudentsReportsService {
       isDisabled: false,
     },
     {
-   
+
       name: this.translate.instant('dashboard.parents.registedDate'),
       isSelected: false,
       isDisabled: false,

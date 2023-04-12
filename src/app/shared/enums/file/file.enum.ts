@@ -1,7 +1,7 @@
 
 export enum FileEnum{
     Csv = 'csv',
-    Xlsx = 'xlsx',
+    Xlsx = 'Xlsx',
     Pdf = 'Pdf',
     Image = 'Image',
     Audio = 'Audio'
