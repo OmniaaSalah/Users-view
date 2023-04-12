@@ -4,7 +4,7 @@
             <p-card id="card-chart">
                 <div class="row">
                     <div *ngIf="model.schoolCurriculumDatasets" class="col-md-6" id="shoolCurriculumChart">
-                        <canvas baseChart [datasets]="model.schoolCurriculumDatasets" [options]="model.schoolCurriculumOptions" [legend]="false" [type]="'doughnut'">
+                        <canvas baseChart [datasets]="model.schoolCurriculumDatasets" [options]="model.schoolCurriculumOptions" [legend]="false" [type]="'doughnut'" [labels]="model.shoolCurriculumChartStringLabels">
                       </canvas>
                         <ng-template [ngTemplateOutlet]="totalSchoolCount"></ng-template>
                     </div>

@@ -519,7 +519,8 @@
     "shared": {
         "RoleMangment":"إدارة الدور الوظيفي",
         "ExamFileMangment":"إدارة ملف الامتحان",
-        "StudentMangment":"إدارة الطالب",
+        "SendRequest":"تقديم طلب",
+        "NotDeterminedYet":"لم تتحدد بعد",
         "SchoolYear":"العام الدراسي",
         "Total Number":"العدد الإجمالي",
         "gotothem":"إذهب إليهم",
@@ -700,6 +701,7 @@
             "Flexible": "مرنة",
             "NotFlexible": "غير مرنة",
             "Failed": "راسب",
+            "FinalFaild":"راسب نهائى",
             "Registered":"مسجل",
             "Unregestered":"غير مسجل",
             "WithdrawnRejected":"منسحب محذوف",

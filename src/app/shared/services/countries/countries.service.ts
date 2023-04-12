@@ -41,7 +41,7 @@ export class CountriesService {
 
   getCities(){
     if(this.allCities) return of(this.allCities)
-    return this.http.get('/Address/cities').pipe(
+    return this.http.get(`/Address/cities?SortColumnName=${this.lang=='ar'?'ArabicName':'EnglishName'}`).pipe(
       take(1),
       map((res) => {
         this.allCities = res
@@ -51,7 +51,7 @@ export class CountriesService {
 
   getAllStates(){
     if(this.states) return of(this.states)
-    return this.http.get('/Address/states').pipe(
+    return this.http.get(`/Address/states?SortColumnName=${this.lang=='ar'?'ArabicName':'EnglishName'}`).pipe(
       take(1),
        map((res) => {
         this.states = res.data

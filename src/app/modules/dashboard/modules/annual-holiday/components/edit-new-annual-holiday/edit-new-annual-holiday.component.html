@@ -128,7 +128,8 @@
                                               <tr >
                                               <th style="max-width: 0rem"  ></th>
                                                 <th   pSortableColumn="name.ar" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
-                                                <th style="min-width:21rem"  pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+                                                <th style="min-width:15rem"  pSortableColumn="name.ar" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'shared.User Name'|translate}}</th>
+                                                <th style="min-width:15rem"  pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
                                                 <th style="min-width:29rem"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
                                                 <th   pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                                                 <th   pSortableColumn="flexibilityStatus.id"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
@@ -147,7 +148,8 @@
                                                       <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="(expanded && e.curriculums.length>1) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                                                   </td>
                                                   <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''" >{{e.name|currentLang}}</td>
-                                                  <td style="min-width:21rem" [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name|currentLang}}</td>
+                                                  <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''" >{{e?.userName|currentLang}}</td>
+                                                  <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name|currentLang}}</td>
                                                   <td style="min-width:29rem" [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom| LocalizeDate}} - {{'shared.To'|translate}} {{e.dateTo| LocalizeDate}}</td>
                                                   <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate | LocalizeDate}}</td>
                                                   <td >
@@ -174,10 +176,8 @@
                                               </tr>
                                           </ng-template>
                                           <ng-template  pTemplate="rowexpansion" let-e>
-                                              <tr>
-                                                  <td colspan="15"  class="expand ">
-                                                      <div class="" *ngIf="e.curriculums.length>1">
-
+                                              <tr >
+                                                  <td colspan="15"  class="expand " *ngIf="e.curriculums.length>1">
 
                                                               <p-table  #dt [value]="e.curriculums" dataKey="name"    >
 
@@ -186,9 +186,9 @@
                                                                   <ng-template pTemplate="body" let-curriculum  let-expanded="expanded">
                                                                       <tr class="border-bottom-0" *ngIf="curriculum.id!=e.curriculums[0].id">
 
-                                                                          <td  style="min-width:26.5rem"></td>
+                                                                          <td  style="min-width:24rem"></td>
 
-                                                                          <td  class=" action " style="min-width:21rem">{{curriculum.name|currentLang}}</td>
+                                                                          <td  class=" action d-flex justify-content-end" style="min-width:20rem">{{curriculum.name|currentLang}}</td>
                                                                           <td class="justify-content-center" style="min-width:24rem;" >-</td>
                                                                           <td class="justify-content-center" style="min-width:16rem;" >-</td>
                                                                           <td  style="min-width:16rem;"></td>
@@ -204,7 +204,7 @@
                                                               </p-table>
 
 
-                                                      </div>
+                                                     
                                               </td>
                                         </tr>
 
