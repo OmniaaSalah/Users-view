@@ -13,27 +13,27 @@ import { filter } from 'rxjs';
   ]
 })
 export class DashboardComponent implements OnInit {
-hideBackGroundImage:boolean=false;
+// hideBackGroundImage:boolean=false;
   constructor(   private router:Router) { }
 
   ngOnInit(): void {
     // let url = this.router.url
     // this.routeListenrService.initRouteListner(url)
 
-    this.router.events
-    .pipe(
-      filter(event =>event instanceof NavigationEnd ),
-      )
-    .subscribe((event: NavigationEnd) => {event.url=='/dashboard/schools-and-students/all-parents/parent/123/all-children/child/331' ? this.hideBackGroundImage = true : this.hideBackGroundImage = false;})
+    // this.router.events
+    // .pipe(
+    //   filter(event =>event instanceof NavigationEnd ),
+    //   )
+    // .subscribe((event: NavigationEnd) => {event.url=='/dashboard/schools-and-students/all-parents/parent/123/all-children/child/331' ? this.hideBackGroundImage = true : this.hideBackGroundImage = false;})
   }
-  
+
 
 routChange = true
   onActive($event, outlet){
- 
-    
+
+
      this.routChange =true
-     
+
   }
 
   prepareRoute(outlet){

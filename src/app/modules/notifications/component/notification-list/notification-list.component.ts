@@ -1,9 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {  NgxSpinnerService } from 'ngx-spinner';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
-import { INotification } from 'src/app/core/Models/inotification';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { NotificationService } from '../../service/notification.service';
@@ -35,19 +33,19 @@ export class NotificationListComponent implements OnInit {
   componentHeaderData: IHeader={
 		breadCrump: [
 			{label: this.translate.instant('breadcrumb.Notifications'), routerLink:'/notifications/notifications-list' }
-			
+
 		],
 		mainTitle:{ main:this.translate.instant('breadcrumb.Notifications'),sub:this.notificationTotal}	}
 
-  constructor( private headerService: HeaderService, 
-               private router: Router, 
+  constructor( private headerService: HeaderService,
+               private router: Router,
                private translate: TranslateService,
                private notificationService: NotificationService,
-               private spinner:NgxSpinnerService ) { }
+               ) { }
 
   ngOnInit(): void {
-     this.notificationService.notificationNumber.subscribe((response) => 
-     { 
+     this.notificationService.notificationNumber.subscribe((response) =>
+     {
       this.componentHeaderData.mainTitle.sub = `(${response})`;
       this.headerService.changeHeaderdata(this.componentHeaderData); this. notificationTotal=response
      });
@@ -57,10 +55,10 @@ export class NotificationListComponent implements OnInit {
       this.checkLanguage = true
     }else{
       this.checkLanguage = false
-    }    
+    }
   }
 
-  getNotifications(searchModel){   
+  getNotifications(searchModel){
     this.skeletonLoading = true
     this.showSpinner = false
     this.loading=true
@@ -69,7 +67,7 @@ export class NotificationListComponent implements OnInit {
       this.loading=false
       this.notificationsList = res.data  ;
       this.currentNotifications=res.total;
-      this.showSpinner = true  
+      this.showSpinner = true
     })
 
   }
@@ -84,7 +82,7 @@ export class NotificationListComponent implements OnInit {
     this.searchModel.isRead = false
     this.getNotifications(this.searchModel)
   }
-  getReadable() 
+  getReadable()
   {
     this.readBtn.nativeElement.classList.add('activeBtn')
     this.notReadBtn.nativeElement.classList.remove('activeBtn')
@@ -104,10 +102,10 @@ export class NotificationListComponent implements OnInit {
       this.skeletonLoading = false
     }
   }
- 
-  
+
+
   showDetails(pageLink){
- 
+
            window.open(pageLink, '_blank')
   }
 
@@ -125,14 +123,14 @@ export class NotificationListComponent implements OnInit {
     //     this.showSpinner=false;
     // }
     // else
-    // { this.showSpinner=true;}  
+    // { this.showSpinner=true;}
     if(this.notificationsList.length==0){
       this.skeletonLoading = false
     }else{
         this.loadMore();
     }
   }
- 
+
   loadMore()
   {
     this.searchModel.page = 1

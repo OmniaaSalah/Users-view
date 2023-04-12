@@ -11,11 +11,12 @@ import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.e
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SurveyService } from '../../service/survey.service';
 import jsPDF from "jspdf";
-import html2canvas from 'html2canvas'; 
+import html2canvas from 'html2canvas';
 import * as XLSX from 'xlsx';
 import { Subscription } from 'rxjs';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { FileExtentions } from 'src/app/shared/enums/file/file.enum';
 
 
 @Component({
@@ -24,6 +25,8 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
   styleUrls: ['./survey-details.component.scss']
 })
 export class SurveyDetailsComponent implements OnInit{
+
+  get FileType(){return FileExtentions}
   get ClaimsEnum(){return ClaimsEnum}
   isBtnLoading: boolean=false;
   isSentBtnLoading:boolean=false;
@@ -53,10 +56,10 @@ get surveyQuestionType()
   }
   get questions():FormArray
   { return this.surveyFormGrp.controls['questions'] as FormArray }
-  
+
   get questionChoices():FormArray {
-  
-   
+
+
     return this.questions.controls['questionChoices'] as FormArray;
   }
   private getTranslateValue(key: string): string {
@@ -71,7 +74,7 @@ get surveyQuestionType()
   }
 
   get arabicSurveyTitle() {
-  
+
     return this.surveyFormGrp.controls['arabicSurveyTitle'] as FormControl;
   }
 
@@ -79,7 +82,7 @@ get surveyQuestionType()
     return this.surveyFormGrp.controls['englishSurveyTitle'] as FormControl;
   }
 
- 
+
 
   constructor(
     public confirmModelService: ConfirmModelService,
@@ -101,7 +104,7 @@ get surveyQuestionType()
 
   }
   ngOnInit(): void {
-   
+
     this.questionType=this.surveyService.questionType;
     this.surveyTypes=this.surveyService.surveyType;
     if(this.surveyId!=null)
@@ -114,34 +117,34 @@ get surveyQuestionType()
       {
         breadCrump: [
           { label: this.translate.instant('dashboard.surveys.surveyList'),routerLink:'/dashboard/educational-settings/surveys' ,routerLinkActiveOptions:{exact: true}}
-         ,{ 
-               
+         ,{
+
             label: (this.surveyId==null||this.surveyId=='')?  this.translate.instant('dashboard.surveys.createNewSurvey'):this.translate.instant('dashboard.surveys.Survey Details'),
             routerLink: (this.surveyId==null||this.surveyId=='')? '/dashboard/educational-settings/surveys/new-survey':'/dashboard/educational-settings/surveys/Survey/'+this.surveyId
           }
         ],
-        mainTitle:{main:(this.surveyId==null||this.surveyId=='')? this.translate.instant('dashboard.surveys.createNewSurvey'):this.translate.instant('dashboard.surveys.Survey Details')} 
+        mainTitle:{main:(this.surveyId==null||this.surveyId=='')? this.translate.instant('dashboard.surveys.createNewSurvey'):this.translate.instant('dashboard.surveys.Survey Details')}
       }
     );
 
   }
 
 
- 
 
- 
+
+
 
 
   addChoices(i)
   {
-   
+
     var questionsFormGrp=this.questions.controls[i] as FormGroup
     var choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;
     choicesFormArr.push( this.fb.group({
       arabicChoice: ['', [Validators.required,Validators.maxLength(200)]],
       englishChoice: ['',[Validators.required,Validators.maxLength(200)]]}))
- 
-   
+
+
   }
 
 
@@ -169,11 +172,11 @@ getSurveyById()
     })
   })
 
-  
+
 }
 
 addDatatoQuestion(item,i){
-  
+
   if(item.surveyQuestionType==QuestionsTypeEnum.SurveyMultiChoiceQuestion||item.surveyQuestionType==QuestionsTypeEnum.SurveyRateQuestion)
   {
     this.addQuestionInCaseInputChoices(item,i);
@@ -195,7 +198,7 @@ onFileUpload(event,i)
 }
 saveSurvey() {
   this.isBtnLoading=true;
- 
+
   this.savedSurvey={
   'title':{ar:this.surveyFormGrp.value.arabicSurveyTitle,en:this.surveyFormGrp.value.englishSurveyTitle},
   'surveyType':this.surveyFormGrp.value.surveyType,
@@ -210,11 +213,11 @@ saveSurvey() {
 
      }})
 };
-  
+
   if(!this.surveyId)
   {
 this.surveyService.addSurvey(this.savedSurvey).subscribe((res)=>{
-  
+
   this.isBtnLoading=false;
   this.toastr.success(this.translate.instant('dashboard.surveys.survey added Successfully'));
   this.router.navigateByUrl(`/dashboard/educational-settings/surveys/Survey/${res.result.createdSurveyId}`);
@@ -250,24 +253,24 @@ var questionsFormGrp
   }));
 
   item.questionChoices?.forEach((element) => {
- 
+
      questionsFormGrp=this.questions.controls[i] as FormGroup
     choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;
     choicesFormArr.push(this.fb.group({
       arabicChoice: [element.questionChoice.ar, [Validators.required,Validators.maxLength(200)]],
       englishChoice: [element.questionChoice.en,[Validators.required,Validators.maxLength(200)]]}))
-  
-   
+
+
   });
   if(!item.questionChoices)
-     { 
+     {
       questionsFormGrp=this.questions.controls[i] as FormGroup
      choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;
       choicesFormArr.push(this.fb.control(''))
     }
 
 
-  } 
+  }
 
 
 
@@ -284,20 +287,20 @@ addQuestionInCaseInputFile(item,i)
 
   var questionsFormGrp=this.questions.controls[i] as FormGroup
   var attachmentFormCtr=questionsFormGrp.controls['attachment']
-  
+
   if(item?.attachment?.url)
  {
   attachmentFormCtr.setValue(item.attachment)
   this.attachments[i]=item.attachment;
- 
+
  }
  else
  {
   attachmentFormCtr.setValue('')
   this.attachments[i]=null;
-  
+
  }
- 
+
 if(item.surveyQuestionType==QuestionsTypeEnum.SurveyAttachmentQuestion)
  {
    attachmentFormCtr.setValidators([Validators.required]);
@@ -306,7 +309,7 @@ if(item.surveyQuestionType==QuestionsTypeEnum.SurveyAttachmentQuestion)
 }
 
 addNewQuestion(){
- 
+
   if(this.canAddSubjects){
     this.questions.push(this.fb.group({
       surveyQuestionType: ['', [Validators.required]],
@@ -316,7 +319,7 @@ addNewQuestion(){
        questionChoices: this.fb.array([this.fb.group({
         arabicChoice: ['', [Validators.required,Validators.maxLength(200)]],
         englishChoice: ['',[Validators.required,Validators.maxLength(200)]]})]),
-   
+
     }));
   }else{
     this.toastService.warning(
@@ -327,33 +330,33 @@ addNewQuestion(){
   }
 
 }
-  
 
 
 
- 
+
+
  //exportPDf
-  pdfToExport()  
- { 
+  pdfToExport()
+ {
 
    var data = document.getElementById('contentToConvert');
-   html2canvas(data).then(canvas => {  
-   
-     let imgWidth = 208;    
-     let imgHeight = canvas.height * imgWidth / canvas.width;  
-   
+   html2canvas(data).then(canvas => {
 
-     const contentDataURL = canvas.toDataURL('image/png')  
-     let pdf = new jsPDF('p', 'mm', 'a4');   
-     let position = 0;  
-     pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
-     pdf.save(this.translate.instant('dashboard.surveys.Survey Report'));  
-   });  
+     let imgWidth = 208;
+     let imgHeight = canvas.height * imgWidth / canvas.width;
+
+
+     const contentDataURL = canvas.toDataURL('image/png')
+     let pdf = new jsPDF('p', 'mm', 'a4');
+     let position = 0;
+     pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+     pdf.save(this.translate.instant('dashboard.surveys.Survey Report'));
+   });
  }
-  //exportExcel 
+  //exportExcel
  ExportToExcel()
     {
-    
+
       var data = document.getElementById('contentToConvert');
       const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(data)
       const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -363,10 +366,10 @@ addNewQuestion(){
       XLSX.writeFile(wb, 'SheetJS.xlsx');
 
     }
-  
+
     onChangesurveyQuestionType(value,i)
     {
-   
+
       var questionsFormGrp=this.questions.controls[i] as FormGroup
       var attachmentFormCtr=questionsFormGrp.controls['attachment']
       var choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;
@@ -381,7 +384,7 @@ addNewQuestion(){
           choices.get('arabicChoice').setValidators([Validators.required]);
           choices.get('englishChoice').setValidators([Validators.required]);
         }
-       
+
       }
       else if(value==QuestionsTypeEnum.SurveyAttachmentQuestion)
       {
@@ -394,7 +397,7 @@ addNewQuestion(){
           choices.get('arabicChoice').updateValueAndValidity();
           choices.get('englishChoice').clearValidators();
           choices.get('englishChoice').updateValueAndValidity();
-          
+
         }
       }
       else  if(value==QuestionsTypeEnum.SurveyFreeTextQuestion||value==QuestionsTypeEnum.SurveyRateQuestion)
@@ -409,9 +412,9 @@ addNewQuestion(){
           choices.get('englishChoice').clearValidators();
           choices.get('englishChoice').updateValueAndValidity();
         }
-       
+
       }
-     
+
     }
     changeStatus()
     {
@@ -420,16 +423,16 @@ addNewQuestion(){
       this.isSentBtnLoading=false;
       if(res.statusCode!='BadRequest')
       {
-     
+
         this.toastr.success(this.translate.instant('dashboard.surveys.Survey Status changed successfully'));
         this.getSurveyById();
       }
       else
       {
-       
+
       this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));
       }
-      
+
     },(err)=>{
       this.isSentBtnLoading=false;
       this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));
@@ -448,7 +451,7 @@ addNewQuestion(){
       }
     }
 
-   
+
 }
 
 

@@ -38,7 +38,7 @@
     <ng-container formGroupName="prohibited">
         <div class="col-md-4">
 
-            <h3 class="heading heading--tertiary mb-4" *permit="[claimsEnum.S_U_ProhibitedFromWithdrawingFromSpea,claimsEnum.SE_U_ProhibitedFromWithdrawingFromSchool]">{{'dashboard.students.forbiddenFromWithdrow' | translate}}</h3>
+            <h3 class="heading heading--tertiary mb-4" *ngIf="isAllowedToUpdateWithdraw  || mode=='view'">{{'dashboard.students.forbiddenFromWithdrow' | translate}}</h3>
             <div class="grid-container align-items-center">
                 <!-- Edit Mode -->
                 <ng-container *ngIf="mode=='edit'">
@@ -68,10 +68,9 @@
         </div>
 
         <div class="col">
-            <h3 class="heading heading--tertiary mb-4" *permit="[claimsEnum.S_U_ProhibitedFromIssueeCertificateFromSpea,claimsEnum.SE_U_ProhibitedFromIssueeCertificateFromSchool]">{{'dashboard.students.forbiddenFromCertificate' | translate}}</h3>
+            <h3 class="heading heading--tertiary mb-4" *ngIf="isAllowedToUpdateIssueCertificate|| mode=='view'">{{'dashboard.students.forbiddenFromCertificate' | translate}}</h3>
+
             <div class="grid-container align-items-center">
-
-
 
                 <!-- Edite -->
                 <ng-container *ngIf="mode=='edit'">

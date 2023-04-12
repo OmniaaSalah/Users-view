@@ -36,7 +36,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
       ar:[, Validators.required],
       en:[, Validators.required]
     }),
-    fileType:[, Validators.required]
+    fileType:[]
   })
 
   attachments=[]

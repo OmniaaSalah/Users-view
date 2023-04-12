@@ -1800,6 +1800,7 @@
             "withdrawalReq":"سحب الطلب",
             "requestAttachments":"المرفقات الخاصة بالطلب",
             "rejectReason":"سبب رفض الطلب",
+            "addExplanation":"إضافة شرح لسبب الرفض",
             "schoolToSend":"المدرسة المنقول منها",
             "schoolToAccept":" المدرسة المنقول إليها",
             "schoolTo":"إلى المدرسة",
