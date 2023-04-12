@@ -181,14 +181,11 @@ degreesToExport(filter)
           [this.translate.instant('shared.grade')]: e?.gradeName? e?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.SchoolYear.school year')]:e?.schoolYearName ? e?.schoolYearName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.SchoolYearStudentResult')]: e?.studentSchoolYearResult ? this.translate.instant('shared.allStatus.'+e?.studentSchoolYearResult) : this.translate.instant('shared.notFound'),
-          [this.translate.instant('dashboard.reports.semester')]: e?.semesterName ? this.translate.instant('shared.'+e?.semesterName) : this.translate.instant('shared.notFound'),
-          [this.translate.instant('dashboard.reports.SemesterStudentResult')]:e?.studentSemesterResult ? this.translate.instant('shared.allStatus.'+e?.studentSemesterResult) : this.translate.instant('shared.notFound'),
-          [this.translate.instant('dashboard.reports.subjectCount')]:e?.subjectsCount,
           [this.translate.instant('dashboard.schools.student')]: e?.student?.name ? e?.student?.name[this.lang] :this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.students.daleelNumber')]:e?.studentDaleelId ? e?.studentDaleelId : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.students.manhalNumber')]:e?.studentManhalId ? e?.studentManhalId :this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.successPercentage')]: e?.sucessPercentagePerGrade ? e?.sucessPercentagePerGrade +'%' :this.translate.instant('shared.notFound'),
-          [this.translate.instant('dashboard.reports.failPercentage')]: e?.failPercentagePerGradeorDivision ? e?.failPercentagePerGradeorDivision + '%' :this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.reports.failPercentage')]: e?.failPercentagePerGrade ? e?.failPercentagePerGrade + '%' :this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.SchoolYear.Subject')]: e?.subjectName ? e?.subjectName[this.lang] :this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.Subjects.Subject Minimum grade')]: e?.minimumPassingScore ,
           [this.translate.instant('dashboard.Subjects.Subject Maximum grade')]: e?.maxPassingScore ,
@@ -197,7 +194,10 @@ degreesToExport(filter)
           [this.translate.instant('dashboard.reports.ImprovementType')]: e?.improvementType[this.lang] ? e?.improvementType[this.lang] :this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.ImprovementSchoolYear')]: e?.improvementYear[this.lang] ? e?.improvementYear[this.lang] :this.translate.instant('shared.notFound') ,
           [this.translate.instant('dashboard.reports.ImprovementDate')]: e?.improvementDate ? e?.improvementDate :this.translate.instant('shared.notFound'),
-          [this.translate.instant('dashboard.reports.ImprovementBy')]: e?.improvementBy ? e?.improvementBy[this.lang] :this.translate.instant('shared.notFound')
+          [this.translate.instant('dashboard.reports.ImprovementBy')]: e?.improvementBy ? e?.improvementBy[this.lang] :this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.reports.semester')]: e?.semesterName ? this.translate.instant('shared.'+e?.semesterName) : this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.reports.SemesterStudentResult')]:e?.studentSemesterResult ? this.translate.instant('shared.allStatus.'+e?.studentSemesterResult) : this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.reports.subjectCount')]:e?.subjectsCount
         }
       })
     }))
