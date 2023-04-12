@@ -198,10 +198,12 @@ export class StudentsListComponent implements OnInit {
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
       this.students.total =res.total
+      this.isSearching =false
 
     },err=> {
       this.students.loading=false
       this.students.total=0
+      this.isSearching =false
     })
   }
   getStudentsInSpecificSchool(schoolId){

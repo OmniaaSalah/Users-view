@@ -17,6 +17,7 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { UserService } from 'src/app/core/services/user/user.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 
 
 @Component({
@@ -31,6 +32,8 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
   isBtnLoading:boolean=false;
   exclamationIcon = faExclamationCircle;
 
+  currentGuardianId = this.userService.getCurrentGuardian()?.id
+
   componentHeaderData: IHeader = {
     breadCrump: [
       {
@@ -43,30 +46,26 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
   };
 
   ngDestroy$ =new Subject()
-  currentGuardianId = this.userService.getCurrentGuardian().id
+
 
   registerWithoutIdentityForm: FormGroup=this.fb.group({
-    reason:['',Validators.required],
-    note:[''],
-    note2:[''],
-    note3:[''],
-    // PassportNumberExpirationDate:['',Validators.required],
-    arabicName:['',[Validators.required, Validators.maxLength(64)]],
-    englishName:['',[Validators.required, Validators.maxLength(64)]],
-    arabicNickName:['',[Validators.required, Validators.maxLength(64)]],
-    englishNickName:['',[Validators.required, Validators.maxLength(64)]],
+    guardianId: this.currentGuardianId,
+    reasonForNotHavingEmiratesId:['',Validators.required],
+    name: this.fb.group({
+      ar:['',[Validators.required, Validators.maxLength(64)]],
+      en:['',[Validators.required, Validators.maxLength(64)]]
+    }),
+    surName: this.fb.group({
+      ar:['',[Validators.required, Validators.maxLength(64)]],
+      en:['',[Validators.required, Validators.maxLength(64)]]
+    }),
     gender:['',Validators.required],
-    nationality:['',Validators.required],
-    relativity:['',Validators.required],
-    // travelId:['',Validators.required],
-    religion:['',Validators.required],
-    birthdate:['',Validators.required],
+    nationlityId:['',Validators.required],
+    relativeRelationId:['',Validators.required],
+    religionId:['',Validators.required],
+    birthDate:['',Validators.required],
   })
 
-  imageResult1 = []
-  imageResult2 = []
-  imageResult3 = []
-  imageResult4;
 
   genderList =this.sharedService.genderOptions;
   Nationalities$  = this.sharedService.getAllNationalities()
@@ -96,126 +95,131 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
 
   }
   get arabicName() {
-    return this.registerWithoutIdentityForm.controls['arabicName'];
+    return (this.registerWithoutIdentityForm.controls['name']as FormGroup ).controls['ar'];
   }
   get englishName() {
-    return this.registerWithoutIdentityForm.controls['englishName'];
+    return (this.registerWithoutIdentityForm.controls['name']as FormGroup ).controls['en'];
   }
   get arabicNickName() {
-    return this.registerWithoutIdentityForm.controls['arabicNickName'];
+    return (this.registerWithoutIdentityForm.controls['surName']as FormGroup ).controls['ar'];
   }
   get englishNickName() {
-    return this.registerWithoutIdentityForm.controls['englishNickName'];
+    return (this.registerWithoutIdentityForm.controls['surName']as FormGroup ).controls['en'];
   }
 
   get gender() {
     return this.registerWithoutIdentityForm.controls['gender'];
   }
-  get nationality() {
-    return this.registerWithoutIdentityForm.controls['nationality'];
+  get nationlityId() {
+    return this.registerWithoutIdentityForm.controls['nationlityId'];
   }
-  get relativity() {
-    return this.registerWithoutIdentityForm.controls['relativity'];
+  get relativeRelationId() {
+    return this.registerWithoutIdentityForm.controls['relativeRelationId'];
   }
-  get birthdate() {
-    return this.registerWithoutIdentityForm.controls['birthdate'];
-  }
-
-  get religion() {
-    return this.registerWithoutIdentityForm.controls['religion'];
-  }
-  get travelId() {
-    return this.registerWithoutIdentityForm.controls['travelId'];
-  }
-  get reason() {
-    return this.registerWithoutIdentityForm.controls['reason'];
-  }
-  get PassportNumberExpirationDate() {
-    return this.registerWithoutIdentityForm.controls['PassportNumberExpirationDate'];
+  get birthDate() {
+    return this.registerWithoutIdentityForm.controls['birthDate'];
   }
 
+  get religionId() {
+    return this.registerWithoutIdentityForm.controls['religionId'];
+  }
 
-
-  messageUpload1(files){
-    this.imageResult1 = files
-   }
-
-  messageDeleted1(event){
-      this.imageResult1 = event
-   }
-
-  messageUpload2(files){
-    this.imageResult2 = files
-   }
-
-  messageDeleted2(event){
-      this.imageResult2 = event
-   }
-   messageUpload3(files){
-    this.imageResult3 = files
-   }
-
-    messageDeleted3(event){
-      this.imageResult3 = event
-   }
-   messageUpload4(event)
-   {
-    this.imageResult4=event;
-   }
-   messageDeleted4(event)
-   {
-    this.imageResult4=event;
-   }
+  get reasonForNotHavingEmiratesId() {
+    return this.registerWithoutIdentityForm.controls['reasonForNotHavingEmiratesId'];
+  }
 
 
    childToRelinkWithNewGuardian={
 
    }
 
+   passportAttach={
+    url: "",
+    titel: {
+      en: 'Passport Image',
+      ar: 'ًصورة جواز السفر'
+    },
+    name: "",
+    comment: "",
+  }
+
+  noIdentityCauseAttach={
+    url: "",
+    titel: {
+      en: 'Not Identity Image',
+      ar: 'صورة اثبات عدم وجود هوية'
+    },
+    name: "",
+    comment: "",
+  }
+
+
+
+  birthDateAttach={
+    url: "",
+    titel: {
+      en: 'birth certificate',
+      ar: 'صورة اثبات تاريخ الميلاد'
+    },
+    name: "",
+    comment: "",
+  }
+
+  personalPhoto={
+    url: "",
+    titel: {
+      en: 'Personal Image',
+      ar: 'الصورة الشخصية'
+    },
+    name: "",
+    comment: "",
+  }
+
+
+   setAttachment(attachRef, files:CustomFile[]){
+    files.length ?
+    ((attachRef.url=files[0].url) && (attachRef.name=files[0].name) ) :
+    (attachRef.url='') && (attachRef.name='' )
+
+  }
+
 
    addNewChild(){
 
     this.isBtnLoading=true;
-    this.imageResult1.map(er=>{
-        er.comment = this.registerWithoutIdentityForm.value.note
-        er.titel= {
-          en: 'Not Identity Image',
-          ar: 'صورة اثبات عدم وجود هوية'
-        }
-    })
+    // this.imageResult1.map(er=>{
+    //     er.comment = this.registerWithoutIdentityForm.value.note
+    //     er.titel= {
+    //       en: 'Not Identity Image',
+    //       ar: 'صورة اثبات عدم وجود هوية'
+    //     }
+    // })
 
-    this.imageResult3.map(er=>{
-      er.comment = this.registerWithoutIdentityForm.value.note2
-      er.titel={
-        en: 'birth certificate',
-        ar: 'صورة اثبات تاريخ الميلاد'
-      }
-    })
+    // this.imageResult3.map(er=>{
+    //   er.comment = this.registerWithoutIdentityForm.value.note2
+    //   er.titel={
+    //     en: 'birth certificate',
+    //     ar: 'صورة اثبات تاريخ الميلاد'
+    //   }
+    // })
 
-    this.imageResult4.map(er=>{
-      er.comment = this.registerWithoutIdentityForm.value.note3
-      er.titel={
-        en: 'Passport Image',
-        ar: 'ًصورة جواز السفر'
-      }
-    })
+    // this.imageResult4.map(er=>{
+    //   er.comment = this.registerWithoutIdentityForm.value.note3
+    //   er.titel={
+    //     en: 'Passport Image',
+    //     ar: 'ًصورة جواز السفر'
+    //   }
+    // })
+
+    let attachments=[this.birthDateAttach, this.personalPhoto, this.noIdentityCauseAttach, this.passportAttach].filter(el=> el.url)
 
     let data = {
-      'relativeRelationId':  this.registerWithoutIdentityForm.value.relativity,
-      'name': {ar:this.registerWithoutIdentityForm.value.arabicName,en:this.registerWithoutIdentityForm.value.englishName},
-      'surName': {ar:this.registerWithoutIdentityForm.value.arabicNickName,en:this.registerWithoutIdentityForm.value.englishNickName},
-      // 'passportNumber': this.registerWithoutIdentityForm.value.travelId,
-      // 'passportNumberExpirationDate': new Date(this.registerWithoutIdentityForm.value.PassportNumberExpirationDate).toISOString(),
-      'birthDate': new Date(this.registerWithoutIdentityForm.value.birthdate).toISOString(),
-      'gender': this.registerWithoutIdentityForm.value.gender,
-      'nationlityId': this.registerWithoutIdentityForm.value.nationality,
-      'imagePath': this.imageResult2.map(er=>er.url).toString(),
-      'guardianId': Number(JSON.parse(localStorage.getItem('$AJ$currentGuardian')).id),
-      'reasonForNotHavingEmiratesId': this.registerWithoutIdentityForm.value.reason,
-      'religionId': this.registerWithoutIdentityForm.value.religion,
-      'childAttachments':[...this.imageResult1,...this.imageResult3,...this.imageResult4],
-      // 'passportImage':this.imageResult4.map(er=>er.url).toString()
+      ...this.registerWithoutIdentityForm.value,
+      imagePath: this.personalPhoto?.url,
+      childAttachments : attachments
     }
+    console.log(data);
+
 
     this.addChildService.postChildWithoudIdentity(data)
     .pipe(
@@ -234,7 +238,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
             return EMPTY
 
           }else{
-            throw  new Error(this.translate.instant('toasterMessage.childAlreadyRegisted',{value: getLocalizedValue(res.name) || data?.name}))
+            throw  new Error(this.translate.instant('toasterMessage.childAlreadyRegisted',{value: getLocalizedValue(res.name)}))
             // throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
 
           }

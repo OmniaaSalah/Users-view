@@ -35,7 +35,7 @@
     "forget password": "نسيت كلمة المرور",
     "login with": "تسجيل",
     "Sign in with a digital identity": "تسجيل الدخول بالهوية الرقمية",
-    "UAE PASS is a single trusted digital identity for all citizens, residents to United Arab Emirates": " UAE PASS هو هوية رقمية واحدة موثوق بها لجميع المواطنين والمقيمين الإمارات العربية المتحدة",
+    "UAE PASS is a single trusted digital identity for all citizens, residents to United Arab Emirates": " UAE PASS هو هوية رقمية واحدة موثوق بها لجميع المواطنين والمقيمين في الإمارات العربية المتحدة",
     "new account": "حساب جديد",
     "Enter your mobile phone number or email": "أكتب رقم الهاتف المحمول  أو البريد الإلكتروني",
     "Type the password": "أكتب كلمة السر",
@@ -357,7 +357,7 @@
     },
 
     "pagination": {
-        "next": "التالى",
+        "next": "التالي",
         "previous": "السابق",
         "currentPage":"الصفحه التى انت فيها"
     },
@@ -576,7 +576,7 @@
         "Edit": "تعديل",
         "save": "حفظ",
         "send": "إرسال",
-        "next": "التالى",
+        "next": "التالي",
         "previous": "السابق",
         "signOut": "خروج",
         "account": "حسابى",
@@ -776,7 +776,13 @@
         "FirstSemester":"الفصل الأول",
         "LastSemester":"الفصل الأخير",
         "FinalResult":"النتيجة النهائية",
-        "updateCause":"سبب التعديل"
+        "updateCause":"سبب التعديل",
+        "Image":"صوروة",
+        "Pdf":"Pdf",
+        "Csv":"Csv",
+        "Audio":"Audio",
+        "Xlsx":"إكسيل"
+
 
     },
     "Notifications": {
@@ -1683,7 +1689,7 @@
             "Name in results screen in English": "الأسم في تقرير الدرجات (باللغة الإنجليزية)",
             "Write Name in results screen": "أكتب الأسم في شاشة الدرجات",
             "Write Subject Name": "أكتب أسم المادة",
-            "subjectHours": "الساعات الدراسية للمادة",
+            "subjectHours": "الساعات الدراسية",
             "Hours must be more than or equal 1 hour": "لابد أن تكون عدد الساعات أكثر من أو تساوي ساعة",
             "maximum degree Must More than minmumDegree":"الدرجة العظمي لابد أن تكون أكبر من الدرجة الدنيا",
             "minimum degree Must Less than maxmumDegree":"الدرجة الدنيا لابد أن تكون أصغر من الدرجة العظمي",

@@ -33,7 +33,7 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'shared.grade'| translate}}</label>
-                     <p-multiSelect [options]="(AllGrades$ | async)" display="chip" (ngModelChange)="onGradeSelected($event)"  (onClear)="isGradeSelected=false" [(ngModel)]="filtration.GradeId"   optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseClasse' |translate}}"></p-multiSelect>
+                     <p-multiSelect  [options]="(AllGrades$ | async)" display="chip" (ngModelChange)="onGradeSelected($event)"  (onClear)="isGradeSelected=false" [(ngModel)]="filtration.GradeId"   optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseClasse' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'shared.division'| translate}}</label>
@@ -46,7 +46,7 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                    <p-multiSelect [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
+                    <p-multiSelect [filter]="true" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.StudentCategory'| translate}}</label>

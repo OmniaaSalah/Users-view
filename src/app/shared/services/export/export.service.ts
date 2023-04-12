@@ -45,10 +45,10 @@ export class ExportService {
   exportPdf(data:any[], fileName) {
   
     let exportColumns = this.getColsHead(data).reverse()
-    data= data.map(el=>{      
+    data= data.map(el=>{
       return Object.values(el).reverse()
     })
-    
+
     const doc = new jsPDF('l', 'pt', 'a2')
    
     doc.addFont("/assets/font/amiri/Amiri-Regular.ttf", "Amiri-Regular", "normal");
@@ -62,17 +62,17 @@ export class ExportService {
       },
       columns: exportColumns,
       body: data,
-      didDrawPage: (dataArg) => { 
+      didDrawPage: (dataArg) => {
         doc.text(fileName, dataArg.settings.margin.left, 10);
       }
-    }); 
-    
+    });
+
     doc.save(fileName+'.pdf');
 
   }
 
   getColsHead(tableData: any[]){
-    return  Object.keys(tableData[0])
+    return  tableData[0] ? Object.keys(tableData[0]) : []
   }
 
 }

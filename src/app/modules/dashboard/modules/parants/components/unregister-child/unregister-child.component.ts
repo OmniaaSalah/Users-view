@@ -102,6 +102,9 @@ export class UnregisterChildComponent implements OnInit {
   addMode=false
   gurdiansAttachmentsTypes$=this.indexsService.getIndext(IndexesEnum.TheTypeOfFileAttachmentForTheParent)
 
+  get getDialogData() { return {img: this.child?.imagePath || 'assets/images/shared/image.svg',message:`هل أنت متأكد أنك تريد حذف "${getLocalizedValue(this.child?.name)}” من قائمة أبنائك؟`}}
+
+
   fileForm= this.fb.group({
     indexId:['', Validators.required],
     titel: this.fb.group({
@@ -128,7 +131,6 @@ export class UnregisterChildComponent implements OnInit {
   ngOnInit(): void {
     this.getUnregisterChild();
   }
-
 
 
 
@@ -230,23 +232,23 @@ export class UnregisterChildComponent implements OnInit {
 
 
 // NOTE :---------------- Delete Child --------------------------
-  openDeleteModel(){
-    this.confirmModelService.openModel({img: this.child?.imagePath || 'assets/images/shared/image.svg',message:`هل أنت متأكد أنك تريد حذف "${getLocalizedValue(this.child.name)}” من قائمة أبنائك؟`})
-    this.confirmDeleteListner()
-  }
+  // openDeleteModel(){
+  //   this.confirmModelService.openModel()
+  //   this.confirmDeleteListner()
+  // }
 
-  confirmDeleteListner(){
-    this.confirmModelService.confirmed$.subscribe(val=>{
-      if(val) this.deleteChild()
-    })
-  }
+  // confirmDeleteListner(){
+  //   this.confirmModelService.confirmed$.subscribe(val=>{
+  //     if(val) this.deleteChild()
+  //   })
+  // }
 
   deleteChild(){
     this.parentService.deleteChild(this.child.id).subscribe(res=>{
       this.toastr.success(this.translate.instant('toasterMessage.deletedSuccessfully'))
       this.router.navigate(['/'], {relativeTo:this._route})
     },()=>{
-      this.toastr.success(this.translate.instant('toasterMessage.deletedSuccessfully'))
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
       this.router.navigate(['/'], {relativeTo:this._route})
       // this.toastr.error(this.translate.instant('toasterMessage.error'))
     })

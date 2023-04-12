@@ -11,7 +11,7 @@
             <div class="d-flex align-items-center gap-4 mt-5">
                 <button (click)="confirm()" class="btn btn-secondary">{{'shared.yesImSure' |translate}}</button>
                 <button (click)="this.confirmModelService.closeModel();  this.confirmModelService.onClose$.next(true)" class="btn btn-primary ">{{'shared.notSure' |translate}}</button>
-    
+
             </div>
            </div>
         </ng-template>

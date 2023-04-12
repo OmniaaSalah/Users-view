@@ -4,10 +4,12 @@ import { RequestListRoutingModule } from './request-list-routing.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RequestdetailsComponent } from './Component/requestdetails/requestdetails.component';
+import { RequestChatComponent } from './component/requestdetails/request-chat/request-chat.component';
 
 @NgModule({
   declarations: [
-    RequestdetailsComponent
+    RequestdetailsComponent,
+    RequestChatComponent
   ],
   imports: [
     CommonModule,

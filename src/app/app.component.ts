@@ -19,6 +19,7 @@ import { IndexesService } from './modules/dashboard/modules/indexes/service/inde
 import { SettingsService } from './modules/dashboard/modules/system-setting/services/settings/settings.service';
 import { FileEnum } from './shared/enums/file/file.enum';
 import { ClaimsService } from './core/services/claims.service';
+import { UserInformationService } from './modules/dashboard/modules/user-information/service/user-information.service';
 
 @Component({
   selector: 'app-root',
@@ -70,6 +71,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
     private sharedService: SharedService,
+    private usersService:UserInformationService,
     private authService:AuthenticationService,
     private messageService: MessageService,
     private index:IndexesService,
@@ -78,8 +80,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
 
   ngAfterViewInit(): void {
-    
-    
+
+
   }
 
   firstChildHoverd = false
@@ -98,24 +100,26 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
-    
+
     this.translationService.init();
     this.userService.isUserLogged$.subscribe((res)=>{
-      
+
       if(res)
       {
+        // this.usersService.deleteUser(129).subscribe()
+
           this.currentUserName=this.userService.getCurrentUserName();
-          this.settingsService.initializeFileRules()
+          // this.settingsService.initializeFileRules()
           this.currentUserScope=this.userService.getCurrentUserScope();
           this.coreSercice.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-          if(this.currentUserScope == this.userScope.Employee) 
+          if(this.currentUserScope == this.userScope.Employee)
           {
           this.getMessagesTypes()
           }
-          
+
         }
-   
-    
+
+
     })
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
@@ -133,11 +137,11 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
     })
 
-   
+
 }
 
 showDialog() {
-  
+
   this.display = true;
 }
 getMessagesTypes(){
@@ -202,7 +206,7 @@ messageUpload(files){
 
    this.authService.logOut();
    this.userService.isUserLogged$.next(false);
-  
+
 
   }
 

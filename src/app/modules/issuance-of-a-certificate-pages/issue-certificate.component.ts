@@ -24,34 +24,21 @@ import { CurriculumCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/s
 })
 export class IssueCertificateComponent implements OnInit {
 
-  certificatesIds=[];
   guardian={id:'',name:{}}
   choosenStudents = []
   lang =inject(TranslationService).lang;
-  skeletonShown = true
-  certificateModelsOpend=true
-  degreescertificates = this.issuance.degreescertificates;
-  valueOfEnum;
-  showChain:boolean = false
-  dataArray = []
-  reasonArr = [];
-  certificateName;
-  step = 1;
-  headerModal;
-  display: boolean = false;
-  dropValue;
-  nameOfCertificate;
-  nameOfStudent;
- faAngleDown = faAngleDown
- subscription:Subscription;
- get certificateType() { return CertificatesEnum }
- isBtnLoading:boolean=false;
- selectedCertificate;
+  get certificateType() { return CertificatesEnum }
+
   childList = []
-  boardObj = {}
+  selectedCertificate;
 
+  step = 1;
 
-  dropForm = this.fb.group({ controlVal :''})
+  display: boolean = false;
+  subscription:Subscription;
+  skeletonShown = true
+ isBtnLoading:boolean=false;
+
 
   destination=""
 
@@ -74,9 +61,9 @@ export class IssueCertificateComponent implements OnInit {
   };
 
   // NOTE :- -------------------------------
-  reqInstance = this.route.snapshot.queryParamMap.get('requestInstance')
+  requestId = this.route.snapshot.queryParamMap.get('requestId')
   returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
-  actions
+  // actions
   studentId = +this.route.snapshot.paramMap.get('studentId')
 
 
@@ -86,7 +73,6 @@ export class IssueCertificateComponent implements OnInit {
     private headerService: HeaderService,
     private translate: TranslateService,
     private issuance: IssuanceCertificaeService,
-    private fb: FormBuilder,
     public confirmModelService: ConfirmModelService,
     private toastr:ToastrService,
     private userService:UserService,
@@ -104,10 +90,10 @@ export class IssueCertificateComponent implements OnInit {
 
     this.userService.currentGuardian.subscribe((res)=> {this.guardian=res;});
 
-    if(this.reqInstance){
-      this.getRequestOptions()
+    if(this.requestId){
+      // this.getRequestOptions()
       this.step =3
-      this.choosenStudents.push(this.returnedReqData[0].student)
+      this.choosenStudents.push(this.returnedReqData.student)
       this.selectedCertificate= {
         "value": CertificatesEnum.AcademicSequenceCertificate,
         "name": {
@@ -128,11 +114,11 @@ export class IssueCertificateComponent implements OnInit {
 
 
 
-  getRequestOptions(){
-    this.requestsService.getRequestTimline(this.reqInstance).subscribe(res=>{
-      this.actions = res?.task?.options
-    })
-  }
+  // getRequestOptions(){
+  //   this.requestsService.getRequestTimline(this.requestId).subscribe(res=>{
+  //     this.actions = res?.task?.options
+  //   })
+  // }
 
 
 

@@ -27,7 +27,7 @@ export class UserInformationService {
     {'name':this.translate.instant("Inactive"),value:false}
   ];
   [
-    
+
   ];
   }
   _headers = new HttpHeaders({
@@ -64,10 +64,10 @@ usersToExport(filter){
       })
     }))
 }
-  
+
 
   getUsersById(id:number){
-    
+
     return this.http.get('/Account/Get/'+id).pipe(take(1));
   }
 
@@ -87,4 +87,7 @@ usersToExport(filter){
   }
 
 
+  deleteUser(userId){
+    return this.http.delete(`/Guardian/delete-guardian/${userId}`).pipe(take(1))
+  }
 }
