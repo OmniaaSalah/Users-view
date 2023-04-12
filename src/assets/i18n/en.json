@@ -409,7 +409,8 @@
     "shared": {
         "RoleMangment":"Role Mangment",
         "ExamFileMangment":"Exam File Mangment",
-        "StudentMangment": "Student Mangment",
+        "SendRequest":"SendRequest",
+        "NotDeterminedYet":"Not Determined Yet",
         "SchoolYear": "School Year",
         "Total Number":"Total Number",
         "gotothem":"Go to them",
@@ -536,6 +537,7 @@
             "notPassed":"Not Passed",
             "Deleted": "Deleted",
             "Failed": "Failed",
+            "FinalFaild":"Final Faild",
             "Registered":"Registered",
             "Unregestered":"Unregestered",
             "WithdrawnRejected":"Withdrawn Rejected",

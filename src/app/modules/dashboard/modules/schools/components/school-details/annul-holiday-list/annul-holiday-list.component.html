@@ -20,13 +20,13 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="annualCalendarName"> <p-sortIcon field="annualCalendarName"></p-sortIcon>{{'dashboard.schools.annulCalendarName' |translate}}</th>
-                <th pSortableColumn="year"><p-sortIcon field="year"></p-sortIcon>{{'dashboard.schools.SchoolYear' |translate}} </th>
-                <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.holidayName' |translate}} </th>
-                <th pSortableColumn="dateRange"><p-sortIcon field="dateRange"></p-sortIcon>{{'dashboard.AnnualHoliday.HolidayStartDate' |translate}} </th>
-                <th pSortableColumn="dateRange"><p-sortIcon field="dateRange"></p-sortIcon>{{'dashboard.AnnualHoliday.HolidayEndDate' |translate}} </th>
-                <th pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date' |translate}} </th>
-                <th class="expand"  pSortableColumn="flexibilityStatus"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
+                <th pSortableColumn="{{lang=='ar' ? 'AnnualCalenderAr' : 'AnnualCalenderEn'}}"> <p-sortIcon field="{{lang=='ar' ? 'AnnualCalenderAr' : 'AnnualCalenderEn'}}"></p-sortIcon>{{'dashboard.schools.annulCalendarName' |translate}}</th>
+                <th pSortableColumn="Year"><p-sortIcon field="Year"></p-sortIcon>{{'dashboard.schools.SchoolYear' |translate}} </th>
+                <th pSortableColumn="{{lang=='ar' ? 'HolidayArabicName' : 'HolidayEnglishName'}}"><p-sortIcon field="{{lang=='ar' ? 'HolidayArabicName' : 'HolidayEnglishName'}}"></p-sortIcon>{{'dashboard.schools.holidayName' |translate}} </th>
+                <th pSortableColumn="DateFrom"><p-sortIcon field="DateFrom"></p-sortIcon>{{'dashboard.AnnualHoliday.HolidayStartDate' |translate}} </th>
+                <th pSortableColumn="DateTo"><p-sortIcon field="DateTo"></p-sortIcon>{{'dashboard.AnnualHoliday.HolidayEndDate' |translate}} </th>
+                <th pSortableColumn="CreatedDate"><p-sortIcon field="CreatedDate"></p-sortIcon>{{'shared.Created Date' |translate}} </th>
+                <th class="expand"  pSortableColumn="FlexibilityStatus"><p-sortIcon  field="FlexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
                 <th class="actions"></th>
             </tr>
         </ng-template>
