@@ -87,29 +87,15 @@ export class AuthenticationMainComponent implements OnInit{
       }
      else if(this.code)
      {
+      console.log(this.code)
       this.loginInProgress=true
         this.authService.getUAEUSER(this.code).subscribe((res:any)=>{
           this.statusCode=res?.statusCode;
           this.loginInProgress=false
           if(res?.statusCode=="OK")
           {
-              this.userService.setToken(res?.user)
-              this.userService.setUser(res?.user);
-              this.userService.setScope(res?.scope)
-              localStorage.setItem('$AJ$token',res?.token)
-              localStorage.setItem('UaeLogged','true')
-              this.userService.isUserLogged$.next(true);
-              if(res?.scope==UserScope.Employee)
-              {
-              this.getCurrentEmployeeData();
-              }
-              else if(res?.scope==UserScope.Guardian)
-              {
-                this.getCurrentGuardianData();
-              }
-
-              this.getCurrentYear();
-              this.showSuccess();
+            this.loginWithUAEPass(res);
+            this.showSuccess();
           }
           else if (res?.statusCode=="NotFound")
           {
@@ -121,7 +107,6 @@ export class AuthenticationMainComponent implements OnInit{
           {
             this.openConfimModel=true
             this.confirmationMessage=res?.errorLocalized[this.languge];
-            // this.toastService.error(res?.errorLocalized[this.languge])
 
           }
         },err=>{
@@ -393,8 +378,8 @@ openUAEAccount()
   this.isUAeAccountBtnLoading=true;
   this.authService.createUAEPassAutomaticAccount(this.UAEUnregisteredUser).subscribe((res)=>{
     this.isUAeAccountBtnLoading=false;
-    this.closeConfirmationModel();
     this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+    this.loginWithUAEPass(res?.result)
   },(err)=>{
     this.isUAeAccountBtnLoading=false;
     this.closeConfirmationModel();
@@ -410,5 +395,25 @@ closeConfirmationModel()
 
 }
 
+loginWithUAEPass(res)
+{
+  
+              this.userService.setToken(res?.user)
+              this.userService.setUser(res?.user);
+              this.userService.setScope(res?.scope)
+              localStorage.setItem('$AJ$token',res?.token)
+              localStorage.setItem('UaeLogged','true')
+              this.userService.isUserLogged$.next(true);
+              if(res?.scope==UserScope.Employee)
+              {
+              this.getCurrentEmployeeData();
+              }
+              else if(res?.scope==UserScope.Guardian)
+              {
+                this.getCurrentGuardianData();
+              }
 
+              this.getCurrentYear();
+             
+}
 }

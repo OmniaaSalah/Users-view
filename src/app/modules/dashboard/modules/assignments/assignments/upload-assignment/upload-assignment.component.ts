@@ -168,7 +168,7 @@ onUpload(event) {
     this.assignmentModel.arabicName = this.assignmentFormGrp.value.ExamNameInArabic ;
     this.assignmentModel.englishName= this.assignmentFormGrp.value.ExamNameInEnglish;
     this.assignmentModel.examduration = this.convertMinutesToTime(Number(this.assignmentFormGrp.value.ExamDuration));
-    this.assignmentModel.examShowTime = this.assignmentFormGrp.value.ExamTime.toISOString().slice(11,19);
+    this.assignmentModel.examShowTime = this.assignmentFormGrp.value.ExamTime;
     this.assignmentModel.examShowDate= this.assignmentFormGrp.value.ExamDate.toISOString().slice(0,10);
     this.assignmentModel.gradeId = this.assignmentFormGrp.value.grades;
     this.assignmentModel.subjectId=  this.assignmentFormGrp.value.subjects;
