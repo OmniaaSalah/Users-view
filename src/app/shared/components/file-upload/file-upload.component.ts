@@ -93,19 +93,25 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
     this.settingService.fileRules$.subscribe(res=> {
       this.filesRules =res
-
-
       // if(!this.fileSize && this.filesRules) this.setMaxFileSizeAllowed()
+      if(!this.fileSize && this.allowedFilesType){
+        this.setMaxFileSizeAllowed()
+      }
+
     })
   }
 
 
-  setMaxFileSizeAllowed(){
+  setMaxFileSizeAllowed(showError = false){
+    console.log(showError);
+
     if(this.allowedFilesType instanceof Array){
       this.fileSize = Math.max(...this.allowedFilesType.map(el => this.filesRules[el]?.size))
     }else{
+      console.log(this.filesRules[this.allowedFilesType]);
+
       if(!this.filesRules[this.allowedFilesType]){
-        this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
+        if(showError) this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
         return
       }
       this.fileSize = this.filesRules[this.allowedFilesType]?.size || 3
@@ -123,12 +129,19 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
 
     // set file type Dynamically (depend on user Input)
-    const lastDot = files[0].name.lastIndexOf('.');
-    const extention = files[0].name.substring(lastDot + 1);
+    if(!this.allowedFilesType){
+      const lastDot = files[0].name.lastIndexOf('.');
+      const extention = files[0].name.substring(lastDot + 1);
+      this.allowedFilesType = FileEnum[capitalizeFirstLetter(extention)]
+      this.allowedFilesExtentions = FileExtentions[capitalizeFirstLetter(extention)]
 
-    this.allowedFilesType = FileEnum[capitalizeFirstLetter(extention)]
-    this.allowedFilesExtentions = FileExtentions[capitalizeFirstLetter(extention)]
-    this.setMaxFileSizeAllowed()
+    }
+
+    if(!this.fileSize){
+      this.setMaxFileSizeAllowed(true)
+    }
+
+
 
     // Validation Condition 1
     if((files.length + this.files.length) > this.maxFilesToUpload) {

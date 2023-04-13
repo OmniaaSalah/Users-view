@@ -16,7 +16,7 @@
 
                 <input
                 [LangRestrict]="'numb'"
-                formControlName="identityNumber"
+                formControlName="emiratesId"
                 [ngClass]="{'ng-invalid ng-dirty': IdentityNumCtr.errors && IdentityNumCtr.errors?.['pattern']}"
                 id="day"
                 pInputText
@@ -26,7 +26,7 @@
 
             <div class="col-md-4">
                 <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}} <span class="star">*</span></label>
-                <p-dropdown  [options]="relativeityTypes$ |async" formControlName="relativityType" optionLabel="{{lang == 'ar'?'arabicName' : 'englishName'}}" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+                <p-dropdown  [options]="relativeityTypes$ |async" formControlName="RelativeRelationId" optionLabel="{{lang == 'ar'?'arabicName' : 'englishName'}}" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
             </div>
 
             <!-- <div class="col-md-4">
@@ -45,14 +45,12 @@
                 <div class="col-md-6 m-4">
                     <P>{{'dashboard.addChild.identityPhoto' | translate}} <span class="star">*</span></P>
                     <app-file-upload
-                    [accept]="fileTypesEnum.Pdf"
                     view="full"
                     (onFileUpload)="setAttachment(identityAttach,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-4 m-4">
                     <P>{{'dashboard.addChild.personalPicture' | translate}}</P>
                     <app-file-upload
-                    [accept]="fileTypesEnum.Image"
                     view="full"
                     (onFileUpload)="setAttachment(personalPhoto,$event)" ></app-file-upload>
                 </div>
@@ -66,7 +64,7 @@
             <div class="row mt-5 g-5">
                 <div class="col-md-6 gap-3">
                     <P>{{'dashboard.addChild.birthCertificate' | translate}} <span class="star">*</span></P>
-                    <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="setAttachment(birthDate,$event)"></app-file-upload>
+                    <app-file-upload  view="full" (onFileUpload)="setAttachment(birthDate,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-4 gap-3">
                     <P class="mb-4">{{'shared.note' | translate}}</P>
