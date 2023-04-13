@@ -9,7 +9,7 @@
           <ng-container *ngIf="requestDetails?.requestComments[0] as comment">
               <li  class="comment sender" *ngIf="comment.comment || comment.attachments.length">
                   <div class="comment__author fs-4 mx-3  fw-bold mb-3">
-                    <ng-container *ngIf="comment.scope=='SPEA'">
+                    <ng-container *ngIf="comment.scope== userScopeEnum.SPEA">
                       <span>موظف الهيئه</span>
                     </ng-container>
                     <ng-container *ngIf="comment.scope!='SPEA'">
