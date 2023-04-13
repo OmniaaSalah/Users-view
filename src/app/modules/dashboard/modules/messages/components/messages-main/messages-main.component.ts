@@ -9,6 +9,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { MessageStatus } from 'src/app/shared/enums/status/status.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { MessageService } from '../../service/message.service';
 
 @Component({
@@ -114,7 +115,7 @@ export class MessagesMainComponent implements OnInit {
   getMessages(searchModel){
     this.showSpinner = false
     this.messages.loading=true
-    if(this.scope == "Guardian"){
+    if(this.scope == UserScope.Guardian){
     this.messageService.getMessagesGuardian(this.useId,searchModel).subscribe(res=>{
       this.messages.loading=false
      this.messages.list = res.data
@@ -125,7 +126,7 @@ export class MessagesMainComponent implements OnInit {
     })
   }
 
-  if(this.scope == "Employee"){
+  if(this.scope == UserScope.Employee){
     this.messageService.getMessagesSchoolEmp(this.useId,searchModel).subscribe(res=>{
       this.messages.loading=false
      this.messages.list = res.data
@@ -136,7 +137,7 @@ export class MessagesMainComponent implements OnInit {
     })
   }
 
-  if(this.scope == "SPEA"){
+  if(this.scope == UserScope.SPEA){
     this.messageService.getMessagesSpea(this.useId,searchModel).subscribe(res=>{
       this.messages.loading=false
      this.messages.list = res.data
@@ -154,7 +155,7 @@ export class MessagesMainComponent implements OnInit {
 
 
   showDialog() {
-    if(this.scope =="SPEA"){
+    if(this.scope == UserScope.SPEA){
       this.router.navigate(['/dashboard/messages/add-message'])
     }else{
       this.display = true;

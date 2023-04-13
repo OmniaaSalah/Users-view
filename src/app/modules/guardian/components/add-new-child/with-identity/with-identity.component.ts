@@ -76,11 +76,11 @@ export class WithIdentityComponent implements OnInit {
   onSubmit=false
 
   newChildForm: FormGroup = this.fb.group({
-    identityNumber:[ null,[Validators.required, Validators.pattern('(784)[0-9]{12}')]],
-    relativityType:['',Validators.required],
+    emiratesId:[ null,[Validators.required, Validators.pattern('(784)[0-9]{12}')]],
+    RelativeRelationId:['',Validators.required],
   })
 
-  get IdentityNumCtr(){return this.newChildForm.controls['identityNumber']}
+  get IdentityNumCtr(){return this.newChildForm.controls['emiratesId']}
 
 
   relativeityTypes$ = this.shredService.getParentRelative()
@@ -120,9 +120,14 @@ export class WithIdentityComponent implements OnInit {
 
   addNewChild(){
     this.onSubmit=true
+
+    let data={
+      ...this.newChildForm.value,
+      imagePhath:this.personalPhoto?.url
+    }
     let attachments=[this.birthDate, this.personalPhoto, this.identityAttach]
 
-    this.addChildService.addChildWithIdentity(this.IdentityNumCtr.value,attachments)
+    this.addChildService.addChildWithIdentity(data,attachments)
     .pipe(
       map(res=>{
         if(res.statusCode!=HttpStatusCodeEnum.OK){

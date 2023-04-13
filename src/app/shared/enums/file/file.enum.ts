@@ -4,6 +4,8 @@ export enum FileEnum{
     Xlsx = 'Xlsx',
     Pdf = 'Pdf',
     Image = 'Image',
+    Jpg = 'Image',
+    Png='Image',
     Audio = 'Audio'
 }
 

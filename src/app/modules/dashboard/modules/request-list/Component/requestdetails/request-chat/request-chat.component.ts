@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SystemRequestService } from '../../../services/system-request.service';
 
@@ -15,6 +16,7 @@ export class RequestChatComponent implements OnInit {
   @Input() requestDetails
   @Output() refresh = new EventEmitter()
 
+  get userScopeEnum(){return UserScope}
   comment=''
   isLoading =false
   filesToUpload:CustomFile[] =[]

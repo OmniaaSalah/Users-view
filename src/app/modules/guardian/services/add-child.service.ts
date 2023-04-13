@@ -20,8 +20,8 @@ export class AddChildService {
 
 
 
-   addChildWithIdentity(emiratId,data){
-    return this.http.post(`/Child/emiratesId?emiratesId=${emiratId}`,data).pipe(take(1))
+   addChildWithIdentity(data,attachments){
+    return this.http.post(`/Child/emiratesId`,attachments, data).pipe(take(1))
    }
-   
+
 }
