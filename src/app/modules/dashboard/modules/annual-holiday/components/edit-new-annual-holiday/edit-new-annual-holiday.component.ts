@@ -215,6 +215,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
             this.holidayList=this.holidayList.map((holiday,i)=>{return {
             'id':i+1,
             'name':{'ar':holiday.name.ar,'en':holiday.name.en },
+            'userName':{'ar':holiday?.userName?.ar,'en':holiday?.userName?.en },
             'dateFrom':holiday.dateFrom,
             'dateTo': holiday.dateTo,
             'flexibilityStatus':holiday.flexibilityStatus,
@@ -390,6 +391,7 @@ bindOldHoliday(holiday)
       this.holidayList=this.holidayList.map((holiday,i)=>{return {
         'id':i+1,
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
+        'userName':{'ar':holiday?.userName.ar,'en':holiday?.userName.en },
         'dateFrom':holiday.dateFrom,
         'dateTo':holiday.dateTo,
         'flexibilityStatus':this.holidayStatusList.find(s=>s.value==holiday.flexibilityStatus),
