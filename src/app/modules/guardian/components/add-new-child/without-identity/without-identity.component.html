@@ -169,7 +169,7 @@
             <div class="row gx-5 form-set  subjects ">
               <div class="col-md-4 ">
                   <P>{{'sign up.pleaze upload image to approve that you don’t have digital identity' |translate}} <span class="star">*</span></P>
-                  <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="setAttachment(noIdentityCauseAttach,$event)"></app-file-upload>
+                  <app-file-upload  view="full" (onFileUpload)="setAttachment(noIdentityCauseAttach,$event)"></app-file-upload>
               </div>
               <div class="col-md-4">
                   <P class="pb-4 ">{{'shared.note' | translate}}</P>
@@ -179,14 +179,14 @@
 
               <div class="col-md-4">
                   <P>{{'dashboard.addChild.personalPicture' | translate}}</P>
-                  <app-file-upload [accept]="fileTypesEnum.Image" view="full" (onFileUpload)="setAttachment(personalPhoto,$event)"></app-file-upload>
+                  <app-file-upload view="full" (onFileUpload)="setAttachment(personalPhoto,$event)"></app-file-upload>
               </div>
           </div>
 
             <div class="row gx-5 form-set  subjects ">
                 <div class="col-md-4">
                     <P>{{'dashboard.addChild.birthCertificate' | translate}} <span class="star">*</span></P>
-                    <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="setAttachment(birthDateAttach,$event)"></app-file-upload>
+                    <app-file-upload view="full" (onFileUpload)="setAttachment(birthDateAttach,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-4">
                     <P class="pb-4">{{'shared.note' | translate}}</P>
@@ -194,7 +194,7 @@
                 </div>
                 <div class="col-md-4">
                     <P>{{'dashboard.addChild.PassportPicture' | translate}}</P>
-                    <app-file-upload [accept]="fileTypesEnum.Image" view="full" (onFileUpload)="setAttachment(passportAttach,$event)"></app-file-upload>
+                    <app-file-upload view="full" (onFileUpload)="setAttachment(passportAttach,$event)"></app-file-upload>
                 </div>
             </div>
 
