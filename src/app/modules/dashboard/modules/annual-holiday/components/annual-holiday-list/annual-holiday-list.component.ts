@@ -200,8 +200,15 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
       
       this.annualHolidayService.updateHoliday(this.updatedHolidayId,this.editedHoliday).subscribe((res)=>{
         // this.isBtnLoading=false;
-        this.openRow(this.annualCalenderId);
-        this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday edited Successfully'));
+        if(res.statusCode=='OK')
+        {
+          this.openRow(this.annualCalenderId);
+          this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday edited Successfully'));
+        }
+        else
+        {
+          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.Can’tEditthisHoliday,BecauseYouEdittheTimeOfItAndTimeOfAllHolidaysInThisAnnualCalenderShouldn’tBeMoreThan6Weeeks'));
+        }
       },(err)=>{
         // this.isBtnLoading=false;
         this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));

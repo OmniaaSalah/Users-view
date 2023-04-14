@@ -1647,6 +1647,7 @@
             "List Of Annual Holidays": " قائمة الإجازات السنوية",
             "Define Annual Holidays Calendar": "تعريف تقويم الإجازات السنوية",
             "Edit Annual Holidays Calendar": "تعديل تقويم الإجازات السنوية",
+            "Can’tEditthisHoliday,BecauseYouEdittheTimeOfItAndTimeOfAllHolidaysInThisAnnualCalenderShouldn’tBeMoreThan6Weeeks":"لا يمكنك تعديل هذه الإجازة , لانك قمت بتغير الفتره الزمنية للإجازة فاصبحت الفترة الزمنية لجميع إجازات هذا التقويم السنوي أكثر من 6 أسابيع",
             "Annual Calender Name": "مسمي التقويم السنوي",
             "Holiday Name": "مسمي الإجازة",
             "curriculum": "المنهج",
