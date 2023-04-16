@@ -42,6 +42,7 @@ export class NewAccountComponent implements OnInit {
   showIdentityField:boolean=false;
   showEmailField:boolean=false;
   tittle;
+  UAEUnregisteredUser;
   registrationWayFormGrp: FormGroup;
   passwordsFormGrp: FormGroup;
   accountFormGrp: FormGroup;
@@ -203,16 +204,30 @@ sendOtp()
   if(this.account.accountWay==RegistrationEnum.EmiratesId)
   {
     this.authService.createUAEPassAccount(this.account.notificationSource).subscribe((res)=>{
+      console.log(res)
       this.isBtnLoading=false;
-      this.closeModel();
-      this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+      if(res.statusCode=='OK')
+      {
+       
+        this.step=5;
+        this.UAEUnregisteredUser=res.result;
+        this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+      }
+      else if(res.statusCode=='NotAcceptable')
+      {
+        this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      }
+      else if(res.statusCode=='BadRequest')
+      {
+        this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      }
+    
     },(err)=>{
       this.isBtnLoading=false;
       this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
   }
-  else
-  {
-    this.authService.sendOtpToUser(this.account).subscribe((res)=>{
+ else 
+  {  this.authService.sendOtpToUser(this.account).subscribe((res)=>{
     this.isBtnLoading=false;
     this.toastService.success(this.translate.instant('shared.Otp send successfully'));
     this.tittle=this.translate.instant('sign up.confirmed with OTP')
@@ -223,6 +238,7 @@ sendOtp()
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
   }
+  
 }
 sendOtpAgain()
 {
