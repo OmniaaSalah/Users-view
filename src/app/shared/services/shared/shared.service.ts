@@ -57,7 +57,6 @@ export class SharedService {
     {name: this.translate.instant('shared.allStatus.'+StatusEnum.Active) , value:StatusEnum.Active},
     {name: this.translate.instant('shared.allStatus.'+ StatusEnum.Inactive), value:StatusEnum.Inactive}
   ]
-
   genderOptions =[
     {name: this.translate.instant('shared.genderType.'+ GenderEnum.Male), value:GenderEnum.Male},
     {name: this.translate.instant('shared.genderType.'+GenderEnum.Female) , value:GenderEnum.Female},
@@ -129,7 +128,11 @@ export class SharedService {
       value:TransportaionType.SchoolBus,
       name: this.translate.instant("shared."+TransportaionType.SchoolBus)
     }
-  ]
+  ];
+  usersStatusList=[
+    {'name':this.translate.instant("Active"),value:true},
+    {'name':this.translate.instant("Inactive"),value:false}
+  ];
 
   constructor(
     private translate :TranslateService,

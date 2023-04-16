@@ -77,11 +77,11 @@ requestList=[];
         })
       }))
     }
-  
+
 
   getMyRequests(filter){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.post(`/Guardian/my-requests-list`,filter)    
+    return this.http.post(`/Guardian/my-requests-list`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -90,7 +90,7 @@ requestList=[];
   }
 
   myReqsToExport(filter){
-    return this.http.post(`/Guardian/my-requests-list`,filter)    
+    return this.http.post(`/Guardian/my-requests-list`,filter)
     .pipe( map(res=>{
       return res.data.map(item =>{
         return {
@@ -113,7 +113,29 @@ requestList=[];
   getRequestTimline(instanceId){
     return this.http.get(`/Instance/Get/${instanceId}`).pipe(take(1))
   }
-  
+
+  getRequestStates(instanceId){
+    return this.http.get(`/Instance/GetWitoutTasks/${instanceId}`)
+  }
+
+  getperformedAction(instanceId){
+    return this.http.get(`/Instance/Actions/Get/${instanceId}`)
+  }
+
+
+  getRequestOptions(instanceId){
+      return this.http.get(`/Task/Instance/Get/${instanceId}`)
+      .pipe(
+        take(1),
+        map(res=>{
+          console.log(res);
+
+          if(!res) return {options: []}
+          else return res
+        })
+        )
+  }
+
 
   changeRequestState(reqBody){
     return this.http.post(`/Workflow/PerformAction`,reqBody).pipe(take(1))
@@ -128,7 +150,7 @@ requestList=[];
     return this.http.post(`/Request/rquest-comment-reply`,reqBody).pipe(take(1))
   }
 
-  
+
   withdrawReq(id){
     return this.http.put(`/Student/withdraw-request/${id}`).pipe(take(1))
   }
