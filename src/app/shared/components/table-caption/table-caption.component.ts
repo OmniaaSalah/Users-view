@@ -42,7 +42,8 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   }
 
 
-  seachListener(){
+  seachListener()
+  {
     this.searchInput.valueChanges
     .pipe(
       debounceTime(1200),

@@ -47,6 +47,8 @@ export class AuthenticationMainComponent implements OnInit{
   subscription:Subscription;
   code=this.activatedRoute.snapshot.queryParamMap.get('code');
   error_description=this.activatedRoute.snapshot.queryParamMap.get('error');
+
+
   constructor(
     private formbuilder: FormBuilder,
     private authService: AuthenticationService,
@@ -397,7 +399,7 @@ closeConfirmationModel()
 
 loginWithUAEPass(res)
 {
-  
+
               this.userService.setToken(res?.user)
               this.userService.setUser(res?.user);
               this.userService.setScope(res?.scope)
@@ -414,6 +416,6 @@ loginWithUAEPass(res)
               }
 
               this.getCurrentYear();
-             
+
 }
 }

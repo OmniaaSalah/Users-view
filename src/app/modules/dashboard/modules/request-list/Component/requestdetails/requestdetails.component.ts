@@ -64,9 +64,7 @@ export class RequestdetailsComponent implements OnInit {
   // filesToUpload:CustomFile[] =[]
 
   requestDetails:UserRequest
-
-  states
-  timeline
+  requestOptions
 
 
   rejectReason$
@@ -98,7 +96,8 @@ export class RequestdetailsComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
     this.getRequestDetails()
-    this.getRequestTimeline()
+    // this.getRequestTimeline()
+    this.getRequestOptions()
   }
 
 
@@ -108,28 +107,12 @@ export class RequestdetailsComponent implements OnInit {
      })
   }
 
-  getRequestTimeline(){
-    this.requestsService.getRequestTimline(this.requestInstance).subscribe(res=>{
-      this.states = [...res.states?.reverse() ]
 
-      this.states.forEach(state => {
-        if(state.status ==StatusEnum.Completed){
-          let ApprovedTaskIndex =state?.tasks?.findIndex(task => task.status.code ==StatusEnum.Completed)
-          state.tasks= state?.tasks.slice(ApprovedTaskIndex,ApprovedTaskIndex+1)
-        }
-      });
-      console.log(this.states);
-
-
-      if(res.task) res.task.options = res?.task?.options?.map(el=>({...el,isLoading:false}))
-
-      this.timeline=res
-      // this.timeline.task.options.map(el=> el.id)
+  getRequestOptions(){
+    this.requestsService.getRequestOptions(this.requestInstance).subscribe(res=>{
+      if(res.options)  this.requestOptions= res?.options?.map(el=>({...el,isLoading:false}))
     })
-
   }
-
-
 
   // NOTE :- Request Perform action LOgic
 
@@ -179,7 +162,8 @@ export class RequestdetailsComponent implements OnInit {
 
       this.rejectReasonModel = false
       this.getRequestDetails()
-      this.getRequestTimeline()
+      // this.getRequestTimeline()
+      this.getRequestOptions()
 
       this.reqActionsForm.comments=''
       // this.filesToUpload =[]
