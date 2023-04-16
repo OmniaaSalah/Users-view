@@ -14,6 +14,7 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { Subscription, takeWhile, tap, timer } from 'rxjs';
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
@@ -34,7 +35,8 @@ export class NewAccountComponent implements OnInit {
   genderList=inject(SharedService).genderOptions;
   otp:string;
   step:number = 1;
-  timeLeft: number = 60;
+  timeLeft=60;
+  enableSendOtpAgain:boolean=true
   interval;
   showPhoneField:boolean=false;
   showIdentityField:boolean=false;
@@ -215,8 +217,8 @@ sendOtp()
     this.toastService.success(this.translate.instant('shared.Otp send successfully'));
     this.tittle=this.translate.instant('sign up.confirmed with OTP')
     this.step=2;
-    this.timeLeft=60;
     this.startTimer();
+    this.enableSendOtpAgain=true
   },(err)=>{
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
@@ -224,6 +226,7 @@ sendOtp()
 }
 sendOtpAgain()
 {
+  this.enableSendOtpAgain=false
   this.getCurrentRegistrationWay();
   this.sendOtp()
 }
@@ -305,19 +308,21 @@ getAuthenticationWays()
 }
 
 startTimer() {
-  this.interval = setInterval(() => {
-    if(this.timeLeft > 0) {
-      this.timeLeft--;
-    } else {
-      this.timeLeft=0;
-    }
-  },1000)
+  this.timeLeft = 60;
+  timer(1000, 1000) //Initial delay 1 seconds and interval countdown also 1 second
+  .pipe(
+    takeWhile( () => this.timeLeft  > 0 ),
+    tap(() =>this.timeLeft --)
+  ).subscribe( () => {
+  
+  } );
+  
+
 }
 onOtpChange(userOtp)
  {
     this.otp=userOtp;
-    console.log(userOtp)
-  }
+ }
 
 confirmOTP()
 {
