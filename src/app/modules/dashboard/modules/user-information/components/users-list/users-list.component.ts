@@ -32,7 +32,7 @@ export class ViewListOfUsersComponent implements OnInit {
   filtration = {...Filtration, roleId:[],isactive:true}
   paginationState= {...paginationInitialState}
   roles: any[] = [];
-  usersStatus= this.userInformation.usersStatusList;
+  usersStatus= this.sharedService.usersStatusList;
   users={
 	  totalAllData:0,
 		total:0,

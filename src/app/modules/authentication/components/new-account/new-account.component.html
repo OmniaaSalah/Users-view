@@ -103,7 +103,7 @@
 
                         <div  [hidden]="timeLeft">
                             <span>{{'sign up.not have OTP yet ?'|translate}}</span>
-                            <button class="" (click)="sendOtpAgain()" ><a class="color-skyBlue-400">{{'sign up.send OTP again'|translate}}</a></button>
+                            <button class="" (click)="sendOtpAgain()" [disabled]="!enableSendOtpAgain" ><a class="color-skyBlue-400">{{'sign up.send OTP again'|translate}}</a></button>
 
                         </div>
 
