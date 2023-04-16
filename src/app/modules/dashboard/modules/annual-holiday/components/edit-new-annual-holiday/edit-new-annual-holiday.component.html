@@ -148,7 +148,7 @@
                                                       <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="(expanded && e.curriculums.length>1) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                                                   </td>
                                                   <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''" >{{e.name|currentLang}}</td>
-                                                  <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''" >{{e?.userName|currentLang}}</td>
+                                                  <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''" >{{e.userName|currentLang}}</td>
                                                   <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name|currentLang}}</td>
                                                   <td style="min-width:29rem" [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom| LocalizeDate}} - {{'shared.To'|translate}} {{e.dateTo| LocalizeDate}}</td>
                                                   <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate | LocalizeDate}}</td>

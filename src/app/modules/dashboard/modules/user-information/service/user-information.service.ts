@@ -15,17 +15,14 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   providedIn: 'root'
 })
 export class UserInformationService {
-  usersStatusList;
+
   lang = inject(TranslationService).lang
 
   usersList: IUser[] = [];
   constructor(private router: Router ,private translate:TranslateService,private http:HttpHandlerService,private tableLoaderService: LoaderService
 ) {
 
-  this. usersStatusList=[
-    {'name':this.translate.instant("Active"),value:true},
-    {'name':this.translate.instant("Inactive"),value:false}
-  ];
+ 
   [
 
   ];

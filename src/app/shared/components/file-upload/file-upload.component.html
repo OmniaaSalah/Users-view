@@ -48,7 +48,7 @@
                 <p class="title text-center color-red-500" *ngIf="!uploaded && !hideCheck">{{'toasterMessage.error' |translate}}</p>
 
                 <!-- <p class="sub-title">{{allowedFilesType}} (Maximum Size: {{fileSize}}mb)</p> -->
-                <p class="sub-title color-primary" *ngIf="allowedFilesType">{{'shared.fileMaxSize' |translate:{type :('shared.'+allowedFilesType |translate) || '', size: fileSize} }}</p>
+                <p class="sub-title color-primary" *ngIf="allowedFilesType && !hideHint">{{'shared.fileMaxSize' |translate:{type :('shared.'+allowedFilesType |translate) || '', size: fileSize} }}</p>
             </div>
 
 

@@ -46,7 +46,7 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                    <p-multiSelect [filter]="true" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
+                    <p-multiSelect [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false"[filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.StudentCategory'| translate}}</label>
@@ -85,7 +85,7 @@
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'shared.deleteAll' |translate}}</span>
-                <button class="btn btn--md btn-primary" (click)="isSearching =true;getStudents()" [disabled]="isSearching">
+                <button class="btn btn--md btn-primary" (click)="isSearching =true;checkStudentList()" [disabled]="isSearching">
                     {{'shared.search' |translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isSearching"></div>
                 </button>

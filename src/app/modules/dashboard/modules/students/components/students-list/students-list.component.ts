@@ -158,12 +158,11 @@ export class StudentsListComponent implements OnInit {
 
 
   schoolSelected(SchoolId){
-    console.log(this.schoolId)
     this.schoolId=SchoolId
     if(this.schoolId.length)
     {
       this.isSchoolSelected = true
-      this.schoolDivisions$ = this.divisionService.getSchoolDivisions({SchoolId:SchoolId,gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
+      this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
       this.onGradeSelected(this.filtration.GradeId||null)
     }
     else
@@ -172,16 +171,17 @@ export class StudentsListComponent implements OnInit {
   }
 
   onGradeSelected(GradeId){
+    
    if(GradeId)
    { if(!GradeId.length)
       {this.isGradeSelected=false}
     else
       {
+       
       this.isGradeSelected=true
       if( this.isGradeSelected && this.isSchoolSelected){
-        console.log("lll")
         this.gradeTracks$ = this.gradesService.getGradeTracks(this.filtration.SchoolId,GradeId)
-        this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.schoolId,gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
+        this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,gradeid:GradeId||null}).pipe(map(res => res.data))
       }
       }
     }
@@ -207,9 +207,10 @@ export class StudentsListComponent implements OnInit {
     })
   }
   getStudentsInSpecificSchool(schoolId){
+    this.filtration.SchoolId=[Number(schoolId)]
     this.students.loading=true
     this.students.list=[]
-    this.studentsService.getAllStudentsInSpecificSchool(this.filtration,schoolId)
+    this.studentsService.getAllStudentsInSpecificSchool(this.filtration)
     .subscribe(res=>{
       this.students.loading=false
       this.students.list = res.result.data
@@ -293,6 +294,7 @@ export class StudentsListComponent implements OnInit {
   }
 
   checkStudentList(){
+  console.log("'kkk")
     if(this.currentUserScope==this.userScope.Employee){
         this.userService.currentUserSchoolId$.subscribe(id => this.getStudentsInSpecificSchool(id))
     }else { this.getStudents() }

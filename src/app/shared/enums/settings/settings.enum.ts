@@ -2,9 +2,10 @@ export enum GracePeriodEnum{
     deleteStudents = 1,
     addSubjects = 2,
     transferStudents=3,
-    registerStudents=4,
-    raisDegreesFirstClass= 2,
-    raisDegreesLastClass= 4,
+    raisDegreesFirstClass= 4,
+    raisDegreesLastClass= 5,
+    registerStudents=6,
+    updateDegreesAfterApproved=7,
     repeatStudyPhase=8
 }
 
@@ -18,63 +19,63 @@ export enum NotificationChannels{
 
 [
   {
-      "id": 1012,
+      "id": 1021,
       "code": "1",
       "name": {
-          "en": "Grace period for student deletion ",
-          "ar": "فترة السماح المخصصة لحذف الطلاب"
+          "en": "Student deletion ",
+          "ar": "حذف الطلاب"
       }
   },
   {
-      "id": 1013,
+      "id": 1022,
       "code": "2",
       "name": {
-          "en": "Grace period for adding school year subjects",
-          "ar": "فترة السماح المخصصة لإضافة مواد السنة الدراسيّة"
+          "en": "Adding school year subjects",
+          "ar": "إضافة مواد السنة الدراسيّة"
       }
   },
   {
-      "id": 1014,
+      "id": 1023,
       "code": "3",
       "name": {
-          "en": "Grace period for group transfer of students",
-          "ar": "فترة السماح المخصصة لنقل الطلاب بشكل جماعي"
+          "en": "Group transfer of students",
+          "ar": "نقل الطلاب بشكل جماعي"
       }
   },
   {
-      "id": 1015,
+      "id": 1024,
       "code": "4",
       "name": {
-          "en": "Grace period for entering grades for the first semester",
-          "ar": "فترة السماح المخصصة لإدخال درجات الفصل الأول"
+          "en": "Entering grades for the first semester",
+          "ar": "إدخال درجات الفصل الأول"
       }
   },
   {
-      "id": 1016,
+      "id": 1025,
       "code": "5",
       "name": {
-          "en": "Grace period for entering grades of the last semester",
-          "ar": "فترة السماح المخصصة لإدخال درجات الفصل الأخير"
+          "en": "Entering grades of the last semester",
+          "ar": "إدخال درجات الفصل الأخير"
       }
   },
   {
-      "id": 1017,
+      "id": 1026,
       "code": "6",
       "name": {
-          "en": "Grace period for student registration",
-          "ar": "فترة السماح المخصصة لتسجيل الطلاب"
+          "en": "Student registration",
+          "ar": "تسجيل الطلاب"
       }
   },
   {
-      "id": 1018,
+      "id": 1027,
       "code": "7",
       "name": {
-          "en": "Grace period for adjusting grades after accreditation",
-          "ar": "فترة السماح المخصصة لتعديل الدرجات بعد الاعتماد"
+          "en": "Adjusting grades after accreditation",
+          "ar": "تعديل الدرجات بعد الاعتماد"
       }
   },
   {
-      "id": 1020,
+      "id": 1028,
       "code": "8",
       "name": {
           "en": "Repeating study phase",

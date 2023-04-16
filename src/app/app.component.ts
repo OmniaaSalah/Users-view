@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, forkJoin } from 'rxjs';
+import { filter, forkJoin, mergeMap, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
 import { UserService } from './core/services/user/user.service';
@@ -75,6 +75,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private authService:AuthenticationService,
     private messageService: MessageService,
     private index:IndexesService,
+    private route :ActivatedRoute,
     private settingsService:SettingsService,) {
     }
 
@@ -106,7 +107,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
       if(res)
       {
-        // this.usersService.deleteUser(129).subscribe()
+        // this.usersService.deleteoser(129).subscribe()
 
           this.currentUserName=this.userService.getCurrentUserName();
           this.settingsService.initializeFileRules()
