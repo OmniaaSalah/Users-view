@@ -14,6 +14,7 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
@@ -43,6 +44,9 @@ export class NewAccountComponent implements OnInit {
   registrationWayFormGrp: FormGroup;
   passwordsFormGrp: FormGroup;
   accountFormGrp: FormGroup;
+
+  get fileTypeEnum() {return FileEnum}
+
   constructor(
     private router:Router,
     private indexService:IndexesService,

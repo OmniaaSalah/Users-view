@@ -91,6 +91,7 @@ export enum UserRequestsStatus{
     Accepted = "Accepted",
     Rejected = "Rejected",
     Returned = "Returned",
+    ModificationRequest ="ModificationRequest",
     Canceled = "Canceled",
     //معتمد
     Approved = "Approved",

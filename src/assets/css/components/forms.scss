@@ -262,8 +262,14 @@
                 // top: 63px !important;
                 top: 101% !important;
 
+
                 .p-multiselect-header {
-                    display: none;
+                  display: none;
+                }
+                &.showHeader{
+                  .p-multiselect-header {
+                    display: block;
+                  }
                 }
                 .p-multiselect-items {
                     font-size: 1.4rem;

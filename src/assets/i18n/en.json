@@ -1736,6 +1736,7 @@
             "StudentStatu":"Created by",
             "DateandTimeCreate": "CreatedDate and Time",
             "Returned":"Returned",
+            "ModificationRequest":"Edit",
             "Pending": "Pending",
             "Accepted": "Accepted",
             "Rejected":"Rejected",

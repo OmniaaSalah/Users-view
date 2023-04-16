@@ -85,7 +85,7 @@
                 <p-inputNumber formControlName="fileSize" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'dashboard.SystemSetting.mb'|translate}}"></p-inputNumber>
             </div>
 
-            <div role="button" class="col-md-3 mb-4 d-flex align-items-end justify-content-end" (click)="deleteConditionFromParents(i)">
+            <div role="button" class="col-md-3 mb-4 d-flex align-items-end justify-content-end">
                 <!-- <img (click)="deleteConditionFromParents(i)" src="assets/images/shared/rect-xmark.svg" alt=""> -->
                 <img  ConfirmDialog (onConfirm)="deleteConditionFromParents(i)" src="assets/images/shared/rect-xmark.svg" alt="">
             </div>

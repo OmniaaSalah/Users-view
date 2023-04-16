@@ -16,14 +16,14 @@
                                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                                     </small>
                                                 </div>
-                                         
+
                                              </div>
                                         </div>
                                 </div>
                                     <div class="row gx-5 form-set">
                                         <div class="col-12" *ngIf="showPhoneField">
                                             <label class="label" for="precantage">{{'sign up.phoneNumber'|translate}} <span class="star">*</span></label>
-                                            <input type="text" pInputText  formControlName="phoneWay" [LangRestrict]="'numb'"  class="form-control "   placeholder="{{'sign up.enter phoneNumber'|translate}}" > 
+                                            <input type="text" pInputText  formControlName="phoneWay" [LangRestrict]="'numb'"  class="form-control "   placeholder="{{'sign up.enter phoneNumber'|translate}}" >
                                             <div>
                                                 <div [hidden]="phoneWay.valid || phoneWay.untouched">
                                                     <small *ngIf="phoneWay.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -39,13 +39,13 @@
                                         </div>
                                         <div class="col-12" *ngIf="showIdentityField">
                                             <label class="label" for="precantage">{{'sign up.digitalIdentity'|translate}} <span class="star">*</span></label>
-                                            <input type="text" pInputText   formControlName="emairatesWay" [LangRestrict]="'numb'"  class="form-control "  placeholder="{{'sign up.enter personal digitalIdentity'|translate}}" >  
+                                            <input type="text" pInputText   formControlName="emairatesWay" [LangRestrict]="'numb'"  class="form-control "  placeholder="{{'sign up.enter personal digitalIdentity'|translate}}" >
                                             <div>
                                                 <div [hidden]="emairatesWay.valid || emairatesWay.untouched">
                                                     <small *ngIf="emairatesWay.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                                       {{'shared.This Field is Required'|translate}}
                                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                                    </small>                        
+                                                    </small>
                                                       <small *ngIf="emairatesWay.errors&&!emairatesWay.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                                         {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}
                                                          <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="col-12" *ngIf="showEmailField">
                                             <label class="label" for="precantage">{{'sign up.email'|translate}} <span class="star">*</span></label>
-                                            <input type="text" pInputText  formControlName="emailWay"   class="form-control"    placeholder="{{'sign up.enter email'|translate}}" > 
+                                            <input type="text" pInputText  formControlName="emailWay"   class="form-control"    placeholder="{{'sign up.enter email'|translate}}" >
                                             <div>
                                                 <div [hidden]="emailWay.valid || emailWay.untouched">
                                                     <small *ngIf="emailWay.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -69,7 +69,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                      
+
                                 </div>
                        </form>
                    </div>
@@ -77,43 +77,43 @@
             </ng-container>
             <ng-container *ngIf="step==2">
                 <div class="OTP pt-3 pb-5">
-    
+
                     {{'sign up.Pleaze enter OTP that send to your Account'|translate}}
                     <div class="justify-content-center w-50 d-flex" [hidden]="!timeLeft">
                         <span >{{'sign up.through'|translate}}</span>
                         <span  ><b>{{timeLeft}} {{'sign up.second'|translate}}</b></span>
                     </div>
-                    
+
                 </div>
                 <div class="mt-5 mb-5" >
-             
-                 
-                       
-                            
+
+
+
+
                                 <div class="otp-change d-flex  justify-content-center">
-    
-                                    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)"   [config]="{length:6,placeholder:'*'}"></ng-otp-input>   
-                                    
+
+                                    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)"   [config]="{length:6,placeholder:'*'}"></ng-otp-input>
+
                                 </div>
-    
-                    
-                    
+
+
+
                 </div>
                 <div class="again-OTP pt-5 pb-5">
-                            
+
                         <div  [hidden]="timeLeft">
                             <span>{{'sign up.not have OTP yet ?'|translate}}</span>
                             <button class="" (click)="sendOtpAgain()" ><a class="color-skyBlue-400">{{'sign up.send OTP again'|translate}}</a></button>
-                            
-                        </div>         
-                
-                            
-                
-                
+
+                        </div>
+
+
+
+
                 </div>
-                
+
             </ng-container>
-    
+
             <ng-container *ngIf="step==3">
                 <div class="sign up">
                     <div class=" mt-5 custom-form custom-validation-form " >
@@ -121,13 +121,13 @@
                                     <div class="row gx-5 form-set">
                                             <div class="col-12">
                                                 <label class="label" for="nationality">{{'Your password'|translate }} <span class="star">*</span> </label>
-                                                <p-password iconPos="left"  formControlName="newUserPassword"    [ngClass]="{'ng-invalid ng-dirty':newUserPassword.errors?.required&& newUserPassword.touched||newUserPassword.errors?.pattern && newUserPassword.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Enter Your password'| translate}}"></p-password> 
+                                                <p-password iconPos="left"  formControlName="newUserPassword"    [ngClass]="{'ng-invalid ng-dirty':newUserPassword.errors?.required&& newUserPassword.touched||newUserPassword.errors?.pattern && newUserPassword.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Enter Your password'| translate}}"></p-password>
                                                 <div [hidden]="newUserPassword.valid || newUserPassword.untouched" class="passerror">
                                                     <small *ngIf="newUserPassword.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                                       {{'shared.This Field is Required'|translate}}
                                                       <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                                     </small>
-                    
+
                                                     <small *ngIf="newUserPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                                                      {{'shared.Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic'|translate}}
                                                      <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
@@ -138,19 +138,19 @@
                                         <div class="row gx-5 form-set">
                                             <div class="col-12" >
                                                 <label class="label" for="precantage">{{'Confirm ypur Password'|translate}} <span class="star">*</span></label>
-                                                <p-password iconPos="left"  formControlName="newUserConfirmPassword"      [ngClass]="{'ng-invalid ng-dirty':newUserConfirmPassword.errors?.required && newUserConfirmPassword.touched || newUserConfirmPassword.errors?.pattern && newUserConfirmPassword.touched || passwordsFormGrp.errors?.matching && newUserConfirmPassword.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Confirm ypur Password'| translate}}"></p-password> 
+                                                <p-password iconPos="left"  formControlName="newUserConfirmPassword"      [ngClass]="{'ng-invalid ng-dirty':newUserConfirmPassword.errors?.required && newUserConfirmPassword.touched || newUserConfirmPassword.errors?.pattern && newUserConfirmPassword.touched || passwordsFormGrp.errors?.matching && newUserConfirmPassword.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Confirm ypur Password'| translate}}"></p-password>
                                                 <div [hidden]="newUserConfirmPassword.valid || newUserConfirmPassword.untouched" class="passerror">
                                                     <small *ngIf="newUserConfirmPassword.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                                     {{'shared.This Field is Required'|translate}}
                                                      <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                                    </small>
-                    
+
                                                     <small *ngIf="newUserConfirmPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                                                     {{'shared.Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic'|translate}}
                                                     <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                                      </small>
-                    
-                    
+
+
                                                  </div>
                                                  <small *ngIf="passwordsFormGrp.errors?.['matching'] && newUserConfirmPassword.touched && !newUserConfirmPassword.errors?.['required'] && newUserPassword.valid && !newUserConfirmPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                                                 {{'shared.Confirm Password Must Match Password'|translate}}
@@ -161,29 +161,29 @@
                            </form>
                        </div>
                 </div>
-                
+
             </ng-container>
             <ng-container  *ngIf="step==4">
                 <div class="sign up">
                     <div class=" mt-5 custom-form custom-validation-form " >
                         <form  [formGroup]="accountFormGrp" >
-    
+
                             <div class="row gx-5 form-set">
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.Name (in Arabic)'|translate }} <span class="star">*</span> </label>
-                                    <input type="text" pInputText  formControlName="arabicName" [LangRestrict]="'ar'" class="form-control " placeholder="{{'sign up.Enter Name'|translate}}" > 
+                                    <input type="text" pInputText  formControlName="arabicName" [LangRestrict]="'ar'" class="form-control " placeholder="{{'sign up.Enter Name'|translate}}" >
                                     <div [hidden]="arabicName.valid || arabicName.untouched">
                                         <small *ngIf="arabicName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}
                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                       
+
                                         <small *ngIf="arabicName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                             {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
                                             <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-        
-                                      
+
+
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -194,53 +194,53 @@
                                           {{'shared.This Field is Required'|translate}}
                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                       
+
                                         <small *ngIf="englishName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                             {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
                                             <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-        
-                                      
-                                    </div> 
+
+
+                                    </div>
                                 </div>
-                              
+
                             </div>
                             <div class="row gx-5 form-set">
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.NickName (in Arabic)'|translate }} <span class="star">*</span> </label>
-                                    <input type="text" pInputText  formControlName="arabicNickName" class="form-control " [LangRestrict]="'ar'" placeholder="{{'sign up.Enter NickName'|translate}}" > 
+                                    <input type="text" pInputText  formControlName="arabicNickName" class="form-control " [LangRestrict]="'ar'" placeholder="{{'sign up.Enter NickName'|translate}}" >
                                     <div [hidden]="arabicNickName.valid || arabicNickName.untouched">
                                         <small *ngIf="arabicNickName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}
                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                       
+
                                         <small *ngIf="arabicNickName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                             {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
                                             <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-        
-                                      
-                                    </div> 
+
+
+                                    </div>
                                 </div>
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.NickName (in English)'|translate }} <span class="star">*</span> </label>
-                                    <input type="text" pInputText formControlName="englishNickName"  class="form-control leftaction" [LangRestrict]="'en'"  placeholder="{{'sign up.Enter NickName'|translate}}" > 
+                                    <input type="text" pInputText formControlName="englishNickName"  class="form-control leftaction" [LangRestrict]="'en'"  placeholder="{{'sign up.Enter NickName'|translate}}" >
                                     <div [hidden]="englishNickName.valid || englishNickName.untouched">
                                         <small *ngIf="englishNickName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}
                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                       
+
                                         <small *ngIf="englishNickName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                             {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
                                             <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-        
-                                      
-                                    </div> 
+
+
+                                    </div>
                                 </div>
-                              
+
                             </div>
                             <div class="row gx-5 form-set">
                                 <div class="col-6">
@@ -251,7 +251,7 @@
                                           {{'shared.This Field is Required'|translate}}
                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.Birthday'|translate }} <span class="star">*</span> </label>
@@ -261,9 +261,9 @@
                                           {{'shared.This Field is Required'|translate}}
                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                    </div> 
+                                    </div>
                                 </div>
-                              
+
                             </div>
                             <div class="row gx-5 form-set">
                                 <div class="col-6">
@@ -275,7 +275,7 @@
                                           {{'shared.This Field is Required'|translate}}
                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.reason of identity not exist'|translate }} <span class="star">*</span> </label>
@@ -285,16 +285,16 @@
                                           {{'shared.This Field is Required'|translate}}
                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                    </div> 
+                                    </div>
                                 </div>
-    
+
                             </div>
-                       
+
                             <div class="row gx-5 form-set">
-                               
+
                                 <div class="col-12">
                                    <label class="label" for="day">{{'sign up.pleaze upload image to approve that you don’t have digital identity' |translate}} <span class="star">*</span></label>
-                                   <app-file-upload  (onFileUpload)="onFileUpload($event)" accept="application/pdf" view="full" ></app-file-upload>
+                                   <app-file-upload [hideHint]="true"  [accept]="fileTypeEnum.Pdf" [maxFileSize]="5" (onFileUpload)="onFileUpload($event)"  view="full" ></app-file-upload>
                                 </div>
                             </div>
                            </form>
@@ -306,18 +306,18 @@
         <ng-template pTemplate="footer">
            <ng-container *ngIf="step==1">
             <div class="d-flex align-items-center justify-content-end  ">
-              
+
               <button class="btn btn-primary  "  (click)="saveRegistrationWay()" [disabled]="registrationWayFormGrp.invalid||isBtnLoading" >
                   <span *ngIf="!showIdentityField">{{'sign up.Next'| translate}} </span>
                   <span *ngIf="showIdentityField">{{'sign up.SignUp'| translate}} </span>
                   <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
               </button>
-              
+
           </div>
         </ng-container>
         <ng-container  *ngIf="step==2">
             <div class="d-flex align-items-center justify-content-center ">
-            
+
                 <button class="btn btn-primary   " (click)="confirmOTP()" [disabled]="!otp||isBtnLoading">
                     <span>{{'sign up.confirm'| translate}} </span>
                     <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
@@ -329,7 +329,7 @@
         </ng-container>
         <ng-container  *ngIf="step==3">
             <div class="d-flex align-items-center justify-content-end  ">
-            
+
                 <button class="btn btn-primary " (click)="savePassword()" [disabled]="passwordsFormGrp.invalid||isBtnLoading">
                     <span>{{'sign up.Next'| translate}} </span>
                     <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
@@ -338,15 +338,15 @@
         </ng-container>
         <ng-container  *ngIf="step==4">
             <div class="d-flex align-items-center justify-content-end  ">
-            
+
                 <button class="btn btn-primary " (click)="savePersonalInformation()"  [disabled]="accountFormGrp.invalid||isBtnLoading">
                     <span>{{'sign up.Next'| translate}} </span>
                     <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
                 </button>
             </div>
         </ng-container>
-        
-        
+
+
         </ng-template>
-    
+
     </p-dialog>
