@@ -1768,6 +1768,7 @@
             "CreatedBy": "تم إنشاؤه من قبل ",
             "DateandTimeCreate": "تاريخ ووقت الإنشاء",
             "Returned":"مرتجع",
+            "ModificationRequest":"تعديل",
             "Pending":"معلق",
             "Accepted":"مقبول",
             "Rejected":"مرفوض",

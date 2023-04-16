@@ -25,6 +25,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   faXmark = faXmark
   filesRules
   @Input() theme :'chat' | 'default' = 'default'
+  @Input() hideHint = false
   @Input() title = ''
   @Input() label = this.translate.instant('shared.clickToUploadFile')
   @Input() imgUrl=''
@@ -33,7 +34,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   @Input() hasComment = false
   @Input() maxFilesToUpload = 1
   @Input() files: CustomFile[] =[]  // files to view
-  @Input('view') view: 'list' | 'box' | 'rows' | 'full'  // file uploader theme variants
+  @Input() view: 'box' | 'full'  // file uploader theme variants
   @Output() onFileUpload= new EventEmitter<any>();
   @Output() onFileDelete= new EventEmitter<any>();
 
@@ -108,10 +109,11 @@ export class FileUploadComponent implements OnInit,OnChanges {
     if(this.allowedFilesType instanceof Array){
       this.fileSize = Math.max(...this.allowedFilesType.map(el => this.filesRules[el]?.size))
     }else{
-      console.log(this.filesRules[this.allowedFilesType]);
+      // console.log(this.filesRules[this.allowedFilesType]);
 
-      if(!this.filesRules[this.allowedFilesType]){
+      if(!this.filesRules || !this.filesRules[this.allowedFilesType]){
         if(showError) this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
+        this.fileSize = 3
         return
       }
       this.fileSize = this.filesRules[this.allowedFilesType]?.size || 3
@@ -129,6 +131,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
 
     // set file type Dynamically (depend on user Input)
+
     if(!this.allowedFilesType){
       const lastDot = files[0].name.lastIndexOf('.');
       const extention = files[0].name.substring(lastDot + 1);
