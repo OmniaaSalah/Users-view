@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserInformationService } from 'src/app/modules/dashboard/modules/user-information/service/user-information.service';
 import { NotificationService } from '../../service/notification.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { NotificationService } from '../../service/notification.service';
   styleUrls: ['./notification-list.component.scss']
 })
 export class NotificationListComponent implements OnInit {
+  roles=[];
   lang = inject(TranslationService).lang
   @ViewChild('readBtn', { read: ElementRef, static:false }) readBtn: ElementRef;
   @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
@@ -28,7 +30,9 @@ export class NotificationListComponent implements OnInit {
     "sortBy": null,
     "page": 1,
     "pageSize": 3,
-    "isRead": null
+    "isRead": null,
+    "NotificationType":null,
+    "Sender":null
   }
   componentHeaderData: IHeader={
 		breadCrump: [
@@ -38,6 +42,7 @@ export class NotificationListComponent implements OnInit {
 		mainTitle:{ main:this.translate.instant('breadcrumb.Notifications'),sub:this.notificationTotal}	}
 
   constructor( private headerService: HeaderService,
+                private userInformation:UserInformationService,
                private router: Router,
                private translate: TranslateService,
                private notificationService: NotificationService,
@@ -56,6 +61,7 @@ export class NotificationListComponent implements OnInit {
     }else{
       this.checkLanguage = false
     }
+    this.userInformation.GetRoleList().subscribe(response => {this.roles = response;})
   }
 
   getNotifications(searchModel){
@@ -136,5 +142,14 @@ export class NotificationListComponent implements OnInit {
     this.searchModel.page = 1
     this.searchModel.pageSize += 3
     this.getNotifications(this.searchModel)
+  }
+  clearFilter()
+  {
+    this.searchModel.keyword =''
+    this.searchModel.Sender= null;
+    this.searchModel.NotificationType= null;
+    this.searchModel.page=1;
+    this.getNotifications(this.searchModel)
+
   }
   }

@@ -136,6 +136,7 @@ console.log(this.filtration.dateFrom,this.filtration.dateTo)
     this.filtration.dateFrom = null
     this.filtration.dateTo = null
     this.filtration.requestType = null
+    this.date='';
     this.filtration.Page=1;
     this.getUsersList();
   }

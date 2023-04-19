@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.talent'| translate}}</label>
-                    <p-multiSelect      [options]="(talents$|async)"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.TalentId"    optionValue="id" optionLabel="arabicName"    placeholder="{{'dashboard.students.chooseTalent' |translate}}"></p-multiSelect>
+                    <p-multiSelect      [options]="(talents$|async)"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.TalentId"    optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"    placeholder="{{'dashboard.students.chooseTalent' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.StudentCategory'| translate}}</label>

@@ -17,6 +17,8 @@ import { StudentsReportsService } from '../../services/student-reports-service/s
 import { StudentsService } from '../../../students/services/students/students.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { IndexesService } from '../../../indexes/service/indexes.service';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 
 @Component({
   selector: 'app-students-reports',
@@ -72,7 +74,7 @@ export class StudentsReportsComponent implements OnInit {
   }
   isSchoolSelected = false
   isGradeSelected = false
-  talents$ = inject(StudentsService).getTalents()
+  talents$ = inject(IndexesService).getIndext(IndexesEnum.TheTypeOfTalentOfTheStudent);
   curriculums$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getSchoolsDropdown()
   AllTracks$ = this.sharedService.getAllTraks()
