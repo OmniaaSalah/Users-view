@@ -38,7 +38,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12" *ngIf="showIdentityField">
-                                            <label class="label" for="precantage">{{'sign up.digitalIdentity'|translate}} <span class="star">*</span></label>
+                                            <label class="label" for="precantage">{{'dashboard.parents.emirateUid'|translate}} <span class="star">*</span></label>
                                             <input type="text" pInputText   formControlName="emairatesWay" [LangRestrict]="'numb'"  class="form-control "  placeholder="{{'sign up.enter personal digitalIdentity'|translate}}" >
                                             <div>
                                                 <div [hidden]="emairatesWay.valid || emairatesWay.untouched">
@@ -302,6 +302,90 @@
                        </div>
                 </div>
             </ng-container>
+            <ng-container *ngIf="step==5">
+
+
+
+                <div class="row gx-5 mt-5">
+                  <div class="col-md-6">
+                      <div class="d-flex ">
+                          <p class="color-gray-300 ">{{ 'dashboard.addChild.name'|translate }}</p>
+                          <span class="color-primary mx-3">{{UAEUnregisteredUser?.name|currentLang}}</span>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="d-flex ">
+                        <p class="color-gray-300 ">{{ 'dashboard.parents.nickname'|translate }}</p>
+                        <span class="color-primary mx-3">{{UAEUnregisteredUser?.surname|currentLang}}</span>
+                    </div>
+                </div>
+        
+                </div>
+                <div class="row gx-5 mt-4">
+                    <div class="col-md-6">
+
+                        <div class="d-flex ">
+                            <p class="color-gray-300 ">{{ 'shared.gender'|translate }}</p>
+                            <span class="color-primary mx-3 ">{{'shared.genderType.'+UAEUnregisteredUser?.gender|translate}}</span>
+                        </div>
+                     </div>
+                  <div class="col-md-6">
+                    <div class="d-flex ">
+                        <p class="color-gray-300 ">{{ 'shared.nationality'|translate }}</p>
+                        <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.nationality|currentLang}}</span>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row gx-5 mt-4">
+                    <div class="col-md-6">
+                        <div class="d-flex ">
+                          <p class="color-gray-300 ">{{ 'sign up.Birthday'|translate }}</p>
+                          <span class="color-primary mx-3 mb-2">{{UAEUnregisteredUser?.birthDate|LocalizeDate}}</span>
+                       </div>
+                      </div>
+
+                    <div class="col-md-6">
+                        <div class="d-flex ">
+                            <p class="color-gray-300 ">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                            <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.emiratesIdNumber}}</span>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row gx-5 mt-4">
+                    <div class="col-md-6">
+                   
+                        <p class="color-gray-300 ">{{'dashboard.addChild.identityPhoto' | translate}}</p>
+                        <app-file-upload view="full" (onFileUpload)="setAttachment($event)"></app-file-upload>
+
+                    </div>
+                    <div class="col-md-6 custom-form custom-validation-form pt-0">
+
+                        <div  [ngClass]="UAEUnregisteredUser?.phone?'d-flex':''">
+                            <label class="color-gray-300 label">{{ 'sign up.phoneNumber'|translate }}</label>
+                            <span class="color-primary mx-3 " *ngIf="UAEUnregisteredUser?.phone">{{UAEUnregisteredUser?.phone}}</span>
+                            <ng-container  *ngIf="!UAEUnregisteredUser?.phone">
+                                <input type="text" pInputText [formControl]="phoneNumber"  [LangRestrict]="'numb'" maxlength="10" class="form-control "  placeholder="{{'shared.Write phoneNumber'|translate}}">
+                            
+                                <div [hidden]="phoneNumber.valid || phoneNumber.untouched">
+                                        <small *ngIf="phoneNumber.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                      {{'shared.This Field is Required'|translate}}
+                                       <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    </small>
+    
+                                        <small *ngIf="phoneNumber.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                                        {{'shared.Mobile Must Start With 05 and Contain 10 Numbers Only'|translate}}
+                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+    
+                    </div>
+
+                  </div>
+
+
+          </ng-container>
           </ng-container>
         </ng-template>
         <ng-template pTemplate="footer">
@@ -309,8 +393,8 @@
             <div class="d-flex align-items-center justify-content-end  ">
 
               <button class="btn btn-primary  "  (click)="saveRegistrationWay()" [disabled]="registrationWayFormGrp.invalid||isBtnLoading" >
-                  <span *ngIf="!showIdentityField">{{'sign up.Next'| translate}} </span>
-                  <span *ngIf="showIdentityField">{{'sign up.SignUp'| translate}} </span>
+                  <span >{{'sign up.Next'| translate}} </span>
+                  <!-- <span *ngIf="showIdentityField">{{'sign up.SignUp'| translate}} </span> -->
                   <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
               </button>
 
@@ -346,7 +430,15 @@
                 </button>
             </div>
         </ng-container>
-
+        <ng-container  *ngIf="step==5">
+            <div class="d-flex align-items-center justify-content-end  ">
+            
+                <button class="btn btn-primary " (click)="saveUserObj()" [disabled]="isBtnLoading||(!UAEUnregisteredUser?.phone&&!phoneNumber.valid)||(!UAEUnregisteredUser?.emiratesIdPath)">
+                    <span>{{'sign up.Next'| translate}} </span>
+                    <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
+                </button>
+            </div>
+        </ng-container>
 
         </ng-template>
 

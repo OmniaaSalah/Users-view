@@ -58,7 +58,10 @@ export class ExportService {
       styles:{
         font:'Amiri-Regular',
         halign:'right',
-        cellWidth: 'wrap'
+        minCellWidth:60,
+        // overflow: "hidden",
+        // cellWidth: "wrap" 
+
       },
       columns: exportColumns,
       body: data,
