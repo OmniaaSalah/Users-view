@@ -1,5 +1,6 @@
 
-<div class="bg-white">
+<div class="bg-white position-relative">
+
 
     <div class="submitBtn d-flex justify-content-end align-items-center gap-4" >
 
@@ -34,9 +35,7 @@
             <span>{{'dashboard.parents.registerChild' | translate}}</span>
         </button>
 
-        <span *ngIf="!requestId" routerLink="/" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
-        <span *ngIf="requestId" routerLink="../" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
-
+        <span  [routerLink]="['/dashboard/schools-and-students/all-parents/parent', parentId,'all-children']" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
 
     </div>
 

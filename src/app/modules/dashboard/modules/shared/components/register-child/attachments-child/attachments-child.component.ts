@@ -59,19 +59,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-
-
-    this.childService.submitBtnClicked$
-    .pipe(filter(val=> val))
-    .subscribe(val =>{
-
-      if(val) this.updateStudentAttachment(this.studentId || this.childId, this.attachments)
-      // this.childService.submitBtnClicked$.next(null)
-
-    })
-
      this.getAttachment()
-
   }
 
   getAttachment(){
@@ -101,7 +89,6 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
       this.mode='view'
       this.onSubmit=false
       this.getAttachment()
-      this.toaster.success('تم التعديل بنجاح')
       this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
 
     },err=>{

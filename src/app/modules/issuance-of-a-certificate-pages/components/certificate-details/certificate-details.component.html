@@ -317,7 +317,7 @@
             </p>
           </div>
           <div class="col-md-3">
-            <img class="logo" [src]="certificate?.SchoolLogo" alt="">
+            <img class="logo" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
           </div>
         </div>
       </header>
@@ -354,7 +354,7 @@
         <div class="col-md-6 fs-2 p-4 radius-15 border-dark">
           <p>تشهد ادارة المدرسة أن الطالب/ة <b>{{certificate?.StudentArabicName| uppercase}}</b> </p>
           <div class="my-6">
-            <p>رقم الهوية الوطنية: {{certificate?.EmiratesId }}</p>
+            <p>رقم الهوية الوطنية: {{certificate?.EmiratesId || 'لايوجد'}}</p>
             <p>تاريخ الميلاد: {{certificate?.BirthDate |LocalizeDate}}</p>
             <p>رقم الطالب: {{certificate?.StudentId }}</p>
           </div>
@@ -369,9 +369,9 @@
           <div class="p-4 radius-15 border-dark">
             <p>School administration certifies that student <b>{{ certificate?.StudentEnglishName| uppercase}} </b> </p>
             <div class="my-6">
-              <p>Emirate ID Number: {{certificate?.EmiratesId }}</p>
+              <p>Emirate ID Number: {{certificate?.EmiratesId || 'Not Found'}}</p>
               <p>Date of Birth: {{certificate?.BirthDate |LocalizeDate}}</p>
-              <p>Student Number: {{certificate?.StudentNumber}}</p>
+              <p>Student Number: {{certificate?.StudentId}}</p>
             </div>
 
             <p>is registered in grade ( {{certificate?.GradeEn}} ), section (...}} ), and class {{certificate?.DivisionEn ||'...'}}.</p>

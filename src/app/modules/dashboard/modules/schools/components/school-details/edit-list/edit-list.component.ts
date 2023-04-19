@@ -10,7 +10,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
@@ -32,7 +32,7 @@ export class EditListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			
+
 			{ label: this.translate.instant('dashboard.schools.editableList'), routerLink: `/dashboard/school-management/school/${this.schoolId}/edit-list`},
 		],
 		mainTitle: { main: this.currentSchool }
@@ -52,7 +52,7 @@ export class EditListComponent implements OnInit {
   }
 
   openEditListModel=false
-  
+
   constructor(
     private translate:TranslateService,
     private schoolsService:SchoolsService,
@@ -66,14 +66,14 @@ export class EditListComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee)
     {
       this.userService.currentUserSchoolName$?.subscribe((res)=>{
-        if(res)  
+        if(res)
         {
           this.currentSchool= JSON.parse(res);
           this.componentHeaderData.mainTitle.main=this.currentSchool[this.lang];
         }
       })
     }
-    
+
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
     this.getEditList()
@@ -94,7 +94,7 @@ export class EditListComponent implements OnInit {
   }
 
 
-  
+
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
@@ -109,10 +109,10 @@ export class EditListComponent implements OnInit {
    }
 
 
-   onExport(fileType: FileEnum){
+   onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:null}
     this.schoolsService.editListToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.editableList'))
     })
   }

@@ -722,8 +722,8 @@
             optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
             placeholder="{{'dashboard.Requests.rejectReason'|translate}}" [required]="rejectReason$"></p-dropdown>
 
-            <div class="mt-5" *ngIf="requestDetails?.requestType==requestTypeEnum.RegestrationApplicationRequest">
-              <P class="mb-4">{{'dashboard.Requests.addExplanation' | translate}}({{'shared.optional' |translate}})</P>
+            <div class="mt-5" >
+              <P class="mb-4">{{'dashboard.Requests.addExplanation' | translate}} <span class="color-gray-700">({{'Optional' |translate}})</span> </P>
               <textarea  [rows]="4" [(ngModel)]="reqActionsForm.comments" pInputTextarea [autoResize]="true" placeholder="{{'dashboard.Requests.addExplanation' | translate}}"></textarea>
           </div>
         </div>

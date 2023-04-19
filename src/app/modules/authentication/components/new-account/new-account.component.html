@@ -137,6 +137,7 @@
                                     </div>
                                         <div class="row gx-5 form-set">
                                             <div class="col-12" >
+                                              <input type="password" style="position: absolute; opacity: 0;">
                                                 <label class="label" for="precantage">{{'Confirm ypur Password'|translate}} <span class="star">*</span></label>
                                                 <p-password iconPos="left"  formControlName="newUserConfirmPassword"      [ngClass]="{'ng-invalid ng-dirty':newUserConfirmPassword.errors?.required && newUserConfirmPassword.touched || newUserConfirmPassword.errors?.pattern && newUserConfirmPassword.touched || passwordsFormGrp.errors?.matching && newUserConfirmPassword.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Confirm ypur Password'| translate}}"></p-password>
                                                 <div [hidden]="newUserConfirmPassword.valid || newUserConfirmPassword.untouched" class="passerror">
@@ -294,7 +295,7 @@
 
                                 <div class="col-12">
                                    <label class="label" for="day">{{'sign up.pleaze upload image to approve that you don’t have digital identity' |translate}} <span class="star">*</span></label>
-                                   <app-file-upload [hideHint]="true"  [accept]="fileTypeEnum.Pdf" [maxFileSize]="5" (onFileUpload)="onFileUpload($event)"  view="full" ></app-file-upload>
+                                   <app-file-upload  [accept]="fileTypeEnum.Pdf" [maxFileSize]="5" (onFileUpload)="onFileUpload($event)"  view="full" ></app-file-upload>
                                 </div>
                             </div>
                            </form>

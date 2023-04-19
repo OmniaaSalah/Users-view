@@ -13,7 +13,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { UserInformationService } from '../../service/user-information.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
@@ -50,18 +50,18 @@ export class ViewListOfUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRoleList();
- 
+
 
     this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-        
+
         ],
       }
     );
-  
-    
+
+
 
   }
   selectedUsersStatus:any;
@@ -76,7 +76,7 @@ export class ViewListOfUsersComponent implements OnInit {
       this.users.total =response.total;
       this.users.loading = false;
       this.sharedService.filterLoading.next(false);
-   
+
 
     },err=> {
       this.users.loading=false
@@ -109,13 +109,13 @@ export class ViewListOfUsersComponent implements OnInit {
     this.getUsersList();
   }
 
-  onExport(fileType: FileEnum){
+  onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:this.users.totalAllData}
-    this.userInformation.usersToExport(filter).subscribe((res:any) =>{      
+    this.userInformation.usersToExport(filter).subscribe((res:any) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
     })
   }
-  sortMe(e){   
+  sortMe(e){
     if(e.order==-1)
     {this.filtration.SortBy="ASC"}
     else

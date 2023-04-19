@@ -1,4 +1,4 @@
-import { FileEnum, FileExtentions } from "src/app/shared/enums/file/file.enum";
+import { FileTypeEnum, FileExtentions } from "src/app/shared/enums/file/file.enum";
 import { NotificationChannels } from "src/app/shared/enums/settings/settings.enum";
 import { StatusEnum } from "src/app/shared/enums/status/status.enum";
 import { Localization } from "../global/global.model";
@@ -13,7 +13,7 @@ export interface FileRule{
 
 
 export type  MapedFileRule={
-    [Key in FileEnum]:{
+    [Key in FileTypeEnum]:{
         extention: FileExtentions
         size:number
     }

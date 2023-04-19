@@ -20,10 +20,11 @@ import { SharedService } from '../../services/shared/shared.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
 import { IndexesEnum } from '../../enums/indexes/indexes.enum';
-import { FileEnum } from '../../enums/file/file.enum';
+import { FileTypeEnum } from '../../enums/file/file.enum';
 import { UserScope } from '../../enums/user/user.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CountriesService } from '../../services/countries/countries.service';
+import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 
 @Component({
   selector: 'app-send-message',
@@ -31,7 +32,7 @@ import { CountriesService } from '../../services/countries/countries.service';
   styleUrls: ['./send-message.component.scss'],
 })
 export class SendMessageComponent implements OnInit, OnDestroy {
-  get fileTypesEnum() { return FileEnum;}
+  get fileTypesEnum() { return FileTypeEnum;}
   onSubmit
   studentSchool;
   lang = inject(TranslationService).lang
@@ -93,6 +94,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     private index: IndexesService,
     private userService: UserService,
     private countriesService:CountriesService,
+    private guardianService:ParentService
   ) {}
 
   ngOnInit(): void {
@@ -187,7 +189,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.searchModel.page = null;
     this.searchModel.pageSize = null;
     this.searchModel.SchoolId = this.currentSchoolId;
-    this.messageService.getGuardian(this.searchModel).subscribe((res) => {
+    this.guardianService.getGuardianDropdown(this.searchModel).subscribe((res) => {
       this.autoCompleteForParent = res.data;
     });
   }
@@ -292,8 +294,9 @@ export class SendMessageComponent implements OnInit, OnDestroy {
 
     this.messageService.sendDataFromGuardianToSchool(form).subscribe(
       (res) => {
-        this.router.navigate(['/dashboard/messages/message-detail/' + res]);
+        // this.router.navigate(['/dashboard/messages/message-detail/' + res]);
         this.toastr.success('تم الارسال بنجاح');
+        this.hiddenDialog.emit();
       },
       (err) => {
         this.toastr.error(err);

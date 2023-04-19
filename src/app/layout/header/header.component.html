@@ -166,11 +166,11 @@
                                                         <div class="title position-relative">
                                                             <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!notification.isRead">
                                                             <img class="cardimage ms-3" src="assets/images/shared/Person.jpg">
-                                                            <span class="tittle" *ngIf="checkLanguage">{{notification.userName.ar}}</span>
-                                                            <span class="tittle" *ngIf="!checkLanguage">{{notification.userName.en}}</span>
+                                                            <span class="fw-bold d-inline-block" *ngIf="checkLanguage">{{notification.userName.ar}}</span>
+                                                            <span class="fw-bold d-inline-block" *ngIf="!checkLanguage">{{notification.userName.en}}</span>
                                                             <!-- <span>{{'Notifications.Ask'|translate}}</span> -->
-                                                            <span class="headerName" *ngIf="checkLanguage">{{notification.title.ar}}</span>
-                                                            <span class="headerName" *ngIf="!checkLanguage">{{notification.title.en}}</span>
+                                                            <span class="color-primary fw-bold mx-3" *ngIf="checkLanguage">{{notification.title.ar}}</span>
+                                                            <span class="color-primary fw-bold mx-3" *ngIf="!checkLanguage">{{notification.title.en}}</span>
                                                         </div>
                                                         <div class="Description my-2">
                                                             <span class="">{{'Notifications.Description'|translate}}</span>

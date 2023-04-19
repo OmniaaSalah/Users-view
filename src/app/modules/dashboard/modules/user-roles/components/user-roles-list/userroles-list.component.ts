@@ -8,7 +8,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import {UserRolesService } from '../../service/user-roles.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -130,7 +130,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
+  onExport(fileType: FileTypeEnum, table:Table){
     let filter = {...this.filtration, PageSize:null}
     this.userRolesService.rolesToExport(filter).subscribe( (res) =>{
 
@@ -154,11 +154,11 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
      this.displayUserList = true;
 }
 dropdownItemClicked(index,role){
-  if(index == 0) 
+  if(index == 0)
    {
     this.router.navigate([`/dashboard/manager-tools/user-roles/role-details/${role.id}`]);
   }
-  if(index == 1) 
+  if(index == 1)
    {
     this.confirmModelService.openModel();  this.selectedRole=role;
   }

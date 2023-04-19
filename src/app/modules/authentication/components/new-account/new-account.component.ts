@@ -12,10 +12,9 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { Subscription, switchMap, takeWhile, tap, timer } from 'rxjs';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
+import {  switchMap, takeWhile, tap, timer } from 'rxjs';
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
@@ -49,7 +48,7 @@ export class NewAccountComponent implements OnInit ,OnDestroy{
   passwordsFormGrp: FormGroup;
   accountFormGrp: FormGroup;
 
-  get fileTypeEnum() {return FileEnum}
+  get fileTypeEnum() {return FileTypeEnum}
 
   constructor(
     private router:Router,
@@ -215,7 +214,7 @@ console.log(this.account.accountWay)
       this.isBtnLoading=false;
       if(res?.statusCode=='OK'||res?.statusCode=='BadGateway')
       {
-       
+
         this.step=5;
         this.UAEUnregisteredUser=res?.result;
       }
@@ -227,12 +226,12 @@ console.log(this.account.accountWay)
       {
         this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
       }
-    
+
     },(err)=>{
       this.isBtnLoading=false;
       this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
   }
- else 
+ else
   {  this.authService.sendOtpToUser(this.account).subscribe((res)=>{
     this.isBtnLoading=false;
     this.toastService.success(this.translate.instant('shared.Otp send successfully'));
@@ -244,7 +243,7 @@ console.log(this.account.accountWay)
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
   }
-  
+
 }
 sendOtpAgain()
 {
@@ -288,7 +287,7 @@ getCurrentRegistrationWay()
           {this.toastService.success(this.translate.instant('sign up.account saved successfully'));
             this.closeModel();
         }
-      
+
     },(err)=>{this.isBtnLoading=false;
       this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
     })
@@ -302,7 +301,7 @@ getCurrentRegistrationWay()
         this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).subscribe((resu)=>{this.noIdentityReasonList=resu});
         this.step=4;
         this.tittle=this.translate.instant('sign up.in case identity not exist')
-      
+
     },(err)=>{this.isBtnLoading=false;
       this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
     })
@@ -358,7 +357,7 @@ getAuthenticationWays()
     {value:RegistrationEnum.Email,name:this.translate.instant('sign up.emailInCaseNotHaveEmiratesID')},
     {value:RegistrationEnum.PhoneNumber,name:this.translate.instant('sign up.phoneNumberInCaseNotHaveEmiratesID')},
     {value:RegistrationEnum.EmiratesId,name:this.translate.instant('sign up.digitalIdentity')}
-    
+
    ]
 }
 

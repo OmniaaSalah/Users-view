@@ -15,7 +15,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -36,8 +36,8 @@ export class ParantsComponent implements OnInit {
 	lang = inject(TranslationService).lang
 	countries$ = this.countriesService.getCountries()
 	currentUserScope = inject(UserService).getCurrentUserScope()
-	
-	
+
+
 	filtration= {...Filtration,  NationalityId:"",hasChildreen:true}
 	paginationState= {...paginationInitialState}
 
@@ -115,7 +115,7 @@ export class ParantsComponent implements OnInit {
 		  })
 	  }
 	onSort(e){
-	
+
 		if(e.order==1) this.filtration.SortBy= 'old'
 		else if(e.order == -1) this.filtration.SortBy= 'update'
 		this.checkParentList()
@@ -136,10 +136,10 @@ export class ParantsComponent implements OnInit {
 	}
 
 
-	onExport(fileType: FileEnum){
+	onExport(fileType: FileTypeEnum){
 		let filter = {...this.filtration, PageSize:this.parent.totalAllData}
 		this.parentService.parentsToExport(filter).subscribe( (res: Guardian[]) =>{
-			
+
 			this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.parents'))
 		})
 	}
@@ -182,9 +182,9 @@ export class ParantsComponent implements OnInit {
 		}
   }
 
-  get userScope() 
-  { 
-    return UserScope 
+  get userScope()
+  {
+    return UserScope
   }
 
 
@@ -192,8 +192,8 @@ export class ParantsComponent implements OnInit {
   {
 	if(this.currentUserScope==this.userScope.Employee)
     {
-    this.userService.currentUserSchoolId$.subscribe(id =>{      
-      
+    this.userService.currentUserSchoolId$.subscribe(id =>{
+
       this.getParentListInSpecificSchool(id);
     })
   }

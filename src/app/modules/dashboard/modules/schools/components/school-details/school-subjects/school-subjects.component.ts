@@ -10,7 +10,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { GradesService } from '../../../services/grade/grade.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -156,7 +156,7 @@ export class SchoolSubjectsComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum){
+  onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:null}
     this.schoolsService.subjectsToExport(filter).subscribe( (res) =>{
 

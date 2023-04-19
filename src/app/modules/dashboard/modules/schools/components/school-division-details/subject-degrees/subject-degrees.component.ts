@@ -9,7 +9,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -133,7 +133,7 @@ export class SubjectDegreesComponent implements OnInit {
     this.getSubjectDegrees();
   }
 
-  onExport(fileType: FileEnum){
+  onExport(fileType: FileTypeEnum){
     this.divisionService.getDegreesExel(this.schoolId,this.divisionId, this.subjectId).subscribe(res=>{
       FileSaver.saveAs(res,'درجات الماده' + new Date().getTime() + '.xlsx');
 

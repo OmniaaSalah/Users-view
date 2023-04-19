@@ -5,7 +5,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { UserInformationService } from '../../../user-information/service/user-information.service';
 import { UsersReportsService } from '../../services/users/users-reports.service';
@@ -33,13 +33,13 @@ export class UsersReportsComponent implements OnInit {
   date;
   requestsList=[];
   filtration = {
-    ...Filtration, 
+    ...Filtration,
     roleIds: [],
     dateFrom:null,
     dateTo:null,
     requestType:null
   }
-  
+
   paginationState= {...paginationInitialState}
   faEllipsisVertical = faEllipsisVertical;
 
@@ -52,10 +52,10 @@ export class UsersReportsComponent implements OnInit {
   roles = []
   tableColumns = []
 
-  constructor( 
-    private toastr:ToastrService,  
+  constructor(
+    private toastr:ToastrService,
      private exportService: ExportService,
-    private headerService: HeaderService, 
+    private headerService: HeaderService,
     private translate: TranslateService,
      private userInformation: UserInformationService,
      private _report:UsersReportsService,
@@ -77,14 +77,14 @@ export class UsersReportsComponent implements OnInit {
     );
     this.getUsersList();
     this.getRolesList();
- 
 
-   
+
+
   }
 
   getUsersList(){
     if(this.date)
-    { 
+    {
       this.filtration.dateFrom=this.formateDate(this.date[0])
       this.filtration.dateTo=this.formateDate(this.date[1])
     }
@@ -114,7 +114,7 @@ console.log(this.filtration.dateFrom,this.filtration.dateTo)
   getRolesList(){
     this.userInformation.GetRoleList().subscribe(res=>
       this.roles = res
-      
+
     )}
 
   onTableDataChange(event: paginationState) {
@@ -141,19 +141,19 @@ console.log(this.filtration.dateFrom,this.filtration.dateTo)
     this.getUsersList();
   }
 
-  onExport(fileType: FileEnum, table: Table) {
+  onExport(fileType: FileTypeEnum, table: Table) {
     let filter = {...this.filtration, PageSize:this.users.totalAllData}
     this._report.employeesToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'))
     })
-    
+
   }
 
 
   formateDate(date :Date)
   {
-    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
     return d.split('.')[0]
   }
 

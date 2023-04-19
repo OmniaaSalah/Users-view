@@ -9,7 +9,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -124,7 +124,7 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
     this.getSubjects();
   }
 
-  onExport(fileType: FileEnum){
+  onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:null}
     this.divisionService.subjectsToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.divisionSubjects'))

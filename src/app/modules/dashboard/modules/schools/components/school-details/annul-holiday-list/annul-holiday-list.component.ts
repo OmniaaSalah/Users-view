@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -15,7 +15,8 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -44,7 +45,7 @@ export class AnnulHolidayListComponent implements OnInit {
   holidayStatusList;
   componentHeaderData: IHeader = {
 		breadCrump: [
-		
+
 			{ label: this.translate.instant('dashboard.schools.annualHolidays'), routerLink: `/dashboard/school-management/school/${this.schoolId}/annual-holidays`},
 		],
 		mainTitle: { main: this.currentSchool}
@@ -84,7 +85,7 @@ export class AnnulHolidayListComponent implements OnInit {
   get holidayForm(){ return this.editHolidayForm.controls}
 
   constructor(
-   
+
     private route: ActivatedRoute,
     private schoolsService:SchoolsService,
     private translate: TranslateService,
@@ -103,7 +104,7 @@ export class AnnulHolidayListComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee)
     {
       this.userService.currentUserSchoolName$?.subscribe((res)=>{
-        if(res)  
+        if(res)
         {
           this.currentSchool= JSON.parse(res);
           this.componentHeaderData.mainTitle.main=this.currentSchool[this.lang];
@@ -167,13 +168,19 @@ export class AnnulHolidayListComponent implements OnInit {
   updateFlexableHoliday(){
     this.submitted = true
       this.schoolsService.sendFlexableHolidayReq(this.selectedHoliday.id,this.editHolidayForm.value)
+      .pipe(
+        map(res=>{
+          if(res.statusCode ==HttpStatusCodeEnum.BadRequest) throw new Error(res?.error)
+          return res
+        })
+      )
       .subscribe(res =>{
         this.submitted = false
         this.openHolidaytModel= false
         this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
 
-      },()=>{
-        this.toastr.error(this.translate.instant('toasterMessage.error'))
+      },(error:Error)=>{
+        this.toastr.error(error?.message || this.translate.instant('toasterMessage.error'))
         this.submitted = false
       })
   }
@@ -214,7 +221,7 @@ export class AnnulHolidayListComponent implements OnInit {
 
 
   onSort(e){
-  
+
     if(e.order==-1)
     {this.filtration.SortBy="ASC"}
     else
@@ -232,10 +239,10 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum){
+  onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:null}
     this.schoolsService.holidaysToExport(this.schoolId,filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualHolidays'))
     })
   }
