@@ -138,14 +138,8 @@ export class AuthenticationService {
 
     .pipe(take(1),map((res)=>{
       if(res)
-     { if(localStorage.getItem('preferredLanguage')=='ar')
-      {
-        return res.result.school.name.ar;
-      }
-      else{
-        return res.result.school.name.en;
-      }
-      
+     { 
+      return res.result.school.name
     }
         
     }))

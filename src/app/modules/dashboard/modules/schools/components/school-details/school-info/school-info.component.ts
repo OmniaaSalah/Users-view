@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { ToastrService } from 'ngx-toastr';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 
 @Component({
   selector: 'app-school-info',
@@ -50,20 +51,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 	private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
-	if(this.currentUserScope==this.userScope.Employee)
-	{
-		this.userService.currentUserSchoolName$?.subscribe((res)=>{
-			if(res)
-			{
-			  this.currentSchool=res;
-
-			  this.componentHeaderData.mainTitle.main=this.currentSchool;
-			}
-	  })
-	}
-
     this.getSchool(this.schoolId);
-
   }
   ngAfterViewInit() {
 }
@@ -73,7 +61,7 @@ getSchool(id){
 	this.schoolsService.getSchool(id).subscribe((res) =>{
 		this.school = res
 		if(this.currentUserScope==UserScope.Employee) {
-			this.componentHeaderData.mainTitle.main = res.name.ar
+			this.componentHeaderData.mainTitle.main = getLocalizedValue(res.name)
 			this.headerService.changeHeaderdata(this.componentHeaderData)
 			this.loadMap();
 		}
