@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FileEnum } from '../../enums/file/file.enum';
+import { FileTypeEnum } from '../../enums/file/file.enum';
 import * as FileSaver from 'file-saver';
 import { Table } from 'primeng/table';
 import jsPDF from "jspdf";
@@ -10,13 +10,13 @@ import autoTable from "jspdf-autotable"
   providedIn: 'root'
 })
 export class ExportService {
- 
+
   constructor() { }
 
 
-  exportFile(extention : FileEnum, items: any[], fileName){
-    if(extention === FileEnum.Pdf) this.exportPdf(items,fileName)
-    else if(extention === FileEnum.Xlsx) this.exportExcel(items,fileName)
+  exportFile(extention : FileTypeEnum, items: any[], fileName){
+    if(extention === FileTypeEnum.Pdf) this.exportPdf(items,fileName)
+    else if(extention === FileTypeEnum.Xlsx) this.exportExcel(items,fileName)
 
   }
 
@@ -43,14 +43,14 @@ export class ExportService {
 
   // <<<<<<<<<<<<<<<<<<< PDF >>>>>>>>>>>>>>>>>>>>>>>
   exportPdf(data:any[], fileName) {
-  
+
     let exportColumns = this.getColsHead(data).reverse()
     data= data.map(el=>{
       return Object.values(el).reverse()
     })
 
     const doc = new jsPDF('l', 'pt', 'a2')
-   
+
     doc.addFont("/assets/font/amiri/Amiri-Regular.ttf", "Amiri-Regular", "normal");
     doc.setFont("Amiri-Regular");
 
@@ -58,7 +58,10 @@ export class ExportService {
       styles:{
         font:'Amiri-Regular',
         halign:'right',
-        cellWidth: 'wrap'
+        minCellWidth:60,
+        // overflow: "hidden",
+        // cellWidth: "wrap" 
+
       },
       columns: exportColumns,
       body: data,

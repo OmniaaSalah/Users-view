@@ -24,6 +24,7 @@
 }
 }
 }
+.table-caption{ margin-inline-start: 4rem;width:89%;display: inline-block;}
 
 #notification-content{
     margin-inline-start: 4rem;
@@ -31,6 +32,7 @@
     .Readingstatus{
         font-weight: 500;
     }
+   ::ng-deep app-table-caption{width:80%;display:flex}
     .group{
         height: 44px;
     .button-group{

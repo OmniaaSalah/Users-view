@@ -12,7 +12,7 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ToastrService } from 'ngx-toastr';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
@@ -27,7 +27,7 @@ export class WithIdentityComponent implements OnInit {
   ngDestroy$ =new Subject()
 
   lang =inject(TranslationService).lang
-  get fileTypesEnum () {return FileEnum}
+  get fileTypesEnum () {return FileTypeEnum}
 
   currentGuardianId = this.userService.getCurrentGuardian().id
 

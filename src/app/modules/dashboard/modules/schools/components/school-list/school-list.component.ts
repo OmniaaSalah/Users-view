@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, inject, OnInit,OnDestroy } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
@@ -11,7 +10,6 @@ import { CountriesService } from 'src/app/shared/services/countries/countries.se
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ArrayOperations } from 'src/app/core/classes/array';
@@ -153,7 +151,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   }
 
 
-  onExport(fileType: FileEnum){
+  onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:this.schools.totalAllData}
     this.schoolsService.schoolsToExport(filter).subscribe( (res: School[]) =>{
 console.log(res);

@@ -11,7 +11,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -125,7 +125,7 @@ console.log(changes);
    }
 
 
-   onExport(fileType: FileEnum){
+   onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:this.divisions.totalAllData}
     this.divisionService.divisionsToExport(filter).subscribe( (res) =>{
 

@@ -1,7 +1,7 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Table } from 'primeng/table';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import {   faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
@@ -104,7 +104,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
 
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
-   
+
 
 
   }
@@ -160,7 +160,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
         'curriculumIds': this.getCurriculumIds(holiday.curriculums)
         }})
      };
-    
+
 
     if(this.urlParameter)
     {
@@ -182,7 +182,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
           this.showErrorMessage();});
     }
    }
- 
+
 
   showErrorMessage()
   {
@@ -202,8 +202,8 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
       if(holiday.name.ar==this.holidayAdded.name.ar)
       {
           this.availableAdded=0;
-         
-          
+
+
       }
     });
     if(this.availableAdded==1)
@@ -276,7 +276,7 @@ editHoliday(holiday)
 confirmDeleteListener(){
   this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
     if (val) this.deleteHoliday(this.deletedHoliday)
-    
+
   })
 }
 deleteHoliday(id)
@@ -308,7 +308,7 @@ getHolidayNameAndYear()
 }
 
 
-export(fileType:FileEnum, table:Table){
+export(fileType:FileTypeEnum, table:Table){
   this.exportService.exportFile(fileType,this.holidayList,'')
 }
 filter() {
@@ -381,8 +381,8 @@ clearFilter(){
 bindOldHoliday(holiday)
 {
   if(this.urlParameter)
-  {  
-     
+  {
+
       this.annualHolidayFormGrp.patchValue({year:holiday.year,
         englishSmester:holiday.annualCalendar.en,
         arabicSmester:holiday.annualCalendar.ar,
@@ -398,7 +398,7 @@ bindOldHoliday(holiday)
         'curriculums': holiday.curriculums,
         'createdDate': holiday.createdDate
         }});
-    
+
       this.saveInlocalStorage();
   }
 

@@ -7,8 +7,7 @@
     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
         <ng-container *ngFor="let item of items; let i=index" >
             <li class=" dropdown-item"
-            [class.disabled]="item?.disabled"
-            [ngClass]="{'disabled': item.isAllowed$ ? !(item.isAllowed$ |async) : false}"
+            [class.disabled]="item?.disabled || item.isAllowed$ ? !(item.isAllowed$ |async) : false"
             (click)="onClick(i)"  *permit="item.claims">
                 <a class="link" [routerLink]="item.routerLink" >
                     <img [src]="item.icon" alt="">

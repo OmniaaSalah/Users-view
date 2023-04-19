@@ -9,7 +9,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -33,7 +33,7 @@ export class SchoolyearsListComponent implements OnInit {
     breadCrump: [
       { label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list'}
     ],
-    
+
   };
   schoolYears={
     total:0,
@@ -46,18 +46,18 @@ export class SchoolyearsListComponent implements OnInit {
 
   ngOnInit(): void {
 
-      
+
   localStorage.removeItem('addedSchoolYear');
- 
+
     this.headerService.changeHeaderdata(this.componentHeaderData);
    this.getAllSchoolYears();
 
      this.schoolYearsStatus=this.schoolYearService.schoolYearsStatus;
-      
+
   }
 
 
- 
+
   getAllSchoolYears(){
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.schoolYears.loading=true;
@@ -69,7 +69,7 @@ export class SchoolyearsListComponent implements OnInit {
         this.schoolYears.totalAllData=res.totalAllData;
         this.schoolYears.list=res.data;
 
-      
+
       },(err)=>{this.schoolYears.loading = false;
         this.schoolYears.total=0
         this.sharedService.filterLoading.next(false);
@@ -86,10 +86,10 @@ export class SchoolyearsListComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
+  onExport(fileType: FileTypeEnum, table:Table){
     let filter = {...this.filtration, PageSize:this.schoolYears.totalAllData}
     this.schoolYearService.schoolYearsToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('breadcrumb.School Years List'))
     })
   }

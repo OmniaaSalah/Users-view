@@ -7,7 +7,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -106,10 +106,10 @@ export class SubjectsReportsComponent implements OnInit {
     })
   }
 
-  onExport(fileType: FileEnum, table: Table) {
+  onExport(fileType: FileTypeEnum, table: Table) {
     let filter = {...this.filtration, PageSize:this.subjectsReport.totalAllData}
     this.subjectReportService.subjectsToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'))
     })
 
@@ -135,6 +135,6 @@ export class SubjectsReportsComponent implements OnInit {
     this.getSubjects()
 
   }
- 
+
 
 }

@@ -1,5 +1,5 @@
 
-export enum FileEnum{
+export enum FileTypeEnum{
     Csv = 'csv',
     Xlsx = 'Xlsx',
     Pdf = 'Pdf',

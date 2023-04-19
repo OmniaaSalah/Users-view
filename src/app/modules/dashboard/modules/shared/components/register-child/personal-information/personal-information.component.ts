@@ -19,6 +19,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsService } from 'src/app/core/services/claims.service';
 import { MessageService } from '../../../../messages/service/message.service';
 import { Filtration } from 'src/app/core/classes/filtration';
+import { ParentService } from '../../../../parants/services/parent.service';
 
 @Component({
   selector: 'app-personal-information',
@@ -60,7 +61,7 @@ export class PersonalInformationComponent implements OnInit {
   cities = this.CountriesService.cities
   cities$ = this.CountriesService.getCities()
   states$ = this.CountriesService.getAllStates()
-  talents$ = this.studentsService.getTalents()
+  talents$ = inject(IndexesService).getIndext(IndexesEnum.TheTypeOfTalentOfTheStudent);
   nationalitiesCategory$ = this.indexService.getIndext(IndexesEnum.NationalityCategory)
   languages$ = this.indexService.getIndext(IndexesEnum.Language).pipe(share())
   countries$ = this.CountriesService.getCountries()
@@ -68,9 +69,9 @@ export class PersonalInformationComponent implements OnInit {
   reasonForNotHaveIdentityOptions$=this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).pipe(debounceTime(1000))
 
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
-  AllGuardians$ = this.messageService.getGuardian({}).pipe(map(res =>res.data))
+  AllGuardians$ = this.guardiansService.getGuardianDropdown({}).pipe(map(res =>res.data))
   AllGuardians = []
-  guardiansFilteration={...Filtration}
+  guardiansFilteration={...Filtration ,PageSize:0}
 
   specialClassOptions = [
     {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
@@ -88,24 +89,27 @@ export class PersonalInformationComponent implements OnInit {
     private studentsService: StudentsService,
     public childService:RegisterChildService,
     private translate:TranslateService,
-    private messageService: MessageService,
+    private guardiansService:ParentService,
     private indexService:IndexesService) { }
 
 
   ngOnInit(): void {
     this.setClassType()
+    this.getGuardians()
   }
 
   onLazyLoad(event){
     console.log(event);
 
     this.guardiansFilteration.Page = Math.ceil((event.first - 1) / this.guardiansFilteration.PageSize) + 1;
-console.log(this.guardiansFilteration.Page);
+      console.log(this.guardiansFilteration.Page);
 
     this.getGuardians()
   }
+
+
   getGuardians(){
-    this.studentsService.getAllStudents(this.guardiansFilteration)
+    this.guardiansService.getGuardianDropdown(this.guardiansFilteration)
     .pipe(map(res =>res.data))
     .subscribe(res =>{
       // this.AllGuardians = [...this.AllGuardians, ...res]

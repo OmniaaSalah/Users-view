@@ -95,7 +95,7 @@
             </div>
 
             <div class="row gx-5 gy-4 form-set" *ngIf="optionalSubjects$ |async as optionalSubjects">
-                <label class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
+                <label class="label fw-bold" for="" *ngIf="optionalSubjects.length">{{'shared.optionalSubjects'|translate}}</label>
 
                 <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of optionalSubjects">
                     <p-checkbox  name="subjects" formControlName="optionalSubjects" [value]="subject.id"></p-checkbox>

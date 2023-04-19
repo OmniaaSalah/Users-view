@@ -74,7 +74,7 @@
 
                     <ng-container *ngIf="student.emiratesId">
                         <div class="d-flex gap-5 align-items-center mt-4 fs-4">
-                            <p class="color-gray-300 ">{{'sign up.digitalIdentity'|translate}}</p>
+                            <p class="color-gray-300 ">{{'shared.Identity Number'|translate}}</p>
                             <span class="color-primary">{{student.emiratesId}}</span>
                             <!-- <a class="color-skyBlue-500" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a> -->
                         </div>
@@ -154,15 +154,15 @@
                         <p class="color-gray-300 fs-4">{{'dashboard.students.isGifted'| translate}}</p>
                         <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
                         <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
+                        <ng-container *ngIf="student?.isGifted">
+                            <p class="color-gray-300 fs-4">{{'dashboard.students.talent'| translate}}</p>
+                            <div  class="mb-2 d-flex">
+                                <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
+                                    {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
+                                </span>
+                            </div>
 
-                        <p class="color-gray-300 fs-4">{{'dashboard.students.talent'| translate}}</p>
-                        <div  class="mb-2 d-flex">
-                            <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
-                                {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
-                            </span>
-                        </div>
-
-
+                        </ng-container>
 
                         <p class="color-gray-300 fs-4">{{'dashboard.students.withDisabilities'| translate}}</p>
                         <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
@@ -291,7 +291,9 @@
                       optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown> -->
                       <p-dropdown
                       formControlName="guardianId"
-                      [options]="AllGuardians$ |async"
+                      [filter]="true"
+                      (onFilter)="guardiansFilteration.KeyWord ==$event.filte; getGuardians()"
+                      [options]="AllGuardians"
                       optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
                     </div>
 
@@ -405,7 +407,7 @@
 
                         <div class="form-set" *ngIf="isGifted.value">
                             <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
-                            <p-multiSelect formControlName="studentTalent" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
+                            <p-multiSelect formControlName="studentTalent" [options]="talents$ |async" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
                         </div>
 
 

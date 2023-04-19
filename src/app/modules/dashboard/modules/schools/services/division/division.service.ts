@@ -186,8 +186,8 @@ export class DivisionService {
         return res.result?.data.map(student =>{
           let obj= {
             [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
-            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
-            [this.translate.instant('dashboard.parents.subjectName')]: student.subjectName.ar,
+            [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student?.name),
+            [this.translate.instant('dashboard.parents.subjectName')]: getLocalizedValue(student.subjectName),
             [this.translate.instant('dashboard.schools.optionalOrmandatory')]: student.isElective ? this.translate.instant("dashboard.Subjects.optional") : this.translate.instant("dashboard.Subjects.mandatory"),
             [this.translate.instant('dashboard.parents.evaluation')]: student.evaluationSystem,
             [this.translate.instant('dashboard.parents.Result')]: student.studentDegree,
