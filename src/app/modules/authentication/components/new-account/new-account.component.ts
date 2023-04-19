@@ -279,7 +279,7 @@ getCurrentRegistrationWay()
         })
       ).subscribe((res)=>{
         this.isBtnLoading=false;
-        if(res.statusCode!="OK")
+        if(res.statusCode!="Created")
         {
           this.toastService.error(this.translate.instant(res.error));
           this.closeModel();
@@ -327,7 +327,7 @@ savePersonalInformation()
 
   this.authService.saveAccount(information).subscribe((res)=>{
     this.isBtnLoading=false;
-  if(res.statusCode!="OK")
+  if(res.statusCode!="Created")
   {
     this.toastService.error(this.translate.instant(res.error));
     this.closeModel();
