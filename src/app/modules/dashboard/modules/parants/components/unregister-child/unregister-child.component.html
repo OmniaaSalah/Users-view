@@ -224,6 +224,8 @@
 
 
         <ng-container *ngIf="step==2">
+
+          <!-- READE MOOODE -------------->
             <ng-container *ngIf="!AttachmentEditMode">
                 <ng-container >
                     <div class="float-btn" *ngIf="!AttachmentEditMode" (click)="AttachmentEditMode=true">
@@ -246,6 +248,7 @@
 
             </ng-container>
 
+            <!-- EDIT MOOODE ------------->
             <ng-container *ngIf="AttachmentEditMode">
 
                 <div class="d-flex justify-content-end gap-3">
@@ -290,7 +293,7 @@
                         <div class="" >
                             <app-file-upload
                             [files]="[{url: file.value?.url,name:file.value?.name, comment:file.value?.comment}]"
-                            [title]="file.value.titel.ar" [accept]="'.pdf'"
+                            [title]="file.value.titel.ar"
                             [hasComment]="true"
                             view="full"
                             (onFileUpload)="addnewAttachmentTo($event, i)"

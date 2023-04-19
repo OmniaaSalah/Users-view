@@ -11,7 +11,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SurveyService } from '../../service/survey.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -53,15 +53,15 @@ export class SurveysListComponent implements OnInit {
     private Surveyservice: SurveyService,
     private toastrService:ToastService,
     private exportService: ExportService) { }
-   
-   
+
+
 
 
   ngOnInit(): void {
     this.surveyStatus=this.Surveyservice.surveyStatus;
     this.surveyType=this.Surveyservice.surveyType;
     this.getSurveyList();
-  
+
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -70,7 +70,7 @@ export class SurveysListComponent implements OnInit {
     );
   }
   getSurveyList(){
-    
+
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.surveyList.loading=true
     this.surveyList.list=[]
@@ -80,7 +80,7 @@ export class SurveysListComponent implements OnInit {
       this.surveyList.total =res.result.total
       this.surveyList.totalAllData = res.result.totalAllData
       this.surveyList.list = res.result.data
-  
+
   }  ,err=> {
       this.surveyList.loading=false
       this.surveyList.total=0
@@ -108,10 +108,10 @@ export class SurveysListComponent implements OnInit {
     this.toastrService.warning(this.translate.instant('noURLFound'));
    }
 
-   onExport(fileType: FileEnum, table:Table){
+   onExport(fileType: FileTypeEnum, table:Table){
     let filter = {...this.filtration, PageSize:this.surveyList.totalAllData}
     this.Surveyservice.surveyToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.surveys.surveyList'))
     })
   }
@@ -121,5 +121,5 @@ export class SurveysListComponent implements OnInit {
     this.filtration.SurveyType= null
     this.getSurveyList()
   }
-  
+
 }

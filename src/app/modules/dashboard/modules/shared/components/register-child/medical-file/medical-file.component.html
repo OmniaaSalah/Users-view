@@ -49,8 +49,9 @@
                     <p class="color-gray-300 fs-4">{{ 'dashboard.students.withDisabilities'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.isTheSonOfDetermination ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
 
-                    <p class="color-gray-300 fs-4">{{'dashboard.parents.IQ'|translate }}</p>
-                    <span class="color-primary mb-2">{{medicalFile.iq}}%</span>
+                    <p class="color-gray-300 fs-4">{{'dashboard.parents.shadowerExist'|translate }}</p>
+                    {{medicalFile.isTheSonOfDetermination ?('shared.yes' | translate): ('shared.no' | translate)}}
+                    <!-- <span class="color-primary mb-2">{{medicalFile.iq}}%</span> -->
 
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.increasement'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.raise}}</span>
@@ -79,17 +80,18 @@
 
                 <div class="grid-container gap-y-5">
 
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Allergicdiseases'|translate }}</p>
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.students.feelingDiseases'|translate }}</p>
+                    <span>{{medicalFile.isTheSonOfDetermination ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
                     <!-- <span class="color-primary mb-2">
                           <a class="color-primary mb-2"> {{medicalFile.allergicDiseases}} </a>
                       </span> -->
-                    <ul class="d-flex flex-wrap">
+                    <!-- <ul class="d-flex flex-wrap">
                     <li class="d-flex color-primary" *ngFor="let val of medicalFile.allergicDiseases; let i= index">
                         <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
                         <div>{{val}}</div>
 
                     </li>
-                    </ul>
+                    </ul> -->
 
                     <ng-container *ngIf="getCtr('isTheSonOfDetermination').value">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
@@ -127,7 +129,7 @@
 
             <div class="col-md-4">
                 <div class="col-sm-3 grid-container mb-5">
-                    <p class="color-gray-300 fs-4">{{'dashboard.parents.athlete'|translate }}</p>
+                    <p class="color-gray-300 fs-4">{{'dashboard.students.exemptionFromTraining'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.isAthletic ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                 </div>
                 <div  class="mb-5">
@@ -160,6 +162,7 @@
 
 
 
+    <!-- EDIT MOOD ------------------ -->
 
     <ng-container *ngIf="editMode && !weightEditMode && !heightEditMode">
         <form class="custom-form" [formGroup]="medicalFileForm">
@@ -172,12 +175,12 @@
                     </div>
                     <div class="col-md-4">
                         <label class="label required">{{'dashboard.students.feelingDiseases'|translate}}</label>
-                        <!-- <p-multiSelect [options]="diseases" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect> -->
-                        <p-chips name="feelingDiseases" [addOnBlur]="true" formControlName="listOfAllergicDiseases" placeholder=""></p-chips>
+                        <p-dropdown [options]="booleanOptions" optionValue="value"  optionLabel="name"></p-dropdown>
+                        <!-- <p-chips name="feelingDiseases" [addOnBlur]="true" formControlName="listOfAllergicDiseases" placeholder=""></p-chips> -->
                     </div>
 
                     <div class="col-md-4">
-                        <label class="label required">{{'dashboard.students.athleteOrNot'|translate}}</label>
+                        <label class="label required">{{'dashboard.students.exemptionFromTraining'|translate}}</label>
                         <p-dropdown [options]="booleanOptions" formControlName="isAthletic" optionValue="value"  optionLabel="name"></p-dropdown>
 
                     </div>
@@ -207,8 +210,10 @@
 
                 <div class="row g-5 form-set">
                     <div class="col-md-4">
-                        <label class="label required">{{'dashboard.students.iQRatio'|translate}}</label>
-                        <p-inputNumber formControlName="iq" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
+                        <label class="label required">{{'dashboard.parents.shadowerExist'|translate}}</label>
+                        <p-dropdown [options]="booleanOptions" optionValue="value"  optionLabel="name"></p-dropdown>
+
+                        <!-- <p-inputNumber formControlName="iq" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber> -->
                     </div>
 
 

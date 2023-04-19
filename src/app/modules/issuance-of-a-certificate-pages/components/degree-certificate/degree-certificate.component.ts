@@ -5,10 +5,8 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
-import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
-import { CurriculumCodeEnum, FirstGradeCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/school.enum';
+import { CurriculumCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/school.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 
@@ -33,15 +31,15 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
 
   onSubmit=false
 
-  
+
   degreeCertificateForm = this.fb.group({
     students:this.fb.array([])
   })
   get studentsCtr() { return this.degreeCertificateForm.controls.students as FormArray}
-  
+
 
   degreeForm = this.fb.group({
-    yearId: '', 
+    yearId: '',
     certificateType: CertificatesEnum.GradesCertificate,
     gradeCertificateType:''
    });
@@ -82,16 +80,16 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
     this.onSubmit=true;
 
     let data = this.degreeCertificateForm.value.students
-    
-   
-    
+
+
+
     this.certificatesService.postGradeCertificate(data).subscribe(result=>{
       this.onSubmit=false;
       if(result.statusCode != 'BadRequest'){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.onCancel.emit();
       }else{
-        if(result?.errorLocalized) 
+        if(result?.errorLocalized)
         {this.toastr.error( result?.errorLocalized[this.lang])}
         else
         {this.toastr.error(this.translate.instant('error happened'))}
@@ -101,12 +99,12 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
       this.onSubmit=false;
       this.toastr.error(this.translate.instant('error happened'))
     })
-    
+
 
   }
-  
 
-  isTypeRequired(student){  
+
+  isTypeRequired(student){
     if(!(student.curriculumCode== CurriculumCodeEnum.British)) return
 
     if([GradeCodeEnum.ten, GradeCodeEnum.eleven, GradeCodeEnum.twelve].includes(student.gradeCode)) return true

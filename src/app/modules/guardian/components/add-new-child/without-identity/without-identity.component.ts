@@ -16,7 +16,7 @@ import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 
 
@@ -28,7 +28,7 @@ import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.co
 
 export class WithoutIdentityComponent implements OnInit , OnDestroy{
   lang =inject(TranslationService).lang
-  get fileTypesEnum () {return FileEnum}
+  get fileTypesEnum () {return FileTypeEnum}
   isBtnLoading:boolean=false;
   exclamationIcon = faExclamationCircle;
 

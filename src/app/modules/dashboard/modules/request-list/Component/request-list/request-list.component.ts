@@ -14,7 +14,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SystemRequestService } from '../../services/system-request.service';
 import { UserRequestsStatus} from 'src/app/shared/enums/status/status.enum'
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -173,7 +173,7 @@ export class RequestListComponent implements OnInit {
     }
 
 
-    onExport(fileType: FileEnum){
+    onExport(fileType: FileTypeEnum){
 
       let filter = {...this.filtration, PageSize:this.requests.totalAllData}
 

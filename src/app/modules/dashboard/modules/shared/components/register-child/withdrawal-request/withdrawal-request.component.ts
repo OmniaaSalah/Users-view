@@ -8,7 +8,7 @@ import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
@@ -24,7 +24,7 @@ import { RegisterChildService } from '../../../services/register-child/register-
 export class WithdrawalRequestComponent implements OnInit {
   student
   lang= inject(TranslationService).lang
-  get fileTypesEnum () {return FileEnum}
+  get fileTypesEnum () {return FileTypeEnum}
 
   studentId = +this.route.snapshot.paramMap.get('id') //in case the page reached throw students route
   childId = +this.route.snapshot.paramMap.get('childId') //in case the page reached throw child (registered) route

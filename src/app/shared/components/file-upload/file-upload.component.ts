@@ -5,8 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, filter, finalize, forkJoin, Observable, of, take, tap } from 'rxjs';
 import { capitalizeFirstLetter } from 'src/app/core/classes/helpers';
 import { Localization } from 'src/app/core/models/global/global.model';
+import { MapedFileRule } from 'src/app/core/models/settings/settings.model';
 import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
-import { FileEnum, FileExtentions } from '../../enums/file/file.enum';
+import { FileTypeEnum, FileExtentions } from '../../enums/file/file.enum';
 import { MediaService } from '../../services/media/media.service';
 
 export interface CustomFile{
@@ -23,28 +24,28 @@ export interface CustomFile{
 })
 export class FileUploadComponent implements OnInit,OnChanges {
   faXmark = faXmark
-  filesRules
+  faFileCircleExclamation =faFileCircleExclamation
+
+
   @Input() theme :'chat' | 'default' = 'default'
-  @Input() hideHint = false
   @Input() title = ''
   @Input() label = this.translate.instant('shared.clickToUploadFile')
+  @Input() hasComment = false
   @Input() imgUrl=''
+
+  @Input() dynamic
   @Input() extractFormData=false // include FormData object in output event "@Output() onFileUpload"
   @Input() multiple = false
-  @Input() hasComment = false
-  @Input() maxFilesToUpload = 1
+  @Input() filesLimit = 1
   @Input() files: CustomFile[] =[]  // files to view
   @Input() view: 'box' | 'full'  // file uploader theme variants
   @Output() onFileUpload= new EventEmitter<any>();
   @Output() onFileDelete= new EventEmitter<any>();
 
-  // @Input() accept:FileEnum | FileEnum[] = FileEnum.Pdf
-  @Input() set accept (value: FileEnum | FileEnum[]) {
-    if(!value || value==null) {
-      // this.allowedFilesExtentions = FileExtentions.Pdf;
-      // this.allowedFilesType= FileEnum.Pdf
-      return;
-    }
+  @Input() maxFileSize
+  @Input() set accept (value: FileTypeEnum | FileTypeEnum[]) {
+
+    if(!value || value==null)  return;
 
     this.allowedFilesType = value
 
@@ -56,16 +57,14 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
   }
 
-  @Input() set maxFileSize(size){
-    if(size) this.fileSize= size
-    // else this.setMaxFileSizeAllowed()
-  }
 
-  fileSize
+  public filesRules
+
+  public allowedFilesType: FileTypeEnum | FileTypeEnum[]
+  public allowedFilesExtentions:string
+
   // private allowedFilesType: FileEnum | FileEnum[] = FileEnum.Pdf
   // allowedFilesExtentions:string = FileExtentions.Pdf
-  private allowedFilesType: FileEnum | FileEnum[]
-  allowedFilesExtentions:string
 
   // For File Comment Edit Mode
   editMode=false
@@ -73,7 +72,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   inProgress=false
   uploaded =false
   hideCheck=true
-  faFileCircleExclamation =faFileCircleExclamation
+
 
 
   constructor(
@@ -92,63 +91,94 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
   ngOnInit(): void {
 
-    this.settingService.fileRules$.subscribe(res=> {
-      this.filesRules =res
-      // if(!this.fileSize && this.filesRules) this.setMaxFileSizeAllowed()
-      if(!this.fileSize && this.allowedFilesType){
-        this.setMaxFileSizeAllowed()
+    this.settingService.fileRules$.subscribe((rules:MapedFileRule)=> {
+      this.filesRules =rules
+
+      // set file Size Dynamically (depend on provided file type)
+      if(!this.maxFileSize && this.allowedFilesType){
+        this.maxFileSize = this.getMaxAllowedSizeForFileType(this.allowedFilesType)
       }
 
     })
   }
 
 
-  setMaxFileSizeAllowed(showError = false){
-    console.log(showError);
+  // setMaxFileSizeAllowed(showError = false){
 
-    if(this.allowedFilesType instanceof Array){
-      this.fileSize = Math.max(...this.allowedFilesType.map(el => this.filesRules[el]?.size))
-    }else{
-      // console.log(this.filesRules[this.allowedFilesType]);
+  //   if(this.allowedFilesType instanceof Array){
+  //     this.maxSize = Math.max(...this.allowedFilesType.map(el => this.filesRules[el]?.size))
+  //   }else{
+  //     // console.log(this.filesRules[this.allowedFilesType]);
 
-      if(!this.filesRules || !this.filesRules[this.allowedFilesType]){
-        if(showError) this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
-        this.fileSize = 3
-        return
-      }
-      this.fileSize = this.filesRules[this.allowedFilesType]?.size || 3
+  //     if(!this.filesRules || !this.filesRules[this.allowedFilesType]){
+  //       if(showError) this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
+  //       this.maxSize = 3
+  //       return
+  //     }
+  //     this.maxSize = this.filesRules[this.allowedFilesType]?.size || 3
 
-    }
-  }
+  //   }
+  // }
 
 
 
  uploadedFilesName:string[]=[]
  uploadedFilesFormData:FormData[]=[]
 
+ getMaxAllowedSizeForFileType(fileType: FileTypeEnum | FileTypeEnum[]) : number | null{
+  if(fileType instanceof Array){
+
+    return  Math.max(...fileType.map(el => this.filesRules[el]?.size))
+  }else{
+
+    if(!this.filesRules || !this.filesRules[fileType])  return null
+
+    return this.filesRules[fileType]?.size || 3
+
+  }
+ }
+
+
+ getFileTypeEnum(fileName) :FileTypeEnum | null{
+    const lastDot = fileName.lastIndexOf('.');
+    const extention = fileName.substring(lastDot + 1);
+     if(FileTypeEnum[capitalizeFirstLetter(extention)]) return FileTypeEnum[capitalizeFirstLetter(extention)]
+     else return null
+ }
+
+
   validateSelectedFiles(event) {
     let files: File[]=[...event.target.files]
 
+    let maxFileSize = this.maxFileSize
 
-    // set file type Dynamically (depend on user Input)
+    // // set file Size Dynamically (depend on provided file type)
+    // if(!this.maxFileSize && this.allowedFilesType){
+    //   maxFileSize = this.getMaxAllowedSizeForFileType(this.allowedFilesType)
 
+    // }
+    if(this.allowedFilesType && !maxFileSize) {
+      this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
+      return;
+    }
+
+    // Dynamically Extract Uploaded File Type
     if(!this.allowedFilesType){
-      const lastDot = files[0].name.lastIndexOf('.');
-      const extention = files[0].name.substring(lastDot + 1);
-      this.allowedFilesType = FileEnum[capitalizeFirstLetter(extention)]
-      this.allowedFilesExtentions = FileExtentions[capitalizeFirstLetter(extention)]
+
+      const fileType : FileTypeEnum = this.getFileTypeEnum(files[0]?.name)
+      maxFileSize = this.getMaxAllowedSizeForFileType(fileType)
+
+      if(!maxFileSize) {
+        this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
+        return;
+      }
 
     }
-
-    if(!this.fileSize){
-      this.setMaxFileSizeAllowed(true)
-    }
-
 
 
     // Validation Condition 1
-    if((files.length + this.files.length) > this.maxFilesToUpload) {
-      this.toaster.error(` يجب ان لا يزيد عدد الملفات عن  عدد ${this.maxFilesToUpload} ملف`)
+    if((files.length + this.files.length) > this.filesLimit) {
+      this.toaster.error(` يجب ان لا يزيد عدد الملفات عن  عدد ${this.filesLimit} ملف`)
       return;
     }
 
@@ -157,9 +187,10 @@ export class FileUploadComponent implements OnInit,OnChanges {
     files.forEach((file, index)=>{
 
       // Validation Condition 2
-      if(!this.fileSize) return
-      if(this.fileSizeMB(file.size) > this.fileSize){
-        this.toaster.error(`يجب ان لا يزيد حجم الملف عن ${this.fileSize}MB`, file.name)
+      if(!maxFileSize) return
+
+      if(this.fileSizeMB(file.size) > maxFileSize){
+        this.toaster.error(`يجب ان لا يزيد حجم الملف عن ${this.maxFileSize}MB`, file.name)
 
       }else{
         const FORM_DATA = new FormData()

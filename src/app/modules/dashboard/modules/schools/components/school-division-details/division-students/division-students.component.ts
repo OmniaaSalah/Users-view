@@ -12,11 +12,10 @@ import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { StudentsService } from '../../../../students/services/students/students.service';
 import { DivisionService } from '../../../services/division/division.service';
 
 @Component({
@@ -25,13 +24,13 @@ import { DivisionService } from '../../../services/division/division.service';
   styleUrls: ['./division-students.component.scss']
 })
 export class DivisionStudentsComponent implements OnInit {
-  @Input('hasTracks') isGradeHaveTracks 
-  @Input() gradeId 
+  @Input('hasTracks') isGradeHaveTracks
+  @Input() gradeId
 
 
   get userScope() { return UserScope }
   get claimsEnum () {return ClaimsEnum}
-  
+
 
   currentUserScope = inject(UserService).getCurrentUserScope()
   lang=inject(TranslationService).lang
@@ -43,7 +42,7 @@ export class DivisionStudentsComponent implements OnInit {
   divisionTracks$= this.divisionService.getDivisionTracks(this.divisionId)
   optionalSubjects$
   filtration:Filter = {
-    ...Filtration, 
+    ...Filtration,
     schoolYearId:1,
     TrackId:''
   }
@@ -55,7 +54,7 @@ export class DivisionStudentsComponent implements OnInit {
       list:[],
       loading:false
     }
-  
+
 
     changeTrackModelOpened=false
 
@@ -91,7 +90,7 @@ export class DivisionStudentsComponent implements OnInit {
       this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
-      this.students.total =res.total 
+      this.students.total =res.total
 
     },err=> {
       this.students.loading=false
@@ -137,10 +136,10 @@ export class DivisionStudentsComponent implements OnInit {
     this.getStudents();
   }
 
-  onExport(fileType:FileEnum){
+  onExport(fileType:FileTypeEnum){
     let filter = {...this.filtration, PageSize:null}
     this.divisionService.divisionStudentsToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.sectionStudents'))
     })
   }
@@ -150,6 +149,6 @@ export class DivisionStudentsComponent implements OnInit {
     this.getStudents();
 
   }
-  
-  
+
+
 }

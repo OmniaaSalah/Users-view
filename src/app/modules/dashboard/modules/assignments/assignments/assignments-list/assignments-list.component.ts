@@ -15,7 +15,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
@@ -109,7 +109,7 @@ export class AssignmentsListComponent implements OnInit {
      this.getAssignmentList()
    }
 
-   onExport(fileType: FileEnum){
+   onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:null}
     this.assignmentservice.assignmentsToExport(filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('Assignments List'))

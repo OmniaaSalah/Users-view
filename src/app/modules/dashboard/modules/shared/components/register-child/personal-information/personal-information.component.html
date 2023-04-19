@@ -291,7 +291,9 @@
                       optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown> -->
                       <p-dropdown
                       formControlName="guardianId"
-                      [options]="AllGuardians$ |async"
+                      [filter]="true"
+                      (onFilter)="guardiansFilteration.KeyWord ==$event.filte; getGuardians()"
+                      [options]="AllGuardians"
                       optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
                     </div>
 
