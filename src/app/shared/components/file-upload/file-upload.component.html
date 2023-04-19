@@ -6,7 +6,7 @@
 
         <input type="file"
         #upload
-        [disabled]="files.length > maxFilesToUpload || inProgress"
+        [disabled]="files.length > filesLimit || inProgress"
         [accept]="allowedFilesExtentions"
         [multiple]="multiple"
         [hidden]="true"
@@ -34,7 +34,7 @@
                 <input type="file"
 
                 #upload
-                [disabled]="files.length > maxFilesToUpload || inProgress"
+                [disabled]="files.length > filesLimit || inProgress"
                 [accept]="allowedFilesExtentions || null"
                 [multiple]="multiple"
                 [hidden]="true"
@@ -47,8 +47,10 @@
                 <p class="title text-center" *ngIf="!inProgress && (hideCheck && !uploaded) || uploaded">{{ label }}</p>
                 <p class="title text-center color-red-500" *ngIf="!uploaded && !hideCheck">{{'toasterMessage.error' |translate}}</p>
 
-                <!-- <p class="sub-title">{{allowedFilesType}} (Maximum Size: {{fileSize}}mb)</p> -->
-                <p class="sub-title color-primary" *ngIf="allowedFilesType && !hideHint">{{'shared.fileMaxSize' |translate:{type :('shared.'+allowedFilesType |translate) || '', size: fileSize} }}</p>
+                <!-- <p class="sub-title">{{allowedFilesType}} (Maximum Size: {{maxFileSize}}mb)</p> -->
+                <p class="sub-title color-primary" *ngIf="allowedFilesType && maxFileSize">{{'shared.fileMaxSize' |translate:{type :('shared.'+allowedFilesType |translate) || '', size: maxFileSize} }}</p>
+                <p class="sub-title color-primary" *ngIf="allowedFilesType && !maxFileSize">{{'shared.fileType' |translate:{type :('shared.'+allowedFilesType |translate) || ''} }}</p>
+
             </div>
 
 

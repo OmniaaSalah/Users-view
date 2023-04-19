@@ -5,7 +5,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 import { Curriculum, Division, Grade,  Track } from 'src/app/core/models/global/global.model';
 import { shool_DDL } from 'src/app/core/Models/Survey/IAddSurvey';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { FileEnum, FileExtentions } from '../../enums/file/file.enum';
+import { FileTypeEnum, FileExtentions } from '../../enums/file/file.enum';
 import { GenderEnum, ReligionEnum, SemesterEnum } from '../../enums/global/global.enum';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
@@ -68,11 +68,11 @@ export class SharedService {
   ]
 
   fileTypesOptions=[
-    {name: FileEnum.Xlsx, extention:FileExtentions.Xlsx},
-    {name: FileEnum.Csv, extention:FileExtentions.Csv},
-    {name: FileEnum.Pdf, extention:FileExtentions.Pdf},
-    {name: FileEnum.Image, extention:FileExtentions.Image},
-    {name: FileEnum.Audio, extention:FileExtentions.Audio}
+    {name: FileTypeEnum.Xlsx, extention:FileExtentions.Xlsx},
+    {name: FileTypeEnum.Csv, extention:FileExtentions.Csv},
+    {name: FileTypeEnum.Pdf, extention:FileExtentions.Pdf},
+    {name: FileTypeEnum.Image, extention:FileExtentions.Image},
+    {name: FileTypeEnum.Audio, extention:FileExtentions.Audio}
   ]
 
   semesterTypes=[

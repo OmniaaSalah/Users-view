@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
                     <label class="label">{{'School'|translate}}</label>
-                    <p-multiSelect  [options]="(schools$| async)"   (ngModelChange)="schoolSelected($event)" display="chip" (onClear)="isSchoolSelected=false" [(ngModel)]="filtration.SchoolId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'shared.chooseSchool'|translate }}"></p-multiSelect>
+                    <p-multiSelect  [options]="(schools$| async)"   (ngModelChange)="schoolSelected($event)" [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'"  display="chip" (onClear)="isSchoolSelected=false" [(ngModel)]="filtration.SchoolId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'shared.chooseSchool'|translate }}"></p-multiSelect>
                 </div>
 
                 <div class="col-md-4">
@@ -46,7 +46,7 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                    <p-multiSelect [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false"[filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
+                    <p-multiSelect [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.StudentCategory'| translate}}</label>
@@ -74,7 +74,7 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.talent'| translate}}</label>
-                    <p-multiSelect      [options]="(talents$|async)"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.talentId"    optionValue="id" optionLabel="arabicName"    placeholder="{{'dashboard.students.chooseTalent' |translate}}"></p-multiSelect>
+                    <p-multiSelect      [options]="(talents$|async)"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.talentId"    optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"    placeholder="{{'dashboard.students.chooseTalent' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label"> {{'dashboard.addChild.gender' | translate}} </label>
@@ -120,7 +120,7 @@
                     <th style="min-width: 16rem;" pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
                     <th pSortableColumn="studentMinisterialNumber">{{ ('dashboard.parents.ministerialNumber' |translate)}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
                     <th pSortableColumn="studentNumber">{{'dashboard.students.daleelNumber1'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                    <th style="min-width: 15rem;" pSortableColumn="studentEmiratesNumber">{{'sign up.digitalIdentity'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                    <th style="min-width: 15rem;" pSortableColumn="studentEmiratesNumber">{{'shared.Identity Number'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
                     <th pSortableColumn="nationality">{{'shared.nationality'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
                     <th style="min-width: 22rem;" pSortableColumn="currentSchoolName" *ngIf="currentUserScope!=userScope.Employee">{{'School'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
                     <th pSortableColumn="guardianName">{{'dashboard.students.parent'|translate}}  <p-sortIcon field="guardianName"></p-sortIcon></th>

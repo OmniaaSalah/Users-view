@@ -61,7 +61,7 @@
 
     </div>
 
-    <div class="box-shadow bg-white raduis-12 p-5">
+    <div class="box-shadow bg-white raduis-12 p-5" *ngIf="(users.totalAllData|| users.loading)&& date && shownTable">
         <h3 class="heading heading-secondary fw-bold m-0 mb-5">{{'dashboard.reports.ReportSummary'|translate}}</h3>
         <div class="row mb-4">
 

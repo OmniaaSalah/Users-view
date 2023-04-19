@@ -1,31 +1,21 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, filter, finalize, first, last, map, Observable, share, Subject, takeUntil, throwError } from 'rxjs';
-import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
-import { Division, Mode, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
-import { RequestRule } from 'src/app/core/models/settings/settings.model';
+import { finalize, Observable, Subject } from 'rxjs';
+import {  Mode } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { ClaimsService } from 'src/app/core/services/claims.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
-import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { IndexesService } from '../../../indexes/service/indexes.service';
-import { ParentService } from '../../../parants/services/parent.service';
-import { DivisionService } from '../../../schools/services/division/division.service';
-import { GradesService } from '../../../schools/services/grade/grade.service';
-import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../../students/services/students/students.service';
-import { SettingsService } from '../../../system-setting/services/settings/settings.service';
 import { RegisterChildService } from '../../services/register-child/register-child.service';
 
 @Component({
@@ -48,7 +38,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   currentUserScope = inject(UserService).getCurrentUserScope();
   get claimsEnum(){ return ClaimsEnum }
   get registrationStatusEnum() {return RegistrationStatus}
-  get fileTypesEnum () {return FileEnum}
+  get fileTypesEnum () {return FileTypeEnum}
 
   studentId = +this.route.snapshot.paramMap.get('id')
   childId = +this.route.snapshot.paramMap.get('childId')
@@ -267,7 +257,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     closeDialog(){
       this.display = false;
-      this.router.navigate(['/dashboard/messages/messages'])
+      // this.router.navigate(['/dashboard/messages/messages'])
     }
 
 }

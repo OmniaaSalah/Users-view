@@ -11,7 +11,7 @@ import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
@@ -26,7 +26,7 @@ import { StudentsService } from '../../services/students/students.service';
 export class DeletedStudentComponent implements OnInit {
   lang = inject(TranslationService).lang
   studentId = +this.route.snapshot.paramMap.get('id');
-  get fileTypesEnum () {return FileEnum}
+  get fileTypesEnum () {return FileTypeEnum}
 
   deletsCauseOptions$ = this.IndexService.getIndext(IndexesEnum.TheMainReasonsForStudentDeletion)
 

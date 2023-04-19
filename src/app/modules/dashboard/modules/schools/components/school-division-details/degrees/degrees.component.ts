@@ -13,7 +13,7 @@ import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { DivisionService } from '../../../services/division/division.service';
 import * as FileSaver from 'file-saver';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
@@ -24,7 +24,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 })
 export class DegreesComponent implements OnInit {
   @Output() onStepChanged = new EventEmitter();
-  get fileTypesEnum () {return FileEnum}
+  get fileTypesEnum () {return FileTypeEnum}
 
   get claimsEnum () {return ClaimsEnum}
 
@@ -181,7 +181,7 @@ export class DegreesComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum){
+  onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:null}
     this.divisionService.degreesToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualDegrees'))

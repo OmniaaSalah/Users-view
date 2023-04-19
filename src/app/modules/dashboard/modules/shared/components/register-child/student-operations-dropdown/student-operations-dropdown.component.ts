@@ -12,7 +12,7 @@ import { ClaimsService } from 'src/app/core/services/claims.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
 import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
@@ -42,7 +42,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
   currentUserScope = inject(UserService).getCurrentUserScope();
   get claimsEnum(){ return ClaimsEnum }
   get registrationStatusEnum() {return RegistrationStatus}
-  get fileTypesEnum () {return FileEnum}
+  get fileTypesEnum () {return FileTypeEnum}
 
   studentId = +this.route.snapshot.paramMap.get('id')
   childId = +this.route.snapshot.paramMap.get('childId')

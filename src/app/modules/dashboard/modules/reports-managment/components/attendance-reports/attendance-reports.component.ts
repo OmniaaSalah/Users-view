@@ -5,7 +5,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
@@ -29,7 +29,7 @@ export class AttendanceReportsComponent implements OnInit {
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
   filtration = {
-    ...Filtration, 
+    ...Filtration,
     schoolId: null,
     currclaumId: null,
     gradeId: null,
@@ -53,10 +53,10 @@ export class AttendanceReportsComponent implements OnInit {
 		loading:true
   }
   tableColumns = []
-  constructor(  
-    private toastr:ToastrService, 
+  constructor(
+    private toastr:ToastrService,
      private exportService: ExportService,
-    private headerService: HeaderService, 
+    private headerService: HeaderService,
     private translate: TranslateService,
      private attendanceReportsServices:AttendanceReportsServicesService,
      private sharedService: SharedService,
@@ -67,7 +67,7 @@ export class AttendanceReportsComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
+
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -78,7 +78,7 @@ export class AttendanceReportsComponent implements OnInit {
     this.getAllAbbsenceAndAttendance();
 
   }
-  
+
 
   checkValueOfCheckbox(item, event) {
     this.tableColumns.forEach((report, i) => {
@@ -110,14 +110,14 @@ export class AttendanceReportsComponent implements OnInit {
     this.getAllAbbsenceAndAttendance();
   }
 
-  onExport(fileType: FileEnum, table: Table) {
+  onExport(fileType: FileTypeEnum, table: Table) {
     let filter = {...this.filtration, PageSize:this.studentsReport.totalAllData}
     this.attendanceReportsServices.attendanceAndAbbsenceToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'))
     })
-    
-    
+
+
   }
 
   onSort(e) {
@@ -156,10 +156,10 @@ export class AttendanceReportsComponent implements OnInit {
         this.isBtnLoading=false;
       })
   }
-  
+
   formateDate(date :Date)
   {
-    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
     return d.split('.')[0]
   }
 

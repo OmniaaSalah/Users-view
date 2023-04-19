@@ -5,7 +5,7 @@ import { IndexesService } from '../../service/indexes.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -79,7 +79,7 @@ export class IndexesComponent implements OnInit {
         this.indexes.total=res.total;
         this.indexes.list=res.data;
         this.indexes.totalAllData=res.totalAllData
-      
+
       },(err)=>{this.indexes.loading = false;
         this.indexes.total=0
         this.sharedService.filterLoading.next(false);
@@ -97,10 +97,10 @@ export class IndexesComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
+  onExport(fileType: FileTypeEnum, table:Table){
     let filter = {...this.filtration, PageSize:this.indexes.totalAllData}
     this.indexesService.indexesToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.managerTools.children.System List'))
     })
   }

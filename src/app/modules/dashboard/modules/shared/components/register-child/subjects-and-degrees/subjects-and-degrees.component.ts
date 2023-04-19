@@ -7,7 +7,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
@@ -96,10 +96,10 @@ export class SubjectsAndDegreesComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum){
+  onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:null}
     this.studentsService.studentSubjectsToExport(this.studentId||this.childId, this.filtration.semester,filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.studentRecord'))
     })
   }

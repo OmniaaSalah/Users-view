@@ -10,7 +10,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Table } from 'primeng/table';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -48,21 +48,21 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     this.confirmDeleteListener();
     this.getAllSubjects();
     this.evaluationTypeList=this.subjectService.evaluationTypeList;
-   
+
     this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.Subjects.List Of Subjects'),routerLink: '/dashboard/educational-settings/subject/subjects-list'}],
       }
     );
- 
-   
+
+
 
   }
   sortMe(e)
   {
-    
-   
+
+
     if(e.order==-1)
     {this.filtration.SortBy="update "+e.field;}
     else
@@ -73,7 +73,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
   confirmDeleteListener(){
     this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
       if (val) this.deleteSubject(this.deletedSubject)
-      
+
     })
   }
 
@@ -93,14 +93,14 @@ export class SubjectsComponent implements OnInit,OnDestroy {
         this.subjects.total=0
         this.sharedService.filterLoading.next(false);
       });
-     
-   
+
+
   }
- 
+
 
   deleteSubject(subject)
   {
-        
+
         this.subjectService.deleteSubject(subject.id).subscribe((res)=>{
           this.getAllSubjects();
           this.toastService.success(this.translate.instant('dashboard.Subjects.Subject deleted Successfully'));
@@ -112,14 +112,14 @@ export class SubjectsComponent implements OnInit,OnDestroy {
           this.toastService.error(this.translate.instant('dashboard.Subjects.error happened,try again'));
           // this.confirmModelService.confirmed$.next(null);
         })
-       
-      
-  
+
+
+
 }
 
 
   clearFilter(){
-    
+
     this.filtration.KeyWord =''
     this.filtration.evaluation= null;
     this.filtration.Page=1;
@@ -127,10 +127,10 @@ export class SubjectsComponent implements OnInit,OnDestroy {
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
+  onExport(fileType: FileTypeEnum, table:Table){
     let filter = {...this.filtration, PageSize:this.subjects.totalAllData}
     this.subjectService.subjectsToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.Subjects.List Of Subjects'))
     })
   }
@@ -146,5 +146,5 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     this.subscription.unsubscribe();
     this.confirmModelService.confirmed$.next(null);
   }
- 
+
 }

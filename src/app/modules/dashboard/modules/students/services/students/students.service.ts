@@ -19,7 +19,7 @@ export class StudentsService {
   certificatesList;
   constructor(private http:HttpHandlerService, private translate:TranslateService, private loaderService: LoaderService) {
     this.certificatesList = [
-     
+
       {
         "value": CertificatesEnum.AcademicSequenceCertificate,
         "name": {
@@ -37,11 +37,11 @@ export class StudentsService {
     ];
 
    }
-  
+
   // << Students CRUD >> //
   getAllStudents(filter?){
     this.loaderService.isLoading$.next(true)
-    
+
     return this.http.post('/Student/Search',filter)
     .pipe(
       take(1),
@@ -53,7 +53,7 @@ export class StudentsService {
 
   getAllStudentsInSpecificSchool(filter){
     this.loaderService.isLoading$.next(true)
-    
+
     return this.http.post(`/Student/students`,filter)
     .pipe(
       take(1),
@@ -94,7 +94,7 @@ export class StudentsService {
     return this.http.post(`/Student/delete-request`,data).pipe(take(1))
   }
 
-  
+
 // مواد الطالب القابله للاعفاء
 getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,studentId:number}){
   return this.http.get(`/Subject/exempt-subjects`,query).pipe(take(1))
@@ -119,7 +119,7 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
   sendWithdrawalReq(data){
     return this.http.post('/Student/withdrawal-request', data).pipe(take(1))
   }
-   
+
 
   // << Students Medical File >> //
   getStudentMedicalfile(id){
@@ -147,7 +147,7 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
   }
 
   updateStudentAttachment(studentId, data){
-    return this.http.put(`/Student/attachment/${studentId}`, data)
+    return this.http.put(`/Student/attachment/${studentId}`, data).pipe(take(1))
   }
 
 
@@ -164,7 +164,7 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
 
   getStudentSubjects(studentId,semester,filter){
     this.loaderService.isLoading$.next(true)
-    
+
     return this.http.get(`/Student/student-subjects/${studentId}/${semester}`,filter)
     .pipe(
       take(1),
@@ -188,15 +188,15 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
             [this.translate.instant('dashboard.parents.Credithour')]: subject.studentHour,
 
           }
- 
+
         })
       }))
 
   }
-  
+
   getStudentRecord(filter){
     this.loaderService.isLoading$.next(true)
-    
+
     return this.http.get('/Student/school-record',filter)
     .pipe(
       take(1),
@@ -258,7 +258,7 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
   }
 
   // << issuance of a certificate >> //
-   
+
 
     getCetificateManually(id){
       return this.http.get(`/Student/${id}/certificatemanually`)

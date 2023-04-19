@@ -10,7 +10,7 @@ import { AnnualHolidayService } from '../../service/annual-holiday.service';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -48,7 +48,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   subscription:Subscription;
 	holidaysItems: MenuItem[]=[
 		{label: this.translate.instant('shared.edit'), icon:'assets/images/dropdown/pen.svg',routerLink:"/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}"},
-		
+
 	];
   constructor(
     private toastService: ToastService,
@@ -80,19 +80,19 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   }
   confirmDeleteListener(){
-  
+
     this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
       if (val) this.deleteHoliday(this.deletedHoliday)
-      
+
     })
   }
   deleteHoliday(id)
   {
- 
+
    this.annualHolidayService.deleteHoliday(id).subscribe((res)=>{
     this.getHolidaysinAnnualCalender(this.annualCalenderId);
     this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday deleted Successfully'));
-   
+
    },(err)=>{
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
    })
@@ -100,29 +100,29 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   }
   sortMe(e)
   {
-  
+
     if (e.order == 1) this.filtration.SortBy = 'old'
     else if (e.order == -1) this.filtration.SortBy = 'update'
     this.filtration.Page=1;
     this.getAllHolidays();
-    
+
   }
-  
+
   getAllHolidays(){
- 
+
     this.annualHolidayService.getAllHolidays(this.filtration).subscribe((res)=>{
       this.annualHolidays.loading = false;
       this.annualHolidays.list=res.data;
       this.annualHolidays.total=res.total;
       this.annualHolidays.totalAllData=res.totalAllData;
-  
+
     },(err)=>{this.annualHolidays.loading = false;
       this.annualHolidays.total=0
     });
-   
+
   }
   clearFilter(){
-    
+
     this.filtration.KeyWord =''
     this.filtration.Year= null;
     this.filtration.Curriculum= null;
@@ -132,10 +132,10 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
+  onExport(fileType: FileTypeEnum, table:Table){
     let filter = {...this.filtration, PageSize:null}
     this.annualHolidayService.annualToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'))
     })
   }
@@ -146,7 +146,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     this.getAllHolidays();
 
   }
-  
+
 
   gotoAddHoliday() {
     this.router.navigate(['/dashboard/educational-settings/annual-holiday/new-holiday']);
@@ -156,7 +156,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   {
    this.annualHolidayService.openModel.next(false);
   }
- 
+
   editHoliday(holiday,currentAnnualCalenderName,currentYear)
   {
   this.getHolidayNameAndYear(currentAnnualCalenderName,currentYear)
@@ -180,16 +180,16 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   saveHoliday(e)
   {
-   
+
      this.subscription=this.annualHolidayService.holiday.subscribe((updatedHoliday)=>{
-      
+
       this.editedHoliday=updatedHoliday;
       this.editedHoliday.flexibilityStatus=this.editedHoliday.flexibilityStatus.id;
       this.editedHoliday.curriculumIds=[];
       this.editedHoliday.curriculums.forEach(element => {
       this.editedHoliday.curriculumIds.push(element.id)
       });
-  
+
       this.editedHoliday={
         'name':{'ar':this.editedHoliday.name.ar,'en':this.editedHoliday.name.en },
         'dateFrom':this.editedHoliday.dateFrom,
@@ -197,7 +197,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
         'flexibilityStatus':this.editedHoliday.flexibilityStatus,
         'curriculumIds': this.editedHoliday.curriculumIds,
         };
-      
+
       this.annualHolidayService.updateHoliday(this.updatedHolidayId,this.editedHoliday).subscribe((res)=>{
         // this.isBtnLoading=false;
         if(res.statusCode=='OK')
@@ -219,7 +219,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   openRow(annualCalenderId:number)
   {
-    
+
     this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading = true;
 
      this.getHolidaysinAnnualCalender(annualCalenderId);
@@ -227,29 +227,29 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   getHolidaysinAnnualCalender(annualCalenderId:number)
   {
-   
+
     this.annualHolidayService.getHolidaysByAnnualCalenderID(annualCalenderId).subscribe((res)=>{
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading = false;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).holidays=res.data;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).total=res.total;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).totalAllData=res.totalAllData;
-     
+
     },(err)=>{ this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading= false;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).total=0
     });
 
-  
+
   }
   closeRow()
   {
- 
+
 
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.confirmModelService.confirmed$.next(null);
    this.annualHolidayService.openModel.next(false);
- 
+
  }
 
 }

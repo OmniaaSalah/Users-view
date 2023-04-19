@@ -78,7 +78,7 @@
           <app-file-upload
           theme="chat"
           [files]="filesToUpload"
-          [maxFilesToUpload]="3"
+          [filesLimit]="3"
           (onFileUpload)="filesToUpload =$event"></app-file-upload>
 
           <!-- <button [disabled]="!reqActionsForm.comments.length || !filesToUpload.length" (click)="addComment()"  role="button" class="d-flex align-items-center align-items-center p-3 bg-primary radius-full rotate180">

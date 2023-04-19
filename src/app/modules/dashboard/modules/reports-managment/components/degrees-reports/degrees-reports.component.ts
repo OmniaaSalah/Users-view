@@ -13,7 +13,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { SubjectService } from '../../../subjects/service/subject.service';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { Table } from 'primeng/table';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
@@ -61,7 +61,7 @@ export class DegreesReportsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  
+
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.tableColumns=this.degreesReportService.getTableColumns();
     this.getDegreesList();
@@ -91,7 +91,7 @@ export class DegreesReportsComponent implements OnInit {
     this.filtration.Page=1;
     this.getDegreesList();
   }
-  
+
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
     this.getDegreesList();
@@ -110,7 +110,7 @@ export class DegreesReportsComponent implements OnInit {
   }
 
   getDegreesList(){
-  
+
     this.isBtnLoading=true;
     this.degreessReport.loading=true
     this.degreessReport.list =[];
@@ -128,10 +128,10 @@ export class DegreesReportsComponent implements OnInit {
     })
   }
 
-  onExport(fileType: FileEnum, table: Table) {
+  onExport(fileType: FileTypeEnum, table: Table) {
     let filter = {...this.filtration, PageSize:this.degreessReport.totalAllData}
     this.degreesReportService.degreesToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'))
     })
 

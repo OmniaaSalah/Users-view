@@ -6,7 +6,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { AssessmentService } from '../../service/assessment.service';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -73,7 +73,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
   }
 
   private getRate(): void {
-  
+
     this.assessmentList.loading = true
     this.assessmentList.list = []
     this.assessmentService.getRates(this.filtration).subscribe(res => {
@@ -95,7 +95,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     this.filtration.Page=1;
     this.getRate()
   }
-  onExport(fileType: FileEnum, table: Table) {
+  onExport(fileType: FileTypeEnum, table: Table) {
     this.exportService.exportFile(fileType, this.assessmentList.list,'')
   }
   clearFilter() {
@@ -104,7 +104,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     this.filtration.Page=1;
     this.getRate()
   }
- 
+
 deleteRate(id)
 {
   this.assessmentService.deleteRate(id).subscribe((res)=>{
@@ -117,7 +117,7 @@ deleteRate(id)
       this.toastService.success(this.translate.instant('dashboard.Assessment.Assessment deleted Successfully'));
       this.getRate()
      }
-    
+
   },(err)=>{
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
   })
@@ -125,7 +125,7 @@ deleteRate(id)
 confirmDeleteListener(){
   this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
     if (val) this.deleteRate(this.selectedRate)
-    
+
   })
 }
 
@@ -138,11 +138,11 @@ checkDashboardHeader()
      {
        this.componentHeaderData.breadCrump=
        [
-      
+
         { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/school-performance-managent/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }
        ]
- 
-       
+
+
      }
      else if (this.currentUserScope==UserScope.SPEA)
      {
@@ -150,10 +150,10 @@ checkDashboardHeader()
           [
             { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }
          ]
- 
-       
+
+
      }
- 
+
      this.headerService.changeHeaderdata(this.componentHeaderData)
    }
 
