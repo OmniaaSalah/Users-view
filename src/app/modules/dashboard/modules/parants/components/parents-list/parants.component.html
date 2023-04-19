@@ -10,7 +10,7 @@
                     <div class="row gx-5 form-set">
                         <div class="col-md-3">
                             <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                            <p-multiSelect [options]="(countries$ | async)" display="chip"[(ngModel)]="filtration.NationalityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
+                            <p-multiSelect [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip"[(ngModel)]="filtration.NationalityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
                         </div>
                         <div class="col-md-3">
                             <label class="label">{{'dashboard.parents.HaveChildreen'| translate}}</label>
@@ -25,28 +25,28 @@
                 <tr>
                     <th pSortableColumn="name.ar" >
                         <div class="content">
-                            
+
                             <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.parents.parentName'|translate }}
                         </div>
                     </th>
                     <th pSortableColumn="surname.ar">
-                        
+
                         <p-sortIcon field="surname.ar"></p-sortIcon>{{'dashboard.parents.parentNickname'|translate }}
                     </th>
                     <th pSortableColumn="emiratesIdNumber">
-                        
+
                         <p-sortIcon field="emiratesIdNumber"></p-sortIcon>{{'shared.Identity Number'|translate }}
                     </th>
                     <th pSortableColumn="gender">
-                        
+
                         <p-sortIcon field="gender"></p-sortIcon>{{'shared.gender'|translate }}
                     </th>
                     <th pSortableColumn="relativeRelation">
-                        
+
                         <p-sortIcon field="gender"></p-sortIcon>{{'dashboard.parents.relativeRelation'|translate }}
                     </th>
                     <th pSortableColumn="birthdate">
-                        
+
                         <p-sortIcon field="birthDate"></p-sortIcon>{{'shared.birthDay'|translate }}
                     </th>
                     <th pSortableColumn="nationalityName.ar">

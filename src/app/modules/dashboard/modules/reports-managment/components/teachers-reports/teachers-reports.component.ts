@@ -7,7 +7,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
@@ -74,14 +74,14 @@ export class TeachersReportsComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
+  onExport(fileType: FileTypeEnum, table:Table){
     let filter = {...this.filtration, PageSize:0}
     this.teachersReportService.teachersToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'))
     })
   }
-  
+
   onSort(e) {
     console.log(e);
     if (e.order == 1) this.filtration.SortBy = 'old'
@@ -90,7 +90,7 @@ export class TeachersReportsComponent implements OnInit {
     this.getTeachersReportList();
   }
 
-  
+
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;

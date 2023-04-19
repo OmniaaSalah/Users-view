@@ -5,7 +5,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
@@ -19,7 +19,7 @@ export class GracePeriodsListComponent implements OnInit {
 
   Items: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
 
-  
+
   filtration={...Filtration}
   paginationState= {...paginationInitialState}
   periods={
@@ -39,7 +39,7 @@ export class GracePeriodsListComponent implements OnInit {
     this.getGracePeriodsList()
   }
 
-  
+
 
   getGracePeriodsList(){
     this.periods.list=[]
@@ -56,10 +56,10 @@ export class GracePeriodsListComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum){
+  onExport(fileType: FileTypeEnum){
     let filter = {...this.filtration, PageSize:null}
     this.settingService.getGracePeriodListToExport(filter).subscribe( (res:any) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.SystemSetting.graceSession'))
     })
   }

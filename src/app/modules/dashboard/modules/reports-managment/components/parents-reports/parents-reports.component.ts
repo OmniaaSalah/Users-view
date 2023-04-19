@@ -8,7 +8,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { ParentsReportsService } from '../../services/parents-reports-service/parents-reports.service';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -51,14 +51,14 @@ export class ParentsReportsComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.tableColumns=this.parentReportService.getTableColumns();
-    this.getParentReportList(); 
+    this.getParentReportList();
   }
 
 
   getParentReportList() {
     this.isBtnLoading=true;
  if(this.date)
- { 
+ {
    this.filtration.RegisterationStartDate=this.formateDate(this.date[0])
    this.filtration.RegisterationEndDate=this.formateDate(this.date[1])
  }
@@ -89,7 +89,7 @@ export class ParentsReportsComponent implements OnInit {
       else
       {this.filtration.SortBy="old "+e.field;}
       this.filtration.Page=1;
-  
+
       this.getParentReportList();
     }
     clearFilter(){
@@ -107,24 +107,24 @@ export class ParentsReportsComponent implements OnInit {
       this.filtration.Page=1;
       this.getParentReportList();
     }
-  
-  
-    onExport(fileType: FileEnum, table:Table){
+
+
+    onExport(fileType: FileTypeEnum, table:Table){
       let filter = {...this.filtration, PageSize:this.parentsReport.totalAllData}
       this.parentReportService.parentsToExport(filter).subscribe( (res) =>{
-        
+
         this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'))
       })
     }
-  
-  
-  
+
+
+
     paginationChanged(event: paginationState) {
       this.filtration.Page = event.page;
       this.getParentReportList();
-  
+
     }
-  
+
     checkValueOfCheckbox(item, event) {
       this.tableColumns.forEach((report, i) => {
         if (report.header == item.header && event.checked == true) {
@@ -133,13 +133,13 @@ export class ParentsReportsComponent implements OnInit {
         if (report.header == item.header && event.checked == false) {
           report.isSelected == false
         }
-  
+
       })
     }
 
   formateDate(date :Date)
   {
-    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
     return d.split('.')[0]
   }
 }

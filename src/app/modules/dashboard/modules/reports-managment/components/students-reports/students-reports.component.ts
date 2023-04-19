@@ -6,7 +6,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -128,16 +128,16 @@ export class StudentsReportsComponent implements OnInit {
   getStudents() {
     this.isBtnLoading=true;
     if(this.birthDate)
-    { 
+    {
       this.filtration.BirthDateFrom=this.formateDate(this.birthDate[0])
       this.filtration.BirthDateTo=this.formateDate(this.birthDate[1])
     }
     if(this.acceptanceDate)
-    { 
+    {
       this.filtration.AcceptanceDateFrom=this.formateDate(this.acceptanceDate[0])
       this.filtration.AcceptanceDateTo=this.formateDate(this.acceptanceDate[1])
     }
-   console.log(this.filtration) 
+   console.log(this.filtration)
     this.studentsReport.loading = true
     this.studentsReport.list = []
     this.studentsReportService.getAllStudents(this.filtration)
@@ -171,17 +171,17 @@ export class StudentsReportsComponent implements OnInit {
     })
   }
 
-  onExport(fileType: FileEnum, table: Table) {
+  onExport(fileType: FileTypeEnum, table: Table) {
     let filter = {...this.filtration, PageSize:this.studentsReport.totalAllData}
     this.studentsReportService.studentsToExport(filter).subscribe( (res) =>{
-      
+
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'))
     })
 
   }
 
   clearFilter() {
-   
+
     this.filtration.KeyWord = ''
     this.filtration.SchoolId = null
     this.filtration.CurriculumId = null
@@ -224,7 +224,7 @@ export class StudentsReportsComponent implements OnInit {
 
   formateDate(date :Date)
   {
-    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
     return d.split('.')[0]
   }
 

@@ -14,7 +14,7 @@ import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
 import { ToastrService } from 'ngx-toastr';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { SubjectService } from '../../../subjects/service/subject.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
@@ -23,7 +23,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   styleUrls: ['./upload-assignment.component.scss']
 })
 export class UploadAssignmentComponent implements OnInit {
-  get fileTypesEnum () {return FileEnum}
+  get fileTypesEnum () {return FileTypeEnum}
   lang = inject(TranslationService).lang
   assignmentFormGrp: FormGroup;
   curriculumId:number;
@@ -68,10 +68,10 @@ export class UploadAssignmentComponent implements OnInit {
 
   getSubjectList(){
     this.subjectService.getAllSubjectsWithoutDuplicated().subscribe(response => {
-     
+
 		  this.subjectsList= response;
 		})
-   
+
   }
 
 
@@ -89,7 +89,7 @@ export class UploadAssignmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurriculumList();
-  
+
     this.getGradeList();
     this.getSubjectList();
     this.headerService.Header.next(
@@ -136,9 +136,9 @@ export class UploadAssignmentComponent implements OnInit {
     return this.assignmentFormGrp.controls['examAudioPath'] as FormControl;
   }
 
- 
 
-  
+
+
 uploadedFiles: any[] = [];
 onUpload(event) {
   for(let file of event.files) {

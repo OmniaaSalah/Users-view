@@ -110,7 +110,7 @@
 
                                     <ng-container  *ngIf="divisionInfo.hasTracks">
                                         <ng-container *ngIf=" tracks$ |async as tracks">
-                                            <label class="label fw-bold" for="">{{'dashboard.schools.tracks'|translate}}</label>
+                                            <label class="label " for="">{{'dashboard.schools.tracks'|translate}}</label>
                                             <div class="row gx-5 gy-4 mb-4">
                                                 <ng-container *ngFor="let track of tracks; let i=index">
                                                     <div class="col-md-3 d-flex align-items-center gap-4">
@@ -301,17 +301,18 @@
                 </div>
             </div>
 
-            <div class="row gx-5 gy-4 form-set mt-6">
-                <label class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
-                <!-- Loader -->
-                <ng-container *ngIf="!(optionalSubjects$|async); then loader"></ng-container>
-               <!-- Loader -->
-                <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of optionalSubjects$|async">
-                    <p-checkbox  name="subjects"  [formControl]="addStudentForm.controls['optionalSubjects']"  [value]="subject.id"></p-checkbox>
-                    <label class="label label--sm" for="">{{subject.name | currentLang}}</label>
-                </div>
+            <div class="row gx-5 gy-4 form-set mt-6" *ngIf="optionalSubjects$|async as optionalSubjects">
+              <label class="label fw-bold" *ngIf="optionalSubjects.length">{{'shared.optionalSubjects'|translate}}</label>
+              <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of optionalSubjects">
+                <p-checkbox  name="subjects"  [formControl]="addStudentForm.controls['optionalSubjects']"  [value]="subject.id"></p-checkbox>
+                <label class="label label--sm" for="">{{subject.name | currentLang}}</label>
+              </div>
 
             </div>
+            <!-- Loader -->
+            <ng-container *ngIf="!optionalSubjects$; then loader"></ng-container>
+           <!-- Loader -->
+
             <div class="py-5"></div>
             <div class="d-flex  align-items-center justify-content-end mt-4">
                 <button class="btn btn-primary btn--sm" (click)="addStudentToDivision(addStudentForm.value)"  [disabled]="!addStudentForm.valid || isSubmited">

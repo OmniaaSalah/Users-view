@@ -12,7 +12,7 @@ import * as L from 'leaflet';
 import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { ToastrService } from 'ngx-toastr';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 
 @Component({
   selector: 'app-school-info',
@@ -25,7 +25,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
   get userScope() { return UserScope }
   get claimsEnum () {return ClaimsEnum}
-  get fileTypeEnum() {return FileEnum}
+  get fileTypeEnum() {return FileTypeEnum}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
 

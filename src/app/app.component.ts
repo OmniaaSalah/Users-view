@@ -17,7 +17,7 @@ import { AuthenticationService } from './core/services/authentication/authentica
 import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
 import { IndexesService } from './modules/dashboard/modules/indexes/service/indexes.service';
 import { SettingsService } from './modules/dashboard/modules/system-setting/services/settings/settings.service';
-import { FileEnum } from './shared/enums/file/file.enum';
+import { FileTypeEnum } from './shared/enums/file/file.enum';
 import { ClaimsService } from './core/services/claims.service';
 import { UserInformationService } from './modules/dashboard/modules/user-information/service/user-information.service';
 
@@ -27,7 +27,7 @@ import { UserInformationService } from './modules/dashboard/modules/user-informa
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit ,AfterViewInit{
-  get fileTypesEnum () {return FileEnum}
+  get fileTypesEnum () {return FileTypeEnum}
   currentUserName;
   version= environment.version
   currentUserScope ;
@@ -107,7 +107,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
       if(res)
       {
-        // this.usersService.deleteoser(129).subscribe()
+        // this.usersService.deleteUser(129).subscribe()
 
           this.currentUserName=this.userService.getCurrentUserName();
           this.settingsService.initializeFileRules()

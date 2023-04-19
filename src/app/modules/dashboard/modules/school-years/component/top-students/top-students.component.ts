@@ -3,7 +3,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolYearsService } from '../../service/school-years.service';
 import { Table } from 'primeng/table';
@@ -48,44 +48,44 @@ export class TopStudentsComponent implements OnInit {
        this.allTopStudentsList.total=res.result.total;
        this.allTopStudentsList.totalAllData=res.result.totalAllData;
        this.allTopStudentsList.list=res.result.data;
- 
-     
+
+
      },(err)=>{this.allTopStudentsList.loading = false;
        this.allTopStudentsList.total=0
        this.sharedService.filterLoading.next(false);
      });
   }
   clearFilter(){
- 
+
    this.filtration.KeyWord =''
    this.filtration.CurriculumId= null;
    this.filtration.GradeId= null;
    this.filtration.NationlaityId= null;
    this. getAllTopStudents();
  }
- 
- 
- onExport(fileType: FileEnum, table:Table){
+
+
+ onExport(fileType: FileTypeEnum, table:Table){
   let filter = {...this.filtration, PageSize:this.allTopStudentsList.totalAllData}
   this.schoolYearService.topStudentsToExport(Number(this.schoolYearId),this.filtration).subscribe( (res) =>{
-    
+
     this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.SchoolYear.Top Students'))
   })
 }
- 
+
  sortMe(e)
  {
    if(e.order==-1)
    {this.filtration.SortBy="update "+e.field;}
    else
    {this.filtration.SortBy="old "+e.field;}
- 
+
    this.getAllTopStudents();
  }
- 
+
  paginationChanged(event: paginationState) {
    this.filtration.Page = event.page;
    this.getAllTopStudents();
- 
+
  }
 }

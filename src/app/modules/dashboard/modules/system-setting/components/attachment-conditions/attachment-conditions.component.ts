@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
@@ -22,7 +22,7 @@ export class AttachmentConditionsComponent implements OnInit {
 
   onSubmitForm
   loading
-  
+
   attachementConditionsForm=this.fb.group({
     guardians:this.fb.array([]),
     employees:this.fb.array([]),
@@ -36,8 +36,8 @@ export class AttachmentConditionsComponent implements OnInit {
 
 
 
-  constructor( 
-    private fb: FormBuilder, 
+  constructor(
+    private fb: FormBuilder,
     private sharedService:SharedService,
     private settingsService:SettingsService,
     private toastr:ToastrService,
@@ -78,7 +78,7 @@ export class AttachmentConditionsComponent implements OnInit {
       this.guardiansCtr.push(this.fb.group({
         ruleFileId:[el.ruleFileId??0],
         fileSize:[el.fileSize, Validators.required],
-        fileType: [FileEnum[el.fileType], Validators.required],
+        fileType: [FileTypeEnum[el.fileType], Validators.required],
       }))
 
     })
@@ -90,7 +90,7 @@ export class AttachmentConditionsComponent implements OnInit {
       this.employeesCtr.push(this.fb.group({
         ruleFileId:[el.ruleFileId??0],
         fileSize:[el.fileSize, Validators.required],
-        fileType: [FileEnum[el.fileType] , Validators.required],
+        fileType: [FileTypeEnum[el.fileType] , Validators.required],
       }))
 
     })
@@ -102,7 +102,7 @@ export class AttachmentConditionsComponent implements OnInit {
       this.speaCtr.push(this.fb.group({
         ruleFileId:[el.ruleFileId??0],
         fileSize:[el.fileSize, Validators.required],
-        fileType: [FileEnum[el.fileType] , Validators.required],
+        fileType: [FileTypeEnum[el.fileType] , Validators.required],
       }))
 
     })
@@ -130,7 +130,7 @@ export class AttachmentConditionsComponent implements OnInit {
       fileSize :[3]
     }))
   }
- 
+
   deleteConditionFromParents(index){
     this.guardiansCtr.removeAt(index)
     this.toastr.success(this.translate.instant('mission Succeeded'))
@@ -144,11 +144,11 @@ export class AttachmentConditionsComponent implements OnInit {
       fileSize :[3]
     }))
   }
- 
+
   deleteConditionFromSpea(index){
     this.speaCtr.removeAt(index)
     this.toastr.success(this.translate.instant('mission Succeeded'))
   }
 
-    
+
 }

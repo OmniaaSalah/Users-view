@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef 
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { FileEnum } from '../../enums/file/file.enum';
+import { FileTypeEnum } from '../../enums/file/file.enum';
 import { SharedService } from '../../services/shared/shared.service';
 
 @Component({
@@ -65,9 +65,9 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
   clearFilter(){this.showFilterModel = false; this.onClear.emit()}
 
-  exportPdf() { this.onExport.emit(FileEnum.Pdf)}
+  exportPdf() { this.onExport.emit(FileTypeEnum.Pdf)}
 
-  exportXslx(){ this.onExport.emit(FileEnum.Xlsx) }
+  exportXslx(){ this.onExport.emit(FileTypeEnum.Xlsx) }
 
 
   ngOnDestroy(): void {
