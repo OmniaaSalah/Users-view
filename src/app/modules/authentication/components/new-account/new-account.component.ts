@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IRegistrationWay } from 'src/app/core/Models/account/registration-way';
@@ -15,13 +15,13 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { Subscription, takeWhile, tap, timer } from 'rxjs';
+import { Subscription, switchMap, takeWhile, tap, timer } from 'rxjs';
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.scss']
 })
-export class NewAccountComponent implements OnInit {
+export class NewAccountComponent implements OnInit ,OnDestroy{
   showInputForm:boolean=true;
   lang = inject(TranslationService).lang
   isBtnLoading:boolean=false;
@@ -44,6 +44,7 @@ export class NewAccountComponent implements OnInit {
   showEmailField:boolean=false;
   tittle;
   UAEUnregisteredUser;
+  phoneNumber = new FormControl('',[Validators.pattern("(05)[0-9]{8}")])
   registrationWayFormGrp: FormGroup;
   passwordsFormGrp: FormGroup;
   accountFormGrp: FormGroup;
@@ -145,6 +146,7 @@ export class NewAccountComponent implements OnInit {
     this.authService.isNewAccountOpened.next(false)
     localStorage.removeItem('accountWay');
     localStorage.removeItem('notificationSource');
+    localStorage.removeItem('userAcountData');
   }
   changeRegistrationField(e)
   {
@@ -202,7 +204,8 @@ export class NewAccountComponent implements OnInit {
 
 sendOtp()
 {
-
+console.log(this.timeLeft)
+console.log(this.account.accountWay)
   if(this.timeLeft)
   {this.isBtnLoading=true;}
   if(this.account.accountWay==RegistrationEnum.EmiratesId)
@@ -210,18 +213,17 @@ sendOtp()
     this.authService.createUAEPassAccount(this.account.notificationSource).subscribe((res)=>{
       console.log(res)
       this.isBtnLoading=false;
-      if(res.statusCode=='OK')
+      if(res?.statusCode=='OK'||res?.statusCode=='BadGateway')
       {
        
         this.step=5;
-        this.UAEUnregisteredUser=res.result;
-        this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+        this.UAEUnregisteredUser=res?.result;
       }
-      else if(res.statusCode=='NotAcceptable')
+      else if(res?.statusCode=='NotAcceptable')
       {
         this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
       }
-      else if(res.statusCode=='BadRequest')
+      else if(res?.statusCode=='BadRequest')
       {
         this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
       }
@@ -255,6 +257,10 @@ getCurrentRegistrationWay()
     this.account.accountWay= localStorage.getItem('accountWay');
     this.account.notificationSource=localStorage.getItem('notificationSource');
   }
+  setAttachment( files:CustomFile[]){
+   console.log(files[0].url)
+   this.UAEUnregisteredUser.emiratesIdPath=files[0].url;
+  }
   savePassword()
 {
   this.isBtnLoading=true;
@@ -264,16 +270,43 @@ getCurrentRegistrationWay()
     "password": this.passwordsFormGrp.value.newUserPassword
   }
 
-  this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});
-  this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).subscribe((res)=>{this.noIdentityReasonList=res});
-  this.authService.savePassword(password).subscribe((res)=>{
-    this.isBtnLoading=false;
-    this.toastService.success(this.translate.instant('sign up.password saved successfully'));
-    this.step=4;
-    this.tittle=this.translate.instant('sign up.in case identity not exist')
-  },(err)=>{this.isBtnLoading=false;
-    this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
-  })
+  if(  localStorage.getItem('userAcountData'))
+  {
+    this.authService.savePassword(password).pipe(
+      switchMap(res=>{
+
+         return this.authService.saveAccount(this.UAEUnregisteredUser)
+
+        })
+      ).subscribe((res)=>{
+        this.isBtnLoading=false;
+        if(res.statusCode!="OK")
+        {
+          this.toastService.error(this.translate.instant(res.error));
+          this.closeModel();
+        }else
+          {this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+            this.closeModel();
+        }
+      
+    },(err)=>{this.isBtnLoading=false;
+      this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
+    })
+  }
+  else
+  {
+    this.authService.savePassword(password).subscribe((res)=>{
+        this.isBtnLoading=false;
+        this.toastService.success(this.translate.instant('sign up.password saved successfully'));
+        this.sharedService.getAllNationalities().subscribe((result)=>{this.nationalityList=result});
+        this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).subscribe((resu)=>{this.noIdentityReasonList=resu});
+        this.step=4;
+        this.tittle=this.translate.instant('sign up.in case identity not exist')
+      
+    },(err)=>{this.isBtnLoading=false;
+      this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
+    })
+  }
 
 }
 savePersonalInformation()
@@ -309,6 +342,7 @@ savePersonalInformation()
     this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
   })
 
+
 }
 
 onFileUpload(file:CustomFile[]): void {
@@ -321,9 +355,10 @@ onFileUpload(file:CustomFile[]): void {
 getAuthenticationWays()
 {
   this.signUpWaysList=[
-    {value:RegistrationEnum.PhoneNumber,name:this.translate.instant('sign up.phoneNumberInCaseNotHaveEmiratesID')},
     {value:RegistrationEnum.Email,name:this.translate.instant('sign up.emailInCaseNotHaveEmiratesID')},
+    {value:RegistrationEnum.PhoneNumber,name:this.translate.instant('sign up.phoneNumberInCaseNotHaveEmiratesID')},
     {value:RegistrationEnum.EmiratesId,name:this.translate.instant('sign up.digitalIdentity')}
+    
    ]
 }
 
@@ -360,6 +395,23 @@ confirmOTP()
     this.ngOtpInputRef.setValue('');
   })
 
+}
+saveUserObj()
+{
+  if(!this.UAEUnregisteredUser?.phone)
+  {
+    console.log(this.phoneNumber)
+    this.UAEUnregisteredUser.phone=this.phoneNumber.value;
+  }
+
+  localStorage.setItem('userAcountData', JSON.stringify(this.UAEUnregisteredUser));
+  this.account.accountWay=RegistrationEnum.PhoneNumber;
+  localStorage.setItem('accountWay',this.account.accountWay);
+  this.sendOtp();
+}
+
+ngOnDestroy(): void {
+    this.closeModel()
 }
 
 }

@@ -60,7 +60,7 @@ export class PersonalInformationComponent implements OnInit {
   cities = this.CountriesService.cities
   cities$ = this.CountriesService.getCities()
   states$ = this.CountriesService.getAllStates()
-  talents$ = this.studentsService.getTalents()
+  talents$ = inject(IndexesService).getIndext(IndexesEnum.TheTypeOfTalentOfTheStudent);
   nationalitiesCategory$ = this.indexService.getIndext(IndexesEnum.NationalityCategory)
   languages$ = this.indexService.getIndext(IndexesEnum.Language).pipe(share())
   countries$ = this.CountriesService.getCountries()

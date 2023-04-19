@@ -10,15 +10,29 @@
     </div>
 
 </div>
+
+<div class="table-caption">
+<app-table-caption [hasExport]="false" (onFilter)="searchModel.page=1;getNotifications(searchModel)" (onSearch)="searchModel.page=1;searchModel.keyword = $event; getNotifications(searchModel)" (onClear)="clearFilter()">
+    <!-- <div class="row gx-5 form-set">
+        <div class="col-4">
+            <label class="label" for="indexType">{{'dashboard.SystemSetting.Receiver'|translate}} </label>
+            <p-multiSelect [options]="roles" display="chip" [(ngModel)]="searchModel.Sender" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.Receiver'|translate}}"></p-multiSelect>
+        </div>
+    </div> -->
+</app-table-caption>
+</div>
+
 <div id="notification-content">
 
-    <div class="d-flex group ">
+    <!-- <div class="d-flex group ">
         <div class="myInput myInput--md myInput--search p-input-icon-left  ">
             <i class="pi pi-search fs-3"></i>
             <input class="input rounded-4" type="text" (keyup)="onSearch($event)" pInputText
                 placeholder="{{'Search...' | translate}}" />
         </div>
-    </div>
+    </div> -->
+
+
     <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500"
         (scrolled)="onScroll()">
 
