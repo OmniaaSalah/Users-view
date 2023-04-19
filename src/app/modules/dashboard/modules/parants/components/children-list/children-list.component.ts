@@ -68,9 +68,6 @@ export class ChildrenListComponent implements OnInit {
 
     this.checkChildrenList()
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.userService.currentUserSchoolName$?.subscribe((res)=>{this.currentSchool=res})
-
-
 
   }
   getChildernByParentId(){
