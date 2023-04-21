@@ -12,23 +12,20 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ClickOutsideDirective } from '../shared/directives/click-outside/click-outside.directive';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DropdownModule } from 'primeng/dropdown';
-import { SharedModule } from '../shared/shared.module';
 import { PermissionDirective } from '../shared/directives/permission/permission.directive';
 import { FormsModule } from '@angular/forms';
-import { CurrentLangPipe } from '../shared/pipes/current-lang/current-lang.pipe';
 import {BadgeModule} from 'primeng/badge';
-import { LocalizeDatePipe } from '../shared/pipes/localize-date.pipe';
 
 @NgModule({
   declarations: [
-    SidebarComponent, 
-    HeaderComponent, 
+    SidebarComponent,
+    HeaderComponent,
     LayoutComponent,
     HeaderDashboardComponent,
     ClickOutsideDirective,
     PermissionDirective
 
-   
+
   ],
   imports: [
     CommonModule,
@@ -41,10 +38,10 @@ import { LocalizeDatePipe } from '../shared/pipes/localize-date.pipe';
     InfiniteScrollModule,
     DropdownModule,
     BadgeModule
-    
 
-  
-  
+
+
+
   ],
   exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective,PermissionDirective]
 })
