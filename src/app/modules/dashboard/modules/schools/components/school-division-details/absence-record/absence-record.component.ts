@@ -156,7 +156,7 @@ lastDate
   getDivisionStudents(searchText?){
     return this.divisionService.getDivisionStudents(this.schoolId, this.divisionId,{KeyWord:searchText || ''})
     .pipe(
-      map(res => res.result.data),
+      map(res => res?.result?.data || []),
       map(students=>{
         return students.map(el =>{
           return {
@@ -180,11 +180,15 @@ lastDate
   //   return  this.absenceStudentsForm.studentAbsences.some(el => el.isAbsencent)
   //  }
 
+  resetSelectedStudents(){
+    this.absenceStudentsForm.studentAbsences = this.absenceStudentsForm.studentAbsences.map(el => el.isAbsencent =false)
+  }
+
   addStudentsToAbsenceRecords(){
     this.isSubmited=true
     let data= {...this.absenceStudentsForm, date: this.formateDate(this.absenceStudentsForm.date)}
     this.divisionService.addAbsentStudents(this.schoolId, this.divisionId,this.absenceStudentsForm).subscribe(res=>{
-      this.toasterService.success('تم اضافه الطلاب الى سجل الغياب بنجاح');
+      this.toasterService.success(this.translate.instant('toasterMessage.absenceRaised'));
       this.isSubmited=false
       this.absenceModelOpened = false
       this.getAbsenceRecords()

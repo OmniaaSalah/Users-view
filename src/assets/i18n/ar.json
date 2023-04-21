@@ -401,7 +401,8 @@
         "degreesUploaded":"تم رفع درجات الماده بنجاح",
         "degreesShouldBeEntered":"يرجى ادخال الدرجات فى الملف المرفق",
         "userNotAllowedToUploadDegrees":"المستخدم الحالى ليس لديه صلاحيه لرفع الدرجات",
-        "fileDataShouldBeReviewed":"يرجعى مراجعه البيانات فى الملف المرفق"
+        "fileDataShouldBeReviewed":"يرجعى مراجعه البيانات فى الملف المرفق",
+        "absenceRaised":"تم اضافه الطلاب الى سجل الغياب بنجاح'"
     },
 
     "emptyList": {
@@ -1121,6 +1122,7 @@
             "editDetailsOnEmployee": "تفاصيل التعديل على معلومات موظف المدرسة",
             "chooseStudentsToTransfer": "اختيار الطلاب المراد نقلهم",
             "raisAbsence": "تسجيل الغياب",
+            "absenceStudentsExist":"يوجد طلاب غائبين",
             "transferStudentToAnotherDivision": "نقل الطالب لشعبة أخري",
             "currentDivision": "الشعبة الحالية",
             "divisionToTransferTo": "الشعبة المراد النقل عليه",

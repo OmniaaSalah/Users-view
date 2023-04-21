@@ -57,11 +57,12 @@
 
                 <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p>
                 <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
+                  <ng-container *ngIf="file?.url">
                     <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
 
                     <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
                         <div class="elcardo-title d-flex">
-                            <img src="assets/images/shared/file.svg" [style.width.rem]="5" alt="" alt="pdf" />
+                            <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="" alt="pdf" />
                             <p class="mx-5 my-2">{{ file?.name }}</p>
                         </div>
                         <!-- <div class="elcardo-body">
@@ -69,6 +70,7 @@
                             <p>{{ file?.comment }}</p>
                         </div> -->
                     </div>
+                  </ng-container>
 
                 </div>
             </div>

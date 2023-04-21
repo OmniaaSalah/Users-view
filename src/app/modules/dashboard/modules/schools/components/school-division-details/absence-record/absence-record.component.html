@@ -29,7 +29,7 @@
                                 dateFormat="DD dd-mm-yy"
                                 (onSelect)="dateSelected($event)"></p-calendar>
                                 <!-- [(ngModel)]="absenceStudentsForm.date" -->
-                    
+
                             <div class="icon calendar" (click)="calendar.toggle()">
                                 <img src="assets/images/navBar/calendar.svg" alt="">
                             </div>
@@ -48,8 +48,8 @@
                     <app-table-caption
                     [hasFilter]="false"
                     [hasExport]="false"
-                    (onExport)="onExport($event)" 
-                    (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getAbsenceRecords()" 
+                    (onExport)="onExport($event)"
+                    (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getAbsenceRecords()"
                     (onClear)="clearFilter()"></app-table-caption>
                 </div>
                 <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentsModelOpened=true">
@@ -58,7 +58,7 @@
                 </button> -->
             </div>
         </ng-template>
-        
+
     <ng-template pTemplate="header" let-columns="columns">
             <tr>
                 <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
@@ -138,47 +138,53 @@
             placeholder="الاثنين 13-10-2022"
              required></p-calendar>
 
-            <!-- <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
-                <input class="input rounded-4" type="text" pInputText placeholder="البحث عن طلاب..." [(ngModel)]="searchText" />
-                <i class="pi pi-search fs-3"></i>
-            </div> -->
-            <div class="myInput myInput--full myInput--search p-input-icon-right mt-6">
-                <i class="pi pi-search fs-3 "></i>
-                <input class="input" [formControl]="studentSearchText" [ngModelOptions]="{standalone: true}" type="text" pInputText placeholder="{{'shared.Search...'|translate}}"/>
+
+             <div class="d-flex align-items-center gap-4  my-5">
+              <!-- <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch> -->
+              <label class="mb-2" for="description">{{'dashboard.schools.absenceStudentsExist'|translate}}</label>
+              <p-inputSwitch name="isAbsence" #isAbsence ngModel (onChange)="resetSelectedStudents()"></p-inputSwitch>
+              <span class="mb-2" for="name">{{(isAbsence.checked() )? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
             </div>
 
-            <!-- Search Result -->
-            <div class="row g-4 mt-6 mb-5" *ngIf="!isLoading">
-                <ng-container *ngFor="let student of students; let i =index">
+             <ng-container *ngIf="isAbsence.checked()">
+               <div class="myInput myInput--full myInput--search p-input-icon-right">
+                   <i class="pi pi-search fs-3 "></i>
+                   <input class="input" [formControl]="studentSearchText" [ngModelOptions]="{standalone: true}" type="text" pInputText placeholder="{{'shared.Search...'|translate}}"/>
+               </div>
 
-                    <div class="col-md-6 col-md-6 d-flex gap-4 align-items-center">
-                            <p-checkbox  name="students" [binary]="true" [inputId]="i" [(ngModel)]="student.isAbsencent" (ngModelChange)="isAbsenteStudentsSelected()"></p-checkbox>
-                            <!-- <p-checkbox  name="students" [value]="student" [inputId]="i" [(ngModel)]="absenceStudentsForm.studentAbsences"></p-checkbox> -->
-                            <label class="label label--sm" [for]="i">{{student.studentNumber}} {{student.name|currentLang}}</label>
-                    </div>
-                    <div class="col-md-6 d-flex align-items-center gap-5">
-                        <div class="d-flex align-items-center gap-4">
-                            <p-checkbox name="withCause"  [trueValue]="1" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
-                            <label class="label label--sm" [for]="i"> {{'dashboard.parents.withCause' | translate}}</label>
-                        </div>
+               <!-- Search Result -->
+               <div class="row g-4 mt-6 mb-5" *ngIf="!isLoading">
+                   <ng-container *ngFor="let student of students; let i =index">
 
-                        <div class="d-flex align-items-center gap-4">
-                            <p-checkbox name="withoutCause"  [trueValue]="0" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
-                            <label class="label label--sm" [for]="i"> {{'dashboard.parents.withoutCause' | translate}}</label>
-                        </div>
-                    </div>
+                       <div class="col-md-6 col-md-6 d-flex gap-4 align-items-center">
+                               <p-checkbox  name="students" [binary]="true" [inputId]="i" [(ngModel)]="student.isAbsencent" (ngModelChange)="isAbsenteStudentsSelected()"></p-checkbox>
+                               <!-- <p-checkbox  name="students" [value]="student" [inputId]="i" [(ngModel)]="absenceStudentsForm.studentAbsences"></p-checkbox> -->
+                               <label class="label label--sm" [for]="i">{{student.studentNumber}} {{student.name|currentLang}}</label>
+                       </div>
+                       <div class="col-md-6 d-flex align-items-center gap-5">
+                           <div class="d-flex align-items-center gap-4">
+                               <p-checkbox name="withCause"  [trueValue]="1" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
+                               <label class="label label--sm" [for]="i"> {{'dashboard.parents.withCause' | translate}}</label>
+                           </div>
 
-                    <div class="my-4" *ngIf="student.withCause">
-                        <p-dropdown [options]="absenceReason$ |async" [(ngModel)]="student.cause" [required]="true" [name]="'cause'+i" optionLabel="{{lang=='ar' ?'name.ar':'name.en'}}" optionValue="id" placeholder="{{'dashboard.parents.chooseAbsenceCause'|translate}}"></p-dropdown>
-                    </div>
+                           <div class="d-flex align-items-center gap-4">
+                               <p-checkbox name="withoutCause"  [trueValue]="0" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
+                               <label class="label label--sm" [for]="i"> {{'dashboard.parents.withoutCause' | translate}}</label>
+                           </div>
+                       </div>
 
-                </ng-container>
-                
-            </div>
-                            
-            <!-- Loader -->
-            <ng-container *ngIf="isLoading; then loader"></ng-container>
-            <!-- Loader -->
+                       <div class="my-4" *ngIf="student.withCause">
+                           <p-dropdown [options]="absenceReason$ |async" [(ngModel)]="student.cause" [required]="true" [name]="'cause'+i" optionLabel="{{lang=='ar' ?'name.ar':'name.en'}}" optionValue="id" placeholder="{{'dashboard.parents.chooseAbsenceCause'|translate}}"></p-dropdown>
+                       </div>
+
+                   </ng-container>
+
+               </div>
+
+               <!-- Loader -->
+               <ng-container *ngIf="isLoading; then loader"></ng-container>
+               <!-- Loader -->
+             </ng-container>
 
             <div class="d-flex  align-items-center justify-content-end mt-5">
                 <!-- || !isAbsenteStudentsSelected() -->

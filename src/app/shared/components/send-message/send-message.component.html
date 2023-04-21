@@ -113,13 +113,13 @@
         <label  for=""> {{'dashboard.Messages.Possibility to reply' | translate}} <span
             class="star">*</span></label>
         <p-inputSwitch (onChange)="isToggleLabel1($event)" formControlName="switch2"></p-inputSwitch>
-      
+
       </div>
-      
+
       <div class="d-flex gap-3  align-items-center">
         <label  for="">{{'dashboard.Messages.senderName' | translate}}</label>
         <p-inputSwitch (onChange)="isToggleLabel2($event)"  formControlName="switch3"></p-inputSwitch>
-       
+
       </div>
     </div>
 
@@ -141,7 +141,7 @@
     </div>
 
     <div class="image-uploader__upload upload-btn">
-      <app-file-upload view="full" [accept]="fileTypesEnum.Pdf" (onFileUpload)="messageUpload($event)"
+      <app-file-upload (onFileUpload)="messageUpload($event)"
         (onFileDelete)="messageDeleted($event)"></app-file-upload>
     </div>
 
@@ -196,8 +196,8 @@
 
     <div class="image-uploader__upload upload-btn">
 
-     
-      <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="messageUpload($event)"
+
+      <app-file-upload (onFileUpload)="messageUpload($event)"
         (onFileDelete)="messageDeleted($event)"></app-file-upload>
     </div>
 
@@ -279,7 +279,7 @@
 
     <div class="image-uploader__upload upload-btn">
 
-      <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="messageUpload($event)"
+      <app-file-upload (onFileUpload)="messageUpload($event)"
         (onFileDelete)="messageDeleted($event)"></app-file-upload>
     </div>
 

@@ -38,7 +38,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   @Input() multiple = false
   @Input() filesLimit = 1
   @Input() files: CustomFile[] =[]  // files to view
-  @Input() view: 'box' | 'full'  // file uploader theme variants
+  @Input() view: 'box' | 'full' ='full'  // file uploader theme variants
   @Output() onFileUpload= new EventEmitter<any>();
   @Output() onFileDelete= new EventEmitter<any>();
 
