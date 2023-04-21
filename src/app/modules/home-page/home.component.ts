@@ -4,10 +4,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { IMessage } from 'src/app/core/Models/messages/message';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-current-user',
@@ -17,6 +17,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+  lang= inject(TranslationService).lang;
   isOpend:boolean[]=[];
   messages=[];
   currentUserScope = inject(UserService).getCurrentUserScope()
@@ -62,7 +63,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     public userService: UserService,
-    private confirmationService: ConfirmationService,
     private translate:TranslateService) { }
 
   ngOnInit(): void {
@@ -71,11 +71,13 @@ export class HomeComponent implements OnInit {
       this.loadCardsItems(id);
     })
 
+   if(this.currentUserScope==UserScope.Employee) 
+   {
     this.userService.currentUserSchoolName$.subscribe(res =>{
-         this.currentSchoolName=res;
-    })
-
-   if(this.currentUserScope==UserScope.Employee) this.getUregentMessages()
+      this.currentSchoolName=typeof  res === 'string' ? (JSON.parse(res))[this.lang] :  res[this.lang]
+      })
+    this.getUregentMessages()
+   }
 
   }
 

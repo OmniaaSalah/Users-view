@@ -355,7 +355,7 @@
                     <div class="col-md-6">
                    
                         <p class="color-gray-300 ">{{'dashboard.addChild.identityPhoto' | translate}}</p>
-                        <app-file-upload view="full" (onFileUpload)="setAttachment($event)"></app-file-upload>
+                        <app-file-upload    [accept]="fileTypeEnum.Image" [maxFileSize]="3" view="full" (onFileUpload)="setAttachment($event)"></app-file-upload>
 
                     </div>
                     <div class="col-md-6 custom-form custom-validation-form pt-0">

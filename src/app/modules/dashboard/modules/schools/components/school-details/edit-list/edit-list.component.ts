@@ -68,9 +68,8 @@ export class EditListComponent implements OnInit {
       this.userService.currentUserSchoolName$?.subscribe((res)=>{
         if(res)
         {
-          this.currentSchool=res;
-
-          this.componentHeaderData.mainTitle.main=this.currentSchool;
+          this.currentSchool= JSON.parse(res);
+          this.componentHeaderData.mainTitle.main=this.currentSchool[this.lang];
         }
       })
     }
