@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { UserService } from '../user/user.service';
+import { UserService } from '../services/user/user.service';
 
 @Injectable({
   providedIn: 'root'

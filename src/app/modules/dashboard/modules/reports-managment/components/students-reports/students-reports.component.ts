@@ -3,7 +3,6 @@ import { Component, OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
@@ -98,7 +97,6 @@ export class StudentsReportsComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-    private layoutService: LayoutService,
     private exportService: ExportService,
     private studentsReportService: StudentsReportsService,
     private sharedService: SharedService,
@@ -112,7 +110,6 @@ export class StudentsReportsComponent implements OnInit {
   ngOnInit(): void {
     this.genderList = this.sharedService.genderOptions
     this.studentsStatus = this.studentsReportService.studentsStatus
-    this.layoutService.changeTheme('dark')
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getStudents()
     this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});

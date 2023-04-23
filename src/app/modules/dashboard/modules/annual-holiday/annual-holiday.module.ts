@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AnnualHolidayComponent } from './components/annual-holiday-list/annual-holiday-list.component';
 import { EditNewAnnualHolidayComponent } from './components/edit-new-annual-holiday/edit-new-annual-holiday.component';
-import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PrimngModule } from '../../../primng/primng.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { PrimngModule } from '../../../../shared/primng/shared-primng.module';
 import { AnnualHolidayRoutingModule } from './annual-holiday-routing.module';
-import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HolidayModelComponent } from './components/holiday-model/holiday-model.component';
 
@@ -17,22 +12,13 @@ import { HolidayModelComponent } from './components/holiday-model/holiday-model.
   declarations: [AnnualHolidayComponent,
     EditNewAnnualHolidayComponent,
     HolidayModelComponent,
-    
-    
+
+
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    FontAwesomeModule,
     PrimngModule,
-    TranslateModule,
     AnnualHolidayRoutingModule,
     SharedModule,
-    ToastrModule
-    
-    
-    
-    
   ]
 })
 export class AnnualHolidayModule { }

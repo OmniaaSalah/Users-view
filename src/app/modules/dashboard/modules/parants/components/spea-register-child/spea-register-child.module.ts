@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SpeaRegisterChildRoutingModule } from './spea-register-child-routing.module';
 import { SpeaRegisterChildComponent } from './spea-register-child.component';
-import { PrimngModule } from 'src/app/modules/primng/primng.module';
+import { PrimngModule } from 'src/app/shared/primng/shared-primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 

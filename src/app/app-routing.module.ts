@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Router, RouterModule, Routes } from '@angular/router';
-// import { AuthGuard } from './core/services/auth-guard.service';
-import { AuthenticationGuard } from './core/services/guards/authentication.guard';
-import { CheckSchoolMandatoryMessagesGuard } from './core/services/guards/check-school-mandatory-messages.guard';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationGuard } from './core/guards/authentication.guard';
+import { CheckSchoolMandatoryMessagesGuard } from './core/guards/check-school-mandatory-messages.guard';
 import { CertificateDetailsComponent } from './modules/issuance-of-a-certificate-pages/components/certificate-details/certificate-details.component';
-// import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
-  
+
   {
     path: '',
     loadChildren: () =>
@@ -23,7 +21,7 @@ const routes: Routes = [
         (a) => a.NotificationModule
       ),
     canActivate: [AuthenticationGuard,CheckSchoolMandatoryMessagesGuard]
-    
+
   },
   {
     path: 'dashboard',
@@ -38,10 +36,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/issuance-of-a-certificate-pages/issue-certificate.module').then(
         (a) => a.IssuanceCertificateModule
-        
+
       ),
       canActivate: [AuthenticationGuard]
-    
+
   },
   {
     path: 'auth',
@@ -56,17 +54,17 @@ const routes: Routes = [
     redirectTo: '/auth/login',
     pathMatch: 'full',
   },
-  
-  // { path: 'register-request', 
+
+  // { path: 'register-request',
   //   loadChildren: () => import('./modules/register-request/register-request.module')
-  //   .then(m => m.RegisterRequestModule) 
+  //   .then(m => m.RegisterRequestModule)
   // },
-  { path: 'parent', 
+  { path: 'parent',
     loadChildren: () => import('./modules/guardian/guardian.module').then(
     (m) => m.GuardianModule) ,
     canActivate: [AuthenticationGuard]
   },
-  
+
   {
     path: 'certificate/:id',
     component: CertificateDetailsComponent
@@ -82,7 +80,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
+export class AppRoutingModule {
 
   }
 

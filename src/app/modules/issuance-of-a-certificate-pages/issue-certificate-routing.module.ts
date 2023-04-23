@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheeckMandatoryServeyGuard } from 'src/app/core/services/guards/check-mandatory-servey.guard';
+import { CheeckMandatoryServeyGuard } from 'src/app/core/guards/check-mandatory-servey.guard';
 import { CertificateDetailsComponent } from './components/certificate-details/certificate-details.component';
 import { IssueCertificateComponent } from './issue-certificate.component';
 

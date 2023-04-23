@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { IndexesRoutingModule } from './indexes-routing.module';
 import { EditNewIndexComponent } from './components/edit-new-Index/edit-new-index.component';
 import { IndexesComponent } from './components/indexes-list/indexes-list.component';
-import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PrimngModule } from 'src/app/modules/primng/primng.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { PrimngModule } from 'src/app/shared/primng/shared-primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
@@ -16,12 +11,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     EditNewIndexComponent, IndexesComponent
   ],
   imports: [
-    CommonModule,
     IndexesRoutingModule,
-    FormsModule,
-    FontAwesomeModule,
     PrimngModule,
-    TranslateModule,
     SharedModule,
 
   ]

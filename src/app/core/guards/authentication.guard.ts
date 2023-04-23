@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { ClaimsService } from '../claims.service';
+import { ClaimsService } from '../services/claims.service';
 
 
 @Injectable({

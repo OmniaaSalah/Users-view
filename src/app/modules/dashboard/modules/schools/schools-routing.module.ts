@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClaimsGuard } from 'src/app/core/services/guards/claims.guard';
+import { ClaimsGuard } from 'src/app/core/guards/claims.guard';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { EditNewSubjectComponent } from '../subjects/components/edit-new-subject/edit-new-subject.component';

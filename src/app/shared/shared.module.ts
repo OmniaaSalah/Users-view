@@ -3,15 +3,13 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
-import { PrimngModule } from '../modules/primng/primng.module';
-import { LayoutModule } from '../layout/layout.module';
+import { PrimngModule } from './primng/shared-primng.module';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { CalenderComponent } from './components/calender/calender.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import localeAr from '@angular/common/locales/ar';
-import { TranslateModule } from '@ngx-translate/core';
 import { BackComponent } from './components/back/back.component';
 import { TableCaptionComponent } from './components/table-caption/table-caption.component';
 import { ValidationDirective } from './directives/validation.directive';
@@ -28,17 +26,14 @@ import { ButtonGroupComponent } from './components/button-group/button-group.com
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 import { PermissionDirective } from './directives/permission/permission.directive';
 import { SendMessageComponent } from './components/send-message/send-message.component';
-import { FileUploadModule } from 'primeng/fileupload';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { CardStudentComponent } from './components/card-student/card-student.component';
 import { DialogModule } from 'primeng/dialog';
-import { InputSwitchModule } from 'primeng/inputswitch';
 import { LocalizeDatePipe } from './pipes/localize-date.pipe';
 
 import { SelectSchoolsComponent } from './components/select-schools/select-schools.component';
 import { RegisterRequestComponent } from './components/register-request/register-request.component';
 import { SharedService } from './services/shared/shared.service';
-import { DTransalteModule } from './transaltion/transalte.module';
 import { UseUtcDirective } from './directives/useUtc/use-utc.directive';
 import { NumberToWordsPipe } from './pipes/numbers-to-words/number-to-words.pipe';
 import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
@@ -53,6 +48,11 @@ import { SafePipe } from './pipes/safe.pipe';
 import { ConfirmDialogDirective } from './directives/confirm-dialog/confirm-dialog.directive';
 import { StudentBadgesComponent } from './components/student-badges/student-badges.component';
 import { WrapFuncPipe } from './pipes/wrapFunc/wrap-func.pipe';
+import { ClickOutsideDirective } from './directives/click-outside/click-outside.directive';
+import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ToastrModule } from 'ngx-toastr';
 
 registerLocaleData(localeAr);
 
@@ -99,7 +99,10 @@ registerLocaleData(localeAr);
     ConfirmDialogDirective,
     StudentBadgesComponent,
     StudentBadgesComponent,
-    WrapFuncPipe
+    WrapFuncPipe,
+    ClickOutsideDirective,
+    PermissionDirective,
+    HeaderDashboardComponent
 
   ],
   imports: [
@@ -109,28 +112,29 @@ registerLocaleData(localeAr);
     FontAwesomeModule,
     InfiniteScrollModule,
     PrimngModule,
-    LayoutModule,
-    TranslateModule,
+    // LayoutModule,
+
     DialogModule,
-    FileUploadModule,
-    InputSwitchModule,
     NgxSkeletonLoaderModule,
+    TranslateModule,
     CalendarModule.forRoot({
-    provide: DateAdapter,
+      provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    RouterModule,
+    ToastrModule
+
   ],
   exports: [
+    CommonModule,
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
     InfiniteScrollModule,
     PaginationComponent,
-    LayoutModule,
     InformativeBlockComponent,
     FileUploadComponent,
     CalenderComponent,
-    TranslateModule,
     BackComponent,
     ValidationDirective,
     ValidatorsInputDirective,
@@ -138,7 +142,6 @@ registerLocaleData(localeAr);
     AddBtnComponent,
     SendBtnComponent,
     DropdownComponent,
-    // PermissionDirective,
     NgxSkeletonLoaderModule,
     LoaderComponent,
     SkeletonComponent,
@@ -165,7 +168,13 @@ registerLocaleData(localeAr);
     SafePipe,
     ConfirmDialogDirective,
     StudentBadgesComponent,
-    WrapFuncPipe
+    WrapFuncPipe,
+    ClickOutsideDirective,
+    PermissionDirective,
+    HeaderDashboardComponent,
+    RouterModule,
+    TranslateModule,
+    ToastrModule
   ],
   providers:[SharedService]
 })

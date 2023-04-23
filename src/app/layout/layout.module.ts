@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { LayoutComponent } from './layout.component';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -15,34 +14,40 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PermissionDirective } from '../shared/directives/permission/permission.directive';
 import { FormsModule } from '@angular/forms';
 import {BadgeModule} from 'primeng/badge';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    SidebarComponent,
     HeaderComponent,
     LayoutComponent,
-    HeaderDashboardComponent,
-    ClickOutsideDirective,
-    PermissionDirective
+    // HeaderDashboardComponent,
+    // ClickOutsideDirective,
+    // PermissionDirective
 
 
   ],
   imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    FontAwesomeModule,
+    // CommonModule,
+    // RouterModule,
+    // FormsModule,
+    // FontAwesomeModule,
     TranslateModule,
     CalendarModule,
     BreadcrumbModule,
     InfiniteScrollModule,
     DropdownModule,
-    BadgeModule
+    BadgeModule,
+    SharedModule
 
 
 
 
   ],
-  exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective,PermissionDirective]
+  exports: [
+    HeaderComponent,
+    LayoutComponent,
+    // HeaderDashboardComponent,
+    // ClickOutsideDirective,PermissionDirective
+  ]
 })
 export class LayoutModule { }

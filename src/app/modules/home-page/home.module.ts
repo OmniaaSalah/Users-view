@@ -5,7 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { GuardianHomeComponent } from './components/guardian-home/guardian-home.component';
 import { HomeComponent } from './home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { PrimngModule } from '../primng/primng.module';
+import { PrimngModule } from '../../shared/primng/shared-primng.module';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 

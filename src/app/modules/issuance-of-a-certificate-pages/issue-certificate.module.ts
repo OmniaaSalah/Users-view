@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { IssuanceOfACertificatePagesRoutingModule } from './issue-certificate-routing.module';
-import { PrimngModule } from '../primng/primng.module';
+import { PrimngModule } from '../../shared/primng/shared-primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CertificateDetailsComponent } from './components/certificate-details/certificate-details.component';
 import { QrCodeModule } from 'ng-qrcode';

@@ -22,7 +22,6 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ToastModule} from 'primeng/toast';
 import {TabViewModule} from 'primeng/tabview';
 import {CardModule} from 'primeng/card';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -34,9 +33,9 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {BadgeModule} from 'primeng/badge';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {TooltipModule} from 'primeng/tooltip';
+import { ChartModule } from 'primeng/chart';
 
 const modules=[
-  ToastModule,
   TableModule,
   InputTextModule,
   MenuModule,
@@ -69,8 +68,9 @@ const modules=[
   FieldsetModule,
   BadgeModule,
   DynamicDialogModule,
-  TooltipModule
-  
+  TooltipModule,
+  ChartModule
+
 ]
 
 @NgModule({
