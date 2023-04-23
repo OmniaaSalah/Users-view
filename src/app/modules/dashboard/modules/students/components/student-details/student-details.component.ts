@@ -9,7 +9,6 @@ import { Student } from 'src/app/core/models/student/student.model';
 
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { StudentsService } from '../../services/students/students.service';
 
@@ -34,7 +33,7 @@ export class StudentDetailsComponent implements OnInit {
 
 
   // << DATA PLACEHOLDER >> //
- 
+
 
   // << CONDITIONS >> //
   step =1
@@ -62,7 +61,7 @@ export class StudentDetailsComponent implements OnInit {
         {label: this.translate.instant('dashboard.students.StudentInfo'),routerLink:'/dashboard/student-management/students/student/'+this.studentId }
       ]
 
-      
+
     }
     else if (this.currentUserScope==UserScope.SPEA)
     {
@@ -72,7 +71,7 @@ export class StudentDetailsComponent implements OnInit {
           {label: this.translate.instant('dashboard.students.StudentInfo'),routerLink:'/dashboard/schools-and-students/students/student/'+this.studentId }
         ]
 
-      
+
     }
   }
 

@@ -6,7 +6,7 @@ import { SurveysListComponent } from './components/surveys-list/surveys-list.com
 import { SendSurveyComponent } from './components/send-survey/send-survey.component';
 import { SurveyDetailsComponent } from './components/survey-details/survey-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { PrimngModule } from 'src/app/modules/primng/primng.module';
+import { PrimngModule } from 'src/app/shared/primng/shared-primng.module';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { ParentReplySurveyComponent } from './components/parent-reply-survey/parent-reply-survey.component';
 
@@ -24,7 +24,7 @@ import { SurveyFilesComponent } from './components/survey-files/survey-files.com
     ParentReplySurveyComponent,
     SurveyRepliesComponent,
     SurveyFilesComponent
-   
+
   ],
   imports: [
     CommonModule,

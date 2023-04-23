@@ -1,13 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { AssessmentRoutingModule } from './assessment-routing.module';
-
-import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { PrimngModule } from '../../../primng/primng.module';
+import { PrimngModule } from '../../../../shared/primng/shared-primng.module';
 import { EditNewAssessmentComponent } from './components/edit-new-assessment/edit-new-assessment.component';
 import { AssessmentsListComponent } from './components/assessments-list/assessments-list.component';
 
@@ -17,15 +11,9 @@ import { AssessmentsListComponent } from './components/assessments-list/assessme
     AssessmentsListComponent
   ],
   imports: [
-    CommonModule,
     AssessmentRoutingModule,
-    FormsModule,
-    FontAwesomeModule,
     PrimngModule,
-   TranslateModule,
     SharedModule,
-    PrimngModule
-
   ]
 })
 export class AssessmentModule { }

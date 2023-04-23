@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SchoolDetailsComponent } from './components/school-details/school-details.component';
 import { SchoolListComponent } from './components/school-list/school-list.component';
-import { PrimngModule } from 'src/app/modules/primng/primng.module';
+import { PrimngModule } from 'src/app/shared/primng/shared-primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsRoutingModule } from './schools-routing.module';
 import { TransferGroupComponent } from './components/transfer-group/transfer-group.component';

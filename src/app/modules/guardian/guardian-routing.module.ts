@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheeckMandatoryServeyGuard } from 'src/app/core/services/guards/check-mandatory-servey.guard';
+import { CheeckMandatoryServeyGuard } from 'src/app/core/guards/check-mandatory-servey.guard';
 import { RegisterRequestComponent } from 'src/app/shared/components/register-request/register-request.component';
 import { ChildDetailsComponent } from '../dashboard/modules/parants/components/child-details/child-details.component';
 import { WithdrawalRequestComponent } from '../dashboard/modules/shared/components/register-child/withdrawal-request/withdrawal-request.component';
