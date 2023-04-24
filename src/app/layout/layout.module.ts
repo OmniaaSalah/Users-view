@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutComponent } from './layout.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { CalendarModule } from 'primeng/calendar';
@@ -8,15 +8,15 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DropdownModule } from 'primeng/dropdown';
 import {BadgeModule} from 'primeng/badge';
 import { SharedModule } from '../shared/shared.module';
-import { DashboardPanalComponent } from '../modules/dashboard/components/dashboard-panal/dashboard-panal.component';
-import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
+import { PageHeaderComponent } from './page-header/page-header.component';
+import { SideNavigatorComponent } from './side-navigator/side-navigator.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
+    NavbarComponent,
     LayoutComponent,
-    DashboardPanalComponent,
-    HeaderDashboardComponent
+    SideNavigatorComponent,
+    PageHeaderComponent
   ],
   imports: [
     TranslateModule,
@@ -29,7 +29,7 @@ import { HeaderDashboardComponent } from '../modules/dashboard/components/header
 
   ],
   exports: [
-    HeaderComponent,
+    NavbarComponent,
     LayoutComponent,
   ]
 })

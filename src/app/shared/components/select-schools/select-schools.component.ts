@@ -1,10 +1,10 @@
 import { Component, OnInit ,Input, inject} from '@angular/core';
-import { UserRolesService } from 'src/app/modules/dashboard/user-roles/service/user-roles.service';
+import { UserRolesService } from 'src/app/modules/user-roles/service/user-roles.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
-import { SchoolsService } from 'src/app/modules/dashboard/schools/services/schools/schools.service';
+import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 

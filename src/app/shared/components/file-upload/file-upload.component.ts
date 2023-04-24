@@ -6,7 +6,7 @@ import { catchError, filter, finalize, forkJoin, Observable, of, take, tap } fro
 import { capitalizeFirstLetter } from 'src/app/core/classes/helpers';
 import { Localization } from 'src/app/core/models/global/global.model';
 import { MapedFileRule } from 'src/app/core/models/settings/settings.model';
-import { SettingsService } from 'src/app/modules/dashboard/system-setting/services/settings/settings.service';
+import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { FileTypeEnum, FileExtentions } from '../../enums/file/file.enum';
 import { MediaService } from '../../services/media/media.service';
 

@@ -50,7 +50,7 @@ import { ClickOutsideDirective } from './directives/click-outside/click-outside.
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrModule } from 'ngx-toastr';
-import { RequestListComponent } from '../modules/dashboard/request-list/Component/request-list/request-list.component';
+import { RequestListComponent } from '../modules/request-list/Component/request-list/request-list.component';
 
 registerLocaleData(localeAr);
 

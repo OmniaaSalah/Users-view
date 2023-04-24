@@ -13,18 +13,18 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
-import { MessageService } from 'src/app/modules/dashboard/messages/service/message.service';
-import { SchoolsService } from 'src/app/modules/dashboard/schools/services/schools/schools.service';
-import { UserRolesService } from 'src/app/modules/dashboard/user-roles/service/user-roles.service';
+import { MessageService } from 'src/app/modules/messages/service/message.service';
+import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
+import { UserRolesService } from 'src/app/modules/user-roles/service/user-roles.service';
 import { SharedService } from '../../services/shared/shared.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { IndexesService } from 'src/app/modules/dashboard/indexes/service/indexes.service';
+import { IndexesService } from 'src/app/modules/indexes/service/indexes.service';
 import { IndexesEnum } from '../../enums/indexes/indexes.enum';
 import { FileTypeEnum } from '../../enums/file/file.enum';
 import { UserScope } from '../../enums/user/user.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CountriesService } from '../../services/countries/countries.service';
-import { ParentService } from 'src/app/modules/dashboard/parants/services/parent.service';
+import { ParentService } from 'src/app/modules/parants/services/parent.service';
 
 @Component({
   selector: 'app-send-message',

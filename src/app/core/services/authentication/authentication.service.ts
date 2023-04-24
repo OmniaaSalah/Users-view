@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
 import {  BehaviorSubject, map,  take } from 'rxjs';
-import { SchoolsService } from 'src/app/modules/dashboard/schools/services/schools/schools.service';
+import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
 import { environment } from 'src/environments/environment';
 import { ClaimsService } from '../claims.service';

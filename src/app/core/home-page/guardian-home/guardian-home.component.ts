@@ -4,7 +4,7 @@ import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { ParentService } from 'src/app/modules/dashboard/parants/services/parent.service';
+import { ParentService } from 'src/app/modules/parants/services/parent.service';
 import { AddChildService } from 'src/app/modules/guardian/services/add-child.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
