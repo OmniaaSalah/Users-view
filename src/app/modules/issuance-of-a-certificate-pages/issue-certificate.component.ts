@@ -11,7 +11,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
-import { SystemRequestService } from '../dashboard/modules/request-list/services/system-request.service';
+import { SystemRequestService } from '../dashboard/request-list/services/system-request.service';
 import { IssuanceCertificaeService } from './services/issuance-certificae.service';
 import { Location } from '@angular/common';
 import { CurriculumCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/school.enum';

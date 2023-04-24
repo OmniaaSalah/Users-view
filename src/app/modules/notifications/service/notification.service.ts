@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { INotification } from 'src/app/core/Models/inotification';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 
 @Injectable({
@@ -10,7 +9,7 @@ export class NotificationService {
   unReadNotificationNumber=new BehaviorSubject(0);
   notificationNumber=new BehaviorSubject(0);
   constructor(private http:HttpHandlerService) { }
-  
+
   getAllNotifications(searchModel?){
     return this.http.get('/Notification',searchModel)
   }

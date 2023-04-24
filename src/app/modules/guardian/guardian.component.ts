@@ -8,18 +8,9 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
   styleUrls: ['./guardian.component.scss']
 })
 export class GuardianComponent implements OnInit {
-
-
-
-
-  constructor(
-    private translate: TranslateService,
-    private headerService: HeaderService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-  
-    // this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
 }

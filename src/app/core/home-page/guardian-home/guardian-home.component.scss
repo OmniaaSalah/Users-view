@@ -1,0 +1,217 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/profile';
+// .swipper{
+//     height: 26rem;
+//     ::ng-deep p-galleria{
+//         .p-galleria-indicators{
+//             background: transparent;
+//             top: 0;
+//             z-index: 11;
+//             .p-galleria-indicator.p-highlight button{ background: #fff}
+//         };
+//         ::ng-deep p-galleriacontent{
+//             .p-galleria-indicators-bottom{max-width: 100% !important; }
+//             p-galleriaitem {
+//                 .p-galleria-item-container{
+//                     border-radius: 12px;
+//                     .p-galleria-caption{
+//                         background: linear-gradient(180deg, rgba(46, 80, 163, 0.4) 0%, rgba(46, 80, 163, 0.91) 100%);
+//                         top: 0;
+//                         z-index: 10;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+.bg-skyBlue-600 {
+    background-color: $color-skyBlue-600 !important;
+}
+
+.mysons{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+::ng-deep .btn.ChildWithNationality:hover {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px;
+    gap: 10px;
+    // position: absolute;
+    width: 309px;
+    height: 67px;
+    margin-right: auto;
+    margin-left: auto;
+    background: rgba(207, 236, 247, 0.1);
+    border: 1px solid #3052A1;
+    border-radius: 15px;
+}
+.ChildWithNationality {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px;
+    gap: 10px;
+    // position: absolute;
+    width: 309px;
+    height: 67px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid gray;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.activeBtn{
+    background: rgba(207, 236, 247, 0.1);
+    border: 2px solid #3052A1 !important;
+    border-radius: 15px;
+}
+.addchild span {
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 28.59px;
+}
+
+.card {
+    &__list li {
+        .icon {
+            margin-inline-start: 0;
+        }
+        &>* {
+            flex-shrink: 0;
+        }
+    }
+    &__badge {
+        p {
+            font-size: 1.4rem;
+        }
+    }
+     ::ng-deep {
+        .p-dialog {
+            .p-dialog-header {
+                font-family: 'Droid';
+                border-top-right-radius: 12px;
+                border-top-left-radius: 12px;
+                display: inline-block;
+                padding-bottom: 0rem;
+                padding-top: 2.5rem;
+                .tittle {
+                    color: $color-gray-300;
+                    font-weight: 400;
+                    font-size: 12px;
+                    font-family: 'Droid';
+                }
+                .detail {
+                    color: $color-primary;
+                    font-weight: 400;
+                    font-size: 14px;
+                    font-family: 'Droid';
+                }
+                .custom-form {
+                    .form-set {
+                        margin-bottom: 2.5rem;
+                    }
+                    .label {
+                        margin-bottom: 1rem;
+                        font-size: 13px;
+                        font-weight: 400;
+                    }
+                    .row {
+                        padding-left: 0rem;
+                    }
+                }
+                .caption__filter {
+                    input {
+                        width: 100%;
+                        margin-top: 2.5rem;
+                        &.p-inputtext {
+                            padding: 0.5rem 3.5rem;
+                            font-family: 'Droid';
+                        }
+                    }
+                    i {
+                        margin-top: 1.5rem;
+                    }
+                }
+                .header {
+                    .headeritem {
+                        font-weight: 700;
+                        font-family: 'Droid';
+                        font-size: 1.4rem;
+                        line-height: 26.68px;
+                        &.send {
+                            font-size: 18px;
+                            line-height: 24px;
+                        }
+                    }
+                    button {
+                        color: rgba(0, 0, 0, 0.6);
+                        width: 9px;
+                        position: relative;
+                        bottom: 1rem;
+                        right: 75%;
+                        &.sm {
+                            position: relative;
+                            right: 84%;
+                        }
+                        &.md {
+                            position: relative;
+                            right: 57%;
+                        }
+                    }
+                }
+            }
+            .p-dialog-content {
+                flex-grow: 0;
+                padding-top: 0rem;
+                line-height: 24px;
+                font-family: "Droid";
+                font-weight: 400;
+                .space {
+                    line-height: 24px;
+                }
+                .heading--tertiary {
+                    padding-top: 0rem;
+                    font-size: 12px;
+                    font-weight: 700;
+                    font-family: 'Droid';
+                }
+            }
+            .p-dialog-footer {
+                border-bottom-right-radius: 12px;
+                border-bottom-left-radius: 12px;
+                padding-top: 0rem;
+                .footeritem {
+                    color: $color-skyBlue-400;
+                    width: 100%;
+                    margin-top: 1rem;
+                    font-weight: 400;
+                    font-size: 14px;
+                    font-family: 'Droid';
+                }
+            }
+        }
+    }
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-auto-rows: min-content;
+    gap: 2.5rem;
+    row-gap: 2.5rem;
+    column-gap: 2.5rem;
+    min-height: 184px;
+  }
+  .gg{
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-auto-rows: min-content;
+    gap: 2.5rem;
+    row-gap: 2.5rem;
+    column-gap: 2.5rem;
+    min-height: none !important;
+}

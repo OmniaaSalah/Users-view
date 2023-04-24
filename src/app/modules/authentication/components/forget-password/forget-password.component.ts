@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
-import Validation from 'src/app/modules/dashboard/modules/user-information/models/utils/validation';
+import Validation from 'src/app/modules/dashboard/user-information/models/utils/validation';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-forget-password',
@@ -26,11 +26,11 @@ export class ForgetPasswordComponent implements OnInit {
   changePasswordFormGrp: FormGroup;
   @Input('openForgetPasswordModel')  openForgetModel:boolean;
   @Input('openResetModel')  openResetModel:boolean;
-  constructor( private router: Router, private activatedRoute:ActivatedRoute,private toastService:ToastrService,private translate:TranslateService, private formbuilder: FormBuilder,private authService:AuthenticationService) { 
+  constructor( private router: Router, private activatedRoute:ActivatedRoute,private toastService:ToastrService,private translate:TranslateService, private formbuilder: FormBuilder,private authService:AuthenticationService) {
     this.resetPasswordFormGrp=formbuilder.group({
 
       resetPasswordWay:['', [Validators.required,Validators.minLength(4)]],
-    
+
     });
     this.changePasswordFormGrp=formbuilder.group({
 
@@ -57,16 +57,16 @@ export class ForgetPasswordComponent implements OnInit {
 
   closeModel()
   {
-  
+
     this.authService.isForgetModelOpened.next(false);
-  
+
   }
 
   forgetPassword()
   {
     var account;
     if(this.isEmail)
-   { 
+   {
      account={
       "userName": this.resetPasswordFormGrp.value.resetPasswordWay
     }
@@ -76,15 +76,15 @@ export class ForgetPasswordComponent implements OnInit {
       "phoneNumber": this.resetPasswordFormGrp.value.resetPasswordWay
     }
   }
-    
+
     this.authService.forgotPassword(account).subscribe((res)=>{
-  
+
       this.step=2;
       this.tittle=""
       this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
-    
+
     },(err)=>{
- 
+
       this.lang=='ar' ? this.toastService.error(err['Ar']) : this.toastService.error(err['En'])
 
     })
@@ -92,23 +92,23 @@ export class ForgetPasswordComponent implements OnInit {
 
   checkValidators(event)
   {
-   
+
     var input=event;
     this.resetPasswordWay.setValidators([Validators.required,Validators.pattern('(05)[0-9]{8}')]);
-   
+
     this.isEmail=false;
- 
+
     for (let index = 0; index < input.length; index++) {
      if( input[index]!=0&&input[index]!=1&&input[index]!=2&&input[index]!=3&&input[index]!=4&&input[index]!=5&&input[index]!=6&&input[index]!=7&&input[index]!=8&&input[index]!=9)
-     { 
-     
+     {
+
          this.isEmail=true;
 
      }
    }
    if(this.isEmail)
    {
-  
+
    this.resetPasswordWay.clearValidators();
    this.resetPasswordWay.setValidators([Validators.required,Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]);
    }
@@ -127,7 +127,7 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   this.authService.resetPassword(account).subscribe((res)=>{
- 
+
     this.toastService.success(this.translate.instant('Password changed successfully'));
     this.openResetModel=false;
     this.router.navigate(['/auth/login']);

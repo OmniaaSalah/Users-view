@@ -1,18 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home-page/home.component';
+import { GuardianHomeComponent } from './home-page/guardian-home/guardian-home.component';
+import { PrimngModule } from '../shared/primng/shared-primng.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HomeComponent,
+    GuardianHomeComponent
+  ],
   imports: [
     CommonModule,
     TranslateModule,
     HttpClientModule,
+    PrimngModule,
+    SharedModule
   ],
-  exports:[TranslateModule,HttpClientModule,]
+  exports:[
+    HttpClientModule,
+    HomeComponent,
+    GuardianHomeComponent
+  ]
 })
 export class CoreModule { }

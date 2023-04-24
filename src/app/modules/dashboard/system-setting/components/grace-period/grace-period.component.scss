@@ -1,0 +1,19 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/forms.scss';
+@import 'src/assets/css/components/primng-table.scss';
+
+
+.actions-btn{
+    position: absolute;
+    left: 3rem;
+    top: -6.5rem;
+
+}
+
+
+::ng-deep .schools-table {
+    .p-datatable-tbody tr td{
+      padding: 1rem .5rem !important;
+        &:first-child{padding: 1rem !important;}
+    }
+}

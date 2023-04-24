@@ -1,0 +1,62 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/forms.scss';
+@import 'src/assets/css/components/breadcrumb';
+@import 'src/assets/css/components/accordion';
+@import 'src/assets/css/components/model';
+@import '/src/app/shared/components/confirm-model/confirm-model.component.scss';
+
+.grade{
+
+
+    .submit-btn {
+        top: -9rem;
+        inset-inline-end: 3rem;
+    }
+
+    &__form{
+        // border: 1px solid $color-gray-200;
+        min-height: 100vh;
+
+        // label{font-size: 1.4rem;}
+
+        .subjects{
+
+            li.subject{
+                border-top: 1px solid $color-gray-100;
+            }
+        }
+
+        .tracks{
+            .track{
+                border-top: 1px solid $color-gray-100;
+                &__head{
+
+                    background-color: $color-gray-30;
+                    padding: 1.2rem 2rem;
+                    margin-bottom: 3rem;
+                    border-radius: 15px;
+                }
+
+                li.subject:not(:last-child){
+                    margin-bottom: 2.75rem;
+                }
+            }
+        }
+    }
+
+
+    .delete-btn{
+        transition: all .2s ease-in-out;
+
+        &:hover{
+            text-shadow: 0px 0px 1px $color-red-500, 0px 0px 1px $color-red-500;
+        }
+    }
+
+    ::ng-deep p-accordiontab{
+        a{
+            text-decoration: none !important;
+        }
+    }
+
+}

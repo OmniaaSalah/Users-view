@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
 import {  BehaviorSubject, map,  take } from 'rxjs';
-import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
+import { SchoolsService } from 'src/app/modules/dashboard/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
 import { environment } from 'src/environments/environment';
 import { ClaimsService } from '../claims.service';
@@ -16,14 +16,14 @@ export class AuthenticationService {
   signUpWaysList;
   public isNewAccountOpened= new BehaviorSubject<boolean>(false);
   public isForgetModelOpened= new BehaviorSubject<boolean>(false);
- 
+
   constructor(
-    private http: HttpHandlerService, 
+    private http: HttpHandlerService,
     private userService:UserService,
     private claimsService:ClaimsService,
-    private router: Router) { 
+    private router: Router) {
 
- 
+
   }
 
 
@@ -106,16 +106,16 @@ export class AuthenticationService {
 
      }
     ))
-    
+
   }
 
   schoolIDOfCurrentSchoolEmployee(){
-    
+
     return this.http.get('/current-user/school-employee')
 
     .pipe(take(1),map((res)=>{
       if(res)
-     { 
+     {
       if(localStorage.getItem('preferredLanguage')=='ar')
       {
         this.userService.currentUserName.next(res.result.arabicName+" "+res.result.arabicSurname)
@@ -125,7 +125,7 @@ export class AuthenticationService {
         this.userService.currentUserName.next(res.result.englishName+" "+res.result.englishSurname)
         this.userService.setCurrentUserName(res.result.arabicName+" "+res.result.arabicSurname)
       }
-      
+
        return res.result.school.id;
     }
     }))
@@ -133,30 +133,30 @@ export class AuthenticationService {
 
   getSchoolNameRelatedToCurrentEmployee()
   {
-   
+
     return this.http.get('/current-user/school-employee')
 
     .pipe(take(1),map((res)=>{
       if(res)
-     { 
+     {
       return res.result.school.name
     }
-        
+
     }))
-    
-    
+
+
 
   }
   getCurrentGuardian(){
-    
+
     return this.http.get('/Guardian/guardian-by-user-id')
 
     .pipe(take(1),map((res)=>{
-     
+
         this.userService.currentGuardian.next(res)
         this.userService.setCurrentGuardian(res)
         return res;
-        
+
     }))
   }
   getMandatorySurveysOfGuardian(guardianId)

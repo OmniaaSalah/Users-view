@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { filter, Observable } from 'rxjs';
 import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 
@@ -28,19 +26,19 @@ export class DashboardPanalComponent implements OnInit {
         {
           title:'sideBar.schoolsAndStudents.chidren.schools',
           key: RouteEnums.Schools,
-          url:'/dashboard/schools-and-students/schools',
+          url:'/schools-and-students/schools',
           icon:'assets/images/sideBar/schools-students/graduation-cap.svg'
         },
         {
           title:'sideBar.schoolsAndStudents.chidren.students',
           key: RouteEnums.Students,
-          url:'/dashboard/schools-and-students/students',
+          url:'/schools-and-students/students',
           icon:'assets/images/sideBar/schools-students/graduate-student.svg'
         },
         {
           title:'sideBar.schoolsAndStudents.chidren.parents',
           key: RouteEnums.Guardians,
-          url:'/dashboard/schools-and-students/all-parents',
+          url:'/schools-and-students/all-parents',
           icon:'assets/images/sideBar/schools-students/parents.svg'
         },
       ]
@@ -52,16 +50,16 @@ export class DashboardPanalComponent implements OnInit {
         {
           title:'sideBar.performanceManagment.chidren.exams',
           key: RouteEnums.Exams,
-          url:'dashboard/performance-managment/schools',
+          url:'/performance-managment/schools',
           icon:'assets/images/sideBar/performance-managment/list.svg'
         },
         {
           title:'sideBar.performanceManagment.chidren.missions',
           key: RouteEnums.Requests,
-          url:'/dashboard/performance-managment/RequestList/',
+          url:'/performance-managment/RequestList/',
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         },
-       
+
       ]
     },
 
@@ -71,32 +69,32 @@ export class DashboardPanalComponent implements OnInit {
         {
           title:'sideBar.managerTools.children.Users',
           key: RouteEnums.Users,
-          url:'/dashboard/manager-tools/user-information/users-list',
+          url:'/manager-tools/user-information/users-list',
           icon:'assets/images/sideBar/system-manager-tools/users.svg'
         },
         {
           title:'sideBar.managerTools.children.Job Roles',
           key: RouteEnums.Roles,
-          url:'/dashboard/manager-tools/user-roles/user-roles-list',
+          url:'/manager-tools/user-roles/user-roles-list',
           icon:'assets/images/sideBar/system-manager-tools/user.svg'
 
         },
         {
           title:'sideBar.managerTools.children.System List',
           key: RouteEnums.Indexes,
-          url:'/dashboard/manager-tools/indexes/indexes-list',
+          url:'/manager-tools/indexes/indexes-list',
           icon:'assets/images/sideBar/system-manager-tools/list.svg'
         },
         {
           title:'sideBar.managerTools.children.systemSettings',
           key: RouteEnums.Settings,
-          url:'/dashboard/manager-tools/settings',
+          url:'/manager-tools/settings',
           icon:'assets/images/sideBar/system-manager-tools/fix.svg'
         },
         {
           title:'breadcrumb.NotificationsSettings',
           key: RouteEnums.Notifications,
-          url:'/dashboard/manager-tools/notifications/',
+          url:'/manager-tools/notifications/',
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         }
       ]
@@ -109,49 +107,49 @@ export class DashboardPanalComponent implements OnInit {
           title:this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'),
           key: RouteEnums.R_Students,
           icon:'assets/images/sideBar/report-managment/report-user.svg',
-          url:'/dashboard/reports-managment/students-reports'
+          url:'/reports-managment/students-reports'
         },
         {
           title:this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'),
           key: RouteEnums.R_Guardians,
           icon:'assets/images/sideBar/report-managment/report.svg',
-          url:'/dashboard/reports-managment/parents-reports'
+          url:'/reports-managment/parents-reports'
         },
         {
           title: this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'),
           key: RouteEnums.R_AbsenceRecord,
           icon:'assets/images/sideBar/report-managment/report-edge.svg',
-          url:'/dashboard/reports-managment/attendance-reports'
+          url:'/reports-managment/attendance-reports'
         },
         {
           title:this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'),
           key: RouteEnums.R_Schools,
           icon:'assets/images/sideBar/report-managment/report-marked.svg',
-          url:'/dashboard/reports-managment/schools-reports'
+          url:'/reports-managment/schools-reports'
         },
         {
           title: this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'),
           key: RouteEnums.R_Degrees,
           icon:'assets/images/sideBar/report-managment/report-content.svg',
-          url:'/dashboard/reports-managment/degrees-reports'
+          url:'/reports-managment/degrees-reports'
         },
         {
           title:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'),
           key: RouteEnums.R_Employees,
           icon:'assets/images/sideBar/report-managment/report-user.svg',
-          url:'/dashboard/reports-managment/users-reports'
+          url:'/reports-managment/users-reports'
         },
         {
           title:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'),
           key: RouteEnums.R_Teachers,
           icon:'assets/images/sideBar/report-managment/report-marked.svg',
-          url:'/dashboard/reports-managment/teachers-reports'
+          url:'/reports-managment/teachers-reports'
         },
         {
           title:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'),
           key: RouteEnums.R_Subjects,
           icon:'assets/images/sideBar/report-managment/report-line.svg',
-          url:'/dashboard/reports-managment/subjects-reports'
+          url:'/reports-managment/subjects-reports'
         },
       ]
     },
@@ -162,27 +160,27 @@ export class DashboardPanalComponent implements OnInit {
         {
           title:'sideBar.educationalSettings.children.Annual Holidays',
           key: RouteEnums.AnnaulHolidays,
-          url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list',
+          url:'/educational-settings/annual-holiday/annual-holiday-list',
           icon:'assets/images/sideBar/educational-setting/calender.svg'
         },
         {
           title:'sideBar.educationalSettings.children.School Years',
           key: RouteEnums.SchoolYears,
-          url:'/dashboard/educational-settings/school-year/school-years-list',
+          url:'/educational-settings/school-year/school-years-list',
           icon:'assets/images/sideBar/educational-setting/calender-user.svg'
 
         },
         {
           title:'sideBar.educationalSettings.children.Subjects',
           key: RouteEnums.Subjects,
-          url:'/dashboard/educational-settings/subject/subjects-list',
+          url:'/educational-settings/subject/subjects-list',
           icon:'assets/images/sideBar/educational-setting/micro.svg'
 
         },
         {
           title:'sideBar.educationalSettings.children.Subjects Assessments',
           key: RouteEnums.Assessments,
-          url:'/dashboard/educational-settings/assessments/assements-list',
+          url:'/educational-settings/assessments/assements-list',
           icon:'assets/images/sideBar/educational-setting/note-marked.svg'
 
         },
@@ -190,7 +188,7 @@ export class DashboardPanalComponent implements OnInit {
         {
           title:'sideBar.educationalSettings.children.surveysList',
           key: RouteEnums.Surveys,
-          url:'/dashboard/educational-settings/surveys',
+          url:'/educational-settings/surveys',
           icon:'assets/images/sideBar/educational-setting/note-list.svg'
 
         },
@@ -205,12 +203,12 @@ export class DashboardPanalComponent implements OnInit {
       children:[
         {
           title:'صفوف المدرسه',
-          url:`/dashboard/grades-and-divisions/school/2/grades`,
+          url:`/grades-and-divisions/school/2/grades`,
           icon:'assets/images/sideBar/schools-students/parents.svg'
         },
         {
           title:'شعب المدرسه',
-          url:`/dashboard/grades-and-divisions/school/2/divisions`,
+          url:`/grades-and-divisions/school/2/divisions`,
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         }
       ]
@@ -221,39 +219,39 @@ export class DashboardPanalComponent implements OnInit {
         {
           title:'معلومات عامة',
           key: RouteEnums.S_GeneralInfo,
-          url:`/dashboard/school-management/school/2`,
+          url:`/school-management/school/2`,
           icon:'assets/images/sideBar/schools-students/parents.svg'
         },
         {
           title:' المواد الدراسيّة',
           key: RouteEnums.S_Subjects,
-          url:`/dashboard/school-management/school/2/subjects`,
+          url:`/school-management/school/2/subjects`,
           icon:'assets/images/sideBar/educational-setting/calender.svg'
         },
         {
           title:'الاجازات السنوية',
           key: RouteEnums.S_AnnualHoliday,
-          url:`/dashboard/school-management/school/2/annual-holidays`,
+          url:`/school-management/school/2/annual-holidays`,
           icon:'assets/images/sideBar/educational-setting/calender-user.svg'
         },
         {
           title:'قائمة التعديلات',
           key: RouteEnums.S_EditList,
-          url:`/dashboard/school-management/school/2/edit-list`,
+          url:`/school-management/school/2/edit-list`,
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         },
         {
           title:this.translate.instant('dashboard.Requests.myRequests'),
           key: RouteEnums.MyRequests,
           queryParams:{isMyRequests:true},
-          url:`/dashboard/school-management/requests-list/my-requests`,
+          url:`/school-management/requests-list/my-requests`,
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         },
         {
           title:this.translate.instant('dashboard.Requests.requestsToMe'),
           key: RouteEnums.Requests,
-          url:`/dashboard/school-management/requests-list`,
-          
+          url:`/school-management/requests-list`,
+
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         }
       ]
@@ -264,16 +262,16 @@ export class DashboardPanalComponent implements OnInit {
         {
           title:'أولياء الأمور',
           key: RouteEnums.Guardians,
-          url:`/dashboard/student-management/all-parents`,
+          url:`/student-management/all-parents`,
           icon:'assets/images/sideBar/schools-students/parents.svg'
         },
         {
           title:'الطلاب',
           key: RouteEnums.Students,
-          url:`/dashboard/student-management/students`,
+          url:`/student-management/students`,
           icon:'assets/images/sideBar/schools-students/graduate-student.svg'
         },
-      
+
       ]
     },
     {
@@ -282,7 +280,7 @@ export class DashboardPanalComponent implements OnInit {
         {
           title:'الموظفين',
           key: RouteEnums.S_Employees,
-          url:`/dashboard/schoolEmployee-management/school/2/employees`,
+          url:`/schoolEmployee-management/school/2/employees`,
           icon:'assets/images/sideBar/schools-students/parents.svg'
         },
       ]

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NotificationRoutingModule } from './notification-routing.module';
 import { NotificationListComponent } from './component/notification-list/notification-list.component';
 import { NotificationDetailsComponent } from './component/notification-details/notification-details.component';
-import { PrimngModule } from '../../shared/primng/shared-primng.module';
+import { PrimngModule } from 'src/app/shared/primng/shared-primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 

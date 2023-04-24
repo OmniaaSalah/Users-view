@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
+import { ParentService } from 'src/app/modules/dashboard/parants/services/parent.service';
 import { AddChildService } from '../../../services/add-child.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';

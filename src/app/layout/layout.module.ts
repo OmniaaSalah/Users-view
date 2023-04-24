@@ -1,36 +1,24 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { LayoutComponent } from './layout.component';
-import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarModule } from 'primeng/calendar';
-import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { ClickOutsideDirective } from '../shared/directives/click-outside/click-outside.directive';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DropdownModule } from 'primeng/dropdown';
-import { PermissionDirective } from '../shared/directives/permission/permission.directive';
-import { FormsModule } from '@angular/forms';
 import {BadgeModule} from 'primeng/badge';
 import { SharedModule } from '../shared/shared.module';
+import { DashboardPanalComponent } from '../modules/dashboard/components/dashboard-panal/dashboard-panal.component';
+import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     LayoutComponent,
-    // HeaderDashboardComponent,
-    // ClickOutsideDirective,
-    // PermissionDirective
-
-
+    DashboardPanalComponent,
+    HeaderDashboardComponent
   ],
   imports: [
-    // CommonModule,
-    // RouterModule,
-    // FormsModule,
-    // FontAwesomeModule,
     TranslateModule,
     CalendarModule,
     BreadcrumbModule,
@@ -39,15 +27,10 @@ import { SharedModule } from '../shared/shared.module';
     BadgeModule,
     SharedModule
 
-
-
-
   ],
   exports: [
     HeaderComponent,
     LayoutComponent,
-    // HeaderDashboardComponent,
-    // ClickOutsideDirective,PermissionDirective
   ]
 })
 export class LayoutModule { }
