@@ -70,12 +70,9 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
-    private sharedService: SharedService,
-    private usersService:UserInformationService,
     private authService:AuthenticationService,
     private messageService: MessageService,
     private index:IndexesService,
-    private route :ActivatedRoute,
     private settingsService:SettingsService,) {
     }
 
@@ -133,9 +130,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
         window.scrollTo(0, 0);
         event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
-        event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
+        // event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
         if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false
-
     })
 
 

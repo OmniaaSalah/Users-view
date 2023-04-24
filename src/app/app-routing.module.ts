@@ -14,6 +14,16 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
 
+  {
+    path: 'auth/login',
+    loadChildren: () =>
+      import('./modules/authentication/authentication.module').then(
+        (a) => a.AuthenticationModule
+      ),
+  },
+
+
+
 
   {
     path:'',
@@ -254,13 +264,6 @@ const routes: Routes = [
     ],
   },
 
-  {
-    path: 'auth/login',
-    loadChildren: () =>
-      import('./modules/authentication/authentication.module').then(
-        (a) => a.AuthenticationModule
-      ),
-  },
 
 
   { path: 'parent',
