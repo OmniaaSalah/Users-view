@@ -11,7 +11,7 @@ import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
 import { StatusEnum, TransportaionType } from '../../enums/status/status.enum';
 import { IndexesEnum } from '../../enums/indexes/indexes.enum';
-import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
+import { SettingsService } from 'src/app/modules/dashboard/system-setting/services/settings/settings.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({

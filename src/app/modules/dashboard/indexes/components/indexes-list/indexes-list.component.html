@@ -1,0 +1,99 @@
+
+<ng-container *permit="ClaimsEnum.S_C_Index">
+
+              <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'"></app-add-btn>
+
+</ng-container>
+<div class="prim-table mt-4" *ngIf="indexes.totalAllData || indexes.loading">
+    <p-table #dt [lazy]="true" [value]="indexes.list" (onSort)="sortMe($event)">
+
+
+        <ng-template pTemplate="caption">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllIndexes()"   (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllIndexes()" (onClear)="clearFilter()">
+             <div class="panel">
+                <div class="row gx-5 form-set">
+                    <div class="col-4 panel">
+                        <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
+                        <p-multiSelect [options]="indexListType" [filter]="true" filterBy="indexType" display="chip" [(ngModel)]="filtration.IndexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-multiSelect>
+                    </div>
+
+                    <div class="col-4">
+                        <label class="label" for="indexStatus">{{'dashboard.Indexes.Index Status'|translate }} </label>
+                        <p-dropdown [options]="indexStatusList" [showClear]="true" [(ngModel)]="filtration.IndexStatus" inputId="indexStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+            </app-table-caption>
+
+        </ng-template>
+
+
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="IndexType">
+                    <p-sortIcon field="IndexType"></p-sortIcon>{{'dashboard.Indexes.List Type'|translate}}
+                </th>
+
+                <th class="mediumrow" pSortableColumn="{{lang=='ar' ? 'IndexArabicName' : 'IndexEnglishName'}}">
+                    <p-sortIcon field=" {{lang=='ar' ? 'IndexArabicName' : 'IndexEnglishName'}}"></p-sortIcon>{{'dashboard.Indexes.Index Name'|translate}}
+                </th>
+
+                <th class="longrow" pSortableColumn="IndexStatus">
+                    <p-sortIcon field="IndexStatus"></p-sortIcon>{{'dashboard.Indexes.Index Status'|translate}}
+                </th>
+
+                <th pSortableColumn="edit" class="actions "></th>
+
+
+
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e?.indexType|translate}}</td>
+                <td  class="mediumrow" >{{e?.indexName|currentLang}}</td>
+                <td  Class="longrow" >
+
+                    <div class="d-flex align-items-center gap-4">
+
+                        <div [ngClass]="e.indexStatus=='Active'?'alerting success':'alerting danger'">{{e?.indexStatus|translate}}</div>
+
+                    </div>
+
+                </td>
+                <td class="actions" >
+                    <div role="button" class=" d-flex  align-items-center gap-3 justify-content-end mx-4" routerLink="/manager-tools/indexes/edit-index/{{e.id}}" *permit="ClaimsEnum.S_U_Index">
+                        <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
+                        <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
+                    </div>
+                </td>
+
+            </tr>
+        </ng-template>
+
+
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="indexes.totalAllData && indexes.list.length == 0 &&  !indexes.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+
+                    <app-loader></app-loader>
+
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+    <div *ngIf="paginationState.rows<indexes.total">
+        <app-pagination [totalItems]="indexes.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+</div>
+<!-- emptymessage -->
+<ng-container *ngIf="!indexes.totalAllData&& !indexes.loading">
+    <app-informative-block title="{{'emptyList.Indexes List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>

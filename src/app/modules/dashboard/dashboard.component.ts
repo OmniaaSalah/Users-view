@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
     // .pipe(
     //   filter(event =>event instanceof NavigationEnd ),
     //   )
-    // .subscribe((event: NavigationEnd) => {event.url=='/dashboard/schools-and-students/all-parents/parent/123/all-children/child/331' ? this.hideBackGroundImage = true : this.hideBackGroundImage = false;})
+    // .subscribe((event: NavigationEnd) => {event.url=='//schools-and-students/all-parents/parent/123/all-children/child/331' ? this.hideBackGroundImage = true : this.hideBackGroundImage = false;})
   }
 
 

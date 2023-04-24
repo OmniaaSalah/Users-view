@@ -1,0 +1,744 @@
+
+
+
+
+ <div class="submit-btn d-flex justify-content-end gap-3 mb-5"
+ *ngIf="(isRequestAllowedForWithdrawal | wrapFn : requestDetails?.requestType) && currentUserScope==userScopeEnum.Guardian">
+    <button class=" btn btn-primary btn--sm px-5"
+    *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Returned || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest"
+    (click)="reSendRegistrationReq()">
+        <!-- <div class="spinner-border text-light" role="status" *ngIf="loading"></div> -->
+        <span>{{'dashboard.Requests.resendRequest' |translate}}</span>
+    </button>
+
+    <button class=" btn btn-primary btn--sm px-5"
+    [disabled]="onSubmited"
+    (click)="withdrawReq()"
+    *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Pending || requestDetails?.requestStatus==RequestStatusEnum.Accepted || requestDetails.requestStatus==RequestStatusEnum.Returned || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest">
+        <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
+        <span>{{'dashboard.Requests.withdrawalReq' |translate}}</span>
+    </button>
+</div>
+
+
+<div class="submit-btn d-flex justify-content-end" *ngIf="requestDetails?.requestType==requestTypeEnum.FlexibleHolidayRequest">
+    <button class=" btn btn-primary btn--sm px-5" (click)="reSendFlexableHolidayReq()" *ngIf="(requestDetails?.requestStatus==RequestStatusEnum.Returned || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest) && currentUserScope==userScopeEnum.Employee">
+        <!-- <div class="spinner-border text-light" role="status" *ngIf="loading"></div> -->
+        <span>{{'dashboard.Requests.resendRequest' |translate}}</span>
+    </button>
+</div>
+
+<div class="submit-btn d-flex justify-content-end" *ngIf="requestDetails?.requestType==requestTypeEnum.AcademicSequenceCertificateRequest">
+    <button class=" btn btn-primary btn--sm px-5" (click)="reSendCertificateReq()" *ngIf="(requestDetails?.requestStatus==RequestStatusEnum.Returned || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest) && currentUserScope==userScopeEnum.Guardian">
+        <!-- <div class="spinner-border text-light" role="status" *ngIf="loading"></div> -->
+        <span>{{'dashboard.Requests.resendRequest' |translate}}</span>
+    </button>
+</div>
+
+
+<ng-container *ngIf="!requestDetails then loader"></ng-container>
+
+<div class="radius-15 border p-5 mb-5 bg-white" *ngIf="requestDetails">
+
+    <!-- NOTE:-------------- Request Main Data -->
+    <div class="">
+        <div class="row gap-6">
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.myRequest.Order ID' | translate}}</p>
+                <h4 class="color-primary">{{requestDetails.requestNumber}}</h4>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.myRequest.request type' | translate}}</p>
+                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails?.requestType |translate}}</h4>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5 position-relative" (click)="viewUser()">
+                <p class="color-gray-300 fs-4">    {{'dashboard.myRequest.It was created by' | translate}}</p>
+                <h4 class="createdBy color-primary text-decoration-underline fw-bold" role="button">{{requestDetails.createdBy |currentLang}}</h4>
+                <div class="custom-tooltip" *ngIf="currentUserScope==userScopeEnum.SPEA && isRequestRelatedToSchool()">
+                    <ul class="p-4">
+                        <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
+                            <span class="color-primary fs-4">{{'dashboard.addChild.Identification Number' |translate}}</span>
+                            <span class="color-gray-300 fs-4">{{requestDetails?.requestCreator?.identityNumber}}</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
+                            <span class="color-primary fs-4">{{'shared.email' |translate}}</span>
+                            <span class="color-gray-300 fs-4">{{requestDetails?.requestCreator?.email}}</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
+                            <span class="color-primary fs-4">{{'shared.phoneNumber' |translate}}</span>
+                            <span class="color-gray-300 fs-4">{{requestDetails?.requestCreator?.phoneNumber}}</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
+                            <span class="color-primary fs-4">{{'dashboard.UserRole.JobRole Name' |translate}}</span>
+                            <span class="color-gray-300 fs-4">{{requestDetails?.requestCreator?.roleName |currentLang}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.myRequest.Order status' | translate}}</p>
+                <h4 class="color-primary">{{'dashboard.Requests.'+requestDetails.requestStatus || requestDetails?.certificateStatus |translate}}</h4>
+            </div>
+
+
+            <div class="col-4 d-flex align-items-center gap-5 mb-5" *ngIf="isRequestRelatedToStudent(requestDetails?.requestType)">
+                <p class="color-gray-300 fs-4">{{'dashboard.myRequest.student status' | translate}}</p>
+                <div [ngSwitch]="requestDetails.student?.status ||''">
+                    <div class="color-primary" *ngSwitchCase="registrationStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
+                    <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Unregistered">{{'shared.allStatus.Unregestered' | translate}}</div>
+                    <div class="color-primary" *ngSwitchCase="registrationStatusEnum.ReEnrolment">{{'shared.allStatus.ReEnrolment' | translate}}</div>
+                    <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
+                    <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Withdrawal">{{'shared.allStatus.Withdrawal' | translate}}</div>
+                    <div class="color-gray-500" *ngSwitchCase="registrationStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
+                    <div class="color-primary" *ngSwitchDefault>{{'shared.allStatus.Unregestered' | translate}}</div>
+                </div>
+            </div>
+
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.myRequest.Creation date and time' | translate}}</p>
+                <h4 class="color-primary">{{requestDetails.createdDate |LocalizeDate:'d MMMM y hh:mm a'}}</h4>
+            </div>
+            <div class="col-5 d-flex align-items-center gap-5 mb-5" *ngIf="requestDetails?.rejectionRequestReason && requestDetails.rejectionRequestReason?.en">
+                <p class="color-gray-300 fs-4">{{'dashboard.Requests.rejectReason' | translate}}</p>
+                <h4 class="color-primary">{{requestDetails.rejectionRequestReason |currentLang}}</h4>
+            </div>
+        </div>
+
+        <ng-container *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Accepted && currentUserScope==userScopeEnum.Guardian">
+            <div class="bg-orange-50 p-3 radius-15 mb-4 " *ngIf="requestDetails?.requestType==requestTypeEnum.AcademicSequenceCertificateRequest  || requestDetails?.requestType==requestTypeEnum.BoardCertificateRequest ||requestDetails?.requestType==requestTypeEnum.GradesCertificateRequest">
+                <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                <span class="color-gray-800">" {{'dashboard.Requests.certificatHint' |translate}} "</span>
+                <a class="mx-2 color-primary" routerLink="/certificates/ask-certificate">إضغط هنا</a>
+            </div>
+        </ng-container>
+
+
+    </div>
+</div>
+
+
+
+
+<div class="tabView mt-4">
+
+    <!-- Navigations Options -->
+    <ul class="tabView__nav">
+        <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1;"><span>{{'dashboard.myRequest.Order details' | translate}}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.myRequest.Application procedures' | translate}}</span></li>
+        <!-- <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3;"><span>{{'dashboard.Requests.commentsAndReplays' | translate}}</span></li> -->
+    </ul>
+
+    <div class="tabView__content">
+
+        <ng-container *ngIf="step==1 ">
+
+            <ng-container *ngIf="isRequestRelatedToStudent(requestDetails?.requestType)">
+                <!-- NOTE:-------------- Student Main Data -->
+                <ng-container *ngTemplateOutlet="studentProfile; context: {$implicit: requestDetails.student}" ></ng-container>
+
+                <hr class="mb-5">
+            </ng-container>
+
+
+
+
+            <div class="fw-bold  mb-5">{{'dashboard.myRequest.Order details' | translate}}</div>
+
+            <ng-container *ngIf="requestDetails?.requestType==requestTypeEnum.DiplomaCertificateRequest  || requestDetails?.requestType==requestTypeEnum.AcademicSequenceCertificateRequest  || requestDetails?.requestType==requestTypeEnum.BoardCertificateRequest ||requestDetails?.requestType==requestTypeEnum.GradesCertificateRequest">
+                <ng-container *ngTemplateOutlet="certificatesRequests; context: {$implicit: requestDetails}" ></ng-container>
+            </ng-container>
+
+            <div >
+                <div class="col-4 d-flex align-items-center gap-5 mb-4" *ngIf="requestDetails?.requestType!=requestTypeEnum.RegestrationApplicationRequest&&requestDetails?.requestCreator?.school" >
+                  <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
+                  <a  class="text color-skyBlue-500 fs-3 d-flex align-items-center" routerLink="/schools-and-students/schools/school/{{requestDetails?.requestCreator?.school?.id}}">{{requestDetails?.requestCreator?.school?.name|currentLang}}</a>
+              </div>
+            </div>
+
+
+            <div [ngSwitch]="requestDetails?.requestType">
+                <!-- NOTE:--------------  طلب تعديل اجازه مرنه-->
+                <div *ngSwitchCase="requestTypeEnum.FlexibleHolidayRequest">
+
+                    <div class="row g-5">
+                        <div class="fw-bold  fs-4 color-primary mb-4">{{'dashboard.Requests.holidayDetails' | translate}}</div>
+                        <div class="col-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.schools.annulCalendarName' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.annualCalendarName|currentLang}}</h4>
+                        </div>
+                        <div class="col-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.schools.holidayName' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.holidayName|currentLang}}</h4>
+                        </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.dateFrom' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.oldDateFrom | LocalizeDate}}</h4>
+                        </div>
+                        <div class="col-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.dateTo' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.oldDateTo | LocalizeDate}}</h4>
+                        </div>
+                    </div>
+                    <hr class="my-5">
+                    <div class="row">
+                        <div class="fw-bold  fs-4 color-primary mb-4">{{'dashboard.Requests.requiredUpdate' | translate}}</div>
+                        <div class="col-4 d-flex align-items-center gap-5 mb-4">
+                            <p class="color-gray-300 fs-4">{{'shared.dateFrom' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.dateFrom | LocalizeDate}}</h4>
+                        </div>
+                        <div class="col-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.dateTo' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.dateTo | LocalizeDate}}</h4>
+                        </div>
+                        <div class="col-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.reason}}</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOTE:-------------- طلب اعاده مرحله دراسيه -->
+                <div *ngSwitchCase="requestTypeEnum.StudentRegradingRequest">
+                    <div class="col-4 d-flex align-items-center gap-5">
+                        <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
+                        <h4 class="color-primary">{{requestDetails.cause}}</h4>
+                    </div>
+                </div>
+
+                <!-- NOTE:-------------- طلب حذف الطالب-->
+                <div *ngSwitchCase="requestTypeEnum.DeleteStudentRequest">
+                    <div class="col-4 d-flex align-items-center gap-5">
+                        <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
+                        <h4 class="color-primary">{{requestDetails.cause}}</h4>
+                    </div>
+                    <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
+                </div>
+
+                <!-- NOTE:-------------- طلب تسجيل الاين-->
+                <div *ngSwitchCase="requestTypeEnum.RegestrationApplicationRequest">
+                    <!-- <ng-container *ngTemplateOutlet="studentProfile; context: {$implicit: requestDetails.student}"></ng-container> -->
+
+                    <div class="row g-5">
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
+                            <a  class="text color-skyBlue-500 fs-3 d-flex align-items-center" routerLink="/schools-and-students/schools/school/+{{request?.school?.id}}">{{requestDetails?.school?.name|currentLang}}</a>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.grade.name|currentLang}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.students.isChildOfAMartyr' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.isChildOfAMartyr ? ('shared.yes'|translate) : ('shared.no'|translate)}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.students.childWithDisabilities' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.isSpecialAbilities? ('shared.yes'|translate) : ('shared.no'|translate) }}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5" *ngIf="requestDetails.isSpecialAbilities">
+                            <ng-container>
+                                <p class="color-gray-300 fs-4">{{'shared.classroom' | translate}}</p>
+                                <h4 class="color-primary"  *ngIf="requestDetails.isSpecialClass">{{'shared.specialClass' | translate}}</h4>
+                                <h4 class="color-primary"  *ngIf="requestDetails.isInFusionClass">{{'shared.fusionClass' | translate}}</h4>
+                            </ng-container>
+                        </div>
+                        <!-- <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.parents.specialEducation' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.isSpecialEducation? ('shared.yes'|translate) : ('shared.no'|translate) }}</h4>
+                        </div> -->
+                        <div class="col-md-4 d-flex align-items-center gap-5" *ngIf="requestDetails.isSpecialClass">
+                            <p class="color-gray-300 fs-4">{{'dashboard.parents.specialEducationtype' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.specialEducation.name|currentLang}}</h4>
+                        </div>
+
+                        <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
+                    </div>
+                </div>
+
+                <!-- NOTE:-------------- طلب تسجيل الابن المنسحب-->
+                <div *ngSwitchCase="requestTypeEnum.RegestrationRequestForWithrawan">
+                    <div class="row g-4">
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.school.name|currentLang}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.grade.name|currentLang}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.students.isChildOfAMartyr' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.student.isChildOfAMartyr ? ('shared.yes'|translate) : ('shared.no'|translate)}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.students.childWithDisabilities' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.student.isSpecialAbilities? ('shared.yes'|translate) : ('shared.no'|translate) }}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5" *ngIf="requestDetails.isSpecialAbilities">
+                            <ng-container>
+                                <p class="color-gray-300 fs-4">{{'shared.classroom' | translate}}</p>
+                                <h4 class="color-primary"  *ngIf="requestDetails.student.isSpecialClass">{{'shared.specialClass' | translate}}</h4>
+                                <h4 class="color-primary"  *ngIf="requestDetails.student.isInFusionClass">{{'shared.fusionClass' | translate}}</h4>
+                            </ng-container>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.parents.specialEducation' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.student.isSpecialEducation? ('shared.yes'|translate) : ('shared.no'|translate) }}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5" *ngIf="requestDetails.isSpecialEducation">
+                            <p class="color-gray-300 fs-4">{{'dashboard.parents.specialEducationtype' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.student.specialEducation.name|currentLang}}</h4>
+                        </div>
+
+                        <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.student.attachments}" ></ng-container>
+                    </div>
+                </div>
+
+                <!-- NOTE:-------------- طلب نقل جماعى-->
+                <div *ngSwitchCase="requestTypeEnum.MassTransferRequest">
+                    <!--  -->
+                    <div class="row g-5 mb-5">
+                        <span class="color-primary fw-bold">{{'shared.From'|translate}}</span>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.Requests.schoolToSend' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.schoolFrom|currentLang}}</h4>
+                        </div>
+
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.schools.studentsNumber' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.studentNumber}}</h4>
+                        </div>
+                    </div>
+
+                    <div class="row g-5">
+                        <span class="color-primary fw-bold ">{{'shared.To'|translate}}</span>
+
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.Requests.schoolToAccept' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails?.schoolTo|currentLang}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails?.gradeTo |currentLang}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5" *ngIf="requestDetails?.divisionTo">
+                            <p class="color-gray-300 fs-4">{{'shared.division' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails?.divisionTo|currentLang}}</h4>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- NOTE:-------------- طلب تعديل هويه-->
+                <div *ngSwitchCase="requestTypeEnum.ModifyIdentityRequest">
+                    <div class="col-4 d-flex align-items-center gap-5">
+                        <p class="color-gray-300 fs-4">{{'shared.Identity Number' | translate}}</p>
+                        <h4 class="color-primary">{{requestDetails.newIdentityNumber}}</h4>
+                    </div>
+                    <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
+                </div>
+
+                <!-- NOTE:-------------- طلب تعديل هويه للطالب الذى لايملك هويه-->
+                <div *ngSwitchCase="requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId">
+                    <div class="fw-bold fs-4 mb-5">{{'dashboard.students.newIdentityInfo' | translate}}</div>
+                    <div class="row  g-4">
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.parents.studentName' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.name|currentLang}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.parents.studentNickname' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.nickName|currentLang}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.birthDay' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.birthDate | LocalizeDate}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.gender' | translate}}</p>
+                            <h4 class="color-primary mb-2" *ngIf="requestDetails?.gender=='Female'">{{'shared.genderType.Female'|translate}}</h4>
+                            <h4 class="color-primary mb-2" *ngIf="requestDetails?.gender=='Male'">{{'shared.genderType.Male'|translate}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.nationality' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.religionName |currentLang}}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.religion' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.nationalityName |currentLang}}</h4>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- NOTE:-------------- طلب انسحاب الطالب من المدرسه-->
+                <div *ngSwitchCase="requestTypeEnum.WithdrawalRequest">
+                    <div class="row">
+                        <div class="col-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'dashboard.students.withdrawalType' | translate}}</p>
+                            <h4 class="color-primary">{{'dashboard.students.'+requestDetails.withdrawalType | translate}}</h4>
+                        </div>
+                        <div class="col-4 d-flex align-items-center gap-5">
+                            <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails.withdrawalCause |currentLang}}</h4>
+                        </div>
+                    </div>
+                    <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
+                </div>
+
+                <!-- NOTE:-------------- طلب اعاده ربط الابن بولى امر جديد-->
+                <div *ngSwitchCase="requestTypeEnum.RelinkChildToGuardianRequestToScool">
+                    <div class="col-4 d-flex align-items-center gap-5 mt-5 ">
+                        <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.The name of the new guardian' | translate}}</p>
+                        <h4 class="color-primary">{{requestDetails.guardian.name |currentLang}}</h4>
+                    </div>
+                </div>
+
+                <!-- NOTE:-------------- طلب اعاده ربط الابن بولى امر جديد-->
+                <div *ngSwitchCase="requestTypeEnum.RelinkChildToGuardianRequestToSPEA">
+                    <div class="col-4 d-flex align-items-center gap-5 mt-5 ">
+                        <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.The name of the new guardian' | translate}}</p>
+                        <h4 class="color-primary">{{requestDetails.guardian.name |currentLang}}</h4>
+                    </div>
+                </div>
+                <!-- <div *ngSwitchDefault>
+                    <app-informative-block subTitle="{{'emptyList.noRequestDetails' |translate}}" ></app-informative-block>
+
+                </div> -->
+            </div>
+
+
+        </ng-container>
+
+
+        <ng-container *ngIf="step==2">
+          <app-request-states [requestDetails]="requestDetails" ></app-request-states>
+        </ng-container>
+
+
+    </div>
+</div>
+
+
+
+
+
+<ng-container *ngIf="!requestOptions then actionsLoader"></ng-container>
+
+<div class="ms-4 mt-4" *ngIf="requestOptions">
+    <form  ngForm #f="ngForm">
+
+        <!-- <ng-container
+        *ngIf="isCommentAllowed()">
+            <div class="custom-form mb-4">
+                <label class="label">{{'dashboard.myRequest.comment' | translate}}</label>
+                <input type="text" [(ngModel)]="reqActionsForm.comments" name="comment" pInputText placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"/>
+            </div>
+            <app-file-upload
+            view="full"
+            [files]="filesToUpload"
+            (onFileUpload)="filesToUpload =$event"></app-file-upload>
+        </ng-container>
+         -->
+
+        <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Aprroved" -->
+        <div class="d-flex justify-content-end mt-3 gap-3" >
+            <!-- NOTE:----- incace the currnt user is Gurdian -->
+            <!-- <button  *ngIf="isCommentAllowed()" (click)="addComment()" class="btn btn-outline-primary">{{'dashboard.myRequest.add a comment' | translate}}</button> -->
+
+            <!-- NOTE:----- incace the currnt user is not  Gurdian -->
+            <!-- currentUserScope!=userScopeEnum.Guardian  -->
+            <ng-container *ngIf="requestOptions" >
+                <button
+                [class.d-none]="option?.label.en=='returned' && (requestDetails?.requestStatus==RequestStatusEnum.Returned  || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest)"
+                [disabled]="option.isLoading"
+                [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
+                *ngFor="let option of requestOptions;let i=index"
+                (click)="onActionTaken(option,i)"
+                class="btn">
+                    {{option.title|currentLang}}
+                    <div class="spinner-border text-light" role="status" *ngIf="option.isLoading"></div>
+                </button>
+            </ng-container>
+        </div>
+    </form>
+</div>
+
+<hr class="my-6">
+
+<app-request-chat [requestDetails]="requestDetails" (refresh)="getRequestDetails()"></app-request-chat>
+
+
+
+
+
+
+<ng-template #certificatesRequests let-requestDetails>
+    <div  [ngSwitch]="requestDetails.requestType">
+        <!-- NOTE :---------------- Case 1 شهاده الدرجات-->
+        <div class="row" *ngSwitchCase="requestTypeEnum.GradesCertificateRequest">
+            <div class="col-4 d-flex align-items-center gap-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
+                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
+            </div>
+
+            <div class="col-4 d-flex align-items-center gap-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
+                <h4 class="color-primary">{{requestDetails.schoolYear  |currentLang}}</h4>
+            </div>
+
+            <div class="col-4 d-flex align-items-center gap-5" *ngIf="requestDetails?.gradeCertificateType">
+                <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.degreesCertificateType' | translate}}</p>
+                <h4 class="color-primary">{{'dashboard.issue of certificate.' + requestDetails.gradeCertificateType | translate}}</h4>
+            </div>
+        </div>
+
+        <!-- NOTE :---------------- Case 2 شهاده التسلسل الدراسى  -->
+        <div class="row" *ngSwitchCase="requestTypeEnum.AcademicSequenceCertificateRequest">
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class=" fs-4 fw-bold">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
+                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
+            </div>
+
+            <div class="row mb-4" *ngFor="let item of requestDetails?.schoolYears" >
+                <div class="col-4 d-flex align-items-center gap-5">
+                    <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
+                    <h4 class="color-primary">{{item.schoolYear?.name  |currentLang}}</h4>
+                </div>
+                <div class="col-4 d-flex align-items-center gap-5">
+                    <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
+                    <h4 class="color-primary">{{item.schoolName?.name |currentLang}}</h4>
+                </div>
+                <div class="col-4 d-flex align-items-center gap-5">
+                    <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
+                    <h4 class="color-primary">{{item.gradeName?.name |currentLang}}</h4>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-12 d-flex align-items-center mt-5 gap-5">
+                <span class="flex-shrink-0">{{'dashboard.Requests.requestAttachments' | translate}} </span>
+                <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
+            </div> -->
+        </div>
+
+        <!-- NOTE :---------------- Case 2 بقيه الشهادات -->
+        <div *ngSwitchDefault>
+            <div class="row">
+                <div class="col-4 d-flex align-items-center gap-5">
+                    <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
+                    <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
+                </div>
+                <div class="col-4 d-flex align-items-center gap-5" *ngIf="requestDetails.cause">
+                    <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
+                    <h4 class="color-primary">{{requestDetails.cause}}</h4>
+                </div>
+
+                <div class="col-md-12 d-flex align-items-center mt-5 gap-5">
+                    <span class="flex-shrink-0">{{'dashboard.Requests.requestAttachments' | translate}} </span>
+                    <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>
+
+
+<ng-template #studentProfile let-student>
+  <div class="profile d-flex align-items-center ">
+      <div class="profile__avatar ">
+          <img [src]="student?.parsonalImagePath " onerror="this.src='assets/images/shared/image.svg'"  alt="Avatar ">
+      </div>
+      <div class="profile__info ">
+          <div class="profile__name d-flex flex-wrap">
+                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.SPEA" target="_blank" [routerLink]="['//schools-and-students/students/student/'+student.id]">{{student.name |currentLang}}</a>
+                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Employee" target="_blank" [routerLink]="['/student-management/students/student/'+student.id]">{{student.name |currentLang}}</a>
+                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Guardian">{{student.name |currentLang}}</a>
+
+                <div class="" *ngIf="student?.isGifted">
+                    <img src="assets/images/shared/medal.svg" alt="">
+                    <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
+                </div>
+                <div *ngIf="student?.isTopStudent">
+                    <img src="assets/images/shared/medal-cup.svg" alt="">
+                    <span class="color-yellow-400">{{'dashboard.students.isFromTheFirst' |translate}}</span>
+                </div>
+
+                <ng-container *ngFor="let item of student?.studentCategory">
+                    <div *ngIf="item==statusEnum.IsChildOfAMartyr">
+                        <img src="assets/images/shared/medal-flag.svg" alt="">
+                        <span class="color-fuchsia-500">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
+                    </div>
+                    <div *ngIf="item==statusEnum.IsSpecialAbilities">
+                        <img src="assets/images/shared/medal-green.svg" alt="">
+                        <span class="color-pink-500">{{'dashboard.students.withDisabilities' |translate}}</span>
+                    </div>
+                    <div *ngIf="(item!=statusEnum.IsSpecialAbilities&&item!=statusEnum.IsChildOfAMartyr)">
+                        <img src="assets/images/shared/medal-blue.svg" alt="">
+                        <span class="color-skyBlue-300" >{{'shared.allStatus.'+item|translate}}</span>
+                    </div>
+                </ng-container>
+          </div>
+          <div class="profile__details ">
+              <div class="fs-4 ">
+                  <img src="assets/images/shared/child.svg" alt="">
+                  <span class="color-gray-300 fs-4 ">{{student.age}} سنه</span>
+              </div>
+              <div>
+                  <!-- <img *ngIf="student.regestered " src="assets/images/shared/fingure.svg " alt=" "> -->
+                  <img  src="assets/images/shared/fingur-blue.svg " alt=" ">
+                  <div [ngSwitch]="student.status||'Unregestered'">
+                      <div class="color-gray-300" *ngSwitchCase="registrationStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
+                      <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Unregistered">{{'shared.allStatus.Unregestered' | translate}}</div>
+                      <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.ReEnrolment">{{'shared.allStatus.ReEnrolment' | translate}}</div>
+                      <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
+                      <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Withdrawal">{{'shared.allStatus.Withdrawal' | translate}}</div>
+                      <div class="color-gray-500" *ngSwitchCase="registrationStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
+                      <div class="color-primary" *ngSwitchDefault>{{'shared.allStatus.Unregestered' | translate}}</div>
+
+                  </div>
+              </div>
+              <div  *ngIf="student?.grade">
+                  <!-- <img *ngIf="student.regestered " src="assets/images/shared/fingure.svg " alt=" "> -->
+                  <img src="assets/images/shared/fingur-blue.svg " alt=" ">
+                  <span class="color-gray-300 fs-4 " >
+                      {{student.grade.name|currentLang}}
+                   </span>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+
+  <div class="mb-5">
+      <div class="row gap-6 mt-5 ">
+          <div class="col-4 d-flex align-items-center gap-5 " *ngIf="student?.identityNum">
+              <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.Personal identification number' | translate}}</p>
+              <h4 class="color-primary">{{student.identityNum}}</h4>
+          </div>
+          <div class="col-4 d-flex align-items-center gap-5 ">
+              <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.Date of Birth' | translate}}</p>
+              <h4 class="color-primary">{{student.birthDate |LocalizeDate}}</h4>
+          </div>
+          <div class="col-4 d-flex align-items-center gap-5 " *ngIf="student?.nationality">
+              <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.Nationality' | translate}}</p>
+              <h4 class="color-primary">{{student.nationality?.name |currentLang}}</h4>
+          </div>
+          <!-- <div class="col-4 d-flex align-items-center gap-5 ">
+              <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.gender' | translate}}</p>
+              <h4 class="color-primary">{{student.gender}}</h4>
+          </div>
+          <div class="col-4 d-flex align-items-center gap-5 mt-5 ">
+              <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.The name of the new guardian' | translate}}</p>
+              <h4 class="color-primary">{{student.parentName.ar}}</h4>
+          </div>
+
+
+          <div class="col-4 d-flex align-items-center gap-5 mt-5 ">
+              <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.join type' | translate}}</p>
+              <h4 class="color-primary">{{student.relation.ar}}</h4>
+          </div> -->
+
+      </div>
+      <!-- <div class="col-md-12 d-flex align-items-center mt-5 ">
+          <span>{{'dashboard.myRequest.Student attachments' | translate}} </span>
+
+          <div *ngFor="let item of student.attachments; let i = index" class="icon--file m-4 ">
+              <app-file [name]="item.name.ar" [url]="item.url"></app-file>
+          </div>
+      </div> -->
+  </div>
+</ng-template>
+
+
+
+<ng-template #attachments let-attachments let-showText="showText">
+    <div class=" d-flex align-items-center mt-5 gap-5" *ngIf="attachments?.length">
+        <span class="flex-shrink-0" *ngIf="showText">{{'dashboard.Requests.requestAttachments' | translate}} </span>
+        <div  class="col-md-3" *ngFor="let item of attachments">
+            <app-file [file]="item"></app-file>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #loader>
+    <div class="row g-5">
+        <div class="col-md-4">
+            <app-skeleton count="2" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="2" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="2" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #actionsLoader>
+    <div class="row mt-5">
+        <div class="col-md-6"></div>
+        <div class="col-md-2">
+            <app-skeleton count="1" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-2">
+            <app-skeleton count="1" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-2">
+            <app-skeleton count="1" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+    </div>
+
+</ng-template>
+
+
+
+
+<p-dialog header="{{'dashboard.Requests.rejectReason' | translate}}" [(visible)]="rejectReasonModel" [draggable]="false" [modal]="true" [style]="{width: '40vw' , height: '65vh'}">
+
+    <ng-template pTemplate="content">
+
+        <div class="custom-form" ngForm #f="ngForm">
+            <label class="label required">{{'dashboard.Requests.rejectReason'| translate}}</label>
+            <input
+            *ngIf="!rejectReason$"
+            type="text"
+            [(ngModel)]="reqActionsForm.rejectionReason"
+            name="comment" pInputText
+            [required]="!rejectReason$"
+            placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"/>
+
+            <p-dropdown
+            [(ngModel)]="reqActionsForm.rejectionReasonId"
+            *ngIf="rejectReason$"
+            name="cause"
+            [options]="rejectReason$|async"
+            optionValue="id"
+            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
+            placeholder="{{'dashboard.Requests.rejectReason'|translate}}" [required]="rejectReason$"></p-dropdown>
+
+            <div class="mt-5" >
+              <P class="mb-4">{{'dashboard.Requests.addExplanation' | translate}} <span class="color-gray-700">({{'Optional' |translate}})</span> </P>
+              <textarea  [rows]="4" [(ngModel)]="reqActionsForm.comments" pInputTextarea [autoResize]="true" placeholder="{{'dashboard.Requests.addExplanation' | translate}}"></textarea>
+          </div>
+        </div>
+
+        <!-- Uploader -->
+        <!-- <app-file-upload view="full" (onFileUpload)="addAttachmentToAction($event)"></app-file-upload> -->
+
+        <div class="py-5"></div>
+        <div class="d-flex justify-content-end mt-6 mb-4" >
+            <button class="btn btn-primary"
+            (click)="completeRequestAction()"
+            [disabled]="!f.valid || isLoading">{{'shared.confirm'| translate}}
+            <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+        </button>
+        </div>
+    </ng-template>
+
+</p-dialog>

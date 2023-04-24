@@ -19,7 +19,7 @@
     <div class="nav__menu__container ms-auto " *ngIf="currentUserScope ==ScopeEnum.Guardian" >
         <ul class="nav__menu">
             <div class="mx-5"></div>
-            <li *ngFor="let navItem of Nav_Items" class="nav__menu__item">
+            <li *ngFor="let navItem of guardianNavItems" class="nav__menu__item">
                 <a routerLinkActive="active" routerLink="{{navItem.Link}}"  [routerLinkActiveOptions]="{exact: true}">
                     <div class="text"> {{navItem.name}}</div>
                 </a>
@@ -70,7 +70,7 @@
                         <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
                         </div> -->
-                        <div class="content" role="button" routerLink="/dashboard/reports-managment/degrees-reports" (click)="isMenuOpend=false">
+                        <div class="content" role="button" routerLink="/reports-managment/degrees-reports" (click)="isMenuOpend=false">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">{{'Score report'|translate}}</h4>
                                 <fa-icon [class.rotate180]="lang=='en'" [icon]="faArrowLeft"></fa-icon>
@@ -82,7 +82,7 @@
                         <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
                         </div> -->
-                        <div class="content" role="button" routerLink="/dashboard/manager-tools/settings" (click)="isMenuOpend=false">
+                        <div class="content" role="button" routerLink="/manager-tools/settings" (click)="isMenuOpend=false">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">{{'system configuration' | translate}}</h4>
                                 <fa-icon [class.rotate180]="lang=='en'" [icon]="faArrowLeft"></fa-icon>
@@ -94,7 +94,7 @@
                         <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
                         </div> -->
-                        <div class="content" role="button" routerLink="/dashboard/schools-and-students/students" (click)="isMenuOpend=false">
+                        <div class="content" role="button" routerLink="//schools-and-students/students" (click)="isMenuOpend=false">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">{{'shared.students' | translate}}</h4>
                                 <fa-icon [class.rotate180]="lang=='en'" [icon]="faArrowLeft"></fa-icon>

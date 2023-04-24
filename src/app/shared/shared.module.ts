@@ -30,7 +30,6 @@ import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { CardStudentComponent } from './components/card-student/card-student.component';
 import { DialogModule } from 'primeng/dialog';
 import { LocalizeDatePipe } from './pipes/localize-date.pipe';
-
 import { SelectSchoolsComponent } from './components/select-schools/select-schools.component';
 import { RegisterRequestComponent } from './components/register-request/register-request.component';
 import { SharedService } from './services/shared/shared.service';
@@ -41,7 +40,6 @@ import { StopPropagationDirective } from './directives/stop-propagation/stop-pro
 import { LanguageRestrictionDirective } from './directives/language-restriction/language-restriction.directive';
 import { LocalizeSearchPipe } from './pipes/localize-search.pipe';
 import { FileComponent } from './components/file/file.component';
-import { RequestListComponent } from '../modules/dashboard/modules/request-list/Component/request-list/request-list.component';
 import { TrauncateTextPipe } from './pipes/truncate-text/trauncate-text.pipe';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { SafePipe } from './pipes/safe.pipe';
@@ -49,10 +47,10 @@ import { ConfirmDialogDirective } from './directives/confirm-dialog/confirm-dial
 import { StudentBadgesComponent } from './components/student-badges/student-badges.component';
 import { WrapFuncPipe } from './pipes/wrapFunc/wrap-func.pipe';
 import { ClickOutsideDirective } from './directives/click-outside/click-outside.directive';
-import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrModule } from 'ngx-toastr';
+import { RequestListComponent } from '../modules/dashboard/request-list/Component/request-list/request-list.component';
 
 registerLocaleData(localeAr);
 
@@ -73,7 +71,6 @@ registerLocaleData(localeAr);
     SendBtnComponent,
     DropdownComponent,
     LocalizeDatePipe,
-    // PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
     ConfirmModelComponent,
@@ -102,7 +99,6 @@ registerLocaleData(localeAr);
     WrapFuncPipe,
     ClickOutsideDirective,
     PermissionDirective,
-    HeaderDashboardComponent
 
   ],
   imports: [
@@ -112,8 +108,6 @@ registerLocaleData(localeAr);
     FontAwesomeModule,
     InfiniteScrollModule,
     PrimngModule,
-    // LayoutModule,
-
     DialogModule,
     NgxSkeletonLoaderModule,
     TranslateModule,
@@ -171,7 +165,6 @@ registerLocaleData(localeAr);
     WrapFuncPipe,
     ClickOutsideDirective,
     PermissionDirective,
-    HeaderDashboardComponent,
     RouterModule,
     TranslateModule,
     ToastrModule
