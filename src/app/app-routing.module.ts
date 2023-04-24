@@ -25,19 +25,19 @@ const routes: Routes = [
         children: [
           {
             path: 'schools',
-            loadChildren: () => import('./modules/dashboard/schools/schools.module').then(m => m.SchoolsModule),
+            loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents}
           },
           {
             path: 'all-parents',
-            loadChildren: () => import('./modules/dashboard/parants/parents.module').then(m => m.ParantsModule),
+            loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents}
           },
           {
             path: 'students',
-            loadChildren: () => import('./modules/dashboard/students/students.module').then(m => m.StudentsModule),
+            loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents}
           },
@@ -50,13 +50,13 @@ const routes: Routes = [
         children: [
           {
             path: 'school',
-            loadChildren: () => import('./modules/dashboard/schools/schools.module').then(m => m.SchoolsModule),
+            loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: [ClaimsEnum.E_Menu_ManageSchool, , ClaimsEnum.E_MenuItem_Subjects]}
           },
           {
             path: 'requests-list',
-            loadChildren: () => import('./modules/dashboard/request-list/request-list.module').then(m => m.RequestListModule),
+            loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule),
             canActivate: [ClaimsGuard],
             // data:{allowedClaims: ClaimsEnum.E_MenuItem_Requests}
           },
@@ -70,13 +70,13 @@ const routes: Routes = [
         children: [
           {
             path: 'all-parents',
-            loadChildren: () => import('./modules/dashboard/parants/parents.module').then(m => m.ParantsModule),
+            loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.E_menu_ManageStudents}
           },
           {
             path: 'students',
-            loadChildren: () => import('./modules/dashboard/students/students.module').then(m => m.StudentsModule),
+            loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: [ClaimsEnum.E_menu_ManageStudents]}
           },
@@ -91,7 +91,7 @@ const routes: Routes = [
         children:[
                {
             path: 'assignments',
-            loadChildren: () => import('./modules/dashboard/assignments/assignments.module').then(m => m.AssignmentsModule),
+            loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.S_MenuItem_Setting}
           },
@@ -99,7 +99,7 @@ const routes: Routes = [
 
           {
             path: 'RequestList',
-            loadChildren: () => import('./modules/dashboard/request-list/request-list.module').then(m => m.RequestListModule),
+            loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule),
             canActivate: [ClaimsGuard],
             // data:{allowedClaims: ClaimsEnum.S_MenuItem_Request}
           },
@@ -112,13 +112,13 @@ const routes: Routes = [
         children:[
           {
             path: 'assignments',
-            loadChildren: () => import('./modules/dashboard/assignments/assignments.module').then(m => m.AssignmentsModule),
+            loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.SE_MenuItem_Exam}
           },
           {
             path: 'assessments',
-            loadChildren: () => import('./modules/dashboard/assessment/assessment.module').then(m => m.AssessmentModule),
+            loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.SE_MenuItem_Exam}
           },
@@ -131,7 +131,7 @@ const routes: Routes = [
         children:[
           {
             path: 'surveys',
-            loadChildren: () => import('./modules/dashboard/surveys/surveys.module').then(m => m.SurveysModule),
+            loadChildren: () => import('./modules/surveys/surveys.module').then(m => m.SurveysModule),
             canActivate: [ClaimsGuard],
             // data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}
           },
@@ -139,27 +139,27 @@ const routes: Routes = [
 
             {
               path: 'annual-holiday',
-              loadChildren: () => import('./modules/dashboard/annual-holiday/annual-holiday.module').then(m => m.AnnualHolidayModule),
+              loadChildren: () => import('./modules/annual-holiday/annual-holiday.module').then(m => m.AnnualHolidayModule),
               canActivate: [ClaimsGuard],
               data:{allowedClaims: ClaimsEnum.S_MenuItem_Holiday}
             },
 
             {
               path: 'assessments',
-              loadChildren: () => import('./modules/dashboard/assessment/assessment.module').then(m => m.AssessmentModule),
+              loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule),
               canActivate: [ClaimsGuard],
               data:{allowedClaims: ClaimsEnum.SE_MenuItem_Rate}
             },
             {
               path: 'school-year',
-              loadChildren: () => import('./modules/dashboard/school-years/school-years.module').then(m => m.SchoolYearsModule),
+              loadChildren: () => import('./modules/school-years/school-years.module').then(m => m.SchoolYearsModule),
               canActivate: [ClaimsGuard],
               data:{allowedClaims: ClaimsEnum.S_MenuItem_SchoolYear}
             },
 
             {
               path: 'subject',
-              loadChildren: () => import('./modules/dashboard/subjects/subjects.module').then(m => m.SubjectsModule),
+              loadChildren: () => import('./modules/subjects/subjects.module').then(m => m.SubjectsModule),
               canActivate: [ClaimsGuard],
               data:{allowedClaims: ClaimsEnum.S_MenuItem_SubjectMenu}
             },
@@ -170,13 +170,13 @@ const routes: Routes = [
 
       {
         path: 'schoolEmployee-management/school',
-        loadChildren: () => import('./modules/dashboard/schools/schools.module').then(m => m.SchoolsModule),
+        loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
         canActivate: [ClaimsGuard],
         data:{allowedClaims: ClaimsEnum.E_menu_ManageSchoolEmployee}
       },
       {
         path: 'grades-and-divisions/school',
-        loadChildren: () => import('./modules/dashboard/schools/schools.module').then(m => m.SchoolsModule),
+        loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
         canActivate: [ClaimsGuard],
         data:{allowedClaims: ClaimsEnum.E_Menu_ManageGradesAndDivisions}
       },
@@ -188,31 +188,31 @@ const routes: Routes = [
         children: [
           {
             path: 'user-roles',
-            loadChildren: () => import('./modules/dashboard/user-roles/user-roles.module').then(m => m.UserRolesModule),
+            loadChildren: () => import('./modules/user-roles/user-roles.module').then(m => m.UserRolesModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.S_MenuItem_Role}
           },
           {
             path: 'indexes',
-            loadChildren: () => import('./modules/dashboard/indexes/indexes.module').then(m => m.IndexesModule),
+            loadChildren: () => import('./modules/indexes/indexes.module').then(m => m.IndexesModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.S_MenuItem_Index}
           },
           {
             path: 'settings',
-            loadChildren: () => import('./modules/dashboard/system-setting/system-setting.module').then(m => m.SystemSettingModule),
+            loadChildren: () => import('./modules/system-setting/system-setting.module').then(m => m.SystemSettingModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.S_MenuItem_Setting}
           },
           {
             path: 'user-information',
-            loadChildren: () => import('./modules/dashboard/user-information/user-information.module').then(m => m.UserInformationModule),
+            loadChildren: () => import('./modules/user-information/user-information.module').then(m => m.UserInformationModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.S_MenuItem_user}
           },
           {
             path: 'notifications',
-            loadChildren: () => import('./modules/dashboard/notifications-list/notifications-setting.module').then(m => m.NotificationsSettingModule),
+            loadChildren: () => import('./modules/notifications-list/notifications-setting.module').then(m => m.NotificationsSettingModule),
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.S_MenuItem_Setting}
           },
@@ -221,14 +221,14 @@ const routes: Routes = [
 
       {
         path: 'reports-managment',
-        loadChildren: () => import('./modules/dashboard/reports-managment/reports-managment.module').then(m => m.ReportsManagmentModule),
+        loadChildren: () => import('./modules/reports-managment/reports-managment.module').then(m => m.ReportsManagmentModule),
         canActivate: [ClaimsGuard],
         data:{allowedClaims: ClaimsEnum.S_Menu_ReportsManagement}
       },
 
       {
         path: 'messages',
-        loadChildren: () => import('./modules/dashboard/messages/messages.module').then(m =>m.MessagesModule),
+        loadChildren: () => import('./modules/messages/messages.module').then(m =>m.MessagesModule),
       },
       {
         path: 'notifications',
@@ -249,7 +249,7 @@ const routes: Routes = [
 
       {
         path: 'requests-list',
-        loadChildren: () => import('./modules/dashboard/request-list/request-list.module').then(m => m.RequestListModule)
+        loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule)
       },
     ],
   },

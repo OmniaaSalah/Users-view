@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
-import Validation from 'src/app/modules/dashboard/user-information/models/utils/validation';
+import Validation from 'src/app/modules/user-information/models/utils/validation';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-forget-password',

@@ -37,7 +37,7 @@ import { ViewPeriod } from 'calendar-utils';
 import moment from 'moment-timezone';
 import { RecurringEvent } from 'src/app/core/models/calendar/calendar';
 import { Calendar } from 'primeng/calendar';
-import { GradesService } from 'src/app/modules/dashboard/schools/services/grade/grade.service';
+import { GradesService } from 'src/app/modules/schools/services/grade/grade.service';
 import { WeekDays } from '../../enums/global/global.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';

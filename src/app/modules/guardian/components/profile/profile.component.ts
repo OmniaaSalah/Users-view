@@ -6,7 +6,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import {  faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { ParentService } from 'src/app/modules/dashboard/parants/services/parent.service';
+import { ParentService } from 'src/app/modules/parants/services/parent.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
