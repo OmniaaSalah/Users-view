@@ -1,0 +1,136 @@
+
+<ng-container *permit="ClaimsEnum.S_C_Survey">
+         <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/educational-settings/surveys/new-survey'" [content]="'breadcrumb.createNewSurvey'"></app-add-btn>
+</ng-container>
+
+
+
+    <div class="prim-table" *ngIf="surveyList.totalAllData|| surveyList.loading">
+        <p-table #dt [lazy]="true" [value]="surveyList.list" (onSort)="onSort($event)" [scrollable]="true">
+
+
+            <!-- Table Caption -->
+            <ng-template pTemplate="caption">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="getSurveyList()" (onSearch)="filtration.KeyWord = $event; getSurveyList()" (onClear)="clearFilter()">
+
+                    <div class="row gx-5 form-set">
+                        <div class="col-lg-4">
+                            <label class="label" for="day"> {{'dashboard.surveys.surveyType'|translate }} </label>
+                            <p-dropdown [options]="surveyType" [showClear]="true" StopProp [(ngModel)]="filtration.SurveyType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.surveyTypechoices'|translate }}"></p-dropdown>
+                        </div>
+                        <div class="col-lg-4">
+                            <label class="label" for="curriculum">{{'dashboard.surveys.surveyStatus'|translate }}  </label>
+                            <p-multiSelect [options]="surveyStatus" display="chip"  [(ngModel)]="filtration.SurveyStatus"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.Select surveyType'|translate }}"></p-multiSelect>
+                        </div>
+                    </div>
+                </app-table-caption>
+
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="surveyNumber" class="lg">
+                        <p-sortIcon field="surveyNumber"></p-sortIcon>{{'dashboard.surveys.surveyNumber' | translate}}
+                    </th>
+
+                    <th pSortableColumn="title.ar" class="lg">
+                        <p-sortIcon field="title.ar"></p-sortIcon>{{'dashboard.surveys.surveyAddress' | translate}}
+                    </th>
+
+                    <th pSortableColumn="surveyType" class="md">
+                        <p-sortIcon field="surveyType"></p-sortIcon>{{'dashboard.surveys.surveyType' | translate}}
+                    </th>
+
+                    <th   pSortableColumn="userName.ar" class="lg"><p-sortIcon  field="userName.ar" >
+                        </p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}
+                    </th>
+
+                    <th pSortableColumn="targetGuardians" class="min">
+                        <p-sortIcon field="targetGuardians"></p-sortIcon>{{'dashboard.surveys.targets' | translate}}
+                    </th>
+
+                    <th pSortableColumn="responsesTotalNumber" class="min">
+                        <p-sortIcon field="responsesTotalNumber"></p-sortIcon>{{'dashboard.surveys.responses' | translate}}
+                    </th>
+                    <th pSortableColumn="surveyStatus" class="md">
+                        <p-sortIcon field="surveyStatus"></p-sortIcon>{{'dashboard.surveys.surveyStatus' | translate}}
+                    </th>
+                    <th  class="actions--lg" pSortableColumn="createdDate"><p-sortIcon  field="createdDate">
+                         </p-sortIcon>{{'shared.Created Date'|translate}}
+                    </th>
+                    <th  class="actions--lg" pSortableColumn="disAppearanceDate"><p-sortIcon  field="disAppearanceDate">
+                    </p-sortIcon>{{'shared.End Date'|translate}}
+                    </th>
+                    <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions"></th>
+
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td class="lg">{{product.surveyNumber}}</td>
+                    <td class="lg">{{product.title| currentLang}}</td>
+                    <td class="md">
+                        <span *ngIf="product.surveyType==StatusEnum.Mandatory">{{'dashboard.surveys.mandatory'| translate}}</span>
+                        <span *ngIf="product.surveyType==StatusEnum.Optional">{{'dashboard.surveys.optional'| translate}}</span>
+                    </td>
+                    <td class="lg">{{product.userName|currentLang}}</td>
+                    <td class="min">{{product.targetGuardians}}</td>
+                    <td class="min">{{product.responsesTotalNumber}}</td>
+
+                    <td class="md">
+                        <div class="d-flex align-items-center">
+                            <div [ngSwitch]="product.surveyStatus">
+                                <div class="alerting primary" *ngSwitchCase="StatusEnum.Draft"> {{'dashboard.surveys.'+StatusEnum.Draft| translate}}</div>
+                                <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
+                                <div class="alerting danger" *ngSwitchCase="StatusEnum.Closed "> {{'dashboard.surveys.'+StatusEnum.Closed | translate}}</div>
+                                <div class="alerting secondary" *ngSwitchCase="StatusEnum.Apparent "> {{'dashboard.surveys.'+StatusEnum.Apparent | translate}}</div>
+                                <div class="alerting dark" *ngSwitchCase="StatusEnum.Canceled "> {{'dashboard.surveys.'+StatusEnum.Canceled | translate}}</div>
+                            </div>
+
+                        </div>
+                    </td>
+                    <td>{{product.createdDate| LocalizeDate}}</td>
+                    <td >
+                        <span *ngIf="product.surveyStatus==StatusEnum.Sent||product.surveyStatus==StatusEnum.Apparent">{{product?.disAppearanceDate| LocalizeDate}}</span>
+                        <span *ngIf="product.surveyStatus==StatusEnum.Draft">{{'dashboard.surveys.NotDeterminedYet'| translate}}</span>
+                        <span *ngIf="product.surveyStatus==StatusEnum.Closed">{{'dashboard.surveys.Finished'| translate}}</span>
+                        <span *ngIf="product.surveyStatus==StatusEnum.Canceled">{{'dashboard.surveys.Closed'| translate}}</span>
+                    </td>
+                    <td pFrozenColumn [frozen]="true">
+                        <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4" routerLink="/educational-settings/surveys/Survey/{{product.id}}">
+                            <span class="color-skyBlue-400">{{'shared.details'|translate}}</span>
+                            <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage" let-columns>
+
+                <tr>
+
+                    <td [attr.colspan]="20 " class="search">
+                        <ng-container *ngIf="surveyList.totalAllData && surveyList.list.length == 0 &&  !surveyList.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}} " src="assets/images/empty-list/empty-list.svg "></app-informative-block>
+                        </ng-container>
+                        <app-loader></app-loader>
+                    </td>
+
+                </tr>
+
+            </ng-template>
+        </p-table>
+
+
+        <div *ngIf="paginationState.rows<surveyList.total">
+            <app-pagination [totalItems]="surveyList.total" (paginationChanged)="onTableDataChange($event) ">
+            </app-pagination>
+        </div>
+
+    </div>
+    <!-- emptymessage -->
+    <ng-container *ngIf="!surveyList.totalAllData && !surveyList.loading">
+        <app-informative-block title="{{ 'emptyList.Survey List is empty' |translate}} " src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
+

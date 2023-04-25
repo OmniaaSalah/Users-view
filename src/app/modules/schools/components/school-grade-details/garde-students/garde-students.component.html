@@ -1,0 +1,76 @@
+<div class="prim-table mt-4" *ngIf="students.totalAllData || students.loading">
+    <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true">
+        <!-- Table Caption -->
+        <ng-template pTemplate="caption">
+            <app-table-caption
+            (onExport)="onExport($event)"
+            (onFilter)="this.filtration.Page=1;getStudents()"
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getStudents()"
+            (onClear)="clearFilter()"
+            >
+            <div class="row gx-5 form-set">
+                <div class="col-md-4">
+                    <label class="label" for="city"> {{'dashboard.students.divisions'| translate}} </label>
+                    <!-- <p-dropdown  [showClear]="true" StopProp [options]="(gradeDivisions$ |async)" [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-dropdown> -->
+                    <p-multiSelect  [options]="(gradeDivisions$ |async)" display="chip" [(ngModel)]="filtration.DivisionId"   optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-multiSelect>
+                </div>
+            </div>
+        </app-table-caption>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns="columns">
+            <tr>
+                <!-- <th *ngFor="let col of cols">
+                    {{col.header}}
+                </th>
+                <th pSortableColumn="actions"></th> -->
+                <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
+                <th pSortableColumn="name" class="lg">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="surname">{{'shared.division'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
+                <th pSortableColumn="track">{{'dashboard.parents.ministerialNumber'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
+                <th pSortableColumn="nationalityId">{{'shared.personalId'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-student >
+            <!-- [routerLink]="['student/', student.id]" class="clickable" -->
+            <tr >
+                <td>{{student.studentNumber}}</td>
+                <td class="lg gap-2 d-flex" *ngIf="currentUserScope==userScope.SPEA" >
+                    <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
+                    <a  target="_blank"  [routerLink]="['//schools-and-students/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
+                </td>
+                <td class="lg gap-2 d-flex" *ngIf="currentUserScope==userScope.Employee" >
+                    <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
+                    <a  target="_blank" [routerLink]="['/student-management/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
+                </td>
+                <td>{{student.divisionName |currentLang }}</td>
+                <td>{{student.ministerialNumber}}</td>
+                <td>{{student?.nationalityId || 12255555555558784}}</td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="!students.total &&  !students.loading">
+                        <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+
+                    <app-loader></app-loader>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+    <div *ngIf="students.total  > paginationState.rows">
+        <app-pagination [totalItems]="students.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+</div>
+
+<ng-container *ngIf="!students.totalAllData && !students.loading">
+    <app-informative-block title="{{'emptyList.students' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>
+
+
+

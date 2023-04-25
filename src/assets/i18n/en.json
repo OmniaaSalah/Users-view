@@ -808,7 +808,8 @@
         "degreesUploaded":"ٍSubject Degrees Uploaded Successfully",
         "degreesShouldBeEntered":"Plesae Enter The Degrees In Attached File",
         "userNotAllowedToUploadDegrees":"User Not Allowed To Upload Degrees",
-        "fileDataShouldBeReviewed":"Attached File Data Should Be Reviewed"
+        "fileDataShouldBeReviewed":"Attached File Data Should Be Reviewed",
+        "absenceRaised":"Absence Raised Successfully"
 
     },
     "dashboard": {
@@ -974,6 +975,7 @@
             "editDetailsOnEmployee": "EditDetails On EmployeeInfo",
             "chooseStudentsToTransfer": "Choose Students To Transfer",
             "raisAbsence":  "Rais Absence",
+            "absenceStudentsExist":"Is there is Abcence",
             "transferStudentToAnotherDivision": "Transfer Student To Another Division",
             "currentDivision":  "Current Division",
             "divisionToTransferTo": "Division To Transfer To",

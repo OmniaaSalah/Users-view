@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { UserInformationService } from 'src/app/modules/dashboard/modules/user-information/service/user-information.service';
+import { UserInformationService } from 'src/app/modules/user-information/service/user-information.service';
 import { NotificationService } from '../../service/notification.service';
 
 @Component({

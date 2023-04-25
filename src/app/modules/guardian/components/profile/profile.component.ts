@@ -6,7 +6,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import {  faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
+import { ParentService } from 'src/app/modules/parants/services/parent.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
     mainTitle: { main: this.translate.instant('dashboard.parents.parentInfo') }
   }
 
-  
+
   constructor(
     private translate: TranslateService,
     private toastr:ToastService,
@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
     private headerService: HeaderService,
     private userService:UserService,
     private fb: FormBuilder
-  ) { 
+  ) {
     this.guardianFormGrp = fb.group({
 
       arabicName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -95,7 +95,7 @@ export class ProfileComponent implements OnInit {
     return this.guardianFormGrp.controls['gender'] as FormControl;
   }
 
- 
+
   get phone() {
     return this.guardianFormGrp.controls['phone'] as FormControl;
   }
@@ -106,7 +106,7 @@ export class ProfileComponent implements OnInit {
 
   setPhoneValidators(event)
   {
-    
+
     this.email.clearValidators();
     this.phone.setValidators([Validators.required,Validators.pattern('(05)[0-9]{8}')]);
   }
@@ -114,24 +114,24 @@ export class ProfileComponent implements OnInit {
   {
     this.email.clearValidators();
     this.phone.clearValidators();
-   
+
   }
 
   setEmailValidators(event)
   {
-   
- 
+
+
    this.phone.clearValidators();
    this.email.setValidators([Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]);
-   
+
  }
 
  saveChanges()
  {
   this.isBtnLoading=true;
-  var guardian={  
-                 name:{ar:this.guardianFormGrp.value.arabicName,en:this.guardianFormGrp.value.englishName}, 
-                  nickName:{ar:this.guardianFormGrp.value.arabicNickName,en:this.guardianFormGrp.value.englishNickName}, 
+  var guardian={
+                 name:{ar:this.guardianFormGrp.value.arabicName,en:this.guardianFormGrp.value.englishName},
+                  nickName:{ar:this.guardianFormGrp.value.arabicNickName,en:this.guardianFormGrp.value.englishNickName},
                   nationalityId:this.guardianFormGrp.value.nationality,
                   gender: this.guardianFormGrp.value.gender,
                   email:this.guardianFormGrp.value.email,
@@ -152,7 +152,7 @@ export class ProfileComponent implements OnInit {
  getGuardianById(){
  var guardian;
   this.guardianService.getGuardianById(this.guardian.id).subscribe(response => {
-    
+
     guardian= response;
     this.guardianFormGrp.patchValue({
       arabicName: guardian?.name.ar,
@@ -165,12 +165,12 @@ export class ProfileComponent implements OnInit {
       nationality:guardian?.nationalityId,
       birthDate:new Date(guardian?.birthDate)
     })
-   
+
   })
 }
 formateDate(date :Date)
 {
-  let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+  let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
   return d.split('.')[0]
 }
 

@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
+import { IndexesService } from 'src/app/modules/indexes/service/indexes.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AddChildService } from '../../../services/add-child.service';
 import { ToastrService } from 'ngx-toastr';

@@ -5,9 +5,9 @@
 <ng-container *ngIf="claimsLoaded">
 
     <app-confirm-model></app-confirm-model>
-    <div *ngIf="hideHeader">
-        <app-header></app-header>
-    </div>
+    <!-- <div *ngIf="hideHeader">
+        <app-navbar></app-navbar>
+    </div> -->
 
 
 
@@ -58,7 +58,7 @@
                             <span></span>
                         </div>
                     </li> -->
-                    <li class="panal__list__item" routerLink="/dashboard/manager-tools/settings" *permit="ClaimsEnum.S_MenuItem_Setting">
+                    <li class="panal__list__item" routerLink="/manager-tools/settings" *permit="ClaimsEnum.S_MenuItem_Setting">
                         <div class="icon">
                             <img src="assets/images/home/panal/setting.svg" alt="">
                         </div>

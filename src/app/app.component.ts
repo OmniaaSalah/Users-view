@@ -8,18 +8,18 @@ import { filter, forkJoin, mergeMap, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
 import { UserService } from './core/services/user/user.service';
-import { MessageService } from './modules/dashboard/modules/messages/service/message.service';
+import { MessageService } from './modules/messages/service/message.service';
 import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 import { SharedService } from './shared/services/shared/shared.service';
 import { ClaimsEnum } from './shared/enums/claims/claims.enum';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
 import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
-import { IndexesService } from './modules/dashboard/modules/indexes/service/indexes.service';
-import { SettingsService } from './modules/dashboard/modules/system-setting/services/settings/settings.service';
+import { IndexesService } from './modules/indexes/service/indexes.service';
+import { SettingsService } from './modules/system-setting/services/settings/settings.service';
 import { FileTypeEnum } from './shared/enums/file/file.enum';
 import { ClaimsService } from './core/services/claims.service';
-import { UserInformationService } from './modules/dashboard/modules/user-information/service/user-information.service';
+import { UserInformationService } from './modules/user-information/service/user-information.service';
 
 @Component({
   selector: 'app-root',
@@ -70,12 +70,9 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
-    private sharedService: SharedService,
-    private usersService:UserInformationService,
     private authService:AuthenticationService,
     private messageService: MessageService,
     private index:IndexesService,
-    private route :ActivatedRoute,
     private settingsService:SettingsService,) {
     }
 
@@ -133,9 +130,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
         window.scrollTo(0, 0);
         event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
-        event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
+        // event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
         if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false
-
     })
 
 
