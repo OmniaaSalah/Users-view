@@ -25,7 +25,6 @@ import { PrimngModule } from './shared/primng/shared-primng.module';
     CoreModule,
     SharedModule,
     PrimngModule,
-    LayoutModule,
     DTransalteModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'

@@ -6,6 +6,7 @@ import { HomeComponent } from './home-page/home.component';
 import { GuardianHomeComponent } from './home-page/guardian-home/guardian-home.component';
 import { PrimngModule } from '../shared/primng/shared-primng.module';
 import { SharedModule } from '../shared/shared.module';
+import { LayoutModule } from '../layout/layout.module';
 
 
 
@@ -19,12 +20,14 @@ import { SharedModule } from '../shared/shared.module';
     TranslateModule,
     HttpClientModule,
     PrimngModule,
-    SharedModule
+    SharedModule,
+    LayoutModule
   ],
   exports:[
     HttpClientModule,
     HomeComponent,
-    GuardianHomeComponent
+    GuardianHomeComponent,
+    LayoutModule
   ]
 })
 export class CoreModule { }
