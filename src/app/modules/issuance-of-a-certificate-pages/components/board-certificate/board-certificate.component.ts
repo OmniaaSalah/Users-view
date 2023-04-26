@@ -16,6 +16,7 @@ import { StudentsService } from 'src/app/modules/students/services/students/stud
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-board-certificate',
@@ -26,6 +27,8 @@ export class BoardCertificateComponent implements OnInit {
   @Input() choosenStudents;
   @Output() onCancel: EventEmitter<string> = new EventEmitter();
   @Output() onBack: EventEmitter<string> = new EventEmitter();
+
+  getCurrentGuardianId = this.userService.getCurrentGuardian()?.id
 
   selected = false;
 
@@ -57,7 +60,8 @@ export class BoardCertificateComponent implements OnInit {
     private certificatesService: IssuanceCertificaeService,
     private route: ActivatedRoute,
     private indexService: IndexesService,
-    private studentService: StudentsService
+    private studentService: StudentsService,
+    private userService:UserService
   ) {}
 
   ngOnInit(): void {

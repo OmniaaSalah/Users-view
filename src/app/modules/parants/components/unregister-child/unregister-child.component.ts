@@ -180,8 +180,8 @@ export class UnregisterChildComponent implements OnInit {
       indexId:[item.indexId??null],
       url:[item.url?? ''],
       titel: this.fb.group({
-        ar:[item.titel.ar?? ''],
-        en:[item.titel.en?? '']
+        ar:[item.title.ar?? ''],
+        en:[item.title.en?? '']
       }),
       name:[item.name?? ''],
       comment:[item.comment?? '']
