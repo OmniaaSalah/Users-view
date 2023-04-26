@@ -30,7 +30,7 @@ export class DegreesReportsComponent implements OnInit {
   subjectList;
   studentList =inject(StudentsService).getAllStudents();
   AllSemesters=inject(SharedService).semesterTypes;
-  schools$ = inject(SchoolsService).getAllSchools();
+  schools$ = inject(SchoolsService).getSchoolsDropdown()
   AllGrades$ =inject(SharedService).getAllGrades('');
   schoolDivisions$ =inject(SharedService).getAllDivisions('')
   isCollapsed=true;

@@ -18,7 +18,7 @@
                     <div class="row gx-5 form-set">
                         <div class="col-4">
                             <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
-                            <p-multiSelect [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.schoolIds"   optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
+                            <p-multiSelect [options]="(schools$| async)" display="chip" [(ngModel)]="filtration.schoolIds"   optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
                         </div>
                     
                         <div class="col-4">
