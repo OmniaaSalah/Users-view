@@ -10,7 +10,7 @@
                 <div class="col-md-4" >
                     <label class="label">{{'School'| translate}}</label>
                     <p-multiSelect 
-                    [options]="(schools$| async)?.data"  
+                    [options]="(schools$| async)"  
                     display="chip"
                     [(ngModel)]="filtration.schoolIds" 
                     optionValue="id" 

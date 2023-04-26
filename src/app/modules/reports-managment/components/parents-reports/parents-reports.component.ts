@@ -24,7 +24,7 @@ export class ParentsReportsComponent implements OnInit {
   isBtnLoading: boolean=false;
   date;
   tableColumns = [];
-  schools$ = inject(SchoolsService).getAllSchools();
+  schools$ = inject(SchoolsService).getSchoolsDropdown()
   AllGrades$ =inject(SharedService).getAllGrades('');
   curriculums$ = inject(SharedService).getAllCurriculum()
   schoolDivisions$ =inject(SharedService).getAllDivisions('')

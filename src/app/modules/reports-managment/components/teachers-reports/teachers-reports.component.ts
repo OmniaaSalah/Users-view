@@ -22,7 +22,7 @@ import { TeachersReportsService } from '../../services/teachers-reports/teachers
 export class TeachersReportsComponent implements OnInit {
   tableColumns = [];
   lang = inject(TranslationService).lang
-  schools$ = inject(SchoolsService).getAllSchools()
+  schools$ = inject(SchoolsService).getSchoolsDropdown()
   subjects$ = inject(SubjectService).getAllSubjectsWithoutDuplicated()
   filtration = {...Filtration,schoolIds:[],subjectIds:[]}
   paginationState = { ...paginationInitialState };

@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -44,6 +45,7 @@ export class NotificationListComponent implements OnInit {
   constructor( private headerService: HeaderService,
                 private userInformation:UserInformationService,
                private router: Router,
+               private toastr:ToastrService,
                private translate: TranslateService,
                private notificationService: NotificationService,
                ) { }
@@ -110,9 +112,21 @@ export class NotificationListComponent implements OnInit {
   }
 
 
-  showDetails(pageLink){
-
-           window.open(pageLink, '_blank')
+  showDetails(pageLink,id,isRead){
+    if(!isRead)
+    {
+      this.notificationService.updateNotifications({'NotificationId' : [id]}).subscribe(res=>{
+        window.open(pageLink, '_blank')
+    
+      },err=>{
+        this.toastr.error(this.translate.instant('Request cannot be processed, Please contact support.'))
+      })
+    }
+    else
+    {
+      window.open(pageLink, '_blank')
+    }
+       
   }
 
 

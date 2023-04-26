@@ -43,7 +43,7 @@ export class SubjectsReportsComponent implements OnInit {
     list: [],
     loading: false
   }
-  schools$ = this.schoolsService.getAllSchools()
+  schools$ = inject(SchoolsService).getSchoolsDropdown()
 
 
   tableColumns = []
