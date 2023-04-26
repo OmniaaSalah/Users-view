@@ -213,9 +213,21 @@ export class NavbarComponent implements OnInit {
       this.getNotReadable()
     }
 }
-goToNotificationDetails(pageLink){
+goToNotificationDetails(pageLink,id,isRead){
+  if(!isRead)
+  {
+    this.notificationService.updateNotifications({'NotificationId' : [id]}).subscribe(res=>{
+      window.open(pageLink, '_blank')
+  
+    },err=>{
+      this.toastr.error(this.translate.instant('Request cannot be processed, Please contact support.'))
+    })
+  }
+  else
+  {
+    window.open(pageLink, '_blank')
+  }
 
-  window.open(pageLink, '_blank')
 }
 
 markAsRead(){
@@ -404,7 +416,7 @@ onScroll()
     this.searchModel.pageSize=8;
     this.searchModel.isRead=null;
 
-    this.notificationService.getAllNotifications(this.searchModel).subscribe((res)=>{
+    this.notificationService.getAllNotifications().subscribe((res)=>{
       let unReadCount=0;
       this.notificationService.notificationNumber.next(res.total);
       res.data.forEach(element => {

@@ -64,7 +64,7 @@
                                 <div class="Details">
 
                                     <button class=" d-flex  align-items-center gap-3 justify-content-end mx-4"
-                                        (click)="showDetails(card.pageLink)">
+                                        (click)="showDetails(card.pageLink,card.id,card.isRead)">
                                         <span class="color-skyBlue-400">{{'shared.Show Details'|translate}}</span>
                                         <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                                     </button>

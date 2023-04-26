@@ -41,7 +41,7 @@ export class AttendanceReportsComponent implements OnInit {
 
 
   curriculums$ = this.sharedService.getAllCurriculum()
-  schools$ = this.schoolsService.getAllSchools()
+  schools$ = inject(SchoolsService).getSchoolsDropdown()
   AllGrades$= this.sharedService.getAllGrades('')
   schoolDivisions$ =inject(SharedService).getAllDivisions('')
   paginationState= {...paginationInitialState}
