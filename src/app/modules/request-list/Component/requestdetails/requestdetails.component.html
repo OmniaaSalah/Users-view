@@ -13,7 +13,7 @@
 
     <button class=" btn btn-primary btn--sm px-5"
     [disabled]="onSubmited"
-    (click)="withdrawReq()"
+    (click)="withdrawReq(requestDetails?.requestType)"
     *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Pending || requestDetails?.requestStatus==RequestStatusEnum.Accepted || requestDetails.requestStatus==RequestStatusEnum.Returned || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest">
         <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
         <span>{{'dashboard.Requests.withdrawalReq' |translate}}</span>
@@ -656,7 +656,7 @@
 
 
 <ng-template #attachments let-attachments let-showText="showText">
-    <div class=" d-flex align-items-center mt-5 gap-5" *ngIf="attachments?.length">
+    <div class=" d-flex align-items-center flex-grow-1 mt-5 gap-5" *ngIf="attachments?.length">
         <span class="flex-shrink-0" *ngIf="showText">{{'dashboard.Requests.requestAttachments' | translate}} </span>
         <div  class="col-md-3" *ngFor="let item of attachments">
             <app-file [file]="item"></app-file>
@@ -703,7 +703,7 @@
 
     <ng-template pTemplate="content">
 
-        <div class="custom-form" ngForm #f="ngForm">
+        <form class="custom-form" ngForm #f="ngForm">
             <label class="label required">{{'dashboard.Requests.rejectReason'| translate}}</label>
             <input
             *ngIf="!rejectReason$"
@@ -724,21 +724,23 @@
 
             <div class="mt-5" >
               <P class="mb-4">{{'dashboard.Requests.addExplanation' | translate}} <span class="color-gray-700">({{'Optional' |translate}})</span> </P>
-              <textarea  [rows]="4" [(ngModel)]="reqActionsForm.comments" pInputTextarea [autoResize]="true" placeholder="{{'dashboard.Requests.addExplanation' | translate}}"></textarea>
+              <textarea name="desc"  [rows]="4" [(ngModel)]="reqActionsForm.comments" pInputTextarea [autoResize]="true" placeholder="{{'dashboard.Requests.addExplanation' | translate}}"></textarea>
           </div>
-        </div>
+
+          <div class="py-5"></div>
+
+          <div class="d-flex justify-content-end mt-6 mb-4" >
+              <button class="btn btn-primary"
+              (click)="completeRequestAction()"
+              [disabled]="!f.valid || isLoading">{{'shared.confirm'| translate}}
+              <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+            </button>
+          </div>
+        </form>
 
         <!-- Uploader -->
         <!-- <app-file-upload view="full" (onFileUpload)="addAttachmentToAction($event)"></app-file-upload> -->
 
-        <div class="py-5"></div>
-        <div class="d-flex justify-content-end mt-6 mb-4" >
-            <button class="btn btn-primary"
-            (click)="completeRequestAction()"
-            [disabled]="!f.valid || isLoading">{{'shared.confirm'| translate}}
-            <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
-        </button>
-        </div>
     </ng-template>
 
 </p-dialog>
