@@ -1,15 +1,13 @@
-import { Component, Input, OnInit,inject} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit,inject} from '@angular/core';
+import { FormBuilder,} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, filter, forkJoin, of, retry, switchMap, tap } from 'rxjs';
 import { IHeader } from 'src/app/core/Models';
 import { UserRequest, WorkflowOptions } from 'src/app/core/models/system-requests/requests.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { RegistrationStatus, StatusEnum, UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
@@ -185,7 +183,16 @@ export class RequestdetailsComponent implements OnInit {
 
 
 isRequestAllowedForWithdrawal(requestType){
-  let reqs = ['WithdrawalRequest','StudentRegradingRequest','RegestrationApplicationRequest','ModifyIdentityRequest','ModifyIdentityRequestCaseStudentNotHaveId']
+  let reqs = [
+    'WithdrawalRequest',
+    'StudentRegradingRequest',
+    'RegestrationApplicationRequest',
+    'ModifyIdentityRequest',
+    'ModifyIdentityRequestCaseStudentNotHaveId',
+    'AcademicSequenceCertificateRequest',
+    'BoardCertificateRequest',
+    'GradesCertificateRequest'
+  ]
   return reqs.includes(requestType)
 }
 
@@ -268,9 +275,9 @@ isRequestAllowedForWithdrawal(requestType){
   }
 
 
-  withdrawReq(){
+  withdrawReq(reqType: requestTypeEnum){
     this.onSubmited=true
-    this.requestsService.withdrawReq(this.requestInstance).subscribe(res=>{
+    this.requestsService.withdrawReq(this.requestInstance,reqType).subscribe(res=>{
       this.toaster.success(this.translate.instant('toasterMessage.requestWithdrawnSuccesfully'))
       this.router.navigate(['/performance-managment/RequestList'])
       this.onSubmited=false

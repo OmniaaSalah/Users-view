@@ -6,6 +6,7 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
 import { TranslateService } from '@ngx-translate/core';
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -151,8 +152,29 @@ requestList=[];
   }
 
 
-  withdrawReq(id){
-    return this.http.put(`/Student/withdraw-request/${id}`).pipe(take(1))
+  withdrawReq(id, reqType){
+    const requests = [
+      'BoardCertificateRequest',
+      'GradesCertificateRequest',
+      'AcademicSequenceCertificateRequest',
+   ]
+    if( requests.includes(reqType)){
+      return this.http.put(`/Certificate/withdraw-certificate-request/${id}`).pipe(
+        map(res=>{
+          if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error()
+          else return res
+        }),
+        take(1))
+    }else{
+      return this.http.put(`/Student/withdraw-request/${id}`).pipe(
+        map(res=>{
+          if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error()
+          else return res
+        }),
+        take(1))
+    }
+
+
   }
   // خلي بالك لما تيجي تعمل الطلبات ابقي اعمل دي بردو لان الطلبات متعملتش كاباك
 // usersToExport(filter){
