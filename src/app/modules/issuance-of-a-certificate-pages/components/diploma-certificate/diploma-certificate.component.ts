@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
-import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
+import { IndexesService } from 'src/app/modules/indexes/service/indexes.service';
+import { StudentsService } from 'src/app/modules/students/services/students/students.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
@@ -91,7 +91,7 @@ export class DiplomaCertificateComponent implements OnInit {
   }
 
 
-  
+
 
   onAttachmentSelected(attachment, index) {
     let urlParts =attachment.url?.split(".")
@@ -99,9 +99,9 @@ export class DiplomaCertificateComponent implements OnInit {
 
 
     if(!isImage){
-      this.showError =true; 
+      this.showError =true;
       return
-    }else this.showError =false; 
+    }else this.showError =false;
 
     let i = this.diplomaCertificateForm[index].attachments.indexOf(attachment.id);
 

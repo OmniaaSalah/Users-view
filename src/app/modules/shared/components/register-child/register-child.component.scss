@@ -1,0 +1,30 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/nav-tabs';
+@import 'src/assets/css/components/forms.scss';
+@import 'src/assets/css/components/profile';
+@import 'src/assets/css/components/model';
+
+
+:host{
+    position: relative;
+}
+// .details{
+
+//     p-inputNumber {
+//         width: 65% !important;
+//     }
+//     ::ng-deep  p-dropdown .p-dropdown {
+//         width: 50% !important;
+//     }
+
+// }
+
+textarea{
+    height: 15rem!important;
+}
+
+.contactBtn{
+    position: absolute;
+    top: -7rem;
+    left: 4rem;
+}

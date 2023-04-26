@@ -1,0 +1,47 @@
+@import 'src/assets/css/components/breadcrumb';
+@import 'src/assets/css/utils/variables.scss';
+
+    b{
+        padding-right: 2rem;
+
+    }
+
+    .sub-heading{
+        font-size: 2.3rem;
+        font-weight: 700;
+    }
+
+
+    .header{
+
+        // background-color: $color-skyBlue-300;
+        &__title{
+            &--main{
+                .Notifications{font-size:2.6rem;position: relative;bottom:5px ;}
+
+
+            }
+
+            &--sub{
+                font-size: 2.6rem;
+                font-weight: 700;
+                margin-top: 1rem;
+
+                .sub{
+                    font-weight: 400;
+                }
+            }
+        }
+
+        &__breadcrumb{
+            .NotificationsHeader{ padding-top: 15.5px;
+
+            .Rejectbtn{margin-right: 1rem;}
+
+
+
+            }
+
+        }
+        .addBtn{color:$color-primary;background-color:red;margin-right:70.3rem ;}
+    }

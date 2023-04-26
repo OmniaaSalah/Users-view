@@ -1,0 +1,128 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/breadcrumb';
+@import 'src/assets/css/components/forms.scss';
+@import 'src/assets/css/components/primng-table';
+.survey-report {
+    &__content {
+        padding: 5rem 3rem;
+        background-color: #fff;
+
+         ::ng-deep p-progressbar {
+            flex-grow: 1;
+            .p-progressbar {
+                width: 93%;
+                height: 1.2rem;
+                border-radius: 100px;
+                background-color: #F3F3F3;
+                margin-top: 6px;
+                // margin-top: 2.1rem;
+                .p-progressbar-value {
+                    border-radius: 100px;
+
+                }
+            }
+        }
+
+
+
+        .details {
+            border: 1px solid #D9D9D9;
+            .report {
+                padding: 4rem 3rem 0;
+                height: 80vh;
+                overflow-y: auto;
+                margin-bottom: 5rem;
+            }
+        }
+    }
+}
+
+span {
+    display: flex;
+}
+
+span.textSuvey {
+    display: inline-block;
+}
+
+::ng-deep #optionA .p-progressbar-value {
+    border-radius: 100px;
+    background-color: $color-skyBlue;
+
+}
+
+::ng-deep #optionB .p-progressbar-value {
+    border-radius: 100px;
+    background-color: #F8C073;
+
+}
+
+::ng-deep #optionC .p-progressbar-value {
+    border-radius: 100px;
+    background-color: #CC3FA8;
+    ;
+}
+
+::ng-deep #optionD .p-progressbar-value {
+    border-radius: 100px;
+    background-color: #3052A1;
+    ;
+}
+
+
+.surveyQuestions,
+.surveyQuestions2 {
+    background-color: #F3F8FA;
+    padding: 20px 10px;
+}
+
+
+// .progress{
+//     display: flex;
+//     width: 20rem;
+// }
+
+.prim-table{
+
+
+       ::ng-deep p-table{
+        .p-datatable-table
+          {width:100rem;}
+           thead.p-datatable-thead tr th{
+            min-width: 12rem;
+            max-width: 20rem;
+            &.action{
+               max-width: 40rem;
+            }
+           }
+           .p-datatable-tbody tr td{
+            &:first-child{
+                &.expand{padding:0rem;margin-inline-start: 6rem;}
+            }
+            &.questions {
+            min-width: 48rem;
+            color:$color-primary !important;
+              }
+              &.type{ min-width: 24rem; color:$color-primary !important;}
+            }
+            .p-datatable-tbody tr {
+                &.questions {
+                background-color: #F8FAFB !important;
+                }
+            }
+      .p-datatable-tbody tr td{
+
+        min-width: 12rem;
+        max-width: 20rem;
+
+        &.action{
+            max-width: 40rem;
+         }
+
+          }
+       }
+   }
+
+   ::ng-deep{
+    .p-rating .p-rating-icon {font-size:2rem;width:3rem}
+   }

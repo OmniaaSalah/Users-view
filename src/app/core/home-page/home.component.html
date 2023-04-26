@@ -1,0 +1,117 @@
+
+<!-- <app-navbar></app-navbar> -->
+<!-- <div class="home-page container-lg px-5 px-lg-0">
+    <ng-container *ngIf="userType != userEnum.U_PARENTS">
+        <div class="search w-50">
+            <div class="p-inputgroup">
+                <input type="text" class="rounded-4 p-3" pInputText placeholder="بحث...">
+                <button type="button" class="rounded-4" pButton pRipple icon="pi pi-search"></button>
+            </div>
+        </div>
+    </ng-container>
+    <router-outlet></router-outlet>
+</div> -->
+<app-navbar></app-navbar>
+
+<app-parents *ngIf="currentUserScope == ScopeEnum.Guardian"></app-parents>
+
+<div class="home" *ngIf="(currentUserScope == ScopeEnum.SPEA) || currentUserScope == ScopeEnum.Employee">
+    <div class="home__header">
+        <div class="home__header__title text-center" *ngIf="currentUserScope == ScopeEnum.SPEA">
+            <h1 class="heading heading--secondary">{{'Main Page Of SPEA Employee'|translate}}</h1>
+            <p class="paragraph paragraph--lg"> {{'SPEA Employee'|translate}} {{'Who Controls & Manges Relations With Schools Related To SPEA'|translate}}</p>
+        </div>
+        <div class="home__header__title text-center" *ngIf="currentUserScope == ScopeEnum.Guardian">
+            <h1 class="heading heading--secondary">{{'Guardians registered In SPEA'|translate}}</h1>
+            <p class="paragraph paragraph--lg">{{'Guardians who follows their chidreens , make requests , check their degrees'|translate}}}</p>
+        </div>
+        <div class="home__header__title text-center" *ngIf="currentUserScope == ScopeEnum.Employee">
+            <h1 class="heading heading--secondary">{{'Main Page for Employee'|translate}} {{currentSchoolName}}  </h1>
+            <p class="paragraph paragraph--lg">{{'Employee'|translate}} {{currentSchoolName}} {{'Related to SPEA'|translate}}</p>
+        </div>
+    </div>
+
+
+    <div class="home__cards">
+        <div class="container" >
+            <div class="row">
+              <ng-container *ngFor="let card of cards; let i=index">
+                <div class="card col p-0"
+                *permit="card.claims"
+                #cardRef
+                [class]="cardsHoverStatus[i].active ? 'hover-' + i : ''"
+                (mouseenter)="cardsHoverStatus[i].active = true"
+                (mouseleave)="cardsHoverStatus[i].active = false;cardsContentStatus[i].active = false">
+                   <ng-container >
+                    <div class="card__img">
+                        <img [src]="card.image" alt="">
+                    </div>
+                    <div class="card__content" [class.show]="cardsContentStatus[i].active">
+                        <div class="card__content__header"
+                        [class.reduce-fs]="cardsHoverStatus[i].active"
+                        [style.backgroundColor]="card.content.header.bgColor"
+                        (click)="cardsContentStatus[i].active= !cardsContentStatus[i].active">
+
+                            <div class="text">{{card.content.header.title}}</div>
+
+                            <fa-icon  [icon]="faChevronUp" *ngIf="cardsContentStatus[i].active"></fa-icon>
+                            <fa-icon
+                            class="icon-up"
+                            [class.slideUp]="cardsHoverStatus[i].active"
+                            [icon]="faChevronDown"
+                            *ngIf="!cardsContentStatus[i].active " ></fa-icon>
+
+                        </div>
+                        <div class="card__content__body">
+                            <ul class="list" [class]="card?.class || ''">
+                                <ng-container *ngFor="let item of card.content.list">
+                                <li
+                                class="list__item"
+                                [class.reduce-fs]="cardsHoverStatus[i].active"
+                                 [routerLink]="item.url" [queryParams]="item?.queryParams" *permit="item.claims">
+                                    <div class="img">
+                                        <img [src]="item.icon" alt="" loading="lazy">
+                                    </div>
+                                    <p>{{item.label}}</p>
+                                </li>
+                            </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                 </ng-container>
+                </div>
+            </ng-container>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<div class="confirm-model">
+
+  <ng-container *ngFor="let item of isOpend;let i=index;">
+    <p-dialog [(visible)]="isOpend[i]" [closable]="false"  [style]="{width: '35vw'}" >
+        <ng-template pTemplate="content">
+           <div class="d-flex flex-column gap-4">
+
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.Sender'|translate}} : </span>{{messages[i]?.userName|currentLang}}</p>
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.SendDate'|translate}} : </span>{{messages[i]?.createdDate|LocalizeDate}}</p>
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageTittle'|translate}} : </span>{{messages[i]?.title}}</p>
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageText'|translate}} : </span>{{messages[i]?.messageText}}</p>
+
+            <div class="d-flex justify-content-center align-items-center gap-4 mt-5">
+                <button (click)="confirm(i,messages[i]?.id)" class="btn btn-secondary">{{'dashboard.Messages.yes,IsawIt' |translate}}</button>
+
+            </div>
+           </div>
+        </ng-template>
+    </p-dialog>
+</ng-container>
+</div>

@@ -1,5 +1,5 @@
-import { UserInformationService } from './../../../modules/dashboard/modules/user-information/service/user-information.service';
-import { AssignmentServiceService } from './../../../modules/dashboard/modules/assignments/service/assignment-service.service';
+import { UserInformationService } from './../../../modules/user-information/service/user-information.service';
+import { AssignmentServiceService } from './../../../modules/assignments/service/assignment-service.service';
 import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
