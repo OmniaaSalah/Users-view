@@ -12,12 +12,13 @@ export enum requestTypeEnum {
     RegestrationRequestForWithrawan = "RegestrationRequestForWithrawan",
     WithdrawalRequest = "WithdrawalRequest",
     ModifyIdentityRequest = "ModifyIdentityRequest",
-    BoardCertificateRequest = "BoardCertificateRequest",
-
     MassTransferRequest = "MassTransferRequest",
+
+    BoardCertificateRequest = "BoardCertificateRequest",
     GradesCertificateRequest = "GradesCertificateRequest",
     AcademicSequenceCertificateRequest  = "AcademicSequenceCertificateRequest",
     DiplomaCertificateRequest="DiplomaCertificateRequest",
+
     ModifyIdentityRequestCaseStudentNotHaveId = "ModifyIdentityRequestCaseStudentNotHaveId",
     RelinkChildToGuardianRequestToScool = "RelinkChildToGuardianRequestToScool",
     RelinkChildToGuardianRequestToSPEA = "RelinkChildToGuardianRequestToSPEA",

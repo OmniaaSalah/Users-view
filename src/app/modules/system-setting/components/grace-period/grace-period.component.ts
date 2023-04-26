@@ -313,7 +313,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   onSelectAll(isAllSelected){
     this.isLoading=true
-    this.settingService.getSchools({curriculumId:this.filtration.curriculumId, gracePeriodId: this.filtration.gracePeriodId})
+    this.settingService.getSchools({PageSize: this.schools.totalAllData, curriculumId:this.filtration.curriculumId, gracePeriodId: this.filtration.gracePeriodId})
     .pipe(map(res=> res.data))
     .subscribe(schoolsList =>{
 
