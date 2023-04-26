@@ -1,0 +1,20 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import 'src/assets/css/components/forms.scss';
+@import 'src/assets/css/components/validation-form.scss';
+
+.prim-table{
+
+
+    ::ng-deep p-table{
+        thead.p-datatable-thead tr th{
+          &.lg{min-width: 18rem;}
+        }
+   .p-datatable-tbody tr td{
+    &.lg{min-width: 18rem;}
+
+       }
+    }
+}

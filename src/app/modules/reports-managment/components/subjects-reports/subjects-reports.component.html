@@ -1,0 +1,96 @@
+<div class="report form-set custom-form">
+
+    <div class="prim-table mt-4" *ngIf="subjectsReport.totalAllData || subjectsReport.loading">
+        <p-table #dt [value]="subjectsReport.list" [lazy]="true" (onSort)="onSort($event)">
+
+            <ng-template pTemplate="caption">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getSubjects()" 
+                (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getSubjects()" (onClear)="clearFilter()">
+
+                <div class="col-md-4" >
+                    <label class="label">{{'School'| translate}}</label>
+                    <p-multiSelect 
+                    [options]="(schools$| async)"  
+                    display="chip"
+                    [(ngModel)]="filtration.schoolIds" 
+                    optionValue="id" 
+                    placeholder="{{'shared.chooseSchool'|translate }}" 
+                    optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
+                </div>
+
+               
+
+                </app-table-caption>
+    
+            </ng-template>
+
+
+            <ng-template pTemplate="header" let-columns="columns">
+                <tr>
+                    <ng-container *ngFor="let column of tableColumns" >
+                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true"> 
+                        <p-sortIcon field="{{column.name}}"></p-sortIcon>
+                       <ng-container >{{column.name}}</ng-container> 
+                       
+                    </th>
+                    </ng-container>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-subject>
+                <tr>
+                    <ng-container>
+                        <td>
+                            {{subject?.school|currentLang}}
+                        </td>
+                        <td>
+                            {{subject?.schoolCode}}
+                        </td>
+                        <td>
+                            {{subject?.state | currentLang}} 
+                        </td>
+                        <td>
+                            {{subject?.subjectsCountPerSchool}}
+                        </td>
+                        <td>
+                            {{subject?.curriculum|currentLang}}
+                        </td>
+                        <td>
+                            {{subject?.grade | currentLang}} 
+                        </td>
+                        <td>
+                            {{subject?.division | currentLang}}
+                        </td>
+                        <td>
+                            {{subject?.track | currentLang}}
+                        </td>
+                       
+                    </ng-container>
+                    
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="20">
+                        <ng-container *ngIf="subjectsReport.totalAllData && subjectsReport.list.length == 0 &&  !subjectsReport.loading">
+                            <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}"
+                                src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        </ng-container>
+
+                        <app-loader></app-loader>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <div class="" *ngIf="subjectsReport.total  > paginationState.rows">
+            <app-pagination [totalItems]="subjectsReport.total"
+                (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+    </div>
+
+    <ng-container *ngIf="!subjectsReport.totalAllData && !subjectsReport.loading">
+        <app-informative-block title="{{'emptyList.Subject List is Empty' |translate}}"
+            src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
+</div>

@@ -45,7 +45,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   setPaginagationReport(){
     this.PageReport={
       ar:`إظهار {first} إلى {last} من أصل  ${this.totalItems}`,
-      en:`Show {first} إلى {last} from ${this.totalItems} Of total Items`
+      en:`Show {first} - {last} from ${this.totalItems} Of total Items`
     }
   }
 

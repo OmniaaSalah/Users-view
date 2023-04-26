@@ -1,0 +1,132 @@
+<!-- emptymessage -->
+<div class="mb-6">
+    <!-- <div class="d-flex gap-5 mx-5 custom-form" *ngIf="currentUserScope==userScope.Employee">
+        <div class="d-flex gap-4">
+            <label class="fs-4 fw-bold color-primary" for="description">{{'dashboard.Requests.myRequests'|translate}}</label>
+            <p-inputSwitch name="'myRequests" [(ngModel)]="showMyReqs.currentValue" (ngModelChange)="applyFilter()" [binary]="true"></p-inputSwitch>
+        </div>
+
+    </div> -->
+
+    <div class="prim-table mt-4" *ngIf="requests.totalAllData || requests.loading">
+        <div class="parents">
+            <div class="prim-table mt-4">
+                <!-- [(rows)]="rows" [(first)]="first" -->
+                <p-table #dt [value]="requests.list" [lazy]="true" (onSort)="sortMe($event)"  [scrollable]="true">
+                    <!-- Table Caption -->
+
+                    <!-- <ng-template pTemplate="caption">
+                        <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+
+                    </ng-template> -->
+
+                    <ng-template pTemplate="caption">
+
+                        <app-table-caption
+                        (onExport)="onExport($event)"
+                        (onFilter)="applyFilter()"
+                        (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; applyFilter()"
+                        (onClear)="clearFilter()">
+
+
+                            <div class="row gx-5 form-set">
+                                <div class="col-4">
+                                    <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
+                                    <!-- <p-dropdown [showClear]="true" StopProp [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-dropdown> -->
+                                    <p-multiSelect [options]="statusOptions" display="chip" [(ngModel)]="filtration.RequestStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Requests.Status'|translate}}"></p-multiSelect>
+                                </div>
+                                <div class="col-5">
+                                    <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>
+                                    <!-- <p-dropdown [showClear]="true" StopProp [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestType"  placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-dropdown> -->
+                                    <p-multiSelect [options]="reqsTypes" display="chip" [(ngModel)]="filtration.RequestType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-multiSelect>
+                                </div>
+                            </div>
+
+                        </app-table-caption>
+
+                    </ng-template>
+
+
+
+
+
+                    <ng-template pTemplate="header" let-columns="columns">
+                        <tr>
+                            <th>{{'dashboard.Requests.requestNumber'|translate}}</th>
+                            <th style="min-width: 24rem;" pSortableColumn="requestTypeEnum">{{'dashboard.Requests.requestType'|translate}}</th>
+                            <th pSortableColumn="createdNameAr">{{'dashboard.Subjects.Created by'|translate}}</th>
+                            <th style="min-width: 16rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+                            <th style="min-width: 16rem;"  *ngIf="currentUserScope==userScope.Guardian">{{'dashboard.Subjects.Last EditDate'|translate}}</th>
+                            <th pSortableColumn="requestStatus"><p-sortIcon field="requestStatus"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
+                            <th style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith">
+                                    <p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
+                            <th class="actions"></th>
+
+                        </tr>
+                    </ng-template>
+
+
+                    <ng-template pTemplate="body" let-request>
+                        <tr >
+                            <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                      {{product[col.field]}}
+                  </td> -->
+                            <td >{{request.requestNumber}}</td>
+                            <td style="min-width: 24rem;">
+                                {{'dashboard.Requests.'+request.requestType | translate}}
+                                <a *ngIf="request?.schoolCreator" routerLink="/schools-and-students/schools/school/{{request?.schoolCreator?.id}}" [style.height.rem]="'4'" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.schoolCreator?.name|currentLang}}</a>
+                                <a *ngIf="request?.school" routerLink="/schools-and-students/schools/school/{{request?.school?.id}}" [style.height.rem]="'4'" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.school?.name|currentLang}}</a>
+                                <span *ngIf="request?.grade" [style.height.rem]="'4'"  class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.grade?.name|currentLang}}</span>
+                            </td>
+                            <td>{{request.createdBy | currentLang}}</td>
+                            <td style="min-width: 16rem;">{{request.createdDate |LocalizeDate:'d MMMM y hh:mm a'}}</td>
+                            <td style="min-width: 16rem;"  *ngIf="currentUserScope==userScope.Guardian">{{(subject?.lastUpdatedDate|LocalizeDate:'d MMMM y hh:mm a' )|| '--'}}</td>
+                            <td>
+                                <span [ngSwitch]="request.requestStatus">
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Approved">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.SentForApproval">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.TentativelyAccepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting success"  *ngSwitchCase="requestStatusEnum.Pending">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting danger"  *ngSwitchCase="requestStatusEnum.Rejected">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.Returned">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dark" *ngSwitchCase="requestStatusEnum.Canceled">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                </span>
+                                <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
+                            </td>
+                            <td style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian">{{request?.relatedSon | currentLang}}</td>
+                            <td >
+                                <div class="d-flex align-items-center gap-3 justify-content-end mx-4" role="button" [routerLink]="['details',request.instanceId]">
+                                    <span class="color-skyBlue-400">{{'shared.details' |translate}}</span>
+                                    <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td [attr.colspan]="20">
+                                <div class="w-100" *ngIf="requests.totalAllData && requests.list.length == 0 &&  !requests.loading">
+                                    <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                </div>
+
+                                <div class="w-100">
+                                  <app-loader></app-loader>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="" *ngIf="requests.total  > paginationState.rows">
+            <app-pagination [totalItems]="requests.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+
+    </div>
+    <ng-container *ngIf="!requests.totalAllData && !requests.loading">
+        <app-informative-block subTitle="{{'emptyList.requestList' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
+</div>

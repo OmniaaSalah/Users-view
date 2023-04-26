@@ -1,10 +1,10 @@
 import { Component, OnInit ,Input, inject} from '@angular/core';
-import { UserRolesService } from 'src/app/modules/dashboard/modules/user-roles/service/user-roles.service';
+import { UserRolesService } from 'src/app/modules/user-roles/service/user-roles.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
-import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
+import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
@@ -31,7 +31,7 @@ export class SelectSchoolsComponent implements OnInit {
   constructor(private CountriesService:CountriesService,private schoolsService:SchoolsService,private sharedService: SharedService,private userRolesService: UserRolesService) { }
 
   ngOnInit(): void {
-   
+
     this.userRolesService.MarkedListLength.subscribe((res)=>{this.MarkedListLength=res});
     this.getSchools();
     this.userRolesService.schoolSelectedList.subscribe((res)=>{
@@ -46,12 +46,12 @@ export class SelectSchoolsComponent implements OnInit {
     //     {this.selectedSchoolIds.push(selectedSchool.id)}
 
     //  });
-    
+
     });
   }
 
   getSchools(){
-  
+
     this.schools.loading=true
     this.schools.list=[];
     this.filtration.PageSize = this.schools.totalAllData;
@@ -61,16 +61,16 @@ export class SelectSchoolsComponent implements OnInit {
       this.schools.list = res.data
       this.schools.totalAllData = res.totalAllData
       this.schools.total =res.total;
-      
-      
-      
+
+
+
     },err=> {
       this.schools.loading=false
       this.schools.total=0
       this.sharedService.filterLoading.next(false);
     });
-  
- 
+
+
   }
 
   getSelectedSchool()
@@ -111,9 +111,9 @@ showSelectedSchool()
         this.schoolIsSelectedList.push(school)
       }
     });
-   
+
   });
-  this.sharedService.openSelectSchoolsModel.next(false); 
+  this.sharedService.openSelectSchoolsModel.next(false);
   this.userRolesService.MarkedListLength.next(this.MarkedListLength)
   this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
  console.log(this.schoolIsSelectedList)

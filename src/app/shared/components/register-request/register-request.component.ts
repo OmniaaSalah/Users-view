@@ -11,23 +11,23 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { IndexesService } from '../../../modules/dashboard/modules/indexes/service/indexes.service';
-import { SchoolsService } from '../../../modules/dashboard/modules/schools/services/schools/schools.service';
+import { IndexesService } from '../../../modules/indexes/service/indexes.service';
+import { SchoolsService } from '../../../modules/schools/services/schools/schools.service';
 import { UserScope } from '../../enums/user/user.enum';
-import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
+import { ParentService } from 'src/app/modules/parants/services/parent.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationStatus } from '../../enums/status/status.enum';
 import { CustomFile } from '../file-upload/file-upload.component';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
+import { SystemRequestService } from 'src/app/modules/request-list/services/system-request.service';
 import { WorkflowOptions } from 'src/app/core/models/system-requests/requests.model';
 import { catchError, map, switchMap, throwError } from 'rxjs';
-import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
+import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { requestTypeEnum } from '../../enums/system-requests/requests.enum';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { HttpStatusCodeEnum } from '../../enums/http-status-code/http-status-code.enum';
-import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
+import { StudentsService } from 'src/app/modules/students/services/students/students.service';
 import { FirstGradeCodeEnum } from '../../enums/school/school.enum';
 
 type ClassType= 'FusionClass' | 'SpecialClass'
@@ -392,7 +392,7 @@ export class RegisterRequestComponent implements OnInit {
     .subscribe(res=>{
 
       this.onSubmit=false
-      this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`)
+      this.router.navigateByUrl(`//schools-and-students/all-parents/parent/${this.parentId}/all-children`)
       this.toaster.success(this.translate.instant('toasterMessage.childRegistedSuccesfully'))
     },(err)=>{
       this.toaster.error(this.translate.instant('toasterMessage.error'))
@@ -439,9 +439,9 @@ export class RegisterRequestComponent implements OnInit {
 
       this.componentHeaderData={
         breadCrump: [
-          { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-          {label: this.translate.instant('dashboard.students.registerChildByCommission'), routerLink: `/dashboard/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}/register`}
+          { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'//schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+          {label: this.translate.instant('dashboard.students.registerChildByCommission'), routerLink: `//schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}/register`}
         ],
         mainTitle: {
           main: this.translate.instant('dashboard.students.registerChildByCommission')

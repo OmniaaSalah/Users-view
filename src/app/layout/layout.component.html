@@ -1,19 +1,43 @@
-<div class="layout ">
-   
+<!-- <div class="layout ">
 
-    <div class="content-container" [class.dark]="( bgColor$ | async) ==='dark'">
-   
-      <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+    <div class="content-container">
+
+      <app-navbar (toggleSidebarForMe)="sideBarToggler()"></app-navbar>
       <div class="mt-3 ">
-     
-        <app-header-dashboard></app-header-dashboard>
+
+        <app-page-header></app-page-header>
         <div class="" id="routeroutlet" [@routeSlide]="prepareRoute(outlet)">
             <div class="position-relative">
-            
+
                 <router-outlet #outlet="outlet" ></router-outlet>
-             
+
             </div>
         </div>
       </div>
     </div>
+</div> -->
+
+<app-navbar></app-navbar>
+
+<div class="dashboard wrapper">
+  <div class="dashboard__content  d-flex">
+
+      <div class="dashboard__panal py-5 px-4">
+          <app-side-navigator></app-side-navigator>
+      </div>
+
+      <div class="dashboard__loaded-conponent">
+
+        <app-page-header></app-page-header>
+        <div class="" id="routeroutlet " [@routeSlide]="prepareRoute(outlet)">
+          <div class="position-relative">
+                <router-outlet #outlet="outlet" (activate)="onActive($event, outlet)"></router-outlet>
+            </div>
+        </div>
+
+      </div>
+
+
+  </div>
 </div>

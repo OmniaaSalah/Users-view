@@ -3,13 +3,13 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { TranslateService } from '@ngx-translate/core';
 import { IRegistrationWay } from 'src/app/core/Models/account/registration-way';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
-import Validation from 'src/app/modules/dashboard/modules/user-information/models/utils/validation';
+import Validation from 'src/app/modules/user-information/models/utils/validation';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { RegistrationEnum } from 'src/app/shared/enums/registration/registration-ways.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
+import { IndexesService } from 'src/app/modules/indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { Router } from '@angular/router';
@@ -279,7 +279,7 @@ getCurrentRegistrationWay()
         })
       ).subscribe((res)=>{
         this.isBtnLoading=false;
-        if(res.statusCode!="OK")
+        if(res.statusCode!="Created")
         {
           this.toastService.error(this.translate.instant(res.error));
           this.closeModel();
@@ -327,7 +327,7 @@ savePersonalInformation()
 
   this.authService.saveAccount(information).subscribe((res)=>{
     this.isBtnLoading=false;
-  if(res.statusCode!="OK")
+  if(res.statusCode!="Created")
   {
     this.toastService.error(this.translate.instant(res.error));
     this.closeModel();

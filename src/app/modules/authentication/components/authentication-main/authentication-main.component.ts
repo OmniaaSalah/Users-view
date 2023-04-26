@@ -10,7 +10,7 @@ import {MessageService} from 'primeng/api';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { SurveyService } from 'src/app/modules/dashboard/modules/surveys/service/survey.service';
+import { SurveyService } from 'src/app/modules/surveys/service/survey.service';
 import { environment } from 'src/environments/environment';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subscription } from 'rxjs';
