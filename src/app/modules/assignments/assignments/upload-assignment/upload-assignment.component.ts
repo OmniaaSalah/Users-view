@@ -6,7 +6,6 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
 import { Icurriculum } from 'src/app/core/Models/Icurriculum';
 import { Igrade } from 'src/app/core/Models/Igrade';
 import { ISubject } from 'src/app/core/Models/isubject';
@@ -42,8 +41,7 @@ export class UploadAssignmentComponent implements OnInit {
     private toastr: ToastrService,
     private subjectService:SubjectService,
     private sharedService:SharedService,
-     private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssignmentServiceService,
-    private messageService: MessageService) {
+     private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssignmentServiceService) {
     this.assignmentFormGrp = fb.group({
       curriculum: ['',Validators.required],
       schools:[''],
@@ -140,12 +138,7 @@ export class UploadAssignmentComponent implements OnInit {
 
 
 uploadedFiles: any[] = [];
-onUpload(event) {
-  for(let file of event.files) {
-      this.uploadedFiles.push(file);
-  }
-  this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-}
+
 
   onFileUpload(file:CustomFile[]): void {
     if(file.length)

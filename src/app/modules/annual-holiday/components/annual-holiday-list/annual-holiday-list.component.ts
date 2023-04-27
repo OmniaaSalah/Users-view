@@ -182,20 +182,20 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   {
 
      this.subscription=this.annualHolidayService.holiday.subscribe((updatedHoliday)=>{
-
+     
       this.editedHoliday=updatedHoliday;
-      this.editedHoliday.flexibilityStatus=this.editedHoliday.flexibilityStatus.id;
+      this.editedHoliday.flexibilityStatus=this.editedHoliday.flexibilityStatus.value;
       this.editedHoliday.curriculumIds=[];
-      this.editedHoliday.curriculums.forEach(element => {
+      this.editedHoliday?.curriculums.forEach(element => {
       this.editedHoliday.curriculumIds.push(element.id)
       });
 
       this.editedHoliday={
-        'name':{'ar':this.editedHoliday.name.ar,'en':this.editedHoliday.name.en },
-        'dateFrom':this.editedHoliday.dateFrom,
-        'dateTo': this.editedHoliday.dateTo,
-        'flexibilityStatus':this.editedHoliday.flexibilityStatus,
-        'curriculumIds': this.editedHoliday.curriculumIds,
+        'name':{'ar':this.editedHoliday?.name.ar,'en':this.editedHoliday?.name.en },
+        'dateFrom':this.editedHoliday?.dateFrom,
+        'dateTo': this.editedHoliday?.dateTo,
+        'flexibilityStatus':this.editedHoliday?.flexibilityStatus,
+        'curriculumIds': this.editedHoliday?.curriculumIds,
         };
 
       this.annualHolidayService.updateHoliday(this.updatedHolidayId,this.editedHoliday).subscribe((res)=>{
