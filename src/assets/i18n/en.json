@@ -679,7 +679,7 @@
     "sideBar": {
 
         "schoolsAndStudents": {
-            "title": "Schools&Students",
+            "title": "Schools & Students",
             "chidren": {
                 "schools": "Schools",
                 "students": "Students",
@@ -1990,13 +1990,13 @@
         },
         "myRequest":{
             "Order ID":"Order ID",
-            "request type": "request type",
+            "request type": "Request type",
             "It was created by": "It was created by",
             "Order status": "Order status",
-            "student status":"student status",
+            "student status":"Student status",
             "Creation date and time": "Creation date and time",
             "The name of the current guardian":"The name of the current guardian",
-            "comment":"comment",
+            "comment":"Comment",
             "You can add a comment here": "You can add a comment here",
             "add a comment": "add a comment",
             "Application procedures":"Application procedures",

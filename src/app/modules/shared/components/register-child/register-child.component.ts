@@ -86,8 +86,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       isGifted: [''],
 
       reasonForNotHavingEmiratesId:[null],
-      passportId:[],
-      passportIdExpirationDate:[],
+      // passportId:[],
+      // passportIdExpirationDate:[],
       hasShadower:[],
       // id:['', Validators.required],
       daleelId: ['', Validators.required],
@@ -180,7 +180,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.schoolId = res.result.school?.id
 
       res.result.birthDate = new Date(res?.result?.birthDate)
-      res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
+      // res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
       this.currentStudent = res?.result
       this.studentForm.patchValue(res?.result as any)
       this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
