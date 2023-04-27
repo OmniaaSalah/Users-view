@@ -42,7 +42,7 @@
                             <!-- Registered Children -->
                             <div class="row g-5" *ngIf="!skeletonShown ">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of registerStudents">
-                                    <div role="button" routerLink="/parent/{{guardian.id}}/child/{{student.id}}" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
+                                    <div  class="h-100 box-shadow radius-15 p-0" role="button" routerLink="/parent/{{guardian.id}}/child/{{student.id}}" [queryParams]="{ registered: 'true' }">
 
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
@@ -66,7 +66,7 @@
 
                                         <div class=" border-top-gray p-4 ">
                                             <div class="grid-container gap-4 pt-2 mb-4">
-                                                
+
                                                 <p class="color-gray-300 fs-4">{{ 'shared.school'|translate }}</p>
                                                 <span class="color-gray-800 mb-2">{{student.school | currentLang}}</span>
 
@@ -91,9 +91,9 @@
                     </div>
 
 
-                    
-                    
-                    
+
+
+
                     <!-- Withdrawn Children -->
                     <div *ngIf="studentsWithdrawal?.length">
                         <hr class="my-6">
@@ -110,7 +110,7 @@
                             </div>
                             <div class="row g-5" *ngIf="!skeletonShown">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let child of studentsWithdrawal">
-                                    <div role="button" routerLink="/parent/{{guardian.id}}/child/{{child.id}}"  [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
+                                    <div role="button" routerLink="/parent/{{guardian.id}}/child/{{child.id}}"  [queryParams]="{ registered: 'true' }" class="h-100 box-shadow radius-15 p-0">
 
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
@@ -140,9 +140,9 @@
                                                 <span class="color-gray-800 mb-2">{{child.relativeRelation | currentLang}}</span>
                                             </div>
 
-                                            
+
                                             <div class="card__actions pt-3" *permit="claimsEnum.GS_RegisterChild">
-                                                <button class="btn btn--full btn-danger "   [routerLink]="['/parent','child', child.id, 'register-request']" [queryParams]="{status: registrationStatus.Withdrawal}" 
+                                                <button class="btn btn--full btn-danger "   [routerLink]="['/parent','child', child.id, 'register-request']" [queryParams]="{status: registrationStatus.Withdrawal}"
                                                   StopProp>
                                                     <span stopProp  class="ms-3 ">{{'dashboard.parents.reRegistration'|translate }}</span>
                                                 </button>
@@ -155,7 +155,7 @@
                                 <app-informative-block *ngIf="!studentsWithdrawal.length"  subTitle="{{'emptyList.noUnregisteredSonsForThisGuardian' |translate}}"></app-informative-block>
                             </div>
                         </div>
-                    </div>  
+                    </div>
 
                     <hr class="my-6">
 
@@ -171,7 +171,7 @@
                             </div>
                             <div class="row g-5" *ngIf="!skeletonShown">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let child of unRegisterStudents">
-                                    <div role="button" routerLink="/parent/{{guardian.id}}/child/{{child.id}}"  [queryParams]="{ registered: 'false' }" class="box-shadow radius-15 p-0">
+                                    <div role="button" routerLink="/parent/{{guardian.id}}/child/{{child.id}}"  [queryParams]="{ registered: 'false' }" class="h-100 box-shadow radius-15 p-0">
 
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
