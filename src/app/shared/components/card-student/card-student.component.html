@@ -4,13 +4,13 @@
 
             <div class="profile d-flex align-items-center p-4 position-relative">
                 <div class="profile__avatar">
-                    <img src="assets/images/avatar.png" alt="Avatar">
+                    <img [src]="student?.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
                 </div>
 
                 <div class="profile__info" style=" white-space: nowrap;">
                     <div class="profile__name ">
                         <h4 class="heading heading--tertiary">{{student.name| currentLang}}</h4>
-                       
+
                     </div>
                     <div class="profile__details mt-0">
                         <div class="fs-4">
@@ -63,11 +63,11 @@
                            <p class="color-primary mb-2 fs-4" *ngSwitchCase="registrationStatusEnum.Transferd">
                                 <span class="color-primary mb-2 fs-4">{{'shared.allStatus.Transferd' | translate}}</span>
                             </p>
-    
+
                         </span>
                     </ng-container>
-                    
+
                 </div>
-                
+
             </div>
         </div>

@@ -140,7 +140,14 @@ export class RegisterRequestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.sharedService.getAllGrades('').subscribe(res=> this.AllGrades=res || [])
+    this.sharedService.getAllGrades('').subscribe(res=> {
+      this.AllGrades=res || []
+      if(this.requestId) {
+        this.patchReturnedRequestData(this.returnedReqData)
+        this.getRequestOptions()
+      }
+    })
+
     this.prepareHeaderData()
     this.getStudentInfo()
 
@@ -149,10 +156,7 @@ export class RegisterRequestComponent implements OnInit {
       this.registerReqForm.controls['guardianId'].setValue(this.parentId)
     }
 
-    if(this.requestId) {
-      this.patchReturnedRequestData(this.returnedReqData)
-      this.getRequestOptions()
-    }
+
 
 
     this.getRegistrationRequiresFiles()
@@ -208,8 +212,8 @@ export class RegisterRequestComponent implements OnInit {
   }
 
   getRequestOptions(){
-    this.requestsService.getRequestTimline(this.reqInstantId).subscribe(res=>{
-      this.actions = res?.task?.options
+    this.requestsService.getRequestOptions(this.reqInstantId).subscribe(res=>{
+      this.actions = res?.options
     })
   }
 
