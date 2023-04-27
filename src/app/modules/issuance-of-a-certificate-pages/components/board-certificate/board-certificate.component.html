@@ -48,14 +48,19 @@
                 </p-dropdown>
             </div>
 
-            <div class="row" *ngIf="student?.attachments?.length">
+            <div class="row align-items-end" *ngIf="student?.attachments?.length">
 
-                <div class="bg-orange-50 p-3 fs-3 radius-15 mb-3 mt-6" >
+              <div class="d-flex align-items-center mb-3 mt-6 gap-5">
+                <div class="bg-orange-50 p-3 fs-3 radius-15 flex-grow-1" >
                     <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-                    <span class="color-gray-800">" يرجى إختيار ملف شهادة البورد صيغه (png / jpge) من المرفقات التالية . "</span>
+                    <span class="color-gray-800">" يرجى إختيار ملف شهادة البورد صيغه (png / jpge) من المرفقات التالية . او إضافة ملف جديد "</span>
                 </div>
 
+                <a class="btn btn-primary" target="_blank" [routerLink]="['/parent', getCurrentGuardianId ,'child', student.id]" [queryParams]="{registered:true,step:3}">{{'shared.addNewFile' |translate}}</a>
+              </div>
+
                 <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p>
+
                 <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
                   <ng-container *ngIf="file?.url">
                     <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
@@ -63,7 +68,7 @@
                     <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
                         <div class="elcardo-title d-flex">
                             <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="" alt="pdf" />
-                            <p class="mx-5 my-2">{{ file?.name }}</p>
+                            <p class="mx-5 my-2 word-break-all">{{ file?.name }}</p>
                         </div>
                         <!-- <div class="elcardo-body">
                             <h4>{{ "dashboard.issue of certificate.note" | translate }}:</h4>

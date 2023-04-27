@@ -327,19 +327,21 @@ savePersonalInformation()
 
   this.authService.saveAccount(information).subscribe((res)=>{
     this.isBtnLoading=false;
-  if(res.statusCode!="OK")
-  {
-    this.toastService.error(this.translate.instant(res.error));
-    this.closeModel();
-  }else
-    {this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+
+    if(res.statusCode!="OK")
+    {
+      this.toastService.error(this.translate.instant(res.error));
       this.closeModel();
-  }
+    }else
+      {this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+        this.closeModel();
+    }
 
   },(res)=>{
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
-  })
+  }
+)
 
 
 }

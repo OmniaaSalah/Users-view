@@ -34,7 +34,7 @@
 </ng-container>
 
 
-<button *ngIf="scope == 'Guardian'" class="btn btn-primary contactBtn" (click)="showDialog()"> تواصل مع ادارة المدرسة</button>
+<button *ngIf="scope == 'Guardian'" class="btn btn-primary contactBtn" (click)="showDialog()"> {{'dashboard.schools.contactWithSchool' |translate}}</button>
 
 
 <div class="radius-15 border p-5 mb-5 bg-white custom-form" *ngIf="student$ |async as student">
@@ -154,16 +154,19 @@
     </div>
     <!-- Navigations Options -->
     <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentInfo" data-step="1" [class.active]="step==1" (click)="step=1; currentMode='view'"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
+      <ng-container *ngFor="let step of steps; let first=first">
+        <li class="tabView__nav__link" *permit="step.claims" [class.active]="step.isActive" (click)="setActiveTab(step.index)"><span>{{step.title}}</span> </li>
+    </ng-container>
+        <!-- <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentInfo" data-step="1" [class.active]="step==1" (click)="step=1; currentMode='view'"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAcceptanceInfo" data-step="2" [class.active]="step==2" (click)="step=2; currentMode='view'"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAbsenceAndAttendance" data-step="3" [class.active]="step==3" (click)="step=3; currentMode='view'"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAttachments" data-step="4" [class.active]="step==4" (click)="step=4; currentMode='view'"><span>{{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentCertificates" data-step="5" [class.active]="step==5" (click)="step=5; currentMode='view'"><span> {{ 'dashboard.parents.certificateList'|translate }}</span></li>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentBehavior" data-step="6" [class.active]="step==6" (click)="step=6; currentMode='view'"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentMedicalFile" data-step="7" [class.active]="step==7" (click)="step=7; currentMode='view'" ><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
-        <!-- <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentEditList" data-step="8" [class.active]="step==8" (click)="step=8; currentMode='view'"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li> -->
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentEditList" data-step="8" [class.active]="step==8" (click)="step=8; currentMode='view'"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentSubjectsAndDegrees" data-step="9" [class.active]="step==9" (click)="step=9; currentMode='view'"><span>{{ 'dashboard.parents.subjectsAndDegrees'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentRecord" data-step="10" [class.active]="step==10" (click)="step=10; currentMode='view'"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentRecord" data-step="10" [class.active]="step==10" (click)="step=10; currentMode='view'"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li> -->
 
     </ul>
     <!-- Table Caption -->
@@ -171,7 +174,7 @@
     <div class="tabView__content">
         <form class="custom-form">
 
-            <ng-container *ngIf="step==1">
+            <ng-container *ngIf="step==0">
 
 
                 <app-personal-information
@@ -190,7 +193,7 @@
                 <app-payments [formGroup]="studentForm"></app-payments>
             </ng-container> -->
 
-            <ng-container *ngIf="step==2">
+            <ng-container *ngIf="step==1">
                 <app-accept-information
                 (onFormSubmited)="updateStudent()"
                 [(mode)]="currentMode"
@@ -199,22 +202,22 @@
             </ng-container>
 
 
-            <ng-container *ngIf="step==3">
+            <ng-container *ngIf="step==2">
                 <app-absence-details></app-absence-details>
             </ng-container>
 
 
-            <ng-container *ngIf="step==4">
+            <ng-container *ngIf="step==3">
                 <app-attachments-child></app-attachments-child>
             </ng-container>
 
 
-            <ng-container *ngIf="step==5">
+            <ng-container *ngIf="step==4">
                 <app-certificate-list></app-certificate-list>
             </ng-container>
 
             <!-- Student Behavior -->
-            <ng-container *ngIf="step==6">
+            <ng-container *ngIf="step==5">
 
                 <ng-container *ngIf="!(student$ |async)">
                     <div class="row g-5">
@@ -294,17 +297,17 @@
 
 
             <!-- Medical Fils -->
-            <ng-container *ngIf="step==7">
+            <ng-container *ngIf="step==6">
 
                 <app-medical-file></app-medical-file>
 
             </ng-container>
             <!-------Student record---------->
-            <ng-container *ngIf="step==9">
+            <ng-container *ngIf="step==7">
                 <app-subjects-and-degrees></app-subjects-and-degrees>
             </ng-container>
 
-            <ng-container *ngIf="step==10">
+            <ng-container *ngIf="step==8">
                 <app-school-record></app-school-record>
             </ng-container>
         </form>

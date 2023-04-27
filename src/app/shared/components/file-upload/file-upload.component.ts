@@ -167,6 +167,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
       const fileType : FileTypeEnum = this.getFileTypeEnum(files[0]?.name)
       maxFileSize = this.getMaxAllowedSizeForFileType(fileType)
+      console.log(maxFileSize);
+
 
       if(!maxFileSize) {
         this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
@@ -190,7 +192,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
       if(!maxFileSize) return
 
       if(this.fileSizeMB(file.size) > maxFileSize){
-        this.toaster.error(`يجب ان لا يزيد حجم الملف عن ${this.maxFileSize}MB`, file.name)
+        this.toaster.error(`يجب ان لا يزيد حجم الملف عن ${maxFileSize} ميجابايت`, file.name)
 
       }else{
         const FORM_DATA = new FormData()

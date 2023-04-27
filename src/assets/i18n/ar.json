@@ -997,6 +997,7 @@
 
         },
         "schools": {
+            "contactWithSchool":"تواصل مع ادارة المدرسة",
             "StudentDensity":"الكثافة الصفية",
             "editInSchoolEmployeeList":"تعديل في قائمة الموظفين",
             "schoolMangement":"إدارة المدرسة",

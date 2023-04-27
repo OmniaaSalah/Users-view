@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { finalize, Observable, Subject } from 'rxjs';
+import { finalize, map, Observable, Subject } from 'rxjs';
 import {  Mode } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { ClaimsService } from 'src/app/core/services/claims.service';
@@ -39,6 +39,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   get claimsEnum(){ return ClaimsEnum }
   get registrationStatusEnum() {return RegistrationStatus}
   get fileTypesEnum () {return FileTypeEnum}
+
+  currStep = +this.route.snapshot.queryParamMap.get('step')
 
   studentId = +this.route.snapshot.paramMap.get('id')
   childId = +this.route.snapshot.paramMap.get('childId')
@@ -144,14 +146,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private fb:FormBuilder,
     private translate:TranslateService,
     private studentsService: StudentsService,
-    private countriesService: CountriesService,
     private route: ActivatedRoute,
     public childService:RegisterChildService,
-    private sharedService: SharedService,
     private toastr: ToastrService,
     private userService:UserService,
-    private claimsService:ClaimsService,
-    private router:Router) { }
+    private claimsService:ClaimsService) { }
 
 
   ngOnInit(): void {
@@ -167,16 +166,15 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
   ngAfterViewInit() {
-    setTimeout(()=> this.setActiveTab(0))
+    setTimeout(()=> this.setActiveTab((this.currStep) || 0))
 
 	}
-
-
 
   getStudent(studentId){
 
     this.childService.Student$.next(null)
-    this.studentsService.getStudent(studentId).subscribe((res) =>{
+    this.studentsService.getStudent(studentId)
+    .subscribe((res:any) =>{
 
       this.childService.Student$.next(res?.result)    // for Sharing between multiple components instead of make multiple Http Requests
       this.schoolId = res.result.school?.id
@@ -215,20 +213,94 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     },err =>{this.toastr.error(this.translate.instant('toasterMessage.error'))})
   }
 
+	steps=[
+		{
+			title: this.translate.instant('dashboard.parents.personalInfo'),
+			index:0,
+			claims:[this.claimsEnum.SEG_R_StudentInfo],
+			isActive:true
+		},
+		{
+			title: this.translate.instant('dashboard.parents.acceptanceInfo'),
+			index:1,
+			claims:[this.claimsEnum.SEG_R_StudentAcceptanceInfo],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.parents.attendanceAndAbsence'),
+			index:2,
+			claims:[this.claimsEnum.SEG_R_StudentAbsenceAndAttendance],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.students.studentAttachedment'),
+			index:3,
+			claims:[this.claimsEnum.SEG_R_StudentAttachments],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.parents.certificateList'),
+			index:4,
+			claims:[this.claimsEnum.SEG_R_StudentCertificates],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.students.studentBehavior'),
+			index:5,
+			claims:[this.claimsEnum.SEG_R_StudentBehavior],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.students.medicalFile'),
+			index:6,
+			claims:[this.claimsEnum.SEG_R_StudentMedicalFile],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.parents.subjectsAndDegrees'),
+			index:7,
+			claims:[this.claimsEnum.SEG_R_StudentSubjectsAndDegrees],
+			isActive:false
+		},
+		{
+			title: this.translate.instant('dashboard.parents.studentRecord'),
+			index:8,
+			claims:[this.claimsEnum.SEG_R_StudentRecord],
+			isActive:false
+		}
 
+	]
+
+
+	// // Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
+	// setActiveTab(nodeIndex?){
+	// 	let navItemsList =this.nav.nativeElement.children
+
+	// 	if(navItemsList.length){
+	// 		navItemsList[nodeIndex]?.classList.add('active')
+	// 		this.navListLength = navItemsList.length
+  //     if(navItemsList[nodeIndex]?.dataset.step) this.step = navItemsList[nodeIndex]?.dataset.step
+  //     else this.step = 1
+	// 	}
+	// }
 
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
-	setActiveTab(nodeIndex?){
-		let navItemsList =this.nav.nativeElement.children
+	setActiveTab(stepIndex=0){
+		this.steps.forEach(el=>el.isActive=false)
 
-		if(nodeIndex == 0 && navItemsList.length){
-			navItemsList[nodeIndex]?.classList.add('active')
-			this.navListLength = navItemsList.length
-      if(navItemsList[0]?.dataset.step) this.step = navItemsList[0]?.dataset.step
-      else this.step = 1
+		let allowedSteps = this.steps.filter(el => this.claimsService.isUserAllowedTo(el.claims))
+		this.navListLength = allowedSteps.length
+
+		let el =this.steps.find(el => (el.index==stepIndex && this.claimsService.isUserAllowedTo(el.claims)))
+		if(el) {
+			el.isActive =true
+			this.step=el.index
+		}else{
+			allowedSteps[0].isActive =true
+			this.step = allowedSteps[0].index
 		}
-	}
 
+	}
 
 	scrollLeft(el :ElementRef){
     let stepLength = this.lang =='ar' ? (this.nav.nativeElement.scrollLeft - 175) : (this.nav.nativeElement.scrollLeft + 175)

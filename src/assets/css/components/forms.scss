@@ -506,12 +506,14 @@
                 border-color: #EF525B;
                 background-color: #fff;
             }
-            &.ng-dirty.ng-invalid .p-password input.p-inputtext:focuS {
+            &.ng-dirty.ng-invalid .p-password input.p-inputtext:focus {
                 box-shadow: inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B
             }
             position: relative;
-            .p-password {
+            // .p-password
+            & > div  {
                 width: 100%;
+                position: relative;
                 i {
                     inset-inline-end: 1rem;
                     inset-inline-start: unset;
