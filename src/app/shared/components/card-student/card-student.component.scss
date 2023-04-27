@@ -2,6 +2,13 @@
 // @import '../../../../assets/css/components/profile';
 
 
+.profile__avatar{
+  width: 8rem;
+  height: 8rem;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
 .editBtn{
     top: -7rem;
     left: 5rem;
