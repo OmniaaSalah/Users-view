@@ -516,6 +516,8 @@
         "CreatedDate And Time": "CreatedDate And Time",
         "From": "From",
         "To": "To",
+        "surnameAr":"Nick Name (in Arabic)",
+        "surnameEn":"Nick Name (in English)",
         "Before": "Before",
         "Accept": "Accept",
         "Reject": "Reject",

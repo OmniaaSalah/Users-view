@@ -37,10 +37,10 @@ export class RequestListComponent implements OnInit {
 	}
 
   statusOptions=[
-    {name:this.translate.instant('dashboard.Requests.Accepted'), value: UserRequestsStatus.Accepted},
+    {name:this.translate.instant('dashboard.Requests.Accepted'), value:[ UserRequestsStatus.Accepted,  UserRequestsStatus.Approved]},
     {name:this.translate.instant('dashboard.Requests.TentativelyAccepted'), value: UserRequestsStatus.TentativelyAccepted},
     {name:this.translate.instant('dashboard.Requests.Pending'), value: UserRequestsStatus.Pending},
-    {name:this.translate.instant('dashboard.Requests.Returned'), value: UserRequestsStatus.Returned},
+    {name:this.translate.instant('dashboard.Requests.Returned'), value: UserRequestsStatus.ModificationRequest},
     {name:this.translate.instant('dashboard.Requests.Rejected'), value: UserRequestsStatus.Rejected},
     {name:this.translate.instant('dashboard.Requests.Canceled'), value: UserRequestsStatus.Canceled},
   ]
@@ -110,7 +110,8 @@ export class RequestListComponent implements OnInit {
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
         this.requests.loading=true;
         this.requests.list=[];
-        this.systemRequestService.getUserRequests(this.filtration).subscribe((res)=>{
+        let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus.flat()}
+        this.systemRequestService.getUserRequests(filter).subscribe((res)=>{
           this.sharedService.filterLoading.next(false);
             this.requests.loading = false;
             this.requests.total=res.total;
@@ -138,7 +139,8 @@ export class RequestListComponent implements OnInit {
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
       this.requests.loading=true;
       this.requests.list=[];
-      this.systemRequestService.getMyRequests(this.filtration).subscribe(res=>{
+      let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus.flat()}
+      this.systemRequestService.getMyRequests(filter).subscribe(res=>{
         this.sharedService.filterLoading.next(false);
         this.requests.loading = false;
         this.requests.total=res.total;
