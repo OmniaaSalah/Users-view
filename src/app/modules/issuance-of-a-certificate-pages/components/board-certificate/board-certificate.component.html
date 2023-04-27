@@ -68,7 +68,7 @@
                     <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
                         <div class="elcardo-title d-flex">
                             <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="" alt="pdf" />
-                            <p class="mx-5 my-2">{{ file?.name }}</p>
+                            <p class="mx-5 my-2 word-break-all">{{ file?.name }}</p>
                         </div>
                         <!-- <div class="elcardo-body">
                             <h4>{{ "dashboard.issue of certificate.note" | translate }}:</h4>

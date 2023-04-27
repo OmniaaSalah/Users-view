@@ -51,10 +51,10 @@ export class StudentsService {
   }
 
 
-  getAllStudentsInSpecificSchool(filter){
+  getAllStudentsInSpecificSchool(filter,schoolId){
     this.loaderService.isLoading$.next(true)
 
-    return this.http.post(`/Student/students`,filter)
+    return this.http.post(`/Student/students/${schoolId}`,filter)
     .pipe(
       take(1),
       finalize(()=> {

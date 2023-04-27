@@ -81,8 +81,8 @@
               <ng-container *ngFor="let file of files; let i = index">
                   <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.url">
                       <div role="button" (click)="openFile(file?.url)" class="d-flex align-items-center gap-5" >
-                          <img src="assets/images/shared/pdf.svg" alt="">
-                          <span> {{file.name || 'ملف'}}</span>
+                          <img [style.width.rem]="4.5" src="assets/images/shared/file.svg" alt="">
+                          <span class="word-break-all"> {{file.name || 'ملف'}}</span>
                           <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2 cancel" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
                       </div>
                       <ng-container *ngIf="hasComment">
