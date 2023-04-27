@@ -1,22 +1,22 @@
 @import 'src/assets/css/utils/variables.scss';
 .custom-validation-form{
-   
+
     border-radius: 12px;
     padding-top: 4rem;
     padding-bottom: 8rem;
     input{
-       
+
         border-radius: 15px !important;
         &.basicinput{height: 57px;}
         &.inputgroupfrom{border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important;border-left: 2px solid #D1D1D1 !important;}
         &.inputgroupto{border-bottom-right-radius: 0px !important;border-top-right-radius: 0px !important}
         &.p-inputtext{
-        
+
             border:0.1px solid  #d8d8d8 ;
             box-shadow: none;
-           
+
         }
-        
+
     }
 
     .alert-danger{ color: #EF525B;}
@@ -35,35 +35,35 @@
     ::ng-deep{
         input{&.p-inputtext:focus{box-shadow: none;border: none;}}
         p-dropdown{
-        
+
                     &.ng-dirty.ng-invalid>.p-dropdown {
                         box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
                     }
-                
+
             .p-dropdown{
                 border:0.1px solid  #d8d8d8 !important;
                 background-color: #fff ;
-            
-                
+
+
             }
         }
 
         p-multiselect{
-        
+
             &.ng-dirty.ng-invalid>.p-multiselect {
                 box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
             }
             .p-multiselect{
                 border:0.1px solid  #d8d8d8 !important;
                 background-color: #fff ;
-                
-            }    
+
+            }
 
         }
-    
+
         .p-inputwrapper-focus{
             .p-inputnumber{
-                // border: none; 
+                // border: none;
             }
             .p-password{box-shadow: none;border: none;}
 
@@ -71,11 +71,11 @@
         }
 
         p-inputnumber{
-            
+
             &.ng-dirty.ng-invalid  {
                 border-radius: 12px;
                 border: 2px solid #EF525B !important;
-            
+
             }
         }
 
@@ -83,11 +83,11 @@
             &.ng-dirty.ng-invalid>.p-calendar {
                 box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
             }
-            
+
             .p-calendar{
                 border:0.1px solid  #d8d8d8 !important;
                 background-color: #fff ;
-            
+
             }
         }
 
@@ -97,9 +97,9 @@
             &.ng-invalid.ng-dirty>.p-password>.p-inputtext {
                 box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
             }
-        
-                i{inset-inline-end: 14px;}
-            
+
+                // i{inset-inline-end: 14px;}
+
         }
         .p-chips{ box-shadow: none; }
     }

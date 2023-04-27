@@ -214,7 +214,10 @@ export class RegisterRequestComponent implements OnInit {
   }
 
   patchReturnedRequestData(reqData){
-    reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
+    if(reqData?.isSpecialAbilities) {
+      reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
+    }
+
     this.onGradeSelected(reqData.gradeId)
     this.onSelectSchool(reqData.schoolId)
     this.registerReqForm.patchValue(reqData)
@@ -341,7 +344,7 @@ export class RegisterRequestComponent implements OnInit {
     .subscribe(res=>{
       this.toaster.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
       this.onSubmit=false
-      this.router.navigate(['/parent/requests-list'])
+      this.router.navigate(['/requests-list'])
 
     },(err:Error)=>{
       this.toaster.error(err.message)
@@ -370,7 +373,7 @@ export class RegisterRequestComponent implements OnInit {
     .subscribe(res=>{
       this.toaster.success(this.translate.instant('toasterMessage.requestResend'));
       this.onSubmit=false
-      this.router.navigate(['/parent/requests-list/details', this.reqInstantId])
+      this.router.navigate(['/requests-list/details', this.reqInstantId])
     },err=>{
       this.toaster.error(this.translate.instant('toasterMessage.error'))
       this.onSubmit=false
@@ -392,7 +395,7 @@ export class RegisterRequestComponent implements OnInit {
     .subscribe(res=>{
 
       this.onSubmit=false
-      this.router.navigateByUrl(`//schools-and-students/all-parents/parent/${this.parentId}/all-children`)
+      this.router.navigateByUrl(`/schools-and-students/all-parents/parent/${this.parentId}/all-children`)
       this.toaster.success(this.translate.instant('toasterMessage.childRegistedSuccesfully'))
     },(err)=>{
       this.toaster.error(this.translate.instant('toasterMessage.error'))
