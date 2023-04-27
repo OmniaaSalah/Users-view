@@ -177,10 +177,9 @@ export class StudentsListComponent implements OnInit {
       {this.isGradeSelected=false}
     else
       {
-
       this.isGradeSelected=true
       if( this.isGradeSelected && this.isSchoolSelected){
-        this.gradeTracks$ = this.gradesService.getGradeTracks(this.filtration.SchoolId,GradeId)
+        this.gradeTracks$ = this.gradesService.getGradeTracks([this.schoolId],GradeId)
         this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,gradeid:GradeId||null}).pipe(map(res => res.data))
       }
       }
@@ -207,10 +206,10 @@ export class StudentsListComponent implements OnInit {
     })
   }
   getStudentsInSpecificSchool(schoolId){
-    this.filtration.SchoolId=[Number(schoolId)]
+    // this.filtration.SchoolId=[Number(schoolId)]
     this.students.loading=true
     this.students.list=[]
-    this.studentsService.getAllStudentsInSpecificSchool(this.filtration)
+    this.studentsService.getAllStudentsInSpecificSchool(this.filtration,schoolId)
     .subscribe(res=>{
       this.students.loading=false
       this.students.list = res.result.data

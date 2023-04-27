@@ -93,13 +93,10 @@ export class HolidayModelComponent implements OnInit {
 
   saveMe()
   {
-   
     if(this.editedHoliday)
     {
     
       this.curriculamListEdited=[];
-      this.editedStatus=this.holidayFormGrp.value.flexibilityStatus?this.holidayStatusList[0]:this.holidayStatusList[1];
-    
       this.curriculamList.forEach(curriculam => {
         this.holidayFormGrp.value.curriculumName.forEach(id => {
           if(id==curriculam.id)
@@ -109,21 +106,20 @@ export class HolidayModelComponent implements OnInit {
         });
       });
       this.editedHoliday={
-        id:this.editedHoliday.id,
-        name:{ar:this.holidayFormGrp.value.arabicName,en:this.holidayFormGrp.value.englishName },
-        dateFrom: this.holidayFormGrp.value.dateFrom,
-        dateTo: this.holidayFormGrp.value.dateTo,
-        flexibilityStatus:this.editedStatus,
-        curriculums: this.curriculamListEdited,
-        createdDate:new Date()
+        'id':this.editedHoliday?.id,
+        'index':this.editedHoliday?.index ? this.editedHoliday?.index :0,
+        'name':{ar:this.holidayFormGrp.value.arabicName,en:this.holidayFormGrp.value.englishName },
+        'dateFrom': this.holidayFormGrp.value.dateFrom,
+        'dateTo': this.holidayFormGrp.value.dateTo,
+        'flexibilityStatus':this.holidayFormGrp.value.flexibilityStatus? this.holidayStatusList[0]:this.holidayStatusList[1],
+        'curriculums': this.curriculamListEdited,
+        'createdDate':new Date()
        }; 
-    
        this.annualHolidayService.holiday.next(this.editedHoliday);
     }
     else{
     this.holiday={};
     this.holiday.curriculums=[];
-    this.holiday.flexibilityStatus=this.holidayFormGrp.value.flexibilityStatus?this.holidayStatusList[0]:this.holidayStatusList[1];
     this.curriculamList.forEach(curriculam => {
       this.holidayFormGrp.value.curriculumName.forEach(id => {
         if(id==curriculam.id)
@@ -136,7 +132,7 @@ export class HolidayModelComponent implements OnInit {
       name:{ar:this.holidayFormGrp.value.arabicName,en:this.holidayFormGrp.value.englishName },
       dateFrom: this.holidayFormGrp.value.dateFrom,
       dateTo: this.holidayFormGrp.value.dateTo,
-      flexibilityStatus:this.holiday.flexibilityStatus,
+      flexibilityStatus:this.holidayFormGrp.value.flexibilityStatus? this.holidayStatusList[0]:this.holidayStatusList[1],
       curriculums: this.holiday.curriculums,
       createdDate:new Date()
      };
