@@ -279,7 +279,7 @@ getCurrentRegistrationWay()
         })
       ).subscribe((res)=>{
         this.isBtnLoading=false;
-        if(res.statusCode!="Created")
+        if(res.statusCode!="OK")
         {
           this.toastService.error(this.translate.instant(res.error));
           this.closeModel();
@@ -327,7 +327,7 @@ savePersonalInformation()
 
   this.authService.saveAccount(information).subscribe((res)=>{
     this.isBtnLoading=false;
-  if(res.statusCode!="Created")
+  if(res.statusCode!="OK")
   {
     this.toastService.error(this.translate.instant(res.error));
     this.closeModel();
@@ -405,7 +405,9 @@ saveUserObj()
 
   localStorage.setItem('userAcountData', JSON.stringify(this.UAEUnregisteredUser));
   this.account.accountWay=RegistrationEnum.PhoneNumber;
+  this.account.notificationSource=this.UAEUnregisteredUser?.phone;
   localStorage.setItem('accountWay',this.account.accountWay);
+  localStorage.setItem('notificationSource',this.account.notificationSource);
   this.sendOtp();
 }
 

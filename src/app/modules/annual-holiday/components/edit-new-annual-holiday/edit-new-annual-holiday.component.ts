@@ -147,12 +147,14 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
    saveHoliday()
    {
+
     this.isBtnLoading = true;
     this.annualHolidayObj={} as IAnnualHoliday;
     this.annualHolidayObj={
       annualCalendar:{ar:this.annualHolidayFormGrp.value.arabicSmester,en:this.annualHolidayFormGrp.value.englishSmester} ,
       year: this.annualHolidayFormGrp.value.year,
       holidayModels:this.holidayList.map((holiday)=>{return {
+        'id':holiday.id,
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
         'dateFrom':holiday.dateFrom,
         'dateTo': holiday.dateTo,
@@ -160,7 +162,6 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
         'curriculumIds': this.getCurriculumIds(holiday.curriculums)
         }})
      };
-
 
     if(this.urlParameter)
     {
@@ -193,7 +194,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
  getHoliday(e)
  {
-
+  console.log("uuuuuuu")
   this.availableAdded=1;
   this.annualHolidayService.holiday.subscribe((res)=>{
     this.holidayAdded=res;
@@ -202,18 +203,20 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
       if(holiday.name.ar==this.holidayAdded.name.ar)
       {
           this.availableAdded=0;
-
+          console.log("uutre")
 
       }
     });
     if(this.availableAdded==1)
     {
 
-      if(this.holidayAdded.id==null||undefined)
+      if(this.holidayAdded.index==null||undefined)
       {
+        console.log("wwwww")
             this.holidayList.push(res);
             this.holidayList=this.holidayList.map((holiday,i)=>{return {
-            'id':i+1,
+            'id':holiday?.id ?holiday?.id:0,
+            'index':i+1,
             'name':{'ar':holiday.name.ar,'en':holiday.name.en },
             'userName':{'ar':holiday?.userName?.ar,'en':holiday?.userName?.en },
             'dateFrom':holiday.dateFrom,
@@ -230,19 +233,21 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
     }
   });
-    if(this.holidayAdded.id)
+  console.log(this.holidayAdded.index)
+    if(this.holidayAdded.index)
     {
-
+console.log("opop")
         this.holidayList.forEach(holiday => {
-            if(holiday.id==this.holidayAdded.id)
+            if(holiday.index==this.holidayAdded.index)
             {
-                 this.holidayList[this.holidayAdded.id-1].id=this.holidayAdded.id;
-                 this.holidayList[this.holidayAdded.id-1].name.ar=this.holidayAdded.name.ar;
-                 this.holidayList[this.holidayAdded.id-1].name.en=this.holidayAdded.name.en;
-                 this.holidayList[this.holidayAdded.id-1].dateFrom=this.holidayAdded.dateFrom;
-                 this.holidayList[this.holidayAdded.id-1].dateTo=this.holidayAdded.dateTo;
-                 this.holidayList[this.holidayAdded.id-1].curriculums=this.holidayAdded.curriculums;
-                 this.holidayList[this.holidayAdded.id-1].flexibilityStatus=this.holidayAdded.flexibilityStatus;
+                 this.holidayList[this.holidayAdded.index-1].id=this.holidayAdded.id;
+                 this.holidayList[this.holidayAdded.index-1].index=this.holidayAdded.index;
+                 this.holidayList[this.holidayAdded.index-1].name.ar=this.holidayAdded.name.ar;
+                 this.holidayList[this.holidayAdded.index-1].name.en=this.holidayAdded.name.en;
+                 this.holidayList[this.holidayAdded.index-1].dateFrom=this.holidayAdded.dateFrom;
+                 this.holidayList[this.holidayAdded.index-1].dateTo=this.holidayAdded.dateTo;
+                 this.holidayList[this.holidayAdded.index-1].curriculums=this.holidayAdded.curriculums;
+                 this.holidayList[this.holidayAdded.index-1].flexibilityStatus=this.holidayAdded.flexibilityStatus;
 
             }
           });
@@ -268,8 +273,8 @@ editHoliday(holiday)
 {
 
  this.getHolidayNameAndYear();
-
-  this.parameterInAddHoliday=holiday.id;
+console.log(holiday)
+  this.parameterInAddHoliday=holiday.index;
   this.annualHolidayService.editedHoliday.next(holiday);
   this.annualHolidayService.openModel.next(true);
 }
@@ -389,7 +394,8 @@ bindOldHoliday(holiday)
       });
       this.holidayList=holiday.holidayModels;
       this.holidayList=this.holidayList.map((holiday,i)=>{return {
-        'id':i+1,
+        'id':holiday.id,
+        'index':i+1,
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
         'userName':{'ar':holiday?.userName.ar,'en':holiday?.userName.en },
         'dateFrom':holiday.dateFrom,
