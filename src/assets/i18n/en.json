@@ -846,6 +846,7 @@
             "should be more than the minmum deserving degree":"Should be more than the minmum deserving degree"
         },
         "schools": {
+          "contactWithSchool":"Contact With School",
             "StudentDensity":"Grade Density",
             "Typeofcertificate": "Type of Certificate",
             "SchoolYear": "School Year",
