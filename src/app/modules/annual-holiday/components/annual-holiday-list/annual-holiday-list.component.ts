@@ -133,7 +133,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
 
   onExport(fileType: FileTypeEnum, table:Table){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration,PageSize:this.annualHolidays.totalAllData,Page:1}
     this.annualHolidayService.annualToExport(filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'))

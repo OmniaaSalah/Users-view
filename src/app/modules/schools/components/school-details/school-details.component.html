@@ -165,7 +165,7 @@
 
 <div class="form-group">
     <label for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-    <p-dropdown  [options]="messagesTypes" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" appValidation  ></p-dropdown>
+    <p-dropdown  [options]="messagesTypes" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}"   ></p-dropdown>
     <div class="text-danger"
     *ngIf="this.speaEmpForm.get('messageType')?.touched && this.speaEmpForm.get('messageType')?.invalid && this.speaEmpForm.get('messageType')?.errors">
     <small *ngIf="this.speaEmpForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>

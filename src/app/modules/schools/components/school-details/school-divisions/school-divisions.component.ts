@@ -125,7 +125,7 @@ console.log(changes);
 
 
    onExport(fileType: FileTypeEnum){
-    let filter = {...this.filtration, PageSize:this.divisions.totalAllData}
+    let filter = {...this.filtration, PageSize:this.divisions.totalAllData,Page:1}
     this.divisionService.divisionsToExport(filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolTracks'))
