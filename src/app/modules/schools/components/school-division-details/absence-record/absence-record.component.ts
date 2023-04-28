@@ -228,7 +228,7 @@ lastDate
   }
 
   onExport(fileType: FileTypeEnum){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration,PageSize:this.absenceRecord.totalAllData,Page:1}
     this.divisionService.absenceRecordToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.absenceRecord'))
     })

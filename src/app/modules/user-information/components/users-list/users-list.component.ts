@@ -110,7 +110,7 @@ export class ViewListOfUsersComponent implements OnInit {
   }
 
   onExport(fileType: FileTypeEnum){
-    let filter = {...this.filtration, PageSize:this.users.totalAllData}
+    let filter = {...this.filtration, PageSize:this.users.totalAllData,Page:1}
     this.userInformation.usersToExport(filter).subscribe((res:any) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
     })

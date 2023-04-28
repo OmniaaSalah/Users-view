@@ -268,7 +268,7 @@ export class StudentsListComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
-    let filter = {...this.filtration, PageSize:this.students.totalAllData}
+    let filter = {...this.filtration, PageSize:this.students.totalAllData,Page:1}
     this.studentsService.studentsToExport(filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsList'))
     })
@@ -293,7 +293,6 @@ export class StudentsListComponent implements OnInit {
   }
 
   checkStudentList(){
-  console.log("'kkk")
     if(this.currentUserScope==this.userScope.Employee){
         this.userService.currentUserSchoolId$.subscribe(id => this.getStudentsInSpecificSchool(id))
     }else { this.getStudents() }
