@@ -130,28 +130,29 @@ lastDate
 
   openRaisAbsenceModel(){
     this.absenceModelOpened=true
-    this.onSearchStudentsChanged()
+    // this.onSearchStudentsChanged()
+    this.getDivisionStudents()
   }
 
 
-  onSearchStudentsChanged(){
-    this.studentSearchText.valueChanges
-    .pipe(
-      startWith(''),
-      debounceTime(1000),
-      distinctUntilChanged(),
-      switchMap((searchText)=>{
-        this.isLoading=true
-        this.students =null
-        return this.getDivisionStudents(searchText)
-      }),
-      takeUntil(this.ngUnSubscribe))
-    .subscribe(students=>{
-          this.students =students
-          this.absenceStudentsForm.studentAbsences = students
+  // onSearchStudentsChanged(){
+  //   this.studentSearchText.valueChanges
+  //   .pipe(
+  //     startWith(''),
+  //     debounceTime(1000),
+  //     distinctUntilChanged(),
+  //     switchMap((searchText)=>{
+  //       this.isLoading=true
+  //       this.students =null
+  //       return this.getDivisionStudents(searchText)
+  //     }),
+  //     takeUntil(this.ngUnSubscribe))
+  //   .subscribe(students=>{
+  //         this.students =students
+  //         this.absenceStudentsForm.studentAbsences = this.students
 
-    })
-  }
+  //   })
+  // }
 
   getDivisionStudents(searchText?){
     return this.divisionService.getDivisionStudents(this.schoolId, this.divisionId,{KeyWord:searchText || ''})
@@ -171,7 +172,11 @@ lastDate
       }),
       takeUntil(this.ngUnSubscribe),
       finalize(()=> this.isLoading = false))
+      .subscribe(students=>{
+        this.students =students
+        this.absenceStudentsForm.studentAbsences = this.students
 
+       })
 
 
   }
@@ -181,7 +186,7 @@ lastDate
   //  }
 
   resetSelectedStudents(){
-    this.absenceStudentsForm.studentAbsences = this.absenceStudentsForm.studentAbsences.map(el => el.isAbsencent =false)
+    this.absenceStudentsForm.studentAbsences = this.absenceStudentsForm.studentAbsences.map(el => ({...el , isAbsencent:false}))
   }
 
   addStudentsToAbsenceRecords(){

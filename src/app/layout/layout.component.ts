@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { routeSlide } from '../shared/animation/animation';
+import { UserService } from '../core/services/user/user.service';
+import { UserScope } from '../shared/enums/user/user.enum';
 
 
 @Component({
@@ -14,7 +16,10 @@ import { routeSlide } from '../shared/animation/animation';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor(public translate: TranslateService) {
+  get currentUserScope() { return this.userService.getCurrentUserScope()}
+  get scopeEnum () {return UserScope}
+
+  constructor(private userService:UserService) {
   }
 
   ngOnInit(): void {
