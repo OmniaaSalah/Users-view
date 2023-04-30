@@ -66,7 +66,7 @@ export class RequestListComponent implements OnInit {
   ]
     // openResponsesModel = false
 
-    filtration = {...Filtration, SortColumnName:'createdDate', SortBy: 'Desc',RequestStatus: [UserRequestsStatus.Pending], RequestType:null};
+    filtration = {...Filtration, SortColumnName:'createdDate', SortBy: 'Desc',RequestStatus: [UserRequestsStatus.Pending, UserRequestsStatus.TentativelyAccepted], RequestType:null};
 
     paginationState= {...paginationInitialState};
     // showMyReqs={
@@ -177,7 +177,7 @@ export class RequestListComponent implements OnInit {
 
     onExport(fileType: FileTypeEnum){
 
-      let filter = {...this.filtration, PageSize:this.requests.totalAllData}
+      let filter = {...this.filtration, PageSize:this.requests.totalAllData,Page:1}
 
       let requestsList$
 

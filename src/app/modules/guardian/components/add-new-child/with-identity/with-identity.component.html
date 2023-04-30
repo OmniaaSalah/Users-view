@@ -37,29 +37,29 @@
     </div>
 
     <!-----------------------------add row------------------------------->
-    <div class="row">
-        <ul class="subjects">
-            <div class="row">
-                <div class="col-md-6 m-4">
+    <div class="p-5 row gx-5 form-set">
+      
+            <div class="row  g-5">
+                <div class="col-md-6 gap-3">
                     <P>{{'dashboard.addChild.identityPhoto' | translate}} <span class="star">*</span></P>
                     <app-file-upload
                     view="full"
                     (onFileUpload)="setAttachment(identityAttach,$event)"></app-file-upload>
                 </div>
-                <div class="col-md-4 m-4">
+                <div class="col-md-4 gap-3">
                     <P>{{'dashboard.addChild.personalPicture' | translate}}</P>
                     <app-file-upload
                     view="full"
                     (onFileUpload)="setAttachment(personalPhoto,$event)" ></app-file-upload>
                 </div>
             </div>
-        </ul>
+    
     </div>
 
-    <div class="row">
-        <ul class="subjects">
+    <div class="p-5 row gx-5 form-set">
+       
             <h3>{{'dashboard.addChild.required attachments' | translate}}</h3>
-            <div class="row mt-5 g-5">
+            <div class="row mt-5  g-5">
                 <div class="col-md-6 gap-3">
                     <P>{{'dashboard.addChild.birthCertificate' | translate}} <span class="star">*</span></P>
                     <app-file-upload  view="full" (onFileUpload)="setAttachment(birthDate,$event)"></app-file-upload>
@@ -69,14 +69,16 @@
                     <textarea  [rows]="6" [(ngModel)]="birthDate.comment"  [ngModelOptions]="{standalone: true}" [cols]="40" pInputTextarea [autoResize]="true" placeholder="{{'shared.note' | translate}}"></textarea>
                 </div>
             </div>
-        </ul>
+   
     </div>
-    <div class="submitBtn d-flex gap-3">
+    <div class=" d-flex align-items-center justify-content-end ">
+        <div class="Btn-group d-flex align-items-center justify-content-end gap-3">
             <button class="btn btn-primary"
             [disabled]="!newChildForm.valid|| !birthDate.url.length ||  !identityAttach.url.length || onSubmit">
                 {{'dashboard.issue of certificate.Save' | translate}}
                 <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
             </button>
             <button  ><a routerLink="/" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
+        </div>
    </div>
 </form>

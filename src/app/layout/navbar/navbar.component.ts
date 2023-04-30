@@ -214,18 +214,14 @@ export class NavbarComponent implements OnInit {
     }
 }
 goToNotificationDetails(pageLink,id,isRead){
+  window.open(pageLink, '_blank')
   if(!isRead)
   {
+    this.notificationService.unReadNotificationNumber.subscribe((response) => { this.notificationNumber=response-1});
     this.notificationService.updateNotifications({'NotificationId' : [id]}).subscribe(res=>{
-      window.open(pageLink, '_blank')
-  
     },err=>{
       this.toastr.error(this.translate.instant('Request cannot be processed, Please contact support.'))
     })
-  }
-  else
-  {
-    window.open(pageLink, '_blank')
   }
 
 }

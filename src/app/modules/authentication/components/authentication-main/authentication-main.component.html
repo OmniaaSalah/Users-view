@@ -88,7 +88,7 @@
                 <div class="forget-password mb-5 ">
                   <a (click)="openForgetModel()" class="color-skyBlue-400">{{'Forgot password?' | translate}}</a>
                 </div>
-                <button class="btn btn-primary mb-4" [disabled]="isBtnLoading">{{'Login'| translate}}
+                <button class="btn btn-primary mb-4" [disabled]="isBtnLoading||loginForm.invalid">{{'Login'| translate}}
                   <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
                 </button>
 

@@ -15,11 +15,12 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
   styleUrls: ['./certificate-details.component.scss']
 })
 export class CertificateDetailsComponent implements OnInit {
-  
+
   get certificateTypeEnum() { return CertificatesEnum }
-  
+
   location="https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448"
 
+  newDate = new Date()
 
   certificateType
   certificateId = this.route.snapshot.paramMap.get('id')
@@ -34,15 +35,15 @@ export class CertificateDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCertificate()
-   
+
   }
 
   getCertificate(){
     this.issueCertificateService.getCertificateDetails(this.certificateId).subscribe(res=>{
-      this.certificateType = res.result.certificateType 
+      this.certificateType = res.result.certificateType
       this.certificateQrc= `${environment.clientUrl}/certificate/${this.certificateId}`
       this.certificate = this.isJSON(res?.result?.jsonObj) ? JSON.parse(res.result.jsonObj) :"npt"
-      
+
       console.log(this.certificate);
       // this.generateQRC()
     })
@@ -74,34 +75,34 @@ export class CertificateDetailsComponent implements OnInit {
 
 
 
-  print() { 
+  print() {
     this.generatePdf().then(pdf=>{
       pdf.save(this.translate.instant('dashboard.issue of certificate.' +this.certificateType))
-      
-      
+
+
     })
   }
 
 
  generatePdf():Promise<jsPDF>{
   var data = document.getElementById('certificate');
-  
+
   return html2canvas(data,{useCORS: true})
-  .then(canvas => {    
-      
-      let imgWidth = 208;  
+  .then(canvas => {
+
+      let imgWidth = 208;
       const pageHeight = 295;
 
-      let imgHeight = canvas.height * imgWidth / canvas.width; 
-  
+      let imgHeight = canvas.height * imgWidth / canvas.width;
+
       let heightLeft = imgHeight;
-      let position = 0;  
+      let position = 0;
       heightLeft -= pageHeight;
 
-      const contentDataURL = canvas.toDataURL('image/png')  
-      let pdf = new jsPDF('p', 'mm', 'a4');   
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jsPDF('p', 'mm', 'a4');
 
-      pdf.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight,'', 'FAST')  
+      pdf.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight,'', 'FAST')
       while (heightLeft >= 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
@@ -109,14 +110,14 @@ export class CertificateDetailsComponent implements OnInit {
         heightLeft -= pageHeight;
       }
 
-   
+
       return pdf
-  });  
+  });
  }
 
 
 
-   
+
   getBase64StringFromDataURL(dataURL) {
     return dataURL.replace('data:', '').replace(/^.+,/, '');
   }

@@ -109,7 +109,7 @@ export class SurveysListComponent implements OnInit {
    }
 
    onExport(fileType: FileTypeEnum, table:Table){
-    let filter = {...this.filtration, PageSize:this.surveyList.totalAllData}
+    let filter = {...this.filtration, PageSize:this.surveyList.totalAllData,Page:1}
     this.Surveyservice.surveyToExport(filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.surveys.surveyList'))

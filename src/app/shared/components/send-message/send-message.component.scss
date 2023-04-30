@@ -3,7 +3,7 @@
 // @import "../../../../../src/assets/css/components/input";
 // @import "../../../../../src/assets/css/components/buttons";
 @import "../../../../assets/css/components/forms.scss";
-// @import "../../../../assets/css/components/validation-form.scss";
+@import "../../../../assets/css/components/validation-form.scss";
 // @import '../../../../../src/assets/css/components/inputswitch';
 
 #content{
@@ -59,31 +59,43 @@ background-color: rgba(239, 253, 255, 0.72);
           }
 
 
-.custom-form{
-    font-size: 1.5rem;
+// .custom-form{
+//     font-size: 1.5rem;
    
-    .form-group{
-       ::ng-deep .p-autocomplete{
-      width: 100%!important;
-      input{
-        padding: 0 4rem;
-      }
-    }
-    i{
-      position: absolute;
-    right: 0.5rem;
-    top: 4.2rem;
-    }
-    }
+//     .form-group{
+//        ::ng-deep .p-autocomplete{
+//       width: 100%!important;
+//       input{
+//         padding: 0 4rem;
+//       }
+//     }
+//     i{
+//       position: absolute;
+//     right: 0.5rem;
+//     top: 4.2rem;
+//     }
+//     }
 
-}
-
-
+// }
 
 
-::ng-deep .p-autocomplete {
+// ::ng-deep{
+//   p-autocomplete{
+ 
+//   &.ng-dirty.ng-invalid>.p-autocomplete>.p-inputtext{
+//     border: none;
+//   box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
+//   }
+
+//   }
+// }
+
+::ng-deep p-autocomplete{
+ 
+  .p-autocomplete {
   display: block !important;
   ul{
+    border:0.1px solid  #d8d8d8 !important;
     padding: 0rem 1rem !important;
     border-radius: 15px !important;
     .p-autocomplete-token,.p-autocomplete-item {
@@ -109,6 +121,13 @@ background-color: rgba(239, 253, 255, 0.72);
       }
     }
   }
+
+}
+
+&.ng-dirty.ng-invalid>.p-autocomplete>.p-inputtext{
+border-color: #d8d8d8;
+box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
+}
 }
 
 .elbutton{

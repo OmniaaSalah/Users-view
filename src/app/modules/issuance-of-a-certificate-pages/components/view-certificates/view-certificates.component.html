@@ -53,7 +53,7 @@
         *ngFor="let certificate of allCertificates.list;let i = index">
             <div class="certificates-list d-flex  w-100">
 
-                <div class="user d-flex gap-4">
+                <div class="user d-flex gap-4 custom-form">
                     <div class="mx-4 mt-3 ">
                         <p-checkbox   [value]="certificate.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
                         </div>

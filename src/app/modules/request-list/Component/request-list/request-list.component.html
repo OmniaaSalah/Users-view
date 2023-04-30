@@ -72,11 +72,15 @@
                       {{product[col.field]}}
                   </td> -->
                             <td >{{request.requestNumber}}</td>
-                            <td style="min-width: 24rem;">
+                            <td class="d-block" style="min-width: 24rem;">
+                                <div class="">
                                 {{'dashboard.Requests.'+request.requestType | translate}}
+                            </div>
+                             <div>
                                 <a *ngIf="request?.schoolCreator" routerLink="/schools-and-students/schools/school/{{request?.schoolCreator?.id}}" [style.height.rem]="'4'" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.schoolCreator?.name|currentLang}}</a>
                                 <a *ngIf="request?.school" routerLink="/schools-and-students/schools/school/{{request?.school?.id}}" [style.height.rem]="'4'" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.school?.name|currentLang}}</a>
                                 <span *ngIf="request?.grade" [style.height.rem]="'4'"  class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.grade?.name|currentLang}}</span>
+                            </div>
                             </td>
                             <td>{{request.createdBy | currentLang}}</td>
                             <td style="min-width: 16rem;">{{request.createdDate |LocalizeDate:'d MMMM y hh:mm a'}}</td>

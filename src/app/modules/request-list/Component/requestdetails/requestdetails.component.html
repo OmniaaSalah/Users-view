@@ -14,7 +14,7 @@
     <button class=" btn btn-primary btn--sm px-5"
     [disabled]="onSubmited"
     (click)="withdrawReq(requestDetails?.requestType)"
-    *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Pending || requestDetails?.requestStatus==RequestStatusEnum.Accepted || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest">
+    *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Pending || requestDetails?.requestStatus==RequestStatusEnum.TentativelyAccepted || requestDetails?.requestStatus==RequestStatusEnum.Approved || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest">
         <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
         <span>{{'dashboard.Requests.withdrawalReq' |translate}}</span>
     </button>
@@ -452,7 +452,7 @@
             <!-- currentUserScope!=userScopeEnum.Guardian  -->
             <ng-container *ngIf="requestOptions" >
                 <button
-                [class.d-none]="option?.label.en=='returned' &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest"
+                [class.d-none]="option?.label.en=='ModificationRequest' &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest"
                 [disabled]="option.isLoading"
                 [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
                 *ngFor="let option of requestOptions;let i=index"
