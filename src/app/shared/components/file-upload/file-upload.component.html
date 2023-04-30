@@ -77,6 +77,7 @@
 
 
         <ng-container  *ngIf="view=='full'">
+          <ng-content></ng-content>
           <div class="gx-5 mt-5 full-file">
               <ng-container *ngFor="let file of files; let i = index">
                   <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.url">

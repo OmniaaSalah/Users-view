@@ -80,7 +80,7 @@
                 <td *permit="claimsEnum.E_D_AbsentStudent">
                     <div class="d-flex justify-content-end gap-5 ps-5">
                         <div class="alerting success">
-                            <span class="fw-bold color-skyBlue-600">غائب</span>
+                            <span class="fw-bold color-skyBlue-600">{{'dashboard.schools.absent' |translate}}</span>
                         </div>
                         <div role="button" (click)="this.confirmModelService.openModel(); selectedRecord=studentObj">
                                 <img   src="assets/images/shared/rect-xmark.svg" alt="">
@@ -154,10 +154,10 @@
 
                <!-- Search Result -->
                <div class="row g-4 mt-6 mb-5" *ngIf="!isLoading">
-                   <ng-container *ngFor="let student of students; let i =index">
+                   <ng-container *ngFor="let student of absenceStudentsForm.studentAbsences |localizeSearch:studentSearchText.value; let i =index">
 
                        <div class="col-md-6 col-md-6 d-flex gap-4 align-items-center">
-                               <p-checkbox  name="students" [binary]="true" [inputId]="i" [(ngModel)]="student.isAbsencent" (ngModelChange)="isAbsenteStudentsSelected()"></p-checkbox>
+                               <p-checkbox  name="students" [binary]="true" [inputId]="i" [(ngModel)]="student.isAbsencent" ></p-checkbox>
                                <!-- <p-checkbox  name="students" [value]="student" [inputId]="i" [(ngModel)]="absenceStudentsForm.studentAbsences"></p-checkbox> -->
                                <label class="label label--sm" [for]="i">{{student.studentNumber}} {{student.name|currentLang}}</label>
                        </div>

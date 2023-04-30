@@ -125,8 +125,8 @@ export class AnnulHolidayListComponent implements OnInit {
 
 
   getRequestOptions(){
-    this.requestsService.getRequestTimline(this.reqInstance).subscribe(res=>{
-      this.actions = res?.task?.options
+    this.requestsService.getRequestOptions(this.reqInstance).subscribe(res=>{
+      this.actions = res?.options
     })
   }
 
@@ -240,7 +240,7 @@ export class AnnulHolidayListComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration,PageSize:this.holidays.totalAllData,Page:1}
     this.schoolsService.holidaysToExport(this.schoolId,filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualHolidays'))

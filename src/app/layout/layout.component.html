@@ -18,16 +18,23 @@
     </div>
 </div> -->
 
+<img class="top" src="assets/images/pattern-top.svg" alt="">
+<img class="side-left" src="assets/images/bg-shap.svg" alt="">
+<img class="side-right" src="assets/images/Frame2.svg" alt="">
+<div class="bg">
+
+</div>
+
 <app-navbar></app-navbar>
 
-<div class="dashboard wrapper">
-  <div class="dashboard__content  d-flex">
+<div class="layout wrapper">
+  <div class="layout__content  d-flex">
 
-      <div class="dashboard__panal py-5 px-4">
+      <div class="layout__navigator py-5 px-4">
           <app-side-navigator></app-side-navigator>
       </div>
 
-      <div class="dashboard__loaded-conponent">
+      <div class="layout__loaded-conponent" [class.w-90]="currentUserScope==scopeEnum.Guardian">
 
         <app-page-header></app-page-header>
         <div class="" id="routeroutlet " [@routeSlide]="prepareRoute(outlet)">

@@ -14,6 +14,7 @@ import { NotificationService } from '../../service/notification.service';
   styleUrls: ['./notification-list.component.scss']
 })
 export class NotificationListComponent implements OnInit {
+  unreadNotificationNumbers;
   roles=[];
   lang = inject(TranslationService).lang
   @ViewChild('readBtn', { read: ElementRef, static:false }) readBtn: ElementRef;
@@ -51,6 +52,9 @@ export class NotificationListComponent implements OnInit {
                ) { }
 
   ngOnInit(): void {
+    this.notificationService.unReadNotificationNumber.subscribe((response) => {
+      this.unreadNotificationNumbers=response
+    })
      this.notificationService.notificationNumber.subscribe((response) =>
      {
       this.componentHeaderData.mainTitle.sub = `(${response})`;
@@ -113,18 +117,15 @@ export class NotificationListComponent implements OnInit {
 
 
   showDetails(pageLink,id,isRead){
+    window.open(pageLink, '_blank')
     if(!isRead)
     {
+      this.notificationService.unReadNotificationNumber.next(this.unreadNotificationNumbers--)
+      this.getNotifications(this.searchModel)
       this.notificationService.updateNotifications({'NotificationId' : [id]}).subscribe(res=>{
-        window.open(pageLink, '_blank')
-    
       },err=>{
         this.toastr.error(this.translate.instant('Request cannot be processed, Please contact support.'))
       })
-    }
-    else
-    {
-      window.open(pageLink, '_blank')
     }
        
   }

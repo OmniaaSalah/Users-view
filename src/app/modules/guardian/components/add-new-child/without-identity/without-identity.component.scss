@@ -21,10 +21,11 @@
 hr {
     width: 90%;
 }
-.submitBtn{
+.Btn-group{
     position: absolute;
-    top: 15rem;
-    inset-inline-end: 15rem;
+    bottom:100% ;
+    padding-bottom: 3%;
+
 }
 
 ::ng-deep p-calendar{

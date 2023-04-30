@@ -142,7 +142,7 @@ console.log(this.filtration.dateFrom,this.filtration.dateTo)
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {
-    let filter = {...this.filtration, PageSize:this.users.totalAllData}
+    let filter = {...this.filtration, PageSize:this.users.totalAllData,Page:1}
     this._report.employeesToExport(filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'))
