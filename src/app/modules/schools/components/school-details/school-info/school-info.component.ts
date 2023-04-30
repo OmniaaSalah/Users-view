@@ -14,6 +14,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { ToastrService } from 'ngx-toastr';
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
+import { GradesService } from '../../../services/grade/grade.service';
 
 @Component({
   selector: 'app-school-info',
@@ -23,6 +24,10 @@ import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 export class SchoolInfoComponent implements OnInit , AfterViewInit{
   currentUserScope = inject(UserService).getCurrentUserScope();
   currentSchool="";
+  gradesList=[];
+
+  showLoader:boolean=false
+  displayGradesList:boolean=false
 
   get userScope() { return UserScope }
   get claimsEnum () {return ClaimsEnum}
@@ -48,6 +53,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
     private headerService: HeaderService,
 	private userService:UserService,
 	private toaster:ToastrService,
+	private gradeService:GradesService,
 	private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
@@ -67,6 +73,17 @@ getSchool(id){
 		}
 
 		},(err)=>{})
+	}
+
+	showGrades(schoolId)
+	{
+		this.gradesList=[];
+		this.showLoader=true;
+		this.displayGradesList = true;
+		this.gradeService.getSchoolGardes(schoolId).subscribe((res)=>{
+		  this.showLoader=false;
+		  this.gradesList=res.data;
+		});
 	}
 
   onLogoFileUpload(event: CustomFile[]){

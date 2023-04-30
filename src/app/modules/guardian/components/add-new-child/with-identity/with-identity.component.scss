@@ -6,10 +6,11 @@
 @import 'src/assets/css/components/inputswitch';
 
 
-.submitBtn{
+.Btn-group{
     position: absolute;
-    top: 15rem;
-    inset-inline-end: 20rem;
+    bottom:100% ;
+    padding-bottom: 3%;
+
 }
 
 textarea{
