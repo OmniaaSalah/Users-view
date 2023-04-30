@@ -106,7 +106,7 @@ export class SubjectsReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {
-    let filter = {...this.filtration, PageSize:this.subjectsReport.totalAllData}
+    let filter = {...this.filtration, PageSize:this.subjectsReport.totalAllData,Page:1}
     this.subjectReportService.subjectsToExport(filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'))

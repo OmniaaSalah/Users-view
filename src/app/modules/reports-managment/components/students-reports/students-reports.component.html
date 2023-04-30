@@ -49,7 +49,7 @@
                     <p-dropdown [options]="genderList"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.Gender"  [showClear]="true"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
                 </div>
                 <div class="col-md-4">
-                    <label class="label" for="nationality">{{'sign up.Nationality'|translate }} <span class="star">*</span> </label>
+                    <label class="label" for="nationality">{{'sign up.Nationality'|translate }} </label>
                     <p-multiSelect       [options]="nationalityList"     [ngModelOptions]="{standalone: true}"  display="chip"    [(ngModel)]="filtration.NationalityId"    optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"      placeholder="{{'sign up.Enter Nationality'|translate }}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
@@ -238,7 +238,8 @@
                             <span  *ngIf="!student?.isActive">{{'false'|translate}}</span>
                         </td>
                         <td *ngIf="tableColumns[16].isSelected == true">
-                            {{student?.isSpecialAbilities}}
+                            <span *ngIf="student?.isSpecialAbilities">{{'true'|translate}}</span>
+                            <span  *ngIf="!student?.isSpecialAbilities">{{'false'|translate}}</span>
                         </td>
                         <td *ngIf="tableColumns[17].isSelected == true">
                             <span *ngIf="student?.local">{{'true'|translate}}</span>

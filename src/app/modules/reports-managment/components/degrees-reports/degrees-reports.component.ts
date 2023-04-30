@@ -129,7 +129,7 @@ export class DegreesReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {
-    let filter = {...this.filtration, PageSize:this.degreessReport.totalAllData}
+    let filter = {...this.filtration, PageSize:this.degreessReport.totalAllData,Page:1}
     this.degreesReportService.degreesToExport(filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'))
