@@ -50,6 +50,17 @@ hr{margin: 30px 0;}
 
 }
 
+.layout{
+  border: 2px solid $color-primary;
+  padding: 1rem;
+}
+
+.linehieght-2{ line-height: 2;}
+
+.border-skyBlue{
+  border: 1px solid $color-skyBlue;
+}
+
 header{
     .logo{
         width: 12rem;

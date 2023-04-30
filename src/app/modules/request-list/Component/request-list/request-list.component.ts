@@ -66,7 +66,7 @@ export class RequestListComponent implements OnInit {
   ]
     // openResponsesModel = false
 
-    filtration = {...Filtration, SortColumnName:'createdDate', SortBy: 'Desc',RequestStatus: [UserRequestsStatus.Pending], RequestType:null};
+    filtration = {...Filtration, SortColumnName:'createdDate', SortBy: 'Desc',RequestStatus: [UserRequestsStatus.Pending, UserRequestsStatus.TentativelyAccepted], RequestType:null};
 
     paginationState= {...paginationInitialState};
     // showMyReqs={
