@@ -1,12 +1,13 @@
 
-    <div class="submitBtn d-flex gap-3">
+<div class=" d-flex align-items-center justify-content-end ">
+    <div class="Btn-group d-flex align-items-center justify-content-end gap-3">
         <button class="btn  btn-primary addBtn" (click)="addNewChild()" [disabled]="registerWithoutIdentityForm.invalid || !birthDateAttach.url.length|| !noIdentityCauseAttach.url.length|| isBtnLoading "  >
             {{'shared.save'|translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
         </button>
         <button  ><a routerLink="/" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
     </div>
-
+</div>
 
 
 <div class="content border-dark radius-15">
@@ -167,15 +168,15 @@
             <h3 class="mb-5 fw-bold">{{'dashboard.addChild.required attachments' | translate}}</h3>
 
             <div class="row gx-5 form-set  subjects ">
-              <div class="col-md-4 ">
+              <div class="col-md-6 ">
                   <P>{{'sign up.pleaze upload image to approve that you don’t have digital identity' |translate}} <span class="star">*</span></P>
-                  <app-file-upload  view="full" (onFileUpload)="setAttachment(noIdentityCauseAttach,$event)"></app-file-upload>
+                  <app-file-upload  view="full" (onFileUpload)="setAttachment(noIdentityCauseAttach,$event)">
+                    <div class="mt-4">
+                        <P class="pb-4 ">{{'shared.note' | translate}}</P>
+                        <textarea [cols]="30" class="w-100 rounded textareaBorder" [rows]="9" placeholder="{{'shared.note' | translate}}" [(ngModel)]="noIdentityCauseAttach.comment" [ngModelOptions]="{standalone:true}" pInputTextarea [autoResize]="true"></textarea>
+                    </div>
+                  </app-file-upload>
               </div>
-              <div class="col-md-4">
-                  <P class="pb-4 ">{{'shared.note' | translate}}</P>
-                  <textarea [cols]="30" class="w-100 rounded textareaBorder" [rows]="9" placeholder="{{'shared.note' | translate}}" [(ngModel)]="noIdentityCauseAttach.comment" [ngModelOptions]="{standalone:true}" pInputTextarea [autoResize]="true"></textarea>
-              </div>
-
 
               <div class="col-md-4">
                   <P>{{'dashboard.addChild.personalPicture' | translate}}</P>
@@ -184,13 +185,14 @@
           </div>
 
             <div class="row gx-5 form-set  subjects ">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <P>{{'dashboard.addChild.birthCertificate' | translate}} <span class="star">*</span></P>
-                    <app-file-upload view="full" (onFileUpload)="setAttachment(birthDateAttach,$event)"></app-file-upload>
-                </div>
-                <div class="col-md-4">
-                    <P class="pb-4">{{'shared.note' | translate}}</P>
-                    <textarea class="textareaBorder" [rows]="9" placeholder="{{'shared.note' | translate}}" [(ngModel)]="birthDateAttach.comment" [ngModelOptions]="{standalone:true}" [cols]="45" pInputTextarea [autoResize]="true"></textarea>
+                    <app-file-upload view="full" (onFileUpload)="setAttachment(birthDateAttach,$event)">
+                        <div class="mt-4">
+                            <P class="pb-4">{{'shared.note' | translate}}</P>
+                            <textarea class="textareaBorder" [rows]="9" placeholder="{{'shared.note' | translate}}" [(ngModel)]="birthDateAttach.comment" [ngModelOptions]="{standalone:true}" [cols]="45" pInputTextarea [autoResize]="true"></textarea>
+                        </div>
+                    </app-file-upload>
                 </div>
                 <div class="col-md-4">
                     <P>{{'dashboard.addChild.PassportPicture' | translate}}</P>
