@@ -157,7 +157,7 @@ export class RequestListComponent implements OnInit {
     clearFilter(){
       this.filtration.Page=1
       this.filtration.KeyWord =''
-      this.filtration.RequestStatus= null;
+      this.filtration.RequestStatus= [];
       this.filtration.RequestType= null;
 
       this.applyFilter()

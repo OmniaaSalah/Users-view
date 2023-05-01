@@ -438,7 +438,8 @@
         }
         .left{
              ::ng-deep select{
-                // background-position: right 8rem center !important;
+                display: flex;
+                text-align: center;
                 border: none!important;
                 font-size: 1.3rem!important;
                 width: 10rem;

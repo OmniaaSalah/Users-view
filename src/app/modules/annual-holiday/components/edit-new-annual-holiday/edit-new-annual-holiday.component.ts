@@ -286,9 +286,9 @@ confirmDeleteListener(){
 }
 deleteHoliday(id)
 {
-
+  let index =this.holidayList.findIndex(holiday => holiday.index==id)
   if(this.holidayList.length > 1)
-     {this.holidayList.splice(id-1, 1);}
+     {this.holidayList.splice(index, 1);}
   else
      {this.holidayList =[];}
 

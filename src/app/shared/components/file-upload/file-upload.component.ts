@@ -89,12 +89,21 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
   }
 
+  allAllowedFilesType: FileTypeEnum[]
+
   ngOnInit(): void {
 
     this.settingService.fileRules$.subscribe((rules:MapedFileRule)=> {
       this.filesRules =rules
 
       // set file Size Dynamically (depend on provided file type)
+      if(!this.allowedFilesType){
+        this.allAllowedFilesType =<FileTypeEnum[]> Object.keys(this.filesRules)
+        // this.allAllowedFilesType = Object.keys(this.filesRules).map((key: FileTypeEnum) => {
+        //   this.filesRules[key]?.type as FileTypeEnum
+        // })
+      }
+
       if(!this.maxFileSize && this.allowedFilesType){
         this.maxFileSize = this.getMaxAllowedSizeForFileType(this.allowedFilesType)
       }

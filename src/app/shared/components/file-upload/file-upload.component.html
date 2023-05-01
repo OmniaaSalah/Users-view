@@ -20,7 +20,7 @@
 
 
 <div class="image-uploader flex-grow-1" [class]="view" *ngIf="theme=='default'">
-    <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
+    <h3 class="heading heading--tertiary mb-4" [style.minHeight.rem]="'2.7'"> {{title}}</h3>
 
 
     <div class=" gx-4 gap-4 gap-xxl-5 file-container" [class.row]="view==='box' || view==='list'">
@@ -49,7 +49,15 @@
 
                 <!-- <p class="sub-title">{{allowedFilesType}} (Maximum Size: {{maxFileSize}}mb)</p> -->
                 <p class="sub-title color-primary" *ngIf="allowedFilesType && maxFileSize">{{'shared.fileMaxSize' |translate:{type :('shared.'+allowedFilesType |translate) || '', size: maxFileSize} }}</p>
-                <p class="sub-title color-primary" *ngIf="allowedFilesType && !maxFileSize">{{'shared.fileType' |translate:{type :('shared.'+allowedFilesType |translate) || ''} }}</p>
+                <p class="sub-title color-primary" *ngIf="allowedFilesType && !maxFileSize">{{'shared.requiredFileType' |translate:{type :('shared.'+allowedFilesType |translate) || ''} }}</p>
+
+                <div class="d-flex  sub-title color-primary" *ngIf="!allowedFilesType">
+                  <span class="mx-3">{{'shared.fileType' |translate}}</span>
+                  (<span *ngFor="let item of allAllowedFilesType; let i=index">
+                    <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
+                    {{'shared.'+item |translate}}
+                  </span>)
+                </div>
 
             </div>
 

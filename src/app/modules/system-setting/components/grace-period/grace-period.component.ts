@@ -396,15 +396,31 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   deleteSchool(schoolId,  schoolType:SchoolType){
     this.isSchooDeletedMode=true;
-    let index =this.selectedSchools.findIndex(id => id==schoolId)
-    if(index >= 0) {
-      console.log({e:this.selectedSchools,r:this.schoolsDialogFor})
-      this.selectedSchools.splice(index ,1)
-      if(this.schoolsDialogFor=='TransferFrom') this.gracePeriodSchools.fromSchools.list.splice(index ,1)
-      else if(this.schoolsDialogFor=='TransferTo') this.gracePeriodSchools.toSchools.list.splice(index ,1)
-      else this.gracePeriodSchools.schools.list.splice(index ,1)
-      // this.isSchooDeletedMode=false
+    let index
+    console.log(schoolType);
+
+    if(schoolType=='allowdSchools'){
+
+      index = this.selectedSchools.findIndex(id => id==schoolId)
+      this.gracePeriodSchools.schools.list.splice(index ,1)
+    }else if(schoolType=='fromSchools'){
+
+      index = this.gracePeriodSchools.fromSchools.list.findIndex(id => id==schoolId)
+      this.gracePeriodSchools.fromSchools.list.splice(index ,1)
+    }else if(schoolType=='toSchools'){
+
+      index = this.gracePeriodSchools.toSchools.list.findIndex(id => id==schoolId)
+      this.gracePeriodSchools.toSchools.list.splice(index ,1)
     }
+
+    // if(index >= 0) {
+    //   console.log({e:this.selectedSchools,r:this.schoolsDialogFor})
+    //   this.selectedSchools.splice(index ,1)
+    //   if(this.schoolsDialogFor=='TransferFrom') this.gracePeriodSchools.fromSchools.list.splice(index ,1)
+    //   else if(this.schoolsDialogFor=='TransferTo') this.gracePeriodSchools.toSchools.list.splice(index ,1)
+    //   else this.gracePeriodSchools.schools.list.splice(index ,1)
+    //   // this.isSchooDeletedMode=false
+    // }
 
 
     if(this.gracePeriodId){
