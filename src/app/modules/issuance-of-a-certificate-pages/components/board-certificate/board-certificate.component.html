@@ -1,6 +1,6 @@
 <app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
 
-<div class="custom-form mt-6">
+<div class="custom-form mt-6 bg-white p-5 radius-15">
     <h4 class="mb-4 color-primary" style="font-weight: 700">
         {{
         "dashboard.issue of certificate.Add the required information - board certification"
@@ -33,10 +33,14 @@
 
     <ng-container *ngFor="let student of choosenStudents; let i = index">
 
-        <p-fieldset [style]="{ minHeight: '65vh', padding: '3rem' }" class="position-relative p-5" [toggleable]="true">
-            <ng-template pTemplate="header">
-                <span class="fw-bold">{{ student.name | currentLang }}</span>
-            </ng-template>
+        <div  class="border-dark radius-15 p-5 mb-6">
+
+            <div class="d-flex align-items-center gap-3">
+              <img  style="width:1.75rem" src="assets/images/home/student/student.svg" alt="">
+              <h3 class="heading heading--secondary color-primary">{{'dashboard.schools.student' | translate}} :- </h3>
+              <span class="color-skyBlue-500 fw-bold">{{student?.name |currentLang}}</span>
+            </div>
+
 
             <div class="col-md-4">
                 <p class="label">
@@ -48,21 +52,20 @@
                 </p-dropdown>
             </div>
 
+            <div class="d-flex align-items-center mb-3 mt-6 gap-5">
+              <div class="bg-orange-50 p-3 fs-3 radius-15 flex-grow-1" >
+                  <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                  <span class="color-gray-800">" يرجى إختيار ملف شهادة البورد صيغه (png / jpge) من المرفقات التالية . او إضافة ملف جديد "</span>
+              </div>
+
+              <!-- <a class="btn btn-primary" target="_blank" [routerLink]="['/parent', getCurrentGuardianId ,'child', student.id]" [queryParams]="{registered:true,step:3}">{{'shared.addNewFile' |translate}}</a> -->
+            </div>
             <div class="row align-items-end" *ngIf="student?.attachments?.length">
 
-              <div class="d-flex align-items-center mb-3 mt-6 gap-5">
-                <div class="bg-orange-50 p-3 fs-3 radius-15 flex-grow-1" >
-                    <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-                    <span class="color-gray-800">" يرجى إختيار ملف شهادة البورد صيغه (png / jpge) من المرفقات التالية . او إضافة ملف جديد "</span>
-                </div>
-
-                <a class="btn btn-primary" target="_blank" [routerLink]="['/parent', getCurrentGuardianId ,'child', student.id]" [queryParams]="{registered:true,step:3}">{{'shared.addNewFile' |translate}}</a>
-              </div>
 
                 <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p>
 
                 <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
-                  <ng-container *ngIf="file?.url">
                     <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
 
                     <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
@@ -75,10 +78,13 @@
                             <p>{{ file?.comment }}</p>
                         </div> -->
                     </div>
-                  </ng-container>
-
                 </div>
-            </div>
-        </p-fieldset>
+              </div>
+
+              <ng-container *ngIf="!student.attachments?.length">
+                <app-informative-block [styles]="{'minHeight': 'auto'}" subTitle="{{'emptyList.noAttachments' |translate}}" ></app-informative-block>
+            </ng-container>
+
+        </div>
     </ng-container>
 </div>

@@ -1,5 +1,5 @@
 
-<div class="d-flex justify-content-between align-items-baseline mb-5">
+<div class="d-flex justify-content-between align-items-baseline mb-4">
     <div class="">
         <h4 class=" fw-bold">{{'dashboard.issue of certificate.Add the required information - Academic Sequence Certificate' | translate}}</h4>
 
@@ -9,8 +9,8 @@
         </div>
     </div>
 
-    <div class="d-flex align-items-center justify-content-end">
-      <ng-container *ngIf="!requestId">
+    <div class="d-flex align-items-center justify-content-end mx-6">
+      <ng-container *ngIf="!requestInstance">
         <button class="btn btn-primary" (click)="sendAcademiccertificateReq()" [disabled]="isBtnLoading">
             {{'dashboard.issue of certificate.Save' | translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
@@ -20,16 +20,17 @@
       </ng-container>
 
 
-      <ng-container *ngIf="requestId">
+      <ng-container *ngIf="requestInstance">
         <button class="btn btn-primary "
         *ngFor="let action of actions"
         (click)="resendAcademicSequesnceReq(action.id)">
 
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
-            <span>{{action.title | currentLang}}</span>
+            <span>{{action?.title | currentLang}}</span>
             <!-- <span>{{'dashboard.Requests.resendRegstrationRequest' | translate}}</span> -->
 
         </button>
+        <button class="mx-4 fs-3"><a [routerLink]="['/requests-list/details', this.requestInstance]" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
       </ng-container>
 
     </div>
@@ -50,7 +51,7 @@
 
 
 <form *ngIf="!isLoading">
-    <div class="custom-form mt-5">
+    <div class="custom-form mt-5 min-vh-100">
 
 
 
@@ -61,7 +62,7 @@
 
                         <div class="border-dark radius-15 p-5 mb-6" [formGroupName]="i">
                             <div class="d-flex align-items-center justify-content-between mb-4 ">
-                                <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center gap-3 mb-5">
                                     <img  style="width:1.75rem" src="assets/images/home/student/student.svg" alt="">
                                     <h3 class="heading heading--secondary color-primary">{{'dashboard.schools.student' | translate}} :- </h3>
                                     <span class="color-skyBlue-500 fw-bold">{{choosenStudents[i]?.name |currentLang}}</span>

@@ -162,7 +162,7 @@ export class BoardCertificateComponent implements OnInit {
       this.studentService
         .getStudentAttachment(student.id)
         .subscribe((attachments) => {
-          student.attachments = attachments.map((attach) => ({
+          student.attachments = attachments.filter(el=> el?.url).map((attach) => ({
             ...attach,
             isSelected: false,
           }));
