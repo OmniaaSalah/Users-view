@@ -191,6 +191,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
       });
 
       this.editedHoliday={
+        'id':this.updatedHolidayId,
         'name':{'ar':this.editedHoliday?.name.ar,'en':this.editedHoliday?.name.en },
         'dateFrom':this.editedHoliday?.dateFrom,
         'dateTo': this.editedHoliday?.dateTo,

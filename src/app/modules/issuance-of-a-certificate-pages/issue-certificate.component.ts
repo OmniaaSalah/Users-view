@@ -200,13 +200,13 @@ export class IssueCertificateComponent implements OnInit {
 
   //save other certificate
   onOtherCertificatesSubmitted(){
+    console.log("other")
     this.isBtnLoading=true;
     let data = {
-      "studentIds" : this.choosenStudents.map(er=>er.id),
+      "studentIds" :this.studentId? [this.studentId] :this.choosenStudents.map(er=>er.id),
       "certificateType": this.selectedCertificate.value,
       "destination":this.destination || ''
     }
-
       this.issuance.postOtherCertificate(data).subscribe(result=>{
       this.isBtnLoading=false;
       this.display=false;
@@ -218,7 +218,6 @@ export class IssueCertificateComponent implements OnInit {
         {this.toastr.error( result?.errorLocalized[this.lang])}
         else
         {this.toastr.error(this.translate.instant('error happened'))}
-      this.showChildreens();
       }
     },err=>{
       this.display=false;
@@ -242,9 +241,10 @@ export class IssueCertificateComponent implements OnInit {
 
     if(this.selectedCertificate.value == CertificatesEnum.GoodBehaviorCertificate) this.display = true;
 
-    // let arr=[CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate, CertificatesEnum.GoodBehaviorCertificate,'']
-    // if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
-
+  
+    let arr=[CertificatesEnum.BoardCertificate,CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate]
+    if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
+   
   }
 
 
