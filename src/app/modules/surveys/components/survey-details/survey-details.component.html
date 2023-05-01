@@ -273,14 +273,14 @@
                                                     <label class="label" for="day" *ngIf="question.get('attachment').value||!surveyId">{{'dashboard.surveys.File'|translate}} <span class="star" *ngIf="question.get('surveyQuestionType').value==QuestionsTypeEnum.SurveyAttachmentQuestion">*</span></label>
                                                     <div>
                                                         <div class="file-hidden"  *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.Draft&&surveyId">
-                                                           <app-file-upload [files]="[question.get('attachment').value]"  (onFileUpload)="onFileUpload($event,i)" [accept]="FileType.Pdf" view="full" ></app-file-upload>
+                                                           <app-file-upload [files]="[question.get('attachment').value]"  (onFileUpload)="onFileUpload($event,i)" view="full" ></app-file-upload>
                                                         </div>
                                                         <div *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId">
                                                                 <ng-container *ngIf="!question.get('attachment').value">
-                                                                <app-file-upload   *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId" (onFileUpload)="onFileUpload($event,i)" [accept]="FileType.Pdf" view="full" ></app-file-upload>
+                                                                <app-file-upload   *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId" (onFileUpload)="onFileUpload($event,i)" view="full" ></app-file-upload>
                                                                 </ng-container>
                                                                 <ng-container *ngIf="question.get('attachment').value">
-                                                                    <app-file-upload [files]="[question.get('attachment').value]"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId" (onFileUpload)="onFileUpload($event,i)" [accept]="FileType.Pdf" view="full" ></app-file-upload>
+                                                                    <app-file-upload [files]="[question.get('attachment').value]"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId" (onFileUpload)="onFileUpload($event,i)" view="full" ></app-file-upload>
                                                                 </ng-container>
                                                         </div>
                                                     </div>
