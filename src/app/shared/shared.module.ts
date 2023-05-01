@@ -52,6 +52,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ToastrModule } from 'ngx-toastr';
 import { RequestListComponent } from '../modules/request-list/Component/request-list/request-list.component';
 import { FullbackImagePipe } from './pipes/fullback-image.pipe';
+import { FullbackImageDirective } from './directives/fullback-image.directive';
 
 registerLocaleData(localeAr);
 
@@ -101,6 +102,7 @@ registerLocaleData(localeAr);
     ClickOutsideDirective,
     PermissionDirective,
     FullbackImagePipe,
+    FullbackImageDirective,
 
   ],
   imports: [
@@ -170,7 +172,8 @@ registerLocaleData(localeAr);
     RouterModule,
     TranslateModule,
     ToastrModule,
-    FullbackImagePipe
+    FullbackImagePipe,
+    FullbackImageDirective
   ],
   providers:[SharedService]
 })
