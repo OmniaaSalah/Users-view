@@ -67,7 +67,7 @@
     "ReasonsForIssuingBoardCertificate" :"ReasonsForIssuingBoardCertificate ",
     "settings":"Settings",
     "Contact with Spea Employee":"Contact with Spea Employee",
-    "TheReasonForLackOfIdentification" :"TheReasonForLackOfIdentification",
+    "TheReasonForLackOfIdentification" :"The Reason For Lack Of Identification",
     "TheReasonForAbsent" :"TheReasonForAbsent",
     "user already exist":"This user already exist",
     "This email is already taken by another user":"This email is already taken by another user",
@@ -507,7 +507,8 @@
         "publicTransport": "Public Transport",
         "attacheFile": "Attache File",
         "fileMaxSize": "{{type}} (Max Size: {{size}} MB)",
-        "fileType":"File Type ( {{type}} )",
+        "requiredFileType":"File Type ( {{type}} )",
+        "fileType":"File Type",
         "transportationType": "Transportation Type",
         "searchBySchoolName": "Search By School Name",
         "clickToUploadFiles": "click To Upload Files",
@@ -811,7 +812,12 @@
         "degreesShouldBeEntered":"Plesae Enter The Degrees In Attached File",
         "userNotAllowedToUploadDegrees":"User Not Allowed To Upload Degrees",
         "fileDataShouldBeReviewed":"Attached File Data Should Be Reviewed",
-        "absenceRaised":"Absence Raised Successfully"
+        "absenceRaised":"Absence Raised Successfully",
+        "It is not allowed to send more than one request to the same school":"It is not allowed to send more than one request to the same school",
+        "There is a problem with adding request":"There is a problem with adding request",
+        "Registration conditions doesn't match the required":"Registration conditions doesn't match the required",
+        "There is a problem with workflow":"There is a problem with workflow"
+
 
     },
     "dashboard": {
@@ -1944,7 +1950,7 @@
             "approved from organzation":"Approved from organzation",
             "PendingForApproval":"Pending For Approval",
             "PendingForPayment":"Pending For Payment",
-            "Payed":"Payed",
+            "Payed":"Paid",
             "Rejected":"Rejected",
             "issueNewCertificate":"Issue New Certificate",
             "downloadCertificat":"Download Certificate",

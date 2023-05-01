@@ -350,6 +350,7 @@ export class SettingsService {
           return res.map(rule=> {
             return {
               [rule.fileType]:{
+                type:rule.fileType,
                 extention: FileExtentions[rule.fileType],
                 size: rule.fileSize
               }

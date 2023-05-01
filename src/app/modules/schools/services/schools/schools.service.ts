@@ -60,10 +60,10 @@ export class SchoolsService {
       map(res=>{
         return res.data.map(school =>{
           return {
-            [this.translate.instant('dashboard.schools.schoolName')]: school.name[this.lang],
-            [this.translate.instant('shared.city')]: school.city[this.lang],
-            [this.translate.instant('shared.state')]: school.state[this.lang],
-            [this.translate.instant('shared.curriculum')]: school.curriculum[this.lang],
+            [this.translate.instant('dashboard.schools.schoolName')]:school.name? school.name[this.lang]:'',
+            [this.translate.instant('shared.city')]:school.city? school.city[this.lang]:'',
+            [this.translate.instant('shared.state')]:school.state? school.state[this.lang]:'',
+            [this.translate.instant('shared.curriculum')]:school.curriculum? school.curriculum[this.lang]:'',
             [this.translate.instant('dashboard.schools.studentsNumber')]: school.studentCount,
             [this.translate.instant('dashboard.schools.schoolStablishmentDate')]: school.establishmentDate,
             [this.translate.instant('dashboard.schools.schoolStatus')]: school.status == StatusEnum.Active? this.translate.instant('shared.allStatus.SchoolActive') : this.translate.instant('shared.allStatus.SchoolInactive')  ,

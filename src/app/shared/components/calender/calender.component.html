@@ -69,7 +69,7 @@
   <ng-template #customCellTemplate let-day="day" let-weekEvent="weekEvent">
     <div class="event-template d-flex " (click)="eventClicked(weekEvent.event)">
       <div class="position-relative w-100">
-        <div class="d-flex"> 
+        <div class="d-flex">
           <span>{{getTime(weekEvent.event?.start)}}</span>&nbsp;-&nbsp;<span>{{ getTime(weekEvent.event?.end)}}</span>
         </div>
         <!-- <span class=" color-primary">رقم الحصه : 3</span> -->
@@ -89,7 +89,7 @@
         <div class="actions d-flex align-items-center position-absolute" *ngIf="showActions">
           <img *permit="claimsEnum.E_U_GradeLecture"  src="assets/images/shared/rect-bluepen.svg" alt="edit" StopProp (click)="onEdit.emit(weekEvent.event)">
           <img *permit="claimsEnum.E_D_GradeLecture" src="assets/images/shared/rect-xmark.svg" alt="delete" StopProp (click)="onDelete.emit(weekEvent.event)">
-         
+
         </div>
       </div>
 
@@ -101,7 +101,7 @@
   </ng-template>
 
     <div [ngSwitch]="view" dir="rtl">
-      
+
       <mwl-calendar-week-view
       *ngSwitchCase="CalendarView.Week"
           [viewDate]="viewDate"
@@ -120,9 +120,9 @@
           >
           <!-- (beforeViewRender)="updateCalendarEvents($event)" -->
         </mwl-calendar-week-view>
-  
-  
-    
+
+
+
       <!-- <mwl-calendar-month-view
         *ngSwitchCase="CalendarView.Month"
         [viewDate]="viewDate"
@@ -135,7 +135,7 @@
         (eventTimesChanged)="eventTimesChanged($event)"
       >
       </mwl-calendar-month-view>
-  
+
       <mwl-calendar-day-view
         *ngSwitchCase="CalendarView.Day"
         [viewDate]="viewDate"

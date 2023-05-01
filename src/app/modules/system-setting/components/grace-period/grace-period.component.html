@@ -2,7 +2,8 @@
 <!-- [formGroup]="gracePeriodForm"  -->
 <div class="custom-form"  [formGroup]="gracePeriodForm">
     <div class="actions-btn d-flex align-items-center gap-4">
-        <button *ngIf="onSubmitted || !gracePeriodId" (click)="createNewGracePeriod()" [disabled]="!gracePeriodForm.valid || !selectedSchools.length" class="btn btn-primary">
+        <button *ngIf="!gracePeriodId"
+        (click)="createNewGracePeriod()" [disabled]="onSubmitted || !gracePeriodForm.valid || !selectedSchools.length" class="btn btn-primary">
             {{'shared.save' | translate}}
          <div class="spinner-border text-light" role="status" *ngIf="onSubmitted"></div>
         </button>
@@ -112,7 +113,7 @@
                         <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                             <td>{{school.name|currentLang}}</td>
                             <!-- <td>{{school.city |currentLang}}</td> -->
-                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img role="button"   ConfirmDialog (onConfirm)="deleteSchool(school.id, fromSchools)"   src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img role="button"   ConfirmDialog (onConfirm)="deleteSchool(school.id, 'fromSchools')"   src="assets/images/shared/rect-xmark.svg" alt=""></td>
                         </tr>
                     </ng-template>
 
@@ -179,7 +180,7 @@
                         <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                             <td>{{school.name|currentLang}}</td>
                             <!-- <td>{{school.city |currentLang}}</td> -->
-                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img  role="button" ConfirmDialog (onConfirm)="deleteSchool(school.id, toSchools)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img  role="button" ConfirmDialog (onConfirm)="deleteSchool(school.id, 'toSchools')" src="assets/images/shared/rect-xmark.svg" alt=""></td>
                         </tr>
                     </ng-template>
 
@@ -204,6 +205,8 @@
 
         </div>
     </div>
+
+
 
     <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
