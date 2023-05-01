@@ -184,6 +184,7 @@ export class RequestdetailsComponent implements OnInit {
 
 isRequestAllowedForWithdrawal(requestType){
   let reqs = [
+    'FlexibleHolidayRequest',
     'WithdrawalRequest',
     'StudentRegradingRequest',
     'RegestrationApplicationRequest',
@@ -298,7 +299,7 @@ isRequestAllowedForWithdrawal(requestType){
       description: this.requestDetails.reason,
     }
     localStorage.setItem('returnedRequest', JSON.stringify(data))
-    this.router.navigate(['/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestInstance: this.requestDetails.id||this.requestInstance}})
+    this.router.navigate(['/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestInstance: this.requestDetails.requestNumber||this.requestInstance}})
 
   }
 
@@ -333,7 +334,7 @@ isRequestAllowedForWithdrawal(requestType){
   // })
 
     localStorage.setItem('returnedRequest', JSON.stringify(data))
-    this.router.navigate(['/certificates/ask-certificate'],{queryParams:{requestId: this.requestDetails.id, requestInstance: this.requestInstance}})
+    this.router.navigate(['/certificates/ask-certificate'],{queryParams:{requestId: this.requestDetails.requestNumber, requestInstance: this.requestInstance}})
 
   }
 
@@ -356,7 +357,7 @@ isRequestAllowedForWithdrawal(requestType){
       if(this.currentUserScope==this.userScopeEnum.Employee)
         this.router.navigate(['/student-management/all-parents/parent',this.requestDetails.guardian.id,'all-children'])
       else
-        this.router.navigate(['//schools-and-students/all-parents/parent',this.requestDetails.guardian.id,'all-children'])
+        this.router.navigate(['/schools-and-students/all-parents/parent',this.requestDetails.guardian.id,'all-children'])
     }
   }
 

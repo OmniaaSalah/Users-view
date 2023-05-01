@@ -31,7 +31,7 @@ export class AcademicSequenceComponent implements OnInit {
 // incase the request is returned from Spea
   requestId = +this.route.snapshot.queryParamMap.get('requestId')
   requestInstance = +this.route.snapshot.queryParamMap.get('requestInstance')
-  studentAcademicSequence = JSON.parse(localStorage.getItem('returnedRequest'))
+  studentAcademicSequence = [JSON.parse(localStorage.getItem('returnedRequest'))?.academicSequence]
 
   isBtnLoading
   isLoading
@@ -74,7 +74,7 @@ export class AcademicSequenceComponent implements OnInit {
   ngOnInit(): void {
     // this.schoolsService.getSchoolGardes('').subscribe()
     // this.st.getGracePeriodList().subscribe()
-    if(this.requestId) {
+    if(this.requestInstance) {
       this.getRequestOptions()
       this.academicSequence =this.studentsSchoolYearsMapped(this.choosenStudents, this.studentAcademicSequence)
       this.fillStudentsFormArr([...this.academicSequence])
@@ -86,7 +86,7 @@ export class AcademicSequenceComponent implements OnInit {
 
 
   getRequestOptions(){
-    this.requestsService.getRequestOptions(this.requestId).subscribe(res=>{
+    this.requestsService.getRequestOptions(this.requestInstance).subscribe(res=>{
       this.actions = res?.options
     })
   }
@@ -178,8 +178,9 @@ export class AcademicSequenceComponent implements OnInit {
 
     let body={
       requestId: this.requestId,
-      certificates: (this.stdAcademicForm.value.studentEducationCertificates[0] as any).academicSequence
+      academicSequence: (this.stdAcademicForm.value.studentEducationCertificates[0] as any).academicSequence
     }
+
 
     this.certificatesService.resendSequenceCertificate(body)
     .pipe(
@@ -197,7 +198,7 @@ export class AcademicSequenceComponent implements OnInit {
 
       this.isBtnLoading = false
       this.toastr.success(this.translate.instant('toasterMessage.requestResend'));
-      this.router.navigate(['/parent/requests-list/details/', this.requestInstance])
+      this.router.navigate(['/requests-list/details/', this.requestInstance])
 
     }, ()=>{
       this.toastr.error(this.translate.instant('toasterMessage.error'))

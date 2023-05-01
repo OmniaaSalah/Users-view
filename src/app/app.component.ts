@@ -1,17 +1,15 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { PrimeNGConfig } from 'primeng/api';
+import {  NavigationEnd, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, forkJoin, mergeMap, of, switchMap } from 'rxjs';
+import { filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
 import { UserService } from './core/services/user/user.service';
 import { MessageService } from './modules/messages/service/message.service';
 import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
-import { SharedService } from './shared/services/shared/shared.service';
 import { ClaimsEnum } from './shared/enums/claims/claims.enum';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
 import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
@@ -19,7 +17,6 @@ import { IndexesService } from './modules/indexes/service/indexes.service';
 import { SettingsService } from './modules/system-setting/services/settings/settings.service';
 import { FileTypeEnum } from './shared/enums/file/file.enum';
 import { ClaimsService } from './core/services/claims.service';
-import { UserInformationService } from './modules/user-information/service/user-information.service';
 
 @Component({
   selector: 'app-root',

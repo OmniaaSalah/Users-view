@@ -22,7 +22,7 @@
     <ng-container *ngIf="attachments && attachments.length">
 
         <div class="">
-            <div class="row mt-5 align-items-end">
+            <div class="row mt-5">
                 <ng-container *ngFor="let file of attachments; let i = index">
                     <div class="col-md-4 mt-4" *ngIf="file?.url">
                         <app-file [file]="file" [clickable]="true"></app-file>
@@ -95,7 +95,7 @@
     <hr class="my-5">
 
     <div class="">
-        <div class="row gx-5 align-items-end">
+        <div class="row gx-5 ">
             <div class="col-md-4"  *ngFor="let file of attachments; let i=index">
                 <div class="">
                     <app-file-upload [files]="[{url: file.url,name:file.name, comment:file.comment}]" [hasComment]="true" view="full" (onFileUpload)="onFileUpload($event, i)" [title]="file.titel.ar"></app-file-upload>
