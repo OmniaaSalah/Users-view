@@ -8,9 +8,11 @@
     <button  (click)="onEditMode=false"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
   </div>
     <div class="border-dark radius-15 px-5 py-6 bg-white">
-        <!-- <div class="float-btn" (click)="onEditMode=true;getGuardianById()" *ngIf="!onEditMode">
-            <img src="assets/images/shared/pen-blue-filled.svg" alt="">
-        </div> -->
+        <ng-container *ngIf="parent">
+                <div class="float-btn" (click)="onEditMode=true;getGuardianById()" *ngIf="!onEditMode">
+                    <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+                </div>
+        </ng-container>
         <ng-container *ngIf="!onEditMode">
         <div class="row gx-58 mt-5">
             <div class="col-md-5">
@@ -139,7 +141,7 @@
                       
                     </div>
                 </div>
-                <div class="col-4 mb-5">
+                <!-- <div class="col-4 mb-5">
                     <p class="color-gray-300  label">{{ 'shared.birthDay'|translate }}</p>
                     <p-calendar formControlName="birthDate"  [showIcon]="true" inputId="icon"   [maxDate]="currentDate"  [ngClass]="{'ng-invalid ng-dirty':birthDate.errors?.required && birthDate.touched}"  placeholder="{{'dd/mm/yy'|translate}}"   [readonlyInput]="true"    dateFormat="yy-mm-dd"  ></p-calendar>
                     <div [hidden]="birthDate.valid || birthDate.untouched">
@@ -148,7 +150,7 @@
                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-4 mb-5">
                     <p class="color-gray-300  label">{{ 'shared.nationality'|translate }}</p>
                     <p-dropdown [options]="nationalityList" formControlName="nationality"     [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.required && nationality.touched}" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"  inputId="nationality" placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
@@ -200,10 +202,21 @@
                 </div>
                 </div>
                 <div class="col-4 mb-5">
-                    <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.emirateUid'|translate }}</p>
-                    <span class="color-primary mx-3">{{parent?.emiratesId}}</span>
+                    <p class="color-gray-300  label">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                    <input type="text" pInputText   formControlName="emiratesId" [LangRestrict]="'numb'"  class="form-control "  placeholder="{{'sign up.enter personal digitalIdentity'|translate}}" >
+                    <div>
+                        <div [hidden]="emiratesId.valid || emiratesId.untouched">
+                            <small *ngIf="emiratesId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                              {{'shared.This Field is Required'|translate}}
+                               <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                              <small *ngIf="emiratesId.errors?.['pattern']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}
+                                 <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                        </div>
+                    </div>
                 </div>
-
                 <div class="col-4 mb-5"> 
                     <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.registedDate'|translate }}</p>
                     <span class="color-primary mx-3 ">{{parent?.registrationDate|LocalizeDate}}</span>
