@@ -86,8 +86,8 @@ export class AcademicSequenceComponent implements OnInit {
 
 
   getRequestOptions(){
-    this.requestsService.getRequestTimline(this.requestId).subscribe(res=>{
-      this.actions = res?.task?.options
+    this.requestsService.getRequestOptions(this.requestId).subscribe(res=>{
+      this.actions = res?.options
     })
   }
 

@@ -125,8 +125,8 @@ export class AnnulHolidayListComponent implements OnInit {
 
 
   getRequestOptions(){
-    this.requestsService.getRequestTimline(this.reqInstance).subscribe(res=>{
-      this.actions = res?.task?.options
+    this.requestsService.getRequestOptions(this.reqInstance).subscribe(res=>{
+      this.actions = res?.options
     })
   }
 

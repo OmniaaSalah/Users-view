@@ -7,7 +7,7 @@
     </div>
 
 
-    <div *ngIf="step==1" class="issune-certificate-content">
+    <div *ngIf="step==1" class="issune-certificate-content bg-white">
         <div class="custom-form radius-15 border-dark p-5">
 
             <div class="d-flex gap-3 mb-5">
@@ -74,11 +74,11 @@
 
             <div *ngIf="skeletonShown " class="row mt-6">
                 <div class="col-md-4" *ngFor="let item of [1,2,3]">
-                    <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
+                    <app-skeleton size="38rem" ></app-skeleton>
                 </div>
             </div>
 
-            <div class="row g-5 my-6" style="margin-left: 2rem;">
+            <div class="row g-5 my-6" >
                 <div class="col-sm-6 col-md-4 col-xxl-3 my-3" *ngFor="let item of childList; let i = index">
                     <app-card-student [student]="item" [choosenStudents]="choosenStudents"  (addStudent)="selectedStudentsChanged($event,item)"></app-card-student>
                 </div>

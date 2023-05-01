@@ -1,30 +1,52 @@
-.bg {
-  position: absolute;
-  top: 10rem;
+.top{
+  top: 8rem;
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+      z-index: -1;
+}
+.side-left{
+  top: 26rem;
   inset-inline-end: 0;
-  width: 100%;
-  z-index: -1;
-  img {
-      width: 100%;
-      object-fit: cover;
-  }
+    position: fixed;
+      z-index: -1;
+}
+.side-right{
+  top: 35rem;
+  inset-inline-start: 0;
+    position: fixed;
+      z-index: -1;
+}
+.bg {
+
+  // width: 25%;
+  // width: 100%;
+
+  // img {
+  //     width: 100%;
+  //     object-fit: cover;
+  // }
 }
 
-.dashboard {
+.layout {
   &__content {
       margin-top: 10rem;
       // margin-inline-end: 13rem;
   }
   &__loaded-conponent {
       padding: 1.5rem 0 7rem;
-      width: 87%;
+      width: 88%;
   }
-  &__panal {
+  &__navigator{
        ::ng-deep app-side-navigator {
           .panal__list {
               // padding: 7px 1.1rem;
           }
       }
   }
+}
+
+.w-90{
+  width: 92%;
 }
 

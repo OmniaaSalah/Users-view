@@ -16,7 +16,7 @@ import * as XLSX from 'xlsx';
 import { Subscription } from 'rxjs';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { FileExtentions } from 'src/app/shared/enums/file/file.enum';
+import { FileExtentions, FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 
 
 @Component({
@@ -26,7 +26,7 @@ import { FileExtentions } from 'src/app/shared/enums/file/file.enum';
 })
 export class SurveyDetailsComponent implements OnInit{
 
-  get FileType(){return FileExtentions}
+  get FileType(){return FileTypeEnum}
   get ClaimsEnum(){return ClaimsEnum}
   isBtnLoading: boolean=false;
   isSentBtnLoading:boolean=false;
