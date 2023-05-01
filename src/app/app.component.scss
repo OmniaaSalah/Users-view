@@ -8,7 +8,7 @@
 .panal-wrapper {
     position: fixed;
     top: 50%;
-    inset-inline-end: 2.5rem;
+    inset-inline-end: 1.5rem;
     border-radius: 30px;
     transform: translateY(-60%);
     z-index: 9;
@@ -21,7 +21,7 @@
         inset-inline-end: 50%;
         background-color: $color-primary;
         transform: scaleX(0);
-        
+
         transform-origin: left;
         transition: all .4s ease-out;
         z-index: -1;
