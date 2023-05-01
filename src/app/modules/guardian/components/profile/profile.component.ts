@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
       nationality:['', [Validators.required]],
       gender: ['', [Validators.required]],
       email: ['',Validators.minLength(4)],
-      emiratesId:['',Validators.minLength(4)],
+      emiratesId:['',[Validators.required,Validators.pattern('(784)[0-9]{12}')]],
       phone: ['',Validators.minLength(4)]
 
     });
@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
   }
   getGuardian()
   {
-    this.guardianService.getGuardianById(this.guardian.id).subscribe(response => {this.parent=response})
+    this.guardianService.getGuardianById(this.guardian.id).subscribe(response => {this.parent=response;})
   }
 
   get arabicName() {
@@ -94,8 +94,9 @@ export class ProfileComponent implements OnInit {
   get gender() {
     return this.guardianFormGrp.controls['gender'] as FormControl;
   }
-
-
+  get emiratesId() {
+    return this.guardianFormGrp.controls['emiratesId'] as FormControl;
+  }
   get phone() {
     return this.guardianFormGrp.controls['phone'] as FormControl;
   }
@@ -136,7 +137,8 @@ export class ProfileComponent implements OnInit {
                   gender: this.guardianFormGrp.value.gender,
                   email:this.guardianFormGrp.value.email,
                   phone: this.guardianFormGrp.value.phone,
-                  birthDate:this.formateDate(this.guardianFormGrp.value.birthDate)
+                  birthDate:this.formateDate(this.guardianFormGrp.value.birthDate),
+                  emiratesId:this.guardianFormGrp.value.emiratesId
     };
     this.guardianService.updateGuardian(this.guardian.id,guardian).subscribe((res)=>{
       this.isBtnLoading=false;
@@ -163,7 +165,8 @@ export class ProfileComponent implements OnInit {
       englishNickName:guardian?.nickName.en,
       gender : guardian?.gender,
       nationality:guardian?.nationalityId,
-      birthDate:new Date(guardian?.birthDate)
+      birthDate:new Date(guardian?.birthDate),
+      emiratesId:guardian?.emiratesId
     })
 
   })

@@ -79,9 +79,16 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
 
         this.userRolesService.deleteRole(role.id).subscribe((res)=>{
-
-          this.getAllRole();
-          this.toastService.success(this.translate.instant('dashboard.UserRole.Job Role deleted Successfully'));
+          if(res.statusCode!="OK")
+          {
+            this.toastService.error(res.errorLocalized[this.lang]);
+          }
+          else
+            {   
+              this.getAllRole();
+              this.toastService.success(this.translate.instant('dashboard.UserRole.Job Role deleted Successfully'));
+            }
+       
           this.confirmModelService.confirmed$.next(null);
           },(err)=>{
 
