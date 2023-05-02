@@ -7,7 +7,7 @@
     </div>
 
     <div class="d-flex justify-self-end mb-4">
-      <button (click)="print()" class="btn btn-primary">تحميل الشهادة</button>
+      <button (click)="print()" class="btn btn-primary">{{'dashboard.issue of certificate.downloadCertificat' |translate}}</button>
     </div>
   </div>
 
@@ -890,8 +890,8 @@
         <div class="">
           <div class="mb-4 text-center">
             <img class="logo-center" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
-            <p class="font-ar">{{certificate?.SchoolName.Ar}}</p>
-            <p class="font-en">{{certificate?.SchoolName.En}}</p>
+            <p class="font-ar">{{certificate?.SchoolName?.Ar}}</p>
+            <p class="font-en">{{certificate?.SchoolName?.En}}</p>
           </div>
 
           <div class="text-center">

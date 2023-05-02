@@ -11,6 +11,8 @@ import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ISchoolChart } from '../../components/school-list/school-charts/school-chart.models';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,7 @@ export class SchoolsService {
   lang = inject(TranslationService).lang;
   currentUserScope = inject(UserService).getCurrentUserScope();
   get userScope() { return UserScope };
-  constructor(private http:HttpHandlerService, 
+  constructor(private http:HttpHandlerService,
     private tableLoaderService: LoaderService,
     private userService:UserService,
     private translate:TranslateService
@@ -52,7 +54,7 @@ export class SchoolsService {
   getAllSchoolNames(){
     return this.http.get('/School/school/name')
   }
-  
+
 
   schoolsToExport(filter){
     return this.http.post('/School/Search',filter)
@@ -144,7 +146,7 @@ export class SchoolsService {
       }))
   }
 
-  
+
   getEmployeeStatusToExport(status)
   {
 
@@ -160,12 +162,12 @@ export class SchoolsService {
     {
       return this.translate.instant('shared.allStatus.deleted')
     }
-                              
+
   }
 
 
   getSchool(schoolId): Observable<School>{
- 
+
     return this.http.get(`/School/${schoolId}`,).pipe(take(1))
   }
 
@@ -180,7 +182,7 @@ export class SchoolsService {
   // getSchoolsTracks(schoolId){
   //   return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
   // }
-  
+
 
   getCharts(): Observable<ISchoolChart> {
     // TODO => Need to implement interceptor
@@ -201,11 +203,25 @@ export class SchoolsService {
   }
 
   sendFlexableHolidayReq(holidayId, data){
-    return this.http.post(`/Holiday/holiday/flexible/request/${holidayId}`,data).pipe(take(1))
+    return this.http.post(`/Holiday/holiday/flexible/request/${holidayId}`,data)
+    .pipe(
+      map(res=>{
+        if(res.statusCode ==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.result))
+        return res
+      }),
+      take(1)
+    )
   }
 
   reSendFlexableHolidayReq(data){
-    return this.http.put(`/Holiday/holiday-flexible-request`,data).pipe(take(1))
+    return this.http.put(`/Holiday/holiday-flexible-request`,data)
+    .pipe(
+      map(res=>{
+        if(res.statusCode ==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.result))
+        return res
+      }),
+      take(1)
+    )
   }
 
   updateSchoolLogo(schoolId, data){
@@ -238,9 +254,9 @@ export class SchoolsService {
   }
 
   updateEmpoyee(id, employeeData){
-   
+
     return this.http.patch(`/School/update/employee/${id}`,employeeData)
-  
+
   }
 
   getSchoolEmployeesJobTitle(){
@@ -262,7 +278,7 @@ export class SchoolsService {
 
   // << SCHOOL EDIT LIST>>
   getSchoolEditList(filter){
-    
+
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/Modification`,filter)
     .pipe(
@@ -284,7 +300,7 @@ export class SchoolsService {
 
     getAllSchoolsInPopUp(filter?:Partial<Filter>){
       this.tableLoaderService.isLoading$.next(true)
-  
+
       return this.http.post('/School/Custom-Search',filter)
       .pipe(
         take(1),

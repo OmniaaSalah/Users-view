@@ -182,7 +182,7 @@ export class RequestdetailsComponent implements OnInit {
   }
 
 
-isRequestAllowedForWithdrawal(requestType){
+isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
   let reqs = [
     'FlexibleHolidayRequest',
     'WithdrawalRequest',
@@ -192,7 +192,8 @@ isRequestAllowedForWithdrawal(requestType){
     'ModifyIdentityRequestCaseStudentNotHaveId',
     'AcademicSequenceCertificateRequest',
     'BoardCertificateRequest',
-    'GradesCertificateRequest'
+    'GradesCertificateRequest',
+    'ExemptionFromSubjectRequest'
   ]
   return reqs.includes(requestType)
 }
@@ -217,7 +218,10 @@ isRequestAllowedForWithdrawal(requestType){
   }
 
   isRequestRelatedToSchool(){
-    return  ['FlexibleHolidayRequest', 'DeleteStudentRequest'].includes(this.requestDetails.requestType)
+    console.log(this.requestDetails);
+
+    let arr = ['FlexibleHolidayRequest', 'DeleteStudentRequest','MassTransferRequest','StudentRegradingRequestForSchool']
+    return arr.includes(this.requestDetails?.requestType)
   }
 
 
@@ -299,7 +303,7 @@ isRequestAllowedForWithdrawal(requestType){
       description: this.requestDetails.reason,
     }
     localStorage.setItem('returnedRequest', JSON.stringify(data))
-    this.router.navigate(['/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestInstance: this.requestDetails.requestNumber||this.requestInstance}})
+    this.router.navigate(['/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestId: this.requestDetails.requestNumber, requestInstance: this.requestInstance}})
 
   }
 
