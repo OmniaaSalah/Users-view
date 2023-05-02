@@ -216,10 +216,10 @@ export class SchoolsService {
   reSendFlexableHolidayReq(data){
     return this.http.put(`/Holiday/holiday-flexible-request`,data)
     .pipe(
-      map(res=>{
-        if(res.statusCode ==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.result))
-        return res
-      }),
+      // map(res=>{
+      //   if(res.statusCode ==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.result))
+      //   return res
+      // }),
       take(1)
     )
   }
