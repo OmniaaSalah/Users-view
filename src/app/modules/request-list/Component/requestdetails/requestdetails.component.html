@@ -23,14 +23,14 @@
 
      <ng-container *ngIf="currentUserScope==userScopeEnum.Employee">
        <button class=" btn btn-primary btn--sm px-5"
-       *ngIf="requestDetails?.requestType==requestTypeEnum.FlexibleHolidayRequest && requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest &&requestOptions?.length">
-       (click)="reSendFlexableHolidayReq()"
+       *ngIf="requestDetails?.requestType==requestTypeEnum.FlexibleHolidayRequest && requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest &&requestOptions?.length"
+       (click)="reSendFlexableHolidayReq()">
          <span>{{'dashboard.Requests.resendRequest' |translate}}</span>
        </button>
      </ng-container>
 
      <!-- (isRequestAllowedForWithdrawal | wrapFn : requestDetails?.requestType) &&  -->
-     <ng-container  *ngIf="(currentUserScope==userScopeEnum.Guardian || (isRequestRelatedToSchool|wrapFn))">
+     <ng-container  *ngIf="(currentUserScope==userScopeEnum.Guardian || (currentUserScope==userScopeEnum.Employee && isRequestRelatedToSchool|wrapFn : requestDetails?.requestType))">
        <button class=" btn btn-primary btn--sm px-5"
        [disabled]="onSubmited"
        (click)="withdrawReq(requestDetails?.requestType)"
@@ -74,7 +74,7 @@
             <div class="col-4 d-flex align-items-center gap-5 mb-5 position-relative" (click)="viewUser()">
                 <p class="color-gray-300 fs-4">    {{'dashboard.myRequest.It was created by' | translate}}</p>
                 <h4 class="createdBy color-primary text-decoration-underline fw-bold" role="button">{{requestDetails.createdBy |currentLang}}</h4>
-                <div class="custom-tooltip" *ngIf="currentUserScope==userScopeEnum.SPEA && (isRequestRelatedToSchool |wrapFn)">
+                <div class="custom-tooltip" *ngIf="currentUserScope==userScopeEnum.SPEA && (isRequestRelatedToSchool |wrapFn : requestDetails?.requestType)">
                     <ul class="p-4">
                         <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
                             <span class="color-primary fs-4">{{'dashboard.addChild.Identification Number' |translate}}</span>
