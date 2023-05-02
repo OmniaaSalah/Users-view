@@ -79,6 +79,7 @@
                     <div class="fw-bold fs-4">
                         <div [ngSwitch]="certificate.status">
                             <div class="alerting dark " *ngSwitchCase="certificateStatus.PendingForApproval"> {{'dashboard.issue of certificate.'+certificateStatus.PendingForApproval| translate}}</div>
+                            <div class="alerting dismissible " *ngSwitchCase="certificateStatus.ModificationRequest"> {{'dashboard.issue of certificate.'+certificateStatus.ModificationRequest| translate}}</div>
                             <div class="alerting success " *ngSwitchCase="certificateStatus.PendingForPayment "> {{'dashboard.issue of certificate.'+certificateStatus.PendingForPayment| translate}}</div>
                             <div class="alerting  primary" *ngSwitchCase="certificateStatus.Payed"> {{'dashboard.issue of certificate.'+certificateStatus.Payed | translate}}</div>
                             <div class="alerting  danger" *ngSwitchCase="certificateStatus.Rejected "> {{'dashboard.issue of certificate.'+certificateStatus.Rejected | translate}}</div>

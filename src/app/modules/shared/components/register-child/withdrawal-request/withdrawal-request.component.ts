@@ -104,21 +104,15 @@ export class WithdrawalRequestComponent implements OnInit {
     this.isLoading=true
     this.studentService
     .sendWithdrawalReq(this.reqForm)
-    .pipe(
-      map(res=>{
-        if(res.error) throw new Error()
-        else return res
-      }
-    ))
     .subscribe(()=>{
       this.isLoading=false
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
-      this.router.navigate(['//schools-and-students/students/student', this.studentId])
+      this.router.navigate(['/schools-and-students/students/student', this.studentId])
 
-    },()=>{
+    },(error:Error)=>{
 
       this.isLoading=false
-      this.toastr.error(this.translate.instant('toasterMessage.This student is prohibited from withdrawing'))
+      this.toastr.error( error.message || this.translate.instant('toasterMessage.error'))
     })
   }
 
