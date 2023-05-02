@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -8,6 +8,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SettingsService } from '../../services/settings/settings.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-grace-periods-list',
@@ -16,7 +17,7 @@ import { SettingsService } from '../../services/settings/settings.service';
 })
 export class GracePeriodsListComponent implements OnInit {
 
-
+  lang = inject(TranslationService).lang
   Items: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
 
 

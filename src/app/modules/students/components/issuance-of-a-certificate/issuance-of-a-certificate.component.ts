@@ -184,7 +184,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
         }
       },err=>{
         this.isBtnLoading=false;
-        this.toastr.error(this.translate.instant('error happened'))
+        this.toastr.error(this.translate.instant('toasterMessage.error'))
       })
     }
    else if(this.certificateFormGrp.value.certificateName==CertificatesEnum.GradesCertificate)
@@ -208,7 +208,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
         }
       },err=>{
         this.isBtnLoading=false;
-        this.toastr.error(this.translate.instant('error happened'))
+        this.toastr.error(this.translate.instant('toasterMessage.error'))
       })
    }
 
