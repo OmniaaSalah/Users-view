@@ -467,6 +467,7 @@
         "confirmPassword": "Confirm Password",
         "Created Date": "Created Date",
         "End Date": "End Date",
+        "year":"Year",
         "Numbres Of Characters Must not More than 256 character": "Numbres Of Characters Must not More than 256 character",
         "Numbres Of Characters must not more than 65 character": "Numbres Of Characters must not more than 500 character",
         "Numbres Of Characters must not more than 500 character": "Numbres Of Characters must not more than 500 character",
@@ -817,9 +818,8 @@
         "It is not allowed to send more than one request to the same school":"It is not allowed to send more than one request to the same school",
         "There is a problem with adding request":"There is a problem with adding request",
         "Registration conditions doesn't match the required":"Registration conditions doesn't match the required",
-        "There is a problem with workflow":"There is a problem with workflow"
-
-
+        "There is a problem with workflow":"There is a problem with workflow",
+        "youShouldSelectGradeAndSchool":"You should select grade and school"
     },
     "dashboard": {
         "Assessment": {
@@ -852,7 +852,9 @@
             "successful": "Successful",
             "unSuccessful": "UnSuccessful",
             "Assessment deleted Successfully":"Assessment deleted successfully",
-            "should be more than the minmum deserving degree":"Should be more than the minmum deserving degree"
+            "should be more than the minmum deserving degree":"Should be more than the minmum deserving degree",
+            "noDivisionsInGrade":"Selected Grade haven't divisions",
+            "noTracksInDivisions":"Selected division haven't Tracks"
         },
         "schools": {
           "contactWithSchool":"Contact With School",
@@ -1751,7 +1753,7 @@
             "StudentStatu":"Created by",
             "DateandTimeCreate": "CreatedDate and Time",
             "Returned":"Returned",
-            "ModificationRequest":"Edit",
+            "ModificationRequest":"Update",
             "Pending": "Pending",
             "Accepted": "Accepted",
             "Rejected":"Rejected",
@@ -1953,6 +1955,7 @@
             "PendingForPayment":"Pending For Payment",
             "Payed":"Paid",
             "Rejected":"Rejected",
+            "ModificationRequest":"Update",
             "issueNewCertificate":"Issue New Certificate",
             "downloadCertificat":"Download Certificate",
             "viewCertificte":"View Certificate",

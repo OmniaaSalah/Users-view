@@ -156,7 +156,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.items=[
-      {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`//schools-and-students/students/student/${this.studentId||this.childId}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
+      {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/schools-and-students/students/student/${this.studentId||this.childId}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
       {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`,claims:ClaimsEnum.E_DeleteStudentRequest},
       {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
       {
@@ -169,7 +169,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
         label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',
         disabled: this.student?.studentStatus === RegistrationStatus.Withdrawal ||this. student?.studentProhibited?.withdrawingFromSchool || this.student?.studentProhibited?.withdrawingFromSPEA,
         claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool,
-        routerLink:`${this.currentUserScope==this.userScope.Guardian ? 'withdraw-request' : ('//schools-and-students/students/student/' + (this.studentId||this.childId) + '/withdraw-request')}`
+        routerLink:`${this.currentUserScope==this.userScope.Guardian ? 'withdraw-request' : ('/schools-and-students/students/student/' + (this.studentId||this.childId) + '/withdraw-request')}`
       },
       {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
       {
@@ -251,15 +251,9 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
     })
   }
 
-  // NOTE ---------- نقل الطالب من شعبه لشعبه -----------
   transferStudent(){
     this.onSubmit =true
     this.divisionService.transferStudentToAnotherDivision(this.transferStudentForm)
-    .pipe(
-      catchError(()=>{
-        return throwError(()=> new Error(this.translate.instant('toasterMessage.transferStudentFaild')))
-      })
-    )
     .subscribe((res)=>{
       this.refreshStudent.emit()
       this.toastr.success(this.translate.instant('toasterMessage.studentTransfered'))
@@ -268,7 +262,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
     },(err:Error) =>{
       this.onSubmit =false
-      this.toastr.error(err.message)
+      this.toastr.error(err.message || this.translate.instant('toasterMessage.error'))
 
     })
   }

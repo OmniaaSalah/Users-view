@@ -18,7 +18,7 @@
 
 <ng-container *ngIf="!isLoading">
 
-    <ng-container *ngIf="!editMode || weightEditMode || heightEditMode">
+    <div class="position-relative" *ngIf="!editMode || weightEditMode || heightEditMode">
         <div class="float-btn " (click)="editMode=true" *permit="[claimsEnum.SEG_U_StudentMedicalFile]">
             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
         </div>
@@ -78,10 +78,13 @@
 
             <div class="col-md-4">
 
+              <div class="d-flex gap-4 mb-5">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.students.feelingDiseases'|translate }}</p>
+                <span class="color-primary mb-2">{{medicalFile.isTheSonOfDetermination ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
+              </div>
+
                 <div class="grid-container gap-y-5">
 
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.students.feelingDiseases'|translate }}</p>
-                    <span class="color-primary">{{medicalFile.isTheSonOfDetermination ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
                     <!-- <span class="color-primary mb-2">
                           <a class="color-primary mb-2"> {{medicalFile.allergicDiseases}} </a>
                       </span> -->
@@ -157,7 +160,7 @@
                 <p class="color-gray-800 fs-4">{{medicalFile.otherNotes}}</p>
             </div>
         </div>
-    </ng-container>
+    </div>
 
 
 

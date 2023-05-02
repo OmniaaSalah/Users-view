@@ -3,7 +3,11 @@
     @import 'src/assets/css/components/profile';
     @import 'src/assets/css/components/forms.scss';
 
-
+  .submit-btn{
+    position: absolute;
+    top: -6rem;
+    inset-inline-end: 2rem;
+  }
     .custom-tooltip{
         position: absolute;
         top: 3rem;

@@ -406,7 +406,8 @@
         "It is not allowed to send more than one request to the same school":"لقد قمت مسبقاً بإرسال طلب تسجيل لهذه المدرسة",
         "There is a problem with adding request":"حدث خطأ اثناء ارسال الطلب يرجى المحاوله مره اخرى",
         "Registration conditions doesn't match the required":"غير مسموح بتسجيل الطالب فى هذه المدرسه ",
-        "There is a problem with workflow":"خدث خطأ اثناء ارسال الطلب ."
+        "There is a problem with workflow":"خدث خطأ اثناء ارسال الطلب .",
+        "youShouldSelectGradeAndSchool":"يجب ان تختار الصف والمدرسه لإظهار الشعب المتاحة"
     },
 
     "emptyList": {
@@ -472,7 +473,9 @@
         "noRequestDetails":"يبدو أنه لا يوجد تفاصيل لهذا الطلب",
         "Attendance and Abbsence List is empty":"يبدو أنه لا توجد سجلات للغياب والحضور بعد",
         "divisionDegreeHint":"إذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به",
-        "noLectures":"يبدو انه لا يوجد حصص دراسية معرفة لهذا الصف"
+        "noLectures":"يبدو انه لا يوجد حصص دراسية معرفة لهذا الصف",
+        "noDivisionsInGrade":"لا يوجد شعب فى هذا الصف",
+        "noTracksInDivisions":"لا يوجد مسارات فى هذه الشعبه"
     },
 
 
@@ -610,6 +613,7 @@
         "Created Date": "تاريخ الإنشاء",
         "End Date": "تاريخ الإنتهاء",
         "date": "التاريخ",
+        "year":"سنة",
         "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن 265 حرف",
         "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن 65 حرف",
         "Numbres Of Characters must not more than 500 character": "عدد الحروف يجب أن لا تزيد عن 500 حرف",
@@ -1943,6 +1947,7 @@
             "PendingForPayment":"معلقة للدفع",
             "Payed":"مدفوعة",
             "Rejected":"مرفوض",
+            "ModificationRequest":"تعديل",
             "issueNewCertificate":"إصـدار شهــادة جديدة",
             "downloadCertificat":"تحميل الشهادة",
             "viewCertificte":"الاطلاع على الشهادة",
