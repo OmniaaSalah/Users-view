@@ -338,7 +338,7 @@ export class RegisterRequestComponent implements OnInit {
       }),
       map(res=>{
         if(res.statusCode==HttpStatusCodeEnum.BadRequest){
-          let mes = this.translate.instant('toasterMessage.Registration Request Already send before to this school')
+          let mes = this.translate.instant(`toasterMessage.${res?.error ||'error'}`)
           throw new Error(mes)
         }else{
           return res

@@ -402,7 +402,11 @@
         "degreesShouldBeEntered":"يرجى ادخال الدرجات فى الملف المرفق",
         "userNotAllowedToUploadDegrees":"المستخدم الحالى ليس لديه صلاحيه لرفع الدرجات",
         "fileDataShouldBeReviewed":"يرجعى مراجعه البيانات فى الملف المرفق",
-        "absenceRaised":"تم اضافه الطلاب الى سجل الغياب بنجاح'"
+        "absenceRaised":"تم اضافه الطلاب الى سجل الغياب بنجاح'",
+        "It is not allowed to send more than one request to the same school":"لقد قمت مسبقاً بإرسال طلب تسجيل لهذه المدرسة",
+        "There is a problem with adding request":"حدث خطأ اثناء ارسال الطلب يرجى المحاوله مره اخرى",
+        "Registration conditions doesn't match the required":"غير مسموح بتسجيل الطالب فى هذه المدرسه ",
+        "There is a problem with workflow":"خدث خطأ اثناء ارسال الطلب ."
     },
 
     "emptyList": {
@@ -653,7 +657,8 @@
         "publicTransport": "وسيلة النقل",
         "attacheFile": "إرفاق ملف",
         "fileMaxSize": " {{type}} (الحجم الاقصى : {{size}} ميجابيت)",
-        "fileType":"نوع المرفق ( {{type}} )",
+        "requiredFileType":"نوع المرفق ( {{type}} )",
+        "fileType":"نوع المرفق",
         "transportationType": " نوع النقل",
         "chooseTransportationType": "أختر نوع النقل",
         "searchBySchoolName": "البحث عن طريق إسم المدرسة ...",
