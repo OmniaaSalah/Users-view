@@ -179,7 +179,7 @@ export class StudentsListComponent implements OnInit {
       {
       this.isGradeSelected=true
       if( this.isGradeSelected && this.isSchoolSelected){
-        this.gradeTracks$ = this.gradesService.getGradeTracks([this.schoolId],GradeId)
+        this.gradeTracks$ = this.gradesService.getGradeTracks(this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,GradeId)
         this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,gradeid:GradeId||null}).pipe(map(res => res.data))
       }
       }
