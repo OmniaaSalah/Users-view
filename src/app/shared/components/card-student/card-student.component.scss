@@ -1,5 +1,5 @@
 @import "src/assets/css/utils/variables.scss";
-// @import '../../../../assets/css/components/profile';
+@import '../../../../assets/css/components/forms.scss';
 
 
 .profile__avatar{
@@ -13,48 +13,48 @@
     top: -7rem;
     left: 5rem;
 }
-input[type="checkbox"]{
-  -webkit-appearance: initial;
-  appearance: initial;
-  width:20px;
-  height:20px;
-  border: none;
-  background: #fff;
-  position: relative;
-  border: 1px solid #C5C7D0;
-  margin-top: 0.5rem;
-  border-radius: 0.3rem;
-}
-input[type="checkbox"]:checked {
-  background: #5CD0DF;
-  border-color: #5CD0DF;
-}
-input[type="checkbox"]:checked:after {
-  // content: url('./../../../../assets/images/shared/check.svg');
-  // color: #fff;
-  // position: absolute;
-  // left: 50%;
-  // top: 50%;
-  // -webkit-transform: translate(-50%,-50%);
-  // -moz-transform: translate(-50%,-50%);
-  // -ms-transform: translate(-50%,-50%);
-  // transform: translate(-50%,-50%);
-  content: url('./../../../../assets/images/shared/check.svg');
-  zoom: 127%;
-  background-size: 100px !important;
-  width: 100px !important;
-  height: 33px !important;
-  visibility: visible;
-  display: block;
-  position: absolute;
-  top: -8px;
-  left: -87px;
+// input[type="checkbox"]{
+//   -webkit-appearance: initial;
+//   appearance: initial;
+//   width:20px;
+//   height:20px;
+//   border: none;
+//   background: #fff;
+//   position: relative;
+//   border: 1px solid #C5C7D0;
+//   margin-top: 0.5rem;
+//   border-radius: 0.3rem;
+// }
+// input[type="checkbox"]:checked {
+//   background: #5CD0DF;
+//   border-color: #5CD0DF;
+// }
+// input[type="checkbox"]:checked:after {
+//   // content: url('./../../../../assets/images/shared/check.svg');
+//   // color: #fff;
+//   // position: absolute;
+//   // left: 50%;
+//   // top: 50%;
+//   // -webkit-transform: translate(-50%,-50%);
+//   // -moz-transform: translate(-50%,-50%);
+//   // -ms-transform: translate(-50%,-50%);
+//   // transform: translate(-50%,-50%);
+//   content: url('./../../../../assets/images/shared/check.svg');
+//   zoom: 127%;
+//   background-size: 100px !important;
+//   width: 100px !important;
+//   height: 33px !important;
+//   visibility: visible;
+//   display: block;
+//   position: absolute;
+//   top: -8px;
+//   left: -87px;
 
-}
+// }
 
 .checkbox{
   position: absolute;
-  left: 17px;
+  inset-inline-end: 17px;
   top: 11px;
 }
 

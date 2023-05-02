@@ -250,7 +250,8 @@
             <ul class="dropdown-menu dropdown-menu-end shadow-lg " aria-labelledby="dropdownMenuButton1">
                 <li class="dropdown-item">
                     <a class="link" (click)="changeLanguage()">
-                            <p>{{lang=='en' ? 'عربى': 'English'}}</p>
+                      <i class="pi pi-globe color-primary" style="font-size: 2rem"></i>
+                      <p [class]="lang=='en' ? 'font-ar'  : 'font-en' ">{{lang=='en' ? 'عربى': 'English'}}</p>
                     </a>
                 </li>
                 <li class="dropdown-item">

@@ -56,7 +56,7 @@
 
 
         <div class="col-12">
-            <h3 class="heading heading--tertiary mb-4">{{ 'dashboard.parents.absenceDaysDetails'|translate }}(5)</h3>
+            <h3 class="heading heading--tertiary mb-4">{{ 'dashboard.parents.absenceDaysDetails'|translate }}</h3>
 
             <div class="prim-table" *ngIf="absence.totalAllData || absence.loading">
                 <p-table [value]="absence.list" (onSort)="onSort($event)">

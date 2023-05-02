@@ -108,14 +108,14 @@ export class BoardCertificateComponent implements OnInit {
           if (result?.errorLocalized) {
             this.toastr.error(result?.errorLocalized[this.lang]);
           } else {
-            this.toastr.error(this.translate.instant('error happened'));
+            this.toastr.error(this.translate.instant('toasterMessage.error'));
           }
           this.onBack.emit();
         }
       },
       (err) => {
         this.isBtnLoading = false;
-        this.toastr.error(this.translate.instant('error happened'));
+        this.toastr.error(this.translate.instant('toasterMessage.error'));
       }
     );
   }

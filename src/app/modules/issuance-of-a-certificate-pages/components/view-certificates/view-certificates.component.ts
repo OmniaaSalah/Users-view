@@ -114,10 +114,10 @@ export class ViewCertificatesComponent implements OnInit {
 
       else{
           if(res?.errorLocalized) this.toastr.error( res?.errorLocalized[this.lang])
-          else this.toastr.error(this.translate.instant('error happened'))
+          else this.toastr.error(this.translate.instant('toasterMessage.error'))
       }
    }, err=>{
-      this.toastr.error(this.translate.instant('error happened'));
+      this.toastr.error(this.translate.instant('toasterMessage.error'));
    })
   }
   completePaymentProccess(){

@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class=" mb-6 border-dark radius-15  p-5 ">
+    <div class=" mb-6 border-dark radius-15  p-5 bg-white">
         <div class="row gx-5">
             <div class="col-md-5 form-set"  *ngIf="!gracePeriodId">
                 <label  class="label required">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
@@ -73,9 +73,9 @@
 
     <!-- Transfer student Grace Period -->
 
-    <div class=""  *ngIf="selectedGracePeriod.currentValue== gracePeriodEnum.transferStudents">
+    <div class="bg-white"  *ngIf="selectedGracePeriod.currentValue== gracePeriodEnum.transferStudents">
 
-        <div class="form-set border-dark radius-15 p-5">
+        <div class="form-set border-dark radius-15 p-5 ">
             <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.chooseSchoolsThatAllowedToTransferGroup'|translate}}</h3>
             <div class="prim-table mt-4" >
                 <p-table #dt [lazy]="true" [value]="gracePeriodSchools.fromSchools.list.reverse()">
@@ -140,7 +140,7 @@
 
 
 
-        <div class="form-set border-dark radius-15 p-5">
+        <div class="form-set border-dark radius-15 p-5 ">
             <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.schoolsAllowedToTransferToIt'|translate}}</h3>
 
             <div class="prim-table mt-4" >
@@ -189,7 +189,7 @@
                         <tr>
                             <td [attr.colspan]="20">
                                 <ng-container *ngIf="!gracePeriodSchools.toSchools.list.length &&  !gracePeriodSchools.toSchools.loading">
-                                    <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.gracePeriodSchools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                    <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.gracePeriodSchools' |translate}}"></app-informative-block>
                                 </ng-container>
                                 <app-loader></app-loader>
                             </td>
@@ -211,7 +211,7 @@
     <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
     <!-- Other Grace Periods -->
-    <div class="border-dark radius-15 p-5" *ngIf="selectedGracePeriod.currentValue != gracePeriodEnum.transferStudents && selectedGracePeriod.currentValue" >
+    <div class="border-dark radius-15 p-5 bg-white" *ngIf="selectedGracePeriod.currentValue != gracePeriodEnum.transferStudents && selectedGracePeriod.currentValue" >
 
         <div class="prim-table mt-4" >
             <p-table styleClass="schools-table" #dt [lazy]="true" [value]="gracePeriodSchools.schools.list.reverse()">
@@ -316,10 +316,10 @@
 
                     </div>
 
-                    <ng-container *ngFor="let item of schools.list">
+                    <ng-container *ngFor="let item of schools.list; let i=index">
                         <div class="col-md-4 d-flex align-items-center gap-3">
-                            <p-checkbox  name="eventSubjects" [value]="item.id" [(ngModel)]="selectedSchools"></p-checkbox>
-                            <label class="label label--sm" for=""> {{item.name |currentLang}}</label>
+                            <p-checkbox  name="eventSubjects" [inputId]="i" [value]="item.id" [(ngModel)]="selectedSchools"></p-checkbox>
+                            <label class="label label--sm" [for]="i"> {{item.name |currentLang}}</label>
                         </div>
                     </ng-container>
 

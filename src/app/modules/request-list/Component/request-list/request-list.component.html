@@ -75,7 +75,7 @@
                             <td class="d-block" style="min-width: 24rem;">
                                 <div class="mb-2">{{'dashboard.Requests.'+request.requestType | translate}}</div>
                              <div>
-                                <a *ngIf="request?.schoolCreator" routerLink="/schools-and-students/schools/school/{{request?.schoolCreator?.id}}" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{request?.schoolCreator?.name|currentLang}}</a>
+                                <a *ngIf="request?.schoolCreator" routerLink="/schools-and-students/schools/school/{{request?.schoolCreator?.id}}" target="_blank" class="text color-skyBlue-500 fs-4 d-flex align-items-center">{{request?.schoolCreator?.name|currentLang}}</a>
                                 <a *ngIf="request?.school" routerLink="/schools-and-students/schools/school/{{request?.school?.id}}" target="_blank" class="text color-skyBlue-500 fs-4 d-flex align-items-center">{{request?.school?.name|currentLang}}</a>
                                 <span *ngIf="request?.grade"   class="text color-primary fs-4 d-flex align-items-center">{{request?.grade?.name|currentLang}}</span>
                             </div>
@@ -114,7 +114,7 @@
                                     <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                                 </div>
 
-                                <div class="w-100">
+                                <div *ngIf="requests.loading" class="w-100">
                                   <app-loader></app-loader>
                                 </div>
                             </td>
