@@ -51,7 +51,7 @@
                 <p class="sub-title color-primary" *ngIf="allowedFilesType && maxFileSize">{{'shared.fileMaxSize' |translate:{type :('shared.'+allowedFilesType |translate) || '', size: maxFileSize} }}</p>
                 <p class="sub-title color-primary" *ngIf="allowedFilesType && !maxFileSize">{{'shared.requiredFileType' |translate:{type :('shared.'+allowedFilesType |translate) || ''} }}</p>
 
-                <div class="d-flex  sub-title color-primary" *ngIf="!allowedFilesType">
+                <div class="d-flex  sub-title color-primary" *ngIf="!allowedFilesType && allAllowedFilesType?.length">
                   <span class="mx-3">{{'shared.fileType' |translate}}</span>
                   (<span *ngFor="let item of allAllowedFilesType; let i=index">
                     <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
@@ -92,11 +92,11 @@
                       <div role="button" (click)="openFile(file?.url)" class="d-flex align-items-center gap-5" >
                           <img [style.width.rem]="4.5" src="assets/images/shared/file.svg" alt="">
                           <span class="word-break-all"> {{file.name || 'ملف'}}</span>
-                          <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2 cancel" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
+                          <fa-icon role="button" class="color-fuchsia-600 ms-2 cancel" [ngClass]="lang=='ar' ? 'me-auto': 'ms-auto'" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
                       </div>
                       <ng-container *ngIf="hasComment">
                           <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
-                              <img class="icon" *ngIf="!editMode" (click)="editMode =true" role="button" class="position-absolute" style="top:1.5rem; left:1.5rem;width: 1.3rem; height: 1.3rem;" src="assets/images/shared/pen.svg" alt="">
+                              <img class="icon" *ngIf="!editMode" (click)="editMode =true" role="button" class="position-absolute" style="top:1.5rem; inset-inline-end:1.5rem;width: 1.3rem; height: 1.3rem;" src="assets/images/shared/pen.svg" alt="">
                               <span class="d-block color-orange-300 mb-2">ملاحظه :</span>
                               <span class="comment" *ngIf="!editMode">{{file.comment}}</span>
                               <textarea  *ngIf="editMode" name="comment" [(ngModel)]="files[i].comment" rows="4" (blur)="editMode=false;this.onFileUpload.emit(this.files)"></textarea>

@@ -5,6 +5,7 @@ import { finalize, take,map } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -117,7 +118,14 @@ export class DivisionService {
 
 
   transferStudentToAnotherDivision(data){
-    return this.http.put('/Division/transfer/student', data).pipe(take(1))
+    return this.http.put('/Division/transfer/student', data)
+    .pipe(
+      map(res=>{
+        if(res?.statusCode ===HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
+        else return res
+      }),
+      take(1)
+    )
   }
 
   changeStudentTrack(schoolId,gradeId, divisionId, reqBody){

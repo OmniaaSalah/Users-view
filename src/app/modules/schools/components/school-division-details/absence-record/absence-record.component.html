@@ -16,7 +16,7 @@
             <div class="mb-5">
                 <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3">
                     <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-                    <span class="color-gray-800">"{{'Last Date Of abbsence'|translate}} {{lastDate|LocalizeDate:'d MMMM y - hh:mm'}} "</span>
+                    <span class="color-gray-800">{{'Last Date Of abbsence'|translate}} {{lastDate|LocalizeDate:'d MMMM y - hh:mm'}}</span>
                 </div>
                 <app-button-group [items]="btnGroupItems" (onClick)="filtration.status=$event; getAbsenceRecords()"></app-button-group>
 
@@ -25,7 +25,7 @@
                         <label class="label required">{{'shared.chooseDay' |translate}}</label>
                         <div class="calender">
                             <p-calendar #calendar  icon="pi pi-clock"
-                                [showIcon]="true" placeholder="الاثنين 13-10-2022"
+                                [showIcon]="true" placeholder="{{'dd/mm/yy'| translate}}"
                                 dateFormat="DD dd-mm-yy"
                                 (onSelect)="dateSelected($event)"></p-calendar>
                                 <!-- [(ngModel)]="absenceStudentsForm.date" -->
@@ -123,7 +123,7 @@
 
 
 <!-- Add absence Student Dialog -->
-<p-dialog header="{{'dashboard.schools.raisAbsence'| translate}}" [(visible)]="absenceModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw',height:'75vh'}">
+<p-dialog header="{{'dashboard.schools.raisAbsence'| translate}}" [(visible)]="absenceModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw',height:'75vh'}">
     <ng-template pTemplate="content">
         <div class="custom-form parent-modal" #form="ngForm" ngForm>
             <label class="label required">{{'shared.date' | translate}}</label>
@@ -135,7 +135,7 @@
             dateFormat="DD dd /mm /yy"
             name="date"
             useUtc
-            placeholder="الاثنين 13-10-2022"
+            placeholder="{{'dd/mm/yy'| translate}}"
              required></p-calendar>
 
 
@@ -159,17 +159,17 @@
                        <div class="col-md-6 col-md-6 d-flex gap-4 align-items-center">
                                <p-checkbox  name="students" [binary]="true" [inputId]="i" [(ngModel)]="student.isAbsencent" ></p-checkbox>
                                <!-- <p-checkbox  name="students" [value]="student" [inputId]="i" [(ngModel)]="absenceStudentsForm.studentAbsences"></p-checkbox> -->
-                               <label class="label label--sm" [for]="i">{{student.studentNumber}} {{student.name|currentLang}}</label>
+                               <label class="label label--sm" >[ {{student.studentNumber}} ] {{student.name|currentLang}}</label>
                        </div>
                        <div class="col-md-6 d-flex align-items-center gap-5">
                            <div class="d-flex align-items-center gap-4">
-                               <p-checkbox name="withCause"  [trueValue]="1" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
-                               <label class="label label--sm" [for]="i"> {{'dashboard.parents.withCause' | translate}}</label>
+                               <p-checkbox [name]="'withCause'+i"  [trueValue]="1" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
+                               <label class="label label--sm" > {{'dashboard.parents.withCause' | translate}}</label>
                            </div>
 
                            <div class="d-flex align-items-center gap-4">
-                               <p-checkbox name="withoutCause"  [trueValue]="0" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
-                               <label class="label label--sm" [for]="i"> {{'dashboard.parents.withoutCause' | translate}}</label>
+                               <p-checkbox [name]="'withoutCause'+i"  [trueValue]="0" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
+                               <label class="label label--sm" > {{'dashboard.parents.withoutCause' | translate}}</label>
                            </div>
                        </div>
 

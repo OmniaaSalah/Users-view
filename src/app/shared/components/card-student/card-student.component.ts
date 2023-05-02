@@ -9,7 +9,7 @@ import { RegistrationStatus } from '../../enums/status/status.enum';
 export class CardStudentComponent implements OnInit {
   isChecked = false
   get registrationStatusEnum() {return RegistrationStatus}
-  
+
   @Input() student : any
   @Input() set choosenStudents(students:any[]){
     if(students.length && students){
@@ -25,9 +25,9 @@ export class CardStudentComponent implements OnInit {
 
   ngOnInit(): void {
   }
- 
+
   increaseOrDecrease(event){
-      this.addStudent.emit(event.target.checked)
+      this.addStudent.emit(event.checked)
   }
 
 }

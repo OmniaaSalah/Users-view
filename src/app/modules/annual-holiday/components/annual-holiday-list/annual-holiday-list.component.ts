@@ -208,7 +208,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
         }
         else
         {
-          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.Can’tEditthisHoliday,BecauseYouEdittheTimeOfItAndTimeOfAllHolidaysInThisAnnualCalenderShouldn’tBeMoreThan6Weeeks'));
+          this.toastService.error(res.errorLocalized[this.lang]);
         }
       },(err)=>{
         // this.isBtnLoading=false;

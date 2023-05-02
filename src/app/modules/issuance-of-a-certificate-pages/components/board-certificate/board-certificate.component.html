@@ -13,7 +13,7 @@
     <br />
 
 
-    <div class="d-flex align-items-center justify-content-end">
+    <div class="d-flex align-items-center justify-content-end position-relative" [style.top.rem]="'-5'">
         <div class="d-flex">
             <button type="submit" class="btn btn-primary mx-2" (click)="sendBoardCertificateReq()"
                 [disabled]="!saveBtn || isBtnLoading || !isBoardFileSelected()">
@@ -33,9 +33,9 @@
 
     <ng-container *ngFor="let student of choosenStudents; let i = index">
 
-        <div  class="border-dark radius-15 p-5 mb-6">
+        <div  class="border-dark radius-15 p-5 ">
 
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3 mb-6">
               <img  style="width:1.75rem" src="assets/images/home/student/student.svg" alt="">
               <h3 class="heading heading--secondary color-primary">{{'dashboard.schools.student' | translate}} :- </h3>
               <span class="color-skyBlue-500 fw-bold">{{student?.name |currentLang}}</span>
@@ -48,14 +48,14 @@
                 </p>
                 <p-dropdown #dropdown [options]="boardReasons$ | async"
                     optionLabel="{{ lang == 'ar' ? 'name.ar' : 'name.en' }}" (ngModelChange)="onReasonChange($event, i)"
-                    name="reason" ngModel optionValue="id" placeholder="ادخال السبب">
+                    name="reason" ngModel optionValue="id" placeholder="{{'dashboard.issue of certificate.Enter the reason' |translate}}">
                 </p-dropdown>
             </div>
 
             <div class="d-flex align-items-center mb-3 mt-6 gap-5">
               <div class="bg-orange-50 p-3 fs-3 radius-15 flex-grow-1" >
                   <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-                  <span class="color-gray-800">" يرجى إختيار ملف شهادة البورد صيغه (png / jpge) من المرفقات التالية . او إضافة ملف جديد "</span>
+                  <span class="color-gray-800">يرجى إختيار ملف شهادة البورد صيغه (png / jpge) من المرفقات التالية .</span>
               </div>
 
               <!-- <a class="btn btn-primary" target="_blank" [routerLink]="['/parent', getCurrentGuardianId ,'child', student.id]" [queryParams]="{registered:true,step:3}">{{'shared.addNewFile' |translate}}</a> -->

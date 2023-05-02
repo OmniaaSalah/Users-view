@@ -104,7 +104,7 @@
 
                     </th>
                     <th pSortableColumn="actions"><p-sortIcon field="price"></p-sortIcon>{{'dashboard.schools.employeeStatus'|translate }}</th>
-                    <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions"></th>
+                    <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions" *ngIf="(currentUserScope ==userScope.SPEA)"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-employee let-columns="columns">
@@ -128,7 +128,7 @@
                         </div>
                     </td>
 
-                    <td pFrozenColumn [frozen]="true" class="actions">
+                    <td pFrozenColumn [frozen]="true" class="actions"  *ngIf="(currentUserScope ==userScope.SPEA)">
                         <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4" (click)="patchForm(employee)">
                             <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                             <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
