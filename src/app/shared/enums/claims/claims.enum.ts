@@ -70,7 +70,7 @@ export  enum ClaimsEnum{
     SEG_R_StudentRecord='SEG_R_StudentRecord',
 
    
-    S_UploadExam=" S_UploadExam",
+    S_UploadExam="S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
     S_EvaluationStatus="S_EvaluationStatus",
     S_EditEvaluation="S_EditEvaluation",

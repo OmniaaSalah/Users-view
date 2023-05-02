@@ -221,11 +221,11 @@
                             <img src="assets/images/school-logo.svg" alt="">
                         </div>
                         <div class="">
-                            <p class="color-primary fs-3">{{school.name|currentLang}}</p>
+                            <p class="color-primary fs-3">{{school?.name|currentLang}}</p>
                             <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
                                 <img src="assets/images/shared/location.svg" alt="">
                                 <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
-                                <span class="color-gray-200">دبي، {{school.state.ar}}</span>
+                                <span class="color-gray-200">دبي، {{school?.state |currentLang}}</span>
 
                             </div>
                         </div>

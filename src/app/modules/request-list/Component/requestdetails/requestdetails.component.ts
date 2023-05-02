@@ -217,11 +217,9 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     return requests.includes(requestType)
   }
 
-  isRequestRelatedToSchool(){
-    console.log(this.requestDetails);
-
+  isRequestRelatedToSchool(requestType){
     let arr = ['FlexibleHolidayRequest', 'DeleteStudentRequest','MassTransferRequest','StudentRegradingRequestForSchool']
-    return arr.includes(this.requestDetails?.requestType)
+    return arr.includes(requestType)
   }
 
 

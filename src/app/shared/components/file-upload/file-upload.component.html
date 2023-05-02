@@ -51,13 +51,18 @@
                 <p class="sub-title color-primary" *ngIf="allowedFilesType && maxFileSize">{{'shared.fileMaxSize' |translate:{type :('shared.'+allowedFilesType |translate) || '', size: maxFileSize} }}</p>
                 <p class="sub-title color-primary" *ngIf="allowedFilesType && !maxFileSize">{{'shared.requiredFileType' |translate:{type :('shared.'+allowedFilesType |translate) || ''} }}</p>
 
-                <div class="d-flex  sub-title color-primary" *ngIf="!allowedFilesType && allAllowedFilesType?.length">
-                  <span class="mx-3">{{'shared.fileType' |translate}}</span>
-                  (<span *ngFor="let item of allAllowedFilesType; let i=index">
-                    <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
-                    {{'shared.'+item |translate}}
-                  </span>)
-                </div>
+
+                <ng-container *ngIf="!allowedFilesType && allAllowedFilesType?.length">
+
+                  <p class="sub-title color-primary text-center">{{'shared.fileType' |translate}}</p>
+
+                  <div class="d-flex  sub-title color-primary" >
+                    (<span class="flex-shrink-0"  *ngFor="let item of allAllowedFilesType; let i=index">
+                      <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
+                      {{'shared.'+item |translate}}
+                    </span>)
+                  </div>
+                </ng-container>
 
             </div>
 
