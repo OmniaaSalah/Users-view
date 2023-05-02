@@ -1,7 +1,7 @@
 
 
 
-<div class="position-relative">
+<div class="position-relative" *ngIf="requestDetails" >
   <div class="submit-btn d-flex justify-content-end gap-3">
 
      <ng-container *ngIf="currentUserScope==userScopeEnum.Guardian">
@@ -29,7 +29,8 @@
        </button>
      </ng-container>
 
-     <ng-container  *ngIf="(isRequestAllowedForWithdrawal | wrapFn : requestDetails?.requestType)">
+     <!-- (isRequestAllowedForWithdrawal | wrapFn : requestDetails?.requestType) &&  -->
+     <ng-container  *ngIf="(currentUserScope==userScopeEnum.Guardian || (isRequestRelatedToSchool|wrapFn))">
        <button class=" btn btn-primary btn--sm px-5"
        [disabled]="onSubmited"
        (click)="withdrawReq(requestDetails?.requestType)"
@@ -73,7 +74,7 @@
             <div class="col-4 d-flex align-items-center gap-5 mb-5 position-relative" (click)="viewUser()">
                 <p class="color-gray-300 fs-4">    {{'dashboard.myRequest.It was created by' | translate}}</p>
                 <h4 class="createdBy color-primary text-decoration-underline fw-bold" role="button">{{requestDetails.createdBy |currentLang}}</h4>
-                <div class="custom-tooltip" *ngIf="currentUserScope==userScopeEnum.SPEA && isRequestRelatedToSchool()">
+                <div class="custom-tooltip" *ngIf="currentUserScope==userScopeEnum.SPEA && (isRequestRelatedToSchool |wrapFn)">
                     <ul class="p-4">
                         <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
                             <span class="color-primary fs-4">{{'dashboard.addChild.Identification Number' |translate}}</span>
