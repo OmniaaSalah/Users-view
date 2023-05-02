@@ -1,4 +1,4 @@
-import { Component,OnChanges, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component,OnChanges, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import {faFileCircleExclamation, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,7 @@ import { MapedFileRule } from 'src/app/core/models/settings/settings.model';
 import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { FileTypeEnum, FileExtentions } from '../../enums/file/file.enum';
 import { MediaService } from '../../services/media/media.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 export interface CustomFile{
   id?:number
@@ -25,7 +26,7 @@ export interface CustomFile{
 export class FileUploadComponent implements OnInit,OnChanges {
   faXmark = faXmark
   faFileCircleExclamation =faFileCircleExclamation
-
+  lang = inject(TranslationService).lang
 
   @Input() theme :'chat' | 'default' = 'default'
   @Input() title = ''

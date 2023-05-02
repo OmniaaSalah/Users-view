@@ -168,12 +168,6 @@ export class AnnulHolidayListComponent implements OnInit {
   updateFlexableHoliday(){
     this.submitted = true
       this.schoolsService.sendFlexableHolidayReq(this.selectedHoliday.id,this.editHolidayForm.value)
-      .pipe(
-        map(res=>{
-          if(res.statusCode ==HttpStatusCodeEnum.BadRequest) throw new Error(res?.error)
-          return res
-        })
-      )
       .subscribe(res =>{
         this.submitted = false
         this.openHolidaytModel= false
@@ -213,8 +207,8 @@ export class AnnulHolidayListComponent implements OnInit {
       this.toastr.success(this.translate.instant('toasterMessage.requestResend'));
       this.router.navigate(['/performance-managment/RequestList/details', this.reqInstance])
 
-    },()=>{
-      this.toastr.error(this.translate.instant('toasterMessage.error'))
+    },(error:Error)=>{
+      this.toastr.error(error.message || this.translate.instant('toasterMessage.error'))
       this.submitted = false
     })
   }

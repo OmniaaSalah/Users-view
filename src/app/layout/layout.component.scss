@@ -8,15 +8,32 @@
 .side-left{
   top: 26rem;
   inset-inline-end: 0;
-    position: fixed;
-      z-index: -1;
+  position: fixed;
+  z-index: -1;
 }
 .side-right{
   top: 35rem;
   inset-inline-start: 0;
-    position: fixed;
-      z-index: -1;
+  position: fixed;
+  z-index: -1;
 }
+
+// .side-left{
+//   top: 20rem;
+//   inset-inline-end: 0;
+//   position: fixed;
+//   z-index: -1;
+//   width: 18%;
+//   opacity: .4;
+// }
+// .side-right{
+//   top: -12rem;
+//   inset-inline-start: 0;
+//   position: fixed;
+//   z-index: -1;
+//   width: 18%;
+//   opacity: .4;
+// }
 
 
 .bg {
