@@ -367,7 +367,6 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
           })
         }))
       .subscribe(schoolsList =>{
-        console.log(schoolsList);
 
         if(this.selectedGracePeriod.previousValue){
           if(this.schoolsDialogFor=='TransferFrom'){
@@ -397,20 +396,32 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   deleteSchool(schoolId,  schoolType:SchoolType){
     this.isSchooDeletedMode=true;
     let index
-    console.log(schoolType);
+
 
     if(schoolType=='allowdSchools'){
 
-      index = this.selectedSchools.findIndex(id => id==schoolId)
-      this.gracePeriodSchools.schools.list.splice(index ,1)
+      index = this.gracePeriodSchools.schools.list.findIndex(el => el?.id==schoolId)
+      console.log(schoolType, index);
+      if(index >-1){
+        this.gracePeriodSchools.schools.list.splice(index ,1)
+        this.selectedSchools.splice(index ,1)
+      }
     }else if(schoolType=='fromSchools'){
 
-      index = this.gracePeriodSchools.fromSchools.list.findIndex(id => id==schoolId)
-      this.gracePeriodSchools.fromSchools.list.splice(index ,1)
+      index = this.gracePeriodSchools.fromSchools.list.findIndex(el => el?.id==schoolId)
+      console.log(schoolType, index);
+      if(index >-1){
+         this.gracePeriodSchools.fromSchools.list.splice(index ,1)
+         this.selectedSchools.splice(index ,1)
+      }
     }else if(schoolType=='toSchools'){
 
-      index = this.gracePeriodSchools.toSchools.list.findIndex(id => id==schoolId)
-      this.gracePeriodSchools.toSchools.list.splice(index ,1)
+      index = this.gracePeriodSchools.toSchools.list.findIndex(el => el?.id==schoolId)
+      console.log(this.gracePeriodSchools.toSchools.list,schoolId,schoolType, index,);
+      if(index >-1){
+         this.gracePeriodSchools.toSchools.list.splice(index ,1)
+         this.selectedSchools.splice(index ,1)
+      }
     }
 
     // if(index >= 0) {
@@ -505,7 +516,6 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
 
   allowedSchoolsPaginationChanged(event: paginationState) {
-    console.log(event);
 
     this.allowedSchoolsFiltration.Page = event.page
     this.getGracePeriodSchools()

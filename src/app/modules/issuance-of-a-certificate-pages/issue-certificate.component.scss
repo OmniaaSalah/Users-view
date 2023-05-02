@@ -163,7 +163,7 @@ a.disabled {
 .Btn-group{
   position: absolute;
   top: -2rem;
-  left: 8rem;
+  inset-inline-end: 8rem;
 
   .topPara{
   margin-left: 2rem;

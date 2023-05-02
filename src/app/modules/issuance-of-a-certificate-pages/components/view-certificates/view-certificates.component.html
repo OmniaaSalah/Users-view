@@ -54,9 +54,9 @@
             <div class="certificates-list d-flex  w-100">
 
                 <div class="user d-flex gap-4 custom-form">
-                    <div class="mx-4 mt-3 ">
+                    <div class="mx-4 mt-3 " [class.opacity-0]="certificate.status==certificateStatus.Payed">
                         <p-checkbox   [value]="certificate.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
-                        </div>
+                      </div>
                     <div class="elcard-img">
                         <img src="assets/images/shared/User male 2.png" alt="">
                     </div>

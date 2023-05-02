@@ -206,10 +206,16 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
 
   transferStudent(){
     this.submitted = true
-    this.studentsService.transferStudent(this.transferForm).subscribe(res=>{
+    this.studentsService.transferStudent(this.transferForm)
+    .pipe(
+      map(res=>{
+        return res
+      })
+    )
+    .subscribe(res=>{
       this.submitted = false
-      this.router.navigate(['//schools-and-students/students'])
-      this.toastr.success('تم نقل الطالب بنجاح')
+      this.router.navigate(['/schools-and-students/students'])
+      this.toastr.success(this.translate.instant('toasterMessage.studentTransfered'))
     },(error)=>{
       this.submitted = false
       this.toastr.error('الشعبه او المسار غير متاح فى هذه المدرسه')

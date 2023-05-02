@@ -6,7 +6,7 @@
                 <app-skeleton size="7rem"></app-skeleton>
                 <app-skeleton width="20rem"  count="2" height="2rem"></app-skeleton>
             </div>
-        </div>       
+        </div>
     </ng-container>
 
     <div class="radius-15 border p-5 mb-5 bg-white custom-form"  *ngIf="student$ |async as student">
@@ -47,15 +47,15 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="actions d-flex align-items-center gap-3 mb-5">
 
                 <ng-container>
-                    <button class="btn btn-primary btn px-5" 
-                    [disabled]="submitted || 
+                    <button class="btn btn-primary btn px-5"
+                    [disabled]="submitted ||
                     !transferTypeVal.value||
-                    (!f.valid && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)|| 
-                    (!selectedSchool.value && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)" 
+                    (!f.valid && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)||
+                    (!selectedSchool.value && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)"
                     (click)="confirmTransferStudent()">
                         <span>{{'dashboard.students.transferStudent' |translate}} </span>
                         <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
@@ -64,7 +64,7 @@
                     <span role="button" class="color-red-500 text-decoration-underline" routerLink="../">{{'shared.cancel' |translate}}</span>
 
                 </ng-container>
-    
+
             </div>
         </div>
     </div>
@@ -75,75 +75,75 @@
         <div class="row gx-5 custom-form mb-5">
             <div class="col-md-4">
                 <h2 class="heading heading--tertiary mb-3">{{'shared.transportationType'| translate}}</h2>
-                <p-dropdown name="type" 
-                #transferTypeVal 
-                [options]="transferType" 
-                [(ngModel)]="transferForm.transferType" 
+                <p-dropdown name="type"
+                #transferTypeVal
+                [options]="transferType"
+                [(ngModel)]="transferForm.transferType"
                 (ngModelChange)="onTransferTypeChange($event)"
-                optionValue="value" optionLabel="name" 
+                optionValue="value" optionLabel="name"
                 placeholder="{{'shared.chooseTransportationType' |translate}}" required></p-dropdown>
                 <!-- <div class="" [hidden]="mode !='transfer'">
                     <label class="label" for="description">{{'shared.transportationType'| translate}}</label>
                 </div> -->
             </div>
-            
-    
+
+
             <div class="col-md-4 " *ngIf="transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate">
                 <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
                 <h2 class="heading heading--tertiary mb-3">{{'shared.grade'| translate}}</h2>
                 <p-dropdown name="grade" #Grade [options]="(AllGrades$ | async)" [(ngModel)]="transferForm.gradeId" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
             </div>
         </div>
-    
-    
-    
+
+
+
         <div [ngClass]="{'h-0': (!selectedSchool.value || transferTypeVal.value !=TransferTypeEnum.TransferWithinTheEmirate)}">
             <form class="custom-form" #f="ngForm">
                 <div class="custom-form " >
                     <div class="row gx-5 form-set">
-                     
+
                         <!-- <div class="col-md-4 ">
                             <label class="label" for="description">{{'shared.grade'| translate}}</label>
                             <p-dropdown name="grade" #Grade [options]="(schoolGrades$ | async)" [(ngModel)]="transferForm.gradeId" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
                         </div> -->
-                        
+
                         <div class="col-md-4 ">
                             <label class="label" for="description">{{'shared.division'| translate}}</label>
-                            <p-dropdown 
-                            name="divisionId" 
-                            [disabled]="!selectedGrade.value" 
-                            [options]="(gradeDivisions$ | async)" 
-                            [(ngModel)]="transferForm.divisionId" 
-                            (ngModelChange)="onDivisionSelected($event)" 
+                            <p-dropdown
+                            name="divisionId"
+                            [disabled]="!selectedGrade.value"
+                            [options]="(gradeDivisions$ | async)"
+                            [(ngModel)]="transferForm.divisionId"
+                            (ngModelChange)="onDivisionSelected($event)"
                             optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
-                            placeholder="{{'dashboard.students.choosedivision' |translate}}" 
+                            placeholder="{{'dashboard.students.choosedivision' |translate}}"
                             emptyMessage="لايوجد شعب فى هذا الصف" [required]="availableGradeDivisions.length"></p-dropdown>
                         </div>
-    
+
                         <div class="col-md-4 " *ngIf="selectedDivision?.hasTrack">
                             <label class="label" for="description">{{'shared.track'| translate}}</label>
                             <p-dropdown name="trackId"
-                            [options]="(divisionTracks$ | async)" 
-                            [(ngModel)]="transferForm.trackId" 
-                            (ngModelChange)="onTrackSelected($event)" 
-                            optionValue="id" 
+                            [options]="(divisionTracks$ | async)"
+                            [(ngModel)]="transferForm.trackId"
+                            (ngModelChange)="onTrackSelected($event)"
+                            optionValue="id"
                             optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
-                            [required]="selectedDivision?.hasTrack" 
-                            placeholder="{{'dashboard.students.chooserack' |translate}}" 
+                            [required]="selectedDivision?.hasTrack"
+                            placeholder="{{'dashboard.students.chooserack' |translate}}"
                             emptyMessage="لايوجد مسارات فى هذه الشعبه"></p-dropdown>
                         </div>
                     </div>
-            
+
                 </div>
-        
-        
+
+
                 <div class="row gx-5 gy-4 form-set" *ngIf="(selectedDivision?.hasTrack && isTrackSelected) || ( selectedDivision && !selectedDivision?.hasTrack)">
-                    
+
 
                     <div class="col-md-8">
                         <div class="row g-4">
                             <label *ngIf="optionalSubjectsList?.length" class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
-                            
+
                             <!-- Loader -->
                             <ng-container *ngIf="!optionalSubjectsList">
                                 <div class="row gx-5">
@@ -153,9 +153,9 @@
                                     <div class="col-md-3">
                                         <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
                                     </div>
-        
+
                                 </div>
-                        
+
                                 <div class="row gx-5">
                                     <div class="col-md-3">
                                         <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
@@ -163,7 +163,7 @@
                                     <div class="col-md-3">
                                         <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
                                     </div>
-        
+
                                 </div>
                             </ng-container>
 
@@ -173,23 +173,23 @@
                                     <label class="label label--sm" for="">{{subject.name|currentLang}}</label>
                                 </div>
                             </ng-container>
-                            
+
                         </div>
-            
+
                     </div>
                 </div>
-        
+
             </form>
         </div>
     </div>
 
-    
-    
+
+
     <ng-container  *ngIf="selectedGrade.value && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate">
-        
+
         <div class="prim-table">
-            <app-table-caption (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">
-    
+            <app-table-caption [hasExport]="true" (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">
+
                 <div class="row gx-5 form-set">
                     <div class="col">
                         <label class="label" for="region">{{'shared.state'|translate }}  </label>
@@ -204,14 +204,14 @@
         </div>
 
         <div class="student__content border p-5 radius-12 mt-5">
-    
-    
+
+
             <h2 class="heading heading--secondary mb-5">{{'dashboard.students.availableSchools'| translate}}({{schools.total}})</h2>
             <div class="cards row" *ngIf="!schools.loading && schools.total">
-                <div 
+                <div
                     class="col-md-4" *ngFor="let school of schools.list; let i=index">
 
-                    <div class="card h-100 p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4" 
+                    <div class="card h-100 p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4"
                     [class.checked]="i==selectedSchool.index"
                     (click)="onSelectSchool(i, school)">
 
@@ -224,21 +224,21 @@
                                 <img src="assets/images/shared/location.svg" alt="">
                                 <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
                                 <span class="color-gray-200">دبي، {{school.state.ar}}</span>
-    
+
                             </div>
                         </div>
                     </div>
-                
+
                 </div>
             </div>
             <div class="mt-5" *ngIf="schools.total > paginationState.rows">
                 <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
             </div>
-    
+
         </div>
-    
+
         <app-loader *ngIf="schools.totalAllData"></app-loader>
-        
+
         <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
         </ng-container>
@@ -248,9 +248,9 @@
             <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
         </ng-container>
     </ng-container>
-    
 
 
-    
+
+
 
 </div>

@@ -1,6 +1,6 @@
 
 
-        <div class="card box-shadow radius-15 p-0" >
+        <div class="card box-shadow radius-15 p-0 custom-form" >
 
             <div class="profile d-flex align-items-center p-4 position-relative">
                 <div class="profile__avatar">
@@ -21,7 +21,9 @@
                 </div>
 
                 <div class="checkbox py-3">
-                    <input (change)="increaseOrDecrease($event)" [checked]="isChecked" type="checkbox" [value]="student.id">
+                  <p-checkbox (onChange)="increaseOrDecrease($event)" [binary]="true" [(ngModel)]="isChecked"  [value]="student.id"></p-checkbox>
+
+                    <!-- <input (change)="increaseOrDecrease($event)" [checked]="isChecked" type="checkbox" [value]="student.id"> -->
                 </div>
 
             </div>

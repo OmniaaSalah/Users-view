@@ -2,7 +2,7 @@
 
     #dropdownMenuButton1{
         cursor: pointer;
-        
+
         fa-icon{
             color: $color-primary;
             transition:  all .2s ease-in-out;
@@ -15,7 +15,7 @@
 
     .dropdown-menu {
 
-        
+
         border: 0;
         border-radius: 12px;
 
@@ -24,7 +24,7 @@
                 display: flex;
                 align-items: center;
                 gap: 1rem;
-                padding: .75rem 2rem;
+                padding: 0rem 2rem;
                 text-decoration: none;
                 p{
                     font-size: 1.3rem;
@@ -39,7 +39,7 @@
                      p{color: $color-skyBlue-400;}
                 }
             }
-            
+
             &:not(:last-child){ border-bottom: 1px solid $color-gray-200;}
 
 
@@ -47,7 +47,7 @@
                 background-color: transparent;
             }
         }
-        
+
     }
 
     &.borderless .dropdown-menu .dropdown-item{ border: none;}

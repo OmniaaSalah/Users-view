@@ -217,12 +217,12 @@ export class IssueCertificateComponent implements OnInit {
         if(result?.errorLocalized)
         {this.toastr.error( result?.errorLocalized[this.lang])}
         else
-        {this.toastr.error(this.translate.instant('error happened'))}
+        {this.toastr.error(this.translate.instant('toasterMessage.error'))}
       }
     },err=>{
       this.display=false;
       this.isBtnLoading=false;
-      this.toastr.error(this.translate.instant('error happened'))
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
     })
 
   }
@@ -241,10 +241,10 @@ export class IssueCertificateComponent implements OnInit {
 
     if(this.selectedCertificate.value == CertificatesEnum.GoodBehaviorCertificate) this.display = true;
 
-  
+
     let arr=[CertificatesEnum.BoardCertificate,CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate]
     if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
-   
+
   }
 
 
