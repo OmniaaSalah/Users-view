@@ -9,6 +9,7 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
 
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -102,7 +103,14 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
 
   // << Transfer Students >> //
   transferStudent(data){
-    return this.http.put('/Student/transfer', data).pipe(take(1))
+    return this.http.put('/Student/transfer', data)
+    .pipe(
+      map(res=>{
+        if(res?.statusCode ===HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
+        else return res
+      }),
+      take(1)
+    )
   }
 
   // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
@@ -117,7 +125,14 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
 
   // NOTE : ارسال طلب انسحاب من المدرسه الحاليه -------------------------------------------------
   sendWithdrawalReq(data){
-    return this.http.post('/Student/withdrawal-request', data).pipe(take(1))
+    return this.http.post('/Student/withdrawal-request', data)
+    .pipe(
+      map(res=>{
+        if(res?.statusCode ===HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
+        else return res
+      }
+    ),
+    take(1))
   }
 
 

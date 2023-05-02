@@ -3,6 +3,11 @@
 @import 'src/assets/css/components/profile';
 
 .h-0{height: 0; overflow: hidden;}
+.disable{
+  opacity: .5;
+  pointer-events: none;
+}
+
 .student{
     padding: 7rem 0;
     &__avatar{
