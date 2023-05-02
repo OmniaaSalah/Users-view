@@ -258,8 +258,11 @@
                         <td *ngIf="tableColumns[21].isSelected == true">
                             {{student?.nationality | currentLang}}
                         </td>
-                        <td *ngIf="tableColumns[22].isSelected == true">
-                            <span *ngIf="student?.studentCategory">{{'shared.allStatus.'+student?.studentCategory|translate}}</span>
+                        <td *ngIf="tableColumns[22].isSelected == true" style="flex-wrap:wrap">
+                            <ng-container *ngFor="let item of student?.studentCategory let i=index">
+                                <span *ngIf="item">{{'shared.allStatus.'+item|translate}}<span  *ngIf="i<student?.studentCategory.length-1"> , </span></span>
+                            </ng-container>
+                        
                             <span *ngIf="!student?.studentCategory">{{'shared.notFound' | translate}}</span>
                         </td>
 
