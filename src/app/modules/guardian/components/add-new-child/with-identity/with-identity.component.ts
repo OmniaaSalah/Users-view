@@ -144,7 +144,7 @@ export class WithIdentityComponent implements OnInit {
             return EMPTY
 
           }else{
-            throw  new Error(this.translate.instant('toasterMessage.childAlreadyRegisted',{value: res?.name || ''}))
+            throw  new Error(this.translate.instant('toasterMessage.childAlreadyRegisted',{value: res?.name[this.lang] || ''}))
             // throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
 
           }
