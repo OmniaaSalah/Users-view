@@ -214,7 +214,7 @@ export class NavbarComponent implements OnInit {
     }
 }
 goToNotificationDetails(pageLink,id,isRead){
- 
+
   if(pageLink) window.open(pageLink, '_blank')
   if(!isRead)
   {
@@ -278,14 +278,50 @@ onScroll()
           {name:this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'),url:'/schools-and-students/all-parents', claims:[ClaimsEnum.S_MenuItem_GuardianMenu]},
         ]
       },
+
+      {
+        id:6,
+        enum: RouteEnums.Student_Management,
+        title:this.translate.instant('dashboard.students.studentsMangement'),
+        claims:[ClaimsEnum.E_menu_ManageStudents],
+        links:[
+          {name: this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'),url:'/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
+          {name: this.translate.instant('sideBar.schoolsAndStudents.chidren.students'),url:'/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
+
+        ]
+      },
+
       {
         id:2,
         enum: RouteEnums.PEFORMANCE_MANAGMENT,
         title:this.translate.instant('breadcrumb.performanceMangement'),
-          claims:[ClaimsEnum.S_Menu_PeformanceManagment],
+        claims:[ClaimsEnum.S_Menu_PeformanceManagment,ClaimsEnum.E_menu_SchoolPerformanceManagent],
         links:[
-          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.SE_MenuItem_Exam],},
-          {name: this.translate.instant('dashboard.Requests.RequestList'),url:'/performance-managment/RequestList/', claims:[ClaimsEnum.S_MenuItem_Request],},
+          {
+            name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),
+            url: this.currentUserScope == this.ScopeEnum.SPEA ? '/performance-managment/assignments/assignments-list' : '/school-performance-managent/assignments/assignments-list',
+            claims:[ClaimsEnum.SE_MenuItem_Exam],},
+          {
+            name: this.translate.instant('dashboard.Requests.RequestList'),
+            url:'/performance-managment/RequestList/',
+            isHidden: this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
+            claims:[ClaimsEnum.S_MenuItem_Request]
+          },
+          {
+            name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),
+            url:'/educational-settings/assessments/assements-list',
+            isHidden: this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
+            claims:[ClaimsEnum.SE_MenuItem_Rate]
+          },
+
+          // For schools
+          {
+            name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),
+            url:'/school-performance-managent/assessments/assements-list',
+            isHidden: this.currentUserScope == this.ScopeEnum.Employee ? false : true,
+            claims:[ClaimsEnum.SE_MenuItem_Rate]
+          },
+          // {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/school-performance-managent/assignments/assignments-list', claims:[ClaimsEnum.SE_MenuItem_Exam]},
 
         ]
       },
@@ -303,6 +339,8 @@ onScroll()
 
         ]
       },
+
+
       {
         id:4,
         enum: RouteEnums.REPORTS_MANAGEMENT,
@@ -329,22 +367,12 @@ onScroll()
           {name: this.translate.instant('sideBar.educationalSettings.children.School Years'), url:'/educational-settings/school-year/school-years-list',   claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
           {name: this.translate.instant('sideBar.educationalSettings.children.Subjects'),url:'/educational-settings/subject/subjects-list',   claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
           {name: this.translate.instant('sideBar.educationalSettings.children.surveysList'), url:'/educational-settings/surveys',   claims:[ClaimsEnum.S_MenuItem_Survey]},
-          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),url:'/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.SE_MenuItem_Rate]},
+          // {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),url:'/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.SE_MenuItem_Rate]},
         ]
       },
 
       // Employee Scope
-      {
-        id:6,
-        enum: RouteEnums.Student_Management,
-        title:this.translate.instant('dashboard.students.studentsMangement'),
-        claims:[ClaimsEnum.E_menu_ManageStudents],
-        links:[
-          {name: this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'),url:'/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
-          {name: this.translate.instant('sideBar.schoolsAndStudents.chidren.students'),url:'/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
 
-        ]
-      },
 
       {
         id:7,
@@ -365,16 +393,16 @@ onScroll()
           {name:  this.translate.instant('breadcrumb.Employees'),url:`/schoolEmployee-management/school/${currentSchoolId}/employees`, claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
         ]
       },
-      {
-        id:9,
-        enum: RouteEnums.School_PerformanceManagent,
-        title:this.translate.instant('breadcrumb.performanceMangement'),
-        claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
-        links:[
-          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), url:'/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.SE_MenuItem_Rate]},
-          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/school-performance-managent/assignments/assignments-list', claims:[ClaimsEnum.SE_MenuItem_Exam]},
-        ]
-      },
+      // {
+      //   id:9,
+      //   enum: RouteEnums.School_PerformanceManagent,
+      //   title:this.translate.instant('breadcrumb.performanceMangement'),
+      //   claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
+      //   links:[
+      //     {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), url:'/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.SE_MenuItem_Rate]},
+      //     {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/school-performance-managent/assignments/assignments-list', claims:[ClaimsEnum.SE_MenuItem_Exam]},
+      //   ]
+      // },
       {
         id:10,
         enum: RouteEnums.School_Management,

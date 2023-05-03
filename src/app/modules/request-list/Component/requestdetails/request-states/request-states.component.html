@@ -1,3 +1,12 @@
+<ng-container *ngIf="!currentState">
+  <div class="row g-5">
+      <div class="col-md-3" *ngFor="let item of [1,2,3]">
+          <app-skeleton count="3" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+      </div>
+  </div>
+</ng-container>
+
+
 <div class="">
   <div class="row">
       <div class="col-md-12">
@@ -15,28 +24,26 @@
 
                   <ng-container *ngFor="let state of states">
 
-                      <ng-container *ngIf="state.status==statusEnum.Completed; then completedStateTemp; else  pendingStateTemp"></ng-container>
+                      <ng-container *ngIf="state.status.code==statusEnum.Completed ; then completedStateTemp; else  pendingStateTemp"></ng-container>
 
                       <ng-template #pendingStateTemp>
                           <!-- *ngFor="let task of state.tasks | slice :0:1" -->
                           <li class="event"
-                          [class.active]="timeline.currentState.mappedStatusCode==state.state.mappedStatusCode"
-                          *ngFor="let task of state.tasks | slice :0:1"
-                          >
-                              <ng-container *ngIf="!state.state.isFinal">
-                                  <p class="event__time mb-6">{{state.createdDate|LocalizeDate:'d MMMM y - hh:mm a'}}</p>
+                          [class.active]="currentState.currentState.mappedStatusCode==state.state.mappedStatusCode">
+                              <!-- <ng-container *ngIf="!state.state.isFinal"> -->
+                                  <p class="event__time mb-6"></p>
                                   <div class="event__separator">
                                       <div class="event__marker"></div>
                                       <div class="event__connector"></div>
                                   </div>
                                   <div class="event__content">
-                                      <div class="profile__name ">
-                                          <h4 class="color-red-500 fs-3">{{state.state.title | currentLang}}</h4>
+                                      <div class="profile__name d-flex">
+                                          <h4 class="color-red-500 fs-3">{{state?.state?.title | currentLang}}</h4>
                                           <!-- <span class="color-black-500 fs-4 ">{{task.action?.title | currentLang}}
                                               <span class="heading heading--tertiary">{{task.rejectThing | currentLang}}</span>
                                           </span> -->
                                           <!-- {{task.status.title | currentLang}} -->
-                                          <span class="color-red-500 me-auto"> قيد الانتظار </span>
+                                          <span class="color-red-500 me-auto">{{'dashboard.Requests.Pending' |translate}}</span>
                                       </div>
                                       <!-- <p class="fs-4 color-gray-800 w-75">{{task.content | currentLang}}</p> -->
 
@@ -45,13 +52,13 @@
                                           <span class="text color-primary">{{task.attachment.name}}</span>
                                       </div> -->
                                   </div>
-                              </ng-container>
+                              <!-- </ng-container> -->
 
                           </li>
                       </ng-template>
 
                       <ng-template #completedStateTemp>
-                          <li class="event" *ngFor="let task of state.tasks">
+                          <li class="event" *ngFor="let task of state?.tasks">
                               <p class="event__time" mb-6 >{{task.createdDate|LocalizeDate:'d MMMM y - hh:mm a'}}</p>
                               <div class="event__separator">
                                   <div class="event__marker"></div>
@@ -59,14 +66,14 @@
                               </div>
                               <div class="event__content">
                                   <div class="d-flex gap-4">
-                                      <span class="fw-bold color-primary action-author" *ngIf="task.assignedTo.scope==userScopeEnum.SPEA">مسؤل الهيئة</span>
-                                      <span class="fw-bold color-primary action-author" *ngIf="task.assignedTo.scope!=userScopeEnum.SPEA">{{task.assignedTo.fullName |currentLang}}</span>
+                                      <span class="fw-bold color-primary action-author" *ngIf="task?.assignedTo?.scope==userScopeEnum.SPEA">مسؤل الهيئة</span>
+                                      <span class="fw-bold color-primary action-author" *ngIf="task?.assignedTo?.scope!=userScopeEnum.SPEA">{{task.assignedTo.fullName |currentLang}}</span>
 
                                       <span class="color-black-500 fs-4 fw-bold color-skyBlue-500 action-name">{{task.action?.title | currentLang}} </span>
                                       <span class="fw-bold ">{{'dashboard.Requests.' + requestDetails?.requestType |translate}}</span>
-                                      <span class="color-skyBlue-500 me-auto">  {{task.action?.title | currentLang}}</span>
+                                      <span class="color-skyBlue-500 me-auto">  {{task?.action?.title | currentLang}}</span>
                                   </div>
-                                  <p class="fs-4 color-gray-800 w-75">{{task.action?.comments}}</p>
+                                  <p class="fs-4 mt-3 color-gray-800 w-75">{{task?.action?.comments}}</p>
 
                                   <!-- <ng-container *ngTemplateOutlet="attachments; context: {$implicit: task.action.attachments}"></ng-container> -->
                                   <div class="row mt-4 mb-5" *ngIf="task.action?.attachments">
