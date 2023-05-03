@@ -73,7 +73,8 @@ export class HomeComponent implements OnInit {
    if(this.currentUserScope==UserScope.Employee)
    {
     this.userService.currentUserSchoolName$.subscribe(res =>{
-      this.currentSchoolName=typeof  res === 'string' ? (JSON.parse(res))[this.lang] :  res[this.lang]
+      if(res)
+      {this.currentSchoolName=typeof  res === 'string' ? (JSON.parse(res))[this.lang] :  res[this.lang]}
       })
     this.getUregentMessages()
    }

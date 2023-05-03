@@ -159,7 +159,7 @@ export class StudentsListComponent implements OnInit {
 
   schoolSelected(SchoolId){
     this.schoolId=SchoolId
-    if(this.schoolId.length)
+    if(this.schoolId)
     {
       this.isSchoolSelected = true
       this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
