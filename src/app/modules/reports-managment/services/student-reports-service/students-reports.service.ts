@@ -42,7 +42,7 @@ export class StudentsReportsService {
 
   tabelColumns = [
     {
-      name:this.translate.instant('dashboard.students.daleelNumber'),
+      name:this.translate.instant('dashboard.students.daleelNumber1'),
       isSelected: true,
       isDisabled: true,
     },
