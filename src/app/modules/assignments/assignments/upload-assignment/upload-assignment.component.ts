@@ -161,31 +161,21 @@ uploadedFiles: any[] = [];
     this.assignmentModel.arabicName = this.assignmentFormGrp.value.ExamNameInArabic ;
     this.assignmentModel.englishName= this.assignmentFormGrp.value.ExamNameInEnglish;
     this.assignmentModel.examduration = this.convertMinutesToTime(Number(this.assignmentFormGrp.value.ExamDuration));
-    this.assignmentModel.examShowTime = this.assignmentFormGrp.value.ExamTime;
-    this.assignmentModel.examShowDate= this.assignmentFormGrp.value.ExamDate.toISOString().slice(0,10);
+    this.assignmentModel.examShowTime =this.assignmentFormGrp.value.ExamTime;
+    this.assignmentModel.examShowDate= this.assignmentFormGrp.value.ExamDate;
     this.assignmentModel.gradeId = this.assignmentFormGrp.value.grades;
     this.assignmentModel.subjectId=  this.assignmentFormGrp.value.subjects;
     this.assignmentModel.curriculumId= this.assignmentFormGrp.value.curriculum;
-
-    if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
-      this.assignmentModel.examStatus=1;
-    } else {
-      this.assignmentModel.examStatus=2;
-    }
-
     this.assignmentModel.examPdfPath = this.assignmentFormGrp.value.examPdfPath ;
     this.assignmentModel.examAudioPath = this.assignmentFormGrp.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       this.isBtnLoading=false;
-      if(res.statusCode!='OK')
-      {
-        this.toastr.error(res.errorLocalized[this.lang]);
-      }
-      else{
       this.router.navigate(['/performance-managment/assignments/assignments-list']);
       this.toastr.success(this.translate.instant('Add Successfully'),'');
-      }
-     },(err)=>{ this.isBtnLoading=false;});
+     },(err)=>{ 
+      this.toastr.error(err?.message||this.translate.instant('toasterMessage.error'));
+      this.isBtnLoading=false;
+    });
   }
 
   convertMinutesToTime(value)
@@ -195,5 +185,11 @@ uploadedFiles: any[] = [];
     const minutes= Math.floor(value%60);
     console.log(hours + ':' + minutes + ':' + 0)
     return hours + ':' + minutes + ':' + 0;
+  }
+
+  formateDate(date :Date){
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
+    return d.split('.')[0]
+  
   }
 }
