@@ -1955,6 +1955,7 @@
             "PendingForPayment":"Pending For Payment",
             "Payed":"Paid",
             "Rejected":"Rejected",
+            "Canceled":"Canceled",
             "ModificationRequest":"Update",
             "issueNewCertificate":"Issue New Certificate",
             "downloadCertificat":"Download Certificate",

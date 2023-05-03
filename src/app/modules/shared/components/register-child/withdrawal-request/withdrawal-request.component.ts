@@ -36,8 +36,8 @@ export class WithdrawalRequestComponent implements OnInit {
 
   componentHeaderData:IHeader = {
     breadCrump: [
-      { label: this.translate.instant('Students List'),routerLink:`/parent/${this.currentGuardianId}/child/${this.studentId}`,routerLinkActiveOptions:{exact: true}},
-      { label: this.translate.instant('dashboard.students.withdrawalReq'),routerLink:`/parent/${this.currentGuardianId}/child/${this.studentId}/withdraw-request` }
+      { label: this.translate.instant('dashboard.parents.sonDetails'),routerLink:`/parent/${this.currentGuardianId}/child/${this.childId || this.studentId}`,routerLinkActiveOptions:{exact: true},queryParams:{registered:true}},
+      { label: this.translate.instant('dashboard.students.withdrawalReq'),routerLink:`/parent/${this.currentGuardianId}/child/${this.childId ||this.studentId}/withdraw-request` }
     ],
     mainTitle: { main: this.translate.instant('dashboard.students.withdrawalReq'), sub: '' }
   }

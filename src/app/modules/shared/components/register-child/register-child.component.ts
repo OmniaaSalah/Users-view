@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { finalize, map, Observable, Subject } from 'rxjs';
+import { finalize, Observable, Subject } from 'rxjs';
 import {  Mode } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { ClaimsService } from 'src/app/core/services/claims.service';
@@ -13,8 +13,6 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { CountriesService } from 'src/app/shared/services/countries/countries.service';
-import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { RegisterChildService } from '../../services/register-child/register-child.service';
 
