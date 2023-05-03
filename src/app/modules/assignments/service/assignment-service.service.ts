@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
-import { map ,finalize, Observable, take,} from 'rxjs';
+import { Injectable,inject } from '@angular/core';
+import { map ,finalize, Observable, take, throwError,} from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssignmentServiceService {
   examStatusList;
+  lang = inject(TranslationService).lang
   constructor(private http: HttpHandlerService, private tableLoaderService: LoaderService,private translate:TranslateService) {
 
      this.examStatusList=[{value:StatusEnum.Available,name:this.translate.instant('login.'+StatusEnum.Available)},{value:StatusEnum.Unavailable,name:this.translate.instant('login.'+StatusEnum.Unavailable)}]
@@ -55,7 +57,17 @@ export class AssignmentServiceService {
 
   AddAssignment(data: IuploadAssignment): Observable<any> {
 
-    return this.http.post('/Exam',data).pipe(take(1));
+    return this.http.post('/Exam',data).pipe(
+      map((res)=>{
+        if(res.statusCode!='OK')
+      {
+         throw new Error(res.errorLocalized[this.lang])
+      }
+      else{
+        return res;
+      }
+      }),
+      take(1));
   }
 
 }

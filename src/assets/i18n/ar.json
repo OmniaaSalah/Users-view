@@ -1668,6 +1668,7 @@
             "Annual Calender Name": "مسمي التقويم السنوي",
             "Holiday Name": "مسمي الإجازة",
             "curriculum": "المنهج",
+            "YouCan’tAddHolidayMoreThan6Weeks":"لا يمكن إضافة إجازة اكثر من 6 أسابيع",
             "Date": "التاريخ",
             "flexibilityStatus": "حالة المرونة",
             "Year": "السنة الميلادية",
