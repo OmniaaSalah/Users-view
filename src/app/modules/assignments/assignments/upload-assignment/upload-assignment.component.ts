@@ -177,9 +177,14 @@ uploadedFiles: any[] = [];
     this.assignmentModel.examAudioPath = this.assignmentFormGrp.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       this.isBtnLoading=false;
+      if(res.statusCode!='OK')
+      {
+        this.toastr.error(res.errorLocalized[this.lang]);
+      }
+      else{
       this.router.navigate(['/performance-managment/assignments/assignments-list']);
-      console.log(this.assignmentModel);
       this.toastr.success(this.translate.instant('Add Successfully'),'');
+      }
      },(err)=>{ this.isBtnLoading=false;});
   }
 
