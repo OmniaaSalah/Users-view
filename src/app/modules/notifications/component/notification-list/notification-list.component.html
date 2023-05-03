@@ -1,4 +1,4 @@
-<div class="notification-header dashboard d-flex justify-content-between">
+<div class="notification-header dashboard d-flex justify-content-between mt-7 mb-4">
     <div class="right">
         <!-- <app-page-header></app-page-header> -->
     </div>
@@ -13,12 +13,16 @@
 
 <div class="table-caption">
 <app-table-caption [hasExport]="false" (onFilter)="searchModel.page=1;getNotifications(searchModel)" (onSearch)="searchModel.page=1;searchModel.keyword = $event; getNotifications(searchModel)" (onClear)="clearFilter()">
-    <!-- <div class="row gx-5 form-set">
+    <div class="row gx-5 form-set">
         <div class="col-4">
-            <label class="label" for="indexType">{{'dashboard.SystemSetting.Receiver'|translate}} </label>
-            <p-multiSelect [options]="roles" display="chip" [(ngModel)]="searchModel.Sender" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.Receiver'|translate}}"></p-multiSelect>
+            <label class="label" for="indexType">{{'Notifications.NotificationName'|translate}} </label>
+            <p-multiSelect [options]="notificationsNames" display="chip" [(ngModel)]="searchModel.notificationName" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'Notifications.NotificationName'|translate}}"></p-multiSelect>
         </div>
-    </div> -->
+        <div class="col-4">
+            <label class="label" for="indexType">{{'Notifications.Receiver'|translate}} </label>
+            <p-multiSelect [options]="receivers" display="chip" [(ngModel)]="searchModel.sender" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'Notifications.Receiver'|translate}}"></p-multiSelect>
+        </div>
+    </div>
 </app-table-caption>
 </div>
 

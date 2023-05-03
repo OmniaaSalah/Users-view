@@ -798,6 +798,8 @@
 
     },
     "Notifications": {
+        "Receiver":"المستقبل",
+        "NotificationName":"إسم الإشعار",
         "Notifications": "الإشعارات",
         "Reading Status": "حالة القراءة",
         "Readable": "مقروء",
