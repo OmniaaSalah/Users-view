@@ -193,8 +193,8 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
       this.editedHoliday={
         'id':this.updatedHolidayId,
         'name':{'ar':this.editedHoliday?.name.ar,'en':this.editedHoliday?.name.en },
-        'dateFrom':this.editedHoliday?.dateFrom,
-        'dateTo': this.editedHoliday?.dateTo,
+        'dateFrom':this.formateDate(this.editedHoliday?.dateFrom),
+        'dateTo': this.formateDate(this.editedHoliday?.dateTo),
         'flexibilityStatus':this.editedHoliday?.flexibilityStatus,
         'curriculumIds': this.editedHoliday?.curriculumIds,
         };
@@ -252,5 +252,11 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
    this.annualHolidayService.openModel.next(false);
 
  }
+ 
+formateDate(date :Date){
+  let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
+  return d.split('.')[0]
+
+}
 
 }

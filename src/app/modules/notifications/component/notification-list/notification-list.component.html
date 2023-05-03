@@ -13,16 +13,16 @@
 
 <div class="table-caption">
 <app-table-caption [hasExport]="false" (onFilter)="searchModel.page=1;getNotifications(searchModel)" (onSearch)="searchModel.page=1;searchModel.keyword = $event; getNotifications(searchModel)" (onClear)="clearFilter()">
-    <div class="row gx-5 form-set">
+    <!-- <div class="row gx-5 form-set">
         <div class="col-4">
             <label class="label" for="indexType">{{'Notifications.NotificationName'|translate}} </label>
-            <p-multiSelect [options]="notificationsNames" display="chip" [(ngModel)]="searchModel.notificationName" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'Notifications.NotificationName'|translate}}"></p-multiSelect>
+            <p-multiSelect [options]="notificationsNames" display="chip" [(ngModel)]="notificationName" optionValue="{{lang=='ar' ? 'name.ar' : 'name.en'}}" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'Notifications.NotificationName'|translate}}"></p-multiSelect>
         </div>
         <div class="col-4">
             <label class="label" for="indexType">{{'Notifications.Receiver'|translate}} </label>
-            <p-multiSelect [options]="receivers" display="chip" [(ngModel)]="searchModel.sender" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'Notifications.Receiver'|translate}}"></p-multiSelect>
+            <p-multiSelect [options]="receivers" display="chip" [(ngModel)]="sender" optionValue="{{lang=='ar' ? 'name.ar' : 'name.en'}}" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'Notifications.Receiver'|translate}}"></p-multiSelect>
         </div>
-    </div>
+    </div> -->
 </app-table-caption>
 </div>
 

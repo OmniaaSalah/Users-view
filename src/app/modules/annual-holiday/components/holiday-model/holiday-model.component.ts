@@ -212,6 +212,16 @@ export class HolidayModelComponent implements OnInit {
   }
  }
 
+ checkTimeDifference()
+ {
+ 
+ if(this.dateFrom.value&&this.dateTo.value&&(Math.ceil(Math.abs(this.dateFrom.value - this.dateTo.value) / (1000 * 60 * 60 * 24))>42))
+  {
+    this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.YouCan’tAddHolidayMoreThan6Weeks'))
+    this.dateTo.setValue('')
+
+  }
+ }
 
 
 }
