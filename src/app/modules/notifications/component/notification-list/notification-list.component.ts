@@ -15,6 +15,8 @@ import { NotificationService } from '../../service/notification.service';
   styleUrls: ['./notification-list.component.scss']
 })
 export class NotificationListComponent implements OnInit {
+  notificationName;
+  sender;
   unreadNotificationNumbers;
   notificationsNames=[];
   receivers=[];
@@ -36,7 +38,11 @@ export class NotificationListComponent implements OnInit {
     "pageSize": 3,
     "isRead": null,
     "notificationName":null,
-    "sender":null
+    "sender":null,
+    "arabicNotificationName":null,
+    "englishNotificationName":null,
+    "arabicSenderName":null,
+    "englishSenderName":null
   }
   componentHeaderData: IHeader={
 		breadCrump: [
@@ -86,10 +92,16 @@ export class NotificationListComponent implements OnInit {
   }
 
   getNotifications(searchModel){
+
+  //  this.searchModel.arabicNotificationName= this.lang=='ar' ? this.notificationName:''
+  //  this.searchModel.englishNotificationName= this.lang=='en' ? this.notificationName:''
+  //  this.searchModel.arabicSenderName= this.lang=='ar' ? this.sender:''
+  //  this.searchModel.englishSenderName= this.lang=='en' ? this.sender:''
     this.skeletonLoading = true
     this.showSpinner = false
     this.loading=true
     this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
+ 
       this.skeletonLoading= false
       this.loading=false
       this.notificationsList = res.data  ;
@@ -132,7 +144,7 @@ export class NotificationListComponent implements OnInit {
 
 
   showDetails(pageLink,id,isRead){
-    window.open(pageLink, '_blank')
+    if(pageLink) window.open(pageLink, '_blank')
     if(!isRead)
     {
       this.notificationService.unReadNotificationNumber.next(this.unreadNotificationNumbers--)
@@ -176,8 +188,12 @@ export class NotificationListComponent implements OnInit {
   clearFilter()
   {
     this.searchModel.keyword =''
-    this.searchModel.sender= null;
-    this.searchModel.notificationName= null;
+    this.sender= null;
+    this.notificationName= null;
+    this.searchModel.arabicNotificationName= null;
+    this.searchModel.englishNotificationName= null;
+    this.searchModel.arabicSenderName= null;
+    this.searchModel.englishSenderName= null;
     this.searchModel.page=1;
     this.getNotifications(this.searchModel)
 

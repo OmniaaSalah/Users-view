@@ -254,8 +254,8 @@
                                                         <div class="col-md-4">
                                                             <div class="d-flex align-items-center gap-4 fs-3">
                                                                 <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
-                                                                <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                 <p-inputSwitch formControlName="isOptional"></p-inputSwitch>
+                                                                <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                             </div>
                                                         </div>
 
@@ -363,7 +363,7 @@
             <div class="d-flex align-items-center gap-4 mt-5">
                 <button (click)="checkDeleteCases()" class="btn btn-secondary">{{'shared.yesImSure' |translate}}</button>
                 <button (click)="openDeleteConfirmation=false" class="btn btn-primary ">{{'shared.notSure' |translate}}</button>
-    
+
             </div>
            </div>
         </ng-template>

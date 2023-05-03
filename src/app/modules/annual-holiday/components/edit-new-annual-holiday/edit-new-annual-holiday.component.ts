@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy,inject } from '@angular/core';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Table } from 'primeng/table';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
@@ -16,6 +16,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { Subscription } from 'rxjs';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-edit-new-annual-holiday',
@@ -23,6 +24,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
   styleUrls: ['./edit-new-annual-holiday.component.scss']
 })
 export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
+  lang = inject(TranslationService).lang
   isBtnLoading: boolean=false;
   openModel:boolean=false;
   exclamationIcon = faExclamationCircle;
@@ -156,19 +158,27 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
       holidayModels:this.holidayList.map((holiday)=>{return {
         'id':holiday.id,
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
-        'dateFrom':holiday.dateFrom,
-        'dateTo': holiday.dateTo,
+        'dateFrom':this.formateDate(holiday.dateFrom),
+        'dateTo': this.formateDate(holiday.dateTo),
         'flexibilityStatus':holiday.flexibilityStatus.value,
         'curriculumIds': this.getCurriculumIds(holiday.curriculums)
         }})
      };
-
+     console.log( this.annualHolidayObj)
     if(this.urlParameter)
     {
       this.annualHolidayService.updateAnnualHoliday(Number(this.urlParameter),this.annualHolidayObj).subscribe((res)=>{
         this.isBtnLoading = false;
-        this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday edited Successfully'));
-        this.router.navigate(['/educational-settings/annual-holiday/annual-holiday-list']);
+        if(res.statusCode=='OK')
+        {
+          this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday edited Successfully'));
+          this.router.navigate(['/educational-settings/annual-holiday/annual-holiday-list']);
+        }
+        else
+        {
+          this.toastService.error(res.result[this.lang]);
+        }
+       
       },(err)=>{ this.isBtnLoading = false;
         this.showErrorMessage();});
 
@@ -177,8 +187,15 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
     {
         this.annualHolidayService.addAnnualHoliday(this.annualHolidayObj).subscribe((res)=>{
           this.isBtnLoading = false;
-          this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday added Successfully'));
-          this.router.navigate(['/educational-settings/annual-holiday/annual-holiday-list']);
+          if(res.statusCode=='OK')
+          {
+            this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday added Successfully'));
+            this.router.navigate(['/educational-settings/annual-holiday/annual-holiday-list']);
+          }
+          else
+          {
+            this.toastService.error(res.result[this.lang]);
+          }
         },(err)=>{ this.isBtnLoading = false;
           this.showErrorMessage();});
     }
@@ -419,5 +436,16 @@ ngOnDestroy(): void {
 }
 
 
+formateDate(date :Date){
+  if( typeof date != 'string')
+  {
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
+    return d.split('.')[0]
+  }
+  else
+  {
+    return date;
+  }
 
+}
 }

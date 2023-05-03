@@ -225,9 +225,9 @@ export class NewUserRoleComponent implements OnInit,OnDestroy {
         this.userRolesService.updateRole(this.jobRole,this.urlParameter).subscribe((res)=>{
           this.isBtnLoading = false;
 
-          if(res.statusCode=='BadRequest')
+          if(res.statusCode!='OK')
           {
-            this.toastService.error(this.translate.instant(res.error));
+            this.toastService.error(res.errorLocalized[this.lang]);
           }
           else
           {

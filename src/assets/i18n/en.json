@@ -1043,6 +1043,7 @@
             "Define Annual Holidays Calendar": "Define annual holidays calendar",
             "Edit Annual Holidays Calendar": "Edit annual holidays calendar",
             "Annual Calender Name": "Annual calender name",
+            "YouCan’tAddHolidayMoreThan6Weeks":"You can’t add holiday more than 6 weeks",
             "Can’tEditthisHoliday,BecauseYouEdittheTimeOfItAndTimeOfAllHolidaysInThisAnnualCalenderShouldn’tBeMoreThan6Weeeks":"Can’t edit this holiday,because you edit the time of it and time of all holidays in this annual calender shouldn’t be more than 6 weeeks",
             "Holiday Name": "Holiday name",
             "curriculum":  "Curriculum",

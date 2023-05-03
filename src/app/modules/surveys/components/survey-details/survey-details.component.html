@@ -9,7 +9,7 @@
 
  </ng-container>
 
-<div class="school position-relative" *ngIf="editSurvey||!surveyId">
+<div class="school position-relative  bg-white radius-15" *ngIf="editSurvey||!surveyId">
     <div class="export"  (clickOutside)="showExportModel=false" >
 
         <div class="d-flex justify-content-end mb-5 downloadbtn"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Closed">
