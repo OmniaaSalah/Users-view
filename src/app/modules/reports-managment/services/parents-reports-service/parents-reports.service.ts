@@ -67,7 +67,7 @@ export class ParentsReportsService {
         isDisabled: false,
       },
       {
-        name:this.translate.instant('dashboard.students.daleelNumber'),
+        name:this.translate.instant('dashboard.students.daleelNumber1'),
         isSelected: false,
         isDisabled:false,
       },

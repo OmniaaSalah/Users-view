@@ -107,7 +107,7 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
   isTypeRequired(student){
     if(!(student.curriculumCode== CurriculumCodeEnum.British)) return
 
-    if([GradeCodeEnum.ten, GradeCodeEnum.eleven, GradeCodeEnum.twelve].includes(student.gradeCode)) return true
+    if([GradeCodeEnum.nine,GradeCodeEnum.ten, GradeCodeEnum.eleven, GradeCodeEnum.twelve].includes(student.gradeCode)) return true
 
     return false
   }

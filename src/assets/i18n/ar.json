@@ -798,6 +798,8 @@
 
     },
     "Notifications": {
+        "Receiver":"المستقبل",
+        "NotificationName":"إسم الإشعار",
         "Notifications": "الإشعارات",
         "Reading Status": "حالة القراءة",
         "Readable": "مقروء",
@@ -1948,6 +1950,7 @@
             "PendingForPayment":"معلقة للدفع",
             "Payed":"مدفوعة",
             "Rejected":"مرفوض",
+            "Canceled":"مُلغى",
             "ModificationRequest":"تعديل",
             "issueNewCertificate":"إصـدار شهــادة جديدة",
             "downloadCertificat":"تحميل الشهادة",
