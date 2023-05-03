@@ -1956,6 +1956,7 @@
             "PendingForPayment":"Pending for payment",
             "Payed":"Paid",
             "Rejected":"Rejected",
+            "Canceled":"Canceled",
             "ModificationRequest":"Update",
             "issueNewCertificate":"Issue new certificate",
             "downloadCertificat":"Download certificate",
