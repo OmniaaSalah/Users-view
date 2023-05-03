@@ -34,7 +34,7 @@
                 </p-calendar>
             </div> -->
         </div>
-    </div>
+   
 
     <!-----------------------------add row------------------------------->
     <div class="p-5 row gx-5 form-set">
@@ -65,7 +65,7 @@
                     <app-file-upload  view="full" (onFileUpload)="setAttachment(birthDate,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-4 gap-3">
-                    <P class="mb-4">{{'shared.note' | translate}}</P>
+                    <P class="mb-6">{{'shared.note' | translate}}</P>
                     <textarea  [rows]="6" [(ngModel)]="birthDate.comment"  [ngModelOptions]="{standalone: true}" [cols]="40" pInputTextarea [autoResize]="true" placeholder="{{'shared.note' | translate}}"></textarea>
                 </div>
             </div>
@@ -81,4 +81,5 @@
             <button  ><a routerLink="/" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
         </div>
    </div>
+ </div>
 </form>
