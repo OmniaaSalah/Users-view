@@ -164,7 +164,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
         'curriculumIds': this.getCurriculumIds(holiday.curriculums)
         }})
      };
-
+     console.log( this.annualHolidayObj)
     if(this.urlParameter)
     {
       this.annualHolidayService.updateAnnualHoliday(Number(this.urlParameter),this.annualHolidayObj).subscribe((res)=>{
@@ -437,8 +437,15 @@ ngOnDestroy(): void {
 
 
 formateDate(date :Date){
-  let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
-  return d.split('.')[0]
+  if( typeof date != 'string')
+  {
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
+    return d.split('.')[0]
+  }
+  else
+  {
+    return date;
+  }
 
 }
 }
