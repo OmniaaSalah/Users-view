@@ -30,7 +30,7 @@
      </ng-container>
 
      <!-- (isRequestAllowedForWithdrawal | wrapFn : requestDetails?.requestType) &&  -->
-     <ng-container  *ngIf="(currentUserScope==userScopeEnum.Guardian || (currentUserScope==userScopeEnum.Employee && isRequestRelatedToSchool|wrapFn : requestDetails?.requestType))">
+     <ng-container  *ngIf="(currentUserScope==userScopeEnum.Guardian || (currentUserScope==userScopeEnum.Employee && (isRequestRelatedToSchool|wrapFn : requestDetails?.requestType) ))">
        <button class=" btn btn-primary btn--sm px-5"
        [disabled]="onSubmited"
        (click)="withdrawReq(requestDetails?.requestType)"

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { SystemRequestService } from '../../../services/system-request.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
   selector: 'app-request-states',
@@ -13,11 +14,13 @@ export class RequestStatesComponent implements OnInit {
 
   requestInstance = this.route.snapshot.paramMap.get('id')
   get statusEnum(){return StatusEnum}
+  get userScopeEnum(){return UserScope}
 
   @Input() requestDetails
 
 
 
+  currentState
   states
   timeline
 
@@ -30,14 +33,15 @@ export class RequestStatesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRequestStates()
-    this.requestsService.getperformedAction(this.requestInstance).subscribe()
+    // this.requestsService.getperformedAction(this.requestInstance).subscribe()
   }
 
 
   getRequestStates(){
     this.requestsService.getRequestStates(this.requestInstance)
     .subscribe(res=>{
-      this.states = [...res.states?.reverse() ]
+      this.currentState=res
+      this.states = [...res.states?.map(el => ({...el, tasks:el.tasks || []})).reverse() ]
     })
   }
 
