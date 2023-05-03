@@ -17,4 +17,16 @@ export class NotificationService {
   updateNotifications(searchModel){
     return this.http.patch('/Notification/isread',searchModel)
   }
+
+  getNotificationsNames()
+  {
+    return this.http.get('/Notification/names')
+    
+  }
+
+  getSendersNames()
+  {
+    return this.http.get('/Notification/senders')
+    
+  }
 }

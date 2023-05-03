@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild,ElementRef,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { Filtration } from 'src/app/core/classes/filtration';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -15,7 +16,8 @@ import { NotificationService } from '../../service/notification.service';
 })
 export class NotificationListComponent implements OnInit {
   unreadNotificationNumbers;
-  roles=[];
+  notificationsNames=[];
+  receivers=[];
   lang = inject(TranslationService).lang
   @ViewChild('readBtn', { read: ElementRef, static:false }) readBtn: ElementRef;
   @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
@@ -33,8 +35,8 @@ export class NotificationListComponent implements OnInit {
     "page": 1,
     "pageSize": 3,
     "isRead": null,
-    "NotificationType":null,
-    "Sender":null
+    "notificationName":null,
+    "sender":null
   }
   componentHeaderData: IHeader={
 		breadCrump: [
@@ -67,7 +69,20 @@ export class NotificationListComponent implements OnInit {
     }else{
       this.checkLanguage = false
     }
-    this.userInformation.GetRoleList().subscribe(response => {this.roles = response;})
+    this.getSendersName();
+    this.getReceivers();
+  }
+
+  getSendersName()
+  {
+
+    this.notificationService.getNotificationsNames().subscribe((res)=>{this.notificationsNames=res.result})
+
+  }
+
+  getReceivers()
+  {
+    this.notificationService.getSendersNames().subscribe((res)=>{this.receivers=res.result})
   }
 
   getNotifications(searchModel){
@@ -161,8 +176,8 @@ export class NotificationListComponent implements OnInit {
   clearFilter()
   {
     this.searchModel.keyword =''
-    this.searchModel.Sender= null;
-    this.searchModel.NotificationType= null;
+    this.searchModel.sender= null;
+    this.searchModel.notificationName= null;
     this.searchModel.page=1;
     this.getNotifications(this.searchModel)
 

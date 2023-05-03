@@ -9,7 +9,7 @@
   </div>
     <div class="border-dark radius-15 px-5 py-6 bg-white">
         <ng-container *ngIf="parent">
-                <div class="float-btn" (click)="onEditMode=true;getGuardianById()" *ngIf="!onEditMode">
+                <div class="float-btn" (click)="onEditMode=true;getGuardianById()" *ngIf="!onEditMode&&parent.isEditable">
                     <img src="assets/images/shared/pen-blue-filled.svg" alt="">
                 </div>
         </ng-container>
