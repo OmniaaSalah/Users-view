@@ -4,7 +4,7 @@ import { EditNewAnnualHolidayComponent } from './components/edit-new-annual-holi
 import { AnnualHolidayRoutingModule } from './annual-holiday-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HolidayModelComponent } from './components/holiday-model/holiday-model.component';
-import { PrimngModule } from 'src/app/shared/primng/shared-primng.module';
+import { PrimngModule } from 'src/app/primeNg/primeNg.module';
 
 
 

@@ -161,17 +161,18 @@ requestList=[];
     if( requests.includes(reqType)){
       return this.http.put(`/Certificate/withdraw-certificate-request/${id}`).pipe(
         map(res=>{
-          if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error()
+          if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
           else return res
         }),
         take(1))
     }else{
       return this.http.put(`/Student/withdraw-request/${id}`).pipe(
         map(res=>{
-          if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error()
+          if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
           else return res
         }),
         take(1))
+
     }
 
 

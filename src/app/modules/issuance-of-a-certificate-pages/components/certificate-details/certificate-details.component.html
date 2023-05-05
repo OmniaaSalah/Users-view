@@ -918,7 +918,7 @@
                     <span>{{certificate?.SchoolCurriculumName.Ar }}</span>
 
                     <span class="">الفترة الإختبارية:</span>
-                    <span>{{certificate?.TransferDate}}</span>
+                    <span>{{certificate?.ReportingPeriod?.Ar}}</span>
 
                     <span class="">إسم الطالب:</span>
                     <span>{{certificate?.StudentName.Ar}} </span>
@@ -938,7 +938,7 @@
                     <span>{{certificate?.SchoolCurriculumName.En}}</span>
 
                     <span class="">Reporting Period:</span>
-                    <span></span>
+                    <span>{{certificate?.ReportingPeriod?.En}}</span>
 
                     <span class="">Student Name:</span>
                     <span>{{certificate?.StudentName.En}}</span>
@@ -976,17 +976,17 @@
           </thead>
           <ng-container *ngIf="certificate?.Subjects">
             <tr class="text-center" *ngFor="let subject of certificate?.Subjects">
-              <td style="width: 20%;">{{subject.SubjectName.Ar}}</td>
-              <td class="font-en" style="width: 20%;">{{subject.SubjectName.En}}</td>
-              <td style="width: 5%;">{{subject.SubjectMinmumDegree}}</td>
-              <td style="width: 5%;">{{subject.SubjectMaxmumDegree}}</td>
-              <td style="width: 5%;">{{subject.Degree}}</td>
+                <td style="width: 20%;">{{subject.SubjectName.Ar}}</td>
+                <td class="font-en" style="width: 20%;">{{subject?.SubjectName.En}}</td>
+                <td style="width: 5%;">{{subject?.SubjectMinmumDegree}}</td>
+                <td style="width: 5%;">{{subject?.SubjectMaxmumDegree}}</td>
+                <td style="width: 5%;">{{subject?.Degree}}</td>
 
-              <td style="width: 5%;">A+</td>
-              <td style="width: 5%;">1.5</td>
-              <td style="width: 5%;">8</td>
+                <td style="width: 5%;">{{subject?.Rate ||'-'}}</td>
+                <td style="width: 5%;">1.5</td>
+                <td style="width: 5%;">8</td>
 
-              <td colspan="3" style="width: 30%">{{subject.Note}}</td>
+                <td colspan="3" style="width: 30%">{{subject?.Note}}</td>
             </tr>
 
             <tr class="text-center  fw-bold">
@@ -1009,6 +1009,38 @@
               <td style="width: 10%;">{{certificate.StudentAveragePercentage |  number:'1.0-2'}}</td>
 
             </tr>
+
+          </ng-container>
+
+          <ng-container *ngIf="certificate?.Subjects">
+            <ng-container *ngIf="subject.IsAddToFinalScore">
+              <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects">
+                  <td  style="width: 20%;">{{subject.SubjectName.Ar}}</td>
+                  <td class="font-en" style="width: 20%;">{{subject?.SubjectName.En}}</td>
+                  <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
+                  <td style="width: 5%">{{subject?.SubjectMaxmumDegree || '-'}}</td>
+                  <td style="width: 5%;">{{subject?.Degree}}</td>
+
+                  <td style="width: 5%;">{{subject?.Rate || '-'}}</td>
+                  <td style="width: 5%;">1.5</td>
+                  <td style="width: 5%;">8</td>
+                  <td style="width: 30%">{{subject?.Note}}</td>
+                </tr>
+            </ng-container>
+
+
+              <!-- <tr class="text-center bg-gray-150">
+                <td  style="width: 20%;">القرآن</td>
+                <td class="font-en" style="width: 20%;">Quran</td>
+                <td style="width: 5%;">0</td>
+                <td style="width: 5%">100</td>
+                <td style="width: 5%;">50</td>
+
+                <td style="width: 5%;">A+</td>
+                <td style="width: 5%;">1.5</td>
+                <td style="width: 5%;">8</td>
+                <td style="width: 30%"></td>
+              </tr> -->
           </ng-container>
 
           <tr  *ngIf="!certificate?.Subjects?.length">
@@ -1016,23 +1048,7 @@
               <app-informative-block [styles]="{'minHeight':'auto'}" subTitle="{{'emptyList.divisionDegrees' |translate}}" ></app-informative-block>
             </td>
           </tr>
-          <!-- <tr class="text-center bg-gray-150">
-            <td  style="width: 10%;">التربية الأخلاقية</td>
-            <td class="font-en" style="width: 10%;">Moral Education</td>
-            <td style="width: 10%;">0</td>
-            <td style="width: 10%">100</td>
-            <td style="width: 10%;">50</td>
-            <td style="width: 30%"></td>
-          </tr>
 
-          <tr class="text-center bg-gray-150">
-            <td  style="width: 10%;">القرآن</td>
-            <td class="font-en" style="width: 10%;">Quran</td>
-            <td style="width: 10%;">0</td>
-            <td style="width: 10%">100</td>
-            <td style="width: 10%;">50</td>
-            <td style="width: 30%"></td>
-          </tr> -->
 
 
         </table>

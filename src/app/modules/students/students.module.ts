@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { StudentsRoutingModule } from './students-routing.module';
 import { StudentsListComponent } from './components/students-list/students-list.component';
 import { DeletedStudentComponent } from './components/deleted-student/deleted-student.component';
-import { PrimngModule } from 'src/app/shared/primng/shared-primng.module';
+import { PrimngModule } from 'src/app/primeNg/primeNg.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
