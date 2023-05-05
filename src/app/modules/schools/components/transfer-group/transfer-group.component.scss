@@ -5,7 +5,7 @@
 .submitBtn{
   position: absolute;
   top: -7rem;
-  left: 4rem;
+  inset-inline-end: 4rem;
   ::ng-deep .p-progress-spinner{
     width: 3rem !important;
   }

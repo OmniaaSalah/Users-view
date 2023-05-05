@@ -1264,7 +1264,7 @@
             "sendRegisterReq":"Send register request",
             "reRegistration":"Re-registration",
             "specialEducationtype": "Special education type",
-            "parentInfo":"Parent info",
+            "parentInfo":"Parent Information",
             "pendingRequestNum":"pending request number",
             "relatedStudent":"Related student",
             "emirateUid":"Emirates id",
@@ -1794,7 +1794,10 @@
             "schoolTo": "To school",
             "holidayDetails":"Holiday details",
             "requiredUpdate": "Required update",
-            "commentsAndReplays":"Comments / Replies"
+            "commentsAndReplays":"Comments / Replies",
+            "certificatHint":"You can click here, pay the required fees, and complete the certificate issuance process.",
+            "ActionOwner":"Action Owner",
+            "ActionTaken":"Action Taken"
 
 
         },
