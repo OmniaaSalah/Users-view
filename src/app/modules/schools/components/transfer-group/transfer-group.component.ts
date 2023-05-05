@@ -82,11 +82,8 @@ export class TransferGroupComponent implements OnInit {
 
   constructor(private headerService:HeaderService,
     private _schools:SchoolsService,
-    private route: ActivatedRoute,
     private fb:FormBuilder,
     private _grade:GradesService,
-    private _student:StudentsService,
-    private _division:DivisionService,
     private sharedService:SharedService,
     private translate:TranslateService,
     private gradeService:GradesService,
@@ -213,8 +210,8 @@ export class TransferGroupComponent implements OnInit {
       // this.selectedSchool = null
       this.selectedSchool.index= null
       this.selectedSchool.value =null
-    },err=>{
-      this.toastr.error(this.translate.instant('toasterMessage.error'));
+    },(err :Error)=>{
+      this.toastr.error(err.message || this.translate.instant('toasterMessage.error'));
       this.spinner = false
     })
 

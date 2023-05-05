@@ -296,6 +296,13 @@ export class SchoolsService {
 
     postTransferGroup(data){
       return this.http.post('/Student/mass-transfer-request',data)
+      .pipe(
+        map(res=>{
+          if(res.statusCode ==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
+          return res
+        }),
+        take(1)
+      )
     }
 
     getAllSchoolsInPopUp(filter?:Partial<Filter>){

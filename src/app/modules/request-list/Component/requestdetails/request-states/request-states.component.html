@@ -14,11 +14,11 @@
           <div id="content">
               <ul class="timeline text-black">
                   <div class="d-flex gap-3 align-items-center header border-bottom mb-5" >
-                      <span class="action-author mx-2 fw-bold color-primary py-2">صاحب الإجراء</span>
+                      <span class="action-author mx-2 fw-bold color-primary py-2">{{'dashboard.Requests.ActionOwner' | translate}}</span>
                       <div class=" border-end" style="height: 5rem;"></div>
-                      <span class="action-name fw-bold color-primary py-2">الإجراءالمتخذ</span>
+                      <span class="action-name fw-bold color-primary py-2">{{'dashboard.Requests.ActionTaken' | translate}}</span>
                       <div class=" border-end" style="height: 5rem;"></div>
-                      <span class="fw-bold color-primary py-2">إسم الطلب</span>
+                      <span class="fw-bold color-primary py-2">{{'dashboard.SystemSetting.requestName' | translate}}</span>
                   </div>
                   <!-- <hr class="mb-5 mt-0"> -->
 
@@ -43,7 +43,7 @@
                                               <span class="heading heading--tertiary">{{task.rejectThing | currentLang}}</span>
                                           </span> -->
                                           <!-- {{task.status.title | currentLang}} -->
-                                          <span class="color-red-500 me-auto">{{'dashboard.Requests.Pending' |translate}}</span>
+                                          <span class="color-red-500 action">{{'dashboard.Requests.Pending' |translate}}</span>
                                       </div>
                                       <!-- <p class="fs-4 color-gray-800 w-75">{{task.content | currentLang}}</p> -->
 
@@ -71,7 +71,7 @@
 
                                       <span class="color-black-500 fs-4 fw-bold color-skyBlue-500 action-name">{{task.action?.title | currentLang}} </span>
                                       <span class="fw-bold ">{{'dashboard.Requests.' + requestDetails?.requestType |translate}}</span>
-                                      <span class="color-skyBlue-500 me-auto">  {{task?.action?.title | currentLang}}</span>
+                                      <span class="action color-skyBlue-500">  {{task?.action?.title | currentLang}}</span>
                                   </div>
                                   <p class="fs-4 mt-3 color-gray-800 w-75">{{task?.action?.comments}}</p>
 
