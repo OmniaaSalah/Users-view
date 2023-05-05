@@ -218,7 +218,7 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
   }
 
   isRequestRelatedToSchool(requestType){
-    let arr = ['FlexibleHolidayRequest', 'DeleteStudentRequest','MassTransferRequest','StudentRegradingRequestForSchool']
+    let arr = ['ModifyIdentityRequestCaseStudentNotHaveId','ModifyIdentityRequest','FlexibleHolidayRequest', 'DeleteStudentRequest','MassTransferRequest','StudentRegradingRequestForSchool']
     return arr.includes(requestType)
   }
 
@@ -285,8 +285,8 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
       this.router.navigate(['/performance-managment/RequestList'])
       this.onSubmited=false
 
-    },()=>{
-      this.toaster.error(this.translate.instant('toasterMessage.error'))
+    },(err:Error)=>{
+      this.toaster.error(err?.message || this.translate.instant('toasterMessage.error'))
       this.onSubmited=false
 
     })

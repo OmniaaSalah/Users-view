@@ -51,7 +51,9 @@
 
       &__content{
         flex-grow: 1;
-
+        .action{
+          margin-inline-start: auto;
+        }
 
       }
 
