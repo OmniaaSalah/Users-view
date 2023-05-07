@@ -59,6 +59,13 @@ export class SideNavigatorComponent implements OnInit {
           url:'/performance-managment/RequestList/',
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         },
+        {
+          title:'sideBar.educationalSettings.children.Subjects Assessments',
+          key: RouteEnums.Assessments,
+          url:'/performance-managment/assessments/assements-list',
+          icon:'assets/images/sideBar/educational-setting/note-marked.svg'
+
+        },
 
       ]
     },
@@ -175,13 +182,6 @@ export class SideNavigatorComponent implements OnInit {
           key: RouteEnums.Subjects,
           url:'/educational-settings/subject/subjects-list',
           icon:'assets/images/sideBar/educational-setting/micro.svg'
-
-        },
-        {
-          title:'sideBar.educationalSettings.children.Subjects Assessments',
-          key: RouteEnums.Assessments,
-          url:'/educational-settings/assessments/assements-list',
-          icon:'assets/images/sideBar/educational-setting/note-marked.svg'
 
         },
 

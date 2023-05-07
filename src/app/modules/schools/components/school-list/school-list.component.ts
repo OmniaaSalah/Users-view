@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit,OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit,OnDestroy, ViewChild } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
@@ -16,6 +16,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 import { TranslateService } from '@ngx-translate/core';
 import { School } from 'src/app/core/models/schools/school.model';
 import { GradesService } from '../../services/grade/grade.service';
+import { SchoolChartsComponent } from './school-charts/school-charts.component';
 
 
 
@@ -25,6 +26,8 @@ import { GradesService } from '../../services/grade/grade.service';
   styleUrls: ['./school-list.component.scss']
 })
 export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
+  @ViewChild('chartsComp')  chartsComp:SchoolChartsComponent
+
   lang =inject(TranslationService).lang
   displayGradesList:boolean=false
   showLoader:boolean=false

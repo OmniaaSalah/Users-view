@@ -152,7 +152,7 @@
                     <div class="col-xs-4 col-lg-7 evaluationSys" >
                         <div *ngFor="let type of evaluationTypeList" class="field-checkbox">
                             <p-radioButton [inputId]="type.value" [ngModelOptions]="{standalone: true}" formControlName="evaluationType"  (onClick)="checkEvaluationType($event.value)"  [value]="type.value"  ></p-radioButton>
-                            <label [for]="type.value">{{type.name}}</label>
+                            <label [for]="type.value" class="mx-3 mt-2">{{type.name}}</label>
                         </div>
                     </div>
 
