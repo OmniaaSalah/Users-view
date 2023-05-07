@@ -101,7 +101,7 @@
                               <!-- Table Caption -->
                                   <ng-template pTemplate="caption">
                                       <app-table-caption
-                                      (onExport)="export($event)"
+                                      [hasExport]="false"
                                       (onFilter)="filter()"
                                       (onSearch)="search($event)"
                                       (onClear)="clearFilter()">
