@@ -47,7 +47,7 @@
                         <img [src]="card.image" alt="">
                     </div>
                     <div class="card__content" [class.show]="cardsContentStatus[i].active">
-                        <div class="card__content__header"
+                        <div class="card__content__header pt-3"
                         [class.reduce-fs]="cardsHoverStatus[i].active"
                         [style.backgroundColor]="card.content.header.bgColor"
                         (click)="cardsContentStatus[i].active= !cardsContentStatus[i].active">

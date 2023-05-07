@@ -329,16 +329,11 @@ getHolidayNameAndYear()
   this.annualHolidayService.year.next(this.annualHolidayFormGrp.value.year);
 }
 
-
-export(fileType:FileTypeEnum, table:Table){
-  this.exportService.exportFile(fileType,this.holidayList,'')
-}
 filter() {
 
   this.holidayList=JSON.parse(localStorage.getItem('holidayList'));
-  if(this.annualHolidayFormGrp.value.status!=''||this.annualHolidayFormGrp.value.curriculum)
-  {
-    if(this.annualHolidayFormGrp.value.status!=''&&!this.annualHolidayFormGrp.value.curriculum)
+
+    if(this.annualHolidayFormGrp.value.status!='')
     {
 
       this.holidayList = this.holidayList.filter((val) =>
@@ -347,30 +342,12 @@ filter() {
 
     );
     }
-    else if (this.annualHolidayFormGrp.value.status==''&&this.annualHolidayFormGrp.value.curriculum)
+
+    else
     {
-
-      this.holidayList = this.holidayList.filter((val) =>
-
-         val.curriculums[0].id==this.annualHolidayFormGrp.value.curriculum
-
-     );
+        this.holidayList=JSON.parse(localStorage.getItem('holidayList'))
     }
-
-    else if (this.annualHolidayFormGrp.value.status!=''&&this.annualHolidayFormGrp.value.curriculum)
-    {
-
-      this.holidayList = this.holidayList.filter((val) =>
-
-      val.curriculums[0].id==this.annualHolidayFormGrp.value.curriculum && val.flexibilityStatus.value==this.annualHolidayFormGrp.value.status
-
-     );
-    }
-  }
-  else
-  {
-    this.holidayList=JSON.parse(localStorage.getItem('holidayList'))
-  }
+  this.sharedService.filterLoading.next(false);
   this.annualHolidayService.holidayList.next(this.holidayList);
 }
 search(keyWord){
