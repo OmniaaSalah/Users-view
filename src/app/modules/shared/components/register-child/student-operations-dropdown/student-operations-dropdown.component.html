@@ -86,7 +86,7 @@
 
 
 <!-- ارسال طلب اعاده مرحله دراسيه -->
-<p-dialog header="{{'dashboard.students.sendRepeateStudyPhaseReqest' | translate}}" [(visible)]="RepeateStudyPhaseModelOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+<p-dialog header="{{'dashboard.students.sendRepeateStudyPhaseReqest' | translate}}" [(visible)]="RepeateStudyPhaseModelOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw', height:'68vh'}">
 
   <ng-template pTemplate="content">
 
@@ -107,7 +107,9 @@
           optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
           placeholder="{{'dashboard.students.caseOfRepeateStudyPhase'|translate}}" [required]="true"></p-dropdown>
       </div>
-      <div class="d-flex justify-content-end mt-6 mb-4" >
+
+      <div class="py-6"></div>
+      <div class="d-flex justify-content-end" >
           <button class="btn btn-primary" (click)="sendRepeateStudyPhaseReq()" [disabled]="!f.valid || onSubmit">
               {{'shared.send'| translate}}
               <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>

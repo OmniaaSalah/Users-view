@@ -351,6 +351,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
         this.RepeateStudyPhaseModelOpend=false
         this.onSubmit=false
       },()=>{
+        this.RepeateStudyPhaseModelOpend=false
         this.toastr.error(this.translate.instant('toasterMessage.error'))
         this.onSubmit=false
       })
