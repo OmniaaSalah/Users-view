@@ -20,7 +20,6 @@ export class SchoolChartsComponent implements OnInit {
   lang =this.TranslationService.lang
   constructor(
     private schoolService: SchoolsService,
-    private translate: TranslateService,
     private TranslationService:TranslationService,
     public loaderService:LoaderService,
 
@@ -43,9 +42,9 @@ export class SchoolChartsComponent implements OnInit {
   }
 
 
-  private getChartData(): void {
+  public getChartData(filter?): void {
 
-    this.schoolService.getCharts().subscribe(res => {
+    this.schoolService.getCharts(filter).subscribe(res => {
       if (res) {
         this.model.chartData = res;
       this.setCurriculumChartChartData();
@@ -74,8 +73,6 @@ export class SchoolChartsComponent implements OnInit {
         });
         this.model.shoolCurriculumChartStringLabels.push(name);
       }
-
-      console.log(this.model.shoolCurriculumChartLabels);
 
     }
   }

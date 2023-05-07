@@ -65,11 +65,11 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
 
 
   gotoAddAssessment() {
-    this.router.navigate(['/educational-settings/assessments/new-assessment']);
+    this.router.navigate(['/performance-managment/assessments/new-assessment']);
   }
 
   navigateToEditAssessment(id: number): void {
-    this.router.navigateByUrl(`/educational-settings/assessments/edit-assessment/${id}`);
+    this.router.navigateByUrl(`/performance-managment/assessments/edit-assessment/${id}`);
   }
 
   private getRate(): void {
@@ -148,7 +148,7 @@ checkDashboardHeader()
      {
        this.componentHeaderData.breadCrump=
           [
-            { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }
+            { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/performance-managment/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }
          ]
 
 

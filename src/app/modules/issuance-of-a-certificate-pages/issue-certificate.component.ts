@@ -77,7 +77,6 @@ export class IssueCertificateComponent implements OnInit {
     private toastr:ToastrService,
     private userService:UserService,
     private route:ActivatedRoute,
-    private requestsService:SystemRequestService,
 
   ) {
   }
@@ -200,7 +199,6 @@ export class IssueCertificateComponent implements OnInit {
 
   //save other certificate
   onOtherCertificatesSubmitted(){
-    console.log("other")
     this.isBtnLoading=true;
     let data = {
       "studentIds" :this.studentId? [this.studentId] :this.choosenStudents.map(er=>er.id),
@@ -242,7 +240,7 @@ export class IssueCertificateComponent implements OnInit {
     if(this.selectedCertificate.value == CertificatesEnum.GoodBehaviorCertificate) this.display = true;
 
 
-    let arr=[CertificatesEnum.BoardCertificate,CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate]
+    let arr=[CertificatesEnum.BoardCertificate,CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate, CertificatesEnum.GoodBehaviorCertificate]
     if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
 
   }

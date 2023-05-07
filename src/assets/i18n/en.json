@@ -816,6 +816,7 @@
         "userNotAllowedToUploadDegrees":"User not allowed to upload degrees",
         "fileDataShouldBeReviewed":"Attached file data should be reviewed",
         "absenceRaised":"Absence raised Successfully",
+        "absenceStudentDeleted":"Student Deleted from absence records succesfully",
         "It is not allowed to send more than one request to the same school":"It is not allowed to send more than one request to the same school",
         "There is a problem with adding request":"There is a problem with adding request",
         "Registration conditions doesn't match the required":"Registration conditions doesn't match the required",
