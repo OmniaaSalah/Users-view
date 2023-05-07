@@ -79,8 +79,13 @@
                   <div class="title">
                     <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="message.messageSatus ==messageStatusEnum.Pending" />
                     <img class="cardimage" src="assets/images/shared/Person.jpg" />
-                    <span class="tittle" *ngIf="checkLanguage">{{message?.userName?.ar}}</span>
-                    <span class="tittle" *ngIf="!checkLanguage">{{message?.userName?.en}}</span>
+                    <ng-container *ngIf="message?.showSenderName==null||message?.showSenderName">
+                        <span class="tittle" *ngIf="checkLanguage">{{message?.userName?.ar}}</span>
+                        <span class="tittle" *ngIf="!checkLanguage">{{message?.userName?.en}}</span>
+                    </ng-container>
+                    <ng-container *ngIf="message?.showSenderName!=null&&!message?.showSenderName">
+                      ---
+                    </ng-container>
                     <span>/</span>
                     <span class="headerName" *ngIf="checkLanguage">{{message?.jobTitleName?.ar}}</span>
                     <span class="headerName" *ngIf="!checkLanguage">{{message?.jobTitleName?.en}}</span>
