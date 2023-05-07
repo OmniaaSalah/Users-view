@@ -902,7 +902,7 @@
         </div>
       </header>
 
-      <div class="overflow-scroll">
+      <div class=" overflow-x-auto">
         <table class="mt-6 fs-4">
 
 
@@ -978,13 +978,13 @@
             <tr class="text-center" *ngFor="let subject of certificate?.Subjects">
                 <td style="width: 20%;">{{subject.SubjectName.Ar}}</td>
                 <td class="font-en" style="width: 20%;">{{subject?.SubjectName.En}}</td>
-                <td style="width: 5%;">{{subject?.SubjectMinmumDegree}}</td>
-                <td style="width: 5%;">{{subject?.SubjectMaxmumDegree}}</td>
-                <td style="width: 5%;">{{subject?.Degree}}</td>
+                <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
+                <td style="width: 5%;">{{subject?.SubjectMaxmumDegree || '-'}}</td>
+                <td style="width: 5%;">{{subject?.Degree || '-'}}</td>
 
                 <td style="width: 5%;">{{subject?.Rate ||'-'}}</td>
-                <td style="width: 5%;">1.5</td>
-                <td style="width: 5%;">8</td>
+                <td style="width: 5%;">{{subject?.StudentGPA || '-'}}</td>
+                <td style="width: 5%;">{{subject?.StudentHour || '-'}}</td>
 
                 <td colspan="3" style="width: 30%">{{subject?.Note}}</td>
             </tr>
@@ -992,11 +992,11 @@
             <tr class="text-center  fw-bold">
               <td  style="width: 20%;">المجموع</td>
               <td class="font-en" style="width: 20%;">Total</td>
-              <td style="width: 10%;">{{certificate?.TotalSubjectsMin}}</td>
-              <td style="width: 10%">{{certificate?.TotalSubjectsMax}}</td>
-              <td style="width: 10%;">{{certificate?.TotalStudentsDegree}}</td>
+              <td style="width: 10%;">{{certificate?.TotalSubjectsMin || '-'}}</td>
+              <td style="width: 10%">{{certificate?.TotalSubjectsMax || '-'}}</td>
+              <td style="width: 10%;">{{certificate?.TotalStudentsDegree || '-'}}</td>
               <td style="width: 30%" class="font-en" colspan="3" rowspan="2">
-                GPA: 3.22
+                GPA: {{certificate?.TotalSubjectsGPA || 0}}
               </td>
               <td style="width: 30%" rowspan="2"></td>
             </tr>
@@ -1013,7 +1013,7 @@
           </ng-container>
 
           <ng-container *ngIf="certificate?.Subjects">
-            <ng-container *ngIf="subject.IsAddToFinalScore">
+            <ng-container *ngIf="subject?.IsAddToFinalScore">
               <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects">
                   <td  style="width: 20%;">{{subject.SubjectName.Ar}}</td>
                   <td class="font-en" style="width: 20%;">{{subject?.SubjectName.En}}</td>
@@ -1022,8 +1022,8 @@
                   <td style="width: 5%;">{{subject?.Degree}}</td>
 
                   <td style="width: 5%;">{{subject?.Rate || '-'}}</td>
-                  <td style="width: 5%;">1.5</td>
-                  <td style="width: 5%;">8</td>
+                  <td style="width: 5%;">{{subject?.StudentGPA || '-'}}</td>
+                  <td style="width: 5%;">{{subject?.StudentHour || '-'}}</td>
                   <td style="width: 30%">{{subject?.Note}}</td>
                 </tr>
             </ng-container>
