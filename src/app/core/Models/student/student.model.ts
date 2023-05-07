@@ -37,6 +37,7 @@ export interface Student{
         isExemptFromStudyingIslamic: boolean
         dateOfAcceptance: string
 
+        guardianId:number
         // registrationStatus: string
         studentStatus: RegistrationStatus,
         isOwnsLaptop: boolean

@@ -211,8 +211,10 @@ lastDate
     this.divisionService.deleteAbsentStudent(this.schoolId, this.divisionId,this.selectedRecord.student.id,this.filtration.date)
     .subscribe(res=>{
       this.absenceRecord.list.splice(index, 1)
-      this.toasterService.success('تم حذف الطالب من سجل الغياب بنجاح');
+      this.toasterService.success(this.translate.instant('toasterMessage.absenceStudentDeleted'));
       this.getAbsenceRecords()
+    },err=>{
+      this.toasterService.error(this.translate.instant('toasterMessage.error'));
     })
   }
 

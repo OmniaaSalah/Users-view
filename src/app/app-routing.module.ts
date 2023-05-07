@@ -113,6 +113,12 @@ const routes: Routes = [
             canActivate: [ClaimsGuard],
             // data:{allowedClaims: ClaimsEnum.S_MenuItem_Request}
           },
+          {
+            path: 'assessments',
+            loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule),
+            canActivate: [ClaimsGuard],
+            data:{allowedClaims: ClaimsEnum.SE_MenuItem_Rate}
+          },
 
         ]
       },
@@ -132,6 +138,7 @@ const routes: Routes = [
             canActivate: [ClaimsGuard],
             data:{allowedClaims: ClaimsEnum.SE_MenuItem_Exam}
           },
+
         ]
       },
 
@@ -154,12 +161,12 @@ const routes: Routes = [
               data:{allowedClaims: ClaimsEnum.S_MenuItem_Holiday}
             },
 
-            {
-              path: 'assessments',
-              loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule),
-              canActivate: [ClaimsGuard],
-              data:{allowedClaims: ClaimsEnum.SE_MenuItem_Rate}
-            },
+            // {
+            //   path: 'assessments',
+            //   loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule),
+            //   canActivate: [ClaimsGuard],
+            //   data:{allowedClaims: ClaimsEnum.SE_MenuItem_Rate}
+            // },
             {
               path: 'school-year',
               loadChildren: () => import('./modules/school-years/school-years.module').then(m => m.SchoolYearsModule),

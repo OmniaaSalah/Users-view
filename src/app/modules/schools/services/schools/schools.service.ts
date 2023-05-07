@@ -184,11 +184,8 @@ export class SchoolsService {
   // }
 
 
-  getCharts(): Observable<ISchoolChart> {
-    // TODO => Need to implement interceptor
-    return this.http.get('/School/Statistics', {}, {
-
-    });
+  getCharts(filter?:Filter): Observable<ISchoolChart> {
+    return this.http.get('/School/Statistics', filter);
   }
 
 
