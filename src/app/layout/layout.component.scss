@@ -18,20 +18,34 @@
   z-index: -1;
 }
 
-// .side-left{
-//   top: 20rem;
-//   inset-inline-end: 0;
-//   position: fixed;
-//   z-index: -1;
-//   width: 18%;
-//   opacity: .4;
-// }
-// .side-right{
+
+// .top-list {
 //   top: -12rem;
 //   inset-inline-start: 0;
 //   position: fixed;
 //   z-index: -1;
-//   width: 18%;
+//   width: 100%;
+//   opacity: .4;
+//   img{
+//     width: 15%;
+//     display: inline-block;
+//     // flex-grow: 1;
+//   }
+// }
+// .side-left{
+//   bottom: -10rem;
+//   inset-inline-end: 0;
+//   position: fixed;
+//   z-index: -1;
+//   width: 15%;
+//   opacity: .4;
+// }
+// .side-right{
+//   top: 30rem;
+//   inset-inline-start: 0;
+//   position: fixed;
+//   z-index: -1;
+//   width: 15%;
 //   opacity: .4;
 // }
 

@@ -9,6 +9,7 @@ import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.e
 import { CurriculumCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/school.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
+import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 
 @Component({
   selector: 'app-degree-certificate',
@@ -21,6 +22,13 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
   @Output() onCancel: EventEmitter<string> = new EventEmitter();
   @Output() onBack: EventEmitter<string> = new EventEmitter();
 
+
+
+  semesters=[
+    {name:this.translate.instant('shared.firstSemester'), value:SemesterEnum.FirstSemester},
+    {name:this.translate.instant('shared.lastSemester'), value:SemesterEnum.LastSemester},
+    {name:this.translate.instant('shared.finalResult'), value:SemesterEnum.FinalResult}
+  ]
 
   schoolYearsList$ = this.sharedService.getSchoolYearsList()
 
@@ -67,6 +75,7 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
         this.fb.group({
           studentId: student.id,
           yearId:[''],
+          semester:null,
           certificatedType: CertificatesEnum.BoardCertificate,
           gradeCertificateType:''
       })
@@ -81,23 +90,15 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
 
     let data = this.degreeCertificateForm.value.students
 
-
-
     this.certificatesService.postGradeCertificate(data).subscribe(result=>{
       this.onSubmit=false;
-      if(result.statusCode != 'BadRequest'){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.onCancel.emit();
-      }else{
-        if(result?.errorLocalized)
-        {this.toastr.error( result?.errorLocalized[this.lang])}
-        else
-        {this.toastr.error(this.translate.instant('toasterMessage.error'))}
-        this.onBack.emit();
-      }
-    },err=>{
+
+    },(err: Error)=>{
       this.onSubmit=false;
-      this.toastr.error(this.translate.instant('toasterMessage.error'))
+      // this.onBack.emit();
+      this.toastr.error(err.message || this.translate.instant('toasterMessage.error'))
     })
 
 

@@ -192,8 +192,8 @@
         <div class="col-md-6 ">
           <div class="p-4 radius-15 border-dark">
             <div class="d-flex  mb-4 align-items-md-center gap-5">
-              <span class="fw-bold">المنطقة التعليمية:</span>
-              <span></span>
+              <span class="fw-bold">منهاج المدرسه:</span>
+              <span>{{certificate?.SchoolCurriculumName?.Ar }}</span>
             </div>
             <div class="d-flex align-items-md-center gap-5">
               <span class="fw-bold">المدرسة:</span>
@@ -205,8 +205,8 @@
 
         <div class="col-md-6  justify-content-end" dir="ltr">
           <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-            <span class="fw-bold">Educational Zone:</span>
-            <span></span>
+            <span class="fw-bold">Curriculum:</span>
+            <span>{{certificate?.SchoolCurriculumName?.En}}</span>
           </div>
           <div class="d-flex align-items-md-center gap-5 font-en">
             <span class="fw-bold">School:</span>
@@ -220,7 +220,7 @@
         <div class="col-md-6 fs-2 p-4 radius-15 border-dark">
           <p>
             تشهد ادارة المدرسة أن الطالب/ة {{certificate?.StudentArabicName| uppercase}}
-            . مقيد/ة بالصف ({{certificate?.GradeAr}} )، قسم ( {{certificate?.DivisionAr ||'...'}} )، شعبة ( {{certificate?.DivisionAr ||'...'}} )
+            . مقيد/ة بالصف ({{certificate?.GradeAr}} )، شعبة ( {{certificate?.DivisionAr ||'...'}} )
           </p>
           <div class="py-5"></div>
 
@@ -232,8 +232,7 @@
             <p>
               School administration certifies that student
               {{ certificate?.StudentEnglishName| uppercase}} is
-              registered in grade ( {{certificate?.GradeEn}} ), section ( {{certificate?.DivisionEn ||'...'}} ), and
-              class ( {{certificate?.DivisionEn ||'...'}} ).
+              registered in grade ( {{certificate?.GradeEn}} ), section ( {{certificate?.DivisionEn ||'...'}} ).
             </p>
 
             <div class="py-5"></div>
@@ -246,7 +245,7 @@
 
       <div class="py-6"></div>
 
-      <div class="">
+      <!-- <div class="">
         <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
           <div class="col-md-6 fs-2">للاستخدام الرسمي فقط</div>
           <div class="col-md-6 fs-2 text-start font-en" dir="ltr">For Official Use Only</div>
@@ -298,7 +297,7 @@
 
         </div>
 
-      </div>
+      </div> -->
 
       <div class="row g-5 my-6">
         <div class="col-md-6 fs-2">. تعتبر هذه الشهادة صالحة لمدة سنة من تاريخ صدورها</div>
@@ -334,8 +333,8 @@
         <div class="col-md-6 ">
           <div class="">
             <div class="d-flex  mb-4 align-items-md-center gap-5">
-              <span class="fw-bold">المنطقة التعليمية:</span>
-              <span></span>
+              <span class="fw-bold">منهاج المدرسة:</span>
+              <span>{{certificate?.SchoolCurriculumName?.Ar }}</span>
             </div>
             <div class="d-flex align-items-md-center gap-5">
               <span class="fw-bold">المدرسة:</span>
@@ -347,8 +346,8 @@
 
         <div class="col-md-6  justify-content-end" dir="ltr">
           <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-            <span class="fw-bold">Educational Zone:</span>
-            <span></span>
+            <span class="fw-bold">Curriculum:</span>
+            <span>{{certificate?.SchoolCurriculumName?.En }}</span>
           </div>
           <div class="d-flex align-items-md-center gap-5 font-en">
             <span class="fw-bold">School:</span>
@@ -366,7 +365,7 @@
             <p>تاريخ الميلاد: {{certificate?.BirthDate |LocalizeDate}}</p>
             <p>رقم الطالب: {{certificate?.StudentId }}</p>
           </div>
-          <p>. مقيد/ة بالصف ({{certificate?.GradeAr}} )،قسم (...)، شعبة {{certificate?.DivisionAr ||'...'}}</p>
+          <p>. مقيد/ة بالصف ({{certificate?.GradeAr}} )،شعبة {{certificate?.DivisionAr ||'...'}}</p>
 
           <!-- <div class="py-5"></div> -->
 
@@ -382,7 +381,7 @@
               <p>Student Number: {{certificate?.StudentId}}</p>
             </div>
 
-            <p>is registered in grade ( {{certificate?.GradeEn}} ), section (...), and class {{certificate?.DivisionEn ||'...'}}.</p>
+            <p>is registered in grade ( {{certificate?.GradeEn}} ), and class {{certificate?.DivisionEn ||'...'}}.</p>
 
             <!-- <div class="py-5"></div> -->
 
@@ -394,7 +393,7 @@
 
       <div class="py-6"></div>
 
-      <div class="">
+      <!-- <div class="">
         <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
           <div class="col-md-6 fs-2">للإستخدام الرسمي فقط من قبل المدرسة</div>
           <div class="col-md-6 fs-2 text-start font-en" dir="ltr">For Official Use Only by School</div>
@@ -445,9 +444,9 @@
 
         </div>
 
-      </div>
+      </div> -->
 
-      <div class="my-6">
+      <!-- <div class="my-6">
         <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
           <div class="col-md-6 fs-2">للإستخدام الرسمي فقط من قبل الإدارة المختصة</div>
           <div class="col-md-6 fs-2 text-start font-en" dir="ltr">For Official Use Only by Concerned Department</div>
@@ -498,7 +497,7 @@
 
         </div>
 
-      </div>
+      </div> -->
 
     </div>
 
@@ -829,10 +828,10 @@
             <p class="linehieght-2 mb-6">
               قد أتم (ت) بنجاح دراسة جميع المواد المقررة للتخرج طبقاً لبرنامج
               المرحلة الثانوية للعام الدراسي __ ({{certificate?.SchoolYear}}) __ وبهذا
-              قرر منحه (ا) شهادة التخرج بتاريخ
+              قرر منحه (ا) شهادة التخرج بتاريخ {{certificate?.CertificateIssuanceDate | LocalizeDate}}
 
             </p>
-            _____({{newDate | LocalizeDate}}) _____.
+            _____({{certificate?.CertificateIssuanceDate | LocalizeDate}}) _____.
 
           </div>
           <div class="col-md-1 d-flex justify-content-center">
@@ -849,9 +848,9 @@
               with the high school program for the
               Academic Year__ ({{certificate?.SchoolYear}}) __
               Therefore, it has been decided to grant him
-              (a) a graduation certificate on the date of
+              (a) a graduation certificate on the date of {{certificate?.CertificateIssuanceDate | LocalizeDate}}
             </p>
-            ___ ({{newDate | LocalizeDate}}) ___
+            ___ ({{certificate?.CertificateIssuanceDate | LocalizeDate}}) ___
           </div>
         </div>
 
@@ -1317,7 +1316,7 @@
       </div>
 
 
-      <div class="fs-2 border-black p-4 border-2 fs-4 mt-4">
+      <!-- <div class="fs-2 border-black p-4 border-2 fs-4 mt-4">
 
         <div class="d-flex ">
           <div class="col-md-6 ">
@@ -1364,7 +1363,7 @@
           <span class="font-en">Seal / الخاتم</span>
           <span class="font-en">School Principal</span>
         </div>
-      </div>
+      </div> -->
 
     </div>
 
