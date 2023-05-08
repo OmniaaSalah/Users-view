@@ -34,7 +34,7 @@ export class EditNewAssessmentComponent implements OnInit {
       value: false
     }
   ];
-  private readonly assementsListUrl = '/educational-settings/assessments/assements-list';
+  private readonly assementsListUrl = '/performance-managment/assessments/assements-list';
 
   get rateScores(): FormArray {
     return this.assesmentFormGrp.get('rateScores') as FormArray
@@ -163,7 +163,7 @@ export class EditNewAssessmentComponent implements OnInit {
           { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
           {
             label: (this.assessmtId==null||this.assessmtId=='')?  this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System'),
-            routerLink: (this.assessmtId==null||this.assessmtId=='')? '/educational-settings/assessments/new-assessment':'/educational-settings/assessments/edit-assessment/'+this.assessmtId
+            routerLink: (this.assessmtId==null||this.assessmtId=='')? '/performance-managment/assessments/new-assessment':'/performance-managment/assessments/edit-assessment/'+this.assessmtId
           }],
           'mainTitle':{main:(this.assessmtId==null||this.assessmtId=='')? this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System')}
       }

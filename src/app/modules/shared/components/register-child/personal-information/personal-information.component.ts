@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, QueryList, Renderer2, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -17,9 +17,10 @@ import { RegisterChildService } from '../../../services/register-child/register-
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsService } from 'src/app/core/services/claims.service';
-import { MessageService } from '../../../../messages/service/message.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { ParentService } from '../../../../parants/services/parent.service';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 
 @Component({
   selector: 'app-personal-information',
@@ -53,6 +54,7 @@ export class PersonalInformationComponent implements OnInit {
   studentId = +this.route.snapshot.paramMap.get('id')
 
   changeIdentityModelOpened=false
+  isGuardiansModelOpend=false
 
     // << DATA PLACEHOLDER >> //
 
@@ -68,10 +70,22 @@ export class PersonalInformationComponent implements OnInit {
   religions$= this.sharedService.getReligion()
   reasonForNotHaveIdentityOptions$=this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).pipe(debounceTime(1000))
 
+
+
+
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
   AllGuardians$ = this.guardiansService.getGuardianDropdown({}).pipe(map(res =>res.data))
-  AllGuardians = []
-  guardiansFilteration={...Filtration ,PageSize:0}
+
+  selectedGuardianId
+
+  AllGuardians ={
+    list:[],
+    totalAllData:0,
+    total:0,
+    loading:false
+  }
+  guardiansFilteration={...Filtration ,PageSize:30, NationalityId:''}
+	paginationState= paginationInitialState
 
   specialClassOptions = [
     {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
@@ -96,6 +110,8 @@ export class PersonalInformationComponent implements OnInit {
   ngOnInit(): void {
     this.setClassType()
     this.getGuardians()
+
+    this.childService.Student$.subscribe(res=> this.selectedGuardianId = res?.guardianId)
   }
 
   onLazyLoad(event){
@@ -109,11 +125,16 @@ export class PersonalInformationComponent implements OnInit {
 
 
   getGuardians(){
-    this.guardiansService.getGuardianDropdown(this.guardiansFilteration)
-    .pipe(map(res =>res.data))
-    .subscribe(res =>{
+    this.AllGuardians.loading=true
+		this.AllGuardians.list=[]
+    this.guardiansService.getAllParents(this.guardiansFilteration)
+    .subscribe((res:any) =>{
       // this.AllGuardians = [...this.AllGuardians, ...res]
-      this.AllGuardians = res
+      this.AllGuardians.list = res.data
+      this.AllGuardians.totalAllData = res.totalAllData
+			this.AllGuardians.total =res.total
+			this.AllGuardians.loading = false
+      this.paginationState.rows=30
     })
   }
 
@@ -160,5 +181,16 @@ export class PersonalInformationComponent implements OnInit {
     this.childService.onEditMode$.next(false)
   }
 
+  changeGuardian(){
+    this.studentForm.controls['guardianId'].setValue(this.selectedGuardianId)
+    this.isGuardiansModelOpend=false
+    this.onFormSubmitted.emit()
+  }
+
+
+  paginationChanged(event: paginationState) {
+		this.guardiansFilteration.Page = event.page
+		this.getGuardians();
+	}
 }
 

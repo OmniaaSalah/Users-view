@@ -13,12 +13,13 @@
 
 }
 
-textarea{
-    overflow: hidden;
-    border-radius: 2rem;
-    font-size: 1.6rem;
-    width: 100%;
-    height:17.75rem !important;
+
+.subjects{
+    textarea{
+        height:17.75rem !important;
+        overflow: hidden;
+        border-radius: 2rem !important;
+}
 }
 ::ng-deep p-calendar{
     box-shadow: none !important;

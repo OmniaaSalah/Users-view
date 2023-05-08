@@ -89,7 +89,14 @@ export class StudentsService {
   }
 
   updateStudent(id, studentData){
-    return this.http.put(`/Student/${id}`, studentData).pipe(take(1))
+    return this.http.put(`/Student/${id}`, studentData)
+    .pipe(
+      map(res=>{
+        if(res?.statusCode ===HttpStatusCodeEnum.BadRequest) throw new Error()
+        else return res
+      }),
+      take(1)
+    )
   }
   deleteStudent(data){
     return this.http.post(`/Student/delete-request`,data).pipe(take(1))

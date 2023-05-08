@@ -114,12 +114,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
     this.getGradeDetails()
     this.getSubjectsList(this.schoolId)
-    this.initListener()
-  }
 
-  initListener(){
-    this.confirmModelListener()
-    this.onConfirmModelClosed()
   }
 
 
@@ -140,9 +135,17 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
       this.headerService.changeHeaderdata(this.componentHeaderData)
 
       this.initForm(res)
+      this.initListener()
       this.gradeData = res
     })
   }
+
+
+  initListener(){
+    this.confirmModelListener()
+    this.onConfirmModelClosed()
+  }
+
 
   updateGrade(){
     this.isSubmited=true
@@ -209,9 +212,10 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     this.confirmModelService.confirmed$
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(val=>{
+      console.log(this.hasTracks);
+
       this.hasTracks= this.willHasTrack
       this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
-
       if(this.hasTracks) this.resetSubjects()
       else this.resetTracks()
 
@@ -332,7 +336,10 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   }
 
   resetTracks(){
+    console.log('Reseat');
+
     this.subjectsToDelete = this.gradeTracks.value.map(track=> track.subjects).map(subjectArr =>subjectArr[0].gradeSubjectId)
+console.log(this.subjectsToDelete);
 
     this.gradeTracks.clear()
   }

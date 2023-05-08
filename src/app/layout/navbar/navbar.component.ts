@@ -73,7 +73,10 @@ export class NavbarComponent implements OnInit {
     "sortBy": 'update',
     "page": 1,
     "pageSize": null,
-    "isRead": null
+    "isRead": null,
+    "senderIds":null,
+    "arabicNotificationName":null,
+    "englishNotificationName":null
   }
 
   constructor(
@@ -201,7 +204,10 @@ export class NavbarComponent implements OnInit {
         "sortBy": null,
         "page": 1,
         "pageSize": 2,
-        "isRead": null
+        "isRead": null,
+        "senderIds":null,
+        "arabicNotificationName":null,
+        "englishNotificationName":null
       })
     }
     if(value=='1'){
@@ -279,6 +285,7 @@ onScroll()
         ]
       },
 
+      // Appear for school Employee
       {
         id:6,
         enum: RouteEnums.Student_Management,
@@ -309,7 +316,7 @@ onScroll()
           },
           {
             name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),
-            url:'/educational-settings/assessments/assements-list',
+            url:'/performance-managment/assessments/assements-list',
             isHidden: this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
             claims:[ClaimsEnum.SE_MenuItem_Rate]
           },
