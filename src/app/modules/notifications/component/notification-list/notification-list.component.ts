@@ -16,7 +16,7 @@ import { NotificationService } from '../../service/notification.service';
   styleUrls: ['./notification-list.component.scss']
 })
 export class NotificationListComponent implements OnInit {
-  notificationName;
+  notificationName=null;
   sender;
   unreadNotificationNumbers;
   notificationsNames=[];
@@ -91,22 +91,22 @@ export class NotificationListComponent implements OnInit {
   }
 
   getNotifications(searchModel){
-
-   this.searchModel.arabicNotificationName= this.lang=='ar' ? this.notificationName:''
-   this.searchModel.englishNotificationName= this.lang=='en' ? this.notificationName:''
+console.log("kkk")
+   searchModel.arabicNotificationName= this.lang=='ar' ? this.notificationName:null
+   searchModel.englishNotificationName= this.lang=='en' ? this.notificationName:null
     this.skeletonLoading = true
     this.showSpinner = false
-    this.loading=true
-    this.notificationService.getAllNotifications(this.searchModel).subscribe(res=>{
+    this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
  
       this.skeletonLoading= false
-      this.loading=false
       this.notificationsList = res.data  ;
       this.currentNotifications=res.total;
       this.showSpinner = true
       this.sharedService.filterLoading.next(false);
     },(err)=>{ 
        this.sharedService.filterLoading.next(false);
+       this.showSpinner = true
+       this.skeletonLoading= false
       })
 
   }
@@ -166,12 +166,6 @@ export class NotificationListComponent implements OnInit {
   onScroll()
   {
 
-    // if(this.notificationsList.length)
-    // {
-    //     this.showSpinner=false;
-    // }
-    // else
-    // { this.showSpinner=true;}
     if(this.notificationsList.length==0){
       this.skeletonLoading = false
     }else{

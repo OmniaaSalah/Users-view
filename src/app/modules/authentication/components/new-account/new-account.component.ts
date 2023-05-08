@@ -21,6 +21,7 @@ import {  switchMap, takeWhile, tap, timer } from 'rxjs';
   styleUrls: ['./new-account.component.scss']
 })
 export class NewAccountComponent implements OnInit ,OnDestroy{
+  emiratesIdPath;
   showInputForm:boolean=true;
   lang = inject(TranslationService).lang
   isBtnLoading:boolean=false;
@@ -220,7 +221,7 @@ console.log(this.account.accountWay)
       }
       else if(res?.statusCode=='NotAcceptable')
       {
-        this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+        this.toastService.error(this.translate.instant('EmiratesIdIsNotValid'));
       }
       else if(res?.statusCode=='BadRequest')
       {
@@ -257,8 +258,7 @@ getCurrentRegistrationWay()
     this.account.notificationSource=localStorage.getItem('notificationSource');
   }
   setAttachment( files:CustomFile[]){
-   console.log(files[0].url)
-   this.UAEUnregisteredUser.emiratesIdPath=files[0].url;
+   this.emiratesIdPath=files[0].url;
   }
   savePassword()
 {
@@ -272,6 +272,7 @@ getCurrentRegistrationWay()
   if(  localStorage.getItem('userAcountData'))
   {
     this.UAEUnregisteredUser.registrationSource=this.account.notificationSource
+    this.UAEUnregisteredUser.emiratesIdPath=this.emiratesIdPath;
     this.authService.savePassword(password).pipe(
       switchMap(res=>{
 
