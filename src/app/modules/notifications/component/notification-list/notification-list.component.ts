@@ -67,7 +67,7 @@ export class NotificationListComponent implements OnInit {
       this.componentHeaderData.mainTitle.sub = `(${response})`;
       this.headerService.changeHeaderdata(this.componentHeaderData); this. notificationTotal=response
      });
-    this.getNotifications(this.searchModel)
+    this.getNotifications()
 
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
@@ -90,14 +90,13 @@ export class NotificationListComponent implements OnInit {
     this.notificationService.getSendersNames().subscribe((res)=>{this.receivers=res.result})
   }
 
-  getNotifications(searchModel){
-console.log("kkk")
-   searchModel.arabicNotificationName= this.lang=='ar' ? this.notificationName:null
-   searchModel.englishNotificationName= this.lang=='en' ? this.notificationName:null
+  getNotifications(){
+    this.notificationsList=[];
+    this.searchModel.arabicNotificationName= this.lang=='ar' ? this.notificationName:null
+    this.searchModel.englishNotificationName= this.lang=='en' ? this.notificationName:null
     this.skeletonLoading = true
     this.showSpinner = false
-    this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
- 
+    this.notificationService.getAllNotifications(this.searchModel).subscribe(res=>{
       this.skeletonLoading= false
       this.notificationsList = res.data  ;
       this.currentNotifications=res.total;
@@ -108,7 +107,6 @@ console.log("kkk")
        this.showSpinner = true
        this.skeletonLoading= false
       })
-
   }
 
   getNotReadable()
@@ -119,7 +117,7 @@ console.log("kkk")
     this.searchModel.page = 1
     this.searchModel.pageSize = 3
     this.searchModel.isRead = false
-    this.getNotifications(this.searchModel)
+    this.getNotifications()
   }
   getReadable()
   {
@@ -129,13 +127,13 @@ console.log("kkk")
     this.searchModel.page = 1
     this.searchModel.pageSize = 3
     this.searchModel.isRead = true
-    this.getNotifications(this.searchModel)
+    this.getNotifications()
   }
   onSearch(e) {
     this.searchModel.keyword = e.target.value
     this.searchModel.page = 1
     setTimeout(() => {
-    this.getNotifications(this.searchModel)
+    this.getNotifications()
     }, 1500);
     if(this.notificationsList.length == 0){
       this.skeletonLoading = false
@@ -148,7 +146,7 @@ console.log("kkk")
     if(!isRead)
     {
       this.notificationService.unReadNotificationNumber.next(this.unreadNotificationNumbers--)
-      this.getNotifications(this.searchModel)
+      this.getNotifications()
       this.notificationService.updateNotifications({'NotificationId' : [id]}).subscribe(res=>{
       },err=>{
         this.toastr.error(this.translate.instant('Request cannot be processed, Please contact support.'))
@@ -177,7 +175,7 @@ console.log("kkk")
   {
     this.searchModel.page = 1
     this.searchModel.pageSize += 3
-    this.getNotifications(this.searchModel)
+    this.getNotifications()
   }
   clearFilter()
   {
@@ -188,7 +186,7 @@ console.log("kkk")
     this.searchModel.englishNotificationName= null;
     this.searchModel.senderIds= null;
     this.searchModel.page=1;
-    this.getNotifications(this.searchModel)
+    this.getNotifications()
 
   }
   }
