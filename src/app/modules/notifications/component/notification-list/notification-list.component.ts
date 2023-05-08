@@ -37,12 +37,9 @@ export class NotificationListComponent implements OnInit {
     "page": 1,
     "pageSize": 3,
     "isRead": null,
-    "notificationName":null,
-    "sender":null,
+    "senderIds":null,
     "arabicNotificationName":null,
-    "englishNotificationName":null,
-    "arabicSenderName":null,
-    "englishSenderName":null
+    "englishNotificationName":null
   }
   componentHeaderData: IHeader={
 		breadCrump: [
@@ -93,14 +90,12 @@ export class NotificationListComponent implements OnInit {
 
   getNotifications(searchModel){
 
-  //  this.searchModel.arabicNotificationName= this.lang=='ar' ? this.notificationName:''
-  //  this.searchModel.englishNotificationName= this.lang=='en' ? this.notificationName:''
-  //  this.searchModel.arabicSenderName= this.lang=='ar' ? this.sender:''
-  //  this.searchModel.englishSenderName= this.lang=='en' ? this.sender:''
+   this.searchModel.arabicNotificationName= this.lang=='ar' ? this.notificationName:''
+   this.searchModel.englishNotificationName= this.lang=='en' ? this.notificationName:''
     this.skeletonLoading = true
     this.showSpinner = false
     this.loading=true
-    this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
+    this.notificationService.getAllNotifications(this.searchModel).subscribe(res=>{
  
       this.skeletonLoading= false
       this.loading=false
@@ -192,8 +187,7 @@ export class NotificationListComponent implements OnInit {
     this.notificationName= null;
     this.searchModel.arabicNotificationName= null;
     this.searchModel.englishNotificationName= null;
-    this.searchModel.arabicSenderName= null;
-    this.searchModel.englishSenderName= null;
+    this.searchModel.senderIds= null;
     this.searchModel.page=1;
     this.getNotifications(this.searchModel)
 

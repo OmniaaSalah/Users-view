@@ -73,7 +73,10 @@ export class NavbarComponent implements OnInit {
     "sortBy": 'update',
     "page": 1,
     "pageSize": null,
-    "isRead": null
+    "isRead": null,
+    "senderIds":null,
+    "arabicNotificationName":null,
+    "englishNotificationName":null
   }
 
   constructor(
@@ -201,7 +204,10 @@ export class NavbarComponent implements OnInit {
         "sortBy": null,
         "page": 1,
         "pageSize": 2,
-        "isRead": null
+        "isRead": null,
+        "senderIds":null,
+        "arabicNotificationName":null,
+        "englishNotificationName":null
       })
     }
     if(value=='1'){
