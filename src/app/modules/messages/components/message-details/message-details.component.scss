@@ -4,6 +4,21 @@
 @import "src/assets/css/components/buttons";
 @import "src/assets/css/components/forms.scss";
 @import "src/assets/css/components/validation-form.scss";
+::ng-deep{
+  .file-hidden{
+    
+    app-file-upload{
+      .image-uploader__upload{
+        display: none;
+  }
+  .heading {min-height: 0rem !important;}
+  .full-file{
+      //  width:70%;
+      .cancel{display: none;}
+  }
+ }
+}
+}
 
 .main-message-header {
   .left {
