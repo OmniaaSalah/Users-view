@@ -11,7 +11,6 @@ export class NotificationService {
   constructor(private http:HttpHandlerService) { }
 
   getAllNotifications(searchModel?){
-    console.log(searchModel)
     return this.http.post('/Notification',searchModel)
   }
 
