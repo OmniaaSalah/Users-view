@@ -33,9 +33,9 @@
     </div>
 </ng-container>
 
-
-<button *ngIf="scope == 'Guardian'" class="btn btn-primary contactBtn" (click)="showDialog()"> {{'dashboard.schools.contactWithSchool' |translate}}</button>
-
+<div class="position-relative justify-content-end" *ngIf="student$ |async as student">
+     <button *ngIf="scope == 'Guardian'" class="btn btn-primary contactBtn" (click)="showDialog()"> {{'dashboard.schools.contactWithSchool' |translate}}</button>
+</div>
 
 <div class="radius-15 border p-5 mb-5 bg-white custom-form" *ngIf="student$ |async as student">
 

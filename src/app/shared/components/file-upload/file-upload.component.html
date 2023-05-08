@@ -96,7 +96,8 @@
                   <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.url">
                       <div role="button" (click)="openFile(file?.url)" class="d-flex align-items-center gap-5" >
                           <img [style.width.rem]="4.5" src="assets/images/shared/file.svg" alt="">
-                          <span class="word-break-all"> {{file.name || 'ملف'}}</span>
+                          <span class="word-break-all" *ngIf="!file?.name?.ar"> {{file.name || 'ملف'}}</span>
+                          <span class="word-break-all" *ngIf="file?.name?.ar"> {{file.name|currentLang}}</span>
                           <fa-icon role="button" class="color-fuchsia-600 ms-2 cancel" [ngClass]="lang=='ar' ? 'me-auto': 'ms-auto'" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
                       </div>
                       <ng-container *ngIf="hasComment">
