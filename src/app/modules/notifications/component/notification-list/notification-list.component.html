@@ -12,7 +12,7 @@
 </div>
 
 <div class="table-caption">
-<app-table-caption [hasExport]="false" (onFilter)="searchModel.page=1;getNotifications(searchModel)" (onSearch)="searchModel.page=1;searchModel.keyword = $event; getNotifications(searchModel)" (onClear)="clearFilter()">
+<app-table-caption [hasExport]="false" (onFilter)="searchModel.page=1;searchModel.pageSize=3;getNotifications(searchModel)" (onSearch)="searchModel.page=1;searchModel.keyword = $event;searchModel.pageSize=3; getNotifications(searchModel)" (onClear)="clearFilter()">
     <div class="row gx-5 form-set">
         <div class="col-4">
             <label class="label" for="indexType">{{'Notifications.NotificationName'|translate}} </label>
