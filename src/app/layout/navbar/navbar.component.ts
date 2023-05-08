@@ -279,6 +279,7 @@ onScroll()
         ]
       },
 
+      // Appear for school Employee
       {
         id:6,
         enum: RouteEnums.Student_Management,
@@ -309,7 +310,7 @@ onScroll()
           },
           {
             name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),
-            url:'/educational-settings/assessments/assements-list',
+            url:'/performance-managment/assessments/assements-list',
             isHidden: this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
             claims:[ClaimsEnum.SE_MenuItem_Rate]
           },

@@ -1,7 +1,7 @@
 <div class="schools">
     <div class="ui-g">
         <div class="row">
-            <app-school-charts></app-school-charts>
+            <app-school-charts #chartsComp></app-school-charts>
         </div>
 
     </div>
@@ -9,10 +9,10 @@
         <p-table #dt [columns]="cols" [lazy]="true" [value]="schools.list" (onSort)="onSort($event)" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption 
-                (onExport)="onExport($event)" 
-                (onFilter)="this.filtration.Page=1;getSchools()" 
-                (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchools()" 
+                <app-table-caption
+                (onExport)="onExport($event)"
+                (onFilter)="this.filtration.Page=1;getSchools(); chartsComp.getChartData(filtration)"
+                (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchools()"
                 (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
@@ -31,7 +31,7 @@
                         <div class="col">
                             <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
                             <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
-    
+
                         </div>
                     </div>
                     <!-- <div class="row gx-5 form-set">
@@ -175,11 +175,11 @@
 
                 <div class="row" *ngIf="showLoader">
                     <app-skeleton count="7"  height="2rem"></app-skeleton>
-                   
+
                 </div>
         </div>
 
     </div>
 
-    
+
    </p-dialog>

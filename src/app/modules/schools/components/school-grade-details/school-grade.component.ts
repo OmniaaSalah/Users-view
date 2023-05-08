@@ -332,6 +332,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   }
 
   resetTracks(){
+
     this.subjectsToDelete = this.gradeTracks.value.map(track=> track.subjects).map(subjectArr =>subjectArr[0].gradeSubjectId)
 
     this.gradeTracks.clear()

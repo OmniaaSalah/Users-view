@@ -277,25 +277,33 @@
                 </div>
 
                 <ng-container>
-                    <div class="form-set">
+
+                  <div class="d-flex gap-5 align-items-center my-5">
+                    <p class="color-gray-300 fs-4">{{ 'Guardian'|translate }}</p>
+                    <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
+                    <a class="color-skyBlue-500" (click)="isGuardiansModelOpend=true; getGuardians()"> {{'shared.edit' | translate}} </a>
+                  </div>
+
+                  <!-- <p-dropdown
+                  [virtualScroll]="true"
+                  [virtualScrollItemSize]="30"
+                  [lazy]="true"
+                  (onLazyLoad)="onLazyLoad($event)"
+                  [filter]="true"
+                  (onFilter)="guardiansFilteration.KeyWord = $event.filter"
+                  formControlName="guardianId"
+                  [options]="AllGuardians"
+                  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown> -->
+
+                    <!-- <div class="form-set">
                       <label class="label required">{{'Guardian'|translate}}</label>
-                      <!-- <p-dropdown
-                      [virtualScroll]="true"
-                      [virtualScrollItemSize]="30"
-                      [lazy]="true"
-                      (onLazyLoad)="onLazyLoad($event)"
-                      [filter]="true"
-                      (onFilter)="guardiansFilteration.KeyWord = $event.filter"
-                      formControlName="guardianId"
-                      [options]="AllGuardians"
-                      optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown> -->
                       <p-dropdown
                       formControlName="guardianId"
                       [filter]="true"
                       (onFilter)="guardiansFilteration.KeyWord ==$event.filte; getGuardians()"
                       [options]="AllGuardians"
                       optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
-                    </div>
+                    </div> -->
 
                     <div class="form-set" formGroupName="motherLanguage">
                         <label class="label required">{{'shared.nativeLanguage'|translate}}</label>
@@ -410,9 +418,6 @@
                             <p-multiSelect formControlName="studentTalent" [options]="talents$ |async" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
                         </div>
 
-
-
-
                     </div>
 
                     <!-- <ng-container *ngIf="student.emiratesId">
@@ -499,6 +504,59 @@
 
 
 
+
+<p-dialog header="{{'dashboard.SystemSetting.addSchools'|translate}}" (onHide)="paginationState.rows=6" [(visible)]="isGuardiansModelOpend" [modal]="true" [style]="{width: '70vw'}">
+  <ng-template pTemplate="content">
+      <form class="custom-form">
+
+          <app-table-caption
+          [styles]="{background: 'transparent'}"
+          [hasFilter]="false"
+          [hasExport]="false"
+          (onSearch)="guardiansFilteration.KeyWord= $event;guardiansFilteration.page=1; getGuardians()">
+          </app-table-caption>
+
+
+          <div class="col-md-6 mb-6">
+            <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
+              <p-dropdown [showClear]="true" [options]="(countries$ | async)" [(ngModel)]="guardiansFilteration.NationalityId" (onChange)="getGuardians()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
+          </div>
+
+          <div class="row gx-5 gy-4 form-set" >
+              <ng-container *ngIf="!AllGuardians.loading">
+
+                  <ng-container *ngFor="let item of AllGuardians?.list; let i=index">
+                      <div class="col-md-4 d-flex align-items-center gap-3">
+                          <p-checkbox [name]="i" [(ngModel)]="selectedGuardianId" [binary]="true" [trueValue]="item.id" [ngModelOptions]="{standalone: true}"></p-checkbox>
+                          <label class="label label--sm" [for]="i"> {{item.name |currentLang}}</label>
+                      </div>
+                  </ng-container>
+
+              </ng-container>
+
+              <ng-container *ngIf="AllGuardians.loading">
+                  <app-loader></app-loader>
+              </ng-container>
+
+              <ng-container *ngIf="!AllGuardians.total&& !AllGuardians.loading">
+                <app-informative-block title="{{'emptyList.Parent List is empty' |translate}}"></app-informative-block>
+            </ng-container>
+
+
+
+          </div>
+          <div *ngIf="AllGuardians.total > paginationState.rows">
+              <app-pagination [totalItems]="AllGuardians.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+          </div>
+
+          <div class="d-flex  align-items-center justify-content-end mt-6">
+              <button class="btn btn-primary btn--md" (click)="changeGuardian();$event.preventDefault()">
+                  <span>{{'shared.save'| translate}} </span>
+              </button>
+          </div>
+      </form>
+  </ng-template>
+</p-dialog>
 
 
 
