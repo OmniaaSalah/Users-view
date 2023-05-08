@@ -153,19 +153,13 @@ export class AcademicSequenceComponent implements OnInit {
 
     this.certificatesService.postSequenceCertificate({studentEducationCertificates: body}).subscribe(result=>{
       this.isBtnLoading=false;
-      if(result.statusCode != 'BadRequest'){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.onCancel.emit();
-      }else{
-     if(result?.errorLocalized)
-     {this.toastr.error( result?.errorLocalized[this.lang])}
-     else
-     {this.toastr.error(this.translate.instant('toasterMessage.error'))}
-      this.onBack.emit();
-      }
-    },err=>{
-      this.isBtnLoading=false;
-      this.toastr.error(this.translate.instant('toasterMessage.error'))
+
+      },(err:Error)=>{
+        this.isBtnLoading=false;
+        this.onBack.emit();
+      this.toastr.error( err.message || this.translate.instant('toasterMessage.error'))
     })
 
   }

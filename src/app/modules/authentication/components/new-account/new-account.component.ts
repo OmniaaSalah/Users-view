@@ -271,6 +271,7 @@ getCurrentRegistrationWay()
 
   if(  localStorage.getItem('userAcountData'))
   {
+    this.UAEUnregisteredUser.registrationSource=this.account.notificationSource
     this.authService.savePassword(password).pipe(
       switchMap(res=>{
 
