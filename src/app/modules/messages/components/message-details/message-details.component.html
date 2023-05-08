@@ -71,8 +71,17 @@
       <p class="title"> {{messageDetails?.roleName | currentLang}} - {{ messageDetails?.userName | currentLang }}</p>
       <div class="body-content">
           <p>{{ messageDetails?.messegeText }}</p>
-          <p class="time">{{messageDetails?.createdDate | customDate}}</p>
+          <div class="w-100 d-flex">
+              <ng-container *ngIf="messageDetails?.attachments">
+                <div class="file-hidden mx-4"  *ngFor="let attachment of messageDetails?.attachments">
+                         <app-file-upload [files]="[attachment]" [accept]="fileTypesEnum.Pdf" view="full" ></app-file-upload>
+                </div>
+              </ng-container>
+          </div>
+
+         <p class="time">{{messageDetails?.createdDate | customDate}}</p>
       </div>
+      
   </div>
 
     <ng-container *ngFor="let message of messagesReplies">

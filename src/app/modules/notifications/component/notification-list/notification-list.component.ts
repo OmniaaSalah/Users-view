@@ -7,6 +7,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserInformationService } from 'src/app/modules/user-information/service/user-information.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { NotificationService } from '../../service/notification.service';
 
 @Component({
@@ -54,6 +55,7 @@ export class NotificationListComponent implements OnInit {
                private toastr:ToastrService,
                private translate: TranslateService,
                private notificationService: NotificationService,
+               private sharedService:SharedService
                ) { }
 
   ngOnInit(): void {
@@ -102,7 +104,10 @@ export class NotificationListComponent implements OnInit {
       this.notificationsList = res.data  ;
       this.currentNotifications=res.total;
       this.showSpinner = true
-    })
+      this.sharedService.filterLoading.next(false);
+    },(err)=>{ 
+       this.sharedService.filterLoading.next(false);
+      })
 
   }
 

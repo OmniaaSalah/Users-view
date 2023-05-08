@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { MessageStatus } from 'src/app/shared/enums/status/status.enum';
 import { MessageService } from '../../service/message.service';
 
@@ -14,6 +15,7 @@ import { MessageService } from '../../service/message.service';
   styleUrls: ['./message-details.component.scss']
 })
 export class MessageDetailsComponent implements OnInit {
+  get fileTypesEnum () {return FileTypeEnum}
   uploadedFiles: any[] = [];
   imagesResult = []
   attachmentList = [];

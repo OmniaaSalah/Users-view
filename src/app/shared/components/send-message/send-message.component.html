@@ -141,7 +141,7 @@
     </div>
 
     <div class="image-uploader__upload upload-btn">
-      <app-file-upload (onFileUpload)="messageUpload($event)"
+      <app-file-upload (onFileUpload)="messageUpload($event)" [filesLimit]="4"
         (onFileDelete)="messageDeleted($event)"></app-file-upload>
     </div>
 
