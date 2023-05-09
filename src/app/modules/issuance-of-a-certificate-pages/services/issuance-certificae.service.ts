@@ -142,8 +142,8 @@ certificateStatusList;
   // }
 
   // الفصول الدراسيه المنتهيه
-  getAvailableReportingPeriods(studentId){
-    return this.http.get(`/Certificate/check-available-degrees/${studentId}`)
+  getAvailableReportingPeriods(studentId, schoolYear){
+    return this.http.get(`/Certificate/check-available-degrees/${studentId}/${schoolYear}`)
     .pipe(
       map(res=>{
         return res.map(el=> ({value: el, name:this.translate.instant('shared.' + el)}) )
@@ -177,7 +177,7 @@ certificateStatusList;
   }
 
   postInternalGradeCertificate(data){
-    return this.http.post('/Certificate/grades-certificate-request',data)
+    return this.http.post('/certificate/internal-subjects-certificate-request',data)
     .pipe(
       map(res=>{
         if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))

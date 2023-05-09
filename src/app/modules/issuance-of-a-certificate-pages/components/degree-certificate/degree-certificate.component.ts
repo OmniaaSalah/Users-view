@@ -9,7 +9,7 @@ import { CurriculumCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/s
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
-import { forkJoin, share } from 'rxjs';
+import { forkJoin, share, tap } from 'rxjs';
 
 @Component({
   selector: 'app-degree-certificate',
@@ -30,7 +30,9 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
     {name:this.translate.instant('shared.finalResult'), value:SemesterEnum.FinalResult}
   ]
 
-  schoolYearsList$ = this.sharedService.getSchoolYearsList().pipe(share())
+  currentSchoolYear
+
+  schoolYearsList
 
   lang = inject(TranslationService).lang;
   studentId = +this.route.snapshot.paramMap.get('studentId');
@@ -38,7 +40,7 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
   degreescertificates = this.certificatesService.degreescertificates;
 
   onSubmit=false
-
+  isLoading = false
 
   ReportingPeriods:[][]=[]
 
@@ -58,19 +60,44 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(): void {
-    this.fillStudentFormArr(this.choosenStudents)
   }
 
   ngOnInit(): void {
-    this.getAvailableReportingPeriods()
+    this.getScoolYears()
+
+                    // .pipe(
+                    //   tap(list => {
+                    //     console.log(list.find(el => el.status=='Current')?.id);
+
+                    //     this.currentSchoolYear = list.find(el => el.status=='Current')?.id
+                    //   }),
+                    //   share())
   }
 
 
+  getScoolYears(){
+    this.isLoading=true
+    this.sharedService.getSchoolYearsList().subscribe(res=>{
+      this.schoolYearsList = res
+      this.currentSchoolYear = res.find(el => el.status=='Current')?.id
+      this.fillStudentFormArr(this.choosenStudents)
+      this.getAvailableReportingPeriods()
+      this.isLoading=false
+
+    })
+  }
+
   getAvailableReportingPeriods(){
-    let ReportingPeriods$ = forkJoin(this.choosenStudents.map(el => this.certificatesService.getAvailableReportingPeriods(el?.id)))
+    let ReportingPeriods$ = forkJoin(this.choosenStudents.map(el => this.certificatesService.getAvailableReportingPeriods(el?.id , this.currentSchoolYear)))
 
     ReportingPeriods$.subscribe((res :[][])=>{
       this.ReportingPeriods = res || []
+    })
+  }
+
+  onYearSelected(studentId, yearId, index){
+    this.certificatesService.getAvailableReportingPeriods(studentId ,yearId).subscribe(res=>{
+      this.ReportingPeriods[index]=res
     })
   }
 
@@ -79,7 +106,7 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
       this.studentsCtr.push(
         this.fb.group({
           studentId: student.id,
-          yearId:['',Validators.required],
+          yearId:[this.currentSchoolYear,Validators.required],
           semester:[null,  Validators.required],
           certificatedType: this.certificateType,
           gradeCertificateType:''
@@ -93,10 +120,15 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
   submitDegreeCertificate(){
     this.onSubmit=true;
 
-    let data = this.degreeCertificateForm.value.students
+    let gardeData = this.degreeCertificateForm.value.students
+    let internalGardeData = this.degreeCertificateForm.value.students.map((el:any) => {
+      let {gradeCertificateType, certificatedType, ...rest } = el
+      return rest
+    })
+
     let httpReq$ = this.certificateType==CertificatesEnum.GradesCertificate ?
-                  this.certificatesService.postGradeCertificate(data) :
-                  this.certificatesService.postInternalGradeCertificate(data);
+                  this.certificatesService.postGradeCertificate(gardeData) :
+                  this.certificatesService.postInternalGradeCertificate(internalGardeData);
 
       httpReq$.subscribe(result=>{
       this.onSubmit=false;
