@@ -295,7 +295,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.messageService.sendDataFromGuardianToSchool(form).subscribe(
       (res) => {
         this.onSubmit = false
-        // this.router.navigate(['/messages/message-detail/' + res]);
+        this.router.navigate(['/messages/message-detail/' + res]);
         this.toastr.success('تم الارسال بنجاح');
         this.hiddenDialog.emit();
       },
