@@ -178,7 +178,7 @@ export class IssueCertificateComponent implements OnInit {
 
 
   isNextStepRequired(){
-    let arr = [CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate,CertificatesEnum.GoodBehaviorCertificate]
+    let arr = [CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate,CertificatesEnum.GoodBehaviorCertificate, CertificatesEnum.SchoolInternalSubjectsCertificate]
     return arr.includes(this.selectedCertificate.value)
   }
 
@@ -227,21 +227,22 @@ export class IssueCertificateComponent implements OnInit {
 
 
   onStepChanged() {
+    let selectedCertificate = this.selectedCertificate.value
 
-    if ( this.selectedCertificate.value == CertificatesEnum.AcademicSequenceCertificate) this.step=3
+    if ( selectedCertificate== CertificatesEnum.AcademicSequenceCertificate) this.step=3
 
-    if ( this.selectedCertificate.value == CertificatesEnum.BoardCertificate) this.step=4
+    if ( selectedCertificate== CertificatesEnum.BoardCertificate) this.step=4
 
-    if ( this.selectedCertificate.value == CertificatesEnum.GradesCertificate) this.step=5
+    if ( selectedCertificate== CertificatesEnum.GradesCertificate || selectedCertificate== CertificatesEnum.SchoolInternalSubjectsCertificate) this.step=5
 
-    // if ( this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate) this.step=6
-
-
-    if(this.selectedCertificate.value == CertificatesEnum.GoodBehaviorCertificate) this.display = true;
+    // if ( selectedCertificate== CertificatesEnum.DiplomaCertificate) this.step=6
 
 
-    let arr=[CertificatesEnum.BoardCertificate,CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate, CertificatesEnum.GoodBehaviorCertificate]
-    if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
+    if(selectedCertificate== CertificatesEnum.GoodBehaviorCertificate) this.display = true;
+
+
+    let arr=[CertificatesEnum.BoardCertificate,CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate, CertificatesEnum.GoodBehaviorCertificate, CertificatesEnum.SchoolInternalSubjectsCertificate]
+    if (!arr.includes(selectedCertificate))  this.onOtherCertificatesSubmitted()
 
   }
 

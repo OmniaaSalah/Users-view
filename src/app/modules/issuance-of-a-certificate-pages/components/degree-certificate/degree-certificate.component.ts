@@ -1,7 +1,6 @@
 import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -10,6 +9,7 @@ import { CurriculumCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/s
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
+import { forkJoin, share } from 'rxjs';
 
 @Component({
   selector: 'app-degree-certificate',
@@ -17,12 +17,12 @@ import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
   styleUrls: ['./degree-certificate.component.scss']
 })
 export class DegreeCertificateComponent implements OnInit, OnChanges {
-  faAngleDown=faAngleDown
   @Input() choosenStudents;
+  @Input() certificateType!:CertificatesEnum
   @Output() onCancel: EventEmitter<string> = new EventEmitter();
   @Output() onBack: EventEmitter<string> = new EventEmitter();
 
-
+  get certificateTypeEnum() { return CertificatesEnum}
 
   semesters=[
     {name:this.translate.instant('shared.firstSemester'), value:SemesterEnum.FirstSemester},
@@ -30,7 +30,7 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
     {name:this.translate.instant('shared.finalResult'), value:SemesterEnum.FinalResult}
   ]
 
-  schoolYearsList$ = this.sharedService.getSchoolYearsList()
+  schoolYearsList$ = this.sharedService.getSchoolYearsList().pipe(share())
 
   lang = inject(TranslationService).lang;
   studentId = +this.route.snapshot.paramMap.get('studentId');
@@ -40,17 +40,13 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
   onSubmit=false
 
 
+  ReportingPeriods:[][]=[]
+
   degreeCertificateForm = this.fb.group({
     students:this.fb.array([])
   })
   get studentsCtr() { return this.degreeCertificateForm.controls.students as FormArray}
 
-
-  degreeForm = this.fb.group({
-    yearId: '',
-    certificateType: CertificatesEnum.GradesCertificate,
-    gradeCertificateType:''
-   });
 
   constructor(
     private fb:FormBuilder,
@@ -66,17 +62,26 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.getAvailableReportingPeriods()
   }
 
+
+  getAvailableReportingPeriods(){
+    let ReportingPeriods$ = forkJoin(this.choosenStudents.map(el => this.certificatesService.getAvailableReportingPeriods(el?.id)))
+
+    ReportingPeriods$.subscribe((res :[][])=>{
+      this.ReportingPeriods = res || []
+    })
+  }
 
   fillStudentFormArr(students){
     students.forEach(student=>{
       this.studentsCtr.push(
         this.fb.group({
           studentId: student.id,
-          yearId:[''],
-          semester:null,
-          certificatedType: CertificatesEnum.BoardCertificate,
+          yearId:['',Validators.required],
+          semester:[null,  Validators.required],
+          certificatedType: this.certificateType,
           gradeCertificateType:''
       })
       )
@@ -89,8 +94,11 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
     this.onSubmit=true;
 
     let data = this.degreeCertificateForm.value.students
+    let httpReq$ = this.certificateType==CertificatesEnum.GradesCertificate ?
+                  this.certificatesService.postGradeCertificate(data) :
+                  this.certificatesService.postInternalGradeCertificate(data);
 
-    this.certificatesService.postGradeCertificate(data).subscribe(result=>{
+      httpReq$.subscribe(result=>{
       this.onSubmit=false;
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.onCancel.emit();

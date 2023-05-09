@@ -917,7 +917,7 @@
                     <span>{{certificate?.SchoolCurriculumName.Ar }}</span>
 
                     <span class="">الفترة الإختبارية:</span>
-                    <span>{{certificate?.ReportingPeriod?.Ar}}</span>
+                    <span>{{'shared.' + certificate?.ReportingPeriod |translate}}</span>
 
                     <span class="">إسم الطالب:</span>
                     <span>{{certificate?.StudentName.Ar}} </span>
@@ -937,7 +937,7 @@
                     <span>{{certificate?.SchoolCurriculumName.En}}</span>
 
                     <span class="">Reporting Period:</span>
-                    <span>{{certificate?.ReportingPeriod?.En}}</span>
+                    <span>{{'shared.' + certificate?.ReportingPeriod |translate}}</span>
 
                     <span class="">Student Name:</span>
                     <span>{{certificate?.StudentName.En}}</span>
@@ -973,7 +973,7 @@
               <td colspan="3" style="width: 30%">Comments</td>
             </tr>
           </thead>
-          <ng-container *ngIf="certificate?.Subjects">
+          <ng-container *ngIf="certificate?.Subjects?.length">
             <tr class="text-center" *ngFor="let subject of certificate?.Subjects">
                 <td style="width: 20%;">{{subject.SubjectName.Ar}}</td>
                 <td class="font-en" style="width: 20%;">{{subject?.SubjectName.En}}</td>
@@ -1005,13 +1005,13 @@
               <td class="font-en" style="width: 20%;">Average (%)</td>
               <td style="width: 10%;">---</td>
               <td style="width: 10%">---</td>
-              <td style="width: 10%;">{{certificate.StudentAveragePercentage |  number:'1.0-2'}}</td>
+              <td style="width: 10%;">{{certificate?.StudentAveragePercentage |  number:'1.0-2'}}</td>
 
             </tr>
 
           </ng-container>
 
-          <ng-container *ngIf="certificate?.Subjects">
+          <ng-container *ngIf="certificate?.Subjects?.length">
             <ng-container *ngIf="subject?.IsAddToFinalScore">
               <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects">
                   <td  style="width: 20%;">{{subject.SubjectName.Ar}}</td>
@@ -1072,8 +1072,8 @@
 
       <div class="border-black border-3 d-flex align-items-center my-5 p-3">
         <div class="col-md-3">النتيجة</div>
-        <div class="col-md-3">يرفع إلى {{certificate?.NextGrade.Ar}}</div>
-        <div class="col-md-3 text-start font-en">Promoted to {{certificate?.NextGrade.En}}</div>
+        <div class="col-md-3">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
+        <div class="col-md-3 text-start font-en">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
         <div class="col-md-3 text-start font-en">Result</div>
 
       </div>
@@ -1136,7 +1136,7 @@
                   <span>{{certificate?.Curriculum }}</span>
 
                   <span class="">الفترة الإختبارية:</span>
-                  <span>{{certificate?.ReportingPeriod?.Ar}}</span>
+                  <span>{{'shared.' + certificate?.ReportingPeriod |translate}}</span>
 
                   <span class="">إسم الطالب:</span>
                   <span>{{certificate?.StudentArabicName}} </span>
@@ -1156,7 +1156,7 @@
                   <span>{{certificate?.CurriculumEn}}</span>
 
                   <span class="">Reporting Period:</span>
-                  <span>{{certificate?.ReportingPeriod?.En}}</span>
+                  <span>{{'shared.' + certificate?.ReportingPeriod |translate}}</span>
 
                   <span class="">Student Name:</span>
                   <span>{{certificate?.StudentEnglishName}}</span>
@@ -1233,7 +1233,7 @@
             <td class="font-en" style="width: 10%;">Average (%)</td>
             <td style="width: 10%;">---</td>
             <td style="width: 10%">---</td>
-            <td style="width: 10%;">{{certificate.StudentAveragePercentage |  number:'1.0-2'}}</td>
+            <td style="width: 10%;">{{certificate?.StudentAveragePercentage |  number:'1.0-2'}}</td>
             <!-- <td style="width: 30%" >1000</td> -->
           </tr>
         </ng-container>
@@ -1309,8 +1309,8 @@
 
       <div class="border-black border-3 d-flex align-items-center mt-4 p-3">
         <div class="col-md-3">النتيجة</div>
-        <div class="col-md-3">يرفع إلى {{certificate?.NextGrade?.Ar}}</div>
-        <div class="col-md-3 text-start font-en">Promoted to {{certificate?.NextGrade?.En}}</div>
+        <div class="col-md-3">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
+        <div class="col-md-3 text-start font-en">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
         <div class="col-md-3 text-start font-en">Result</div>
 
       </div>

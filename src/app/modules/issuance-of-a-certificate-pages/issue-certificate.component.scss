@@ -1,13 +1,9 @@
 @import "src/assets/css/utils/variables.scss";
-@import "src/assets/css/components/input";
-@import "src/assets/css/components/buttons";
+// @import "src/assets/css/components/input";
+// @import "src/assets/css/components/buttons";
 @import "src/assets/css/components/forms.scss";
-@import "src/assets/css/components/validation-form.scss";
-.content{
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
+// @import "src/assets/css/components/validation-form.scss";
+
 .star{
   color: red;
   font-size: 1.5rem;
