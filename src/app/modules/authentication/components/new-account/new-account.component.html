@@ -71,6 +71,13 @@
                                         </div>
 
                                 </div>
+
+                                <div class="row gx-5 form-set">
+                                    <div class="col-12" *ngIf="showIdentityField">
+                                        <p  for="precantage">{{'dashboard.addChild.identityPhoto' | translate}} <span class="star">*</span></p>
+                                        <app-file-upload    [accept]="fileTypeEnum.Image" [maxFileSize]="3" view="full" (onFileUpload)="setAttachment($event)"></app-file-upload>
+                                    </div>
+                                </div>
                        </form>
                    </div>
             </div>
@@ -352,12 +359,6 @@
                     </div>
                   </div>
                   <div class="row gx-5 mt-4">
-                    <div class="col-md-6">
-                   
-                        <p class="color-gray-300 ">{{'dashboard.addChild.identityPhoto' | translate}}</p>
-                        <app-file-upload    [accept]="fileTypeEnum.Image" [maxFileSize]="3" view="full" (onFileUpload)="setAttachment($event)"></app-file-upload>
-
-                    </div>
                     <div class="col-md-6 custom-form custom-validation-form pt-0">
 
                         <div  [ngClass]="UAEUnregisteredUser?.phone?'d-flex':''">
@@ -392,7 +393,7 @@
            <ng-container *ngIf="step==1">
             <div class="d-flex align-items-center justify-content-end  ">
 
-              <button class="btn btn-primary  "  (click)="saveRegistrationWay()" [disabled]="registrationWayFormGrp.invalid||isBtnLoading" >
+              <button class="btn btn-primary  "  (click)="saveRegistrationWay()" [disabled]="registrationWayFormGrp.invalid||isBtnLoading||(!emiratesIdPath&&showIdentityField)" >
                   <span >{{'sign up.Next'| translate}} </span>
                   <!-- <span *ngIf="showIdentityField">{{'sign up.SignUp'| translate}} </span> -->
                   <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
@@ -433,7 +434,7 @@
         <ng-container  *ngIf="step==5">
             <div class="d-flex align-items-center justify-content-end  ">
             
-                <button class="btn btn-primary " (click)="saveUserObj()" [disabled]="isBtnLoading||(!UAEUnregisteredUser?.phone&&!phoneNumber.valid)||(!UAEUnregisteredUser?.emiratesIdPath)">
+                <button class="btn btn-primary " (click)="saveUserObj()" [disabled]="isBtnLoading||(!UAEUnregisteredUser?.phone&&!phoneNumber.valid)">
                     <span>{{'sign up.Next'| translate}} </span>
                     <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
                 </button>

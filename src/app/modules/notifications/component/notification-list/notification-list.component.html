@@ -12,7 +12,7 @@
 </div>
 
 <div class="table-caption">
-<app-table-caption [hasExport]="false" (onFilter)="searchModel.page=1;searchModel.pageSize=3;getNotifications(searchModel)" (onSearch)="searchModel.page=1;searchModel.keyword = $event;searchModel.pageSize=3; getNotifications(searchModel)" (onClear)="clearFilter()">
+<app-table-caption [hasExport]="false" (onFilter)="searchModel.page=1;searchModel.pageSize=3;getNotifications()" (onSearch)="searchModel.page=1;searchModel.keyword = $event;searchModel.pageSize=3; getNotifications()" (onClear)="clearFilter()">
     <div class="row gx-5 form-set panel">
         <div class="col-4">
             <label class="label" for="indexType">{{'Notifications.NotificationName'|translate}} </label>
@@ -85,12 +85,10 @@
         </button>
     </div>
 
-    <div class="Empty">
-        <app-informative-block *ngIf="notificationsList.length==0 && !skeletonLoading "
-            title="{{'emptyList.Notifications List is empty' |translate}}"
-            src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    </div>
+</div>
 
+<div  *ngIf="notificationsList?.length==0 && !skeletonLoading ">
+        <app-informative-block title="{{'emptyList.Notifications List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </div>
 
 <div *ngIf="skeletonLoading" id="notification-content">

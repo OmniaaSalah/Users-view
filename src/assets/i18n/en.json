@@ -4,6 +4,7 @@
     "Main Page for Employee":"Main page for employee",
     "Employee": "Employee of",
     "Kg":"Kg",
+    "EmiratesIdIsNotValid":"Emirates id is not valid",
     "Phonenumber/Email":"Email / Phone number",
     "WriteDeleteReason": "Write delete Reason",
     "Last Date Of abbsence":"Last date of abbsence",
@@ -544,6 +545,7 @@
             "notPassed":"Not passed",
             "Deleted": "Deleted",
             "Failed": "Failed",
+            "RetakeExam":"Summer Course",
             "FinalFaild":"Final faild",
             "Registered":"Registered",
             "Unregestered":"Unregestered",
@@ -1966,7 +1968,8 @@
             "issueNewCertificate":"Issue new certificate",
             "downloadCertificat":"Download certificate",
             "viewCertificte":"View certificate",
-            "certificateMinimized":" تمّ تصغير ملف الشهادة بنسبة 95% بهدف التصديق."
+            "certificateMinimized":" The certificate file has been reduced by 95% for authentication purposes.",
+            "noDegreesForStudent":"There are no accredited grades for this student in the selected academic year."
 
         },
         "parentHome":{

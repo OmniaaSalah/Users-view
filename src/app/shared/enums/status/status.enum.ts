@@ -43,6 +43,7 @@ export enum StatusEnum {
     Failed = 'Failed',
     Incomplete='Incomplete',
     FinalFaild='FinalFaild',
+    RetakeExam='RetakeExam', //'اعاده امتحان' in case the student failed in some subjects
 
     Flexible='Flexible',
     NotFlexible='NotFlexible',

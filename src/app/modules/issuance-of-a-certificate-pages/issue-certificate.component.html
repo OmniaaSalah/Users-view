@@ -1,11 +1,5 @@
 
-<div class="mb-5">
-    <div class="notification-header dashboard d-flex justify-content-between">
-        <div class="right">
-            <!-- <app-page-header></app-page-header> -->
-        </div>
-    </div>
-
+<div class="mb-5 bg-white p-5 radius-15 border-dark">
 
     <div *ngIf="step==1" class="issune-certificate-content bg-white">
         <div class="custom-form radius-15 border-dark p-5">
@@ -108,22 +102,20 @@
 
     </div>
 
-    <div class="content">
 
-        <div *ngIf="step==3" class="issune-certificate-content">
-            <app-academic-sequence [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-academic-sequence>
-
-        </div>
-
-
-        <div *ngIf="step==4" class="issune-certificate-content">
-            <app-board-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-board-certificate>
-        </div>
+    <div *ngIf="step==3" class="issune-certificate-content">
+        <app-academic-sequence [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-academic-sequence>
 
     </div>
 
+
+    <div *ngIf="step==4" class="issune-certificate-content">
+        <app-board-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-board-certificate>
+    </div>
+
+
     <div *ngIf="step==5" class="issune-certificate-content">
-        <app-degree-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-degree-certificate>
+        <app-degree-certificate [certificateType]="selectedCertificate?.value" [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-degree-certificate>
     </div>
 
 

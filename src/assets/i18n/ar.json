@@ -4,6 +4,7 @@
     "Main Page for Employee":"الصفحة الرئيسية لموظف",
     "Employee":"موظف",
     "Kg":"كغ",
+    "EmiratesIdIsNotValid":"رقم الهوية هذا غير صحيح",
     "Phonenumber/Email":"البريد الإلكتروني / رقم الهاتف المحمول",
     "WriteDeleteReason":"اكتب سبب الحذف",
     "You should Read Code from Mobile to get Location in Google Map":"المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل",
@@ -714,6 +715,7 @@
             "Flexible": "مرنة",
             "NotFlexible": "غير مرنة",
             "Failed": "راسب",
+            "RetakeExam":"إعادة امتحان",
             "FinalFaild":"راسب نهائى",
             "Registered":"مسجل",
             "Unregestered":"غير مسجل",
@@ -1909,6 +1911,7 @@
             "payment": "الدفع",
             "previous": "السابق",
             "Add the required information - Degree Certificate" : "إضافة المعلومات المطلوبة - شهادة الدرجات",
+            "Add the required information - internal Degree Certificate" : "إضافة المعلومات المطلوبة - شهادة المواد الداخليه للمدرسة",
             "Please fill in the following information" : "يرجى ملئ المعلومات التالية ",
             "Save":"حفظ",
             "academic year": "السنة الدراسية",
@@ -1959,7 +1962,8 @@
             "issueNewCertificate":"إصـدار شهــادة جديدة",
             "downloadCertificat":"تحميل الشهادة",
             "viewCertificte":"الاطلاع على الشهادة",
-            "certificateMinimized":" تمّ تصغير ملف الشهادة بنسبة 95% بهدف التصديق."
+            "certificateMinimized":" تمّ تصغير ملف الشهادة بنسبة 95% بهدف التصديق.",
+            "noDegreesForStudent":"لايوجد درجات معتمدة لهذا الطالب فالسنه الدراسية المختارة"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان أبنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",
