@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { MessageStatus } from 'src/app/shared/enums/status/status.enum';
 import { MessageService } from '../../service/message.service';
@@ -29,7 +30,7 @@ export class MessageDetailsComponent implements OnInit {
 
   onSubmit
 
-  constructor(private headerService: HeaderService, private route: ActivatedRoute, private messageService: MessageService, private toastr: ToastrService, private formbuilder: FormBuilder, private router: Router, private translate: TranslateService) { }
+  constructor(private headerService: HeaderService,private userService:UserService, private route: ActivatedRoute, private messageService: MessageService, private toastr: ToastrService, private formbuilder: FormBuilder, private router: Router, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -56,7 +57,6 @@ export class MessageDetailsComponent implements OnInit {
 
   getMessageDetail(){
     this.messageService.getMessageDetailsById(this.routeSub).subscribe(res=>{
-      if(res.messageSatus ==MessageStatus.Pending) this.changeMessageStatus(res.id)
       this.messageDetails = res
       this.messagesReplies = res.messageReplies || []
       let unique: any[] = [...new Set(this.messagesReplies.map(item => item.userName.ar))];
@@ -66,7 +66,7 @@ export class MessageDetailsComponent implements OnInit {
             element.color = "second-message"
         }
       })
-
+      if(res.messageSatus ==MessageStatus.Pending&&(this.messageDetails.scope!=JSON.parse(this.userService.getScope()))) this.changeMessageStatus(res.id)
     })
   }
 
