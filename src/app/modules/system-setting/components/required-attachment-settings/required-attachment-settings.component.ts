@@ -34,7 +34,7 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
 
 
   constructor(
-    private fb :FormBuilder, 
+    private fb :FormBuilder,
     private settingsService:SettingsService,
     private toastr:ToastrService,
     private translate:TranslateService,
@@ -43,7 +43,7 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRequiredFilesSettings()
-    
+
   }
 
 
@@ -96,8 +96,8 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
     return this.fb.group({
         ruleFileId:[file?.ruleFileId??0],
         name: this.fb.group({
-          ar: [file?.name.ar ?? '', Validators.required],
-          en: [file?.name.ar ??'', Validators.required],
+          ar: [file?.name?.ar ?? '', Validators.required],
+          en: [file?.name?.en ??'', Validators.required],
         }),
         type: [file?.type ?? ''],
         size:[file?.size?? 2]
@@ -107,10 +107,10 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
   }
 
   filesCountChange(reqFilesCount, reqIndex){
-    
+
     let filesLength = this.reqFilesCtr(reqIndex).length
     if(filesLength === reqFilesCount) return
-    
+
     let subtractRes = Math.abs(reqFilesCount - filesLength)
     console.log(subtractRes);
 
@@ -132,11 +132,11 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
     this.reqFilesCtr(reqIndex).push(this.fileConditionFormGroup())
   }
 
-  deleteFileConditionFromReq(reqIndex, fileIndex){    
+  deleteFileConditionFromReq(reqIndex, fileIndex){
     this.reqFilesCtr(reqIndex).removeAt(fileIndex)
   }
 
-  
+
 
   deleteRow(index){
   this.requestsFilesCtr.removeAt(index)
