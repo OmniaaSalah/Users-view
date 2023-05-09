@@ -85,11 +85,18 @@
   </div>
 
     <ng-container *ngFor="let message of messagesReplies">
-    <div class="second-message">
-        <p class="title"> {{message.roleName | currentLang}} - {{ message.userName | currentLang }}</p>
+    <div  [ngClass]="message?.scope==messageDetails?.scope ? 'first-message':'second-message'">
+        <p class="title"> {{message?.roleName | currentLang}} - {{ message?.userName | currentLang }}</p>
         <div class="body-content">
-            <p>{{ message.messegeText }}</p>
-            <p class="time">{{message.createdDate | customDate}}</p>
+            <p>{{ message?.messegeText }}</p>
+            <div class="w-100 d-flex">
+                <ng-container *ngIf="message?.attachments">
+                  <div class="file-hidden mx-4"  *ngFor="let attachment of message?.attachments">
+                           <app-file-upload [files]="[attachment]" [accept]="fileTypesEnum.Pdf" view="full" ></app-file-upload>
+                  </div>
+                </ng-container>
+            </div>
+            <p class="time">{{message?.createdDate | customDate}}</p>
         </div>
     </div>
 </ng-container>
