@@ -171,8 +171,8 @@
 
           <ng-container *ngIf="requiredFiles">
               <div class="mt-6" *ngFor="let file of requiredFiles.files; let i =index">
-                  <label class="label fw-bold" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label>
-                  <app-file-upload [accept]="file.type" [maxFileSize]="file.size" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" ></app-file-upload>
+                  <!-- <label class="label fw-bold" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label> -->
+                  <app-file-upload [accept]="file.type" [maxFileSize]="file.size" [title]="file.name |currentLang" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" ></app-file-upload>
               </div>
 
           </ng-container>
