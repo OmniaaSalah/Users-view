@@ -388,9 +388,16 @@ confirmOTP()
   this.getCurrentRegistrationWay();
   this.authService.confirmOtp(this.account,this.otp).subscribe((res)=>{
     this.isBtnLoading=false;
-    this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
-    this.step=3;
-    this.tittle=this.translate.instant('Enter Your password')
+    if(res?.statusCode=="OK")
+    {
+        this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
+        this.step=3;
+        this.tittle=this.translate.instant('Enter Your password')
+    }
+    else
+    {
+      this.toastService.error(res?.errorLocalized[this.lang]);
+    }
   },(err)=>{
     this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
