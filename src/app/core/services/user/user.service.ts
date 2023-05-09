@@ -121,6 +121,11 @@ export class UserService {
     return this.token.user ;
   }
 
+  public getScope() {
+    
+    return this.token.scope ;
+  }
+
   /**
    * This method will update the user claims and persist it
    **/
