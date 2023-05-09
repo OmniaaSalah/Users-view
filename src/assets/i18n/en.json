@@ -1969,7 +1969,7 @@
             "downloadCertificat":"Download certificate",
             "viewCertificte":"View certificate",
             "certificateMinimized":" The certificate file has been reduced by 95% for authentication purposes.",
-            "noDegreesForStudent":"There are no accredited grades for this student in the current academic year."
+            "noDegreesForStudent":"There are no accredited grades for this student in the selected academic year."
 
         },
         "parentHome":{
