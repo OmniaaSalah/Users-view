@@ -13,7 +13,7 @@
                 (onExport)="onExport($event)"
                 (onFilter)="this.filtration.Page=1;getSchools(); chartsComp.getChartData(filtration)"
                 (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchools()"
-                (onClear)="clearFilter()">
+                (onClear)="clearFilter();chartsComp.getChartData(filtration)">
 
                     <div class="row gx-5 form-set">
                         <div class="col">

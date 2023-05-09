@@ -42,15 +42,6 @@ export class MessageDetailsComponent implements OnInit {
     });
     this.getMessageDetail()
 
-
-    // this.attachmentList.forEach(file => {
-    //   //  this.visit.addVisit(newAdHocVisit).pipe(
-    //   //    mergeMap((res1) => this.visit.sendAttachment(file,res1.id))
-    //   //  ).subscribe(res2=>{})
-    //   console.log(file);
-
-    //  })
-
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -62,11 +53,6 @@ export class MessageDetailsComponent implements OnInit {
     );
   }
 
-//   onSearch(e) {
-//     this.searchModel2.keyword = e.target.value
-//     this.searchModel2.page = 1
-//     this.getMessageDetail()
-// }
 
   getMessageDetail(){
     this.messageService.getMessageDetailsById(this.routeSub).subscribe(res=>{
@@ -98,24 +84,19 @@ export class MessageDetailsComponent implements OnInit {
 
   }
   messageUpload(files) {
-    this.imagesResult = files
-    // console.log(this.imagesResult);
+    this.imagesResult=files;
 
   }
 
-  messageDeleted(event) {
-    this.imagesResult = event
-    // console.log(event);
-    // console.log(this.imagesResult);
-
-  }
   sendReply() {
     this.onSubmit=true
     const form = {
       "userId": Number(localStorage.getItem('$AJ$userId')),
       // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
       "messegeText": this.replayForm.value.messegeText,
-      'attachment': this.imagesResult || null
+      'attachment':  this.imagesResult.map((attachment) => {
+        return attachment.url;
+      }) || null,
     }
 
     this.messageService.sendReply(this.routeSub, form).subscribe(res => {

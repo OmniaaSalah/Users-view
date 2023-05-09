@@ -185,7 +185,7 @@ export class SchoolsService {
 
 
   getCharts(filter?:Filter): Observable<ISchoolChart> {
-    return this.http.get('/School/Statistics', filter);
+    return this.http.post('/School/Statistics',filter );
   }
 
 
