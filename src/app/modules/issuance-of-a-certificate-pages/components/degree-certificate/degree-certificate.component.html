@@ -1,5 +1,5 @@
 
-<div class="position-relative">
+<div class="position-relative" *ngIf="!isLoading">
   <div class="submitBtn d-flex">
       <button class="btn btn-primary mx-2" (click)="submitDegreeCertificate()"
           [disabled]="!degreeCertificateForm.valid||onSubmit">{{'dashboard.issue of certificate.Save' | translate}}
@@ -13,7 +13,7 @@
 
 
 
-<div class="custom-form mt-5 mb-6" >
+<div class="custom-form mt-5 mb-6" *ngIf="!isLoading">
     <h4 class="mb-5 fw-bold color-primary" *ngIf="certificateType== certificateTypeEnum.GradesCertificate"> {{'dashboard.issue of certificate.Add the required information - Degree Certificate' | translate}} </h4>
     <h4 class="mb-5 fw-bold color-primary" *ngIf="certificateType== certificateTypeEnum.SchoolInternalSubjectsCertificate"> {{'dashboard.issue of certificate.Add the required information - internal Degree Certificate' | translate}} </h4>
 
@@ -38,7 +38,8 @@
                     <div class="col-md-4 my-4">
                         <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  <span class="star">*</span></label>
                         <p-dropdown
-                        [options]="schoolYearsList$ |async"
+                        [options]="schoolYearsList"
+                        (ngModelChange)="onYearSelected(student?.value?.studentId, $value, i)"
                         optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
                         </p-dropdown>
                     </div>
@@ -69,3 +70,19 @@
 
     </form>
 </div>
+
+
+<ng-container *ngIf="isLoading">
+  <div class="row g-5">
+      <div class="col-md-4">
+          <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+      </div>
+      <div class="col-md-4">
+          <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+      </div>
+      <div class="col-md-4">
+          <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+      </div>
+  </div>
+
+</ng-container>
