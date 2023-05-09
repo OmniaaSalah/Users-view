@@ -14,6 +14,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
+import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 
 @Component({
   selector: 'app-issuance-of-a-certificate',
@@ -47,11 +48,16 @@ export class IssuanceOfACertificateComponent implements OnInit  {
   certificateFormGrp: FormGroup;
 
 
+  semesters=[
+    {name:this.translate.instant('shared.firstSemester'), value:SemesterEnum.FirstSemester},
+    {name:this.translate.instant('shared.lastSemester'), value:SemesterEnum.LastSemester},
+    {name:this.translate.instant('shared.finalResult'), value:SemesterEnum.FinalResult}
+  ]
+
   constructor(
     private location: Location,
     private sharedService:SharedService,
     private translate: TranslateService,
-    private headerService: HeaderService,
     private std: StudentsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -64,6 +70,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
       certificateName:['',[Validators.required]],
       academicCertificates:this.fb.array([]),
       gradeCertificateType:[''],
+      semester:[],
       yearId:['']
 
     });
@@ -191,10 +198,11 @@ export class IssuanceOfACertificateComponent implements OnInit  {
    {
 
     certificate={
-      "studentId": this.studentId,
-       "yearId": this.certificateFormGrp.value.yearId,
-       "gradeCertificateType": this.certificateFormGrp.value.gradeCertificateType
-      }
+        studentId: this.studentId,
+        yearId: this.certificateFormGrp.value.yearId,
+        semester:0,
+        gradeCertificateType: this.certificateFormGrp.value.gradeCertificateType
+    }
 
       this.std.postGradeCertificate(certificate).subscribe(result=>{
         this.isBtnLoading=false;

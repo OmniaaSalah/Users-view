@@ -15,6 +15,7 @@ import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-s
 export class IssuanceCertificaeService {
   allCertificates;
   certificatesList;
+
   degreescertificates= [
     {
       value:DegreesCertificatesEnum.MinisterialSubjects,
@@ -119,19 +120,7 @@ certificateStatusList;
     ]
   }
 
-  // boardsArray =
-  //   [
-  //     {name:"a1",url:"a1"},
-  //     {name:"a2",url:"a2"},
-  //     {name:"a3",url:"a3"},
-  //     {name:"a4",url:"a4"},
-  //     {name:"a5",url:"a5"},
-  //     {name:"a6",url:"a6"},
 
-  //   ]
-
-
-  studentArray = []
 
   getCetificatesTypes(){
     return this.http.get(`/Certificate/Certificates`)
@@ -152,6 +141,18 @@ certificateStatusList;
   //   return this.http.get(`/Certificate/certificates`)
   // }
 
+  // الفصول الدراسيه المنتهيه
+  getAvailableReportingPeriods(studentId){
+    return this.http.get(`/Certificate/check-available-degrees/${studentId}`)
+    .pipe(
+      map(res=>{
+        return res.map(el=> ({value: el, name:this.translate.instant('shared.' + el)}) )
+      }),
+      take(1)
+    )
+
+  }
+
   postBoardCertificate(data){
     return this.http.post('/Certificate/board-certificate-request',data).pipe(take(1))
   }
@@ -165,6 +166,17 @@ certificateStatusList;
   }
 
   postGradeCertificate(data){
+    return this.http.post('/Certificate/grades-certificate-request',data)
+    .pipe(
+      map(res=>{
+        if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
+        else return res
+      }),
+      take(1)
+      )
+  }
+
+  postInternalGradeCertificate(data){
     return this.http.post('/Certificate/grades-certificate-request',data)
     .pipe(
       map(res=>{
@@ -195,6 +207,7 @@ certificateStatusList;
   {
     return this.http.post('/Certificate/certificate-requests',filtration).pipe(take(1))
   }
+
   deleteCertificate(id)
   {
     return this.http.delete(`/Certificate/request/${id}`).pipe(take(1))
