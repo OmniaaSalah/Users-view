@@ -18,7 +18,7 @@
                 <!-- Navigations Options -->
                 <ul class="tabView__nav">
                     <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==2" (click)="step=2; ngOnInit()" ><span>{{'dashboard.schools.tracks'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==2" (click)="step=2; getGradeDetails()" ><span>{{'dashboard.schools.tracks'| translate}} </span></li>
                     <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeLecture" [class.active]="step==3" (click)="step=3; ngOnDestroy()"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
                     <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeStudents" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.gradeStudents'| translate}} </span></li>
                 </ul>
@@ -53,9 +53,19 @@
 
                             <ng-container *ngIf="gradeData">
                                 <div class="mb-5 px-5 d-flex align-items-center">
+
+
                                     <!-- formControlName="hasTracks" -->
-                                    <p-checkbox [(ngModel)]="hasTracks" (ngModelChange)="onTracksModeChange($event)" [ngModelOptions]="{standalone: true}" [binary]="true" label="{{'dashboard.schools.includingTracks'| translate}}"  [style]="{'font-size':'2rem'}"></p-checkbox>
-                                    <div class="me-auto" [class]="lang=='ar'? 'me-auto': 'ms-auto'">
+                                    <div class="d-flex align-items-center gap-3">
+                                      <label class="ms-3" for="description">{{'dashboard.schools.includingTracks'| translate}}</label>
+                                      <p-inputSwitch name="status" [(ngModel)]="hasTracks" (onChange)="onTracksModeChange($event?.checked)" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+                                      <span class="mb-2">
+                                          {{ hasTracks ? ('shared.yes' | translate): ('shared.no' | translate)}}
+                                      </span>
+                                    </div>
+
+                                    <!-- <p-checkbox [(ngModel)]="hasTracks" (ngModelChange)="onTracksModeChange($event)" [ngModelOptions]="{standalone: true}" [binary]="true" label="{{'dashboard.schools.includingTracks'| translate}}"  [style]="{'font-size':'2rem'}"></p-checkbox> -->
+                                    <div class="" [class]="lang=='ar'? 'me-auto': 'ms-auto'">
                                         <button class="btn btn-primary btn--md " *ngIf="hasTracks" (click)="addTrack()">
                                             <fa-icon class="icon" [icon]="faPlus"></fa-icon>
                                             <span>{{'dashboard.schools.addTrack'|translate}}</span>
