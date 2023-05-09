@@ -39,7 +39,7 @@
                         <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  <span class="star">*</span></label>
                         <p-dropdown
                         [options]="schoolYearsList"
-                        (ngModelChange)="onYearSelected(student?.value?.studentId, $value, i)"
+                        (ngModelChange)="onYearSelected(student?.value?.studentId, $event, i)"
                         optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
                         </p-dropdown>
                     </div>

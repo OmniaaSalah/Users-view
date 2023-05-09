@@ -27,10 +27,12 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 export class SchoolGradeComponent implements OnInit, OnDestroy {
   faPlus=faPlus
   openDeleteConfirmation:boolean=false;
+
   deleteConfirmationCase;
   deletedSubjectId;
   deletedTrackIndex;
   deletedSubjectIndex;
+
   currentUserScope = inject(UserService).getCurrentUserScope()
   lang = inject(TranslationService).lang
   onDestroy$ = new Subject()
@@ -114,6 +116,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
     this.getGradeDetails()
     this.getSubjectsList(this.schoolId)
+    this.initListener()
 
   }
 
@@ -130,12 +133,12 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     this.gradeData=null
     this.gradeService.getGrade(this.schoolId, this.gradeId).subscribe((res :SchoolGrade)=>{
       this.hasTracks = res.hasTracks
+
       // this.gradeForm.patchValue(res as any)
       this.componentHeaderData.subTitle.sub = ` (${getLocalizedValue(res.name)})`
       this.headerService.changeHeaderdata(this.componentHeaderData)
 
       this.initForm(res)
-      this.initListener()
       this.gradeData = res
     })
   }
@@ -209,15 +212,17 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   }
 
   confirmModelListener(){
+
     this.confirmModelService.confirmed$
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(val=>{
-      console.log(this.hasTracks);
-
-      this.hasTracks= this.willHasTrack
-      this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
-      if(this.hasTracks) this.resetSubjects()
-      else this.resetTracks()
+      console.log(val);
+      if(val){
+        this.hasTracks= this.willHasTrack
+        this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
+        if(this.hasTracks) this.resetSubjects()
+        else this.resetTracks()
+      }
 
     })
   }
@@ -226,7 +231,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     this.confirmModelService.onClose$
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(val=>{
-      this.hasTracks= !this.willHasTrack
+      if(val) this.hasTracks= !this.willHasTrack
     })
   }
 
