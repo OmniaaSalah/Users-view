@@ -80,6 +80,7 @@ export class SchoolChartsComponent implements OnInit {
 
 
   private setRegionSchoolsChartData(): void {
+    this.model.schoolCityChartStringLabels=[];
     const schoolCity = this.model.chartData.schoolCity;
     if (schoolCity) {
 

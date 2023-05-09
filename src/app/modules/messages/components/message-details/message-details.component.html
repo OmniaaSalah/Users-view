@@ -35,12 +35,12 @@
                         </ng-template>
 
                     </p-fileUpload> -->
-                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
+                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" [filesLimit]="4"></app-file-upload>
 
                 </div>
             </div>
 
-                <button (click)="sendReply()" [disabled]="replayForm.invalid" style="float: left;" class="btn btn-primary">
+                <button (click)="sendReply()" [disabled]="replayForm.invalid||onSubmit" style="float: left;" class="btn btn-primary">
                   {{'dashboard.Messages.Send' | translate}}
                   <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
                 </button>

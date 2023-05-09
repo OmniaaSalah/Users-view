@@ -197,7 +197,7 @@
     <div class="image-uploader__upload upload-btn">
 
 
-      <app-file-upload (onFileUpload)="messageUpload($event)"
+      <app-file-upload (onFileUpload)="messageUpload($event)" [filesLimit]="4"
         (onFileDelete)="messageDeleted($event)"></app-file-upload>
     </div>
 
@@ -279,7 +279,7 @@
 
     <div class="image-uploader__upload upload-btn">
 
-      <app-file-upload (onFileUpload)="messageUpload($event)"
+      <app-file-upload (onFileUpload)="messageUpload($event)" [filesLimit]="4"
         (onFileDelete)="messageDeleted($event)"></app-file-upload>
     </div>
 
@@ -289,7 +289,7 @@
 
 <div class="d-flex justify-content-end">
   <button (click)="sendMessage()" class="btn btn-primary"
-    [disabled]="(speaEmpForm.invalid && parentForm.invalid && schoolEmpForm.invalid) ||onSubmit">
+    [disabled]="(speaEmpForm.invalid && currentUserscope == 'SPEA')||(parentForm.invalid && currentUserscope == 'Guardian' )||(schoolEmpForm.invalid&& currentUserscope == 'Employee') ||onSubmit">
     {{'dashboard.Messages.Send' |translate}}
     <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
 
