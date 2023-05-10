@@ -58,6 +58,7 @@ export class SchoolChartsComponent implements OnInit {
   }
 
   private setCurriculumChartChartData(): void {
+    this.model.shoolCurriculumChartLabels=[];
     const schoolCurriculum = this.model.chartData.schoolCurriculum;
 
     if (schoolCurriculum) {
@@ -81,6 +82,7 @@ export class SchoolChartsComponent implements OnInit {
 
   private setRegionSchoolsChartData(): void {
     this.model.schoolCityChartStringLabels=[];
+    this.model.schoolCityChartLabels=[];
     const schoolCity = this.model.chartData.schoolCity;
     if (schoolCity) {
 

@@ -286,7 +286,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       messageTypeId: this.parentForm.value.messageType,
       // "schoolId": Number(localStorage.getItem('schoolId')),
       schoolId: this.studentSchool,
-      attachment:
+      attachments:
         this.imagesResult.map((attachment) => {
           return attachment.url;
         }) || null,
@@ -316,7 +316,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
         replyPossibility: this.schoolEmpForm.value.switch2,
         messegeText: this.schoolEmpForm.value.description,
         messageTypeId: this.schoolEmpForm.value.messageType,
-        attachment:
+        attachments:
           this.imagesResult.map((attachment) => {
             return attachment.url;
           }) || null,
