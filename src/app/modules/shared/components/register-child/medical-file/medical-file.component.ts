@@ -26,25 +26,25 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
   get claimsEnum() {return ClaimsEnum}
 
   isSpeaNurse =  this.cliamsService.isUserAllowedTo(this.claimsEnum.S_N_U_StudentHeightAndWeight)
-  
+
   step=0
   booleanOptions = this.sharedService.booleanOptions
   diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
-  
-  
+
+
   // << DATA PLACEHOLDER >> /
   studentId = this.route.snapshot.paramMap.get('id')
   childId = this.route.snapshot.paramMap.get('childId')
 
 
   isLoading=true
-  medicalFile 
+  medicalFile
 
 
     // << FORMS >> //
     medicalFileForm= this.fb.group({
-      listOfChronicDiseases: [['أمراض القلب','السكرى'], Validators.required],
-      listOfAllergicDiseases: [['سيلان الأنف التحسسي '], Validators.required],
+      listOfChronicDiseases: [[], Validators.required],
+      listOfAllergicDiseases: [[]],
       disabilities: ['dff'],
       isTheSonOfDetermination: [true, Validators.required],
       fats: ['', Validators.required],
@@ -52,7 +52,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       bloc:[5, Validators.required],
       raise: ['', Validators.required],
       shortage: [4,Validators.required],
-      dietFollowed: ['اكتب النظام الغذائي المتبع لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء ',Validators.required],
+      dietFollowed: ['',Validators.required],
       vaccinationBook:[''],
       isAthletic: ['',Validators.required],
       weight: ['',Validators.required],
