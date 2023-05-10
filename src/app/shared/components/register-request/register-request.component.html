@@ -1,5 +1,5 @@
 
-<div class="bg-white position-relative">
+<div class="bg-white position-relative p-5">
 
 
     <div class="submitBtn d-flex justify-content-end align-items-center gap-4" >
@@ -166,7 +166,7 @@
     <div *ngIf="childRegistrationStatus==registrtionStatusEnum.Withdrawal">
         <div class=" d-flex align-items-center gap-5 radius-15 border-dark p-5 mb-6">
             <p class="color-gray-300">{{'shared.grade' | translate}}</p>
-            <h4 class="color-primary">{{(selectedGrade?.name | currentLang) ||' الصف الرابع'}}</h4>
+            <h4 class="color-primary">{{(selectedGrade?.name | currentLang) ||'لم يحدد'}}</h4>
         </div>
     </div>
 
@@ -196,7 +196,7 @@
 
         <div class="border p-5 radius-12 mt-5">
 
-            <h2 class="heading heading--secondary mb-5">{{'dashboard.request-list.Available schools' | translate}}({{schools.total}})</h2>
+            <h2 class="heading heading--secondary mb-5 required">{{'dashboard.request-list.Available schools' | translate}}({{schools.total}})</h2>
             <div class="cards row g-4" *ngIf="!schools.loading && schools.total">
 
                 <div class=" col-md-4" style="cursor: pointer;"
@@ -213,7 +213,7 @@
                             <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
                                 <img src="assets/images/shared/location.svg" alt="">
                                 <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
-                                <span class="color-gray-200">دبي، {{school.state?.ar}}</span>
+                                <span class="color-gray-200 fs-5">دبي، {{school?.address |currentLang}}</span>
 
                             </div>
                         </div>
@@ -230,19 +230,19 @@
         <app-loader *ngIf="schools.loading"></app-loader>
 
         <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
-            <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+            <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}"></app-informative-block>
         </ng-container>
 
 
         <ng-container *ngIf="!schools.totalAllData && !schools.loading">
-            <app-informative-block subTitle="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+            <app-informative-block subTitle="{{'emptyList.schools' |translate}}"></app-informative-block>
         </ng-container>
     </ng-container>
 
     <ng-container *ngIf="!selectedGrade">
-        <h2 class="heading heading--secondary mb-5">{{'dashboard.request-list.Available schools' | translate}}</h2>
+        <h2 class="heading heading--secondary mb-5 required">{{'dashboard.request-list.Available schools' | translate}}</h2>
 
-        <app-informative-block subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+        <app-informative-block subTitle="{{'emptyList.youShouldSelectGarde' |translate}}"></app-informative-block>
     </ng-container>
     <!-- Available Schools ------------------------>
 

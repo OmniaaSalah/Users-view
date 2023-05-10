@@ -511,18 +511,33 @@
 
           <app-table-caption
           [styles]="{background: 'transparent'}"
-          [hasFilter]="false"
           [hasExport]="false"
+          (onFilter)="guardiansFilteration.page=1;getGuardians()"
           (onSearch)="guardiansFilteration.KeyWord= $event;guardiansFilteration.page=1; getGuardians()">
+
+              <div class="row gx-5">
+                <div class="col-md-4">
+                    <!-- [ngClass]="{'ng-invalid ng-dirty': IdentityNumCtr.errors && IdentityNumCtr.errors?.['pattern']}" -->
+                    <label class="label" for="day">{{'dashboard.addChild.Identification Number' | translate}}</label>
+                    <input
+                    [LangRestrict]="'numb'"
+                    [(ngModel)]="guardiansFilteration.emiratesId"
+                    name="emiratesId"
+                    pInputText
+                    placeholder="{{'dashboard.addChild.Identification Number' | translate}}" />
+                    <!-- <div *ngIf="IdentityNumCtr.errors?.['pattern']" class="mt-2 color-red-500 fs-4"> {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}</div> -->
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
+                      <p-dropdown [showClear]="true" [options]="(countries$ | async)" [(ngModel)]="guardiansFilteration.NationalityId" (onChange)="getGuardians()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                  </div>
+              </div>
           </app-table-caption>
 
 
-          <div class="col-md-6 mb-6">
-            <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-              <p-dropdown [showClear]="true" [options]="(countries$ | async)" [(ngModel)]="guardiansFilteration.NationalityId" (onChange)="getGuardians()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
-          </div>
 
-          <div class="row gx-5 gy-4 form-set" >
+          <div class="row gx-5 gy-4 form-set mt-5" >
               <ng-container *ngIf="!AllGuardians.loading">
 
                   <ng-container *ngFor="let item of AllGuardians?.list; let i=index">

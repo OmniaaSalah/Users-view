@@ -96,8 +96,8 @@
                             </div>
                             <span *ngIf="!school?.grageNumber" class="color-gray-300">{{'shared.notFound' |translate}}</span>
                         </td>
-                        <td>{{school.city |currentLang}}</td>
-                        <td>{{school.state|currentLang}}</td>
+                        <td>{{(school.city |currentLang) || 'shared.notFound' |translate}}</td>
+                        <td>{{ (school.state  | currentLang ) || 'shared.notFound' |translate}}</td>
                         <td>{{school.curriculum|currentLang}}</td>
                         <td>{{school.studentCount}}</td>
                         <td>{{school.establishmentDate | LocalizeDate}}</td>
