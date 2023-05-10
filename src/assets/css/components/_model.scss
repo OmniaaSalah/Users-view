@@ -1,5 +1,9 @@
-::ng-deep p-dialog{
-    .p-dialog-mask{z-index: 900000 !important;}
+::ng-deep p-dialog, ::ng-deep p-dynamicdialog{
+    .p-dialog-mask{
+      z-index: 10000000 !important;
+
+
+    }
     .p-dialog{
 
         .p-dialog-header{

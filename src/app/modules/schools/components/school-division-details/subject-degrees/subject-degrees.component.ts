@@ -60,9 +60,9 @@ export class SubjectDegreesComponent implements OnInit {
     private toaster:ToastService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
-    private exportService:ExportService,
     private translate:TranslateService,
-    private indexService:IndexesService
+    private indexService:IndexesService,
+
   ) { }
 
   ngOnInit(): void {
@@ -98,7 +98,7 @@ export class SubjectDegreesComponent implements OnInit {
     }
     this.divisionService.improvementStudentDegree(this.schoolId,this.divisionId,this.stuentToImproveDegree.id, this.subjectId,student).subscribe(res=>{
 
-      this.toaster.success('تم تحسين درجات الطالب بنجاح')
+      this.toaster.success(this.translate.instant('toasterMessage.DegreeImproved'))
       this.getSubjectDegrees()
       this.stuentToImproveDegree=null
       this.selectedImprovement=null
@@ -111,12 +111,12 @@ export class SubjectDegreesComponent implements OnInit {
   approveOrRejectDegrees(status){
     this.divisionService.approveOrRejectSubjectDegrees(this.schoolId,this.divisionId,this.gradeId,{subjectid:this.subjectId, status,semester: this.semester})
     .subscribe(res=>{
-      if(status==2) this.toaster.success('تم قبول الدرجات المرفقه بنجاح')
-      if(status==3) this.toaster.success('تم رفض الدرجات المرفقه بنجاح')
+      if(status==2) this.toaster.success(this.translate.instant('toasterMessage.degreesAccepted'))
+      if(status==3) this.toaster.success(this.translate.instant('toasterMessage.degreesRejected'))
       this.ref.close(true);
 
     },()=>{
-      this.toaster.error('حدث خطأز يرجى المحاوله مره اخرى')
+      this.toaster.error(this.translate.instant('toasterMessage.error'))
     })
   }
 

@@ -86,10 +86,12 @@
                     <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.employeeName'|translate }}
 
                     </th>
-                    <th pSortableColumn="category"><p-sortIcon field="category"></p-sortIcon>{{'dashboard.schools.employeeNickname'|translate }}
+                    <th pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.employeeNickname'|translate }}
 
                     </th>
-                    <th pSortableColumn="category"><p-sortIcon field="category"></p-sortIcon>{{'dashboard.schools.jobTitle'|translate }}
+                    <th pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'shared.gender'|translate }}
+                    </th>
+                    <th pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.jobTitle'|translate }}
 
                     </th>
                     <th pSortableColumn="quantity"><p-sortIcon field="quantity"></p-sortIcon>{{'shared.email'|translate }}
@@ -113,6 +115,7 @@
                     <td>{{employee?.employeeIdNumber}}</td>
                     <td>{{employee?.name |currentLang}}</td>
                     <td>{{employee?.surName |currentLang}}</td>
+                    <td>{{'shared.genderType.' + employee.gender |translate}}</td>
                     <td>{{employee?.jobTitle | currentLang}}</td>
                     <td ><span class="position-relative" pTooltip="{{employee?.email}}" [autoHide]="true" tooltipPosition="top">{{employee?.email | truncate:15}}</span></td>
                     <td>{{employee?.phoneNumber}}</td>

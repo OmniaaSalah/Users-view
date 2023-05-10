@@ -8,6 +8,7 @@ import { Guardian } from 'src/app/core/models/guardian/guardian.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class ParentService {
 
   constructor(private http: HttpHandlerService,
     private translate:TranslateService,
+    private sharedService:SharedService,
     private tableLoaderService: LoaderService) {
 
    }

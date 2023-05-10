@@ -84,7 +84,7 @@ export class PersonalInformationComponent implements OnInit {
     total:0,
     loading:false
   }
-  guardiansFilteration={...Filtration ,PageSize:30, NationalityId:''}
+  guardiansFilteration={...Filtration ,PageSize:30, NationalityId:'', emiratesId:''}
 	paginationState= paginationInitialState
 
   specialClassOptions = [
@@ -135,6 +135,11 @@ export class PersonalInformationComponent implements OnInit {
 			this.AllGuardians.total =res.total
 			this.AllGuardians.loading = false
       this.paginationState.rows=30
+      this.sharedService.filterLoading.next(false);
+
+    },()=>{
+      this.sharedService.filterLoading.next(false);
+
     })
   }
 
