@@ -46,7 +46,7 @@
                       <span>{{comment.roleName | currentLang}}</span>
                     </ng-container>
                   </div>
-                  <div class="comment__message p-4 radius-15 mt-3" *ngIf="comment?.reply?.lengeth">
+                  <div class="comment__message p-4 radius-15 mt-3" *ngIf="comment?.reply?.length">
                       <p class="paragraph paragraph--sm mb-3 color-gray-800">{{comment.reply}}</p>
                       <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
                   </div>
