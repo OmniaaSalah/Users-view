@@ -94,7 +94,7 @@ export class MessageDetailsComponent implements OnInit {
       "userId": Number(localStorage.getItem('$AJ$userId')),
       // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
       "messegeText": this.replayForm.value.messegeText,
-      'attachment':  this.imagesResult.map((attachment) => {
+      'attachments':  this.imagesResult.map((attachment) => {
         return attachment.url;
       }) || null,
     }
