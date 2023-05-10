@@ -43,9 +43,9 @@
                     <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
                     <a  target="_blank" [routerLink]="['/student-management/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
                 </td>
-                <td>{{student.divisionName |currentLang }}</td>
-                <td>{{student.ministerialNumber}}</td>
-                <td>{{student?.nationalityId || 12255555555558784}}</td>
+                <td>{{student.divisionName || '--' |currentLang }}</td>
+                <td>{{student.ministerialNumber || '--'}}</td>
+                <td>{{student?.nationalityId || '--'}}</td>
             </tr>
         </ng-template>
 
