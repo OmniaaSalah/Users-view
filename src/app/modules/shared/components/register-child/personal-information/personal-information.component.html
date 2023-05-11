@@ -130,6 +130,10 @@
                           </span>
                     </div>
                     <div class="grid-container">
+
+                      <p class="color-gray-300 fs-4">{{ 'shared.curriculum'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.curriculum?.name |currentLang}}</span>
+
                         <p class="color-gray-300 fs-4">{{ 'shared.grade'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.grade.name |currentLang}}</span>
 
@@ -143,6 +147,11 @@
 
                         <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
                         <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
+
+
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.students.studentStatus'|translate }}</p>
+                        <span class="color-primary mb-2" *ngIf="student.isPassed!=null">{{student?.isPassed ? ('shared.allStatus.Passed'|translate) : ('shared.allStatus.Failed'|translate)}}</span>
+                        <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
 
 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
@@ -235,7 +244,7 @@
                     <div class="d-flex gap-5 align-items-center mt-4 fs-4">
                         <p class="color-gray-300 "> رقم الهوية</p>
                         <span class="color-primary">{{student.emiratesId}}</span>
-                        <a class="color-skyBlue-500" (click)="openChangeIdentityModel.emit()">ارسال طلب تعديل </a>
+                        <!-- <a class="color-skyBlue-500" (click)="openChangeIdentityModel.emit()">ارسال طلب تعديل </a> -->
                     </div>
                     <!-- <div class="grid-container mt-5">
 
@@ -354,6 +363,9 @@
                     </div>
                     <div class="grid-container">
 
+                      <p class="color-gray-300 fs-4">{{ 'shared.curriculum'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.curriculum?.name |currentLang}}</span>
+
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
                         <span class="color-primary mb-2">{{student.schoolCode}}</span>
 
@@ -372,7 +384,7 @@
                         <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.studentStatus'|translate }}</p>
-                        <span class="color-primary mb-2" *ngIf="student.isPassed!=null">{{student.isPassed ? 'ناجح' : 'راسب'}}</span>
+                        <span class="color-primary mb-2" *ngIf="student.isPassed!=null">{{student?.isPassed ? ('shared.allStatus.Passed'|translate) : ('shared.allStatus.Failed'|translate)}}</span>
                         <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
 
 

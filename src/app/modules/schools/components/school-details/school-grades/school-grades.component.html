@@ -101,7 +101,7 @@
 </ng-container>
 
 
-<p-dialog header="4 مسارات" [(visible)]="isDialogOpened" [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+<p-dialog header="{{'dashboard.students.tracks' |translate}} " [(visible)]="isDialogOpened" [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
     <ng-template pTemplate="content">
         <ng-container *ngIf="!gradeTracks">
             <div class="row g-5">

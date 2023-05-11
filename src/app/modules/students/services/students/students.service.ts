@@ -155,6 +155,12 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
 
   updateStudentIdentityNum(data){
     return this.http.post(`/Student/modify-identity-request`, data)
+    .pipe(
+      map(res=>{
+        if(res?.statusCode ===HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
+        else return res
+      })
+    )
   }
 
   updateStudentIdentityInfo(data){

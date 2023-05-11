@@ -274,12 +274,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
   updateIdentity(newIdentityData){
     this.onSubmit=true
     this.studentsService.updateStudentIdentityNum(newIdentityData)
-    .pipe(
-      map(res => {
-        if(!res.error) return res
-        else throw new Error(res.error)
-      })
-    ).subscribe(res=> {
+    .subscribe(res=> {
 
       this.changeIdentityNumModelOpened =false
       this.onSubmit=false
@@ -288,7 +283,8 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
     }, (err:Error) =>{
       this.changeIdentityNumModelOpened =false
       this.onSubmit=false
-      this.toastr.error(this.translate.instant('toasterMessage.'+err.message))
+      this.toastr.error(err?.message || this.translate.instant('toasterMessage.error'))
+
 
     })
   }

@@ -48,7 +48,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       disabilities: ['dff'],
       isTheSonOfDetermination: [true, Validators.required],
       fats: ['', Validators.required],
-      iq:['', Validators.required],
+      hasShadower:['', Validators.required],
       bloc:[5, Validators.required],
       raise: ['', Validators.required],
       shortage: [4,Validators.required],
