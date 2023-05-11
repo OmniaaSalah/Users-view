@@ -24,7 +24,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   get claimsEnum(){ return ClaimsEnum }
 
   addMode =false
-
+  addAttachModelOpened=false
   studentId = this.route.snapshot.paramMap.get('id')
   childId = this.route.snapshot.paramMap.get('childId')
 
@@ -36,7 +36,8 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
       ar:[, Validators.required],
       en:[, Validators.required]
     }),
-    fileType:[]
+    fileType:[],
+    attachments:[[], Validators.required]
   })
 
   attachments=[]
@@ -105,22 +106,48 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   }
 
   fileTypeChanged(indexId){
-    let isExist= this.attachments.findIndex(el => el?.indexId === indexId) > -1 ? true : false
+    let isExist= this.attachments.findIndex(el => (el?.indexId && el?.indexId === indexId)) > -1 ? true : false
 
     if(isExist) this.showErrMess=true
     else this.showErrMess =false
   }
 
+  // addNewAttachment(){
+  //   let index = this.attachments.findIndex(el => el?.indexId === this.fileForm.value.indexId)
+  //   if(index > -1) this.attachments.splice(index, 1)
+
+  //   this.attachments.unshift({url: '', name: '', titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId})
+  //   this.addMode=false
+  //   this.showErrMess =false
+  //   this.fileForm.reset()
+  // }
+
   addNewAttachment(){
-    let index = this.attachments.findIndex(el => el?.indexId === this.fileForm.value.indexId)
+    let index = this.attachments.findIndex(el => el?.indexId && (el?.indexId === this.fileForm.value.indexId))
     if(index > -1) this.attachments.splice(index, 1)
 
-    this.attachments.unshift({url: '', name: '', titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId})
-    this.addMode=false
+    console.log(index);
+
+    let attach = this.fileForm.get('attachments' as any).value[0]
+
+    this.attachments.unshift({url: attach?.url, name: attach?.name, titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId})
+    this.addAttachModelOpened=false
     this.showErrMess =false
     this.fileForm.reset()
+    this.updateStudentAttachment(this.studentId|| this.childId, this.attachments)
   }
 
+
+  onNewAttachmentUploaded(file){
+    file= file[0]
+    if(file){
+      console.log(file);
+
+      this.fileForm.get('attachments'  as any).setValue([{url: file?.url,name:file?.name, comment: file?.comment}])
+    }else{
+      this.fileForm.get('attachments'  as any).setValue(null)
+    }
+  }
 
   ngOnDestroy(): void {
     this.childService.onEditMode$.next(false)
