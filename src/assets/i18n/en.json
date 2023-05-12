@@ -578,6 +578,7 @@
 
         "deleteAll":"Reset",
         "in date":"In date",
+        "by":"By",
         "students":"Students",
         "not found": "Not found",
         "SPEA":   "SPEA",
@@ -1294,7 +1295,9 @@
             "Select Private Role": "Select private role",
             "UserName (in Arabic)":"User name (in arabic)",
             "UserName (in English)":"User name (in english)",
-            "lastLoginDate":"Last login date"
+            "lastLoginDate":"Last login date",
+            "ThisUserIsRelatedToSchool":"This user related to a school",
+            "teacherNotEditable":"Please note that school teachers not editable"
 
 
         },

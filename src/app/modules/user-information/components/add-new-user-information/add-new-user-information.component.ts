@@ -152,41 +152,32 @@ AddAccount(){
   {
         this.accountModel.email =this.userFormGrp.value.email;
         this.userService.AddAccount(this.accountModel).subscribe(res => {
-        this.isBtnLoading=false;
-        if(res.statusCode=='BadRequest')
-        {
-          this.toastr.error(this.translate.instant(res.error));
-        }
-        else
-        {
-          this.toastr.success(this.translate.instant('Add Successfully'),'');
-          this.router.navigate(['/manager-tools/user-information/users-list']);
-        }
+            this.isBtnLoading=false;
+            if(res.statusCode=='BadRequest')
+            {
+              this.toastr.error(this.translate.instant(res.error));
+            }
+            else
+            {
+              this.toastr.success(this.translate.instant('Add Successfully'),'');
+              this.router.navigate(['/manager-tools/user-information/users-list']);
+            }
 
          },(err)=>{
-
-              this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
-               this.isBtnLoading=false;
-
-      });
+            this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+            this.isBtnLoading=false;
+        });
   }
   else{
     this.accountModel.id=this.userId;
     this.userService.EditAccount(this.accountModel).subscribe(res => {
       this.isBtnLoading=false;
+      this.toastr.success(this.translate.instant('Updated Successfully'),'');
+      this.router.navigate(['/manager-tools/user-information/users-list']);
 
-      if(res.statusCode=='BadRequest')
-      {
-        this.toastr.error(this.translate.instant(res.error));
-      }
-      else
-      {
-        this.toastr.success(this.translate.instant('Updated Successfully'),'');
-        this.router.navigate(['/manager-tools/user-information/users-list']);
-      }
-     },(err)=>{
+     },(err:Error)=>{
 
-      this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      this.toastr.error(err?.message ||  this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
       this.isBtnLoading=false;
 
     });

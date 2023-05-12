@@ -25,7 +25,7 @@
             <div class="row mt-5">
                 <ng-container *ngFor="let file of attachments; let i = index">
                     <div class="col-md-4 mt-4" *ngIf="file?.url">
-                        <app-file [file]="file" [clickable]="true"></app-file>
+                        <app-file [file]="file" [hasFooter]="true" [clickable]="true"></app-file>
                     </div>
                 </ng-container>
 
