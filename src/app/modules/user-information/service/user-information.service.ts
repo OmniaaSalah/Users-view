@@ -3,10 +3,12 @@ import { Injectable,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {  map, Observable, take,finalize } from 'rxjs';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { IUser} from 'src/app/core/Models/base.models';
 import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 
@@ -22,7 +24,7 @@ export class UserInformationService {
   constructor(private router: Router ,private translate:TranslateService,private http:HttpHandlerService,private tableLoaderService: LoaderService
 ) {
 
- 
+
   [
 
   ];
@@ -64,18 +66,26 @@ usersToExport(filter){
 
 
   getUsersById(id:number){
-
     return this.http.get('/Account/Get/'+id).pipe(take(1));
   }
-
 
 
   AddAccount(data: IAccountAddOrEdit): Observable<any> {
     return this.http.post(`/Account/Add`,data).pipe(take(1));
   }
+
   EditAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.put(`/Account/Update`,data).pipe(take(1));
+    return this.http.put(`/Account/Update`,data)
+    .pipe(
+      map(res=>{
+        if(res?.statusCode ===HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
+        else return res
+      }),
+      take(1)
+    )
   }
+
+
   GetRoleList(): Observable<any> {
     return this.http.get(`/role-details/dropdown`).pipe(take(1));
   }

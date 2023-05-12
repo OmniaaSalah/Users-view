@@ -23,9 +23,26 @@
             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
         </div>
 
-        <div class="row gx-5">
+        <div class="row gx-5 align-items-center">
 
-            <h3 class="heading heading--tertiary mb-5">{{ 'dashboard.parents.HealthStatus'|translate }} :</h3>
+          <div class="d-flex gap-5  mb-6">
+            <div class="d-flex align-items-center gap-3">
+              <img  style="width:1.75rem" src="assets/images/home/student/student.svg" alt="">
+              <h3 class="heading heading--secondary color-primary">{{ 'dashboard.parents.HealthStatus'|translate }} :- </h3>
+              <span class="color-skyBlue-500 fw-bold">{{student?.name |currentLang}}</span>
+            </div>
+
+            <div class="col-7 bg-orange-50 p-3 fs-3 radius-15 " >
+              <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+              <span class="color-gray-800">{{ 'dashboard.SchoolYear.last editeddate'|translate }} {{medicalFile?.updatedDate |LocalizeDate }}</span>
+            </div>
+
+            <!-- <div class="d-flex gap-4 align-content-center">
+              <p class="color-gray-300 fs-4"></p>
+              <span class="color-primary mb-2">{{medicalFile?.updatedDate |LocalizeDate }}</span>
+            </div> -->
+          </div>
+            <!-- <h3 class="heading heading--tertiary mb-5">{{ 'dashboard.parents.HealthStatus'|translate }} :</h3> -->
 
             <div class="col-md-4">
 
@@ -49,7 +66,7 @@
 
 
                     <p class="color-gray-300 fs-4">{{ 'dashboard.students.withDisabilities'|translate }}</p>
-                    <span class="color-primary mb-2">{{medicalFile.isTheSonOfDetermination ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
+                    <span class="color-primary mb-2">{{medicalFile.isSpecialAbilities ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
 
                     <p class="color-gray-300 fs-4">{{'dashboard.parents.shadowerExist'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.hasShadower ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
@@ -100,7 +117,7 @@
                 </ng-container>
 
 
-                    <ng-container *ngIf="getCtr('isTheSonOfDetermination').value">
+                    <ng-container *ngIf="getCtr('isSpecialAbilities').value">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
                         <span class="color-primary mb-2">{{medicalFile.disabilities || 'لم يَذْكُر'}}</span>
                     </ng-container>
@@ -177,7 +194,7 @@
           <div class="row gx-5">
             <div class="col-md-4">
               <div class="form-set">
-                  <label class="label required">{{'dashboard.students.chronicDiseases'|translate}}</label>
+                  <label class="label ">{{'dashboard.students.chronicDiseases'|translate}}</label>
                   <p-chips name="chronicDiseases" [addOnBlur]="true" formControlName="listOfChronicDiseases"  placeholder=""></p-chips>
               </div>
               <!-- <div class="form-set">
@@ -186,17 +203,17 @@
               </div> -->
 
               <div class="form-set">
-                <label class="label required">{{'dashboard.students.feelingDiseases'|translate}}</label>
+                <label class="label">{{'dashboard.students.feelingDiseases'|translate}}</label>
                 <p-chips name="feelingDiseases" [addOnBlur]="true" formControlName="listOfAllergicDiseases" placeholder=""></p-chips>
               </div>
 
 
               <div class="form-set">
                 <label class="label required">{{'dashboard.students.childWithDisabilities'| translate}}</label>
-                <p-dropdown [options]="booleanOptions" formControlName="isTheSonOfDetermination" optionValue="value"  optionLabel="name"></p-dropdown>
+                <p-dropdown [options]="booleanOptions" formControlName="isSpecialAbilities" optionValue="value"  optionLabel="name"></p-dropdown>
               </div>
 
-              <div class="form-set" *ngIf="getCtr('isTheSonOfDetermination').value">
+              <div class="form-set" *ngIf="getCtr('isSpecialAbilities').value">
                   <label class="label required">{{'dashboard.students.disabilities'| translate}}</label>
                   <input type="text" id="trackId" formControlName="disabilities" pInputText placeholder="{{'dashboard.students.disabilities'|translate}}" />
                   <!-- <p-dropdown [options]="booleanOptions"  optionValue="value" optionLabel="name"></p-dropdown> -->

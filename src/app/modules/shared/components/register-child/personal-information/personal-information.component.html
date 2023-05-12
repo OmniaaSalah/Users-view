@@ -49,15 +49,8 @@
                     <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
 
                     <div class="grid-container mt-4">
-                      <p class="color-gray-300 fs-4">{{ 'Guardian'|translate }}</p>
-                      <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
-
-                      <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
-                      <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span>
-
-                        <p class="color-gray-300 fs-4">{{ 'shared.nationalityCategory'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
-
+                      <p class="color-gray-300 fs-4">{{ 'shared.nationalityCategory'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
 
                         <p class="color-gray-300 fs-4">{{ 'shared.nativeLanguage'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.motherLanguage?.name | currentLang}}</span>
@@ -131,6 +124,9 @@
                     </div>
                     <div class="grid-container">
 
+                      <p class="color-gray-300 fs-4">{{ 'shared.state'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.schoolState |currentLang}}</span>
+
                       <p class="color-gray-300 fs-4">{{ 'shared.curriculum'|translate }}</p>
                       <span class="color-primary mb-2">{{student?.curriculum?.name |currentLang}}</span>
 
@@ -203,14 +199,27 @@
 
                     </div>
 
+                    <!-- <<<<<<<<<<< Guardian Data >>>>>>>>>>>>>>> -->
+                    <hr class="my-5 w-75">
+                    <h3 class="heading heading--tertiary  mb-5">{{'dashboard.parents.parentInfo'|translate}}</h3>
+                    <div class="grid-container">
+
+                      <p class="color-gray-300 fs-4">{{ 'Guardian'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
+
+                      <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span>
+
+                      <p class="color-gray-300 fs-4">{{ 'shared.phoneNumber'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.relativeNumber || ('shared.notFound' |translate)}}</span>
+
+                      <p class="color-gray-300 fs-4">{{ 'shared.email'|translate }}</p>
+                      <span class="color-primary mb-2">{{student?.RelativeEmail || ('shared.notFound' |translate)}}</span>
 
 
+                    </div>
 
                 </div>
-
-
-
-
 
             </div>
 

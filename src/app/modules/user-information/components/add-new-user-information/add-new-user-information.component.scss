@@ -1,17 +1,16 @@
 @import 'src/assets/css/utils/variables.scss';
 @import'src/assets/css/components/input';
-@import'src/assets/css/components/buttons';
 @import 'src/assets/css/components/forms.scss';
 @import 'src/assets/css/components/validation-form.scss';
-#content {
-    width: 100%;
-    .Btn-group{
-        position: absolute;
-        bottom:100% ;
-        padding-bottom: 2%;
 
-    }
-}
+
+  .Btn-group{
+      position: absolute;
+      bottom:100% ;
+      padding-bottom: 2%;
+
+  }
+
 
 hr {
     width: 90%;
