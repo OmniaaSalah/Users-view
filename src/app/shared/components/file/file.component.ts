@@ -12,8 +12,9 @@ export class FileComponent implements OnInit {
 
   @Input() file
   @Input() clickable= true
+  @Input() hasFooter= false
   @Input() styles={}
-  
+
   constructor(
     private toaster:ToastrService,
     private translate:TranslateService) { }
