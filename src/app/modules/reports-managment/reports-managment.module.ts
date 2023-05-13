@@ -5,7 +5,7 @@ import { ReportsManagmentRoutingModule } from './reports-managment-routing.modul
 import { StudentsReportsComponent } from './components/students-reports/students-reports.component';
 import { DegreesReportsComponent } from './components/degrees-reports/degrees-reports.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { PrimngModule } from 'src/app/primeNg/primeNg.module';
+import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { SubjectsReportsComponent } from './components/subjects-reports/subjects-reports.component';
 import { UsersReportsComponent } from './components/users-reports/users-reports.component';
 import { AttendanceReportsComponent } from './components/attendance-reports/attendance-reports.component';

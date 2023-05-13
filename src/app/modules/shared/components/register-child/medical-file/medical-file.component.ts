@@ -43,12 +43,12 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
 
     // << FORMS >> //
     medicalFileForm= this.fb.group({
-      listOfChronicDiseases: [[], Validators.required],
+      listOfChronicDiseases: [[]],
       listOfAllergicDiseases: [[]],
       disabilities: ['dff'],
-      isTheSonOfDetermination: [true, Validators.required],
+      isSpecialAbilities: ['', Validators.required],
       fats: ['', Validators.required],
-      iq:['', Validators.required],
+      hasShadower:['', Validators.required],
       bloc:[5, Validators.required],
       raise: ['', Validators.required],
       shortage: [4,Validators.required],

@@ -25,5 +25,10 @@
             </p>
         </ng-container>
 
+        <div *ngIf="hasFooter" class="fs-5 d-flex justify-content-between align-items-center py-2 px-4 radius-8 bg-gray-30 mt-2">
+          <span>{{'shared.by' |translate}} / {{(file?.uploader|currentLang) || '--'}}</span>
+          <span>{{'shared.in date' |translate}} / {{file?.createdDate |LocalizeDate}}</span>
+        </div>
+
     </div>
 </div>

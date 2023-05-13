@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home-page/home.component';
 import { GuardianHomeComponent } from './home-page/guardian-home/guardian-home.component';
-import { PrimngModule } from '../primeNg/primeNg.module';
+import { PrimngModule } from '../primng/primeNg.module';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutModule } from '../layout/layout.module';
 

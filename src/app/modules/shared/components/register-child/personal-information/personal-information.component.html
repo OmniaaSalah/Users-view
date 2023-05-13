@@ -37,173 +37,171 @@
       (onFormSubmitted)="updateStudent()"
       [formGroup]="studentForm"></app-student-prohibited-status>
 
-      <hr class="my-5">
+      <hr class="my-6 w-75">
 
         <ng-container *ngIf="mode=='view'">
             <div class="float-btn " (click)="mode='edit'; modeChange.emit(mode)" *permit="claimsEnum.SEG_U_StudentInfo">
                 <img src="assets/images/shared/pen-blue-filled.svg" alt="">
             </div>
-            <div class="row gx-5">
-                <div class="col-md-4">
-                    <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.StudentInfo'|translate}}</h3>
-                    <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
 
-                    <div class="grid-container mt-4">
-                      <p class="color-gray-300 fs-4">{{ 'Guardian'|translate }}</p>
-                      <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
+            <div class="">
+              <sub-header title="{{'dashboard.students.StudentInfo'|translate}}" img="assets/images/home/student/graduation-student.svg"></sub-header>
 
-                      <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
-                      <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span>
+              <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
 
-                        <p class="color-gray-300 fs-4">{{ 'shared.nationalityCategory'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
+              <hr class="my-5">
 
+              <div class="d-grid grid-col-8 even-gap gap-5">
 
-                        <p class="color-gray-300 fs-4">{{ 'shared.nativeLanguage'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.motherLanguage?.name | currentLang}}</span>
+                <p class="color-gray-300">{{ 'shared.nationalityCategory'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
 
-                        <p class="color-gray-300 fs-4">{{ 'shared.homeLanguage'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.languageAtHome?.name | currentLang}}</span>
+                <p class="color-gray-300">{{ 'shared.nationalityCategory'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
 
-                    </div>
-                    <div class="d-flex gap-5 mt-5">
-                        <p class="color-gray-300 fs-4">{{ 'shared.mostUsedLanguage'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.mostUsedLanguage?.name | currentLang}}</span>
-                    </div>
+                <p class="color-gray-300">{{ 'shared.nativeLanguage'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.motherLanguage?.name | currentLang}}</span>
 
+                <p class="color-gray-300">{{ 'shared.homeLanguage'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.languageAtHome?.name | currentLang}}</span>
 
-                    <ng-container *ngIf="student.emiratesId">
-                        <div class="d-flex gap-5 align-items-center mt-4 fs-4">
-                            <p class="color-gray-300 ">{{'shared.Identity Number'|translate}}</p>
-                            <span class="color-primary">{{student.emiratesId}}</span>
-                            <!-- <a class="color-skyBlue-500" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a> -->
-                        </div>
-                        <div class="grid-container mt-5">
+                <p class="color-gray-300">{{ 'shared.mostUsedLanguage'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.mostUsedLanguage?.name | currentLang}}</span>
 
-                            <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
-                            <span class="color-primary mb-2">{{student.emiratesIdExpirationDate  | LocalizeDate}}</span>
-
-                        </div>
-                    </ng-container>
-
-                    <ng-container *ngIf="!student.emiratesId">
-
-                        <div class="grid-container mt-5">
-
-                            <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
-                            <span class="color-primary mb-2">{{'shared.notFound' |translate}}</span>
-
-                            <p class="color-gray-300 fs-4">{{ 'shared.cause'|translate }}</p>
-                            <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
-
-                            <!-- <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
-                            <span class="color-primary mb-2">{{student.passportId}}</span> -->
-
-                            <!-- <p class="color-gray-300 fs-4">{{'shared.expireDate'|translate}}</p>
-                            <span class="color-primary mb-2">{{student.passportIdExpirationDate |LocalizeDate}}</span> -->
-
-                        </div>
-                    </ng-container>
-
-                    <ng-container *ngIf="!student.emiratesId">
-                        <ul class="mt-4">
-                            <ng-container *ngFor="let item of student?.attachments">
-                                <app-file [file]="item" [clickable]="true" [styles]="{'margin-bottom':'.75rem', 'font-size':'1.3rem'}"></app-file>
-                            </ng-container>
-                        </ul>
-                    </ng-container>
-
-
-                </div>
-
-
-                <div class="col-md-4">
-                    <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student School Information'|translate}}</h3>
-
-                    <div class="d-flex gap-4 mb-4">
-                        <p class="color-gray-300 fs-4 flex-shrink-0">{{'School'|translate}}</p>
-                        <span *ngIf="currentUserScope==scopeEnum.SPEA" class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]">
-                          <a class="color-skyBlue-500">{{student?.school?.name |currentLang}}</a>
+                <p class="color-gray-300">{{'dashboard.students.isGifted'| translate}}</p>
+                <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
+                <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
+                <ng-container *ngIf="student?.isGifted">
+                    <p class="color-gray-300">{{'dashboard.students.talent'| translate}}</p>
+                    <div  class="mb-2 d-flex">
+                        <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
+                            {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
                         </span>
-                        <span *ngIf="currentUserScope==scopeEnum.Guardian || currentUserScope==scopeEnum.Employee" class="color-primary mb-2 flex-shrink-0">
-                            {{student?.school?.name |currentLang}}
-                          </span>
-                    </div>
-                    <div class="grid-container">
-                        <p class="color-gray-300 fs-4">{{ 'shared.grade'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.grade.name |currentLang}}</span>
-
-
-                        <p class="color-gray-300 fs-4">{{'shared.track'| translate}}</p>
-                        <span *ngIf="student?.track?.id" class="color-primary mb-2">{{student.track.name |currentLang}}</span>
-                        <span *ngIf="!student?.track?.id" class="color-red-500 mb-2">{{'shared.notFound' |translate}}</span>
-
-
-                        <p class="color-gray-300 fs-4">{{'shared.division'| translate}}</p>
-
-                        <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
-                        <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
-
-
-                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.schoolCode}}</span>
-
-                        <p class="color-gray-300 fs-4">{{'dashboard.parents.ministerialNumber' |translate}}</p>
-                        <span class="color-primary mb-2">{{student.ministerialId}}</span>
-
-                        <p class="color-gray-300 fs-4">{{'dashboard.students.isGifted'| translate}}</p>
-                        <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
-                        <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
-                        <ng-container *ngIf="student?.isGifted">
-                            <p class="color-gray-300 fs-4">{{'dashboard.students.talent'| translate}}</p>
-                            <div  class="mb-2 d-flex">
-                                <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
-                                    {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
-                                </span>
-                            </div>
-
-                        </ng-container>
-
-                        <p class="color-gray-300 fs-4">{{'dashboard.students.withDisabilities'| translate}}</p>
-                        <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
-
-                        <p class="color-gray-300 fs-4" *ngIf="student?.isSpecialAbilities">{{'shared.classroom'| translate}}</p>
-                        <span class="color-primary mb-2" *ngIf="student?.isSpecialAbilities">{{student?.isSpecialClass? ('shared.specialClass'| translate) : ('shared.fusionClass' | translate)}}</span>
-
-                        <ng-container *ngIf="student?.isSpecialClass">
-                          <p class="color-gray-300 ">{{ 'dashboard.parents.specialEducation'|translate }}</p>
-                          <span class="color-primary mb-2 fs-3">{{student?.specialEducation?.name | currentLang}}</span>
-                        </ng-container>
-
-
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Address Information'|translate}}</h3>
-                    <div class="grid-container">
-
-                        <p class="color-gray-300 fs-4">{{'shared.city'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.address?.city |translate}}</span>
-
-                        <p class="color-gray-300 fs-4">{{ 'shared.emara'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.address?.emirate}}</span>
-
-                        <p class="color-gray-300 fs-4">{{ 'shared.state'|translate}}</p>
-                        <span class="color-primary mb-2">{{student?.address?.state}}</span>
-
                     </div>
 
+                </ng-container>
 
+                <p class="color-gray-300">{{'dashboard.parents.ministerialNumber' |translate}}</p>
+                <span class="color-primary mb-2">{{student.ministerialId || ('shared.notFound' |translate)}}</span>
 
+                <p class="color-gray-300">{{'dashboard.students.withDisabilities'| translate}}</p>
+                <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
-                </div>
+                <p class="color-gray-300" *ngIf="student?.isSpecialAbilities">{{'shared.classroom'| translate}}</p>
+                <span class="color-primary mb-2" *ngIf="student?.isSpecialAbilities">{{student?.isSpecialClass? ('shared.specialClass'| translate) : ('shared.fusionClass' | translate)}}</span>
 
+                <ng-container *ngIf="student?.isSpecialClass">
+                  <p class="color-gray-300 ">{{ 'dashboard.parents.specialEducation'|translate }}</p>
+                  <span class="color-primary mb-2 fs-3">{{student?.specialEducation?.name | currentLang}}</span>
+                </ng-container>
 
+                <ng-container *ngIf="student.emiratesId">
+                  <p class="color-gray-300 ">{{'shared.Identity Number'|translate}}</p>
+                  <span class="color-primary">{{student.emiratesId}}</span>
 
+                  <p class="color-gray-300">{{ 'shared.nationalIdExpireDate'|translate }}</p>
+                  <span class="color-primary mb-2">{{student.emiratesIdExpirationDate  | LocalizeDate}}</span>
+                </ng-container>
 
+                <ng-container *ngIf="!student.emiratesId">
+                  <p class="color-gray-300">{{ 'shared.Identity Number'|translate }}</p>
+                  <span class="color-primary mb-2">{{'shared.notFound' |translate}}</span>
 
+                  <p class="color-gray-300">{{ 'shared.cause'|translate }}</p>
+                  <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
+                </ng-container>
+
+              </div>
             </div>
+
+            <hr class="my-6 w-75">
+
+            <div class="">
+              <sub-header title="{{'dashboard.students.Student School Information'|translate}}" img="assets/images/home/student/school.svg"></sub-header>
+
+              <div class="d-grid grid-col-8 even-gap gap-5">
+
+                <p class="color-gray-300 flex-shrink-0">{{'School'|translate}}</p>
+                <span *ngIf="currentUserScope==scopeEnum.SPEA" class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]"><a class="color-skyBlue-500">{{student?.school?.name |currentLang}}</a></span>
+                <span *ngIf="currentUserScope==scopeEnum.Guardian || currentUserScope==scopeEnum.Employee" class="color-primary mb-2 flex-shrink-0">{{student?.school?.name |currentLang}}</span>
+
+                <p class="color-gray-300">{{ 'shared.state'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.schoolState |currentLang}}</span>
+
+                <p class="color-gray-300">{{ 'shared.curriculum'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.curriculum?.name |currentLang}}</span>
+
+
+                <p class="color-gray-300">{{ 'shared.grade'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.grade.name |currentLang}}</span>
+
+
+                <p class="color-gray-300">{{'shared.track'| translate}}</p>
+                <span *ngIf="student?.track?.id" class="color-primary mb-2">{{student.track.name |currentLang}}</span>
+                <span *ngIf="!student?.track?.id" class="color-red-500 mb-2">{{'shared.notFound' |translate}}</span>
+
+
+                <p class="color-gray-300">{{'shared.division'| translate}}</p>
+
+                <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
+                <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
+
+
+                <p class="color-gray-300">{{ 'dashboard.students.studentStatus'|translate }}</p>
+                <span class="color-primary mb-2" *ngIf="student.isPassed!=null">{{student?.isPassed ? ('shared.allStatus.Passed'|translate) : ('shared.allStatus.Failed'|translate)}}</span>
+                <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
+
+
+                <p class="color-gray-300">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.schoolCode}}</span>
+
+              </div>
+            </div>
+
+            <hr class="my-6 w-75">
+
+
+            <div class="">
+              <sub-header title="{{'dashboard.students.Student Address Information'|translate}}">
+                <i class="pi pi-globe color-orange" style="font-size: 2rem"></i>
+              </sub-header>
+
+              <div class="d-grid grid-col-8 even-gap gap-5">
+                <p class="color-gray-300">{{'shared.city'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.address?.city |translate}}</span>
+
+                <p class="color-gray-300">{{ 'shared.emara'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.address?.emirate}}</span>
+
+                <p class="color-gray-300">{{ 'shared.state'|translate}}</p>
+                <span class="color-primary mb-2">{{student?.address?.state}}</span>
+              </div>
+            </div>
+
+
+            <hr class="my-6 w-75">
+
+            <div class="">
+              <sub-header title="{{'dashboard.parents.parentInfo'|translate}}" img="assets/images/home/schools-students/Parentnew.svg"></sub-header>
+
+              <div class="d-grid grid-col-8 even-gap gap-5">
+                <p class="color-gray-300">{{ 'Guardian'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
+
+                <p class="color-gray-300">{{ 'dashboard.parents.relatedType'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span>
+
+                <p class="color-gray-300">{{ 'shared.phoneNumber'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.relativeNumber || ('shared.notFound' |translate)}}</span>
+
+                <p class="color-gray-300">{{ 'shared.email'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.relativeEmail || ('shared.notFound' |translate)}}</span>
+              </div>
+            </div>
+
+            <hr class="my-6">
+
+
 
 
         </ng-container>
@@ -224,283 +222,196 @@
 <!----------------edit mode------------------->
 
 <ng-container *ngIf="student$ |async as student">
-    <ng-container *ngIf="mode=='edit'">
-        <div class="row gx-5" [formGroup]="studentForm">
-            <div class="col-md-4">
-                <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Information'|translate}}</h3>
+    <ng-container *ngIf="mode=='edit'"  [formGroup]="studentForm">
 
-                <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
+      <div class="row g-5">
+          <sub-header title="{{'dashboard.students.StudentInfo'|translate}}" img="assets/images/home/student/graduation-student.svg"></sub-header>
 
-                <ng-container *ngIf="student.emiratesId">
-                    <div class="d-flex gap-5 align-items-center mt-4 fs-4">
-                        <p class="color-gray-300 "> رقم الهوية</p>
-                        <span class="color-primary">{{student.emiratesId}}</span>
-                        <a class="color-skyBlue-500" (click)="openChangeIdentityModel.emit()">ارسال طلب تعديل </a>
-                    </div>
-                    <!-- <div class="grid-container mt-5">
+          <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
 
-                        <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
-                        <span class="color-primary mb-2">{{student.emiratesIdExpirationDate | LocalizeDate}}</span>
+          <div class=" col-md-4 col-lg-3" formGroupName="nationalityCategory">
+            <label class="label required">{{'shared.nationalityCategory'|translate}}</label>
+            <p-dropdown formControlName="id" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+          </div>
 
-                    </div> -->
-                </ng-container>
+          <div class="col-md-4 col-lg-3 " formGroupName="motherLanguage">
+            <label class="label required">{{'shared.nativeLanguage'|translate}}</label>
+            <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
+          </div>
 
-                <ng-container *ngIf="!student.emiratesId">
-                    <div class="grid-container mt-5">
-                        <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
-                        <span class="color-primary mb-2">{{'shared.notFound' |translate}}</span>
-                    </div>
+          <div class="col-md-4 col-lg-3 " formGroupName="languageAtHome">
+              <label class="label required">{{'shared.homeLanguage'|translate}}</label>
+              <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
+          </div>
 
-                    <div class=" custom-form mt-4" *ngIf="reasonForNotHaveIdentityOptions$ | async as options">
-                        <div class="form-set ">
-                            <label class="label">{{ 'shared.cause'|translate }}</label>
-                            <p-dropdown [options]="options" formControlName="reasonForNotHavingEmiratesId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar':'name.en'}}" placeholder="{{ 'shared.cause'|translate }}" ></p-dropdown>
-                        </div>
+          <div class="col-md-4 col-lg-3 "  formGroupName="mostUsedLanguage">
+              <label class="label required">{{'shared.mostUsedLanguage'|translate}}</label>
+              <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
+          </div>
 
-                        <!-- <div class="form-set">
-                            <label class="label">{{ 'shared.passportId'|translate }}</label>
-                            <p-inputNumber formControlName="passportId" name="identity" [useGrouping]="false" [maxlength]="15" [minlength]="15" placeholder="{{ 'shared.passportId'|translate }}"></p-inputNumber>
-                        </div> -->
+          <div class="col-md-4 col-lg-3 "  >
+            <label class="label required">{{'dashboard.parents.ministerialNumber' |translate}}</label>
+            <p-inputNumber formControlName="ministerialId" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
+          </div>
 
-                        <!-- <div class="form-set">
-                            <label class="label">{{'shared.expireDate'|translate}}</label>
-                            <p-calendar formControlName="passportIdExpirationDate"  useUtc dateFormat="DD dd-mm-yy"  icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
-                        </div> -->
-                    </div>
+          <div class="col-md-4 col-lg-3 ">
+              <label class="label" for="description">{{'dashboard.students.withDisabilities'| translate}}</label>
+              <p-dropdown formControlName="isSpecialAbilities" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+          </div>
 
+          <div class="col-md-4 col-lg-3 "*ngIf="isSpecialAbilities.value">
+              <label class="label" for="description">{{'shared.classroom'| translate}}</label>
+              <p-dropdown [(ngModel)]="classType" [ngModelOptions]="{standalone: true}" [options]="specialClassOptions" optionValue="value" (onChange)="onSpecialClassSelected($event.value)" optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
+          </div>
 
-                </ng-container>
+          <div class="col-md-4 col-lg-3 "*ngIf="isSpecialClass.value"  formGroupName="specialEducation">
+            <label class="label" for="description">{{'shared.classroom'| translate}}</label>
+            <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="value" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}"></p-dropdown>
+          </div>
 
-                <div class="form-set mt-4" formGroupName="nationalityCategory">
-                    <label class="label required">{{'shared.nationalityCategory'|translate}}</label>
-                    <p-dropdown formControlName="id" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
-                </div>
+          <div class="col-md-4 col-lg-3 ">
+              <label class="label" for="description">{{'dashboard.students.isChildOfAMartyr'| translate}}</label>
+              <p-dropdown formControlName="isChildOfAMartyr" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+          </div>
+          <div class="col-md-4 col-lg-3 ">
+              <label class="label" for="description">{{'dashboard.students.isGifted'| translate}}</label>
+              <p-dropdown #isGifted formControlName="isGifted" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+          </div>
 
-                <ng-container>
+          <div class="col-md-4 col-lg-3 " *ngIf="isGifted.value">
+              <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
+              <p-multiSelect formControlName="studentTalent" [options]="talents$ |async" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
+          </div>
 
-                  <div class="d-flex gap-5 align-items-center my-5">
-                    <p class="color-gray-300 fs-4">{{ 'Guardian'|translate }}</p>
-                    <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
-                    <a class="color-skyBlue-500" (click)="isGuardiansModelOpend=true; getGuardians()"> {{'shared.edit' | translate}} </a>
-                  </div>
+          <ng-container *ngIf="student.emiratesId">
+            <div class="col-md-4 col-lg-3 d-flex gap-5 align-items-center ">
+                <p class="color-gray-300 "> رقم الهوية</p>
+                <span class="color-primary">{{student.emiratesId}}</span>
+                <!-- <a class="color-skyBlue-500" (click)="openChangeIdentityModel.emit()">ارسال طلب تعديل </a> -->
+            </div>
+          </ng-container>
 
-                  <!-- <p-dropdown
-                  [virtualScroll]="true"
-                  [virtualScrollItemSize]="30"
-                  [lazy]="true"
-                  (onLazyLoad)="onLazyLoad($event)"
-                  [filter]="true"
-                  (onFilter)="guardiansFilteration.KeyWord = $event.filter"
-                  formControlName="guardianId"
-                  [options]="AllGuardians"
-                  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown> -->
-
-                    <!-- <div class="form-set">
-                      <label class="label required">{{'Guardian'|translate}}</label>
-                      <p-dropdown
-                      formControlName="guardianId"
-                      [filter]="true"
-                      (onFilter)="guardiansFilteration.KeyWord ==$event.filte; getGuardians()"
-                      [options]="AllGuardians"
-                      optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
-                    </div> -->
-
-                    <div class="form-set" formGroupName="motherLanguage">
-                        <label class="label required">{{'shared.nativeLanguage'|translate}}</label>
-                        <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
-                    </div>
-
-                    <div class="form-set" formGroupName="languageAtHome">
-                        <label class="label required">{{'shared.homeLanguage'|translate}}</label>
-                        <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
-                    </div>
-
-                    <div class="form-set"  formGroupName="mostUsedLanguage">
-                        <label class="label required">{{'shared.mostUsedLanguage'|translate}}</label>
-                        <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
-                    </div>
-
-                </ng-container>
-
-                <!-- <div class="form-set" *ngIf="student.isGifted">
-                    <label class="label">{{'dashboard.students.talent'|translate}}</label>
-                    <p-multiSelect formControlName="talents" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
-                </div> -->
-
-
-
-                <!-- <div class="form-set">
-                    <label class="label">{{'shared.nationalId'|translate}}</label>
-                    <input type="text" pInputText placeholder="23545" />
-                </div>
-
-                </div> -->
-
-
-
+          <ng-container *ngIf="!student.emiratesId">
+            <div class="col-md-4 col-lg-3 align-items-center grid-container">
+                <p class="color-gray-300 ">{{ 'shared.Identity Number'|translate }}</p>
+                <span class="color-primary mb-2">{{'shared.notFound' |translate}}</span>
             </div>
 
-
-            <div class="col-md-4">
-                <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student School Information'|translate}}</h3>
-
-
+            <div class="col-md-4 col-lg-3 custom-form" *ngIf="reasonForNotHaveIdentityOptions$ | async as options">
                 <div class=" ">
-                    <div class="d-flex gap-4 mb-4">
-                        <p class="color-gray-300 fs-4 flex-shrink-0">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
-                        <span class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student.school?.id]">
-                          <a class="color-skyBlue-500">{{student.school?.name | currentLang}}</a>
-                        </span>
-                    </div>
-                    <div class="grid-container">
-
-                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
-                        <span class="color-primary mb-2">{{student.schoolCode}}</span>
-
-
-                        <p class="color-gray-300 fs-4">{{ 'shared.grade'|translate }}</p>
-                        <span class="color-primary mb-2">{{student.grade.name |currentLang}}</span>
-
-
-                        <p class="color-gray-300 fs-4">{{'shared.track'| translate}}</p>
-                        <span *ngIf="student?.track?.id" class="color-primary mb-2">{{student.track.name |currentLang}}</span>
-                        <span *ngIf="!student?.track?.id" class="color-red-500 mb-2">{{'shared.notFound' |translate}}</span>
-
-
-                        <p class="color-gray-300 fs-4">{{'shared.division'| translate}}</p>
-                        <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
-                        <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
-
-                        <p class="color-gray-300 fs-4">{{ 'dashboard.students.studentStatus'|translate }}</p>
-                        <span class="color-primary mb-2" *ngIf="student.isPassed!=null">{{student.isPassed ? 'ناجح' : 'راسب'}}</span>
-                        <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
-
-
-
-                    </div>
-
-                    <div class="mt-4">
-                        <!-- <div class="form-set">
-                            <label class="label" for="description">{{'shared.track'| translate}}</label>
-                            <p-dropdown formControlName="trackId" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                        </div> -->
-                        <div class="form-set"  >
-                            <label class="label required">{{'dashboard.parents.ministerialNumber' |translate}}</label>
-                            <p-inputNumber formControlName="ministerialId" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
-                        </div>
-
-                        <div class="form-set">
-                            <label class="label" for="description">{{'dashboard.students.withDisabilities'| translate}}</label>
-                            <p-dropdown formControlName="isSpecialAbilities" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                        </div>
-
-                        <div class="form-set"*ngIf="isSpecialAbilities.value">
-                            <label class="label" for="description">{{'shared.classroom'| translate}}</label>
-                            <p-dropdown [(ngModel)]="classType" [ngModelOptions]="{standalone: true}" [options]="specialClassOptions" optionValue="value" (onChange)="onSpecialClassSelected($event.value)" optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
-                        </div>
-
-                        <div class="form-set"*ngIf="isSpecialClass.value"  formGroupName="specialEducation">
-                          <label class="label" for="description">{{'shared.classroom'| translate}}</label>
-                          <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="value" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}"></p-dropdown>
-                        </div>
-
-                        <div class="form-set">
-                            <label class="label" for="description">{{'dashboard.students.isChildOfAMartyr'| translate}}</label>
-                            <p-dropdown formControlName="isChildOfAMartyr" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                        </div>
-                        <div class="form-set">
-                            <label class="label" for="description">{{'dashboard.students.isGifted'| translate}}</label>
-                            <p-dropdown #isGifted formControlName="isGifted" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                        </div>
-
-                        <div class="form-set" *ngIf="isGifted.value">
-                            <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
-                            <p-multiSelect formControlName="studentTalent" [options]="talents$ |async" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
-                        </div>
-
-                    </div>
-
-                    <!-- <ng-container *ngIf="student.emiratesId">
-                        <div class="d-flex gap-5 align-items-center mt-4 fs-4">
-                            <p class="color-gray-300 "> رقم الهوية</p>
-                            <span class="color-primary">{{student.emiratesId}}</span>
-                            <a class="color-skyBlue-500" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a>
-                        </div>
-                        <div class="grid-container mt-5">
-
-                            <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
-                            <span class="color-primary mb-2">{{student.emiratesIdExpirationDate | LocalizeDate}}</span>
-
-                        </div>
-                    </ng-container>
-
-                    <ng-container *ngIf="!student.emiratesId">
-                        <div class="grid-container mt-5">
-                            <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
-                            <span class="color-primary mb-2">لا يوجد</span>
-                        </div>
-
-                        <div class=" custom-form mt-4">
-                            <div class="form-set ">
-                                <label class="label">{{ 'shared.cause'|translate }}</label>
-                                <input type="text" pInputText placeholder="{{ 'shared.cause'|translate }}" />
-                            </div>
-
-                            <div class="form-set">
-                                <label class="label">{{ 'shared.passportId'|translate }}</label>
-                                <p-inputNumber name="identity" [useGrouping]="false" [maxlength]="15" [minlength]="15" placeholder="{{ 'shared.passportId'|translate }}"></p-inputNumber>
-                            </div>
-
-                            <div class="form-set">
-                                <label class="label">{{'shared.expireDate'|translate}}</label>
-                                <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
-                            </div>
-                        </div>
-
-
-                    </ng-container> -->
-
-
+                    <label class="label">{{ 'shared.cause'|translate }}</label>
+                    <p-dropdown [options]="options" formControlName="reasonForNotHavingEmiratesId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar':'name.en'}}" placeholder="{{ 'shared.cause'|translate }}" ></p-dropdown>
                 </div>
-
-
-
             </div>
+          </ng-container>
+
+      </div>
+
+      <hr class="my-6">
+
+      <div class="row g-5">
+          <sub-header title="{{'dashboard.students.Student School Information'|translate}}" img="assets/images/home/student/school.svg"></sub-header>
+
+          <div class="d-grid grid-col-8 even-gap gap-5">
+
+            <p class="color-gray-300 flex-shrink-0">{{'School'|translate}}</p>
+            <span *ngIf="currentUserScope==scopeEnum.SPEA" class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]"><a class="color-skyBlue-500">{{student?.school?.name |currentLang}}</a></span>
+            <span *ngIf="currentUserScope==scopeEnum.Guardian || currentUserScope==scopeEnum.Employee" class="color-primary mb-2 flex-shrink-0">{{student?.school?.name |currentLang}}</span>
+
+            <p class="color-gray-300">{{ 'shared.state'|translate }}</p>
+            <span class="color-primary mb-2">{{student?.schoolState |currentLang}}</span>
+
+            <p class="color-gray-300">{{ 'shared.curriculum'|translate }}</p>
+            <span class="color-primary mb-2">{{student?.curriculum?.name |currentLang}}</span>
+
+            <p class="color-gray-300">{{'dashboard.parents.ministerialNumber' |translate}}</p>
+            <span class="color-primary mb-2">{{student.ministerialId}}</span>
+
+            <p class="color-gray-300">{{ 'shared.grade'|translate }}</p>
+            <span class="color-primary mb-2">{{student?.grade.name |currentLang}}</span>
 
 
+            <p class="color-gray-300">{{'shared.track'| translate}}</p>
+            <span *ngIf="student?.track?.id" class="color-primary mb-2">{{student.track.name |currentLang}}</span>
+            <span *ngIf="!student?.track?.id" class="color-red-500 mb-2">{{'shared.notFound' |translate}}</span>
 
-            <div class="col-md-4" >
-                <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Address Information'|translate}}</h3>
-                <!-- <div class="form-set">
-                    <label class="label" for="description">{{'shared.religion'| translate}}</label>
-                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div> -->
-                <ng-container formGroupName="address">
-                    <div class="form-set">
-                        <label class="label">{{'shared.emara'|translate}}</label>
-                        <input type="text" formControlName="emirate" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
-                    </div>
 
-                    <div class="form-set">
-                        <label class="label">{{'shared.city'|translate}}</label>
-                        <input type="text" formControlName="city" pInputText placeholder="{{'shared.chooseCity'|translate}}" />
-                        <!-- <p-dropdown formControlName="city" [options]="cities$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown> -->
-                    </div>
-                    <div class="form-set">
-                        <label class="label">{{'shared.state'|translate}}</label>
-                        <input type="text" formControlName="state" pInputText placeholder="{{'shared.chooseState'|translate}}" />
-                        <!-- <p-dropdown formControlName="state" [options]="(states$|async)" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown> -->
-                    </div>
-                </ng-container>
+            <p class="color-gray-300">{{'shared.division'| translate}}</p>
 
-            </div>
+            <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
+            <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
 
+
+            <p class="color-gray-300">{{ 'dashboard.students.studentStatus'|translate }}</p>
+            <span class="color-primary mb-2" *ngIf="student.isPassed!=null">{{student?.isPassed ? ('shared.allStatus.Passed'|translate) : ('shared.allStatus.Failed'|translate)}}</span>
+            <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
+
+
+            <p class="color-gray-300">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
+            <span class="color-primary mb-2">{{student?.schoolCode}}</span>
+
+          </div>
+      </div>
+
+      <hr class="my-6">
+
+      <div class="row g-5">
+        <sub-header title="{{'dashboard.students.Student Address Information'|translate}}">
+          <i class="pi pi-globe color-orange" style="font-size: 2rem"></i>
+        </sub-header>
+
+        <ng-container formGroupName="address">
+          <div class="col-md-4 col-lg-3 ">
+              <label class="label">{{'shared.emara'|translate}}</label>
+              <input type="text" formControlName="emirate" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
+          </div>
+
+          <div class="col-md-4 col-lg-3 ">
+              <label class="label">{{'shared.city'|translate}}</label>
+              <input type="text" formControlName="city" pInputText placeholder="{{'shared.chooseCity'|translate}}" />
+              <!-- <p-dropdown formControlName="city" [options]="cities$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown> -->
+          </div>
+          <div class="col-md-4 col-lg-3 ">
+              <label class="label">{{'shared.state'|translate}}</label>
+              <input type="text" formControlName="state" pInputText placeholder="{{'shared.chooseState'|translate}}" />
+              <!-- <p-dropdown formControlName="state" [options]="(states$|async)" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown> -->
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="py-6"></div>
+
+      <div class="row g-5">
+        <sub-header title="{{'dashboard.parents.parentInfo'|translate}}" img="assets/images/home/schools-students/Parentnew.svg"></sub-header>
+
+        <div class="d-grid grid-col-8 even-gap gap-5">
+          <p class="color-gray-300">{{ 'Guardian'|translate }}</p>
+
+          <div class="d-flex gap-5 align-items-center">
+            <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
+            <a class="color-skyBlue-500" (click)="isGuardiansModelOpend=true; getGuardians()"> {{'shared.edit' | translate}} </a>
+          </div>
+
+
+          <p class="color-gray-300">{{ 'dashboard.parents.relatedType'|translate }}</p>
+          <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span>
+
+          <p class="color-gray-300">{{ 'shared.phoneNumber'|translate }}</p>
+          <span class="color-primary mb-2">{{student?.relativeNumber || ('shared.notFound' |translate)}}</span>
+
+          <p class="color-gray-300">{{ 'shared.email'|translate }}</p>
+          <span class="color-primary mb-2">{{student?.relativeEmail || ('shared.notFound' |translate)}}</span>
         </div>
 
-        <div class="py-6"></div>
+      </div>
+
+      <div class="py-6"></div>
 
     </ng-container>
 </ng-container>
+
+
+
 
 
 
@@ -537,7 +448,7 @@
 
 
 
-          <div class="row gx-5 gy-4 form-set mt-5" >
+          <div class="row gx-5 gy-4  mt-5" >
               <ng-container *ngIf="!AllGuardians.loading">
 
                   <ng-container *ngFor="let item of AllGuardians?.list; let i=index">

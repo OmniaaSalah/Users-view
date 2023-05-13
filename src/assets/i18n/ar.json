@@ -546,6 +546,7 @@
         "SchoolBus/PrivateCar":"حافلة المدرسة / سيارة خاصة",
         "deleteAll":"إعادة تعيين البحث",
         "in date":"بتاريخ",
+        "by":"بواسطة",
         "students":"الطلبة",
         "not found": "لا توجد",
         "SPEA": "الهيئة",
@@ -1378,7 +1379,7 @@
             "defineMedicalFile": "تعريف الملف الصحي",
             "notAddedToDivision":"لم يضاف إلى شعبه",
             "chronicDiseases": "الأمراض المزمنة ",
-            "feelingDiseases": "الأمراض الحساسية من أدوية أو أغذية خاصة ",
+            "feelingDiseases": "أمراض الحساسية من أدوية أو أغذية خاصة",
             "disabilities": "الإعاقات ",
             "writeDisabilities": "أكتب الإعاقات ",
             "childWithDisabilities": "الأبن من ذوي الهمم ",
@@ -1776,7 +1777,8 @@
             "UserName (in Arabic)":"إسم المستخدم (باللغة العربية)",
             "UserName (in English)":"إسم المستخدم (باللغة الإنجليزية)",
             "lastLoginDate":"تاريخ أخر تسجيل دخول",
-            "ThisUserIsRelatedToSchool":"هذا المستخدم تابع لمدرسة"
+            "ThisUserIsRelatedToSchool":"هذا المستخدم تابع لمدرسة",
+            "teacherNotEditable":"يرجى العلم انه لا يمكن تعديل معلومات معلمين المدارس"
 
         },
         "Requests": {

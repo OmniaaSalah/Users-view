@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterChildComponent } from './components/register-child/register-child.component';
-import { PrimngModule } from 'src/app/primeNg/primeNg.module';
+import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { AbsenceDetailsComponent } from './components/register-child/absence-details/absence-details.component';
 import { AcceptInformationComponent } from './components/register-child/accept-information/accept-information.component';
 import { AttachmentsChildComponent } from './components/register-child/attachments-child/attachments-child.component';
