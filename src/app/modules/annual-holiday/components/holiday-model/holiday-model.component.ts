@@ -96,15 +96,6 @@ export class HolidayModelComponent implements OnInit {
     if(this.editedHoliday)
     {
     
-      this.curriculamListEdited=[];
-      this.curriculamList.forEach(curriculam => {
-        this.holidayFormGrp.value.curriculumName.forEach(id => {
-          if(id==curriculam.id)
-          {
-            this.curriculamListEdited.push(curriculam);
-          }
-        });
-      });
       this.editedHoliday={
         'id':this.editedHoliday?.id,
         'index':this.editedHoliday?.index ? this.editedHoliday?.index :0,
@@ -112,7 +103,7 @@ export class HolidayModelComponent implements OnInit {
         'dateFrom': this.holidayFormGrp.value.dateFrom,
         'dateTo': this.holidayFormGrp.value.dateTo,
         'flexibilityStatus':this.holidayFormGrp.value.flexibilityStatus? this.holidayStatusList[0]:this.holidayStatusList[1],
-        'curriculums': this.curriculamListEdited,
+        'curriculums': this.holidayFormGrp.value.curriculumName,
         'createdDate':new Date()
        }; 
        this.annualHolidayService.holiday.next(this.editedHoliday);
@@ -120,20 +111,12 @@ export class HolidayModelComponent implements OnInit {
     else{
     this.holiday={};
     this.holiday.curriculums=[];
-    this.curriculamList.forEach(curriculam => {
-      this.holidayFormGrp.value.curriculumName.forEach(id => {
-        if(id==curriculam.id)
-        {
-          this.holiday.curriculums.push(curriculam);
-        }
-      });
-    });
     this.holiday={
       name:{ar:this.holidayFormGrp.value.arabicName,en:this.holidayFormGrp.value.englishName },
       dateFrom: this.holidayFormGrp.value.dateFrom,
       dateTo: this.holidayFormGrp.value.dateTo,
       flexibilityStatus:this.holidayFormGrp.value.flexibilityStatus? this.holidayStatusList[0]:this.holidayStatusList[1],
-      curriculums: this.holiday.curriculums,
+      curriculums: this.holidayFormGrp.value.curriculumName,
       createdDate:new Date()
      };
     
@@ -173,12 +156,14 @@ export class HolidayModelComponent implements OnInit {
 
         this.editedStatus=holiday.flexibilityStatus.value==StatusEnum.Flexible?true:false;
 
-          holiday.curriculums.forEach(curriculam => {
-          
-              this.curriculamListEdited.push(curriculam.id);
-            
-          });
-       
+        this.curriculamList.forEach(curriculam => {
+        holiday.curriculums.forEach(selectedCurriculum=> {
+          if(selectedCurriculum.id==curriculam.id)
+          {
+            this.curriculamListEdited.push(curriculam);
+          }
+        });
+      });
         this.holidayFormGrp.patchValue({arabicName:holiday.name.ar, 
           englishName:holiday.name.en, 
           flexibilityStatus: this.editedStatus,
@@ -188,12 +173,12 @@ export class HolidayModelComponent implements OnInit {
         });
       
  }
- curriculumSelected(curriculumsIds)
+ curriculumSelected(curriculums)
  {
   this.flexibilityStatus.enable();
   this.avaliableChangeStatus=true;
-  curriculumsIds?.forEach(element => {
-    if(element==3)
+  curriculums?.forEach(element => {
+    if(element.code=="U.A.E")
     {
       this.holidayFormGrp.patchValue({flexibilityStatus:false});
       this.flexibilityStatus.disable();
