@@ -3,7 +3,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
-import { PrimngModule } from '../primeNg/primeNg.module';
+import { PrimngModule } from '../primng/primeNg.module';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { CalenderComponent } from './components/calender/calender.component';
@@ -53,6 +53,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RequestListComponent } from '../modules/request-list/Component/request-list/request-list.component';
 import { FullbackImagePipe } from './pipes/fullback-image.pipe';
 import { FullbackImageDirective } from './directives/fullback-image.directive';
+import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 
 registerLocaleData(localeAr);
 
@@ -103,6 +104,7 @@ registerLocaleData(localeAr);
     PermissionDirective,
     FullbackImagePipe,
     FullbackImageDirective,
+    SubHeaderComponent,
 
   ],
   imports: [
@@ -173,7 +175,8 @@ registerLocaleData(localeAr);
     TranslateModule,
     ToastrModule,
     FullbackImagePipe,
-    FullbackImageDirective
+    FullbackImageDirective,
+    SubHeaderComponent
   ],
   providers:[SharedService]
 })
