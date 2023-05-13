@@ -1,0 +1,7 @@
+
+<div class="d-flex align-items-center gap-3 mb-5">
+  <img *ngIf="img" style="width:2rem" [src]="img" alt="">
+  <ng-content></ng-content>
+  <h3 class="title color-primary">{{title}} :- </h3>
+  <span *ngIf="label" class="color-skyBlue-500 fw-bold">{{label}}</span>
+</div>

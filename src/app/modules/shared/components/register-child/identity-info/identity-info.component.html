@@ -1,34 +1,37 @@
 
 <ng-container *ngIf="!allowToEditIdentityInfo || mode=='view'">
     <ng-container *ngIf="(student$ |async) as student">
-        <div class="grid-container">
-            <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentName'|translate }}</p>
+
+      <!-- <sub-header title="{{'dashboard.parents.parentInfo'|translate}}" img="assets/images/home/student/student.svg"></sub-header> -->
+
+        <div class="d-grid grid-col-8 even-gap gap-5">
+            <p class="color-gray-300">{{ 'dashboard.parents.studentName'|translate }}</p>
             <span class="color-primary mb-2">{{student.name |currentLang}}</span>
 
-            <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentNickname'|translate }}</p>
+            <p class="color-gray-300">{{ 'dashboard.parents.studentNickname'|translate }}</p>
             <span class="color-primary mb-2">{{student.surname |currentLang}}</span>
 
-            <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
+            <p class="color-gray-300">{{'shared.birthDay'|translate }}</p>
             <span class="color-primary mb-2">{{student.birthDate |LocalizeDate}}</span>
 
-            <p class="color-gray-300 fs-4">{{'shared.placeOfBirth'|translate }}</p>
+            <p class="color-gray-300">{{'shared.placeOfBirth'|translate }}</p>
             <span class="color-primary mb-2">{{student?.placeOfBirth }}</span>
 
-            <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
+            <p class="color-gray-300">{{ 'shared.gender'|translate }}</p>
             <span class="color-primary mb-2" *ngIf="student?.gender=='Female'">{{'shared.genderType.Female'|translate}}</span>
             <span class="color-primary mb-2" *ngIf="student?.gender=='Male'">{{'shared.genderType.Male'|translate}}</span>
 
 
-            <p class="color-gray-300 fs-4">{{ 'shared.religion'|translate }}</p>
+            <p class="color-gray-300">{{ 'shared.religion'|translate }}</p>
             <span class="color-primary mb-2">{{student?.religion?.name |currentLang}}</span>
 
-            <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
+            <p class="color-gray-300">{{ 'shared.nationality'|translate }}</p>
             <span class="color-primary mb-2">{{student.nationality?.name |currentLang}}</span>
             <!--
-            <p class="color-gray-300 fs-4">{{'shared.nationalId'|translate }}</p>
+            <p class="color-gray-300">{{'shared.nationalId'|translate }}</p>
             <span class="color-primary mb-2">2002/07/04</span>
 
-            <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
+            <p class="color-gray-300">{{ 'shared.nationalIdExpireDate'|translate }}</p>
             <span class="color-primary mb-2">مصرى</span> -->
 
         </div>
@@ -38,34 +41,34 @@
 
 
 <ng-container *ngIf="allowToEditIdentityInfo && mode=='edit'">
-    <div class=" custom-form" [formGroup]="studentForm">
-        <div class="form-set " formGroupName="name">
+    <div class="row g-5 custom-form" [formGroup]="studentForm">
+        <div class="col-md-4 col-lg-3  " formGroupName="name">
             <label class="label required">{{'dashboard.students.studentName'|translate}}</label>
             <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
         </div>
 
-        <div class="form-set" formGroupName="surname">
+        <div class="col-md-4 col-lg-3 " formGroupName="surname">
             <label class="label required">{{'dashboard.students.studentNickname'|translate}}</label>
             <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
         </div>
 
-        <div class="form-set">
+        <div class="col-md-4 col-lg-3 ">
             <label class="label required">{{'shared.birthDay'|translate}}</label>
             <p-calendar formControlName="birthDate" useUtc dateFormat="DD dd-mm-yy" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
         </div>
 
-        <div class="form-set">
+        <div class="col-md-4 col-lg-3 ">
             <label class="label required">{{'shared.gender'|translate}}</label>
             <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
         </div>
 
 
-        <div class="form-set">
+        <div class="col-md-4 col-lg-3 ">
             <label class="label required">{{'shared.religion'|translate}}</label>
             <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
         </div>
 
-        <div class="form-set" >
+        <div class="col-md-4 col-lg-3 " >
             <label class="label required">{{'shared.nationality'|translate}}</label>
             <p-dropdown
             [filter]="true"
