@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IndexesRoutingModule } from './indexes-routing.module';
 import { EditNewIndexComponent } from './components/edit-new-Index/edit-new-index.component';
 import { IndexesComponent } from './components/indexes-list/indexes-list.component';
-import { PrimngModule } from 'src/app/primeNg/primeNg.module';
+import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 

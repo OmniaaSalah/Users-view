@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PrimngModule } from 'src/app/primeNg/primeNg.module';
+import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { AssignmentsListComponent } from './assignments/assignments-list/assignments-list.component';
 import { UploadAssignmentComponent } from './assignments/upload-assignment/upload-assignment.component';
 import { AssignmentRoutingModule } from './assignments-routing.module';

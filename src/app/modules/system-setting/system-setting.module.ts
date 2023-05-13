@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SystemSettingRoutingModule } from './system-setting-routing.module';
-import { PrimngModule } from 'src/app/primeNg/primeNg.module';
+import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SystemSettingComponent } from './system-setting.component';
 import { GracePeriodsListComponent } from './components/grace-periods-list/grace-periods-list.component';
