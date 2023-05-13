@@ -215,6 +215,22 @@
     &.gap-y-5{row-gap: 3.5rem;}
 }
 
+.d-grid{
+
+  @for $i from 1 through 12{
+    &.grid-col-#{$i}{
+      grid-template-columns: repeat($i, max-content);
+    }
+  }
+
+  &.even-gap > *{
+    &:nth-child(even){
+      margin-inline-end: 4.3rem;
+    }
+  }
+}
+
+
 .required{
     position: relative;
     &::after{

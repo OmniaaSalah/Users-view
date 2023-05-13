@@ -51,7 +51,11 @@
                 <td>{{subject.subject|currentLang}}</td>
                 <td>{{subject.isElective ? ('dashboard.Subjects.optional'| translate) : ('dashboard.Subjects.mandatory'| translate)}}</td>
                 <td>{{''+subject.evaluationSystem || 'تقيم' | translate}}</td>
-                <td>{{subject.studentDegree}}</td>
+                <td>
+                  {{subject.studentDegree}} -
+                  <span class="color-skyBlue-500" *ngIf="subject.ispass">{{'shared.allStatus.Passed' |translate}}</span>
+                  <span class="color-red-500" *ngIf="!subject.ispass">{{'shared.allStatus.Failed' |translate}}</span>
+              </td>
                 <td *ngIf="subjects.isHaveStudentPerformance">
                     <div class="color-skyBlue-500 ">
                         <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="openStudentPerformanceModal(subject?.studentPerformance)">
@@ -88,12 +92,13 @@
                 </td>
                 <td [attr.colspan]="subjects.isHaveStudentPerformance ? 3 : 2">
                     <div class="d-flex gap-4">
-                        <span class="fw-bold">{{'dashboard.students.finalFirstSemesterResult'|translate}}</span>
-                        <span>{{subjects.finalResult}}%</span>
+                      <span class="fw-bold">{{'shared.FinalResult'|translate}}</span>
+                        <!-- <span class="fw-bold">{{'dashboard.students.finalFirstSemesterResult'|translate}}</span> -->
+                        <span>{{subjects.finalResult}}</span>
                     </div>
                 </td>
-                <td>{{subjects.finalGPA}}</td>
-                <td>{{subjects.finalHour}}</td>
+                <td>{{subjects.finalGPA || '--'}}</td>
+                <td>{{subjects.finalHour || '--'}}</td>
             </tr>
         </ng-template>
 
