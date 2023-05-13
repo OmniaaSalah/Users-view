@@ -116,8 +116,12 @@ export class ParantsComponent implements OnInit {
 	  }
 	onSort(e){
 
-		if(e.order==1) this.filtration.SortBy= 'old'
-		else if(e.order == -1) this.filtration.SortBy= 'update'
+		if(e.order==-1)
+		{this.filtration.SortBy="ASC"}
+		else
+		{this.filtration.SortBy="desc"}
+		this.filtration.SortColumnName=e.field;
+		this.filtration.Page=1;
 		this.checkParentList()
 	  }
 	paginationChanged(event: paginationState) {

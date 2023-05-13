@@ -23,46 +23,46 @@
 
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
-                    <th pSortableColumn="name.ar" >
+                    <th pSortableColumn="{{lang=='ar' ? 'GuardianArabicName' : 'GuardianEnglishName'}}" >
                         <div class="content">
 
-                            <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.parents.parentName'|translate }}
+                            <p-sortIcon field="{{lang=='ar' ? 'GuardianArabicName' : 'GuardianEnglishName'}}"></p-sortIcon>{{'dashboard.parents.parentName'|translate }}
                         </div>
                     </th>
-                    <th pSortableColumn="surname.ar">
+                    <th pSortableColumn="{{lang=='ar' ? 'ArabicSurname' : 'EnglishSurname'}}">
 
-                        <p-sortIcon field="surname.ar"></p-sortIcon>{{'dashboard.parents.parentNickname'|translate }}
+                        <p-sortIcon field="{{lang=='ar' ? 'ArabicSurname' : 'EnglishSurname'}}"></p-sortIcon>{{'dashboard.parents.parentNickname'|translate }}
                     </th>
-                    <th pSortableColumn="emiratesIdNumber">
+                    <th pSortableColumn="EmiratesIdNumber">
 
-                        <p-sortIcon field="emiratesIdNumber"></p-sortIcon>{{'shared.Identity Number'|translate }}
+                        <p-sortIcon field="EmiratesIdNumber"></p-sortIcon>{{'shared.Identity Number'|translate }}
                     </th>
-                    <th pSortableColumn="gender">
+                    <th pSortableColumn="Gender">
 
-                        <p-sortIcon field="gender"></p-sortIcon>{{'shared.gender'|translate }}
+                        <p-sortIcon field="Gender"></p-sortIcon>{{'shared.gender'|translate }}
                     </th>
-                    <th pSortableColumn="relativeRelation">
+                    <th pSortableColumn="{{lang=='ar' ? 'RelativeRelationAr' : 'RelativeRelationEn'}}">
 
-                        <p-sortIcon field="gender"></p-sortIcon>{{'dashboard.parents.relativeRelation'|translate }}
+                        <p-sortIcon field="{{lang=='ar' ? 'RelativeRelationAr' : 'RelativeRelationEn'}}"></p-sortIcon>{{'dashboard.parents.relativeRelation'|translate }}
                     </th>
-                    <th pSortableColumn="birthdate">
+                    <th pSortableColumn="BirthDate">
 
-                        <p-sortIcon field="birthDate"></p-sortIcon>{{'shared.birthDay'|translate }}
+                        <p-sortIcon field="BirthDate"></p-sortIcon>{{'shared.birthDay'|translate }}
                     </th>
-                    <th pSortableColumn="nationalityName.ar">
-                        <p-sortIcon field="nationalityName.ar"></p-sortIcon>{{'shared.nationality'|translate }}
+                    <th pSortableColumn="{{lang=='ar' ? 'NationalityAr' : 'NationalityEn'}}">
+                        <p-sortIcon field="{{lang=='ar' ? 'NationalityAr' : 'NationalityEn'}}"></p-sortIcon>{{'shared.nationality'|translate }}
                     </th>
-                    <th pSortableColumn="mobile">
-                        <p-sortIcon field="mobile"></p-sortIcon>{{'shared.phoneNumber'|translate }}
+                    <th pSortableColumn="Mobile">
+                        <p-sortIcon field="Mobile"></p-sortIcon>{{'shared.phoneNumber'|translate }}
                     </th>
-                    <th pSortableColumn="childrenCount">
-                        <p-sortIcon field="childrenCount"></p-sortIcon>{{'dashboard.parents.childrenNumber'|translate }}
+                    <th pSortableColumn="ChildrenCount">
+                        <p-sortIcon field="ChildrenCount"></p-sortIcon>{{'dashboard.parents.childrenNumber'|translate }}
                     </th>
-                    <th  pSortableColumn="email">
-                        <p-sortIcon field="email"></p-sortIcon>{{'shared.email'|translate }}
+                    <th  pSortableColumn="Email">
+                        <p-sortIcon field="Email"></p-sortIcon>{{'shared.email'|translate }}
                     </th>
-                    <th pSortableColumn="requestCount">
-                        <p-sortIcon field="requestCount"></p-sortIcon>{{'dashboard.parents.pendingRequests'|translate }}
+                    <th pSortableColumn="RequestCount">
+                        <p-sortIcon field="RequestCount"></p-sortIcon>{{'dashboard.parents.pendingRequests'|translate }}
                     </th>
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>
                 </tr>
@@ -76,7 +76,12 @@
                     <td>{{parent.surname |currentLang}}</td>
                     <td>{{parent.emiratesIdNumber}}</td>
                     <td>{{'shared.genderType.'+parent.gender |translate}}</td>
-                    <td>{{parent?.relativeRelation|currentLang}}</td>
+                    <td>
+                        <ng-container *ngFor="let item of lang=='ar'?parent?.relativeRelationAr:parent?.relativeRelationEn let i=index">
+                            {{item}}<span *ngIf="i< parent?.relativeRelationAr.length-1">,</span>
+                        </ng-container>
+                        
+                    </td>
                     <td>{{parent.birthDate |LocalizeDate}}</td>
                     <td>{{parent.nationalityName |currentLang}}</td>
                     <td>{{parent.mobile}}</td>
