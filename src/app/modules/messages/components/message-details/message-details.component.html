@@ -68,7 +68,7 @@
         <p class="time">{{messageDetails?.createdDate | customDate}}</p>
     </div>
     <div class="first-message">
-      <p class="title"> {{messageDetails?.roleName | currentLang}} - {{ messageDetails?.userName | currentLang }}</p>
+      <p class="title"><span *ngIf="messageDetails?.showSenderName==null||messageDetails?.showSenderName">{{ messageDetails?.userName | currentLang }}</span><span *ngIf="messageDetails?.showSenderName!=null&&!messageDetails?.showSenderName">---</span> / {{messageDetails?.roleName | currentLang}}</p>
       <div class="body-content">
           <p>{{ messageDetails?.messegeText }}</p>
           <div class="w-100 d-flex">
@@ -86,7 +86,7 @@
 
     <ng-container *ngFor="let message of messagesReplies">
     <div  [ngClass]="message?.scope==messageDetails?.scope ? 'first-message':'second-message'">
-        <p class="title"> {{message?.roleName | currentLang}} - {{ message?.userName | currentLang }}</p>
+        <p class="title">{{ message?.userName | currentLang }} / {{message?.roleName | currentLang}}</p>
         <div class="body-content">
             <p>{{ message?.messegeText }}</p>
             <div class="w-100 d-flex">

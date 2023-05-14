@@ -118,10 +118,10 @@ export class MessagesMainComponent implements OnInit {
     if(this.scope == UserScope.Guardian){
     this.messageService.getMessagesGuardian(this.useId,searchModel).subscribe(res=>{
       this.messages.loading=false
-     this.messages.list = res.data
-      this.messages.total = res.total
-      this.messages.totalAllData = res.totalAllData
-      this.componentHeaderData.mainTitle.sub = `(${res.total})`
+     this.messages.list = res.result.data
+      this.messages.total = res.result.total
+      this.messages.totalAllData = res.result.totalAllData
+      this.componentHeaderData.mainTitle.sub = `(${res.result.total})`
       this.headerService.changeHeaderdata(this.componentHeaderData);
     })
   }
@@ -129,10 +129,10 @@ export class MessagesMainComponent implements OnInit {
   if(this.scope == UserScope.Employee){
     this.messageService.getMessagesSchoolEmp(this.useId,searchModel).subscribe(res=>{
       this.messages.loading=false
-     this.messages.list = res.data
-      this.messages.total = res.total
-      this.messages.totalAllData = res.totalAllData
-      this.componentHeaderData.mainTitle.sub = `(${res.total})`
+     this.messages.list = res.result.data
+      this.messages.total = res.result.total
+      this.messages.totalAllData = res.result.totalAllData
+      this.componentHeaderData.mainTitle.sub = `(${res.result.total})`
       this.headerService.changeHeaderdata(this.componentHeaderData);
     })
   }
@@ -140,10 +140,10 @@ export class MessagesMainComponent implements OnInit {
   if(this.scope == UserScope.SPEA){
     this.messageService.getMessagesSpea(this.useId,searchModel).subscribe(res=>{
       this.messages.loading=false
-     this.messages.list = res.data
-      this.messages.total = res.total
-      this.messages.totalAllData = res.totalAllData
-      this.componentHeaderData.mainTitle.sub = `(${res.total})`
+     this.messages.list = res?.result.data
+      this.messages.total = res?.result.total
+      this.messages.totalAllData = res?.result.totalAllData
+      this.componentHeaderData.mainTitle.sub = `(${res?.result.total})`
       this.headerService.changeHeaderdata(this.componentHeaderData);
     })
   }
