@@ -16,6 +16,9 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { SubjectService } from '../../../subjects/service/subject.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -35,7 +38,12 @@ export class UploadAssignmentComponent implements OnInit {
   files: any = [];
   currentDate = new Date();
   isBtnLoading:boolean=false;
-
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
+  componentHeaderData: IHeader={
+    breadCrump: [],
+    mainTitle: { main: this.translate.instant('breadcrumb.Upload Assignment') }
+  }
 
   constructor(private headerService: HeaderService, private router: Router,
     private toastr: ToastrService,
@@ -90,15 +98,8 @@ export class UploadAssignmentComponent implements OnInit {
 
     this.getGradeList();
     this.getSubjectList();
-    this.headerService.Header.next(
-      {
-        'breadCrump': [
-          { label: this.translate.instant('breadcrumb.Assignments List'), routerLink: '/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } },
-          { label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/performance-managment/assignments/upload-assignment', routerLinkActiveOptions: { exact: true } }
-        ],
-        mainTitle: { main: this.translate.instant('breadcrumb.Upload Assignment') }
-      }
-    );
+    this.checkDashboardHeader();
+  
 
   }
 
@@ -191,5 +192,33 @@ uploadedFiles: any[] = [];
     let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
     return d.split('.')[0]
   
+  }
+
+  checkDashboardHeader()
+  {
+      if(this.currentUserScope==UserScope.Employee)
+    {
+      this.componentHeaderData.breadCrump=
+      [
+
+       { label: this.translate.instant('Assignments List'), routerLink: '/school-performance-managent/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
+       , {label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/school-performance-managent/assignments/upload-assignment', routerLinkActiveOptions: { exact: true }}
+      ]
+
+
+    }
+    else if (this.currentUserScope==UserScope.SPEA)
+    {
+      this.componentHeaderData.breadCrump=
+         [
+         { label: this.translate.instant('Assignments List'), routerLink: '/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
+         , {label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/performance-managment/assignments/upload-assignment', routerLinkActiveOptions: { exact: true }}
+         
+        ]
+
+
+    }
+
+    this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 }

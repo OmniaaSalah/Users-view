@@ -69,7 +69,10 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
   }
 
   navigateToEditAssessment(id: number): void {
-    this.router.navigateByUrl(`/performance-managment/assessments/edit-assessment/${id}`);
+    if(this.currentUserScope==UserScope.SPEA)
+    {this.router.navigateByUrl(`/performance-managment/assessments/edit-assessment/${id}`);}
+    else if(this.currentUserScope==UserScope.Employee)
+    {this.router.navigateByUrl(`/school-performance-managent/assessments/edit-assessment/${id}`);}
   }
 
   private getRate(): void {

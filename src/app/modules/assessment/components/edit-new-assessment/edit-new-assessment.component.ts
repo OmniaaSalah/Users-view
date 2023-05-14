@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , inject} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators,FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { KeyValue } from '@angular/common';
@@ -10,6 +10,9 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { AssessmentService } from '../../service/assessment.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { assesmentDegreesValidator } from './assement-degrees-validators';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 
 @Component({
   selector: 'app-edit-new-assessment',
@@ -18,6 +21,8 @@ import { assesmentDegreesValidator } from './assement-degrees-validators';
 })
 
 export class EditNewAssessmentComponent implements OnInit {
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
   rateArray={};
   assessmtId='';
   faPlus = faPlus;
@@ -34,6 +39,10 @@ export class EditNewAssessmentComponent implements OnInit {
       value: false
     }
   ];
+  componentHeaderData: IHeader={
+    breadCrump: [],
+    'mainTitle':{main:(this.assessmtId==null||this.assessmtId=='')? this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System')}
+  }
   private readonly assementsListUrl = '/performance-managment/assessments/assements-list';
 
   get rateScores(): FormArray {
@@ -80,7 +89,7 @@ export class EditNewAssessmentComponent implements OnInit {
    if (this.assessmtId) {
     this.getRate();
    }
-   this.setBreadCrump();
+   this.checkDashboardHeader()
    this.initFormModels();
   }
 
@@ -156,19 +165,6 @@ export class EditNewAssessmentComponent implements OnInit {
     }
   }
 
-  private setBreadCrump(): void {
-    this.headerService.Header.next(
-      {
-        'breadCrump': [
-          { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
-          {
-            label: (this.assessmtId==null||this.assessmtId=='')?  this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System'),
-            routerLink: (this.assessmtId==null||this.assessmtId=='')? '/performance-managment/assessments/new-assessment':'/performance-managment/assessments/edit-assessment/'+this.assessmtId
-          }],
-          'mainTitle':{main:(this.assessmtId==null||this.assessmtId=='')? this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System')}
-      }
-    );
-  }
 
   private getRate(): void {
     this.assessmentService.getRateById(Number(this.assessmtId)).subscribe((res: IRate) => {
@@ -225,4 +221,34 @@ checkRating(i)
 
 
  }
+
+ checkDashboardHeader()
+   {
+       if(this.currentUserScope==UserScope.Employee)
+     {
+       this.componentHeaderData.breadCrump=
+       [
+        { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
+        {
+          label: (this.assessmtId==null||this.assessmtId=='')?  this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System'),
+          routerLink: (this.assessmtId==null||this.assessmtId=='')? '/school-performance-managent/assessments/new-assessment':'/school-performance-managent/assessments/edit-assessment/'+this.assessmtId
+        }]
+
+
+     }
+     else if (this.currentUserScope==UserScope.SPEA)
+     {
+       this.componentHeaderData.breadCrump=
+       [
+        { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
+        {
+          label: (this.assessmtId==null||this.assessmtId=='')?  this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System'),
+          routerLink: (this.assessmtId==null||this.assessmtId=='')? '/performance-managment/assessments/new-assessment':'/performance-managment/assessments/edit-assessment/'+this.assessmtId
+        }]
+
+
+     }
+
+     this.headerService.changeHeaderdata(this.componentHeaderData)
+   }
 }
