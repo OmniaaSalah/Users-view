@@ -1,5 +1,5 @@
-import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
@@ -23,15 +23,19 @@ import { GradesService } from '../../../services/grade/grade.service';
   templateUrl: './school-divisions.component.html',
   styleUrls: ['./school-divisions.component.scss']
 })
-export class SchoolDivisionsComponent implements OnInit,OnChanges {
+export class SchoolDivisionsComponent implements OnInit,OnChanges,OnDestroy {
 @Input('selectedGradeId') selectedGradeId
+lang = inject(TranslationService).lang
 currentSchool="";
+
 currentUserScope = inject(UserService).getCurrentUserScope()
 get userScope() { return UserScope }
 get claimsEnum () {return ClaimsEnum}
-schoolId = this.route.snapshot.paramMap.get('schoolId')
 
-lang = inject(TranslationService).lang
+
+schoolId = this.route.snapshot.paramMap.get('schoolId')
+gardeId = +this.route.snapshot.queryParamMap.get('gradeId')
+
 
 componentHeaderData: IHeader = {
   breadCrump:  [
@@ -55,6 +59,7 @@ componentHeaderData: IHeader = {
 
 
 
+
    constructor(
      public translate: TranslateService,
      private exportService :ExportService,
@@ -63,16 +68,18 @@ componentHeaderData: IHeader = {
      private headerService: HeaderService,
      private divisionService:DivisionService,
      private userService:UserService,
+     private router:Router,
      private sharedService:SharedService) { }
 
-    ngOnChanges(changes: SimpleChanges): void {
-console.log(changes);
 
-      if(changes['selectedGradeId'].currentValue) this.filtration.gradeid = [changes['selectedGradeId'].currentValue]
+    ngOnChanges(changes: SimpleChanges): void {
+
+      // if(changes['selectedGradeId'].currentValue) this.filtration.gradeid = [changes['selectedGradeId'].currentValue]
 
     }
 
    ngOnInit(): void {
+    this.filtration.gradeid = this.gardeId ? [this.gardeId] :[]
     if(this.currentUserScope==this.userScope.Employee)
     {
       this.userService.currentUserSchoolName$?.subscribe((res)=>{
@@ -139,5 +146,9 @@ console.log(changes);
    }
 
 
+   ngOnDestroy(): void {
+    // this.selectedGradeId=null
+    this.router.navigate([],{queryParams:{}})
+  }
 
 }

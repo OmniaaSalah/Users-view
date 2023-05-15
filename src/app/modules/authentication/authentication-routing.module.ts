@@ -6,7 +6,9 @@ import { AuthenticationMainComponent } from './components/authentication-main/au
 const routes: Routes = [
   {
     path: '',component: AuthenticationMainComponent,
-    data: { title: 'Login' }
+    data:{
+      title:{ar:'تسجيل الدخول',en: 'SignIn'}
+    }
   }
 ];
 

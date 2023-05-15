@@ -37,19 +37,28 @@ const routes: Routes = [
             path: 'schools',
             loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents}
+            data:{
+              allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents,
+              title:{ar:'المدارس', en:'schools'}
+            }
           },
           {
             path: 'all-parents',
             loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents}
+            data:{
+              allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents,
+              title:{ar:'اولياء الأمور',en: 'schools'}
+            }
           },
           {
             path: 'students',
             loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents}
+            data:{
+              allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents,
+              title:{ar:'قائمه الطلاب',en: 'Students List'}
+            }
           },
         ]
       },
@@ -62,13 +71,16 @@ const routes: Routes = [
             path: 'school',
             loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: [ClaimsEnum.E_Menu_ManageSchool, , ClaimsEnum.E_MenuItem_Subjects]}
+            data:{
+              allowedClaims: [ClaimsEnum.E_Menu_ManageSchool, , ClaimsEnum.E_MenuItem_Subjects],
+              title:{ar:'تفاصيل المدرسه',en: 'school details'}
+            }
           },
           {
             path: 'requests-list',
             loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule),
             canActivate: [ClaimsGuard],
-            // data:{allowedClaims: ClaimsEnum.E_MenuItem_Requests}
+            data:{title:{ar:'قائمه الطلبات',en: 'requests List'}}
           },
         ]
       },
@@ -82,13 +94,19 @@ const routes: Routes = [
             path: 'all-parents',
             loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.E_menu_ManageStudents}
+            data:{
+              allowedClaims: ClaimsEnum.E_menu_ManageStudents,
+              title:{ar:'اولياء الامور',en: 'parents List'}
+            }
           },
           {
             path: 'students',
             loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: [ClaimsEnum.E_menu_ManageStudents]}
+            data:{
+              allowedClaims: [ClaimsEnum.E_menu_ManageStudents],
+              title:{ar:'قائمه الطلاب',en: 'Students List'}
+            }
           },
         ]
       },
@@ -99,11 +117,13 @@ const routes: Routes = [
       {
         path:'performance-managment',
         children:[
-               {
-            path: 'assignments',
-            loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule),
-            canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.S_MenuItem_Setting}
+            {
+              path: 'assignments',
+              loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule),
+              canActivate: [ClaimsGuard],
+              data:{
+                allowedClaims: ClaimsEnum.S_MenuItem_Setting,
+              }
           },
 
 
@@ -111,13 +131,17 @@ const routes: Routes = [
             path: 'RequestList',
             loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule),
             canActivate: [ClaimsGuard],
-            // data:{allowedClaims: ClaimsEnum.S_MenuItem_Request}
+            data:{title:{ar:'قائمه الطلبات',en: 'requests List'}}
+
+
           },
           {
             path: 'assessments',
             loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.SE_MenuItem_Rate}
+            data:{
+              allowedClaims: ClaimsEnum.SE_MenuItem_Rate,
+            }
           },
 
         ]
@@ -130,13 +154,19 @@ const routes: Routes = [
             path: 'assignments',
             loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.SE_MenuItem_Exam}
+            data:{
+              allowedClaims: ClaimsEnum.SE_MenuItem_Exam,
+              title:{ar:'الامتحانات',en: 'Exams'}
+            }
           },
           {
             path: 'assessments',
             loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.SE_MenuItem_Exam}
+            data:{
+              allowedClaims: ClaimsEnum.SE_MenuItem_Exam,
+              title:{ar:'تقيمات المواد الدراسيه',en: 'Subjects rates'}
+            }
           },
 
         ]
@@ -150,7 +180,11 @@ const routes: Routes = [
             path: 'surveys',
             loadChildren: () => import('./modules/surveys/surveys.module').then(m => m.SurveysModule),
             canActivate: [ClaimsGuard],
-            // data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}
+            data:{
+              // allowedClaims: ClaimsEnum.S_MenuItem_Survey,
+              title:{ar:'الاستبيانات',en: 'Surveys'}
+
+            }
           },
 
 
@@ -158,7 +192,9 @@ const routes: Routes = [
               path: 'annual-holiday',
               loadChildren: () => import('./modules/annual-holiday/annual-holiday.module').then(m => m.AnnualHolidayModule),
               canActivate: [ClaimsGuard],
-              data:{allowedClaims: ClaimsEnum.S_MenuItem_Holiday}
+              data:{
+                allowedClaims: ClaimsEnum.S_MenuItem_Holiday,
+              }
             },
 
             // {
@@ -171,14 +207,18 @@ const routes: Routes = [
               path: 'school-year',
               loadChildren: () => import('./modules/school-years/school-years.module').then(m => m.SchoolYearsModule),
               canActivate: [ClaimsGuard],
-              data:{allowedClaims: ClaimsEnum.S_MenuItem_SchoolYear}
+              data:{
+                allowedClaims: ClaimsEnum.S_MenuItem_SchoolYear,
+              }
             },
 
             {
               path: 'subject',
               loadChildren: () => import('./modules/subjects/subjects.module').then(m => m.SubjectsModule),
               canActivate: [ClaimsGuard],
-              data:{allowedClaims: ClaimsEnum.S_MenuItem_SubjectMenu}
+              data:{
+                allowedClaims: ClaimsEnum.S_MenuItem_SubjectMenu,
+              }
             },
         ]
       },
@@ -189,13 +229,20 @@ const routes: Routes = [
         path: 'schoolEmployee-management/school',
         loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
         canActivate: [ClaimsGuard],
-        data:{allowedClaims: ClaimsEnum.E_menu_ManageSchoolEmployee}
+        data:{
+          allowedClaims: ClaimsEnum.E_menu_ManageSchoolEmployee,
+          title:{ar:'موظفين المدرسة',en: 'School Employee'}
+
+        }
       },
       {
         path: 'grades-and-divisions/school',
         loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
         canActivate: [ClaimsGuard],
-        data:{allowedClaims: ClaimsEnum.E_Menu_ManageGradesAndDivisions}
+        data:{
+          allowedClaims: ClaimsEnum.E_Menu_ManageGradesAndDivisions,
+          title:{ar:'الشعب والصفوف',en: 'Divisions & Degrees'}
+        }
       },
 
 
@@ -207,31 +254,43 @@ const routes: Routes = [
             path: 'user-roles',
             loadChildren: () => import('./modules/user-roles/user-roles.module').then(m => m.UserRolesModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.S_MenuItem_Role}
+            data:{
+              allowedClaims: ClaimsEnum.S_MenuItem_Role,
+            }
           },
           {
             path: 'indexes',
             loadChildren: () => import('./modules/indexes/indexes.module').then(m => m.IndexesModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.S_MenuItem_Index}
+            data:{
+              allowedClaims: ClaimsEnum.S_MenuItem_Index,
+            }
           },
           {
             path: 'settings',
             loadChildren: () => import('./modules/system-setting/system-setting.module').then(m => m.SystemSettingModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.S_MenuItem_Setting}
+            data:{
+              allowedClaims: ClaimsEnum.S_MenuItem_Setting,
+              title:{ar:'الاعدادات',en: 'Settings'}
+            }
           },
           {
             path: 'user-information',
             loadChildren: () => import('./modules/user-information/user-information.module').then(m => m.UserInformationModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.S_MenuItem_user}
+            data:{
+              allowedClaims: ClaimsEnum.S_MenuItem_user,
+            }
           },
           {
             path: 'notifications',
             loadChildren: () => import('./modules/notifications-list/notifications-setting.module').then(m => m.NotificationsSettingModule),
             canActivate: [ClaimsGuard],
-            data:{allowedClaims: ClaimsEnum.S_MenuItem_Setting}
+            data:{
+              allowedClaims: ClaimsEnum.S_MenuItem_Setting,
+              title:{ar:'اعدادات الاشعارات',en: 'Notifications Setting'}
+            }
           },
         ]
       },
@@ -240,12 +299,18 @@ const routes: Routes = [
         path: 'reports-managment',
         loadChildren: () => import('./modules/reports-managment/reports-managment.module').then(m => m.ReportsManagmentModule),
         canActivate: [ClaimsGuard],
-        data:{allowedClaims: ClaimsEnum.S_Menu_ReportsManagement}
+        data:{
+          allowedClaims: ClaimsEnum.S_Menu_ReportsManagement,
+          title:{ar:'التقارير',en: 'Reports'}
+        }
       },
 
       {
         path: 'messages',
         loadChildren: () => import('./modules/messages/messages.module').then(m =>m.MessagesModule),
+        data:{
+          title:{ar:'الرسائل',en: 'Messages'}
+        }
       },
       {
         path: 'notifications',
@@ -253,20 +318,27 @@ const routes: Routes = [
           import('./modules/notifications/notification.module').then(
             (a) => a.NotificationModule
           ),
+          data:{
+            title:{ar:'الإشعارات',en: 'Notifications'}
+          }
       },
 
       {
         path: 'certificates',
         loadChildren: () =>
         import('./modules/issuance-of-a-certificate-pages/issue-certificate.module').then(
-          (a) => a.IssuanceCertificateModule
-
-        ),
+          (a) => a.IssuanceCertificateModule),
+        data:{
+          title:{ar:'الشهادات',en: 'Certificates'}
+        }
       },
 
       {
         path: 'requests-list',
-        loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule)
+        loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule),
+        data:{
+          title:{ar:'الطلبات',en: 'Requests List'}
+        }
       },
     ],
   },

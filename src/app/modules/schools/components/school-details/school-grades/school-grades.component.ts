@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Track } from 'src/app/core/Models/global/global.model';
@@ -57,10 +57,10 @@ export class SchoolGradesComponent implements OnInit {
   gradeTracks:Track[]
 
   constructor(
-    private schoolsService:SchoolsService,
     private translate :TranslateService,
     private gradesService:GradesService,
     private route: ActivatedRoute,
+    private router:Router,
     private headerService: HeaderService,
     private userService:UserService,
     private exportService: ExportService) { }
@@ -107,6 +107,11 @@ export class SchoolGradesComponent implements OnInit {
   }
 
 
+
+  openDivisionTab(gradeId){
+    this.setActiveTab.emit(4)
+    this.router.navigate([],{queryParams:{gradeId:gradeId}})
+  }
 
 
   onSort(e){

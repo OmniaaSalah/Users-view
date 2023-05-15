@@ -10,9 +10,25 @@ const routes:Routes=[
   {
     path: '', component: LayoutComponent,
     children:[
-      {path:"annual-holiday-list",component:AnnualHolidayComponent,data:{ RouteKey: RouteEnums.AnnaulHolidays}},
-      {path:"new-holiday",component:EditNewAnnualHolidayComponent},
-      {path:"edit-holiday/:holidayId",component:EditNewAnnualHolidayComponent},
+      {
+        path:"annual-holiday-list",component:AnnualHolidayComponent,
+        data:{
+          RouteKey: RouteEnums.AnnaulHolidays,
+          title:{ar:'الاجازات السنويه',en: 'Annual Holiday'}
+        }
+      },
+      {
+        path:"new-holiday",component:EditNewAnnualHolidayComponent,
+        data:{
+          title:{ar:'اضافه اجازه',en: 'Create Annual Holiday'}
+        }
+      },
+      {
+        path:"edit-holiday/:holidayId",component:EditNewAnnualHolidayComponent,
+        data:{
+          title:{ar:'تعديل اجازة',en: 'Update Annual Holiday'}
+        }
+      },
     ]
   }
 
