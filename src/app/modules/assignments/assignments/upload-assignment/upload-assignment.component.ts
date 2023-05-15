@@ -19,6 +19,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -49,6 +50,8 @@ export class UploadAssignmentComponent implements OnInit {
     private toastr: ToastrService,
     private subjectService:SubjectService,
     private sharedService:SharedService,
+    private userService:UserService,
+    private schoolService:SchoolsService,
      private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssignmentServiceService) {
     this.assignmentFormGrp = fb.group({
       curriculum: ['',Validators.required],
@@ -99,7 +102,7 @@ export class UploadAssignmentComponent implements OnInit {
     this.getGradeList();
     this.getSubjectList();
     this.checkDashboardHeader();
-  
+    if(this.currentUserScope==this.userScope.Employee)  this.userService.currentUserSchoolId$.subscribe(id => {this.schoolService.getSchool(id).subscribe((res)=>{this.curriculumId=res?.curriculum?.id;this.curriculum.setValue(this.curriculumId);this.curriculum.disable();})});
 
   }
 
@@ -166,7 +169,7 @@ uploadedFiles: any[] = [];
     this.assignmentModel.examShowDate= this.assignmentFormGrp.value.ExamDate;
     this.assignmentModel.gradeId = this.assignmentFormGrp.value.grades;
     this.assignmentModel.subjectId=  this.assignmentFormGrp.value.subjects;
-    this.assignmentModel.curriculumId= this.assignmentFormGrp.value.curriculum;
+    this.assignmentModel.curriculumId=this.currentUserScope==this.userScope.Employee ? this.curriculumId:this.assignmentFormGrp.value.curriculum;
     this.assignmentModel.examPdfPath = this.assignmentFormGrp.value.examPdfPath ;
     this.assignmentModel.examAudioPath = this.assignmentFormGrp.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {

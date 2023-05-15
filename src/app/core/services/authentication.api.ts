@@ -21,13 +21,13 @@ export class AuthenticationService {
 
   }
 
-  validateUsername(userName: string) {
-    return this.http.post("/User/Auth/Validate", { userName })
-  }
+  // validateUsername(userName: string) {
+  //   return this.http.post("/User/Auth/Validate", { userName })
+  // }
 
-  authenticate(token: string, password: string) {
-    return this.http.post("/User/Auth/Authenticate", { password }, null, { Authorization: `Bearer ${token}` })
-  }
+  // authenticate(token: string, password: string) {
+  //   return this.http.post("/User/Auth/Authenticate", { password }, null, { Authorization: `Bearer ${token}` })
+  // }
 
   setPassword(token: string, password: string, otp: string) {
     return this.http.post("/Account/Auth/SetPassword", { password, otp }, null, { Authorization: `Bearer ${token}` })

@@ -68,13 +68,13 @@
                 <th pSortableColumn="gradeName">{{'dashboard.Subjects.createdDate'|translate}}</th>
                 <th pSortableColumn="gradeName">{{'dashboard.Subjects.Edited by'|translate}}</th>
                 <th pSortableColumn="gradeName">{{'dashboard.Subjects.Last EditDate'|translate}}</th>
-
+                <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>
 
 
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-subject let-columns="columns">
-            <tr class="clickable" (click)="openSubject(subject.id)">
+            <tr >
                 <td>{{subject?.name|currentLang}}</td>
                 <td>{{subject?.gradeName|currentLang}}</td>
                 <td>{{subject?.trackName|currentLang}}</td>
@@ -85,6 +85,12 @@
                 <td>{{subject?.createdDate|LocalizeDate}}</td>
                 <td>{{(subject?.updatedName|currentLang) || '--'}}</td>
                 <td>{{(subject?.lastUpdatedDate|LocalizeDate )|| '--'}}</td>
+                <td pFrozenColumn [frozen]="true" class="actions">
+                    <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4"  routerLink="/school-management/school/{{schoolId}}/subjects/edit-subject/{{subject?.id}}" *permit="claimsEnum.E_U_Subject">
+                        <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
+                        <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
+                    </div>
+                 </td>
 
             </tr>
         </ng-template>

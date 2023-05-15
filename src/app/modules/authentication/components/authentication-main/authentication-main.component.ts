@@ -139,16 +139,6 @@ export class AuthenticationMainComponent implements OnInit{
   }
 
 
-
-
-
-  onNext() {
-
-
-    this.login();
-
-  }
-
   get getLoginForm() {
     return this.loginForm.controls
   }
@@ -199,8 +189,8 @@ export class AuthenticationMainComponent implements OnInit{
   }
 
   authenticate() {
-
-    this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
+    this.isBtnLoading=true;
+    this.authService.login({'username':this.loginForm.value.account,'password':this.loginForm.value.password}).subscribe((res: any) => {
 
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
@@ -232,24 +222,6 @@ export class AuthenticationMainComponent implements OnInit{
 
 
     },err=>{this.isBtnLoading = false;this.showError()})
-  }
-
-
-  validate() {
-
-    this.authService.validateUsername(this.account.value).subscribe((res: any) => {
-      this.token = res.token
-
-      this.authenticate();
-
-    },err=>{this.isBtnLoading = false;this.showError(); })
-  }
-
-  login(){
-
-    this.isBtnLoading=true;
-    this.validate();
-
   }
 
 

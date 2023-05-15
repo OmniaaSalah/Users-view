@@ -60,12 +60,18 @@ export class AuthenticationService {
     this.router.navigate(['/auth/login']);
   }
 
-  validateUsername(userName: string) {
-    return this.http.post("/User/Auth/Validate", { userName })
-  }
+  // validateUsername(userName: string) {
+  //   return this.http.post("/User/Auth/Validate", { userName })
+  // }
 
-  authenticate(token: string, password: string) {
-    return this.http.post("/User/Auth/Authenticate", { password }, null, { Authorization: `Bearer ${token}` })
+  // authenticate(token: string, password: string) {
+  //   return this.http.post("/User/Auth/Authenticate", { password }, null, { Authorization: `Bearer ${token}` })
+  // }
+
+  login(account)
+  {
+    return this.http.post("/User/Auth/Login", account)
+    
   }
 
   setPassword(token: string, password: string, otp: string) {
