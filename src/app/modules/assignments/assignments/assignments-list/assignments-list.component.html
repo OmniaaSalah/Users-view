@@ -2,8 +2,14 @@
 
 <!-- -------------- -->
 <ng-container *permit="claimsEnum.S_UploadExam">
-<app-add-btn [backGroundColor]="'btn-primary'" [route]="'/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'">
-</app-add-btn>
+    <div *ngIf="currentUserScope==userScope.SPEA">
+        <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'">
+        </app-add-btn>
+    </div>
+    <div *ngIf="currentUserScope==userScope.Employee">
+        <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/school-performance-managent/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'">
+        </app-add-btn>
+    </div>
 </ng-container>
 
 <!-- ------Table------- -->
@@ -99,7 +105,7 @@
                     </div>
                 </td>
                 <td pFrozenColumn [frozen]="true" class="actions" >
-                    <div class="" *ngIf="currentUserScope==userScope.SPEA || (assignment.examStatus === 'Available' && currentUserScope==userScope.Employee)">
+                    <div>
 
                         <app-dropdown [items]="items" label="{{'shared.ExamFileMangment' | translate}}"
                           (onItemClicked)="dropdownItemClicked($event, assignment)"></app-dropdown>

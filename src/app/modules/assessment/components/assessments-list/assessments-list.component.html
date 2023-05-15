@@ -1,7 +1,14 @@
 <ng-container *permit="claimsEnum.S_AddEvaluation">
-<app-add-btn bg-primary [backGroundColor]="'btn-primary'" [route]="'/performance-managment/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
-    <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
-</app-add-btn>
+    <div *ngIf="currentUserScope==userScope.SPEA">
+        <app-add-btn bg-primary [backGroundColor]="'btn-primary'" [route]="'/performance-managment/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
+            <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
+        </app-add-btn>
+    </div>
+    <div *ngIf="currentUserScope==userScope.Employee">
+        <app-add-btn bg-primary [backGroundColor]="'btn-primary'" [route]="'/school-performance-managent/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
+            <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
+        </app-add-btn>
+</div>
 </ng-container>
 <div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading">
 

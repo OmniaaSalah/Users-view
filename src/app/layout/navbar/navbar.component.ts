@@ -477,12 +477,11 @@ onScroll()
   unReadedMessagesCount=0
 
   getCurrentUserMessages(){
+    console.log("omn")
     let userId = this.userService.getCurrentUserId();
     this.messageService.getCurrentUserMessages(userId, this.currentUserScope,{PageSize:50, Page:1})
     .subscribe(res=>{
-      res.result?.data.forEach(mes=>{
-        mes.messageSatus== MessageStatus.Pending ? this.unReadedMessagesCount++ : null
-      })
+      this.unReadedMessagesCount=res?.countPending;
     })
   }
 
