@@ -75,7 +75,7 @@ routeHistory$ : BehaviorSubject<RouteInHistory[]> = new BehaviorSubject<RouteInH
   addToRouteHistory(route:RouteInHistory){
     let routeIndex = this.routeHistory.findIndex(el => el.url == this.currentUrl)
 
-    if(this.RouteHistoryLocalStorage.length > 9) this.routeHistory.shift()
+    if(this.RouteHistoryLocalStorage && this.RouteHistoryLocalStorage?.length > 9) this.routeHistory.shift()
 
     if(routeIndex > -1) {
       this.removeFromRouteHistory(routeIndex)

@@ -365,7 +365,7 @@
             <p>تاريخ الميلاد: {{certificate?.BirthDate |LocalizeDate}}</p>
             <p>رقم الطالب: {{certificate?.StudentId }}</p>
           </div>
-          <p>. مقيد/ة بالصف ({{certificate?.GradeAr}} )،شعبة {{certificate?.DivisionAr ||'...'}}</p>
+          <p>. مقيد/ة بالصف ({{certificate?.GradeAr}} ) ، شعبة ( {{certificate?.DivisionAr ||'...'}} )</p>
 
           <!-- <div class="py-5"></div> -->
 
@@ -381,7 +381,7 @@
               <p>Student Number: {{certificate?.StudentId}}</p>
             </div>
 
-            <p>is registered in grade ( {{certificate?.GradeEn}} ), and class {{certificate?.DivisionEn ||'...'}}.</p>
+            <p>is registered in grade ( {{certificate?.GradeEn}} ), and class ( {{certificate?.DivisionEn ||'...'}} ).</p>
 
             <!-- <div class="py-5"></div> -->
 

@@ -49,18 +49,6 @@ export class NavbarComponent implements OnInit {
     //,{name:this.translate.instant('about daleel'),Link:"/about-us"}
   ]
 
-  historyList=[
-    {title:'الرئيسه', url:'/'},
-    {title:'الطلاب', url:'/schools-and-students/students'},
-    {title:'المدارس', url:'/schools-and-students/schools'},
-    {title:'الاباء', url:'/schools-and-students/all-parents'},
-    {title:'الطلبات', url:'/performance-managment/RequestList'},
-    {title:'التقيمات الدراسيه', url:'/performance-managment/RequestList'},
-    {title:'فترات السماح', url:'/performance-managment/RequestList'},
-    {title:'السنوات الدراسيه', url:'/performance-managment/RequestList'},
-    {title:'تفاصيل الطالب', url:'/performance-managment/RequestList'},
-    {title:'طلب تسجيل', url:'/performance-managment/RequestList'},
-  ]
 
   message:string="";
   faAngleDown = faAngleDown
@@ -71,8 +59,6 @@ export class NavbarComponent implements OnInit {
   }
 
   activeRoute$=this.routeListenrService.activeRoute$
-  history = this.routeListenrService.routeHistory$.subscribe(console.log)
-  routeHistory$ = this.routeListenrService.routeHistory$
 
   isMenuOpend= false
   activeMenuItem:MenuItem

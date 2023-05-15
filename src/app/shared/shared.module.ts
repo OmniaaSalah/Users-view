@@ -54,6 +54,7 @@ import { RequestListComponent } from '../modules/request-list/Component/request-
 import { FullbackImagePipe } from './pipes/fullback-image.pipe';
 import { FullbackImageDirective } from './directives/fullback-image.directive';
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
+import { RequiredRolesDirective } from './directives/required-roles/required-roles.directive';
 
 registerLocaleData(localeAr);
 
@@ -105,6 +106,7 @@ registerLocaleData(localeAr);
     FullbackImagePipe,
     FullbackImageDirective,
     SubHeaderComponent,
+    RequiredRolesDirective,
 
   ],
   imports: [
@@ -176,7 +178,8 @@ registerLocaleData(localeAr);
     ToastrModule,
     FullbackImagePipe,
     FullbackImageDirective,
-    SubHeaderComponent
+    SubHeaderComponent,
+    RequiredRolesDirective,
   ],
   providers:[SharedService]
 })

@@ -232,7 +232,7 @@ export class SettingsService {
       take(1))
   }
 
-    isSchoolExistInGracePeriod(query){
+    isSchoolExistInGracePeriod(query : {schoolId:number , code:GracePeriodEnum}){
     return this.http.get(`/system-settings/grace-period/check-from-school`, query)
     .pipe(
       map(res=> res.result.valid ? true : false),
