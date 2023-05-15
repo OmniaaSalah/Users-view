@@ -16,6 +16,8 @@ import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-s
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
+import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
 
 @Component({
   selector: 'app-degrees',
@@ -28,9 +30,13 @@ export class DegreesComponent implements OnInit {
 
   get claimsEnum () {return ClaimsEnum}
 
+
+
   lang=this.TranslationService.lang
-  schoolId= this.route.snapshot.paramMap.get('schoolId')
+  schoolId= +this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
+
+  isSchoolAllowToUploadDegrees$=this.settingService.isSchoolExistInGracePeriod({schoolId:this.schoolId, code:GracePeriodEnum.raisDegreesFirstClass})
 
   subjects$=this.divisionService.getAllSubjects(this.divisionId)
 
@@ -69,6 +75,7 @@ export class DegreesComponent implements OnInit {
     private TranslationService:TranslationService,
     public toaster: ToastrService,
     private route:ActivatedRoute,
+    private settingService:SettingsService,
     private divisionService:DivisionService,
     private exportService:ExportService,) { }
 
@@ -77,11 +84,16 @@ export class DegreesComponent implements OnInit {
   }
 
   semesterChanged(semester){
-    console.log(semester);
 
     this.filtration.semester=semester;
     this.selectedSemesterLable = this.btnGroupItems.find(el=>el.value===semester).label
     this.getDivisionDegrees()
+    if(semester==SemesterEnum.LastSemester){
+      this.isSchoolAllowToUploadDegrees$=this.settingService.isSchoolExistInGracePeriod({schoolId:this.schoolId, code:GracePeriodEnum.raisDegreesLastClass})
+    }else if(semester==SemesterEnum.FirstSemester){
+      this.isSchoolAllowToUploadDegrees$=this.settingService.isSchoolExistInGracePeriod({schoolId:this.schoolId, code:GracePeriodEnum.raisDegreesFirstClass})
+    }
+
   }
 
   getDivisionDegrees(){
