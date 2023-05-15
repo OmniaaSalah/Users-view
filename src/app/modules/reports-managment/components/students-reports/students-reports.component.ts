@@ -104,7 +104,6 @@ export class StudentsReportsComponent implements OnInit {
     private studentService:StudentsService
   ) {
     this.tableColumns = this.studentsReportService.tabelColumns
-    console.log(this.tableColumns);
   }
 
   ngOnInit(): void {
@@ -136,7 +135,6 @@ export class StudentsReportsComponent implements OnInit {
       this.filtration.AcceptanceDateFrom=this.formateDate(this.acceptanceDate[0])
       this.filtration.AcceptanceDateTo=this.formateDate(this.acceptanceDate[1])
     }
-   console.log(this.filtration)
     this.studentsReport.loading = true
     this.studentsReport.list = []
     this.studentsReportService.getAllStudents(this.filtration)
@@ -208,7 +206,6 @@ export class StudentsReportsComponent implements OnInit {
   }
 
   onSort(e) {
-    console.log(e);
     if (e.order == 1) this.filtration.SortBy = 'old'
     else if (e.order == -1) this.filtration.SortBy = 'update'
     this.filtration.Page=1;

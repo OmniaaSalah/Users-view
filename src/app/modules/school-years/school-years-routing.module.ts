@@ -10,13 +10,38 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children:[
-      {path:"school-years-list",component:SchoolyearsListComponent,data:{ RouteKey: RouteEnums.SchoolYears}},
-      {path:"new-school-year",component:EditNewSchoolyearComponent},
-      {path:"display-school-year/:schoolyearId",component:EditNewSchoolyearComponent},
-      {path:"new-school-year/class-details",component:ClassDetailsComponent},
-      {path:"display-school-year/:schoolyearId/curriculum/:curriculumId/class-details/:classId",component:ClassDetailsComponent},
-      {path:"new-school-year/curriculum/:curriculumId/class-details/:classId",component:ClassDetailsComponent},
-      {path:"display-school-year/:schoolyearId/class-details",component:ClassDetailsComponent}
+      {
+        path:"school-years-list",component:SchoolyearsListComponent,
+        data:{
+          RouteKey: RouteEnums.SchoolYears,
+          title:{ar:'السنوات الدراسية',en: 'School Years'}
+        }
+
+      },
+      {
+        path:"new-school-year",component:EditNewSchoolyearComponent,
+        data:{title:{ar:'اضافه سنه دراسية',en: 'School Years'}}
+      },
+      {
+        path:"display-school-year/:schoolyearId",component:EditNewSchoolyearComponent,
+        data:{title:{ar:'تعديل سنه دراسيه',en: 'Update School Years'}}
+      },
+      {
+        path:"new-school-year/class-details",component:ClassDetailsComponent,
+        data:{title:{ar:'اضافه صفوف السنه الدراسيه',en: 'Create new School Years'}}
+      },
+      {
+        path:"display-school-year/:schoolyearId/curriculum/:curriculumId/class-details/:classId",component:ClassDetailsComponent,
+        data:{title:{ar:'تعديل صفوف السنه الدراسيه',en: 'Update School Years Grades'}}
+      },
+      {
+        path:"new-school-year/curriculum/:curriculumId/class-details/:classId",component:ClassDetailsComponent,
+        data:{title:{ar:'اضافه صفوف السنه الدراسيه',en: 'Update School Years Grades'}}
+      },
+      {
+        path:"display-school-year/:schoolyearId/class-details",component:ClassDetailsComponent,
+        data:{title:{ar:'اضافه صفوف السنه الدراسيه',en: 'Update School Years Grades'}}
+      }
     ]
   }
 ];

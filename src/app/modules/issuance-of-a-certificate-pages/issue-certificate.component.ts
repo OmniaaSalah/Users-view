@@ -165,6 +165,8 @@ export class IssueCertificateComponent implements OnInit {
           }else{
             return Number(el.gradeCode) >= GradeCodeEnum.twelve
           }
+        }).filter(el=>{
+          return !el.certificateFromSchool || !el.rCertificateFromSPEA
         })
         this.skeletonShown = false
         return;

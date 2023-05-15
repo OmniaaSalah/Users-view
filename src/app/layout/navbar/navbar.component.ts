@@ -1,10 +1,10 @@
 
-import { Component, inject, NgZone, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, NgZone, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import {  fromEvent } from 'rxjs';
+import {  distinctUntilChanged, fromEvent } from 'rxjs';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { slide } from 'src/app/shared/animation/animation';
@@ -18,7 +18,6 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { DatePipe } from '@angular/common';
 import { MessageService } from 'src/app/modules/messages/service/message.service';
 import { MessageStatus } from 'src/app/shared/enums/status/status.enum';
-
 interface MenuItem{
   id:number
   title:string
@@ -30,6 +29,7 @@ interface MenuItem{
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   animations:[slide]
 })
 export class NavbarComponent implements OnInit {
@@ -49,6 +49,19 @@ export class NavbarComponent implements OnInit {
     //,{name:this.translate.instant('about daleel'),Link:"/about-us"}
   ]
 
+  historyList=[
+    {title:'الرئيسه', url:'/'},
+    {title:'الطلاب', url:'/schools-and-students/students'},
+    {title:'المدارس', url:'/schools-and-students/schools'},
+    {title:'الاباء', url:'/schools-and-students/all-parents'},
+    {title:'الطلبات', url:'/performance-managment/RequestList'},
+    {title:'التقيمات الدراسيه', url:'/performance-managment/RequestList'},
+    {title:'فترات السماح', url:'/performance-managment/RequestList'},
+    {title:'السنوات الدراسيه', url:'/performance-managment/RequestList'},
+    {title:'تفاصيل الطالب', url:'/performance-managment/RequestList'},
+    {title:'طلب تسجيل', url:'/performance-managment/RequestList'},
+  ]
+
   message:string="";
   faAngleDown = faAngleDown
   faArrowLeft = faArrowLeft
@@ -58,6 +71,8 @@ export class NavbarComponent implements OnInit {
   }
 
   activeRoute$=this.routeListenrService.activeRoute$
+  history = this.routeListenrService.routeHistory$.subscribe(console.log)
+  routeHistory$ = this.routeListenrService.routeHistory$
 
   isMenuOpend= false
   activeMenuItem:MenuItem
@@ -84,7 +99,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private translate:TranslateService,
     private userService: UserService,
-    private routeListenrService:RouteListenrService,
+    public routeListenrService:RouteListenrService,
     private zone: NgZone,
     private notificationService: NotificationService,
     private sharedService:SharedService,
@@ -97,7 +112,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.userService.isUserLogged$.subscribe((res)=>{
+    this.userService.isUserLogged$.pipe(distinctUntilChanged()).subscribe((res)=>{
        if(res){
           this.guardianName=this.userService.getCurrentUserName();
           this.getSchoolYearsList();
@@ -465,7 +480,7 @@ onScroll()
     let userId = this.userService.getCurrentUserId();
     this.messageService.getCurrentUserMessages(userId, this.currentUserScope,{PageSize:50, Page:1})
     .subscribe(res=>{
-      res?.data.forEach(mes=>{
+      res.result?.data.forEach(mes=>{
         mes.messageSatus== MessageStatus.Pending ? this.unReadedMessagesCount++ : null
       })
     })

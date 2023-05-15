@@ -67,7 +67,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	}
 
 	// from tab 4
-	selectedGradeId
+	// selectedGradeId
 
 
 	map: any

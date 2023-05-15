@@ -46,7 +46,7 @@
                     <span *ngIf="!grade.trackCount" class="color-gray-300">{{'shared.notFound' |translate}}</span>
                 </td>
                 <td>
-                    <div *ngIf="grade.divisionCount" class="color-skyBlue-700 " (click)="selectedGradeId.emit(grade.id); setActiveTab.emit(4)">
+                    <div *ngIf="grade.divisionCount" class="color-skyBlue-700 " (click)="openDivisionTab(grade.id);">
                         <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4">
                             <span class="">{{grade.divisionCount}}</span>
                         </a>

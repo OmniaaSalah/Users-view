@@ -13,8 +13,8 @@
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
 
-            <div class="mb-5">
-                <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3">
+            <div class="">
+                <div class="bg-orange-50 p-3 radius-15 mb-4">
                     <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
                     <span class="color-gray-800">{{'Last Date Of abbsence'|translate}} {{lastDate|LocalizeDate:'d MMMM y - hh:mm a'}}</span>
                 </div>
@@ -38,8 +38,34 @@
 
                     <div class="bg-orange-50 p-3 radius-15">
                         <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-                        <span class="color-gray-800">" {{'shared.youShouldChooseDay' |translate}}"</span>
+                        <span class="color-gray-800"> {{'shared.youShouldChooseDay' |translate}}</span>
                     </div>
+                </div>
+
+
+
+              </div>
+
+
+              <div *ngIf="absenceRecord.isDateSelected" class="my-4 color-primary d-flex justify-content-center gap-5 p-2 radius-15 border-dark">
+                <div class="d-flex align-items-center gap-3 p-4">
+                  <img src="assets/images/home/student/student.svg" class="bullet">
+                  <span class="d-flex gap-3">
+                      {{ 'dashboard.schools.studentsNumber'|translate }} : <b>30</b>
+                  </span>
+                </div>
+
+                <div class="d-flex align-items-center gap-3 p-4 color-skyBlue-500">
+                    <img src="assets/images/shared/attendance.svg" class="bullet">
+                    <span class="d-flex gap-3">
+                        {{ 'dashboard.schools.attendanceStudents'|translate }} : <b>5</b>
+                    </span>
+                </div>
+                <div class="d-flex align-items-center gap-3 color-red-500">
+                    <img src="assets/images/shared/absence.svg" class="bullet">
+                    <span class="d-flex gap-3">
+                        {{ 'dashboard.schools.absentStudents'|translate }} : <b>{{absenceRecord.total}}</b>
+                    </span>
                 </div>
             </div>
 
@@ -101,7 +127,7 @@
                         <app-informative-block subTitle="{{'emptyList.youShouldSelectDate' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
-                    <app-loader></app-loader>
+                    <app-loader *ngIf="absenceRecord.loading && absenceRecord.isDateSelected"></app-loader>
                 </td>
             </tr>
         </ng-template>
