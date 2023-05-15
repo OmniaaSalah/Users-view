@@ -12,10 +12,31 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children:[
-      {path:"user-roles-list",component:UserRolesListComponent, data:{ RouteKey: RouteEnums.Roles}},
-      {path:"new-role",component:NewUserRoleComponent},
-      {path:"edit-role/:roleId",component:NewUserRoleComponent},
-      {path:"role-details/:roleId", component:RoleDetailsComponent}
+      {
+        path:"user-roles-list",component:UserRolesListComponent,
+        data:{
+          RouteKey: RouteEnums.Roles,
+          title:{ar:'الادوار الوظيفية',en: 'User Roles'}
+        },
+      },
+      {
+        path:"new-role",component:NewUserRoleComponent,
+        data:{
+          title:{ar:'اضافة دور وظيفى',en: 'User Roles'}
+        },
+      },
+      {
+        path:"edit-role/:roleId",component:NewUserRoleComponent,
+        data:{
+          title:{ar:'تعديل دور وظيفى',en: 'User Roles'}
+        },
+      },
+      {
+        path:"role-details/:roleId", component:RoleDetailsComponent,
+        data:{
+          title:{ar:'تفاصيل دور وظيفى',en: 'User Roles'}
+        },
+      }
     ]
   }
 ];

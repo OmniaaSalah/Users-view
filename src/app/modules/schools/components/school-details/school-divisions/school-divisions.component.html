@@ -4,9 +4,9 @@
             <app-table-caption (onExport)="onExport($event)" (onFilter)="this.filtration.Page=1;getSchoolDivisions()" (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchoolDivisions()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
-                    <div class="col-md-4">
+                    <div class="col-md-4" *ngIf="schoolGrades$ |async as schoolGrades">
                         <label class="label" for="status">{{'shared.grade'|translate }} </label>
-                        <p-multiSelect [options]="schoolGrades$ |async" display="chip"  [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.grade'|translate }}"></p-multiSelect>
+                        <p-multiSelect [lazy]="true" [options]="schoolGrades" display="chip"  [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.grade'|translate }}"></p-multiSelect>
                     </div>
 
                 </div>

@@ -64,7 +64,6 @@ export class SchoolChartsComponent implements OnInit {
     if (schoolCurriculum) {
       const schoolCurriculumValues = Object.values(schoolCurriculum);
       this.model.schoolCurriculumDatasets = [{data: schoolCurriculumValues, backgroundColor:["#CD578A","#5BCEDD", "#F8C073","#f1f2f4","#93d9d9","#c1d6e1","#ff9776"]}];
-      console.log(schoolCurriculum);
 
       for (const key in schoolCurriculum) {
         const name = this.lang=='ar' ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length);

@@ -39,7 +39,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
 
   isLoading=true
   medicalFile
-
+  attachments=[{url:'dsd', name:'vaccine'}]
 
     // << FORMS >> //
     medicalFileForm= this.fb.group({
@@ -114,6 +114,10 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     })
   }
 
+
+  onFileUpload(files){
+
+  }
   ngOnDestroy(): void {
   }
 

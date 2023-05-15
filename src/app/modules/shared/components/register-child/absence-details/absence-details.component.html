@@ -19,7 +19,7 @@
                     <app-skeleton count="2" ></app-skeleton>
                 </div>
             </div>
-    
+
         </ng-container>
 
         <ng-container *ngIf="!absence.loading">
@@ -27,15 +27,15 @@
                 <div class="chart__label chart__label--primary"
                 [class.d-none]="!absence.attendenceDaysPercentage"
                  [style.width.%]="absence.attendenceDaysPercentage">{{absence.attendenceDaysPercentage}}%</div>
-    
-                <div class="chart__label chart__label--secondary" 
+
+                <div class="chart__label chart__label--secondary"
                 [class.d-none]="!absence.absenceDaysPercentage"
                 [style.width.%]="absence.absenceDaysPercentage">{{absence.absenceDaysPercentage}}%</div>
             </div>
-    
+
             <div class="d-flex  mb-3">
                 <div class=" col-md-8"></div>
-    
+
                 <div class=" col-md-4  color-primary d-flex gap-5">
                     <div class="d-flex align-items-center gap-3 p-4">
                         <img src="assets\images\home\schools-students/bullet2.svg" class="bullet">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </ng-container>
-        
+
 
 
         <div class="col-12">
@@ -86,7 +86,7 @@
                                 <ng-container *ngIf="!absence.total &&  !absence.loading">
                                     <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                                 </ng-container>
-                                
+
                                 <app-loader></app-loader>
                             </td>
                         </tr>

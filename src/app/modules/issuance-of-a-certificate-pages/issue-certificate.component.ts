@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { IHeader } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -150,7 +150,12 @@ export class IssueCertificateComponent implements OnInit {
 
 
   getparentsChildren(id) {
-    this.issuance.getParentsChild(id).subscribe(res => {
+    this.issuance.getParentsChild(id)
+    .pipe(map(res =>{
+      res.students = res.students.filter(el=> (!el.certificateFromSchool && !el.rCertificateFromSPEA) )
+      return res
+    }))
+    .subscribe(res => {
 
       if(this.selectedCertificate.value == CertificatesEnum.TransferCertificate){
         this.childList =[...res.studentsWithdrawal ||[]]
