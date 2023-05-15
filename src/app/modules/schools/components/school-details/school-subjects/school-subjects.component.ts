@@ -128,7 +128,11 @@ export class SchoolSubjectsComponent implements OnInit {
   // }
 
   getTracks(){
-    this.gradeTracks$ =this.gradesService.getGradeTracks([this.schoolId],[this.filtration.GradeId])
+    if(this.filtration.GradeId) {
+      this.gradeTracks$ =this.gradesService.getGradeTracks([this.schoolId],[this.filtration.GradeId])
+    }else{
+      this.gradeTracks$=null
+    }
 
   }
 

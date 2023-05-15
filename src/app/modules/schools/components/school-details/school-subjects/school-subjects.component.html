@@ -29,11 +29,6 @@
                     </div>
                 </div>
                 <div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
-<!--
-                    <div class="actions d-flex align-items-center justify-content-end gap-4">
-                        <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()" >امسح الكل</span>
-                        <button class="btn btn-primary btn-sm" (click)="getSubjects();filterApplied=true" [disabled]="!subjectsObj.isGradeSelected">تطبيق</button>
-                    </div> -->
                     <div class="">
                         <button *permit="claimsEnum.E_C_GradeSubject" class="btn btn-primary btn--sm px-5"  (click)="sendDataToAddSubject()">
                             <span>{{'dashboard.schools.addSubjectToschool'| translate}}</span>
@@ -106,7 +101,9 @@
                         <app-informative-block subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </div>
 
-                    <app-loader></app-loader>
+                    <div class="w-100" *ngIf="subjectsObj.loading && subjectsObj.isGradeSelected">
+                      <app-loader></app-loader>
+                    </div>
                 </td>
             </tr>
             <!-- <tr>

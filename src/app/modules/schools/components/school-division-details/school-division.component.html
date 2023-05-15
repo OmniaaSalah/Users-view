@@ -68,21 +68,21 @@
                                     <div class="row gx-5 form-set">
                                         <div class="col-md-4 px-5">
                                             <div class="grid-container">
-                                                <p class="color-gray-300 fs-4">{{'dashboard.schools.sectionNumber'| translate}}</p>
+                                                <p class="color-gray-300 ">{{'dashboard.schools.sectionNumber'| translate}}</p>
                                                 <span class="color-primary mb-2">{{divisionInfo?.divisionNumber}} </span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 px-6">
                                             <div class="grid-container">
-                                                <p class="color-gray-300 fs-4">{{'shared.grade'| translate}}</p>
+                                                <p class="color-gray-300 ">{{'shared.grade'| translate}}</p>
                                                 <span class="color-primary mb-2">{{divisionInfo?.grade.name |currentLang}}  </span>
                                             </div>
 
                                         </div>
                                         <div class="col-md-3">
                                             <div class="grid-container">
-                                                <p class="color-gray-300 fs-4">{{'dashboard.schools.maxStudentsNumber'| translate}}</p>
-                                                <span class="color-primary mb-2">{{divisionInfo?.maxStudentCount}} </span>
+                                                <p class="color-gray-300">{{'dashboard.schools.sectionForSpetialAbilitiesStudents'| translate}}</p>
+                                                <span class="color-primary mb-2">{{divisionInfo?.forDisabilities? ('shared.yes' |translate):('shared.no' |translate)}} </span>
                                             </div>
                                         </div>
                                     </div>
@@ -92,18 +92,15 @@
                                             <label class="label required" for="name">{{'dashboard.schools.sectionName'|translate}} </label>
                                             <input type="text" name="sectionName" id="name" formControlName="ar" pInputText />
                                         </div>
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-5 d-flex align-self-end">
+                                        <div class="col-md-3 align-self-end">
+                                          <!-- <label class="label required" for="name">{{'dashboard.schools.maxStudentsNumber'|translate}} </label>
+                                          <input type="text" name="sectionName" id="name" [value]="divisionInfo?.maxStudentCount" pInputText [disabled]="true" /> -->
+
                                             <div class="grid-container">
-                                                <p class="fs-4">{{'dashboard.schools.sectionForSpetialAbilitiesStudents'| translate}}</p>
-                                                <span class="color-primary mb-2">{{divisionInfo?.forDisabilities? ('shared.yes' |translate):('shared.no' |translate)}} </span>
+                                              <p class="color-gray-300 ">{{'dashboard.schools.maxStudentsNumber'| translate}}</p>
+                                              <span class="color-primary mb-2">{{divisionInfo?.maxStudentCount}} </span>
                                             </div>
-                                            <!-- <div class="d-flex align-items-center gap-4">
-                                                <label class="mb-2" for="description">{{'dashboard.schools.sectionForSpetialAbilitiesStudents'|translate}}</label>
-                                                <p-inputSwitch   [binary]="true"></p-inputSwitch>
-                                                name="forSpecialAbilities"
-                                                <span class="mb-2">{{'shared.yes' |translate}}</span>
-                                            </div> -->
+
                                         </div>
                                     </div>
 

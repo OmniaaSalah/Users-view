@@ -458,7 +458,9 @@
         "noSons": "لا يوجد أي أبناء مرتبطين بك حتى الآن",
         "noUnregisteredSonsForThisGuardian": "لا يوجد أي أبناء  غير مسجلين لهذا الاب",
         "noRegisteredSonsForThisGuardian": "لا يوجد أي أبناء  مسجلين لهذا الاب",
+        "noGraduatedSonsForThisGuardian": "لا يوجد أي أبناء  انهو السنوات الدراسيه  لهذا الاب",
         "noRegisteredSons":"لا يوجد أبناء مسجلين لديك حتي الآن",
+        "noGraduatedSons":"لا يوجد أبناء انهو السنوات الدراسيه لديك حتي الآن",
         "chidrenNotAllowed":"لايوجد ابناء مسموح لهم باصدار هذه الشهادة",
         "noChildren":"لا يوجد أبناء",
         "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'إضافة أبن جديد'",
@@ -1085,6 +1087,7 @@
             "raseAttendance": "رفع الحضور",
             "defineSchedule": "تعريف الجدول الزمني",
             "absentStudents": "الطلاب الغائبين",
+            "attendanceStudents": "الطلاب الحاضرين",
             "absent": "غائب",
             "addAbsentStudents": "إضافة طلاب غائبين",
             "canNotChooseDay": "(لا يمكن اختيار يوم في المستقبل)",
@@ -1197,6 +1200,7 @@
             "child saved successfully":"تم إضافة أبن جديد بنجاح",
             "in":"ب",
             "VaccinationBook":"دفتر التطعيم",
+            "VaccineCertificate":"شهادة التطعيم",
             "HealthStatus":"الحالة الصحية",
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
             "acceptanceInfo": "معلومات القبول",
@@ -1379,6 +1383,7 @@
             "defineMedicalFile": "تعريف الملف الصحي",
             "notAddedToDivision":"لم يضاف إلى شعبه",
             "chronicDiseases": "الأمراض المزمنة ",
+            "AllergiesFromFoodOrMedicine": "الحساسية من أدوية أو أغذية خاصة",
             "feelingDiseases": "أمراض الحساسية من أدوية أو أغذية خاصة",
             "disabilities": "الإعاقات ",
             "writeDisabilities": "أكتب الإعاقات ",
@@ -1445,7 +1450,11 @@
             "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-إلي",
             "exemptionFromSubjectStudey":"طلب إعفاء من دراسة مادة دراسية",
             "newIdentityInfo":"معلومات الهوبة الجديدة",
-            "attachmentsToAdd":"المرفقات التى يمكن اضافتها"
+            "attachmentsToAdd":"المرفقات التى يمكن اضافتها",
+            "attendanceType":"نوع الحضور",
+            "Remote":"عن بعد",
+            "Mixed":"مخلط",
+            "Physical":"حضورى"
 
         },
         "Assignments": {
@@ -1985,6 +1994,7 @@
             "Registered children": "الأبناء المسجلين",
             "Unregistered children":"الأبناء غير المسجلين",
             "Withdrawn children": "الأبناء المنسحبين",
+            "graduatedChildren":"انهو السنوات الدراسيه",
             "Submit a registration request": "إرسال طلب تسجيل",
             "message":"هذا الطفل موجود لدي أب أخر هل تريد إرسال طلب لتسجيل الطفل لديك ؟"
         },

@@ -14,6 +14,7 @@ import { SurveyService } from 'src/app/modules/surveys/service/survey.service';
 import { environment } from 'src/environments/environment';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subscription } from 'rxjs';
+import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 
 
 
@@ -60,7 +61,8 @@ export class AuthenticationMainComponent implements OnInit{
     private activatedRoute:ActivatedRoute,
     private sharedService:SharedService,
     public surveyService:SurveyService,
-    public confirmModelService: ConfirmModelService
+    public confirmModelService: ConfirmModelService,
+    private settingsService:SettingsService
 
   ) {
 
@@ -70,7 +72,7 @@ export class AuthenticationMainComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    this.settingsService.initializeFileRules()
      this.checkUAEPassLogin();
      this.initLoginForm();
 

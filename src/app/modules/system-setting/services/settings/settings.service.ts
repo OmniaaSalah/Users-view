@@ -326,7 +326,7 @@ export class SettingsService {
   }
 
   initializeFileRules(){
-    // if(this.fileRules$) return this.fileRules$
+    if(this.fileRules$.getValue()) return this.fileRules$
     this.getAttachedFileRules()
     .pipe(
       map(res=>{

@@ -40,6 +40,7 @@ export class ChildrenListComponent implements OnInit {
   chiledren: Ichiledren[]=[] ;
   students: Istudent[] =[];
   studentsWithdrawal: Istudent[] =[];
+  graduatedChildren: Istudent[] =[];
 
   isSkeletonVisible = true;
 

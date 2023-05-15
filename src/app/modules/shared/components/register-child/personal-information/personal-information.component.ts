@@ -92,6 +92,13 @@ export class PersonalInformationComponent implements OnInit {
     {name: this.translate.instant('shared.fusionClass'), value:'fusionClass'}
   ]
 
+  attendanceType = [
+    {name: this.translate.instant('dashboard.students.Physical'), value:'Physical'},
+    {name: this.translate.instant('dashboard.students.Mixed'), value:'Mixed'},
+    {name: this.translate.instant('dashboard.students.Remote'), value:'Remote'},
+
+  ]
+
     // << FORMS >> //
 
   constructor(

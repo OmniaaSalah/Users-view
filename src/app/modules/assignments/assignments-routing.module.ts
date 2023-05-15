@@ -12,8 +12,18 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children:[
-      { path: 'assignments-list', component: AssignmentsListComponent ,data:{ RouteKey: RouteEnums.Exams}},
-      { path: 'upload-assignment', component: UploadAssignmentComponent }
+      { path: 'assignments-list', component: AssignmentsListComponent ,
+        data:{
+          RouteKey: RouteEnums.Exams,
+          title:{ar:'الامتحانات',en: 'Exams'}
+        }
+      },
+      {
+        path: 'upload-assignment', component: UploadAssignmentComponent,
+        data:{
+          title:{ar:'رفع الامتحان',en: 'Upload Exams'}
+        }
+       }
     ]
   }
 ];

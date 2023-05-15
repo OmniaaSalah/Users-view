@@ -1,5 +1,6 @@
-<nav class="nav" [ngClass]="classes">
+<nav class="nav-container" [ngClass]="classes">
 
+  <div class="nav">
     <ng-container>
 
         <div class="nav__logo nav__logo--main">
@@ -272,5 +273,22 @@
         </div>
 
     </div>
+  </div>
+
+  <!-- <ng-container *ngIf="routeHistory$ |async as routeHistory"> -->
+    <div class="history" *ngIf="routeListenrService?.routeHistory?.length">
+      <hr >
+      <ul class="history__list" >
+        <i class="pi pi-history color-primary" style="font-size: 1.5rem;"></i>
+        <ng-container *ngFor="let item of routeListenrService?.routeHistory; let i =index; trackBy:item?.url">
+          <span [class.d-none]="i==0">|</span>
+          <li class="history__list__item">
+              <a target="_blank" href="{{item.url}}">{{item.title |currentLang}}</a>
+              <i (click)="routeListenrService.removeFromRouteHistory(i)" StopProp class="pi pi-times" style="font-size: 1rem"></i>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  <!-- </ng-container> -->
 
 </nav>
