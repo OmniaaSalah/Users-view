@@ -10,9 +10,25 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children:[
-      {path:"assements-list",component:AssessmentsListComponent,data:{ RouteKey: RouteEnums.Assessments}},
-      {path:"new-assessment",component:EditNewAssessmentComponent},
-      {path:"edit-assessment/:id",component:EditNewAssessmentComponent},
+      {
+        path:"assements-list",component:AssessmentsListComponent,
+        data:{
+          RouteKey: RouteEnums.Assessments,
+          title:{ar:'تقيمات المواد الدراسيه',en: 'Subjects rates'}
+        }
+      },
+      {
+        path:"new-assessment",component:EditNewAssessmentComponent,
+        data:{
+          title:{ar:'اضافة تقيم مادة دراسية',en: 'Create Subject Rate'}
+        }
+      },
+      {
+        path:"edit-assessment/:id",component:EditNewAssessmentComponent,
+        data:{
+          title:{ar:'تعديل تقيم مادة دراسية',en: 'Update Subject Rate'}
+        }
+      },
     ]
   }
 ];

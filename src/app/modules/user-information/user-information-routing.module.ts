@@ -9,9 +9,26 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children:[
-      {path:"users-list",component:ViewListOfUsersComponent, data:{ RouteKey: RouteEnums.Users}},
-      {path:"new-user",component:AddNewUserInformationComponent},
-      {path:"edit-user/:userId",component:AddNewUserInformationComponent}
+      {
+
+        path:"users-list",component:ViewListOfUsersComponent,
+        data:{
+          RouteKey: RouteEnums.Users,
+          title:{ar:'المستخدمين',en: 'System Users'}
+        }
+      },
+      {
+        path:"new-user",component:AddNewUserInformationComponent,
+        data:{
+          title:{ar:'اضافه مستخدم جديد',en: 'Create Users'}
+        }
+      },
+      {
+        path:"edit-user/:userId",component:AddNewUserInformationComponent,
+        data:{
+          title:{ar:'تعديل مستخدم جديد',en: 'Update Users'}
+        }
+      }
     ]
   }
 ];

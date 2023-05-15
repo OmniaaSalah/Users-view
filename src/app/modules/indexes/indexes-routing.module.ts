@@ -9,9 +9,28 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children:[
-      { path: "indexes-list", component: IndexesComponent,data:{ RouteKey: RouteEnums.Indexes} },
-      { path: "new-index", component: EditNewIndexComponent },
-      { path: "edit-index/:indexId", component: EditNewIndexComponent },
+      {
+
+        path: "indexes-list", component: IndexesComponent,
+        data:{
+          RouteKey: RouteEnums.Indexes,
+          title:{ar:'فهارس النظام',en: 'Indexes List'}
+        }
+      },
+      {
+
+        path: "new-index", component: EditNewIndexComponent ,
+        data:{
+          title:{ar:'اضافه فهرس',en: 'Create Indexes'}
+        }
+      },
+      {
+
+        path: "edit-index/:indexId", component: EditNewIndexComponent,
+        data:{
+          title:{ar:'تعديل فهرس',en: 'Update Indexes'}
+        }
+      },
     ]
   }
 ];

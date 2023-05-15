@@ -12,10 +12,31 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children:[
-      {path:"subjects-list",component:SubjectsComponent,data:{ RouteKey: RouteEnums.Subjects}},
-      {path:"new-subject/school/:schoolId",component:EditNewSubjectComponent},
-      {path:"new-subject",component:EditNewSubjectComponent},
-      {path:"edit-subject/:subjectId",component:EditNewSubjectComponent}
+      {
+        path:"subjects-list",component:SubjectsComponent,
+        data:{
+          RouteKey: RouteEnums.Subjects,
+          title:{ar:'المواد الدراسيه',en: 'Subjects'}
+        }
+      },
+      {
+        path:"new-subject/school/:schoolId",component:EditNewSubjectComponent,
+        data:{
+          title:{ar:'اضافة ماده دراسية',en: 'Create Subjects'}
+        }
+      },
+      {
+        path:"new-subject",component:EditNewSubjectComponent,
+        data:{
+          title:{ar:'اضافة ماده دراسية',en: 'Create Subjects'}
+        }
+      },
+      {
+        path:"edit-subject/:subjectId",component:EditNewSubjectComponent,
+        data:{
+          title:{ar:'تعديل مادة دراسيه',en: 'Updata Subjects'}
+        }
+      }
     ]
   }
 

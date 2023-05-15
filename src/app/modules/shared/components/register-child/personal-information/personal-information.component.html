@@ -56,9 +56,6 @@
                 <p class="color-gray-300">{{ 'shared.nationalityCategory'|translate }}</p>
                 <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
 
-                <p class="color-gray-300">{{ 'shared.nationalityCategory'|translate }}</p>
-                <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
-
                 <p class="color-gray-300">{{ 'shared.nativeLanguage'|translate }}</p>
                 <span class="color-primary mb-2">{{student?.motherLanguage?.name | currentLang}}</span>
 
@@ -83,6 +80,10 @@
 
                 <p class="color-gray-300">{{'dashboard.parents.ministerialNumber' |translate}}</p>
                 <span class="color-primary mb-2">{{student.ministerialId || ('shared.notFound' |translate)}}</span>
+
+
+                <p class="color-gray-300">{{ 'dashboard.students.attendanceType'|translate }}</p>
+                <span class="color-primary mb-2">{{'dashboard.students.Remote' |translate}}</span>
 
                 <p class="color-gray-300">{{'dashboard.students.withDisabilities'| translate}}</p>
                 <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
@@ -125,11 +126,14 @@
                 <span *ngIf="currentUserScope==scopeEnum.SPEA" class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]"><a class="color-skyBlue-500">{{student?.school?.name |currentLang}}</a></span>
                 <span *ngIf="currentUserScope==scopeEnum.Guardian || currentUserScope==scopeEnum.Employee" class="color-primary mb-2 flex-shrink-0">{{student?.school?.name |currentLang}}</span>
 
+                <p class="color-gray-300">{{ 'shared.curriculum'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.curriculum?.name |currentLang}}</span>
+
                 <p class="color-gray-300">{{ 'shared.state'|translate }}</p>
                 <span class="color-primary mb-2">{{student?.schoolState |currentLang}}</span>
 
-                <p class="color-gray-300">{{ 'shared.curriculum'|translate }}</p>
-                <span class="color-primary mb-2">{{student?.curriculum?.name |currentLang}}</span>
+                <p class="color-gray-300">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.schoolCode}}</span>
 
 
                 <p class="color-gray-300">{{ 'shared.grade'|translate }}</p>
@@ -142,7 +146,6 @@
 
 
                 <p class="color-gray-300">{{'shared.division'| translate}}</p>
-
                 <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
                 <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
 
@@ -152,8 +155,6 @@
                 <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
 
 
-                <p class="color-gray-300">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
-                <span class="color-primary mb-2">{{student?.schoolCode}}</span>
 
               </div>
             </div>
@@ -254,6 +255,11 @@
             <p-inputNumber formControlName="ministerialId" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
           </div>
 
+          <div class="col-md-4 col-lg-3 "  >
+            <label class="label required">{{ 'dashboard.students.attendanceType'|translate }}</label>
+            <p-dropdown [options]="attendanceType" optionValue="value" optionLabel="name" placeholder="{{'dashboard.students.attendanceType' |translate}}"></p-dropdown>
+          </div>
+
           <div class="col-md-4 col-lg-3 ">
               <label class="label" for="description">{{'dashboard.students.withDisabilities'| translate}}</label>
               <p-dropdown formControlName="isSpecialAbilities" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
@@ -318,14 +324,16 @@
             <span *ngIf="currentUserScope==scopeEnum.SPEA" class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]"><a class="color-skyBlue-500">{{student?.school?.name |currentLang}}</a></span>
             <span *ngIf="currentUserScope==scopeEnum.Guardian || currentUserScope==scopeEnum.Employee" class="color-primary mb-2 flex-shrink-0">{{student?.school?.name |currentLang}}</span>
 
-            <p class="color-gray-300">{{ 'shared.state'|translate }}</p>
-            <span class="color-primary mb-2">{{student?.schoolState |currentLang}}</span>
-
             <p class="color-gray-300">{{ 'shared.curriculum'|translate }}</p>
             <span class="color-primary mb-2">{{student?.curriculum?.name |currentLang}}</span>
 
-            <p class="color-gray-300">{{'dashboard.parents.ministerialNumber' |translate}}</p>
-            <span class="color-primary mb-2">{{student.ministerialId}}</span>
+            <p class="color-gray-300">{{ 'shared.state'|translate }}</p>
+            <span class="color-primary mb-2">{{student?.schoolState |currentLang}}</span>
+
+
+            <p class="color-gray-300">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
+            <span class="color-primary mb-2">{{student?.schoolCode}}</span>
+
 
             <p class="color-gray-300">{{ 'shared.grade'|translate }}</p>
             <span class="color-primary mb-2">{{student?.grade.name |currentLang}}</span>
@@ -347,8 +355,6 @@
             <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
 
 
-            <p class="color-gray-300">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
-            <span class="color-primary mb-2">{{student?.schoolCode}}</span>
 
           </div>
       </div>

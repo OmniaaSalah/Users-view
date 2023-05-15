@@ -380,9 +380,11 @@
          "TopStudent List is empty":"Top student list is empty",
         "studentDegrees":  "No student degrees yet",
         "noSons": "No sons related to you now",
-        "noUnregisteredSonsForThisGuardian":  "No unregistered sons for this guardian",
-        "noRegisteredSonsForThisGuardian":  "No registered sons for this guardian",
+        "noUnregisteredSonsForThisGuardian":  "There is no unregistered sons for this guardian",
+        "noRegisteredSonsForThisGuardian":  "There is no registered sons for this guardian",
+        "noGraduatedSonsForThisGuardian": "There is no graduated sons for this guardian",
         "noRegisteredSons":"No registered sons for you now",
+        "noGraduatedSons":"No graduated sons for you now",
         "noChildren":"There is no children for you",
         "addNewSon": "Add new son",
         "employee":"Employee list is empty",
@@ -929,6 +931,7 @@
             "raseAttendance": "Rase attendance",
             "defineSchedule": "Define schedule",
             "absentStudents": "Absent students",
+            "attendanceStudents": "Attendant students",
             "absent": "Absent",
             "absentRecord":"Absent record",
             "addAbsentStudents":  "Add absent students",
@@ -1163,6 +1166,7 @@
             "acceptanceInfo": "Acceptance info",
             "personalInfo": "Personal info",
             "VaccinationBook": "Vaccination book",
+            "VaccineCertificate":"Vaccine Certificate",
             "certificateList": "Certificate list",
             "studentBehavior": "Student behavior",
             "studentName": "Student name",
@@ -1694,6 +1698,7 @@
             "defineMedicalFile":  "Define medical file",
             "notAddedToDivision":"Not added to division",
             "chronicDiseases": "Chronic diseases",
+            "AllergiesFromFoodOrMedicine": "Allergies From Food Or Medicine",
             "feelingDiseases": "Feeling diseases",
             "disabilities": "Disabilities",
             "writeDisabilities": "Write disabilities",
@@ -1751,7 +1756,11 @@
             "RegistrationDateAndTimeFrom-To":"Registration date and time from-to",
             "exemptionFromSubjectStudey":"Exemption from subject",
             "newIdentityInfo":"New identity info",
-            "attachmentsToAdd":"Attachments to adding"
+            "attachmentsToAdd":"Attachments to adding",
+            "attendanceType":"Attendance Type",
+            "Remote":"Remote",
+            "Mixed":"Mixed",
+            "Physical":"Physical"
 
         },
         "Requests": {
@@ -1995,6 +2004,7 @@
             "Registered children": "Registered children",
             "Unregistered children":"Unregistered children",
             "Withdrawn children": " Withdrawn children",
+            "graduatedChildren":"Graduated Children",
             "Submit a registration request": "Submit a registration request",
             "message":"This child is with another father. do you want to send a request to register the child with you?"
         },

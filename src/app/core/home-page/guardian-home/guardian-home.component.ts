@@ -31,6 +31,7 @@ export class GuardianHomeComponent implements OnInit {
   registerStudents = []
   unRegisterStudents = []
   studentsWithdrawal=[]
+  graduatedStudents=[]
 
 
 

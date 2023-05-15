@@ -24,15 +24,38 @@ const routes: Routes = [
             canActivate: [CheeckMandatoryServeyGuard],
             children: [
 
-              { path:'child/:childId/register-request', component: RegisterRequestComponent },
+              {
+                path:'child/:childId/register-request', component: RegisterRequestComponent,
+                data:{
+                  title:{ar:'طلب تسجيل',en: 'Registed Request'}
+                }
+              },
 
-              { path:'profile', component: ProfileComponent },
-              { path: ':parentId/child/:childId'  , component:ChildDetailsComponent },
-              { path: ":parentId/child/:childId/withdraw-request", component: WithdrawalRequestComponent },
+              {
+                path:'profile', component: ProfileComponent ,
+                data:{
+                  title:{ar:'حسابى',en: 'My Profile'}
+                }
+              },
+              {
+                path: ':parentId/child/:childId'  , component:ChildDetailsComponent ,
+                   data:{
+                  title:{ar:'تفاصيل الابن',en: 'Child Details'}
+                }
+              },
+              {
+                path: ":parentId/child/:childId/withdraw-request", component: WithdrawalRequestComponent ,
+                data:{
+                  title:{ar:'طلب انسحاب',en: 'Withdraw Request'}
+                }
+              },
 
               {
                 path: 'AddChild',
-                loadChildren: () => import('./components/add-new-child/add-new-child.module').then(m => m.AddNewChildModule)
+                loadChildren: () => import('./components/add-new-child/add-new-child.module').then(m => m.AddNewChildModule),
+                data:{
+                  title:{ar:'اضافة ابن جديد',en: 'Add New Child'}
+                }
               },
             ]
           },
