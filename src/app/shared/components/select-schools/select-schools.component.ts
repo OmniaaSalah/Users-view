@@ -141,5 +141,4 @@ paginationChanged(event: paginationState) {
 ngOnDestroy(): void {
  this.closeModel()
 }
-
 }

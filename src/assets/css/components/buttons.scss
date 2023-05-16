@@ -12,6 +12,10 @@
     height: 45px;
     text-align: center;
     gap: 1rem;
+
+    &:disabled{
+      pointer-events: unset;
+    }
     &:visited,
     &:hover,
     &:focus,

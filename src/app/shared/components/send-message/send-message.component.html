@@ -126,7 +126,7 @@
     <div class="mb-5">
       <label class="label" for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span
           class="star">*</span></label>
-      <textarea maxlength="512" class="form-s form-control" formControlName="description" 
+      <textarea maxlength="512" class="form-s form-control" formControlName="description"
         placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5"
         pInputTextarea></textarea>
       <div class="text-danger"
@@ -288,7 +288,7 @@
 
 <div class="d-flex justify-content-end">
   <button (click)="sendMessage()" class="btn btn-primary"
-    [disabled]="(speaEmpForm.invalid && currentUserscope == 'SPEA')||(parentForm.invalid && currentUserscope == 'Guardian' )||(schoolEmpForm.invalid&& currentUserscope == 'Employee') ||onSubmit">
+    [disabled]="(currentUserscope == 'SPEA' && (speaEmpForm.invalid || MarkedListLength==0))||(parentForm.invalid && currentUserscope == 'Guardian' )||(schoolEmpForm.invalid&& currentUserscope == 'Employee') ||onSubmit">
     {{'dashboard.Messages.Send' |translate}}
     <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
 
