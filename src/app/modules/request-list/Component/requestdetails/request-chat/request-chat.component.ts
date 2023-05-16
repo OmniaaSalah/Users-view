@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SystemRequestService } from '../../../services/system-request.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-request-chat',
@@ -17,6 +18,8 @@ export class RequestChatComponent implements OnInit {
   @Output() refresh = new EventEmitter()
 
   get userScopeEnum(){return UserScope}
+  currentUserScope = inject(UserService).getCurrentUserScope()
+
   comment=''
   isLoading =false
   filesToUpload:CustomFile[] =[]
@@ -89,8 +92,26 @@ export class RequestChatComponent implements OnInit {
 
 
 
-  deleteComment(id){
+    deleteMainComment(id){
+      this.requestsService.deleteMainComment(id).subscribe(res=>{
+          this.toaster.success(this.translate.instant('toasterMessage.deletedSuccessfully'))
+          this.refresh.emit()
+          this.requestDetails=null
 
-  }
+      },()=>{
+          this.toaster.error(this.translate.instant('toasterMessage.error'))
+      })
+    }
+
+    deleteReplay(id){
+      this.requestsService.deleteMainComment(id).subscribe(res=>{
+          this.toaster.success(this.translate.instant('toasterMessage.deletedSuccessfully'))
+          this.refresh.emit()
+          this.requestDetails=null
+
+      },()=>{
+          this.toaster.error(this.translate.instant('toasterMessage.error'))
+      })
+    }
 
 }

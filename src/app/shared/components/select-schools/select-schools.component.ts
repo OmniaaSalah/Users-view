@@ -35,7 +35,6 @@ export class SelectSchoolsComponent implements OnInit {
     this.userRolesService.MarkedListLength.subscribe((res)=>{this.MarkedListLength=res});
     this.getSchools();
     this.userRolesService.schoolSelectedList.subscribe((res)=>{
-      console.log(res)
       // this.selectedSchoolIds=res;
        res.forEach(school => {
       this.selectedSchoolIds.push(school.id)
@@ -116,7 +115,6 @@ showSelectedSchool()
   this.sharedService.openSelectSchoolsModel.next(false);
   this.userRolesService.MarkedListLength.next(this.MarkedListLength)
   this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
- console.log(this.schoolIsSelectedList)
 }
 
 

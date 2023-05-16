@@ -1,6 +1,7 @@
 
 <ng-container *permit="claimsEnum.E_AcceptOrRejectSubjectDegress">
-    <div class="d-flex gap-4 mx-4" *ngIf="subjectDegrees.total && subjectStatus=='Pending'">
+  <!-- && subjectStatus=='Pending' -->
+    <div class="d-flex gap-4 mx-4" *ngIf="subjectDegrees.total">
         <button class="btn btn-sm reject" (click)="approveOrRejectDegrees(3)">{{'shared.Reject' |translate}}</button>
         <button class="btn btn-sm accept" (click)="approveOrRejectDegrees(2)">{{'shared.accept' |translate}}</button>
         <!-- <button class="btn btn-sm btn-outline-primary">{{'shared.edit' |translate}}</button> -->
@@ -9,16 +10,16 @@
 
 
 <div class="prim-table mt-4" *ngIf="subjectDegrees.totalAllData || subjectDegrees.loading">
-    <p-table #dt [value]="subjectDegrees.list" (onSort)="onSort($event)" [lazy]="true"> 
+    <p-table #dt [value]="subjectDegrees.list" (onSort)="onSort($event)" [lazy]="true">
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
             <app-table-caption
-            [hasFilter]="false" 
-            (onExport)="onExport($event)" 
-            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSubjectDegrees()" 
+            [hasFilter]="false"
+            (onExport)="onExport($event)"
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSubjectDegrees()"
             (onClear)="clearFilter()"></app-table-caption>
         </ng-template>
-        
+
         <ng-template pTemplate="header" let-columns="columns">
             <tr>
                 <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
@@ -28,6 +29,8 @@
                 <th pSortableColumn="nationalityId">{{'dashboard.parents.GPA'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
                 <th pSortableColumn="nationalityId">{{'dashboard.parents.Credithour'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
                 <th *ngIf="subjectStatus=='Pending'" class="actions"></th>
+                <th *ngIf="subjectStatus=='Accepted'" class="actions"></th>
+
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student >
@@ -40,11 +43,19 @@
                 <td>{{student.studentGPA || 'shared.notFound'|translate}}</td>
                 <td>{{student.studentHour || 'shared.notFound'|translate}}</td>
                 <td *ngIf="subjectStatus=='Pending'">
-                    <div role="button" class="color-skyBlue-600" 
+                    <div role="button" class="color-skyBlue-600"
                     *permit="claimsEnum.E_U_StudentDegree"
                     (click)="stuentToImproveDegree =student;editDegreeModelOpened =true">
                         {{'shared.edit' |translate}}
                     </div>
+                </td>
+                <td *ngIf="subjectStatus=='Accepted'">
+                  <button role="button" class="btn btn-outline-none btn-sm color-skyBlue-600"
+                  [IsAllowedTo]="(isSchoolAllowToUpdateDegrees$ | async)"
+                  *permit="claimsEnum.E_U_StudentDegree"
+                  (click)="stuentToImproveDegree =student;editDegreeModelOpened =true">
+                      {{'shared.edit' |translate}}
+                  </button>
                 </td>
             </tr>
         </ng-template>
@@ -55,7 +66,7 @@
                     <ng-container *ngIf="!subjectDegrees.total &&  !subjectDegrees.loading">
                         <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
-                    
+
                     <app-loader></app-loader>
                 </td>
             </tr>
@@ -95,8 +106,8 @@
 
         <div class=" my-6"></div>
         <div class="d-flex justify-content-end" >
-            <button 
-            class="btn btn-primary" 
+            <button
+            class="btn btn-primary"
             (click)="updateStudentDegree()"
              [disabled]="!selectedImprovement">{{'shared.save'| translate}}</button>
         </div>

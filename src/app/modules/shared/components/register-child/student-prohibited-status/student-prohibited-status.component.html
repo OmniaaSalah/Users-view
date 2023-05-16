@@ -43,8 +43,10 @@
                 <!-- Edit Mode -->
                 <ng-container *ngIf="mode=='edit'">
                     <ng-container *permit="claimsEnum.S_U_ProhibitedFromWithdrawingFromSpea">
+                      <ng-container *ngIf="currentUserScope==scopeEnum.SPEA">
                         <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
                         <p-dropdown formControlName="withdrawingFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                      </ng-container>
                     </ng-container>
 
                     <ng-container *permit="claimsEnum.SE_U_ProhibitedFromWithdrawingFromSchool">
@@ -75,8 +77,10 @@
                 <!-- Edite -->
                 <ng-container *ngIf="mode=='edit'">
                     <ng-container *permit="claimsEnum.S_U_ProhibitedFromIssueeCertificateFromSpea">
+                      <ng-container *ngIf="currentUserScope==scopeEnum.SPEA">
                         <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
                         <p-dropdown formControlName="rCertificateFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                      </ng-container>
                     </ng-container>
 
                     <ng-container *permit="claimsEnum.SE_U_ProhibitedFromIssueeCertificateFromSchool">
