@@ -94,17 +94,33 @@
 
 
 
-<div class="confirm-model">
+
 
   <ng-container *ngFor="let item of isOpend;let i=index;">
-    <p-dialog [(visible)]="isOpend[i]" [closable]="false"  [style]="{width: '35vw'}" >
+    <div class="confirm-model">
+    <p-dialog [(visible)]="isOpend[i]" [closable]="false"  [style]="{width: '35vw'}" styleClass="urgent-message" >
         <ng-template pTemplate="content">
            <div class="d-flex flex-column gap-4">
 
-            <p><span class="color-primary fw-bold">{{'dashboard.Messages.Sender'|translate}} : </span>{{messages[i]?.userName|currentLang}}</p>
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.Sender'|translate}} : </span>
+                <ng-container *ngIf="messages[i]?.showSenderName">
+                            {{messages[i]?.userName|currentLang}}
+                 </ng-container>
+                 <ng-container *ngIf="!messages[i]?.showSenderName">
+                    ---
+                  </ng-container>
+            </p>
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.SendDate'|translate}} : </span>{{messages[i]?.createdDate|LocalizeDate}}</p>
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageTittle'|translate}} : </span>{{messages[i]?.title}}</p>
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageText'|translate}} : </span>{{messages[i]?.messageText}}</p>
+            <span class="color-primary fw-bold">{{'dashboard.Messages.attachments'|translate}} : </span>
+            <div class="w-100 d-flex flex-wrap " [ngClass]="messages[i]?.attachments.length<=2?'attachments':'attachments scroll'">
+                    <ng-container *ngIf="messages[i]?.attachments">
+                        <div class="file-hidden mx-4"  *ngFor="let attachment of messages[i]?.attachments">
+                            <app-file-upload [files]="[attachment]" [accept]="fileTypesEnum.Pdf" view="full" ></app-file-upload>
+                        </div>
+                    </ng-container>
+            </div>
 
             <div class="d-flex justify-content-center align-items-center gap-4 mt-5">
                 <button (click)="confirm(i,messages[i]?.id)" class="btn btn-secondary">{{'dashboard.Messages.yes,IsawIt' |translate}}</button>
@@ -113,5 +129,6 @@
            </div>
         </ng-template>
     </p-dialog>
+    </div>
 </ng-container>
-</div>
+

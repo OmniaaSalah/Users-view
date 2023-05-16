@@ -62,8 +62,15 @@ export class SubjectService {
 
   addSubjectBySchool(subject)
   {
-     console.log(subject)
+
     return this.http.post('/Subject/school-Grade-subject',subject);
+
+  }
+
+  editSubjectBySchool(subject)
+  {
+
+    return this.http.put('/Subject/school-Grade-subject',subject);
 
   }
  

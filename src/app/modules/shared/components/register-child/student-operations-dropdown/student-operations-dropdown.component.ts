@@ -157,8 +157,8 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.items=[
       {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/schools-and-students/students/student/${this.studentId||this.childId}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
-      {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`,claims:ClaimsEnum.E_DeleteStudentRequest},
       {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
+      {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`,claims:ClaimsEnum.E_DeleteStudentRequest},
       {
         label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'),
         isAllowed$ :this.settingServcice.isSchoolExistInGracePeriod({schoolId: this.student?.school?.id, code: GracePeriodEnum.repeatStudyPhase}),
