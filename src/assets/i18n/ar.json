@@ -1329,7 +1329,7 @@
             "FromSpetialAbilitiesPeople":"من اصحاب الهمم",
             "TransferStudentGroup":"إرسال طلب نقل جماعي",
             "studentsMangement":"إدارة الطلاب",
-            "searchCriteria": "معاير البحث",
+            "searchCriteria": "معايير البحث",
             "curriculum": "المناهج",
             "chooseCurriculum": "أختر المنهاج",
             "classes": "الصفوف",
@@ -1870,6 +1870,7 @@
         },
         "Messages": {
             "messages": "المحادثات",
+            "attachments":"المرفقات",
             "MessageDetails":"تفاصيل الرسالة",
             "title message": "عنوان الرسالة",
             "Show Details": "إضغط لقراءة المزيد",

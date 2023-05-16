@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/core/services/authentication/auth
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
@@ -16,6 +17,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+  get fileTypesEnum () {return FileTypeEnum}
   lang= inject(TranslationService).lang;
   isOpend:boolean[]=[];
   messages=[];
