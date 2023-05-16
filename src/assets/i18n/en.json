@@ -412,6 +412,7 @@
 
 
     "shared": {
+        "You":"You",
         "RoleMangment":"Role mangment",
         "ExamFileMangment":"Exam file mangment",
         "SendRequest":"Send request",
@@ -1823,6 +1824,7 @@
         },
         "Messages": {
             "messages": "Messages",
+            "attachments":"Attachments",
             "MessageDetails":"Message details",
             "title message": "Title",
             "Show Details": "Details",

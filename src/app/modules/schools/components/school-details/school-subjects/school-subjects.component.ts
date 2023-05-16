@@ -98,13 +98,6 @@ export class SchoolSubjectsComponent implements OnInit {
     // this.getSubjects()
   }
 
-  openSubject(id){
-    this.router.navigate([], {relativeTo:this.route, queryParams: {trackId :this.filtration.TrackId, gradeId:this.filtration.GradeId}}).then(()=>{
-
-      this.router.navigate([`/educational-settings/subject/edit-subject/${id}`])
-    })
-  }
-
 
   getSubjects(){
     this.subjectsObj.loading=true

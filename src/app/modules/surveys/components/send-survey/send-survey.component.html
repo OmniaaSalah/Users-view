@@ -96,7 +96,7 @@
                     </div>
                     </app-table-caption>
                
-                <div  class="contain" [ngClass]="parent.list.length>6 ? 'scroll':''">
+                <div  class="contain" [ngClass]="parent.list.length>25 ? 'scroll':''">
                     <div *ngIf="!parent.list.length">
                         <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">
                             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
@@ -105,7 +105,7 @@
                         <app-loader></app-loader>
                     </div>
                     <div *ngIf="parent.list.length" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500" (scrolled)="onScroll()"> 
-                        <div class="d-flex justify-content-end" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId">
+                        <div class="d-flex" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId">
                             <p-checkbox    binary="true"   (onChange)="selectAllParents($event)"></p-checkbox>
                             <span class="mx-3 ">{{'shared.selectAll'|translate}}</span>
                       
@@ -120,7 +120,7 @@
                             </div>
                         </ng-container>
     
-                    </div>
+                    </div>           
                   
                 </div>
             </div>

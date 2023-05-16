@@ -93,7 +93,7 @@
                   <div class="Description">
                     <!-- <span class="tittle">{{"Notifications.Description" | translate}}</span> -->
                     <span>{{ message.title }}</span>
-                    <p class="paragraph">{{ message.messageText }}</p>
+                    <p class="paragraph" ><span *ngIf="message.scope==currentUserScope">{{'shared.You'|translate}} : </span>{{ message.messageText }}</p>
                   </div>
                   <span class="receviedTime">{{
                     message.createdDate | date | translate

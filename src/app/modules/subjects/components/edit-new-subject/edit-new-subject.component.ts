@@ -113,9 +113,10 @@ export class EditNewSubjectComponent implements OnInit {
         {
           'breadCrump': [
 
-           {label:   this.translate.instant('dashboard.Subjects.Add New Subject'),routerLink:`/school-management/school/${this.schoolId}/subjects/new-subject`}
+           {label:  (this.urlParameter==null||this.urlParameter=='')? this.translate.instant('dashboard.Subjects.Add New Subject'):this.translate.instant('dashboard.Subjects.Edit Subject'),
+           routerLink:(this.urlParameter==null||this.urlParameter=='')?`/school-management/school/${this.schoolId}/subjects/new-subject`:`/school-management/school/${this.schoolId}/subjects/edit-subject/${this.urlParameter}`}
        ],
-        'mainTitle':{main: this.translate.instant('dashboard.Subjects.Add New Subject')}
+        'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('dashboard.Subjects.Add New Subject'):this.translate.instant('dashboard.Subjects.Edit Subject')}
         }
       );
 
@@ -357,25 +358,50 @@ export class EditNewSubjectComponent implements OnInit {
      this.gradeId=Number(localStorage.getItem("gradeId"))
      if(localStorage.getItem("trackId"))
      {this.trackId=Number(localStorage.getItem("trackId"))}
-     this.subjectServise.addSubjectBySchool({schoolId:this.schoolId,gradeId:this.gradeId,trackId:this.trackId,subject:this.addedSubject}).subscribe((res)=>{
-      this.isBtnLoading = false;
-      if(res.statusCode != 'BadRequest'){
-        this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
-        }else{
-        this.toastService.error(this.translate.instant('This subject is already exist'));
-        }
-      if(this.userScope.SPEA==this.currentUserScope)
-      {this.router.navigate([`/schools-and-students/schools/school/${this.schoolId}`]);}
-      else if(this.userScope.Employee==this.currentUserScope)
-      {this.router.navigate([`/school-management/school/${this.schoolId}/subjects`]);}
-      localStorage.removeItem("gradeId");
-      if(localStorage.getItem("trackId"))
-      {localStorage.removeItem("trackId");}
-    },(err)=>{
-      this.isBtnLoading = false;
-      this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
+     if(!this.urlParameter)
+         { 
+            this.subjectServise.addSubjectBySchool({schoolId:this.schoolId,gradeId:this.gradeId,trackId:this.trackId,subject:this.addedSubject}).subscribe((res)=>{
+            this.isBtnLoading = false;
+            if(res.statusCode != 'BadRequest'){
+              this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
+              }else{
+              this.toastService.error(this.translate.instant('This subject is already exist'));
+              }
+            if(this.userScope.SPEA==this.currentUserScope)
+            {this.router.navigate([`/schools-and-students/schools/school/${this.schoolId}`]);}
+            else if(this.userScope.Employee==this.currentUserScope)
+            {this.router.navigate([`/school-management/school/${this.schoolId}/subjects`]);}
+            localStorage.removeItem("gradeId");
+            if(localStorage.getItem("trackId"))
+            {localStorage.removeItem("trackId");}
+          },(err)=>{
+            this.isBtnLoading = false;
+            this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
 
-    })
+          })
+        }
+      else
+        {
+          this.subjectServise.editSubjectBySchool({schoolId:this.schoolId,gradeId:this.gradeId,trackId:this.trackId,subject:this.addedSubject}).subscribe((res)=>{
+            this.isBtnLoading = false;
+            if(res.statusCode != 'BadRequest'){
+              this.toastService.success(this.translate.instant('dashboard.Subjects.Subject edited Successfully'));
+              }else{
+              this.toastService.error(this.translate.instant('This subject is already exist'));
+              }
+            if(this.userScope.SPEA==this.currentUserScope)
+            {this.router.navigate([`/schools-and-students/schools/school/${this.schoolId}`]);}
+            else if(this.userScope.Employee==this.currentUserScope)
+            {this.router.navigate([`/school-management/school/${this.schoolId}/subjects`]);}
+            localStorage.removeItem("gradeId");
+            if(localStorage.getItem("trackId"))
+            {localStorage.removeItem("trackId");}
+          },(err)=>{
+            this.isBtnLoading = false;
+            this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
+
+          })
+        }
     }
     else{
 

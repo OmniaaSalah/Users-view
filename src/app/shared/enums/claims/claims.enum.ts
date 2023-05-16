@@ -94,6 +94,7 @@ export  enum ClaimsEnum{
     S_C_Subject="S_C_Subject",
     S_U_Subject="S_U_Subject",
     E_C_Subject="E_C_Subject",
+    E_U_Subject="E_U_Subject",
     S_C_User="S_C_User",
     S_U_User="S_U_User",
     S_C_Holiday="S_C_Holiday",

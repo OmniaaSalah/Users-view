@@ -193,3 +193,27 @@
         }
     }
 }
+
+.confirm-model{
+    .attachments{
+        height: 15rem;
+        &.scroll{overflow-y: scroll;}
+    }
+
+    .file-hidden{
+     
+      app-file-upload{
+         
+          .image-uploader__upload{
+              display: none !important;
+          }
+          .heading {min-height: 0rem !important;}
+          .full-file{
+          
+              .cancel{display: none;}
+          }
+  
+       }
+    }       
+          
+  }

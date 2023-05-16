@@ -166,7 +166,7 @@ export class SchoolsService {
   }
 
 
-  getSchool(schoolId): Observable<School>{
+  getSchool(schoolId){
 
     return this.http.get(`/School/${schoolId}`,).pipe(take(1))
   }
