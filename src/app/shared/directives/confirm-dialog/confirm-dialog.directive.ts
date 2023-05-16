@@ -14,7 +14,8 @@ export class ConfirmDialogDirective implements OnDestroy {
   constructor(private confirmModelService: ConfirmModelService,private translate:TranslateService) { }
 
   @HostListener('click') onClick() {
-    this.confirmModelService.openModel(this.modelData) ;
+    let modelData ={message: this.translate.instant('shared.confirmDelete'), img:'assets/images/empty-list/basket.svg'};
+    this.confirmModelService.openModel(this.modelData || modelData) ;
       this.confirmListener();
 
    }

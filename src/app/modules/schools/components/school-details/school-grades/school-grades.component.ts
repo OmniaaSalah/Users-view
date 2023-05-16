@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -13,7 +13,6 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { GradesService } from '../../../services/grade/grade.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { SchoolsService } from '../../../services/schools/schools.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({

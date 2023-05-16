@@ -11,11 +11,12 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { ExportService } from 'src/app/shared/services/export/export.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { DivisionService } from '../../../services/division/division.service';
 import * as FileSaver from 'file-saver';
+import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
+import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
 
 
 @Component({
@@ -28,8 +29,8 @@ export class SubjectDegreesComponent implements OnInit {
   get claimsEnum () {return ClaimsEnum}
 
   lang = inject(TranslationService).lang
-  schoolId= this.route.snapshot.paramMap.get('schoolId')
-  divisionId= this.route.snapshot.paramMap.get('divisionId')
+  schoolId= +this.route.snapshot.paramMap.get('schoolId')
+  divisionId= +this.route.snapshot.paramMap.get('divisionId')
 
   subjectId = this.config.data.subjectId
   subjectStatus = this.config.data.status
@@ -40,6 +41,7 @@ export class SubjectDegreesComponent implements OnInit {
   paginationState= {...paginationInitialState}
 
   ImprovementOptions$=this.indexService.getIndext(IndexesEnum.ModifyStudentResult)
+  isSchoolAllowToUpdateDegrees$=this.settingService.isSchoolExistInGracePeriod({schoolId:this.schoolId, code:GracePeriodEnum.updateDegreesAfterApproved})
 
   editDegreeModelOpened=false
 
@@ -62,7 +64,7 @@ export class SubjectDegreesComponent implements OnInit {
     public ref: DynamicDialogRef,
     private translate:TranslateService,
     private indexService:IndexesService,
-
+    private settingService:SettingsService,
   ) { }
 
   ngOnInit(): void {
