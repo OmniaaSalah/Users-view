@@ -152,6 +152,15 @@ requestList=[];
   }
 
 
+  deleteMainComment(id){
+    return this.http.delete(`/Request/delete-comment/${id}`).pipe(take(1))
+
+  }
+
+  deleteReplay(id){
+    return this.http.delete(`/Request/delete-reply/${id}`).pipe(take(1))
+  }
+
   withdrawReq(id, reqType){
     const requests = [
       'BoardCertificateRequest',
