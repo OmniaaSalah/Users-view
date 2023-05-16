@@ -81,128 +81,133 @@
                                 <ng-template #withTraks>
                                     <div class="" formArrayName="tracks">
 
-                                        <p-accordion [style]="{'font-size':'1.4rem'}">
+                                        <p-accordion [style]="{'font-size':'1.4rem'}" [styleClass]="">
 
                                             <ng-container *ngFor="let track of gradeTracks.controls; let trackIndex =index" [formGroupName]="trackIndex">
                                                 <!-- Accordion tab -->
-                                                <p-accordionTab [selected]="trackIndex==0">
+                                                <p-accordionTab [selected]="activeAccordion == trackIndex">
                                                     <!-- Accordion Header -->
                                                     <ng-template pTemplate="header">
-                                                        <div class="row w-100 align-items-center">
-                                                            <div class="col-4 d-flex align-items-center fs-4 gap-3" formGroupName="name">
-                                                                <span class="flex-none">{{'dashboard.parents.trackNameAr'| translate}} </span>
-                                                                <input class="w-75 required" pInputText [LangRestrict]="'ar'" formControlName="ar" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
-                                                            </div>
-                                                            <div class="col-2 d-flex align-items-center justify-content-center fs-4 gap-3">
-                                                                <span class="color-gray-700">{{'dashboard.schools.subjectsNumber'| translate}} </span>
-                                                                <span class="color-skyBlue-500 fw-bold"> {{track.value.subjects.length}}</span>
-                                                            </div>
+                                                      <!-- red border in case there is no subjected add -->
+                                                      <div class="invalid" *ngIf="!getTrackSubjects(trackIndex)?.controls?.length"></div>
 
-                                                            <div class="col-4 d-flex align-items-center fs-4 gap-3" formGroupName="name">
-                                                                <span class="flex-none required">{{'shared.nameEn' |translate}}</span>
-                                                                <input class="w-75" pInputText formControlName="en" [LangRestrict]="'en'" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
-                                                            </div>
+                                                      <div class=" content row w-100 align-items-center">
+                                                          <div class="col-4 d-flex align-items-center fs-4 gap-3" formGroupName="name">
+                                                              <span class="flex-none">{{'dashboard.parents.trackNameAr'| translate}} </span>
+                                                              <input class="w-75 required" pInputText [LangRestrict]="'ar'" formControlName="ar" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
+                                                          </div>
+                                                          <div class="col-2 d-flex align-items-center justify-content-center fs-4 gap-3">
+                                                              <span class="color-gray-700">{{'dashboard.schools.subjectsNumber'| translate}} </span>
+                                                              <span class="color-skyBlue-500 fw-bold"> {{track.value.subjects.length}}</span>
+                                                          </div>
 
-                                                            <!-- <div class="col-md-3">
-                                                                <button class=" btn btn-outline-primary btn--sm px-5" (click)="deleteTrack()">
-                                                                    <span>{{'dashboard.schools.deletTrack' |translate}}</span>
-                                                                </button>
-                                                            </div> -->
-                                                            <div  class="col-md-2 d-flex align-items-center justify-content-end color-red-500  ps-4" >
-                                                                <span class="delete-btn" role="button" (click)="$event.stopPropagation();deleteConfirmationCase='deleteTrack';deletedTrackIndex=trackIndex;openDeleteConfirmation=true">{{'shared.delete' |translate}}</span>
-                                                                <!-- <img class="pt-5" (click)="deleteTrackSubjects(trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt=""> -->
-                                                            </div>
+                                                          <div class="col-4 d-flex align-items-center fs-4 gap-3" formGroupName="name">
+                                                              <span class="flex-none required">{{'shared.nameEn' |translate}}</span>
+                                                              <input class="w-75" pInputText formControlName="en" [LangRestrict]="'en'" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
+                                                          </div>
 
-                                                           </div>
-                                                    </ng-template>
+                                                          <!-- <div class="col-md-3">
+                                                              <button class=" btn btn-outline-primary btn--sm px-5" (click)="deleteTrack()">
+                                                                  <span>{{'dashboard.schools.deletTrack' |translate}}</span>
+                                                              </button>
+                                                          </div> -->
+                                                          <div  class="col-md-2 d-flex align-items-center justify-content-end color-red-500  ps-4" >
+                                                              <span class="delete-btn" role="button" (click)="$event.stopPropagation();deleteConfirmationCase='deleteTrack';deletedTrackIndex=trackIndex;openDeleteConfirmation=true">{{'shared.delete' |translate}}</span>
+                                                              <!-- <img class="pt-5" (click)="deleteTrackSubjects(trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt=""> -->
+                                                          </div>
+
+                                                        </div>
+                                                      </ng-template>
 
                                                     <!-- Accordion Body -->
                                                     <ng-container >
                                                         <ng-template pTemplate="body">
-                                                            <div class="row" formArrayName="subjects">
-                                                                <ul class="subjects">
-                                                                    <li class="subject border rounded-4" *ngFor="let subject of getTrackSubjects(trackIndex).controls let subjectIndex =index" [formGroupName]="subjectIndex">
-                                                                        <div class="p-5 ">
-                                                                            <div class="row g-5 align-items-center mb-6">
+                                                          <div class="color-red-500 p-5 fs-3 text-center" *ngIf="!getTrackSubjects(trackIndex)?.controls?.length">يجب اضافه ماده واحده على الاقل</div>
 
-                                                                                <div class="col-md-4" >
-                                                                                    <label for="" class="label required">{{'dashboard.Subjects.subjectName'| translate}}</label>
-                                                                                    <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'Choose Subject' |translate}}"></p-dropdown>
+                                                          <div class="row" formArrayName="subjects">
+                                                              <ul class="subjects">
+                                                                  <li class="subject border rounded-4" *ngFor="let subject of getTrackSubjects(trackIndex).controls let subjectIndex =index" [formGroupName]="subjectIndex">
+                                                                      <div class="p-5 ">
+                                                                          <div class="row g-5 align-items-center mb-6">
 
-                                                                                </div>
+                                                                              <div class="col-md-4" >
+                                                                                  <label for="" class="label required">{{'dashboard.Subjects.subjectName'| translate}}</label>
+                                                                                  <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'Choose Subject' |translate}}"></p-dropdown>
 
-                                                                                <div class="col-md-4">
-                                                                                    <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
-                                                                                    <p-inputNumber
-                                                                                    formControlName="weekClassRoomNumber"
-                                                                                    [showButtons]="true"
-                                                                                    [min]="1"
-                                                                                    [max]="32"
-                                                                                    placeholder="0"
-                                                                                    inputId="classCount"  ></p-inputNumber>
-                                                                                </div>
-                                                                                <div class="col-md-3 align-self-end mb-3">
-                                                                                    <div class="d-flex align-items-center gap-4 fs-3">
-                                                                                        <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
-                                                                                        <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
-                                                                                        <p-inputSwitch formControlName="isOptional" [binary]="true"></p-inputSwitch>
-                                                                                    </div>
-                                                                                </div>
+                                                                              </div>
+
+                                                                              <div class="col-md-4">
+                                                                                  <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
+                                                                                  <p-inputNumber
+                                                                                  formControlName="weekClassRoomNumber"
+                                                                                  [showButtons]="true"
+                                                                                  [min]="1"
+                                                                                  [max]="32"
+                                                                                  placeholder="0"
+                                                                                  inputId="classCount"  ></p-inputNumber>
+                                                                              </div>
+                                                                              <div class="col-md-3 align-self-end mb-3">
+                                                                                  <div class="d-flex align-items-center gap-4 fs-3">
+                                                                                      <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
+                                                                                      <p-inputSwitch formControlName="isOptional" [binary]="true"></p-inputSwitch>
+                                                                                      <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
+                                                                                  </div>
+                                                                              </div>
 
 
-                                                                                <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                                                    <img class="pt-5" (click)="deleteConfirmationCase='deleteTrackSubjects';deletedTrackIndex=trackIndex;deletedSubjectIndex=subjectIndex;deletedSubjectId=subject.value.gradeSubjectId;openDeleteConfirmation=true" src="assets/images/shared/rect-xmark.svg" alt="">
-                                                                                </div>
-                                                                            </div>
+                                                                              <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
+                                                                                  <img class="pt-5" (click)="deleteConfirmationCase='deleteTrackSubjects';deletedTrackIndex=trackIndex;deletedSubjectIndex=subjectIndex;deletedSubjectId=subject.value.gradeSubjectId;openDeleteConfirmation=true" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                                              </div>
+                                                                          </div>
 
-                                                                            <div class="row gx-5">
-                                                                                <div class="col-md-4 align-self-end mb-3">
-                                                                                    <div class="d-flex align-items-center gap-4 fs-3">
-                                                                                        <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
-                                                                                        <p-inputSwitch formControlName="haveGpa" [binary]="true"></p-inputSwitch>
-                                                                                        <span class="mb-2">{{subject.value.haveGpa ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
-                                                                                    </div>
+                                                                          <div class="row gx-5">
+                                                                              <div class="col-md-4 align-self-end mb-3">
+                                                                                  <div class="d-flex align-items-center gap-4 fs-3">
+                                                                                      <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
+                                                                                      <p-inputSwitch formControlName="haveGpa" [binary]="true"></p-inputSwitch>
+                                                                                      <span class="mb-2">{{subject.value.haveGpa ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
+                                                                                  </div>
 
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}} (Credit Hours)</label>
-                                                                                    <div class=" position-relative" >
-                                                                                        <!-- <input type="number" pInputText placeholder="0" /> -->
-                                                                                        <p-inputNumber formControlName="studyHour" ></p-inputNumber>
-                                                                                        <img class="position-absolute translate-middle-y top-50" [style]="{'inset-inline-end': '1.5rem'}" src="assets/images/shared/clock-solid.svg" alt="">
-                                                                                    </div>
-                                                                                </div>
+                                                                              </div>
+                                                                              <div class="col-md-4">
+                                                                                  <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}} (Credit Hours)</label>
+                                                                                  <div class=" position-relative" >
+                                                                                      <!-- <input type="number" pInputText placeholder="0" /> -->
+                                                                                      <p-inputNumber formControlName="studyHour" ></p-inputNumber>
+                                                                                      <img class="position-absolute translate-middle-y top-50" [style]="{'inset-inline-end': '1.5rem'}" src="assets/images/shared/clock-solid.svg" alt="">
+                                                                                  </div>
+                                                                              </div>
 
-                                                                                <div class="col-md-4 align-self-end mb-3">
+                                                                              <div class="col-md-4 align-self-end mb-3">
 
-                                                                                    <div class="d-flex align-items-center gap-4 fs-3">
-                                                                                        <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
-                                                                                        <p-inputSwitch formControlName="isAddToFinalScore" [binary]="true"></p-inputSwitch>
-                                                                                        <span class="mb-2">{{subject.value.isAddToFinalScore ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
-                                                                                    </div>
+                                                                                  <div class="d-flex align-items-center gap-4 fs-3">
+                                                                                      <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
+                                                                                      <p-inputSwitch formControlName="isAddToFinalScore" [binary]="true"></p-inputSwitch>
+                                                                                      <span class="mb-2">{{subject.value.isAddToFinalScore ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
+                                                                                  </div>
 
-                                                                                </div>
-                                                                            </div>
+                                                                              </div>
+                                                                          </div>
 
-                                                                            <div class="row  mb-5 mt-6" *ngIf="subject.value.haveGpa">
-                                                                                <div class="col-md-4">
-                                                                                    <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
-                                                                                    <p-inputNumber
-                                                                                    formControlName="maxGpa"
-                                                                                    [showButtons]="true"
-                                                                                    [min]="0"
-                                                                                    [max]="100" ></p-inputNumber>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-4"
-                                                                    (click)="addSubjectToTrack(trackIndex)">
-                                                                        <fa-icon [icon]="faPlus"></fa-icon>
-                                                                        <span>{{'dashboard.schools.addSubject' |translate}}</span>
-                                                                    </div>
-                                                                </ul>
-                                                            </div>
+                                                                          <div class="row  mb-5 mt-6" *ngIf="subject.value.haveGpa">
+                                                                              <div class="col-md-4">
+                                                                                  <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
+                                                                                  <p-inputNumber
+                                                                                  formControlName="maxGpa"
+                                                                                  [showButtons]="true"
+                                                                                  [min]="0"
+                                                                                  [max]="100" ></p-inputNumber>
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+                                                                  </li>
+                                                                  <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-50 p-3 mt-4"
+                                                                  (click)="addSubjectToTrack(trackIndex)">
+                                                                      <fa-icon [icon]="faPlus"></fa-icon>
+                                                                      <span>{{'dashboard.schools.addSubject' |translate}}</span>
+                                                                  </div>
+                                                              </ul>
+                                                          </div>
                                                         </ng-template>
                                                     </ng-container>
                                                 </p-accordionTab>

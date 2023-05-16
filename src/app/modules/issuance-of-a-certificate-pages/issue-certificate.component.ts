@@ -1,7 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import {  FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute} from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { map, Subscription } from 'rxjs';
@@ -11,7 +9,6 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
-import { SystemRequestService } from '../request-list/services/system-request.service';
 import { IssuanceCertificaeService } from './services/issuance-certificae.service';
 import { Location } from '@angular/common';
 import { CurriculumCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/school.enum';
@@ -37,7 +34,7 @@ export class IssueCertificateComponent implements OnInit {
   display: boolean = false;
   subscription:Subscription;
   skeletonShown = true
- isBtnLoading:boolean=false;
+  isBtnLoading:boolean=false;
 
 
   destination=""

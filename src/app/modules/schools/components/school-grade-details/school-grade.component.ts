@@ -52,7 +52,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     subTitle: {main: this.translate.instant('dashboard.schools.editClass') , sub:'(الصف الرابع)'}
   }
 
-
+  activeAccordion=null
 
   // << DATA >>
   tracks:GradeTrack[]=inject(GradesService).tracks ;
@@ -283,7 +283,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
 
   fillTrackSubjects(trackIndex, subjects: SchoolSubject[]){
-    let trackSubjectsArr = this.fb.array([]) as FormArray
+    let trackSubjectsArr = this.fb.array([],Validators.minLength(1)) as FormArray
 
     subjects.forEach(subject =>{
       trackSubjectsArr.push(this.fb.group({
@@ -322,8 +322,8 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     return this.fb.group({
       TrackId :[0],
       name:this.fb.group({
-        ar:[''],
-        en:['']
+        ar:['', Validators.required],
+        en:['', Validators.required]
       }),
       subjects: this.fb.array([])
     })
@@ -331,6 +331,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   addTrack(){
     this.gradeTracks.push(this.newTrackGroup())
+    this.activeAccordion=this.gradeTracks?.length - 1
   }
 
 
@@ -354,7 +355,7 @@ console.log(this.subjectsToDelete);
     this.gradeSubjects.clear()
     subjects.forEach(subject =>{
       this.gradeSubjects.push(this.fb.group({
-        id:[subject.id],
+        id:[subject.id,  Validators.required],
         // name:this.fb.group({
         //   ar:[subject.name.ar?? ''],
         //   en:[subject.name.en ?? '']
