@@ -52,6 +52,11 @@ const routes: Routes = [
         data:{allowedClaims: ClaimsEnum.E_MenuItem_Subjects}
       },
       {
+        path: ':schoolId/subjects/edit-subject/:subjectId',component: EditNewSubjectComponent,
+        canActivate: [ClaimsGuard],
+        data:{allowedClaims: ClaimsEnum.E_MenuItem_Subjects}
+      },
+      {
         path: ':schoolId/annual-holidays',component: AnnulHolidayListComponent,
         canActivate: [ClaimsGuard],
         data:{allowedClaims: ClaimsEnum.E_MenuItem_AnnualHolidays}

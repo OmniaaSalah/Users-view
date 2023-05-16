@@ -31,7 +31,7 @@ export class NewUserRoleComponent implements OnInit,OnDestroy {
   dataRestrictionLevelList;
   rolePowersList=[];
   rolePowersAddedList=[];
-  rolePowersIdList;
+  rolePowersIdList=[];
   curriculamList;
   schoolIsSelectedList;
   selectedSchoolIds=[];

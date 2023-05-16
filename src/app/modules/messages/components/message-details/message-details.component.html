@@ -1,7 +1,10 @@
 <div class="main-message-header dashboard d-flex justify-content-between">
     <div class="left d-flex align-items-center ">
-
-        <button class="btn btn-primary" (click)="showDialog()" *ngIf="messageDetails?.replyPossibility">{{'dashboard.Messages.Send Reply' | translate}}</button>
+     <ng-container *ngIf="(messageDetails&&messageDetails?.replyPossibility)">
+        <button class="btn btn-primary" (click)="showDialog()" >
+            {{'dashboard.Messages.Send Reply' | translate}}
+        </button>
+     </ng-container>
         <button class=" btn  custom-btn px-4 mx-3" routerLink='/messages/messages' >{{'dashboard.Messages.close the conversation' | translate}}</button>
 
 

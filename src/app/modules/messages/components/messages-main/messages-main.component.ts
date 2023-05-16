@@ -18,7 +18,7 @@ import { MessageService } from '../../service/message.service';
   styleUrls: ['./messages-main.component.scss']
 })
 export class MessagesMainComponent implements OnInit {
-
+  currentUserScope = inject(UserService).getCurrentUserScope()
   @ViewChild('readBtn', { read: ElementRef, static:false }) readBtn: ElementRef;
   @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
 
