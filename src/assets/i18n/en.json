@@ -412,6 +412,7 @@
 
 
     "shared": {
+        "You":"You",
         "RoleMangment":"Role mangment",
         "ExamFileMangment":"Exam file mangment",
         "SendRequest":"Send request",

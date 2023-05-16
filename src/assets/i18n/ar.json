@@ -533,6 +533,7 @@
 
 
     "shared": {
+        "You":"أنت",
         "RoleMangment":"إدارة الدور الوظيفي",
         "ExamFileMangment":"إدارة ملف الامتحان",
         "SendRequest":"تقديم طلب",
