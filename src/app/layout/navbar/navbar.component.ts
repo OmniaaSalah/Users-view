@@ -363,6 +363,7 @@ onScroll()
           {name:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'),url:'/reports-managment/users-reports',  claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport],},
           {name:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'),url:'/reports-managment/teachers-reports',  claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport],},
           {name:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'), url:'/reports-managment/subjects-reports',  claims:[ClaimsEnum.S_MenuItem_SubjectReport],},
+          {name:this.translate.instant('sideBar.reportsManagment.chidren.TransferedStudentsReport'), url:'/reports-managment/transfered-students-reports',claims:[ClaimsEnum.S_MenuItem_TransferedStudentsReport]}
         ]
       },
       {

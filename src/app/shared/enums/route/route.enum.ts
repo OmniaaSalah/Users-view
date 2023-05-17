@@ -35,6 +35,7 @@ export enum RouteEnums{
     R_Employees="R_Employees",
     R_Teachers="R_Teachers",
     R_Subjects="R_Subjects",
+    R_TransferedStudents="R_TransferedStudents",
     AnnaulHolidays = "AnnaulHolidays",
     SchoolYears = "SchoolYears",
     Subjects = "Subjects",
