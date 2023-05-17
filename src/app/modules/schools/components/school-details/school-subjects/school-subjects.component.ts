@@ -172,16 +172,20 @@ export class SchoolSubjectsComponent implements OnInit {
   {
     if(this.filtration.GradeId)
     {
-        localStorage.setItem("gradeId", JSON.stringify(this.filtration.GradeId))
-        if(this.filtration.TrackId)
-        {localStorage.setItem("trackId",this.filtration.TrackId)}
-
+        this.saveDataOfsubject();
         this.router.navigate([`/school-management/school/${this.schoolId}/subjects/new-subject`])
     }
     else
     {
       this.toastService.error(this.translate.instant('dashboard.schools.pleaze select class firstly'));
     }
+  }
+
+  saveDataOfsubject()
+  {
+        localStorage.setItem("gradeId", JSON.stringify(this.filtration.GradeId))
+        if(this.filtration.TrackId)
+        {localStorage.setItem("trackId",this.filtration.TrackId)}
   }
 
 }

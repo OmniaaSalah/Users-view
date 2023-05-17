@@ -345,7 +345,8 @@
                     "gradesReport":"تقرير الدرجات",
                     "EmployeesReport":"تقرير الموظفين",
                     "TeachersReport":"تقرير المعلمين",
-                    "subjectsReport":"تقرير المواد الدراسية"
+                    "subjectsReport":"تقرير المواد الدراسية",
+                    "TransferedStudentsReport":"تقرير الطلاب المنقوليين"
             }
         },
         "comunicationAndmanagment": {
