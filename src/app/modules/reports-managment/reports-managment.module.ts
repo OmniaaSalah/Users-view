@@ -12,6 +12,7 @@ import { AttendanceReportsComponent } from './components/attendance-reports/atte
 import { ParentsReportsComponent } from './components/parents-reports/parents-reports.component';
 import { SchoolsReportsComponent } from './components/schools-reports/schools-reports.component';
 import { TeachersReportsComponent } from './components/teachers-reports/teachers-reports.component';
+import { TransferedStudentsReportsComponent } from './components/transfered-students-reports/transfered-students-reports.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { TeachersReportsComponent } from './components/teachers-reports/teachers
     AttendanceReportsComponent,
     ParentsReportsComponent,
     SchoolsReportsComponent,
-    TeachersReportsComponent
+    TeachersReportsComponent,
+    TransferedStudentsReportsComponent
   ],
   imports: [
     ReportsManagmentRoutingModule,

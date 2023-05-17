@@ -158,6 +158,12 @@ export class SideNavigatorComponent implements OnInit {
           icon:'assets/images/sideBar/report-managment/report-line.svg',
           url:'/reports-managment/subjects-reports'
         },
+        {
+          title:this.translate.instant('sideBar.reportsManagment.chidren.TransferedStudentsReport'),
+          key: RouteEnums.R_TransferedStudents,
+          icon:'assets/images/sideBar/report-managment/report.svg',
+          url:'/reports-managment/transfered-students-reports'
+        }
       ]
     },
 

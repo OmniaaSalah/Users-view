@@ -188,6 +188,7 @@ export class HomeComponent implements OnInit {
           {label:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'), icon:'assets/images/home/report-managment/list.svg', url:'/reports-managment/subjects-reports', claims:[ClaimsEnum.S_MenuItem_SubjectReport]},
           {label:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/users-reports',claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport]},
           {label:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'), icon:'assets/images/home/report-managment/report-line.svg', url:'/reports-managment/teachers-reports',claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport]},
+          {label:this.translate.instant('sideBar.reportsManagment.chidren.TransferedStudentsReport'), icon:'assets/images/home/report-managment/report.svg', url:'/reports-managment/transfered-students-reports',claims:[ClaimsEnum.S_MenuItem_TransferedStudentsReport]}
         ]
       }
     },

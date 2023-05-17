@@ -42,7 +42,11 @@ export class UploadAssignmentComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
   componentHeaderData: IHeader={
-    breadCrump: [],
+    breadCrump:[
+
+      { label: this.translate.instant('Assignments List'), routerLink: '/school-performance-managent/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
+      , {label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/school-performance-managent/assignments/upload-assignment', routerLinkActiveOptions: { exact: true }}
+     ],
     mainTitle: { main: this.translate.instant('breadcrumb.Upload Assignment') }
   }
 
@@ -101,7 +105,7 @@ export class UploadAssignmentComponent implements OnInit {
 
     this.getGradeList();
     this.getSubjectList();
-    this.checkDashboardHeader();
+    this.headerService.changeHeaderdata(this.componentHeaderData)
     if(this.currentUserScope==this.userScope.Employee)  this.userService.currentUserSchoolId$.subscribe(id => {this.schoolService.getSchool(id).subscribe((res)=>{this.curriculumId=res?.curriculum?.id;this.curriculum.setValue(this.curriculumId);this.curriculum.disable();})});
 
   }
@@ -174,7 +178,7 @@ uploadedFiles: any[] = [];
     this.assignmentModel.examAudioPath = this.assignmentFormGrp.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       this.isBtnLoading=false;
-      this.router.navigate(['/performance-managment/assignments/assignments-list']);
+      this.router.navigate(['/school-performance-managent/assignments/assignments-list']);
       this.toastr.success(this.translate.instant('Add Successfully'),'');
      },(err)=>{ 
       this.toastr.error(err?.message||this.translate.instant('toasterMessage.error'));
@@ -197,31 +201,31 @@ uploadedFiles: any[] = [];
   
   }
 
-  checkDashboardHeader()
-  {
-      if(this.currentUserScope==UserScope.Employee)
-    {
-      this.componentHeaderData.breadCrump=
-      [
+  // checkDashboardHeader()
+  // {
+  //     if(this.currentUserScope==UserScope.Employee)
+  //   {
+  //     this.componentHeaderData.breadCrump=
+  //     [
 
-       { label: this.translate.instant('Assignments List'), routerLink: '/school-performance-managent/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
-       , {label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/school-performance-managent/assignments/upload-assignment', routerLinkActiveOptions: { exact: true }}
-      ]
+  //      { label: this.translate.instant('Assignments List'), routerLink: '/school-performance-managent/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
+  //      , {label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/school-performance-managent/assignments/upload-assignment', routerLinkActiveOptions: { exact: true }}
+  //     ]
 
 
-    }
-    else if (this.currentUserScope==UserScope.SPEA)
-    {
-      this.componentHeaderData.breadCrump=
-         [
-         { label: this.translate.instant('Assignments List'), routerLink: '/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
-         , {label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/performance-managment/assignments/upload-assignment', routerLinkActiveOptions: { exact: true }}
+  //   }
+  //   else if (this.currentUserScope==UserScope.SPEA)
+  //   {
+  //     this.componentHeaderData.breadCrump=
+  //        [
+  //        { label: this.translate.instant('Assignments List'), routerLink: '/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
+  //        , {label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/performance-managment/assignments/upload-assignment', routerLinkActiveOptions: { exact: true }}
          
-        ]
+  //       ]
 
 
-    }
+  //   }
 
-    this.headerService.changeHeaderdata(this.componentHeaderData)
-  }
+  //   this.headerService.changeHeaderdata(this.componentHeaderData)
+  // }
 }
