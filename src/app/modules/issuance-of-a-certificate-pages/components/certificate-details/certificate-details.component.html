@@ -319,7 +319,7 @@
             <h1 class="fw-bold mb-3">إلى من يهمه الأمر - متابعة الدراسة</h1>
             <p class="d-flex fs-2 justify-content-center gap-5 fw-bold ">
               <span>العام الدراسي</span>
-              <span class="font-en">{{certificate?.schoolYearAr}}</span>
+              <span class="font-en">{{addSpaceBtwStrAndNum | wrapFn : certificate?.schoolYearAr}}</span>
               <span class="font-en">Academic Year</span>
             </p>
           </div>
@@ -365,7 +365,7 @@
             <p>تاريخ الميلاد: {{certificate?.BirthDate |LocalizeDate}}</p>
             <p>رقم الطالب: {{certificate?.StudentId }}</p>
           </div>
-          <p>. مقيد/ة بالصف ({{certificate?.GradeAr}} ) ، شعبة ( {{certificate?.DivisionAr ||'...'}} )</p>
+          <p>. مقيد/ة بالصف ({{certificate?.GradeAr}} ) ، شعبة ( {{addSpaceBtwStrAndNum | wrapFn : certificate?.DivisionAr ||'...'}} )</p>
 
           <!-- <div class="py-5"></div> -->
 

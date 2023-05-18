@@ -22,7 +22,7 @@
             <div class="mx-5"></div>
             <li *ngFor="let navItem of guardianNavItems" class="nav__menu__item">
                 <a routerLinkActive="active" routerLink="{{navItem.Link}}"  [routerLinkActiveOptions]="{exact: true}">
-                    <div class="text"> {{navItem.name}}</div>
+                    <div class="text"> {{navItem.name |async}}</div>
                 </a>
             </li>
         </ul>
@@ -33,10 +33,11 @@
 
         <div class="nav__menu__container ">
             <ul class="nav__menu">
-                <ng-container *ngFor="let item of menuItems; let i= index">
-                    <li class="nav__menu__item" (click)="openMenu(i)" *permit="item.claims">
+              <!-- | excludeEmptyList :'links'  -->
+                <ng-container *ngFor="let item of menuItems ; let i= index">
+                    <li class="nav__menu__item" (click)="openMenu(item.id)" *permit="item.claims">
                         <a [class.active]="item.enum == (activeRoute$|async)">
-                            <div class="text">{{item.title}}</div>
+                            <div class="text">{{item.title |async}}</div>
                             <div class="icon">
                                 <fa-icon class="" [icon]="faAngleDown"></fa-icon>
                             </div>
@@ -52,12 +53,12 @@
         <div class="menu" [class.show]="isMenuOpend">
             <div class="w-50">
                 <div class="links" *ngIf="activeMenuItemChanged" @slide>
-                    <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
+                    <h2 class="heading heading--secondary">{{activeMenuItem?.title |async}}</h2>
                     <ul>
                         <ng-container *ngFor="let link of activeMenuItem?.links" >
                           <ng-container *ngIf="!link?.isHidden">
                             <li (click)="isMenuOpend=false" [routerLink]="[link.url]" [queryParams]="link?.queryParams" *permit="link.claims">
-                                {{link.name}}
+                                {{link?.name | async}}
                             </li>
                           </ng-container>
                         </ng-container>
@@ -274,6 +275,9 @@
 
     </div>
   </div>
+
+
+
 
   <!-- <ng-container *ngIf="routeHistory$ |async as routeHistory"> -->
     <div class="history" *ngIf="routeListenrService?.routeHistory?.length">

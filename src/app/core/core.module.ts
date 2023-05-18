@@ -17,7 +17,7 @@ import { LayoutModule } from '../layout/layout.module';
   ],
   imports: [
     CommonModule,
-    TranslateModule,
+    // TranslateModule,
     HttpClientModule,
     PrimngModule,
     SharedModule,
