@@ -10,6 +10,8 @@ import { AttendanceReportsComponent } from './components/attendance-reports/atte
 import { TeachersReportsComponent } from './components/teachers-reports/teachers-reports.component';
 import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { LayoutComponent } from 'src/app/layout/layout.component';
+import { TransferStudentComponent } from '../students/components/transfer-student/transfer-student.component';
+import { TransferedStudentsReportsComponent } from './components/transfered-students-reports/transfered-students-reports.component';
 
 const routes: Routes = [
 
@@ -24,7 +26,8 @@ const routes: Routes = [
         {path: 'attendance-reports', component:AttendanceReportsComponent, data:{ RouteKey: RouteEnums.R_AbsenceRecord}},
         {path: 'parents-reports', component:ParentsReportsComponent, data:{ RouteKey: RouteEnums.R_Guardians}},
         {path: 'schools-reports', component:SchoolsReportsComponent, data:{ RouteKey: RouteEnums.R_Schools}},
-        {path: 'teachers-reports', component:TeachersReportsComponent, data:{ RouteKey: RouteEnums.R_Teachers}}
+        {path: 'teachers-reports', component:TeachersReportsComponent, data:{ RouteKey: RouteEnums.R_Teachers}},
+        {path: 'transfered-students-reports', component:TransferedStudentsReportsComponent, data:{ RouteKey: RouteEnums.R_TransferedStudents}}
       ]}
     ]
   }

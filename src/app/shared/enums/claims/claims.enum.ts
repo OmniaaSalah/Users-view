@@ -22,6 +22,7 @@ export  enum ClaimsEnum{
     S_MenuItem_AbsenceReport = "S_MenuItem_AbsenceReport",
     S_MenuItem_GuardianReport = "S_MenuItem_GuardianReport",
     S_MenuItem_StudentReport = "S_MenuItem_StudentReport",
+    S_MenuItem_TransferedStudentsReport="S_MenuItem_TransferedStudentsReport",
     S_MenuItem_Setting = "S_MenuItem_Setting",
     S_MenuItem_Index = "S_MenuItem_Index",
     S_MenuItem_Role = "S_MenuItem_Role",

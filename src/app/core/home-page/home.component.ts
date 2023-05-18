@@ -179,17 +179,18 @@ export class HomeComponent implements OnInit {
           bgColor:'#CD578A'
         },
 
-      },
-      list: [
-        {label:this.translate.get('sideBar.reportsManagment.chidren.studentsReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/students-reports',claims:[ClaimsEnum.S_MenuItem_StudentReport]},
-        {label:this.translate.get('sideBar.reportsManagment.chidren.gurdiansReport'), icon:'assets/images/home/report-managment/report.svg', url:'/reports-managment/parents-reports',claims:[ClaimsEnum.S_MenuItem_GuardianReport]},
-        {label: this.translate.get('sideBar.reportsManagment.chidren.attendanceReport'), icon:'assets/images/home/report-managment/report-edge.svg', url:'/reports-managment/attendance-reports',claims:[ClaimsEnum.S_MenuItem_AbsenceReport]},
-        {label:this.translate.get('sideBar.reportsManagment.chidren.schoolsReport'), icon:'assets/images/home/report-managment/report-marked.svg', url:'/reports-managment/schools-reports',claims:[ClaimsEnum.S_MenuItem_SchoolReport]},
-        {label:this.translate.get('sideBar.reportsManagment.chidren.gradesReport'), icon:'assets/images/home/report-managment/report-content.svg', url:'/reports-managment/degrees-reports',claims:[ClaimsEnum.S_MenuItem_DegreesReport]},
-        {label:this.translate.get('sideBar.reportsManagment.chidren.subjectsReport'), icon:'assets/images/home/report-managment/list.svg', url:'/reports-managment/subjects-reports', claims:[ClaimsEnum.S_MenuItem_SubjectReport]},
-        {label:this.translate.get('sideBar.reportsManagment.chidren.EmployeesReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/users-reports',claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport]},
-        {label:this.translate.get('sideBar.reportsManagment.chidren.TeachersReport'), icon:'assets/images/home/report-managment/report-line.svg', url:'/reports-managment/teachers-reports',claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport]},
-      ]
+        list: [
+          {label:this.translate.get('sideBar.reportsManagment.chidren.studentsReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/students-reports',claims:[ClaimsEnum.S_MenuItem_StudentReport]},
+          {label:this.translate.get('sideBar.reportsManagment.chidren.gurdiansReport'), icon:'assets/images/home/report-managment/report.svg', url:'/reports-managment/parents-reports',claims:[ClaimsEnum.S_MenuItem_GuardianReport]},
+          {label: this.translate.get('sideBar.reportsManagment.chidren.attendanceReport'), icon:'assets/images/home/report-managment/report-edge.svg', url:'/reports-managment/attendance-reports',claims:[ClaimsEnum.S_MenuItem_AbsenceReport]},
+          {label:this.translate.get('sideBar.reportsManagment.chidren.schoolsReport'), icon:'assets/images/home/report-managment/report-marked.svg', url:'/reports-managment/schools-reports',claims:[ClaimsEnum.S_MenuItem_SchoolReport]},
+          {label:this.translate.get('sideBar.reportsManagment.chidren.gradesReport'), icon:'assets/images/home/report-managment/report-content.svg', url:'/reports-managment/degrees-reports',claims:[ClaimsEnum.S_MenuItem_DegreesReport]},
+          {label:this.translate.get('sideBar.reportsManagment.chidren.subjectsReport'), icon:'assets/images/home/report-managment/list.svg', url:'/reports-managment/subjects-reports', claims:[ClaimsEnum.S_MenuItem_SubjectReport]},
+          {label:this.translate.get('sideBar.reportsManagment.chidren.EmployeesReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/users-reports',claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport]},
+          {label:this.translate.get('sideBar.reportsManagment.chidren.TeachersReport'), icon:'assets/images/home/report-managment/report-line.svg', url:'/reports-managment/teachers-reports',claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport]},
+          {label:this.translate.get('sideBar.reportsManagment.chidren.TransferedStudentsReport'), icon:'assets/images/home/report-managment/report.svg', url:'/reports-managment/transfered-students-reports',claims:[ClaimsEnum.S_MenuItem_TransferedStudentsReport]}
+        ]
+      }
     },
 
     {

@@ -105,18 +105,18 @@
 
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.Sender'|translate}} : </span>
                 <ng-container *ngIf="messages[i]?.showSenderName">
-                            {{messages[i]?.userName|currentLang}}
+                            {{messages[i]?.userName|currentLang}} <span> / {{messages[i]?.jobTitleName|currentLang}}</span> 
                  </ng-container>
                  <ng-container *ngIf="!messages[i]?.showSenderName">
-                    ---
+                    --- <span> / {{messages[i]?.jobTitleName|currentLang}}</span> 
                   </ng-container>
             </p>
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.SendDate'|translate}} : </span>{{messages[i]?.createdDate|LocalizeDate}}</p>
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageTittle'|translate}} : </span>{{messages[i]?.title}}</p>
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageText'|translate}} : </span>{{messages[i]?.messageText}}</p>
-            <span class="color-primary fw-bold">{{'dashboard.Messages.attachments'|translate}} : </span>
+            <p><span class="color-primary fw-bold">{{'dashboard.Messages.attachments'|translate}} :  </span><span  *ngIf="!messages[i]?.attachments[0]?.url">{{'shared.not found'|translate}}</span></p>
             <div class="w-100 d-flex flex-wrap " [ngClass]="messages[i]?.attachments.length<=2?'attachments':'attachments scroll'">
-                    <ng-container *ngIf="messages[i]?.attachments">
+                    <ng-container *ngIf="messages[i]?.attachments[0]?.url">
                         <div class="file-hidden mx-4"  *ngFor="let attachment of messages[i]?.attachments">
                             <app-file-upload [files]="[attachment]" [accept]="fileTypesEnum.Pdf" view="full" ></app-file-upload>
                         </div>

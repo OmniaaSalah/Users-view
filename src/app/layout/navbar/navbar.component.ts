@@ -346,66 +346,19 @@ export class NavbarComponent implements OnInit {
       {
         id: 5,
         enum: RouteEnums.REPORTS_MANAGEMENT,
-        title: this.translate.get('sideBar.reportsManagment.title'),
-        claims: [ClaimsEnum.S_Menu_ReportsManagement],
-        links: [
-          {
-            name: this.translate.get(
-              'sideBar.reportsManagment.chidren.studentsReport'
-            ),
-            url: '/reports-managment/students-reports',
-            claims: [ClaimsEnum.S_MenuItem_StudentReport],
-          },
-          {
-            name: this.translate.get(
-              'sideBar.reportsManagment.chidren.gurdiansReport'
-            ),
-            url: '/reports-managment/parents-reports',
-            claims: [ClaimsEnum.S_MenuItem_GuardianReport],
-          },
-          {
-            name: this.translate.get(
-              'sideBar.reportsManagment.chidren.attendanceReport'
-            ),
-            url: '/reports-managment/attendance-reports',
-            claims: [ClaimsEnum.S_MenuItem_AbsenceReport],
-          },
-          {
-            name: this.translate.get(
-              'sideBar.reportsManagment.chidren.schoolsReport'
-            ),
-            url: '/reports-managment/schools-reports',
-            claims: [ClaimsEnum.S_MenuItem_SchoolReport],
-          },
-          {
-            name: this.translate.get(
-              'sideBar.reportsManagment.chidren.gradesReport'
-            ),
-            url: '/reports-managment/degrees-reports',
-            claims: [ClaimsEnum.S_MenuItem_DegreesReport],
-          },
-          {
-            name: this.translate.get(
-              'sideBar.reportsManagment.chidren.EmployeesReport'
-            ),
-            url: '/reports-managment/users-reports',
-            claims: [ClaimsEnum.S_MenuItem_SchoolEmployeeReport],
-          },
-          {
-            name: this.translate.get(
-              'sideBar.reportsManagment.chidren.TeachersReport'
-            ),
-            url: '/reports-managment/teachers-reports',
-            claims: [ClaimsEnum.S_MenuItem_SchoolTeacherReport],
-          },
-          {
-            name: this.translate.get(
-              'sideBar.reportsManagment.chidren.subjectsReport'
-            ),
-            url: '/reports-managment/subjects-reports',
-            claims: [ClaimsEnum.S_MenuItem_SubjectReport],
-          },
-        ],
+        title:this.translate.get('sideBar.reportsManagment.title'),
+          claims:[ClaimsEnum.S_Menu_ReportsManagement],
+        links:[
+          {name: this.translate.get('sideBar.reportsManagment.chidren.studentsReport'),url:'/reports-managment/students-reports',  claims:[ClaimsEnum.S_MenuItem_StudentReport],},
+          {name: this.translate.get('sideBar.reportsManagment.chidren.gurdiansReport'), url:'/reports-managment/parents-reports',  claims:[ClaimsEnum.S_MenuItem_GuardianReport],},
+          {name: this.translate.get('sideBar.reportsManagment.chidren.attendanceReport'),url:'/reports-managment/attendance-reports',  claims:[ClaimsEnum.S_MenuItem_AbsenceReport],},
+          {name:this.translate.get('sideBar.reportsManagment.chidren.schoolsReport'),url:'/reports-managment/schools-reports',  claims:[ClaimsEnum.S_MenuItem_SchoolReport],},
+          {name: this.translate.get('sideBar.reportsManagment.chidren.gradesReport'), url:'/reports-managment/degrees-reports',  claims:[ClaimsEnum.S_MenuItem_DegreesReport],},
+          {name:this.translate.get('sideBar.reportsManagment.chidren.EmployeesReport'),url:'/reports-managment/users-reports',  claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport],},
+          {name:this.translate.get('sideBar.reportsManagment.chidren.TeachersReport'),url:'/reports-managment/teachers-reports',  claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport],},
+          {name:this.translate.get('sideBar.reportsManagment.chidren.subjectsReport'), url:'/reports-managment/subjects-reports',  claims:[ClaimsEnum.S_MenuItem_SubjectReport],},
+          {name:this.translate.get('sideBar.reportsManagment.chidren.TransferedStudentsReport'), url:'/reports-managment/transfered-students-reports',claims:[ClaimsEnum.S_MenuItem_TransferedStudentsReport]}
+        ]
       },
       {
         id: 6,

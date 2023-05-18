@@ -81,7 +81,7 @@
                 <td>{{(subject?.updatedName|currentLang) || '--'}}</td>
                 <td>{{(subject?.lastUpdatedDate|LocalizeDate )|| '--'}}</td>
                 <td pFrozenColumn [frozen]="true" class="actions">
-                    <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4"  routerLink="/school-management/school/{{schoolId}}/subjects/edit-subject/{{subject?.id}}" *permit="claimsEnum.E_U_Subject">
+                    <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4" (click)="saveDataOfsubject()"  routerLink="/school-management/school/{{schoolId}}/subjects/edit-subject/{{subject?.id}}" *permit="claimsEnum.E_U_Subject">
                         <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                         <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                     </div>

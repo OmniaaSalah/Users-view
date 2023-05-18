@@ -83,6 +83,11 @@ export class SchoolsReportsService {
         name:this.translate.instant('dashboard.schools.SpecialClassesNumbers'),
         isSelected: false,
         isDisabled: false,
+      },
+      {
+        name:this.translate.instant('dashboard.schools.fusionStudentNumbers'),
+        isSelected: false,
+        isDisabled: false,
       }
       
      
@@ -108,6 +113,8 @@ export class SchoolsReportsService {
             [this.translate.instant('dashboard.schools.studentPercentgeInDivision')]: school?.studentsCountInDivision,
             [this.translate.instant('dashboard.schools.EnrolledStudentNumbers')]: school?.withdrawalStudentCount,
             [this.translate.instant('dashboard.schools.SpecialClassesNumbers')]: school?.specialClassesCountPerSchool,
+            [this.translate.instant('dashboard.schools.fusionStudentNumbers')]: school?.fusionStudentsCountInSchool
+            
           }
         })
       }))
