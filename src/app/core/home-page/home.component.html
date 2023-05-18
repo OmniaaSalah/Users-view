@@ -104,10 +104,10 @@
 
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.Sender'|translate}} : </span>
                 <ng-container *ngIf="messages[i]?.showSenderName">
-                            {{messages[i]?.userName|currentLang}}
+                            {{messages[i]?.userName|currentLang}} <span> / {{messages[i]?.jobTitleName|currentLang}}</span> 
                  </ng-container>
                  <ng-container *ngIf="!messages[i]?.showSenderName">
-                    ---
+                    --- <span> / {{messages[i]?.jobTitleName|currentLang}}</span> 
                   </ng-container>
             </p>
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.SendDate'|translate}} : </span>{{messages[i]?.createdDate|LocalizeDate}}</p>
