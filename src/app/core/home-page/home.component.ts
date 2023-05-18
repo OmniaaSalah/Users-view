@@ -119,34 +119,34 @@ export class HomeComponent implements OnInit {
       claims:[ClaimsEnum.S_Menu_SchoolsAndStudents],
       content:{
         header: {
-          title:this.translate.instant('sideBar.schoolsAndStudents.title'),
+          title:this.translate.get('sideBar.schoolsAndStudents.title'),
           bgColor:'#5CD0DF'
         },
 
-        list: [
-          {label:this.translate.instant('sideBar.schoolsAndStudents.chidren.schools'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:'/schools-and-students/schools',claims:[ClaimsEnum.S_MenuItem_SchoolMenu]},
-          {label:this.translate.instant('sideBar.schoolsAndStudents.chidren.students'), icon:'assets/images/home/schools-students/user-graduate.svg', url:'/schools-and-students/students',claims:[ClaimsEnum.S_MenuItem_StudentMenu]},
-          {label:this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'), icon:'assets/images/home/schools-students/parents.svg',url:'/schools-and-students/all-parents',claims:[ClaimsEnum.S_MenuItem_GuardianMenu]},
-        ]
-      }
+      },
+      list: [
+        {label:this.translate.get('sideBar.schoolsAndStudents.chidren.schools'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:'/schools-and-students/schools',claims:[ClaimsEnum.S_MenuItem_SchoolMenu]},
+        {label:this.translate.get('sideBar.schoolsAndStudents.chidren.students'), icon:'assets/images/home/schools-students/user-graduate.svg', url:'/schools-and-students/students',claims:[ClaimsEnum.S_MenuItem_StudentMenu]},
+        {label:this.translate.get('sideBar.schoolsAndStudents.chidren.parents'), icon:'assets/images/home/schools-students/parents.svg',url:'/schools-and-students/all-parents',claims:[ClaimsEnum.S_MenuItem_GuardianMenu]},
+      ]
     },
     {
       image:'assets/images/home/performance-managment.png',
       claims:[ClaimsEnum.S_Menu_PeformanceManagment],
       content:{
         header: {
-          title:this.translate.instant('breadcrumb.performanceMangement'),
+          title:this.translate.get('breadcrumb.performanceMangement'),
           bgColor:'#F8C073'
         },
 
-        list: [
-          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
-          {label:this.translate.instant('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
-          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/educational-setting/note-marked.svg',url:'/performance-managment/assessments/assements-list',claims:[ClaimsEnum.SE_MenuItem_Rate]},
+      },
+      list: [
+        {label:this.translate.get('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
+        {label:this.translate.get('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
+        {label:this.translate.get('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/educational-setting/note-marked.svg',url:'/performance-managment/assessments/assements-list',claims:[ClaimsEnum.SE_MenuItem_Rate]},
 
 
-        ]
-      }
+      ]
 
     },
     {
@@ -154,19 +154,19 @@ export class HomeComponent implements OnInit {
       claims:[ClaimsEnum.S_Menu_ManagarTools],
       content:{
         header: {
-          title:this.translate.instant('sideBar.managerTools.title'),
+          title:this.translate.get('sideBar.managerTools.title'),
           bgColor:'#D644B1'
         },
 
-        list: [
-          {label:this.translate.instant('sideBar.managerTools.children.Users'), icon:'assets/images/home/system-manager-tools/users.svg',url:'/manager-tools/user-information/users-list',claims:[ClaimsEnum.S_MenuItem_user]},
-          {label: this.translate.instant('sideBar.managerTools.children.Job Roles'), icon:'assets/images/home/system-manager-tools/user.svg', url:'/manager-tools/user-roles/user-roles-list',claims:[ClaimsEnum.S_MenuItem_Role]},
-          {label:this.translate.instant('sideBar.managerTools.children.systemSettings'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/manager-tools/settings',claims:[ClaimsEnum.S_MenuItem_Setting]},
-          {label: this.translate.instant('sideBar.managerTools.children.System List'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/manager-tools/indexes/indexes-list',claims:[ClaimsEnum.S_MenuItem_Index]},
-          {label:this.translate.instant('breadcrumb.NotificationsSettings'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/performance-managment/notifications/',claims:[ClaimsEnum.S_MenuItem_Setting]},
+      },
+      list: [
+        {label:this.translate.get('sideBar.managerTools.children.Users'), icon:'assets/images/home/system-manager-tools/users.svg',url:'/manager-tools/user-information/users-list',claims:[ClaimsEnum.S_MenuItem_user]},
+        {label: this.translate.get('sideBar.managerTools.children.Job Roles'), icon:'assets/images/home/system-manager-tools/user.svg', url:'/manager-tools/user-roles/user-roles-list',claims:[ClaimsEnum.S_MenuItem_Role]},
+        {label:this.translate.get('sideBar.managerTools.children.systemSettings'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/manager-tools/settings',claims:[ClaimsEnum.S_MenuItem_Setting]},
+        {label: this.translate.get('sideBar.managerTools.children.System List'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/manager-tools/indexes/indexes-list',claims:[ClaimsEnum.S_MenuItem_Index]},
+        {label:this.translate.get('breadcrumb.NotificationsSettings'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/performance-managment/notifications/',claims:[ClaimsEnum.S_MenuItem_Setting]},
 
-        ]
-      }
+      ]
     },
 
     {
@@ -175,21 +175,21 @@ export class HomeComponent implements OnInit {
       class:'flex-layout',
       content:{
         header: {
-          title: this.translate.instant('sideBar.reportsManagment.title'),
+          title: this.translate.get('sideBar.reportsManagment.title'),
           bgColor:'#CD578A'
         },
 
-        list: [
-          {label:this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/students-reports',claims:[ClaimsEnum.S_MenuItem_StudentReport]},
-          {label:this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'), icon:'assets/images/home/report-managment/report.svg', url:'/reports-managment/parents-reports',claims:[ClaimsEnum.S_MenuItem_GuardianReport]},
-          {label: this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'), icon:'assets/images/home/report-managment/report-edge.svg', url:'/reports-managment/attendance-reports',claims:[ClaimsEnum.S_MenuItem_AbsenceReport]},
-          {label:this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'), icon:'assets/images/home/report-managment/report-marked.svg', url:'/reports-managment/schools-reports',claims:[ClaimsEnum.S_MenuItem_SchoolReport]},
-          {label:this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'), icon:'assets/images/home/report-managment/report-content.svg', url:'/reports-managment/degrees-reports',claims:[ClaimsEnum.S_MenuItem_DegreesReport]},
-          {label:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'), icon:'assets/images/home/report-managment/list.svg', url:'/reports-managment/subjects-reports', claims:[ClaimsEnum.S_MenuItem_SubjectReport]},
-          {label:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/users-reports',claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport]},
-          {label:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'), icon:'assets/images/home/report-managment/report-line.svg', url:'/reports-managment/teachers-reports',claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport]},
-        ]
-      }
+      },
+      list: [
+        {label:this.translate.get('sideBar.reportsManagment.chidren.studentsReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/students-reports',claims:[ClaimsEnum.S_MenuItem_StudentReport]},
+        {label:this.translate.get('sideBar.reportsManagment.chidren.gurdiansReport'), icon:'assets/images/home/report-managment/report.svg', url:'/reports-managment/parents-reports',claims:[ClaimsEnum.S_MenuItem_GuardianReport]},
+        {label: this.translate.get('sideBar.reportsManagment.chidren.attendanceReport'), icon:'assets/images/home/report-managment/report-edge.svg', url:'/reports-managment/attendance-reports',claims:[ClaimsEnum.S_MenuItem_AbsenceReport]},
+        {label:this.translate.get('sideBar.reportsManagment.chidren.schoolsReport'), icon:'assets/images/home/report-managment/report-marked.svg', url:'/reports-managment/schools-reports',claims:[ClaimsEnum.S_MenuItem_SchoolReport]},
+        {label:this.translate.get('sideBar.reportsManagment.chidren.gradesReport'), icon:'assets/images/home/report-managment/report-content.svg', url:'/reports-managment/degrees-reports',claims:[ClaimsEnum.S_MenuItem_DegreesReport]},
+        {label:this.translate.get('sideBar.reportsManagment.chidren.subjectsReport'), icon:'assets/images/home/report-managment/list.svg', url:'/reports-managment/subjects-reports', claims:[ClaimsEnum.S_MenuItem_SubjectReport]},
+        {label:this.translate.get('sideBar.reportsManagment.chidren.EmployeesReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/users-reports',claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport]},
+        {label:this.translate.get('sideBar.reportsManagment.chidren.TeachersReport'), icon:'assets/images/home/report-managment/report-line.svg', url:'/reports-managment/teachers-reports',claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport]},
+      ]
     },
 
     {
@@ -197,17 +197,17 @@ export class HomeComponent implements OnInit {
       claims:[ClaimsEnum.S_Menu_EducationalSetting],
       content:{
         header: {
-          title:this.translate.instant('sideBar.educationalSettings.title'),
+          title:this.translate.get('sideBar.educationalSettings.title'),
           bgColor:'#EF8071'
         },
 
-        list: [
-          {label:this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/educational-setting/calender.svg',url:'/educational-settings/annual-holiday/annual-holiday-list', claims:[ClaimsEnum.S_MenuItem_Holiday]},
-          {label:this.translate.instant('sideBar.educationalSettings.children.School Years'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/educational-settings/school-year/school-years-list', claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
-          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/educational-setting/micro.svg',url:'/educational-settings/subject/subjects-list', claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
-          {label:this.translate.instant('sideBar.educationalSettings.children.surveysList'), icon:'assets/images/home/educational-setting/note-list.svg', url:'/educational-settings/surveys',claims:[ClaimsEnum.S_MenuItem_Survey]},
-        ]
-      }
+      },
+      list: [
+        {label:this.translate.get('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/educational-setting/calender.svg',url:'/educational-settings/annual-holiday/annual-holiday-list', claims:[ClaimsEnum.S_MenuItem_Holiday]},
+        {label:this.translate.get('sideBar.educationalSettings.children.School Years'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/educational-settings/school-year/school-years-list', claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
+        {label:this.translate.get('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/educational-setting/micro.svg',url:'/educational-settings/subject/subjects-list', claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
+        {label:this.translate.get('sideBar.educationalSettings.children.surveysList'), icon:'assets/images/home/educational-setting/note-list.svg', url:'/educational-settings/surveys',claims:[ClaimsEnum.S_MenuItem_Survey]},
+      ]
 
     },
 
@@ -219,16 +219,16 @@ export class HomeComponent implements OnInit {
       claims:[ClaimsEnum.E_menu_ManageStudents],
       content:{
         header: {
-          title:this.translate.instant('dashboard.students.studentsMangement'),
+          title:this.translate.get('dashboard.students.studentsMangement'),
           bgColor:'#EF8071'
         },
 
-        list: [
-          {label: this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'), icon:'assets/images/home/educational-setting/calender.svg',url:'/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
-          {label:this.translate.instant('sideBar.schoolsAndStudents.chidren.students'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
+      },
+      list: [
+        {label: this.translate.get('sideBar.schoolsAndStudents.chidren.parents'), icon:'assets/images/home/educational-setting/calender.svg',url:'/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
+        {label:this.translate.get('sideBar.schoolsAndStudents.chidren.students'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
 
-        ]
-      }
+      ]
 
     },
 
@@ -237,31 +237,31 @@ export class HomeComponent implements OnInit {
       claims:[ClaimsEnum.E_Menu_ManageGradesAndDivisions],
       content:{
         header: {
-          title:this.translate.instant('breadcrumb.GradesAndDivisionsMangement'),
+          title:this.translate.get('breadcrumb.GradesAndDivisionsMangement'),
           bgColor:'#5CD0DF'
         },
 
-        list: [
-          {label: this.translate.instant('dashboard.schools.schoolClasses'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:`/grades-and-divisions/school/${currentSchoolId}/grades`,claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
-          {label:this.translate.instant('dashboard.schools.schoolTracks'), icon:'assets/images/home/schools-students/user-graduate.svg', url:`/grades-and-divisions/school/${currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
+      },
+      list: [
+        {label: this.translate.get('dashboard.schools.schoolClasses'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:`/grades-and-divisions/school/${currentSchoolId}/grades`,claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
+        {label:this.translate.get('dashboard.schools.schoolTracks'), icon:'assets/images/home/schools-students/user-graduate.svg', url:`/grades-and-divisions/school/${currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
 
-        ]
-      }
+      ]
     },
     {
       image:'assets/images/home/reports-managment.png',
       claims:[ClaimsEnum.E_menu_ManageSchoolEmployee],
       content:{
         header: {
-          title: this.translate.instant('dashboard.schools.schoolEmployeeMangement'),
+          title: this.translate.get('dashboard.schools.schoolEmployeeMangement'),
           bgColor:'#CD578A'
         },
 
-        list: [
-          {label:this.translate.instant('breadcrumb.Employees'), icon:'assets/images/home/report-managment/report-user.svg', url:'/schoolEmployee-management/school/2/employees',claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
+      },
+      list: [
+        {label:this.translate.get('breadcrumb.Employees'), icon:'assets/images/home/report-managment/report-user.svg', url:'/schoolEmployee-management/school/2/employees',claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
 
-        ]
-      }
+      ]
     },
 
     {
@@ -269,35 +269,33 @@ export class HomeComponent implements OnInit {
       claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
       content:{
         header: {
-          title: this.translate.instant('breadcrumb.performanceMangement'),
+          title: this.translate.get('breadcrumb.performanceMangement'),
           bgColor:'#D644B1'
         },
-
-        list: [
-          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.SE_MenuItem_Rate]},
-          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/school-performance-managent/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
-        ]
-      }
+      },
+      list: [
+        {label:this.translate.get('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.SE_MenuItem_Rate]},
+        {label:this.translate.get('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/school-performance-managent/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
+      ]
     },
     {
       image:'assets/images/home/performance-managment.png',
       claims:[ClaimsEnum.E_Menu_ManageSchool],
       content:{
         header: {
-          title:this.translate.instant('dashboard.schools.schoolMangement'),
+          title:this.translate.get('dashboard.schools.schoolMangement'),
           bgColor:'#F8C073'
         },
+      },
+      list: [
+        {label:this.translate.get('dashboard.schools.generalInfo'), icon:'assets/images/home/performance-managment/list.svg', url:`/school-management/school/${currentSchoolId}`,claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
+        {label:this.translate.get('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/school-management/school/${currentSchoolId}/subjects`,claims:[ClaimsEnum.E_MenuItem_Subjects]},
+        {label:this.translate.get('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/performance-managment/list.svg', url:`/school-management/school/${currentSchoolId}/annual-holidays`,claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
+        {label:this.translate.get('dashboard.schools.editableList'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/school-management/school/${currentSchoolId}/edit-list`, claims:[ClaimsEnum.SE_MenuItem_EditList]},
+        {label:this.translate.get('dashboard.Requests.myRequests'), icon:'assets/images/home/educational-setting/micro.svg',url:'/school-management/requests-list/my-requests', queryParams:{isMyRequests:true} ,claims:[ClaimsEnum.E_MenuItem_Requests]},
+        {label:this.translate.get('dashboard.Requests.requestsToMe'), icon:'assets/images/home/educational-setting/micro.svg',url:'/school-management/requests-list', claims:[ClaimsEnum.E_MenuItem_Requests]},
 
-        list: [
-          {label:this.translate.instant('dashboard.schools.generalInfo'), icon:'assets/images/home/performance-managment/list.svg', url:`/school-management/school/${currentSchoolId}`,claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
-          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/school-management/school/${currentSchoolId}/subjects`,claims:[ClaimsEnum.E_MenuItem_Subjects]},
-          {label:this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/performance-managment/list.svg', url:`/school-management/school/${currentSchoolId}/annual-holidays`,claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
-          {label:this.translate.instant('dashboard.schools.editableList'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/school-management/school/${currentSchoolId}/edit-list`, claims:[ClaimsEnum.SE_MenuItem_EditList]},
-          {label:this.translate.instant('dashboard.Requests.myRequests'), icon:'assets/images/home/educational-setting/micro.svg',url:'/school-management/requests-list/my-requests', queryParams:{isMyRequests:true} ,claims:[ClaimsEnum.E_MenuItem_Requests]},
-          {label:this.translate.instant('dashboard.Requests.requestsToMe'), icon:'assets/images/home/educational-setting/micro.svg',url:'/school-management/requests-list', claims:[ClaimsEnum.E_MenuItem_Requests]},
-
-        ]
-      }
+      ]
 
     }
 

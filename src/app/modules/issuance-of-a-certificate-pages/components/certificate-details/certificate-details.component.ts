@@ -18,8 +18,6 @@ export class CertificateDetailsComponent implements OnInit {
 
   get certificateTypeEnum() { return CertificatesEnum }
 
-  location="https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448"
-
   newDate = new Date()
 
   certificateType
@@ -29,12 +27,18 @@ export class CertificateDetailsComponent implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
-    private mediaSevice:MediaService,
     private issueCertificateService:IssuanceCertificaeService,
     private translate :TranslateService) { }
 
   ngOnInit(): void {
     this.getCertificate()
+
+  }
+
+  addSpaceBtwStrAndNum(string){
+    return string.replace(/([0-9]+)/,(match)=>{
+      return ` ${match} `
+    })
 
   }
 
@@ -86,6 +90,7 @@ export class CertificateDetailsComponent implements OnInit {
 
  generatePdf():Promise<jsPDF>{
   var data = document.getElementById('certificate');
+  data.style.fontFeatureSettings = '"liga" 0';
 
   return html2canvas(data,{useCORS: true})
   .then(canvas => {

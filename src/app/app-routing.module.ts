@@ -39,7 +39,6 @@ const routes: Routes = [
             canActivate: [ClaimsGuard],
             data:{
               allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents,
-              title:{ar:'المدارس', en:'schools'}
             }
           },
           {
@@ -48,7 +47,6 @@ const routes: Routes = [
             canActivate: [ClaimsGuard],
             data:{
               allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents,
-              title:{ar:'اولياء الأمور',en: 'schools'}
             }
           },
           {
@@ -57,7 +55,6 @@ const routes: Routes = [
             canActivate: [ClaimsGuard],
             data:{
               allowedClaims: ClaimsEnum.S_Menu_SchoolsAndStudents,
-              title:{ar:'قائمه الطلاب',en: 'Students List'}
             }
           },
         ]
@@ -73,7 +70,6 @@ const routes: Routes = [
             canActivate: [ClaimsGuard],
             data:{
               allowedClaims: [ClaimsEnum.E_Menu_ManageSchool, , ClaimsEnum.E_MenuItem_Subjects],
-              title:{ar:'تفاصيل المدرسه',en: 'school details'}
             }
           },
           {
@@ -96,7 +92,6 @@ const routes: Routes = [
             canActivate: [ClaimsGuard],
             data:{
               allowedClaims: ClaimsEnum.E_menu_ManageStudents,
-              title:{ar:'اولياء الامور',en: 'parents List'}
             }
           },
           {
@@ -105,7 +100,6 @@ const routes: Routes = [
             canActivate: [ClaimsGuard],
             data:{
               allowedClaims: [ClaimsEnum.E_menu_ManageStudents],
-              title:{ar:'قائمه الطلاب',en: 'Students List'}
             }
           },
         ]
@@ -231,7 +225,6 @@ const routes: Routes = [
         canActivate: [ClaimsGuard],
         data:{
           allowedClaims: ClaimsEnum.E_menu_ManageSchoolEmployee,
-          title:{ar:'موظفين المدرسة',en: 'School Employee'}
 
         }
       },
@@ -241,7 +234,6 @@ const routes: Routes = [
         canActivate: [ClaimsGuard],
         data:{
           allowedClaims: ClaimsEnum.E_Menu_ManageGradesAndDivisions,
-          title:{ar:'الشعب والصفوف',en: 'Divisions & Degrees'}
         }
       },
 

@@ -1,138 +1,129 @@
-@import 'src/assets/css/utils/variables.scss';
-@import 'src/assets/css/components/forms.scss';
-@import 'src/assets/css/components/validation-form.scss';
-@import 'src/assets/css/components/message.scss';
-@import '/src/app/shared/components/confirm-model/confirm-model.component.scss';
+@import "src/assets/css/utils/variables.scss";
+@import "src/assets/css/components/forms.scss";
+@import "src/assets/css/components/validation-form.scss";
+@import "src/assets/css/components/message.scss";
+@import "/src/app/shared/components/confirm-model/confirm-model.component.scss";
 
-.spinner.spinner-border{
+.spinner.spinner-border {
   color: $color-primary !important;
 }
 
-.All-content{
+.All-content {
 
+  height: 100vh;
 
-            .sidebar{
+  .login-bg {
+    // background-image: url("/assets/images/Login/loginSidebar.svg");
+    background-image: url("../../../../../assets/images//login-bg.jpg");
+    background-position: -520% 0%;    background-attachment: fixed;
+    background-repeat: no-repeat;
+    // position: relative;
+    // overflow: hidden;
+    img{
 
-                background-image: url("/assets/images/Login/loginSidebar.svg");
-                position: fixed;
-                display: flexbox;
-                background-size: cover;
-                // margin: 1rem 0;
-                // border-radius: 12px;
-                width:48rem;
-                height: 100%;
-
-
-            }
-            .header-images{
-                display: flexbox;
-               margin-bottom:3rem;
-               margin-inline-start: 50.5rem;
-               margin-top: 0.5rem;
-            }
-            .form-header{
-                margin-inline-start: 0.7rem;
-            }
-         .end-side{
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 0 12%;
-            .inner {
-                width: 100%;
-
-                &>* {
-                    width: 100%;
-                }
-            }
-            .content{
-
-               margin-inline-start: 50rem;
-                max-width:50.5rem ;
-                .handimg{margin-inline-start: 0.5rem;width: 4%;}
-                .custom-validation-form{
-                    box-shadow:  none;
-                    border: none;
-                    padding-top: 0rem;
-                    padding-bottom: 0rem;
-                    .label{
-                        font-weight: 400;
-                    }
-                }
-                .forget-password{
-                    a{
-                        font-size: 16px;
-                        text-decoration-line: underline;
-                    }
-                }
-                .btn{
-                    width:48.5rem;
-                    border-radius: 12px !important;
-                }
-
-
-                   .identity{
-                    &.btn{
-                        transition: all .2s ease-in-out;
-                            border:1px solid black;
-                            &:hover{
-                                border:1px solid black !important;
-                                box-shadow: 0 0 1rem rgba($color: #000000, $alpha: .2);
-                            }
-                            &:active,:focus{
-                                border:1px solid black !important;
-                                border-color: #000 !important;
-                                background-color: $color-gray-100;
-                            }
-                       }
-                    }
-
-            }
-        }
-
-}
-
-.toolTip	{
-
-  &:hover{
-    .tip{
-      opacity: 1;
-      visibility: visible;
-
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
     }
   }
 
-  .tip	{
-    visibility: hidden;
-    bottom: -11rem;
-      right: -7rem;
-      padding: 1.2rem;
-      background-color: #fafafa !important;
-      color: $color-gray-700 !important;
-      font-size: 1.28rem;
-      text-align: center;
-      width: 30rem;
-      border-radius: 12px;
-      border: 1px solid $color-gray-400;
-      opacity: 0;
-      transition: opacity .2s ease-in;
 
-      &:lang(en){
-        bottom: -9rem;
+
+  .end-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .form {
+      width: 56%;
+      margin-top: 1rem;
+
+
+      .spea-logo{
+        width: 17rem;
+        margin-bottom: 3rem;
+        img{ width: 17rem;}
+      }
+
+
+      .i-hand {
+        margin-inline-start: 0.5rem;
+        width: 2rem;
+      }
+      .custom-validation-form {
+        box-shadow: none;
+        border: none;
+        padding-top: 0rem;
+        padding-bottom: 0rem;
+        .label {
+          font-weight: 400;
+        }
+      }
+      .forget-password {
+        a {
+          font-size: 16px;
+          text-decoration-line: underline;
+        }
+      }
+
+
+      .identity {
+        &.btn {
+          transition: all 0.2s ease-in-out;
+          border: 1px solid black;
+          &:hover {
+            border: 1px solid black !important;
+            box-shadow: 0 0 1rem rgba($color: #000000, $alpha: 0.2);
+          }
+          &:active,
+          :focus {
+            border: 1px solid black !important;
+            border-color: #000 !important;
+            background-color: $color-gray-100;
+          }
+        }
       }
     }
+  }
+
 }
 
+.toolTip {
+  &:hover {
+    .tip {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 
-.language{text-align: end;width: 100%;}
+  .tip {
+    visibility: hidden;
+    bottom: -11rem;
+    right: -7rem;
+    padding: 1.2rem;
+    background-color: #fafafa !important;
+    color: $color-gray-700 !important;
+    font-size: 1.28rem;
+    text-align: center;
+    width: 30rem;
+    border-radius: 12px;
+    border: 1px solid $color-gray-400;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
 
+    &:lang(en) {
+      bottom: -9rem;
+    }
+  }
+}
 
+.language {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
 
-
-
-
-
-
-
+}

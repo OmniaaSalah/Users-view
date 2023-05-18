@@ -2,46 +2,49 @@
 
 
   <div class="row All-content">
-    <div class="col-lg-4 sidebar d-none d-sm-block">
-
+    <div class="col-lg-5 login-bg d-none d-sm-block">
+      <!-- <div class="position-relative h-100 w-100">
+        <img class="first-img" src="assets/images/login-bg.jpg" alt="">
+      </div> -->
 
     </div>
-    <div class="col-lg-8 end-side">
-
-      <div class="inner">
 
 
-        <div class="header-images d-flex">
-          <img class="first-img" src="assets/images/Login/elSharkaHeader.svg" alt="">
-          <div class="language mt-3">
-            <a (click)="changeLanguage()">
-              <p [class]="languge=='ar'? 'font-en' : 'font-ar'">{{languge=='en' ? 'عربي': 'English'}}</p>
-            </a>
-          </div>
+    <div class="col-lg-7 end-side position-relative">
+      <div class="language">
+        <a (click)="changeLanguage()">
+          <p [class]="languge=='ar'? 'font-en' : 'font-ar'">{{languge=='en' ? 'عربي': 'English'}}</p>
+        </a>
+      </div>
 
+
+      <div class="form" >
+        <div class="spea-logo">
+          <img class="" src="assets/images/spea-logo.png" alt="">
         </div>
 
-        <div class="content" >
-
           <ng-container *ngIf="!loginInProgress">
-            <div class="form-header">
-              <h4 class="color-gray-400">{{'Welcome'|translate}}<img class="handimg" src="assets/images/Login/hand.png">
+            <div class="">
+              <h4 class="fw-bold mb-4" [style.color]="'#757575'">
+                {{'Welcome'|translate}}
+                <img class="i-hand" src="assets/images/Login/hand.png">
               </h4>
+
               <h1 class="mb-4 color-primary"><b>{{'Login' | translate}}</b></h1>
-              <h6>{{'Please enter your email and password' | translate}}</h6>
+              <!-- <p class="fs-5">{{'Please enter your email and password' | translate}}</p> -->
             </div>
 
 
-            <div class="custom-form custom-validation-form my-5 container position-relative">
+            <div class="custom-form custom-validation-form mt-5 mb-4 container position-relative">
 
               <form [formGroup]="loginForm" (ngSubmit)="authenticate()" autocomplete="off">
 
                 <!-- <input type="text" style="position: absolute; opacity: 0;">
                               <input type="password" style="position: absolute; opacity: 0;"> -->
 
-                <div class="row gx-5 mb-4">
+                <div class="row gx-5 mb-5">
                   <div class="col-md-12">
-                    <label for="email" class="label">{{'Phonenumber/Email'|translate}} <span class="star">*</span></label>
+                    <label for="email" class="mb-3">{{'Phonenumber/Email'|translate}} <span class="star">*</span></label>
                     <input type="text" readonly onclick="this.removeAttribute('readonly')" pInputText
                       formControlName="account" (ngModelChange)="checkValidators($event)" class="form-control "
                       placeholder="{{'Phonenumber/Email'|translate}}" name="email" id="email">
@@ -70,7 +73,7 @@
                 <div class="row gx-5 mb-1">
                   <div class=" col-md-12">
 
-                    <label for="PID6" class="label">{{'Password'| translate}} <span class="star">*</span></label>
+                    <label for="PID6" class="mb-3">{{'Password'| translate}} <span class="star">*</span></label>
                     <p-password iconPos="left" formControlName="password"
                       [ngClass]="{'ng-invalid ng-dirty':password.errors?.['required']&& password.touched||password.errors?.['pattern'] && password.touched}"
                       [feedback]="false" [toggleMask]="true" name="password"
@@ -88,13 +91,13 @@
                 <div class="forget-password mb-5 ">
                   <a (click)="openForgetModel()" class="color-skyBlue-400">{{'Forgot password?' | translate}}</a>
                 </div>
-                <button class="btn btn-primary mb-4" [disabled]="isBtnLoading||loginForm.invalid">{{'Login'| translate}}
+                <button class="btn btn-primary btn--full mb-4 radius-12" [disabled]="isBtnLoading||loginForm.invalid">{{'Login'| translate}}
                   <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
                 </button>
 
 
               </form>
-              <button (click)="signWithIdentity()" class="btn mb-4 identity">
+              <button (click)="signWithIdentity()" class="btn btn--full radius-12 mb-4 identity">
                 <img src="assets/images/Login/identity.svg" alt="">
                 <p>{{'Sign in with UAE PASS' | translate}}</p>
               </button>
@@ -126,7 +129,7 @@
 
           </ng-container>
 
-          <div *ngIf="loginInProgress" class="form-header d-flex flex-column gap-3 align-items-center text-center mt-6">
+          <div *ngIf="loginInProgress" class=" d-flex flex-column gap-3 align-items-center text-center mt-6">
             <div class="py-6"></div>
             <h4 class="color-gray-400">{{'Welcome'|translate}}<img style="width: 3rem;" src="assets/images/Login/hand.png">
             </h4>
@@ -135,9 +138,8 @@
           </div>
 
 
-        </div>
-
       </div>
+
       <div class="py-6"></div>
     </div>
   </div>
