@@ -102,7 +102,10 @@
                         <td *ngIf="tableColumns[10].isSelected == true">
                             {{school?.specialClassesCountPerSchool}} 
                         </td>
-                       
+                        <td *ngIf="tableColumns[11].isSelected == true">
+                            {{school?.fusionStudentsCountInSchool}} 
+                        </td>
+                        
                     </ng-container>
                     
                 </tr>

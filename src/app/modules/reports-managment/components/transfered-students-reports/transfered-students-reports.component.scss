@@ -1,0 +1,41 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import 'src/assets/css/components/forms.scss';
+@import 'src/assets/css/components/inputswitch';
+
+
+.prim-table{
+    .actions--sm{justify-content: center;}
+           ::ng-deep app-loader{
+
+               width:117rem;
+
+           }
+           .search{
+           ::ng-deep app-informative-block{
+
+               .informative-block{
+                       width:100%;
+                       min-height: 30rem !important;
+                       position: relative;
+                       right:35rem;
+                       .title{
+                           width: 90% !important;
+
+                       }
+                   }
+               }
+
+           }
+
+       ::ng-deep p-table{
+           thead.p-datatable-thead tr th{
+               min-width: 19rem;
+               &.lg{min-width: 28rem;}
+           }
+      .p-datatable-tbody tr td{
+       min-width: 19rem;
+       &.lg{min-width: 28rem;}
+          }
+       }
+   }

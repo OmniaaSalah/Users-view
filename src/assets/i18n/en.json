@@ -1046,6 +1046,7 @@
             "SelectClassType":"Select class type",
             "EnrolledStudentNumbers":"Enrolled student numbers",
             "SpecialClassesNumbers":"Special classes numbers",
+            "fusionStudentNumbers":"Fusion student numbers",
             "trackWillBeDeleted":"Please note that all predefined tracks and subjects will deleted",
             "subjectsWillBeDeleted":"Please note that all predefined subjects will deleted"
 
@@ -1864,6 +1865,7 @@
         "reports": {
             "generateEmployeesReport":"Generate employees report",
             "generatestudentsReport":  "Generate students report",
+            "generateTransferedStudentsReport": "Generate transfered students report",
             "generateDegreesReport": "Generate degrees report",
             "generateSubjectsReport":"Generate subjects report",
             "generateAttendenceReport":"Generate attendence report",

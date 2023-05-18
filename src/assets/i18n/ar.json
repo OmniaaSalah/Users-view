@@ -1193,6 +1193,7 @@
             "SelectClassType":"أختر نوع الفصل",
             "EnrolledStudentNumbers":"عدد الطلاب المنسحبين",
             "SpecialClassesNumbers":"عدد الفصول الخاصة",
+            "fusionStudentNumbers":"عدد طلاب الدمج",
             "trackWillBeDeleted":"يرجعى العلم انه سيتم حذف جميع المسارات والمواد المعرفه سابقا",
             "subjectsWillBeDeleted":"يرجعى العلم انه سيتم حذف جميع المواد المعرفه سابقا"
 
@@ -1620,6 +1621,7 @@
         "reports": {
             "generateEmployeesReport":"إنشاء تقرير الموظفين",
             "generatestudentsReport": "إنشاء تقرير الطلاب",
+            "generateTransferedStudentsReport": "إنشاء تقرير الطلاب المنقولين",
             "generateDegreesReport": "إنشاء تقرير الدرجات",
             "generateSubjectsReport":"إنشاء تقرير المواد الدراسية",
             "generateAttendenceReport":"إنشاء تقرير الغياب والحضور",
