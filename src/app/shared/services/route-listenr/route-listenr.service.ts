@@ -48,13 +48,12 @@ routeHistory$ : BehaviorSubject<RouteInHistory[]> = new BehaviorSubject<RouteInH
       if(event instanceof NavigationEnd){
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
+        this.manageRouteHistory()
+
         this.setActiveRoute(event.url)
 
         this.activeChildRoute.next(this.getRoutData('RouteKey'))
 
-        this.manageRouteHistory()
-
-      }else{
 
       }
 
@@ -65,7 +64,7 @@ routeHistory$ : BehaviorSubject<RouteInHistory[]> = new BehaviorSubject<RouteInH
 
   manageRouteHistory(){
     let currRouteTitle = this.getRoutData('title')
-    let currRouteURL = this.previousUrl
+    let currRouteURL = this.currentUrl
 
     if(!currRouteTitle || !currRouteURL) return
 

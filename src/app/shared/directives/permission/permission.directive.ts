@@ -21,15 +21,15 @@ export class PermissionDirective implements OnInit {
 
   @Input()
   set permit(claim: ClaimsEnum | ClaimsEnum[]) {;
-    
+
     if(!claim || !claim.length) {
       this.viewContainer.createEmbeddedView(this.templateRef);
       return;
-    }  
-    
-    // IN CASE ARRAY OF PERMISSIONS  
+    }
+
+    // IN CASE ARRAY OF PERMISSIONS
     if (claim instanceof Array) {
-      
+
       if(claim.some(item=> this.userClaims?.[item])){
           this.viewContainer.createEmbeddedView(this.templateRef);
       }
@@ -38,7 +38,7 @@ export class PermissionDirective implements OnInit {
     }
     // IN CASE ONE PERMISSION
     else {
-      if(this.userClaims?.[claim]) {  
+      if(this.userClaims?.[claim]) {
         this.viewContainer.createEmbeddedView(this.templateRef);
       } else {
         this.viewContainer.clear();

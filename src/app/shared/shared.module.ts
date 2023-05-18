@@ -55,6 +55,7 @@ import { FullbackImagePipe } from './pipes/fullback-image.pipe';
 import { FullbackImageDirective } from './directives/fullback-image.directive';
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 import { RequiredRolesDirective } from './directives/required-roles/required-roles.directive';
+import { ExcludeEmptyListPipe } from './pipes/exclude-empty-list.pipe';
 
 registerLocaleData(localeAr);
 
@@ -107,6 +108,7 @@ registerLocaleData(localeAr);
     FullbackImageDirective,
     SubHeaderComponent,
     RequiredRolesDirective,
+    ExcludeEmptyListPipe,
 
   ],
   imports: [
@@ -180,6 +182,7 @@ registerLocaleData(localeAr);
     FullbackImageDirective,
     SubHeaderComponent,
     RequiredRolesDirective,
+    ExcludeEmptyListPipe,
   ],
   providers:[SharedService]
 })

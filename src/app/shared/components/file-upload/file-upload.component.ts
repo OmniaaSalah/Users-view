@@ -95,6 +95,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
   ngOnInit(): void {
 
     this.settingService.fileRules$.subscribe((rules:MapedFileRule)=> {
+      console.log(rules);
+
       this.filesRules =rules
 
       // set file Size Dynamically (depend on provided file type)

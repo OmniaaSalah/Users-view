@@ -30,10 +30,10 @@ export class TranslationService {
     this.currentLanguage = localStorage.getItem(this.languageKey) || environment.defaultLang;
     localStorage.setItem(this.languageKey, this.currentLanguage);
 
-    this.translateService.setDefaultLang(this.currentLanguage)
     this.translateService.use(this.currentLanguage);
+    this.translateService.setDefaultLang(this.currentLanguage)
     this.translateService.get('primeng').subscribe(res => this.config.setTranslation(res));
-    
+
     let dir = this.currentLanguage == 'ar' ? 'rtl' : 'ltr';
     document.querySelector('html')?.setAttribute('dir', dir)
     document.querySelector('html')?.setAttribute('lang', this.currentLanguage)

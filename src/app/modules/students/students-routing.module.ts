@@ -13,13 +13,40 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children:[
-      { path: "", component: StudentsListComponent, data:{ RouteKey: RouteEnums.Students}},
-      { path: "student/:id", component: StudentDetailsComponent },
+      {
+        path: "", component: StudentsListComponent,
+        data:{
+          RouteKey: RouteEnums.Students,
+          title:{ar:'قائمه الطلاب',en: 'Students List'}
+        },
+      },
+      {
+        path: "student/:id", component: StudentDetailsComponent ,
+        data:{
+          title:{ar:'تفاصيل الطالب',en: 'Student Details'}
+        }
+      },
 
-      { path: "student/:id/transfer", component: TransferStudentComponent},
-      { path: "student/:id/withdraw-request", component: WithdrawalRequestComponent },
-      { path: "delete-student/:id", component: DeletedStudentComponent },
-      { path: "student/:id/IssuanceOfACertificateComponent", component: IssuanceOfACertificateComponent }
+      {
+        path: "student/:id/transfer", component: TransferStudentComponent,
+          data:{title:{ar:'نقل الطالب',en: 'Transfer Student'}
+        }
+      },
+      {
+        path: "student/:id/withdraw-request", component: WithdrawalRequestComponent,
+          data:{title:{ar:'إرسال طلب سحب',en: 'Withdraw Request'}
+        }
+       },
+      {
+        path: "delete-student/:id", component: DeletedStudentComponent,
+          data:{title:{ar:'إرسال طلب حذف ',en: 'Student Details'}
+        }
+       },
+      {
+        path: "student/:id/IssuanceOfACertificateComponent", component: IssuanceOfACertificateComponent,
+          data:{title:{ar:'اصدار شهاده للطالب',en: 'Issue Student Certificate'}
+        }
+      }
     ]
   }
 ];
