@@ -35,7 +35,8 @@
     <div class="home__cards">
         <div class="container" >
             <div class="row">
-              <ng-container *ngFor="let card of cards; let i=index">
+              <!-- | excludeEmptyList :'list' -->
+              <ng-container *ngFor="let card of cards ; let i=index">
                 <div class="card col p-0"
                 *permit="card.claims"
                 #cardRef
@@ -52,7 +53,7 @@
                         [style.backgroundColor]="card.content.header.bgColor"
                         (click)="cardsContentStatus[i].active= !cardsContentStatus[i].active">
 
-                            <div class="text">{{card.content.header.title}}</div>
+                            <div class="text">{{card.content.header.title |async}}</div>
 
                             <fa-icon  [icon]="faChevronUp" *ngIf="cardsContentStatus[i].active"></fa-icon>
                             <fa-icon
@@ -64,7 +65,7 @@
                         </div>
                         <div class="card__content__body">
                             <ul class="list" [class]="card?.class || ''">
-                                <ng-container *ngFor="let item of card.content.list">
+                                <ng-container *ngFor="let item of card.list">
                                 <li
                                 class="list__item"
                                 [class.reduce-fs]="cardsHoverStatus[i].active"
@@ -72,7 +73,7 @@
                                     <div class="img">
                                         <img [src]="item.icon" alt="" loading="lazy">
                                     </div>
-                                    <p>{{item.label}}</p>
+                                    <p>{{item.label |async}}</p>
                                 </li>
                             </ng-container>
                             </ul>
