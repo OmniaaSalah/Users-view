@@ -41,7 +41,7 @@ export class MessageDetailsComponent implements OnInit {
     this.replayForm = this.formbuilder.group({
       messegeText: ['', [Validators.required, Validators.maxLength(512)]],
     });
-    this.getMessageDetail()
+    this.getMessageDetailAfterReply();
 
     this.headerService.Header.next(
       {
@@ -56,6 +56,22 @@ export class MessageDetailsComponent implements OnInit {
 
 
   getMessageDetail(){
+    this.messageService.getMessageDetailsById(this.routeSub).subscribe(res=>{
+      this.messageDetails = res
+      this.messagesReplies = res.messageReplies || []
+      let unique: any[] = [...new Set(this.messagesReplies.map(item => item.userName.ar))];
+      this.messagesReplies.map(element => {
+        element.color = "first-message"
+        if (unique.length > 1 && element.userName.ar == unique[1]) {
+            element.color = "second-message"
+        }
+      })
+      if(res.messageSatus ==MessageStatus.Pending&&(this.messageDetails.scope!=JSON.parse(this.userService.getScope()))) this.changeMessageStatus(res.id)
+    })
+  }
+
+  getMessageDetailAfterReply(){
+    this.messageService.reduceReplyCount(this.routeSub).subscribe((res)=>{})
     this.messageService.getMessageDetailsById(this.routeSub).subscribe(res=>{
       this.messageDetails = res
       this.messagesReplies = res.messageReplies || []

@@ -88,4 +88,9 @@ export class MessageService {
   changeMessageStatus(data){
    return this.http.put('/Message/update-message', data).pipe(take(1))
   }
+
+  reduceReplyCount(messageId)
+  {
+    return this.http.post(`/Message/reduce-reply-count/${messageId}`).pipe(take(1))
+  }
 }
