@@ -19,7 +19,7 @@ import { SideNavigatorComponent } from './side-navigator/side-navigator.componen
     PageHeaderComponent
   ],
   imports: [
-    TranslateModule,
+    // TranslateModule,
     CalendarModule,
     BreadcrumbModule,
     InfiniteScrollModule,

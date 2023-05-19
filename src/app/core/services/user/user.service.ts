@@ -26,9 +26,9 @@ export class UserService {
 
 
   // userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
-  
+
   // getUserClaims(){
-    
+
   //   // if(Object.keys(this.userClaims).length) return of(this.userClaims)
   //   let headers: HttpHeaders = new HttpHeaders();
   //   headers = headers.append(
@@ -50,19 +50,19 @@ export class UserService {
   //       // }else if (this.getCurrentUserScope()==UserScope.Guardian){
   //       //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
   //       // }
-       
+
   //       return this.userClaims
   //     }),
   //     take(1),
   //     catchError(err=>{
-  //       if(err.status===401 || err.status===0) 
+  //       if(err.status===401 || err.status===0)
   //       return EMPTY
   //     })
   //   )
   // }
 
- 
-  
+
+
 
   private token: any = new Token();
   protected prefix: string = '$AJ$';
@@ -72,7 +72,7 @@ export class UserService {
   usersList: IUser[] = [];
   constructor() {
 
-    
+
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');
@@ -117,12 +117,12 @@ export class UserService {
   }
 
   public getUser() {
-    
+
     return this.token.user ;
   }
 
   public getScope() {
-    
+
     return this.token.scope ;
   }
 
@@ -133,7 +133,12 @@ export class UserService {
     this.token.claims = JSON.stringify(claims);
     this.save();
   }
-  
+
+  public getCurrentUserClaims(): any {
+    return typeof this.token.claims === 'string' ? JSON.parse(this.token.claims) : this.token.claims;
+  }
+
+
   public setSchoolId(schoolId?:any)
   {
     this.token.schoolId = JSON.stringify(schoolId);
@@ -177,29 +182,30 @@ export class UserService {
   }
 
   public getCurrentUserName() :any {
-   
+
     return typeof this.token.user === 'string'? JSON.parse( this.token.user)?.fullName:this.token.user?.fullName
-   
+
 }
 
-  //  /**
-  //  * @param  {ClaimsEnum|ClaimsEnum[]} permission
-  //  */
-  // public isUserAllowedTo(claim) {
-  //   if(claim instanceof Array){
-  //   if(!claim.length) return true
-  //     if(claim.some(item=> this.sharedService.userClaims[item])) return true;
-  //     return false;
-  //   }else{
-  //     if(!claim) return true
-  //      if(this.sharedService.userClaims[claim]) return true;
-  //      return false;
-  //   }
-  //    // let userClaims = this.getCurrentUserClaims() || [];
-  //    // return userClaims.indexOf(claim) >= 0;
-  // }
+   /**
+   * @param  {ClaimsEnum|ClaimsEnum[]} permission
+   */
+  public isUserAllowedTo(claim) {
+    let userClaims = this.getCurrentUserClaims() || {};
+    if(claim instanceof Array){
+    if(!claim.length) return true
+      if(claim.some(item=> userClaims[item])) return true;
+      return false;
+    }else{
+      if(!claim) return true
+       if(userClaims[claim]) return true;
+       return false;
+    }
+     // let userClaims = this.getCurrentUserClaims() || [];
+     // return userClaims.indexOf(claim) >= 0;
+  }
 
-  
+
   /**
    * @method setToken
    * @param {Token} token Token or casted AccessToken instance
@@ -257,9 +263,7 @@ export class UserService {
     return typeof this.token.user === 'string' ? JSON.parse(this.token.user) : this.token.user;
   }
 
-  public getCurrentUserClaims(): any {
-    return typeof this.token.claims === 'string' ? JSON.parse(this.token.claims) : this.token.claims;
-  }
+
 
   public  isUserLogged():boolean
   {
@@ -279,7 +283,7 @@ export class UserService {
        {return false;}
   }
 
-  
+
   public  isSchoolHaveMandatoryMseeages():boolean
   {
     // if (this.load("schoolUrgentMessages"))
@@ -332,7 +336,7 @@ export class UserService {
    * This method will clear cookies or the local storage.
    **/
   public clear(): void {
-   
+
     Object.keys(this.token).forEach((prop: string) => localStorage.removeItem(`${this.prefix}${prop}`));
     this.token = new Token();
     this.token.user = null;

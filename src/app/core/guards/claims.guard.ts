@@ -12,6 +12,7 @@ export class ClaimsGuard implements CanActivate {
   constructor(
     private router: Router,
     private claimsService:ClaimsService,
+    private userService:UserService
    ) { }
 
   canActivate(
@@ -20,7 +21,8 @@ export class ClaimsGuard implements CanActivate {
 
 
       const allowedClaims = route.data["allowedClaims"];
-      let claimFound =this.claimsService.isUserAllowedTo(allowedClaims)
+
+      let claimFound =this.userService.isUserAllowedTo(allowedClaims)
         if(!claimFound) this.router.navigate(['/']);
 
         return claimFound
