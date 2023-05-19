@@ -91,6 +91,6 @@ export class MessageService {
 
   reduceReplyCount(messageId)
   {
-    return this.http.post(`/Message/reduce-reply-count/${messageId}`).pipe(take(1))
+    return this.http.put(`/Message/reduce-reply-count/${messageId}`).pipe(take(1))
   }
 }
