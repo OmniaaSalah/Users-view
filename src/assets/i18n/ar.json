@@ -1768,6 +1768,7 @@
             "meaning": "المعني",
             "successed": "ناجح",
             "retry": "راسب",
+            "retryExam":"اعادة امتحان",
             "add description": "إضافة وصف",
             "Are you sure that you want to delete Subject": "هل متاكد أنك تريد حذف المادة ",
             "Subject deleted Successfully": "تم حذف هذه المادة بنجاح",

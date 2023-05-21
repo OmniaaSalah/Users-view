@@ -56,7 +56,7 @@
               <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
           </button>
 
-          <button  (click)="mode='view'"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+          <button  (click)="mode='view' ; getAttachment()"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
         </ng-container>
 
     </div>
@@ -102,7 +102,7 @@
               </div>
           </ng-container>
 
-          <app-file-upload  [hasComment]="true" view="full" (onFileUpload)="onNewAttachmentUploaded($event)"></app-file-upload>
+          <app-file-upload [hideDeletedBy]="false" [hasComment]="true" view="full" (onFileUpload)="onNewAttachmentUploaded($event)"></app-file-upload>
 
           <!-- <div class="col-md-2">
               <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
