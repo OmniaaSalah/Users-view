@@ -94,7 +94,8 @@
           <div class="gx-5 mt-5 full-file">
               <ng-container *ngFor="let file of files; let i = index">
 
-                <ng-container *ngIf="(!file.isActive && currentUserScope=='SPEA') || file.isActive ">
+                <!-- *ngIf="(!file.isActive && currentUserScope=='SPEA') || file.isActive " -->
+                <ng-container>
                   <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.url">
                       <div role="button" (click)="openFile(file?.url)" class="d-flex align-items-center gap-5" >
                           <img [style.width.rem]="4.5" src="assets/images/shared/file.svg" alt="">
@@ -111,7 +112,7 @@
                           </p>
                       </ng-container>
 
-                      <div *ngIf="!file.isActive" class="fs-5 d-flex justify-content-between align-items-center py-2 px-4 radius-8 color-red-500 bg-red-50 mt-2">
+                      <div *ngIf="!file.isActive && showDeletedBy" class="fs-5 d-flex justify-content-between align-items-center py-2 px-4 radius-8 color-red-500 bg-red-50 mt-2">
                         <p>حذف بواسطه موظف المدرسه</p>
                       </div>
                   </div>
