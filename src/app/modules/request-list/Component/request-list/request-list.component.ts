@@ -26,7 +26,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   styleUrls: ['./request-list.component.scss']
 })
 export class RequestListComponent implements OnInit {
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   lang = inject(TranslationService).lang
   get userScope() { return UserScope }
   get requestStatusEnum(){return UserRequestsStatus}

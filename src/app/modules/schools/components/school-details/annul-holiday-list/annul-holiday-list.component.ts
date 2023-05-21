@@ -35,7 +35,7 @@ export class AnnulHolidayListComponent implements OnInit {
 	currentSchool="";
   get statusEnum () {return StatusEnum}
   get claimsEnum () {return ClaimsEnum}
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   filtration = {...Filtration,flexibilityStatus: ''}
   schoolId = this.route.snapshot.paramMap.get('schoolId')

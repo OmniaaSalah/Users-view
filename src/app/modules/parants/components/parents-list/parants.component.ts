@@ -35,7 +35,7 @@ export class ParantsComponent implements OnInit {
 
 	lang = inject(TranslationService).lang
 	countries$ = this.countriesService.getCountries()
-	currentUserScope = inject(UserService).getCurrentUserScope()
+	currentUserScope = inject(UserService).getScope()
 
 
 	filtration= {...Filtration,  NationalityId:"",hasChildreen:true}

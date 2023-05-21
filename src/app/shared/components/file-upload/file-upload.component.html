@@ -93,6 +93,8 @@
           <ng-content></ng-content>
           <div class="gx-5 mt-5 full-file">
               <ng-container *ngFor="let file of files; let i = index">
+
+                <ng-container *ngIf="(!file.isActive && currentUserScope=='SPEA') || file.isActive ">
                   <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.url">
                       <div role="button" (click)="openFile(file?.url)" class="d-flex align-items-center gap-5" >
                           <img [style.width.rem]="4.5" src="assets/images/shared/file.svg" alt="">
@@ -101,15 +103,20 @@
                           <fa-icon role="button" class="color-fuchsia-600 ms-2 cancel" [ngClass]="lang=='ar' ? 'me-auto': 'ms-auto'" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
                       </div>
                       <ng-container *ngIf="hasComment">
-                          <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
-                              <img class="icon" *ngIf="!editMode" (click)="editMode =true" role="button" class="position-absolute" style="top:1.5rem; inset-inline-end:1.5rem;width: 1.3rem; height: 1.3rem;" src="assets/images/shared/pen.svg" alt="">
-                              <span class="d-block color-orange-300 mb-2">ملاحظه :</span>
-                              <span class="comment" *ngIf="!editMode">{{file.comment}}</span>
-                              <textarea  *ngIf="editMode" name="comment" [(ngModel)]="files[i].comment" rows="4" (blur)="editMode=false;this.onFileUpload.emit(this.files)"></textarea>
+                        <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
+                            <img class="icon" *ngIf="!editMode" (click)="editMode =true" role="button" class="position-absolute" style="top:1.5rem; inset-inline-end:1.5rem;width: 1.3rem; height: 1.3rem;" src="assets/images/shared/pen.svg" alt="">
+                            <span class="d-block color-orange-300 mb-2">{{'shared.note' |translate}} :</span>
+                            <span class="comment" *ngIf="!editMode">{{file.comment}}</span>
+                            <textarea  *ngIf="editMode" name="comment" [(ngModel)]="files[i].comment" rows="4" (blur)="editMode=false;this.onFileUpload.emit(this.files)"></textarea>
                           </p>
                       </ng-container>
 
+                      <div *ngIf="!file.isActive" class="fs-5 d-flex justify-content-between align-items-center py-2 px-4 radius-8 color-red-500 bg-red-50 mt-2">
+                        <p>حذف بواسطه موظف المدرسه</p>
+                      </div>
                   </div>
+                </ng-container>
+
               </ng-container>
           </div>
       </ng-container>

@@ -40,10 +40,10 @@ type ClassType= 'FusionClass' | 'SpecialClass'
 export class RegisterRequestComponent implements OnInit {
   childData
   lang = this.translationService.lang
-  scope = inject(UserService).getCurrentUserScope()
+  scope = inject(UserService).getScope()
   get ScopeEnum(){ return UserScope}
   get registrtionStatusEnum () {return RegistrationStatus}
-  get currentUserScope (){return this.userService.getCurrentUserScope()}
+  get currentUserScope (){return this.userService.getScope()}
 
   parentId = +this.route.snapshot.paramMap.get('parentId')
   childId = +this.route.snapshot.paramMap.get('childId')

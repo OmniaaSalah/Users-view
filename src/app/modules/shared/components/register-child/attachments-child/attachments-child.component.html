@@ -24,9 +24,11 @@
         <div class="">
             <div class="row mt-5">
                 <ng-container *ngFor="let file of attachments; let i = index">
+                  <ng-container *ngIf="(!file.isActive && currentUserScope=='SPEA') || file.isActive ">
                     <div class="col-md-4 mt-4" *ngIf="file?.url">
-                        <app-file [file]="file" [hasFooter]="true" [clickable]="true"></app-file>
+                        <app-file  [file]="file" [hasFooter]="true" [clickable]="true"></app-file>
                     </div>
+                  </ng-container>
                 </ng-container>
 
             </div>
@@ -59,38 +61,6 @@
 
     </div>
 
-    <div class="mt-5 border-dark radius-15 p-5" *ngIf="addMode">
-      <div class="row gx-5 "  [formGroup]="fileForm">
-          <div class="col-md-4">
-              <label class="label required">{{'dashboard.students.attachmentsToAdd'|translate}}</label>
-              <p-dropdown formControlName="indexId" (ngModelChange)="fileTypeChanged($event)" [options]="gurdiansAttachmentsTypes$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.chooseAttachment' |translate}}"></p-dropdown>
-              <p *ngIf="showErrMess" class="color-red-500 fs-4 mt-3">هناك بالفعل مرفقات محفوظه لهذا النوع ، وبهذا الحفظ ستحل محل البيانات السابقة</p>
-          </div>
-          <ng-container formGroupName="titel">
-
-              <div class="col-md-3">
-                  <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
-                  <input pInputText formControlName="ar" >
-              </div>
-              <div class="col-md-3">
-                  <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
-                  <input pInputText formControlName="en" >
-              </div>
-          </ng-container>
-
-          <!-- <div class="col-md-2">
-              <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
-              <p-dropdown formControlName="fileType" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.attachmentType'|translate}}"></p-dropdown>
-          </div> -->
-
-                  <div class="col mb-2 gap-3 align-self-end d-flex justify-content-end mt-4">
-                      <button class="btn btn-primary" (click)="addNewAttachment()" [disabled]="!fileForm.valid">{{'shared.save' |translate}}</button>
-                      <button class="fs-3" ><a (click)="addMode=false" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
-                  </div>
-
-        </div>
-    </div>
-
 
     <hr class="my-5">
 
@@ -98,7 +68,10 @@
         <div class="row gx-5 ">
             <div class="col-md-4"  *ngFor="let file of attachments; let i=index">
                 <div class="">
-                    <app-file-upload [files]="[{url: file.url,name:file.name, comment:file.comment}]" [hasComment]="true" view="full" (onFileUpload)="onFileUpload($event, i)" [title]="file.titel.ar"></app-file-upload>
+                    <app-file-upload
+                    [files]="[{url: file.url,name:file.name, comment:file.comment, isActive: file?.isActive}]"
+                    [hasComment]="true" view="full" (onFileUpload)="onFileUpload($event, i)"
+                    [title]="file.titel.ar"></app-file-upload>
                 </div>
             </div>
         </div>

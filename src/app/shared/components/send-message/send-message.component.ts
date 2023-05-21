@@ -40,7 +40,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.studentSchool = id;
   }
   @Output() hiddenDialog = new EventEmitter();
-  currentUserscope = this.userService.getCurrentUserScope();
+  currentUserscope = this.userService.getScope();
   searchModel = {
     keyword: null,
     sortBy: null,
@@ -98,7 +98,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.currentSchoolId = this.User.getCurrentSchoollId();
+    this.currentSchoolId = this.User.getSchoolId();
     this.getCurr();
     this.getMessagesTypes();
     this.getAddress();

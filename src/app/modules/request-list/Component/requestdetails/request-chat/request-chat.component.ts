@@ -18,7 +18,7 @@ export class RequestChatComponent implements OnInit {
   @Output() refresh = new EventEmitter()
 
   get userScopeEnum(){return UserScope}
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
 
   comment=''
   isLoading =false
