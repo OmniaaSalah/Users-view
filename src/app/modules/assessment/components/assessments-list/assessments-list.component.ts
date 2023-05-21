@@ -25,7 +25,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
   styleUrls: ['./assessments-list.component.scss']
 })
 export class AssessmentsListComponent implements OnInit ,OnDestroy{
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   selectedRate;
   get claimsEnum () {return ClaimsEnum}

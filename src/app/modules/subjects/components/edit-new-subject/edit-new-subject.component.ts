@@ -47,15 +47,22 @@ export class EditNewSubjectComponent implements OnInit {
   schoolId=0;
   gradeId=0;
   trackId=null;
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
 
+  isSpeaSubject = !!this.route.snapshot.queryParamMap.get('speaSubject')
 
 
   constructor(
     private headerService: HeaderService,
     private location: LocationStrategy,
-    private assessmentService:AssessmentService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
+    private assessmentService:AssessmentService,
+    private toastService: ToastService,
+    private route: ActivatedRoute,
+     private router: Router,
+     private fb: FormBuilder,
+     private subjectServise: SubjectService,
+     private translate: TranslateService) {
 
     this.subjectFormGrp = fb.group({
 
@@ -359,7 +366,7 @@ export class EditNewSubjectComponent implements OnInit {
      if(localStorage.getItem("trackId"))
      {this.trackId=Number(localStorage.getItem("trackId"))}
      if(!this.urlParameter)
-         { 
+         {
             this.subjectServise.addSubjectBySchool({schoolId:this.schoolId,gradeId:this.gradeId,trackId:this.trackId,subject:this.addedSubject}).subscribe((res)=>{
             this.isBtnLoading = false;
             if(res.statusCode != 'BadRequest'){
@@ -382,7 +389,7 @@ export class EditNewSubjectComponent implements OnInit {
         }
       else
         {
-          this.subjectServise.editSubjectBySchool({schoolId:this.schoolId,gradeId:this.gradeId,trackId:this.trackId,subject:this.addedSubject}).subscribe((res)=>{
+          this.subjectServise.editSubjectBySchool({schoolId:this.schoolId,gradeId:this.gradeId,trackId:this.trackId,subject:this.addedSubject,speaSubject: this.isSpeaSubject}).subscribe((res)=>{
             this.isBtnLoading = false;
             if(res.statusCode != 'BadRequest'){
               this.toastService.success(this.translate.instant('dashboard.Subjects.Subject edited Successfully'));

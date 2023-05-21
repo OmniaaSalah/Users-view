@@ -191,6 +191,10 @@
     background-color: lighten($color: $color-skyBlue, $amount: 46);
 }
 
+.bg-red-50{
+  background-color: $color-red-200;
+}
+
 .font-ar{font-family: 'Droid' !important;}
 .font-en{font-family: 'Maven Pro', sans-serif !important;}
 

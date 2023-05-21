@@ -32,7 +32,7 @@ export class DivisionStudentsComponent implements OnInit {
   get claimsEnum () {return ClaimsEnum}
 
 
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   lang=inject(TranslationService).lang
 
   schoolId= this.route.snapshot.paramMap.get('schoolId')

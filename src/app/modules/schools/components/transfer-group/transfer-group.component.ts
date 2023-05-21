@@ -28,8 +28,8 @@ export class TransferGroupComponent implements OnInit {
   @ViewChild('checkBox') checkBox: ElementRef;
 
   lang= inject(TranslationService).lang
-  currentUserScope = inject(UserService).getCurrentUserScope()
-  schoolId= this.userService.getCurrentSchoollId()
+  currentUserScope = inject(UserService).getScope()
+  schoolId= this.userService.getSchoolId()
 
   filteration:Filter ={...Filtration, curriculumId:1,gradeId: null}
   // studentFilteration:Filter = {...Filtration,SchoolId:this.schoolId, GradeId:'',DivisionId:'',PageSize:null}

@@ -71,7 +71,7 @@ export class AuthenticationService {
   login(account)
   {
     return this.http.post("/User/Auth/Login", account)
-    
+
   }
 
   setPassword(token: string, password: string, otp: string) {
@@ -132,7 +132,7 @@ export class AuthenticationService {
         this.userService.setCurrentUserName(res.result.arabicName+" "+res.result.arabicSurname)
       }
 
-       return res.result.school.id;
+       return res.result.school;
     }
     }))
   }

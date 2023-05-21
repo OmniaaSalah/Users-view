@@ -39,7 +39,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
   lang =inject(TranslationService).lang;
   get userScope() { return UserScope }
-  currentUserScope = inject(UserService).getCurrentUserScope();
+  currentUserScope = inject(UserService).getScope();
   get claimsEnum(){ return ClaimsEnum }
   get registrationStatusEnum() {return RegistrationStatus}
   get fileTypesEnum () {return FileTypeEnum}

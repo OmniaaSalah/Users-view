@@ -23,7 +23,7 @@ export class StudentDetailsComponent implements OnInit {
   faCheck= faCheck
   faChevronDown= faChevronDown
   studentId = +this.route.snapshot.paramMap.get('id');
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   // << ICONS >> //
   componentHeaderData: IHeader={

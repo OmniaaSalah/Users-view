@@ -21,7 +21,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./edit-list.component.scss']
 })
 export class EditListComponent implements OnInit {
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   lang = inject(TranslationService).lang
 

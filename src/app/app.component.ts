@@ -105,7 +105,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
           this.currentUserName=this.userService.getCurrentUserName();
           this.settingsService.initializeFileRules()
-          this.currentUserScope=this.userService.getCurrentUserScope();
+          this.currentUserScope=this.userService.getScope();
           // this.coreSercice.getUserClaims().subscribe(res =>this.claimsLoaded = true)
           if(this.currentUserScope == this.userScope.Employee)
           {

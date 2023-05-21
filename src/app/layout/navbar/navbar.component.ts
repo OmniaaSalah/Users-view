@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
   schoolYearsList = [];
   schoolYearId = this.userService.schoolYearId || '';
   notificationNumber;
-  currentUserScope = inject(UserService).getCurrentUserScope();
+  currentUserScope = inject(UserService).getScope();
   get ScopeEnum() {
     return UserScope;
   }

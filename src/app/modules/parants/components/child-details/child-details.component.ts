@@ -18,7 +18,7 @@ export class ChildDetailsComponent implements OnInit {
   faArrowRight = faArrowRight
   faCheck = faCheck
   faClose = faClose
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   isRegistered= this.route.snapshot.queryParamMap.get('registered')
   childId= Number(this.route.snapshot.paramMap.get('childId'));
   parentId = Number(this.route.snapshot.paramMap.get('parentId'));

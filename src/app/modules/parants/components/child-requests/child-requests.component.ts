@@ -13,7 +13,7 @@ import { SystemRequestService } from '../../../request-list/services/system-requ
   styleUrls: ['./child-requests.component.scss']
 })
 export class ChildRequestsComponent implements OnInit {
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   get requestStatusEnum(){return UserRequestsStatus}
 

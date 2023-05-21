@@ -47,7 +47,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	get claimsEnum () {return ClaimsEnum}
 	get userScope() { return UserScope }
 
-	currentUserScope = inject(UserService).getCurrentUserScope()
+	currentUserScope = inject(UserService).getScope()
 
 
 	// << Route Data >> //
