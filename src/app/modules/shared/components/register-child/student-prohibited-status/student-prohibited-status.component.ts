@@ -25,7 +25,7 @@ export class StudentProhibitedStatusComponent implements OnInit {
   lang =inject(TranslationService).lang;
   get claimsEnum(){ return ClaimsEnum }
   get scopeEnum(){ return UserScope }
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
 
   isAllowedToUpdateIssueCertificate = this.claimsService.isUserAllowedTo([ClaimsEnum.S_U_ProhibitedFromIssueeCertificateFromSpea, ClaimsEnum.SE_U_ProhibitedFromIssueeCertificateFromSchool])
   isAllowedToUpdateWithdraw = this.claimsService.isUserAllowedTo([ClaimsEnum.S_U_ProhibitedFromWithdrawingFromSpea, ClaimsEnum.SE_U_ProhibitedFromWithdrawingFromSchool])

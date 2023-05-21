@@ -35,7 +35,7 @@ export class StudentsListComponent implements OnInit {
   lang = inject(TranslationService).lang
   genderList=[];
   studentCategoryList=[];
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get claimsEnum(){ return ClaimsEnum }
 
   get statusEnum(){ return StatusEnum }

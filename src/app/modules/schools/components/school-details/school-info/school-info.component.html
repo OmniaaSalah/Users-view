@@ -53,14 +53,14 @@
 
          <ng-container *ngIf="currentUserScope==userScope.Employee">
             <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolGrades'|translate }} </span>
-                                     
+
             <div  *ngIf="school?.schoolGradeNumbers">
                 <a role="button"  (click)="showGrades(school.id)">
                   <span class="color-primary  text-decoration-underline fs-3">{{school?.schoolGradeNumbers}}</span>
                 </a>
             </div>
             <p *ngIf="!school?.schoolGradeNumbers" class="color-primary">{{'shared.notFound' |translate}}</p>
-        
+
         </ng-container>
         </div>
         <div class="col-md-4   grid-container">
@@ -130,7 +130,7 @@
                 <p class="color-primary">{{(school?.address?.street.name |currentLang) || 'شارع الأنوار، مجمع النخيل'}}</p>
 
                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
-                <p class="color-primary"> {{(school?.address?.city |currentLang) || 'ابو ظبى'}}</p>
+                <p class="color-primary"> {{(school?.address?.city?.name |currentLang) || 'ابو ظبى'}}</p>
             </div>
         </div>
     </div>
@@ -163,11 +163,11 @@
 
                 <div class="row" *ngIf="showLoader">
                     <app-skeleton count="7"  height="2rem"></app-skeleton>
-                   
+
                 </div>
         </div>
 
     </div>
 
-    
+
    </p-dialog>

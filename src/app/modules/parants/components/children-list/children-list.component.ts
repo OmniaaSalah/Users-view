@@ -28,7 +28,7 @@ export class ChildrenListComponent implements OnInit {
   currentSchool;
   currentSchoolId;
   parentId = Number(this._router.snapshot.paramMap.get('parentId'));
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
 
 
   get claimsEnum () {return ClaimsEnum}

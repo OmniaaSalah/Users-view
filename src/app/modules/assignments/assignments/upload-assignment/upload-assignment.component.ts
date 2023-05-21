@@ -39,7 +39,7 @@ export class UploadAssignmentComponent implements OnInit {
   files: any = [];
   currentDate = new Date();
   isBtnLoading:boolean=false;
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   componentHeaderData: IHeader={
     breadCrump:[
@@ -180,7 +180,7 @@ uploadedFiles: any[] = [];
       this.isBtnLoading=false;
       this.router.navigate(['/school-performance-managent/assignments/assignments-list']);
       this.toastr.success(this.translate.instant('Add Successfully'),'');
-     },(err)=>{ 
+     },(err)=>{
       this.toastr.error(err?.message||this.translate.instant('toasterMessage.error'));
       this.isBtnLoading=false;
     });
@@ -198,7 +198,7 @@ uploadedFiles: any[] = [];
   formateDate(date :Date){
     let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
     return d.split('.')[0]
-  
+
   }
 
   // checkDashboardHeader()
@@ -220,7 +220,7 @@ uploadedFiles: any[] = [];
   //        [
   //        { label: this.translate.instant('Assignments List'), routerLink: '/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
   //        , {label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/performance-managment/assignments/upload-assignment', routerLinkActiveOptions: { exact: true }}
-         
+
   //       ]
 
 

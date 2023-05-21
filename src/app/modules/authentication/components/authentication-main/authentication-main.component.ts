@@ -23,6 +23,7 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { Subscription } from 'rxjs';
 import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
+import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 
 @Component({
   selector: 'app-authentication-main',
@@ -67,7 +68,8 @@ export class AuthenticationMainComponent implements OnInit {
     private sharedService: SharedService,
     public surveyService: SurveyService,
     public confirmModelService: ConfirmModelService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private routerListenr:RouteListenrService
   ) {}
 
   ngOnInit(): void {
@@ -251,6 +253,7 @@ export class AuthenticationMainComponent implements OnInit {
             this.userService.currentUserName.next(res.user.fullName);
           }
 
+          this.routerListenr.clearRouteHistory()
           this.getCurrentYear();
 
           this.showSuccess();
@@ -343,20 +346,22 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
   getCurrentEmployeeData() {
-    this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId) => {
-      if (schoolId) {
-        this.userService.currentUserSchoolId$.next(schoolId);
-        this.userService.setSchoolId(schoolId);
+    this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((school) => {
+      if (school) {
+        this.userService.currentUserSchoolId$.next(school?.id);
+        this.userService.setSchoolId(school?.id);
+        this.userService.currentUserSchoolName$.next(school?.name);
+        this.userService.setSchoolName(school?.name);
       }
     });
-    this.authService
-      .getSchoolNameRelatedToCurrentEmployee()
-      .subscribe((schoolName) => {
-        if (schoolName) {
-          this.userService.currentUserSchoolName$.next(schoolName);
-          this.userService.setSchoolName(schoolName);
-        }
-      });
+    // this.authService
+    //   .getSchoolNameRelatedToCurrentEmployee()
+    //   .subscribe((schoolName) => {
+    //     if (schoolName) {
+    //       this.userService.currentUserSchoolName$.next(schoolName);
+    //       this.userService.setSchoolName(schoolName);
+    //     }
+    //   });
   }
   getCurrentGuardianData() {
     this.authService.getCurrentGuardian().subscribe((guardian) => {
@@ -421,6 +426,9 @@ export class AuthenticationMainComponent implements OnInit {
     } else if (res?.scope == UserScope.Guardian) {
       this.getCurrentGuardianData();
     }
+
+    this.routerListenr.clearRouteHistory()
+
 
     this.getCurrentYear();
   }

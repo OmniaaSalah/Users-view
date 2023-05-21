@@ -25,7 +25,7 @@ import { SchoolsService } from '../../services/schools/schools.service';
 })
 export class SchoolDivisionComponent implements OnInit {
 
- currentUserScope = inject(UserService).getCurrentUserScope()
+ currentUserScope = inject(UserService).getScope()
  faPlus=faPlus
  lang = inject(TranslationService).lang
  get userScope() { return UserScope };

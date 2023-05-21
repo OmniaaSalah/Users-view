@@ -21,7 +21,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 })
 
 export class EditNewAssessmentComponent implements OnInit {
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   rateArray={};
   assessmtId='';

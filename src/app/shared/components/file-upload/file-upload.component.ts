@@ -10,6 +10,7 @@ import { SettingsService } from 'src/app/modules/system-setting/services/setting
 import { FileTypeEnum, FileExtentions } from '../../enums/file/file.enum';
 import { MediaService } from '../../services/media/media.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 export interface CustomFile{
   id?:number
@@ -27,6 +28,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   faXmark = faXmark
   faFileCircleExclamation =faFileCircleExclamation
   lang = inject(TranslationService).lang
+  currentUserScope = inject(UserService).getScope()
 
   @Input() theme :'chat' | 'default' = 'default'
   @Input() title = ''

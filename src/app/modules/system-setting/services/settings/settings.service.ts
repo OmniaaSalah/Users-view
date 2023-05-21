@@ -21,7 +21,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 export class SettingsService {
 
   get userScope() { return UserScope }
-	currentUserScope = inject(UserService).getCurrentUserScope()
+	currentUserScope = inject(UserService).getScope()
 
   fileRules$ = new BehaviorSubject<Partial<MapedFileRule> |null>(null)
 
