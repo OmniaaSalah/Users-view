@@ -23,7 +23,7 @@ import { GradesService } from '../../../services/grade/grade.service';
 })
 export class GardeStudentsComponent implements OnInit {
   lang = inject(TranslationService).lang
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   gradeId= this.route.snapshot.paramMap.get('gradeId')

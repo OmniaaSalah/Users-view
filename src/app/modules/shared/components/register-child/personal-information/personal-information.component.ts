@@ -38,7 +38,7 @@ export class PersonalInformationComponent implements OnInit {
   lang =inject(TranslationService).lang;
   get claimsEnum(){ return ClaimsEnum }
   get scopeEnum(){ return UserScope }
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
 
   faXmark =faXmark
 

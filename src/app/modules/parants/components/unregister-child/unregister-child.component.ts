@@ -28,7 +28,7 @@ import { ParentService } from '../../services/parent.service';
 })
 export class UnregisterChildComponent implements OnInit {
   lang = inject(TranslationService).lang
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   get claimsEnum () {return ClaimsEnum}
 

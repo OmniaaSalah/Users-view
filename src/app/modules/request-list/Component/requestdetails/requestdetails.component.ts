@@ -24,7 +24,7 @@ import { SystemRequestService } from '../../services/system-request.service';
   styleUrls: ['./requestdetails.component.scss']
 })
 export class RequestdetailsComponent implements OnInit {
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   lang = inject(TranslationService).lang
   get userScopeEnum(){return UserScope}
   get RequestStatusEnum(){return UserRequestsStatus}
@@ -33,7 +33,7 @@ export class RequestdetailsComponent implements OnInit {
   get statusEnum(){return StatusEnum}
   get registrationStatusEnum() { return RegistrationStatus}
 
-  get currentUserSchoolId() { return this. userService.getCurrentSchoollId()}
+  get currentUserSchoolId() { return this. userService.getSchoolId()}
 
 
 

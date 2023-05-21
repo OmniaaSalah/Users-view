@@ -1,29 +1,19 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, EMPTY, map, of, take } from 'rxjs';
-import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { SharedService } from 'src/app/shared/services/shared/shared.service';
-
-import { environment } from 'src/environments/environment';
-import { ArrayOperations } from '../../classes/array';
+import { BehaviorSubject } from 'rxjs';
 import { IUser, Token } from '../../Models/base.models';
-import { GenericResponse } from '../../models/global/global.model';
-import { ClaimsService } from '../claims.service';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   currentUserName;
   currentGuardian;
-  currentUserSchoolId$ ;
-  currentUserSchoolName$ ;
-  isUserLogged$ =new BehaviorSubject(false);
-
+  currentUserSchoolId$;
+  currentUserSchoolName$;
+  isUserLogged$ = new BehaviorSubject(false);
 
   // userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
 
@@ -61,51 +51,45 @@ export class UserService {
   //   )
   // }
 
-
-
-
   private token: any = new Token();
   protected prefix: string = '$AJ$';
-  cities: string[];
-  // schoolId;
-  // schoolName;
-  usersList: IUser[] = [];
+
+
   constructor() {
-
-
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
-    this.token.schoolId=this.load('schoolId');
-    this.token.schoolName=this.load('schoolName');
-    this.token.guardian=this.load('currentGuardian');
-    this.token.currentUserName=this.load('currentUserName');
-    this.token.serviesNumbers =this.load('serviesNumbers');
-    this.token.schoolUrgentMessages =this.load('schoolUrgentMessages');
-    this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
-    this.currentUserSchoolName$=new BehaviorSubject(this.getCurrentSchoollName() || null)
-    this.currentUserName=new BehaviorSubject(this.getCurrentUserName() || null)
-    this.currentGuardian=new BehaviorSubject(this.getCurrentGuardian() ||null)
-    if(this.isUserLogged()) this.isUserLogged$.next(true);
-
+    this.token.schoolId = this.load('schoolId');
+    this.token.schoolName = this.load('schoolName');
+    this.token.guardian = this.load('currentGuardian');
+    this.token.currentUserName = this.load('currentUserName');
+    this.token.serviesNumbers = this.load('serviesNumbers');
+    this.token.schoolUrgentMessages = this.load('schoolUrgentMessages');
+    this.currentUserSchoolId$ = new BehaviorSubject(
+      this.getSchoolId() || null
+    );
+    this.currentUserSchoolName$ = new BehaviorSubject(this.getSchoolName() || null);
+    this.currentUserName = new BehaviorSubject(this.getCurrentUserName() || null);
+    this.currentGuardian = new BehaviorSubject(this.getCurrentGuardian() || null);
+    if (this.isUserLogged()) this.isUserLogged$.next(true);
   }
 
-
-  get schoolYearId():string{
-    return  JSON.parse(localStorage.getItem(`${this.prefix}yearId`)) ||''
+  get schoolYearId(): string {
+    return JSON.parse(localStorage.getItem(`${this.prefix}yearId`)) || '';
   }
-
 
   public setScope(scope?: any) {
-     this.token.scope = JSON.stringify(scope);
-     this.save();
+    this.token.scope = JSON.stringify(scope);
+    this.save();
   }
 
-  public getCurrentUserScope(): any {
-    return typeof this.token.scope === 'string' ?  JSON.parse(this.token.scope)  : this.token.scope;
+  public getScope(): any {
+    return typeof this.token.scope === 'string'
+      ? JSON.parse(this.token.scope)
+      : this.token.scope;
   }
 
   /**
@@ -117,14 +101,9 @@ export class UserService {
   }
 
   public getUser() {
-
-    return this.token.user ;
+    return this.token.user;
   }
 
-  public getScope() {
-
-    return this.token.scope ;
-  }
 
   /**
    * This method will update the user claims and persist it
@@ -134,77 +113,78 @@ export class UserService {
     this.save();
   }
 
-  public getCurrentUserClaims(): any {
-    return typeof this.token.claims === 'string' ? JSON.parse(this.token.claims) : this.token.claims;
+  public getClaims(): any {
+    return typeof this.token.claims === 'string'
+      ? JSON.parse(this.token.claims)
+      : this.token.claims;
   }
 
-
-  public setSchoolId(schoolId?:any)
-  {
+  public setSchoolId(schoolId?: any) {
     this.token.schoolId = JSON.stringify(schoolId);
     this.save();
   }
-  public setSchoolName(schoolName?:any)
-  {
+
+  public getSchoolId(): any {
+    return this.token.schoolId;
+  }
+
+  public setSchoolName(schoolName?: any) {
     this.token.schoolName = schoolName;
     this.save();
   }
-  public setCurrentUserName(currentUserName?:any)
-  {
+
+  public getSchoolName(): any {
+    return this.token.schoolName;
+  }
+
+  public setCurrentUserName(currentUserName?: any) {
     this.token.currentUserName = currentUserName;
     this.save();
   }
 
-  public setServiesNumbers(number)
-  {
+  public setServiesNumbers(number) {
     this.token.serviesNumbers = number;
     this.save();
   }
-  public setschoolUrgentMessages(number)
-  {
+  public setschoolUrgentMessages(number) {
     this.token.schoolUrgentMessages = number;
     this.save();
   }
 
-  public getCurrentSchoollId(): any {
-    return this.token.schoolId;
-  }
-  public getCurrentSchoollName(): any {
-    return this.token.schoolName;
-  }
-  public setCurrentGuardian(guardian?:any)
-  {
+
+  public setCurrentGuardian(guardian?: any) {
     this.token.guardian = guardian;
     this.save();
   }
   public getCurrentGuardian(): any {
-    return typeof this.token.guardian === 'string'? JSON.parse(this.token.guardian):this.token.guardian
+    return typeof this.token.guardian === 'string'
+      ? JSON.parse(this.token.guardian)
+      : this.token.guardian;
   }
 
-  public getCurrentUserName() :any {
+  public getCurrentUserName(): any {
+    return typeof this.token.user === 'string'
+      ? JSON.parse(this.token.user)?.fullName
+      : this.token.user?.fullName;
+  }
 
-    return typeof this.token.user === 'string'? JSON.parse( this.token.user)?.fullName:this.token.user?.fullName
-
-}
-
-   /**
+  /**
    * @param  {ClaimsEnum|ClaimsEnum[]} permission
    */
   public isUserAllowedTo(claim) {
-    let userClaims = this.getCurrentUserClaims() || {};
-    if(claim instanceof Array){
-    if(!claim.length) return true
-      if(claim.some(item=> userClaims[item])) return true;
+    let userClaims = this.getClaims() || {};
+    if (claim instanceof Array) {
+      if (!claim.length) return true;
+      if (claim.some((item) => userClaims[item])) return true;
       return false;
-    }else{
-      if(!claim) return true
-       if(userClaims[claim]) return true;
-       return false;
+    } else {
+      if (!claim) return true;
+      if (userClaims[claim]) return true;
+      return false;
     }
-     // let userClaims = this.getCurrentUserClaims() || [];
-     // return userClaims.indexOf(claim) >= 0;
+    // let userClaims = this.getCurrentUserClaims() || [];
+    // return userClaims.indexOf(claim) >= 0;
   }
-
 
   /**
    * @method setToken
@@ -247,7 +227,7 @@ export class UserService {
    * @return {any}
    * @description
    * This method will return the current user id, it can be number or string.
-  **/
+   **/
 
   public getCurrentUserId(): any {
     return this.token.userId;
@@ -260,40 +240,35 @@ export class UserService {
    * This method will return the current user instance.
    **/
   public getCurrentUserData(): IUser {
-    return typeof this.token.user === 'string' ? JSON.parse(this.token.user) : this.token.user;
+    return typeof this.token.user === 'string'
+      ? JSON.parse(this.token.user)
+      : this.token.user;
   }
 
-
-
-  public  isUserLogged():boolean
-  {
-
-    if (this.load("token"))
-       {return true;}
-    else
-       {return false;}
+  public isUserLogged(): boolean {
+    if (this.load('token')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  public  isUserhaveMandatoryServeies():boolean
-  {
-
-    if (JSON.parse(this.load("serviesNumbers"))?.length)
-       {return true;}
-    else
-       {return false;}
+  public isUserhaveMandatoryServeies(): boolean {
+    if (JSON.parse(this.load('serviesNumbers'))?.length) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-
-  public  isSchoolHaveMandatoryMseeages():boolean
-  {
+  public isSchoolHaveMandatoryMseeages(): boolean {
     // if (this.load("schoolUrgentMessages"))
-    if (this.token.schoolUrgentMessages)
-       {return true;}
-    else
-       {return false;}
+    if (this.token.schoolUrgentMessages) {
+      return true;
+    } else {
+      return false;
+    }
   }
-
-
 
   /**
    * @method save
@@ -314,7 +289,11 @@ export class UserService {
     this.persist('currentUserName', this.token.currentUserName, expires);
     this.persist('currentGuardian', this.token.guardian, expires);
     this.persist('serviesNumbers', this.token.serviesNumbers, expires);
-    this.persist('schoolUrgentMessages', this.token.schoolUrgentMessages, expires);
+    this.persist(
+      'schoolUrgentMessages',
+      this.token.schoolUrgentMessages,
+      expires
+    );
     return true;
   }
 
@@ -336,8 +315,9 @@ export class UserService {
    * This method will clear cookies or the local storage.
    **/
   public clear(): void {
-
-    Object.keys(this.token).forEach((prop: string) => localStorage.removeItem(`${this.prefix}${prop}`));
+    Object.keys(this.token).forEach((prop: string) =>
+      localStorage.removeItem(`${this.prefix}${prop}`)
+    );
     this.token = new Token();
     this.token.user = null;
     this.isUserLogged$.next(false);
@@ -352,7 +332,10 @@ export class UserService {
   public persist(prop: string, value: any, expires?: Date): void {
     try {
       if (value)
-        localStorage.setItem(`${this.prefix}${prop}`, typeof value === 'object' ? JSON.stringify(value) : value);
+        localStorage.setItem(
+          `${this.prefix}${prop}`,
+          typeof value === 'object' ? JSON.stringify(value) : value
+        );
     } catch (err) {
       console.error('Cannot access local/session storage:', err);
     }

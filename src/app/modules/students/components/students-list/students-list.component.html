@@ -105,7 +105,7 @@
                 [hasFilter]="false"
                 (onExport)="onExport($event)"
                 (onFilter)="checkStudentList()"
-                (onSearch)="filtration.KeyWord = $event; checkStudentList()"
+                (onSearch)="filtration.KeyWord = $event;filtration.Page=1; checkStudentList()"
                 (onClear)="clearFilter()"></app-table-caption>
             </ng-template>
 

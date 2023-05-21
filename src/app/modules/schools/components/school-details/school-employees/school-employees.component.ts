@@ -32,7 +32,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 export class SchoolEmployeesComponent implements OnInit {
 	currentSchool="";
 	lang =inject(TranslationService).lang;
-	currentUserScope = inject(UserService).getCurrentUserScope()
+	currentUserScope = inject(UserService).getScope()
 	get userScope() { return UserScope }
 	get claimsEnum () {return ClaimsEnum}
 	get statusEnum(){ return StatusEnum}

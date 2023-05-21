@@ -101,6 +101,11 @@ routeHistory$ : BehaviorSubject<RouteInHistory[]> = new BehaviorSubject<RouteInH
     return   JSON.parse(localStorage.getItem('routeHistory'))
   }
 
+  clearRouteHistory(){
+    localStorage.removeItem('routeHistory')
+    this.routeHistory =[]
+  }
+
 
 
 

@@ -27,7 +27,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 })
 export class SchoolSubjectsComponent implements OnInit {
 	currentSchool="";
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   get assessmentsEnum () {return AssessmentsEnum}
   get claimsEnum () {return ClaimsEnum}

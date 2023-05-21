@@ -43,7 +43,7 @@ export class AuthenticationGuard implements CanActivate {
       return true;
 
     // Handle when user claims is empty
-    const userClaims = this.userService.getCurrentUserClaims();
+    const userClaims = this.userService.getClaims();
     if (!userClaims || userClaims.length == 0) {
       this.router.navigate(['/oops/not-authorized']);
       return false;

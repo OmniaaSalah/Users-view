@@ -33,7 +33,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   deletedTrackIndex;
   deletedSubjectIndex;
 
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   lang = inject(TranslationService).lang
   onDestroy$ = new Subject()
 

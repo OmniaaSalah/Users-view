@@ -27,7 +27,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
   schoolYearsList =[];
   degreescertificates;
   get certificateType() { return CertificatesEnum }
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   certificatesList ;
   parentId = +this.route.snapshot.paramMap.get('parentId');

@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   lang= inject(TranslationService).lang;
   isOpend:boolean[]=[];
   messages=[];
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get ScopeEnum() { return UserScope}
   currentSchoolName
   currentSchoolId;
