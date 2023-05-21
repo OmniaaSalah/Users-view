@@ -28,7 +28,7 @@ export class SchoolDivisionsComponent implements OnInit,OnChanges,OnDestroy {
 lang = inject(TranslationService).lang
 currentSchool="";
 
-currentUserScope = inject(UserService).getCurrentUserScope()
+currentUserScope = inject(UserService).getScope()
 get userScope() { return UserScope }
 get claimsEnum () {return ClaimsEnum}
 

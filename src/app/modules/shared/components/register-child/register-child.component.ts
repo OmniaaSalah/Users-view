@@ -25,7 +25,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   display:boolean = false;
   ngDestroy$ = new Subject()
-  scope = this.userService.getCurrentUserScope()
+  scope = this.userService.getScope()
   get scopeEnum() { return UserScope }
   get statusEnum() {return StatusEnum}
   lang =inject(TranslationService).lang;
@@ -33,7 +33,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   @ViewChild('nav') nav: ElementRef
 
   get userScope() { return UserScope }
-  currentUserScope = inject(UserService).getCurrentUserScope();
+  currentUserScope = inject(UserService).getScope();
   get claimsEnum(){ return ClaimsEnum }
   get registrationStatusEnum() {return RegistrationStatus}
   get fileTypesEnum () {return FileTypeEnum}

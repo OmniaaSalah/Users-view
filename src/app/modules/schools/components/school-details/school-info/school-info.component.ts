@@ -22,7 +22,7 @@ import { GradesService } from '../../../services/grade/grade.service';
   styleUrls: ['./school-info.component.scss']
 })
 export class SchoolInfoComponent implements OnInit , AfterViewInit{
-  currentUserScope = inject(UserService).getCurrentUserScope();
+  currentUserScope = inject(UserService).getScope();
   currentSchool="";
   gradesList=[];
 

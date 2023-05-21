@@ -74,13 +74,13 @@
                                 <p class="color-primary"> {{school?.number}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
-                                <p class="color-primary"> {{school?.address?.city |currentLang}}</p>
+                                <p class="color-primary"> {{school?.address?.city?.name |currentLang}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
                                 <p class="color-primary">{{school?.address?.state.name?.ar}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
-                                <p class="color-primary">{{school?.address?.street.name |currentLang}}</p>
+                                <p class="color-primary">{{school?.address?.street?.name |currentLang}}</p>
                             </div>
 
                             <div class="col-md-3 align-self-center">

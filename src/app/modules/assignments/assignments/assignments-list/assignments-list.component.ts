@@ -28,7 +28,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 })
 export class AssignmentsListComponent implements OnInit {
   lang = inject(TranslationService).lang
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   schoolId=''
   get claimsEnum () {return ClaimsEnum}

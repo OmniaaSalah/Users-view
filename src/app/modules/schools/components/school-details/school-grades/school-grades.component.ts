@@ -30,7 +30,7 @@ export class SchoolGradesComponent implements OnInit {
   get claimsEnum () {return ClaimsEnum}
   currentSchool="";
   schoolId = this.route.snapshot.paramMap.get('schoolId')
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
 
   componentHeaderData: IHeader = {

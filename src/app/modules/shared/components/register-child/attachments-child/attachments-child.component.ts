@@ -11,6 +11,8 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
   selector: 'app-attachments-child',
@@ -22,6 +24,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
   lang = inject(TranslationService).lang
   get claimsEnum(){ return ClaimsEnum }
+  currentUserScope = inject(UserService).getScope()
 
   addMode =false
   addAttachModelOpened=false
@@ -69,7 +72,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     .pipe(map(res => {
       return res.map(value=>{
         const {id, ...otherProps} = value;
-        return otherProps;
+        return ({...otherProps , isActive:value.isActive ?? true});
       })
     }))
     .subscribe(res=>{
@@ -101,8 +104,14 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
   onFileUpload(file, i){
 
-    file= file[0] ? file[0] : {url:"", name:"",comment:""}
-    this.attachments[i] = {...this.attachments[i], url: file?.url,name:file?.name, comment: file?.comment}
+    if(this.currentUserScope==UserScope.Employee && !file[0]){
+      file = {...this.attachments[i], isActive:false}
+    }else{
+      file= file[0] ? file[0] : {url:"", name:"",comment:""}
+
+    }
+    this.attachments[i] = {...this.attachments[i], url: file?.url,name:file?.name, comment: file?.comment, isActive: file?.isActive}
+    this.attachments = [...this.attachments]
   }
 
   fileTypeChanged(indexId){
@@ -130,7 +139,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
     let attach = this.fileForm.get('attachments' as any).value[0]
 
-    this.attachments.unshift({url: attach?.url, name: attach?.name, titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId})
+    this.attachments.unshift({url: attach?.url, name: attach?.name, titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId,isActive:true})
     this.addAttachModelOpened=false
     this.showErrMess =false
     this.fileForm.reset()
@@ -141,7 +150,6 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   onNewAttachmentUploaded(file){
     file= file[0]
     if(file){
-      console.log(file);
 
       this.fileForm.get('attachments'  as any).setValue([{url: file?.url,name:file?.name, comment: file?.comment}])
     }else{

@@ -23,9 +23,9 @@ export class ParentReplySurveyComponent implements OnInit {
   currentGuardianId;
   get StatusEnum() { return StatusEnum }
   isDisabled:boolean = false
-  currentUserScope=this.userService.getCurrentUserScope();
+  currentUserScope=this.userService.getScope();
   surveyForm = this.fb.group({
-  
+
     surveyQuestions: this.fb.array([])
   })
 
@@ -36,7 +36,7 @@ export class ParentReplySurveyComponent implements OnInit {
      this.surveyId = this.route.snapshot.paramMap.get('surveyId');
 
 
-     if(this.currentUserScope == UserScope.Guardian) 
+     if(this.currentUserScope == UserScope.Guardian)
      {
       this.openSurvey();
      }
@@ -54,8 +54,8 @@ openSurvey()
     {
        this.notAvailable=true;
        this.errorMessage=res.errorLocalized;
-   
-    } 
+
+    }
     else
     {
       this.notAvailable=false;
@@ -74,7 +74,7 @@ getSurveyById()
      {
         this.notAvailable=true;
         this.errorMessage=res.result.errorLocalized;
-     } 
+     }
      else
      { this.survey = res.result.result
       this.selected = this.survey.surveyQuestions[0];
@@ -85,22 +85,22 @@ getSurveyById()
   })
 }
 checkChangesForm(){
-  this.surveyForm.valueChanges.subscribe((res)=>{  
+  this.surveyForm.valueChanges.subscribe((res)=>{
     console.log(this.surveyForm.value);
-      
+
     res.surveyQuestions.every(element=>{
       if(element['answer'] == null || element['answer'] == ''){
       return this.isDisabled= false
         console.log("false");
-        
+
 
       }else{
         return this.isDisabled= true
-       
+
 
       }
     })
-   
+
   })
 }
 
@@ -128,7 +128,7 @@ isSameAnswer(el, index, arr) {
   get surveyQuestions(): FormArray {
     return this.surveyForm.get('surveyQuestions') as FormArray;
   }
- 
+
   newQuestion(): FormGroup {
     return this.fb.group({
       surveyQuestionId:[null,Validators.required],
@@ -149,7 +149,7 @@ isSameAnswer(el, index, arr) {
       answer: files[0]
     });
    }
-    
+
   messageDeleted1(event,index){
     this.surveyQuestions.at(index).patchValue({
       answer: null
@@ -162,8 +162,8 @@ isSameAnswer(el, index, arr) {
   this.isBtnLoading=true;
   let surveyResponseModel = []
  const newArr = JSON.parse(JSON.stringify(this.surveyForm.value.surveyQuestions))
-  
-  newArr.map((element)=>{    
+
+  newArr.map((element)=>{
     if(element.type=="SurveyMultiChoiceQuestion"){
       delete Object.assign(element, {['choiceId']: element['answer'] })['answer'];
     }
@@ -183,18 +183,18 @@ isSameAnswer(el, index, arr) {
     delete object['title'];
     delete object['type'];
   });
-   
+
   let data = {
     "surveyId": Number(this.surveyId),
     "guardianId": this.currentGuardianId,
     "surveyResponseModel": surveyResponseModel
   }
     console.log(data);
-    
+
   this._survey.sendParentSurvey(data).subscribe(res=>{
     this.isBtnLoading=false;
     this.toastr.success(this.translate.instant('dashboard.replySurvey.Survey is suibmitted successfully'))
-    this.router.navigateByUrl('/'); 
+    this.router.navigateByUrl('/');
   },(err)=>{ this.isBtnLoading=false;
     this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));
   })

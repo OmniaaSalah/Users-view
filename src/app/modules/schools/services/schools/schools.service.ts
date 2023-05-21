@@ -20,7 +20,7 @@ import { getLocalizedValue } from 'src/app/core/classes/helpers';
 export class SchoolsService {
 
   lang = inject(TranslationService).lang;
-  currentUserScope = inject(UserService).getCurrentUserScope();
+  currentUserScope = inject(UserService).getScope();
   get userScope() { return UserScope };
   constructor(private http:HttpHandlerService,
     private tableLoaderService: LoaderService,
