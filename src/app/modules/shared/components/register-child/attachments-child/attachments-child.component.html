@@ -69,6 +69,7 @@
             <div class="col-md-4"  *ngFor="let file of attachments; let i=index">
                 <div class="">
                     <app-file-upload
+                    [showDeletedBy]="true"
                     [files]="[{url: file.url,name:file.name, comment:file.comment, isActive: file?.isActive}]"
                     [hasComment]="true" view="full" (onFileUpload)="onFileUpload($event, i)"
                     [title]="file.titel.ar"></app-file-upload>
@@ -102,7 +103,7 @@
               </div>
           </ng-container>
 
-          <app-file-upload [hideDeletedBy]="false" [hasComment]="true" view="full" (onFileUpload)="onNewAttachmentUploaded($event)"></app-file-upload>
+          <app-file-upload [hasComment]="true" view="full" (onFileUpload)="onNewAttachmentUploaded($event)"></app-file-upload>
 
           <!-- <div class="col-md-2">
               <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
