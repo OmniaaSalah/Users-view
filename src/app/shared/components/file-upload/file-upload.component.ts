@@ -34,7 +34,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   @Input() title = ''
   @Input() label = this.translate.instant('shared.clickToUploadFile')
   @Input() hasComment = false
-  @Input() hideDeletedBy = true
+  @Input() showDeletedBy = false
   @Input() imgUrl=''
 
   @Input() dynamic
