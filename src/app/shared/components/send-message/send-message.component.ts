@@ -196,7 +196,6 @@ export class SendMessageComponent implements OnInit, OnDestroy {
 
   messageUpload(files) {
     this.imagesResult = files;
-    // console.log(this.imagesResult);
   }
 
   messageDeleted(event) {
@@ -253,10 +252,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       replyPossibility: this.speaEmpForm.value.switch2,
       showSenderName: this.speaEmpForm.value.switch3,
       messegeText: this.speaEmpForm.value.description,
-      attachments:
-        this.imagesResult.map((attachment) => {
-          return attachment.url;
-        }) || null,
+      attachments:this.imagesResult
     };
     this.messageService.sendDataFromSpeaToEmp(form).subscribe(
       (res) => {
@@ -286,10 +282,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       messageTypeId: this.parentForm.value.messageType,
       // "schoolId": Number(localStorage.getItem('schoolId')),
       schoolId: this.studentSchool,
-      attachments:
-        this.imagesResult.map((attachment) => {
-          return attachment.url;
-        }) || null,
+      attachments:this.imagesResult
     };
 
     this.messageService.sendDataFromGuardianToSchool(form).subscribe(
@@ -316,10 +309,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
         replyPossibility: this.schoolEmpForm.value.switch2,
         messegeText: this.schoolEmpForm.value.description,
         messageTypeId: this.schoolEmpForm.value.messageType,
-        attachments:
-          this.imagesResult.map((attachment) => {
-            return attachment.url;
-          }) || null,
+        attachments:this.imagesResult
       };
       this.messageService.sendDataFromEmpToGuardian(form).subscribe(
         (res) => {
