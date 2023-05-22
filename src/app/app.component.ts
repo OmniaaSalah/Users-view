@@ -177,7 +177,7 @@ messageUpload(files){
         "messegeText": this.parentForm.value.description,
         "messageTypeId": this.parentForm.value.messageType,
         "replyPossibility": this.parentForm.value.switch2,
-        'attachment': this.imagesResult
+        'attachments': this.imagesResult
       }
 
       this.messageService.sendDataFromEmployeeTOSPEA(form).subscribe(res=>{
