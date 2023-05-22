@@ -85,8 +85,8 @@
                       <tr *ngFor="let year of certificate?.StudyPhases | slice:0:5">
                           <td class="text-center">{{year.GradeName.Name.Ar}}</td>
                           <td class="text-center">{{year.GradeName.Name.En}}</td>
-                          <td>{{year.SchoolName.Name.Ar}}</td>
-                          <td>{{year.SchoolYear.Name.Ar}}</td>
+                          <td>{{year.SchoolName.Name?.Ar}}</td>
+                          <td>{{year.SchoolYear.Name?.Ar}}</td>
                       </tr>
                     </ng-container>
                     <tr  *ngIf="!certificate?.StudyPhases?.length">
@@ -894,8 +894,8 @@
           </div>
 
           <div class="text-center">
-            <h1 class="fw-bold mb-3 font-ar">ﺑﻄﺎﻗﺔ ﺗﻘﻴﻴﻢ ﺍﻟﻌﺎﻡ ﺍﻟﺪﺭﺍﺳﻲ <span >{{certificate?.SchoolYearName.Ar}}</span></h1>
-            <h1 class="fw-bold mb-3 font-en">Report Card for the Academic  <span>{{certificate?.SchoolYearName.en}}</span></h1>
+            <h1 class="fw-bold mb-3 font-ar">ﺑﻄﺎﻗﺔ ﺗﻘﻴﻴﻢ ﺍﻟﻌﺎﻡ ﺍﻟﺪﺭﺍﺳﻲ <span >{{certificate?.SchoolYearName?.Ar}}</span></h1>
+            <h1 class="fw-bold mb-3 font-en">Report Card for the Academic  <span>{{certificate?.SchoolYearName?.en}}</span></h1>
           </div>
 
         </div>
@@ -911,42 +911,42 @@
                 <div class="d-flex fs-2 fs-4">
                   <div class="col-md-6 grid-container">
                     <span class="">مدرسة:</span>
-                    <span>{{certificate?.SchoolName.Ar}}</span>
+                    <span>{{certificate?.SchoolName?.Ar}}</span>
 
                     <span class="">منهاج المدرسة:</span>
-                    <span>{{certificate?.SchoolCurriculumName.Ar }}</span>
+                    <span>{{certificate?.SchoolCurriculumName?.Ar }}</span>
 
                     <span class="">الفترة الإختبارية:</span>
-                    <span>{{'shared.' + certificate?.ReportingPeriod |translate}}</span>
+                    <span>{{reportingPeriods.ar[certificate?.ReportingPeriod]}}</span>
 
                     <span class="">إسم الطالب:</span>
-                    <span>{{certificate?.StudentName.Ar}} </span>
+                    <span>{{certificate?.StudentName?.Ar}} </span>
 
                     <span class="">رقم الطالب:</span>
                     <span>{{certificate?.StudentNumber }}</span>
 
                     <span class="">الصف:</span>
-                    <span>{{certificate?.StudentGrade.Ar}} </span>
+                    <span>{{certificate?.StudentGrade?.Ar}} </span>
                   </div>
 
                   <div class="col-md-6 grid-container font-en text-start" dir="ltr">
                     <span class="">School:</span>
-                    <span>{{certificate?.SchoolName.En}}</span>
+                    <span>{{certificate?.SchoolName?.En}}</span>
 
                     <span class="">School curriculum:</span>
-                    <span>{{certificate?.SchoolCurriculumName.En}}</span>
+                    <span>{{certificate?.SchoolCurriculumName?.En}}</span>
 
                     <span class="">Reporting Period:</span>
-                    <span>{{'shared.' + certificate?.ReportingPeriod |translate}}</span>
+                    <span>{{reportingPeriods.en[certificate?.ReportingPeriod]}}</span>
 
                     <span class="">Student Name:</span>
-                    <span>{{certificate?.StudentName.En}}</span>
+                    <span>{{certificate?.StudentName?.En}}</span>
 
                     <span class="">Student #:</span>
                     <span>{{certificate?.StudentNumber}}</span>
 
                     <span class="">Grade:</span>
-                    <span>{{certificate?.StudentGrade.En}}</span>
+                    <span>{{certificate?.StudentGrade?.En}}</span>
 
                   </div>
                 </div>
@@ -1072,7 +1072,8 @@
 
       <div class="border-black border-3 d-flex align-items-center my-5 p-3">
         <div class="col-md-3">النتيجة</div>
-        <div class="col-md-3">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
+        <div class="col-md-3" *ngIf="certificate?.FinalResult">{{('shared.allStatus.' + certificate?.FinalResult |translate)}}</div>
+        <div class="col-md-3" *ngIf="!certificate?.FinalResult">--</div>
         <!-- <div class="col-md-3 text-start font-en">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
         <div class="col-md-3 text-start font-en">Result</div> -->
 
@@ -1136,7 +1137,7 @@
                   <span>{{certificate?.Curriculum }}</span>
 
                   <span class="">الفترة الإختبارية:</span>
-                  <span>{{'shared.' + certificate?.ReportingPeriod |translate}}</span>
+                  <span>{{reportingPeriods.ar[certificate?.ReportingPeriod]}}</span>
 
                   <span class="">إسم الطالب:</span>
                   <span>{{certificate?.StudentArabicName}} </span>
@@ -1156,7 +1157,7 @@
                   <span>{{certificate?.CurriculumEn}}</span>
 
                   <span class="">Reporting Period:</span>
-                  <span>{{'shared.' + certificate?.ReportingPeriod |translate}}</span>
+                  <span>{{reportingPeriods.en[certificate?.ReportingPeriod]}}</span>
 
                   <span class="">Student Name:</span>
                   <span>{{certificate?.StudentEnglishName}}</span>
@@ -1302,7 +1303,8 @@
 
       <div class="border-black border-3 d-flex align-items-center mt-4 p-3">
         <div class="col-md-3">النتيجة</div>
-        <div class="col-md-3">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
+        <div class="col-md-3" *ngIf="certificate?.FinalResult">{{('shared.allStatus.' + certificate?.FinalResult |translate)}}</div>
+        <div class="col-md-3" *ngIf="!certificate?.FinalResult">--</div>
         <!-- <div class="col-md-3 text-start font-en">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
         <div class="col-md-3 text-start font-en">Result</div> -->
 

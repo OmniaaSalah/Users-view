@@ -24,20 +24,6 @@
                 </div>
 
                 <div class="image-uploader__upload upload-btn">
-
-                    <!-- <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
-
-                        <ng-template pTemplate="content">
-
-                            <ul *ngIf="uploadedFiles.length">
-
-                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-
-                            </ul>
-
-                        </ng-template>
-
-                    </p-fileUpload> -->
                     <app-file-upload view="full" (onFileUpload)="messageUpload($event)" [filesLimit]="4"></app-file-upload>
 
                 </div>
@@ -84,7 +70,7 @@
 
          <p class="time">{{messageDetails?.createdDate | customDate}}</p>
       </div>
-      
+
   </div>
 
     <ng-container *ngFor="let message of messagesReplies">

@@ -58,7 +58,9 @@
     top: 4rem;
     inset-inline-end: 7rem;
     border-radius: 50%;
-    background-color: $color-primary;
+    // background-color: $color-primary;
+    background: linear-gradient(90.04deg, #42B4E3 0.04%, #3052A1 99.17%);
+
     height: 4.25rem;
     width: 4.25rem;
     display: flex;
@@ -79,7 +81,9 @@
 
 .btn-primary {
     color: #FFFFFF;
-    background: $color-primary;
+    // background: $color-primary;
+    background: linear-gradient(90.04deg, #42B4E3 0.04%, #3052A1 99.17%);
+
     border: none;
     &:hover {
         // background-color: #2E50A3;
