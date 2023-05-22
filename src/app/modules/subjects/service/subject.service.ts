@@ -14,7 +14,14 @@ import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 export class SubjectService {
   subjectsList: ISubject[] = [];
  evaluationTypeList;
- successStatus;
+
+ successStatus= [
+  {name:this.translate.instant('dashboard.Subjects.successed'),status:true},
+  {name:this.translate.instant('dashboard.Subjects.retry'),status:false},
+  {name:this.translate.instant('dashboard.Subjects.retryExam'),status:false}
+  ];
+
+
  lang = inject(TranslationService).lang;
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
     this.evaluationTypeList=
@@ -23,10 +30,7 @@ export class SubjectService {
     {value:AssessmentsEnum.Discription,name:this.translate.instant('Discription')},
     {value:AssessmentsEnum.Evaluation,name:this.translate.instant('Evaluation')}];
 
-    this.successStatus = [
-    {name:this.translate.instant('dashboard.Subjects.successed'),status:true},
-    {name:this.translate.instant('dashboard.Subjects.retry'),status:false}
-    ];
+
   }
 
   getAllSubjects(filter?:Partial<Filter>)
@@ -48,15 +52,15 @@ export class SubjectService {
   {
 
     return this.http.delete(`/Subject/${id}`).pipe(take(1));
-   
+
   }
 
   addSubject(subject)
   {
-  
+
     return this.http.post('/Subject',subject);
-    
-      
+
+
   }
 
 
@@ -73,7 +77,7 @@ export class SubjectService {
     return this.http.put('/Subject/school-Grade-subject',subject);
 
   }
- 
+
   getSubjectByID(subjectId:number)
   {
     return this.http.get(`/Subject/${subjectId}`).pipe(take(1))
@@ -101,8 +105,8 @@ export class SubjectService {
             [this.translate.instant('dashboard.Subjects.Last EditDate')]: subject?.lastEditedDate,
             [this.translate.instant('dashboard.Subjects.Subject Minimum grade')]: subject?.subjectMinmumDegree ? subject?.subjectMinmumDegree:'-',
             [this.translate.instant('dashboard.Subjects.Subject Maximum grade')]: subject?.maximumDegree ? subject?.maximumDegree:'-'
-            
-   
+
+
 
           }
         })
@@ -129,7 +133,7 @@ export class SubjectService {
   }
   getAllSubjectsWithoutDuplicated()
   {
- 
+
     return this.http.get('/Subject/dropdown').pipe(take(1));
   }
 }

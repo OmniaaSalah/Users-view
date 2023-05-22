@@ -1519,6 +1519,7 @@
             "meaning": "Meaning",
             "successed": "Successed",
             "retry":"Failed",
+            "retryExam":"Retry Exam",
             "add description":"Add description",
             "Are you sure that you want to delete Subject":"Are you sure that you want to delete subject",
             "Subject deleted Successfully":"Subject deleted successfully",
