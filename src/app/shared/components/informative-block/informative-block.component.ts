@@ -12,7 +12,8 @@ export class InformativeBlockComponent implements OnInit {
   @Input() subTitle:string;
   @Input() src:string ='assets/images/empty-list/empty-list.svg';
   @Input() styles ={}
-  
+  @Input() size:'sm' | 'md' | 'lg' = 'lg'
+
   constructor(private translate:TranslateService) { }
 
   ngOnInit(): void {

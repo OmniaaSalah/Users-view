@@ -1,4 +1,4 @@
-<div class="text-center py-5 informative-block" [style]="styles">
+<div class="text-center py-5 informative-block" [style]="styles" *ngIf="size=='lg'">
     <img *ngIf="src" loading="lazy" class="img-fluid" [src]="src">
     <div class="title text-center h-100">
         <h1 class="heading heading--tertiary fs-2 color-black mb-2">{{title}} </h1>
@@ -6,4 +6,14 @@
     </div>
 
     <ng-content></ng-content>
+</div>
+
+<div class="text-center py-4 informative-block sm" [style]="styles" *ngIf="size=='sm'">
+  <img *ngIf="src" loading="lazy" class="img-fluid" [src]="src">
+  <div class="title text-center h-100">
+      <h1 class="heading heading--tertiary fs-2 color-black mb-2">{{title}} </h1>
+      <p class="paragraph paragraph--md paragraph--black">{{subTitle}}</p>
+  </div>
+
+  <ng-content></ng-content>
 </div>

@@ -69,7 +69,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
     this.certificateFormGrp = fb.group({
       certificateName:['',[Validators.required]],
       academicCertificates:this.fb.array([]),
-      gradeCertificateType:[''],
+      gradeCertificateType:['AllSubjects'],
       semester:[],
       yearId:['']
 
@@ -247,7 +247,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
     else if(this.certificateName.value==CertificatesEnum.GradesCertificate)
     {
       this.degreescertificates=this.certificateService.degreescertificates;
-      this.gradeCertificateType.setValidators([Validators.required]);
+      // this.gradeCertificateType.setValidators([Validators.required]);
       this.gradeCertificateType.updateValueAndValidity();
       this.yearId.setValidators([Validators.required]);
       this.yearId.updateValueAndValidity();

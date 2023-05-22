@@ -26,7 +26,7 @@
                 <ng-container *ngFor="let file of attachments; let i = index">
                   <ng-container *ngIf="(!file.isActive && currentUserScope=='SPEA') || file.isActive ">
                     <div class="col-md-4 mt-4" *ngIf="file?.url">
-                        <app-file  [file]="file" [hasFooter]="true" [clickable]="true"></app-file>
+                        <app-file [showDeletedBy]="true" [file]="file" [hasFooter]="true" [clickable]="true"></app-file>
                     </div>
                   </ng-container>
                 </ng-container>

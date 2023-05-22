@@ -539,20 +539,20 @@
               <span class="">الصف</span>
               <span>{{certificate?.GradeAr}}</span>
 
-              <span class="">تاريخ القبول:</span>
-              <span>{{certificate?.AcceptanceDate |LocalizeDate}}</span>
+              <span class="">القسم:</span>
+              <span>{{certificate?.DivisionAr}}</span>
 
-              <span class="">تاريخ الانسحاب:</span>
-              <span>{{certificate?.TransferDate |LocalizeDate}}</span>
+              <!--<span class="">تاريخ القبول:</span>
+              <span>{{certificate?.AcceptanceDate |LocalizeDate}}</span> -->
+
+
 
               <span class="">الديانة:</span>
-              <span>{{certificate?.Religion}}</span>
+              <span>{{certificate?.Religion | currentLang}}</span>
 
-              <span class="">تاريخ الميلاد:</span>
-              <span>{{certificate?.BirthDate |LocalizeDate}}</span>
 
-              <span class="">رقم البلدة:</span>
-              <span></span>
+              <!-- <span class="">رقم البلدة:</span>
+              <span></span> -->
 
               <!-- <span class="">رقم الهوية:</span>
               <span>{{certificate?.EmiratesId || 'لا يمتلك هوية'}}</span> -->
@@ -565,25 +565,29 @@
             </div>
 
             <div class="col-md-6 grid-container">
-              <span class="">القسم:</span>
-              <span>{{certificate?.DivisionAr}}</span>
 
 
+              <!--<span class="">سبب القبول:</span>
+              <span></span> -->
 
-              <span class="">سبب القبول:</span>
-              <span></span>
+              <span class="">تاريخ الانسحاب:</span>
+              <span>{{certificate?.TransferDate |LocalizeDate}}</span>
 
               <span class="">سبب الانسحاب:</span>
               <span>{{certificate?.ResonOfWithdrow}}</span>
 
-              <span class="">الجنسية:</span>
-              <span></span>
 
-              <span class="">مكان الميلاد:</span>
+              <span class="">تاريخ الميلاد:</span>
+              <span>{{certificate?.BirthDate |LocalizeDate}}</span>
+
+              <span class="">الجنسية:</span>
+              <span>{{certificate?.Nationality}}</span>
+
+              <!-- <span class="">مكان الميلاد:</span>
               <span></span>
 
               <span class="">رقم الأسرة:</span>
-              <span></span>
+              <span></span> -->
 
 
               <!-- <span class="">تاريخ الانتهاء:</span>
@@ -602,8 +606,8 @@
               <span class="">رقم الهوية:</span>
               <span>{{certificate?.EmiratesId || 'لا يمتلك هوية'}}</span>
 
-              <span class="">رقم الإقامة:</span>
-              <span></span>
+              <!-- <span class="">رقم الإقامة:</span>
+              <span></span> -->
             </div>
 
             <div class="col-md-6 grid-container">
@@ -611,12 +615,12 @@
               <span>{{certificate?.EmiratesIdExpirationDate | LocalizeDate}}</span>
 
 
-              <span class="">تاريخ الانتهاء:</span>
+              <!-- <span class="">تاريخ الانتهاء:</span> -->
             </div>
           </div>
         </div>
 
-        <div class="row fs-2 border-black border-2 mt-6">
+        <!-- <div class="row fs-2 border-black border-2 mt-6">
           <div class=" bg-gray-150 border-black p-3 border-2 align-items-center">
             <div class="fs-2">العائلة والمعارف</div>
           </div>
@@ -645,10 +649,10 @@
             <span>{{certificate?.GuardianPhoneNumber}}</span>
 
           </div>
-        </div>
+        </div> -->
 
 
-        <div class="mt-6">
+        <!-- <div class="mt-6">
           <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
             <div class="col-md-6 fs-2">للاستخدام الرسمي فقط</div>
             <div class="col-md-6 fs-2 text-start font-en" dir="ltr">For Official Use Only by School</div>
@@ -677,9 +681,9 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
 
-        <div class="mt-6">
+        <!-- <div class="mt-6">
           <div class="bg-gray-150 border-black p-3 border-2 align-items-center">
             <div class="col-md-6 fs-2">صحية</div>
           </div>
@@ -714,7 +718,7 @@
               <td></td>
             </tr>
           </table>
-        </div>
+        </div> -->
 
 
         <div class="mt-6">

@@ -867,7 +867,8 @@
             "Assessment deleted Successfully":"Assessment deleted successfully",
             "should be more than the minmum deserving degree":"Should be more than the minmum deserving degree",
             "noDivisionsInGrade":"Selected grade haven't divisions",
-            "noTracksInDivisions":"Selected division haven't tracks"
+            "noTracksInDivisions":"Selected division haven't tracks",
+            "noManager":"There is no manager assigned to this school yet"
         },
         "schools": {
           "contactWithSchool":"Contact with school",
@@ -1701,6 +1702,7 @@
             "defineMedicalFile":  "Define medical file",
             "notAddedToDivision":"Not added to division",
             "chronicDiseases": "Chronic diseases",
+            "sufferFromAllergiesFromFoodOrMedicine":"Suffering From Allergies From Food Or Medicine",
             "AllergiesFromFoodOrMedicine": "Allergies From Food Or Medicine",
             "feelingDiseases": "Feeling diseases",
             "disabilities": "Disabilities",
