@@ -44,16 +44,53 @@
           </div>
             <!-- <h3 class="heading heading--tertiary mb-5">{{ 'dashboard.parents.HealthStatus'|translate }} :</h3> -->
 
+
+            <div class="d-flex  mb-5">
+              <div class="col-md-4 grid-container">
+                <p class="color-gray-300">{{'dashboard.parents.SufferFromChronicdiseases'| translate}}</p>
+                <span class="color-primary mb-2">{{medicalFile.chronicDiseases.length? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
+
+                <ng-container *ngIf="medicalFile.chronicDiseases.length">
+                        <p class="color-gray-300">{{ 'dashboard.parents.Chronicdiseases'|translate }}</p>
+                        <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
+                        <ul class="d-flex flex-wrap">
+                            <li class="d-flex color-primary" *ngFor="let val of medicalFile.chronicDiseases; let i= index">
+                            <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
+                            <div>{{val}}</div>
+
+                            </li>
+                        </ul>
+                </ng-container>
+              </div>
+
+              <div class="col-md-4 grid-container">
+                <p class="color-gray-300">{{'dashboard.students.sufferFromAllergiesFromFoodOrMedicine'| translate}}</p>
+                <span class="color-primary mb-2">{{medicalFile?.allergicDiseases.length? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
+
+                <ng-container *ngIf="medicalFile?.allergicDiseases.length">
+                        <p class="color-gray-300">{{ 'dashboard.students.AllergiesFromFoodOrMedicine'|translate }}</p>
+                        <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
+                        <ul class="d-flex flex-wrap">
+                            <li class="d-flex color-primary" *ngFor="let val of medicalFile?.allergicDiseases; let i= index">
+                            <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
+                            <div>{{val}}</div>
+
+                            </li>
+                        </ul>
+                </ng-container>
+              </div>
+            </div>
+
+
             <div class="col-md-4">
 
                 <div class="grid-container">
 
-                    <p class="color-gray-300">{{'dashboard.parents.SufferFromChronicdiseases'| translate}}</p>
+                    <!-- <p class="color-gray-300">{{'dashboard.parents.SufferFromChronicdiseases'| translate}}</p>
                     <span class="color-primary mb-2">{{medicalFile.chronicDiseases.length? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
                     <ng-container *ngIf="medicalFile.chronicDiseases.length">
                             <p class="color-gray-300">{{ 'dashboard.parents.Chronicdiseases'|translate }}</p>
-                            <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
                             <ul class="d-flex flex-wrap">
                                 <li class="d-flex color-primary" *ngFor="let val of medicalFile.chronicDiseases; let i= index">
                                 <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
@@ -61,7 +98,7 @@
 
                                 </li>
                             </ul>
-                    </ng-container>
+                    </ng-container> -->
 
 
 
@@ -101,12 +138,11 @@
 
               <div class="grid-container gap-y-5">
 
-                <p class="color-gray-300">{{'dashboard.students.AllergiesFromFoodOrMedicine'| translate}}</p>
+                <!-- <p class="color-gray-300">{{'dashboard.students.AllergiesFromFoodOrMedicine'| translate}}</p>
                 <span class="color-primary mb-2">{{medicalFile?.allergicDiseases.length? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
                 <ng-container *ngIf="medicalFile?.allergicDiseases.length">
-                        <p class="color-gray-300">{{ 'dashboard.students.feelingDiseases'|translate }}</p>
-                        <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
+                        <p class="color-gray-300">{{ 'dashboard.students.AllergiesFromFoodOrMedicine'|translate }}</p>
                         <ul class="d-flex flex-wrap">
                             <li class="d-flex color-primary" *ngFor="let val of medicalFile?.allergicDiseases; let i= index">
                             <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
@@ -114,7 +150,7 @@
 
                             </li>
                         </ul>
-                </ng-container>
+                </ng-container> -->
 
 
                     <ng-container *ngIf="getCtr('isSpecialAbilities').value">
@@ -212,7 +248,7 @@
               </div> -->
 
               <div class="form-set">
-                <label class="label">{{'dashboard.students.feelingDiseases'|translate}}</label>
+                <label class="label">{{'dashboard.students.AllergiesFromFoodOrMedicine'|translate}}</label>
                 <p-chips name="feelingDiseases" [addOnBlur]="true" formControlName="listOfAllergicDiseases" placeholder=""></p-chips>
               </div>
 

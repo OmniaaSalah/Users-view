@@ -88,6 +88,7 @@
                                             </div>
 
                                             <p-dropdown
+                                            [disabled]="true"
                                             [options]="schoolYears"
                                             optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
                                             </p-dropdown>
@@ -101,14 +102,14 @@
 
                                     <div class="col-md-4" *ngIf="allSchools$ |async as allSchools">
                                         <label class="label">{{'dashboard.students.School Name'| translate}}</label>
-                                        <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}"
+                                        <p-dropdown [disabled]="true" placeholder="{{'dashboard.students.School Name'| translate}}"
                                             [options]="allSchools" formControlName="schoolId"
                                             optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
                                     </div>
 
                                     <div class="col-md-4" *ngIf="allGrades$ |async as allGrades">
                                         <label class="label">{{'dashboard.students.Class'|translate}}</label>
-                                        <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}"
+                                        <p-dropdown [disabled]="true" placeholder="{{'dashboard.students.Class'|translate}}"
                                         [options]="allGrades"
                                             formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
                                             optionValue="id"></p-dropdown>
