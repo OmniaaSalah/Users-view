@@ -99,9 +99,7 @@ export class MessageDetailsComponent implements OnInit {
       "userId": Number(localStorage.getItem('$AJ$userId')),
       // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
       "messegeText": this.replayForm.value.messegeText,
-      'attachments':  this.imagesResult.map((attachment) => {
-        return attachment.url;
-      }) || null,
+      'attachments':  this.imagesResult,
     }
 
     this.messageService.sendReply(this.routeSub, form).subscribe(res => {
