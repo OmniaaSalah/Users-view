@@ -44,7 +44,7 @@
                     <img class="" src="assets/images/shared/upload.svg" alt="upload">
                 </div>
                 <!-- <p class="title">{{ 'dashboard.schools.enterForAttachSchoolLogo'|translate }}</p> -->
-                <p class="title text-center" *ngIf="!inProgress && (hideCheck && !uploaded) || uploaded">{{ label }}</p>
+                <p class="title text-center" *ngIf="!inProgress && (hideCheck && !uploaded) || uploaded">{{ label | async }}</p>
                 <p class="title text-center color-red-500" *ngIf="!uploaded && !hideCheck">{{'toasterMessage.error' |translate}}</p>
 
                 <!-- <p class="sub-title">{{allowedFilesType}} (Maximum Size: {{maxFileSize}}mb)</p> -->

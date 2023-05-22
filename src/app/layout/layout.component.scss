@@ -52,6 +52,15 @@
 
 .bg {
 
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  // height: 100%;
+  background-size: cover;
+  z-index: -1;
+
   // width: 25%;
   // width: 100%;
 
@@ -67,7 +76,7 @@
       // margin-inline-end: 13rem;
   }
   &__loaded-conponent {
-      padding: 1.5rem 0 7rem;
+      padding: 1.5rem 0 10rem;
       width: 88%;
   }
   &__navigator{

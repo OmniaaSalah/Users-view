@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row bg-white border-dark radius-15 p-5">
     <div class="row align-items-center">
         <div class=" ">
             <ng-container *ngIf="!schoolManager">
@@ -17,8 +17,9 @@
             </ng-container>
 
             <div class="" *ngIf="schoolManager">
+              <h3 class=" heading heading--tertiary mb-3 color-primary">{{'dashboard.schools.SchoolManager' |translate}} </h3>
+              <ng-container  *ngIf="schoolManager?.name">
                 <div class="d-flex justify-content-between align-items-baseline">
-                    <h3 class=" heading heading--tertiary mb-3 color-primary">{{'dashboard.schools.SchoolManager' |translate}} </h3>
                     <button class="btn btn-primary" (click)="patchManagerForm(schoolManager); isManagerModelOpened=true" *permit="claimsEnum.S_EditMangerInformation" >
                         {{'shared.edit' |translate}}
                     </button>
@@ -30,12 +31,12 @@
                         <span class=" color-primary">{{schoolManager.jobTitle?.name|currentLang}} {{schoolManager.schoolName|currentLang}}</span>
                     </div>
 
-                    <div class="d-flex align-items-center color-primary">
+                    <div class="d-flex align-items-center color-primary" *ngIf="schoolManager?.email">
                         <img src="assets/images/shared/mail.svg" alt="">
                         <span class="mx-2 text-decoration-underline lh-1" role="button"> {{schoolManager?.email}}</span>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-2"  *ngIf="schoolManager?.phoneNumber">
                         <div class="d-flex align-items-center color-primary justify-content-center">
                             <img src="assets/images/shared/phone.svg" alt="">
                             <span class="me-2 lh-1" role="button" dir="ltr"> {{schoolManager?.phoneNumber}}</span>
@@ -43,7 +44,14 @@
                     </div>
 
                 </div>
+              </ng-container>
+
+              <div  *ngIf="!schoolManager?.name">
+                <app-informative-block size="sm" subTitle="{{'emptyList.noManager' |translate}}" ></app-informative-block>
+              </div>
+
             </div>
+
         </div>
     </div>
 
@@ -52,7 +60,7 @@
 
 
     <h3 class="heading heading--tertiary ">{{'dashboard.schools.schoolEmployeeList'|translate }}</h3>
-    <div class="prim-table mt-4" *ngIf="employees.totalAllData || employees.loading">
+    <div class="prim-table  mt-4" *ngIf="employees.totalAllData || employees.loading">
         <p-table #dt [value]="employees.list" [lazy]="true" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
