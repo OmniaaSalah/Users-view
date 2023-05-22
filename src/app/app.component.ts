@@ -63,7 +63,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private translationService: TranslationService,
     private router:Router,
     private userService:UserService,
-    private coreSercice:ClaimsService,
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
@@ -97,6 +96,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
   ngOnInit(): void {
 
     this.translationService.init();
+    this.settingsService.initializeFileRules()
+
     this.userService.isUserLogged$.subscribe((res)=>{
 
       if(res)
@@ -104,7 +105,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
         // this.usersService.deleteUser(129).subscribe()
 
           this.currentUserName=this.userService.getCurrentUserName();
-          this.settingsService.initializeFileRules()
           this.currentUserScope=this.userService.getScope();
           // this.coreSercice.getUserClaims().subscribe(res =>this.claimsLoaded = true)
           if(this.currentUserScope == this.userScope.Employee)

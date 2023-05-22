@@ -162,6 +162,7 @@ getDivisionInfo(){
     this.gradeId = res.result?.grade?.id
     this.divisionInfo = res.result
     this.divisionInfoForm.patchValue(res.result)
+    this.divisionInfoForm.controls.trackIds.setValue(res?.result?.tracksIds || [])
     this.componentHeaderData.mainTitle.sub= `(${getLocalizedValue( res.result.grade.name.ar)})`
     this.componentHeaderData.subTitle.sub = `(${getLocalizedValue( res.result.name)})`
     this.headerService.changeHeaderdata(this.componentHeaderData)

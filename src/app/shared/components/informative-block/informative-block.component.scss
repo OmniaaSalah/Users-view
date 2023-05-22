@@ -7,12 +7,29 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: #fff;
     gap: 4rem;
 
     .title{
-        width: 50%;
-        // font-family: 'Droid';
+      width: 50%;
+      // font-family: 'Droid';
     }
 
-  
+    &.sm{
+      min-height: 16rem;
+      gap: 1rem;
+      img{
+        width: 7rem;
+      }
+
+      .title{
+        h1.heading{
+          font-size: 1.5rem !important;
+
+        }
+
+        p.paragraph{ font-size: 1.5rem;}
+      }
+    }
+
 }

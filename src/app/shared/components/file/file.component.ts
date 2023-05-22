@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-file',
@@ -13,6 +12,7 @@ export class FileComponent implements OnInit {
   @Input() file
   @Input() clickable= true
   @Input() hasFooter= false
+  @Input() showDeletedBy= false
   @Input() styles={}
 
   constructor(
