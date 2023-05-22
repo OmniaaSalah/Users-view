@@ -32,7 +32,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
   @Input() theme :'chat' | 'default' = 'default'
   @Input() title = ''
-  @Input() label = this.translate.instant('shared.clickToUploadFile')
+  @Input() label = this.translate.get('shared.clickToUploadFile')
   @Input() hasComment = false
   @Input() showDeletedBy = false
   @Input() imgUrl=''
@@ -100,11 +100,12 @@ export class FileUploadComponent implements OnInit,OnChanges {
     this.settingService.fileRules$.subscribe((rules:MapedFileRule)=> {
       console.log(rules);
 
+
       this.filesRules =rules
 
       // set file Size Dynamically (depend on provided file type)
       if(!this.allowedFilesType){
-        this.allAllowedFilesType =<FileTypeEnum[]> Object.keys(this.filesRules)
+        this.allAllowedFilesType =<FileTypeEnum[]> Object.keys(this.filesRules || {})
         // this.allAllowedFilesType = Object.keys(this.filesRules).map((key: FileTypeEnum) => {
         //   this.filesRules[key]?.type as FileTypeEnum
         // })

@@ -484,7 +484,8 @@
         "divisionDegreeHint":"إذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به",
         "noLectures":"يبدو انه لا يوجد حصص دراسية معرفة لهذا الصف",
         "noDivisionsInGrade":"لا يوجد شعب فى هذا الصف",
-        "noTracksInDivisions":"لا يوجد مسارات فى هذه الشعبه"
+        "noTracksInDivisions":"لا يوجد مسارات فى هذه الشعبه",
+        "noManager":"يبدو انه لم يتم تعين مدير للمدرسة بعد"
     },
 
 
@@ -1386,7 +1387,8 @@
             "defineMedicalFile": "تعريف الملف الصحي",
             "notAddedToDivision":"لم يضاف إلى شعبه",
             "chronicDiseases": "الأمراض المزمنة ",
-            "feelingDiseases": "أمراض الحساسية من أدوية أو أغذية خاصة",
+            "sufferFromAllergiesFromFoodOrMedicine":"يعانى من الحساسية من أدوية أو أغذية خاصة",
+            "AllergiesFromFoodOrMedicine": "أمراض الحساسية من أدوية أو أغذية خاصة",
             "disabilities": "الإعاقات ",
             "writeDisabilities": "أكتب الإعاقات ",
             "childWithDisabilities": "الأبن من ذوي الهمم ",
