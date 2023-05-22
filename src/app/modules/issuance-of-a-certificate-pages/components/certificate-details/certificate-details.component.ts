@@ -18,6 +18,18 @@ export class CertificateDetailsComponent implements OnInit {
 
   get certificateTypeEnum() { return CertificatesEnum }
 
+  reportingPeriods={
+    ar:{
+      FirstSemester:"الفصل الأول",
+      LastSemester:"الفصل الأخير",
+      FinalResult:"النتيجة النهائية",
+    },
+    en:{
+      FirstSemester:"First Semester",
+      LastSemester:"Last Semester",
+      FinalResult:"Final Result",
+    }
+  }
   newDate = new Date()
 
   certificateType
