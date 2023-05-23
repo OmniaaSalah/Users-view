@@ -4,28 +4,29 @@ import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { AssignmentsListComponent } from './assignments/assignments-list/assignments-list.component';
 import { UploadAssignmentComponent } from './assignments/upload-assignment/upload-assignment.component';
 import { LayoutComponent } from 'src/app/layout/layout.component';
+import { Layout } from 'src/app/layout/layout-routing.service';
 
 
 
 
 const routes: Routes = [
-  {
-    path: '', component: LayoutComponent,
-    children:[
-      { path: 'assignments-list', component: AssignmentsListComponent ,
-        data:{
-          RouteKey: RouteEnums.Exams,
-          title:{ar:'الامتحانات',en: 'Exams'}
-        }
-      },
-      {
-        path: 'upload-assignment', component: UploadAssignmentComponent,
-        data:{
-          title:{ar:'رفع الامتحان',en: 'Upload Exams'}
-        }
-       }
-    ]
-  }
+
+  Layout.childRoutes([
+
+    { path: 'assignments-list', component: AssignmentsListComponent ,
+      data:{
+        RouteKey: RouteEnums.Exams,
+        title:{ar:'الامتحانات',en: 'Exams'}
+      }
+    },
+    {
+      path: 'upload-assignment', component: UploadAssignmentComponent,
+      data:{
+        title:{ar:'رفع الامتحان',en: 'Upload Exams'}
+      }
+     }
+  ])
+
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { EMPTY, map, Subject, Subscription, takeUntil } from 'rxjs';
+import { EMPTY, map, of, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { IndexesEnum } from '../../../../../shared/enums/indexes/indexes.enum';
 import { Component, OnInit,inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -187,29 +187,6 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
    addNewChild(){
 
     this.isBtnLoading=true;
-    // this.imageResult1.map(er=>{
-    //     er.comment = this.registerWithoutIdentityForm.value.note
-    //     er.titel= {
-    //       en: 'Not Identity Image',
-    //       ar: 'صورة اثبات عدم وجود هوية'
-    //     }
-    // })
-
-    // this.imageResult3.map(er=>{
-    //   er.comment = this.registerWithoutIdentityForm.value.note2
-    //   er.titel={
-    //     en: 'birth certificate',
-    //     ar: 'صورة اثبات تاريخ الميلاد'
-    //   }
-    // })
-
-    // this.imageResult4.map(er=>{
-    //   er.comment = this.registerWithoutIdentityForm.value.note3
-    //   er.titel={
-    //     en: 'Passport Image',
-    //     ar: 'ًصورة جواز السفر'
-    //   }
-    // })
 
     let attachments=[this.birthDateAttach, this.personalPhoto, this.noIdentityCauseAttach, this.passportAttach].filter(el=> el.url)
 
@@ -223,8 +200,9 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
 
     this.addChildService.postChildWithoudIdentity(data)
     .pipe(
-      map(res=>{
+      switchMap(res=>{
         if(res.statusCode!=HttpStatusCodeEnum.OK || res.statusCode!=HttpStatusCodeEnum.OK){
+
           if(res.statusCode==HttpStatusCodeEnum.NotAcceptable){
             this.confirmModel.openModel({message: this.translate.instant('toasterMessage.childExistForAnotherGaurdian')})
             this.confirmModelLister()
@@ -244,7 +222,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
           }
 
         }else{
-          return res
+          return of(res)
         }
     }))
     .subscribe(res=>{
