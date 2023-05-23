@@ -5,40 +5,41 @@ import { NewUserRoleComponent } from './components/new-user-role/new-userrole.co
 import { RoleDetailsComponent } from './components/role-details/role-details.component';
 import { UserRolesListComponent } from './components/user-roles-list/userroles-list.component';
 import { LayoutComponent } from 'src/app/layout/layout.component';
+import { Layout } from 'src/app/layout/layout-routing.service';
 
 
 
 const routes: Routes = [
-  {
-    path: '', component: LayoutComponent,
-    children:[
-      {
-        path:"user-roles-list",component:UserRolesListComponent,
-        data:{
-          RouteKey: RouteEnums.Roles,
-          title:{ar:'الادوار الوظيفية',en: 'User Roles'}
-        },
+  Layout.childRoutes([
+
+    {
+      path:"user-roles-list",component:UserRolesListComponent,
+      data:{
+        RouteKey: RouteEnums.Roles,
+        title:{ar:'الادوار الوظيفية',en: 'User Roles'}
       },
-      {
-        path:"new-role",component:NewUserRoleComponent,
-        data:{
-          title:{ar:'اضافة دور وظيفى',en: 'User Roles'}
-        },
+    },
+    {
+      path:"new-role",component:NewUserRoleComponent,
+      data:{
+        title:{ar:'اضافة دور وظيفى',en: 'User Roles'}
       },
-      {
-        path:"edit-role/:roleId",component:NewUserRoleComponent,
-        data:{
-          title:{ar:'تعديل دور وظيفى',en: 'User Roles'}
-        },
+    },
+    {
+      path:"edit-role/:roleId",component:NewUserRoleComponent,
+      data:{
+        title:{ar:'تعديل دور وظيفى',en: 'User Roles'}
       },
-      {
-        path:"role-details/:roleId", component:RoleDetailsComponent,
-        data:{
-          title:{ar:'تفاصيل دور وظيفى',en: 'User Roles'}
-        },
-      }
-    ]
-  }
+    },
+    {
+      path:"role-details/:roleId", component:RoleDetailsComponent,
+      data:{
+        title:{ar:'تفاصيل دور وظيفى',en: 'User Roles'}
+      },
+    }
+  ])
+
+
 ];
 
 @NgModule({

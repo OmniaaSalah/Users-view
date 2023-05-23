@@ -8,6 +8,8 @@ import { DTransalteModule } from './shared/transaltion/transalte.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { PrimngModule } from './primng/primeNg.module';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStrategy } from './core/strategies/route-reuse.strategy';
 
 
 
@@ -29,7 +31,12 @@ import { PrimngModule } from './primng/primeNg.module';
       positionClass: 'toast-bottom-right'
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RouteReuseStrategy,
+      useClass: CustomRouteReuseStrategy,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
