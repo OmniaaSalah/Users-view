@@ -52,7 +52,8 @@
 
         <div class="menu" [class.show]="isMenuOpend">
             <div class="w-50">
-                <div class="links" *ngIf="activeMenuItemChanged" @slide>
+              <!--  @slide -->
+                <div class="links" *ngIf="activeMenuItemChanged">
                     <h2 class="heading heading--secondary">{{activeMenuItem?.title |async}}</h2>
                     <ul>
                         <ng-container *ngFor="let link of activeMenuItem?.links" >

@@ -8,11 +8,11 @@ import { StudentDetailsComponent } from './components/student-details/student-de
 import { StudentsListComponent } from './components/students-list/students-list.component';
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
 import { LayoutComponent } from 'src/app/layout/layout.component';
+import { Layout } from 'src/app/layout/layout-routing.service';
 
 const routes: Routes = [
-  {
-    path: '', component: LayoutComponent,
-    children:[
+  Layout.childRoutes(
+    [
       {
         path: "", component: StudentsListComponent,
         data:{
@@ -47,8 +47,8 @@ const routes: Routes = [
           data:{title:{ar:'اصدار شهاده للطالب',en: 'Issue Student Certificate'}
         }
       }
-    ]
-  }
+    ])
+
 ];
 
 @NgModule({

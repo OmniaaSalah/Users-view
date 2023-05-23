@@ -84,9 +84,9 @@ export class ParantsComponent implements OnInit {
 		.subscribe(res => {
          if(res.data){
 			this.sharedService.filterLoading.next(false);
-			this.parent.list = res.data
-			this.parent.totalAllData = res.totalAllData
-			this.parent.total =res.total
+			this.parent.list = res?.data
+			this.parent.totalAllData = res?.totalAllData
+			this.parent.total =res?.total
 			this.parent.loading = false
       }
 		},err=> {

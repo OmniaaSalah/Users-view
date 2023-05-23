@@ -9,18 +9,18 @@ import { SurveyDetailsComponent } from './components/survey-details/survey-detai
 
 import { SurveysListComponent } from './components/surveys-list/surveys-list.component';
 import { LayoutComponent } from 'src/app/layout/layout.component';
+import { Layout } from 'src/app/layout/layout-routing.service';
 
 const routes: Routes = [
-  {
-    path: '', component: LayoutComponent,
-    children:[
-      {path:'' , component: SurveysListComponent,data:{ RouteKey: RouteEnums.Surveys,allowedClaims: ClaimsEnum.S_MenuItem_Survey} },
-      {path:'new-survey' , component: SurveyDetailsComponent ,data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}},
-      {path:'send-survey' , component: SendSurveyComponent ,data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}},
-      {path:"Survey/:surveyId",component:SurveyDetailsComponent,data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}},
-      {path:"reply-survey/:surveyId",component:ParentReplySurveyComponent}
-    ]
-  }
+  Layout.childRoutes([
+    {path:'' , component: SurveysListComponent,data:{ RouteKey: RouteEnums.Surveys,allowedClaims: ClaimsEnum.S_MenuItem_Survey} },
+    {path:'new-survey' , component: SurveyDetailsComponent ,data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}},
+    {path:'send-survey' , component: SendSurveyComponent ,data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}},
+    {path:"Survey/:surveyId",component:SurveyDetailsComponent,data:{allowedClaims: ClaimsEnum.S_MenuItem_Survey}},
+    {path:"reply-survey/:surveyId",component:ParentReplySurveyComponent}
+  ])
+
+
 ];
 
 @NgModule({
