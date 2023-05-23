@@ -1,4 +1,4 @@
-import { EMPTY, map, Subject, Subscription, takeUntil } from 'rxjs';
+import { EMPTY, isEmpty, map, of, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -129,9 +129,13 @@ export class WithIdentityComponent implements OnInit {
 
     this.addChildService.addChildWithIdentity(data,attachments)
     .pipe(
-      map(res=>{
+      switchMap(res=>{
+
+
         if(res.statusCode!=HttpStatusCodeEnum.OK){
+
           if(res.statusCode==HttpStatusCodeEnum.NotAcceptable){
+            console.log(res);
             this.confirmModelService.openModel({message: this.translate.instant('toasterMessage.childExistForAnotherGaurdian')})
             this.confirmModelLister()
             this.onSubmit=false;
@@ -140,29 +144,36 @@ export class WithIdentityComponent implements OnInit {
                   childId: res.childId,
                   guardianId: this.currentGuardianId,
                   studentStatus: res.studentStatus
-            }
+            };
             return EMPTY
 
           }else{
+
             throw  new Error(this.translate.instant('toasterMessage.childAlreadyRegisted',{value: res?.name[this.lang] || ''}))
             // throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
 
           }
 
         }else{
-          return res
+
+          return of(res)
         }
-    }))
-    .subscribe(res=>{
+    }) )
+    .subscribe({
+      next: (res)=>{
+      console.log(res);
+
       this.onSubmit=false;
       this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
 
-      this.router.navigate(['/']);
-    },(err:Error)=>{
-      this.onSubmit=false;
-      this.toastr.error(err.message);
+      this.router.navigate(['/'])
+      },
+      error: (err:Error)=>{
+        this.onSubmit=false;
+        this.toastr.error(err.message || this.translate.instant('toasterMessage.error'));
+      }
 
-    })
+    },)
 
    }
 
@@ -170,6 +181,8 @@ export class WithIdentityComponent implements OnInit {
 
 
    sendRelinkChildReq(){
+    console.warn('innnnnnnnnnnnnnnnnnnnnnnnnn');
+
     this.onSubmit=true;
     this.addChildService.sendRelinkChildReq(this.childToRelinkWithNewGuardian).subscribe(res=>{
 

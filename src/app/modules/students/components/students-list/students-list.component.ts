@@ -49,6 +49,9 @@ export class StudentsListComponent implements OnInit {
   // << HRADER DATA >> //
   componentHeaderData: IHeader={
 		breadCrump: [],
+    mainTitle: {
+      main: this.translate.instant('dashboard.schools.studentsList'),
+    },
 	}
 
 
@@ -291,7 +294,7 @@ export class StudentsListComponent implements OnInit {
 
   checkDashboardHeader(){
     if(this.currentUserScope==UserScope.Employee) this.componentHeaderData.breadCrump = [{label:this.translate.instant('dashboard.schools.studentsList') ,routerLink:'/student-management/students'},]
-    else if (this.currentUserScope==UserScope.SPEA) this.componentHeaderData.breadCrump = [{label:this.translate.instant('dashboard.schools.studentsList'),routerLink:'//schools-and-students/students'},]
+    else if (this.currentUserScope==UserScope.SPEA) this.componentHeaderData.breadCrump = [{label:this.translate.instant('dashboard.schools.studentsList'),routerLink:'/schools-and-students/students'},]
 
     this.headerService.changeHeaderdata(this.componentHeaderData)
   }

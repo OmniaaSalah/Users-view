@@ -39,7 +39,9 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.currentPage =1
     this.paginationState.page = 1
     this.paginationState.first=0
+    this.pagination.totalRecords = this.totalItems
     this.setPaginagationReport()
+    this.ngAfterViewInit()
   }
 
   setPaginagationReport(){
@@ -54,7 +56,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   }
 
   getPagesCountList(pageCount){
-
+    this.pagesArrOptions=[]
     if(pageCount != Infinity){
       for(let i=1; i<= pageCount; i++){
         this.pagesArrOptions.push(i)

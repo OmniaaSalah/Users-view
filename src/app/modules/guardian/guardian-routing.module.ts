@@ -8,66 +8,64 @@ import { ParentReplySurveyComponent } from '../surveys/components/parent-reply-s
 import { MandatorySurveyComponent } from './components/mandatory-survey/mandatory-survey.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GuardianComponent } from './guardian.component';
-import { LayoutComponent } from 'src/app/layout/layout.component';
+import { Layout } from 'src/app/layout/layout-routing.service';
 
 const routes: Routes = [
+  Layout.childRoutes([
+    {
+      path: '', component: GuardianComponent,
+      children:[
 
-  {path:'', component: LayoutComponent,
-    children:[
+        {
+          path:'',
+          canActivate: [CheeckMandatoryServeyGuard],
+          children: [
 
-      {
-        path: '', component: GuardianComponent,
-        children:[
+            {
+              path:'child/:childId/register-request', component: RegisterRequestComponent,
+              data:{
+                title:{ar:'طلب تسجيل',en: 'Registed Request'}
+              }
+            },
 
-          {
-            path:'',
-            canActivate: [CheeckMandatoryServeyGuard],
-            children: [
+            {
+              path:'profile', component: ProfileComponent ,
+              data:{
+                title:{ar:'حسابى',en: 'My Profile'}
+              }
+            },
+            {
+              path: ':parentId/child/:childId'  , component:ChildDetailsComponent ,
+                 data:{
+                title:{ar:'تفاصيل الابن',en: 'Child Details'}
+              }
+            },
+            {
+              path: ":parentId/child/:childId/withdraw-request", component: WithdrawalRequestComponent ,
+              data:{
+                title:{ar:'طلب انسحاب',en: 'Withdraw Request'}
+              }
+            },
 
-              {
-                path:'child/:childId/register-request', component: RegisterRequestComponent,
-                data:{
-                  title:{ar:'طلب تسجيل',en: 'Registed Request'}
-                }
-              },
-
-              {
-                path:'profile', component: ProfileComponent ,
-                data:{
-                  title:{ar:'حسابى',en: 'My Profile'}
-                }
-              },
-              {
-                path: ':parentId/child/:childId'  , component:ChildDetailsComponent ,
-                   data:{
-                  title:{ar:'تفاصيل الابن',en: 'Child Details'}
-                }
-              },
-              {
-                path: ":parentId/child/:childId/withdraw-request", component: WithdrawalRequestComponent ,
-                data:{
-                  title:{ar:'طلب انسحاب',en: 'Withdraw Request'}
-                }
-              },
-
-              {
-                path: 'AddChild',
-                loadChildren: () => import('./components/add-new-child/add-new-child.module').then(m => m.AddNewChildModule),
-                data:{
-                  title:{ar:'اضافة ابن جديد',en: 'Add New Child'}
-                }
-              },
-            ]
-          },
+            {
+              path: 'AddChild',
+              loadChildren: () => import('./components/add-new-child/add-new-child.module').then(m => m.AddNewChildModule),
+              data:{
+                title:{ar:'اضافة ابن جديد',en: 'Add New Child'}
+              }
+            },
+          ]
+        },
 
 
-          {path:'mandatory-survey',component:MandatorySurveyComponent},
-          {path:'mandatory-survey/reply-survey/:surveyId',component:ParentReplySurveyComponent},
-        ]
-      },
+        {path:'mandatory-survey',component:MandatorySurveyComponent},
+        {path:'mandatory-survey/reply-survey/:surveyId',component:ParentReplySurveyComponent},
+      ]
+    },
+  ])
 
-    ]
-  },
+
+
 
 ];
 

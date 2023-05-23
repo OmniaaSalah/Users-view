@@ -12,13 +12,12 @@ import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { TransferStudentComponent } from '../students/components/transfer-student/transfer-student.component';
 import { TransferedStudentsReportsComponent } from './components/transfered-students-reports/transfered-students-reports.component';
+import { Layout } from 'src/app/layout/layout-routing.service';
 
 const routes: Routes = [
-
-  {
-    path: '', component: LayoutComponent,
-    children:[
-      {path:'', children:[
+  Layout.childRoutes([
+    {
+      path:'', children:[
         {path: 'students-reports', component:StudentsReportsComponent, data:{ RouteKey: RouteEnums.R_Students}},
         {path: 'degrees-reports', component:DegreesReportsComponent, data:{ RouteKey: RouteEnums.R_Degrees}},
         {path: 'subjects-reports', component:SubjectsReportsComponent, data:{ RouteKey: RouteEnums.R_Subjects}},
@@ -28,9 +27,11 @@ const routes: Routes = [
         {path: 'schools-reports', component:SchoolsReportsComponent, data:{ RouteKey: RouteEnums.R_Schools}},
         {path: 'teachers-reports', component:TeachersReportsComponent, data:{ RouteKey: RouteEnums.R_Teachers}},
         {path: 'transfered-students-reports', component:TransferedStudentsReportsComponent, data:{ RouteKey: RouteEnums.R_TransferedStudents}}
-      ]}
-    ]
-  }
+    ]}
+  ])
+
+
+
 ];
 
 @NgModule({
