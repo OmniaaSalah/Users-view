@@ -14,7 +14,7 @@
             <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">
                 {{ "dashboard.issue of certificate.previous" | translate }}
             </button>
-            
+
             <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()">
                 {{ "dashboard.issue of certificate.previous" | translate }}
             </button>
@@ -34,23 +34,23 @@
                     <h3 class="heading heading--secondary color-primary">{{'dashboard.schools.student' | translate}} :- </h3>
                     <span class="color-skyBlue-500 fw-bold">{{student.name |currentLang}}</span>
                 </div>
-    
+
             </div>
 
             <div class="bg-orange-50 p-3 fs-3 radius-15 mb-3 mt-6" >
                 <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-                <span class="color-gray-800">" يرجى إختيار ملف شهادة الدبلوم صيغه (png / jpge) من المرفقات التالية . "</span>
+                <span class="color-gray-800">" يرجى إختيار ملف شهادة المعادلة من المرفقات التالية . "</span>
             </div>
 
 
-            <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p>
-            
+            <!-- <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p> -->
+
             <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
                 <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
 
                 <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
                     <div class="elcardo-title d-flex">
-                        <img src="assets/images/shared/pdf.svg" alt="pdf" />
+                        <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="file" />
                         <p class="mx-5 my-2">{{ file?.name }}</p>
                     </div>
                     <!-- <div class="elcardo-body">
