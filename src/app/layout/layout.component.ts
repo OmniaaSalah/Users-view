@@ -16,6 +16,7 @@ import { UserScope } from '../shared/enums/user/user.enum';
 })
 export class LayoutComponent implements OnInit {
 
+  get name () { return 'jjjjjjjjjjjjjjjjjjjjj'}
   get currentUserScope() { return this.userService.getScope()}
   get scopeEnum () {return UserScope}
 
