@@ -56,7 +56,7 @@
                             <th style="min-width: 24rem;" pSortableColumn="requestTypeEnum">{{'dashboard.Requests.requestType'|translate}}</th>
                             <th pSortableColumn="createdNameAr">{{'dashboard.Subjects.Created by'|translate}}</th>
                             <th style="min-width: 16rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-                            <th style="min-width: 16rem;"  *ngIf="currentUserScope==userScope.Guardian">{{'dashboard.Subjects.Last EditDate'|translate}}</th>
+                            <th style="min-width: 16rem;" *ngIf="currentUserScope==userScope.Guardian">{{'dashboard.Subjects.Last EditDate'|translate}}</th>
                             <th pSortableColumn="requestStatus"><p-sortIcon field="requestStatus"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
                             <th style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith">
                                     <p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
@@ -82,7 +82,7 @@
                             </td>
                             <td>{{request.createdBy | currentLang}}</td>
                             <td style="min-width: 16rem;">{{request.createdDate |LocalizeDate:'d MMMM y hh:mm a'}}</td>
-                            <td style="min-width: 16rem;"  *ngIf="currentUserScope==userScope.Guardian">{{(subject?.lastUpdatedDate|LocalizeDate:'d MMMM y hh:mm a' )|| '--'}}</td>
+                            <td style="min-width: 16rem;"  *ngIf="currentUserScope==userScope.Guardian">{{(request?.lastUpdatedDate|LocalizeDate:'d MMMM y hh:mm a' ) || '--'}}</td>
                             <td>
                                 <span [ngSwitch]="request.requestStatus">
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>

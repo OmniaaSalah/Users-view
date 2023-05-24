@@ -6,6 +6,8 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   private storedRoutes = new Map<string, DetachedRouteHandle>();
 
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
+    console.log(route.routeConfig,route.routeConfig.component?.prototype?.constructor?.name);
+
     return route?.data['reuse'] && route.routeConfig.component?.prototype?.constructor?.name =='LayoutComponent';
   }
 

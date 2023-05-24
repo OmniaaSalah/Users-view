@@ -1,6 +1,7 @@
 
 <div class="container " id="container" *ngIf="certificate">
   <div class=" d-flex justify-content-between">
+
     <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3" *ngIf="certificateType ==certificateTypeEnum.BoardCertificate">
       <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
       <span class="color-gray-800">" {{'dashboard.issue of certificate.certificateMinimized'|translate}} "</span>
@@ -17,12 +18,7 @@
 
     <div *ngSwitchCase="certificateTypeEnum.AcademicSequenceCertificate">
 
-      <ng-container *ngIf="certificate?.Attachments && certificate?.Attachments?.length">
-        <img class="w-100" [src]="certificate?.Attachments[0]" alt="">
-        <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
-      </ng-container>
-
-      <ng-container *ngIf="!certificate?.Attachments?.length">
+      <ng-container>
           <header>
             <div class="text-end">
                 <img class="logo" src="assets/images/home/tab-logo.png">
@@ -47,22 +43,29 @@
               <p class="mb-2 mt-6 fw-bold"> تشهد هيئه الشارقه للتعليم الخاص بأن :</p>
               <table class="blue-theme">
                   <tr>
-                      <td>اسم الطالب بالغة العربية</td>
-                      <td>{{certificate?.StudentArabicName}}</td>
+                      <td style="width: 25%;" class="font-ar">اسم الطالب بالغة العربية</td>
+                      <td class="text-center">{{certificate?.StudentArabicName}} <span class="d-inline-block mx-5">-</span> {{certificate?.StudentEnglishName}}</td>
+                      <td style="width: 25%;" class="font-en text-start">Student Name</td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                       <td>إسم الطالب بالغه الانجليزية</td>
                       <td class="font-en">{{certificate?.StudentEnglishName}}</td>
-                  </tr>
+                  </tr> -->
                   <tr>
-                      <td>الهوية الإماراتية</td>
-                      <td>{{certificate?.EmiratesId || 'لا يمتلك هوية'}}</td>
+                      <td style="width: 25%;" class="font-ar">الهوية الإماراتية</td>
+                      <td class="text-center">{{certificate?.EmiratesId || 'لا يمتلك هوية'}}</td>
+                      <td style="width: 25%;" class="font-en text-start">Emirates ID</td>
+
                   </tr>
               </table>
 
-              <p class="mb-2 mt-6 fw-bold">قد التحق بالمدارس على النحو التالى :</p>
+              <div class="d-flex justify-content-between mb-3 mt-6 ">
+                <p class="font-ar fw-bold">قد التحق بالمدارس على النحو التالى :</p>
+                <p class=" font-en fw-bold">He / She enrolled in schools as follows:</p>
+              </div>
+
               <table class="blue-theme">
-                  <thead>
+                  <thead class="color-white">
                       <tr>
                           <th colspan="2">المرحله الدراسية</th>
                           <th  rowspan="2">
@@ -98,7 +101,7 @@
               </table>
           </section>
 
-          <section class="mt-6">
+          <!-- <section class="mt-6">
               <div class="row align-items-center">
                   <p class="col-md-4">
                       هذا ايصال تلقائى تم إنشاؤها تلقائيا عن هيئه الشارقه للتعليم الخاص
@@ -114,9 +117,24 @@
                       To verify this receipt please scan QR code.
                   </p>
               </div>
-          </section>
+          </section> -->
 
-          <div class="py-6"></div>
+          <div class="d-flex justify-content-end align-items-center mt-6">
+            <div class="fs-5 d-flex align-items-center">
+              <div class="text-center">
+                <p class="font-ar">شهادة مصدقة من هيئة الشارقة للتعليم </p>
+                <p class="font-en">Approved by Sharjah private Education Authority</p>
+
+                <p class="font-ar">للتأكد من صحه الشهادة يرجى مسح ضوئى للرمز </p>
+                <p class="font-en">To Check The Validity Of Certificate, Please Scane The QA</p>
+              </div>
+                <div class="">
+                  <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+                </div>
+            </div>
+          </div>
+
+          <div class="py-4"></div>
 
           <footer class="my-6 ">
               <div class="d-grid grid-cols-2 justify-between">
@@ -170,7 +188,7 @@
       <header>
         <div class="row">
           <div class="col-md-3">
-            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+            <!-- <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code> -->
           </div>
 
           <div class="col-md-6 text-center">
@@ -178,7 +196,7 @@
             <h1 class="fw-bold mb-3 font-en">Certificate of Good Conduct</h1>
             <p class="d-flex fs-2 justify-content-center gap-5 fw-bold ">
               <span>العام الدراسي</span>
-              <span class="font-en">{{certificate?.SchoolYear}}</span>
+              <span class="font-en">( {{certificate?.SchoolYear}} )</span>
               <span class="font-en">Academic Year</span>
             </p>
           </div>
@@ -188,9 +206,9 @@
         </div>
       </header>
 
-      <div class="row g-5 mt-6 fs-2">
+      <div class="row gx-5 mt-6 fs-2 p-5 radius-15 border-dark">
         <div class="col-md-6 ">
-          <div class="p-4 radius-15 border-dark">
+          <div class="">
             <div class="d-flex  mb-4 align-items-md-center gap-5">
               <span class="fw-bold">منهاج المدرسه:</span>
               <span>{{certificate?.SchoolCurriculumName?.Ar }}</span>
@@ -216,7 +234,7 @@
       </div>
 
 
-      <div class="row g-5 mt-6">
+      <div class="row g-5 mt-5">
         <div class="col-md-6 fs-2 p-4 radius-15 border-dark">
           <p>
             تشهد ادارة المدرسة أن الطالب/ة {{certificate?.StudentArabicName| uppercase}}
@@ -243,7 +261,7 @@
         </div>
       </div>
 
-      <div class="py-6"></div>
+      <!-- <div class="py-5"></div> -->
 
       <!-- <div class="">
         <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
@@ -304,6 +322,21 @@
         <div class="col-md-6 fs-2 text-start font-en" dir="ltr">This certificate is valid for one year from the date of issue.</div>
       </div>
 
+      <div class="d-flex justify-content-end align-items-center">
+        <div class="fs-5 d-flex align-items-center">
+          <div class="text-center">
+            <p class="font-ar">شهادة مصدقة من هيئة الشارقة للتعليم </p>
+            <p class="font-en">Approved by Sharjah private Education Authority</p>
+
+            <p class="font-ar">للتأكد من صحه الشهادة يرجى مسح ضوئى للرمز </p>
+            <p class="font-en">To Check The Validity Of Certificate, Please Scane The QA</p>
+          </div>
+            <div class="">
+              <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+            </div>
+        </div>
+      </div>
+
 
     </div>
 
@@ -311,15 +344,15 @@
       <header>
         <div class="row">
           <div class="col-md-3">
-            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+            <!-- <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code> -->
           </div>
 
           <div class="col-md-6 text-center">
             <h1 class="fw-bold mb-3">لمن يهمه الامر – الاستمرار في الدراسة</h1>
-            <h1 class="fw-bold mb-3">إلى من يهمه الأمر - متابعة الدراسة</h1>
+            <h1 class="fw-bold mb-3 font-en">To Whom It May Concern - Pursuing of Study</h1>
             <p class="d-flex fs-2 justify-content-center gap-5 fw-bold ">
               <span>العام الدراسي</span>
-              <span class="font-en">{{addSpaceBtwStrAndNum | wrapFn : certificate?.schoolYearAr}}</span>
+              <span class="font-en">( {{addSpaceBtwStrAndNum | wrapFn : certificate?.schoolYearAr}} )</span>
               <span class="font-en">Academic Year</span>
             </p>
           </div>
@@ -392,6 +425,21 @@
       </div>
 
       <div class="py-6"></div>
+
+      <div class="d-flex justify-content-end align-items-center">
+        <div class="fs-5 d-flex align-items-center">
+          <div class="text-center">
+            <p class="font-ar">شهادة مصدقة من هيئة الشارقة للتعليم </p>
+            <p class="font-en">Approved by Sharjah private Education Authority</p>
+
+            <p class="font-ar">للتأكد من صحه الشهادة يرجى مسح ضوئى للرمز </p>
+            <p class="font-en">To Check The Validity Of Certificate, Please Scane The QA</p>
+          </div>
+            <div class="">
+              <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+            </div>
+        </div>
+      </div>
 
       <!-- <div class="">
         <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
@@ -503,306 +551,204 @@
 
 
     <div *ngSwitchCase="certificateTypeEnum.TransferCertificate">
+
       <header>
-        <div class="row">
-          <div class="col-md-3">
-            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+
+        <div class="d-flex align-items-end justify-content-between">
+          <h2>{{certificate?.SchoolArabicName}}</h2>
+          <div class="">
+            <img class="logo-center" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
           </div>
 
-          <div class="col-md-6 text-center">
-            <h1 class="fw-bold mb-3">شهادة لمن يهمه الأمر بترك الدراسة</h1>
-            <p class="d-flex mb-3 fs-2 justify-content-center gap-5 fw-bold ">
-              <span>العام الدراسي</span>
-              <span class="font-en">{{certificate?.SchoolYear}}</span>
-              <span class="font-en">Academic Year</span>
-            </p>
-            <p class="fw-bold "> {{certificate?.StudentArabicName}} ( {{certificate?.StudentNumber}})</p>
-          </div>
-          <div class="col-md-3">
-            <img class="logo" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
-          </div>
+          <h2>{{certificate?.SchoolEnglishName}}</h2>
+
+        </div>
+
+        <div class="my-6"></div>
+        <div class="d-grid grid-cols-2 justify-between">
+            <div class="text-end fs-3">
+                <p class="text-decoration-underline mb-2 fw-bold">شهاده لمن يهمه الامر</p>
+                <span>( ترك طالب للدراسة / انتقال طالب خارج إمارة الشارقة)</span>
+            </div>
+            <div class="text-start fs-3">
+                <p class="text-decoration-underline mb-2 fw-bold font-en">CERTIFICATE TO WHOM IT MAY CONCERN</p>
+                <span class="font-en">STUDENT (  LEAVE /  TRANSFER )</span>
+            </div>
         </div>
       </header>
 
-      <div class="py-6"></div>
+      <table class="blue-theme mt-5">
+        <tr>
+            <td style="width: 25%;" class="font-ar">اسم الطالب بالغة العربية</td>
+            <td class="text-center">{{certificate?.StudentArabicName}}</td>
+            <td class="text-center"> {{certificate?.StudentEnglishName}}</td>
+            <td style="width: 25%;" class="font-en text-start">Student Name</td>
+        </tr>
+        <tr>
+            <td style="width: 25%;" class="font-ar">الهوية الإماراتية</td>
+            <td colspan="2" class="text-center">{{certificate?.EmiratesId || 'لا يمتلك هوية'}}</td>
+            <td style="width: 25%;" class="font-en text-start">Emirates ID</td>
+
+        </tr>
+        <tr>
+          <td style="width: 25%;" class="font-ar">تاريخ الميلاد</td>
+          <td colspan="2" class="text-center">{{certificate?.BirthDate | LocalizeDate}}</td>
+          <td style="width: 25%;" class="font-en text-start">Birth Date</td>
+
+      </tr>
+      <tr>
+        <td style="width: 25%;" class="font-ar">الجنسيه</td>
+        <td class="text-center">{{certificate?.Nationality}}</td>
+        <td style="width: 25%;" class="font-en text-start">Nationality</td>
+
+      </tr>
+    </table>
+
+    <!-- -------------------------------------- -->
+
+    <table class="blue-theme mt-5">
+      <tr>
+          <td style="width: 25%;" class="font-ar">اسم المدرسة</td>
+          <td class="text-center">{{certificate?.SchoolArabicName}}</td>
+          <td class="text-center"> {{certificate?.SchoolEnglishName}}</td>
+          <td style="width: 25%;" class="font-en text-start">School Name</td>
+      </tr>
+
+      <tr>
+          <td style="width: 25%;" class="font-ar">المنهاج</td>
+          <td class="text-center" colspan="2">--</td>
+          <td style="width: 25%;" class="font-en text-start">Curriculum</td>
+      </tr>
+    </table>
+
+    <table class="blue-theme mt-5">
+      <tr>
+        <td colspan="4" >
+          <div class="d-flex justify-content-between">
+            <div colspan="2" class="font-ar">بيانات الالتحاق : </div>
+            <div colspan="2" class="font-en">: Join statment</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+          <td style="width: 25%;" class="font-ar">تاريخ الالتحاق بالمدرسة : </td>
+          <td class="text-center">--</td>
+          <td style="width: 25%;" class="font-en text-start">Join date</td>
+      </tr>
+
+      <tr>
+          <td style="width: 25%;" class="font-ar">العام الدراسي</td>
+          <td class="text-center">{{certificate?.SchoolYear}}</td>
+          <td style="width: 25%;" class="font-en text-start">Academic Year </td>
+      </tr>
+      <tr>
+        <td style="width: 25%;" class="font-ar">الصف</td>
+        <td class="text-center">{{certificate?.GradeAr}}</td>
+        <td style="width: 25%;" class="font-en text-start">Grade</td>
+    </tr>
+
+    <tr>
+      <td style="width: 25%;" class="font-ar">الشعبة</td>
+      <td class="text-center">{{certificate?.DivisionAr}}</td>
+      <td style="width: 25%;" class="font-en text-start">Division</td>
+    </tr>
+    </table>
+
+    <!-- -------------------------------------- -->
+
+
+    <table class="blue-theme mt-5">
+      <tr>
+        <td colspan="4" >
+          <div class="d-flex justify-content-between">
+            <div colspan="2" class="font-ar"> بيانات الالتحاق : </div>
+            <div colspan="2" class="font-en"> : Join statment </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+          <td style="width: 25%;" class="font-ar">تاريخ ترك المدرسة : </td>
+          <td colspan="2" class="text-center">{{certificate?.TransferDate |LocalizeDate}}</td>
+          <td style="width: 25%;" class="font-en text-start">School leave date</td>
+      </tr>
+
+      <tr>
+          <td style="width: 25%;" class="font-ar">العام الدراسي</td>
+          <td colspan="2" class="text-center">{{certificate?.SchoolYear}}</td>
+          <td style="width: 25%;" class="font-en text-start">Academic Year </td>
+      </tr>
+      <tr>
+        <td style="width: 25%;" class="font-ar">بالصف</td>
+        <td colspan="2" class="text-center">{{certificate?.GradeAr}}</td>
+        <td style="width: 25%;" class="font-en text-start">Grade</td>
+      </tr>
+
+      <tr>
+        <td style="width: 25%;" class="font-ar">سبب الترك</td>
+        <td class="text-center">{{certificate?.ResonOfWithdrow}}</td>
+        <td class="text-center">{{certificate?.ResonOfWithdrow}}</td>
+        <td style="width: 25%;" class="font-en text-start">Leave reason</td>
+      </tr>
+
+      <tr>
+        <td style="width: 25%;" class="font-ar">نتيجة الطالب في آخر العام : </td>
+        <td colspan="2" class="text-center">--</td>
+        <td style="width: 25%;" class="font-en text-start">The Annual result </td>
+      </tr>
+    </table>
+
+      <div class="py-4"></div>
 
       <div class="">
-        <div class=" bg-gray-150 border-black p-3 border-2 align-items-center">
-          <div class="fs-2">البيانات الاساسية</div>
-        </div>
-        <div class="border-black  fs-2 p-3 border-2">
-          <div class="d-flex ">
-            <div class="col-md-6 grid-container">
-              <span class="">اسم المدرسة:</span>
-              <span>{{certificate?.SchoolArabicName}}</span>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="">
+            <div class="mb-5">تاريخ تحرير المستند : --</div>
+            <div class=""> ختم المدرسه : --</div>
+          </div>
 
-              <span class="">الصف</span>
-              <span>{{certificate?.GradeAr}}</span>
+          <div class="fs-5 d-flex align-items-center">
+            <div class="text-center">
+              <p class="font-ar">شهادة مصدقة من هيئة الشارقة للتعليم </p>
+              <p class="font-en">Approved by Sharjah private Education Authority</p>
 
-              <span class="">القسم:</span>
-              <span>{{certificate?.DivisionAr}}</span>
-
-              <!--<span class="">تاريخ القبول:</span>
-              <span>{{certificate?.AcceptanceDate |LocalizeDate}}</span> -->
-
-
-
-              <span class="">الديانة:</span>
-              <span>{{certificate?.Religion | currentLang}}</span>
-
-
-              <!-- <span class="">رقم البلدة:</span>
-              <span></span> -->
-
-              <!-- <span class="">رقم الهوية:</span>
-              <span>{{certificate?.EmiratesId || 'لا يمتلك هوية'}}</span> -->
-
-              <!-- <span class="">رقم جواز السفر:</span>
-              <span>{{certificate?.PassportId}}</span> -->
-
-              <!-- <span class="">رقم الإقامة:</span>
-              <span></span> -->
+              <p class="font-ar">للتأكد من صحه الشهادة يرجى مسح ضوئى للرمز </p>
+              <p class="font-en">To Check The Validity Of Certificate, Please Scane The QA</p>
             </div>
-
-            <div class="col-md-6 grid-container">
-
-
-              <!--<span class="">سبب القبول:</span>
-              <span></span> -->
-
-              <span class="">تاريخ الانسحاب:</span>
-              <span>{{certificate?.TransferDate |LocalizeDate}}</span>
-
-              <span class="">سبب الانسحاب:</span>
-              <span>{{certificate?.ResonOfWithdrow}}</span>
-
-
-              <span class="">تاريخ الميلاد:</span>
-              <span>{{certificate?.BirthDate |LocalizeDate}}</span>
-
-              <span class="">الجنسية:</span>
-              <span>{{certificate?.Nationality}}</span>
-
-              <!-- <span class="">مكان الميلاد:</span>
-              <span></span>
-
-              <span class="">رقم الأسرة:</span>
-              <span></span> -->
-
-
-              <!-- <span class="">تاريخ الانتهاء:</span>
-              <span>{{certificate?.EmiratesIdExpirationDate | LocalizeDate}}</span> -->
-
-              <!-- <span class="">تاريخ الانتهاء:</span>
-              <span>{{certificate?.PassportIdExpirationDate | LocalizeDate}}</span> -->
-
-              <!-- <span class="">تاريخ الانتهاء:</span>
-              <span></span> -->
-
-            </div>
-          </div>
-          <div class="d-flex mt-5">
-            <div class="col-md-6 grid-container">
-              <span class="">رقم الهوية:</span>
-              <span>{{certificate?.EmiratesId || 'لا يمتلك هوية'}}</span>
-
-              <!-- <span class="">رقم الإقامة:</span>
-              <span></span> -->
-            </div>
-
-            <div class="col-md-6 grid-container">
-              <span class="">تاريخ الانتهاء:</span>
-              <span>{{certificate?.EmiratesIdExpirationDate | LocalizeDate}}</span>
-
-
-              <!-- <span class="">تاريخ الانتهاء:</span> -->
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="row fs-2 border-black border-2 mt-6">
-          <div class=" bg-gray-150 border-black p-3 border-2 align-items-center">
-            <div class="fs-2">العائلة والمعارف</div>
-          </div>
-          <div class=" p-4 col-md-6 grid-container">
-            <span class="">الاسم:</span>
-            <span>{{certificate?.GuardianName}}</span>
-
-            <span class="">العمل:</span>
-            <span></span>
-
-            <span class="">عنوان السكن:</span>
-            <span></span>
-          </div>
-
-          <div class=" p-4 col-md-6 grid-container">
-            <span class="">صلة القرابة:</span>
-            <span>{{certificate?.GuardianRelativeRelation}}</span>
-
-            <span class="">رقم هاتف العمل:</span>
-            <span></span>
-
-            <span class="">رقم هاتف المنزل:</span>
-            <span></span>
-
-            <span class="">رقم الهاتف المتحرك:</span>
-            <span>{{certificate?.GuardianPhoneNumber}}</span>
-
-          </div>
-        </div> -->
-
-
-        <!-- <div class="mt-6">
-          <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
-            <div class="col-md-6 fs-2">للاستخدام الرسمي فقط</div>
-            <div class="col-md-6 fs-2 text-start font-en" dir="ltr">For Official Use Only by School</div>
-          </div>
-
-          <div class="row fs-2 border-black p-3 border-2">
-
-              <div class="col-md-6 ">
-                <div class="">
-                  <div class="d-flex  mb-4 align-items-md-center gap-5">
-                    <span class="">اسم الموظف المختص:</span>
-                    <span></span>
-                  </div>
-                  <div class="d-flex align-items-md-center gap-5 mb-4">
-                    <span class="">التوقيع :</span>
-                    <span></span>
-                  </div>
-                </div>
-
+              <div class="">
+                <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
               </div>
-
-            <div class="d-flex justify-content-between">
-              <span class="col-md-4">تاريخ الاصدار:</span>
-              <span class="col-md-3"> مدير المدرسة</span>
-              <span class="col-md-3" >الطابع / الخاتم</span>
-            </div>
           </div>
-
-        </div> -->
-
-        <!-- <div class="mt-6">
-          <div class="bg-gray-150 border-black p-3 border-2 align-items-center">
-            <div class="col-md-6 fs-2">صحية</div>
-          </div>
-          <table>
-            <tr>
-              <td>الحالة الصحية</td>
-              <td>التطعيمات</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>المشاكل الصحية</td>
-              <td rowspan="2"></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-            <tr>
-              <td class="">
-                <span class="w-50 float-end">التربية الخاصة</span>
-                <span class="w-50 border-end">
-                  <input class="mx-4" type="checkbox" style="height: 2rem; width: 2rem;">
-                </span>
-              </td>
-              <td>العلاج</td>
-
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-          </table>
-        </div> -->
-
-
-        <div class="mt-6">
-          <div class="bg-gray-150 border-black p-3 border-2 align-items-center">
-            <div class="col-md-6 fs-2">النتائج الدراسية</div>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>سنة</th>
-                <th>اسم المدرسة</th>
-                <th>الصف</th>
-                <th>الدرجة النهائية</th>
-                <th>نتيجة الطالب</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let year of certificate?.FinalDegrees">
-                <td>{{year?.schoolyear}}</td>
-                <td>{{year?.schoolName}}</td>
-                <td>{{year?.GradeName}}</td>
-                <td>{{year?.FinalResult}}</td>
-                <td>{{year?.Degree}}</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
-
-        <div class="mt-6">
-          <div class="bg-gray-150 border-black p-3 border-2 align-items-center">
-            <div class="col-md-6 fs-2">فهرس النتائج الدراسية</div>
-          </div>
-          <table>
-            <tbody>
-              <tr>
-                <td>-</td>
-                <td>الدرجة النهائية غير مطبقة</td>
-              </tr>
-              <tr>
-                <td>لم يكتمل العام الدراسي</td>
-                <td>لم يتم اعتماد الدرجة النهائية</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- <div class="mt-5">
-          <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
-            <div class="col-md-6 fs-2">للاستخدام الرسمي فقط</div>
-          </div>
-
-          <div class="row fs-2 border-black p-3 border-2">
-
-              <div class="col-md-6 ">
-                <div class="">
-                  <div class="d-flex  mb-4 align-items-md-center gap-5">
-                    <span class="">اسم الموظف المختص:</span>
-                    <span></span>
-                  </div>
-                  <div class="d-flex align-items-md-center gap-5 mb-4">
-                    <span class="">التوقيع :</span>
-                    <span></span>
-                  </div>
-                </div>
-
-              </div>
-
-            <div class="d-flex justify-content-between">
-              <span class="col-md-4">تاريخ الاصدار:</span>
-              <span class="col-md-3"> مدير المدرسة</span>
-              <span class="col-md-3" >الطابع / الخاتم</span>
-            </div>
-          </div>
-
-        </div> -->
-
 
       </div>
+
+
+    <div class="text-center mt-6">
+      <p class="font-ar mb-3">المدرسة مرخصة من قبل هيئة الشارقة للتعليم الخاص – حكومة الشارقة – دولة الامارات العربية المتحدة</p>
+      <p class="font-en">The School Licensed by the Sharjah Private Education Authority- Government of Sharjah – United Arab Emirate</p>
+    </div>
+
 
     </div>
 
     <div *ngSwitchCase="certificateTypeEnum.BoardCertificate">
       <img class="w-100" [src]="certificate?.Attachments[0]" onerror="this.src='assets/images/shared/image.svg'">
-      <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+
+      <div class="d-flex justify-content-end align-items-center">
+        <div class="fs-5 d-flex align-items-center">
+          <div class="text-center">
+            <p class="font-ar">شهادة مصدقة من هيئة الشارقة للتعليم </p>
+            <p class="font-en">Approved by Sharjah private Education Authority</p>
+
+            <p class="font-ar">للتأكد من صحه الشهادة يرجى مسح ضوئى للرمز </p>
+            <p class="font-en">To Check The Validity Of Certificate, Please Scane The QA</p>
+          </div>
+            <div class="">
+              <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+            </div>
+        </div>
+      </div>
+      <!-- <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code> -->
 
     </div>
 
@@ -898,8 +844,8 @@
           </div>
 
           <div class="text-center">
-            <h1 class="fw-bold mb-3 font-ar">ﺑﻄﺎﻗﺔ ﺗﻘﻴﻴﻢ ﺍﻟﻌﺎﻡ ﺍﻟﺪﺭﺍﺳﻲ <span >{{certificate?.SchoolYearName?.Ar}}</span></h1>
-            <h1 class="fw-bold mb-3 font-en">Report Card for the Academic  <span>{{certificate?.SchoolYearName?.en}}</span></h1>
+            <h1 class=" mb-3 font-ar">شهادة ﺗﻘﻴﻴﻢ ( {{reportingPeriods.ar[certificate?.ReportingPeriod]}} ) ﺍﻟﻌﺎﻡ ﺍﻟﺪﺭﺍﺳﻲ <span >{{certificate?.SchoolYearName?.Ar}}</span></h1>
+            <h1 class=" mb-3 font-en">Report Card ( {{ reportingPeriods.en[certificate?.ReportingPeriod] }} ) of  <span>{{certificate?.SchoolYearName?.Ar}}</span></h1>
           </div>
 
         </div>
@@ -957,56 +903,56 @@
               </td>
             </tr>
             <tr class="text-center fw-bold">
-              <td style="width: 20%;" rowspan="2">المواد الدراسية</td>
-              <td style="width: 20%;" rowspan="2">Subject</td>
+              <td style="width: 25%;" rowspan="2">المواد الدراسية</td>
+              <td style="width: 25%;" rowspan="2">Subject</td>
               <td style="width: 5%;">النهاية الصغرى</td>
               <td style="width: 5%;">النهاية العظمى</td>
               <td style="width: 5%;">الدرجة بالارقام</td>
               <td style="width: 5%;">الدرجة بالأحرف</td>
               <td style="width: 5%;">المعدل</td>
               <td style="width: 5%;">عدد الساعات</td>
-              <td style="width: 30%">ملاحظات</td>
+              <!-- <td style="width: 30%">ملاحظات</td> -->
             </tr>
             <tr class="text-center fw-bold font-en">
               <td style="width: 5%;">Min</td>
               <td style="width: 5%;">Max</td>
-              <td style="width: 5%;">Mark</td>
-              <td style="width: 5%;">Grade</td>
-              <td style="width: 5%;">GPA</td>
-              <td style="width: 5%;">Credit Hour</td>
-              <td colspan="3" style="width: 30%">Comments</td>
+              <td style="width: 10%;">Mark</td>
+              <td style="width: 10%;">Grade</td>
+              <td style="width: 10%;">GPA</td>
+              <td style="width: 10%;">Credit Hour</td>
+              <!-- <td colspan="3" style="width: 30%">Comments</td> -->
             </tr>
           </thead>
           <ng-container *ngIf="certificate?.Subjects?.length">
             <tr class="text-center" *ngFor="let subject of certificate?.Subjects">
-                <td style="width: 20%;">{{subject.SubjectName.Ar}}</td>
-                <td class="font-en" style="width: 20%;">{{subject?.SubjectName.En}}</td>
+                <td style="width: 25%;">{{subject.SubjectName.Ar}}</td>
+                <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
                 <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
                 <td style="width: 5%;">{{subject?.SubjectMaxmumDegree || '-'}}</td>
-                <td style="width: 5%;">{{subject?.Degree || '-'}}</td>
+                <td style="width: 10%;">{{subject?.Degree || '-'}}</td>
 
-                <td style="width: 5%;">{{subject?.Rate ||'-'}}</td>
-                <td style="width: 5%;">{{subject?.StudentGPA || '-'}}</td>
-                <td style="width: 5%;">{{subject?.StudentHour || '-'}}</td>
+                <td style="width: 10%;">{{subject?.Rate ||'-'}}</td>
+                <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
+                <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
 
-                <td colspan="3" style="width: 30%">{{subject?.Note}}</td>
+                <!-- <td colspan="3" style="width: 30%">{{subject?.Note}}</td> -->
             </tr>
 
             <tr class="text-center  fw-bold">
-              <td  style="width: 20%;">المجموع</td>
-              <td class="font-en" style="width: 20%;">Total</td>
+              <td  style="width: 25%;">المجموع</td>
+              <td class="font-en" style="width: 25%;">Total</td>
               <td style="width: 10%;">{{certificate?.TotalSubjectsMin || '-'}}</td>
               <td style="width: 10%">{{certificate?.TotalSubjectsMax || '-'}}</td>
               <td style="width: 10%;">{{certificate?.TotalStudentsDegree || '-'}}</td>
               <td style="width: 30%" class="font-en" colspan="3" rowspan="2">
                 GPA: {{certificate?.TotalStudentGPA || 0}}
               </td>
-              <td style="width: 30%" rowspan="2"></td>
+              <!-- <td style="width: 20%" rowspan="2"></td> -->
             </tr>
 
             <tr class="text-center  fw-bold">
-              <td  style="width: 20%;">النسبة المئوية</td>
-              <td class="font-en" style="width: 20%;">Average (%)</td>
+              <td  style="width: 25%;">النسبة المئوية</td>
+              <td class="font-en" style="width: 25%;">Average (%)</td>
               <td style="width: 10%;">---</td>
               <td style="width: 10%">---</td>
               <td style="width: 10%;">{{certificate?.StudentAveragePercentage |  number:'1.0-2'}} %</td>
@@ -1018,18 +964,24 @@
           <ng-container *ngIf="certificate?.Subjects?.length">
             <ng-container *ngIf="subject?.IsAddToFinalScore">
               <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects">
-                  <td  style="width: 20%;">{{subject.SubjectName.Ar}}</td>
-                  <td class="font-en" style="width: 20%;">{{subject?.SubjectName.En}}</td>
+                  <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
+                  <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
                   <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
                   <td style="width: 5%">{{subject?.SubjectMaxmumDegree || '-'}}</td>
-                  <td style="width: 5%;">{{subject?.Degree}}</td>
+                  <td style="width: 10%;">{{subject?.Degree}}</td>
 
-                  <td style="width: 5%;">{{subject?.Rate || '-'}}</td>
-                  <td style="width: 5%;">{{subject?.StudentGPA || '-'}}</td>
-                  <td style="width: 5%;">{{subject?.StudentHour || '-'}}</td>
-                  <td style="width: 30%">{{subject?.Note}}</td>
+                  <td style="width: 10%;">{{subject?.Rate || '-'}}</td>
+                  <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
+                  <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
+                  <!-- <td style="width: 30%">{{subject?.Note}}</td> -->
                 </tr>
             </ng-container>
+
+            <!-- <tr class="text-center" *ngFor="let subject of certificate?.Subjects">
+              <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
+              <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
+               <td  colspan="6">هذا الطالب ابدى التميز خلال السنه الدراسيه وعليه فاننا نمنحه اتلدرجه الكليه واعطائه شهاده تقدير على مجهوده واخلاقه العاليه</td>
+            </tr> -->
 
 
               <!-- <tr class="text-center bg-gray-150">
@@ -1087,7 +1039,23 @@
       <p class="font-en text-start ">The School is Licensed from Sharjah Private Education Authority – Sharjah Government – United Arab Emirates </p>
 
 
+
       <div class="d-flex justify-content-end align-items-center mt-6">
+        <div class="fs-5 d-flex align-items-center">
+          <div class="text-center">
+            <p class="font-ar">شهادة مصدقة من هيئة الشارقة للتعليم </p>
+            <p class="font-en">Approved by Sharjah private Education Authority</p>
+
+            <p class="font-ar">للتأكد من صحه الشهادة يرجى مسح ضوئى للرمز </p>
+            <p class="font-en">To Check The Validity Of Certificate, Please Scane The QA</p>
+          </div>
+            <div class="">
+              <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+            </div>
+        </div>
+      </div>
+
+      <!-- <div class="d-flex justify-content-end align-items-center mt-6">
         <div class="text-center">
           <p class="font-ar">شهادة مصدقة من هيئة الشارقة للتعليم </p>
           <p class="font-en">Approved by Sharjah private Education Authority</p>
@@ -1095,7 +1063,7 @@
           <div class="">
             <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
           </div>
-      </div>
+      </div> -->
 
     </div>
 
@@ -1314,6 +1282,21 @@
 
       </div>
 
+
+      <div class="d-flex justify-content-end align-items-center mt-6">
+        <div class="fs-5 d-flex align-items-center">
+          <div class="text-center">
+            <p class="font-ar">شهادة مصدقة من هيئة الشارقة للتعليم </p>
+            <p class="font-en">Approved by Sharjah private Education Authority</p>
+
+            <p class="font-ar">للتأكد من صحه الشهادة يرجى مسح ضوئى للرمز </p>
+            <p class="font-en">To Check The Validity Of Certificate, Please Scane The QA</p>
+          </div>
+            <div class="">
+              <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+            </div>
+        </div>
+      </div>
 
       <!-- <div class="fs-2 border-black p-4 border-2 fs-4 mt-4">
 
