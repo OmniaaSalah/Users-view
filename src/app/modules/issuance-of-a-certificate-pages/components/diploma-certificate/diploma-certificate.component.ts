@@ -37,7 +37,6 @@ export class DiplomaCertificateComponent implements OnInit {
   showError
 
   constructor(
-    private fb:FormBuilder,
     private toastr: ToastrService,
     private translate: TranslateService,
     private certificatesService: IssuanceCertificaeService,
@@ -94,14 +93,14 @@ export class DiplomaCertificateComponent implements OnInit {
 
 
   onAttachmentSelected(attachment, index) {
-    let urlParts =attachment.url?.split(".")
-    let isImage = ['jpge','jpg','png'].includes(urlParts[urlParts.length-1]?.toLowerCase())
+    // let urlParts =attachment.url?.split(".")
+    // let isImage = ['jpge','jpg','png'].includes(urlParts[urlParts.length-1]?.toLowerCase())
 
 
-    if(!isImage){
-      this.showError =true;
-      return
-    }else this.showError =false;
+    // if(!isImage){
+    //   this.showError =true;
+    //   return
+    // }else this.showError =false;
 
     let i = this.diplomaCertificateForm[index].attachments.indexOf(attachment.id);
 
