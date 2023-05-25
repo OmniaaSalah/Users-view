@@ -408,9 +408,8 @@ confirmOTP()
 }
 saveUserObj()
 {
-  if(!this.UAEUnregisteredUser?.phone)
+  if(this.UAEUnregisteredUser?.phone?.length!=10)
   {
-    console.log(this.phoneNumber)
     this.UAEUnregisteredUser.phone=this.phoneNumber.value;
   }
 
