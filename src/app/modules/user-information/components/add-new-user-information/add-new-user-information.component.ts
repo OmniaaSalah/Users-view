@@ -29,6 +29,7 @@ export class AddNewUserInformationComponent implements OnInit {
   exclamationIcon = faExclamationCircle;
   userFormGrp: FormGroup;
   userId = this.route.snapshot.paramMap.get('userId')
+  notFoundUserError;
   constructor(
     private route: ActivatedRoute,
      private fb: FormBuilder,
@@ -188,21 +189,27 @@ AddAccount(){
 getUserById(){
   this.email.disable();
   this.userInformation.getUsersById(Number(this.userId)).subscribe(response => {
-
-    this.accountModel= response;
-    this.userFormGrp.patchValue({
-      arabicFullName: this.accountModel.arabicFullName,
-      englishFullName:this.accountModel.fullName,
-      phoneNumber: this.accountModel.phoneNumber,
-      email: this.accountModel.email,
-      password :  this.accountModel.password,
-      confirmPassword :  this.accountModel.password,
-      arabicNickName : this.accountModel.arabicSurname,
-      englishNickName:this.accountModel.englishSurname,
-      identityNumber : this.accountModel.emiratesIdNumber,
-      userStatus : this.accountModel.isActive,
-      privateRole:this.accountModel.roles[0]
-    })
+   
+   if(response?.statusCode=='OK')
+    {  this.accountModel= response.result;
+      this.userFormGrp.patchValue({
+        arabicFullName: this.accountModel.arabicFullName,
+        englishFullName:this.accountModel.fullName,
+        phoneNumber: this.accountModel.phoneNumber,
+        email: this.accountModel.email,
+        password :  this.accountModel.password,
+        confirmPassword :  this.accountModel.password,
+        arabicNickName : this.accountModel.arabicSurname,
+        englishNickName:this.accountModel.englishSurname,
+        identityNumber : this.accountModel.emiratesIdNumber,
+        userStatus : this.accountModel.isActive,
+        privateRole:this.accountModel.roles[0]
+      })
+    }
+    else if(response?.statusCode=='NotFound')
+    {
+      this.notFoundUserError=response?.errorLocalized;
+    }
 
   })
 }
