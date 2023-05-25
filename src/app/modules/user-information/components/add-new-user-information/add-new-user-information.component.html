@@ -1,9 +1,11 @@
 
 <div style="overflow-x: hidden;">
 
+    <ng-container *ngIf="notFoundUserError">
+        <app-informative-block title={{notFoundUserError|currentLang}} src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+      </ng-container>
 
-
-  <div class="bg-white radius-15 p-5 border-dark">
+  <div class="bg-white radius-15 p-5 border-dark" *ngIf="!notFoundUserError">
 
         <div class="col-7 bg-orange-50 p-3 fs-3 radius-15" *ngIf="accountModel?.roleCode==='Teacher'">
           <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
@@ -184,7 +186,9 @@
 
                       </div>
                       <div  class="col-xs-1 col-lg-2 changePassword "  *ngIf="userId">
+                        <ng-container *permit="ClaimsEnum.S_U_UserPassword">
                           <button  (click)="openPasswordModel=true;clearPasswordModel()"><a class="color-skyBlue-400">{{'shared.editPassword'|translate}}</a></button>
+                        </ng-container>
                       </div>
 
                   </div>

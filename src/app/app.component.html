@@ -115,7 +115,7 @@
     <div class="here">
         <p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
             <form [formGroup]="parentForm">
-                <div class="custom-form">
+                <div class="custom-form custom-validation-form">
                     <div class="mb-5">
                         <label class="label" for="">{{'dashboard.Messages.Enter the message title' | translate}} <span class="star">*</span></label>
                         <input class="form-control py-3 my-3" type="text" formControlName="title" placeholder="{{'dashboard.Messages.Enter the message title' | translate}}">
@@ -141,7 +141,7 @@
 
                     <div class="mb-5">
                         <label class="label" for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-                        <p-dropdown [options]="messagesTypes" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id" appValidation></p-dropdown>
+                        <p-dropdown [options]="messagesTypes" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id"  [ngClass]="{'ng-invalid ng-dirty':parentForm.get('messageType')?.errors?.['required']&& parentForm.get('messageType')?.touched}"></p-dropdown>
                         <div class="text-danger" *ngIf="this.parentForm.get('messageType')?.touched && this.parentForm.get('messageType')?.invalid && this.parentForm.get('messageType')?.errors">
                             <small *ngIf="this.parentForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
                         </div>

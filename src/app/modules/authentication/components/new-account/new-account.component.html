@@ -361,10 +361,10 @@
                   <div class="row gx-5 mt-4">
                     <div class="col-md-6 custom-form custom-validation-form pt-0">
 
-                        <div  [ngClass]="UAEUnregisteredUser?.phone?'d-flex':''">
+                        <div  [ngClass]="UAEUnregisteredUser?.phone?.length==10?'d-flex':''">
                             <label class="color-gray-300 label">{{ 'sign up.phoneNumber'|translate }}</label>
-                            <span class="color-primary mx-3 " *ngIf="UAEUnregisteredUser?.phone">{{UAEUnregisteredUser?.phone}}</span>
-                            <ng-container  *ngIf="!UAEUnregisteredUser?.phone">
+                            <span class="color-primary mx-3 " *ngIf="UAEUnregisteredUser?.phone?.length==10">{{UAEUnregisteredUser?.phone}}</span>
+                            <ng-container  *ngIf="UAEUnregisteredUser?.phone?.length!=10">
                                 <input type="text" pInputText [formControl]="phoneNumber"  [LangRestrict]="'numb'" maxlength="10" class="form-control "  placeholder="{{'shared.Write phoneNumber'|translate}}">
                             
                                 <div [hidden]="phoneNumber.valid || phoneNumber.untouched">
