@@ -68,6 +68,7 @@ export class SurveysListComponent implements OnInit {
           { label: this.translate.instant('dashboard.surveys.surveyList'), routerLink: '/educational-settings/surveys', routerLinkActiveOptions: { exact: true } }],
       }
     );
+    localStorage.removeItem('addedSurveyStatus');
   }
   getSurveyList(){
 

@@ -107,7 +107,7 @@ export  enum ClaimsEnum{
     E_TransferStudentToAnotherDivision="E_TransferStudentToAnotherDivision",
     S_StudentCertificateIssue="S_StudentCertificateIssue",
  
-    
+    S_U_UserPassword="S_U_UserPassword",
     S_EditMangerInformation="S_EditMangerInformation",
 
     // =========================================================

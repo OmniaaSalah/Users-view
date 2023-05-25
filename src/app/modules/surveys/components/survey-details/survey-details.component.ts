@@ -1,4 +1,4 @@
-import {  Component, OnInit } from '@angular/core';
+import {  Component, OnInit} from '@angular/core';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {  faExclamationCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -108,7 +108,11 @@ get surveyQuestionType()
     this.questionType=this.surveyService.questionType;
     this.surveyTypes=this.surveyService.surveyType;
     if(this.surveyId!=null)
-    {this.getSurveyById();}
+    {
+      if(localStorage.getItem('addedSurveyStatus')) this.step=2
+
+      this.getSurveyById();
+    }
     else
     {
       this.addNewQuestion();
@@ -221,6 +225,7 @@ this.surveyService.addSurvey(this.savedSurvey).subscribe((res)=>{
   this.isBtnLoading=false;
   this.toastr.success(this.translate.instant('dashboard.surveys.survey added Successfully'));
   this.router.navigateByUrl(`/educational-settings/surveys/Survey/${res.result.createdSurveyId}`);
+  localStorage.setItem('addedSurveyStatus',"1");
 },(err)=>{ this.isBtnLoading=false;
     this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));})
   }
