@@ -4,33 +4,34 @@ import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { AddNewUserInformationComponent } from './components/add-new-user-information/add-new-user-information.component';
 import { ViewListOfUsersComponent } from './components/users-list/users-list.component';
 import { LayoutComponent } from 'src/app/layout/layout.component';
+import { Layout } from 'src/app/layout/layout-routing.service';
 
 const routes: Routes = [
-  {
-    path: '', component: LayoutComponent,
-    children:[
-      {
 
-        path:"users-list",component:ViewListOfUsersComponent,
-        data:{
-          RouteKey: RouteEnums.Users,
-          title:{ar:'المستخدمين',en: 'System Users'}
-        }
-      },
-      {
-        path:"new-user",component:AddNewUserInformationComponent,
-        data:{
-          title:{ar:'اضافه مستخدم جديد',en: 'Create Users'}
-        }
-      },
-      {
-        path:"edit-user/:userId",component:AddNewUserInformationComponent,
-        data:{
-          title:{ar:'تعديل مستخدم جديد',en: 'Update Users'}
-        }
+  Layout.childRoutes([
+    {
+
+      path:"users-list",component:ViewListOfUsersComponent,
+      data:{
+        RouteKey: RouteEnums.Users,
+        title:{ar:'المستخدمين',en: 'System Users'}
       }
-    ]
-  }
+    },
+    {
+      path:"new-user",component:AddNewUserInformationComponent,
+      data:{
+        title:{ar:'اضافه مستخدم جديد',en: 'Create Users'}
+      }
+    },
+    {
+      path:"edit-user/:userId",component:AddNewUserInformationComponent,
+      data:{
+        title:{ar:'تعديل مستخدم جديد',en: 'Update Users'}
+      }
+    }
+  ])
+
+
 ];
 
 @NgModule({

@@ -45,9 +45,7 @@ export class IssueCertificateComponent implements OnInit {
   componentHeaderData: IHeader = {
     breadCrump: [
       {
-        label: this.translate.instant(
-          'dashboard.parentHome.Request certificates'
-        ),
+        label: this.translate.instant('dashboard.parentHome.Request certificates'),
         routerLink: '/certificates/ask-certificate',
         routerLinkActiveOptions: { exact: true },
       },
@@ -161,6 +159,7 @@ export class IssueCertificateComponent implements OnInit {
 
       }
       else if(this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate){
+
         this.childList =res.students.filter(el =>{
           if(el.curriculumCode== CurriculumCodeEnum.Philippines){
             return Number(el.gradeCode) >= GradeCodeEnum.ten
@@ -173,6 +172,10 @@ export class IssueCertificateComponent implements OnInit {
         this.skeletonShown = false
         return;
 
+      }else if(this.selectedCertificate.value == CertificatesEnum.SchoolInternalSubjectsCertificate){
+          this.childList =res.students.filter(el =>{
+            return el.curriculumCode==CurriculumCodeEnum.British
+          })
       }
 
       this.childList = res.students

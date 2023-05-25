@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   inject,
   NgZone,
@@ -98,7 +97,7 @@ export class NavbarComponent implements OnInit {
     private sharedService: SharedService,
     private authService: AuthenticationService,
     private translation: TranslationService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   ngOnInit(): void {
@@ -188,14 +187,14 @@ export class NavbarComponent implements OnInit {
       this.activeMenuItemChanged = true;
     } else {
       this.activeMenuItemChanged = false;
-      this.activeMenuItem = this.menuItems.find(el=> el.id === id);
+      this.activeMenuItem = {...this.menuItems.find(el=> el.id === id)};
       this.isMenuOpend = true;
 
       setTimeout(() => {
         this.activeMenuItemChanged = true;
       }, 320);
     }
-    this.activeMenuItem = this.menuItems.find(el=> el.id === id);
+    this.activeMenuItem = {...this.menuItems.find(el=> el.id === id)};
   }
 
 

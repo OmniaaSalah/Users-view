@@ -10,12 +10,12 @@ export class LanguageRestrictionDirective {
 
   constructor(private elementRef:ElementRef) { }
 
-  
+
   @HostListener('keypress', ['$event']) onInput(event) {
- 
+
     var charCode = (event.which) ? event.which : event.keyCode;
     if(this.LangRestrict=='ar')
-   { 
+   {
     if (!(charCode >=1569 && charCode <=1594) &&!(charCode ==1567 )&&!(charCode ==45 )&&!(charCode ==95 )&&!(charCode ==32 )&& !(charCode >=1600 && charCode <=1621)&&!(charCode >= 1632 && charCode <= 1641)&&!(charCode > 47 && charCode < 58))
     {
     event.preventDefault();
@@ -23,13 +23,12 @@ export class LanguageRestrictionDirective {
     return false;
     }
     return true;
- 
+
   }
 
    else if(this.LangRestrict=='en')
    {
-  
-    console.log(charCode)
+
     if (!(charCode <123  && charCode > 96)&&!(charCode ==63)&&!(charCode ==45 )&&!(charCode ==95 )&&!(charCode ==32 )&&!(charCode < 91 && charCode > 64)&&!(charCode > 47 && charCode < 58))
      {
       event.preventDefault();

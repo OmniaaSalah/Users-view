@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { take } from 'rxjs';
+import { catchError, of, take } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 
 @Injectable({
@@ -11,7 +11,8 @@ export class AddChildService {
 
 
    postChildWithoudIdentity(data){
-    return this.http.post('/Child',data).pipe(take(1))
+    return this.http.post('/Child',data).
+    pipe(take(1))
    }
 
    sendRelinkChildReq(data){
@@ -21,7 +22,8 @@ export class AddChildService {
 
 
    addChildWithIdentity(data,attachments){
-    return this.http.post(`/Child/emiratesId`,attachments, data).pipe(take(1))
+    return this.http.post(`/Child/emiratesId`,attachments, data)
+    .pipe(take(1))
    }
 
 }

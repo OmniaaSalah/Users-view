@@ -30,13 +30,14 @@ export class PageHeaderComponent implements OnInit {
   ngOnInit(): void {
 
     this.headerService.Header.subscribe((response: IHeader) => {
+
       this.breadCrump = response.breadCrump;
       this.mainTitle = response?.mainTitle;
       this.subTitle = response?.subTitle;
       // this.showContactUs = response?.showContactUs;
-      this.showNoOfNotifications = response?.showNoOfNotifications;
-      this.showNoOfMessages = response?.showNoOfMessages;
-      this.showNotificationActionBtn = response?.showNotificationActionBtn;
+      // this.showNoOfNotifications = response?.showNoOfNotifications;
+      // this.showNoOfMessages = response?.showNoOfMessages;
+      // this.showNotificationActionBtn = response?.showNotificationActionBtn;
 
     });
 
