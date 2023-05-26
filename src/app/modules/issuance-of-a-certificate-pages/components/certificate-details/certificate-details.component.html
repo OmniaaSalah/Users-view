@@ -48,10 +48,6 @@
                       <td class="text-center"> {{certificate?.StudentEnglishName}}</td>
                       <td style="width: 25%;" class="font-en text-start">Student Name</td>
                   </tr>
-                  <!-- <tr>
-                      <td>إسم الطالب بالغه الانجليزية</td>
-                      <td class="font-en">{{certificate?.StudentEnglishName}}</td>
-                  </tr> -->
                   <tr>
                       <td style="width: 25%;" class="font-ar">الهوية الإماراتية</td>
                       <td colspan="2" class="text-center">{{certificate?.EmiratesId || 'لا يمتلك هوية'}}</td>
@@ -102,26 +98,8 @@
               </table>
           </section>
 
-          <!-- <section class="mt-6">
-              <div class="row align-items-center">
-                  <p class="col-md-4">
-                      هذا ايصال تلقائى تم إنشاؤها تلقائيا عن هيئه الشارقه للتعليم الخاص
-                      <br>
-                      للتحقق من صحه هذا الايصال يرجى عمل مسح ضوئى للرمز
-                  </p>
-                  <div class="col-md-4 text-center">
-                    <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
-                  </div>
-                  <p dir="ltr" class="col-md-4 font-en text-start">
-                      This is an auto created receipt, issued by Sharjah Private Education Authority.
-                      <br>
-                      To verify this receipt please scan QR code.
-                  </p>
-              </div>
-          </section> -->
-
           <div class="d-flex justify-content-end align-items-center mt-6">
-            <div class="fs-4 d-flex align-items-center  gap-3 ">
+            <div class="fs-4 d-flex align-items-center">
               <div class="text-start">
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
                 <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -271,7 +249,7 @@
       </div>
 
       <div class="d-flex justify-content-end align-items-center">
-        <div class="fs-4 d-flex align-items-center  gap-3 ">
+        <div class="fs-4 d-flex align-items-center">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -377,7 +355,7 @@
 
       <div class="py-6"></div>
       <div class="d-flex justify-content-end align-items-center">
-        <div class="fs-4 d-flex align-items-center  gap-3 ">
+        <div class="fs-4 d-flex align-items-center">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -394,111 +372,6 @@
         </div>
       </div>
 
-      <!-- <div class="">
-        <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
-          <div class="col-md-6 fs-2">للإستخدام الرسمي فقط من قبل المدرسة</div>
-          <div class="col-md-6 fs-2 text-start font-en" dir="ltr">For Official Use Only by School</div>
-        </div>
-
-        <div class="row fs-2 border-black p-3 border-2">
-
-            <div class="col-md-6 ">
-              <div class="">
-                <div class="d-flex  mb-4 align-items-md-center gap-5">
-                  <span class="">اسم الموظف المختص:</span>
-                  <span></span>
-                </div>
-                <div class="d-flex align-items-md-center gap-5 mb-4">
-                  <span class="">التوقيع :</span>
-                  <span></span>
-                </div>
-                <div class="d-flex  mb-4 align-items-md-center gap-5">
-                  <span class="">تاريخ الاصدار:</span>
-                  <span></span>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="col-md-6  justify-content-end" dir="ltr">
-              <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-                <span class="">Issued By:</span>
-                <span></span>
-              </div>
-              <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-                <span class="">Signature:</span>
-                <span></span>
-              </div>
-              <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-                <span class="">Date of Issue:</span>
-                <span></span>
-              </div>
-            </div>
-
-
-          <div class="d-flex justify-content-between">
-            <span>اعتماد مدير المدرسة</span>
-            <span class="font-en">Seal / الخ</span>
-            <span class="font-en">School Principal</span>
-          </div>
-
-        </div>
-
-      </div> -->
-
-      <!-- <div class="my-6">
-        <div class="row bg-gray-150 border-black p-3 border-2 align-items-center">
-          <div class="col-md-6 fs-2">للإستخدام الرسمي فقط من قبل الإدارة المختصة</div>
-          <div class="col-md-6 fs-2 text-start font-en" dir="ltr">For Official Use Only by Concerned Department</div>
-        </div>
-
-        <div class="row fs-2 border-black p-3 border-2">
-
-            <div class="col-md-6 ">
-              <div class="">
-                <div class="d-flex  mb-4 align-items-md-center gap-5">
-                  <span class="">اسم الموظف المختص بالمجلس:</span>
-                  <span></span>
-                </div>
-                <div class="d-flex align-items-md-center gap-5 mb-4">
-                  <span class="">التوقيع :</span>
-                  <span></span>
-                </div>
-                <div class="d-flex  mb-4 align-items-md-center gap-5">
-                  <span class="">تاريخ الاصدار:</span>
-                  <span></span>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="col-md-6  justify-content-end" dir="ltr">
-              <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-                <span class="">Issued By:</span>
-                <span></span>
-              </div>
-              <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-                <span class="">Signature:</span>
-                <span></span>
-              </div>
-              <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-                <span class="">Date of Issue:</span>
-                <span></span>
-              </div>
-            </div>
-
-
-          <div class="d-flex justify-content-between">
-            <span>اعتماد مدير خدمة العملاء</span>
-            <span class="font-en">Seal / الخ</span>
-            <span class="font-en">ADEC Customer Service</span>
-          </div>
-
-        </div>
-
-      </div> -->
 
     </div>
 
@@ -660,12 +533,12 @@
           </div>
 
           <div class="d-flex justify-content-end align-items-center">
-            <div class="fs-4 d-flex align-items-center  gap-3 ">
+            <div class="fs-4 d-flex align-items-center">
               <div class="text-start">
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
                 <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
               </div>
-                <div class="d-flexflex-column justify-content-center">
+                <div class="d-flex flex-column justify-content-center">
                   <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
                     <span class="">068041444</span>
                     <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
@@ -694,7 +567,7 @@
       <img class="w-100" [src]="certificate?.Attachments[0]" onerror="this.src='assets/images/shared/image.svg'">
 
             <div class="d-flex justify-content-end align-items-center">
-        <div class="fs-4 d-flex align-items-center  gap-3 ">
+        <div class="fs-4 d-flex align-items-center ">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -777,12 +650,12 @@
           <span class="col-md-2 text-center">ختم المدرسه</span>
 
 
-            <div class="fs-4 d-flex align-items-center  gap-3 ">
+            <div class="fs-4 d-flex align-items-center">
               <div class="text-start">
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
                 <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
               </div>
-                <div class="d-flexflex-column align-items-center">
+                <div class="d-flex flex-column align-items-center">
                   <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
                     <span class="">068041444</span>
                     <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
@@ -1007,12 +880,12 @@
 
 
       <div class="d-flex justify-content-end align-items-center mt-6">
-        <div class="fs-4 d-flex align-items-center  gap-3 ">
+        <div class="fs-4 d-flex align-items-center">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
           </div>
-            <div class="d-flexflex-column align-items-center">
+            <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
                 <span class="">068041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
@@ -1253,12 +1126,12 @@
 
 
       <div class="d-flex justify-content-end align-items-center mt-6">
-        <div class="fs-4 d-flex align-items-center  gap-3 ">
+        <div class="fs-4 d-flex align-items-center">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
           </div>
-            <div class="d-flexflex-column align-items-center">
+            <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
                 <span class="">068041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">

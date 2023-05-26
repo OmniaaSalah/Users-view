@@ -186,7 +186,7 @@
                         <label class="label" for="region">{{'shared.state'|translate }}  </label>
                         <p-dropdown [showClear]="true" [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
                     </div> -->
-                    <div class="col">
+                    <div class="col-md-4">
                         <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
                         <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                     </div>
@@ -206,7 +206,7 @@
                     <div [ngClass]="selectedSchoolId == school?.id ? 'schoolSelected' : ''"
                         class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100" >
                         <div class="">
-                            <img src="assets/images/school-logo.svg" alt="">
+                            <img [src]="school?.schoolLogo" fullbackImage style="width: 7rem;">
                         </div>
                         <div class="">
                             <p class="color-primary fs-3">{{school.name|currentLang}}</p>
