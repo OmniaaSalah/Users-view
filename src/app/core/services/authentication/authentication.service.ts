@@ -102,7 +102,7 @@ export class AuthenticationService {
     map((res)=>{
       return {
         token:res?.result?.token,
-        claims: res?.claims,
+        claims: res?.result?.claims||[],
         scope:res?.result?.scope,
         userId:res?.result?.userId,
         user:{...res?.result},
