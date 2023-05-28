@@ -94,9 +94,8 @@ export class AuthenticationMainComponent implements OnInit {
     );
     if (this.error_description) {
       this.openConfimModel = true;
-      this.confirmationMessage = this.translate.instant(
-        'login.user not complete Login with UEA pass'
-      );
+      this.confirmationMessage = this.translate.instant('login.user not complete Login with UEA pass');
+
     } else if (this.code) {
       console.log(this.code);
       this.loginInProgress = true;
@@ -391,18 +390,14 @@ export class AuthenticationMainComponent implements OnInit {
       .subscribe(
         (res) => {
           this.isUAeAccountBtnLoading = false;
-          this.toastService.success(
-            this.translate.instant('sign up.account saved successfully')
-          );
+          this.toastService.success(this.translate.instant('sign up.account saved successfully'));
           this.loginWithUAEPass(res?.result);
         },
         (err) => {
           this.isUAeAccountBtnLoading = false;
           this.closeConfirmationModel();
           this.toastService.error(
-            this.translate.instant(
-              'dashboard.AnnualHoliday.error,please try again'
-            )
+            this.translate.instant('dashboard.AnnualHoliday.error,please try again')
           );
         }
       );
@@ -418,6 +413,7 @@ export class AuthenticationMainComponent implements OnInit {
     this.userService.setToken(res?.user);
     this.userService.setUser(res?.user);
     this.userService.setScope(res?.scope);
+    this.userService.setClaims( ArrayOperations.arrayOfStringsToObject(res?.claims))
     localStorage.setItem('$AJ$token', res?.token);
     localStorage.setItem('UaeLogged', 'true');
     this.userService.isUserLogged$.next(true);
