@@ -1770,6 +1770,7 @@
             "meaning": "المعني",
             "successed": "ناجح",
             "retry": "راسب",
+            "donotShow":"لا تظهر",
             "retryExam":"اعادة امتحان",
             "add description": "إضافة وصف",
             "Are you sure that you want to delete Subject": "هل متاكد أنك تريد حذف المادة ",

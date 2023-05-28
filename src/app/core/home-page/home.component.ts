@@ -178,7 +178,7 @@ export class HomeComponent implements OnInit {
           title: this.translate.get('sideBar.reportsManagment.title'),
           bgColor:'#CD578A'
         },
-
+      },
         list: [
           {label:this.translate.get('sideBar.reportsManagment.chidren.studentsReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/students-reports',claims:[ClaimsEnum.S_MenuItem_StudentReport]},
           {label:this.translate.get('sideBar.reportsManagment.chidren.gurdiansReport'), icon:'assets/images/home/report-managment/report.svg', url:'/reports-managment/parents-reports',claims:[ClaimsEnum.S_MenuItem_GuardianReport]},
@@ -189,8 +189,7 @@ export class HomeComponent implements OnInit {
           {label:this.translate.get('sideBar.reportsManagment.chidren.EmployeesReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'/reports-managment/users-reports',claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport]},
           {label:this.translate.get('sideBar.reportsManagment.chidren.TeachersReport'), icon:'assets/images/home/report-managment/report-line.svg', url:'/reports-managment/teachers-reports',claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport]},
           {label:this.translate.get('sideBar.reportsManagment.chidren.TransferedStudentsReport'), icon:'assets/images/home/report-managment/report.svg', url:'/reports-managment/transfered-students-reports',claims:[ClaimsEnum.S_MenuItem_TransferedStudentsReport]}
-        ]
-      }
+        ]  
     },
 
     {
