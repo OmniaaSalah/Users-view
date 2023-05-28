@@ -168,7 +168,7 @@ export class AuthenticationService {
   }
   getMandatorySurveysOfGuardian(guardianId)
   {
-    return this.http.get(`/Survey/gurdian-required-surveys/${guardianId}`)
+    return this.http.get(`/Survey/gurdian-required-surveys/${guardianId}`).pipe(take(1), map((res) => res.result))
   }
 
   getSchoolUrgentMessage(userId)
