@@ -91,7 +91,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       daleelId: ['', Validators.required],
       studentNumber:['', Validators.required],
       ministerialId:['', Validators.required],
-      manhalNumber:['', Validators.required],
+      manhalNumber:[''],
 
       isSpecialAbilities:[],
       isSpecialClass:[],
