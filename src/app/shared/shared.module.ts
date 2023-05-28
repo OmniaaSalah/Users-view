@@ -56,6 +56,7 @@ import { FullbackImageDirective } from './directives/fullback-image.directive';
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 import { RequiredRolesDirective } from './directives/required-roles/required-roles.directive';
 import { ExcludeEmptyListPipe } from './pipes/exclude-empty-list.pipe';
+import { FormControlValidationMsgDirective } from './directives/validations/form-control-validation-msg.directive';
 
 registerLocaleData(localeAr);
 
@@ -109,6 +110,7 @@ registerLocaleData(localeAr);
     SubHeaderComponent,
     RequiredRolesDirective,
     ExcludeEmptyListPipe,
+    FormControlValidationMsgDirective,
 
   ],
   imports: [
@@ -183,6 +185,7 @@ registerLocaleData(localeAr);
     SubHeaderComponent,
     RequiredRolesDirective,
     ExcludeEmptyListPipe,
+    FormControlValidationMsgDirective
   ],
   providers:[SharedService]
 })
