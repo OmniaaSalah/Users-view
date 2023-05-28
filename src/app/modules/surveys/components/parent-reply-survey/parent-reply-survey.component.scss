@@ -4,10 +4,11 @@
     .file-hidden{
         position: relative;
         bottom:3rem;
-      app-file-upload{
-        .image-uploader{
-          .file-container{display: none;}
-    }
+        app-file-upload{
+            .image-uploader__upload{
+              display: none;
+        }
+    .heading {min-height: 0rem !important;}
     .full-file{
         .cancel{display: none;}
     }

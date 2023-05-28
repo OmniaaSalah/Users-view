@@ -143,7 +143,11 @@
                         &:hover{
                             background-color: transparent !important;
                         }
-                    }
+                        &.my-disabled{
+                            pointer-events: none;
+                            color: $color-gray-500 !important;
+                           }
+                    }           
                 }
             }
 

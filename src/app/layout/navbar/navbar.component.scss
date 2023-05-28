@@ -540,6 +540,9 @@
                     margin-top: -3rem;
 
                 }
+                &.my-disabled{
+                    pointer-events: none ;
+                }
             }
         }
 
