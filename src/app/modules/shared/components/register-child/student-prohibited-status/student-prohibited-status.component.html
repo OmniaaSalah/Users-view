@@ -20,14 +20,14 @@
                 <!-- <p class="required fs-4">{{'dashboard.students.daleelNumber' |translate}}</p>
                 <p-inputNumber formControlName="id" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber> -->
 
-                <p class="required fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
+                <p class="fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
                 <p-inputNumber formControlName="manhalNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
 
                 <p class="required fs-4">{{'dashboard.students.daleelNumber1' |translate}}</p>
                 <p-inputNumber formControlName="daleelId" [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
             </ng-container>
 
-            <ng-container *ngIf="currentUserScope !=scopeEnum.SPEA">
+            <ng-container *ngIf="currentUserScope !=scopeEnum.Employee">
                 <p class="required fs-4">{{ 'dashboard.students.studentSchoolId'|translate }}</p>
                 <p-inputNumber formControlName="studentNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
             </ng-container>

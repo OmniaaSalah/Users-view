@@ -98,8 +98,6 @@ export class FileUploadComponent implements OnInit,OnChanges {
   ngOnInit(): void {
 
     this.settingService.fileRules$.subscribe((rules:MapedFileRule)=> {
-      console.log(rules);
-
 
       this.filesRules =rules
 
