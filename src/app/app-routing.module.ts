@@ -6,6 +6,7 @@ import { CertificateDetailsComponent } from './modules/issuance-of-a-certificate
 import { HomeComponent } from './core/home-page/home.component';
 import { ClaimsGuard } from './core/guards/claims.guard';
 import { ClaimsEnum } from './shared/enums/claims/claims.enum';
+import { CheeckMandatoryServeyGuard } from './core/guards/check-mandatory-servey.guard';
 
 const routes: Routes = [
 
@@ -327,6 +328,7 @@ const routes: Routes = [
 
       {
         path: 'requests-list',
+        canActivate: [CheeckMandatoryServeyGuard],
         loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule),
         data:{
           title:{ar:'الطلبات',en: 'Requests List'}

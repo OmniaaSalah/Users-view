@@ -44,33 +44,34 @@
     <div class="row g-5 custom-form" [formGroup]="studentForm">
         <div class="col-md-4 col-lg-3  " formGroupName="name">
             <label class="label required">{{'dashboard.students.studentName'|translate}}</label>
-            <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+            <input type="text" formControlName="ar" appFormControlValidationMsg  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
         </div>
 
         <div class="col-md-4 col-lg-3 " formGroupName="surname">
             <label class="label required">{{'dashboard.students.studentNickname'|translate}}</label>
-            <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+            <input type="text" formControlName="ar" appFormControlValidationMsg pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
         </div>
 
         <div class="col-md-4 col-lg-3 ">
             <label class="label required">{{'shared.birthDay'|translate}}</label>
-            <p-calendar formControlName="birthDate" dateFormat="DD dd-mm-yy" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+            <p-calendar formControlName="birthDate" appFormControlValidationMsg dateFormat="DD dd-mm-yy" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
         </div>
 
         <div class="col-md-4 col-lg-3 ">
             <label class="label required">{{'shared.gender'|translate}}</label>
-            <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
+            <p-dropdown formControlName="gender" appFormControlValidationMsg [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
         </div>
 
 
         <div class="col-md-4 col-lg-3 ">
             <label class="label required">{{'shared.religion'|translate}}</label>
-            <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
+            <p-dropdown formControlName="religionId" appFormControlValidationMsg [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
         </div>
 
         <div class="col-md-4 col-lg-3 " >
-            <label class="label required">{{'shared.nationality'|translate}}</label>
+            <label class="label required" >{{'shared.nationality'|translate}}</label>
             <p-dropdown
+            appFormControlValidationMsg
             [filter]="true"
             filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
             formControlName="nationalityId" [lazy]="true" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>

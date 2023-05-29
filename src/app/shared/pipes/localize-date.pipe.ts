@@ -9,9 +9,9 @@ export class LocalizeDatePipe implements PipeTransform {
 
   constructor(private translationService:TranslationService){}
 
-  transform(value: Date | string, format = "d MMMM y"): string {
+  transform(value: Date | string, format = "d MMMM y", lang): string {
 
-    const datePipe = new DatePipe(this.translationService.lang ||  'ar');
+    const datePipe = new DatePipe(lang || this.translationService.lang ||  'ar');
     return datePipe.transform(value, format);
   }
 

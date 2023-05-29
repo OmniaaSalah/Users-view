@@ -19,9 +19,11 @@ export enum FirstGradeCodeEnum{
 
 
 export enum CurriculumCodeEnum{
-    British =  1,
-    Philippines=1010,
-    French=2
+    English = "EnCurr",
+    French = "FrCurr",
+    Australian = "AuCurr",
+    Philippine = "PhCurr",
+    British = "BrCurr",
 
 }
 
@@ -40,7 +42,10 @@ export enum GradeCodeEnum{
     eleven = 11,
     twelve =12,
     thirteen = 13,
-    fourteen=14,
+    Kindergarten='Kindergarten',
+    PRE_KG = 'PRE-KG',
+    Preschool = 'Pre-Kindergarten/Preschool'
+
 }
 
 

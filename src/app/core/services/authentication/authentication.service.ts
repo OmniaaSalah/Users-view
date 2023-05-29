@@ -125,15 +125,15 @@ export class AuthenticationService {
      {
       if(localStorage.getItem('preferredLanguage')=='ar')
       {
-        this.userService.currentUserName.next(res.result.arabicName+" "+res.result.arabicSurname)
-        this.userService.setCurrentUserName(res.result.arabicName+" "+res.result.arabicSurname)
+        this.userService.currentUserName.next(res.result?.arabicName+" "+res.result?.arabicSurname)
+        this.userService.setCurrentUserName(res.result?.arabicName+" "+res.result?.arabicSurname)
       }
       else{
-        this.userService.currentUserName.next(res.result.englishName+" "+res.result.englishSurname)
-        this.userService.setCurrentUserName(res.result.arabicName+" "+res.result.arabicSurname)
+        this.userService.currentUserName.next(res.result?.englishName+" "+res.result?.englishSurname)
+        this.userService.setCurrentUserName(res.result?.arabicName+" "+res.result?.arabicSurname)
       }
 
-       return res.result.school;
+       return res.result;
     }
     }))
   }
@@ -168,7 +168,7 @@ export class AuthenticationService {
   }
   getMandatorySurveysOfGuardian(guardianId)
   {
-    return this.http.get(`/Survey/gurdian-required-surveys/${guardianId}`)
+    return this.http.get(`/Survey/gurdian-required-surveys/${guardianId}`).pipe(take(1), map((res) => res.result))
   }
 
   getSchoolUrgentMessage(userId)

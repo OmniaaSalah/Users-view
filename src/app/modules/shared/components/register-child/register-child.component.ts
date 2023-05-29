@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -29,7 +29,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   get scopeEnum() { return UserScope }
   get statusEnum() {return StatusEnum}
   lang =inject(TranslationService).lang;
-  mode : Mode= 'view'
+
   @ViewChild('nav') nav: ElementRef
 
   get userScope() { return UserScope }
@@ -139,6 +139,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   currentMode :Mode='view'
   paymentCurrentMode :Mode='view'
+  stdBehaviorMode : Mode= 'view'
 
   constructor(
     private fb:FormBuilder,
@@ -173,26 +174,26 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.childService.Student$.next(null)
     this.studentsService.getStudent(studentId)
     .subscribe((res:any) =>{
-
       this.childService.Student$.next(res?.result)    // for Sharing between multiple components instead of make multiple Http Requests
       this.schoolId = res.result.school?.id
 
       res.result.birthDate = new Date(res?.result?.birthDate)
       // res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
       this.currentStudent = res?.result
-      this.studentForm.patchValue(res?.result as any)
-      this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
-      this.studentForm.controls.nationalityId.setValue(res.result?.nationality?.id)
-      this.studentForm.controls.religionId.setValue(res.result?.religion?.id)
-      this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)
-      this.studentForm.controls.specialEducation.patchValue({name:{ar:"",en:''}})
-
-
+      this.initStudentForm(res?.result)
 
     });
 
   }
 
+  initStudentForm(res){
+    this.studentForm.patchValue(res as any)
+    this.studentForm.controls.prohibited.patchValue(res.studentProhibited)
+    this.studentForm.controls.nationalityId.setValue(res.nationality?.id)
+    this.studentForm.controls.religionId.setValue(res.religion?.id)
+    // this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)
+    this.studentForm.controls.specialEducation.patchValue({name:{ar:"",en:''}})
+  }
 
   updateStudent(){
     this.childService.loading$.next(true)
@@ -201,6 +202,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.childService.loading$.next(false)
       this.currentMode='view'
       this.paymentCurrentMode='view'
+      this.stdBehaviorMode='view'
     }))
     .subscribe(res=>{
       this.toastr.success(this.translate.instant('toasterMessage.successUpdate'))
