@@ -169,13 +169,13 @@
 
               <div class="d-grid grid-col-8 even-gap gap-5">
                 <p class="color-gray-300">{{'shared.city'|translate }}</p>
-                <span class="color-primary mb-2">{{student?.address?.city |translate}}</span>
+                <span class="color-primary mb-2">{{(student?.address?.city |translate) || '--'}}</span>
 
                 <p class="color-gray-300">{{ 'shared.emara'|translate }}</p>
-                <span class="color-primary mb-2">{{student?.address?.emirate}}</span>
+                <span class="color-primary mb-2">{{student?.address?.emirate || '--'}}</span>
 
                 <p class="color-gray-300">{{ 'shared.state'|translate}}</p>
-                <span class="color-primary mb-2">{{student?.address?.state}}</span>
+                <span class="color-primary mb-2">{{student?.address?.state || '--'}}</span>
               </div>
             </div>
 
@@ -290,7 +290,7 @@
           </div>
 
           <ng-container *ngIf="student.emiratesId">
-            <div class="col-md-4 col-lg-3 d-flex gap-5 align-items-center ">
+            <div class="col-md-4 col-lg-3 d-flex gap-5 align-items-center align-self-end">
                 <p class="color-gray-300 "> رقم الهوية</p>
                 <span class="color-primary">{{student.emiratesId}}</span>
                 <!-- <a class="color-skyBlue-500" (click)="openChangeIdentityModel.emit()">ارسال طلب تعديل </a> -->
@@ -369,17 +369,17 @@
         <ng-container formGroupName="address">
           <div class="col-md-4 col-lg-3 ">
               <label class="label">{{'shared.emara'|translate}}</label>
-              <input type="text" formControlName="emirate" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
+              <input type="text" formControlName="emirate"  pInputText placeholder="{{'shared.writeEmara'|translate}}" />
           </div>
 
           <div class="col-md-4 col-lg-3 ">
               <label class="label">{{'shared.city'|translate}}</label>
-              <input type="text" formControlName="city" pInputText placeholder="{{'shared.chooseCity'|translate}}" />
+              <input type="text" formControlName="city"  pInputText placeholder="{{'shared.chooseCity'|translate}}" />
               <!-- <p-dropdown formControlName="city" [options]="cities$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown> -->
           </div>
           <div class="col-md-4 col-lg-3 ">
               <label class="label">{{'shared.state'|translate}}</label>
-              <input type="text" formControlName="state" pInputText placeholder="{{'shared.chooseState'|translate}}" />
+              <input type="text" formControlName="state"  pInputText placeholder="{{'shared.chooseState'|translate}}" />
               <!-- <p-dropdown formControlName="state" [options]="(states$|async)" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown> -->
           </div>
         </ng-container>

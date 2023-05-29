@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, share, shareReplay, switchMap } from 'rxjs';
@@ -21,6 +21,7 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
 })
 export class AcademicSequenceComponent implements OnInit {
   faAngleDown=faAngleDown
+  faPlus=faPlus
   @Input() choosenStudents;
   @Output() onCancel : EventEmitter<string> = new EventEmitter();
   @Output() onBack : EventEmitter<string> = new EventEmitter();
@@ -52,6 +53,8 @@ export class AcademicSequenceComponent implements OnInit {
   get StudenstArrCtr(){ return this.stdAcademicForm.controls['studentEducationCertificates'] as FormArray}
   getStudentCtr(index) {return this.StudenstArrCtr.controls[index] as FormGroup}
   getStudentCertifictesArrCtr(index) { return this.getStudentCtr(index).controls['academicSequence'] as FormArray}
+  getStudentNewAccademicArrCtr(index) { return this.getStudentCtr(index).controls['newAcademicSequence'] as FormArray}
+
   getStudentCertificteCtr(index) { return this.getStudentCertifictesArrCtr(index).controls[index] as FormGroup}
 
 
@@ -100,8 +103,8 @@ export class AcademicSequenceComponent implements OnInit {
     requests.subscribe((stdAcademicSequence: any[])=>{
       this.isLoading=false
 
-      this.academicSequence =this.studentsSchoolYearsMapped(this.choosenStudents, stdAcademicSequence)
-     this.fillStudentsFormArr([...this.academicSequence])
+      this.academicSequence = this.studentsSchoolYearsMapped(this.choosenStudents, stdAcademicSequence)
+      this.fillStudentsFormArr([...this.academicSequence])
 
     })
   }
@@ -112,7 +115,8 @@ export class AcademicSequenceComponent implements OnInit {
       return {
         id: student.id,
         certificatedType : CertificatesEnum.AcademicSequenceCertificate,
-        academicSequence : stdAcademicSequence[i].map(el => ({gradeId: el.gradeName?.id, yearId: el.schoolYearName?.id,  schoolId: el.schoolName?.id,}))
+        academicSequence : stdAcademicSequence[i].map(el => ({gradeId: el.gradeName?.id, yearId: el.schoolYearName?.id,  schoolId: el.schoolName?.id,})),
+        newAcademicSequence : []
       }
     })
   }
@@ -124,7 +128,8 @@ export class AcademicSequenceComponent implements OnInit {
         studentId: el.id,
         certificatedType: CertificatesEnum.AcademicSequenceCertificate,
         attachments:[[]],
-        academicSequence: this.fillStudentstdAcademicSequence(el.academicSequence)
+        academicSequence: this.fillStudentstdAcademicSequence(el.academicSequence),
+        newAcademicSequence : this.fb.array([])
       }))
     })
   }
@@ -200,6 +205,20 @@ export class AcademicSequenceComponent implements OnInit {
     })
   }
 
+
+  addNewAccademicYear(index){
+    this.getStudentNewAccademicArrCtr(index).push(
+      this.fb.group({
+        yearId:[, Validators.required],
+        schoolId:[, Validators.required],
+        gradeId:[, Validators.required],
+      })
+    )
+  }
+
+  deleteNewAcc(index, ctrIndex){
+    this.getStudentNewAccademicArrCtr(index).removeAt(ctrIndex)
+  }
 
   // validationStep(){
 

@@ -161,7 +161,7 @@ export class IssueCertificateComponent implements OnInit {
       else if(this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate){
 
         this.childList =res.students.filter(el =>{
-          if(el.curriculumCode== CurriculumCodeEnum.Philippines){
+          if(el.curriculumCode== CurriculumCodeEnum.Philippine){
             return Number(el.gradeCode) >= GradeCodeEnum.ten
           }else if((el.curriculumCode== CurriculumCodeEnum.British)){
             return Number(el.gradeCode) >= GradeCodeEnum.thirteen

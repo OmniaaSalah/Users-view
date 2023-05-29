@@ -65,7 +65,7 @@ export class UnregisterChildComponent implements OnInit {
     passportNumber: [''],
     emiratesIdNumber: [''],
     reasonForNotHavingEmiratesId:[],
-    religionId:[],
+    religionId:[, Validators.required],
     emiratesIdPath:[''],
     birthDate: [new Date(), Validators.required],
     nationlityId: ['', Validators.required],
