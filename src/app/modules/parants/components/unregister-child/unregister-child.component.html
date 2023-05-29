@@ -160,44 +160,44 @@
                         <ng-container formGroupName="name">
                             <div class="form-set  col-md-4" >
                                 <label class="label required">{{'shared.nameAr'|translate}}</label>
-                                <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                                <input type="text" appFormControlValidationMsg formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
                             </div>
 
                             <div class="form-set  col-md-4">
                                 <label class="label required">{{'shared.nameEn'|translate}}</label>
-                                <input type="text" formControlName="en"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                                <input type="text" appFormControlValidationMsg formControlName="en"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
                             </div>
                         </ng-container>
 
                         <ng-container formGroupName="surname" >
                             <div class="form-set col-md-4" >
                                 <label class="label required">{{'shared.surnameAr'|translate}}</label>
-                                <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                                <input type="text" appFormControlValidationMsg formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
                             </div>
 
                             <div class="form-set col-md-4">
                                 <label class="label required">{{'shared.surnameEn'|translate}}</label>
-                                <input type="text" formControlName="en" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                                <input type="text" appFormControlValidationMsg formControlName="en" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
                             </div>
                         </ng-container>
 
                         <div class="form-set col-md-4">
                             <label class="label required">{{'shared.gender'|translate}}</label>
-                            <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
+                            <p-dropdown appFormControlValidationMsg formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
                         </div>
 
                         <div class="form-set col-md-4">
                           <label class="label required">{{'shared.religion'|translate}}</label>
-                          <p-dropdown formControlName="religionId" [options]="religion$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.religion' |translate}}"></p-dropdown>
+                          <p-dropdown appFormControlValidationMsg formControlName="religionId" [options]="religion$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.religion' |translate}}"></p-dropdown>
                       </div>
 
                         <div class="form-set col-md-4">
                             <label class="label required">{{'shared.birthDay'|translate}}</label>
-                            <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+                            <p-calendar appFormControlValidationMsg formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
                         </div>
 
 
-                        <div class="form-set col-md-4">
+                        <div class="form-set col-md-4" *ngIf="!child.emiratesId">
                           <label class="label required">{{'TheReasonForLackOfIdentification'|translate}}</label>
                           <p-dropdown formControlName="reasonForNotHavingEmiratesId" [options]="NoIdentityReason$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
                         </div>
@@ -206,6 +206,7 @@
                             <label class="label required">{{'shared.nationality'|translate}}</label>
                             <!-- <input type="text" formControlName="nationalityId" pInputText placeholder="اماراتى" /> -->
                             <p-dropdown
+                            appFormControlValidationMsg
                             [filter]="true"
                             filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                             formControlName="nationlityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
@@ -213,7 +214,7 @@
 
                         <div class="form-set col-md-4">
                             <label class="label required">{{'dashboard.parents.relatedType'|translate}}</label>
-                            <p-dropdown formControlName="relativeRelationId" [options]="relativeRelation$|async" optionValue="id" optionLabel="arabicName"></p-dropdown>
+                            <p-dropdown appFormControlValidationMsg formControlName="relativeRelationId" [options]="relativeRelation$|async" optionValue="id" optionLabel="arabicName"></p-dropdown>
                         </div>
 
                 </div>

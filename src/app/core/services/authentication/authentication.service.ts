@@ -125,15 +125,15 @@ export class AuthenticationService {
      {
       if(localStorage.getItem('preferredLanguage')=='ar')
       {
-        this.userService.currentUserName.next(res.result.arabicName+" "+res.result.arabicSurname)
-        this.userService.setCurrentUserName(res.result.arabicName+" "+res.result.arabicSurname)
+        this.userService.currentUserName.next(res.result?.arabicName+" "+res.result?.arabicSurname)
+        this.userService.setCurrentUserName(res.result?.arabicName+" "+res.result?.arabicSurname)
       }
       else{
-        this.userService.currentUserName.next(res.result.englishName+" "+res.result.englishSurname)
-        this.userService.setCurrentUserName(res.result.arabicName+" "+res.result.arabicSurname)
+        this.userService.currentUserName.next(res.result?.englishName+" "+res.result?.englishSurname)
+        this.userService.setCurrentUserName(res.result?.arabicName+" "+res.result?.arabicSurname)
       }
 
-       return res.result.school;
+       return res.result;
     }
     }))
   }

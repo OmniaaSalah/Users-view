@@ -80,23 +80,13 @@
                             <ng-container formArrayName="academicSequence">
                                 <div class="row g-5 form-set custom-form" *ngFor="let student of getStudentCertifictesArrCtr(i).controls; let j=index" [formGroupName]="j">
 
-                                    <div class=" col-md-4" >
+                                    <div class=" col-md-3"  *ngIf="schoolYears$ |async as schoolYears">
                                         <label class="label">{{'dashboard.students.academic year'|translate}}</label>
-                                        <div class="year-dropdown " *ngIf="schoolYears$ |async as schoolYears">
-                                            <div class="icon arrow" (click)="dropdown.show()">
-                                                <fa-icon class="" [icon]="faAngleDown"></fa-icon>
-                                            </div>
-
-                                            <p-dropdown
-                                            [disabled]="true"
-                                            [options]="schoolYears"
-                                            optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
-                                            </p-dropdown>
-                                            <div class="icon calendar" (click)="dropdown.show()">
-                                                <img src="assets/images/navBar/calendar.svg" alt="">
-                                            </div>
-                                        </div>
-
+                                        <p-dropdown
+                                        [disabled]="true"
+                                        [options]="schoolYears"
+                                        optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
+                                        </p-dropdown>
                                     </div>
 
 
@@ -107,7 +97,7 @@
                                             optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
                                     </div>
 
-                                    <div class="col-md-4" *ngIf="allGrades$ |async as allGrades">
+                                    <div class="col-md-3" *ngIf="allGrades$ |async as allGrades">
                                         <label class="label">{{'dashboard.students.Class'|translate}}</label>
                                         <p-dropdown [disabled]="true" placeholder="{{'dashboard.students.Class'|translate}}"
                                         [options]="allGrades"
@@ -119,6 +109,43 @@
                                 </div>
                             </ng-container>
 
+
+                            <ng-container formArrayName="newAcademicSequence">
+                              <div class="row g-5 form-set custom-form" *ngFor="let student of getStudentNewAccademicArrCtr(i).controls; let ctrIndex=index" [formGroupName]="ctrIndex">
+
+                                  <div class=" col-md-3" *ngIf="schoolYears$ |async as schoolYears">
+                                      <label class="label">{{'dashboard.students.academic year'|translate}}</label>
+                                      <p-dropdown [options]="schoolYears" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" ></p-dropdown>
+                                  </div>
+
+
+                                  <div class="col-md-4" *ngIf="allSchools$ |async as allSchools">
+                                      <label class="label">{{'dashboard.students.School Name'| translate}}</label>
+                                      <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}"
+                                          [options]="allSchools" formControlName="schoolId"
+                                          optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
+                                  </div>
+
+                                  <div class="col-md-3" *ngIf="allGrades$ |async as allGrades">
+                                      <label class="label">{{'dashboard.students.Class'|translate}}</label>
+                                      <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}"
+                                      [options]="allGrades"
+                                          formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
+                                          optionValue="id"></p-dropdown>
+
+                                  </div>
+                                  <div role="button" class="col-md-2 mb-4 d-flex align-items-end justify-content-end">
+                                    <img  ConfirmDialog (onConfirm)="deleteNewAcc(i, ctrIndex)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                </div>
+
+                              </div>
+                          </ng-container>
+
+                            <!-- <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-50 p-3 mt-4"
+                            (click)="addNewAccademicYear(i, newIndex)">
+                                <fa-icon [icon]="faPlus"></fa-icon>
+                                <span>{{'dashboard.issue of certificate.addNewAccademicYear' |translate}}</span>
+                            </div> -->
 
                             <!-- <div class="row" *ngIf="showAttchments[i]">
                                 <ng-container *ngIf="!attachLoading">

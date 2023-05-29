@@ -235,8 +235,8 @@
                 </ng-container>
 
                 <ng-container *ngIf="student$ |async as student">
-                    <ng-container *ngIf="mode=='view'">
-                        <div class="float-btn " (click)="mode='edit'" *permit="claimsEnum.SEG_U_StudentBehavior">
+                    <ng-container *ngIf="stdBehaviorMode=='view'">
+                        <div class="float-btn " (click)="stdBehaviorMode='edit'" *permit="claimsEnum.SEG_U_StudentBehavior">
                             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
                         </div>
 
@@ -244,7 +244,7 @@
                             <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.studentBehavior'| translate}}</h3>
                             <label class="label">{{'dashboard.students.behaviorDescription' | translate}}</label>
                             <p class="paragraph paragraph--sm color-gray-800 mb-6 w-75">
-                                {{student.studentBehavior?.descrition}}
+                                {{student.studentBehavior?.descrition || '--'}}
                             </p>
 
                             <div class="grid-container">
@@ -259,7 +259,7 @@
                     </ng-container>
 
 
-                    <ng-container *ngIf="mode=='edit'">
+                    <ng-container *ngIf="stdBehaviorMode=='edit'">
 
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-primary "
@@ -268,7 +268,7 @@
                                 <span>{{'shared.saveChanges'| translate}}</span>
                                 <div class="spinner-border text-light" role="status" *ngIf="this.childService.loading$ |async"></div>
                             </button>
-                            <button  (click)="mode='view'" ><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+                            <button  (click)="stdBehaviorMode='view'" ><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
                         </div>
                         <hr class="my-5">
 
