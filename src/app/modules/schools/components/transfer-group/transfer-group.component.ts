@@ -30,8 +30,9 @@ export class TransferGroupComponent implements OnInit {
   lang= inject(TranslationService).lang
   currentUserScope = inject(UserService).getScope()
   schoolId= this.userService.getSchoolId()
+  schoolCurriculumId= this.userService.getSchoolCurriculumId()
 
-  filteration:Filter ={...Filtration, curriculumId:1,gradeId: null}
+  filteration:Filter ={...Filtration, curriculumId: this.schoolCurriculumId ,gradeId: null}
   // studentFilteration:Filter = {...Filtration,SchoolId:this.schoolId, GradeId:'',DivisionId:'',PageSize:null}
   studentFilteration:Filter = {...Filtration,GradeId:'',DivisionId:'',PageSize:0}
 
@@ -151,7 +152,13 @@ export class TransferGroupComponent implements OnInit {
     this.schools.loading=true
 
     this.settingService.schoolsAllowedToAcceptStudentsGroup(this.filteration).subscribe(res=>{
-      this.schools.list = res.result.data.filter(el => el.id!=this.schoolId)
+      this.schools.list = res.result.data.filter(el =>{
+        if(el.id!=this.schoolId) return true
+        else {
+          res.result.total -=1
+          return false
+        }
+      })
       this.schools.total = res.result.total
       this.schools.totalAllData = res.result.totalAllData
       this.schools.loading=false

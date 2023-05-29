@@ -106,12 +106,12 @@
               </div>
                 <div class="d-flex flex-column align-items-center">
                   <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                    <span class="">068041444</span>
+                    <span dir="ltr">+971 068041444</span>
                     <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
                   </p>
                   <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
                   <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-                  <p class="text-center fs-3">125486245896354</p>
+                  <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
                 </div>
             </div>
           </div>
@@ -256,12 +256,12 @@
           </div>
             <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center gap-2  fs-3 mb-1">
-                <span class="">068041444</span>
+                <span dir="ltr">+971 068041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">125486245896354</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
             </div>
         </div>
       </div>
@@ -362,12 +362,12 @@
           </div>
             <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                <span class="">068041444</span>
+                <span dir="ltr">+971 068041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">125486245896354</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
             </div>
         </div>
       </div>
@@ -418,7 +418,7 @@
         </tr>
         <tr>
           <td style="width: 25%;" class="font-ar">تاريخ الميلاد</td>
-          <td colspan="2" class="text-center">{{certificate?.BirthDate | LocalizeDate}}</td>
+          <td colspan="2" class="text-center" >{{certificate?.BirthDate | LocalizeDate}}</td>
           <td style="width: 25%;" class="font-en text-start">Birth Date</td>
 
       </tr>
@@ -538,15 +538,15 @@
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
                 <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
               </div>
-                <div class="d-flex flex-column justify-content-center">
-                  <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                    <span class="">068041444</span>
-                    <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
-                  </p>
-                  <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
-                  <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-                  <p class="text-center fs-3">125486245896354</p>
-                </div>
+              <div class="d-flex flex-column align-items-center">
+                <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
+                  <span dir="ltr">+971 068041444</span>
+                  <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
+                </p>
+                <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
+                <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
+                <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
+              </div>
             </div>
           </div>
 
@@ -574,12 +574,12 @@
           </div>
             <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                <span class="">068041444</span>
+                <span dir="ltr">+971 068041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">125486245896354</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
             </div>
         </div>
       </div>
@@ -613,10 +613,12 @@
             <p class="linehieght-2 mb-6">
               قد أتم (ت) بنجاح دراسة جميع المواد المقررة للتخرج طبقاً لبرنامج
               المرحلة الثانوية للعام الدراسي __ ({{certificate?.SchoolYear}}) __ وبهذا
-              قرر منحه (ا) شهادة التخرج بتاريخ {{certificate?.CertificateIssuanceDate | LocalizeDate}}
+              قرر منحه (ا) شهادة التخرج بتاريخ ( {{certificate?.CertificateIssuanceDate | LocalizeDate}} )
 
             </p>
-            _____({{certificate?.CertificateIssuanceDate | LocalizeDate}}) _____.
+            <p>
+              _____({{certificate?.CertificateIssuanceDate | LocalizeDate}}) _____.
+            </p>
 
           </div>
           <div class="col-md-1 d-flex justify-content-center">
@@ -627,15 +629,17 @@
             <h4 class="mb-4">The school administration certifies that</h4>
             <div class="color-skyBlue-500 mb-6">___________ ({{certificate?.StudentEnglishName}}) __________</div>
 
-            <p class="mb-6">
+            <p class="mb-6" dir="ltr">
               Has successfully completed the study
               of all the required subjects for graduation in accordance
               with the high school program for the
               Academic Year__ ({{certificate?.SchoolYear}}) __
               Therefore, it has been decided to grant him
-              (a) a graduation certificate on the date of {{certificate?.CertificateIssuanceDate | LocalizeDate}}
+              (a) a graduation certificate on the date of ( {{certificate?.CertificateIssuanceDate | LocalizeDate: 'd MMMM y':'en'}} )
             </p>
-            ___ ({{certificate?.CertificateIssuanceDate | LocalizeDate}}) ___
+            <p dir="ltr">
+              ___ ({{certificate?.CertificateIssuanceDate | LocalizeDate: 'd MMMM y':'en'}}) ___
+            </p>
           </div>
         </div>
 
@@ -657,12 +661,12 @@
               </div>
                 <div class="d-flex flex-column align-items-center">
                   <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                    <span class="">068041444</span>
+                    <span dir="ltr">+971 068041444</span>
                     <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
                   </p>
                   <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
                   <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-                  <p class="text-center fs-3">125486245896354</p>
+                  <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
                 </div>
             </div>
 
@@ -887,12 +891,12 @@
           </div>
             <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                <span class="">068041444</span>
+                <span dir="ltr">+971 068041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">125486245896354</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
             </div>
         </div>
       </div>
@@ -1133,12 +1137,12 @@
           </div>
             <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                <span class="">068041444</span>
+                <span dir="ltr">+971 068041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">125486245896354</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
             </div>
         </div>
       </div>
