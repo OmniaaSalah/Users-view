@@ -345,12 +345,13 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
   getCurrentEmployeeData() {
-    this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((school) => {
-      if (school) {
-        this.userService.currentUserSchoolId$.next(school?.id);
-        this.userService.setSchoolId(school?.id);
-        this.userService.currentUserSchoolName$.next(school?.name);
-        this.userService.setSchoolName(school?.name);
+    this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((res) => {
+      if (res.school) {
+        this.userService.currentUserSchoolId$.next(res?.school?.id);
+        this.userService.setSchoolId(res?.school?.id);
+        this.userService.currentUserSchoolName$.next(res?.school?.name);
+        this.userService.setSchoolName(res?.school?.name);
+        this.userService.setSchoolCurriculumId(res?.curriculumId);
       }
     });
     // this.authService

@@ -1,5 +1,6 @@
 import { Directive, Input, HostListener, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { NgControl, ValidationErrors } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Directive({
@@ -9,6 +10,7 @@ export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
 
   constructor(private elRef: ElementRef,
     private control: NgControl,
+    private translate:TranslateService
   ) { }
 
   @Input('validationMsgId') validationMsgId: string='requiredField';
@@ -17,11 +19,11 @@ export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
   statusChangeSubscription: Subscription;
 
   ngOnInit(): void {
-    this.errorSpanId = this.validationMsgId + new Date() + '-error-msg';
-    this.statusChangeSubscription = this.control.statusChanges.subscribe(
+    this.errorSpanId = this.validationMsgId + (new Date().getTime() * ((Math.random() * 10) + 1)) + '-error-msg';
+    // this.errorSpanId =  (new Date().getTime() * ((Math.random() * 10) + 1)) + '-error-msg';
+    this.statusChangeSubscription = this.control.statusChanges.subscribe((status) => {
+      console.log(status);
 
-      (status) => {
-        console.log(status);
         if (status == 'INVALID') {
           this.showError();
         } else {
@@ -36,8 +38,8 @@ export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
   }
 
   @HostListener('onBlur', ["$event"])
+  @HostListener('blur', ["$event"])
   handleBlurEvent(event) {
-    console.log('blurr');
 
     //This is needed to handle the case of clicking a required field and moving out.
     //Rest all are handled by status change subscription
@@ -49,13 +51,15 @@ export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
 
   private showError() {
     this.removeError();
-    console.log(this.control.errors);
-
     const valErrors: ValidationErrors = this.control.errors;
     const firstKey = Object.keys(valErrors)[0];
     const errorMsgKey = this.validationMsgId + '-' + firstKey + '-msg';
+    // const errorMsgKey = firstKey + '-msg';
     const errorMsg = this.getValidationMsg(errorMsgKey);
-    const errSpan = '<span style="color:red;" id="' + this.errorSpanId + '">' + errorMsg + '</span>';
+    console.log(errorMsg,errorMsgKey);
+
+    const errSpan = '<p style="color:red;margin-top:.75rem" id="' + this.errorSpanId + '">' + errorMsg + '</p>';
+    this.elRef.nativeElement.classList.add('ng-invalid' ,'ng-dirty')
     this.elRef.nativeElement.parentElement.insertAdjacentHTML('beforeend', errSpan);
   }
 
@@ -73,7 +77,7 @@ export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
 }
 
 private errorMessages = {
-    'requiredField-required-msg':"هذا الحقل مطلوب",
+    'requiredField-required-msg': this.translate.instant('shared.This Field is Required'),
     'firstname-required-msg' : "Firstname is a required field",
     'firstname-minlength-msg' : "Firstname must have 8 characters",
     'firstname-maxlength-msg' : "Firstname can have maximum 30 characters",

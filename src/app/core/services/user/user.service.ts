@@ -65,6 +65,7 @@ export class UserService {
     this.token.schoolId = this.load('schoolId');
     this.token.schoolName = this.load('schoolName');
     this.token.guardian = this.load('currentGuardian');
+    this.token.schoolCurriculumId = this.load('schoolCurriculumId');
     this.token.currentUserName = this.load('currentUserName');
     this.token.serviesNumbers = this.load('serviesNumbers');
     this.token.schoolUrgentMessages = this.load('schoolUrgentMessages');
@@ -128,6 +129,15 @@ export class UserService {
     return this.token.schoolId;
   }
 
+  public setSchoolCurriculumId(curriculumId?: any) {
+    this.token.schoolCurriculumId = curriculumId;
+    this.save();
+  }
+
+  public getSchoolCurriculumId(): any {
+    return this.token.schoolCurriculumId;
+  }
+
   public setSchoolName(schoolName?: any) {
     this.token.schoolName = schoolName;
     this.save();
@@ -156,6 +166,7 @@ export class UserService {
     this.token.guardian = guardian;
     this.save();
   }
+
   public getCurrentGuardian(): any {
     return typeof this.token.guardian === 'string'
       ? JSON.parse(this.token.guardian)
@@ -287,6 +298,7 @@ export class UserService {
     this.persist('schoolId', this.token.schoolId, expires);
     this.persist('schoolName', this.token.schoolName, expires);
     this.persist('currentUserName', this.token.currentUserName, expires);
+    this.persist('schoolCurriculumId', this.token.schoolCurriculumId, expires)
     this.persist('currentGuardian', this.token.guardian, expires);
     this.persist('serviesNumbers', this.token.serviesNumbers, expires);
     this.persist(
