@@ -218,8 +218,8 @@ certificateStatusList;
     return this.http.post(`/Certificate/payment-link`,obj).pipe(take(1))
   }
 
-  completepaymentProcess(refId){
-    return this.http.post(`/Certificate/payment-completed/${refId}`).pipe(take(1))
+  completepaymentProcess(refId,receiptNo){
+    return this.http.post(`/Certificate/payment-completed/${refId}/${receiptNo}`).pipe(take(1))
   }
 
 

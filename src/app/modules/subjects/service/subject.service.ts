@@ -8,6 +8,7 @@ import { take,  map,delay,BehaviorSubject,finalize } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { DescriptionStatusEnum } from 'src/app/shared/enums/subjects/description-status.enum';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,9 +17,9 @@ export class SubjectService {
  evaluationTypeList;
 
  successStatus= [
-  {name:this.translate.instant('dashboard.Subjects.successed'),status:true},
-  {name:this.translate.instant('dashboard.Subjects.retry'),status:false},
-  {name:this.translate.instant('dashboard.Subjects.retryExam'),status:false}
+  {name:this.translate.instant('dashboard.Subjects.successed'),status:DescriptionStatusEnum.Successful},
+  {name:this.translate.instant('dashboard.Subjects.retry'),status:DescriptionStatusEnum.Fail},
+  {name:this.translate.instant('dashboard.Subjects.donotShow'),status:DescriptionStatusEnum.DonotShow}
   ];
 
 
