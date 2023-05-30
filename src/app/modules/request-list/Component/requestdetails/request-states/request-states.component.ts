@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { SystemRequestService } from '../../../services/system-request.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-request-states',
@@ -13,8 +13,10 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 export class RequestStatesComponent implements OnInit {
 
   requestInstance = this.route.snapshot.paramMap.get('id')
+  currentUserScope = inject(UserService).getScope()
+
   get statusEnum(){return StatusEnum}
-  get userScopeEnum(){return UserScope}
+  get ScopeEnum(){return UserScope}
 
   @Input() requestDetails
 
