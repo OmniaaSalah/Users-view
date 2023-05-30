@@ -13,10 +13,9 @@
         <!-- Navigations Options -->
         <ul class="tabView__nav "  #nav>
             <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.SystemSetting.graceSession'|translate }}</span></li>
-            <!-- <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.SystemSetting.notificationSetting'|translate }}</span></li> -->
-            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.SystemSetting.RegistrationConditions'|translate }}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.SystemSetting.attachmentCondition'|translate }}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{ 'dashboard.SystemSetting.attachmentsetting'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span> {{ 'dashboard.SystemSetting.RegistrationConditions'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{ 'dashboard.SystemSetting.attachmentCondition'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.SystemSetting.attachmentsetting'|translate }}</span></li>
         </ul>
         <!-- Navigations Options -->
 
@@ -24,7 +23,7 @@
 
             <div class="actions-btn d-flex align-items-center gap-4">
                 <button *ngIf="step==1" routerLink="grace-period/new" class="btn btn-primary">{{'dashboard.SystemSetting.newGracePeriod' | translate}}</button>
-                <button *ngIf="step==3" (click)="updateRoles()" class="btn btn-primary" [disabled]="onSubmitForm">
+                <button *ngIf="step==2" (click)="updateRoles()" class="btn btn-primary" [disabled]="onSubmitForm">
                     {{'shared.saveChanges' | translate}}
                     <div class="spinner-border" role="status" *ngIf="onSubmitForm"></div>
                 </button>
@@ -39,14 +38,8 @@
                 </ng-container>
 
 
-                <!-- Notifications -->
-                <ng-container *ngIf="step==2">
-                    <app-notifications></app-notifications>
-
-                </ng-container>
-
                 <!-- Registration -->
-                <ng-container *ngIf="step==3">
+                <ng-container *ngIf="step==2">
 
                     <ng-container  [formGroup]="rolesForm" *ngIf="rolesCtr.controls">
                         <div class="bg-orange-50 p-3 radius-15 mb-4 ">
@@ -66,13 +59,13 @@
                                         <label  class="label">{{'dashboard.SystemSetting.newCurriculum'|translate}}</label>
                                         <p-multiSelect formControlName="newCurriculums" [options]="currculums" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
                                     </div>
-            
+
                                     <div role="button" class="col-md-3 d-flex align-items-end justify-content-end" >
                                         <!-- <img (click)="deleteRole(i)"  src="assets/images/shared/rect-xmark.svg" alt=""> -->
                                         <img  ConfirmDialog (onConfirm)="deleteRole(i)" src="assets/images/shared/rect-xmark.svg" alt="">
                                     </div>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-4 offset-1">
                                         <label  class="label">{{'shared.grades'|translate}}</label>
@@ -80,23 +73,23 @@
                                     </div>
                                     <div class="col-md-4 d-flex align-items-center gap-4 align-self-end">
                                         <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
-                                        <p-inputSwitch formControlName="isActive" ></p-inputSwitch>  
+                                        <p-inputSwitch formControlName="isActive" ></p-inputSwitch>
                                         <span class="mb-2">{{role.value.isActive? ('shared.yes' |translate) : 'shared.no' |translate}}</span>
                                     </div>
-            
+
                                 </div>
                                 <hr class="my-6">
                             </div>
-                           
+
                         </ng-container>
                     </ng-container>
-                    
+
                 <ng-container *ngIf="!rolesCtr.controls.length">
 
                     <app-informative-block subTitle="{{'emptyList.registrationRoles' |translate}}"></app-informative-block>
                 </ng-container>
 
-                    <div role="button" 
+                    <div role="button"
                     class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
                     (click)="addNewRole()">
                         <fa-icon [icon]="faPlus"></fa-icon>
@@ -106,13 +99,13 @@
 
 
                 <!-- Attachment Conditions-->
-                <ng-container *ngIf="step==4">
+                <ng-container *ngIf="step==3">
                     <app-attachment-conditions></app-attachment-conditions>
                 </ng-container>
 
 
                 <!-- اعدادات الملفات المطلوبه -->
-                <ng-container *ngIf="step==5">
+                <ng-container *ngIf="step==4">
                     <app-required-attachment-settings [step]="step"></app-required-attachment-settings>
                 </ng-container>
 

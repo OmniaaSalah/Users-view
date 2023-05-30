@@ -18,17 +18,45 @@
     <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
     <div class=" row gx-5">
         <div class="col ">
-
             <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [accept]="fileTypeEnum.Image" [imgUrl]="school?.schoolLogoPath" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" ></app-file-upload>
+
+            <div class=" box image-wrapper w px-5 d-flex flex-column" >
+              <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.logo=''"></fa-icon>
+              <!-- <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt=""> -->
+              <img  [src]="schoolAttacments.logo" fullbackImage>
+            </div>
         </div>
+
+
         <div class="col flex-grow-0">
             <p-divider layout="vertical"></p-divider>
         </div>
-        <div class="col">
 
+
+        <div class="col">
             <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [accept]="fileTypeEnum.Image" [imgUrl]="school?.diplomaLogoPath" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" ></app-file-upload>
+
+            <div class=" box image-wrapper w px-5 d-flex flex-column" >
+              <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.reliableLogo=''"></fa-icon>
+              <!-- <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt=""> -->
+              <img  [src]="schoolAttacments.reliableLogo" fullbackImage>
+            </div>
         </div>
 
+
+        <div class="col flex-grow-0">
+          <p-divider layout="vertical"></p-divider>
+        </div>
+
+        <div class="col">
+          <app-file-upload (onFileUpload)="onCertificateLogoFileUpload($event)" [accept]="fileTypeEnum.Image"  view="box" title="{{'dashboard.schools.certificateReliableLogo'|translate }}" ></app-file-upload>
+
+          <div class=" box image-wrapper w px-5 d-flex flex-column" >
+            <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.certificateLogo=''"></fa-icon>
+            <!-- <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt=""> -->
+            <img  [src]="schoolAttacments.certificateLogo" fullbackImage>
+          </div>
+      </div>
     </div>
 
 
