@@ -47,14 +47,24 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
   map: any
 
+
+  schoolAttacments={
+    logo:'',
+    reliableLogo:'',
+    certificateLogo:''
+  }
+
+
+
+
   constructor(
-	private translate:TranslateService,
+	  private translate:TranslateService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
-	private userService:UserService,
-	private toaster:ToastrService,
-	private gradeService:GradesService,
-	private schoolsService:SchoolsService) { }
+    private userService:UserService,
+    private toaster:ToastrService,
+    private gradeService:GradesService,
+    private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
     this.getSchool(this.schoolId);
@@ -66,6 +76,10 @@ getSchool(id){
 
 	this.schoolsService.getSchool(id).subscribe((res) =>{
 		this.school = res
+    this.schoolAttacments.logo = res?.schoolLogoPath
+    this.schoolAttacments.reliableLogo = res?.diplomaLogoPath
+    // this.schoolAttacments.certificateLogo = res?.diplomaLogoPath
+
 		if(this.currentUserScope==UserScope.Employee) {
 			this.componentHeaderData.mainTitle.main = getLocalizedValue(res.name)
 			this.headerService.changeHeaderdata(this.componentHeaderData)
@@ -88,7 +102,7 @@ getSchool(id){
 
   onLogoFileUpload(event: CustomFile[]){
 
-
+    this.schoolAttacments.logo =  event[0]?.url || ''
 		// const file={
 		// 	title:event[0].name,
 		// 	data: event[0].url
@@ -106,6 +120,8 @@ getSchool(id){
 	}
 
 	onDiplomaFileUpload(event: CustomFile[]){
+    this.schoolAttacments.reliableLogo =  event[0]?.url || ''
+
 		// const file={
 		// 	title:event[0].name,
 		// 	data: event[0].url
@@ -120,6 +136,32 @@ getSchool(id){
 			else this.toaster.success(this.translate.instant('toasterMessage.diplomaLogoDeleted'))
 		})
 	}
+
+
+  onCertificateLogoFileUpload(event: CustomFile[]){
+    this.schoolAttacments.certificateLogo =  event[0]?.url || ''
+
+		// const file={
+		// 	title:event[0].name,
+		// 	data: event[0].url
+		// }
+		let file={
+			id: this.schoolId,
+			schoolLogoPath: event[0]?.url || '',
+			diplomaLogoPath: this.school?.schoolLogoPath ||''
+		}
+
+		// this.schoolsService.updateSchoolAttachments(file).subscribe(res=>{
+		// 	if(file.schoolLogoPath) this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
+		// 	else this.toaster.success(this.translate.instant('toasterMessage.schoolLogoDeleted'))
+		// })
+	}
+
+
+  removeFile(index){
+    // this.files.splice(index, 1)
+  }
+
 
 
   private loadMap(): void {

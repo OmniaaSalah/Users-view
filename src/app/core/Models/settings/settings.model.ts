@@ -7,6 +7,7 @@ export interface FileRule{
     name:Localization
     type:string
     size:number,
+    isMandatory:boolean
     uploadedFiles? :[]
 }
 

@@ -205,9 +205,9 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
     return this.http.get(`/Student/student-subjects/${studentId}/${semester}`,filter)
     .pipe(
       map(res=>{
-        return res.data.map(subject =>{
+        return res.result?.data.map(subject =>{
           return {
-            [this.translate.instant('dashboard.parents.subjectName')]: getLocalizedValue(subject.subjectName),
+            [this.translate.instant('dashboard.parents.subjectName')]: getLocalizedValue(subject.subject),
             [this.translate.instant('dashboard.parents.Mandatory/Optional')]: subject.isElective ? this.translate.instant('dashboard.Subjects.optional') : this.translate.instant('dashboard.Subjects.mandatory'),
             [this.translate.instant('dashboard.parents.Evaluation')]: this.translate.instant(''+subject.evaluationSystem),
             [this.translate.instant('dashboard.parents.Result')]: subject.studentDegree,

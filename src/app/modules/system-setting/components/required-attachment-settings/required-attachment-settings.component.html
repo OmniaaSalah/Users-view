@@ -1,7 +1,7 @@
 <h3 class="heading heading--tertiary mb-6"> {{'dashboard.SystemSetting.fileSettingList'|translate}}</h3>
 
 <div class="actions-btn">
-    <button *ngIf="step==5" (click)="updateRequiredFiles()" class="btn btn-primary" [disabled]="onSubmitForm">
+    <button (click)="updateRequiredFiles()" class="btn btn-primary" [disabled]="onSubmitForm">
         {{'shared.saveChanges' | translate}}
         <div class="spinner-border" role="status" *ngIf="onSubmitForm"></div>
     </button>
@@ -38,7 +38,7 @@
                     <label  class="label">{{'dashboard.SystemSetting.requestName'|translate}}</label>
                     <p-dropdown formControlName="request" [options]="diseases" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseRequest'|translate}}"></p-dropdown>
                 </div> -->
-                <div class="mb-6 row gx-5" *ngFor="let file of reqFilesCtr(reqIndex).controls; let i=index" [formGroupName]="i">
+                <div class="mb-6 row gx-4" *ngFor="let file of reqFilesCtr(reqIndex).controls; let i=index" [formGroupName]="i">
                     <ng-container formGroupName="name">
                         <div class="col-md-3">
                             <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
@@ -50,8 +50,8 @@
                         </div>
                     </ng-container>
 
-                    <div class="col-md-2">
-                        <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
+                    <div class="col-md-1">
+                        <label  class="label">{{'shared.fileType'|translate}}</label>
                         <p-dropdown formControlName="type" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
                     </div>
 
@@ -59,6 +59,13 @@
                         <label  class="label">{{'dashboard.SystemSetting.maxSizeAllowed'|translate}}</label>
                         <p-inputNumber formControlName="size" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'dashboard.SystemSetting.mb'|translate}}"></p-inputNumber>
                     </div>
+
+                    <div class="col-md-2 d-flex align-items-center gap-4 align-self-end mb-3">
+                      <label class="mb-2" for="description">{{'dashboard.surveys.mandatory'|translate}}</label>
+                      <p-inputSwitch formControlName="isMandatory" [binary]="true"></p-inputSwitch>
+                      <span class="mb-2" *ngIf="file.get('isMandatory')?.value">{{'shared.yes' |translate}}</span>
+                      <span class="mb-2" *ngIf="!file.get('isMandatory')?.value">{{'shared.no' |translate}}</span>
+                  </div>
                 </div>
                 <!-- <div role="button"
                 class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"

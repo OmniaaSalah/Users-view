@@ -194,12 +194,21 @@
         </div>
                 <div class=" row gx-5 form-set " *ngIf="!urlParameter">
                     <div class="col-xs-2 col-lg-4">
-                      <label class="label">{{'dashboard.SchoolYear.SelectSchoolYearThatYouNeedcopyFrom'|translate}}</label>
+                      <label class="label">{{'dashboard.SchoolYear.SelectSchoolYearThatYouNeedcopyFrom'|translate}} <span class="star">*</span></label>
                       <p-dropdown
+                      formControlName="schoolYearCopiedFrom"
                       (onChange)="copySchoolYearData($event.value)"
                       [options]="schoolYearsList"
+                       [ngClass]="{'ng-invalid ng-dirty':schoolYearCopiedFrom.errors?.['required'] && schoolYearCopiedFrom.touched}" 
                       optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
                       </p-dropdown>
+                      
+                      <div [hidden]="schoolYearCopiedFrom.valid || schoolYearCopiedFrom.untouched">
+                        <small *ngIf="schoolYearCopiedFrom.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                      </div>
                     </div>
                 </div>
 

@@ -100,7 +100,8 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
           en: [file?.name?.en ??'', Validators.required],
         }),
         type: [file?.type ?? ''],
-        size:[file?.size?? 2]
+        size:[file?.size?? 2],
+        isMandatory:[file?.isMandatory??true]
 
     })
 
