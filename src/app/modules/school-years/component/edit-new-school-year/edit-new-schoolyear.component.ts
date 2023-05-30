@@ -72,7 +72,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       weekendDays:['',[Validators.required]],
       ageDeterminationDate:['',[Validators.required]],
       annualHolidays:['',[Validators.required]],
-
+      schoolYearCopiedFrom:['']
       });
   }
 
@@ -103,6 +103,11 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
         this.step=2;
       }
 
+      }
+      else
+      {
+        this.schoolYearFormGrp.get('schoolYearCopiedFrom').setValidators([Validators.required])
+        this.schoolYearFormGrp.get('schoolYearCopiedFrom').updateValueAndValidity();
       }
 
 
@@ -154,6 +159,9 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   }
   get annualHolidays() {
     return this.schoolYearFormGrp.controls['annualHolidays'] as FormControl;
+  }
+  get schoolYearCopiedFrom() {
+    return this.schoolYearFormGrp.controls['schoolYearCopiedFrom'] as FormControl;
   }
 
   get curriculum() {
@@ -511,7 +519,6 @@ closeRow()
   }
   copySchoolYearData($event)
   {
-    console.log($event)
     this.schoolYearCopied=$event;
     this.getCurrentSchoolYear($event);
   }
