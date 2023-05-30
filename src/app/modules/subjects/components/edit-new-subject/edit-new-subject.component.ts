@@ -15,6 +15,7 @@ import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.e
 import { LocationStrategy } from '@angular/common';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { DescriptionStatusEnum } from 'src/app/shared/enums/subjects/description-status.enum';
 
 
 
@@ -303,7 +304,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.descriptionArr.push(this.fb.group({
         description: [''],
         meaning: [''],
-        successfulRetry: [true]
+        successfulRetry: [DescriptionStatusEnum.Successful]
       }));
 
     }
@@ -491,7 +492,7 @@ export class EditNewSubjectComponent implements OnInit {
     this.descriptionArr.push(this.fb.group({
       description: [''],
       meaning: [''],
-      successfulRetry: [true]
+      successfulRetry: [DescriptionStatusEnum.Successful]
     }));
   }
 
