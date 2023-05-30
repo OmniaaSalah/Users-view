@@ -1,27 +1,29 @@
 
-    <div class="" (click)="upload.value=null; upload.click()" *ngIf="theme=='chat'">
-        <!-- <div class="spinner-border text-light" role="status" *ngIf="inProgress"></div> -->
-        <!-- <i class="pi pi-spin pi-spinner " *ngIf="inProgress"></i> -->
-        <div class="spinner-border text-dark" role="status" *ngIf="inProgress"></div>
+  <!-- ************ Chat Theme ************** -->
+<div class="" (click)="upload.value=null; upload.click()" *ngIf="theme=='chat'">
+    <!-- <div class="spinner-border text-light" role="status" *ngIf="inProgress"></div> -->
+    <!-- <i class="pi pi-spin pi-spinner " *ngIf="inProgress"></i> -->
+    <div class="spinner-border text-dark" role="status" *ngIf="inProgress"></div>
 
-        <input type="file"
-        #upload
-        [disabled]="files.length > filesLimit || inProgress"
-        [accept]="allowedFilesExtentions"
-        [multiple]="multiple"
-        [hidden]="true"
-        (change)="validateSelectedFiles($event)">
+    <input type="file"
+    #upload
+    [disabled]="files.length > filesLimit || inProgress"
+    [accept]="allowedFilesExtentions"
+    [multiple]="multiple"
+    [hidden]="true"
+    (change)="validateSelectedFiles($event)">
 
-        <div class="icon-upload sm" role="button" *ngIf="!inProgress">
-            <img class="" src="assets/images/shared/upload.svg" alt="upload">
-        </div>
+    <div class="icon-upload sm" role="button" *ngIf="!inProgress">
+        <img class="" src="assets/images/shared/upload.svg" alt="upload">
     </div>
+</div>
 
 
 
+  <!-- ************ Default Theme (Box uploader) ************** -->
 <div class="image-uploader flex-grow-1" [class]="view" *ngIf="theme=='default'">
-    <h3 class="heading heading--tertiary mb-4" [style.minHeight.rem]="'2.7'"> {{title}}</h3>
 
+    <h3 class="fw-bold mb-4" [style.minHeight.rem]="'2.7'"> {{title}} <span class="d-inline-block mx-1 fs-4 fw-normal mb-1" *ngIf="isMandatory !=null">( {{isMandatory ? ( 'dashboard.surveys.mandatory'|translate) : ('dashboard.surveys.optional'|translate)}} )</span></h3>
 
     <div class=" gx-4 gap-4 gap-xxl-5 file-container" [class.row]="view==='box' || view==='list'">
 
@@ -32,7 +34,6 @@
                 <i [class.showError]="!uploaded" class="spinner pi pi-times-circle" *ngIf="!uploaded && !hideCheck"></i>
                 <!-- <fa-icon class="showError" [i con]="faFileCircleExclamation"></fa-icon> -->
                 <input type="file"
-
                 #upload
                 [disabled]="files.length > filesLimit || inProgress"
                 [accept]="allowedFilesExtentions || null"
@@ -75,16 +76,13 @@
         <!-- Views Options -->
         <!-- ----------------------------- -->
 
-        <ng-container  *ngIf="view=='box'">
+        <!-- <ng-container  *ngIf="view=='box'">
             <div class=" box image-wrapper w px-5 d-flex flex-column" >
-                <!-- <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.reliableLogo'|translate }} </h3> -->
-                <!-- <div class="box images"> -->
-                    <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="removeFile(0)"></fa-icon>
-                    <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt="">
-                    <img *ngIf="imgUrl" [src]="imgUrl" alt="" onerror="this.src='assets/images/shared/image.svg'">
-                <!-- </div>  -->
+                <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="removeFile(0)"></fa-icon>
+                <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt="">
+                <img *ngIf="imgUrl" [src]="imgUrl" alt="" onerror="this.src='assets/images/shared/image.svg'">
             </div>
-        </ng-container>
+        </ng-container> -->
 
 
 

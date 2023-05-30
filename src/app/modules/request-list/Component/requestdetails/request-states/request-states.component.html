@@ -66,8 +66,8 @@
                               </div>
                               <div class="event__content">
                                   <div class="d-flex gap-4">
-                                      <span class="fw-bold color-primary action-author" *ngIf="task?.assignedTo?.scope==userScopeEnum.SPEA">مسؤل الهيئة</span>
-                                      <span class="fw-bold color-primary action-author" *ngIf="task?.assignedTo?.scope!=userScopeEnum.SPEA">{{task.assignedTo.fullName |currentLang}}</span>
+                                      <span class="fw-bold color-primary action-author" *ngIf="task?.assignedTo?.scope==ScopeEnum.SPEA && currentUserScope != ScopeEnum.SPEA">مسؤل الهيئة</span>
+                                      <span class="fw-bold color-primary action-author" *ngIf="task?.assignedTo?.scope!=ScopeEnum.SPEA || (task?.assignedTo?.scope == ScopeEnum.SPEA && currentUserScope == ScopeEnum.SPEA)">{{task.assignedTo.fullName |currentLang}}</span>
 
                                       <span class="color-black-500 fs-4 fw-bold color-skyBlue-500 action-name">{{task.action?.title | currentLang}} </span>
                                       <span class="fw-bold ">{{'dashboard.Requests.' + requestDetails?.requestType |translate}}</span>

@@ -51,6 +51,9 @@ export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
 
   private showError() {
     this.removeError();
+    {
+      required: true
+    }
     const valErrors: ValidationErrors = this.control.errors;
     const firstKey = Object.keys(valErrors)[0];
     const errorMsgKey = this.validationMsgId + '-' + firstKey + '-msg';
@@ -58,7 +61,7 @@ export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
     const errorMsg = this.getValidationMsg(errorMsgKey);
     console.log(errorMsg,errorMsgKey);
 
-    const errSpan = '<p style="color:red;margin-top:.75rem" id="' + this.errorSpanId + '">' + errorMsg + '</p>';
+    const errSpan = '<p class="fs-4" style="color:#EF525B;margin-top:.75rem" id="' + this.errorSpanId + '">' + errorMsg + '</p>';
     this.elRef.nativeElement.classList.add('ng-invalid' ,'ng-dirty')
     this.elRef.nativeElement.parentElement.insertAdjacentHTML('beforeend', errSpan);
   }

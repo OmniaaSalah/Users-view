@@ -30,8 +30,10 @@ export class FileUploadComponent implements OnInit,OnChanges {
   lang = inject(TranslationService).lang
   currentUserScope = inject(UserService).getScope()
 
+
   @Input() theme :'chat' | 'default' = 'default'
   @Input() title = ''
+  @Input() isMandatory
   @Input() label = this.translate.get('shared.clickToUploadFile')
   @Input() hasComment = false
   @Input() showDeletedBy = false
