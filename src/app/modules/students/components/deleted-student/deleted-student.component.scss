@@ -1,17 +1,14 @@
 @import 'src/assets/css/utils/variables.scss';
 @import 'src/assets/css/components/forms';
 
-.student{
-
-    .submit-btn {
-        position: absolute;
-        top: -7rem;
-        inset-inline-end: 4rem;
-    }
+.submit-btn {
+    position: absolute;
+    top: -7rem;
+    inset-inline-end: 4rem;
+}
 
 
-    &__content{
-        padding: 4rem 3rem;
-        min-height: 80vh;
-    }
+.content{
+    padding: 4rem 3rem;
+    min-height: 80vh;
 }
