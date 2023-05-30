@@ -413,7 +413,7 @@ export class AuthenticationMainComponent implements OnInit {
     this.userService.setToken(res?.user);
     this.userService.setUser(res?.user);
     this.userService.setScope(res?.scope);
-    this.userService.setClaims( ArrayOperations.arrayOfStringsToObject(res?.claims))
+    this.userService.setClaims( ArrayOperations.arrayOfStringsToObject(res?.user?.claims))
     localStorage.setItem('$AJ$token', res?.token);
     localStorage.setItem('UaeLogged', 'true');
     this.userService.isUserLogged$.next(true);
