@@ -1676,10 +1676,14 @@
             "SubjectStudentResult":"نتيجة الطالب بالمادة",
             "SchoolYearStudentResult":"نتيجة الطالب بالسنة الدراسية",
             "SemesterStudentResult":"نتيجة الطالب بالصف الدراسي",
-            "ImprovementType":"نوع التحسين",
+            "ImprovementType":"نوع التعديل",
             "ImprovementSchoolYear":"السنة الدراسية للتحسين",
-            "ImprovementDate":"تاريخ التحسين",
-            "ImprovementBy":"تم التحسين بواسطة"
+            "ImprovementDate":"تاريخ التعديل",
+            "ImprovementBy":"تم التعديل بواسطة",
+            "Old Curriculum":"المنهج القديم",
+            "New Curriculum":"المنهج الجديد",
+            "Select Old Curriculum":"أختر المنهج القديم",
+            "Select New Curriculum":"أختر المنهج الجديد"
         },
 
 
