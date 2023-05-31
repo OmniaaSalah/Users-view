@@ -40,7 +40,7 @@
               <ng-container formGroupName="name">
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'sign up.Name (in Arabic)' | translate}} <span class="star">*</span></label>
-                    <input type="text"  id="day" formControlName="ar"  [LangRestrict]="'ar'" class="form-control" pInputText placeholder="{{'dashboard.addChild.name' | translate}}" />
+                    <input type="text"  id="day" formControlName="ar"  class="form-control" pInputText placeholder="{{'dashboard.addChild.name' | translate}}" />
                     <div [hidden]="arabicName.valid || arabicName.untouched">
                         <small *ngIf="arabicName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
@@ -184,7 +184,7 @@
                   <app-file-upload  view="full" (onFileUpload)="setAttachment(noIdentityCauseAttach,$event)"> </app-file-upload>
 
               </div>
-              
+
               <div class="col-md-6">
                 <P class="pb-6">{{'shared.note' | translate}}</P>
                 <textarea [cols]="30" class="w-100 rounded textareaBorder" [rows]="9" placeholder="{{'shared.note' | translate}}" [(ngModel)]="noIdentityCauseAttach.comment" [ngModelOptions]="{standalone:true}" pInputTextarea [autoResize]="true"></textarea>

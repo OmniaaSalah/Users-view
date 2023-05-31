@@ -131,7 +131,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         emirate: [''],
         state: ['']
       }),
-      studentTalent:[[]]
+      studentTalent:[[]],
+      attendanceMode:[]
     })
 
 

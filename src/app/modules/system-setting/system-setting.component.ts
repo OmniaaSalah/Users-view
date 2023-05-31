@@ -26,7 +26,7 @@ export class SystemSettingComponent implements OnInit {
 
   faPlus= faPlus;
 
-  step:number = 4;
+  step:number = 1;
 
   // << FORMS >> //
   rolesForm= this.fb.group({
