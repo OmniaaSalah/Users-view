@@ -31,6 +31,7 @@ export class TransferedStudentsReportsComponent implements OnInit {
   get statusEnum(){ return StatusEnum }
   nationalityList=[];
   studentCategoryList=[];
+  schoolYearsList=[];
   birthDate;
   acceptanceDate;
   componentHeaderData: IHeader = {
@@ -40,7 +41,9 @@ export class TransferedStudentsReportsComponent implements OnInit {
   }
   filtration = {
     ...Filtration,
-    reEnrollmentType:null,
+    OldCurriculumId:null,
+    NewCurriculumId:null,
+    SchoolYearId:null,
     IsActive:true,
     SchoolId: null,
     CurriculumId: null,
@@ -120,6 +123,7 @@ export class TransferedStudentsReportsComponent implements OnInit {
     this.getStudents()
     this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});
     this.studentCategoryList=this.sharedService.studentCategoryList;
+    this.getSchoolYearsList();
   }
 
 
@@ -194,9 +198,11 @@ export class TransferedStudentsReportsComponent implements OnInit {
     this.filtration.DivisionId = null
     this.filtration.IsChildOfAMartyr = null
     this.filtration.IsSpecialAbilities = null
-    this.acceptanceDate=null,
-    this.filtration.TalentId=null,
-    this.filtration.reEnrollmentType=null;
+    this.acceptanceDate=null;
+    this.filtration.TalentId=null;
+    this.filtration.OldCurriculumId=null;
+    this.filtration.NewCurriculumId=null;
+    this.filtration.SchoolYearId=null;
     this.filtration.BirthDateTo = null
     this.filtration.BirthDateFrom = null
     this.filtration.CurriculumId = null
@@ -224,6 +230,10 @@ export class TransferedStudentsReportsComponent implements OnInit {
     this.filtration.Page = event.page
     this.getStudents()
 
+  }
+
+  getSchoolYearsList(){
+    this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
   }
 
   formateDate(date :Date)

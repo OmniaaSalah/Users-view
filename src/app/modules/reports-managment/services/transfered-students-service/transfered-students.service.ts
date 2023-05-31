@@ -165,7 +165,7 @@ export class TransferedStudentsService {
       isDisabled: false,
     }
   ];
-  getAllStudents(reEnrollmentType,filter?:Partial<Filter>){
+  getAllStudents(filter?:Partial<Filter>){
     this.tableLoaderService.isLoading$.next(true)
 
     return this.http.post(`/Student/transfered-student-report`,filter)
@@ -176,7 +176,7 @@ export class TransferedStudentsService {
       }))
   }
 
-  studentsToExport(reEnrollmentType,filter?:Partial<Filter>)
+  studentsToExport(filter?:Partial<Filter>)
   {
     return this.http.post(`/Student/transfered-student-report`,filter)
     .pipe(

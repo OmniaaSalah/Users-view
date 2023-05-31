@@ -34,6 +34,7 @@ export class CertificateDetailsComponent implements OnInit {
 
   certificateType
   certificateId = this.route.snapshot.paramMap.get('id')
+  showQRC = this.route.snapshot.queryParamMap.get('qrc') =='false' ? false :true
   certificate
   certificateQrc=""
 
@@ -44,6 +45,8 @@ export class CertificateDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCertificate()
+    console.log(typeof this.showQRC);
+
 
   }
 
