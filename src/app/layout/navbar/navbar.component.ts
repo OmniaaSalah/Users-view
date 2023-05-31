@@ -101,6 +101,7 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getCurrentUserMessages();
     this.userService.isUserLogged$
       .pipe(distinctUntilChanged())
       .subscribe((res) => {
@@ -108,7 +109,6 @@ export class NavbarComponent implements OnInit {
           this.guardianName = this.userService.getCurrentUserName();
           this.getSchoolYearsList();
           // this.userService.currentUserName.subscribe((res)=>{this.guardianName=res;})
-          this.getCurrentUserMessages();
           this.getNotficationNumber();
 
           this.notificationService.unReadNotificationNumber.subscribe(
@@ -606,14 +606,17 @@ export class NavbarComponent implements OnInit {
 
   getCurrentUserMessages() {
     let userId = this.userService.getCurrentUserId();
-    this.messageService
-      .getCurrentUserMessages(userId, this.currentUserScope, {
-        PageSize: 50,
-        Page: 1,
-      })
-      .subscribe((res) => {
-        this.unReadedMessagesCount = res?.countPending;
-      });
+    if(this.userService.isUserLogged())
+     { 
+      this.messageService
+        .getCurrentUserMessages(userId, this.currentUserScope, {
+          PageSize: 50,
+          Page: 1,
+        })
+        .subscribe((res) => {
+          this.unReadedMessagesCount = res?.countPending;
+        });
+     }
   }
 
   transform(value: Date | string, format = 'd MMMM y '): string {
