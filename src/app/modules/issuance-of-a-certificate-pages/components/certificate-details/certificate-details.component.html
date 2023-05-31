@@ -98,8 +98,14 @@
               </table>
           </section>
 
-          <div class="d-flex justify-content-end align-items-center mt-6">
-            <div class="fs-4 d-flex align-items-center">
+          <div class="d-flex justify-content-between align-items-center mt-6" >
+
+            <div class="">
+              <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+              <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+            </div>
+
+            <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
               <div class="text-start">
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
                 <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -111,7 +117,7 @@
                   </p>
                   <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
                   <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-                  <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
+                  <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
                 </div>
             </div>
           </div>
@@ -124,19 +130,19 @@
                       <span class="font-en">SHJSPEA</span>
                       <ul class="social d-flex align-center gap-2">
                         <li>
-                            <a href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
+                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
                         </li>
                         <li>
-                            <a href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
+                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
                         </li>
                         <li>
-                            <a href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
+                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
                         </li>
                         <li>
-                            <a href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
+                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
                         </li>
                         <li>
-                            <a href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
+                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
                         </li>
                     </ul>
                       <a>web : spea.shj.ae</a>
@@ -248,8 +254,14 @@
         <div class="col-md-6 fs-2 text-start font-en" dir="ltr">This certificate is valid for one year from the date of issue.</div>
       </div>
 
-      <div class="d-flex justify-content-end align-items-center">
-        <div class="fs-4 d-flex align-items-center">
+      <div class="d-flex justify-content-between align-items-center" >
+
+        <div class="">
+          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+        </div>
+
+        <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -261,7 +273,7 @@
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
             </div>
         </div>
       </div>
@@ -354,8 +366,13 @@
       </div>
 
       <div class="py-6"></div>
-      <div class="d-flex justify-content-end align-items-center">
-        <div class="fs-4 d-flex align-items-center">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="">
+          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+        </div>
+
+        <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -367,7 +384,7 @@
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
             </div>
         </div>
       </div>
@@ -528,11 +545,11 @@
       <div class="">
         <div class="d-flex justify-content-between align-items-center">
           <div class="">
-            <div class="mb-5">تاريخ تحرير المستند : --</div>
-            <div class=""> ختم المدرسه : --</div>
+            <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+            <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
           </div>
 
-          <div class="d-flex justify-content-end align-items-center">
+          <div class="d-flex justify-content-end align-items-center" *ngIf="showQRC">
             <div class="fs-4 d-flex align-items-center">
               <div class="text-start">
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
@@ -545,7 +562,7 @@
                 </p>
                 <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
                 <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-                <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
+                <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
               </div>
             </div>
           </div>
@@ -566,8 +583,13 @@
     <div *ngSwitchCase="certificateTypeEnum.BoardCertificate">
       <img class="w-100" [src]="certificate?.Attachments[0]" onerror="this.src='assets/images/shared/image.svg'">
 
-            <div class="d-flex justify-content-end align-items-center">
-        <div class="fs-4 d-flex align-items-center ">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="">
+          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+        </div>
+
+        <div class="fs-4 d-flex align-items-center "  *ngIf="showQRC">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -579,7 +601,7 @@
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
             </div>
         </div>
       </div>
@@ -588,7 +610,7 @@
     </div>
 
     <div class="layout" *ngSwitchCase="certificateTypeEnum.DiplomaCertificate">
-<!--
+      <!--
       <img class="w-100" [src]="certificate?.Attachments[0]" onerror="this.src='assets/images/shared/image.svg'">
       <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code> -->
       <header>
@@ -651,10 +673,13 @@
 
           </div>
 
-          <span class="col-md-2 text-center">ختم المدرسه</span>
+          <div class="d-flex flex-column">
+            <span class="col-md-2 text-center">ختم المدرسه</span>
+            <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
+          </div>
 
 
-            <div class="fs-4 d-flex align-items-center">
+            <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
               <div class="text-start">
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
                 <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -666,7 +691,7 @@
                   </p>
                   <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
                   <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-                  <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
+                  <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
                 </div>
             </div>
 
@@ -883,8 +908,13 @@
       <p class="font-en text-start ">The School is Licensed from Sharjah Private Education Authority – Sharjah Government – United Arab Emirates </p>
 
 
-      <div class="d-flex justify-content-end align-items-center mt-6">
-        <div class="fs-4 d-flex align-items-center">
+      <div class="d-flex justify-content-between align-items-center mt-6">
+        <div class="">
+          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+        </div>
+
+        <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -896,7 +926,7 @@
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
             </div>
         </div>
       </div>
@@ -1129,8 +1159,13 @@
       </div>
 
 
-      <div class="d-flex justify-content-end align-items-center mt-6">
-        <div class="fs-4 d-flex align-items-center">
+      <div class="d-flex justify-content-between align-items-center mt-6" >
+        <div class="">
+          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+        </div>
+
+        <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -1142,7 +1177,7 @@
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
               <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '1253648558556'}}</p>
+              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
             </div>
         </div>
       </div>

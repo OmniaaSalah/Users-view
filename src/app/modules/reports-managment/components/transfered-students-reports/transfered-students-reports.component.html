@@ -10,13 +10,27 @@
         <div class="custom-form p-5 " *ngIf="isCollapsed">
 
            <div class="row g-5 form-set" >
-            <div class="col-md-4" >
+            <!-- <div class="col-md-4" >
                 <label class="label">{{'shared.transportationType'| translate}}</label>
                 <p-dropdown 
                 [options]="transferType"
                 [(ngModel)]="filtration.reEnrollmentType"
                 optionValue="value" optionLabel="name"
                 placeholder="{{'shared.chooseTransportationType' |translate}}" required></p-dropdown>
+            </div> -->
+            <div class="col-md-4">
+                <label class="label">{{'dashboard.reports.Old Curriculum'|translate}}</label>
+                <p-multiSelect   [options]="(curriculums$ | async)" [(ngModel)]="filtration.OldCurriculumId" display="chip"  optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"     placeholder="{{'dashboard.reports.Select Old Curriculum'|translate}}" ></p-multiSelect>
+
+            </div>
+            <div class="col-md-4">
+                <label class="label">{{'dashboard.reports.New Curriculum'|translate}}</label>
+                <p-multiSelect   [options]="(curriculums$ | async)" [(ngModel)]="filtration.NewCurriculumId" display="chip"  optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"    placeholder="{{'dashboard.reports.Select New Curriculum'|translate}}" ></p-multiSelect>
+
+            </div>
+            <div class="col-md-4">
+                <label class="label">{{'dashboard.students.academic year'|translate}}</label>
+                <p-dropdown [options]="schoolYearsList" [(ngModel)]="filtration.SchoolYearId" [showClear]="true"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"  placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"></p-dropdown>
             </div>
             <div class="col-md-4">
                 <label class="label">{{'reports.Registration date and time (from-to)' | translate}}</label>

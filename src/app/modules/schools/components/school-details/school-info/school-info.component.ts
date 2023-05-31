@@ -110,7 +110,7 @@ getSchool(id){
 		let file={
 			id: this.schoolId,
 			schoolLogoPath: event[0]?.url || '',
-			diplomaLogoPath: this.school?.schoolLogoPath ||''
+			diplomaLogoPath: this.school?.diplomaLogoPath ||''
 		}
 
 		this.schoolsService.updateSchoolAttachments(file).subscribe(res=>{
@@ -128,7 +128,7 @@ getSchool(id){
 		// }
 		let file={
 			id: this.schoolId,
-			schoolLogoPath: this.school?.diplomaLogoPath||'',
+			schoolLogoPath: this.school?.schoolLogoPath||'',
 			diplomaLogoPath: event[0]?.url || ''
 		}
 		this.schoolsService.updateSchoolAttachments( file).subscribe(res=>{
