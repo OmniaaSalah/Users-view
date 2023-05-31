@@ -37,7 +37,9 @@
       (onFormSubmitted)="updateStudent()"
       [formGroup]="studentForm"></app-student-prohibited-status>
 
-      <hr class="my-6 w-75">
+      <hr class="my-6 w-75" *ngIf="currentUserScope != scopeEnum.Guardian">
+      <hr class="my-6 w-75" *ngIf="currentUserScope == scopeEnum.Guardian && mode=='view'">
+
 
         <ng-container *ngIf="mode=='view'">
             <div class="float-btn " (click)="mode='edit'; modeChange.emit(mode)" *permit="claimsEnum.SEG_U_StudentInfo">
@@ -83,7 +85,7 @@
 
 
                 <p class="color-gray-300">{{ 'dashboard.students.attendanceType'|translate }}</p>
-                <span class="color-primary mb-2">{{'dashboard.students.Remote' |translate}}</span>
+                <span class="color-primary mb-2">{{'dashboard.students.' + student?.attendanceMode |translate}}</span>
 
                 <p class="color-gray-300">{{'dashboard.students.withDisabilities'| translate}}</p>
                 <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
@@ -250,14 +252,14 @@
               <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
           </div>
 
-          <div class="col-md-4 col-lg-3 "  >
+          <div class="col-md-4 col-lg-3 "  *ngIf="currentUserScope != scopeEnum.Guardian">
             <label class="label">{{'dashboard.parents.ministerialNumber' |translate}}</label>
             <p-inputNumber formControlName="ministerialId" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
           </div>
 
           <div class="col-md-4 col-lg-3 "  >
             <label class="label required">{{ 'dashboard.students.attendanceType'|translate }}</label>
-            <p-dropdown [options]="attendanceType" optionValue="value" optionLabel="name" placeholder="{{'dashboard.students.attendanceType' |translate}}"></p-dropdown>
+            <p-dropdown [options]="attendanceType" formControlName="attendanceMode" optionValue="value" optionLabel="name" placeholder="{{'dashboard.students.attendanceType' |translate}}"></p-dropdown>
           </div>
 
           <div class="col-md-4 col-lg-3 ">

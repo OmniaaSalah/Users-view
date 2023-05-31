@@ -42,15 +42,30 @@
 
 <ng-container *ngIf="allowToEditIdentityInfo && mode=='edit'">
     <div class="row g-5 custom-form" [formGroup]="studentForm">
-        <div class="col-md-4 col-lg-3  " formGroupName="name">
-            <label class="label required">{{'dashboard.students.studentName'|translate}}</label>
+      <ng-container formGroupName="name">
+        <div class="col-md-4 col-lg-3  " >
+            <label class="label required">{{'dashboard.students.studentNameAr'|translate}}</label>
             <input type="text" formControlName="ar" appFormControlValidationMsg  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
         </div>
 
-        <div class="col-md-4 col-lg-3 " formGroupName="surname">
-            <label class="label required">{{'dashboard.students.studentNickname'|translate}}</label>
+        <div class="col-md-4 col-lg-3  ">
+          <label class="label required">{{'dashboard.students.studentNameEn'|translate}}</label>
+          <input type="text" formControlName="en" appFormControlValidationMsg  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+        </div>
+      </ng-container>
+
+
+      <ng-container formGroupName="surname">
+        <div class="col-md-4 col-lg-3 ">
+            <label class="label required">{{'dashboard.students.studentsurnameAr'|translate}}</label>
             <input type="text" formControlName="ar" appFormControlValidationMsg pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
         </div>
+
+        <div class="col-md-4 col-lg-3 ">
+          <label class="label required">{{'dashboard.students.studentsurnameEn'|translate}}</label>
+          <input type="text" formControlName="en" appFormControlValidationMsg pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+        </div>
+      </ng-container>
 
         <div class="col-md-4 col-lg-3 ">
             <label class="label required">{{'shared.birthDay'|translate}}</label>

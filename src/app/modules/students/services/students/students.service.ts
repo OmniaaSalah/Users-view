@@ -212,7 +212,7 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
             [this.translate.instant('dashboard.parents.Evaluation')]: this.translate.instant(''+subject.evaluationSystem),
             [this.translate.instant('dashboard.parents.Result')]: subject.studentDegree,
             [this.translate.instant('dashboard.parents.studentperformance')]: subject?.studentPerformance || 'لايوجد',
-            [this.translate.instant('dashboard.parents.GPAlt')]: subject.studentGPA ,
+            [this.translate.instant('dashboard.parents.GPA')]: subject.studentGPA ,
             [this.translate.instant('dashboard.parents.Credithour')]: subject.studentHour,
 
           }
@@ -237,12 +237,13 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
     return this.http.get('/Student/school-record',filter)
     .pipe(
       map(res=>{
-        return res.data.map(record =>{
+        return res?.result?.data.map(record =>{
           return {
             [this.translate.instant('dashboard.schools.SchoolYear')]: getLocalizedValue(record.schoolYear),
             [this.translate.instant('dashboard.schools.schoolName')]: getLocalizedValue(record.grade),
             [this.translate.instant('shared.grade')]: record.finalResult==StatusEnum.Passed? this.translate.instant('shared.allStatus.Passed'): this.translate.instant('shared.allStatus.Failed'),
             [this.translate.instant('shared.divisionName')]: getLocalizedValue(record.division),
+            [this.translate.instant('dashboard.students.finalScore')]: this.translate.instant('shared.allStatus.' + record.finalResult),
           }
         })
       }))

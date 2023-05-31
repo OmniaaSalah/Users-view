@@ -22,22 +22,22 @@ export class IssuanceCertificaeService {
       name: this.translate.instant("dashboard.issue of certificate.MinisterialSubjects")
 
     },
-    // {
-    //   value:DegreesCertificatesEnum.NonMinisterialSubjects,
-    //   name: this.translate.instant("dashboard.issue of certificate.NonMinisterialSubjects")
-    // },
+    {
+      value:DegreesCertificatesEnum.NonMinisterialSubjects,
+      name: this.translate.instant("dashboard.issue of certificate.NonMinisterialSubjects")
+    },
     {
       value: DegreesCertificatesEnum.AllSubjects,
       name: this.translate.instant("dashboard.issue of certificate.AllSubjects")
     },
-    {
-      value:DegreesCertificatesEnum.OptionalSubjects,
-      name: this.translate.instant("dashboard.issue of certificate.OptionalSubjects")
-    },
-    {
-      value: DegreesCertificatesEnum.MandatorySubjects,
-      name: this.translate.instant("dashboard.issue of certificate.MandatorySubjects")
-    },
+    // {
+    //   value:DegreesCertificatesEnum.OptionalSubjects,
+    //   name: this.translate.instant("dashboard.issue of certificate.OptionalSubjects")
+    // },
+    // {
+    //   value: DegreesCertificatesEnum.MandatorySubjects,
+    //   name: this.translate.instant("dashboard.issue of certificate.MandatorySubjects")
+    // },
   ];
 
 
