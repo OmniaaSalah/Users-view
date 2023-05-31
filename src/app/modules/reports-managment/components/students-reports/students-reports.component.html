@@ -11,6 +11,11 @@
 
            <div class="row g-5 form-set" >
             <div class="col-md-4">
+                <label class="label">{{'dashboard.students.academic year'|translate}}</label>
+                <p-dropdown [options]="schoolYearsList" [(ngModel)]="filtration.SchoolYearId" [showClear]="true"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"  placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"></p-dropdown>
+            </div>
+            
+            <div class="col-md-4">
                 <label class="label">{{'reports.Registration date and time (from-to)' | translate}}</label>
                 <p-calendar  [(ngModel)]="acceptanceDate" [showIcon]="true" inputId="icon" selectionMode="range"
                      placeholder="{{'dd/mm/yy'|translate}} - {{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy" >
