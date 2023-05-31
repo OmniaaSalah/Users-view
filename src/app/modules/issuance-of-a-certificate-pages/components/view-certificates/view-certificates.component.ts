@@ -26,6 +26,7 @@ export class ViewCertificatesComponent implements OnInit {
   get certificateType() { return CertificatesEnum }
   get certificateStatus() { return CertificateStatusEnum }
   paymentRef = this.route.snapshot.queryParamMap.get('TP_RefNo')
+  receiptNo= this.route.snapshot.queryParamMap.get('TP_ReceiptNo')
   certificatesIds=[];
   guardian={id:'',name:{}}
   allCertificates={
@@ -122,7 +123,7 @@ export class ViewCertificatesComponent implements OnInit {
   }
   completePaymentProccess(){
 
-    this.issuance.completepaymentProcess(this.paymentRef.toString()).subscribe(()=>{
+    this.issuance.completepaymentProcess(this.paymentRef.toString(),this.receiptNo.toString()).subscribe(()=>{
       this.getAllCertificates()
       this.router.navigate([])
     })

@@ -34,7 +34,7 @@ export class TransferGroupComponent implements OnInit {
 
   filteration:Filter ={...Filtration, curriculumId: this.schoolCurriculumId ,gradeId: null}
   // studentFilteration:Filter = {...Filtration,SchoolId:this.schoolId, GradeId:'',DivisionId:'',PageSize:null}
-  studentFilteration:Filter = {...Filtration,GradeId:'',DivisionId:'',PageSize:0}
+  studentFilteration = {...Filtration,GradeId:'',DivisionId:null,PageSize:0}
 
 
   schools={
@@ -141,7 +141,7 @@ export class TransferGroupComponent implements OnInit {
   onDivisionSelected(divisionId){
     this.allChecked = false;
     this.checkboxSelected = false
-    this.studentFilteration.DivisionId = divisionId
+    this.studentFilteration.DivisionId = [divisionId]
     this.selectedStudents = []
 
     this.getAllStudents()

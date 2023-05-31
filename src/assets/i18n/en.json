@@ -1521,6 +1521,7 @@
             "meaning": "Meaning",
             "successed": "Successed",
             "retry":"Failed",
+            "donotShow":"Donot show",
             "retryExam":"Retry Exam",
             "add description":"Add description",
             "Are you sure that you want to delete Subject":"Are you sure that you want to delete subject",
@@ -1924,7 +1925,11 @@
             "ImprovementType":"Improvement type",
             "ImprovementSchoolYear": "Improvement school year",
             "ImprovementDate": "Improvement date",
-            "ImprovementBy":"Improvement by"
+            "ImprovementBy":"Improvement by",
+            "Old Curriculum":"Old curriculum",
+            "New Curriculum": "New curriculum",
+            "Select Old Curriculum":"Select old curriculum",
+            "Select New Curriculum":"Select new curriculum"
         },
         "issue of certificate": {
             "CertificateStatus": "Certificate status",
