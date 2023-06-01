@@ -1767,7 +1767,8 @@
             "attendanceType":"Attendance Type",
             "Remote":"Remote",
             "Mixed":"Mixed",
-            "Physical":"Physical"
+            "Physical":"Physical",
+            "diplomeFile":"Equivalency certificate file"
 
         },
         "Requests": {
