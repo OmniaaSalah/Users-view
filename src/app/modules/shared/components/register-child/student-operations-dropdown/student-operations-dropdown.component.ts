@@ -344,10 +344,10 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
       this.onSubmit=true
       this.studentsService.exemptionFromStudySubjectReq(reqBody).subscribe(()=>{
         this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
-        this.RepeateStudyPhaseModelOpend=false
+        this.exemptionFromStudyModelOpend=false
         this.onSubmit=false
       },()=>{
-        this.RepeateStudyPhaseModelOpend=false
+        this.exemptionFromStudyModelOpend=false
         this.toastr.error(this.translate.instant('toasterMessage.error'))
         this.onSubmit=false
       })
