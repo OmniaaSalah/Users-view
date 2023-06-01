@@ -47,6 +47,11 @@ export class TransferedStudentsService {
       isDisabled: true,
     },
     {
+      name:this.translate.instant('dashboard.students.daleelNumber2'),
+      isSelected: true,
+      isDisabled: true,
+    },
+    {
       name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: true,
       isDisabled: true,
