@@ -178,8 +178,8 @@ export class EditNewSubjectComponent implements OnInit {
   get meaning() {
     return this.subjectFormGrp.controls['meaning'] as FormControl;
   }
-  get successfulRetry() {
-    return this.subjectFormGrp.controls['successfulRetry'] as FormControl;
+  get status() {
+    return this.subjectFormGrp.controls['status'] as FormControl;
   }
 
 
@@ -272,7 +272,7 @@ export class EditNewSubjectComponent implements OnInit {
        let descriptionArrGrp= this.descriptionArr.controls[0] as FormGroup
        descriptionArrGrp.controls['meaning'].setValidators([Validators.required]);
        descriptionArrGrp.controls['description'].setValidators([Validators.required]);
-       descriptionArrGrp.controls['successfulRetry'].setValidators([Validators.required]);
+       descriptionArrGrp.controls['status'].setValidators([Validators.required]);
 
        this.clearDegreesField();
 
@@ -304,7 +304,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.descriptionArr.push(this.fb.group({
         description: [''],
         meaning: [''],
-        successfulRetry: [DescriptionStatusEnum.Successful]
+        status: [DescriptionStatusEnum.Successful]
       }));
 
     }
@@ -352,6 +352,7 @@ export class EditNewSubjectComponent implements OnInit {
           {
             element.code=i;
             this.addedSubject.subjectDescriptions.push(element);
+            console.log(element)
           }
       });
 
@@ -472,7 +473,7 @@ export class EditNewSubjectComponent implements OnInit {
             this.descriptionArr.push(this.fb.group({
               description: [element.description],
               meaning: [element.meaning],
-              successfulRetry: [element.successfulRetry]
+              status: [element.status]
             }));
           });
        }
@@ -492,7 +493,7 @@ export class EditNewSubjectComponent implements OnInit {
     this.descriptionArr.push(this.fb.group({
       description: [''],
       meaning: [''],
-      successfulRetry: [DescriptionStatusEnum.Successful]
+      status: [DescriptionStatusEnum.Successful]
     }));
   }
 
@@ -503,10 +504,10 @@ export class EditNewSubjectComponent implements OnInit {
       let descriptionArrGrp= this.descriptionArr.controls[i] as FormGroup
       descriptionArrGrp.controls['meaning'].clearValidators();
       descriptionArrGrp.controls['description'].clearValidators();
-      descriptionArrGrp.controls['successfulRetry'].clearValidators();
+      descriptionArrGrp.controls['status'].clearValidators();
       descriptionArrGrp.controls['meaning'].updateValueAndValidity();
       descriptionArrGrp.controls['description'].updateValueAndValidity();
-      descriptionArrGrp.controls['successfulRetry'].updateValueAndValidity();
+      descriptionArrGrp.controls['status'].updateValueAndValidity();
     }
   }
   clearDegreesField()

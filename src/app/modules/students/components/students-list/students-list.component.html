@@ -176,7 +176,7 @@
         </p-table>
 
         <div class="" *ngIf="students.total  > paginationState.rows">
-            <app-pagination [totalItems]="students.total + 5" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [totalItems]="students.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
 
