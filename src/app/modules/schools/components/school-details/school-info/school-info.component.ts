@@ -51,7 +51,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
   schoolAttacments={
     logo:'',
     reliableLogo:'',
-    certificateLogo:''
+    stampSchoolLogoPath:''
   }
 
 
@@ -61,7 +61,6 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 	  private translate:TranslateService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
-    private userService:UserService,
     private toaster:ToastrService,
     private gradeService:GradesService,
     private schoolsService:SchoolsService) { }
@@ -78,7 +77,7 @@ getSchool(id){
 		this.school = res
     this.schoolAttacments.logo = res?.schoolLogoPath
     this.schoolAttacments.reliableLogo = res?.diplomaLogoPath
-    // this.schoolAttacments.certificateLogo = res?.diplomaLogoPath
+    this.schoolAttacments.stampSchoolLogoPath = res?.stampSchoolLogoPath
 
 		if(this.currentUserScope==UserScope.Employee) {
 			this.componentHeaderData.mainTitle.main = getLocalizedValue(res.name)
@@ -110,7 +109,8 @@ getSchool(id){
 		let file={
 			id: this.schoolId,
 			schoolLogoPath: event[0]?.url || '',
-			diplomaLogoPath: this.school?.diplomaLogoPath ||''
+			diplomaLogoPath: this.school?.diplomaLogoPath ||'',
+      stampSchoolLogoPath:  this.school?.stampSchoolLogoPath ||''
 		}
 
 		this.schoolsService.updateSchoolAttachments(file).subscribe(res=>{
@@ -129,7 +129,8 @@ getSchool(id){
 		let file={
 			id: this.schoolId,
 			schoolLogoPath: this.school?.schoolLogoPath||'',
-			diplomaLogoPath: event[0]?.url || ''
+			diplomaLogoPath: event[0]?.url || '',
+      stampSchoolLogoPath: this.school?.stampSchoolLogoPath || ''
 		}
 		this.schoolsService.updateSchoolAttachments( file).subscribe(res=>{
 			if(file.diplomaLogoPath) this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
@@ -139,7 +140,7 @@ getSchool(id){
 
 
   onCertificateLogoFileUpload(event: CustomFile[]){
-    this.schoolAttacments.certificateLogo =  event[0]?.url || ''
+    this.schoolAttacments.stampSchoolLogoPath =  event[0]?.url || ''
 
 		// const file={
 		// 	title:event[0].name,
@@ -147,8 +148,9 @@ getSchool(id){
 		// }
 		let file={
 			id: this.schoolId,
-			schoolLogoPath: event[0]?.url || '',
-			diplomaLogoPath: this.school?.schoolLogoPath ||''
+			schoolLogoPath: this.school?.schoolLogoPath||'',
+			diplomaLogoPath: this.school?.schoolLogoPath || '',
+      stampSchoolLogoPath: event[0]?.url || '',
 		}
 
 		// this.schoolsService.updateSchoolAttachments(file).subscribe(res=>{
