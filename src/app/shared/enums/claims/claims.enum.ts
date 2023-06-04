@@ -208,7 +208,7 @@ export  enum ClaimsEnum{
     E_ContactWithSpea = 'E_ContactWithSpea',
     SE_NavBarMenu = 'SE_NavBarMenu',
     SE_ShowUserIcon ="SE_ShowUserIcon",
-
+    SE_TakeUndoAction="SE_TakeUndoAction",
     SE_MenuItem_Exam = "SE_MenuItem_Exam",
     SE_MenuItem_Rate="SE_MenuItem_Rate"
 
