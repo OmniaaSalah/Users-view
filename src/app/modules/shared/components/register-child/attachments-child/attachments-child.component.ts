@@ -48,7 +48,8 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   onSubmit
   showErrMess = false
 
-  gurdiansAttachmentsTypes$=this.indexsService.getIndext(IndexesEnum.TheTypeOfFileAttachmentForTheParent)
+  allowedFilesFor = this.currentUserScope ==UserScope.Guardian ?IndexesEnum.TheTypeOfFileAttachmentForTheParent: IndexesEnum.TypesOfFileAttachmentsForSchoolStaff
+  gurdiansAttachmentsTypes$=this.indexsService.getIndext(this.allowedFilesFor)
 
   constructor(
     private fb:FormBuilder,
