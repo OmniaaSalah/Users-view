@@ -56,7 +56,10 @@ absenceRecord={
   total:0,
   list:[],
   loading:true,
-  isDateSelected:null
+  isDateSelected:null,
+  totalAbsenceStudents:0,
+  totalAttendantStudents:0,
+  totalDivisionStudents:0
 }
 
 lastDate
@@ -92,6 +95,8 @@ lastDate
 
 
   dateSelected(date:Date){
+    console.log(date);
+
     this.filtration.date = date.toDateString()
     this.absenceRecord.isDateSelected=true
     this.filtration.Page=1
@@ -104,9 +109,14 @@ lastDate
 
     this.divisionService.getAbsenceRecords(this.schoolId, this.divisionId, this.filtration).subscribe(res=>{
       this.absenceRecord.loading = false
-      this.absenceRecord.list = res.result
-      this.absenceRecord.totalAllData = res.totalAllData ||1
+      this.absenceRecord.list = res?.result?.divisionAttendantListDto
+      // this.absenceRecord.totalAllData = res.totalAllData ||1
       this.absenceRecord.total =res.total||5
+
+      this.absenceRecord.totalAbsenceStudents = res?.result?.totalAbsenceStudents
+      this.absenceRecord.totalAttendantStudents = res?.result?.totalAttendantStudents
+      this.absenceRecord.totalDivisionStudents = res?.result?.totalDivisionStudents
+
     },err=> {
       this.absenceRecord.loading=false
       this.absenceRecord.total=0
@@ -196,7 +206,7 @@ lastDate
       this.toasterService.success(this.translate.instant('toasterMessage.absenceRaised'));
       this.isSubmited=false
       this.absenceModelOpened = false
-      this.getAbsenceRecords()
+      // this.getAbsenceRecords()
       this.getLastAbsenceDate()
     },err=>{
       this.toasterService.error(this.translate.instant('toasterMessage.error'));

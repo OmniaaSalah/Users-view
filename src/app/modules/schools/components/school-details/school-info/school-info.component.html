@@ -52,9 +52,9 @@
           <app-file-upload (onFileUpload)="onCertificateLogoFileUpload($event)" [accept]="fileTypeEnum.Image"  view="box" title="{{'dashboard.schools.certificateReliableLogo'|translate }}" ></app-file-upload>
 
           <div class=" box image-wrapper w px-5 d-flex flex-column" >
-            <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.certificateLogo=''"></fa-icon>
+            <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.stampSchoolLogoPath=''"></fa-icon>
             <!-- <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt=""> -->
-            <img  [src]="schoolAttacments.certificateLogo" fullbackImage>
+            <img  [src]="schoolAttacments.stampSchoolLogoPath" fullbackImage>
           </div>
       </div>
     </div>
