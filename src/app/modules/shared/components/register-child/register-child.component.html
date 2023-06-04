@@ -93,6 +93,12 @@
                         <img src="assets/images/shared/branch.svg" alt="">
                         <span class="color-gray-300 fs-4">{{student.grade?.name |currentLang}}</span>
                     </div>
+
+                    <div *ngIf="student.isFinalGraduated">
+                      <img style="width:1.5rem" src="assets/images/shared/cup.svg" alt="">
+                      <span class="color-red-500 fs-4">{{'dashboard.students.graduated' |translate}}</span>
+                  </div>
+
                 </div>
             </div>
           </div>

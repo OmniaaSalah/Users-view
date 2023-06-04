@@ -232,7 +232,7 @@
                           </div>
 
                           <div class="row g-5" *ngIf="!skeletonShown ">
-                              <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of graduatedStudents">
+                              <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of finalGraduatedStudents">
                                   <div  class="h-100 box-shadow radius-15 p-0" role="button" routerLink="/parent/{{guardian.id}}/child/{{student.id}}" [queryParams]="{ registered: 'true' }">
 
                                       <div class="profile d-flex align-items-center p-4">
@@ -276,7 +276,7 @@
 
                                   </div>
                               </div>
-                              <app-informative-block *ngIf="graduatedStudents.length == 0" subTitle="{{'emptyList.noGraduatedSons' |translate}}"></app-informative-block>
+                              <app-informative-block *ngIf="finalGraduatedStudents.length == 0" subTitle="{{'emptyList.noGraduatedSons' |translate}}"></app-informative-block>
                           </div>
                       </div>
                   </div>
