@@ -33,6 +33,7 @@ export interface School{
     classification: SchoolClassification,
     schoolLogoPath:string
     diplomaLogoPath:string
+    stampSchoolLogoPath:string
 }
 
 

@@ -57,7 +57,7 @@
         <p class="time">{{messageDetails?.createdDate | customDate}}</p>
     </div>
     <div class="first-message">
-      <p class="title"><span *ngIf="messageDetails?.showSenderName==null||messageDetails?.showSenderName">{{ messageDetails?.userName | currentLang }}</span><span *ngIf="messageDetails?.showSenderName!=null&&!messageDetails?.showSenderName">---</span> / {{messageDetails?.roleName | currentLang}}</p>
+      <p class="title"><span *ngIf="messageDetails?.scope==currentUserScope||messageDetails?.showSenderName==null||messageDetails?.showSenderName">{{ messageDetails?.userName | currentLang }}</span><span *ngIf="messageDetails?.showSenderName!=null&&!messageDetails?.showSenderName&&messageDetails?.scope!=currentUserScope">---</span> / {{messageDetails?.roleName | currentLang}}</p>
       <div class="body-content">
           <p>{{ messageDetails?.messegeText }}</p>
           <div class="w-100 d-flex">

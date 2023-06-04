@@ -99,6 +99,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     },err=>{
       this.mode='view'
       this.onSubmit=false
+      this.getAttachment()
       this.toaster.error(this.translate.instant('toasterMessage.error'))
     })
   }
