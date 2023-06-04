@@ -1,8 +1,8 @@
 export enum DegreesCertificatesEnum{
-    MinisterialSubjects= 'MinisterialSubjects', 
-    NonMinisterialSubjects= 'NonMinisterialSubjects',
+  SpeaSubjects= 'SpeaSubjects',
+  SchoolSubjects= 'SchoolSubjects',
     AllSubjects= 'AllSubjects',
     MandatorySubjects ="MandatorySubjects",
     OptionalSubjects="OptionalSubjects"
- 
+
 }
