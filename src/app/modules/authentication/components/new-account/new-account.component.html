@@ -179,7 +179,7 @@
                             <div class="row gx-5 form-set">
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.Name (in Arabic)'|translate }} <span class="star">*</span> </label>
-                                    <input type="text" pInputText  formControlName="arabicName" [LangRestrict]="'ar'" class="form-control " placeholder="{{'sign up.Enter Name'|translate}}" >
+                                    <input type="text" pInputText  formControlName="arabicName" class="form-control " placeholder="{{'sign up.Enter Name'|translate}}" >
                                     <div [hidden]="arabicName.valid || arabicName.untouched">
                                         <small *ngIf="arabicName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}
@@ -216,7 +216,7 @@
                             <div class="row gx-5 form-set">
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.NickName (in Arabic)'|translate }} <span class="star">*</span> </label>
-                                    <input type="text" pInputText  formControlName="arabicNickName" class="form-control " [LangRestrict]="'ar'" placeholder="{{'sign up.Enter NickName'|translate}}" >
+                                    <input type="text" pInputText  formControlName="arabicNickName" class="form-control " placeholder="{{'sign up.Enter NickName'|translate}}" >
                                     <div [hidden]="arabicNickName.valid || arabicNickName.untouched">
                                         <small *ngIf="arabicNickName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}
@@ -326,7 +326,7 @@
                         <span class="color-primary mx-3">{{UAEUnregisteredUser?.surname|currentLang}}</span>
                     </div>
                 </div>
-        
+
                 </div>
                 <div class="row gx-5 mt-4">
                     <div class="col-md-6">
@@ -366,13 +366,13 @@
                             <span class="color-primary mx-3 " *ngIf="UAEUnregisteredUser?.phone?.length==10">{{UAEUnregisteredUser?.phone}}</span>
                             <ng-container  *ngIf="UAEUnregisteredUser?.phone?.length!=10">
                                 <input type="text" pInputText [formControl]="phoneNumber"  [LangRestrict]="'numb'" maxlength="10" class="form-control "  placeholder="{{'shared.Write phoneNumber'|translate}}">
-                            
+
                                 <div [hidden]="phoneNumber.valid || phoneNumber.untouched">
                                         <small *ngIf="phoneNumber.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                       {{'shared.This Field is Required'|translate}}
                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                     </small>
-    
+
                                         <small *ngIf="phoneNumber.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                                         {{'shared.Mobile Must Start With 05 and Contain 10 Numbers Only'|translate}}
                                         <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
@@ -380,7 +380,7 @@
                                 </div>
                             </ng-container>
                         </div>
-    
+
                     </div>
 
                   </div>
@@ -433,7 +433,7 @@
         </ng-container>
         <ng-container  *ngIf="step==5">
             <div class="d-flex align-items-center justify-content-end  ">
-            
+
                 <button class="btn btn-primary " (click)="saveUserObj()" [disabled]="isBtnLoading||(!UAEUnregisteredUser?.phone&&!phoneNumber.valid)">
                     <span>{{'sign up.Next'| translate}} </span>
                     <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>

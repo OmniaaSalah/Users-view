@@ -1977,8 +1977,8 @@
             "it will remove previous data": "سوف يتم حذف البيانات السابقة",
 
             "degreesCertificateType":"نوع شهادة الدرجات",
-            "MinisterialSubjects":"المواد الإلزامية",
-            "NonMinisterialSubjects":"المواد الدراسية",
+            "SpeaSubjects":"المواد الإلزامية",
+            "SchoolSubjects":"المواد الدراسية",
             "MandatorySubjects":"المواد الإجبارية",
             "OptionalSubjects":"المواد الاختيارية",
             "AllSubjects":"كل المواد",
