@@ -7,8 +7,8 @@
     </button>
 </div>
 
-
-<div class="prim-table mt-4" *ngIf="absenceRecord.totalAllData || absenceRecord.loading">
+<!-- *ngIf="absenceRecord.totalAbsenceStudents || absenceRecord.loadin -->
+<div class="prim-table mt-4">
     <p-table #dt [value]="absenceRecord.list" (onSort)="onSort($event)">
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
@@ -47,27 +47,27 @@
               </div>
 
 
-              <!-- <div *ngIf="absenceRecord.isDateSelected" class="my-4 color-primary d-flex justify-content-center gap-5 p-2 radius-15 border-dark">
+              <div *ngIf="absenceRecord.isDateSelected" class="my-4 color-primary d-flex justify-content-center gap-5 p-2 radius-15 border-dark">
                 <div class="d-flex align-items-center gap-3 p-4">
                   <img src="assets/images/home/student/student.svg" class="bullet">
                   <span class="d-flex gap-3">
-                      {{ 'dashboard.schools.studentsNumber'|translate }} : <b>30</b>
+                      {{ 'dashboard.schools.studentsNumber'|translate }} : <b>{{absenceRecord?.totalDivisionStudents}}</b>
                   </span>
                 </div>
 
                 <div class="d-flex align-items-center gap-3 p-4 color-skyBlue-500">
                     <img src="assets/images/shared/attendance.svg" class="bullet">
                     <span class="d-flex gap-3">
-                        {{ 'dashboard.schools.attendanceStudents'|translate }} : <b>5</b>
+                        {{ 'dashboard.schools.attendanceStudents'|translate }} : <b>{{absenceRecord?.totalAttendantStudents}}</b>
                     </span>
                 </div>
                 <div class="d-flex align-items-center gap-3 color-red-500">
                     <img src="assets/images/shared/absence.svg" class="bullet">
                     <span class="d-flex gap-3">
-                        {{ 'dashboard.schools.absentStudents'|translate }} : <b>{{absenceRecord.total}}</b>
+                        {{ 'dashboard.schools.absentStudents'|translate }} : <b>{{absenceRecord?.totalAbsenceStudents}}</b>
                     </span>
                 </div>
-            </div> -->
+            </div>
 
             <div class="d-flex align-items-center bg-gray-30 radius-15">
                 <div class="flex-grow-1">
@@ -97,10 +97,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-studentObj let-columns="columns">
             <tr>
-                <td>{{studentObj.student.studentNumber}}</td>
-                <td>{{studentObj.student.name |currentLang}}</td>
-                <td>{{studentObj.student.surname |currentLang}}</td>
-                <td>{{studentObj.withCause=='WithCause' ? ("dashboard.parents.withCause"|translate) : ("dashboard.parents.withoutCause"|translate)}}</td>
+                <td>{{studentObj?.student?.id}}</td>
+                <td>{{studentObj?.student?.name |currentLang}}</td>
+                <td>{{studentObj?.student?.surname |currentLang}}</td>
+                <td>{{studentObj?.withCause=='WithCause' ? ("dashboard.parents.withCause"|translate) : ("dashboard.parents.withoutCause"|translate)}}</td>
                 <td *ngIf="studentObj?.cause">{{studentObj?.cause?.name | currentLang}}</td>
                 <td *ngIf="!studentObj?.cause">-----</td>
                 <td *permit="claimsEnum.E_D_AbsentStudent">
@@ -119,7 +119,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
-                    <ng-container *ngIf="absenceRecord.totalAllData && absenceRecord.list.length == 0 &&  !absenceRecord.loading && absenceRecord.isDateSelected">
+                    <ng-container *ngIf="absenceRecord.totalDivisionStudents && absenceRecord.list.length == 0 &&  !absenceRecord.loading && absenceRecord.isDateSelected">
                         <app-informative-block subTitle="{{'emptyList.noAbcenceStudents' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 

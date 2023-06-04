@@ -114,7 +114,8 @@
            </div>
            <div class="col-xs-4 col-lg-4">
                <label class="label" for="precantage">{{'dashboard.SchoolYear.Class'|translate}} <span class="star">*</span> </label>
-               <p-dropdown [options]="classList" [showClear]="true" StopProp  optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id"  inputId="precantage" formControlName="classId" [ngClass]="{'ng-invalid ng-dirty':classId.errors?.['required'] && classId.touched}"  placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID5" id="PID5"  ></p-dropdown>
+               <div class="col-6 value mt-5" *ngIf="classUrlParameter">{{class?.grade|currentLang}}</div>
+               <p-dropdown [options]="classList" [showClear]="true" StopProp *ngIf="!classUrlParameter" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id"  inputId="precantage" formControlName="classId" [ngClass]="{'ng-invalid ng-dirty':classId.errors?.['required'] && classId.touched}"  placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID5" id="PID5"  ></p-dropdown>
                <div [hidden]="classId.valid || classId.untouched">
                 <small *ngIf="classId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                   {{'shared.This Field is Required'|translate}}
