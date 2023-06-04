@@ -16,3 +16,13 @@ export enum FileExtentions{
     Image = 'image/*',
     Audio = 'audio/*'
 }
+
+
+export enum AttachmentIndexCode{
+  VaccinationCertificate= 'VnC',
+  BoaredCertificate= 'BordC',
+  Diploma= 'DipF',
+  EduCertificate= 'EduC',
+}
+
+

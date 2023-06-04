@@ -18,13 +18,13 @@ export class IssuanceCertificaeService {
 
   degreescertificates= [
     {
-      value:DegreesCertificatesEnum.MinisterialSubjects,
-      name: this.translate.instant("dashboard.issue of certificate.MinisterialSubjects")
+      value:DegreesCertificatesEnum.SpeaSubjects,
+      name: this.translate.instant("dashboard.issue of certificate.SpeaSubjects")
 
     },
     {
-      value:DegreesCertificatesEnum.NonMinisterialSubjects,
-      name: this.translate.instant("dashboard.issue of certificate.NonMinisterialSubjects")
+      value:DegreesCertificatesEnum.SchoolSubjects,
+      name: this.translate.instant("dashboard.issue of certificate.SchoolSubjects")
     },
     {
       value: DegreesCertificatesEnum.AllSubjects,

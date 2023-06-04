@@ -37,29 +37,32 @@
 
             </div>
 
-            <div class="bg-orange-50 p-3 fs-3 radius-15 mb-3 mt-6" >
+            <!-- <div class="bg-orange-50 p-3 fs-3 radius-15 mb-3 mt-6" >
                 <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
                 <span class="color-gray-800">" يرجى إختيار ملف شهادة المعادلة من المرفقات التالية . "</span>
-            </div>
+            </div> -->
 
 
             <!-- <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p> -->
 
-            <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
-                <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
+            <label class="fw-bold mt-6 mb-4">{{'dashboard.students.diplomeFile' | translate}} :- </label>
 
-                <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
-                    <div class="elcardo-title d-flex">
-                        <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="file" />
-                        <p class="mx-5 my-2">{{ file?.name }}</p>
-                    </div>
-                    <!-- <div class="elcardo-body">
-                        <h4>{{ "dashboard.issue of certificate.note" | translate }}:</h4>
-                        <p>{{ file?.comment }}</p>
-                    </div> -->
-                </div>
-                <!-- <app-students-board-certificate  [studentBoard]="item"  (addAttachment)="onAttachmentSelected(item.id,i);item.isSelected = !item.isSelected"></app-students-board-certificate> -->
-            </div>
+            <ng-container *ngIf="student?.attachments?.length">
+              <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
+                  <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
+
+                  <div class="elcardo">
+                      <div class="elcardo-title d-flex">
+                          <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="file" />
+                          <p class="mx-5 my-2">{{ file?.name }}</p>
+                      </div>
+
+                  </div>
+              </div>
+            </ng-container>
+
+            <app-informative-block *ngIf="!student?.attachments?.length" size="sm" subTitle="{{'emptyList.missingDiplomaFile' |translate}}"></app-informative-block>
+
         </div>
     </ng-container>
 </div>

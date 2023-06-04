@@ -9,6 +9,8 @@ import { StudentsService } from 'src/app/modules/students/services/students/stud
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
+import { AttachmentIndexCode } from 'src/app/shared/enums/file/file.enum';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-diploma-certificate',
@@ -31,7 +33,7 @@ export class DiplomaCertificateComponent implements OnInit {
   diplomaCertificateForm = [];
 
   get isFormValid(){
-    return this.diplomaCertificateForm.every(el => el.attachments.length)
+    return this.diplomaCertificateForm.every(el => el.attachmentId)
   }
 
   showError
@@ -48,8 +50,7 @@ export class DiplomaCertificateComponent implements OnInit {
     this.diplomaCertificateForm = this.choosenStudents.map((element) => {
       return {
         studentId: element.id,
-        // certificatedType: CertificatesEnum.DiplomaCertificate,
-        attachments: [],
+        attachmentId: null,
       };
     });
 
@@ -120,15 +121,23 @@ export class DiplomaCertificateComponent implements OnInit {
 
 
   getAttachments() {
-    this.choosenStudents.forEach((student) => {
+    this.choosenStudents.forEach((student, index) => {
 
       this.studentService
         .getStudentAttachment(student.id)
+        .pipe(
+          map(list=>{
+            return list.filter(el => el.indexCode==AttachmentIndexCode.Diploma)
+          })
+        )
         .subscribe((attachments) => {
-          student.attachments = attachments.map((attach) => ({
-            ...attach,
-            isSelected: false,
-          }));
+
+          this.diplomaCertificateForm[index] = {
+              studentId: student.id,
+              attachmentId: attachments?.length && attachments[0]?.id,
+          }
+
+          student.attachments = attachments
         });
 
     });

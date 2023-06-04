@@ -485,7 +485,8 @@
         "noLectures":"يبدو انه لا يوجد حصص دراسية معرفة لهذا الصف",
         "noDivisionsInGrade":"لا يوجد شعب فى هذا الصف",
         "noTracksInDivisions":"لا يوجد مسارات فى هذه الشعبه",
-        "noManager":"يبدو انه لم يتم تعين مدير للمدرسة بعد"
+        "noManager":"يبدو انه لم يتم تعين مدير للمدرسة بعد",
+        "missingDiplomaFile":"يبدو ان المرفقات الخاصة بالطالب لا تحتوى على 'شهادة المعادلة' . يرجى التواصل مع اداره المدرسة للدعم والمساعدة"
     },
 
 
@@ -1358,6 +1359,7 @@
             "studentsList": "قائمة الطلاب",
             "daleelNumber": "رقم الدليل",
             "daleelNumber1": "رقم الدليل 1",
+            "daleelNumber2": "رقم الدليل 2",
             "studentName": "إسم الطالب",
             "Select StudentName":"أختر إسم الطالب",
             "studentNickname": "كنية الطالب",
@@ -1459,7 +1461,8 @@
             "attendanceType":"نوع الحضور",
             "Remote":"عن بعد",
             "Mixed":"مخلط",
-            "Physical":"حضورى"
+            "Physical":"حضورى",
+            "diplomeFile":"مرفق شهادة المعادله"
 
         },
         "Assignments": {
@@ -1974,8 +1977,8 @@
             "it will remove previous data": "سوف يتم حذف البيانات السابقة",
 
             "degreesCertificateType":"نوع شهادة الدرجات",
-            "MinisterialSubjects":"المواد الإلزامية",
-            "NonMinisterialSubjects":"المواد الدراسية",
+            "SpeaSubjects":"المواد الإلزامية",
+            "SchoolSubjects":"المواد الدراسية",
             "MandatorySubjects":"المواد الإجبارية",
             "OptionalSubjects":"المواد الاختيارية",
             "AllSubjects":"كل المواد",

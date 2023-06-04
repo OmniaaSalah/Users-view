@@ -97,7 +97,7 @@ export class SubjectsAndDegreesComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
-    let filter = {...this.filtration,PageSize:this.subjects.totalAllData,Page:1}
+    let filter = {...this.filtration,PageSize:null,Page:1}
     this.studentsService.studentSubjectsToExport(this.studentId||this.childId, this.filtration.semester,filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.studentRecord'))

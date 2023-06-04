@@ -73,6 +73,12 @@ export class AttendanceReportsServicesService {
       isDisabled: false,
     },
     {
+   
+      name:this.translate.instant('dashboard.students.daleelNumber2'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
      
       name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: false,
@@ -113,7 +119,8 @@ export class AttendanceReportsServicesService {
             [this.translate.instant('dashboard.schools.student')]: student?.student?.name ? student?.student?.name[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.Identity Number')]:student?.emiratesId ? student?.emiratesId : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.ChildWithoutNationality')]: student?.reasonForNotHavingEmiratesId[this.lang] ? student?.reasonForNotHavingEmiratesId[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.students.daleelNumber')]: student?.daleelId ? student?.daleelId : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.students.daleelNumber1')]: student?.daleelId ? student?.daleelId : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.students.daleelNumber2')]: student?.student?.id ? student?.student?.id : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.manhalNumber')]: student?.manhalNumber ? student?.manhalNumber : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.parentName')]: student?.guardianName ? student?.guardianName[this.lang] : this.translate.instant('shared.notFound'),
 

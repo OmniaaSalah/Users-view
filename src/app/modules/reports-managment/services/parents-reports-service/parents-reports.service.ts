@@ -72,6 +72,11 @@ export class ParentsReportsService {
         isDisabled:false,
       },
       {
+        name:this.translate.instant('dashboard.students.daleelNumber2'),
+        isSelected: false,
+        isDisabled:false,
+      },
+      {
         name:this.translate.instant('dashboard.students.manhalNumber'),
         isSelected: false,
         isDisabled: false,
@@ -118,7 +123,8 @@ export class ParentsReportsService {
             [this.translate.instant('dashboard.parents.relatedType')]: parent?.relationType[this.lang] ? parent?.relationType[this.lang]:this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.schools.student')]: parent?.student?.name[this.lang] ? parent?.student?.name[this.lang]:this.translate.instant('shared.notFound'),
             [this.translate.instant('Students nickname')]:parent?.studentNickName[this.lang] ? parent?.studentNickName[this.lang]:this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.students.daleelNumber')]:parent?.studentIdInDaleel ? parent?.studentIdInDaleel:this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.students.daleelNumber1')]:parent?.studentIdInDaleel ? parent?.studentIdInDaleel:this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.students.daleelNumber2')]:parent?.student?.id ? parent?.student?.id:this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.manhalNumber')]:parent?.studentIdInManhl ?parent?.studentIdInManhl:this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.Identity Number')]:parent?.emiratesIdNumber ? parent?.emiratesIdNumber :this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.ChildWithoutNationality')]:parent?.reasonForNotHavingEmirratesId[this.lang] ? parent?.reasonForNotHavingEmirratesId[this.lang]:this.translate.instant('shared.notFound'),

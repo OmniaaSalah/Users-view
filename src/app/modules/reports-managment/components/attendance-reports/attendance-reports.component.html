@@ -133,9 +133,12 @@
                                 {{student?.daleelId}}
                             </td>
                             <td *ngIf="tableColumns[10].isSelected == true">
-                                {{student?.manhalNumber}}
+                                {{student?.student?.id}}
                             </td>
                             <td *ngIf="tableColumns[11].isSelected == true">
+                                {{student?.manhalNumber}}
+                            </td>
+                            <td *ngIf="tableColumns[12].isSelected == true">
                                 {{student?.guardianName | currentLang}}
                             </td>
 
