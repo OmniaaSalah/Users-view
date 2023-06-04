@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, HostBinding, HostListener, OnInit, EventEmitter, Output ,inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,7 +27,7 @@ export class MessageDetailsComponent implements OnInit {
   routeSub
   messageDetails;
   messagesReplies: any[] = []
-
+  currentUserScope = inject(UserService).getScope()
   onSubmit
 
   constructor(private headerService: HeaderService,private userService:UserService, private route: ActivatedRoute, private messageService: MessageService, private toastr: ToastrService, private formbuilder: FormBuilder, private router: Router, private translate: TranslateService) { }

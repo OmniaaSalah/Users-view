@@ -42,6 +42,8 @@
                                 <div class="name-description">
                                     <div class="title">
                                         <img class="NotReadable" src="assets/images/shared/bluecircle.svg"
+                                            *ngIf="card.isRead">
+                                        <img class="NotReadable" src="assets/images/shared/redcircle.svg"
                                             *ngIf="!card.isRead">
                                         <img class="cardimage" src="assets/images/shared/Person.jpg">
                                         <span class="fw-bold mx-4 d-inline-block" *ngIf="checkLanguage && card.userName != null">{{card.userName | currentLang}}</span>
