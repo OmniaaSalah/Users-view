@@ -40,7 +40,8 @@ export class ChildrenListComponent implements OnInit {
   chiledren: Ichiledren[]=[] ;
   students: Istudent[] =[];
   studentsWithdrawal: Istudent[] =[];
-  graduatedChildren: Istudent[] =[];
+  finalGraduatedStudents: Istudent[] =[];
+
 
   isSkeletonVisible = true;
 
@@ -78,6 +79,7 @@ export class ChildrenListComponent implements OnInit {
       this.studentsWithdrawal = response.studentsWithdrawal || []
       this.students = response.students || [];
       this.guardianData=response.guardian || {}
+      this.finalGraduatedStudents=response.finalGraduatedStudents || {}
       this.isSkeletonVisible = false;
 
     },err=> {

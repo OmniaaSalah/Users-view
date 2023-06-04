@@ -250,7 +250,7 @@
 
             <!-- Registered Child -->
             <div class="row g-5" *ngIf="!skeletonShown ">
-                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of graduatedChildren">
+                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of finalGraduatedStudents">
                     <div role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
 
                         <div class="profile d-flex align-items-center p-4">
@@ -297,7 +297,7 @@
 
                     </div>
                 </div>
-                <app-informative-block *ngIf="!graduatedChildren?.length" subTitle="{{'emptyList.noGraduatedSonsForThisGuardian' |translate}}"></app-informative-block>
+                <app-informative-block *ngIf="!finalGraduatedStudents?.length" subTitle="{{'emptyList.noGraduatedSonsForThisGuardian' |translate}}"></app-informative-block>
             </div>
         </div>
     </div>
