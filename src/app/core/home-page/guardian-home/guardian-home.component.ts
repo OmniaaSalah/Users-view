@@ -32,6 +32,8 @@ export class GuardianHomeComponent implements OnInit {
   unRegisterStudents = []
   studentsWithdrawal=[]
   graduatedStudents=[]
+  finalGraduatedStudents =[];
+
 
 
 
@@ -63,6 +65,7 @@ export class GuardianHomeComponent implements OnInit {
       this.unRegisterStudents = res.children
       this.registerStudents = res.students
       this.studentsWithdrawal = res.studentsWithdrawal
+      this.finalGraduatedStudents = res.finalGraduatedStudents
       this.skeletonShown = false
     },(err)=>{ this.skeletonShown = false})
 

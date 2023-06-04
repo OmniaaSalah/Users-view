@@ -1462,7 +1462,8 @@
             "Remote":"عن بعد",
             "Mixed":"مخلط",
             "Physical":"حضورى",
-            "diplomeFile":"مرفق شهادة المعادله"
+            "diplomeFile":"مرفق شهادة المعادله",
+            "graduated":"أنهى السنوات الدراسية"
 
         },
         "Assignments": {
