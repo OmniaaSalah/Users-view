@@ -1,14 +1,8 @@
 
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder } from '@angular/forms';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { IRole } from 'src/app/core/Models/IRole';
-import { IAccount } from 'src/app/core/Models/IAccount';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';

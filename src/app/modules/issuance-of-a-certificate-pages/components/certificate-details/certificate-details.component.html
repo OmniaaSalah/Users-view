@@ -102,7 +102,7 @@
 
             <div class="">
               <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
-              <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+              <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
             </div>
 
             <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
@@ -258,7 +258,7 @@
 
         <div class="">
           <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
         <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
@@ -369,7 +369,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="">
           <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
         <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
@@ -398,12 +398,12 @@
       <header>
 
         <div class="d-flex align-items-end justify-content-between">
-          <h2>{{certificate?.SchoolArabicName}}</h2>
+          <h2>{{certificate?.SchoolName?.Ar}}</h2>
           <div class="">
-            <img class="logo-center" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
+            <img class="logo-center" [src]="certificate?.SchoolLogoPath" onerror="this.src='assets/images/shared/image.svg'">
           </div>
 
-          <h2>{{certificate?.SchoolEnglishName}}</h2>
+          <h2>{{certificate?.SchoolName?.En}}</h2>
 
         </div>
 
@@ -423,8 +423,8 @@
       <table class="blue-theme mt-5">
         <tr>
             <td style="width: 25%;" class="font-ar">اسم الطالب بالغة العربية</td>
-            <td class="text-center">{{certificate?.StudentArabicName}}</td>
-            <td class="text-center"> {{certificate?.StudentEnglishName}}</td>
+            <td class="text-center">{{certificate?.SchoolName?.Ar}}</td>
+            <td class="text-center"> {{certificate?.SchoolName?.En}}</td>
             <td style="width: 25%;" class="font-en text-start">Student Name</td>
         </tr>
         <tr>
@@ -435,31 +435,32 @@
         </tr>
         <tr>
           <td style="width: 25%;" class="font-ar">تاريخ الميلاد</td>
-          <td colspan="2" class="text-center" >{{certificate?.BirthDate | LocalizeDate}}</td>
+          <td colspan="2" class="text-center" >{{certificate?.Birthday | LocalizeDate}}</td>
           <td style="width: 25%;" class="font-en text-start">Birth Date</td>
 
-      </tr>
-      <tr>
-        <td style="width: 25%;" class="font-ar">الجنسيه</td>
-        <td  colspan="2" class="text-center">{{certificate?.Nationality}}</td>
-        <td style="width: 25%;" class="font-en text-start">Nationality</td>
+        </tr>
+        <tr>
+          <td style="width: 25%;" class="font-ar">الجنسيه</td>
+          <td class="text-center">{{certificate?.Nationality?.Ar}}</td>
+          <td class="text-center"> {{certificate?.Nationality?.En}}</td>
+          <td style="width: 25%;" class="font-en text-start">Nationality</td>
 
-      </tr>
-    </table>
+        </tr>
+      </table>
 
     <!-- -------------------------------------- -->
 
     <table class="blue-theme mt-5">
       <tr>
           <td style="width: 25%;" class="font-ar">اسم المدرسة</td>
-          <td class="text-center">{{certificate?.SchoolArabicName}}</td>
-          <td class="text-center"> {{certificate?.SchoolEnglishName}}</td>
+          <td class="text-center">{{certificate?.SchoolName?.Ar}}</td>
+          <td class="text-center"> {{certificate?.SchoolName?.En}}</td>
           <td style="width: 25%;" class="font-en text-start">School Name</td>
       </tr>
 
       <tr>
           <td style="width: 25%;" class="font-ar">المنهاج</td>
-          <td class="text-center" colspan="2">--</td>
+          <td class="text-center" colspan="2">{{certificate?.CurriculumName}}</td>
           <td style="width: 25%;" class="font-en text-start">Curriculum</td>
       </tr>
     </table>
@@ -475,24 +476,24 @@
       </tr>
       <tr>
           <td style="width: 25%;" class="font-ar">تاريخ الالتحاق بالمدرسة : </td>
-          <td class="text-center">--</td>
+          <td class="text-center">{{certificate?.RegisterDate | LocalizeDate}}</td>
           <td style="width: 25%;" class="font-en text-start">Join date</td>
       </tr>
 
       <tr>
           <td style="width: 25%;" class="font-ar">العام الدراسي</td>
-          <td class="text-center">{{certificate?.SchoolYear}}</td>
+          <td class="text-center">{{certificate?.RegisterSchoolyear?.Ar}}</td>
           <td style="width: 25%;" class="font-en text-start">Academic Year </td>
       </tr>
       <tr>
         <td style="width: 25%;" class="font-ar">الصف</td>
-        <td class="text-center">{{certificate?.GradeAr}}</td>
+        <td class="text-center">{{certificate?.RegisterGrade?.Ar}}</td>
         <td style="width: 25%;" class="font-en text-start">Grade</td>
     </tr>
 
     <tr>
       <td style="width: 25%;" class="font-ar">الشعبة</td>
-      <td class="text-center">{{certificate?.DivisionAr}}</td>
+      <td class="text-center">{{certificate?.RegisterDivision?.Ar}}</td>
       <td style="width: 25%;" class="font-en text-start">Division</td>
     </tr>
     </table>
@@ -511,31 +512,31 @@
       </tr>
       <tr>
           <td style="width: 25%;" class="font-ar">تاريخ ترك المدرسة : </td>
-          <td colspan="2" class="text-center">{{certificate?.TransferDate |LocalizeDate}}</td>
+          <td colspan="2" class="text-center">{{certificate?.WithdrawalDate |LocalizeDate}}</td>
           <td style="width: 25%;" class="font-en text-start">School leave date</td>
       </tr>
 
       <tr>
           <td style="width: 25%;" class="font-ar">العام الدراسي</td>
-          <td colspan="2" class="text-center">{{certificate?.SchoolYear}}</td>
+          <td colspan="2" class="text-center">{{certificate?.WithdrawalSchoolyear?.Ar}}</td>
           <td style="width: 25%;" class="font-en text-start">Academic Year </td>
       </tr>
       <tr>
         <td style="width: 25%;" class="font-ar">بالصف</td>
-        <td colspan="2" class="text-center">{{certificate?.GradeAr}}</td>
+        <td colspan="2" class="text-center">{{certificate?.WithdrawalGrade?.Ar}}</td>
         <td style="width: 25%;" class="font-en text-start">Grade</td>
       </tr>
 
       <tr>
         <td style="width: 25%;" class="font-ar">سبب الترك</td>
-        <td class="text-center">{{certificate?.ResonOfWithdrow}}</td>
-        <td class="text-center">{{certificate?.ResonOfWithdrow}}</td>
+        <td class="text-center">{{certificate?.WithdrawalReason?.Ar}}</td>
+        <td class="text-center">{{certificate?.WithdrawalReason?.En}}</td>
         <td style="width: 25%;" class="font-en text-start">Leave reason</td>
       </tr>
 
       <tr>
         <td style="width: 25%;" class="font-ar">نتيجة الطالب في آخر العام : </td>
-        <td colspan="2" class="text-center">--</td>
+        <td colspan="2" class="text-center">{{'shared.allStatus.' + certificate?.FinalResultStatus |translate}}</td>
         <td style="width: 25%;" class="font-en text-start">The Annual result </td>
       </tr>
     </table>
@@ -546,7 +547,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <div class="">
             <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
-            <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+            <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
           </div>
 
           <div class="d-flex justify-content-end align-items-center" *ngIf="showQRC">
@@ -586,7 +587,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="">
           <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
         <div class="fs-4 d-flex align-items-center "  *ngIf="showQRC">
@@ -911,7 +912,7 @@
       <div class="d-flex justify-content-between align-items-center mt-6">
         <div class="">
           <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
         <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
@@ -930,16 +931,6 @@
             </div>
         </div>
       </div>
-
-      <!-- <div class="d-flex justify-content-end align-items-center mt-6">
-        <div class="text-center">
-          <p class="font-ar">شهادة مصدقة من هيئة الشارقة للتعليم </p>
-          <p class="font-en">Approved by Sharjah private Education Authority</p>
-        </div>
-          <div class="">
-            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
-          </div>
-      </div> -->
 
     </div>
 
@@ -1162,7 +1153,7 @@
       <div class="d-flex justify-content-between align-items-center mt-6" >
         <div class="">
           <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">            </div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
         <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">

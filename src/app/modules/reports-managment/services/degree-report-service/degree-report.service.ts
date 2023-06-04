@@ -93,6 +93,12 @@ export class DegreeReportService {
       isDisabled: false,
     },
     {
+   
+      name:this.translate.instant('dashboard.students.daleelNumber2'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
      
       name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: false,
@@ -182,7 +188,8 @@ degreesToExport(filter)
           [this.translate.instant('dashboard.SchoolYear.school year')]:e?.schoolYearName ? e?.schoolYearName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.SchoolYearStudentResult')]: e?.studentSchoolYearResult ? this.translate.instant('shared.allStatus.'+e?.studentSchoolYearResult) : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.schools.student')]: e?.student?.name ? e?.student?.name[this.lang] :this.translate.instant('shared.notFound'),
-          [this.translate.instant('dashboard.students.daleelNumber')]:e?.studentDaleelId ? e?.studentDaleelId : this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.students.daleelNumber1')]:e?.studentDaleelId ? e?.studentDaleelId : this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.students.daleelNumber2')]:e?.student?.id ? e?.student?.id : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.students.manhalNumber')]:e?.studentManhalId ? e?.studentManhalId :this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.successPercentage')]: e?.sucessPercentagePerGrade ? e?.sucessPercentagePerGrade +'%' :this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.failPercentage')]: e?.failPercentagePerGrade ? e?.failPercentagePerGrade + '%' :this.translate.instant('shared.notFound'),
