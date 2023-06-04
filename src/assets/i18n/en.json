@@ -1769,7 +1769,8 @@
             "Remote":"Remote",
             "Mixed":"Mixed",
             "Physical":"Physical",
-            "diplomeFile":"Equivalency certificate file"
+            "diplomeFile":"Equivalency certificate file",
+            "graduated":"Finish Academic years"
 
         },
         "Requests": {
