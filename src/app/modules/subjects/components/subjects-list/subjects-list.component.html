@@ -51,9 +51,11 @@
             <td   >{{e?.subjectCode|translate}}#</td>
             <td  >{{e?.subjectName|currentLang}}</td>
             <td   *ngIf="e?.schoolName[lang]">{{e?.schoolName|currentLang}}</td>
-            <td  *ngIf="!e?.schoolName[lang]" >{{'SPEA'|translate}}</td>
-            <td  >{{e?.schoolCode}}</td>
-            <td   >{{e?.curriculumsName|currentLang}}</td>
+            <td  *ngIf="!e?.schoolName[lang]" >{{'shared.notFound'|translate}}</td>
+            <td *ngIf="e?.schoolCode" >{{e?.schoolCode}}</td>
+            <td  *ngIf="!e?.schoolCode">{{'shared.notFound'|translate}}</td>
+            <td  *ngIf="e?.curriculumsName[lang]" >{{e?.curriculumsName|currentLang}}</td>
+            <td  *ngIf="!e?.curriculumsName[lang]" >{{'shared.notFound'|translate}}</td>
             <td   >{{e?.evaluationType|translate}}</td>
             <td   *ngIf="e?.creatorName">{{e?.creatorName}}</td>
             <td  *ngIf="!e?.creatorName" >{{'shared.notFound'|translate}}</td>
