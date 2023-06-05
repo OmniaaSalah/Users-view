@@ -66,7 +66,7 @@ export class MessageDetailsComponent implements OnInit {
             element.color = "second-message"
         }
       })
-      if(res.messageSatus ==MessageStatus.Pending&&(this.messageDetails.scope!=JSON.parse(this.userService.getScope()))) this.changeMessageStatus(res.id)
+      if(res.messageSatus ==MessageStatus.Pending&&(this.messageDetails.scope!=this.currentUserScope)) this.changeMessageStatus(res.id)
     })
   }
 
