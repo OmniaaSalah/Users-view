@@ -868,7 +868,9 @@
             "should be more than the minmum deserving degree":"Should be more than the minmum deserving degree",
             "noDivisionsInGrade":"Selected grade haven't divisions",
             "noTracksInDivisions":"Selected division haven't tracks",
-            "noManager":"There is no manager assigned to this school yet"
+            "noManager":"There is no manager assigned to this school yet",
+            "missingDiplomaFile":"It appears that the student's attachments do not contain a 'Diploma certificate'. Please contact the school administration for support and assistance",
+            "missingBoardFile":"It appears that the student's attachments do not contain a 'board certificate'. Please contact the school administration for support and assistance."
         },
         "schools": {
           "contactWithSchool":"Contact with school",
@@ -1770,6 +1772,7 @@
             "Mixed":"Mixed",
             "Physical":"Physical",
             "diplomeFile":"Equivalency certificate file",
+            "boardFile":"Board certificate File",
             "graduated":"Finish Academic years"
 
         },
@@ -2003,7 +2006,10 @@
             "downloadCertificat":"Download certificate",
             "viewCertificte":"View certificate",
             "certificateMinimized":" The certificate file has been reduced by 95% for authentication purposes.",
-            "noDegreesForStudent":"There are no accredited grades for this student in the selected academic year."
+            "noDegreesForStudent":"There are no accredited grades for this student in the selected academic year.",
+            "addNewAccademicYear":"Add New Accademic Year",
+            "issueDate":"Issurance Date"
+
 
         },
         "parentHome":{
