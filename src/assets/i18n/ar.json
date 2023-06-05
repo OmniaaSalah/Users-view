@@ -1465,6 +1465,7 @@
             "Mixed":"مخلط",
             "Physical":"حضورى",
             "diplomeFile":"مرفق شهادة المعادله",
+            "boardFile":"مرفق شهادة البورد",
             "graduated":"أنهى السنوات الدراسية"
 
         },
@@ -1998,7 +1999,8 @@
             "viewCertificte":"الاطلاع على الشهادة",
             "certificateMinimized":" تمّ تصغير ملف الشهادة بنسبة 95% بهدف التصديق.",
             "noDegreesForStudent":"لايوجد درجات معتمدة لهذا الطالب فالسنه الدراسية المختارة",
-            "addNewAccademicYear":"اضافة سنه دراسيه سابقة"
+            "addNewAccademicYear":"اضافة سنه دراسيه سابقة",
+            "issueDate":"تاريخ الإصدار"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان أبنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",

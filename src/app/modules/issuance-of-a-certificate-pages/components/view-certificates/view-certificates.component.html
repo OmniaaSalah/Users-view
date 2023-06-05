@@ -55,7 +55,7 @@
 
                 <div class="user d-flex gap-4 custom-form">
                     <div class="mx-4 mt-3 " [class.opacity-0]="certificate.status==certificateStatus.Payed">
-                        <p-checkbox   [value]="certificate.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
+                        <p-checkbox   [value]="certificate?.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
                       </div>
                     <div class="elcard-img">
                         <img src="assets/images/shared/User male 2.png" alt="">
@@ -64,16 +64,22 @@
 
                 <div class="">
                     <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
-                    <span class="fw-bold fs-4">{{'dashboard.issue of certificate.'+certificate.certificateType| translate}}</span>
+                    <span class="fw-bold fs-4">{{'dashboard.issue of certificate.'+certificate?.certificateType| translate}}</span>
                 </div>
                 <div class="elcard-payment px-3">
                     <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                    <span class="fw-bold fs-4">{{certificate.fees}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
+                    <span class="fw-bold fs-4">{{certificate?.fees}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                 </div>
                 <div class="">
                     <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.sons name' | translate}}</p>
-                    <span class="fw-bold fs-4">{{certificate.studentName|currentLang}}</span>
+                    <span class="fw-bold fs-4">{{certificate?.studentName|currentLang}}</span>
                 </div>
+
+                <div class="">
+                  <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.issueDate' | translate}}</p>
+                  <span class="fw-bold fs-4">{{certificate?.certificateIssuanceDate|LocalizeDate}}</span>
+              </div>
+
                 <div class=" mx-3 text-center">
                     <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.CertificateStatus' | translate}}</p>
                     <div class="fw-bold fs-4">

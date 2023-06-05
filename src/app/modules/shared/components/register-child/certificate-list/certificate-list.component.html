@@ -27,6 +27,9 @@
                 <th pSortableColumn="issuanceDate">{{'dashboard.schools.Dateofapplicationforthecertificate'|translate}}
                     <p-sortIcon field="issuanceDate"></p-sortIcon>
                 </th>
+                <th pSortableColumn="issuanceDate">{{'dashboard.issue of certificate.issueDate'|translate}}
+                  <p-sortIcon field="issuanceDate"></p-sortIcon>
+                </th>
                 <th class="actions" pSortableColumn="actions"></th>
             </tr>
         </ng-template>
@@ -39,7 +42,7 @@
                 <td>{{certificate.certificate |currentLang}}</td>
                 <td>{{certificate.schoolYear |currentLang}}</td>
                 <td>{{certificate.issuanceDate |LocalizeDate}}</td>
-
+                <td>{{(certificate.certificateIssuanceDate |LocalizeDate) || '--'}}</td>
                 <td class="actions">
                     <div class="d-flex gap-2 align-items-baseline justify-content-end mx-4" (click)="viewCertificate(certificate)">
                         <img src="src/assets/images/shared/eye.svg" alt="">
