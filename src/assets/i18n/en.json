@@ -1351,10 +1351,10 @@
             "Select AnnualHolidays": "Select annual holidays",
             "Are you need to Activate Age for this class": "Are you need to activate age for this class",
             "Select Activate Age":"Select activate age",
-            "Minmum Age for student from insidecountry":  "Minmum age for student from inside country",
+            "Minmum Age for student from insidecountry":  "Age for student from inside country",
             "From year":"From year",
             "to year": "To year",
-            "Minmum Age for student from outsidecountry": "Minmum age for student from outside country",
+            "Minmum Age for student from outsidecountry": "Age for student from outside country",
             "Related curriculum":  "Related curriculum",
             "Select Related curriculum": "Select related curriculum",
             "Minmum Subject Numbers that fails student":"Minmum subject numbers that fails student",
@@ -1772,6 +1772,7 @@
             "Mixed":"Mixed",
             "Physical":"Physical",
             "diplomeFile":"Equivalency certificate file",
+            "boardFile":"Board certificate File",
             "graduated":"Finish Academic years"
 
         },
@@ -2005,7 +2006,10 @@
             "downloadCertificat":"Download certificate",
             "viewCertificte":"View certificate",
             "certificateMinimized":" The certificate file has been reduced by 95% for authentication purposes.",
-            "noDegreesForStudent":"There are no accredited grades for this student in the selected academic year."
+            "noDegreesForStudent":"There are no accredited grades for this student in the selected academic year.",
+            "addNewAccademicYear":"Add New Accademic Year",
+            "issueDate":"Issurance Date"
+
 
         },
         "parentHome":{
