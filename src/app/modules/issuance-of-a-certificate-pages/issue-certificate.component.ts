@@ -176,8 +176,6 @@ export class IssueCertificateComponent implements OnInit {
 
       }else if(this.selectedCertificate.value == CertificatesEnum.SchoolInternalSubjectsCertificate){
           this.childList =res.students.filter(el =>{
-            console.log(el.curriculumCode==CurriculumCodeEnum.British);
-
             return el.curriculumCode==CurriculumCodeEnum.British
           })
           this.skeletonShown = false

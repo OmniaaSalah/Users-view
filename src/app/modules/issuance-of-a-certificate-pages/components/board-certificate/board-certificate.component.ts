@@ -17,6 +17,8 @@ import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.e
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { AttachmentIndexCode } from 'src/app/shared/enums/file/file.enum';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-board-certificate',
@@ -157,16 +159,39 @@ export class BoardCertificateComponent implements OnInit {
     }
   }
 
+  // getAttachments() {
+  //   this.choosenStudents.forEach((student) => {
+  //     this.studentService
+  //       .getStudentAttachment(student.id)
+  //       .subscribe((attachments) => {
+  //         student.attachments = attachments.filter(el=> el?.url).map((attach) => ({
+  //           ...attach,
+  //           isSelected: false,
+  //         }));
+  //       });
+  //   });
+  // }
+
   getAttachments() {
-    this.choosenStudents.forEach((student) => {
+    this.choosenStudents.forEach((student, index) => {
+
       this.studentService
         .getStudentAttachment(student.id)
+        .pipe(
+          map(list=>{
+            return list.filter(el => el.indexCode==AttachmentIndexCode.BoaredCertificate)
+          })
+        )
         .subscribe((attachments) => {
-          student.attachments = attachments.filter(el=> el?.url).map((attach) => ({
-            ...attach,
-            isSelected: false,
-          }));
+
+          this.boardCertificateData[index].attachments.push( attachments?.length && attachments[0] )
+
+          student.attachments = attachments
         });
+
     });
   }
+
+
+
 }
