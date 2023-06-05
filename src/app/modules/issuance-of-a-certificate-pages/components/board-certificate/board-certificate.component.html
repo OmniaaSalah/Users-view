@@ -2,14 +2,9 @@
 
 <div class="custom-form mt-6 bg-white p-5 radius-15">
     <h4 class="mb-4 color-primary" style="font-weight: 700">
-        {{
-        "dashboard.issue of certificate.Add the required information - board certification"
-        | translate
-        }}
+        {{"dashboard.issue of certificate.Add the required information - board certification"| translate}}
     </h4>
-    <span class="mb-4" style="color: #afafaf">{{
-        "dashboard.issue of certificate.please2" | translate
-        }}</span>
+    <span class="mb-4" style="color: #afafaf">{{"dashboard.issue of certificate.please2" | translate}}</span>
     <br />
 
 
@@ -46,44 +41,37 @@
                 <p class="label">
                     {{ "dashboard.issue of certificate.Select reason" | translate }}
                 </p>
-                <p-dropdown #dropdown [options]="boardReasons$ | async"
+                <p-dropdown [options]="boardReasons$ | async"
                     optionLabel="{{ lang == 'ar' ? 'name.ar' : 'name.en' }}" (ngModelChange)="onReasonChange($event, i)"
                     name="reason" ngModel optionValue="id" placeholder="{{'dashboard.issue of certificate.Enter the reason' |translate}}">
                 </p-dropdown>
             </div>
 
-            <div class="d-flex align-items-center mb-3 mt-6 gap-5">
+            <!-- <div class="d-flex align-items-center mb-3 mt-6 gap-5">
               <div class="bg-orange-50 p-3 fs-3 radius-15 flex-grow-1" >
                   <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
                   <span class="color-gray-800">يرجى إختيار ملف شهادة البورد صيغه (png / jpge) من المرفقات التالية .</span>
               </div>
 
-              <!-- <a class="btn btn-primary" target="_blank" [routerLink]="['/parent', getCurrentGuardianId ,'child', student.id]" [queryParams]="{registered:true,step:3}">{{'shared.addNewFile' |translate}}</a> -->
-            </div>
+            </div> -->
             <div class="row align-items-end" *ngIf="student?.attachments?.length">
 
 
-                <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p>
+                <!-- <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p> -->
 
                 <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
                     <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
 
-                    <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
+                    <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }">
                         <div class="elcardo-title d-flex">
                             <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="" alt="file" />
                             <p class="mx-5 my-2 word-break-all">{{ file?.name }}</p>
                         </div>
-                        <!-- <div class="elcardo-body">
-                            <h4>{{ "dashboard.issue of certificate.note" | translate }}:</h4>
-                            <p>{{ file?.comment }}</p>
-                        </div> -->
                     </div>
                 </div>
               </div>
 
-              <ng-container *ngIf="!student.attachments?.length">
-                <app-informative-block [styles]="{'minHeight': 'auto'}" subTitle="{{'emptyList.noAttachments' |translate}}" ></app-informative-block>
-            </ng-container>
+              <app-informative-block *ngIf="!student?.attachments?.length" size="sm" subTitle="{{'emptyList.missingBoardFile' |translate}}"></app-informative-block>
 
         </div>
     </ng-container>
