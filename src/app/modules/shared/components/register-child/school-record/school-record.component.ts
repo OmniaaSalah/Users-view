@@ -17,8 +17,8 @@ import { StudentsService } from '../../../../students/services/students/students
 })
 export class SchoolRecordComponent implements OnInit {
 
-  studentId = +this.route.snapshot.paramMap.get('id')
-  childId = +this.route.snapshot.paramMap.get('childId')
+  studentId = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
 
   get statusEnum () {return StatusEnum}
 

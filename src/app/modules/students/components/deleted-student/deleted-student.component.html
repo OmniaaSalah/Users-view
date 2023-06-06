@@ -1,13 +1,13 @@
 
 
-<div class="p-5 radius-15 border-dark bg-white">
+<div class="p-5 radius-15 border-dark bg-white" *ngIf="student">
     <div class="submit-btn d-flex justify-content-end gap-3">
       <!-- || !deleteStudentForm.valid ||(attachmentCtr.value.length!=requiredFiles?.filesCount &&requiredFiles?.isRequired) -->
-        <button class="btn btn-primary btn px-5" [disabled]="loading|| !deleteStudentForm.valid " (click)="deleteStudentReq(deleteStudentForm.value)">
+        <button class="btn btn-primary btn px-5" [disabled]="loading|| !deleteStudentForm?.valid " (click)="deleteStudentReq(deleteStudentForm.value)">
             <div class="spinner-border text-light" role="status" *ngIf="loading"></div>
             <span>{{'shared.send' |translate}}</span>
         </button>
-        <span role="button" class="color-red-500 text-decoration-underline mt-3" routerLink="//schools-and-students/students/student/{{studentId}}">{{'shared.cancel' |translate}}</span>
+        <span role="button" class="color-red-500 text-decoration-underline mt-3" routerLink="//schools-and-students/students/student/{{studentGUID}}">{{'shared.cancel' |translate}}</span>
     </div>
 
     <app-workflow [steps]="[{ar:'موافقة الهيئة', en:'SPEA Approval'}]"></app-workflow>

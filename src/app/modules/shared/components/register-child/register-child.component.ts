@@ -40,8 +40,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   currStep = +this.route.snapshot.queryParamMap.get('step')
 
-  studentId = +this.route.snapshot.paramMap.get('id')
-  childId = +this.route.snapshot.paramMap.get('childId')
+  studentId = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
   schoolId
 
  viewStudentInfo:boolean = this.claimsService.isUserAllowedTo([ClaimsEnum.SEG_R_StudentInfo, ClaimsEnum.SEG_R_StudentAcceptanceInfo,ClaimsEnum.SEG_R_StudentBehavior])

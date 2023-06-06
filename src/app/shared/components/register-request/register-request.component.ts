@@ -46,8 +46,8 @@ export class RegisterRequestComponent implements OnInit {
   get currentUserScope (){return this.userService.getScope()}
 
   parentId = +this.route.snapshot.paramMap.get('parentId')
-  childId = +this.route.snapshot.paramMap.get('childId')
-  studentId = +this.route.snapshot.paramMap.get('studentId')
+  childId =  this.route.snapshot.paramMap.get('childId')
+  studentId =  this.route.snapshot.paramMap.get('studentId')
   childRegistrationStatus = this.route.snapshot.queryParamMap.get('status')
 
   // NOTE:- incase the Request is returned Form Spea
@@ -88,33 +88,14 @@ export class RegisterRequestComponent implements OnInit {
   submitted
 
   requiredFiles:Partial<RequestRule>
-  // =[
-  //   {Titel:{ar:"صورة الهوية",en:"Identity Image"}, fileSize:4},
-  //   {Titel:{ar:"صورة القيد",en:"Identity Image"}, fileSize:4},
-  //   {Titel:{ar:"صورة شهاده الميلاد",en:"Identity Image"}, fileSize:4}
-  // ]
+
 
 
   selectedSchoolId
   selectedGrade
 
     // ارسال طلب تسجيل للابن او الطالب المنسحب
-  registerReqForm:FormGroup = this.fb.group({
-    id:[],
-    childId:[this.childId],
-    studentId:[this.childRegistrationStatus==RegistrationStatus.Withdrawal ? this.childId : null],
-    guardianId:[this.parentId],
-    schoolId:[null,Validators.required],
-    gradeId: [null,Validators.required],
-    studentStatus:[this.childRegistrationStatus==RegistrationStatus.Withdrawal?RegistrationStatus.Withdrawal : RegistrationStatus.Unregistered ],
-    isChildOfAMartyr:[null,Validators.required],
-    isSpecialAbilities:[null,Validators.required],
-    isSpecialClass:[null],
-    isInFusionClass:[null],
-    // isSpecialEducation:[null,Validators.required],
-    specialEducationId:[null],
-    attachments:[[]],
-  })
+  registerReqForm:FormGroup
 
 
   classType:ClassType
@@ -124,7 +105,6 @@ export class RegisterRequestComponent implements OnInit {
     private translationService:TranslationService,
     private headerService: HeaderService,
     private sharedService: SharedService,
-    private schoolsService:SchoolsService,
     private countriesService:CountriesService,
     private indexService:IndexesService,
     private fb:FormBuilder,
@@ -151,20 +131,54 @@ export class RegisterRequestComponent implements OnInit {
     this.prepareHeaderData()
     this.getStudentInfo()
 
-    if(this.scope==UserScope.Guardian) {
-      this.parentId = this.userService.getCurrentGuardian()?.id
-      this.registerReqForm.controls['guardianId'].setValue(this.parentId)
-    }
-
-
-
-
     this.getRegistrationRequiresFiles()
 
     this.childRegistrationStatus==RegistrationStatus.Withdrawal && this.setSelectedGradeForWithdrawalStudent()
-
-    this.initValidation()
   }
+
+
+  getStudentInfo(){
+    if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
+      this.studentService.getStudent(this.route.snapshot.params['childId']).subscribe(res=>{
+        this.childData = res.result
+        this.initRegisterationForm(res?.result)
+      })
+
+    }else{
+      this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
+        this.childData = res
+        this.initRegisterationForm(res)
+      })
+    }
+  }
+
+initRegisterationForm(child){
+  this.registerReqForm = this.fb.group({
+    id:[],
+    childId:[child?.id],
+    studentId:[this.childRegistrationStatus==RegistrationStatus.Withdrawal ? child?.id : null],
+    guardianId:[this.parentId],
+    schoolId:[null,Validators.required],
+    gradeId: [null,Validators.required],
+    studentStatus:[this.childRegistrationStatus==RegistrationStatus.Withdrawal?RegistrationStatus.Withdrawal : RegistrationStatus.Unregistered ],
+    isChildOfAMartyr:[null,Validators.required],
+    isSpecialAbilities:[null,Validators.required],
+    isSpecialClass:[null],
+    isInFusionClass:[null],
+    // isSpecialEducation:[null,Validators.required],
+    specialEducationId:[null],
+    attachments:[[]],
+  })
+
+
+  if(this.scope==UserScope.Guardian) {
+    this.parentId = this.userService.getCurrentGuardian()?.id
+    this.registerReqForm.controls['guardianId'].setValue(this.parentId)
+  }
+
+  this.initValidation()
+
+}
 
   initValidation(){
     let ctrs = ['isChildOfAMartyr','isSpecialAbilities']
@@ -249,18 +263,7 @@ export class RegisterRequestComponent implements OnInit {
 
   }
 
-  getStudentInfo(){
-    if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
-      this.studentService.getStudent(this.route.snapshot.params['childId']).subscribe(res=>{
-        this.childData = res.result
-      })
 
-    }else{
-      this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
-        this.childData = res
-      })
-    }
-  }
 
 
 

@@ -16,14 +16,14 @@ import { RegisterChildService } from '../../../services/register-child/register-
 })
 export class AbsenceDetailsComponent implements OnInit {
 
-  studentId = +this.route.snapshot.paramMap.get('id')
+  studentId = this.route.snapshot.paramMap.get('id')
   childId = this.route.snapshot.paramMap.get('childId')
     // << DATA PLACEHOLDER >> //
     filtration:Filter = {...Filtration, semester:0}
     paginationState= {...paginationInitialState}
 
     get absenceType(){ return AbsenceType}
-  
+
     absence ={
       attendenceDays: 0,
       absenceDays: 0,
@@ -66,7 +66,7 @@ export class AbsenceDetailsComponent implements OnInit {
     .subscribe((res:any)=>{
       this.absence.loading=false
 
-      
+
       this.absence.attendenceDays = res.attendenceDays
       this.absence.absenceDays = res.absenceDays
       this.absence.absenceDaysWithExecuse = res.absenceDaysWithExecuse
@@ -75,7 +75,7 @@ export class AbsenceDetailsComponent implements OnInit {
       this.absence.absenceDaysPercentage = res.absenceDaysPercentage
       this.absence.list = res.studentAttendenceModel.data
       this.absence.totalAllData = res.studentAttendenceModel.totalAllData
-      this.absence.total =res.studentAttendenceModel.total 
+      this.absence.total =res.studentAttendenceModel.total
 
     },err=> {
       this.absence.loading=false

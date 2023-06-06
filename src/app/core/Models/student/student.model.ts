@@ -5,6 +5,7 @@ import { Curriculum, Division, Grade, Localization, Track } from "../global/glob
 export interface Student{
 
         id: number
+        studentGuid:string
         name: Localization
         surname: Localization
         parsonalImagePath :string

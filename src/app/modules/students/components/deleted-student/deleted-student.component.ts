@@ -1,6 +1,6 @@
 
 import { Component, inject, OnInit, } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { el } from 'date-fns/locale';
@@ -25,15 +25,17 @@ import { StudentsService } from '../../services/students/students.service';
 })
 export class DeletedStudentComponent implements OnInit {
   lang = inject(TranslationService).lang
-  studentId = +this.route.snapshot.paramMap.get('id');
+  studentGUID = this.route.snapshot.paramMap.get('id');
   get fileTypesEnum () {return FileTypeEnum}
+
+  student:Student
 
   deletsCauseOptions$ = this.IndexService.getIndext(IndexesEnum.TheMainReasonsForStudentDeletion)
 
   componentHeaderData:IHeader = {
     breadCrump: [
       { label: this.translate.instant('Students List'),routerLink:'//schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
-      { label: this.translate.instant('dashboard.students.deletStudentFromSchool'),routerLink:`/student-management/students/delete-student/${this.studentId}` }
+      { label: this.translate.instant('dashboard.students.deletStudentFromSchool'),routerLink:`/student-management/students/delete-student/${this.studentGUID}` }
     ],
     mainTitle: { main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)' }
   }
@@ -43,14 +45,8 @@ export class DeletedStudentComponent implements OnInit {
   requiredFiles:RequestRule
 
   // << FORMS >> //
-  deleteStudentForm = this.fb.group({
-    studentId:[this.studentId],
-    deleteRequestReasonId: ['', Validators.required],
-    attachments:[[]],
-    instanceId:[null]
-  })
-
-  get attachmentCtr(){ return this.deleteStudentForm.controls.attachments as FormControl}
+  deleteStudentForm:FormGroup
+  get attachmentCtr(){ return this.deleteStudentForm?.controls['attachments'] as FormControl}
   get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
 
 
@@ -71,18 +67,28 @@ export class DeletedStudentComponent implements OnInit {
     this.registerChildService.Student$
     .pipe(
       switchMap(res=>{
-        if(!res) return this.studentService.getStudent(this.studentId).pipe(map(res => res?.result))
+        if(!res) return this.studentService.getStudent(this.studentGUID).pipe(map(res => res?.result))
         return of(res)
       })
     )
     .subscribe((res:Student)=>{
       this.componentHeaderData.mainTitle.sub = `(${res.name[this.lang]})`
       this.headerService.changeHeaderdata(this.componentHeaderData)
+      this.student =res
+      this.initForm(res)
     })
 
     this.getDeleteRequestRequiresFiles()
   }
 
+  initForm(student){
+    this.deleteStudentForm = this.fb.group({
+      studentId:[student.id],
+      deleteRequestReasonId: ['', Validators.required],
+      attachments:[[]],
+      instanceId:[null]
+    })
+  }
 
   getDeleteRequestRequiresFiles(){
     this.settingServcice.getRequestRquiredFiles(requestTypeEnum.DeleteStudentRequest).subscribe(res=>{
@@ -97,7 +103,7 @@ export class DeletedStudentComponent implements OnInit {
     this.studentService.deleteStudent(data).subscribe(res=>{
       this.loading = false
       this.toasterService.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
-      this.router.navigate(['../../student',this.studentId],{relativeTo:this.route})
+      this.router.navigate(['../../student',this.studentGUID],{relativeTo:this.route})
     },err=>{
       this.toasterService.error(this.translate.instant('toasterMessage.error'))
       this.loading = false

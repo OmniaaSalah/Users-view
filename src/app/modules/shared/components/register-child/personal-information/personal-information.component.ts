@@ -51,7 +51,7 @@ export class PersonalInformationComponent implements OnInit {
   editStudentinfoMode =false
   isAccountantCommentModel=false
 
-  studentId = +this.route.snapshot.paramMap.get('id')
+  studentId = this.route.snapshot.paramMap.get('id')
 
   changeIdentityModelOpened=false
   isGuardiansModelOpend=false

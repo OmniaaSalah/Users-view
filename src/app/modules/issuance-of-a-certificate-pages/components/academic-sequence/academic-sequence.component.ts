@@ -41,8 +41,11 @@ export class AcademicSequenceComponent implements OnInit {
   // showError=false
 
   schoolYears$ = this.sharedService.getSchoolYearsList().pipe(shareReplay())
-  allGrades$ = this.sharedService.getAllGrades().pipe(shareReplay())
   allSchools$ = this.schoolsService.getAllSchoolNames().pipe(shareReplay())
+  allGrades$ = this.sharedService.getAllGrades().pipe(shareReplay())
+
+  oldSchoolYears$ = this.sharedService.getOldSchoolYearsList().pipe(shareReplay())
+  OldSchools$ = this.schoolsService.getOldSchools().pipe(shareReplay())
 
   academicSequence=[]
 
@@ -53,7 +56,7 @@ export class AcademicSequenceComponent implements OnInit {
   get StudenstArrCtr(){ return this.stdAcademicForm.controls['studentEducationCertificates'] as FormArray}
   getStudentCtr(index) {return this.StudenstArrCtr.controls[index] as FormGroup}
   getStudentCertifictesArrCtr(index) { return this.getStudentCtr(index).controls['academicSequence'] as FormArray}
-  getStudentNewAccademicArrCtr(index) { return this.getStudentCtr(index).controls['newAcademicSequence'] as FormArray}
+  getStudentNewAccademicArrCtr(index) { return this.getStudentCtr(index).controls['addedAcademicSequence'] as FormArray}
 
   getStudentCertificteCtr(index) { return this.getStudentCertifictesArrCtr(index).controls[index] as FormGroup}
 
@@ -116,7 +119,7 @@ export class AcademicSequenceComponent implements OnInit {
         id: student.id,
         certificatedType : CertificatesEnum.AcademicSequenceCertificate,
         academicSequence : stdAcademicSequence[i].map(el => ({gradeId: el.gradeName?.id, yearId: el.schoolYearName?.id,  schoolId: el.schoolName?.id,})),
-        newAcademicSequence : []
+        addedAcademicSequence : []
       }
     })
   }
@@ -129,7 +132,7 @@ export class AcademicSequenceComponent implements OnInit {
         certificatedType: CertificatesEnum.AcademicSequenceCertificate,
         attachments:[[]],
         academicSequence: this.fillStudentstdAcademicSequence(el.academicSequence),
-        newAcademicSequence : this.fb.array([])
+        addedAcademicSequence : this.fb.array([])
       }))
     })
   }

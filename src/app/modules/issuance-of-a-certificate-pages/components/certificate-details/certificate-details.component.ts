@@ -45,9 +45,6 @@ export class CertificateDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCertificate()
-    console.log(typeof this.showQRC);
-
-
   }
 
   addSpaceBtwStrAndNum(string){
