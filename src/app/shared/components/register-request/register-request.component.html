@@ -188,7 +188,7 @@
                     </div> -->
                     <div class="col-md-4">
                         <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                        <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                        <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                     </div>
                 </div>
             </app-table-caption>
