@@ -54,9 +54,10 @@
               </div>
 
             </div> -->
+
+            <label class="fw-bold mt-6 mb-4">{{'dashboard.students.boardFile' | translate}} :- </label>
+
             <div class="row align-items-end" *ngIf="student?.attachments?.length">
-
-
                 <!-- <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p> -->
 
                 <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">

@@ -60,7 +60,7 @@ export class CertificateListComponent implements OnInit {
 
 
   viewCertificate(certificate){
-    window.open(`${environment.clientUrl}/certificate/${certificate?.id}?qrc=false`)
+    window.open(`${environment.clientUrl}/certificate/${certificate?.paymentRefNo||certificate?.id}?qrc=${!certificate?.createdBySpeaAdmin}`)
    }
 
 

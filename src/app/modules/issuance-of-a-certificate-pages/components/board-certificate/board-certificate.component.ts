@@ -184,7 +184,7 @@ export class BoardCertificateComponent implements OnInit {
         )
         .subscribe((attachments) => {
 
-          this.boardCertificateData[index].attachments.push( attachments?.length && attachments[0] )
+          this.boardCertificateData[index].attachments.push( attachments?.length && attachments[0]?.id )
 
           student.attachments = attachments
         });
