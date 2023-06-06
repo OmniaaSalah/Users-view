@@ -1,4 +1,4 @@
-<div class="student">
+<div class="student bg-white radius-15 p-5 border-dark">
 
     <ng-container *ngIf="isLoading">
         <div class="row mb-4">
@@ -13,7 +13,7 @@
         <div class="d-flex align-items-center justify-content-between bg-white">
             <div class="profile d-flex align-items-center">
                 <div class="profile__avatar">
-                    <img src="assets/images/avatar.png" alt="Avatar">
+                    <img [src]="student?.parsonalImagePath" fullbackImage alt="Avatar">
                 </div>
                 <div class="profile__info">
                     <div class="profile__name ">

@@ -44,8 +44,8 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
   get registrationStatusEnum() {return RegistrationStatus}
   get fileTypesEnum () {return FileTypeEnum}
 
-  studentId = +this.route.snapshot.paramMap.get('id')
-  childId = +this.route.snapshot.paramMap.get('childId')
+  studentId = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
   schoolId ;
   gradeId;
 

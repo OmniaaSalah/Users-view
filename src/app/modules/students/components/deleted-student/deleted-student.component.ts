@@ -25,7 +25,7 @@ import { StudentsService } from '../../services/students/students.service';
 })
 export class DeletedStudentComponent implements OnInit {
   lang = inject(TranslationService).lang
-  studentId = +this.route.snapshot.paramMap.get('id');
+  studentId = this.route.snapshot.paramMap.get('id');
   get fileTypesEnum () {return FileTypeEnum}
 
   deletsCauseOptions$ = this.IndexService.getIndext(IndexesEnum.TheMainReasonsForStudentDeletion)

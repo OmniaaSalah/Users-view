@@ -46,8 +46,8 @@ export class RegisterRequestComponent implements OnInit {
   get currentUserScope (){return this.userService.getScope()}
 
   parentId = +this.route.snapshot.paramMap.get('parentId')
-  childId = +this.route.snapshot.paramMap.get('childId')
-  studentId = +this.route.snapshot.paramMap.get('studentId')
+  childId =  this.route.snapshot.paramMap.get('childId')
+  studentId =  this.route.snapshot.paramMap.get('studentId')
   childRegistrationStatus = this.route.snapshot.queryParamMap.get('status')
 
   // NOTE:- incase the Request is returned Form Spea

@@ -19,7 +19,7 @@ import { StudentsService } from '../../../../students/services/students/students
 })
 export class SubjectsAndDegreesComponent implements OnInit {
 
-  studentId = +this.route.snapshot.paramMap.get('id')
+  studentId = this.route.snapshot.paramMap.get('id')
   childId = this.route.snapshot.paramMap.get('childId')
 
   btnGroupItems=[

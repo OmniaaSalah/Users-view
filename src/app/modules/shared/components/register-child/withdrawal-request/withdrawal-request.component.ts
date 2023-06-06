@@ -28,8 +28,8 @@ export class WithdrawalRequestComponent implements OnInit {
   get fileTypesEnum () {return FileTypeEnum}
 
   currentGuardianId = this.userService.getCurrentGuardian()?.id
-  studentId = +this.route.snapshot.paramMap.get('id') //in case the page reached throw students route
-  childId = +this.route.snapshot.paramMap.get('childId') //in case the page reached throw child (registered) route
+  studentId = this.route.snapshot.paramMap.get('id') //in case the page reached throw students route
+  childId = this.route.snapshot.paramMap.get('childId') //in case the page reached throw child (registered) route
 
   reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.ReasonsForWithdrawingTheStudentFromTheCurrentSchool)
 

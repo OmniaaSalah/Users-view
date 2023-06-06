@@ -104,7 +104,7 @@ export class StudentsService {
 
 
 // مواد الطالب القابله للاعفاء
-getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,studentId:number}){
+getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,studentId:number|string}){
   return this.http.get(`/Subject/exempt-subjects`,query).pipe(take(1))
 }
 
