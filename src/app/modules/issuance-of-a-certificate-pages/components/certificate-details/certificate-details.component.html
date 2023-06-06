@@ -797,8 +797,8 @@
               <!-- <td colspan="3" style="width: 30%">Comments</td> -->
             </tr>
           </thead>
-          <ng-container *ngIf="certificate?.ScoreSubjects?.length">
-            <tr class="text-center" *ngFor="let subject of certificate?.ScoreSubjects">
+          <ng-container *ngIf="certificate?.Subjects?.ScoreSubjects?.length">
+            <tr class="text-center" *ngFor="let subject of certificate?.Subjects?.ScoreSubjects">
                 <td style="width: 25%;">{{subject.SubjectName.Ar}}</td>
                 <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
                 <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
@@ -834,8 +834,8 @@
 
           </ng-container>
 
-          <ng-container *ngIf="certificate?.Subjects?.length">
-            <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects">
+          <ng-container *ngIf="certificate?.Subjects?.Subjects?.length">
+            <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects?.Subjects">
                 <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
                 <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
                 <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
@@ -848,15 +848,15 @@
             </tr>
           </ng-container>
 
-          <ng-container *ngIf="certificate?.DiscriptionalSubjects?.length">
-            <tr class="text-center" *ngFor="let subject of certificate?.DiscriptionalSubjects">
+          <ng-container *ngIf="certificate?.Subjects?.DiscriptionalSubjects?.length">
+            <tr class="text-center" *ngFor="let subject of certificate?.Subjects?.DiscriptionalSubjects">
               <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
               <td class="font-en" style="width: 25%;">{{subject?.SubjectName?.En}}</td>
                <td  colspan="6">{{subject?.Description || '----'}}</td>
             </tr>
           </ng-container>
 
-          <tr  *ngIf="!certificate?.Subjects?.length && !certificate?.ScoreSubjects?.length && !certificate?.DiscriptionalSubjects?.length">
+          <tr  *ngIf="!certificate?.Subjects?.Subjects?.length && !certificate?.Subjects?.ScoreSubjects?.length && !certificate?.Subjects?.DiscriptionalSubjects?.length">
             <td colspan="10">
               <app-informative-block [styles]="{'minHeight':'auto'}" subTitle="{{'emptyList.divisionDegrees' |translate}}" ></app-informative-block>
             </td>
@@ -1021,8 +1021,8 @@
           </tr>
         </thead>
 
-        <ng-container *ngIf="certificate?.ScoreSubjects?.length">
-          <tr class="text-center" *ngFor="let subject of certificate?.ScoreSubjects">
+        <ng-container *ngIf="certificate?.Subjects?.ScoreSubjects?.length">
+          <tr class="text-center" *ngFor="let subject of certificate?.Subjects?.ScoreSubjects">
               <td style="width: 25%;">{{subject.SubjectName.Ar}}</td>
               <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
               <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
@@ -1058,8 +1058,8 @@
 
         </ng-container>
 
-        <ng-container *ngIf="certificate?.Subjects?.length">
-          <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects">
+        <ng-container *ngIf="certificate?.Subjects?.Subjects?.length">
+          <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects?.Subjects">
               <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
               <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
               <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
@@ -1072,8 +1072,8 @@
           </tr>
         </ng-container>
 
-        <ng-container *ngIf="certificate?.DiscriptionalSubjects?.length">
-          <tr class="text-center" *ngFor="let subject of certificate?.DiscriptionalSubjects">
+        <ng-container *ngIf="certificate?.Subjects?.DiscriptionalSubjects?.length">
+          <tr class="text-center" *ngFor="let subject of certificate?.Subjects?.DiscriptionalSubjects">
             <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
             <td class="font-en" style="width: 25%;">{{subject?.SubjectName?.En}}</td>
              <td  colspan="6">{{subject?.Description || '----'}}</td>
@@ -1082,7 +1082,7 @@
 
 
 
-        <tr  *ngIf="!certificate?.Subjects?.length && !certificate?.ScoreSubjects?.length && !certificate?.DiscriptionalSubjects?.length">
+        <tr  *ngIf="!certificate?.Subjects.Subjects?.length && !certificate?.Subjects?.ScoreSubjects?.length && !certificate?.Subjects?.DiscriptionalSubjects?.length">
           <td colspan="10">
             <app-informative-block [styles]="{'minHeight':'auto'}" subTitle="{{'emptyList.divisionDegrees' |translate}}" ></app-informative-block>
           </td>

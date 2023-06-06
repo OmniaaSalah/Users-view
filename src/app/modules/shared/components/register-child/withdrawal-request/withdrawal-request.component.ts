@@ -28,16 +28,18 @@ export class WithdrawalRequestComponent implements OnInit {
   get fileTypesEnum () {return FileTypeEnum}
 
   currentGuardianId = this.userService.getCurrentGuardian()?.id
-  studentId = this.route.snapshot.paramMap.get('id') //in case the page reached throw students route
+  // studentId = this.route.snapshot.paramMap.get('id') //in case the page reached throw students route
   childId = this.route.snapshot.paramMap.get('childId') //in case the page reached throw child (registered) route
+
+  studentGUID=this.route.snapshot.paramMap.get('id')
 
   reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.ReasonsForWithdrawingTheStudentFromTheCurrentSchool)
 
 
   componentHeaderData:IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.parents.sonDetails'),routerLink:`/parent/${this.currentGuardianId}/child/${this.childId || this.studentId}`,routerLinkActiveOptions:{exact: true},queryParams:{registered:true}},
-      { label: this.translate.instant('dashboard.students.withdrawalReq'),routerLink:`/parent/${this.currentGuardianId}/child/${this.childId ||this.studentId}/withdraw-request` }
+      { label: this.translate.instant('dashboard.parents.sonDetails'),routerLink:`/parent/${this.currentGuardianId}/child/${this.studentGUID}`,routerLinkActiveOptions:{exact: true},queryParams:{registered:true}},
+      { label: this.translate.instant('dashboard.students.withdrawalReq'),routerLink:`/parent/${this.currentGuardianId}/child/${this.studentGUID}/withdraw-request` }
     ],
     mainTitle: { main: this.translate.instant('dashboard.students.withdrawalReq'), sub: '' }
   }
@@ -50,12 +52,7 @@ export class WithdrawalRequestComponent implements OnInit {
   ]
 
   isLoading=false
-  reqForm = {
-    studentId: this.childId || this.studentId,
-    withdrawalType: null,
-    withdrawalReasonId: null,
-    attachments: []
-  }
+  reqForm
 
   get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
 
@@ -78,9 +75,7 @@ export class WithdrawalRequestComponent implements OnInit {
     this.registerChildService.Student$
     .pipe(
       switchMap(res=>{
-        console.log(res);
-
-        if(!res) return this.studentService.getStudent(this.studentId).pipe(map(res => res?.result))
+        if(!res) return this.studentService.getStudent(this.studentGUID).pipe(map(res => res?.result))
         return of(res)
       })
     )
@@ -88,9 +83,20 @@ export class WithdrawalRequestComponent implements OnInit {
       this.student=res
       this.componentHeaderData.mainTitle.sub = `(${res.name[this.lang]})`
       this.headerService.changeHeaderdata(this.componentHeaderData)
+      this.initForm(res)
     })
 
     this.getWithdrawRequestRequiresFiles()
+  }
+
+
+  initForm(student){
+    this.reqForm = {
+      studentId: student?.id,
+      withdrawalType: null,
+      withdrawalReasonId: null,
+      attachments: []
+    }
   }
 
   getWithdrawRequestRequiresFiles(){
@@ -107,7 +113,7 @@ export class WithdrawalRequestComponent implements OnInit {
     .subscribe(()=>{
       this.isLoading=false
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
-      this.router.navigate(['/schools-and-students/students/student', this.studentId])
+      this.router.navigate(['/schools-and-students/students/student', this.studentGUID])
 
     },(error:Error)=>{
 

@@ -14,10 +14,10 @@ import { UserService } from './user/user.service';
 export class ClaimsService {
 
   // http = inject(HttpHandlerService)
-  constructor(private http:HttpHandlerService, private sharedService:SharedService
+  constructor(private http:HttpHandlerService, private userService:UserService
     ) { }
 
-  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
+  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>= this.userService.getClaims() || {}
 
 
   getUserClaims(){

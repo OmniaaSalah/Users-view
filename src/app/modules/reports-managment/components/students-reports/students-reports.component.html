@@ -14,7 +14,7 @@
                 <label class="label">{{'dashboard.students.academic year'|translate}}</label>
                 <p-dropdown [options]="schoolYearsList" [(ngModel)]="filtration.SchoolYearId" [showClear]="true"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"  placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"></p-dropdown>
             </div>
-            
+
             <div class="col-md-4">
                 <label class="label">{{'reports.Registration date and time (from-to)' | translate}}</label>
                 <p-calendar  [(ngModel)]="acceptanceDate" [showIcon]="true" inputId="icon" selectionMode="range"
@@ -203,7 +203,7 @@
                         </td>
                         <td  class="lg d-flex gap-2">
                             <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
-                            <a   target="_blank"  [routerLink]="['//schools-and-students/students/student/'+student?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.student?.name |currentLang}}</a></td>
+                            <a   target="_blank"  [routerLink]="['//schools-and-students/students/student/'+student?.studentGuid]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.student?.name |currentLang}}</a></td>
                         <td>
                            {{student?.surName | currentLang}}
                         </td>
@@ -270,7 +270,7 @@
                             <ng-container *ngFor="let item of student?.studentCategory let i=index">
                                 <span *ngIf="item">{{'shared.allStatus.'+item|translate}}<span  *ngIf="i<student?.studentCategory.length-1"> , </span></span>
                             </ng-container>
-                        
+
                             <span *ngIf="!student?.studentCategory">{{'shared.notFound' | translate}}</span>
                         </td>
 

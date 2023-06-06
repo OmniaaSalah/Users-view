@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, finalize, map, Observable, of, share, Subject, take, takeUntil, tap } from 'rxjs';
+import { filter, finalize, map, Observable, of, share, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -24,6 +24,7 @@ import { SchoolsService } from '../../../schools/services/schools/schools.servic
 import { StudentsService } from '../../services/students/students.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { RegisterChildService } from 'src/app/modules/shared/services/register-child/register-child.service';
 
 type transeferBy = 'parent' | 'commission';
 
@@ -41,17 +42,11 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   lang = inject(TranslationService).lang;
   get TransferTypeEnum(){ return TransferType}
 
-  studentId = this.route.snapshot.paramMap.get('id')
+  studentGUID = this.route.snapshot.paramMap.get('id')
   studentSchoolId
   isLoading=true
 
-  student$ = this.studentsService.getStudent(this.studentId)
-  .pipe(
-    map((res:GenericResponse<Student>)=>{
-      this.studentSchoolId= res.result.school.id
-      return res.result
-    }),
-    finalize(()=>this.isLoading= false))
+  student:Student
 
 
   componentHeaderData: IHeader={
@@ -59,7 +54,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
       { label: this.translate.instant('Students List') ,routerLink:'//schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
       {
         label: this.translate.instant('dashboard.students.transferStudent') ,
-        routerLink: `//schools-and-students/students/student/${this.studentId}/transfer`
+        routerLink: `/schools-and-students/students/student/${this.studentGUID}/transfer`
       }
     ],
     mainTitle: {
@@ -96,15 +91,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     loading:true
   }
 
-  transferForm={
-    transferType:null,
-    schoolId: null,
-    gradeId: null,
-    divisionId: null,
-    trackId: null,
-    studentIds: [this.studentId],
-    subjects:[]
-  }
+  transferForm
 
   isFormValid =false
   submitted=false
@@ -130,15 +117,46 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private gradeService: GradesService,
     private divisionService: DivisionService,
-    private confirm :ConfirmModelService
+    private confirm :ConfirmModelService,
+    private registerChildService:RegisterChildService
   ) { }
 
 
   ngOnInit(): void {
+
+    this.registerChildService.Student$
+    .pipe(
+      switchMap(res=>{
+        if(!res) return this.studentsService.getStudent(this.studentGUID).pipe(map(res => res?.result))
+        return of(res)
+      }))
+    .subscribe((res:Student)=>{
+      this.student=res
+      this.studentSchoolId= res?.school?.id
+      this.componentHeaderData.mainTitle.sub = `(${res.name[this.lang]})`
+      this.headerService.changeHeaderdata(this.componentHeaderData)
+      this.initForm(res)
+      this.isLoading= false
+    })
+
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.confirmDialogListner()
 
   }
+
+
+  initForm(student){
+    this.transferForm={
+      transferType:null,
+      schoolId: null,
+      gradeId: null,
+      divisionId: null,
+      trackId: null,
+      studentIds: [student?.id],
+      subjects:[]
+    }
+  }
+
 
 
   onTransferTypeChange(type :TransferType){

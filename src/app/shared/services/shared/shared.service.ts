@@ -241,6 +241,11 @@ export class SharedService {
     return this.http.get('/SchoolYear/dropdown').pipe(take(1))
   }
 
+  getOldSchoolYearsList(){
+    return this.http.get('/certificate/academic/schoolyear/dropdown').pipe(take(1))
+  }
+
+
   getParentRelative(){
     return this.http.get('/Child/relative-relation').pipe(map(res => res.data))
    }

@@ -110,16 +110,16 @@
                             </ng-container>
 
 
-                            <ng-container formArrayName="newAcademicSequence">
+                            <ng-container formArrayName="addedAcademicSequence">
                               <div class="row g-5 form-set custom-form" *ngFor="let student of getStudentNewAccademicArrCtr(i).controls; let ctrIndex=index" [formGroupName]="ctrIndex">
 
-                                  <div class=" col-md-3" *ngIf="schoolYears$ |async as schoolYears">
+                                  <div class=" col-md-3" *ngIf="oldSchoolYears$ |async as schoolYears">
                                       <label class="label">{{'dashboard.students.academic year'|translate}}</label>
                                       <p-dropdown [options]="schoolYears" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" ></p-dropdown>
                                   </div>
 
 
-                                  <div class="col-md-4" *ngIf="allSchools$ |async as allSchools">
+                                  <div class="col-md-4" *ngIf="OldSchools$ |async as allSchools">
                                       <label class="label">{{'dashboard.students.School Name'| translate}}</label>
                                       <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}"
                                           [options]="allSchools" formControlName="schoolId"
@@ -141,11 +141,11 @@
                               </div>
                           </ng-container>
 
-                            <!-- <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-50 p-3 mt-4"
+                            <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-50 p-3 mt-4"
                             (click)="addNewAccademicYear(i, newIndex)">
                                 <fa-icon [icon]="faPlus"></fa-icon>
                                 <span>{{'dashboard.issue of certificate.addNewAccademicYear' |translate}}</span>
-                            </div> -->
+                            </div>
 
                             <!-- <div class="row" *ngIf="showAttchments[i]">
                                 <ng-container *ngIf="!attachLoading">

@@ -174,14 +174,13 @@ export class IssueCertificateComponent implements OnInit {
         this.skeletonShown = false
         return;
 
+      }else if(this.selectedCertificate.value == CertificatesEnum.SchoolInternalSubjectsCertificate){
+          this.childList =res.students.filter(el =>{
+            return el.curriculumCode==CurriculumCodeEnum.British
+          })
+          this.skeletonShown = false
+          return
       }
-      // else if(this.selectedCertificate.value == CertificatesEnum.SchoolInternalSubjectsCertificate){
-      //     this.childList =res.students.filter(el =>{
-      //       return el.curriculumCode==CurriculumCodeEnum.British
-      //     })
-      //     this.skeletonShown = false
-      //     return
-      // }
 
       this.childList = res.students
       this.skeletonShown = false
