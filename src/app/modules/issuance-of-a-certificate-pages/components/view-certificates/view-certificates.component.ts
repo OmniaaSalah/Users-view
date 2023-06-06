@@ -132,6 +132,6 @@ export class ViewCertificatesComponent implements OnInit {
     this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
   }
   viewCertificate(certificate){
-    window.open(`${environment.clientUrl}/certificate/${certificate?.id}`)
+    window.open(`${environment.clientUrl}/certificate/${certificate?.paymentRefNo|| certificate?.id}`)
    }
 }

@@ -104,7 +104,7 @@ export class StudentsService {
 
 
 // مواد الطالب القابله للاعفاء
-getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,studentId:number}){
+getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,studentId:number|string}){
   return this.http.get(`/Subject/exempt-subjects`,query).pipe(take(1))
 }
 
@@ -122,7 +122,14 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
 
   // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
   repeateStudyPhaseReq(data){
-      return this.http.post('/Student/regrading-request', data).pipe(take(1))
+      return this.http.post('/Student/regrading-request', data)
+      .pipe(
+        map(res=>{
+          if(res?.statusCode ===HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized) || res?.error)
+          else return res
+        }),
+        take(1)
+      )
   }
 
       // NOTE : ارسال طلب اعفاء من ماده دراسيه -------------------------------------------------
