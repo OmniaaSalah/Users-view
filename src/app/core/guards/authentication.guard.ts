@@ -25,13 +25,13 @@ export class AuthenticationGuard implements CanActivate {
     }
 
 
+    return true
 
+    // return this.claimsSercice.getUserClaims()
+    // .pipe(map((res)=>{
+    //     if(res)  return true
 
-    return this.claimsSercice.getUserClaims()
-    .pipe(map((res)=>{
-        if(res)  return true
-
-    }))
+    // }))
 
 
 

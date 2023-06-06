@@ -53,7 +53,7 @@
             <!-- Registered Child -->
             <div class="row g-5" *ngIf="!skeletonShown ">
                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of students">
-                    <div role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
+                    <div role="button" [routerLink]="['../', 'child',student?.studentGuid]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
 
                         <div class="profile d-flex align-items-center p-4">
                             <div class="profile__avatar">
@@ -122,7 +122,7 @@
             </div>
             <div class="row g-5" *ngIf="!skeletonShown">
                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let child of studentsWithdrawal">
-                    <div role="button" [routerLink]="['../', 'child',child.id]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
+                    <div role="button" [routerLink]="['../', 'child',child?.studentGuid]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
 
                         <div class="profile d-flex align-items-center p-4">
                             <div class="profile__avatar">
@@ -153,7 +153,7 @@
                             </div>
 
                             <div class="card__actions pt-3" *permit="claimsEnum.GS_RegisterChild">
-                                <button class="btn btn--full btn-danger "  [routerLink]="['../','child', child.id, 'register']" [queryParams]="{status: registrationStatus.Withdrawal}" StopProp>
+                                <button class="btn btn--full btn-danger "  [routerLink]="['../','child', child?.studentGuid, 'register']" [queryParams]="{status: registrationStatus.Withdrawal}" StopProp>
                                     <span stopProp  class="ms-3 ">{{'dashboard.parents.reRegistration'|translate }}</span>
                                 </button>
                             </div>
@@ -248,10 +248,10 @@
                 </div>
             </div>
 
-            <!-- Registered Child -->
+            <!-- Graduated Child -->
             <div class="row g-5" *ngIf="!skeletonShown ">
                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of finalGraduatedStudents">
-                    <div role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
+                    <div role="button" [routerLink]="['../', 'child',student?.studentGuid]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
 
                         <div class="profile d-flex align-items-center p-4">
                             <div class="profile__avatar">

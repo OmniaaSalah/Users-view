@@ -12,7 +12,7 @@
            <div class="row g-5 form-set" >
             <!-- <div class="col-md-4" >
                 <label class="label">{{'shared.transportationType'| translate}}</label>
-                <p-dropdown 
+                <p-dropdown
                 [options]="transferType"
                 [(ngModel)]="filtration.reEnrollmentType"
                 optionValue="value" optionLabel="name"
@@ -188,7 +188,7 @@
 
             <ng-template pTemplate="caption">
                 <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getStudents()" (onClear)="clearFilter()">
-                
+
                 </app-table-caption>
 
             </ng-template>
@@ -220,7 +220,7 @@
                         </td>
                         <td  class="lg d-flex gap-2">
                             <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
-                            <a   target="_blank"  [routerLink]="['//schools-and-students/students/student/'+student?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.student?.name |currentLang}}</a></td>
+                            <a   target="_blank"  [routerLink]="['/schools-and-students/students/student/'+student?.studentGuid]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student?.student?.name |currentLang}}</a></td>
                         <td>
                            {{student?.surName | currentLang}}
                         </td>
@@ -287,7 +287,7 @@
                             <ng-container *ngFor="let item of student?.studentCategory let i=index">
                                 <span *ngIf="item">{{'shared.allStatus.'+item|translate}}<span  *ngIf="i<student?.studentCategory.length-1"> , </span></span>
                             </ng-container>
-                        
+
                             <span *ngIf="!student?.studentCategory">{{'shared.notFound' | translate}}</span>
                         </td>
 

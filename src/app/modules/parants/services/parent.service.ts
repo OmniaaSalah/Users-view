@@ -105,7 +105,7 @@ export class ParentService {
 
   registerChildBySpea(studentRegistrationStatus,childId, childData){
     if(studentRegistrationStatus===RegistrationStatus.Withdrawal){
-      return this.http.post(`/Student//enroll-withdrawal-student/${childId}`,childData).pipe(take(1));
+      return this.http.post(`/Student/enroll-withdrawal-student/${childId}`,childData).pipe(take(1));
     }else{
 
       return this.http.post(`/Student/enroll/${childId}`,childData).pipe(take(1));
