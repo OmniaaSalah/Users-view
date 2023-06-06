@@ -165,7 +165,8 @@
             <div class="fw-bold  mb-5">{{'dashboard.myRequest.Order details' | translate}}</div>
 
             <ng-container *ngIf="requestDetails?.requestType==requestTypeEnum.DiplomaCertificateRequest  || requestDetails?.requestType==requestTypeEnum.AcademicSequenceCertificateRequest  || requestDetails?.requestType==requestTypeEnum.BoardCertificateRequest ||requestDetails?.requestType==requestTypeEnum.GradesCertificateRequest">
-                <ng-container *ngTemplateOutlet="certificatesRequests; context: {$implicit: requestDetails}" ></ng-container>
+              <app-certificates-request-details [requestDetails]="requestDetails" (refresh)="getRequestDetails()"></app-certificates-request-details>
+                <!-- <ng-container *ngTemplateOutlet="certificatesRequests; context: {$implicit: requestDetails}" ></ng-container> -->
             </ng-container>
 
             <div >
