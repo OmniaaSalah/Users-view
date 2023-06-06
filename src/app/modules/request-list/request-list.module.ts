@@ -6,12 +6,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RequestdetailsComponent } from './Component/requestdetails/requestdetails.component';
 import { RequestChatComponent } from './component/requestdetails/request-chat/request-chat.component';
 import { RequestStatesComponent } from './Component/requestdetails/request-states/request-states.component';
+import { CertificatesRequestDetailsComponent } from './Component/requestdetails/certificates-request-details/certificates-request-details.component';
 
 @NgModule({
   declarations: [
     RequestdetailsComponent,
     RequestChatComponent,
-    RequestStatesComponent
+    RequestStatesComponent,
+    CertificatesRequestDetailsComponent
   ],
   imports: [
     CommonModule,

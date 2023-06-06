@@ -797,8 +797,8 @@
               <!-- <td colspan="3" style="width: 30%">Comments</td> -->
             </tr>
           </thead>
-          <ng-container *ngIf="certificate?.ScoreSubjects?.length">
-            <tr class="text-center" *ngFor="let subject of certificate?.ScoreSubjects">
+          <ng-container *ngIf="certificate?.Subjects?.ScoreSubjects?.length">
+            <tr class="text-center" *ngFor="let subject of certificate?.Subjects?.ScoreSubjects">
                 <td style="width: 25%;">{{subject.SubjectName.Ar}}</td>
                 <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
                 <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
@@ -834,8 +834,8 @@
 
           </ng-container>
 
-          <ng-container *ngIf="certificate?.Subjects?.length">
-            <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects">
+          <ng-container *ngIf="certificate?.Subjects?.Subjects?.length">
+            <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects?.Subjects">
                 <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
                 <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
                 <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
@@ -848,15 +848,15 @@
             </tr>
           </ng-container>
 
-          <ng-container *ngIf="certificate?.DiscriptionalSubjects?.length">
-            <tr class="text-center" *ngFor="let subject of certificate?.DiscriptionalSubjects">
+          <ng-container *ngIf="certificate?.Subjects?.DiscriptionalSubjects?.length">
+            <tr class="text-center" *ngFor="let subject of certificate?.Subjects?.DiscriptionalSubjects">
               <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
               <td class="font-en" style="width: 25%;">{{subject?.SubjectName?.En}}</td>
                <td  colspan="6">{{subject?.Description || '----'}}</td>
             </tr>
           </ng-container>
 
-          <tr  *ngIf="!certificate?.Subjects?.length && !certificate?.ScoreSubjects?.length && !certificate?.DiscriptionalSubjects?.length">
+          <tr  *ngIf="!certificate?.Subjects?.Subjects?.length && !certificate?.Subjects?.ScoreSubjects?.length && !certificate?.Subjects?.DiscriptionalSubjects?.length">
             <td colspan="10">
               <app-informative-block [styles]="{'minHeight':'auto'}" subTitle="{{'emptyList.divisionDegrees' |translate}}" ></app-informative-block>
             </td>
@@ -1021,88 +1021,72 @@
           </tr>
         </thead>
 
-          <ng-container *ngIf="certificate?.ScoreSubjects?.length">
-            <tr class="text-center" *ngFor="let subject of certificate?.ScoreSubjects">
-                <td style="width: 25%;">{{subject.SubjectName.Ar}}</td>
-                <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
-                <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
-                <td style="width: 5%;">{{subject?.SubjectMaxmumDegree || '-'}}</td>
-                <td style="width: 10%;">{{subject?.Degree || '-'}}</td>
+        <ng-container *ngIf="certificate?.Subjects?.ScoreSubjects?.length">
+          <tr class="text-center" *ngFor="let subject of certificate?.Subjects?.ScoreSubjects">
+              <td style="width: 25%;">{{subject.SubjectName.Ar}}</td>
+              <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
+              <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
+              <td style="width: 5%;">{{subject?.SubjectMaxmumDegree || '-'}}</td>
+              <td style="width: 10%;">{{subject?.Degree || '-'}}</td>
 
-                <td style="width: 10%;">{{subject?.Rate ||'-'}}</td>
-                <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
-                <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
+              <td style="width: 10%;">{{subject?.Rate ||'-'}}</td>
+              <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
+              <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
 
-                <!-- <td colspan="3" style="width: 30%">{{subject?.Note}}</td> -->
-            </tr>
+              <!-- <td colspan="3" style="width: 30%">{{subject?.Note}}</td> -->
+          </tr>
 
-            <tr class="text-center  fw-bold">
-              <td  style="width: 25%;">المجموع</td>
-              <td class="font-en" style="width: 25%;">Total</td>
-              <td style="width: 10%;">{{certificate?.TotalSubjectsMin || '-'}}</td>
-              <td style="width: 10%">{{certificate?.TotalSubjectsMax || '-'}}</td>
-              <td style="width: 10%;">{{certificate?.TotalStudentsDegree || '-'}}</td>
-              <td style="width: 30%" class="font-en" colspan="3" rowspan="2">
-                GPA: {{certificate?.TotalStudentGPA || 0}}
-              </td>
-            </tr>
-
-            <tr class="text-center  fw-bold">
-              <td  style="width: 25%;">النسبة المئوية</td>
-              <td class="font-en" style="width: 25%;">Average (%)</td>
-              <td style="width: 10%;">---</td>
-              <td style="width: 10%">---</td>
-              <td style="width: 10%;">{{certificate?.StudentAveragePercentage |  number:'1.0-2'}} %</td>
-
-            </tr>
-
-          </ng-container>
-
-          <ng-container *ngIf="certificate?.Subjects?.length">
-            <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects">
-                <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
-                <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
-                <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
-                <td style="width: 5%">{{subject?.SubjectMaxmumDegree || '-'}}</td>
-                <td style="width: 10%;">{{subject?.Degree}}</td>
-
-                <td style="width: 10%;">{{subject?.Rate || '-'}}</td>
-                <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
-                <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
-            </tr>
-          </ng-container>
-
-          <ng-container *ngIf="certificate?.DiscriptionalSubjects?.length">
-            <tr class="text-center" *ngFor="let subject of certificate?.DiscriptionalSubjects">
-              <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
-              <td class="font-en" style="width: 25%;">{{subject?.SubjectName?.En}}</td>
-               <td  colspan="6">{{subject?.Description || '----'}}</td>
-            </tr>
-          </ng-container>
-
-          <tr  *ngIf="!certificate?.Subjects?.length && !certificate?.ScoreSubjects?.length && !certificate?.DiscriptionalSubjects?.length">
-            <td colspan="10">
-              <app-informative-block [styles]="{'minHeight':'auto'}" subTitle="{{'emptyList.divisionDegrees' |translate}}" ></app-informative-block>
+          <tr class="text-center  fw-bold">
+            <td  style="width: 25%;">المجموع</td>
+            <td class="font-en" style="width: 25%;">Total</td>
+            <td style="width: 10%;">{{certificate?.TotalSubjectsMin || '-'}}</td>
+            <td style="width: 10%">{{certificate?.TotalSubjectsMax || '-'}}</td>
+            <td style="width: 10%;">{{certificate?.TotalStudentsDegree || '-'}}</td>
+            <td style="width: 30%" class="font-en" colspan="3" rowspan="2">
+              GPA: {{certificate?.TotalStudentGPA || 0}}
             </td>
           </tr>
 
-        <!-- <tr class="text-center bg-gray-150">
-          <td  style="width: 10%;">التربية الأخلاقية</td>
-          <td class="font-en" style="width: 10%;">Moral Education</td>
-          <td style="width: 10%;">0</td>
-          <td style="width: 10%">100</td>
-          <td style="width: 10%;">50</td>
-          <td style="width: 30%"></td>
-        </tr>
+          <tr class="text-center  fw-bold">
+            <td  style="width: 25%;">النسبة المئوية</td>
+            <td class="font-en" style="width: 25%;">Average (%)</td>
+            <td style="width: 10%;">---</td>
+            <td style="width: 10%">---</td>
+            <td style="width: 10%;">{{certificate?.StudentAveragePercentage |  number:'1.0-2'}} %</td>
 
-        <tr class="text-center bg-gray-150">
-          <td  style="width: 10%;">القرآن</td>
-          <td class="font-en" style="width: 10%;">Quran</td>
-          <td style="width: 10%;">0</td>
-          <td style="width: 10%">100</td>
-          <td style="width: 10%;">50</td>
-          <td style="width: 30%"></td>
-        </tr> -->
+          </tr>
+
+        </ng-container>
+
+        <ng-container *ngIf="certificate?.Subjects?.Subjects?.length">
+          <tr class="text-center bg-gray-150" *ngFor="let subject of certificate?.Subjects?.Subjects">
+              <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
+              <td class="font-en" style="width: 25%;">{{subject?.SubjectName.En}}</td>
+              <td style="width: 5%;">{{subject?.SubjectMinmumDegree || '-'}}</td>
+              <td style="width: 5%">{{subject?.SubjectMaxmumDegree || '-'}}</td>
+              <td style="width: 10%;">{{subject?.Degree}}</td>
+
+              <td style="width: 10%;">{{subject?.Rate || '-'}}</td>
+              <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
+              <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
+          </tr>
+        </ng-container>
+
+        <ng-container *ngIf="certificate?.Subjects?.DiscriptionalSubjects?.length">
+          <tr class="text-center" *ngFor="let subject of certificate?.Subjects?.DiscriptionalSubjects">
+            <td  style="width: 25%;">{{subject.SubjectName.Ar}}</td>
+            <td class="font-en" style="width: 25%;">{{subject?.SubjectName?.En}}</td>
+             <td  colspan="6">{{subject?.Description || '----'}}</td>
+          </tr>
+        </ng-container>
+
+
+
+        <tr  *ngIf="!certificate?.Subjects.Subjects?.length && !certificate?.Subjects?.ScoreSubjects?.length && !certificate?.Subjects?.DiscriptionalSubjects?.length">
+          <td colspan="10">
+            <app-informative-block [styles]="{'minHeight':'auto'}" subTitle="{{'emptyList.divisionDegrees' |translate}}" ></app-informative-block>
+          </td>
+        </tr>
 
       </table>
 

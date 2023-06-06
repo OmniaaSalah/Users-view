@@ -44,8 +44,9 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
   get registrationStatusEnum() {return RegistrationStatus}
   get fileTypesEnum () {return FileTypeEnum}
 
-  studentId = +this.route.snapshot.paramMap.get('id')
-  childId = +this.route.snapshot.paramMap.get('childId')
+  studentGUID = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
+
   schoolId ;
   gradeId;
 
@@ -70,56 +71,14 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
 
 
-    // Transfer From Division To Division
-    transferStudentForm={
-      studentId: this.studentId || this.childId,
-      currentDivisionId: null,
-      updatedDivisionId: null,
-      trackId: '',
-      electiveSubjectId: []
-    }
-
-
+    // Forms
     requiredFiles:RequestRule
     get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
-
-    changeIdentityNumForm={
-      identityNumber: null,
-      attachments:[],
-      studentId: this.studentId || this.childId,
-      childId : null
-    }
-
-    changeStudentInfoReqForm= this.fb.group({
-      studentId: [this.studentId || this.childId, Validators.required],
-      childId: [],
-      studentName: this.fb.group({
-        ar:['', Validators.required],
-        en:['', Validators.required]
-      }),
-      studentSurName: this.fb.group({
-        ar: ['', Validators.required],
-        en: ['', Validators.required]
-      }),
-      gender:["", Validators.required],
-      birthDate:["", Validators.required],
-      nationalityId:["", Validators.required],
-      religionId:["", Validators.required]
-    })
-
-
-    repeateStudyPhaseReqForm={
-      studentId: this.childId ||this.studentId,
-      schoolId: null,
-      gradeId: null,
-      requestReasonId: null
-    }
-
-
-    exemptionFromStudySubjectReqForm={
-      studentId: this.childId ||this.studentId,
-      subjectId: null
-    }
+    changeIdentityNumForm
+    transferStudentForm
+    changeStudentInfoReqForm
+    repeateStudyPhaseReqForm
+    exemptionFromStudySubjectReqForm
 
 
 
@@ -156,9 +115,9 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.items=[
-      {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/schools-and-students/students/student/${this.studentId||this.childId}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
+      {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/schools-and-students/students/student/${this.studentGUID}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
       {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
-      {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`,claims:ClaimsEnum.E_DeleteStudentRequest},
+      {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentGUID}`,claims:ClaimsEnum.E_DeleteStudentRequest},
       {
         label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'),
         isAllowed$ :this.settingServcice.isSchoolExistInGracePeriod({schoolId: this.student?.school?.id, code: GracePeriodEnum.repeatStudyPhase}),
@@ -169,7 +128,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
         label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',
         disabled: this.student?.studentStatus === RegistrationStatus.Withdrawal ||this. student?.studentProhibited?.withdrawingFromSchool || this.student?.studentProhibited?.withdrawingFromSPEA,
         claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool,
-        routerLink:`${this.currentUserScope==this.userScope.Guardian ? 'withdraw-request' : ('/schools-and-students/students/student/' + (this.studentId||this.childId) + '/withdraw-request')}`
+        routerLink:`${this.currentUserScope==this.userScope.Guardian ? 'withdraw-request' : ('/schools-and-students/students/student/' + (this.studentGUID) + '/withdraw-request')}`
       },
       {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
       {
@@ -194,13 +153,12 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
   }
 
 
-
   initializeState(student:Student){
     this.schoolId = student.school?.id
     this.gradeId = student.grade?.id
     this.currentStudentDivision = student?.division
 
-    this.transferStudentForm.currentDivisionId = student?.division?.id
+    // this.transferStudentForm.currentDivisionId = student?.division?.id
 
     this.gradeDivisions$ = this.gradeService.getGradeDivision(this.schoolId, this.gradeId)
     .pipe(
@@ -210,10 +168,60 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
       }),
        share());
 
-    this.subjectsExemption$ = this.studentsService.getStudentSubjectsThatAllowedToExemption({schoolId:this.schoolId, gradeId:this.gradeId, studentId:this.studentId||this.childId})
+    this.subjectsExemption$ = this.studentsService.getStudentSubjectsThatAllowedToExemption({schoolId:this.schoolId, gradeId:this.gradeId, studentId: student?.id})
+
+      this.initForms(student)
+
   }
 
 
+  initForms(student){
+
+    this.transferStudentForm={
+      studentId: student?.id,
+      currentDivisionId: student?.division?.id,
+      updatedDivisionId: null,
+      trackId: '',
+      electiveSubjectId: []
+    }
+    // --------------------------------------------------------
+    this.changeIdentityNumForm={
+      identityNumber: null,
+      attachments:[],
+      studentId: student?.id,
+      childId : null
+    }
+    // --------------------------------------------------------
+    this.changeStudentInfoReqForm= this.fb.group({
+      studentId: [student?.id, Validators.required],
+      childId: [],
+      studentName: this.fb.group({
+        ar:['', Validators.required],
+        en:['', Validators.required]
+      }),
+      studentSurName: this.fb.group({
+        ar: ['', Validators.required],
+        en: ['', Validators.required]
+      }),
+      gender:["", Validators.required],
+      birthDate:["", Validators.required],
+      nationalityId:["", Validators.required],
+      religionId:["", Validators.required]
+    })
+    // --------------------------------------------------------
+    this.repeateStudyPhaseReqForm={
+      studentId: student?.id,
+      schoolId: null,
+      gradeId: null,
+      requestReasonId: null
+    }
+    // -----------------------------------------------------------
+    this.exemptionFromStudySubjectReqForm={
+      studentId: student.id,
+      subjectId: null
+    }
+
+  }
 
 
    // Transfer Student To Another Division Logic
@@ -332,8 +340,8 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
       this.RepeateStudyPhaseModelOpend=false
       this.onSubmit=false
-    },()=>{
-      this.toastr.error(this.translate.instant('toasterMessage.error'))
+    },(err:Error)=>{
+      this.toastr.error(err.message || this.translate.instant('toasterMessage.error'))
       this.onSubmit=false
     })
   }
