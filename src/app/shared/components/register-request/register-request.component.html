@@ -104,7 +104,7 @@
 
 
     <ng-container *ngIf="scope ==ScopeEnum.Guardian && childRegistrationStatus!=registrtionStatusEnum.Withdrawal">
-        <div class="mb-6 p-5 bg-color-30 radius-15 border-dark custom-form">
+        <div class="mb-6 p-5 bg-color-30 radius-15 border-dark custom-form" *ngIf="registerReqForm">
           <form [formGroup]="registerReqForm">
                 <div class="row g-5 form-set">
                     <div class="col-md-4">
@@ -116,7 +116,7 @@
                         <p-dropdown [options]="booleanOptions" formControlName="isSpecialAbilities" (ngModelChange)="resetSpecialClass($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
 
-                    <div class="col-md-4" *ngIf="registerReqForm.value.isSpecialAbilities">
+                    <div class="col-md-4" *ngIf="registerReqForm?.value.isSpecialAbilities">
                         <label class="label">{{'dashboard.request-list.Special/merge classes' | translate}}</label>
                         <p-dropdown [options]="disabilitiesOptions"  [showClear]="true" [(ngModel)]="classType"  (ngModelChange)="onClassTypeChange($event)"  [ngModelOptions]="{standalone: true}" optionValue="value"  optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
                     </div>
@@ -206,7 +206,7 @@
                     <div [ngClass]="selectedSchoolId == school?.id ? 'schoolSelected' : ''"
                         class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100" >
                         <div class="">
-                            <img [src]="school?.schoolLogo" fullbackImage style="width: 7rem;">
+                            <img [src]="school?.schoolLogo" fullbackImage style="width: 7rem;height: 8rem;">
                         </div>
                         <div class="">
                             <p class="color-primary fs-3">{{school.name|currentLang}}</p>
