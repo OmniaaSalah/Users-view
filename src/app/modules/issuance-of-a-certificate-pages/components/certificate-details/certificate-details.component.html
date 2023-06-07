@@ -21,8 +21,14 @@
       <ng-container>
           <header>
             <div class="text-end">
-                <img class="logo" src="assets/images/home/tab-logo.png">
-                <h1 class="fw-bold">هيئة الشارقه للتعليم الخاص</h1>
+              <div class="d-flex justify-content-between">
+                <div>
+                  <img class="logo" src="assets/images/home/tab-logo.png">
+                  <h1 class="fw-bold">هيئة الشارقه للتعليم الخاص</h1>
+                </div>
+                <img class="logo-center" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
+              </div>
+
                 <hr class="m-0 color-black my-1">
                 <h3 class="fw-bold font-en">SHRAJAH PRIVARE EDUCATION Authority</h3>
             </div>
