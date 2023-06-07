@@ -133,7 +133,6 @@ export class RegisterRequestComponent implements OnInit {
 
     this.getRegistrationRequiresFiles()
 
-    this.childRegistrationStatus==RegistrationStatus.Withdrawal && this.setSelectedGradeForWithdrawalStudent()
   }
 
 
@@ -176,6 +175,8 @@ initRegisterationForm(child){
     this.registerReqForm.controls['guardianId'].setValue(this.parentId)
   }
 
+  this.childRegistrationStatus==RegistrationStatus.Withdrawal && this.setSelectedGradeForWithdrawalStudent()
+
   this.initValidation()
 
 }
@@ -210,8 +211,8 @@ initRegisterationForm(child){
       this.selectedGrade=res
       // this.onGradeSelected(res.id)
     },err =>{
-      this.onGradeSelected(2)
-      this.registerReqForm.controls['gradeId'].setValue(2)
+      // this.onGradeSelected(2)
+      // this.registerReqForm.controls['gradeId'].setValue(2)
     })
   }
 
@@ -411,13 +412,6 @@ initRegisterationForm(child){
     })
 
 
-    // let data ={
-    //   "attachments":   this.backupData.map(({index,...rest})=> rest),
-    // "selectedSchool":this.selectedSchool.value.id,
-    // "ChildId": Number(this.route.snapshot.paramMap.get('childId')),
-    // "GurdianId": Number(this.route.snapshot.paramMap.get('parentId'))
-    // }
-    // console.log(data)
   }
 
 
