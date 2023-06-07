@@ -958,66 +958,67 @@
               <div class="d-flex fs-2 fs-4">
                 <div class="col-md-6  d-grid grid-col-2 gap-3">
                   <span class="">مدرسة:</span>
-                  <span>{{certificate?.SchoolArabicName}}</span>
+                  <span>{{certificate?.SchoolName?.Ar}}</span>
 
                   <span class="">منهاج المدرسة:</span>
-                  <span>{{certificate?.Curriculum }}</span>
+                  <span>{{certificate?.SchoolCurriculumName?.Ar }}</span>
 
                   <span class="">الفترة الإختبارية:</span>
                   <span>{{reportingPeriods.ar[certificate?.ReportingPeriod]}}</span>
 
                   <span class="">إسم الطالب:</span>
-                  <span>{{certificate?.StudentArabicName}} </span>
+                  <span>{{certificate?.StudentName?.Ar}} </span>
 
                   <span class="">رقم الطالب:</span>
                   <span>{{certificate?.StudentNumber }}</span>
 
                   <span class="">الصف:</span>
-                  <span>{{certificate?.GradeAr}} </span>
+                  <span>{{certificate?.StudentGrade?.Ar}} </span>
                 </div>
 
                 <div class="col-md-6  d-grid grid-col-2 gap-3 font-en text-start" dir="ltr">
                   <span class="">School:</span>
-                  <span>{{certificate?.SchoolEnglishName}}</span>
+                  <span>{{certificate?.SchoolName?.En}}</span>
 
                   <span class="">School curriculum:</span>
-                  <span>{{certificate?.CurriculumEn}}</span>
+                  <span>{{certificate?.SchoolCurriculumName?.En}}</span>
 
                   <span class="">Reporting Period:</span>
                   <span>{{reportingPeriods.en[certificate?.ReportingPeriod]}}</span>
 
                   <span class="">Student Name:</span>
-                  <span>{{certificate?.StudentEnglishName}}</span>
+                  <span>{{certificate?.StudentName?.En}}</span>
 
                   <span class="">Student #:</span>
                   <span>{{certificate?.StudentNumber}}</span>
 
                   <span class="">Grade:</span>
-                  <span>{{certificate?.GradeEn}}</span>
+                  <span>{{certificate?.StudentGrade?.En}}</span>
 
                 </div>
               </div>
             </td>
           </tr>
+
           <tr class="text-center fw-bold">
-            <td style="width: 20%;" rowspan="2">المواد الدراسية</td>
-            <td style="width: 20%;" rowspan="2">Subject</td>
+            <td style="width: 25%;" rowspan="2">المواد الدراسية</td>
+            <td style="width: 25%;" rowspan="2">Subject</td>
             <td style="width: 5%;">النهاية الصغرى</td>
             <td style="width: 5%;">النهاية العظمى</td>
-            <td style="width: 5%;">الدرجة</td>
+            <td style="width: 5%;">الدرجة بالارقام</td>
             <td style="width: 5%;">الدرجة بالأحرف</td>
             <td style="width: 5%;">المعدل</td>
             <td style="width: 5%;">عدد الساعات</td>
-            <td style="width: 30%">ملاحظات</td>
+            <!-- <td style="width: 30%">ملاحظات</td> -->
           </tr>
           <tr class="text-center fw-bold font-en">
             <td style="width: 5%;">Min</td>
             <td style="width: 5%;">Max</td>
-                          <td style="width: 5%;">Mark</td>
-            <td style="width: 5%;">Grade</td>
-            <td style="width: 5%;">GPA</td>
-            <td style="width: 5%;">Credit Hour</td>
-            <td colspan="3" style="width: 30%">Comments</td>
+            <td style="width: 10%;">Mark</td>
+            <td style="width: 10%;">Grade</td>
+            <td style="width: 10%;">GPA</td>
+            <td style="width: 10%;">Credit Hour</td>
+            <!-- <td colspan="3" style="width: 30%">Comments</td> -->
           </tr>
         </thead>
 
