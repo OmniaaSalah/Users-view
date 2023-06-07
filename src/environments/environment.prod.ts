@@ -14,7 +14,8 @@ export const environment = {
    // logoutRedirectUrl:"https://daleel-app.azurewebsites.net/auth/login",
    //  logoutRedirectUrl: 'http://10.25.236.38:80/auth/login', //production
    //   logoutRedirectUrl: 'http://10.35.236.31:80/auth/login', //Staging
-   logoutRedirectUrl: 'http://10.25.237.31:80/auth/login',
+   // logoutRedirectUrl: 'http://10.25.237.31:80/auth/login',
+   logoutRedirectUrl: 'http://10.25.237.35:80/auth/login',
    clientUrl:"https://daleel-app.azurewebsites.net"
   };
 
