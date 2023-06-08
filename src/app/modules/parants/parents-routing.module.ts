@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterRequestComponent } from 'src/app/shared/components/register-request/register-request.component';
 import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
-import { IssuanceOfACertificateComponent } from '../students/components/issuance-of-a-certificate/issuance-of-a-certificate.component';
+import { ManualCertificatesComponent } from '../students/components/manual-certificates/manual-certificates.component';
 import { ChildDetailsComponent } from './components/child-details/child-details.component';
 import { ChildrenListComponent } from './components/children-list/children-list.component';
 import { ParantsComponent } from './components/parents-list/parants.component';
@@ -36,7 +36,7 @@ const routes: Routes = [
     },
 
     {
-       path: 'parent/:parentId/child/:childId/IssuanceOfACertificateComponent', component:IssuanceOfACertificateComponent ,
+       path: 'parent/:parentId/child/:childId/IssuanceOfACertificateComponent', component:ManualCertificatesComponent ,
        data:{
         title:{ar:'الشهادات',en: 'Certificates'}
       }

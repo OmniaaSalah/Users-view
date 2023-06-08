@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { WithdrawalRequestComponent } from '../shared/components/register-child/withdrawal-request/withdrawal-request.component';
 import { DeletedStudentComponent } from './components/deleted-student/deleted-student.component';
-import { IssuanceOfACertificateComponent } from './components/issuance-of-a-certificate/issuance-of-a-certificate.component';
+import { ManualCertificatesComponent } from './components/manual-certificates/manual-certificates.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { StudentsListComponent } from './components/students-list/students-list.component';
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
@@ -43,7 +43,7 @@ const routes: Routes = [
         }
        },
       {
-        path: "student/:id/IssuanceOfACertificateComponent", component: IssuanceOfACertificateComponent,
+        path: "student/:id/IssuanceOfACertificateComponent", component: ManualCertificatesComponent,
           data:{title:{ar:'اصدار شهاده للطالب',en: 'Issue Student Certificate'}
         }
       }
