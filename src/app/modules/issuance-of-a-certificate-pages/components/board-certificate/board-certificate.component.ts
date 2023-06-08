@@ -19,6 +19,7 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
 import { UserService } from 'src/app/core/services/user/user.service';
 import { AttachmentIndexCode } from 'src/app/shared/enums/file/file.enum';
 import { map } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-board-certificate',
@@ -27,6 +28,8 @@ import { map } from 'rxjs';
 })
 export class BoardCertificateComponent implements OnInit {
   @Input() choosenStudents;
+  @Input() activateSpeaView = false;
+
   @Output() onCancel: EventEmitter<string> = new EventEmitter();
   @Output() onBack: EventEmitter<string> = new EventEmitter();
 
@@ -63,7 +66,8 @@ export class BoardCertificateComponent implements OnInit {
     private route: ActivatedRoute,
     private indexService: IndexesService,
     private studentService: StudentsService,
-    private userService:UserService
+    private userService:UserService,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -98,7 +102,7 @@ export class BoardCertificateComponent implements OnInit {
     this.isBtnLoading = true;
     var data = { studentBoardCertificateDtos: this.boardCertificateData };
 
-    this.certificatesService.postBoardCertificate(data).subscribe(
+    this.certificatesService.postBoardCertificate(data, this.activateSpeaView).subscribe(
       (result) => {
         this.isBtnLoading = false;
         if (result.statusCode != 'BadRequest') {
@@ -114,6 +118,8 @@ export class BoardCertificateComponent implements OnInit {
           }
           this.onBack.emit();
         }
+
+        if(this.activateSpeaView) this.location.back()
       },
       (err) => {
         this.isBtnLoading = false;
@@ -135,29 +141,29 @@ export class BoardCertificateComponent implements OnInit {
     return this.boardCertificateData.filter(el=> el.attachments.length).length == this.choosenStudents?.length
   }
 
-  onAttachmentSelected(attachment, index) {
-    let urlParts =attachment.url?.split(".")
-    let isImage = ['jpge','jpg','png'].includes(urlParts[urlParts.length-1]?.toLowerCase())
+  // onAttachmentSelected(attachment, index) {
+  //   let urlParts =attachment.url?.split(".")
+  //   let isImage = ['jpge','jpg','png'].includes(urlParts[urlParts.length-1]?.toLowerCase())
 
 
-    if(!isImage){
-      this.showError =true;
-      return
-    }else this.showError =false;
+  //   if(!isImage){
+  //     this.showError =true;
+  //     return
+  //   }else this.showError =false;
 
-    let i = this.boardCertificateData[index].attachments.indexOf(attachment.id);
-    if (i >= 0) {
-      this.boardCertificateData[index].attachments.splice(i, 1);
+  //   let i = this.boardCertificateData[index].attachments.indexOf(attachment.id);
+  //   if (i >= 0) {
+  //     this.boardCertificateData[index].attachments.splice(i, 1);
 
-    } else {
-      this.choosenStudents[index].attachments = this.choosenStudents[index].attachments.map(el=> {
-        if(el.id != attachment.id) return {...el, isSelected:false}
-        else return {...el, isSelected:true}
-      })
-      this.boardCertificateData[index].attachments=[]
-      this.boardCertificateData[index].attachments.push(attachment.id);
-    }
-  }
+  //   } else {
+  //     this.choosenStudents[index].attachments = this.choosenStudents[index].attachments.map(el=> {
+  //       if(el.id != attachment.id) return {...el, isSelected:false}
+  //       else return {...el, isSelected:true}
+  //     })
+  //     this.boardCertificateData[index].attachments=[]
+  //     this.boardCertificateData[index].attachments.push(attachment.id);
+  //   }
+  // }
 
   // getAttachments() {
   //   this.choosenStudents.forEach((student) => {
@@ -176,7 +182,7 @@ export class BoardCertificateComponent implements OnInit {
     this.choosenStudents.forEach((student, index) => {
 
       this.studentService
-        .getStudentAttachment(student.id)
+        .getStudentAttachment(student.studentGuid)
         .pipe(
           map(list=>{
             return list.filter(el => el.indexCode==AttachmentIndexCode.BoaredCertificate)
