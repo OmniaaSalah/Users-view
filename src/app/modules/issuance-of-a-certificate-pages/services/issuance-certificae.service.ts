@@ -153,20 +153,28 @@ certificateStatusList;
 
   }
 
-  postBoardCertificate(data){
-    return this.http.post('/Certificate/board-certificate-request',data).pipe(take(1))
+  postBoardCertificate(data, issuedBySpea){
+    let url = issuedBySpea ? '/Certificate/org/grades-certificate-request' : '/Certificate/board-certificate-request'
+    return this.http.post(url ,data).pipe(take(1))
   }
 
-  sendDiplomaCertificateReq(data){
-    return this.http.post('/Certificate/diploma-certificate-request',data).pipe(take(1))
+  sendDiplomaCertificateReq(data, issuedBySpea){
+    let url = issuedBySpea ? '/Certificate/org/grades-certificate-request' : '/Certificate/diploma-certificate-request'
+    return this.http.post(url ,data).pipe(take(1))
   }
 
   postOtherCertificate(data){
     return this.http.post('/Certificate/certificate-request',data).pipe(take(1))
   }
 
-  postGradeCertificate(data){
-    return this.http.post('/Certificate/grades-certificate-request',data)
+  submitOtherCertifiatesBySpea(data){
+    return this.http.post('/Certificate/org/certificate-request',data).pipe(take(1))
+  }
+
+  postGradeCertificate(data, issuedBySpea){
+    let url = issuedBySpea ? '/Certificate/org/grades-certificate-request' : '/Certificate/grades-certificate-request'
+
+    return this.http.post(url ,data)
     .pipe(
       map(res=>{
         if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
@@ -176,8 +184,10 @@ certificateStatusList;
       )
   }
 
-  postInternalGradeCertificate(data){
-    return this.http.post('/certificate/internal-subjects-certificate-request',data)
+  postInternalGradeCertificate(data, issuedBySpea){
+    let url = issuedBySpea ? '/Certificate/org/internal-subjects-certificate-request' : '/certificate/internal-subjects-certificate-request'
+
+    return this.http.post(url ,data)
     .pipe(
       map(res=>{
         if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
@@ -187,7 +197,8 @@ certificateStatusList;
       )
   }
 
-  postSequenceCertificate(data){
+  postSequenceCertificate(data, issuedBySpea:boolean){
+    let url = issuedBySpea ? '/Certificate/org/academic-sequencen-certificate-request' : '/Certificate/academic-sequencen-certificate-request'
     return this.http.post('/Certificate/academic-sequencen-certificate-request',data)
     .pipe(
       map(res=>{

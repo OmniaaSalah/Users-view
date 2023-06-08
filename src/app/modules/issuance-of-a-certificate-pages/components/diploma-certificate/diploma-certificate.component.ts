@@ -1,16 +1,13 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { IndexesService } from 'src/app/modules/indexes/service/indexes.service';
 import { StudentsService } from 'src/app/modules/students/services/students/students.service';
-import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
-import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 import { AttachmentIndexCode } from 'src/app/shared/enums/file/file.enum';
 import { map } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-diploma-certificate',
@@ -20,6 +17,8 @@ import { map } from 'rxjs';
 export class DiplomaCertificateComponent implements OnInit {
 
   @Input() choosenStudents;
+  @Input() activateSpeaView = false;
+
   @Output() onCancel: EventEmitter<string> = new EventEmitter();
   @Output() onBack: EventEmitter<string> = new EventEmitter();
 
@@ -43,7 +42,9 @@ export class DiplomaCertificateComponent implements OnInit {
     private translate: TranslateService,
     private certificatesService: IssuanceCertificaeService,
     private route: ActivatedRoute,
-    private studentService: StudentsService
+    private studentService: StudentsService,
+    private location: Location,
+
   ) {}
 
   ngOnInit(): void {
@@ -66,7 +67,7 @@ export class DiplomaCertificateComponent implements OnInit {
   sendDiplomaCertificateReq() {
     this.onSubmit = true;
 
-    this.certificatesService.sendDiplomaCertificateReq(this.diplomaCertificateForm).subscribe(
+    this.certificatesService.sendDiplomaCertificateReq(this.diplomaCertificateForm, this.activateSpeaView).subscribe(
       (result) => {
         this.onSubmit = false;
         if (result.statusCode != 'BadRequest') {
@@ -81,6 +82,8 @@ export class DiplomaCertificateComponent implements OnInit {
             this.toastr.error(this.translate.instant('toasterMessage.error'));
           }
           this.onBack.emit();
+          if(this.activateSpeaView) this.location.back()
+
         }
       },
       (err) => {
@@ -124,7 +127,7 @@ export class DiplomaCertificateComponent implements OnInit {
     this.choosenStudents.forEach((student, index) => {
 
       this.studentService
-        .getStudentAttachment(student.id)
+        .getStudentAttachment(student.studentGuid)
         .pipe(
           map(list=>{
             return list.filter(el => el.indexCode==AttachmentIndexCode.Diploma)

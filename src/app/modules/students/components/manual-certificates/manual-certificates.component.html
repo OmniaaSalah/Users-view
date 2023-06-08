@@ -1,24 +1,48 @@
-<form [formGroup]="certificateFormGrp" class="container-fluid " >
-    <div class="custom-form">
-        <h4 class="mb-4">{{'dashboard.students.Issuance of certificate'|translate}} ( {{studentName}} )</h4>
-        <div class="row gx-5 form-set">
-            <div class="col-lg-4">
-                <label class="label">{{'dashboard.students.type of certificate'|translate}} <span class="star">*</span></label>
-                <p-dropdown placeholder="{{'dashboard.students.type of certificate'|translate}}" [options]="certificatesList"
-                    optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" (onChange)="checkCertificateType()" formControlName="certificateName"  optionValue="value" ></p-dropdown>
-           </div>
-        </div>
+<div class="p-5 radius-15 bg-white border-dark custom-form">
+  <h3 class="heading heading--secondary color-primary mb-5">{{'dashboard.students.Issuance of certificate' | translate}} :- </h3>
 
-    <div class="d-flex submitBtn">
-    <button [disabled]="certificateFormGrp.invalid||isBtnLoading" class="btn btn-primary mx-4 " (click)="sendData()">
-        {{'dashboard.students.Issuance of certificate'|translate}}
-        <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
-    </button>
-    <button   >
-        <a class="cancelbtn" (click)="goBack()">{{'shared.Cancel'| translate}}</a>
-    </button>
+
+  <div class="row  justify-content-between" >
+      <div class="col-lg-4">
+          <label class="label">{{'dashboard.students.type of certificate'|translate}} <span class="star">*</span></label>
+          <p-dropdown placeholder="{{'dashboard.students.type of certificate'|translate}}"
+          [options]="certificatesList$ |async"
+          optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
+          [(ngModel)]="selectedCertificate"></p-dropdown>
+      </div>
+
+      <div class="col d-flex align-self-end justify-content-end mb-3" *ngIf="selectedCertificate?.value==certificateTypeEnum.TransferCertificate || selectedCertificate?.value==certificateTypeEnum.ContinuingEducationCertificate || selectedCertificate?.value==certificateTypeEnum.GoodBehaviorCertificate">
+        <button  type="submit" class=" btn btn-primary mx-2" (click)="submitOtherCertifiates()"[disabled]="onSubmit">
+          {{ "dashboard.issue of certificate.Save" | translate }}
+        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+        </button>
+
+      </div>
   </div>
-    <ng-container *ngIf=" certificateName.value==certificateType.GradesCertificate" class="issune-certificate-content">
+
+  <hr class="my-5">
+
+  <div [ngSwitch]="selectedCertificate?.value">
+    <div *ngSwitchCase="certificateTypeEnum.AcademicSequenceCertificate">
+      <app-academic-sequence [choosenStudents]="[studentData]" [activateSpeaView]="true"></app-academic-sequence>
+    </div>
+    <div *ngSwitchCase="certificateTypeEnum.BoardCertificate">
+      <app-board-certificate [choosenStudents]="[studentData]" [activateSpeaView]="true"></app-board-certificate>
+    </div>
+    <div *ngSwitchCase="certificateTypeEnum.GradesCertificate">
+      <app-degree-certificate [certificateType]="selectedCertificate?.value" [choosenStudents]="[studentData]" [activateSpeaView]="true"></app-degree-certificate>
+    </div>
+    <div *ngSwitchCase="certificateTypeEnum.SchoolInternalSubjectsCertificate">
+      <app-degree-certificate [certificateType]="selectedCertificate?.value" [choosenStudents]="[studentData]" [activateSpeaView]="true"></app-degree-certificate>
+    </div>
+    <div *ngSwitchCase="certificateTypeEnum.DiplomaCertificate">
+      <app-diploma-certificate [choosenStudents]="[studentData]" [activateSpeaView]="true"></app-diploma-certificate>
+    </div>
+
+  </div>
+
+  <form [formGroup]="certificateFormGrp">
+    <ng-container *ngIf=" certificateName.value==certificateTypeEnum.GradesCertificate" class="issune-certificate-content">
       <div >
 
               <div class="row gx-5 form-set">
@@ -41,23 +65,20 @@
                     </p-dropdown>
                   </div>
 
-                  <!-- <div class="col-md-4 ">
+                  <div class="col-md-4 ">
                       <label class="label">{{'dashboard.issue of certificate.type of certificate' | translate}} <span class="star">*</span> </label>
                       <p-dropdown
                           placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
                           formControlName="gradeCertificateType" [options]="degreescertificates" optionLabel="name" optionValue="value">
                       </p-dropdown>
-                  </div> -->
+                  </div>
               </div>
 
 
       </div>
-  </ng-container>
+    </ng-container>
 
-
-
-
-    <ng-container formArrayName="academicCertificates"  *ngIf="certificateName.value==certificateType.AcademicSequenceCertificate" >
+    <ng-container formArrayName="academicCertificates"  *ngIf="certificateName.value==certificateTypeEnum.AcademicSequenceCertificate" >
         <ng-container *ngFor="let school of academicCertificates.controls; let i = index" [formGroupName]="i" >
             <div class="row gx-5 form-set ">
                 <div class="col-md-4 position-relative ">
@@ -85,5 +106,6 @@
 
         </ng-container>
     </ng-container>
-    </div>
-</form>
+  </form>
+
+</div>
