@@ -4,7 +4,7 @@
 <div class="border-dark radius-15 p-5 position-relative bg-white" ngForm #f="ngForm" *ngIf="student">
 
     <div class="sendBtn d-flex align-items-center gap-4 position-absolute">
-        <button class="btn btn-primary btn--sm px-5 " [disabled]="!f.valid ||isLoading ||(reqForm.attachments.length!=requiredFiles?.filesCount &&requiredFiles?.isRequired)" (click)="sendWithdrawalReq()">
+        <button class="btn btn-primary btn--sm px-5 " [disabled]="!f.valid ||isLoading ||isRequiredAttchmentsUploaded()" (click)="sendWithdrawalReq()">
             <span>{{'shared.send'| translate}}</span>
             <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
         </button>

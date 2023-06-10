@@ -16,9 +16,9 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
-  selector: 'app-school-grades',
-  templateUrl: './school-grades.component.html',
-  styleUrls: ['./school-grades.component.scss']
+  selector: 'app-grades-list',
+  templateUrl: './grades-list.component.html',
+  styleUrls: ['./grades-list.component.scss']
 })
 export class SchoolGradesComponent implements OnInit {
   @Output() setActiveTab =new EventEmitter<number>()
