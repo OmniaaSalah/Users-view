@@ -79,6 +79,7 @@ export class SchoolDivisionComponent implements OnInit {
   id:[this.divisionId],
   name: this.fb.group({en: [''],ar: ['']}),
   trackIds:[[]],
+  studentToleranceCount:[]
   // forDisabilities:[],
  })
 

@@ -287,7 +287,7 @@
                 <i class="pi pi-search fs-3"></i>
                 <input class="input " name="subject" type="text" pInputText placeholder="البحث عن المدارس..."
                 [(ngModel)]="filtration.KeyWord"
-                (ngModelChange)="getSchools()"
+                (ngModelChange)="getAvailableSchools()"
                 [ngModelOptions]="{standalone: true}"/>
             </div> -->
 
@@ -295,28 +295,28 @@
             [styles]="{background: 'transparent'}"
             [hasFilter]="false"
             [hasExport]="false"
-            (onSearch)="filtration.KeyWord= $event;filtration.page=1; getSchools()">
+            (onSearch)="filtration.KeyWord= $event;filtration.page=1; getAvailableSchools()">
             </app-table-caption>
 
 
             <div class="col-md-6 mb-6">
                 <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" (onChange)="getSchools()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" (onChange)="getAvailableSchools()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
             </div>
 
             <div class="row gx-5 gy-4 form-set">
-                <label class="fw-bold" for="">{{'dashboard.schools.schoolsList'|translate}} ({{schools.total}})</label>
+                <label class="fw-bold" for="">{{'dashboard.schools.schoolsList'|translate}} ({{availableSchools.total}})</label>
 
-                <ng-container *ngIf="!schools.loading">
+                <ng-container *ngIf="!availableSchools.loading">
 
-                    <div class=" d-flex align-items-center gap-3 my-4" *ngIf="schools.total>1">
+                    <div class=" d-flex align-items-center gap-3 my-4" *ngIf="availableSchools.total>1">
                         <p-checkbox  name="all" [binary]="true" ngModel (ngModelChange)="onSelectAll($event)"></p-checkbox>
                         <label class="fw-bold" for="">{{'shared.selectAll'|translate}}</label>
                         <div class="spinner-border color-skyBlue-500" role="status" *ngIf="isLoading"></div>
 
                     </div>
 
-                    <ng-container *ngFor="let item of schools.list; let i=index">
+                    <ng-container *ngFor="let item of availableSchools.list; let i=index">
                         <div class="col-md-4 d-flex align-items-center gap-3">
                             <p-checkbox  name="eventSubjects" [inputId]="i" [value]="item.id" [(ngModel)]="selectedSchools"></p-checkbox>
                             <label class="label label--sm" [for]="i"> {{item.name |currentLang}}</label>
@@ -325,7 +325,7 @@
 
                 </ng-container>
 
-                <ng-container *ngIf="schools.loading">
+                <ng-container *ngIf="availableSchools.loading">
                     <app-loader></app-loader>
                 </ng-container>
 
@@ -333,8 +333,8 @@
 
 
             </div>
-            <div *ngIf="schools.total > paginationState.rows">
-                <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <div *ngIf="availableSchools.total > paginationState.rows">
+                <app-pagination [totalItems]="availableSchools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
             </div>
 
             <div class="d-flex  align-items-center justify-content-between mt-6">

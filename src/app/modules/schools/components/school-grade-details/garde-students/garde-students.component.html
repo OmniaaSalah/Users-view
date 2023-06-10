@@ -37,11 +37,11 @@
                 <td>{{student.studentNumber}}</td>
                 <td class="lg gap-2 d-flex" *ngIf="currentUserScope==userScope.SPEA" >
                     <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
-                    <a  target="_blank"  [routerLink]="['//schools-and-students/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
+                    <a  target="_blank"  [routerLink]="['//schools-and-students/students/student/'+student?.studentGuid]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
                 </td>
                 <td class="lg gap-2 d-flex" *ngIf="currentUserScope==userScope.Employee" >
                     <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
-                    <a  target="_blank" [routerLink]="['/student-management/students/student/'+student.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
+                    <a  target="_blank" [routerLink]="['/student-management/students/student/'+student?.studentGuid]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a>
                 </td>
                 <td>{{student.divisionName || '--' |currentLang }}</td>
                 <td>{{student.ministerialNumber || '--'}}</td>
