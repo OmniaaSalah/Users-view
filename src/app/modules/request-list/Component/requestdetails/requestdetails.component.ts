@@ -15,6 +15,9 @@ import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.e
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { SystemRequestService } from '../../services/system-request.service';
+import { Observable, map } from 'rxjs';
+import { Division } from 'src/app/core/models/global/global.model';
+import { GradesService } from 'src/app/modules/schools/services/grade/grade.service';
 // import { IunregisterChild } from '../../models/IunregisterChild';
 
 
@@ -40,6 +43,7 @@ export class RequestdetailsComponent implements OnInit {
 
   requestInstance = this.route.snapshot.paramMap.get('id')
   rejectReasonModel
+  addStudentTodivisionModal
 
 
   reqActionsForm={
@@ -47,7 +51,8 @@ export class RequestdetailsComponent implements OnInit {
     optionId: null,
     rejectionReasonId: null,  // فى حاله سبب الرفض يكون من فهارس النظام
     rejectionReason:'', // فى حاله سبب الرفض يكون text
-    attachments:[]
+    attachments:[],
+    divisionIdForRegistrationRequest:'' // لطلب التسجيل فقط
   }
 
   step=1
@@ -76,6 +81,12 @@ export class RequestdetailsComponent implements OnInit {
     return ApprovedTaskIndex!= -1 ? tasks.slice(ApprovedTaskIndex,1) : tasks.slice(0,1)
   }
 
+  gradeDivisions$ :Observable<Division>
+
+
+  currentState
+  states
+
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
@@ -85,7 +96,8 @@ export class RequestdetailsComponent implements OnInit {
     private requestsService:SystemRequestService,
     private toaster:ToastrService,
     private indexesService:IndexesService,
-    private userService:UserService
+    private userService:UserService,
+    private gradeService:GradesService
   ) { }
 
   ngOnInit(): void {
@@ -94,15 +106,25 @@ export class RequestdetailsComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
     this.getRequestDetails()
-    // this.getRequestTimeline()
     this.getRequestOptions()
+    this.getRequestStates()
   }
 
 
   getRequestDetails(){
      this.requestsService.getRequestDetails(this.requestInstance).subscribe(res=>{
       this.requestDetails =res.result
+
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, res?.result?.grade?.id).pipe(map((res:any) => res?.data ||[]));
      })
+  }
+
+  getRequestStates(){
+    this.requestsService.getRequestStates(this.requestInstance)
+    .subscribe(res=>{
+      this.currentState=res
+      this.states = [...res.states?.map(el => ({...el, tasks:el.tasks || []})).reverse() ]
+    })
   }
 
 
@@ -128,8 +150,11 @@ export class RequestdetailsComponent implements OnInit {
   }
 
 
+
   onActionTaken(submittedOption: WorkflowOptions, index){
     this.submittedOption = submittedOption
+    // this.currentState?.currentState?.isFinal &&
+    let isRegistrationReqLastStep =(this.requestDetails?.requestType== this.requestTypeEnum.RegestrationApplicationRequest || this.requestDetails?.requestType== this.requestTypeEnum.RegestrationRequestForWithrawan) && this.requestDetails?.requestStatus==this.RequestStatusEnum.Approved
 
     if(submittedOption.label?.en.includes('reject')){
       if(this.requestsTypes[this.requestDetails?.requestType]){
@@ -138,11 +163,15 @@ export class RequestdetailsComponent implements OnInit {
       this.rejectReasonModel = true
 
       return;
+    }else if(isRegistrationReqLastStep){
+      this.addStudentTodivisionModal = true
+      return
+
     }
 
     this.completeRequestAction()
     submittedOption.isLoading=true
-    // this.timeline.task.options[index].isLoading = true
+
   }
 
 
@@ -159,8 +188,8 @@ export class RequestdetailsComponent implements OnInit {
     .subscribe(res=>{
 
       this.rejectReasonModel = false
+      this.addStudentTodivisionModal = false
       this.getRequestDetails()
-      // this.getRequestTimeline()
       this.getRequestOptions()
 
       this.reqActionsForm.comments=''
@@ -174,6 +203,7 @@ export class RequestdetailsComponent implements OnInit {
       this.isLoading=false
       this.rejectReasonModel = false
       this.submittedOption.isLoading=false
+      this.addStudentTodivisionModal = false
 
       if(err.message && err.message.includes('This student has financial obligations') )this.toaster.error(this.translate.instant('toasterMessage.This student has financial obligations'))
       else this.toaster.error(this.translate.instant('toasterMessage.error'))
@@ -293,6 +323,27 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
   }
 
 
+  reOpenRequest(){
+    let reqBody={
+      instanceId: this.requestInstance,
+      stateId: 0,
+      comments: ""
+    }
+    this.onSubmited=true
+    this.requestsService.reOpenRequest(reqBody).subscribe(res=>{
+      this.getRequestDetails()
+      this.getRequestOptions()
+      this.toaster.success(this.translate.instant('toasterMessage.requestReopenSuccesfully'))
+      this.onSubmited=false
+
+    },(err:Error)=>{
+      this.toaster.error(err?.message || this.translate.instant('toasterMessage.error'))
+      this.onSubmited=false
+
+    })
+  }
+
+
   reSendFlexableHolidayReq(){
     let data={
       id: this.requestDetails.requestNumber,
@@ -321,19 +372,6 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
         }
       })
     }
-
-  // let datas = this.requestDetails.schoolYears.map(el => {
-  //   return {
-  //     student:{
-  //       id: this.requestDetails.student.id,
-  //       name:this.requestDetails.student.name,
-  //     },
-  //     schoolYearName: el.schoolYear,
-  //     schoolName: el.schoolName,
-  //     gradeName: el.gradeName,
-  //     attachments:[]
-  //   }
-  // })
 
     localStorage.setItem('returnedRequest', JSON.stringify(data))
     this.router.navigate(['/certificates/ask-certificate'],{queryParams:{requestId: this.requestDetails.requestNumber, requestInstance: this.requestInstance}})

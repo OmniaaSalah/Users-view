@@ -7,9 +7,9 @@ import { EditNewSubjectComponent } from '../subjects/components/edit-new-subject
 import { AnnulHolidayListComponent } from './components/school-details/annul-holiday-list/annul-holiday-list.component';
 import { EditListComponent } from './components/school-details/edit-list/edit-list.component';
 import { SchoolDetailsComponent } from './components/school-details/school-details.component';
-import { SchoolDivisionsComponent } from './components/school-details/school-divisions/school-divisions.component';
+import { DivisionsListComponent } from './components/school-details/divisions-list/divisions-list.component';
 import { SchoolEmployeesComponent } from './components/school-details/school-employees/school-employees.component';
-import { SchoolGradesComponent } from './components/school-details/school-grades/school-grades.component';
+import { SchoolGradesComponent } from './components/school-details/grades-list/grades-list.component';
 import { SchoolInfoComponent } from './components/school-details/school-info/school-info.component';
 import { SchoolSubjectsComponent } from './components/school-details/school-subjects/school-subjects.component';
 import { SchoolListComponent } from './components/school-list/school-list.component';
@@ -131,7 +131,7 @@ const routes: Routes = [
     },
 
     {
-      path: ':schoolId/divisions',component: SchoolDivisionsComponent,
+      path: ':schoolId/divisions',component: DivisionsListComponent,
       canActivate: [ClaimsGuard],
       data:{
         allowedClaims: ClaimsEnum.E_MenuItem_SchoolDivisions,

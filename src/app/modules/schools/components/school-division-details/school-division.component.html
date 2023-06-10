@@ -92,9 +92,12 @@
                                             <label class="label required" for="name">{{'dashboard.schools.sectionName'|translate}} </label>
                                             <input type="text" name="sectionName" id="name" formControlName="ar" pInputText />
                                         </div>
+
+                                        <div class="col-md-3">
+                                          <label class="label required" for="name">{{'dashboard.schools.maxStudentsNumber'|translate}} </label>
+                                          <input type="text" name="sectionName" id="name" formControlName="studentToleranceCount" pInputText [disabled]="true" />
+                                        </div>
                                         <div class="col-md-3 align-self-end">
-                                          <!-- <label class="label required" for="name">{{'dashboard.schools.maxStudentsNumber'|translate}} </label>
-                                          <input type="text" name="sectionName" id="name" [value]="divisionInfo?.maxStudentCount" pInputText [disabled]="true" /> -->
 
                                             <div class="grid-container">
                                               <p class="color-gray-300 ">{{'dashboard.schools.maxStudentsNumber'| translate}}</p>
