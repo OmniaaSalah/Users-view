@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -101,7 +101,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   schoolsDialogFor: 'TransferFrom' | 'TransferTo' | null =null
   isSchoolsModelOpend =false
 
-  schools={
+  availableSchools={
     list:[],
     totalAllData:0,
     total:0,
@@ -279,24 +279,24 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
 
 
-  getSchools(){
-    this.schools.loading = true
+  getAvailableSchools(){
+    this.availableSchools.loading = true
 
     this.settingService.getSchools(this.filtration)
     .subscribe(res=>{
 
-      this.schools.list = res.data
-      this.schools.totalAllData = res.totalAllData
-      this.schools.total =res.total
+      this.availableSchools.list = res.data
+      this.availableSchools.totalAllData = res.totalAllData
+      this.availableSchools.total =res.total
       this.paginationState.rows=30
-      this.schools.loading =  false
+      this.availableSchools.loading =  false
     })
   }
 
 
 
   openSchoolsModel(schoolsDialogFor=null){
-    this.getSchools()
+    this.getAvailableSchools()
     this.schoolsDialogFor = schoolsDialogFor
     if(this.gracePeriodId){
       if(this.schoolsDialogFor=='TransferFrom') this.selectedSchools= this.gracePeriodMainData.fromSchools
@@ -313,7 +313,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   onSelectAll(isAllSelected){
     this.isLoading=true
-    this.settingService.getSchools({PageSize: this.schools.totalAllData, curriculumId:this.filtration.curriculumId, gracePeriodId: this.filtration.gracePeriodId})
+    this.settingService.getSchools({PageSize: this.availableSchools.totalAllData, curriculumId:this.filtration.curriculumId, gracePeriodId: this.filtration.gracePeriodId})
     .pipe(map(res=> res.data))
     .subscribe(schoolsList =>{
 
@@ -532,6 +532,11 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   }
 
 
+  paginationChanged(event: paginationState) {
+    this.filtration.Page = event.page
+    this.getAvailableSchools()
+
+  }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next(null)

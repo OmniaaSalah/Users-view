@@ -1,10 +1,11 @@
-<app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
+<app-workflow *ngIf="!activateSpeaView" [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
 
 <div class="custom-form mt-6 bg-white p-5 radius-15">
-    <h4 class="mb-4 color-primary" style="font-weight: 700">
+
+    <h4 class="mb-4 color-primary" style="font-weight: 700" *ngIf="!activateSpeaView">
         {{"dashboard.issue of certificate.Add the required information - board certification"| translate}}
     </h4>
-    <span class="mb-4" style="color: #afafaf">{{"dashboard.issue of certificate.please2" | translate}}</span>
+    <!-- <span class="mb-4" style="color: #afafaf">{{"dashboard.issue of certificate.please2" | translate}}</span> -->
     <br />
 
 
@@ -15,14 +16,14 @@
                 {{ "dashboard.issue of certificate.Save" | translate }}
                 <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
             </button>
-            <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">
-                {{ "dashboard.issue of certificate.previous" | translate }}
-            </button>
-            <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()">
-                {{ "dashboard.issue of certificate.previous" | translate }}
-            </button>
+
+            <ng-container *ngIf="!activateSpeaView">
+              <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">{{ "dashboard.issue of certificate.previous" | translate }}</button>
+              <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()">{{ "dashboard.issue of certificate.previous" | translate }}</button>
+            </ng-container>
         </div>
     </div>
+
 
 
 

@@ -415,6 +415,12 @@ initRegisterationForm(child){
   }
 
 
+
+
+  isRequiredAttchmentsUploaded(){
+    return !this.requiredFiles?.files.filter(el => el.isMandatory).every(el=> el?.uploadedFiles?.length > 0)
+  }
+
   clearFilter(){
     this.filtration.Page=1
     this.filtration.KeyWord =''

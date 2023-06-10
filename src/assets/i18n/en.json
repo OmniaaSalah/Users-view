@@ -796,6 +796,7 @@
         "noUrl":"This file is wrong",
         "requestStatusUpdated":"Request status updated successfully",
         "requestWithdrawnSuccesfully": "Request withdrawn succesfully",
+        "requestReopenSuccesfully":"Request Reopend succesfully",
         "diplomaLogoDeleted":"Diploma logo deleted successfully",
         "schoolLogoDeleted":"School logo deleted successfully",
         "deletedSuccessfully":"Deleted successfully",
@@ -1830,7 +1831,8 @@
             "commentsAndReplays":"Comments / Replies",
             "certificatHint":"You can click here, pay the required fees, and complete the certificate issuance process.",
             "ActionOwner":"Action Owner",
-            "ActionTaken":"Action Taken"
+            "ActionTaken":"Action Taken",
+            "reopenReq":"Reopen Request"
 
 
         },

@@ -19,11 +19,11 @@ import { DivisionService } from '../../../services/division/division.service';
 import { GradesService } from '../../../services/grade/grade.service';
 
 @Component({
-  selector: 'app-school-divisions',
-  templateUrl: './school-divisions.component.html',
-  styleUrls: ['./school-divisions.component.scss']
+  selector: 'app-divisions-list',
+  templateUrl: './divisions-list.component.html',
+  styleUrls: ['./divisions-list.component.scss']
 })
-export class SchoolDivisionsComponent implements OnInit,OnChanges,OnDestroy {
+export class DivisionsListComponent implements OnInit,OnChanges,OnDestroy {
 @Input('selectedGradeId') selectedGradeId
 lang = inject(TranslationService).lang
 currentSchool="";

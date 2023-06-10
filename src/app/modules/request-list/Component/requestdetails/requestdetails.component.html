@@ -448,41 +448,32 @@
 
 <ng-container *ngIf="!requestOptions then actionsLoader"></ng-container>
 
-<div class="ms-4 mt-4" *ngIf="requestOptions">
+<div class="ms-4 mt-4">
     <form  ngForm #f="ngForm">
 
-        <!-- <ng-container
-        *ngIf="isCommentAllowed()">
-            <div class="custom-form mb-4">
-                <label class="label">{{'dashboard.myRequest.comment' | translate}}</label>
-                <input type="text" [(ngModel)]="reqActionsForm.comments" name="comment" pInputText placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"/>
-            </div>
-            <app-file-upload
-            view="full"
-            [files]="filesToUpload"
-            (onFileUpload)="filesToUpload =$event"></app-file-upload>
-        </ng-container>
-         -->
-
-        <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Aprroved" -->
+        <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Approved" -->
         <div class="d-flex justify-content-end mt-3 gap-3" >
-            <!-- NOTE:----- incace the currnt user is Gurdian -->
-            <!-- <button  *ngIf="isCommentAllowed()" (click)="addComment()" class="btn btn-outline-primary">{{'dashboard.myRequest.add a comment' | translate}}</button> -->
-
-            <!-- NOTE:----- incace the currnt user is not  Gurdian -->
-            <!-- currentUserScope!=userScopeEnum.Guardian  -->
             <ng-container *ngIf="requestOptions" >
                 <button
+                *ngFor="let option of requestOptions;let i=index"
                 [class.d-none]="option?.label.en=='ModificationRequest' &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest"
                 [disabled]="option.isLoading"
                 [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
-                *ngFor="let option of requestOptions;let i=index"
                 (click)="onActionTaken(option,i)"
                 class="btn">
                     {{option.title|currentLang}}
                     <div class="spinner-border text-light" role="status" *ngIf="option.isLoading"></div>
                 </button>
             </ng-container>
+
+            <button
+            *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Approved && currentUserScope==userScopeEnum.SPEA"
+            [disabled]="onSubmited"
+            (click)="reOpenRequest()"
+            class="btn btn-primary">
+                {{'dashboard.Requests.reopenReq'|translate}}
+                <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
+            </button>
         </div>
     </form>
 </div>
@@ -574,8 +565,8 @@
       </div>
       <div class="profile__info ">
           <div class="profile__name d-flex flex-wrap">
-                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.SPEA" target="_blank" [routerLink]="['//schools-and-students/students/student/'+student.id]">{{student.name |currentLang}}</a>
-                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Employee" target="_blank" [routerLink]="['/student-management/students/student/'+student.id]">{{student.name |currentLang}}</a>
+                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.SPEA" target="_blank" [routerLink]="['//schools-and-students/students/student/'+student?.studentGuid]">{{student.name |currentLang}}</a>
+                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Employee" target="_blank" [routerLink]="['/student-management/students/student/'+student?.studentGuid]">{{student.name |currentLang}}</a>
                 <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Guardian">{{student.name |currentLang}}</a>
 
                 <div class="" *ngIf="student?.isGifted">
@@ -763,5 +754,48 @@
         <!-- <app-file-upload view="full" (onFileUpload)="addAttachmentToAction($event)"></app-file-upload> -->
 
     </ng-template>
+
+</p-dialog>
+
+
+
+<p-dialog header="{{'dashboard.Requests.rejectReason' | translate}}" [(visible)]="addStudentTodivisionModal" [draggable]="false" [modal]="true" [style]="{width: '40vw' , height: '65vh'}">
+
+  <ng-template pTemplate="content">
+
+      <form class="custom-form" ngForm #f="ngForm">
+
+        <label class="label">{{'dashboard.schools.addStudentToSection'|translate}} </label>
+        <p-dropdown
+        [ngClass]="{'ng-invalid ng-dirty': targetDivision && !targetDivision?.isAcceptStudent}"
+        name="taget"
+        [options]="gradeDivisions$ | async"
+        [(ngModel)]="reqActionsForm.divisionIdForRegistrationRequest"
+        #target="ngModel"
+        optionValue="id"
+        optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
+        emptyMessage="  لا يوجد اخرى شعب متاحه"
+        placeholder="{{'shared.chooseDivition'|translate}}"
+        [required]="true"></p-dropdown>
+
+        <!-- (ngModelChange)="onTargetDivisionSelected($event)" -->
+        <!-- <div *ngIf="targetDivision &&!targetDivision?.isAcceptStudent" class="mt-2 color-red-500 fs-4">لا يمكن تجاوز العدد الاعظمي للطلاب في الشعبة.</div> -->
+
+
+
+        <div class="py-5"></div>
+
+        <div class="d-flex justify-content-end mt-6 mb-4" >
+            <button class="btn btn-primary"
+            (click)="completeRequestAction()"
+            [disabled]="!f.valid || isLoading">{{'shared.confirm'| translate}}
+            <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+          </button>
+        </div>
+      </form>
+
+
+
+  </ng-template>
 
 </p-dialog>

@@ -1,18 +1,18 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faAngleDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { forkJoin, share, shareReplay, switchMap } from 'rxjs';
+import { forkJoin, shareReplay, switchMap } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SystemRequestService } from 'src/app/modules/request-list/services/system-request.service';
 import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 import { StudentsService } from 'src/app/modules/students/services/students/students.service';
-import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-academic-sequence',
@@ -23,6 +23,8 @@ export class AcademicSequenceComponent implements OnInit {
   faAngleDown=faAngleDown
   faPlus=faPlus
   @Input() choosenStudents;
+  @Input() activateSpeaView = false;
+
   @Output() onCancel : EventEmitter<string> = new EventEmitter();
   @Output() onBack : EventEmitter<string> = new EventEmitter();
 
@@ -74,7 +76,8 @@ export class AcademicSequenceComponent implements OnInit {
     private sharedService:SharedService,
     private schoolsService: SchoolsService,
     private requestsService:SystemRequestService,
-    private router:Router
+    private router:Router,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -86,7 +89,7 @@ export class AcademicSequenceComponent implements OnInit {
       this.fillStudentsFormArr([...this.academicSequence])
     }else{
 
-      this.getStudentsSchoolYears(this.choosenStudents.map(el=> el.id))
+      this.getStudentsSchoolYears(this.choosenStudents.map(el=> el.studentGuid))
     }
   }
 
@@ -99,6 +102,7 @@ export class AcademicSequenceComponent implements OnInit {
 
 
   getStudentsSchoolYears(studentsIds:[]){
+
     this.isLoading =true
 
     let requests = forkJoin(studentsIds.map(id => this.studentService.getCetificateManually(id)))
@@ -159,16 +163,19 @@ export class AcademicSequenceComponent implements OnInit {
     // let body =this.validationStep()
     let body=this.stdAcademicForm.value.studentEducationCertificates
 
-    this.certificatesService.postSequenceCertificate({studentEducationCertificates: body}).subscribe(result=>{
+    this.certificatesService.postSequenceCertificate({studentEducationCertificates: body}, this.activateSpeaView).subscribe(result=>{
       this.isBtnLoading=false;
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.onCancel.emit();
+
+      if(this.activateSpeaView) this.location.back()
 
       },(err:Error)=>{
         this.isBtnLoading=false;
         this.onBack.emit();
       this.toastr.error( err.message || this.translate.instant('toasterMessage.error'))
     })
+
 
   }
 

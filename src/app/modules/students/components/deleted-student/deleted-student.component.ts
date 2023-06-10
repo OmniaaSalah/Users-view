@@ -123,6 +123,10 @@ export class DeletedStudentComponent implements OnInit {
   // }
 
 
+  isRequiredAttchmentsUploaded(){
+    return !this.requiredFiles.files.filter(el => el.isMandatory).every(el=> el?.uploadedFiles?.length > 0)
+  }
+
   onFileUpload(files, fileTitle, index){
     this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
     this.attachmentCtr.setValue(this.uploadedFiles)

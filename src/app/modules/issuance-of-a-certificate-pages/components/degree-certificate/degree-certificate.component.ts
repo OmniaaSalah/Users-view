@@ -9,7 +9,8 @@ import { CurriculumCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/s
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
-import { forkJoin, share, tap } from 'rxjs';
+import { forkJoin} from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-degree-certificate',
@@ -18,6 +19,7 @@ import { forkJoin, share, tap } from 'rxjs';
 })
 export class DegreeCertificateComponent implements OnInit, OnChanges {
   @Input() choosenStudents;
+  @Input() activateSpeaView = false;
   @Input() certificateType!:CertificatesEnum
   @Output() onCancel: EventEmitter<string> = new EventEmitter();
   @Output() onBack: EventEmitter<string> = new EventEmitter();
@@ -56,7 +58,9 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
     private translate: TranslateService,
     private certificatesService: IssuanceCertificaeService,
     private route: ActivatedRoute,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private location: Location,
+
   ) {}
 
   ngOnChanges(): void {
@@ -127,13 +131,15 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
     })
 
     let httpReq$ = this.certificateType==CertificatesEnum.GradesCertificate ?
-                  this.certificatesService.postGradeCertificate(gardeData) :
-                  this.certificatesService.postInternalGradeCertificate(internalGardeData);
+                  this.certificatesService.postGradeCertificate(gardeData, this.activateSpeaView) :
+                  this.certificatesService.postInternalGradeCertificate(internalGardeData, this.activateSpeaView);
 
       httpReq$.subscribe(result=>{
       this.onSubmit=false;
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.onCancel.emit();
+      if(this.activateSpeaView) this.location.back()
+
 
     },(err: Error)=>{
       this.onSubmit=false;
