@@ -1533,7 +1533,8 @@
             "isExemptable": "Is exemptable",
             "Subject added Successfully": "Subject added successfully",
             "Subject edited Successfully": "Subject edited successfully",
-            "error,please try again": "Error,please try again"
+            "error,please try again": "Error,please try again",
+            "IsInternalSubject":"Is internal Subject"
 
         },
         "surveys": {
@@ -1642,10 +1643,15 @@
             "CitizenStudentNumbers":"Citizen student numbers",
             "Citizen":"Citizen",
             "StudentCategory": "Student category",
+            "Prohibitiontype":"Prohibition type",
             "SelectStudentCategory":"Select student category",
             "FromSpetialAbilitiesPeople":"From spetialAbilities people",
             "studentAttachedment": "Student attachedment",
             "medicalFile": "Medical file",
+            "ForbiddenFromWithdrowfromAuthority":"Forbidden from withdrow from authority",
+            "ForbiddenFromCertificatefromAuthority":"Forbidden from certificate from authority",
+            "ForbiddenFromWithdrowfromSchool":"Forbidden from withdrow from school",
+            "ForbiddenFromCertificatefromSchool":"Forbidden from certificate from school",
             "IssuanceOfACertificate": "Issuance of certificate to student manually",
             "Issuance of certificate": "Issuance of certificate",
             "Issuing the certificate manually": "Issuing the certificate manually",

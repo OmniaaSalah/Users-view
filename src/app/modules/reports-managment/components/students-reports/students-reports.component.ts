@@ -29,6 +29,7 @@ export class StudentsReportsComponent implements OnInit {
   isBtnLoading: boolean=false;
   get statusEnum(){ return StatusEnum }
   nationalityList=[];
+  prohibitionTypeList=[];
   studentCategoryList=[];
   schoolYearsList=[];
   birthDate;
@@ -59,7 +60,8 @@ export class StudentsReportsComponent implements OnInit {
     IsTopStudent: false,
     NationalityId:null,
     TalentId: null,
-    StudentCategory:null
+    StudentCategory:null,
+    ProhibitedTypes:null
   };
   rangeValues: number[];
   felmaleStudentCount;
@@ -115,6 +117,7 @@ export class StudentsReportsComponent implements OnInit {
     this.getStudents()
     this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});
     this.studentCategoryList=this.sharedService.studentCategoryList;
+    this.prohibitionTypeList=this.studentsReportService.prohibitionTypeList;
     this.getSchoolYearsList();
   }
 
@@ -205,6 +208,7 @@ export class StudentsReportsComponent implements OnInit {
     this.acceptanceDate=null,
     this.filtration.TalentId=null,
     this.filtration.StudentCategory=null,
+    this.filtration.ProhibitedTypes=null;
     this.filtration.Page=1;
     this.getStudents()
   }
