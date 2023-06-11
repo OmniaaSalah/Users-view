@@ -153,10 +153,10 @@ getSchool(id){
       stampSchoolLogoPath: event[0]?.url || '',
 		}
 
-		// this.schoolsService.updateSchoolAttachments(file).subscribe(res=>{
-		// 	if(file.schoolLogoPath) this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
-		// 	else this.toaster.success(this.translate.instant('toasterMessage.schoolLogoDeleted'))
-		// })
+		this.schoolsService.updateSchoolAttachments(file).subscribe(res=>{
+			if(file.schoolLogoPath) this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
+			else this.toaster.success(this.translate.instant('toasterMessage.schoolLogoDeleted'))
+		})
 	}
 
 

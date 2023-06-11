@@ -93,8 +93,8 @@
                                             <input type="text" name="sectionName" id="name" formControlName="ar" pInputText />
                                         </div>
 
-                                        <div class="col-md-3">
-                                          <label class="label required" for="name">{{'dashboard.schools.maxStudentsNumber'|translate}} </label>
+                                        <div class="col-md-3" *ngIf="currentUserScope==userScope.SPEA">
+                                          <label class="label" for="name">{{'dashboard.schools.maxStudentsNumber'|translate}} + </label>
                                           <input type="text" name="sectionName" id="name" formControlName="studentToleranceCount" pInputText [disabled]="true" />
                                         </div>
                                         <div class="col-md-3 align-self-end">

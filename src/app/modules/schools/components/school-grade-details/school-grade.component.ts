@@ -261,7 +261,8 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
       isAddToFinalScore:[true],
       maxGpa:[0],
       gradeSubjectId:[0],
-      trackSubjectId:[0]
+      trackSubjectId:[0],
+      IsInternal:[false]
     })
   }
 
@@ -301,7 +302,8 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         isAddToFinalScore:[subject.isAddToFinalScore],
         maxGpa:[subject.maxGpa??0],
         gradeSubjectId:[subject.gradeSubjectId??0],
-        trackSubjectId:[subject.trackSubjectId??0]
+        trackSubjectId:[subject.trackSubjectId??0],
+        IsInternal:[subject.trackSubjectId??false]
       }))
     })
 
@@ -345,7 +347,6 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     console.log('Reseat');
 
     this.subjectsToDelete = this.gradeTracks.value.map(track=> track.subjects).map(subjectArr =>subjectArr[0].gradeSubjectId)
-console.log(this.subjectsToDelete);
 
     this.gradeTracks.clear()
   }
@@ -369,7 +370,8 @@ console.log(this.subjectsToDelete);
         isAddToFinalScore:[subject.isAddToFinalScore],
         maxGpa:[subject.maxGpa??0],
         gradeSubjectId:[subject.gradeSubjectId??0],
-        trackSubjectId:[subject.trackSubjectId??0]
+        trackSubjectId:[subject.trackSubjectId??0],
+        IsInternal:[subject.trackSubjectId??false]
         })
       )
 

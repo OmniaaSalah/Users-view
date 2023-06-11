@@ -61,23 +61,27 @@
 
                             <hr class="my-5">
 
-                            <ng-container formArrayName="academicSequence">
-                                <div class="row g-5 form-set custom-form" *ngFor="let student of getStudentCertifictesArrCtr(i).controls; let j=index" [formGroupName]="j">
-<!--
-                                      <div class="col-4 d-flex align-items-center gap-5">
-                                          <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
-                                          <h4 class="color-primary">{{item.schoolYear?.name  |currentLang}}</h4>
-                                      </div>
-                                      <div class="col-4 d-flex align-items-center gap-5">
-                                          <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
-                                          <h4 class="color-primary">{{item.schoolName?.name |currentLang}}</h4>
-                                      </div>
-                                      <div class="col-4 d-flex align-items-center gap-5">
-                                          <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
-                                          <h4 class="color-primary">{{item.gradeName?.name |currentLang}}</h4>
-                                      </div> -->
+                            <!-- formArrayName="academicSequence" -->
+                            <ng-container >
+                                <!-- <div class="row g-5 form-set custom-form" *ngFor="let student of getStudentCertifictesArrCtr(i).controls; let j=index" [formGroupName]="j"> -->
+                                <div class="row g-5 form-set custom-form" *ngFor="let studentAcc of studentsAacademicSequence">
+                                  <ng-container *ngFor="let obj of studentAcc">
+                                    <div class="col-4 d-flex align-items-center gap-5">
+                                        <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
+                                        <h4 class="color-primary">{{obj?.schoolYearName?.name  |currentLang}}</h4>
+                                    </div>
+                                    <div class="col-4 d-flex align-items-center gap-5">
+                                        <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
+                                        <h4 class="color-primary">{{obj?.schoolName?.name |currentLang}}</h4>
+                                    </div>
+                                    <div class="col-4 d-flex align-items-center gap-5">
+                                        <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
+                                        <h4 class="color-primary">{{obj?.gradeName?.name |currentLang}}</h4>
+                                    </div>
 
-                                    <div class=" col-md-3"  *ngIf="schoolYears$ |async as schoolYears">
+                                  </ng-container>
+
+                                    <!-- <div class=" col-md-3"  *ngIf="schoolYears$ |async as schoolYears">
                                         <label class="label">{{'dashboard.students.academic year'|translate}}</label>
                                         <p-dropdown
                                         [disabled]="true"
@@ -101,7 +105,7 @@
                                             formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
                                             optionValue="id"></p-dropdown>
 
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </ng-container>
