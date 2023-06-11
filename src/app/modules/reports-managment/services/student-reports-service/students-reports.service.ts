@@ -2,7 +2,7 @@ import { Injectable ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { ProhabitionType, RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { finalize, map, Observable, take } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -12,6 +12,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 })
 export class StudentsReportsService {
   studentsStatus = []
+  prohibitionTypeList=[]
   lang = inject(TranslationService).lang;
   constructor(private translate:TranslateService,private http: HttpHandlerService,
     private tableLoaderService: LoaderService) {
@@ -35,6 +36,24 @@ export class StudentsReportsService {
       {
         value: RegistrationStatus.Withdrawal,
         name: this.translate.instant("shared.allStatus.Withdrawal")
+      }
+    ];
+    this.prohibitionTypeList = [
+      {
+        value:ProhabitionType.CertificateFromSPEA,
+        name: this.translate.instant("dashboard.students.ForbiddenFromCertificatefromAuthority")
+      },
+      {
+        value:ProhabitionType.CertificateFromSchool,
+        name:this.translate.instant("dashboard.students.ForbiddenFromCertificatefromSchool")
+      },
+      {
+        value: ProhabitionType.WithdrawingFromSPEA,
+        name: this.translate.instant("dashboard.students.ForbiddenFromWithdrowfromAuthority")
+      },
+      {
+        value: ProhabitionType.WithdrawingFromSchool,
+        name: this.translate.instant("dashboard.students.ForbiddenFromWithdrowfromSchool")
       }
     ];
   }
