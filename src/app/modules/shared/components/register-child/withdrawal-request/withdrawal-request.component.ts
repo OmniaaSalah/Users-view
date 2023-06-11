@@ -130,6 +130,11 @@ export class WithdrawalRequestComponent implements OnInit {
   //   this.reqForm.attachment = file[0].url
   // }
 
+
+  isRequiredAttchmentsUploaded(){
+    return !this.requiredFiles?.files.filter(el => el.isMandatory).every(el=> el?.uploadedFiles?.length > 0)
+  }
+
   onFileUpload(files, fileTitle, index){
     this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
     this.reqForm.attachments = this.uploadedFiles

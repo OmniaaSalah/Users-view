@@ -16,8 +16,8 @@ import { EditListComponent } from './components/school-details/edit-list/edit-li
 import { SchoolSubjectsComponent } from './components/school-details/school-subjects/school-subjects.component';
 import { AnnulHolidayListComponent } from './components/school-details/annul-holiday-list/annul-holiday-list.component';
 import { SchoolEmployeesComponent } from './components/school-details/school-employees/school-employees.component';
-import { SchoolDivisionsComponent } from './components/school-details/school-divisions/school-divisions.component';
-import { SchoolGradesComponent } from './components/school-details/school-grades/school-grades.component';
+import { DivisionsListComponent } from './components/school-details/divisions-list/divisions-list.component';
+import { SchoolGradesComponent } from './components/school-details/grades-list/grades-list.component';
 import { NgChartsModule } from 'ng2-charts';
 import { SchoolChartsComponent } from './components/school-list/school-charts/school-charts.component';
 import { SchoolInfoComponent } from './components/school-details/school-info/school-info.component';
@@ -32,7 +32,7 @@ import { DivisionSubjectsComponent } from './components/school-division-details/
     SchoolSubjectsComponent,
     AnnulHolidayListComponent,
     SchoolEmployeesComponent,
-    SchoolDivisionsComponent,
+    DivisionsListComponent,
     SchoolGradesComponent,
     SchoolChartsComponent,
     SchoolInfoComponent,

@@ -374,6 +374,7 @@
         "noUrl":"هذا الملف غير صالح",
         "requestStatusUpdated":"تم تحديث حاله الطلب بنجاح",
         "requestWithdrawnSuccesfully":"تم سحب الطلب بنجاح",
+        "requestReopenSuccesfully":"تم اعادة فتح الطلب بنجاح",
         "diplomaLogoDeleted":"تم حذف شعار الأعتماد بنجاح",
         "schoolLogoDeleted":"تم حذف شعار المدرسة بنجاح",
         "deletedSuccessfully":"تم الحذف بنجاح",
@@ -1873,7 +1874,8 @@
             "commentsAndReplays":"التعليقات / الردود",
             "certificatHint":"يمكنك الضغط هنا ودفع الرسوم المطلوبة و استكمال عمليه اصدار الشهاده",
             "ActionOwner":"صاحب الإجراء",
-            "ActionTaken":"الإجراء المتخذ"
+            "ActionTaken":"الإجراء المتخذ",
+            "reopenReq":"اعادة فتح الطلب"
         },
 
         "Indexes": {

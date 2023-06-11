@@ -30,6 +30,12 @@ import { ViewCertificatesComponent } from './components/view-certificates/view-c
     PrimngModule,
     SharedModule,
     QrCodeModule,
+  ],
+  exports:[
+    AcademicSequenceComponent,
+    BoardCertificateComponent,
+    DegreeCertificateComponent,
+    DiplomaCertificateComponent,
   ]
 })
 export class IssuanceCertificateModule { }

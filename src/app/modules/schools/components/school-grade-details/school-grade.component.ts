@@ -283,7 +283,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
 
   fillTrackSubjects(trackIndex, subjects: SchoolSubject[]){
-    let trackSubjectsArr = this.fb.array([],Validators.minLength(1)) as FormArray
+    let trackSubjectsArr = this.fb.array([],[Validators.minLength(1), Validators.required]) as FormArray
 
     subjects.forEach(subject =>{
       trackSubjectsArr.push(this.fb.group({
@@ -325,7 +325,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         ar:['', Validators.required],
         en:['', Validators.required]
       }),
-      subjects: this.fb.array([])
+      subjects: this.fb.array([], [Validators.minLength(1), Validators.required],)
     })
   }
 

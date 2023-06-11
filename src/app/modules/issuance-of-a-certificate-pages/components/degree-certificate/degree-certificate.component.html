@@ -1,14 +1,19 @@
 
-<div class="position-relative" *ngIf="!isLoading">
-  <div class="submitBtn d-flex">
-      <button class="btn btn-primary mx-2" (click)="submitDegreeCertificate()"
-          [disabled]="!degreeCertificateForm.valid||onSubmit">{{'dashboard.issue of certificate.Save' | translate}}
-          <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-      </button>
-      <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">{{'dashboard.issue of certificate.previous' | translate}}</button>
-      <button class="btn btn-light" *ngIf="studentId" (click)="onCancel.emit()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+<ng-container >
+  <div class="position-relative" *ngIf="!isLoading">
+    <div class="submitBtn d-flex">
+        <button class="btn btn-primary mx-2"  (click)="submitDegreeCertificate()"
+            [disabled]="!degreeCertificateForm.valid||onSubmit">{{'dashboard.issue of certificate.Save' | translate}}
+            <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+        </button>
+
+        <ng-container *ngIf="!activateSpeaView">
+          <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+          <button class="btn btn-light" *ngIf="studentId" (click)="onCancel.emit()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+        </ng-container>
+    </div>
   </div>
-</div>
+</ng-container>
 
 
 

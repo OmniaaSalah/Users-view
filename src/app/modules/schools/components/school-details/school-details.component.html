@@ -110,7 +110,7 @@
 
                     <!-- school Classes -->
                     <ng-container *ngIf="step==3">
-                        <app-school-grades (setActiveTab)="setActiveTab($event)" (selectedGradeId)="selectedGradeId =$event"></app-school-grades>
+                        <app-grades-list (setActiveTab)="setActiveTab($event)" (selectedGradeId)="selectedGradeId =$event"></app-grades-list>
                     </ng-container>
                     <!-- school Classes -->
 
@@ -118,7 +118,7 @@
                     <!-- school Divitions -->
                     <ng-container *ngIf="step==4">
                       <!-- [selectedGradeId]="selectedGradeId" -->
-                        <app-school-divisions ></app-school-divisions>
+                        <app-divisions-list ></app-divisions-list>
                     </ng-container>
                     <!-- School Section -->
 

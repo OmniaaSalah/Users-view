@@ -173,7 +173,7 @@
           <ng-container *ngIf="requiredFiles">
               <div class="mt-6" *ngFor="let file of requiredFiles.files; let i =index">
                   <!-- <label class="label fw-bold" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label> -->
-                  <app-file-upload  [title]="file.name |currentLang" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" ></app-file-upload>
+                  <app-file-upload [isMandatory]="file?.isMandatory" [title]="file.name |currentLang" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" ></app-file-upload>
               </div>
 
           </ng-container>
@@ -186,7 +186,7 @@
           (onFileDelete)="changeIdentityNumForm.identityAttachmentPath=''"></app-file-upload> -->
 
           <div class="d-flex justify-content-end mt-4" >
-              <button class="btn btn-primary" (click)="updateIdentity(changeIdentityNumForm)" [disabled]="!form.valid || onSubmit  ||(changeIdentityNumForm.attachments.length!=requiredFiles?.filesCount &&requiredFiles?.isRequired)">
+              <button class="btn btn-primary" (click)="updateIdentity(changeIdentityNumForm)" [disabled]="!form.valid || onSubmit  ||isRequiredAttchmentsUploaded()">
                   {{'shared.send'| translate}}
                   <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
               </button>

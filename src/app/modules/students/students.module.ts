@@ -9,7 +9,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
 import { DashboardSharedModule } from '../shared/dashboard-shared.module';
-import { IssuanceOfACertificateComponent } from './components/issuance-of-a-certificate/issuance-of-a-certificate.component';
+import { ManualCertificatesComponent } from './components/manual-certificates/manual-certificates.component';
+import { IssuanceCertificateModule } from '../issuance-of-a-certificate-pages/issue-certificate.module';
 
 
 
@@ -20,7 +21,7 @@ import { IssuanceOfACertificateComponent } from './components/issuance-of-a-cert
     DeletedStudentComponent,
     StudentDetailsComponent,
     TransferStudentComponent,
-    IssuanceOfACertificateComponent,
+    ManualCertificatesComponent,
 
   ],
   imports: [
@@ -28,7 +29,8 @@ import { IssuanceOfACertificateComponent } from './components/issuance-of-a-cert
     StudentsRoutingModule,
     PrimngModule,
     SharedModule,
-    DashboardSharedModule
+    DashboardSharedModule,
+    IssuanceCertificateModule
   ]
 })
 export class StudentsModule { }
