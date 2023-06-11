@@ -1533,7 +1533,8 @@
             "isExemptable": "Is exemptable",
             "Subject added Successfully": "Subject added successfully",
             "Subject edited Successfully": "Subject edited successfully",
-            "error,please try again": "Error,please try again"
+            "error,please try again": "Error,please try again",
+            "IsInternalSubject":"Is internal Subject"
 
         },
         "surveys": {
