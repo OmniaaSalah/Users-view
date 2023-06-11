@@ -90,7 +90,7 @@
 
                 <div class="col-md-4">
                     <label class="label"> {{'dashboard.students.Prohibitiontype' | translate}} </label>
-                    <p-dropdown [options]="prohibitionTypeList"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.ProhibitedTypes"  [showClear]="true"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.students.Prohibitiontype' | translate}}"></p-dropdown>
+                    <p-multiSelect  [options]="prohibitionTypeList"  [ngModelOptions]="{standalone: true}" display="chip"  [(ngModel)]="filtration.ProhibitedTypes"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.students.Prohibitiontype' | translate}}"></p-multiSelect>
                 </div>
 
                 <div class="col-md-4">
