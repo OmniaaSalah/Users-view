@@ -65,6 +65,8 @@ export class AcademicSequenceComponent implements OnInit {
 
   actions
 
+  studentsAacademicSequence
+
 
   constructor(
     private fb: FormBuilder,
@@ -89,7 +91,7 @@ export class AcademicSequenceComponent implements OnInit {
       this.fillStudentsFormArr([...this.academicSequence])
     }else{
 
-      this.getStudentsSchoolYears(this.choosenStudents.map(el=> el.studentGuid))
+      this.getStudentsSchoolYears(this.choosenStudents.map(el=> el?.studentGuid))
     }
   }
 
@@ -110,6 +112,7 @@ export class AcademicSequenceComponent implements OnInit {
     requests.subscribe((stdAcademicSequence: any[])=>{
       this.isLoading=false
 
+      this.studentsAacademicSequence= stdAcademicSequence
       this.academicSequence = this.studentsSchoolYearsMapped(this.choosenStudents, stdAcademicSequence)
       this.fillStudentsFormArr([...this.academicSequence])
 
@@ -132,10 +135,10 @@ export class AcademicSequenceComponent implements OnInit {
   fillStudentsFormArr(students){
     students.forEach(el=>{
       this.StudenstArrCtr.push(this.fb.group({
-        studentId: el.id,
+        studentId: el?.id,
         certificatedType: CertificatesEnum.AcademicSequenceCertificate,
         attachments:[[]],
-        academicSequence: this.fillStudentstdAcademicSequence(el.academicSequence),
+        academicSequence: this.fillStudentstdAcademicSequence(el?.academicSequence ||[]),
         addedAcademicSequence : this.fb.array([])
       }))
     })
