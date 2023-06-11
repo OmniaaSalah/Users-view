@@ -136,7 +136,7 @@
 
                                                                               </div>
 
-                                                                              <div class="col-md-4">
+                                                                              <div class="col-md-3">
                                                                                   <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
                                                                                   <p-inputNumber
                                                                                   formControlName="weekClassRoomNumber"
@@ -146,11 +146,18 @@
                                                                                   placeholder="0"
                                                                                   inputId="classCount"  ></p-inputNumber>
                                                                               </div>
-                                                                              <div class="col-md-3 align-self-end mb-3">
+
+                                                                              <div class="col-md-4 align-self-end mb-3 d-flex align-items-center gap-5">
                                                                                   <div class="d-flex align-items-center gap-4 fs-3">
                                                                                       <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
                                                                                       <p-inputSwitch formControlName="isOptional" [binary]="true"></p-inputSwitch>
                                                                                       <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
+                                                                                  </div>
+
+                                                                                  <div class="d-flex align-items-center gap-4 fs-3" *ngIf="subject.value.isOptional">
+                                                                                    <label class="" for="description">{{'dashboard.Subjects.IsInternalSubject'| translate}}</label>
+                                                                                    <p-inputSwitch formControlName="IsInternal" [binary]="true"></p-inputSwitch>
+                                                                                    <span class="mb-2">{{subject.value.IsInternal ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                                   </div>
                                                                               </div>
 
@@ -169,7 +176,7 @@
                                                                                   </div>
 
                                                                               </div>
-                                                                              <div class="col-md-4">
+                                                                              <div class="col-md-3">
                                                                                   <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}} (Credit Hours)</label>
                                                                                   <div class=" position-relative" >
                                                                                       <!-- <input type="number" pInputText placeholder="0" /> -->
@@ -226,75 +233,85 @@
 
 
                                                 <div class="p-5">
-                                                    <div class="row g-5 align-items-center mb-6">
+                                                  <div class="row g-5 align-items-center mb-6">
 
-                                                        <div class="col-md-4">
-                                                            <label for="" class="label required">{{'dashboard.Subjects.subjectName'| translate}}</label>
-                                                            <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="اختر الماده"></p-dropdown>
+                                                    <div class="col-md-4" >
+                                                        <label for="" class="label required">{{'dashboard.Subjects.subjectName'| translate}}</label>
+                                                        <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'Choose Subject' |translate}}"></p-dropdown>
+
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
+                                                        <p-inputNumber
+                                                        formControlName="weekClassRoomNumber"
+                                                        [showButtons]="true"
+                                                        [min]="1"
+                                                        [max]="32"
+                                                        placeholder="0"
+                                                        inputId="classCount"  ></p-inputNumber>
+                                                    </div>
+
+                                                    <div class="col-md-4 align-self-end mb-3 d-flex align-items-center gap-5">
+                                                        <div class="d-flex align-items-center gap-4 fs-3">
+                                                            <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
+                                                            <p-inputSwitch formControlName="isOptional" [binary]="true"></p-inputSwitch>
+                                                            <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                         </div>
 
-                                                        <div class="col-md-4">
-                                                            <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
-                                                            <p-inputNumber
-                                                            formControlName="weekClassRoomNumber"
-                                                            [showButtons]="true"
-                                                            [min]="1"
-                                                            [max]="32"
-                                                            placeholder="0"
-                                                            inputId="classCount"></p-inputNumber>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                            <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}}  (Credit Hours)</label>
-                                                            <div class=" position-relative">
-                                                                <!-- <input type="number" pInputText placeholder="0" /> -->
-                                                                <p-inputNumber formControlName="studyHour" [min]="1"></p-inputNumber>
-                                                                <img class="position-absolute translate-middle-y top-50" [style]="{'inset-inline-end': '1.5rem'}" src="assets/images/shared/clock-solid.svg" alt="">
-                                                            </div>
-                                                        </div>
-                                                        <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                            <img class="pt-5" (click)="deleteConfirmationCase='deleteSubject';deletedSubjectId=subject.value.gradeSubjectId;deletedSubjectIndex=i;openDeleteConfirmation=true" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                        <div class="d-flex align-items-center gap-4 fs-3" *ngIf="subject.value.isOptional">
+                                                          <label class="" for="description">{{'dashboard.Subjects.IsInternalSubject'| translate}}</label>
+                                                          <p-inputSwitch formControlName="IsInternal" [binary]="true"></p-inputSwitch>
+                                                          <span class="mb-2">{{subject.value.IsInternal ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                         </div>
                                                     </div>
 
-                                                    <div class="row gx-5">
-                                                        <div class="col-md-4">
-                                                            <div class="d-flex align-items-center gap-4 fs-3">
-                                                                <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
-                                                                <p-inputSwitch formControlName="haveGpa"></p-inputSwitch>
-                                                                <span class="mb-2">{{subject.value.haveGpa ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
-                                                            </div>
 
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="d-flex align-items-center gap-4 fs-3">
-                                                                <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
-                                                                <p-inputSwitch formControlName="isOptional"></p-inputSwitch>
-                                                                <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
-                                                            </div>
+                                                    <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
+                                                        <img class="pt-5" (click)="deleteConfirmationCase='deleteTrackSubjects';deletedTrackIndex=trackIndex;deletedSubjectIndex=subjectIndex;deletedSubjectId=subject.value.gradeSubjectId;openDeleteConfirmation=true" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row gx-5">
+                                                    <div class="col-md-4 align-self-end mb-3">
+                                                        <div class="d-flex align-items-center gap-4 fs-3">
+                                                            <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
+                                                            <p-inputSwitch formControlName="haveGpa" [binary]="true"></p-inputSwitch>
+                                                            <span class="mb-2">{{subject.value.haveGpa ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                         </div>
 
-                                                        <div class="col-md-4">
-
-                                                            <div class="d-flex align-items-center gap-4 fs-3">
-                                                                <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
-                                                                <p-inputSwitch formControlName="isAddToFinalScore"></p-inputSwitch>
-                                                                <span class="mb-2">{{subject.value.isAddToFinalScore ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
-                                                            </div>
-
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}} (Credit Hours)</label>
+                                                        <div class=" position-relative" >
+                                                            <!-- <input type="number" pInputText placeholder="0" /> -->
+                                                            <p-inputNumber formControlName="studyHour" ></p-inputNumber>
+                                                            <img class="position-absolute translate-middle-y top-50" [style]="{'inset-inline-end': '1.5rem'}" src="assets/images/shared/clock-solid.svg" alt="">
                                                         </div>
                                                     </div>
 
-                                                    <div class="row  mb-5 mt-6" *ngIf="subject.value.haveGpa">
-                                                        <div class="col-md-4">
-                                                            <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
-                                                            <p-inputNumber
-                                                            formControlName="maxGpa"
-                                                            [showButtons]="true"
-                                                            [min]="0"
-                                                            [max]="100" ></p-inputNumber>
+                                                    <div class="col-md-4 align-self-end mb-3">
+
+                                                        <div class="d-flex align-items-center gap-4 fs-3">
+                                                            <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
+                                                            <p-inputSwitch formControlName="isAddToFinalScore" [binary]="true"></p-inputSwitch>
+                                                            <span class="mb-2">{{subject.value.isAddToFinalScore ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                         </div>
+
                                                     </div>
+                                                </div>
+
+                                                <div class="row  mb-5 mt-6" *ngIf="subject.value.haveGpa">
+                                                    <div class="col-md-4">
+                                                        <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
+                                                        <p-inputNumber
+                                                        formControlName="maxGpa"
+                                                        [showButtons]="true"
+                                                        [min]="0"
+                                                        [max]="100" ></p-inputNumber>
+                                                    </div>
+                                                </div>
+
                                                 </div>
                                             </li>
 

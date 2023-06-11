@@ -1792,7 +1792,8 @@
             "isExemptable": "قابلة للإعفاء",
             "Subject added Successfully": "تمّ إنشاء مادة دراسية جديد بنجاح",
             "Subject edited Successfully": "تمّ تعديل المادة الدراسية بنجاح",
-            "error,please try again": "حدث خطأ. من فضلك حاول مجدداً"
+            "error,please try again": "حدث خطأ. من فضلك حاول مجدداً",
+            "IsInternalSubject":"مادة داخلية"
 
         },
         "UserInformation": {
