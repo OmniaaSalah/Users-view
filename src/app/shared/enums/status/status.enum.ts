@@ -110,3 +110,11 @@ export enum MessageStatus{
   Read = "Read",
   Answered = "Answered",
 }
+
+
+export enum ProhabitionType{
+    CertificateFromSPEA = "CertificateFromSPEA",
+    CertificateFromSchool = "CertificateFromSchool",
+    WithdrawingFromSchool = "WithdrawingFromSchool",
+    WithdrawingFromSPEA = "WithdrawingFromSPEA"
+  }
