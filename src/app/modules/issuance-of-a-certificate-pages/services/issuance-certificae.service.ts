@@ -154,12 +154,12 @@ certificateStatusList;
   }
 
   postBoardCertificate(data, issuedBySpea){
-    let url = issuedBySpea ? '/Certificate/org/grades-certificate-request' : '/Certificate/board-certificate-request'
+    let url = issuedBySpea ? '/Certificate/org/board-certificate-request' : '/Certificate/board-certificate-request';
     return this.http.post(url ,data).pipe(take(1))
   }
 
   sendDiplomaCertificateReq(data, issuedBySpea){
-    let url = issuedBySpea ? '/Certificate/org/grades-certificate-request' : '/Certificate/diploma-certificate-request'
+    let url = issuedBySpea ? '/Certificate/org/diploma-certificate-request' :'/Certificate/diploma-certificate-request' ;
     return this.http.post(url ,data).pipe(take(1))
   }
 
@@ -199,7 +199,7 @@ certificateStatusList;
 
   postSequenceCertificate(data, issuedBySpea:boolean){
     let url = issuedBySpea ? '/Certificate/org/academic-sequencen-certificate-request' : '/Certificate/academic-sequencen-certificate-request'
-    return this.http.post('/Certificate/academic-sequencen-certificate-request',data)
+    return this.http.post(url ,data)
     .pipe(
       map(res=>{
         if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))

@@ -15,6 +15,7 @@ import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { RegisterChildService } from 'src/app/modules/shared/services/register-child/register-child.service';
 import { map, of, switchMap } from 'rxjs';
 import { Student } from 'src/app/core/models/student/student.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
   selector: 'app-manual-certificates',
@@ -62,6 +63,7 @@ export class ManualCertificatesComponent implements OnInit  {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private toastr:ToastrService,
+    private headerService:HeaderService,
     private registerChildService:RegisterChildService,
     private certificateService:IssuanceCertificaeService
   ) {
@@ -183,19 +185,17 @@ submitOtherCertifiates(){
   checkDashboardHeader()
   {
 
-        this.componentHeaderData.breadCrump= [
-              {
-                label: this.translate.instant('dashboard.students.studentsList'),
-                routerLink: '//schools-and-students/students/',
-                routerLinkActiveOptions: { exact: true },
-              },
-              {
-                label: this.translate.instant(
-                  'dashboard.students.Issuing the certificate manually'
-                ),
-                routerLink: `/schools-and-students/students/student/${this.studentId}/IssuanceOfACertificateComponent`,
-              },
-            ]
+      this.componentHeaderData.breadCrump= [
+            {
+              label: this.translate.instant('dashboard.students.studentsList'),
+              routerLink: '/schools-and-students/students/',
+              routerLinkActiveOptions: { exact: true },
+            },
+            {
+              label: this.translate.instant('dashboard.students.Issuing the certificate manually'),
+              routerLink: `/schools-and-students/students/student/${this.studentId}/IssuanceOfACertificateComponent`,
+            },
+          ]
 
 
 
@@ -219,11 +219,18 @@ submitOtherCertifiates(){
         this.componentHeaderData.breadCrump=[
               { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
               { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-              { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/child/${this.studentId}`}
+              { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/child/${this.studentGUID}`, routerLinkActiveOptions:{exact: true}},
+              {
+                label: this.translate.instant('dashboard.students.Issuing the certificate manually'),
+                routerLink: `/schools-and-students/students/student/${this.studentGUID}/IssuanceOfACertificateComponent`,
+              },
 
             ]
 
       }
+
+      this.headerService.changeHeaderdata(this.componentHeaderData)
+
       // else if (this.currentUserScope==UserScope.Guardian){
       //   this.componentHeaderData.breadCrump=[
       //       { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/parent/${this.parentId}/child/${this.studentId}`}
