@@ -116,7 +116,6 @@ export class PersonalInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.setClassType()
-    this.getGuardians()
 
     this.childService.Student$.subscribe(res=> this.selectedGuardianId = res?.guardianId)
   }

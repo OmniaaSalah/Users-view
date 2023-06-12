@@ -108,6 +108,7 @@ export class BoardCertificateComponent implements OnInit {
         if (result.statusCode != 'BadRequest') {
           this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
           this.onCancel.emit();
+          if(this.activateSpeaView) this.location.back()
 
         } else {
 
@@ -119,7 +120,6 @@ export class BoardCertificateComponent implements OnInit {
           this.onBack.emit();
         }
 
-        if(this.activateSpeaView) this.location.back()
       },
       (err) => {
         this.isBtnLoading = false;
