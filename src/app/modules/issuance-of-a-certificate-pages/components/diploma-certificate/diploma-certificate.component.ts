@@ -73,6 +73,7 @@ export class DiplomaCertificateComponent implements OnInit {
         if (result.statusCode != 'BadRequest') {
           this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
           this.onCancel.emit();
+          if(this.activateSpeaView) this.location.back()
 
         } else {
 
@@ -82,7 +83,7 @@ export class DiplomaCertificateComponent implements OnInit {
             this.toastr.error(this.translate.instant('toasterMessage.error'));
           }
           this.onBack.emit();
-          if(this.activateSpeaView) this.location.back()
+
 
         }
       },
