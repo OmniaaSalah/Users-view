@@ -1,7 +1,7 @@
 import { Component, OnInit,inject} from '@angular/core';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { map } from 'rxjs';
+import { map, share, shareReplay } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -23,6 +23,7 @@ import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SettingsService } from '../../../system-setting/services/settings/settings.service';
 import { StudentsService } from '../../services/students/students.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-students-list',
@@ -57,8 +58,7 @@ export class StudentsListComponent implements OnInit {
 
 
 
-
-  filtration= {
+  filtration = JSON.parse(this.route.snapshot.queryParams['q'] || 'null') || {
     ...Filtration,
     schoolYearId:1,
     SchoolId:null,
@@ -89,16 +89,16 @@ export class StudentsListComponent implements OnInit {
   isSchoolAllowToTransferGroup$
 
   // << DATA PLACEHOLDER >> //
-  countries$ = this.countriesService.getCountries()
-  curriculums$ = this.sharedService.getAllCurriculum()
-  schools$ = this.schoolsService.getSchoolsDropdown()
-  AllTracks$ =this.sharedService.getAllTraks()
+  countries$ = this.countriesService.getCountries().pipe(shareReplay())
+  curriculums$ = this.sharedService.getAllCurriculum().pipe(shareReplay())
+  schools$ = this.schoolsService.getSchoolsDropdown().pipe(shareReplay())
+  AllTracks$ =this.sharedService.getAllTraks().pipe(shareReplay())
   AllGrades$;
   AllDivisions$;
   gradeTracks$
   schoolDivisions$
 
-  talents$ =  this.indexService.getIndext(IndexesEnum.TheTypeOfTalentOfTheStudent);
+  talents$ =  this.indexService.getIndext(IndexesEnum.TheTypeOfTalentOfTheStudent).pipe(shareReplay());
   booleanOptions = this.sharedService.booleanOptions
 
   passedOptions = [
@@ -122,6 +122,11 @@ export class StudentsListComponent implements OnInit {
 
   isSearching =false
 
+  onCurriculumSelected(id){
+    this.schools$ = this.schoolsService.getSchoolsDropdown({curriculumId:id[0]}).pipe(shareReplay())
+
+  }
+
   constructor(
     private translate: TranslateService,
     private headerService:HeaderService,
@@ -134,7 +139,9 @@ export class StudentsListComponent implements OnInit {
     private gradesService:GradesService,
     private exportService:ExportService,
     private settings:SettingsService,
-    private indexService:IndexesService
+    private indexService:IndexesService,
+    private route:ActivatedRoute,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -151,8 +158,8 @@ export class StudentsListComponent implements OnInit {
           this.isSchoolAllowToTransferGroup$=this.settings.isSchoolAllowToTransferGroup(this.schoolId)
         }
         else{id=''}
-        this.AllDivisions$ =this.sharedService.getAllDivisions(id)
-        this.AllGrades$ =this.sharedService.getAllGrades(id)
+        this.AllDivisions$ =this.sharedService.getAllDivisions(id).pipe(shareReplay())
+        this.AllGrades$ =this.sharedService.getAllGrades(id).pipe(shareReplay())
 
 
     })
@@ -182,8 +189,8 @@ export class StudentsListComponent implements OnInit {
       {
       this.isGradeSelected=true
       if( this.isGradeSelected && this.isSchoolSelected){
-        this.gradeTracks$ = this.gradesService.getGradeTracks(this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,GradeId)
-        this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,gradeid:GradeId||null}).pipe(map(res => res.data))
+        this.gradeTracks$ = this.gradesService.getGradeTracks(this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,GradeId).pipe(shareReplay())
+        this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.currentUserScope==this.userScope.Employee ?[this.schoolId]:this.schoolId,gradeid:GradeId||null}).pipe(map(res => res.data), shareReplay())
       }
       }
     }
@@ -194,6 +201,17 @@ export class StudentsListComponent implements OnInit {
   getStudents(){
     this.students.loading=true
     this.students.list=[]
+
+    // let filterObj =  this.route.snapshot.queryParams['q'] ? this.route.snapshot.queryParams['q']: this.filtration
+    if(this.route.snapshot.queryParams['q']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['q'] || ''), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {q : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
+
     this.studentsService.getAllStudents(this.filtration)
     .subscribe(res=>{
       this.students.loading=false

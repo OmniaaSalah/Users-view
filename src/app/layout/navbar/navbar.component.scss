@@ -365,34 +365,39 @@
         overflow: hidden;
         // transform: translateY(3rem);
 
+        height: 45rem;
+
         &.show{
             visibility: visible;
             opacity: 1;
             transform: translate(-50%, 0);
         }
 
-        .links{
-            padding: 3rem;
+        .links-wrapper{
+          overflow-y: auto;
 
-            h2{margin-bottom: 2rem;}
+          .links{
+              padding: 3rem;
+              h2{margin-bottom: 2rem;}
 
-            ul{
+              ul{
 
-                li{
-                    padding: 1.25rem 1rem;
-                    color: $color-primary;
-                    transition: all .2s ease-in-out;
-                    border-radius: 12px;
-                    cursor: pointer;
+                  li{
+                      padding: 1.25rem 1rem;
+                      color: $color-primary;
+                      transition: all .2s ease-in-out;
+                      border-radius: 12px;
+                      cursor: pointer;
 
-                    &:hover{
-                        background-color: $color-gray-100;
-                        color: $color-skyBlue;
-                        padding-inline-start: 2rem;
-                    }
-                }
-            }
+                      &:hover{
+                          background-color: $color-gray-100;
+                          color: $color-skyBlue;
+                          padding-inline-start: 2rem;
+                      }
+                  }
+              }
 
+          }
         }
 
         .more-common{
@@ -402,6 +407,7 @@
             display: flex;
             flex-direction: column;
             padding: 6rem 5rem;
+            overflow-y: auto;
 
             h2{margin-bottom: 3.5rem;}
 

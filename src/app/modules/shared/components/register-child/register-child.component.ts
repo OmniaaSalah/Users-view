@@ -278,6 +278,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 			index:8,
 			claims:[this.claimsEnum.SEG_R_StudentRecord],
 			isActive:false
+		},
+    {
+			title: this.translate.instant('dashboard.parents.editableList'),
+			index:9,
+			claims:[], //this.claimsEnum.SEG_R_StudentEditList
+			isActive:false
 		}
 
 	]

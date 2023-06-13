@@ -208,7 +208,7 @@
 
                 <div class="mb-5">
                   <p class="color-gray-300">{{'dashboard.parents.VaccineCertificate'|translate}}</p>
-                  <ng-container *ngFor="let file of attachments; let i = index">
+                  <ng-container *ngFor="let file of medicalFile?.vaccineCertificates||[] ; let i = index">
                     <div class="" *ngIf="file?.url">
                         <app-file [file]="file" [clickable]="true"></app-file>
                     </div>
@@ -327,7 +327,7 @@
                   <textarea formControlName="vaccinationBook" pInputTextarea placeholder="{{'dashboard.parents.VaccinationBook'|translate}}"></textarea>
                 </div> -->
 
-                <app-file-upload [files]="[{url: 'dsfdsf',name:'vaccine'}]" (onFileUpload)="onFileUpload($event)" title="{{'dashboard.parents.VaccineCertificate'|translate}}"></app-file-upload>
+                <app-file-upload [files]="getCtr('vaccineCertificates').value || []" (onFileUpload)="onFileUpload($event)" title="{{'dashboard.parents.VaccineCertificate'|translate}}"></app-file-upload>
             </div>
 
           </div>
