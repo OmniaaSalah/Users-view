@@ -17,6 +17,7 @@ import { PaymentsComponent } from './components/register-child/payments/payments
 import { StudentProhibitedStatusComponent } from './components/register-child/student-prohibited-status/student-prohibited-status.component';
 import { StudentOperationsDropdownComponent } from './components/register-child/student-operations-dropdown/student-operations-dropdown.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { EditHistoryComponent } from './components/register-child/edit-history/edit-history.component';
 
 
 
@@ -39,7 +40,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     IdentityInfoComponent,
     PaymentsComponent,
     StudentProhibitedStatusComponent,
-    StudentOperationsDropdownComponent
+    StudentOperationsDropdownComponent,
+    EditHistoryComponent
   ],
   imports: [
     CommonModule,

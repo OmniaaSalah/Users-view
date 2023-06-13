@@ -45,10 +45,10 @@ export class ViewCertificatesComponent implements OnInit {
     private userService:UserService,) { }
 
   ngOnInit(): void {
-    this.getAllCertificates();
     if(this.paymentRef)  {
       this.completePaymentProccess()
-      localStorage.setItem('url',this.paymentRef)
+    }else{
+      this.getAllCertificates();
     }
 
     this.userService.currentGuardian.subscribe((res)=> {this.guardian=res;});

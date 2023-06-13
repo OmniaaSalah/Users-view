@@ -15,7 +15,7 @@ import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.e
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { SystemRequestService } from '../../services/system-request.service';
-import { Observable, map } from 'rxjs';
+import { Observable, delay, map } from 'rxjs';
 import { Division } from 'src/app/core/models/global/global.model';
 import { GradesService } from 'src/app/modules/schools/services/grade/grade.service';
 // import { IunregisterChild } from '../../models/IunregisterChild';
@@ -330,7 +330,7 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
       comments: ""
     }
     this.onSubmited=true
-    this.requestsService.reOpenRequest(reqBody).subscribe(res=>{
+    this.requestsService.reOpenRequest(reqBody).pipe(delay(1500)).subscribe(res=>{
       this.getRequestDetails()
       this.getRequestOptions()
       this.toaster.success(this.translate.instant('toasterMessage.requestReopenSuccesfully'))
