@@ -1,13 +1,14 @@
 @import "src/assets/css/utils/variables.scss";
 @import '../../../../assets/css/components/forms.scss';
+@import '../../../../assets/css/components/profile';
 
 
-.profile__avatar{
-  width: 8rem;
-  height: 8rem;
-  border-radius: 15px;
-  overflow: hidden;
-}
+// .profile__avatar{
+//   width: 8rem;
+//   height: 8rem;
+//   border-radius: 15px;
+//   overflow: hidden;
+// }
 
 .editBtn{
     top: -7rem;
@@ -59,67 +60,67 @@
 }
 
 
-.profile{
-  position: relative;
-  display: flex;
-  align-items: center;
-  column-gap: 1.5rem;
+// .profile{
+//   position: relative;
+//   display: flex;
+//   align-items: center;
+//   column-gap: 1.5rem;
 
-  &__avatar{
+//   &__avatar{
 
 
-      &.sm{
-          height: 7rem;
-          width: 7rem;
-      }
+//       &.sm{
+//           height: 7rem;
+//           width: 7rem;
+//       }
 
-      img{
-        border-radius: 15px;
-          width: 100%;
-          object-fit: cover;
-      }
+//       img{
+//         border-radius: 15px;
+//           width: 100%;
+//           object-fit: cover;
+//       }
 
-  }
+//   }
 
-  &__info{
+//   &__info{
 
-  }
-  &__name{
-      display: flex;
-      align-items: center;
-      column-gap: 2rem;
-      margin-bottom: 1rem;
-      color: #3052A1;
-      h4{
+//   }
+//   &__name{
+//       display: flex;
+//       align-items: center;
+//       column-gap: 2rem;
+//       margin-bottom: 1rem;
+//       color: #3052A1;
+//       h4{
 
-          font-size: 1.9rem;
-      }
-      & > *{
-          display: flex;
-          align-items: center;
-          gap: .5rem;
-      }
-  }
+//           // font-size: 1.9rem;
+//       }
+//       & > *{
+//           display: flex;
+//           align-items: center;
+//           gap: .5rem;
+//       }
+//   }
 
-  &__job{
+//   &__job{
 
-  }
+//   }
 
-  &__details{
-      display: flex;
-      align-items: center;
-      column-gap: 3rem;
-      color: #5F5F5F;
-      margin-top: 1.8rem;
-      font-size: 1.6rem;
+//   &__details{
+//       display: flex;
+//       align-items: center;
+//       column-gap: 3rem;
+//       color: #5F5F5F;
+//       margin-top: 1.8rem;
+//       font-size: 1.6rem;
 
-      div{
-          display: flex;
-          align-items: center;
-          column-gap: .75rem;
-      }
-  }
-}
+//       div{
+//           display: flex;
+//           align-items: center;
+//           column-gap: .75rem;
+//       }
+//   }
+// }
 .card{
   min-height: 381px;
   border-color: #F5F5F5;
