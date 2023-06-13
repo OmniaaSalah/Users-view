@@ -24,7 +24,7 @@
            <div class="row g-5 form-set" >
                 <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
                     <label class="label">{{'dashboard.schools.SchoolCurriculum'| translate}}</label>
-                    <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
+                    <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" (ngModelChange)="onCurriculumSelected($event)" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
                 </div>
                 <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
                     <label class="label">{{'School'|translate}}</label>

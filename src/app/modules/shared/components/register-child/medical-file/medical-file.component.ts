@@ -57,7 +57,8 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       isAthletic: ['',Validators.required],
       weight: ['',Validators.required],
       height:['',Validators.required],
-      otherNotes:['', Validators.required]
+      otherNotes:['', Validators.required],
+      vaccineCertificates :[[]]
 
     })
 
@@ -70,7 +71,6 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     private studentsService: StudentsService,
     private route: ActivatedRoute,
     public childService:RegisterChildService,
-    private userService:UserService,
     private toaster:ToastrService,
     private cliamsService:ClaimsService,
     private sharedService:SharedService) { }
@@ -116,7 +116,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
 
 
   onFileUpload(files){
-
+    this.medicalFileForm.controls.vaccineCertificates.setValue(files)
   }
   ngOnDestroy(): void {
   }

@@ -23,7 +23,7 @@
   <!-- ************ Default Theme (Box uploader) ************** -->
 <div class="image-uploader flex-grow-1" [class]="view" *ngIf="theme=='default'">
 
-    <h3 class="fw-bold mb-4" [style.minHeight.rem]="'2.7'"> {{title}} <span class="d-inline-block mx-1 fs-4 fw-normal mb-1" *ngIf="isMandatory !=null">( {{isMandatory ? ( 'dashboard.surveys.mandatory'|translate) : ('dashboard.surveys.optional'|translate)}} )</span></h3>
+    <h3 class="fw-bold mb-4" [style.minHeight.rem]="'2.7'"> {{title}} <span class="d-inline-block mx-1 fs-4 fw-normal mb-1 " [class.required]="isMandatory" *ngIf="isMandatory !=null">( {{isMandatory ? ( 'dashboard.surveys.mandatory'|translate) : ('dashboard.surveys.optional'|translate)}} )</span></h3>
 
     <div class=" gx-4 gap-4 gap-xxl-5 file-container" [class.row]="view==='box' || view==='list'">
 
