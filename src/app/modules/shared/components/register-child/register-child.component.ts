@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { finalize, Observable, Subject } from 'rxjs';
+import { finalize, map, Observable, Subject } from 'rxjs';
 import {  Mode } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { ClaimsService } from 'src/app/core/services/claims.service';
@@ -15,6 +15,7 @@ import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/stat
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { RegisterChildService } from '../../services/register-child/register-child.service';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 
 @Component({
   selector: 'app-register-child',
@@ -150,6 +151,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     public childService:RegisterChildService,
     private toastr: ToastrService,
     private userService:UserService,
+    private router:Router,
     private claimsService:ClaimsService) { }
 
 
@@ -174,6 +176,14 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     this.childService.Student$.next(null)
     this.studentsService.getStudent(studentId)
+    .pipe(map(res=>{
+      if(res.statusCode==HttpStatusCodeEnum.Unauthorized){
+        this.router.navigate(['/'])
+      }
+
+      return res
+
+    }))
     .subscribe((res:any) =>{
       this.childService.Student$.next(res?.result)    // for Sharing between multiple components instead of make multiple Http Requests
       this.schoolId = res.result.school?.id
