@@ -88,6 +88,7 @@ export class NewAccountComponent implements OnInit ,OnDestroy{
   ngOnInit(): void {
     this.tittle=this.translate.instant("login.Create New User Account");
     this.getAuthenticationWays();
+    this.RemoveStorage();
   }
   get registrationWay() {
     return this.registrationWayFormGrp.controls['registrationWay'] as FormControl;
@@ -144,6 +145,10 @@ export class NewAccountComponent implements OnInit ,OnDestroy{
   {
 
     this.authService.isNewAccountOpened.next(false)
+    this.RemoveStorage();
+  }
+  RemoveStorage()
+  {
     localStorage.removeItem('accountWay');
     localStorage.removeItem('notificationSource');
     localStorage.removeItem('userAcountData');
