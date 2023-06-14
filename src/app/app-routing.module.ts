@@ -7,6 +7,8 @@ import { HomeComponent } from './core/home-page/home.component';
 import { ClaimsGuard } from './core/guards/claims.guard';
 import { ClaimsEnum } from './shared/enums/claims/claims.enum';
 import { CheeckMandatoryServeyGuard } from './core/guards/check-mandatory-servey.guard';
+import { NotAllowedComponent } from './core/components/not-allowed/not-allowed.component';
+import { Layout } from './layout/layout-routing.service';
 
 const routes: Routes = [
 
@@ -22,8 +24,6 @@ const routes: Routes = [
         (a) => a.AuthenticationModule
       ),
   },
-
-
 
 
   {
@@ -347,9 +347,19 @@ const routes: Routes = [
 
   {
     path: 'certificate/:id',
-    component: CertificateDetailsComponent
+    component: CertificateDetailsComponent,
+    canActivate: [AuthenticationGuard]
   },
 
+
+  Layout.childRoutes([
+    {
+      path:'oops/page-not-allowed',
+      component:NotAllowedComponent,
+      canActivate: [AuthenticationGuard]
+
+    }
+  ]),
 
   {
     path: '**',

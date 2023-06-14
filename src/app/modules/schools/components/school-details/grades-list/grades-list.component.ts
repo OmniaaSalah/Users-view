@@ -70,7 +70,7 @@ export class SchoolGradesComponent implements OnInit {
       this.userService.currentUserSchoolName$?.subscribe((res)=>{
         if(res)
         {
-          this.currentSchool= JSON.parse(res);
+          this.currentSchool= res;
           this.componentHeaderData.mainTitle.main=this.currentSchool[this.lang];
         }
       })

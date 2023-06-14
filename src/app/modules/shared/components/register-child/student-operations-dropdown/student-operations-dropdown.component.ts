@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, map, Observable, share, throwError } from 'rxjs';
+import { map, Observable, share } from 'rxjs';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { OptionalSubjects, Division, Track } from 'src/app/core/models/global/global.model';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
@@ -135,7 +135,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
         label: this.translate.instant('breadcrumb.Request to issue a certificate'),
         disabled: this.student?.studentProhibited?.rCertificateFromSPEA || this.student?.studentProhibited?.certificateFromSchool,
         icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,
-        routerLink:`/certificates/ask-certificate/${this.childId}`
+        routerLink:`/certificates/ask-certificate/${this.student?.id}`
       }
     ];
   }

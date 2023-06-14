@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -178,7 +178,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.studentsService.getStudent(studentId)
     .pipe(map(res=>{
       if(res.statusCode==HttpStatusCodeEnum.Unauthorized){
-        this.router.navigate(['/'])
+        this.router.navigate(['/oops/page-not-allowed'])
       }
 
       return res
