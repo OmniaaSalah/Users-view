@@ -7,13 +7,15 @@ import { GuardianHomeComponent } from './home-page/guardian-home/guardian-home.c
 import { PrimngModule } from '../primng/primeNg.module';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutModule } from '../layout/layout.module';
+import { NotAllowedComponent } from './components/not-allowed/not-allowed.component';
 
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    GuardianHomeComponent
+    GuardianHomeComponent,
+    NotAllowedComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { LayoutModule } from '../layout/layout.module';
     HttpClientModule,
     HomeComponent,
     GuardianHomeComponent,
-    LayoutModule
+    LayoutModule,
+    NotAllowedComponent
   ]
 })
 export class CoreModule { }
