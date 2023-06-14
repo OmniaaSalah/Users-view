@@ -106,7 +106,7 @@ export class StudentsService {
   getStudentEditHistory(id, filter){
 
     this.loaderService.isLoading$.next(true)
-    return this.http.get(`/Modification/${id}`,filter)
+    return this.http.get(`/Modification?entityId=${id}&entityName=Student`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -116,7 +116,7 @@ export class StudentsService {
   }
 
   getStudentEditHistoryItem(id){
-    return this.http.get(`Modification?entityId=${25}&entityName=Student`)
+    return this.http.get(`/Modification/${id}`)
   }
 
   postTransferGroup(data){

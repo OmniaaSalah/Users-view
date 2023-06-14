@@ -13,7 +13,8 @@ import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./page-header.component.scss']
 })
 export class PageHeaderComponent implements OnInit {
-  homePage=inject (TranslateService) .instant('Home Page')
+  homePage=inject(TranslateService).get('Home Page')
+
   notificationNumber: number = 0;
   breadCrump: MenuItem[]
   mainTitle: ITitle;

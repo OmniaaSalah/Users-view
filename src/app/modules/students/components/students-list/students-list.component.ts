@@ -58,7 +58,8 @@ export class StudentsListComponent implements OnInit {
 
 
 
-  filtration = JSON.parse(this.route.snapshot.queryParams['q'] || 'null') || {
+  filtration =
+  {
     ...Filtration,
     schoolYearId:1,
     SchoolId:null,
@@ -76,7 +77,8 @@ export class StudentsListComponent implements OnInit {
     IsInFusionClass:null,
     IsSpecialClass:null,
     StudentDegreeResultFilter:null,
-    gender:null
+    gender:null,
+    ...JSON.parse(this.route.snapshot.queryParams['q'] || 'null')
   }
   paginationState= {...paginationInitialState}
 
@@ -204,7 +206,7 @@ export class StudentsListComponent implements OnInit {
 
     // let filterObj =  this.route.snapshot.queryParams['q'] ? this.route.snapshot.queryParams['q']: this.filtration
     if(this.route.snapshot.queryParams['q']){
-      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['q'] || ''), ...this.filtration}
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['q']), ...this.filtration}
     }
     this.router.navigate([], {
       queryParams: {q : JSON.stringify(this.filtration)},
