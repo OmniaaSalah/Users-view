@@ -144,7 +144,7 @@ export class UserService {
   }
 
   public getSchoolName(): any {
-    return this.token.schoolName;
+    return typeof this.token.schoolName ==='string' ? JSON.parse(this.token.schoolName) : this.token.schoolName;
   }
 
   public setCurrentUserName(currentUserName?: any) {

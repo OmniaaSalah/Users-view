@@ -405,7 +405,8 @@
         "imageUploaded":"Image uploaded successfully",
         "Attendance and Abbsence List is empty":"Attendance and Abbsence list is empty",
         "divisionDegreeHint":"If division official not allowed to enter degrees ,The teacher is responsible to enter them for his subject.",
-        "noLectures": "No lectures are defined"
+        "noLectures": "No lectures are defined",
+        "accessDenied":"Sorry . you are not allowed to visit this page"
 
     },
 
