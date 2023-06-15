@@ -26,6 +26,7 @@ import { TransferType } from 'src/app/shared/enums/school/school.enum';
   styleUrls: ['./transfered-students-reports.component.scss']
 })
 export class TransferedStudentsReportsComponent implements OnInit {
+  emptyTable:boolean=false;
   lang = inject(TranslationService).lang
   isBtnLoading: boolean=false;
   get statusEnum(){ return StatusEnum }
@@ -168,6 +169,7 @@ export class TransferedStudentsReportsComponent implements OnInit {
   }
 
   checkValueOfCheckbox(item, event) {
+    var selectedItems=[]
     this.tableColumns.forEach((report, i) => {
       if (report.header == item.header && event.checked == true) {
         report.isSelected == true
@@ -175,8 +177,9 @@ export class TransferedStudentsReportsComponent implements OnInit {
       if (report.header == item.header && event.checked == false) {
         report.isSelected == false
       }
-
+      if(report.isSelected) selectedItems.push(report)
     })
+    !selectedItems.length? this.emptyTable=true : this.emptyTable=false
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {

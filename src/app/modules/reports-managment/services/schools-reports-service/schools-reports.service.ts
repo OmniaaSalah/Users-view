@@ -32,62 +32,50 @@ export class SchoolsReportsService {
       {
         name:this.translate.instant('School'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:this.translate.instant('shared.state'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name: this.translate.instant('dashboard.schools.TeachersNumbers'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:  this.translate.instant('dashboard.schools.StudentsNumbers'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:this.translate.instant('dashboard.schools.SchoolStudentsPercentge'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:this.translate.instant('shared.grade'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name:this.translate.instant('shared.division'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name:this.translate.instant('dashboard.schools.studentPercentgeInDivision'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name:this.translate.instant('dashboard.schools.EnrolledStudentNumbers'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name:this.translate.instant('dashboard.schools.SpecialClassesNumbers'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name:this.translate.instant('dashboard.schools.fusionStudentNumbers'),
         isSelected: false,
-        isDisabled: false,
       }
       
      

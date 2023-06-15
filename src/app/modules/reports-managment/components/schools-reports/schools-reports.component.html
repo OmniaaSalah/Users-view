@@ -10,7 +10,7 @@
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
-                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" [disabled]="item.isDisabled" [(ngModel)]="item.isSelected"
+                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)"  [(ngModel)]="item.isSelected"
                     [binary]="true"></p-checkbox>
 
                 <label class="label label--sm" for=""> {{item.name}} </label>
@@ -20,7 +20,7 @@
     </div>
 
 
-    <div class="prim-table mt-4" *ngIf="schoolsReport.totalAllData || schoolsReport.loading">
+    <div class="prim-table mt-4" *ngIf="(schoolsReport.totalAllData || schoolsReport.loading)&&!emptyTable">
         <p-table #dt [value]="schoolsReport.list" [lazy]="true" (onSort)="onSort($event)" [scrollable]="true">
 
             <ng-template pTemplate="caption">
@@ -57,7 +57,6 @@
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
                         <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true"> 
-                            <!-- studentsReportsArray -->
                             <p-sortIcon field="{{column.name }}"></p-sortIcon>{{column.name }}
                         </th>
                     </ng-container>
@@ -66,23 +65,23 @@
             <ng-template pTemplate="body" let-school>
                 <tr>
                     <ng-container>
-                        <td>
+                        <td *ngIf="tableColumns[0].isSelected == true">
                             {{school?.schoolName | currentLang}} 
                         </td>
                        
-                        <td>
+                        <td *ngIf="tableColumns[1].isSelected == true">
                             {{school?.state | currentLang}}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[2].isSelected == true">
                             {{school?.teachersNumbers }}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[3].isSelected == true">
                             {{school?.studentsNumber }}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[4].isSelected == true">
                             {{school?.studentsCountInSchool}} 
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[5].isSelected == true">
                             {{school?.curriculumName | currentLang}}
                           
                         </td>

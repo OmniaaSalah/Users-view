@@ -60,7 +60,7 @@
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
-                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" [disabled]="item.isDisabled"
+                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" 
                     [(ngModel)]="item.isSelected" [binary]="true"></p-checkbox>
 
                 <label class="label label--sm" for=""> {{item.name}} </label>
@@ -74,7 +74,7 @@
     <span class="color-gray-800">" {{'dashboard.reports.you should choose the date that you need view it’s absence and attendance data first'|translate}} "</span>
 </div>
     <div class="parents">
-        <div class="prim-table" *ngIf="(studentsReport.totalAllData|| studentsReport.loading)&& date && shownTable">
+        <div class="prim-table" *ngIf="(studentsReport.totalAllData|| studentsReport.loading)&& date && shownTable &&!emptyTable">
             <p-table #dt [value]="studentsReport.list" sortMode="multiple"  [scrollable]="true" (onSort)="onSort($event)">
 
                 <ng-template pTemplate="caption">
@@ -100,22 +100,22 @@
                 <ng-template pTemplate="body" let-student>
                     <tr>
                         <ng-container>
-                            <td>
+                            <td *ngIf="tableColumns[0].isSelected == true">
                                 {{student?.devisionName | currentLang}}
                             </td>
-                             <td>
+                             <td *ngIf="tableColumns[1].isSelected == true">
                                 {{student?.gradeName | currentLang}}
                             </td>
-                            <td>
+                            <td *ngIf="tableColumns[2].isSelected == true">
                                 {{student?.attendantCount}}
                             </td>
-                            <td>
+                            <td *ngIf="tableColumns[3].isSelected == true">
                                 {{student?.absenceCount }}
                             </td>
-                            <td>
+                            <td *ngIf="tableColumns[4].isSelected == true">
                                 {{student?.attendantPersentage}} %
                             </td>
-                            <td>
+                            <td *ngIf="tableColumns[5].isSelected == true">
                                 {{student?.absencePersentage}} %
                             </td>
 

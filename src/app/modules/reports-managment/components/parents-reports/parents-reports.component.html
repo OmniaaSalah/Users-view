@@ -69,7 +69,7 @@
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
-                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" [disabled]="item.isDisabled" [(ngModel)]="item.isSelected"
+                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)"  [(ngModel)]="item.isSelected"
                     [binary]="true"></p-checkbox>
 
                 <label class="label label--sm" for=""> {{item.name}} </label>
@@ -79,7 +79,7 @@
     </div>
 
 
-    <div class="prim-table mt-4" *ngIf="parentsReport.totalAllData || parentsReport.loading">
+    <div class="prim-table mt-4" *ngIf="(parentsReport.totalAllData || parentsReport.loading)&&!emptyTable">
         <p-table #dt [value]="parentsReport.list" [lazy]="true" (onSort)="onSort($event)" [scrollable]="true">
 
             <ng-template pTemplate="caption">
@@ -102,23 +102,23 @@
             <ng-template pTemplate="body" let-parent>
                 <tr>
                     <ng-container>
-                        <td>
+                        <td *ngIf="tableColumns[0].isSelected == true">
                             {{parent?.parentName| currentLang}}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[1].isSelected == true">
                             {{parent?.parentNumber }}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[2].isSelected == true">
                             {{parent?.parentNationality | currentLang}}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[3].isSelected == true">
                             <span class="position-relative" pTooltip="{{parent?.parentEmail}}" [autoHide]="true" tooltipPosition="top">{{parent?.parentEmail | truncate:15 }}</span>
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[4].isSelected == true">
                             {{parent?.relationType| currentLang }}
                         </td>
 
-                        <td class="lg d-flex gap-2">
+                        <td class="lg d-flex gap-2" *ngIf="tableColumns[5].isSelected == true">
                             <app-student-badges [isTopStudent]="parent?.isTopStudent" [isGifted]="parent?.isGifted" [studentCategory]='parent?.studentCategory'></app-student-badges>
                             <a  target="_blank"  [routerLink]="['//schools-and-students/students/student/'+parent?.student?.id]" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{parent?.student?.name |currentLang}}</a>
                         </td>
