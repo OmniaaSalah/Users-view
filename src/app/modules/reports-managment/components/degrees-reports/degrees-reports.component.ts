@@ -22,6 +22,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   styleUrls: ['./degrees-reports.component.scss']
 })
 export class DegreesReportsComponent implements OnInit {
+  emptyTable:boolean=false;
   isBtnLoading: boolean=false;
   shownTable:boolean=false;
   lang = inject(TranslationService).lang
@@ -98,6 +99,7 @@ export class DegreesReportsComponent implements OnInit {
 
   }
   checkValueOfCheckbox(item, event) {
+    var selectedItems=[]
     this.tableColumns.forEach((report, i) => {
       if (report.header == item.header && event.checked == true) {
         report.isSelected == true
@@ -105,8 +107,9 @@ export class DegreesReportsComponent implements OnInit {
       if (report.header == item.header && event.checked == false) {
         report.isSelected == false
       }
-
+      if(report.isSelected) selectedItems.push(report)
     })
+    !selectedItems.length? this.emptyTable=true : this.emptyTable=false
   }
 
   getDegreesList(){
