@@ -53,7 +53,7 @@
             <!-- Registered Child -->
             <div class="row g-5" *ngIf="!skeletonShown ">
                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of students">
-                    <div role="button" [routerLink]="['../', 'child',student?.studentGuid]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0 h-100">
+                    <div role="button" [routerLink]="['../', 'child',student?.studentGuid||student?.guid ]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0 h-100">
 
                         <div class="profile d-flex align-items-center p-4">
                             <div class="profile__avatar">

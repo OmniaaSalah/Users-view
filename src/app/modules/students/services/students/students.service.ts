@@ -103,6 +103,35 @@ export class StudentsService {
   }
 
 
+  getStudentEditHistory(id, filter){
+
+    this.loaderService.isLoading$.next(true)
+    return this.http.get(`/Modification?entityId=${id}&entityName=Student`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
+
+  }
+
+  getStudentEditHistoryItem(id){
+    return this.http.get(`/Modification/${id}`)
+  }
+
+  postTransferGroup(data){
+    return this.http.post('/Student/mass-transfer-request',data)
+    .pipe(
+      map(res=>{
+        if(res.statusCode ==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res?.errorLocalized))
+        return res
+      }),
+      take(1)
+    )
+  }
+
+
+
 // مواد الطالب القابله للاعفاء
 getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,studentId:number|string}){
   return this.http.get(`/Subject/exempt-subjects`,query).pipe(take(1))

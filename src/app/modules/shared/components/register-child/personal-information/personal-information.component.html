@@ -63,8 +63,8 @@
                 <p class="color-gray-300">{{'dashboard.students.daleelNumber1' |translate}}</p>
                 <span class="color-primary">{{student.daleelId}}</span>
 
-                <p class="color-gray-300">{{'dashboard.students.manhalNumber' |translate}}</p>
-                <span class="color-primary">{{student.manhalNumber}}</span>
+                <!-- <p class="color-gray-300">{{'dashboard.students.manhalNumber' |translate}}</p>
+                <span class="color-primary">{{student.manhalNumber}}</span> -->
 
                 <p class="color-gray-300">{{'dashboard.parents.ministerialNumber' |translate}}</p>
                 <span class="color-primary mb-2">{{student.ministerialId || ('shared.notFound' |translate)}}</span>
@@ -274,10 +274,10 @@
                 <p-inputNumber formControlName="daleelId" appFormControlValidationMsg [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
               </div>
 
-              <div class="col-md-4 col-lg-3 ">
+              <!-- <div class="col-md-4 col-lg-3 ">
                 <label class="label" for="description">{{'dashboard.students.manhalNumber'| translate}}</label>
                 <p-inputNumber formControlName="manhalNumber" appFormControlValidationMsg [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
-              </div>
+              </div> -->
             </ng-container>
 
             <div class="col-md-4 col-lg-3 " *ngIf="currentUserScope !=scopeEnum.Guardian">

@@ -83,9 +83,8 @@ componentHeaderData: IHeader = {
     if(this.currentUserScope==this.userScope.Employee)
     {
       this.userService.currentUserSchoolName$?.subscribe((res)=>{
-        if(res)
-        {
-          this.currentSchool= JSON.parse(res);
+        if(res){
+          this.currentSchool= res;
           this.componentHeaderData.mainTitle.main=this.currentSchool[this.lang];
         }
       })

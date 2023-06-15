@@ -23,7 +23,7 @@ export class ClaimsGuard implements CanActivate {
       const allowedClaims = route.data["allowedClaims"];
 
       let claimFound =this.userService.isUserAllowedTo(allowedClaims)
-        if(!claimFound) this.router.navigate(['/']);
+        if(!claimFound) this.router.navigate(['/oops/page-not-allowed']);
 
         return claimFound
   }
