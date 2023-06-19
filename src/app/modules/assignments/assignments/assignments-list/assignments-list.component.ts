@@ -1,7 +1,7 @@
 
 import { AssignmentServiceService } from './../../service/assignment-service.service';
 
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {  faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 import { Component, OnInit,inject} from '@angular/core';
@@ -33,7 +33,12 @@ export class AssignmentsListComponent implements OnInit {
   schoolId=''
   get claimsEnum () {return ClaimsEnum}
   paginationState: paginationState = { ...paginationInitialState }
-  filtration = {...Filtration,Status: ''};
+  filtration = {
+    ...Filtration,
+    Status: '',
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  };
+
   faEllipsisVertical = faEllipsisVertical;
   examStatusList
  assignments={
@@ -60,7 +65,9 @@ export class AssignmentsListComponent implements OnInit {
     private translate: TranslateService,
     private userService:UserService,
     private assignmentservice: AssignmentServiceService,
-    private toastrService:ToastService) { }
+    private toastrService:ToastService,
+    private route:ActivatedRoute,
+    private router:Router) { }
 
 
 
@@ -73,6 +80,14 @@ export class AssignmentsListComponent implements OnInit {
     this.examStatusList=this.assignmentservice.examStatusList;
   }
   getAssignmentList() {
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
 
     this.assignments.loading=true;
     this.assignments.list=[];

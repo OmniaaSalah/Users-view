@@ -65,6 +65,7 @@
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption
+                [seachKeyword]="filtration.KeyWord"
                 (onFilter)="this.filtration.Page=1;getEmployees()"
                 (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getEmployees()"
                 (onExport)="onExport($event)"
@@ -164,7 +165,7 @@
 
 
         <div class="" *ngIf="employees.total > paginationState.rows">
-            <app-pagination [totalItems]="employees.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [currentPage]="filtration.Page" [totalItems]="employees.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
 

@@ -17,6 +17,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -30,7 +31,12 @@ export class SurveysListComponent implements OnInit {
   get ClaimsEnum(){return ClaimsEnum}
   surveyType;
   surveyStatus ;
-  filtration  = {...Filtration, SurveyType: '', SurveyStatus:null}
+  filtration  = {
+    ...Filtration,
+    SurveyType: '',
+    SurveyStatus:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  }
   paginationState: paginationState = { ...paginationInitialState }
   faEllipsisVertical = faEllipsisVertical;
   surveyList={
@@ -52,7 +58,9 @@ export class SurveysListComponent implements OnInit {
     private sharedService:SharedService,
     private Surveyservice: SurveyService,
     private toastrService:ToastService,
-    private exportService: ExportService) { }
+    private exportService: ExportService,
+    private route:ActivatedRoute,
+    private router:Router) { }
 
 
 
@@ -72,6 +80,13 @@ export class SurveysListComponent implements OnInit {
   }
   getSurveyList(){
 
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.surveyList.loading=true
     this.surveyList.list=[]

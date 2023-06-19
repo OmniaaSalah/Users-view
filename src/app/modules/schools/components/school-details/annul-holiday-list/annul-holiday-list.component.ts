@@ -37,7 +37,6 @@ export class AnnulHolidayListComponent implements OnInit {
   get claimsEnum () {return ClaimsEnum}
   currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
-  filtration = {...Filtration,flexibilityStatus: ''}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   reqInstance = this.route.snapshot.queryParamMap.get('requestInstance')
   returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
@@ -53,6 +52,11 @@ export class AnnulHolidayListComponent implements OnInit {
 
   actions
 
+  filtration = {
+    ...Filtration,
+    flexibilityStatus: '',
+    ...JSON.parse(localStorage.getItem('Holiday-SearchQuery') || 'null')
+  }
   paginationState={...paginationInitialState}
 
   selectedHoliday
@@ -138,6 +142,12 @@ export class AnnulHolidayListComponent implements OnInit {
 
 
   getHolidays(){
+
+    if(localStorage.getItem('Holiday-SearchQuery')){
+      this.filtration = {...JSON.parse(localStorage.getItem('Holiday-SearchQuery')), ...this.filtration}
+    }
+    localStorage.setItem('Holiday-SearchQuery',JSON.stringify(this.filtration))
+
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     this.holidays.loading=true
     this.holidays.list=[]
@@ -229,6 +239,7 @@ export class AnnulHolidayListComponent implements OnInit {
     this.filtration.KeyWord ='',
     this.filtration.flexibilityStatus='',
     this.filtration.Page=1;
+    localStorage.removeItem('Holiday-SearchQuery')
     this.getHolidays()
   }
 

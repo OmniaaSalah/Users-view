@@ -17,6 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { School } from 'src/app/core/models/schools/school.model';
 import { GradesService } from '../../services/grade/grade.service';
 import { SchoolChartsComponent } from './school-charts/school-charts.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -37,20 +38,15 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   cities$ = this.CountriesService.getCities()
   states$ = this.CountriesService.getAllStates()
 
-  public userAppData: any;
-  public seconduserAppData: any;
-  public appUserCount1: any;
-  public appUserCount2: any;
-  public appUserCount3: any;
-  public appUserCount4: any;
-  public appUserCount5: any;
-  public userLabel: any;
-  public options: any;
-  public userUsageHoursData;
-
 
   get StatusEnum() { return StatusEnum }
-  filtration :Filter = {...Filtration, Status: null, CityId:null,curriculumId:null, StateId: null}
+  filtration :Filter = {
+    ...Filtration, Status: null,
+    CityId:null,
+    curriculumId:null,
+    StateId: null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  }
   paginationState= {...paginationInitialState}
 
   schoolStatus = this.sharedService.statusOptions
@@ -92,7 +88,9 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
     private schoolsService:SchoolsService,
     private sharedService: SharedService,
     private CountriesService:CountriesService,
-    private translate:TranslateService
+    private translate:TranslateService,
+    private route:ActivatedRoute,
+    private router:Router
   ) { }
 
   ngAfterViewInit(): void {
@@ -106,6 +104,15 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
 
   getSchools(){
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     // ArrayOperations.filledObjectItemsCount(this.filtration)
     this.schools.loading=true

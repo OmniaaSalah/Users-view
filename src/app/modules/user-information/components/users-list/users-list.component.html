@@ -10,7 +10,7 @@
         <p-table #dt [value]="users.list"   [scrollable]="true" [lazy]="true" (onSort)="sortMe($event)">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getUsersList()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
+                <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getUsersList()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                         <div class="col-lg-4">
@@ -113,7 +113,7 @@
 
         <div>
             <div *ngIf="paginationState.rows<users.total">
-                <app-pagination [totalItems]="users.total" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+                <app-pagination [currentPage]="filtration.Page" [totalItems]="users.total" (paginationChanged)="onTableDataChange($event)"></app-pagination>
             </div>
         </div>
 

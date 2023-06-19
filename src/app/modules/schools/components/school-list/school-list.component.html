@@ -10,6 +10,7 @@
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption
+                [seachKeyword]="filtration.KeyWord"
                 (onExport)="onExport($event)"
                 (onFilter)="this.filtration.Page=1;getSchools(); chartsComp.getChartData(filtration)"
                 (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchools();chartsComp.getChartData(filtration)"
@@ -139,7 +140,7 @@
 
         </p-table>
         <div *ngIf="schools.total > paginationState.rows">
-            <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [currentPage]="filtration.Page" [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
 
     </div>

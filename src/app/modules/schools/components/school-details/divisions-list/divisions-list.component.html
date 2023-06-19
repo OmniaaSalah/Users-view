@@ -1,7 +1,7 @@
 <div class="prim-table mt-4" *ngIf="divisions.totalAllData || divisions.loading">
     <p-table #dt [value]="divisions.list">
         <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="this.filtration.Page=1;getSchoolDivisions()" (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchoolDivisions()" (onClear)="clearFilter()">
+            <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" (onFilter)="this.filtration.Page=1;getSchoolDivisions()" (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchoolDivisions()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
                     <div class="col-md-4" *ngIf="schoolGrades$ |async as schoolGrades">
@@ -84,7 +84,7 @@
         </ng-template>
     </p-table>
     <div class="" *ngIf="divisions.total > paginationState.rows">
-        <app-pagination [totalItems]="divisions.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [currentPage]="filtration.Page" [totalItems]="divisions.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 <ng-container *ngIf="!divisions.totalAllData && !divisions.loading">

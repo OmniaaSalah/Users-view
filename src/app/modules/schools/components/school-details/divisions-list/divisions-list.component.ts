@@ -46,7 +46,12 @@ componentHeaderData: IHeader = {
   mainTitle: { main:  this.currentSchool  }
 }
 
-  filtration={...Filtration, gradeid: [],schoolId:[this.schoolId]}
+  filtration={
+    ...Filtration,
+    gradeid: [],
+    schoolId:[this.schoolId],
+    ...JSON.parse(localStorage.getItem('Div-SearchQuery') || 'null')
+  }
   paginationState={...paginationInitialState}
   schoolGrades$ = this.gradesService.getSchoolGardes(this.schoolId).pipe(map(res=>res.data))
 
@@ -98,6 +103,15 @@ componentHeaderData: IHeader = {
     }
 
     getSchoolDivisions(){
+      if(localStorage.getItem('Div-SearchQuery')){
+        this.filtration = {...JSON.parse(localStorage.getItem('Div-SearchQuery')), ...this.filtration}
+      }
+      localStorage.setItem('Div-SearchQuery',JSON.stringify(this.filtration))
+      // this.router.navigate([], {
+      //   queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      //   relativeTo: this.route,
+      // });
+
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     this.divisions.loading=true
     this.divisions.list=[]
@@ -126,6 +140,7 @@ componentHeaderData: IHeader = {
      this.filtration.KeyWord =''
      this.filtration.gradeid = null
      this.filtration.Page=1;
+     localStorage.removeItem('Div-SearchQuery')
      this.getSchoolDivisions()
    }
 

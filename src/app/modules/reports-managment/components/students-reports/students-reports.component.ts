@@ -18,6 +18,7 @@ import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-students-reports',
@@ -62,8 +63,10 @@ export class StudentsReportsComponent implements OnInit {
     NationalityId:null,
     TalentId: null,
     StudentCategory:null,
-    ProhibitedTypes:null
+    ProhibitedTypes:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   };
+
   rangeValues: number[];
   felmaleStudentCount;
   maleStudentCount;
@@ -106,7 +109,8 @@ export class StudentsReportsComponent implements OnInit {
     private studentsReportService: StudentsReportsService,
     private sharedService: SharedService,
     private schoolsService: SchoolsService,
-    private studentService:StudentsService
+    private route:ActivatedRoute,
+    private router:Router
   ) {
     this.tableColumns = this.studentsReportService.tabelColumns
   }
@@ -142,6 +146,15 @@ export class StudentsReportsComponent implements OnInit {
       this.filtration.AcceptanceDateFrom=this.formateDate(this.acceptanceDate[0])
       this.filtration.AcceptanceDateTo=this.formateDate(this.acceptanceDate[1])
     }
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.studentsReport.loading = true
     this.studentsReport.list = []
     this.studentsReportService.getAllStudents(this.filtration)

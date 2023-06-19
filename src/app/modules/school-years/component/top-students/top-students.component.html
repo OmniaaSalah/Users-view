@@ -3,7 +3,7 @@
 
     <!-- Table Caption -->
     <ng-template pTemplate="caption">
-     <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllTopStudents()" (onSearch)="filtration.KeyWord = $event;getAllTopStudents()" (onClear)="clearFilter()">
+     <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" (onFilter)="getAllTopStudents()" (onSearch)="filtration.KeyWord = $event;getAllTopStudents()" (onClear)="clearFilter()">
 
          <div class="row gx-5 form-set">
            <div class="col-4">

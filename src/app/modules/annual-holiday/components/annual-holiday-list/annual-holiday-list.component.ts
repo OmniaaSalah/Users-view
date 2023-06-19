@@ -26,7 +26,6 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 export class AnnualHolidayComponent implements OnInit,OnDestroy{
   lang = inject(TranslationService).lang
   openModel:boolean=false;
-  filtration = {...Filtration,Curriculum:'',HolidayStatus: ''}
   faEllipsisVertical = faEllipsisVertical;
   curriculumList;
   annualCalenderId;
@@ -35,7 +34,16 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   deletedHoliday;
   holidayStatusList;
   updatedHolidayId:number;
+
+
+  filtration = {
+    ...Filtration,
+    Curriculum:'',
+    HolidayStatus: '',
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  }
   paginationState= {...paginationInitialState};
+
   annualHolidays={
     total:0,
     totalAllData:0,
@@ -110,6 +118,14 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   getAllHolidays(){
 
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.annualHolidayService.getAllHolidays(this.filtration).subscribe((res)=>{
       this.annualHolidays.loading = false;
       this.annualHolidays.list=res.data;
@@ -182,7 +198,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   {
 
      this.subscription=this.annualHolidayService.holiday.subscribe((updatedHoliday)=>{
-     
+
       this.editedHoliday=updatedHoliday;
       this.editedHoliday.flexibilityStatus=this.editedHoliday.flexibilityStatus.value;
       this.editedHoliday.curriculumIds=[];
@@ -252,7 +268,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
    this.annualHolidayService.openModel.next(false);
 
  }
- 
+
 formateDate(date :Date){
   let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
   return d.split('.')[0]

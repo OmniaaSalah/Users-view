@@ -14,6 +14,7 @@ import { SchoolsService } from '../../../schools/services/schools/schools.servic
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-parents-reports',
   templateUrl: './parents-reports.component.html',
@@ -33,8 +34,21 @@ export class ParentsReportsComponent implements OnInit {
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
   isCollapsed=true
-  filtration :Filter = {...Filtration,IsChildOfAMartyr:null,IsSpecialAbilities:null,RegisterationEndDate:'',RegisterationStartDate:'',curriculumId:null,SchoolId:null,GradeId:null,DivisionId:null}
+
+  filtration :Filter = {
+    ...Filtration,
+    IsChildOfAMartyr:null,
+    IsSpecialAbilities:null,
+    RegisterationEndDate:'',
+    RegisterationStartDate:'',
+    curriculumId:null,
+    SchoolId:null,
+    GradeId:null,
+    DivisionId:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  }
   paginationState = { ...paginationInitialState };
+
   parentsReport = {
     total: 0,
     totalAllData: 0,
@@ -47,7 +61,13 @@ export class ParentsReportsComponent implements OnInit {
     ],
   }
 
-  constructor(private exportService: ExportService,private translate:TranslateService, private headerService: HeaderService,private parentReportService:ParentsReportsService) { }
+  constructor(
+    private exportService: ExportService,
+    private translate:TranslateService,
+    private headerService: HeaderService,
+    private parentReportService:ParentsReportsService,
+    private route:ActivatedRoute,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
@@ -57,13 +77,20 @@ export class ParentsReportsComponent implements OnInit {
 
 
   getParentReportList() {
+    if(this.date){
+      this.filtration.RegisterationStartDate=this.formateDate(this.date[0])
+      this.filtration.RegisterationEndDate=this.formateDate(this.date[1])
+    }
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.isBtnLoading=true;
- if(this.date)
- {
-   this.filtration.RegisterationStartDate=this.formateDate(this.date[0])
-   this.filtration.RegisterationEndDate=this.formateDate(this.date[1])
- }
- console.log(this.filtration)
 		this.parentsReport.loading=true
 		this.parentsReport.list=[]
 		this.parentReportService.getAllParents(this.filtration).subscribe(res => {

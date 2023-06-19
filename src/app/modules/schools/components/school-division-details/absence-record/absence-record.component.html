@@ -72,6 +72,7 @@
             <div class="d-flex align-items-center bg-gray-30 radius-15">
                 <div class="flex-grow-1">
                     <app-table-caption
+                    [seachKeyword]="filtration.KeyWord"
                     [hasFilter]="false"
                     [hasExport]="false"
                     (onExport)="onExport($event)"

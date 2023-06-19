@@ -102,6 +102,16 @@ export class StudentsService {
     return this.http.post(`/Student/delete-request`,data).pipe(take(1))
   }
 
+  getSchools(filter?:Partial<Filter>){
+    this.loaderService.isLoading$.next(true)
+
+    return this.http.post('/School/dropdowen',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
+  }
 
   getStudentEditHistory(id, filter){
 

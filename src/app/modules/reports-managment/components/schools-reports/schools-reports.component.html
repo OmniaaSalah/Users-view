@@ -24,13 +24,14 @@
         <p-table #dt [value]="schoolsReport.list" [lazy]="true" (onSort)="onSort($event)" [scrollable]="true">
 
             <ng-template pTemplate="caption">
-                <app-table-caption 
-                (onExport)="onExport($event)" 
-                (onFilter)="filtration.Page=1;getschoolsReportList()" 
-                (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getschoolsReportList()" 
+                <app-table-caption
+                [seachKeyword]="filtration.KeyWord"
+                (onExport)="onExport($event)"
+                (onFilter)="filtration.Page=1;getschoolsReportList()"
+                (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getschoolsReportList()"
                 (onClear)="clearFilter()">
-            
-                  
+
+
                     <div class="row gx-5 form-set">
                         <div class="col-lg-4">
                             <label class="label" for="region">{{'shared.state'|translate }}  </label>
@@ -39,24 +40,24 @@
                         <div class="col-lg-4">
                             <label class="label" for="curriculum">{{'dashboard.schools.SchoolCurriculum'|translate }}  </label>
                             <p-multiSelect  [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.CurriculumId" optionValue="id"  optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
-            
+
                         </div>
-            
+
                         <div class="col-lg-4">
                             <label class="label" for="curriculum">{{'dashboard.schools.hasSpecialClasses'|translate }}  </label>
                             <p-dropdown  [showClear]="true" StopProp [options]="booleanOptions" [(ngModel)]="filtration.HasSpecialEducationClasses" optionValue="value" inputId="curriculum" optionLabel="name" placeholder="{{'shared.yesOrNo'|translate }}"></p-dropdown>
-            
+
                         </div>
                     </div>
                 </app-table-caption>
-            
+
             </ng-template>
 
 
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
-                        <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true"> 
+                        <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true">
                             <p-sortIcon field="{{column.name }}"></p-sortIcon>{{column.name }}
                         </th>
                     </ng-container>
@@ -66,9 +67,9 @@
                 <tr>
                     <ng-container>
                         <td *ngIf="tableColumns[0].isSelected == true">
-                            {{school?.schoolName | currentLang}} 
+                            {{school?.schoolName | currentLang}}
                         </td>
-                       
+
                         <td *ngIf="tableColumns[1].isSelected == true">
                             {{school?.state | currentLang}}
                         </td>
@@ -79,11 +80,11 @@
                             {{school?.studentsNumber }}
                         </td>
                         <td *ngIf="tableColumns[4].isSelected == true">
-                            {{school?.studentsCountInSchool}} 
+                            {{school?.studentsCountInSchool}}
                         </td>
                         <td *ngIf="tableColumns[5].isSelected == true">
                             {{school?.curriculumName | currentLang}}
-                          
+
                         </td>
 
                         <td *ngIf="tableColumns[6].isSelected == true">
@@ -93,20 +94,20 @@
                             {{school?.divisionName | currentLang}}
                         </td>
                         <td *ngIf="tableColumns[8].isSelected == true">
-                            {{school?.studentsCountInDivision}} 
+                            {{school?.studentsCountInDivision}}
                         </td>
                         <td *ngIf="tableColumns[9].isSelected == true">
-                            {{school?.withdrawalStudentCount}} 
+                            {{school?.withdrawalStudentCount}}
                         </td>
                         <td *ngIf="tableColumns[10].isSelected == true">
-                            {{school?.specialClassesCountPerSchool}} 
+                            {{school?.specialClassesCountPerSchool}}
                         </td>
                         <td *ngIf="tableColumns[11].isSelected == true">
-                            {{school?.fusionStudentsCountInSchool}} 
+                            {{school?.fusionStudentsCountInSchool}}
                         </td>
-                        
+
                     </ng-container>
-                    
+
                 </tr>
             </ng-template>
 
@@ -125,7 +126,7 @@
         </p-table>
 
         <div class="" *ngIf="schoolsReport.total  > paginationState.rows">
-            <app-pagination [totalItems]="schoolsReport.total"
+            <app-pagination [totalItems]="schoolsReport.total" [currentPage]="filtration.Page"
                 (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>

@@ -16,6 +16,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SubjectsService } from '../../services/subjects/subjects.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -26,6 +27,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   styleUrls: ['./subjects-reports.component.scss']
 })
 export class SubjectsReportsComponent implements OnInit {
+  lang = inject(TranslationService).lang
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.reports.generateSubjectsReport'),routerLink: '/reports-managment/subjects-reports' },
@@ -34,8 +36,8 @@ export class SubjectsReportsComponent implements OnInit {
   filtration = {
     ...Filtration,
     schoolIds: null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   };
-  lang = inject(TranslationService).lang
   paginationState = { ...paginationInitialState };
   subjectsReport = {
     total: 0,
@@ -59,7 +61,8 @@ export class SubjectsReportsComponent implements OnInit {
     private headerService: HeaderService,
     private exportService: ExportService,
     private subjectReportService: SubjectsService,
-    private schoolsService: SchoolsService) {
+    private route:ActivatedRoute,
+    private router:Router) {
     this.tableColumns = this.subjectReportService.tabelColumns
     console.log(this.tableColumns);
   }
@@ -72,7 +75,15 @@ export class SubjectsReportsComponent implements OnInit {
 
 
   getSubjects() {
-    console.log(this.filtration)
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.subjectsReport.loading = true
     this.subjectsReport.list = []
     this.subjectReportService.getAllSubjects(this.filtration)

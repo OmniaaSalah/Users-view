@@ -190,7 +190,15 @@ getDivisionInfo(){
     this.divisionTeachers =  null
     this.divisionService.getDivisionTeachers(this.divisionId).subscribe((res:any)=>{
       this.divisionTeachers = res.result
-      this.divisionTeachersForm.patchValue(res.result)
+      this.divisionTeachersForm.patchValue({
+        ...res.result,
+        supervisior:{
+          id: res.result?.supervisior?.id ?? null,
+          abilityToAddDegrees: res?.result?.supervisior?.abilityToAddDegrees ?? false,
+          name: {en: res?.result?.supervisior?.name?.en ?? '', ar: res?.result?.supervisior?.name?.ar ?? ''}
+        }
+      });
+
       this.fillSubjectsTeachers(res.result.subjectsTeachers)
       this.abilityToAddDegreesChanged()
     })

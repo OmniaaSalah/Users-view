@@ -14,6 +14,7 @@ import { SchoolsService } from '../../../schools/services/schools/schools.servic
 import { AttendanceReportsServicesService } from '../../services/attendance/attendance-reports-services.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-attendance-reports',
@@ -36,6 +37,7 @@ export class AttendanceReportsComponent implements OnInit {
     gradeId: null,
     divisionId: null,
     date:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   }
   isSchoolSelected = false
   isGradeSelected = false
@@ -61,7 +63,8 @@ export class AttendanceReportsComponent implements OnInit {
     private translate: TranslateService,
      private attendanceReportsServices:AttendanceReportsServicesService,
      private sharedService: SharedService,
-     private schoolsService: SchoolsService
+     private route:ActivatedRoute,
+     private router:Router
    ) {
     this.tableColumns = this.attendanceReportsServices.tabelColumns
    }
@@ -139,9 +142,20 @@ export class AttendanceReportsComponent implements OnInit {
 
   getAllAbbsenceAndAttendance()
   {
+    if(this.date){
+      this.filtration.date=this.formateDate(this.date)
+    }
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
+
     this.isBtnLoading=true;
-    if(this.date)
-    {this.filtration.date=this.formateDate(this.date)}
     this.studentsReport.loading = true
     this.studentsReport.list = []
     this.attendanceReportsServices.getAllAbbsenceAndAttendance(this.filtration)
