@@ -70,16 +70,16 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     studentForm= this.fb.group({
       name: this.fb.group({
-        ar:['', Validators.required],
-        en:['', Validators.required]
+        ar:[''],
+        en:['']
       }),
       surname: this.fb.group({
-        ar:['', Validators.required],
-        en:['', Validators.required]
+        ar:[''],
+        en:['']
       }),
-      birthDate:['', Validators.required],
-      gender:['', Validators.required],
-      nationalityId:[0 , Validators.required],
+      birthDate:[''],
+      gender:[''],
+      nationalityId:[0 ],
       religionId:[1, ],
       isTalented: [''],
       isGifted: [''],
@@ -88,10 +88,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       // passportId:[],
       // passportIdExpirationDate:[],
       hasShadower:[],
-      // id:['', Validators.required],
-      daleelId: ['', Validators.required],
-      studentNumber:['', Validators.required],
-      ministerialId:['', Validators.required],
+      // id:[''],
+      daleelId: [''],
+      studentNumber:[''],
+      ministerialId:[''],
       manhalNumber:[''],
 
       isSpecialAbilities:[],
@@ -112,7 +112,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       motherLanguage: this.localizeFormGroup,
       languageAtHome: this.localizeFormGroup,
       mostUsedLanguage: this.localizeFormGroup,
-      guardianId:['', Validators.required],
+      guardianId:[''],
       studentPayments: this.fb.group({
         fullAmountToBePaid: [],
         paidAmount: [],

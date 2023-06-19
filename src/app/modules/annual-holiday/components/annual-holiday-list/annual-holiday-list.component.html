@@ -9,6 +9,7 @@
                 <!-- Table Caption -->
                 <ng-template pTemplate="caption">
                     <app-table-caption
+                    [seachKeyword]="filtration.KeyWord"
                     (onExport)="onExport($event)"
                     [hasFilter]="false"
                     (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllHolidays()"
@@ -201,7 +202,7 @@
 
 
     <div *ngIf="paginationState.rows<annualHolidays.total" >
-        <app-pagination [totalItems]="annualHolidays.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [currentPage]="filtration.Page" [totalItems]="annualHolidays.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
    <!-- emptymessage -->

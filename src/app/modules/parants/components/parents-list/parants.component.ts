@@ -38,7 +38,12 @@ export class ParantsComponent implements OnInit {
 	currentUserScope = inject(UserService).getScope()
 
 
-	filtration= {...Filtration,  NationalityId:"",hasChildreen:true}
+	filtration= {
+    ...Filtration,
+    NationalityId:"",
+    hasChildreen:true,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  }
 	paginationState= {...paginationInitialState}
 
 	parent={
@@ -78,6 +83,15 @@ export class ParantsComponent implements OnInit {
 
 	}
 	getParentList() {
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
 		this.parent.loading=true
 		this.parent.list=[]
 		this.parentService.getAllParents(this.filtration)

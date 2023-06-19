@@ -15,6 +15,9 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   @Input() hasFilter:boolean=true
   @Input() hasExport:boolean=true
   @Input() hasSearch:boolean=true
+  @Input() set seachKeyword(text){
+    this.searchInput.setValue(text)
+  }
   @Input() template :TemplateRef<any>
   @Input('size') small:string;
   @Input() styles ={};

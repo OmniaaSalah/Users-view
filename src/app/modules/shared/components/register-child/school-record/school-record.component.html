@@ -5,6 +5,7 @@
 
         <ng-template pTemplate="caption">
             <app-table-caption
+            [seachKeyword]="filtration.KeyWord"
             (onExport)="onExport($event)"
             [hasFilter]="false"
             (onFilter)="getStudentRecord()"

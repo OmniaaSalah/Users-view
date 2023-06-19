@@ -1,5 +1,5 @@
 import { Component, OnInit,OnDestroy,inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
 import {ConfirmationService, MessageService} from 'primeng/api';
@@ -38,8 +38,14 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   get ClaimsEnum(){return ClaimsEnum}
   selectedRole;
   subscription:Subscription;
-  filtration = {...Filtration,isactive:''};
+
+  filtration = {
+    ...Filtration,
+    isactive:'',
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  };
   paginationState= {...paginationInitialState};
+
   roles={
     totalAllData:0,
     total:0,
@@ -50,7 +56,16 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     {label: this.translate.instant('shared.Show Details'), icon:'assets/images/shared/file.svg'},
     {label: this.translate.instant('dashboard.UserRole.Delete Job Role'), icon:'assets/images/shared/delete.svg'}
   ]
-  constructor(private exportService: ExportService,private sharedService:SharedService,public confirmModelService: ConfirmModelService,private toastService: ToastService,private confirmationService: ConfirmationService,private headerService: HeaderService,  private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
+  constructor(
+    private exportService: ExportService,
+    private sharedService:SharedService,
+    public confirmModelService: ConfirmModelService,
+    private toastService: ToastService,
+    private headerService: HeaderService,
+    private userRolesService: UserRolesService,
+    private translate: TranslateService,
+    private router: Router,
+    private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.showLoader=true;
@@ -84,11 +99,11 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
             this.toastService.error(res.errorLocalized[this.lang]);
           }
           else
-            {   
+            {
               this.getAllRole();
               this.toastService.success(this.translate.instant('dashboard.UserRole.Job Role deleted Successfully'));
             }
-       
+
           this.confirmModelService.confirmed$.next(null);
           },(err)=>{
 
@@ -102,6 +117,15 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
   getAllRole()
   {
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.roles.loading=true;
     this.roles.list=[];

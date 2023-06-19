@@ -3,6 +3,7 @@
     <p-table  [lazy]="true" [value]="holidays.list" (onSort)="onSort($event)" >
         <ng-template pTemplate="caption">
             <app-table-caption
+            [seachKeyword]="filtration.KeyWord"
             (onExport)="onExport($event)"
             (onFilter)="this.filtration.Page=1;getHolidays()"
             (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getHolidays()"
@@ -77,7 +78,7 @@
     </p-table>
 
     <div *ngIf="holidays.total > paginationState.rows">
-        <app-pagination [totalItems]="holidays.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [currentPage]="filtration.Page" [totalItems]="holidays.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 

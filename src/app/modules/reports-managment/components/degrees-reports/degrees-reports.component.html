@@ -90,7 +90,7 @@
         <p-table #dt [value]="degreessReport.list" [lazy]="true" (onSort)="onSort($event)"  [scrollable]="true">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getDegreesList()" (onClear)="clearFilter()">
+                <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getDegreesList()" (onClear)="clearFilter()">
                 </app-table-caption>
 
             </ng-template>
@@ -205,7 +205,7 @@
         </p-table>
 
         <div class="" *ngIf="degreessReport.total  > paginationState.rows">
-            <app-pagination [totalItems]="degreessReport.total"
+            <app-pagination [currentPage]="filtration.Page" [totalItems]="degreessReport.total"
                 (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>

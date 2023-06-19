@@ -16,6 +16,7 @@ import { Table } from 'primeng/table';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-degrees-reports',
   templateUrl: './degrees-reports.component.html',
@@ -41,8 +42,19 @@ export class DegreesReportsComponent implements OnInit {
       { label: this.translate.instant('dashboard.reports.generateDegreesReport') ,routerLink:"/reports-managment/degrees-reports"},
     ],
   }
-  filtration = {...Filtration,StudentId:null,SchoolId:null,GradeId:null,DivisionlId:null,SubjectId:null,SchoolYearId:null,Semester:null}
+  filtration = {
+    ...Filtration,
+    StudentId:null,
+    SchoolId:null,
+    GradeId:null,
+    DivisionlId:null,
+    SubjectId:null,
+    SchoolYearId:null,
+    Semester:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  }
   paginationState = { ...paginationInitialState };
+
   degreessReport = {
     total: 0,
     totalAllData: 0,
@@ -57,7 +69,9 @@ export class DegreesReportsComponent implements OnInit {
     private degreesReportService:DegreeReportService,
     private subjectService:SubjectService,
     private exportService:ExportService,
-    private sharedService:SharedService
+    private sharedService:SharedService,
+    private route:ActivatedRoute,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -110,6 +124,14 @@ export class DegreesReportsComponent implements OnInit {
   }
 
   getDegreesList(){
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
 
     this.isBtnLoading=true;
     this.degreessReport.loading=true

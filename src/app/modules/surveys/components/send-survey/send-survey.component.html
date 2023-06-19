@@ -1,13 +1,13 @@
 <div class="survey">
     <ng-container *ngIf="!editSurvey">
         <div class="row g-5 mt-5">
-           
+
                 <app-skeleton count="6"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-        
+
         </div>
-    
+
      </ng-container>
- 
+
     <div class="survey__content my-5 rounded custom-form custom-validation-form container-fluid" *ngIf="editSurvey">
 
         <form  [formGroup]="surveyFormGrp">
@@ -17,7 +17,7 @@
                     <span>{{'dashboard.surveys.Send survey'| translate}} </span>
                     <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
                   </button>
-                    
+
                 </div>
             </ng-container>
 
@@ -29,7 +29,7 @@
                         <p-calendar formControlName="appearanceDate"  [showTime]="true"  *ngIf="editSurvey?.surveyStatus!=StatusEnum.Draft&&surveyId" [disabled]="true" [ngClass]="{'ng-invalid ng-dirty':appearanceDate.errors?.['required'] &&appearanceDate.touched}"  [showIcon]="true" inputId="icon" [minDate]="currentDate" [maxDate]="disAppearanceDate.value"  placeholder="{{'dashboard.surveys.SurveyAppearanceDateAndTime'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
                         <p-calendar formControlName="appearanceDate" [showTime]="true"   *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId"  [ngClass]="{'ng-invalid ng-dirty':appearanceDate.errors?.['required'] &&appearanceDate.touched}"  [showIcon]="true" inputId="icon" [minDate]="currentDate" [maxDate]="disAppearanceDate.value"  placeholder="{{'dashboard.surveys.SurveyAppearanceDateAndTime'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
                         <div>
-                           
+
                             <div [hidden]="appearanceDate.valid || appearanceDate.untouched">
                                 <small *ngIf="appearanceDate.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
@@ -59,7 +59,7 @@
             </ng-container>
 
         </form>
-          
+
             <ng-container>
 
                 <div>
@@ -69,68 +69,68 @@
                         <app-informative-block title="{{'emptyList.Parent List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
-                    
-             
-    
+
+
+
                 <div class="custom-form parent-modal" *ngIf="parent.totalAllData || parent.loading">
 
-                    <app-table-caption [hasExport]="false" (onFilter)="parent.list=[];filtration.Page=0;getParentList()"  (onSearch)="parent.list=[];filtration.Page=0;filtration.KeyWord = $event; getParentList()" (onClear)="clearFilter()">
+                    <app-table-caption [seachKeyword]="filtration.KeyWord" [hasExport]="false" (onFilter)="parent.list=[];filtration.Page=0;getParentList()"  (onSearch)="parent.list=[];filtration.Page=0;filtration.KeyWord = $event; getParentList()" (onClear)="clearFilter()">
                         <div class="row gx-5 form-set">
-        
-                            
+
+
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.classes'| translate}}</label>
                                 <p-multiSelect [options]="(AllGrades$ | async)" display="chip" [(ngModel)]="filtration.gradeId"   optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  optionValue="id"  placeholder="{{'dashboard.students.chooseClasse' |translate}}" ></p-multiSelect>
                             </div>
-    
+
                             <div class="col-md-4">
                                 <label class="label" for="schools">{{'Schools'|translate }}  </label>
                                 <p-multiSelect  [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.schoolId"   optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" ></p-multiSelect>
                             </div>
-                            
+
                             <div class="col-md-4">
                                 <label class="label" for="schools">{{'shared.personalId'|translate }}  </label>
                                 <input type="text" [(ngModel)]="filtration.emiretesId" pInputText class="form-control" (ngModelChange)="getParentList()"  [LangRestrict]="'ar'" placeholder="{{'sign up.enter personal digitalIdentity' | translate}}" name="PID7" id="PID7">
                         </div>
-    
+
                     </div>
                     </app-table-caption>
-               
+
                 <div  class="contain" [ngClass]="parent.list.length>25 ? 'scroll':''">
                     <div *ngIf="!parent.list.length">
                         <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">
                             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
-    
+
                         <app-loader></app-loader>
                     </div>
-                    <div *ngIf="parent.list.length" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500" (scrolled)="onScroll()"> 
+                    <div *ngIf="parent.list.length" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
                         <div class="d-flex" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId">
                             <p-checkbox    binary="true"   (onChange)="selectAllParents($event)"></p-checkbox>
                             <span class="mx-3 ">{{'shared.selectAll'|translate}}</span>
-                      
+
                         </div>
                         <div class="row gx-5 gy-4 form-set mt-5">
                         <ng-container *ngFor="let item of parent.list; let i = index">
                             <div class="col-md-4 d-flex gap-4 align-items-center">
-                     
+
                                 <p-checkbox  [value]="item.id" *ngIf="editSurvey?.surveyStatus==StatusEnum.Draft||!surveyId" name="parents"   [(ngModel)]="savedGuardianIds"></p-checkbox>
                                 <p-checkbox  [value]="item.id" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Draft&&surveyId" name="parents" [disabled]="true"  [(ngModel)]="savedGuardianIds"></p-checkbox>
                                 <label class="label label--sm" for=""> {{item.name|currentLang}} </label>
                             </div>
                         </ng-container>
-    
-                    </div>           
-                  
+
+                    </div>
+
                 </div>
             </div>
           </div>
         </div>
 
             </ng-container>
-          
 
-       
+
+
     </div>
 
 </div>

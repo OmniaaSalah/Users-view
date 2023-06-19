@@ -85,15 +85,6 @@
                 <p class="color-gray-300">{{'dashboard.students.isGifted'| translate}}</p>
                 <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
                 <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
-                <ng-container *ngIf="student?.isGifted">
-                    <p class="color-gray-300">{{'dashboard.students.talent'| translate}}</p>
-                    <div  class="mb-2 d-flex">
-                        <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
-                            {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
-                        </span>
-                    </div>
-
-                </ng-container>
 
 
                 <p class="color-gray-300">{{ 'dashboard.students.attendanceType'|translate }}</p>
@@ -126,6 +117,15 @@
                   <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
                 </ng-container>
 
+                <ng-container *ngIf="student?.isGifted">
+                    <p class="color-gray-300">{{'dashboard.students.talent'| translate}}</p>
+                    <div  class="mb-2 d-flex">
+                        <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
+                            {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
+                        </span>
+                    </div>
+
+                </ng-container>
               </div>
             </div>
 

@@ -15,6 +15,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-users-reports',
   templateUrl: './users-reports.component.html',
@@ -37,7 +38,8 @@ export class UsersReportsComponent implements OnInit {
     roleIds: [],
     dateFrom:null,
     dateTo:null,
-    requestType:null
+    requestType:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   }
 
   paginationState= {...paginationInitialState}
@@ -60,7 +62,9 @@ export class UsersReportsComponent implements OnInit {
      private userInformation: UserInformationService,
      private _report:UsersReportsService,
      private requestService:SystemRequestService,
-     private sharedService:SharedService
+     private sharedService:SharedService,
+     private route:ActivatedRoute,
+     private router:Router
    ) {
     this.tableColumns = this._report.tabelColumns
    }
@@ -83,12 +87,20 @@ export class UsersReportsComponent implements OnInit {
   }
 
   getUsersList(){
-    if(this.date)
-    {
+    if(this.date){
       this.filtration.dateFrom=this.formateDate(this.date[0])
       this.filtration.dateTo=this.formateDate(this.date[1])
     }
-console.log(this.filtration.dateFrom,this.filtration.dateTo)
+
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.users.loading=true
     this.isBtnLoading=true;
     this.users.list =[];

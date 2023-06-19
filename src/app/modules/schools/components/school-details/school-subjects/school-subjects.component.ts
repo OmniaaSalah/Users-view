@@ -56,7 +56,13 @@ export class SchoolSubjectsComponent implements OnInit {
   gardeId = this.route.snapshot.queryParamMap.get('gradeId')
   trackId = this.route.snapshot.queryParamMap.get('trackId')
 
-  filtration={...Filtration, GradeId: this.gardeId, TrackId:this.trackId ,SchoolId :this.schoolId}
+  filtration={
+    ...Filtration,
+    GradeId: this.gardeId,
+    TrackId:this.trackId ,
+    SchoolId :this.schoolId,
+    ...JSON.parse(localStorage.getItem('Subj-SearchQuery') || 'null')
+  }
 
   paginationState={...paginationInitialState}
 
@@ -100,6 +106,11 @@ export class SchoolSubjectsComponent implements OnInit {
 
 
   getSubjects(){
+    if(localStorage.getItem('Subj-SearchQuery')){
+      this.filtration = {...JSON.parse(localStorage.getItem('Subj-SearchQuery')), ...this.filtration}
+    }
+    localStorage.setItem('Subj-SearchQuery',JSON.stringify(this.filtration))
+
     this.subjectsObj.loading=true
     this.subjectsObj.list=[]
     this.schoolsService.getSchoolSubjects(this.filtration).subscribe(res =>{
@@ -149,6 +160,7 @@ export class SchoolSubjectsComponent implements OnInit {
     this.filtration.GradeId=null
     this.filtration.TrackId =null
     this.filtration.Page=1;
+    localStorage.removeItem('Subj-SearchQuery')
     this.getSubjects()
   }
 

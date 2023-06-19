@@ -13,6 +13,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SubjectService } from '../../../subjects/service/subject.service';
 import { TeachersReportsService } from '../../services/teachers-reports/teachers-reports.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-teachers-reports',
@@ -24,7 +25,13 @@ export class TeachersReportsComponent implements OnInit {
   lang = inject(TranslationService).lang
   schools$ = inject(SchoolsService).getSchoolsDropdown()
   subjects$ = inject(SubjectService).getAllSubjectsWithoutDuplicated()
-  filtration = {...Filtration,schoolIds:[],subjectIds:[]}
+
+  filtration = {
+    ...Filtration,
+    schoolIds:[],
+    subjectIds:[],
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  }
   paginationState = { ...paginationInitialState };
   teachersReport = {
     total: 0,
@@ -37,16 +44,31 @@ export class TeachersReportsComponent implements OnInit {
       { label: this.translate.instant('dashboard.reports.generateteachersReport'),routerLink:'/reports-managment/teachers-reports' },
     ],
   }
-  constructor(private sharedService:SharedService, private exportService: ExportService,private translate:TranslateService,private headerService: HeaderService,private teachersReportService:TeachersReportsService) { }
+  constructor(
+    private sharedService:SharedService,
+    private exportService: ExportService,
+    private translate:TranslateService,
+    private headerService: HeaderService,
+    private teachersReportService:TeachersReportsService,
+    private route:ActivatedRoute,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.tableColumns=this.teachersReportService.getTableColumns();
     this.getTeachersReportList();
   }
-  getTeachersReportList()
-  {
-    console.log(this.filtration)
+
+
+  getTeachersReportList(){
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.teachersReport.loading = true
     this.teachersReport.list = []
     this.teachersReportService.getAllTeachers(this.filtration)
@@ -64,6 +86,8 @@ export class TeachersReportsComponent implements OnInit {
         this.teachersReport.total = 0
       })
   }
+
+
   clearFilter(){
 
     this.filtration.KeyWord =''

@@ -83,7 +83,7 @@
         <p-table #dt [value]="parentsReport.list" [lazy]="true" (onSort)="onSort($event)" [scrollable]="true">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getParentReportList()" (onClear)="clearFilter()">
+                <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getParentReportList()" (onClear)="clearFilter()">
                 </app-table-caption>
 
             </ng-template>
@@ -172,7 +172,7 @@
         </p-table>
 
         <div class="" *ngIf="parentsReport.total  > paginationState.rows">
-            <app-pagination [totalItems]="parentsReport.total"
+            <app-pagination [totalItems]="parentsReport.total" [currentPage]="filtration.Page"
                 (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>

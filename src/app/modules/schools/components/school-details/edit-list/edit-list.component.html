@@ -4,14 +4,15 @@
     <p-table #dt [value]="editList.list">
         <ng-template pTemplate="caption">
             <app-table-caption
+            [seachKeyword]="filtration.KeyWord"
             [hasFilter]="false"
-            (onExport)="onExport($event)" 
-            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getEditList()" 
+            (onExport)="onExport($event)"
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getEditList()"
             (onClear)="clearFilter()">
-          
+
         </app-table-caption>
         </ng-template>
-        
+
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.schools.editBy' |translate}} </th>
@@ -27,7 +28,7 @@
                 <td>{{product?.jobTitle|currentLang}}</td>
                 <td>{{product?.createdDate|LocalizeDate}}</td>
                 <td>
-                 
+
                     {{product?.type|translate}}
 
                 </td>
@@ -74,11 +75,11 @@
           </ng-container>
           <ng-container *ngIf="!editItem?.createdBy">
             <div class="row g-5">
-               
+
                     <app-skeleton count="1" width="56.5rem" [style]="{'margin-bottom': '1rem','margin-top': '3rem'}"></app-skeleton>
-            
+
             </div>
-        
+
           </ng-container>
         </div>
     </ng-template>
@@ -88,11 +89,11 @@
             <div class="">
             <ng-container *ngIf="!editItem?.modificationDetails">
                     <div class="row g-5">
-                       
+
                             <app-skeleton count="4"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-                    
+
                     </div>
-                
+
             </ng-container>
             <ng-container *ngIf="editItem?.modificationDetails">
                <ng-container *ngFor="let item of editItem?.modificationDetails">
@@ -103,15 +104,15 @@
                             <div class="d-flex gap-5  align-items-center">
                                 <span class="fs-3">{{'shared.From'|translate}}</span>
                                 <span class="color-gray-600">{{item?.from}}</span>
-                               
+
                             </div>
                         </div>
-        
+
                         <div class="col-md-6">
                             <div class="d-flex gap-5  align-items-center">
                                 <span class="fs-3">{{'shared.To'|translate}}</span>
                                 <span class="color-gray-600">{{item?.to}}</span>
-                          
+
                             </div>
                         </div>
                     </div>
@@ -120,8 +121,8 @@
 
                 </ng-container>
             </ng-container>
-                  
-           
+
+
             </div>
         </div>
     </ng-template>
