@@ -9,6 +9,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { MessageStatus } from 'src/app/shared/enums/status/status.enum';
 import { MessageService } from '../../service/message.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
   selector: 'app-message-details',
@@ -28,6 +29,8 @@ export class MessageDetailsComponent implements OnInit {
   messageDetails;
   messagesReplies: any[] = []
   currentUserScope = inject(UserService).getScope()
+  get ScopeEnum(){return UserScope}
+
   onSubmit
 
   constructor(private headerService: HeaderService,private userService:UserService, private route: ActivatedRoute, private messageService: MessageService, private toastr: ToastrService, private formbuilder: FormBuilder, private router: Router, private translate: TranslateService) { }
