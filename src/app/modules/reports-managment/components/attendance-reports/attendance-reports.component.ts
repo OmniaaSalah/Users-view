@@ -117,10 +117,24 @@ export class AttendanceReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {
+    let exportedTable = []
+    const myColumns = this.tableColumns.filter(el => el.isSelected)
     let filter = {...this.filtration, PageSize:this.studentsReport.totalAllData,Page:1}
     this.attendanceReportsServices.attendanceAndAbbsenceToExport(filter).subscribe( (res) =>{
+      res.forEach((student) => {
+        let myObject = {}
+        for (let property in student)
+        { 
+         var selected= myColumns.find(column => column.name==property)
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'))
+         if(selected)   myObject = { ...myObject, [selected?.name] :student[selected?.name]} 
+
+        }
+
+        exportedTable.push(myObject)
+      })
+
+      this.exportService.exportFile(fileType,exportedTable, this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'))
     })
 
 
@@ -145,6 +159,10 @@ export class AttendanceReportsComponent implements OnInit {
     if(this.date){
       this.filtration.date=this.formateDate(this.date)
     }
+    if(this.filtration.date){
+      this.date= new Date(this.filtration.date)
+    }
+
 
     if(this.route.snapshot.queryParams['searchQuery']){
       this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}

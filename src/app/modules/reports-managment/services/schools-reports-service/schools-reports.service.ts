@@ -93,7 +93,7 @@ export class SchoolsReportsService {
             [this.translate.instant('School')]: school?.schoolName[this.lang],
             [this.translate.instant('shared.state')]: school?.state[this.lang],
             [this.translate.instant('dashboard.schools.TeachersNumbers')]: school?.teachersNumbers,
-            [this.translate.instant('dashboard.schools.studentsNumber')]: school?.studentsNumber,
+            [this.translate.instant('dashboard.schools.StudentsNumbers')]: school?.studentsNumber,
             [this.translate.instant('dashboard.schools.SchoolStudentsPercentge')]: school?.studentsCountInSchool,
             [this.translate.instant('dashboard.schools.SchoolCurriculum')]: school?.curriculumName[this.lang],
             [this.translate.instant('shared.grade')]: school?.gradeName[this.lang],
