@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable ,inject} from '@angular/core';
 import { FileTypeEnum } from '../../enums/file/file.enum';
 import * as FileSaver from 'file-saver';
 import { Table } from 'primeng/table';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable"
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExportService {
-
+  lang = inject(TranslationService).lang
   constructor() { }
 
 
@@ -58,14 +59,15 @@ export class ExportService {
       styles:{
         font:'Amiri-Regular',
         halign:'right',
-        overflow: "hidden",
-        cellWidth: "wrap"
+        // overflow:'hidden',
+        // cellWidth: "wrap"
 
       },
       columns: exportColumns,
       body: data,
       didDrawPage: (dataArg) => {
-        doc.text(fileName, dataArg.settings.margin.left, 10);
+        doc.setFontSize(20);
+        this.lang=='ar'? doc.text(fileName,doc.internal.pageSize.width-40,25,{align: 'right'}):doc.text(fileName,dataArg.settings.margin.right,30);
       }
     });
 
