@@ -181,7 +181,7 @@ messageUpload(files){
       }
 
       this.messageService.sendDataFromEmployeeTOSPEA(form).subscribe(res=>{
-        this.toastr.success('Message Sent Successfully')
+        this.toastr.success(this.translate.instant('toasterMessage.messageSend'))
         this.isShown1=false;
         this.parentForm.reset();
         this.display = false

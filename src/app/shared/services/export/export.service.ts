@@ -59,7 +59,7 @@ export class ExportService {
         font:'Amiri-Regular',
         halign:'right',
         overflow: "hidden",
-        cellWidth: "wrap" 
+        cellWidth: "wrap"
 
       },
       columns: exportColumns,

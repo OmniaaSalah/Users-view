@@ -146,10 +146,19 @@ export class TransferedStudentsReportsComponent implements OnInit {
       this.filtration.BirthDateFrom=this.formateDate(this.birthDate[0])
       this.filtration.BirthDateTo=this.formateDate(this.birthDate[1])
     }
+
+    if(this.filtration.BirthDateFrom || this.filtration.BirthDateTo){
+      this.birthDate=[new Date(this.filtration.BirthDateFrom), new Date(this.filtration.BirthDateTo)]
+    }
+
     if(this.acceptanceDate)
     {
       this.filtration.AcceptanceDateFrom=this.formateDate(this.acceptanceDate[0])
       this.filtration.AcceptanceDateTo=this.formateDate(this.acceptanceDate[1])
+    }
+
+    if(this.filtration.AcceptanceDateFrom || this.filtration.AcceptanceDateTo){
+      this.acceptanceDate=[new Date(this.filtration.AcceptanceDateFrom), new Date(this.filtration.AcceptanceDateTo)]
     }
 
     if(this.route.snapshot.queryParams['searchQuery']){
@@ -196,10 +205,24 @@ export class TransferedStudentsReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {
+    let exportedTable = []
+    const myColumns = this.tableColumns.filter(el => el.isSelected)
     let filter = {...this.filtration, PageSize:this.studentsReport.totalAllData,Page:1}
     this.transferedStudentsReportService.studentsToExport(filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'))
+      res.forEach((student) => {
+        let myObject = {}
+        for (let property in student)
+        { 
+         var selected= myColumns.find(column => column.name==property)
+
+         if(selected)   myObject = { ...myObject, [selected?.name] :student[selected?.name]} 
+
+        }
+
+        exportedTable.push(myObject)
+      })
+      this.exportService.exportFile(fileType,exportedTable, this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'))
     })
 
   }

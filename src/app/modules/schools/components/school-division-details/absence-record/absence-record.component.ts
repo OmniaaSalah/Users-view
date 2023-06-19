@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { debounceTime, distinctUntilChanged, finalize, map, shareReplay, startWith, Subject, switchMap, takeUntil } from 'rxjs';
+import {  finalize, map, shareReplay, Subject, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';

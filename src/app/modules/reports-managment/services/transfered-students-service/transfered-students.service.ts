@@ -169,7 +169,7 @@ export class TransferedStudentsService {
             [this.translate.instant('dashboard.schools.student')]: student?.student?.name ? student?.student?.name[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('Students nickname')]:student?.surName ? student?.surName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.parentName')]: student?.guardianName ? student?.guardianName[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.issue of certificate.schoolName')]: student?.schoolName ? student?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('School')]: student?.schoolName ? student?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.grade')]:student?.gradeName ? student?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.division')]:student?.divisionName ? student?.divisionName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.Identity Number')]: student?.emiratesId ? student?.emiratesId :this.translate.instant('shared.notFound'),
