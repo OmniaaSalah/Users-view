@@ -103,7 +103,7 @@ export class ParentsReportsService {
       return {
             [this.translate.instant('dashboard.parents.parentName')]: parent?.parentName[this.lang] ? parent?.parentName[this.lang]:this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.parentNumber')]: parent?.parentNumber? parent?.parentNumber:this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.parents.parentNationality')]: parent?.parentNationality[this.lang] ? parent?.parentNationality[this.lang]:this.translate.instant('shared.notFound'),
+            [this.translate.instant('Nationality')]: parent?.parentNationality[this.lang] ? parent?.parentNationality[this.lang]:this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.parentEmail')]: parent?.parentEmail ? parent?.parentEmail:this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.relatedType')]: parent?.relationType[this.lang] ? parent?.relationType[this.lang]:this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.schools.student')]: parent?.student?.name[this.lang] ? parent?.student?.name[this.lang]:this.translate.instant('shared.notFound'),

@@ -205,10 +205,24 @@ export class TransferedStudentsReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {
+    let exportedTable = []
+    const myColumns = this.tableColumns.filter(el => el.isSelected)
     let filter = {...this.filtration, PageSize:this.studentsReport.totalAllData,Page:1}
     this.transferedStudentsReportService.studentsToExport(filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'))
+      res.forEach((student) => {
+        let myObject = {}
+        for (let property in student)
+        { 
+         var selected= myColumns.find(column => column.name==property)
+
+         if(selected)   myObject = { ...myObject, [selected?.name] :student[selected?.name]} 
+
+        }
+
+        exportedTable.push(myObject)
+      })
+      this.exportService.exportFile(fileType,exportedTable, this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'))
     })
 
   }

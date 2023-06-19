@@ -145,10 +145,25 @@ export class ParentsReportsComponent implements OnInit {
 
 
     onExport(fileType: FileTypeEnum, table:Table){
+      let exportedTable = []
+      const myColumns = this.tableColumns.filter(el => el.isSelected)
       let filter = {...this.filtration, PageSize:this.parentsReport.totalAllData,Page:1}
       this.parentReportService.parentsToExport(filter).subscribe( (res) =>{
+        res.forEach((parent) => {
+          let myObject = {}
+          for (let property in parent)
+          { 
+           var selected= myColumns.find(column => column.name==property)
+  
+           if(selected)   myObject = { ...myObject, [selected?.name] :parent[selected?.name]} 
+  
+          }
+  
+          exportedTable.push(myObject)
+        })
+  
 
-        this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'))
+        this.exportService.exportFile(fileType, exportedTable, this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'))
       })
     }
 
