@@ -33,78 +33,63 @@ export class ParentsReportsService {
       {
         name: this.translate.instant('dashboard.parents.parentName'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:this.translate.instant('dashboard.parents.parentNumber'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name: this.translate.instant('Nationality'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name: this.translate.instant('dashboard.parents.parentEmail'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:  this.translate.instant('dashboard.parents.relatedType'),
         isSelected: true,
-        isDisabled: true,
       },
     
       {
         name:this.translate.instant('dashboard.schools.student'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:this.translate.instant('Students nickname'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name:this.translate.instant('dashboard.students.daleelNumber1'),
         isSelected: false,
-        isDisabled:false,
       },
       {
         name:this.translate.instant('dashboard.students.daleelNumber2'),
         isSelected: false,
-        isDisabled:false,
       },
       {
         name:this.translate.instant('dashboard.students.manhalNumber'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name: this.translate.instant('shared.Identity Number'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name: this.translate.instant('dashboard.parents.ChildWithoutNationality'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name: this.translate.instant('shared.gender'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name: this.translate.instant('shared.state'),
         isSelected: false,
-        isDisabled: false,
       },
       {
         name: this.translate.instant('shared.city'),
         isSelected: false,
-        isDisabled: false,
       }
     ];
   }

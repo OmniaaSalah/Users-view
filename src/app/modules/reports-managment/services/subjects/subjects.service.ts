@@ -27,44 +27,36 @@ export class SubjectsService {
     {
       name:this.translate.instant('School'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('dashboard.schools.schoolNumber'),
       isSelected: true,
-      isDisabled: true,
     },
     {
      
       name:this.translate.instant('shared.state'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       
       name:this.translate.instant('dashboard.reports.subjectCount'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('shared.grade'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('shared.division'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('shared.track'),
       isSelected: true,
-      isDisabled: true,
     }
     
   ];

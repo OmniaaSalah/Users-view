@@ -21,6 +21,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./parents-reports.component.scss']
 })
 export class ParentsReportsComponent implements OnInit {
+  emptyTable:boolean=false;
   lang = inject(TranslationService).lang
   isBtnLoading: boolean=false;
   date;
@@ -153,6 +154,7 @@ export class ParentsReportsComponent implements OnInit {
     }
 
     checkValueOfCheckbox(item, event) {
+      var selectedItems=[]
       this.tableColumns.forEach((report, i) => {
         if (report.header == item.header && event.checked == true) {
           report.isSelected == true
@@ -160,8 +162,9 @@ export class ParentsReportsComponent implements OnInit {
         if (report.header == item.header && event.checked == false) {
           report.isSelected == false
         }
-
+        if(report.isSelected) selectedItems.push(report)
       })
+      !selectedItems.length? this.emptyTable=true : this.emptyTable=false
     }
 
   formateDate(date :Date)

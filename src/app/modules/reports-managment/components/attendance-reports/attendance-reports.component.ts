@@ -22,6 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./attendance-reports.component.scss']
 })
 export class AttendanceReportsComponent implements OnInit {
+  emptyTable:boolean=false;
   isBtnLoading: boolean=false;
   lang = inject(TranslationService).lang
   date;
@@ -84,6 +85,7 @@ export class AttendanceReportsComponent implements OnInit {
 
 
   checkValueOfCheckbox(item, event) {
+    var selectedItems=[]
     this.tableColumns.forEach((report, i) => {
       if (report.header == item.header && event.checked == true) {
         report.isSelected == true
@@ -91,8 +93,9 @@ export class AttendanceReportsComponent implements OnInit {
       if (report.header == item.header && event.checked == false) {
         report.isSelected == false
       }
-
+      if(report.isSelected) selectedItems.push(report)
     })
+    !selectedItems.length? this.emptyTable=true : this.emptyTable=false
   }
 
 

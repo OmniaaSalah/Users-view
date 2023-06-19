@@ -21,6 +21,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./schools-reports.component.scss']
 })
 export class SchoolsReportsComponent implements OnInit {
+  emptyTable:boolean=false;
   lang = inject(TranslationService).lang
   tableColumns = [];
 
@@ -125,6 +126,7 @@ export class SchoolsReportsComponent implements OnInit {
   }
 
   checkValueOfCheckbox(item, event) {
+    var selectedItems=[]
     this.tableColumns.forEach((report, i) => {
       if (report.header == item.header && event.checked == true) {
         report.isSelected == true
@@ -132,8 +134,9 @@ export class SchoolsReportsComponent implements OnInit {
       if (report.header == item.header && event.checked == false) {
         report.isSelected == false
       }
-
+      if(report.isSelected) selectedItems.push(report)
     })
+    !selectedItems.length? this.emptyTable=true : this.emptyTable=false
   }
 
 }

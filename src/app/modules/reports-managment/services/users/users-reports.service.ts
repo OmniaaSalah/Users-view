@@ -21,24 +21,20 @@ export class UsersReportsService {
 
       name:this.translate.instant('dashboard.schools.employeeName'),
       isSelected: true,
-      isDisabled: true,
     },
     {
 
       name:this.translate.instant('dashboard.SystemSetting.Email'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('dashboard.reports.RequestsNumbers'),
       isSelected: true,
-      isDisabled: true,
     },
     {
    
       name:this.translate.instant('shared.phoneNumber'),
       isSelected: true,
-      isDisabled: true,
     },
   ];
 
