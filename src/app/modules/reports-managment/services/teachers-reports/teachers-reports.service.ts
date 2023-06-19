@@ -19,32 +19,26 @@ export class TeachersReportsService {
       {
         name:this.translate.instant('School'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:this.translate.instant('dashboard.SchoolYear.Subject'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name: this.translate.instant('dashboard.reports.SubjectsTeachersNumbers'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:  this.translate.instant('dashboard.reports.TeacherName'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:this.translate.instant('dashboard.reports.TeacherSpeciality'),
         isSelected: true,
-        isDisabled: true,
       },
       {
         name:this.translate.instant('dashboard.reports.TeacherEquiivalent'),
         isSelected: true,
-        isDisabled: true,
       }
   
     ];

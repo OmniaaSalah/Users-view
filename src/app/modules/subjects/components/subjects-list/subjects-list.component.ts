@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit ,inject} from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ISubject } from 'src/app/core/Models/subjects/subject';
@@ -32,7 +32,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
   evaluationTypeList;
   deletedSubject;
   subscription:Subscription;
-  filtration = {...Filtration,evaluation: null};
+  filtration = {...Filtration,evaluation: null, ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')};
   paginationState= {...paginationInitialState};
   subjects={
     totalAllData:0,
@@ -41,7 +41,16 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     loading:true
   }
   lang = inject(TranslationService).lang
-  constructor(private exportService: ExportService, public confirmModelService: ConfirmModelService,private sharedService:SharedService, private toastService: ToastService, private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
+  constructor(
+    private exportService: ExportService,
+    public confirmModelService: ConfirmModelService,
+    private sharedService:SharedService,
+    private toastService: ToastService,
+    private headerService: HeaderService,
+    private translate: TranslateService,
+    private subjectService: SubjectService,
+    private route:ActivatedRoute,
+    private router:Router) {
   }
 
   ngOnInit(): void {
@@ -59,10 +68,9 @@ export class SubjectsComponent implements OnInit,OnDestroy {
 
 
   }
-  sortMe(e)
-  {
 
 
+  sortMe(e){
     if(e.order==-1)
     {this.filtration.SortBy="update "+e.field;}
     else
@@ -70,6 +78,8 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     this.filtration.Page=1;
     this.getAllSubjects();
   }
+
+
   confirmDeleteListener(){
     this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
       if (val) this.deleteSubject(this.deletedSubject)
@@ -78,6 +88,15 @@ export class SubjectsComponent implements OnInit,OnDestroy {
   }
 
   getAllSubjects(){
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.subjects.loading=true;
     this.subjects.list=[];

@@ -10,6 +10,8 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { DivisionService } from '../../../services/division/division.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 
 @Component({
   selector: 'app-students-rate',
@@ -19,10 +21,10 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 export class StudentsRateComponent implements OnInit {
 
   get claimsEnum () {return ClaimsEnum}
-  
+
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
-  
+
   filtration:Filter = {...Filtration}
   paginationState= {...paginationInitialState}
 
@@ -40,12 +42,13 @@ export class StudentsRateComponent implements OnInit {
     list:[],
     loading:false
   }
-    
+
   constructor(
     private route:ActivatedRoute,
     private divisionService:DivisionService,
     private toaster:ToastrService,
     private translate:TranslateService,
+    private exportService:ExportService,
   ) { }
 
   ngOnInit(): void {
@@ -90,6 +93,13 @@ export class StudentsRateComponent implements OnInit {
     })
   }
 
+
+  onExport(fileType: FileTypeEnum){
+    let filter = {...this.filtration,PageSize:this.students?.totalAllData,Page:1}
+    this.divisionService.studentsRateToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsRate'))
+    })
+  }
 
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'

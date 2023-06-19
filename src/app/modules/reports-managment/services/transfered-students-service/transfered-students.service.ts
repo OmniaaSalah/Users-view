@@ -44,130 +44,106 @@ export class TransferedStudentsService {
     {
       name:this.translate.instant('dashboard.students.daleelNumber1'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('dashboard.students.daleelNumber2'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: true,
-      isDisabled: true,
     },
     {
 
       name: this.translate.instant('dashboard.schools.student') ,
       isSelected: true,
-      isDisabled: true,
     },
     {
 
       name: this.translate.instant('Students nickname'),
       isSelected: true,
-      isDisabled: true,
     },
     {
 
       name:this.translate.instant('dashboard.parents.parentName'),
       isSelected: true,
-      isDisabled: true,
     },
     {
 
       name: this.translate.instant('School'),
       isSelected: true,
-      isDisabled: true,
     },
     {
 
       name: this.translate.instant('shared.grade'),
       isSelected: false,
-      isDisabled: false,
     },
     {
 
       name:this.translate.instant('shared.division'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('shared.Identity Number'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('dashboard.parents.ChildWithoutNationality'),
       isSelected: false,
-      isDisabled: false,
     },
     {
 
       name: this.translate.instant('dashboard.schools.SchoolCurriculum'),
       isSelected: false,
-      isDisabled: false,
     },
     {
 
       name: this.translate.instant('dashboard.parents.registedDate'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('sign up.Birthday'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('shared.age') ,
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('shared.status') ,
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('Active') ,
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('dashboard.students.Citizen'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('shared.gender'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('shared.state'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('shared.city'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('Nationality'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('dashboard.students.StudentCategory'),
       isSelected: false,
-      isDisabled: false,
     }
   ];
   getAllStudents(filter?:Partial<Filter>){

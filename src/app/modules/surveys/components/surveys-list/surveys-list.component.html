@@ -124,7 +124,7 @@
 
 
         <div *ngIf="paginationState.rows<surveyList.total">
-            <app-pagination [totalItems]="surveyList.total" (paginationChanged)="onTableDataChange($event) ">
+            <app-pagination [currentPage]="filtration.Page" [totalItems]="surveyList.total" (paginationChanged)="onTableDataChange($event) ">
             </app-pagination>
         </div>
 

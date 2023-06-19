@@ -13,6 +13,7 @@ import { CountriesService } from 'src/app/shared/services/countries/countries.se
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsReportsService } from '../../services/schools-reports-service/schools-reports.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-schools-reports',
@@ -20,9 +21,18 @@ import { SchoolsReportsService } from '../../services/schools-reports-service/sc
   styleUrls: ['./schools-reports.component.scss']
 })
 export class SchoolsReportsComponent implements OnInit {
+  emptyTable:boolean=false;
   lang = inject(TranslationService).lang
   tableColumns = [];
-  filtration = {...Filtration,CurriculumId:null,StateId:null,HasSpecialEducationClasses:null}
+
+  filtration = {
+    ...Filtration,
+    CurriculumId:null,
+    StateId:null,
+    HasSpecialEducationClasses:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  }
+
   paginationState = { ...paginationInitialState };
   schoolsReport = {
     total: 0,
@@ -39,7 +49,14 @@ export class SchoolsReportsComponent implements OnInit {
     ],
   }
 
-  constructor(private exportService: ExportService,private sharedService:SharedService,private countriesService:CountriesService ,private translate:TranslateService, private headerService: HeaderService,private schoolReportService:SchoolsReportsService) { }
+  constructor(private exportService: ExportService,
+    private sharedService:SharedService,
+    private countriesService:CountriesService ,
+    private translate:TranslateService,
+    private headerService: HeaderService,
+    private schoolReportService:SchoolsReportsService,
+    private route:ActivatedRoute,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
@@ -48,6 +65,14 @@ export class SchoolsReportsComponent implements OnInit {
   }
   getschoolsReportList()
   {
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     this.schoolsReport.loading=true
     this.schoolsReport.list=[]
@@ -101,6 +126,7 @@ export class SchoolsReportsComponent implements OnInit {
   }
 
   checkValueOfCheckbox(item, event) {
+    var selectedItems=[]
     this.tableColumns.forEach((report, i) => {
       if (report.header == item.header && event.checked == true) {
         report.isSelected == true
@@ -108,8 +134,9 @@ export class SchoolsReportsComponent implements OnInit {
       if (report.header == item.header && event.checked == false) {
         report.isSelected == false
       }
-
+      if(report.isSelected) selectedItems.push(report)
     })
+    !selectedItems.length? this.emptyTable=true : this.emptyTable=false
   }
 
 }

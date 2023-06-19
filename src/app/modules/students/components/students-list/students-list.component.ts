@@ -78,7 +78,7 @@ export class StudentsListComponent implements OnInit {
     IsSpecialClass:null,
     StudentDegreeResultFilter:null,
     gender:null,
-    ...JSON.parse(this.route.snapshot.queryParams['q'] || 'null')
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   }
   paginationState= {...paginationInitialState}
 
@@ -93,7 +93,7 @@ export class StudentsListComponent implements OnInit {
   // << DATA PLACEHOLDER >> //
   countries$ = this.countriesService.getCountries().pipe(shareReplay())
   curriculums$ = this.sharedService.getAllCurriculum().pipe(shareReplay())
-  schools$ = this.schoolsService.getSchoolsDropdown().pipe(shareReplay())
+  schools$ = this.studentsService.getSchools().pipe(shareReplay())
   AllTracks$ =this.sharedService.getAllTraks().pipe(shareReplay())
   AllGrades$;
   AllDivisions$;
@@ -124,8 +124,8 @@ export class StudentsListComponent implements OnInit {
 
   isSearching =false
 
-  onCurriculumSelected(id){
-    this.schools$ = this.schoolsService.getSchoolsDropdown({curriculumId:id[0]}).pipe(shareReplay())
+  onCurriculumSelected(ids){
+    this.schools$ = this.studentsService.getSchools({curriculumId:ids}).pipe(shareReplay())
 
   }
 
@@ -204,12 +204,11 @@ export class StudentsListComponent implements OnInit {
     this.students.loading=true
     this.students.list=[]
 
-    // let filterObj =  this.route.snapshot.queryParams['q'] ? this.route.snapshot.queryParams['q']: this.filtration
-    if(this.route.snapshot.queryParams['q']){
-      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['q']), ...this.filtration}
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
     }
     this.router.navigate([], {
-      queryParams: {q : JSON.stringify(this.filtration)},
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
       relativeTo: this.route,
     });
 

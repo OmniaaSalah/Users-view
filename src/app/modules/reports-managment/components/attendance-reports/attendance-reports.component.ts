@@ -14,6 +14,7 @@ import { SchoolsService } from '../../../schools/services/schools/schools.servic
 import { AttendanceReportsServicesService } from '../../services/attendance/attendance-reports-services.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-attendance-reports',
@@ -21,6 +22,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   styleUrls: ['./attendance-reports.component.scss']
 })
 export class AttendanceReportsComponent implements OnInit {
+  emptyTable:boolean=false;
   isBtnLoading: boolean=false;
   lang = inject(TranslationService).lang
   date;
@@ -35,6 +37,7 @@ export class AttendanceReportsComponent implements OnInit {
     gradeId: null,
     divisionId: null,
     date:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   }
   isSchoolSelected = false
   isGradeSelected = false
@@ -60,7 +63,8 @@ export class AttendanceReportsComponent implements OnInit {
     private translate: TranslateService,
      private attendanceReportsServices:AttendanceReportsServicesService,
      private sharedService: SharedService,
-     private schoolsService: SchoolsService
+     private route:ActivatedRoute,
+     private router:Router
    ) {
     this.tableColumns = this.attendanceReportsServices.tabelColumns
    }
@@ -81,6 +85,7 @@ export class AttendanceReportsComponent implements OnInit {
 
 
   checkValueOfCheckbox(item, event) {
+    var selectedItems=[]
     this.tableColumns.forEach((report, i) => {
       if (report.header == item.header && event.checked == true) {
         report.isSelected == true
@@ -88,8 +93,9 @@ export class AttendanceReportsComponent implements OnInit {
       if (report.header == item.header && event.checked == false) {
         report.isSelected == false
       }
-
+      if(report.isSelected) selectedItems.push(report)
     })
+    !selectedItems.length? this.emptyTable=true : this.emptyTable=false
   }
 
 
@@ -136,9 +142,20 @@ export class AttendanceReportsComponent implements OnInit {
 
   getAllAbbsenceAndAttendance()
   {
+    if(this.date){
+      this.filtration.date=this.formateDate(this.date)
+    }
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
+
     this.isBtnLoading=true;
-    if(this.date)
-    {this.filtration.date=this.formateDate(this.date)}
     this.studentsReport.loading = true
     this.studentsReport.list = []
     this.attendanceReportsServices.getAllAbbsenceAndAttendance(this.filtration)

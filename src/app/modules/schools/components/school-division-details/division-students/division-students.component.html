@@ -3,6 +3,7 @@
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
             <app-table-caption
+            [seachKeyword]="filtration.KeyWord"
             [hasFilter]="false"
             (onExport)="onExport($event)"
             (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getStudents()"

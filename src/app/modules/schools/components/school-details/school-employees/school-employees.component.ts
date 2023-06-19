@@ -54,7 +54,12 @@ export class SchoolEmployeesComponent implements OnInit {
 	// For Dropdown
 	searchModel={...Filtration}
 
-	filtration={...Filtration,jobtitelid:null, status:null}
+	filtration={
+    ...Filtration,
+    jobtitelid:null,
+    status:null,
+    ...JSON.parse(localStorage.getItem('Emp-SearchQuery') || 'null')
+  }
 	paginationState={...paginationInitialState}
 
 	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle().pipe(filter(res=> res.name?.en != 'Manager'),shareReplay())
@@ -143,6 +148,11 @@ export class SchoolEmployeesComponent implements OnInit {
 
 
 	getEmployees(){
+    if(localStorage.getItem('Emp-SearchQuery')){
+      this.filtration = {...JSON.parse(localStorage.getItem('Emp-SearchQuery')), ...this.filtration}
+    }
+    localStorage.setItem('Emp-SearchQuery',JSON.stringify(this.filtration))
+
 		this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
 		this.employees.loading=true
 		this.employees.list=[]
@@ -216,6 +226,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	 this.filtration.jobtitelid = null
 	 this.filtration.status=null
 	 this.filtration.Page=1;
+   localStorage.removeItem('Emp-SearchQuery')
      this.getEmployees()
    }
 

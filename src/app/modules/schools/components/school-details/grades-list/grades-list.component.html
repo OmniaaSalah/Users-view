@@ -2,6 +2,7 @@
     <p-table #dt [value]="grades.list" [lazy]="true">
         <ng-template pTemplate="caption">
             <app-table-caption
+            [seachKeyword]="filtration.KeyWord"
             [hasFilter]="false"
             (onExport)="onExport($event)"
             (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchoolGrades()"
@@ -92,7 +93,7 @@
     </p-table>
 
     <div class="" *ngIf="grades.total > paginationState.rows">
-        <app-pagination [totalItems]="grades.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [currentPage]="filtration.Page" [totalItems]="grades.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 

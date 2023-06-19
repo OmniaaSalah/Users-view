@@ -12,7 +12,6 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../modules/indexes/service/indexes.service';
-import { SchoolsService } from '../../../modules/schools/services/schools/schools.service';
 import { UserScope } from '../../enums/user/user.enum';
 import { ParentService } from 'src/app/modules/parants/services/parent.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';

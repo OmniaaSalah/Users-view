@@ -13,16 +13,11 @@
             <div class="prim-table mt-4">
                 <!-- [(rows)]="rows" [(first)]="first" -->
                 <p-table #dt [value]="requests.list" [lazy]="true" (onSort)="sortMe($event)"  [scrollable]="true">
-                    <!-- Table Caption -->
-
-                    <!-- <ng-template pTemplate="caption">
-                        <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
-
-                    </ng-template> -->
 
                     <ng-template pTemplate="caption">
 
                         <app-table-caption
+                        [seachKeyword]="filtration.KeyWord"
                         (onExport)="onExport($event)"
                         (onFilter)="applyFilter()"
                         (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; applyFilter()"
@@ -124,7 +119,7 @@
             </div>
         </div>
         <div class="" *ngIf="requests.total  > paginationState.rows">
-            <app-pagination [totalItems]="requests.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [currentPage]="filtration.Page" [totalItems]="requests.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
 
     </div>

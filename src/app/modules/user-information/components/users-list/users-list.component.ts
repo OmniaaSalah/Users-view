@@ -12,6 +12,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { UserInformationService } from '../../service/user-information.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -23,8 +24,15 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 export class ViewListOfUsersComponent implements OnInit {
   get ClaimsEnum(){return ClaimsEnum}
   lang = this.translationService.lang
-  filtration = {...Filtration, roleId:[],isactive:true}
+
+  filtration = {
+    ...Filtration,
+    roleId:[],
+    isactive:true,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  }
   paginationState= {...paginationInitialState}
+
   roles: any[] = [];
   usersStatus= this.sharedService.usersStatusList;
   users={
@@ -35,10 +43,15 @@ export class ViewListOfUsersComponent implements OnInit {
   }
 
 
-  constructor(    private exportService: ExportService,
-    private headerService: HeaderService, private translate: TranslateService,
-    private userInformation: UserInformationService,private sharedService: SharedService,
-    public translationService: TranslationService) {}
+  constructor(
+    private exportService: ExportService,
+    private headerService: HeaderService,
+    private translate: TranslateService,
+    private userInformation: UserInformationService,
+    private sharedService: SharedService,
+    public translationService: TranslationService,
+    private route:ActivatedRoute,
+    private router:Router) {}
 
 
 
@@ -60,6 +73,15 @@ export class ViewListOfUsersComponent implements OnInit {
   }
   selectedUsersStatus:any;
   getUsersList(){
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     this.users.loading=true
     this.users.list =[];

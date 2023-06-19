@@ -55,12 +55,11 @@
 </div>
 
 <div class="box-shadow bg-white raduis-12 my-3 p-5">
-    <h3 class="mb-5 heading heading-secondary fw-bold m-0">{{'dashboard.reports.The columns that you want
-        to add to the table'|translate}}</h3>
+    <h3 class="mb-5 heading heading-secondary fw-bold m-0">{{'dashboard.reports.The columns that you want to add to the table'|translate}}</h3>
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
-                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" [disabled]="item.isDisabled"
+                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" 
                     [(ngModel)]="item.isSelected" [binary]="true"></p-checkbox>
 
                 <label class="label label--sm" for=""> {{item.name}} </label>
@@ -74,11 +73,11 @@
     <span class="color-gray-800">" {{'dashboard.reports.you should choose the date that you need view it’s absence and attendance data first'|translate}} "</span>
 </div>
     <div class="parents">
-        <div class="prim-table" *ngIf="(studentsReport.totalAllData|| studentsReport.loading)&& date && shownTable">
+        <div class="prim-table" *ngIf="(studentsReport.totalAllData|| studentsReport.loading)&& date && shownTable &&!emptyTable">
             <p-table #dt [value]="studentsReport.list" sortMode="multiple"  [scrollable]="true" (onSort)="onSort($event)">
 
                 <ng-template pTemplate="caption">
-                    <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"
+                    <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" [hasFilter]="false"
                         (onSearch)="filtration.Page=1;filtration.KeyWord = $event;getAllAbbsenceAndAttendance()" (onClear)="clearFilter()">
 
                     </app-table-caption>
@@ -100,22 +99,22 @@
                 <ng-template pTemplate="body" let-student>
                     <tr>
                         <ng-container>
-                            <td>
+                            <td *ngIf="tableColumns[0].isSelected == true">
                                 {{student?.devisionName | currentLang}}
                             </td>
-                             <td>
+                             <td *ngIf="tableColumns[1].isSelected == true">
                                 {{student?.gradeName | currentLang}}
                             </td>
-                            <td>
+                            <td *ngIf="tableColumns[2].isSelected == true">
                                 {{student?.attendantCount}}
                             </td>
-                            <td>
+                            <td *ngIf="tableColumns[3].isSelected == true">
                                 {{student?.absenceCount }}
                             </td>
-                            <td>
+                            <td *ngIf="tableColumns[4].isSelected == true">
                                 {{student?.attendantPersentage}} %
                             </td>
-                            <td>
+                            <td *ngIf="tableColumns[5].isSelected == true">
                                 {{student?.absencePersentage}} %
                             </td>
 
@@ -167,7 +166,7 @@
 
             <div>
                 <div *ngIf="paginationState.rows<studentsReport.total">
-                    <app-pagination [totalItems]="studentsReport.total"
+                    <app-pagination [totalItems]="studentsReport.total" [currentPage]="filtration.Page"
                         (paginationChanged)="onTableDataChange($event)"></app-pagination>
                 </div>
             </div>

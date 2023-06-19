@@ -1,5 +1,5 @@
 import { Component, OnInit ,OnDestroy,inject} from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {  faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -32,7 +32,11 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
   faEllipsisVertical = faEllipsisVertical;
   paginationState= {...paginationInitialState}
   plusIcon = faPlus;
-  filtration: Filter = { ...Filtration , status : null }
+  filtration: Filter = {
+    ...Filtration ,
+    status : null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+   }
   subscription:Subscription;
   filteration_status = [
     {name:this.translate.instant('shared.yes'), code: true},
@@ -49,8 +53,16 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     breadCrump: []
   }
 
-  constructor(private sharedService:SharedService,public confirmModelService: ConfirmModelService,private exportService: ExportService, private headerService: HeaderService,private toastService: ToastService,
-    private assessmentService: AssessmentService, private translate: TranslateService, private router: Router) { }
+  constructor(
+    private sharedService:SharedService,
+    public confirmModelService: ConfirmModelService,
+    private exportService: ExportService,
+    private headerService: HeaderService,
+    private toastService: ToastService,
+    private assessmentService: AssessmentService,
+    private translate: TranslateService,
+    private router: Router,
+    private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.confirmDeleteListener();
@@ -76,6 +88,14 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
   }
 
   private getRate(): void {
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
 
     this.assessmentList.loading = true
     this.assessmentList.list = []

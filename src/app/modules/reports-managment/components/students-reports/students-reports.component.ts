@@ -18,6 +18,7 @@ import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-students-reports',
@@ -25,6 +26,7 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
   styleUrls: ['./students-reports.component.scss']
 })
 export class StudentsReportsComponent implements OnInit {
+  emptyTable:boolean=false;
   lang = inject(TranslationService).lang
   isBtnLoading: boolean=false;
   get statusEnum(){ return StatusEnum }
@@ -61,8 +63,10 @@ export class StudentsReportsComponent implements OnInit {
     NationalityId:null,
     TalentId: null,
     StudentCategory:null,
-    ProhibitedTypes:null
+    ProhibitedTypes:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   };
+
   rangeValues: number[];
   felmaleStudentCount;
   maleStudentCount;
@@ -105,7 +109,8 @@ export class StudentsReportsComponent implements OnInit {
     private studentsReportService: StudentsReportsService,
     private sharedService: SharedService,
     private schoolsService: SchoolsService,
-    private studentService:StudentsService
+    private route:ActivatedRoute,
+    private router:Router
   ) {
     this.tableColumns = this.studentsReportService.tabelColumns
   }
@@ -141,6 +146,15 @@ export class StudentsReportsComponent implements OnInit {
       this.filtration.AcceptanceDateFrom=this.formateDate(this.acceptanceDate[0])
       this.filtration.AcceptanceDateTo=this.formateDate(this.acceptanceDate[1])
     }
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.studentsReport.loading = true
     this.studentsReport.list = []
     this.studentsReportService.getAllStudents(this.filtration)
@@ -163,6 +177,7 @@ export class StudentsReportsComponent implements OnInit {
   }
 
   checkValueOfCheckbox(item, event) {
+    var selectedItems=[]
     this.tableColumns.forEach((report, i) => {
       if (report.header == item.header && event.checked == true) {
         report.isSelected == true
@@ -170,8 +185,9 @@ export class StudentsReportsComponent implements OnInit {
       if (report.header == item.header && event.checked == false) {
         report.isSelected == false
       }
-
+      if(report.isSelected) selectedItems.push(report)
     })
+    !selectedItems.length? this.emptyTable=true : this.emptyTable=false
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {
