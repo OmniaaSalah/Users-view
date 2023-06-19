@@ -146,10 +146,19 @@ export class TransferedStudentsReportsComponent implements OnInit {
       this.filtration.BirthDateFrom=this.formateDate(this.birthDate[0])
       this.filtration.BirthDateTo=this.formateDate(this.birthDate[1])
     }
+
+    if(this.filtration.BirthDateFrom || this.filtration.BirthDateTo){
+      this.birthDate=[new Date(this.filtration.BirthDateFrom), new Date(this.filtration.BirthDateTo)]
+    }
+
     if(this.acceptanceDate)
     {
       this.filtration.AcceptanceDateFrom=this.formateDate(this.acceptanceDate[0])
       this.filtration.AcceptanceDateTo=this.formateDate(this.acceptanceDate[1])
+    }
+
+    if(this.filtration.AcceptanceDateFrom || this.filtration.AcceptanceDateTo){
+      this.acceptanceDate=[new Date(this.filtration.AcceptanceDateFrom), new Date(this.filtration.AcceptanceDateTo)]
     }
 
     if(this.route.snapshot.queryParams['searchQuery']){

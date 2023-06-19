@@ -72,11 +72,16 @@ export class ParentsReportsComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.tableColumns=this.parentReportService.getTableColumns();
+
     this.getParentReportList();
   }
 
 
   getParentReportList() {
+    if(this.filtration.RegisterationStartDate || this.filtration.RegisterationEndDate){
+      this.date=[new Date(this.filtration.RegisterationStartDate), new Date(this.filtration.RegisterationEndDate)]
+    }
+
     if(this.date){
       this.filtration.RegisterationStartDate=this.formateDate(this.date[0])
       this.filtration.RegisterationEndDate=this.formateDate(this.date[1])
@@ -133,6 +138,8 @@ export class ParentsReportsComponent implements OnInit {
       this.filtration.GradeId= null;
       this.filtration.DivisionId= null;
       this.filtration.Page=1;
+
+      this.date=null
       this.getParentReportList();
     }
 

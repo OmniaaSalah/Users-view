@@ -256,7 +256,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     };
     this.messageService.sendDataFromSpeaToEmp(form).subscribe(
       (res) => {
-        this.toastr.success('تم الارسال بنجاح');
+        this.toastr.success(this.translate.instant('toasterMessage.messageSend'))
         this.isShown = false;
         this.isShown1 = false;
         this.isShown2 = false;
@@ -289,7 +289,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       (res) => {
         this.onSubmit = false
         this.router.navigate(['/messages/message-detail/' + res]);
-        this.toastr.success('تم الارسال بنجاح');
+        this.toastr.success(this.translate.instant('toasterMessage.messageSend'))
         this.hiddenDialog.emit();
       },
       (err) => {
@@ -313,7 +313,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       };
       this.messageService.sendDataFromEmpToGuardian(form).subscribe(
         (res) => {
-          this.toastr.success('تم الارسال بنجاح');
+          this.toastr.success(this.translate.instant('toasterMessage.messageSend'))
           this.isShown = false;
           this.isShown1 = false;
           this.isShown2 = false;

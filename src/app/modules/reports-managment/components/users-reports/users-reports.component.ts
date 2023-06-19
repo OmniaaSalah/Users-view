@@ -92,6 +92,9 @@ export class UsersReportsComponent implements OnInit {
       this.filtration.dateTo=this.formateDate(this.date[1])
     }
 
+    if(this.filtration.dateFrom || this.filtration.dateTo){
+      this.date=[new Date(this.filtration.dateFrom), new Date(this.filtration.dateTo)]
+    }
 
     if(this.route.snapshot.queryParams['searchQuery']){
       this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}

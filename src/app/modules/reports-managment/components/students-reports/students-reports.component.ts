@@ -141,11 +141,19 @@ export class StudentsReportsComponent implements OnInit {
       this.filtration.BirthDateFrom=this.formateDate(this.birthDate[0])
       this.filtration.BirthDateTo=this.formateDate(this.birthDate[1])
     }
+    if(this.filtration.BirthDateFrom || this.filtration.BirthDateTo){
+      this.birthDate=[new Date(this.filtration.BirthDateFrom), new Date(this.filtration.BirthDateTo)]
+    }
+
     if(this.acceptanceDate)
     {
       this.filtration.AcceptanceDateFrom=this.formateDate(this.acceptanceDate[0])
       this.filtration.AcceptanceDateTo=this.formateDate(this.acceptanceDate[1])
     }
+    if(this.filtration.AcceptanceDateFrom || this.filtration.AcceptanceDateTo){
+      this.acceptanceDate=[new Date(this.filtration.AcceptanceDateFrom), new Date(this.filtration.AcceptanceDateTo)]
+    }
+
 
     if(this.route.snapshot.queryParams['searchQuery']){
       this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
@@ -224,7 +232,6 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.IsSpecialAbilities = null
     this.filtration.BirthDateTo = null
     this.filtration.BirthDateFrom = null
-    this.birthDate=null
     this.filtration.SchoolYearId=null;
     this.filtration.NationalityId=null
     this.filtration.Gender = null
@@ -240,6 +247,8 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.StudentCategory=null,
     this.filtration.ProhibitedTypes=null;
     this.filtration.Page=1;
+    this.birthDate=null
+    this.acceptanceDate=null
     this.getStudents()
   }
 

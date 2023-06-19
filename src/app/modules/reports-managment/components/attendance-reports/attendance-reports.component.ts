@@ -159,6 +159,10 @@ export class AttendanceReportsComponent implements OnInit {
     if(this.date){
       this.filtration.date=this.formateDate(this.date)
     }
+    if(this.filtration.date){
+      this.date= new Date(this.filtration.date)
+    }
+
 
     if(this.route.snapshot.queryParams['searchQuery']){
       this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
