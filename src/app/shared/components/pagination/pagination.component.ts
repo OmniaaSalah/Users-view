@@ -17,7 +17,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
   @ViewChild('pagination',{read: Paginator,static:true}) pagination:Paginator
   @Input() totalItems: number
-  // @Input() currentPage: number = 1;
+  @Input() currentPage: number = 1;
   @Output() paginationChanged = new EventEmitter();
 
   lang = inject(TranslationService).lang
@@ -26,23 +26,51 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
   pagesArrOptions=[]
 
-  currentPage=1;
 
   paginationState: paginationState = paginationInitialState
 
 
+  firstPage
+  lastPage
+  get isFirstPage() {return this.pagination.isFirstPage()}
+  get isLastPage () {return this.pagination.isLastPage()}
+
   ngOnInit(): void {
     this.setPaginagationReport()
+    this.initPaginationState()
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.currentPage =1
-    this.paginationState.page = 1
-    this.paginationState.first=0
-    this.pagination.totalRecords = this.totalItems
-    this.setPaginagationReport()
-    this.ngAfterViewInit()
+  initPaginationState(){
+    this.currentPage===1 ? this.paginationState.first=0 : this.paginationState.first = this.getFirstIndexInPages(this.currentPage)
+    this.paginationState.page=this.currentPage
+
   }
+
+  getFirstIndexInPages(page:number){
+    if(page && page==1) return 0
+    let arr =[]
+    for(let i=1 ; i<= this.totalItems ;i++){
+      arr.push(i)
+    }
+
+    return ( (page * this.paginationState.rows) - (this.paginationState.rows - 1) ) -1
+
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['totalItems'] && !changes['totalItems']?.firstChange){
+      this.currentPage =1
+      this.paginationState.page = 1
+      this.paginationState.first=0
+      this.pagination.totalRecords = this.totalItems
+      this.setPaginagationReport()
+      this.ngAfterViewInit()
+      console.log(this.pagination, this.pagination.isFirstPage());
+    }
+
+  }
+
 
   setPaginagationReport(){
     this.PageReport={
@@ -67,6 +95,8 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
   next(state: paginationState) {
 
+    console.log(this.paginationState.first);
+
     this.paginationState.first = this.paginationState.first + this.paginationState.rows;
     this.paginationState.page = this.paginationState.page + 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
     this.currentPage=this.paginationState.page;
@@ -86,13 +116,15 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.onPageChange(this.paginationState)
   }
 
-  isLastPage(): boolean {
-    return this.totalItems ? (this.paginationState.first >= this.totalItems -  this.paginationState.rows) :true;
-  }
+  // isLastPage(): boolean {
+  //   return this.pagination.isLastPage()
+  //   return this.totalItems ? (this.paginationState.first >= this.totalItems -  this.paginationState.rows) :true;
+  // }
 
-  isFirstPage(): boolean {
-    return this.totalItems ? this.paginationState.first === 0 : true;
-  }
+  // isFirstPage(): boolean {
+  //   return this.pagination.isFirstPage()
+  //   return this.totalItems ? this.paginationState.first === 0 : true;
+  // }
 
 
   jupmToPage(state, page){

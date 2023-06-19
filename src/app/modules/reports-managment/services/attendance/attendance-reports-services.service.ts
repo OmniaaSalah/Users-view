@@ -21,74 +21,61 @@ export class AttendanceReportsServicesService {
  
       name:this.translate.instant('shared.division'),
       isSelected: true,
-      isDisabled: true,
     },
     {
    
       name: this.translate.instant('shared.grade'),
       isSelected: true,
-      isDisabled: true,
     },
   
     {
       name: this.translate.instant('dashboard.reports.AttendanceNumbers'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name: this.translate.instant('dashboard.reports.AbsenceNumbers'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name: this.translate.instant('dashboard.parents.attendancePercentage'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name: this.translate.instant('dashboard.parents.absencePercentage'),
       isSelected: true,
-      isDisabled: true,
     },
     {
   
       name: this.translate.instant('dashboard.schools.student') ,
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('shared.Identity Number'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       name: this.translate.instant('dashboard.parents.ChildWithoutNationality'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name:this.translate.instant('dashboard.students.daleelNumber1'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name:this.translate.instant('dashboard.students.daleelNumber2'),
       isSelected: false,
-      isDisabled: false,
     },
     {
      
       name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       
       name:this.translate.instant('dashboard.parents.parentName'),
       isSelected: false,
-      isDisabled: false,
     },
   ];
 

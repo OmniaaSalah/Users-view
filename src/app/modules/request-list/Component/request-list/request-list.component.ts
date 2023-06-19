@@ -66,7 +66,14 @@ export class RequestListComponent implements OnInit {
   ]
     // openResponsesModel = false
 
-    filtration = {...Filtration, SortColumnName:'createdDate', SortBy: 'Desc',RequestStatus: [UserRequestsStatus.Pending, UserRequestsStatus.TentativelyAccepted], RequestType:null};
+    filtration = {
+      ...Filtration,
+       SortColumnName:'createdDate',
+       SortBy: 'Desc',
+       RequestStatus: [UserRequestsStatus.Pending, UserRequestsStatus.TentativelyAccepted],
+       RequestType:null,
+       ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+      };
 
     paginationState= {...paginationInitialState};
     // showMyReqs={
@@ -89,7 +96,8 @@ export class RequestListComponent implements OnInit {
       private systemRequestService: SystemRequestService,
       private exportService: ExportService,
       private sharedService: SharedService,
-      private route :ActivatedRoute
+      private route:ActivatedRoute,
+      private router:Router
     ) {
     }
 
@@ -107,6 +115,14 @@ export class RequestListComponent implements OnInit {
     }
 
     getRequests(){
+      if(this.route.snapshot.queryParams['searchQuery']){
+        this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+      }
+      this.router.navigate([], {
+        queryParams: {searchQuery : JSON.stringify(this.filtration)},
+        relativeTo: this.route,
+      });
+
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
         this.requests.loading=true;
         this.requests.list=[];
@@ -136,6 +152,14 @@ export class RequestListComponent implements OnInit {
     }
 
     getMyRequests(){
+      if(this.route.snapshot.queryParams['searchQuery']){
+        this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+      }
+      this.router.navigate([], {
+        queryParams: {searchQuery : JSON.stringify(this.filtration)},
+        relativeTo: this.route,
+      });
+
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
       this.requests.loading=true;
       this.requests.list=[];

@@ -43,7 +43,10 @@ export class SchoolGradesComponent implements OnInit {
 
   isDialogOpened=false
 
-  filtration={...Filtration}
+  filtration={
+    ...Filtration,
+    ...JSON.parse(localStorage.getItem('Div-SearchQuery') || 'null')
+  }
   paginationState={...paginationInitialState}
 
   grades={
@@ -82,6 +85,11 @@ export class SchoolGradesComponent implements OnInit {
   }
 
   getSchoolGrades(){
+    if(localStorage.getItem('Grades-SearchQuery')){
+      this.filtration = {...JSON.parse(localStorage.getItem('Grades-SearchQuery')), ...this.filtration}
+    }
+    localStorage.setItem('Grades-SearchQuery',JSON.stringify(this.filtration))
+
     this.grades.loading=true
     this.grades.list=[]
     this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe(res=>{
@@ -123,6 +131,7 @@ export class SchoolGradesComponent implements OnInit {
   clearFilter(){
     this.filtration.KeyWord =''
     this.filtration.Page=1;
+    localStorage.removeItem('Grades-SearchQuery')
     this.getSchoolGrades()
   }
 

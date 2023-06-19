@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { SchoolYearsService } from '../../service/school-years.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -26,7 +26,12 @@ export class SchoolyearsListComponent implements OnInit {
   get schoolYearEnum() {return SchoolYearEnum}
   get ClaimsEnum(){return ClaimsEnum}
   faEllipsisVertical=faEllipsisVertical;
-  filtration = {...Filtration,statusId:null};
+  filtration = {
+    ...Filtration,
+    statusId:null,
+    ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
+  };
+
   paginationState= {...paginationInitialState};
   schoolYearsStatus;
   componentHeaderData: IHeader = {
@@ -42,7 +47,14 @@ export class SchoolyearsListComponent implements OnInit {
     loading:true
   }
 
-  constructor(private exportService: ExportService,private sharedService:SharedService,private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolYearService:SchoolYearsService) { }
+  constructor(
+    private exportService: ExportService,
+    private sharedService:SharedService,
+    private headerService:HeaderService,
+    private translate:TranslateService,
+    private router:Router,
+    private schoolYearService:SchoolYearsService,
+    private route:ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -59,6 +71,14 @@ export class SchoolyearsListComponent implements OnInit {
 
 
   getAllSchoolYears(){
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.schoolYears.loading=true;
     this.schoolYears.list=[];

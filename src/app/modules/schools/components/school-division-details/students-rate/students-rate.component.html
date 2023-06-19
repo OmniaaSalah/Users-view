@@ -1,16 +1,17 @@
 
 
 <div class="rates prim-table mt-4" *ngIf="students.totalAllData || students.loading">
-    <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true"> 
+    <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true">
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
             <app-table-caption
-            [hasFilter]="false" 
-            (onExport)="onExport($event)" 
-            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getStudentsRate()" 
+            [seachKeyword]="filtration.KeyWord"
+            [hasFilter]="false"
+            (onExport)="onExport($event)"
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getStudentsRate()"
             (onClear)="clearFilter()"></app-table-caption>
         </ng-template>
-        
+
         <ng-template pTemplate="header" let-columns="columns">
             <tr>
                 <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
@@ -25,18 +26,18 @@
                 <td>{{student.name |currentLang}}</td>
                 <td *permit="claimsEnum.E_U_DivisionStudentRate">
                     <!-- [formControl]="studentRateInput"  -->
-                    <p-dropdown 
-                    *ngIf="student.isFinalPass || (!student.isFinalPass && student.isPossibilityEdit)" 
+                    <p-dropdown
+                    *ngIf="student.isFinalPass || (!student.isFinalPass && student.isPossibilityEdit)"
                     [inputId]="student.studentNumber"
                     [options]="ratesOptions"
-                    [(ngModel)]="student.isFinalPass" 
-                    (ngModelChange)="onStudentRateChanged($event,student.studentId,rowIndex)" 
+                    [(ngModel)]="student.isFinalPass"
+                    (ngModelChange)="onStudentRateChanged($event,student.studentId,rowIndex)"
                     optionLabel="name" optionValue="value"> </p-dropdown>
-                    
+
                     <span *ngIf="!student.isFinalPass && !student.isPossibilityEdit" class="py-2 px-5 bg-gray-30 color-gray-400 radius-30">راسب</span>
                 </td>
                 <td>{{student.numberOfFaildSubject}}</td>
-              
+
             </tr>
         </ng-template>
 
@@ -46,7 +47,7 @@
                     <ng-container *ngIf="!students.total &&  !students.loading">
                         <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}"></app-informative-block>
                     </ng-container>
-                    
+
                     <app-loader></app-loader>
                 </td>
             </tr>

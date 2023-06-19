@@ -5,34 +5,34 @@
             <span class="fs-2 color-primary">{{'Search' |translate}}</span>
             <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
         </div>
-        
-        <div class="custom-form p-5 " *ngIf="isCollapsed">
-            
-            <div class="row gx-5 form-set">
-                       
 
-                       
-    
+        <div class="custom-form p-5 " *ngIf="isCollapsed">
+
+            <div class="row gx-5 form-set">
+
+
+
+
                 <div class="col-4">
                     <label class="label" for="city">{{'dashboard.Requests.requestType' |translate}} </label>
-                    <p-multiSelect 
-                    [options]="requestsList" 
+                    <p-multiSelect
+                    [options]="requestsList"
                    display="chip"
                    [(ngModel)]="filtration.requestType" optionValue="value" optionLabel="name"
-                   [ngModelOptions]="{standalone: true}" 
+                   [ngModelOptions]="{standalone: true}"
                    placeholder="{{'dashboard.Requests.SelectRequestType' |translate}}"
                    ></p-multiSelect>
                 </div>
-               
+
                 <div class="col-4">
                     <label class="label" for="city">{{'dashboard.UserInformation.Select Private Role'|translate }} </label>
-                    <p-multiSelect 
-                     [options]="roles" 
+                    <p-multiSelect
+                     [options]="roles"
                     display="chip"
                     [(ngModel)]="filtration.roleIds"
-                    optionValue="id" 
-                    [ngModelOptions]="{standalone: true}" 
-                    placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}" 
+                    optionValue="id"
+                    [ngModelOptions]="{standalone: true}"
+                    placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}"
                     optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
                 </div>
 
@@ -43,7 +43,7 @@
                    </p-calendar>
                 </div>
 
-           
+
 
             </div>
 
@@ -70,7 +70,7 @@
 
         </div>
         <div class="row">
-         
+
                 <div class="row">
                 <h4 class="heading heading--tertiary mb-3 col col-md-4">{{'dashboard.reports.RequestNumbersProcessedFromEmployeesBasedOnRequestType'|translate}} :</h4>
                 <!-- <p class="paragraph paragraph--sm col col-md-8">{{requestsNumbersBasedOnRequestType}}</p> -->
@@ -83,8 +83,8 @@
                        </div>
                         </ng-container>
                 </div>
-              
-            
+
+
         </div>
 
     </div>
@@ -99,7 +99,7 @@
         <p-table #dt [value]="users.list"  sortMode="multiple" (onSort)="onSort($event)">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" [hasFilter]="false" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
+                <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" [hasFilter]="false" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
 
                 </app-table-caption>
 
@@ -108,11 +108,11 @@
             <ng-template pTemplate="header" et-columns="columns">
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
-                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true"> 
+                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true">
                             <!-- studentsReportsArray -->
                             <p-sortIcon field="{{column.name }}"></p-sortIcon>
-                            <ng-container >{{column.name }}</ng-container> 
-                     
+                            <ng-container >{{column.name }}</ng-container>
+
                     </th>
                     </ng-container>
 
@@ -120,14 +120,14 @@
             </ng-template>
             <ng-template pTemplate="body" let-e let-columns="columns">
                 <tr>
-                    
+
                     <td>{{e?.employeeName | currentLang}}</td>
                     <td>{{e?.email}}</td>
                     <td>{{e?.requestNumber}}</td>
                     <td>{{e?.phoneNumber}}</td>
-                  
 
-             
+
+
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage" let-columns>
@@ -149,7 +149,7 @@
 
         <div>
             <div *ngIf="paginationState.rows<users.total">
-                <app-pagination [totalItems]="users.total" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+                <app-pagination [currentPage]="filtration.Page" [totalItems]="users.total" (paginationChanged)="onTableDataChange($event)"></app-pagination>
             </div>
         </div>
 

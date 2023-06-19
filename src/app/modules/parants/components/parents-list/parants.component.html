@@ -5,7 +5,7 @@
         <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" (onFilter)="checkParentList()"    (onSearch)="filtration.KeyWord = $event;filtration.page=1; checkParentList();" (onClear)="clearFilter()">
+                <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" (onFilter)="checkParentList()"    (onSearch)="filtration.KeyWord = $event;filtration.page=1; checkParentList();" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-3">
@@ -80,7 +80,7 @@
                         <ng-container *ngFor="let item of lang=='ar'?parent?.relativeRelationAr:parent?.relativeRelationEn let i=index">
                             {{item}}<span *ngIf="i< parent?.relativeRelationAr.length-1">,</span>
                         </ng-container>
-                        
+
                     </td>
                     <td>{{parent.birthDate |LocalizeDate}}</td>
                     <td>{{parent.nationalityName |currentLang}}</td>
@@ -117,7 +117,7 @@
         </p-table>
 
         <div *ngIf="parent.total  > paginationState.rows">
-            <app-pagination [totalItems]="parent.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [currentPage]="filtration.Page" [totalItems]="parent.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
     <ng-container *ngIf="!parent.totalAllData && !parent.loading">

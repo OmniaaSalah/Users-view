@@ -8,7 +8,7 @@
 
          <!-- Table Caption -->
          <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllRole()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllRole()" (onClear)="clearFilter()">
+            <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllRole()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllRole()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
                     <div class="col-lg-4">
@@ -83,7 +83,7 @@
     </p-table>
 
     <div *ngIf="paginationState.rows<roles.total">
-        <app-pagination [totalItems]="roles.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [currentPage]="filtration.Page" [totalItems]="roles.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 
  </div>

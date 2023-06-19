@@ -14,6 +14,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-indexes',
@@ -29,7 +30,7 @@ export class IndexesComponent implements OnInit {
     {'value':StatusEnum.Inactive,'name':this.translate.instant("Inactive")}
   ];
   indexListType;
-  filtration = {...Filtration,IndexType: null,IndexStatus:''};
+  filtration = {...Filtration,IndexType: null,IndexStatus:'',  ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')};
   paginationState= {...paginationInitialState};
   indexes={
     totalAllData:0,
@@ -40,7 +41,10 @@ export class IndexesComponent implements OnInit {
   constructor(private exportService: ExportService,
     private headerService: HeaderService,
     private sharedService:SharedService,
-    private indexesService: IndexesService, private translate: TranslateService) { }
+    private indexesService: IndexesService,
+    private translate: TranslateService,
+    private route:ActivatedRoute,
+    private router:Router) { }
 
   ngOnInit(): void {
 
@@ -70,6 +74,14 @@ export class IndexesComponent implements OnInit {
   }
 
   getAllIndexes(){
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.indexes.loading=true;
     this.indexes.list=[];

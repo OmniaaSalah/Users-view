@@ -32,143 +32,119 @@ export class DegreeReportService {
     {
       name:this.translate.instant('School'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
       isSelected: true,
-      isDisabled: true,
     },
     {
  
       name:this.translate.instant('shared.division'),
       isSelected: true,
-      isDisabled: true,
     },
     {
    
       name: this.translate.instant('shared.grade'),
       isSelected: true,
-      isDisabled: true,
     },
     {
       name:this.translate.instant('dashboard.SchoolYear.school year'),
       isSelected: true,
-      isDisabled: true,
     },
     {
      
       name:this.translate.instant('dashboard.reports.SchoolYearStudentResult'),
       isSelected: true,
-      isDisabled: true,
     },
     {
  
       name:this.translate.instant('dashboard.reports.semester'),
       isSelected: true,
-      isDisabled: true,
     },
     {
      
       name:this.translate.instant('dashboard.reports.SemesterStudentResult'),
       isSelected: false,
-      isDisabled: false,
     },
     {
       
       name:this.translate.instant('dashboard.reports.subjectCount'),
       isSelected: false,
-      isDisabled: false,
     },
     {
   
       name: this.translate.instant('dashboard.schools.student') ,
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name:this.translate.instant('dashboard.students.daleelNumber1'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name:this.translate.instant('dashboard.students.daleelNumber2'),
       isSelected: false,
-      isDisabled: false,
     },
     {
      
       name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name: this.translate.instant('dashboard.reports.successPercentage'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name: this.translate.instant('dashboard.reports.failPercentage'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name:this.translate.instant('dashboard.SchoolYear.Subject'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name: this.translate.instant('dashboard.Subjects.Subject Minimum grade'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name: this.translate.instant('dashboard.Subjects.Subject Maximum grade'),
       isSelected: false,
-      isDisabled: false,
     },
     {
      
       name:this.translate.instant('dashboard.reports.StudentDegree'),
       isSelected: false,
-      isDisabled: false,
     },
     {
      
       name:this.translate.instant('dashboard.reports.SubjectStudentResult'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name:this.translate.instant('dashboard.reports.ImprovementType'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name: this.translate.instant('dashboard.reports.ImprovementSchoolYear'),
       isSelected: false,
-      isDisabled: false,
     },
     {
    
       name: this.translate.instant('dashboard.reports.ImprovementDate'),
       isSelected: false,
-      isDisabled: false,
     },
     {
      
       name:this.translate.instant('dashboard.reports.ImprovementBy'),
       isSelected: false,
-      isDisabled: false,
     }
    
   ];

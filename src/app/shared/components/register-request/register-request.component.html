@@ -176,6 +176,7 @@
 
         <div class="prim-table">
             <app-table-caption
+            [seachKeyword]="filtration.KeyWord"
             [hasExport]="false"
             (onFilter)="getSchools()"
             (onSearch)="filtration.Page=1; filtration.KeyWord = $event; getSchools()"

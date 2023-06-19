@@ -101,6 +101,7 @@
                               <!-- Table Caption -->
                                   <ng-template pTemplate="caption">
                                       <app-table-caption
+                                      [seachKeyword]="filtration.KeyWord"
                                       [hasExport]="false"
                                       (onFilter)="filter()"
                                       (onSearch)="search($event)"

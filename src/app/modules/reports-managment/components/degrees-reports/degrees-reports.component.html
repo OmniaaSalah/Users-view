@@ -71,7 +71,7 @@
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
-                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" [disabled]="item.isDisabled" [(ngModel)]="item.isSelected"
+                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" [(ngModel)]="item.isSelected"
                     [binary]="true"></p-checkbox>
 
                 <label class="label label--sm" for=""> {{item.name}} </label>
@@ -86,11 +86,11 @@
     </div>
 
 
-    <div class="prim-table mt-4" *ngIf="(degreessReport.totalAllData || degreessReport.loading) &&filtration.SchoolId &&filtration.GradeId && filtration.SchoolYearId &&shownTable">
+    <div class="prim-table mt-4" *ngIf="(degreessReport.totalAllData || degreessReport.loading) &&filtration.SchoolId &&filtration.GradeId && filtration.SchoolYearId &&shownTable &&!emptyTable">
         <p-table #dt [value]="degreessReport.list" [lazy]="true" (onSort)="onSort($event)"  [scrollable]="true">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getDegreesList()" (onClear)="clearFilter()">
+                <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getDegreesList()" (onClear)="clearFilter()">
                 </app-table-caption>
 
             </ng-template>
@@ -109,26 +109,26 @@
             <ng-template pTemplate="body" let-e>
                 <tr>
                     <ng-container>
-                        <td>
+                        <td *ngIf="tableColumns[0].isSelected == true">
                             {{e?.schoolName| currentLang}}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[1].isSelected == true">
                             {{e?.curriculum| currentLang}}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[2].isSelected == true">
                             {{e?.divisionName| currentLang}}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[3].isSelected == true">
                             {{e?.gradeName | currentLang}}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[4].isSelected == true">
                             {{e?.schoolYearName | currentLang}}
                         </td>
-                        <td>
+                        <td *ngIf="tableColumns[5].isSelected == true">
                             <span *ngIf="e?.studentSchoolYearResult">{{'shared.allStatus.'+e?.studentSchoolYearResult  |translate}}</span>
                         </td>
 
-                        <td >
+                        <td *ngIf="tableColumns[6].isSelected == true">
                            <span >{{'shared.'+e?.semesterName | translate}}</span>
                         </td>
                         <td *ngIf="tableColumns[7].isSelected == true">
@@ -205,7 +205,7 @@
         </p-table>
 
         <div class="" *ngIf="degreessReport.total  > paginationState.rows">
-            <app-pagination [totalItems]="degreessReport.total"
+            <app-pagination [currentPage]="filtration.Page" [totalItems]="degreessReport.total"
                 (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
