@@ -38,6 +38,14 @@ export class AcceptInformationComponent implements OnInit {
     {name: this.translate.instant('shared.fusionClass'), value: 'FusionClass'}
   ]
 
+  reEnrollmentTypes=[
+    {name: this.translate.instant('shared.allStatus.TransferredWithinTheEmirate'), value:ReEnrollmentType.TransferredWithinTheEmirate},
+    {name: this.translate.instant('shared.allStatus.TransferredFromOutsideTheEmirate'), value:ReEnrollmentType.TransferredFromOutsideTheEmirate},
+    {name: this.translate.instant('shared.allStatus.TransferredFromOutsideTheCountry'), value:ReEnrollmentType.TransferredFromOutsideTheCountry},
+    {name: this.translate.instant('shared.allStatus.Newbie'), value:ReEnrollmentType.Newbie},
+    {name: this.translate.instant('shared.allStatus.LevelSetting'), value:ReEnrollmentType.LevelSetting},
+  ]
+
 
   constructor(
     private translate:TranslateService,

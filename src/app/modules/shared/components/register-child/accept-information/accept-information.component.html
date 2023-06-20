@@ -134,12 +134,11 @@
                 </div>
             </div> -->
 
-            <!-- <div class="col-md-4" *ngIf="specialEducation.value">
-                <div class="form-set" formGroupName="specialEducation">
-                    <label class="label required" for="description">{{'dashboard.parents.specialEducationtype'| translate}}</label>
-                    <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
-                </div>
+            <!-- <div class="form-set" >
+                <label class="label required" for="description">{{'dashboard.parents.studentEnrollmentType'| translate}}</label>
+                <p-dropdown [options]="reEnrollmentTypes" optionValue="value" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
             </div> -->
+
 
 
             <div class="col-md-4">
