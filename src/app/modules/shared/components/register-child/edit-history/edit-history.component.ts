@@ -49,9 +49,6 @@ export class EditHistoryComponent implements OnInit {
   constructor(
     private translate:TranslateService,
     private schoolsService:SchoolsService,
-    private route: ActivatedRoute,
-    private headerService: HeaderService,
-    private userService:UserService,
     private studentsService:StudentsService,
     public childService:RegisterChildService,
     private exportService :ExportService
