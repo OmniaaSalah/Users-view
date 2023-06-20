@@ -243,7 +243,7 @@
                             {{student?.reasonForNotHavingEmiratesId|currentLang}}
                         </td>
                         <td *ngIf="tableColumns[11].isSelected == true">
-                            {{student?.curriculumName| LocalizeDate}}
+                            {{student?.curriculumName| currentLang}}
                         </td>
                         <td *ngIf="tableColumns[12].isSelected == true">
                             {{student?.dateOfAcceptance | LocalizeDate}}

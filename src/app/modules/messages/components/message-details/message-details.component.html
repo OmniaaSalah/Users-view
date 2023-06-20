@@ -76,7 +76,7 @@
     <ng-container *ngFor="let message of messagesReplies">
     <div  [ngClass]="message?.scope==messageDetails?.scope ? 'first-message':'second-message'">
         <p class="title" *ngIf="message.scope==ScopeEnum.SPEA && currentUserScope == ScopeEnum.SPEA"> {{ message?.userName | currentLang }} / {{message?.roleName | currentLang}}</p>
-        <p class="title" *ngIf="message.scope!=ScopeEnum.SPEA  && currentUserScope != ScopeEnum.SPEA"> --- / {{message?.roleName | currentLang}}</p>
+        <p class="title" *ngIf="message.scope==ScopeEnum.SPEA  && currentUserScope != ScopeEnum.SPEA"> --- / {{message?.roleName | currentLang}}</p>
 
         <div class="body-content">
             <p>{{ message?.messegeText }}</p>

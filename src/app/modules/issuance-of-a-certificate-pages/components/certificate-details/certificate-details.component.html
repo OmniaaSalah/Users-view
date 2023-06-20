@@ -899,35 +899,35 @@
           <div class="col-md-3 text-start font-en">Result</div> -->
 
         </div>
-      </div>
 
-      <p class="font-ar">المدرسة مرخصة من قبل هيئة الشارقة للتعليم الخاص – حكومة الشارقة – دولة الامارات العربية المتحدة</p>
-      <p class="font-en text-start ">The School is Licensed from Sharjah Private Education Authority – Sharjah Government – United Arab Emirates </p>
+        <p class="font-ar">المدرسة مرخصة من قبل هيئة الشارقة للتعليم الخاص – حكومة الشارقة – دولة الامارات العربية المتحدة</p>
+        <p class="font-en text-start ">The School is Licensed from Sharjah Private Education Authority – Sharjah Government – United Arab Emirates </p>
 
 
-      <div class="d-flex justify-content-between align-items-center mt-6">
-        <div class="">
-          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
-        </div>
-
-        <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
-          <div class="text-start">
-            <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
-            <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
+        <div class="d-flex justify-content-between align-items-center mt-6">
+          <div class="">
+            <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+            <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
           </div>
-            <div class="d-flex flex-column align-items-center">
-              <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                <span dir="ltr">+971 068041444</span>
-                <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
-              </p>
-              <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
-              <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
-              <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
-            </div>
-        </div>
-      </div>
 
+          <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
+            <div class="text-start">
+              <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
+              <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
+            </div>
+              <div class="d-flex flex-column align-items-center">
+                <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
+                  <span dir="ltr">+971 068041444</span>
+                  <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
+                </p>
+                <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
+                <p class="text-center fs-3"> رقم الإيصال/ receipt number</p>
+                <p class="text-center fs-3">{{certificate?.ReceiptNumber || '--'}}</p>
+              </div>
+          </div>
+        </div>
+
+      </div>
 
 
 
