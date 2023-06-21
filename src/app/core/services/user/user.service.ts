@@ -15,41 +15,6 @@ export class UserService {
   currentUserSchoolName$;
   isUserLogged$ = new BehaviorSubject(false);
 
-  // userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
-
-  // getUserClaims(){
-
-  //   // if(Object.keys(this.userClaims).length) return of(this.userClaims)
-  //   let headers: HttpHeaders = new HttpHeaders();
-  //   headers = headers.append(
-  //     'Authorization',
-  //     `Bearer ${this.getAccessTokenId()}`
-  //   );
-  //   return this.http.get(environment.serverUrl+'/current-user/get-claims', {headers})
-  //   .pipe(
-  //     map((res: GenericResponse<any>)=> res.result),
-  //     map((res)=> res.map(val => val.code)),
-  //     map((claims:any)=> {
-  //       let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
-  //       this.userClaims = {...claimsMap}
-
-  //       // if(this.getCurrentUserScope()==UserScope.SPEA){
-  //       //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.SpeaClaims)
-  //       // }else if(this.getCurrentUserScope()==UserScope.Employee){
-  //       //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.EmployeeClaims)
-  //       // }else if (this.getCurrentUserScope()==UserScope.Guardian){
-  //       //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
-  //       // }
-
-  //       return this.userClaims
-  //     }),
-  //     take(1),
-  //     catchError(err=>{
-  //       if(err.status===401 || err.status===0)
-  //       return EMPTY
-  //     })
-  //   )
-  // }
 
   private token: any = new Token();
   protected prefix: string = '$AJ$';
@@ -69,9 +34,7 @@ export class UserService {
     this.token.currentUserName = this.load('currentUserName');
     this.token.serviesNumbers = this.load('serviesNumbers');
     this.token.schoolUrgentMessages = this.load('schoolUrgentMessages');
-    this.currentUserSchoolId$ = new BehaviorSubject(
-      this.getSchoolId() || null
-    );
+    this.currentUserSchoolId$ = new BehaviorSubject(this.getSchoolId() || null);
     this.currentUserSchoolName$ = new BehaviorSubject(this.getSchoolName() || null);
     this.currentUserName = new BehaviorSubject(this.getCurrentUserName() || null);
     this.currentGuardian = new BehaviorSubject(this.getCurrentGuardian() || null);

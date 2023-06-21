@@ -182,7 +182,7 @@
                                                             <p *ngIf="!checkLanguage">{{notification.description.en}}</p>
 
                                                         </div>
-                                                        <span class="receviedTime">{{transform(notification.createdDate)}}</span>
+                                                        <span class="receviedTime">{{notification.createdDate |LocalizeDate}}</span>
                                                     </div>
                                                     <hr>
                                                 </div>

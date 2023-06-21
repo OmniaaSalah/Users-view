@@ -143,6 +143,10 @@
                     </div>
                 </div>
                 <div class="row gx-5 custom-form mb-5" *ngIf="AllGrades">
+                    <div class="col-md-4">
+                      <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                      <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" (ngModelChange)="onCurriculumSelected($event)" [(ngModel)]="filtration.curriculumId" [ngModelOptions]="{standalone: true}" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                    </div>
                     <div class="col-md-4 ">
                         <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
                         <!-- name="grade" [ngModelOptions]="{standalone: true}"  -->
@@ -178,6 +182,7 @@
             <app-table-caption
             [seachKeyword]="filtration.KeyWord"
             [hasExport]="false"
+            [hasFilter]="childRegistrationStatus==registrtionStatusEnum.Withdrawal"
             (onFilter)="getSchools()"
             (onSearch)="filtration.Page=1; filtration.KeyWord = $event; getSchools()"
             (onClear)="clearFilter()">
@@ -187,7 +192,7 @@
                         <label class="label" for="region">{{'shared.state'|translate }}  </label>
                         <p-dropdown [showClear]="true" [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
                     </div> -->
-                    <div class="col-md-4">
+                    <div class="col-md-4" *ngIf="childRegistrationStatus==registrtionStatusEnum.Withdrawal">
                         <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
                         <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                     </div>
@@ -222,13 +227,14 @@
 
                 </div>
             </div>
+            <app-loader *ngIf="schools.loading"></app-loader>
+
             <div class="mt-5" *ngIf="schools.total > paginationState.rows">
                 <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
             </div>
 
         </div>
 
-        <app-loader *ngIf="schools.loading"></app-loader>
 
         <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
             <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}"></app-informative-block>
