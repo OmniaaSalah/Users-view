@@ -309,6 +309,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 		this.navListLength = allowedSteps.length
 
 		let el =this.steps.find(el => (el.index==stepIndex && this.claimsService.isUserAllowedTo(el.claims)))
+
 		if(el) {
 			el.isActive =true
 			this.step=el.index

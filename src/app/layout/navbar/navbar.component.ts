@@ -4,7 +4,6 @@ import {
   NgZone,
   OnInit,
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -19,7 +18,6 @@ import { RouteListenrService } from 'src/app/shared/services/route-listenr/route
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { DatePipe } from '@angular/common';
 import { MessageService } from 'src/app/modules/messages/service/message.service';
 interface MenuItem {
   id: number;
@@ -53,7 +51,6 @@ export class NavbarComponent implements OnInit {
   guardianNavItems = [
     { name: this.translate.get('Home Page'), Link: '/' },
     { name: this.translate.get('My requests'), Link: '/requests-list' },
-    //,{name:this.translate.get('about daleel'),Link:"/about-us"}
   ];
 
   message: string = '';
@@ -88,7 +85,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private router: Router,
     private translate: TranslateService,
     private userService: UserService,
     public routeListenrService: RouteListenrService,
@@ -607,7 +603,7 @@ export class NavbarComponent implements OnInit {
   getCurrentUserMessages() {
     let userId = this.userService.getCurrentUserId();
     if(this.userService.isUserLogged())
-     { 
+     {
       this.messageService
         .getCurrentUserMessages(userId, this.currentUserScope, {
           PageSize: 50,
@@ -619,10 +615,7 @@ export class NavbarComponent implements OnInit {
      }
   }
 
-  transform(value: Date | string, format = 'd MMMM y '): string {
-    const datePipe = new DatePipe(this.translation.lang || 'ar');
-    return datePipe.transform(value, format);
-  }
+
 
   changeLanguage(): void {
     this.translation.handleLanguageChange();
