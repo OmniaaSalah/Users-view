@@ -51,7 +51,7 @@ export class EditNewSubjectComponent implements OnInit {
   currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
 
-  isSpeaSubject = !!this.route.snapshot.queryParamMap.get('speaSubject')
+  isSpeaSubject = this.route.snapshot.queryParamMap.get('speaSubject')=='false'? false :true
 
 
   constructor(

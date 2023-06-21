@@ -119,20 +119,15 @@ export class RegisterRequestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.sharedService.getAllGrades('').subscribe(res=> {
-      this.AllGrades=res || []
-      if(this.requestId) {
-        this.patchReturnedRequestData(this.returnedReqData)
-        this.getRequestOptions()
-      }
-    })
-
+    this.getGrades()
     this.prepareHeaderData()
     this.getStudentInfo()
 
     this.getRegistrationRequiresFiles()
 
   }
+
+
 
 
   getStudentInfo(){
@@ -265,6 +260,23 @@ initRegisterationForm(child){
 
 
 
+
+  getGrades(curriculumsId=''){
+    this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
+      this.AllGrades=res || []
+
+      if(this.requestId) {
+        this.patchReturnedRequestData(this.returnedReqData)
+        this.getRequestOptions()
+      }
+    })
+  }
+
+  onCurriculumSelected(id){
+    this.filtration.GradeId=null
+    this.registerReqForm.controls['gradeId'].setValue(null)
+    this.getGrades(id)
+  }
 
 
 
