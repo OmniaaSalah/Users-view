@@ -189,10 +189,10 @@
                       formControlName="schoolYearCopiedFrom"
                       (onChange)="copySchoolYearData($event.value)"
                       [options]="schoolYearsList"
-                       [ngClass]="{'ng-invalid ng-dirty':schoolYearCopiedFrom.errors?.['required'] && schoolYearCopiedFrom.touched}" 
+                       [ngClass]="{'ng-invalid ng-dirty':schoolYearCopiedFrom.errors?.['required'] && schoolYearCopiedFrom.touched}"
                       optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
                       </p-dropdown>
-                      
+
                       <div [hidden]="schoolYearCopiedFrom.valid || schoolYearCopiedFrom.untouched">
                         <small *ngIf="schoolYearCopiedFrom.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                           {{'shared.This Field is Required'|translate}}
@@ -562,58 +562,51 @@
 
 
 <!--selectTopStudents -->
-<p-dialog  styleClass="block" [closable]="false" [resizable]="false" [(visible)]="TopStudentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
-  <ng-template pTemplate="header">
+<p-dialog header="{{'dashboard.SchoolYear.choose Top Students'| translate}}"  styleClass="block"  [resizable]="false" [(visible)]="TopStudentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw', height:'80vh'}">
+  <!-- <ng-template pTemplate="header">
    <p-dialog-header >
-
+    [closable]="false"
    <div class="header mb-5">
-    <span class="headeritem ">{{'dashboard.SchoolYear.choose Top Students'| translate}}</span>
-    <button class="md" (click)="TopStudentsModelOpened=false"><i class="pi pi-times " ></i></button>
+      <span class="headeritem ">{{'dashboard.SchoolYear.choose Top Students'| translate}}</span>
+      <button class="md" (click)="TopStudentsModelOpened=false"><i class="pi pi-times " ></i></button>
    </div>
-   <div class="row mt-5 ">
-    <div class="col-2 tittle">
-      {{'dashboard.SchoolYear.curriculum'| translate}}
-   </div>
-   <div class="col-4 detail">
-    {{schoolYearCurriculum?.name|currentLang}}
-  </div>
-  <div class="col-2 tittle">
-    {{'dashboard.SchoolYear.Class'| translate}}
-  </div>
-  <div class="col-4 detail class">
-    {{schoolYearClass?.name|currentLang}}
- </div>
-   </div>
-    <div class="col-12 caption__filter caption__filter--actions">
-      <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
-          <i class="pi pi-search fs-3 "></i>
-          <input class="input" [formControl]="searchInput" type="text"  pInputText placeholder="{{'shared.Search...'|translate}}"/>
-      </div>
-   </div>
-<div class="custom-form mt-4">
-   <div class="row gx-5 form-set">
-          <div class="col-6">
-              <label class="label" for="nationality">{{'dashboard.SchoolYear.Nationality'|translate }} </label>
-              <p-dropdown [options]="nationalityList" [showClear]="true" StopProp optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" (onChange)="getStudentsFiltration()" [(ngModel)]="nationalityId" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Nationality'|translate }}"></p-dropdown>
-          </div>
-          <div class="col-6">
-              <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Precantage'|translate }} </label>
-              <p-dropdown [options]="precentageList" [showClear]="true" StopProp  inputId="precantage" (onChange)="getStudentsFiltration()" [(ngModel)]="perecentge" placeholder="{{'dashboard.SchoolYear.Select Precantage'|translate }}"></p-dropdown>
-          </div>
-    </div>
-  </div>
+
    </p-dialog-header>
-  </ng-template>
+  </ng-template> -->
 
   <ng-template pTemplate="content">
+
+      <div class="row mt-5 ">
+        <div class="col-2 tittle">{{'dashboard.SchoolYear.curriculum'| translate}}</div>
+        <div class="col-4 detail">{{schoolYearCurriculum?.name|currentLang}}</div>
+        <div class="col-2 tittle">{{'dashboard.SchoolYear.Class'| translate}}</div>
+        <div class="col-4 detail class">{{schoolYearClass?.name|currentLang}}</div>
+      </div>
+
+      <div class="col-12 caption__filter caption__filter--actions my-5">
+        <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+            <i class="pi pi-search fs-3 "></i>
+            <input class="input" [formControl]="searchInput" type="text"  pInputText placeholder="{{'shared.Search...'|translate}}"/>
+        </div>
+      </div>
+      <div class="custom-form mt-4">
+        <div class="row gx-5 form-set">
+            <div class="col-6">
+                <label class="label" for="nationality">{{'dashboard.SchoolYear.Nationality'|translate }} </label>
+                <p-dropdown [options]="nationalityList" [showClear]="true" StopProp optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" (onChange)="getStudentsFiltration()" [(ngModel)]="nationalityId" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Nationality'|translate }}"></p-dropdown>
+            </div>
+            <div class="col-6">
+                <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Precantage'|translate }} </label>
+                <p-dropdown [options]="precentageList" [showClear]="true" StopProp  inputId="precantage" (onChange)="getStudentsFiltration()" [(ngModel)]="perecentge" placeholder="{{'dashboard.SchoolYear.Select Precantage'|translate }}"></p-dropdown>
+            </div>
+        </div>
+      </div>
+
       <div class="custom-form parent-modal">
-
-
           <div class="row gx-5 gy-4 form-set" >
               <h2 class="heading heading--tertiary mb-3 ">{{'dashboard.SchoolYear.Student List' | translate}} ( {{studentsList.length}} )</h2>
               <ng-container *ngFor="let student of studentsList; let i =index">
                   <div class="col-md-6 d-flex gap-4 align-items-center">
-                      <!-- <p-checkbox  name="students" binary="true" (onChange)="getTopStudentsNumber()" [(ngModel)]="student.isSelected" [inputId]="i" ></p-checkbox> -->
                       <p-checkbox  name="students" [value]="student?.id" name="student" (onChange)="getTopStudentsNumber()" [(ngModel)]="topStudentIds"  ></p-checkbox>
                       <label class="label label--sm col-md-12" [for]="i">
                         <div class="row">
@@ -625,14 +618,13 @@
                   </div>
               </ng-container>
           </div>
-
       </div>
   </ng-template>
 
   <ng-template pTemplate="footer">
 
     <div class="d-flex justify-content-between  mt-5 ">
-      <span class="footeritem">{{'dashboard.SchoolYear.you select'|translate}} {{topStudentIds.length}} {{'dashboard.SchoolYear.from students'|translate}} . {{'dashboard.SchoolYear.you can select 10 top students at max'|translate}}</span>
+      <span class="footeritem">{{'dashboard.SchoolYear.you select'|translate}} {{topStudentIds?.length}} {{'dashboard.SchoolYear.from students'|translate}} . {{'dashboard.SchoolYear.you can select 10 top students at max'|translate}}</span>
       <button class="btn btn-primary btn--sm  " (click)="TopStudentsModelOpened=false;saveTopStudent(schoolYearCurriculum.curriculumId,schoolYearClass.gradeId)">
           <span>{{'shared.save'| translate}} </span>
       </button>

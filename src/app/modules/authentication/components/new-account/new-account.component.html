@@ -196,7 +196,7 @@
                                 </div>
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.Name (in English)'|translate }} <span class="star">*</span> </label>
-                                    <input type="text" pInputText  formControlName="englishName" [LangRestrict]="'en'" class="form-control leftaction"   placeholder="{{'sign up.Enter Name'|translate}}" >
+                                    <input type="text" pInputText  formControlName="englishName" class="form-control leftaction"   placeholder="{{'sign up.Enter Name'|translate}}" >
                                     <div [hidden]="englishName.valid || englishName.untouched">
                                         <small *ngIf="englishName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}
@@ -233,7 +233,7 @@
                                 </div>
                                 <div class="col-6">
                                     <label class="label" for="nationality">{{'sign up.NickName (in English)'|translate }} <span class="star">*</span> </label>
-                                    <input type="text" pInputText formControlName="englishNickName"  class="form-control leftaction" [LangRestrict]="'en'"  placeholder="{{'sign up.Enter NickName'|translate}}" >
+                                    <input type="text" pInputText formControlName="englishNickName"  class="form-control leftaction"  placeholder="{{'sign up.Enter NickName'|translate}}" >
                                     <div [hidden]="englishNickName.valid || englishNickName.untouched">
                                         <small *ngIf="englishNickName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}
