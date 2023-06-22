@@ -85,7 +85,7 @@
               <ng-container formGroupName="surName">
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'sign up.NickName (in Arabic)' | translate}} <span class="star">*</span></label>
-                    <input type="text" id="day" [LangRestrict]="'ar'" class="form-control" formControlName="ar" pInputText placeholder="{{'dashboard.addChild.nickname' | translate}}" />
+                    <input type="text" id="day"  class="form-control" formControlName="ar" pInputText placeholder="{{'dashboard.addChild.nickname' | translate}}" />
                     <div [hidden]="arabicNickName.valid || arabicNickName.untouched">
                         <small *ngIf="arabicNickName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
