@@ -102,8 +102,7 @@ export class RequestdetailsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.states=[...this.timeline.states].reverse()
-    this.checkDashboardHeader();
-    this.headerService.changeHeaderdata(this.componentHeaderData)
+
 
     this.getRequestDetails()
     this.getRequestOptions()
@@ -112,8 +111,9 @@ export class RequestdetailsComponent implements OnInit {
 
 
   getRequestDetails(){
-     this.requestsService.getRequestDetails(this.requestInstance).subscribe(res=>{
+    this.requestsService.getRequestDetails(this.requestInstance).subscribe(res=>{
       this.requestDetails =res.result
+      this.checkDashboardHeader();
 
       this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, res?.result?.grade?.id).pipe(map((res:any) => res?.data ||[]));
      })
@@ -406,36 +406,48 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
 
    checkDashboardHeader()
    {
-       if(this.currentUserScope==UserScope.Employee)
-     {
+     if (this.currentUserScope == UserScope.Employee) {
+       this.componentHeaderData.breadCrump = [
+         {
+           label: this.translate.instant('dashboard.Requests.RequestList'),
+           routerLink: '/performance-managment/RequestList',
+           routerLinkActiveOptions: { exact: true },
+         },
+         {
+           label: this.translate.instant('dashboard.myRequest.Order details'),
+           routerLink: `/performance-managment/RequestList/details/${this.requestInstance}`,
+         },
+       ];
 
-     this.componentHeaderData.breadCrump= [
-      {label: this.translate.instant('dashboard.Requests.RequestList'),  routerLink:'/performance-managment/RequestList',routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/performance-managment/RequestList/details/${this.requestInstance}`},
-       ]
-
-
+     } else if (this.currentUserScope == UserScope.SPEA) {
+       this.componentHeaderData.breadCrump = [
+         {
+           label: this.translate.instant('dashboard.Requests.RequestList'),
+           routerLink: '/performance-managment/RequestList',
+           routerLinkActiveOptions: { exact: true },
+         },
+         {
+           label: this.translate.instant('dashboard.myRequest.Order details'),
+           routerLink: `/performance-managment/RequestList/details/${this.requestInstance}`,
+         },
+         // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/performance-managment/RequestList/Requestdetails'}
+       ];
+     } else if (this.currentUserScope == UserScope.Guardian) {
+       this.componentHeaderData.breadCrump = [
+         {
+           label: this.translate.instant('dashboard.myRequest.My requests'),
+           routerLink: `/requests-list`,
+           routerLinkActiveOptions: { exact: true },
+         },
+         {
+           label: this.translate.instant('dashboard.myRequest.Order details'),
+           routerLink: `/requests-list/details/${this.requestInstance}`,
+         },
+         // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),}
+       ];
      }
-     else if (this.currentUserScope==UserScope.SPEA)
-     {
-     this.componentHeaderData.breadCrump= [
-      {label: this.translate.instant('dashboard.Requests.RequestList'),  routerLink:'/performance-managment/RequestList',routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/performance-managment/RequestList/details/${this.requestInstance}`},
-      // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/performance-managment/RequestList/Requestdetails'}
-       ]
 
-     }
-
-     else if (this.currentUserScope==UserScope.Guardian)
-     {
-     this.componentHeaderData.breadCrump= [
-			{label: this.translate.instant('dashboard.myRequest.My requests'),routerLink:`/requests-list`,routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.myRequest.Order details'), routerLink:`/requests-list/details/${this.requestInstance}`},
-      // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),}
-       ]
-
-     }
-
+     this.headerService.changeHeaderdata(this.componentHeaderData)
    }
 
 }
