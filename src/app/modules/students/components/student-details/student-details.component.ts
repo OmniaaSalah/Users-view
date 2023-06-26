@@ -22,7 +22,7 @@ export class StudentDetailsComponent implements OnInit {
   // << ICONS >> //
   faCheck= faCheck
   faChevronDown= faChevronDown
-  studentId = +this.route.snapshot.paramMap.get('id');
+  studentId = this.route.snapshot.paramMap.get('id');
   currentUserScope = inject(UserService).getScope()
   get userScope() { return UserScope }
   // << ICONS >> //
@@ -67,8 +67,8 @@ export class StudentDetailsComponent implements OnInit {
     {
       this.componentHeaderData.breadCrump=
          [
-          {label: this.translate.instant('dashboard.students.studentsList'),routerLink:'//schools-and-students/students',routerLinkActiveOptions:{exact: true}},
-          {label: this.translate.instant('dashboard.students.StudentInfo'),routerLink:'//schools-and-students/students/student/'+this.studentId }
+          {label: this.translate.instant('dashboard.students.studentsList'),routerLink:'/schools-and-students/students',routerLinkActiveOptions:{exact: true}},
+          {label: this.translate.instant('dashboard.students.StudentInfo'),routerLink:'/schools-and-students/students/student/'+this.studentId }
         ]
 
 
