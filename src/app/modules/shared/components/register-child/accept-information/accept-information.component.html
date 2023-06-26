@@ -45,12 +45,19 @@
                     <p class="color-gray-300 fs-3">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
                     <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | LocalizeDate}}</span>
                 </div>
-                <div class="col-sm-3 d-flex align-items-baseline gap-5">
+                <!-- <div class="col-sm-3 d-flex align-items-baseline gap-5">
                     <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentType'|translate }}</p>
-                    <p  *ngIf="student?.studentEnrollmentType">
-                            <span class="color-primary mb-2 fs-3">{{'shared.allStatus.'+student?.studentEnrollmentType | translate}}</span>
+                    <p  *ngIf="student?.reEnrollmentStatus">
+                            <span class="color-primary mb-2 fs-3">{{'shared.allStatus.'+student?.reEnrollmentStatus | translate}}</span>
                     </p>
+                </div> -->
+                <div class="col-sm-3 d-flex align-items-baseline gap-5">
+                  <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentType'|translate }}</p>
+                  <p  *ngIf="student?.reEnrollmentType">
+                          <span class="color-primary mb-2 fs-3">{{student?.reEnrollmentType?.name | currentLang}}</span>
+                  </p>
                 </div>
+
                 <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{ 'shared.mobile'|translate }}</p>
                     <span class="color-primary mb-2" *ngIf="student?.isHasPhone">{{'shared.yes'|translate}}</span>
@@ -108,7 +115,23 @@
     <form >
 
         <div class="row mt-5 gx-5" [formGroup]="studentForm">
+
+          <div class="col-md-4">
+            <div class="form-set" >
+                <label class="label required" for="description">{{'dashboard.parents.acceptanceDate'| translate}}</label>
+                <p-calendar formControlName="dateOfAcceptance"  dateFormat="DD dd-mm-yy" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="yyyy/mm/dd"></p-calendar>
+              </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-set" >
+                <label class="label required" for="description">{{'dashboard.parents.studentEnrollmentType'| translate}}</label>
+                <p-dropdown formControlName="studentReEnrollmentId" [options]="reEnrollmentTypes$ |async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.studentEnrollmentType' |translate}}"></p-dropdown>
+            </div>
+          </div>
+
             <div class="col-md-4">
+
                 <div class="form-set">
                     <label class="label required" for="description">{{'shared.internet'| translate}}</label>
                     <p-dropdown formControlName="isHasInternet" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
@@ -134,10 +157,6 @@
                 </div>
             </div> -->
 
-            <!-- <div class="form-set" >
-                <label class="label required" for="description">{{'dashboard.parents.studentEnrollmentType'| translate}}</label>
-                <p-dropdown [options]="reEnrollmentTypes" optionValue="value" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
-            </div> -->
 
 
 
@@ -148,7 +167,7 @@
                 </div>
             </div>
 
-            <div class="col-md-8 align-self-center gap-5"  *ngIf="student$ |async as student">
+            <!-- <div class="col-md-8 align-self-center gap-5"  *ngIf="student$ |async as student">
                 <div class="row">
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
                         <p class="color-gray-300 fs-3">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
@@ -162,7 +181,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
 

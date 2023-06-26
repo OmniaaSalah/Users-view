@@ -35,7 +35,8 @@
             <span>{{'dashboard.parents.registerChild' | translate}}</span>
         </button>
 
-        <span  [routerLink]="['//schools-and-students/all-parents/parent', parentId,'all-children']" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
+        <span *ngIf="scope ==ScopeEnum.SPEA" [routerLink]="['/schools-and-students/all-parents/parent', parentId,'all-children']" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
+        <span *ngIf="scope !=ScopeEnum.SPEA" [routerLink]="['/']" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
 
     </div>
 

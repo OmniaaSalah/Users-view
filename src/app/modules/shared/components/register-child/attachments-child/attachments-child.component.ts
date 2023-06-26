@@ -72,8 +72,8 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     this.studentService.getStudentAttachment(this.studentId || this.childId)
     .pipe(map(res => {
       return res.map(value=>{
-        const {id, ...otherProps} = value;
-        return ({...otherProps , isActive:value.isActive ?? true});
+        // const {id, ...otherProps} = value;
+        return ({...value , isActive:value.isActive ?? true});
       })
     }))
     .subscribe(res=>{
@@ -142,7 +142,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
     let attach = this.fileForm.get('attachments' as any).value[0]
 
-    this.attachments.unshift({url: attach?.url, name: attach?.name, titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId,isActive:true})
+    this.attachments.unshift({id: 0, url: attach?.url, name: attach?.name, titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId,isActive:true})
     this.addAttachModelOpened=false
     this.showErrMess =false
     this.fileForm.reset()
@@ -154,7 +154,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     file= file[0]
     if(file){
 
-      this.fileForm.get('attachments'  as any).setValue([{url: file?.url,name:file?.name, comment: file?.comment}])
+      this.fileForm.get('attachments'  as any).setValue([{id:0, url: file?.url,name:file?.name, comment: file?.comment}])
     }else{
       this.fileForm.get('attachments'  as any).setValue(null)
     }
