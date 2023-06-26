@@ -327,7 +327,7 @@
                   <textarea formControlName="vaccinationBook" pInputTextarea placeholder="{{'dashboard.parents.VaccinationBook'|translate}}"></textarea>
                 </div> -->
 
-                <app-file-upload [files]="getCtr('vaccineCertificates').value || []" (onFileUpload)="onFileUpload($event)" title="{{'dashboard.parents.VaccineCertificate'|translate}}"></app-file-upload>
+                <app-file-upload [filesLimit]="5" [files]="getCtr('vaccineCertificates').value || []" (onFileUpload)="onFileUpload($event)" title="{{'dashboard.parents.VaccineCertificate'|translate}}"></app-file-upload>
             </div>
 
           </div>
