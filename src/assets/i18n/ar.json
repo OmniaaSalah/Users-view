@@ -139,6 +139,7 @@
     "TheReasonForRegradingRequest" :"سبب إعادة مرحلة دراسية",
     "TheReasonForWithdrawalRequest" :"سبب سحب الطالب",
     "ModifyStudentResult" :"أنواع تحسين درجات الطالب",
+    "reEnrollmentTypes":"نوع الإلتحاق",
     "Active": "فعال",
     "Inactive": "غير فعال",
     "mission Succeeded": "تمت العملية بنجاح",
@@ -1473,7 +1474,8 @@
             "Physical":"حضورى",
             "diplomeFile":"مرفق شهادة المعادله",
             "boardFile":"مرفق شهادة البورد",
-            "graduated":"أنهى السنوات الدراسية"
+            "graduated":"أنهى السنوات الدراسية",
+            "studentHistoryDetails": "تفاصيل التعديل على معلومات الطالب"
 
         },
         "Assignments": {

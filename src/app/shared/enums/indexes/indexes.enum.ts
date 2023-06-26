@@ -26,4 +26,5 @@ export enum IndexesEnum{
     TheReasonForWithdrawalRequest ="TheReasonForWithdrawalRequest",
     ModifyStudentResult ="ModifyStudentResult",
     TheReasonForRejectRegradingRequest ="TheReasonForRejectRegradingRequest ",
+    reEnrollmentTypes=27
 }

@@ -8,8 +8,6 @@
             <span class="" *ngIf="mainTitle.sub">{{mainTitle.sub}}</span>
         </h3>
 
-        <!-- <span class="Notifications color-primary" *ngIf="showNoOfNotifications">({{notificationNumber}})</span>
-        <span class="Notifications color-primary" *ngIf="showNoOfMessages">({{messageNumber}})</span> -->
     </div>
 
     <!-- Sub Title -->
@@ -23,20 +21,6 @@
 
         <p-breadcrumb [model]="breadCrump" [home]="{label:(homePage |async) ,icon: 'pi pi-home', routerLink: '/', routerLinkActiveOptions:{exact: true}}"
         [style]="{'font-size':'1.6rem','color':'#767676','margin':'.5rem 0 1.5rem 0'}"></p-breadcrumb>
-<!--
-        <div class="d-flex NotificationsHeader">
-            <button class="btn btn--sm ntn btn-outline-green" *ngIf="showNotificationActionBtn">
-                <fa-icon class="fs-4" [icon]="acceptIcon" ></fa-icon>
-                <span>{{'shared.Accept'|translate}}</span>
-
-            </button>
-            <button class="btn btn--sm ntn btn-outline-red Rejectbtn " *ngIf="showNotificationActionBtn">
-                <fa-icon class="fs-4" [icon]="rejectIcon" ></fa-icon>
-                <span>{{'shared.Reject'|translate}}</span>
-
-            </button>
-
-       </div> -->
     </div>
 
 

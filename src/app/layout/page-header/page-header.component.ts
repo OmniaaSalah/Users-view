@@ -13,18 +13,12 @@ import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./page-header.component.scss']
 })
 export class PageHeaderComponent implements OnInit {
-  homePage=inject(TranslateService).get('Home Page')
 
-  notificationNumber: number = 0;
+  homePage=inject(TranslateService).get('Home Page')
   breadCrump: MenuItem[]
   mainTitle: ITitle;
   subTitle: ITitle;
-  showNoOfNotifications = false;
-  showNoOfMessages = false;
-  messageNumber:number = 0
-  acceptIcon = faCheck;
-  rejectIcon = faClose;
-  showNotificationActionBtn = false;
+
   constructor(
     private headerService: HeaderService) { }
 
@@ -35,15 +29,10 @@ export class PageHeaderComponent implements OnInit {
       this.breadCrump = response.breadCrump;
       this.mainTitle = response?.mainTitle;
       this.subTitle = response?.subTitle;
-      // this.showContactUs = response?.showContactUs;
-      // this.showNoOfNotifications = response?.showNoOfNotifications;
-      // this.showNoOfMessages = response?.showNoOfMessages;
-      // this.showNotificationActionBtn = response?.showNotificationActionBtn;
+
 
     });
 
-    // this.notificationService.notificationNumber.subscribe((response) => { this.notificationNumber = response });
-    // this.messageService.messageNumber.subscribe((response) => { this.messageNumber = response });
 
   }
 

@@ -29,6 +29,7 @@ export class AcceptInformationComponent implements OnInit {
   lang =inject(TranslationService).lang;
   booleanOptions = this.sharedService.booleanOptions
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
+  reEnrollmentTypes$ = this.indexService.getIndext(IndexesEnum.reEnrollmentTypes)
 
   get registrationStatusEnum() {return RegistrationStatus}
   get reEnrollmentTypeEnum() {return ReEnrollmentType}
