@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import {  faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';

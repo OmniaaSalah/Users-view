@@ -17,8 +17,7 @@ export class HeaderService {
 
   changeHeaderdata(data: IHeader) {
     this.Header.next(data)
-    // if (!data.showContactUs) this.Header.next({ ...data, showContactUs: false })
-    // else this.Header.next(data)
+
   }
 
 

@@ -129,7 +129,8 @@ export class RequestdetailsComponent implements OnInit {
 
 
   getRequestOptions(){
-    this.requestsService.getRequestOptions(this.requestInstance).subscribe(res=>{
+    this.requestsService.getRequestOptions(this.requestInstance)
+    .subscribe(res=>{
       if(res.options)  this.requestOptions= res?.options?.map(el=>({...el,isLoading:false}))
     })
   }

@@ -16,7 +16,7 @@ import { MessageService } from '../../../messages/service/message.service';
 import { ToastrService } from 'ngx-toastr';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsService } from 'src/app/core/services/claims.service';
 

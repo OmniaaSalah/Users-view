@@ -6,7 +6,7 @@ import { faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription} from 'rxjs';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';

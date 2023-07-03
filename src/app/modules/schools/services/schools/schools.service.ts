@@ -12,7 +12,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ISchoolChart } from '../../components/school-list/school-charts/school-chart.models';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 
 @Injectable({
   providedIn: 'root'
