@@ -1,16 +1,4 @@
 
-<!-- <app-navbar></app-navbar> -->
-<!-- <div class="home-page container-lg px-5 px-lg-0">
-    <ng-container *ngIf="userType != userEnum.U_PARENTS">
-        <div class="search w-50">
-            <div class="p-inputgroup">
-                <input type="text" class="rounded-4 p-3" pInputText placeholder="بحث...">
-                <button type="button" class="rounded-4" pButton pRipple icon="pi pi-search"></button>
-            </div>
-        </div>
-    </ng-container>
-    <router-outlet></router-outlet>
-</div> -->
 <app-navbar></app-navbar>
 
 <app-parents *ngIf="currentUserScope == ScopeEnum.Guardian"></app-parents>
@@ -105,10 +93,10 @@
 
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.Sender'|translate}} : </span>
                 <ng-container *ngIf="messages[i]?.showSenderName">
-                            {{messages[i]?.userName|currentLang}} <span> / {{messages[i]?.jobTitleName|currentLang}}</span> 
+                            {{messages[i]?.userName|currentLang}} <span> / {{messages[i]?.jobTitleName|currentLang}}</span>
                  </ng-container>
                  <ng-container *ngIf="!messages[i]?.showSenderName">
-                    --- <span> / {{messages[i]?.jobTitleName|currentLang}}</span> 
+                    --- <span> / {{messages[i]?.jobTitleName|currentLang}}</span>
                   </ng-container>
             </p>
             <p><span class="color-primary fw-bold">{{'dashboard.Messages.SendDate'|translate}} : </span>{{messages[i]?.createdDate|LocalizeDate}}</p>

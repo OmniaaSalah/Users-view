@@ -11,7 +11,6 @@ import { PersonalInformationComponent } from './components/register-child/person
 import { SchoolRecordComponent } from './components/register-child/school-record/school-record.component';
 import { SubjectsAndDegreesComponent } from './components/register-child/subjects-and-degrees/subjects-and-degrees.component';
 import { WithdrawalRequestComponent } from './components/register-child/withdrawal-request/withdrawal-request.component';
-import { SchoolsComponent } from './components/schools/schools.component';
 import { IdentityInfoComponent } from './components/register-child/identity-info/identity-info.component';
 import { PaymentsComponent } from './components/register-child/payments/payments.component';
 import { StudentProhibitedStatusComponent } from './components/register-child/student-prohibited-status/student-prohibited-status.component';
@@ -27,7 +26,6 @@ import { EditHistoryComponent } from './components/register-child/edit-history/e
 @NgModule({
   declarations: [
     RegisterChildComponent,
-    SchoolsComponent,
     MedicalFileComponent,
     AttachmentsChildComponent,
     AbsenceDetailsComponent,
@@ -48,6 +46,6 @@ import { EditHistoryComponent } from './components/register-child/edit-history/e
     PrimngModule,
     SharedModule,
   ],
-  exports:[RegisterChildComponent,SchoolsComponent,MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent]
+  exports:[RegisterChildComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent]
 })
 export class DashboardSharedModule { }

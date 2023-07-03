@@ -1,7 +1,7 @@
 import { Injectable,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, from, map, of, share, shareReplay, take } from 'rxjs';
-import { ArrayOperations } from 'src/app/core/classes/array';
+import { ArrayOperations } from 'src/app/core/helpers/array';
 import { Curriculum, Division, Grade,  Track } from 'src/app/core/models/global/global.model';
 import { shool_DDL } from 'src/app/core/Models/Survey/IAddSurvey';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';

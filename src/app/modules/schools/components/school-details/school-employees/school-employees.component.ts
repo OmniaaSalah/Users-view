@@ -3,10 +3,10 @@ import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, map, shareReplay } from 'rxjs';
-import { ArrayOperations } from 'src/app/core/classes/array';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { passwordMatch } from 'src/app/core/classes/validation';
+import { ArrayOperations } from 'src/app/core/helpers/array';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
+import { passwordMatch } from 'src/app/core/helpers/validation';
 
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { IHeader } from 'src/app/core/Models/header-dashboard';

@@ -2,8 +2,8 @@ import { Component, OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -213,10 +213,10 @@ export class TransferedStudentsReportsComponent implements OnInit {
       res.forEach((student) => {
         let myObject = {}
         for (let property in student)
-        { 
+        {
          var selected= myColumns.find(column => column.name==property)
 
-         if(selected)   myObject = { ...myObject, [selected?.name] :student[selected?.name]} 
+         if(selected)   myObject = { ...myObject, [selected?.name] :student[selected?.name]}
 
         }
 

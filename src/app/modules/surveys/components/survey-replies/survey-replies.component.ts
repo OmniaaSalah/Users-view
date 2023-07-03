@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.enum';
 import { SurveyService } from '../../service/survey.service';
@@ -23,24 +23,24 @@ export class SurveyRepliesComponent implements OnInit {
       list:[],
       loading:true
     }
-    
-   
-  
+
+
+
     constructor(
       private route: ActivatedRoute,
       private surveyService:SurveyService) { }
-  
+
     ngOnInit(): void {
- 
+
       this.filtration.PageSize=0;
       this.getResponses();
-      
+
     }
-  
+
     paginationChanged(e) {
-  
+
     }
-  
+
    getResponses()
    {
     this.showSpinner = false
@@ -54,56 +54,56 @@ export class SurveyRepliesComponent implements OnInit {
       this.showSpinner = true;
     });
    }
-  
+
    exportPdf(fileUrl : string): void {
     if (fileUrl) {
       window.open(fileUrl, '_blank').focus();
-    } 
+    }
    }
-  
+
    openRow(questionId)
    {
     this.questions.list.find(c=>c.id==questionId).loading = true;
-  
+
     this.getDetailsOfQuestion(questionId);
-    
+
    }
-  
-  
-  
+
+
+
     getDetailsOfQuestion(questionId)
     {
       this.surveyService.getDetailsOfResponeseOfSurvey(this.surveyId,questionId).subscribe((res)=>{
-      
+
         this.questions.list.find(c=>c.id==questionId).loading = false;
         this.questions.list.find(c=>c.id==questionId).parents=res.result.parentsWhoAnswered;
         this.questions.list.find(c=>c.id==questionId).choices=res.result.choicesPercentage
-    
+
       })
-    
-  
-    
+
+
+
     }
     closeRow()
     {
-  
+
     }
-  
+
     onScroll()
     {
-  
-       
+
+
       if(this.questions.list.length<this.questions.totalAllData){
-    
+
           this.loadMore();
       }
     }
-   
+
     loadMore()
     {
-    
+
       this.getResponses();
     }
-  
+
   }
-  
+

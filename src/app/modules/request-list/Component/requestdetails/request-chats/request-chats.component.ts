@@ -9,8 +9,8 @@ import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-request-chat',
-  templateUrl: './request-chat.component.html',
-  styleUrls: ['./request-chat.component.scss']
+  templateUrl: './request-chats.component.html',
+  styleUrls: ['./request-chats.component.scss']
 })
 export class RequestChatComponent implements OnInit {
 

@@ -17,9 +17,9 @@ import { RegisterChildService } from '../../../services/register-child/register-
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsService } from 'src/app/core/services/claims.service';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { ParentService } from '../../../../parants/services/parent.service';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 
 @Component({

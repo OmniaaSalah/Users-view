@@ -14,7 +14,7 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 

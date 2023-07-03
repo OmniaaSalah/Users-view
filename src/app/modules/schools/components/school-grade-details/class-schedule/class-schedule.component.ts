@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { addHours, addDays, startOfWeek, addMinutes } from 'date-fns';
-import { DateValidators } from 'src/app/core/classes/validation';
+import { DateValidators } from 'src/app/core/helpers/validation';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 import { GradesService } from '../../../services/grade/grade.service';
 import { ToastrService } from 'ngx-toastr';

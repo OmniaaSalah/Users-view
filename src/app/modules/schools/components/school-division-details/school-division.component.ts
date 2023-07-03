@@ -5,7 +5,7 @@ import {  faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { map, share } from 'rxjs';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { GradeCalenderEvent } from 'src/app/core/models/schools/school.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
