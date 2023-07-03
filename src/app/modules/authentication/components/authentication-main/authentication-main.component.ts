@@ -22,7 +22,7 @@ import { environment } from 'src/environments/environment';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subscription } from 'rxjs';
 import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
-import { ArrayOperations } from 'src/app/core/classes/array';
+import { ArrayOperations } from 'src/app/core/helpers/array';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 
 @Component({
@@ -334,7 +334,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.account.setValidators([
         Validators.required,
         Validators.pattern(
-          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/
         ),
       ]);
     }

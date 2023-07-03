@@ -2,7 +2,7 @@ import {  Injectable, OnInit } from '@angular/core';
 import { map, take,of} from 'rxjs';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { environment } from 'src/environments/environment';
-import { ArrayOperations } from '../classes/array';
+import { ArrayOperations } from '../helpers/array';
 import { GenericResponse } from '../models/global/global.model';
 import { HttpHandlerService } from './http/http-handler.service';
 import { UserService } from './user/user.service';

@@ -5,8 +5,8 @@ import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter, finalize, map, Observable, of, share, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 
 import { IHeader } from 'src/app/core/Models/header-dashboard';

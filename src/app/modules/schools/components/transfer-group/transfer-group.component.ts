@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SettingsService } from '../../../system-setting/services/settings/settings.service';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { map } from 'rxjs';
 

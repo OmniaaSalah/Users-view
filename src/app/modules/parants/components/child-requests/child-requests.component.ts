@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';

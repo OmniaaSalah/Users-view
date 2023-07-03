@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { MessageService } from 'src/app/modules/messages/service/message.service';
 import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
@@ -131,7 +131,6 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     });
     this.userRolesService.schoolSelectedList.subscribe((res) => {
       this.schoolIsSelectedList = res;
-      console.log(res)
     });
     this.userRolesService.MarkedListLength.subscribe((res) => {
       this.MarkedListLength = res;
@@ -166,7 +165,6 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   getCurr() {
     this.sharedService.getAllCurriculum().subscribe((res) => {
       this.curricuulum = res.data;
-      // console.log(this.curricuulum);
     });
   }
 

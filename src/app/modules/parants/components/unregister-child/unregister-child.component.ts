@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { map, share } from 'rxjs';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';

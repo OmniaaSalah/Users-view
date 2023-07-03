@@ -4,7 +4,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 

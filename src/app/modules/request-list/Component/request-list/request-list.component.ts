@@ -2,8 +2,8 @@ import { Component, OnInit,inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -15,7 +15,7 @@ import { SystemRequestService } from '../../services/system-request.service';
 import { UserRequestsStatus} from 'src/app/shared/enums/status/status.enum'
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
-import { ArrayOperations } from 'src/app/core/classes/array';
+import { ArrayOperations } from 'src/app/core/helpers/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 

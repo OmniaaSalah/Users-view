@@ -12,7 +12,7 @@ import * as L from 'leaflet';
 import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { ToastrService } from 'ngx-toastr';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { GradesService } from '../../../services/grade/grade.service';
 

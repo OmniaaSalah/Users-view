@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
