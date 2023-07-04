@@ -196,11 +196,11 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   getCurrentSchoolYear(urLParameter)
   {
     this.schoolYearService.getSchoolYearByID(urLParameter).subscribe((res)=>{
-      this.schoolYear=res.result;
-      if(!this.urlParameter)              //to show action buttons in case we need to copy data fron current or finished year
-      {this.schoolYearStatus=''}
+      this.schoolYear=res?.result;
       if(this.schoolYear)
       {this.schoolYearStatus=this.schoolYear.schoolYearStatus?.name.en;this.bindOldSchoolYear(this.schoolYear);}
+      if(!this.urlParameter)              //to show action buttons in case we need to copy data fron current or finished year
+      {this.schoolYearStatus='';}
       })
   }
 

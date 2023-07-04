@@ -342,7 +342,7 @@
                  </div>
                 </div>
                  <div class="prim-table mt-5" *ngIf="curriculumClassList?.length">
-                  <p-table  [lazy]="true"  #dt [value]="curriculumClassList"   sortMode="single"  dataKey="curriculumId" [scrollable]="true" scrollHeight="480px" [virtualScroll]="true" [virtualRowHeight]="95"  >
+                  <p-table  [lazy]="true"  #dt [value]="curriculumClassList"   sortMode="single"  dataKey="curriculumId" [scrollable]="true" scrollHeight="480px"  >
 
                     <ng-template pTemplate="header" >
                           <tr  >
@@ -369,7 +369,7 @@
                                 <div class="" *ngIf="e.classTopStudentList?.length  || e.loading" >
 
 
-                                        <p-table  #dt [value]="e?.classTopStudentList"  dataKey="gradeId"  >
+                                        <p-table #dt [lazy]="true" [value]="e?.classTopStudentList"  dataKey="gradeId"  >
                                             <ng-template pTemplate="header" >
                                               <tr >
                                                 <th class="expand"  style="max-width: 0rem"  ></th>
