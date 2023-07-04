@@ -99,7 +99,7 @@
                           <img [style.width.rem]="4.5" src="assets/images/shared/file.svg" alt="">
                           <span class="word-break-all" *ngIf="!file?.name?.ar"> {{file.name || 'ملف'}}</span>
                           <span class="word-break-all" *ngIf="file?.name?.ar"> {{file.name|currentLang}}</span>
-                          <fa-icon role="button" class="color-fuchsia-600 ms-2 cancel" [ngClass]="lang=='ar' ? 'me-auto': 'ms-auto'" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
+                          <fa-icon role="button" class="color-fuchsia-600 ms-2 cancel" [ngClass]="lang=='ar' ? 'me-auto': 'ms-auto'" [icon]="faXmark" (click)="removeFile(i)" StopProp></fa-icon>
                       </div>
                       <ng-container *ngIf="hasComment">
                         <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">

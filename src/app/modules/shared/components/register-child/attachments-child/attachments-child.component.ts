@@ -44,6 +44,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   })
 
   attachments=[]
+  attachmentsCopy
   loading
   onSubmit
   showErrMess = false
@@ -70,15 +71,32 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   getAttachment(){
     this.loading =true
     this.studentService.getStudentAttachment(this.studentId || this.childId)
-    .pipe(map(res => {
-      return res.map(attachment=>{
-        // const {id, ...otherProps} = value;
-        return ({...attachment , isActive:attachment.isActive ?? true});
-      })
+    .pipe(
+      map(res => {
+        return res.map(attachment=>{
+          // const {id, ...otherProps} = value;
+
+          return {
+            ...attachment,
+            files : attachment.files.map(file =>{
+              return {...file ,isActive: file?.isActive ?? true}
+            })
+          }
+          // let attachments =  attachment.files.map(file =>{
+          //   // files : file.files.map(el => ({...el, isActive: el?.isActive ?? true}) )
+          //   return {...file ,isActive: file?.isActive ?? true}
+          // })
+
+          // return attachments
+          // return ({...attachment , isActive:attachment.isActive ?? true});
+       })
     }))
     .subscribe(res=>{
       this.loading =false
       this.attachments = res
+      this.attachmentsCopy = [...res]
+      console.log(this.attachments);
+
     },()=>{
       this.loading =false
     })
@@ -107,16 +125,30 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
 
   onFileUpload(file, i){
+    console.log(file);
 
-    if(this.currentUserScope==UserScope.Employee && !file[0]){
-      file = {...this.attachments[i], isActive:false}
-    }else{
-      file= file[0] ? file[0] : {url:"", name:"",comment:"",isActive:true}
+    this.attachments[i].files = file
 
+    // if(this.currentUserScope==UserScope.Employee && !file[0]){
+    //   file = {...this.attachments[i], isActive:false}
+    // }else{
+    //   file= file[0] ? file[0] : {url:"", name:"",comment:"",isActive:true}
+
+    // }
+    // this.attachments[i] = {...this.attachments[i], url: file?.url,name:file?.name, comment: file?.comment, isActive: file?.isActive}
+
+    // this.attachments= [...this.attachments]
+  }
+
+  onFileDeleted(fileIndex, uploaderIndex){
+
+    let files = this.attachments[uploaderIndex]?.files
+    files[fileIndex] = {...files[fileIndex], isActive:false}
+
+    if(this.currentUserScope==UserScope.SPEA){
+      files.splice(fileIndex,1)
     }
-    this.attachments[i] = {...this.attachments[i], url: file?.url,name:file?.name, comment: file?.comment, isActive: file?.isActive}
 
-    this.attachments= [...this.attachments]
   }
 
   fileTypeChanged(indexId){
@@ -135,7 +167,18 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
     let attach = this.newAttachmentForm.get('attachments' as any).value[0]
 
-    this.attachments.unshift({id: 0, url: attach?.url, name: attach?.name, titel:this.newAttachmentForm.value.titel, comment:'', indexId:this.newAttachmentForm.value.indexId, isActive:true})
+    this.attachments.unshift({
+      files:[{
+        id: 0,
+        url: attach?.url,
+        name: attach?.name,
+        isActive:true
+      }],
+      titel:this.newAttachmentForm.value.titel, comment:'',
+      indexId:this.newAttachmentForm.value.indexId,
+    })
+
+    // this.attachments.unshift({id: 0, url: attach?.url, name: attach?.name, titel:this.newAttachmentForm.value.titel, comment:'', indexId:this.newAttachmentForm.value.indexId, isActive:true})
     this.addAttachModelOpened=false
     this.showErrMess =false
     this.newAttachmentForm.reset()

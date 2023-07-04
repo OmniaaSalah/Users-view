@@ -24,10 +24,15 @@
         <div class="">
             <div class="row mt-5">
                 <ng-container *ngFor="let file of attachments; let i = index">
-                  <ng-container *ngIf="(!file.isActive && currentUserScope=='SPEA') || file.isActive ">
-                    <div class="col-md-4 mt-4" *ngIf="file?.url">
-                        <app-file [showDeletedBy]="true" [file]="file" [hasFooter]="true" [clickable]="true"></app-file>
-                    </div>
+
+                  <ng-container *ngFor="let file of file?.files; let i = index">
+
+                    <ng-container *ngIf="(!file.isActive && currentUserScope=='SPEA') || file.isActive ">
+                      <div class="col-md-4 mt-4" *ngIf="file?.url">
+                          <app-file [showDeletedBy]="true" [file]="file" [hasFooter]="true" [clickable]="true"></app-file>
+                      </div>
+                    </ng-container>
+
                   </ng-container>
                 </ng-container>
 
@@ -66,13 +71,17 @@
 
     <div class="">
         <div class="row gx-5 ">
-            <div class="col-md-4"  *ngFor="let file of attachments; let i=index">
+            <div class="col-md-4"  *ngFor="let file of attachmentsCopy; let i=index">
                 <div class="">
                     <app-file-upload
                     [showDeletedBy]="true"
-                    [files]="[{url: file.url,name:file.name, comment:file.comment, isActive: file?.isActive}]"
-                    [hasComment]="true" view="full" (onFileUpload)="onFileUpload($event, i)"
-                    [title]="file.titel.ar"></app-file-upload>
+                    [filesLimit]="5"
+                    [files]="file.files"
+                    [hasComment]="true" view="full"
+                    (onFileUpload)="onFileUpload($event, i)"
+                    (onFileDelete)="onFileDeleted($event?.index , i)"
+                    [title]="file.titel |currentLang"></app-file-upload>
+                    <!-- [files]="[{url: file.url,name:file.name, comment:file.comment, isActive: file?.isActive}]" -->
                 </div>
             </div>
         </div>
