@@ -8,7 +8,7 @@ import { faArrowRight ,faExclamationCircle,faPlus } from '@fortawesome/free-soli
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { debounceTime, distinctUntilChanged, Subject, Subscription, takeUntil } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';

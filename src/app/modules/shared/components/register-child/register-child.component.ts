@@ -133,9 +133,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         state: ['']
       }),
       studentTalent:[[]],
-      attendanceMode:[]
+      attendanceMode:[],
+      reEnrollmentStatus:[],
+      dateOfAcceptance:[],
+      studentReEnrollmentId:[]
     })
-
 
 
 
@@ -189,6 +191,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.schoolId = res.result.school?.id
 
       res.result.birthDate = new Date(res?.result?.birthDate)
+      res.result.dateOfAcceptance = new Date(res?.result?.dateOfAcceptance)
       // res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
       this.currentStudent = res?.result
       this.initStudentForm(res?.result)
@@ -204,6 +207,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.studentForm.controls.religionId.setValue(res.religion?.id)
     // this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)
     this.studentForm.controls.specialEducation.patchValue({name:{ar:"",en:''}})
+    this.studentForm.controls.studentReEnrollmentId.patchValue(res?.reEnrollmentType?.id)
+
   }
 
   updateStudent(){
@@ -309,6 +314,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 		this.navListLength = allowedSteps.length
 
 		let el =this.steps.find(el => (el.index==stepIndex && this.claimsService.isUserAllowedTo(el.claims)))
+
 		if(el) {
 			el.isActive =true
 			this.step=el.index

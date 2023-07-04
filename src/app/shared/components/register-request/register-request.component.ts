@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -119,20 +119,15 @@ export class RegisterRequestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.sharedService.getAllGrades('').subscribe(res=> {
-      this.AllGrades=res || []
-      if(this.requestId) {
-        this.patchReturnedRequestData(this.returnedReqData)
-        this.getRequestOptions()
-      }
-    })
-
+    this.getGrades()
     this.prepareHeaderData()
     this.getStudentInfo()
 
     this.getRegistrationRequiresFiles()
 
   }
+
+
 
 
   getStudentInfo(){
@@ -265,6 +260,23 @@ initRegisterationForm(child){
 
 
 
+
+  getGrades(curriculumsId=''){
+    this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
+      this.AllGrades=res || []
+
+      if(this.requestId) {
+        this.patchReturnedRequestData(this.returnedReqData)
+        this.getRequestOptions()
+      }
+    })
+  }
+
+  onCurriculumSelected(id){
+    this.filtration.GradeId=null
+    this.registerReqForm.controls['gradeId'].setValue(null)
+    this.getGrades(id)
+  }
 
 
 

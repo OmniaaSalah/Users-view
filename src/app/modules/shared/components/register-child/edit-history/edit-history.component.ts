@@ -2,8 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -49,9 +49,6 @@ export class EditHistoryComponent implements OnInit {
   constructor(
     private translate:TranslateService,
     private schoolsService:SchoolsService,
-    private route: ActivatedRoute,
-    private headerService: HeaderService,
-    private userService:UserService,
     private studentsService:StudentsService,
     public childService:RegisterChildService,
     private exportService :ExportService

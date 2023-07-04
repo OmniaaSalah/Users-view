@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { DivisionService } from '../../../services/division/division.service';
@@ -95,7 +95,7 @@ export class StudentsRateComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
-    let filter = {...this.filtration,PageSize:this.students?.totalAllData,Page:1}
+    let filter = {...this.filtration,PageSize:this.students?.total,Page:1}
     this.divisionService.studentsRateToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsRate'))
     })

@@ -10,13 +10,15 @@ import {BadgeModule} from 'primeng/badge';
 import { SharedModule } from '../shared/shared.module';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { SideNavigatorComponent } from './side-navigator/side-navigator.component';
+import { NotificationIconComponent } from './navbar/notification-icon/notification-icon.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     LayoutComponent,
     SideNavigatorComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    NotificationIconComponent
   ],
   imports: [
     // TranslateModule,

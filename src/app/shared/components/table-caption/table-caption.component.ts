@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { FileTypeEnum } from '../../enums/file/file.enum';
 import { SharedService } from '../../services/shared/shared.service';
 

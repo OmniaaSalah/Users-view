@@ -1,9 +1,9 @@
 import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
-import { ArrayOperations } from 'src/app/core/classes/array';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { ArrayOperations } from 'src/app/core/helpers/array';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -108,10 +108,10 @@ export class SchoolsReportsComponent implements OnInit {
       res.forEach((school) => {
         let myObject = {}
         for (let property in school)
-        { 
+        {
          var selected= myColumns.find(column => column.name==property)
 
-         if(selected)   myObject = { ...myObject, [selected?.name] :school[selected?.name]} 
+         if(selected)   myObject = { ...myObject, [selected?.name] :school[selected?.name]}
 
         }
 

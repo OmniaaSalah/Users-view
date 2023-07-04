@@ -4,13 +4,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { UserInformationService } from '../../service/user-information.service';
-import { ArrayOperations } from 'src/app/core/classes/array';
+import { ArrayOperations } from 'src/app/core/helpers/array';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 

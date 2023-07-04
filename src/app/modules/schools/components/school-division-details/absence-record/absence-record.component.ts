@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import {  finalize, map, shareReplay, Subject, takeUntil } from 'rxjs';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -17,6 +17,7 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { DivisionService } from '../../../services/division/division.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-absence-record',
@@ -86,8 +87,9 @@ lastDate
   getLastAbsenceDate(){
 
     this.divisionService.getLastAbsenceDate(this.divisionId).subscribe(res =>{
-
-      this.lastDate = new Date(res.result.split('+')[0])
+      let utc = moment.utc(res.result.split('+')[0]).toDate()
+      this.lastDate = moment(utc).local().format('YYYY-MM-DD HH:mm:ss')
+      // this.lastDate = new Date(res.result.split('+')[0])
       // this.absenceStudentsForm.date = new Date(res.result.split('+')[0])
       // this.dateSelected(new Date(res.result))
     })

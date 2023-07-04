@@ -1,7 +1,7 @@
 import { Component, OnInit,Input,inject } from '@angular/core';
-import { ArrayOperations } from 'src/app/core/classes/array';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { ArrayOperations } from 'src/app/core/helpers/array';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';

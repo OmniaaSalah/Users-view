@@ -1,16 +1,8 @@
-import {
-  Component,
-  inject,
-  NgZone,
-  OnInit,
-} from '@angular/core';
-import { Router } from '@angular/router';
+import {Component,inject,NgZone, OnInit,} from '@angular/core';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
 import { distinctUntilChanged, fromEvent, Observable } from 'rxjs';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
@@ -19,7 +11,6 @@ import { RouteListenrService } from 'src/app/shared/services/route-listenr/route
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { DatePipe } from '@angular/common';
 import { MessageService } from 'src/app/modules/messages/service/message.service';
 interface MenuItem {
   id: number;
@@ -38,9 +29,9 @@ interface MenuItem {
 export class NavbarComponent implements OnInit {
   lang = inject(TranslationService).lang;
   guardianName;
-  schoolYearsList = [];
   schoolYearId = this.userService.schoolYearId || '';
-  notificationNumber;
+  schoolYearsList = [];
+
   currentUserScope = inject(UserService).getScope();
   get ScopeEnum() {
     return UserScope;
@@ -53,7 +44,6 @@ export class NavbarComponent implements OnInit {
   guardianNavItems = [
     { name: this.translate.get('Home Page'), Link: '/' },
     { name: this.translate.get('My requests'), Link: '/requests-list' },
-    //,{name:this.translate.get('about daleel'),Link:"/about-us"}
   ];
 
   message: string = '';
@@ -72,28 +62,13 @@ export class NavbarComponent implements OnInit {
 
   menuItems: MenuItem[];
 
-  notificationsList = [];
-  checkLanguage: boolean = false;
-  isChecked: boolean = false;
-  searchModel = {
-    keyword: null,
-    sortBy: 'update',
-    page: 1,
-    pageSize: null,
-    isRead: null,
-    senderIds: null,
-    arabicNotificationName: null,
-    englishNotificationName: null,
-  };
+
 
   constructor(
-    private toastr: ToastrService,
-    private router: Router,
     private translate: TranslateService,
     private userService: UserService,
     public routeListenrService: RouteListenrService,
     private zone: NgZone,
-    private notificationService: NotificationService,
     private sharedService: SharedService,
     private authService: AuthenticationService,
     private translation: TranslationService,
@@ -109,17 +84,7 @@ export class NavbarComponent implements OnInit {
           this.guardianName = this.userService.getCurrentUserName();
           this.getSchoolYearsList();
           // this.userService.currentUserName.subscribe((res)=>{this.guardianName=res;})
-          this.getNotficationNumber();
 
-          this.notificationService.unReadNotificationNumber.subscribe(
-            (response) => {
-              if (response != 0) {
-                this.notificationNumber = response;
-              } else {
-                this.notificationNumber = '';
-              }
-            }
-          );
         }
       });
 
@@ -127,11 +92,7 @@ export class NavbarComponent implements OnInit {
       this.loadMenuItems(id);
     });
 
-    if (localStorage.getItem('preferredLanguage') == 'ar') {
-      this.checkLanguage = true;
-    } else {
-      this.checkLanguage = false;
-    }
+
     this.setupScrollListener();
   }
 
@@ -141,29 +102,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  getNotifications(searchModel) {
-    if (this.searchModel.pageSize == null) {
-      this.searchModel.pageSize = 2;
-    }
-    this.notificationService
-      .getAllNotifications(searchModel)
-      .subscribe((res) => (this.notificationsList = res.data));
-  }
 
-  getNotReadable() {
-    this.searchModel.keyword = null;
-    this.searchModel.page = 1;
-    this.searchModel.pageSize = 2;
-    this.searchModel.isRead = false;
-    this.getNotifications(this.searchModel);
-  }
-  getReadable() {
-    this.searchModel.keyword = null;
-    this.searchModel.page = 1;
-    this.searchModel.pageSize = 2;
-    this.searchModel.isRead = true;
-    this.getNotifications(this.searchModel);
-  }
 
   private setupScrollListener() {
     this.zone.runOutsideAngular(() => {
@@ -491,90 +430,8 @@ export class NavbarComponent implements OnInit {
     this.isMenuOpend = false;
   }
 
-  changeStatus(value) {
-    if (value == '0') {
-      this.isChecked = false;
-      this.getNotifications(
-        (this.searchModel = {
-          keyword: null,
-          sortBy: null,
-          page: 1,
-          pageSize: 2,
-          isRead: null,
-          senderIds: null,
-          arabicNotificationName: null,
-          englishNotificationName: null,
-        })
-      );
-    }
-    if (value == '1') {
-      this.isChecked = false;
-      this.getReadable();
-    }
-    if (value == '2') {
-      this.isChecked = true;
-      this.getNotReadable();
-    }
-  }
 
-  goToNotificationDetails(pageLink, id, isRead) {
-    if (pageLink) window.open(pageLink, '_blank');
-    if (!isRead) {
-      this.notificationService.unReadNotificationNumber.subscribe(
-        (response) => {
-          this.notificationNumber = response - 1;
-        }
-      );
-      this.notificationService
-        .updateNotifications({ NotificationId: [id] })
-        .subscribe(
-          (res) => {},
-          (err) => {
-            this.toastr.error(
-              this.translate.instant(
-                'Request cannot be processed, Please contact support.'
-              )
-            );
-          }
-        );
-    }
-  }
 
-  markAsRead() {
-    let sentData = {
-      NotificationId: [],
-    };
-    this.notificationsList.map((res) => {
-      {
-        return sentData.NotificationId.push(res.id);
-      }
-    });
-
-    this.notificationService.updateNotifications(sentData).subscribe(
-      (res) => {
-        // this.toastr.success(res.message)
-        this.getNotficationNumber();
-        this.getNotReadable();
-      },
-      (err) => {
-        this.toastr.error(
-          this.translate.instant(
-            'Request cannot be processed, Please contact support.'
-          )
-        );
-      }
-    );
-  }
-
-  onScroll() {
-    this.loadMore();
-  }
-
-  loadMore() {
-    this.searchModel.page = 1;
-    this.searchModel.pageSize += 2;
-    this.getNotifications(this.searchModel);
-  }
 
 
   onYearSelected(schoolYearId) {
@@ -586,28 +443,14 @@ export class NavbarComponent implements OnInit {
     this.authService.logOut();
   }
 
-  getNotficationNumber() {
-    this.searchModel.pageSize = 8;
-    this.searchModel.isRead = null;
 
-    this.notificationService.getAllNotifications().subscribe((res) => {
-      let unReadCount = 0;
-      this.notificationService.notificationNumber.next(res.total);
-      res.data.forEach((element) => {
-        if (!element.isRead) {
-          unReadCount++;
-        }
-      });
-      this.notificationService.unReadNotificationNumber.next(unReadCount);
-    });
-  }
 
   unReadedMessagesCount = 0;
 
   getCurrentUserMessages() {
     let userId = this.userService.getCurrentUserId();
     if(this.userService.isUserLogged())
-     { 
+     {
       this.messageService
         .getCurrentUserMessages(userId, this.currentUserScope, {
           PageSize: 50,
@@ -619,10 +462,7 @@ export class NavbarComponent implements OnInit {
      }
   }
 
-  transform(value: Date | string, format = 'd MMMM y '): string {
-    const datePipe = new DatePipe(this.translation.lang || 'ar');
-    return datePipe.transform(value, format);
-  }
+
 
   changeLanguage(): void {
     this.translation.handleLanguageChange();

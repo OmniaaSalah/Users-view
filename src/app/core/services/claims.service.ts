@@ -1,9 +1,8 @@
-import {  Injectable } from '@angular/core';
+import {  Injectable, OnInit } from '@angular/core';
 import { map, take,of} from 'rxjs';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { environment } from 'src/environments/environment';
-import { ArrayOperations } from '../classes/array';
+import { ArrayOperations } from '../helpers/array';
 import { GenericResponse } from '../models/global/global.model';
 import { HttpHandlerService } from './http/http-handler.service';
 import { UserService } from './user/user.service';
@@ -11,13 +10,16 @@ import { UserService } from './user/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ClaimsService {
+export class ClaimsService implements OnInit {
+
+  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>
 
   // http = inject(HttpHandlerService)
-  constructor(private http:HttpHandlerService, private userService:UserService
-    ) { }
+  constructor(private http:HttpHandlerService, private userService:UserService) {}
+    ngOnInit(): void {
+    this.userClaims = this.userService.getClaims()
+  }
 
-  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>= this.userService.getClaims() || {}
 
 
   getUserClaims(){
@@ -54,6 +56,10 @@ export class ClaimsService {
    * @param  {ClaimsEnum|ClaimsEnum[]} permission
    */
      public isUserAllowedTo(claim) {
+
+      if(!this.userClaims || !Object.keys(this.userClaims ||{})?.length) {
+        this.userClaims = this.userService.getClaims() || {}
+      }
 
       if(claim instanceof Array){
 

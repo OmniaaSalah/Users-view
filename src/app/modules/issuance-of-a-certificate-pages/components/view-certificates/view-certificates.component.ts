@@ -1,6 +1,6 @@
 import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ToastrService } from 'ngx-toastr';

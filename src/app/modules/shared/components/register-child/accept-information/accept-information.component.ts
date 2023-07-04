@@ -29,6 +29,7 @@ export class AcceptInformationComponent implements OnInit {
   lang =inject(TranslationService).lang;
   booleanOptions = this.sharedService.booleanOptions
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
+  reEnrollmentTypes$ = this.indexService.getIndext(IndexesEnum.reEnrollmentTypes)
 
   get registrationStatusEnum() {return RegistrationStatus}
   get reEnrollmentTypeEnum() {return ReEnrollmentType}
@@ -36,6 +37,14 @@ export class AcceptInformationComponent implements OnInit {
   disabilitiesOptions = [
     {name: this.translate.instant('shared.specialClass'), value:'SpecialClass'},
     {name: this.translate.instant('shared.fusionClass'), value: 'FusionClass'}
+  ]
+
+  reEnrollmentTypes=[
+    {name: this.translate.instant('shared.allStatus.TransferredWithinTheEmirate'), value:ReEnrollmentType.TransferredWithinTheEmirate},
+    {name: this.translate.instant('shared.allStatus.TransferredFromOutsideTheEmirate'), value:ReEnrollmentType.TransferredFromOutsideTheEmirate},
+    {name: this.translate.instant('shared.allStatus.TransferredFromOutsideTheCountry'), value:ReEnrollmentType.TransferredFromOutsideTheCountry},
+    {name: this.translate.instant('shared.allStatus.Newbie'), value:ReEnrollmentType.Newbie},
+    {name: this.translate.instant('shared.allStatus.LevelSetting'), value:ReEnrollmentType.LevelSetting},
   ]
 
 

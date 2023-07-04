@@ -1,7 +1,7 @@
 import { Injectable,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, from, map, of, share, shareReplay, take } from 'rxjs';
-import { ArrayOperations } from 'src/app/core/classes/array';
+import { ArrayOperations } from 'src/app/core/helpers/array';
 import { Curriculum, Division, Grade,  Track } from 'src/app/core/models/global/global.model';
 import { shool_DDL } from 'src/app/core/Models/Survey/IAddSurvey';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
@@ -170,7 +170,9 @@ export class SharedService {
       {indexType:this.translate.instant('TheReasonForAbsent'),value:IndexesEnum.TheReasonForAbsent},
       {indexType:this.translate.instant('TheReasonForRegradingRequest'),value:IndexesEnum.TheReasonForRegradingRequest},
       {indexType:this.translate.instant('TheReasonForWithdrawalRequest'),value:IndexesEnum.TheReasonForWithdrawalRequest},
-      {indexType:this.translate.instant('ModifyStudentResult'),value:IndexesEnum.ModifyStudentResult}
+      {indexType:this.translate.instant('ModifyStudentResult'),value:IndexesEnum.ModifyStudentResult},
+      {indexType:this.translate.instant('reEnrollmentTypes'),value:IndexesEnum.reEnrollmentTypes}
+
     ]
   }
 
@@ -198,9 +200,9 @@ export class SharedService {
     }))
   }
 
-  getAllGrades(schoolid=''){
-    if(this.allGrades) return of(this.allGrades)
-    return this.http.get(`/Grade?schoolid=${schoolid}`).pipe(take(1),map(val => {
+  getAllGrades(schoolid ='',curriculumId=''){
+    // if(this.allGrades) return of(this.allGrades)
+    return this.http.get(`/Grade?schoolid=${schoolid}&curriculumId=${curriculumId}`).pipe(take(1),map(val => {
       this.allGrades = val.data
       return val.data
     }))

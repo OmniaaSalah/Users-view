@@ -4,7 +4,7 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
