@@ -23,11 +23,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   constructor(private userService:UserService) {
   }
   ngOnDestroy(): void {
-    localStorage.removeItem('Subj-SearchQuery')
-    localStorage.removeItem('Emp-SearchQuery')
-    localStorage.removeItem('Grades-SearchQuery')
-    localStorage.removeItem('Div-SearchQuery')
-    localStorage.removeItem('Holiday-SearchQuery')
+
   }
 
   ngOnInit(): void {

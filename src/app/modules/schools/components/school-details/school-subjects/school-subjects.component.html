@@ -1,3 +1,38 @@
+<div class="row custom-form gx-5 align-items-baseline mb-4">
+  <div class="col-md-3">
+      <div class="">
+          <label class="label required" for="description">{{'shared.grade'|translate }} </label>
+          <p-dropdown
+          [options]="(schoolGrades$ | async)?.data"
+          [showClear]="true" StopProp
+          [(ngModel)]="filtration.GradeId"
+          (ngModelChange)="onGradeSelected()" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.students.chooseClasse' |translate}}" > </p-dropdown>
+      </div>
+  </div>
+  <div class="col-md-3">
+      <div class="">
+          <label class="label" for="description">{{'shared.track'|translate }}  </label>
+          <p-dropdown [options]="(gradeTracks$ | async)?.data" [showClear]="true" StopProp [(ngModel)]="filtration.TrackId" (onChange)="getSubjects()" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.chooseTrack' |translate}}" ></p-dropdown>
+      </div>
+  </div>
+  <div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
+      <div class="">
+          <button *permit="claimsEnum.E_C_GradeSubject" class="btn btn-primary btn--sm px-5"  (click)="sendDataToAddSubject()">
+              <span>{{'dashboard.schools.addSubjectToschool'| translate}}</span>
+          </button>
+
+
+      </div>
+  </div>
+
+</div>
+<div class="bg-orange-50 p-3 radius-15 mb-4 ">
+  <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+  <span class="color-gray-800">" {{'emptyList.youShouldSelectGarde' |translate}} "</span>
+</div>
+
+
+
 <div class="prim-table" *ngIf="subjectsObj.totalAllData || subjectsObj.loading">
     <p-table #dt [value]="subjectsObj.list" [lazy]="true"  [scrollable]="true">
         <ng-template pTemplate="caption">
@@ -11,38 +46,6 @@
 
             </app-table-caption>
 
-            <div class="row custom-form gx-5 align-items-baseline mb-4">
-                <div class="col-md-3">
-                    <div class="">
-                        <label class="label required" for="description">{{'shared.grade'|translate }} </label>
-                        <p-dropdown
-                        [options]="(schoolGrades$ | async)?.data"
-                        [showClear]="true" StopProp
-                        [(ngModel)]="filtration.GradeId"
-                        (ngModelChange)="onGradeSelected()" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.students.chooseClasse' |translate}}" > </p-dropdown>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="">
-                        <label class="label" for="description">{{'shared.track'|translate }}  </label>
-                        <p-dropdown [options]="(gradeTracks$ | async)?.data" [showClear]="true" StopProp [(ngModel)]="filtration.TrackId" (onChange)="getSubjects()" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.chooseTrack' |translate}}" ></p-dropdown>
-                    </div>
-                </div>
-                <div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
-                    <div class="">
-                        <button *permit="claimsEnum.E_C_GradeSubject" class="btn btn-primary btn--sm px-5"  (click)="sendDataToAddSubject()">
-                            <span>{{'dashboard.schools.addSubjectToschool'| translate}}</span>
-                        </button>
-
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="bg-orange-50 p-3 radius-15 mb-4 ">
-                <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-                <span class="color-gray-800">" {{'emptyList.youShouldSelectGarde' |translate}} "</span>
-            </div>
 
 
         </ng-template>
