@@ -2,8 +2,8 @@ import { Component, OnInit,inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -15,7 +15,7 @@ import { SystemRequestService } from '../../services/system-request.service';
 import { UserRequestsStatus} from 'src/app/shared/enums/status/status.enum'
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
-import { ArrayOperations } from 'src/app/core/classes/array';
+import { ArrayOperations } from 'src/app/core/helpers/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
@@ -36,35 +36,9 @@ export class RequestListComponent implements OnInit {
 		breadCrump: []
 	}
 
-  statusOptions=[
-    {name:this.translate.instant('dashboard.Requests.Accepted'), value:[ UserRequestsStatus.Accepted,  UserRequestsStatus.Approved]},
-    {name:this.translate.instant('dashboard.Requests.TentativelyAccepted'), value: UserRequestsStatus.TentativelyAccepted},
-    {name:this.translate.instant('dashboard.Requests.Pending'), value: UserRequestsStatus.Pending},
-    {name:this.translate.instant('dashboard.Requests.Returned'), value: UserRequestsStatus.ModificationRequest},
-    {name:this.translate.instant('dashboard.Requests.Rejected'), value: UserRequestsStatus.Rejected},
-    {name:this.translate.instant('dashboard.Requests.Canceled'), value: UserRequestsStatus.Canceled},
-  ]
+  statusOptions
+  reqsTypes
 
-  reqsTypes=[
-    {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: requestTypeEnum.RegestrationApplicationRequest},
-    {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
-    {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
-    {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
-    {name:this.translate.instant('dashboard.Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},
-    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequest'), value: requestTypeEnum.ModifyIdentityRequest},
-    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
-    {name:this.translate.instant('dashboard.Requests.FlexibleHolidayRequest'), value: requestTypeEnum.FlexibleHolidayRequest},
-    {name:this.translate.instant('dashboard.Requests.MassTransferRequest'), value: requestTypeEnum.MassTransferRequest},
-    {name:this.translate.instant('dashboard.Requests.BoardCertificateRequest'), value: requestTypeEnum.BoardCertificateRequest},
-    {name:this.translate.instant('dashboard.Requests.GradesCertificateRequest'), value: requestTypeEnum.GradesCertificateRequest},
-
-    {name:this.translate.instant('dashboard.Requests.AcademicSequenceCertificateRequest'), value: requestTypeEnum.AcademicSequenceCertificateRequest},
-    {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
-    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
-    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
-
-  ]
-    // openResponsesModel = false
 
     filtration = {
       ...Filtration,
@@ -103,6 +77,9 @@ export class RequestListComponent implements OnInit {
 
     ngOnInit(): void {
       this.setDashboardHeaderData();
+
+      this.statusOptions=this.systemRequestService.statusOptions
+      this.reqsTypes= this.systemRequestService.reqsTypes
 
       if(this.currentUserScope == UserScope.Guardian) this.getMyRequests()
       if(this.currentUserScope == UserScope.SPEA ) this.getRequests()

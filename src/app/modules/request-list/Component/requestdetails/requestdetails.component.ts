@@ -1,5 +1,5 @@
 import { Component, OnInit,inject} from '@angular/core';
-import { FormBuilder,} from '@angular/forms';
+import { FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -15,10 +15,9 @@ import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.e
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { SystemRequestService } from '../../services/system-request.service';
-import { Observable, delay, map } from 'rxjs';
+import { Observable, delay, map, switchMap } from 'rxjs';
 import { Division } from 'src/app/core/models/global/global.model';
 import { GradesService } from 'src/app/modules/schools/services/grade/grade.service';
-// import { IunregisterChild } from '../../models/IunregisterChild';
 
 
 @Component({
@@ -90,7 +89,6 @@ export class RequestdetailsComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-    private fb:FormBuilder,
     private route: ActivatedRoute,
     private router:Router,
     private requestsService:SystemRequestService,
@@ -129,7 +127,12 @@ export class RequestdetailsComponent implements OnInit {
 
 
   getRequestOptions(){
-    this.requestsService.getRequestOptions(this.requestInstance).subscribe(res=>{
+    this.requestsService.getRequestOptions(this.requestInstance)
+    .pipe(
+      switchMap(()=>{
+      return this.requestsService.getRequestOptions(this.requestInstance)
+    }))
+    .subscribe(res=>{
       if(res.options)  this.requestOptions= res?.options?.map(el=>({...el,isLoading:false}))
     })
   }

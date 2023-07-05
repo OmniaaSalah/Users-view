@@ -2,8 +2,8 @@ import { Component, OnInit,inject} from '@angular/core';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { map, share, shareReplay } from 'rxjs';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -135,7 +135,6 @@ export class StudentsListComponent implements OnInit {
     private studentsService: StudentsService,
     private sharedService: SharedService,
     private countriesService: CountriesService,
-    private schoolsService: SchoolsService,
     private userService:UserService,
     private divisionService: DivisionService,
     private gradesService:GradesService,
@@ -231,6 +230,16 @@ export class StudentsListComponent implements OnInit {
     // this.filtration.SchoolId=[Number(schoolId)]
     this.students.loading=true
     this.students.list=[]
+
+    if(this.route.snapshot.queryParams['searchQuery']){
+      this.filtration = {...JSON.parse(this.route.snapshot.queryParams['searchQuery']), ...this.filtration}
+    }
+    this.router.navigate([], {
+      queryParams: {searchQuery : JSON.stringify(this.filtration)},
+      relativeTo: this.route,
+    });
+
+
     this.studentsService.getAllStudentsInSpecificSchool(this.filtration,schoolId)
     .subscribe(res=>{
       this.students.loading=false

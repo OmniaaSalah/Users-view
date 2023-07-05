@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { th } from 'date-fns/locale';
 import { Table } from 'primeng/table';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -88,20 +88,19 @@ export class SchoolSubjectsComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem("gradeId")
     localStorage.removeItem("trackId")
-    if(this.currentUserScope==this.userScope.Employee)
-	{
-		this.userService.currentUserSchoolName$?.subscribe((res)=>{
-      if(res)
-      {
-        this.currentSchool= res;
-        this.componentHeaderData.mainTitle.main=this.currentSchool[this.lang];
-      }
-	  })
-	}
+    if (this.currentUserScope == this.userScope.Employee) {
+      this.userService.currentUserSchoolName$?.subscribe((res) => {
+        if (res) {
+          this.currentSchool = res;
+          this.componentHeaderData.mainTitle.main =
+            this.currentSchool[this.lang];
+        }
+      });
+    }
 
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
-    // this.getSubjects()
+    if(this.filtration.GradeId) this.getSubjects()
   }
 
 

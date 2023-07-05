@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -16,7 +16,7 @@ import { MessageService } from '../../../messages/service/message.service';
 import { ToastrService } from 'ngx-toastr';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsService } from 'src/app/core/services/claims.service';
 
@@ -30,7 +30,7 @@ import { ClaimsService } from 'src/app/core/services/claims.service';
 	templateUrl: './school-details.component.html',
 	styleUrls: ['./school-details.component.scss']
 })
-export class SchoolDetailsComponent implements OnInit, AfterViewInit {
+export class SchoolDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild('nav') nav: ElementRef
 	lang = inject(TranslationService).lang
 
@@ -92,6 +92,15 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		private userService:UserService,
 		private cliamsService:ClaimsService,
 		private index:IndexesService) { }
+
+
+  ngOnDestroy(): void {
+    localStorage.removeItem('Subj-SearchQuery')
+    localStorage.removeItem('Emp-SearchQuery')
+    localStorage.removeItem('Grades-SearchQuery')
+    localStorage.removeItem('Div-SearchQuery')
+    localStorage.removeItem('Holiday-SearchQuery')
+  }
 
 	ngOnInit(): void {
 

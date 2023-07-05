@@ -2,7 +2,7 @@
 import { Injectable,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize, take,map } from 'rxjs';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';

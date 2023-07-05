@@ -59,7 +59,7 @@
 
                       <ng-template #completedStateTemp>
                           <li class="event" *ngFor="let task of state?.tasks">
-                              <p class="event__time" mb-6 >{{task.createdDate|LocalizeDate:'d MMMM y - hh:mm a'}}</p>
+                              <p class="event__time" mb-6 >{{task.action?.createdDate|LocalizeDate:'d MMMM y - hh:mm a'}}</p>
                               <div class="event__separator">
                                   <div class="event__marker"></div>
                                   <div class="event__connector"></div>

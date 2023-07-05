@@ -1,7 +1,7 @@
 import { Injectable,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize, take ,map} from 'rxjs';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { GradeTrack } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -54,12 +54,12 @@ export class GradesService {
   ]
 
   constructor(
-    private http:HttpHandlerService, 
+    private http:HttpHandlerService,
     private tableLoaderService:LoaderService,
     private translate:TranslateService) {}
   lang = inject(TranslationService).lang;
 
-   
+
    getSchoolSubjects(schoolId){
     return this.http.get(`/Subject/school-subject/${schoolId}`)
    }
@@ -90,7 +90,7 @@ export class GradesService {
   getGradeSubjects(schoolId, gradeId){
     return this.http.get(`/Grade/subjects/${gradeId}`,{schoolid:schoolId})
     .pipe(
-      map(res=> 
+      map(res=>
         res.map(el=> ({id:el.id, name:{ar: el.arabicName,en:el.englishName}}) )),
     take(1))
   }
@@ -116,7 +116,7 @@ export class GradesService {
       }))
   }
 
-  
+
   gradeStudentsToExport(schoolId, gradeId,filter?){
     return this.http.post(`/Student/school-grade-students/Search/${schoolId}/${gradeId}`,filter)
     .pipe(

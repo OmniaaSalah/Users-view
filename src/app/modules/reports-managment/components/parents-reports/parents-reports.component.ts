@@ -1,7 +1,7 @@
 import { Component, OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -152,16 +152,16 @@ export class ParentsReportsComponent implements OnInit {
         res.forEach((parent) => {
           let myObject = {}
           for (let property in parent)
-          { 
+          {
            var selected= myColumns.find(column => column.name==property)
-  
-           if(selected)   myObject = { ...myObject, [selected?.name] :parent[selected?.name]} 
-  
+
+           if(selected)   myObject = { ...myObject, [selected?.name] :parent[selected?.name]}
+
           }
-  
+
           exportedTable.push(myObject)
         })
-  
+
 
         this.exportService.exportFile(fileType, exportedTable, this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'))
       })

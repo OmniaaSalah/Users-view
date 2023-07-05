@@ -3,8 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { UserInformationService } from '../../../user-information/service/user-information.service';
@@ -71,7 +71,7 @@ export class UsersReportsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.requestsList=this.requestService.requestList;
+    this.requestsList=this.requestService.reqsTypes;
     this.headerService.Header.next(
       {
         'breadCrump': [

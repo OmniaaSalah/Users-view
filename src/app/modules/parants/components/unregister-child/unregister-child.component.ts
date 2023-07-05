@@ -3,8 +3,7 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { map, share } from 'rxjs';
-import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
@@ -18,7 +17,6 @@ import { CountriesService } from 'src/app/shared/services/countries/countries.se
 import { MediaService } from 'src/app/shared/services/media/media.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../indexes/service/indexes.service';
-// import { IunregisterChild } from '../../models/IunregisterChild';
 import { ParentService } from '../../services/parent.service';
 
 @Component({
@@ -140,8 +138,10 @@ export class UnregisterChildComponent implements OnInit {
     this.parentService.getChild(this.childId).subscribe(response=>{
       this.child = response;
       this.childForm.patchValue({...response})
-      this.childForm.controls['birthDate'].patchValue(new Date(response.birthDate))
-      this.childForm.controls.nationlityId.setValue(response.nationlity.id)
+      this.childForm.controls['birthDate'].patchValue(new Date(response?.birthDate))
+      this.childForm.controls.nationlityId.setValue(response?.nationlity?.id)
+      this.childForm.controls.religionId.setValue(response?.religion?.id)
+
       this.childForm.controls.relativeRelationId.setValue(response.relativeRelation?.id)
       this.childForm.controls.reasonForNotHavingEmiratesId.setValue(response.reasonForNotHavingEmirates?.id)
       this.fillAttachments(response.childAttachments)

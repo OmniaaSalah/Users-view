@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, map } from 'rxjs';
+import {  map } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
@@ -33,7 +33,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
   filesTypesOptions = [...this.sharedService.fileTypesOptions]
 
-  fileForm= this.fb.group({
+  newAttachmentForm= this.fb.group({
     indexId:[],
     titel: this.fb.group({
       ar:[, Validators.required],
@@ -71,9 +71,9 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     this.loading =true
     this.studentService.getStudentAttachment(this.studentId || this.childId)
     .pipe(map(res => {
-      return res.map(value=>{
+      return res.map(attachment=>{
         // const {id, ...otherProps} = value;
-        return ({...value , isActive:value.isActive ?? true});
+        return ({...attachment , isActive:attachment.isActive ?? true});
       })
     }))
     .subscribe(res=>{
@@ -104,12 +104,14 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     })
   }
 
+
+
   onFileUpload(file, i){
 
     if(this.currentUserScope==UserScope.Employee && !file[0]){
       file = {...this.attachments[i], isActive:false}
     }else{
-      file= file[0] ? file[0] : {url:"", name:"",comment:"",isActive:true}
+      file= file[0] ? {...file[0], isActive: true} : {url:"", name:"",comment:"",isActive:true}
 
     }
     this.attachments[i] = {...this.attachments[i], url: file?.url,name:file?.name, comment: file?.comment, isActive: file?.isActive}
@@ -124,28 +126,19 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     else this.showErrMess =false
   }
 
-  // addNewAttachment(){
-  //   let index = this.attachments.findIndex(el => el?.indexId === this.fileForm.value.indexId)
-  //   if(index > -1) this.attachments.splice(index, 1)
 
-  //   this.attachments.unshift({url: '', name: '', titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId})
-  //   this.addMode=false
-  //   this.showErrMess =false
-  //   this.fileForm.reset()
-  // }
 
   addNewAttachment(){
-    let index = this.attachments.findIndex(el => el?.indexId && (el?.indexId === this.fileForm.value.indexId))
+    let index = this.attachments.findIndex(el => el?.indexId && (el?.indexId === this.newAttachmentForm.value.indexId))
     if(index > -1) this.attachments.splice(index, 1)
 
-    console.log(index);
 
-    let attach = this.fileForm.get('attachments' as any).value[0]
+    let attach = this.newAttachmentForm.get('attachments' as any).value[0]
 
-    this.attachments.unshift({id: 0, url: attach?.url, name: attach?.name, titel:this.fileForm.value.titel, comment:'', indexId:this.fileForm.value.indexId,isActive:true})
+    this.attachments.unshift({id: 0, url: attach?.url, name: attach?.name, titel:this.newAttachmentForm.value.titel, comment:'', indexId:this.newAttachmentForm.value.indexId, isActive:true})
     this.addAttachModelOpened=false
     this.showErrMess =false
-    this.fileForm.reset()
+    this.newAttachmentForm.reset()
     this.updateStudentAttachment(this.studentId|| this.childId, this.attachments)
   }
 
@@ -154,9 +147,9 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     file= file[0]
     if(file){
 
-      this.fileForm.get('attachments'  as any).setValue([{id:0, url: file?.url,name:file?.name, comment: file?.comment}])
+      this.newAttachmentForm.get('attachments'  as any).setValue([{id:0, url: file?.url,name:file?.name, comment: file?.comment}])
     }else{
-      this.fileForm.get('attachments'  as any).setValue(null)
+      this.newAttachmentForm.get('attachments'  as any).setValue(null)
     }
   }
 

@@ -3,7 +3,7 @@ import {faFileCircleExclamation, faXmark } from '@fortawesome/free-solid-svg-ico
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, filter, finalize, forkJoin, Observable, of, take, tap } from 'rxjs';
-import { capitalizeFirstLetter } from 'src/app/core/classes/helpers';
+import { capitalizeFirstLetter } from 'src/app/core/helpers/helpers';
 import { Localization } from 'src/app/core/models/global/global.model';
 import { MapedFileRule } from 'src/app/core/models/settings/settings.model';
 import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';

@@ -1,7 +1,7 @@
 import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/helpers/filtration';
+import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -161,10 +161,10 @@ export class DegreesReportsComponent implements OnInit {
       res.forEach((student) => {
         let myObject = {}
         for (let property in student)
-        { 
+        {
          var selected= myColumns.find(column => column.name==property)
 
-         if(selected)   myObject = { ...myObject, [selected?.name] :student[selected?.name]} 
+         if(selected)   myObject = { ...myObject, [selected?.name] :student[selected?.name]}
 
         }
 
