@@ -111,7 +111,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     if(this.currentUserScope==UserScope.Employee && !file[0]){
       file = {...this.attachments[i], isActive:false}
     }else{
-      file= file[0] ? file[0] : {url:"", name:"",comment:"",isActive:true}
+      file= file[0] ? {...file[0], isActive: true} : {url:"", name:"",comment:"",isActive:true}
 
     }
     this.attachments[i] = {...this.attachments[i], url: file?.url,name:file?.name, comment: file?.comment, isActive: file?.isActive}
