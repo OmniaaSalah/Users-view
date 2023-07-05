@@ -97,7 +97,8 @@ export enum UserRequestsStatus{
     Canceled = "Canceled",
     //معتمد
     Approved = "Approved",
-    SentForApproval  ="SentForApproval"
+    SentForApproval  ="SentForApproval",
+    FinalApproval="FinalApproval"
 }
 
 export enum TransportaionType{

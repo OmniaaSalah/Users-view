@@ -88,21 +88,20 @@
           <div class="">
           <ng-container *ngIf="!editItem?.modificationDetails">
                   <div class="row g-5">
-
-                          <app-skeleton count="4"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-
+                    <app-skeleton count="4"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
                   </div>
 
           </ng-container>
           <ng-container *ngIf="editItem?.modificationDetails">
              <ng-container *ngFor="let item of editItem?.modificationDetails">
                   <div class="row gx-5 form-set" >
-                      <label class="label color-primary fw-bold fs-3 mb-5"  for="password">{{'shared.edit' | translate}} {{item?.colomnName |currentLang}}</label>
+                      <label class="label color-primary fw-bold fs-3 mb-5"  for="password">{{'shared.edit' | translate}} {{item?.colomnName |currentLang }}</label>
                       <div class="col-md-6 d-flex gap-3 align-items-baseline">
                           <img src="assets/images/shared/bullet.svg" alt="">
                           <div class="d-flex gap-5  align-items-center">
                               <span class="fs-3">{{'shared.From'|translate}}</span>
-                              <span class="color-gray-600">{{item?.from |currentLang}}</span>
+                              <span class="position-relative" pTooltip="{{item?.from |currentLang}}" [autoHide]="true" tooltipPosition="top">{{item?.from | currentLang | truncate:30}}</span>
+                              <!-- <span class="color-gray-600">{{item?.from |currentLang}}</span> -->
 
                           </div>
                       </div>
@@ -110,7 +109,7 @@
                       <div class="col-md-6">
                           <div class="d-flex gap-5  align-items-center">
                               <span class="fs-3">{{'shared.To'|translate}}</span>
-                              <span class="color-gray-600">{{item?.to |currentLang}}</span>
+                              <span class="color-gray-600 position-relative" [autoHide]="true" tooltipPosition="top" pTooltip="{{item?.from |currentLang}}">{{item?.to |currentLang | truncate:30}}</span>
 
                           </div>
                       </div>

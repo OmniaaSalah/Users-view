@@ -71,7 +71,7 @@ export class UsersReportsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.requestsList=this.requestService.requestList;
+    this.requestsList=this.requestService.reqsTypes;
     this.headerService.Header.next(
       {
         'breadCrump': [
