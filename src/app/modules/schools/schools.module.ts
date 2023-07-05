@@ -22,7 +22,6 @@ import { NgChartsModule } from 'ng2-charts';
 import { SchoolChartsComponent } from './components/school-list/school-charts/school-charts.component';
 import { SchoolInfoComponent } from './components/school-details/school-info/school-info.component';
 import { SchoolLocationComponent } from './components/school-details/school-location/school-location.component';
-import { DivisionSubjectsComponent } from './components/school-division-details/division-subjects/division-subjects.component';
 @NgModule({
   declarations: [
     SchoolDetailsComponent,
