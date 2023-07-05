@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -30,7 +30,7 @@ import { ClaimsService } from 'src/app/core/services/claims.service';
 	templateUrl: './school-details.component.html',
 	styleUrls: ['./school-details.component.scss']
 })
-export class SchoolDetailsComponent implements OnInit, AfterViewInit {
+export class SchoolDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild('nav') nav: ElementRef
 	lang = inject(TranslationService).lang
 
@@ -92,6 +92,15 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		private userService:UserService,
 		private cliamsService:ClaimsService,
 		private index:IndexesService) { }
+
+
+  ngOnDestroy(): void {
+    localStorage.removeItem('Subj-SearchQuery')
+    localStorage.removeItem('Emp-SearchQuery')
+    localStorage.removeItem('Grades-SearchQuery')
+    localStorage.removeItem('Div-SearchQuery')
+    localStorage.removeItem('Holiday-SearchQuery')
+  }
 
 	ngOnInit(): void {
 
