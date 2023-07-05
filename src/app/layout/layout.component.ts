@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { routeSlide } from '../shared/animation/animation';
 import { UserService } from '../core/services/user/user.service';
@@ -14,13 +14,20 @@ import { UserScope } from '../shared/enums/user/user.enum';
   ]
 
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
 
   get name () { return 'LayoutComponent'}
   get currentUserScope() { return this.userService.getScope()}
   get scopeEnum () {return UserScope}
 
   constructor(private userService:UserService) {
+  }
+  ngOnDestroy(): void {
+    localStorage.removeItem('Subj-SearchQuery')
+    localStorage.removeItem('Emp-SearchQuery')
+    localStorage.removeItem('Grades-SearchQuery')
+    localStorage.removeItem('Div-SearchQuery')
+    localStorage.removeItem('Holiday-SearchQuery')
   }
 
   ngOnInit(): void {
