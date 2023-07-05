@@ -88,20 +88,19 @@ export class SchoolSubjectsComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem("gradeId")
     localStorage.removeItem("trackId")
-    if(this.currentUserScope==this.userScope.Employee)
-	{
-		this.userService.currentUserSchoolName$?.subscribe((res)=>{
-      if(res)
-      {
-        this.currentSchool= res;
-        this.componentHeaderData.mainTitle.main=this.currentSchool[this.lang];
-      }
-	  })
-	}
+    if (this.currentUserScope == this.userScope.Employee) {
+      this.userService.currentUserSchoolName$?.subscribe((res) => {
+        if (res) {
+          this.currentSchool = res;
+          this.componentHeaderData.mainTitle.main =
+            this.currentSchool[this.lang];
+        }
+      });
+    }
 
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
-    // this.getSubjects()
+    if(this.filtration.GradeId) this.getSubjects()
   }
 
 

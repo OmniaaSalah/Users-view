@@ -1839,6 +1839,7 @@
             "Rejected":"رفض",
             "Approved":"اعتماد",
             "Canceled":"مُلغى",
+            "FinalApproval":"موافقة النهائية",
             "SentForApproval":"أرسل للإعتماد",
             "TentativelyAccepted":"مقبول بشكل مبدأى",
             "myRequests":"الطلبات المرسلة",

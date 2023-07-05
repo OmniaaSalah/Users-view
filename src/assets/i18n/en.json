@@ -1803,6 +1803,7 @@
             "Rejected":"Rejected",
             "Approved":"Approved",
             "Canceled": "Canceled",
+            "FinalApproval":"Final Approval",
             "SentForApproval":"Sent for approval",
             "SelectRequestType":"Select request type",
             "TentativelyAccepted": "Tentatively accepted",
