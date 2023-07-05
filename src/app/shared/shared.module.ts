@@ -33,7 +33,6 @@ import { LocalizeDatePipe } from './pipes/localize-date.pipe';
 import { SelectSchoolsComponent } from './components/select-schools/select-schools.component';
 import { RegisterRequestComponent } from './components/register-request/register-request.component';
 import { SharedService } from './services/shared/shared.service';
-import { UseUtcDirective } from './directives/useUtc/use-utc.directive';
 import { NumberToWordsPipe } from './pipes/numbers-to-words/number-to-words.pipe';
 import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
 import { StopPropagationDirective } from './directives/stop-propagation/stop-propagation.directive';
@@ -87,7 +86,6 @@ registerLocaleData(localeAr);
     CardStudentComponent,
     RegisterRequestComponent,
     SelectSchoolsComponent,
-    UseUtcDirective,
     NumberToWordsPipe,
     CustomDatePipe,
     StopPropagationDirective,
@@ -160,7 +158,6 @@ registerLocaleData(localeAr);
     LocalizeDatePipe,
     RegisterRequestComponent,
     SelectSchoolsComponent,
-    UseUtcDirective,
     NumberToWordsPipe,
     CustomDatePipe,
     StopPropagationDirective,
