@@ -14,41 +14,43 @@ import { UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
 })
 export class SystemRequestService {
 
-  statusOptions=[
-    {name:this.translate.instant('dashboard.Requests.Pending'), value: UserRequestsStatus.Pending},
-    {name:this.translate.instant('dashboard.Requests.Returned'), value: UserRequestsStatus.ModificationRequest},
-    {name:this.translate.instant('dashboard.Requests.Accepted'), value:[ UserRequestsStatus.Accepted,  UserRequestsStatus.Approved]},
-    {name:this.translate.instant('dashboard.Requests.TentativelyAccepted'), value: UserRequestsStatus.TentativelyAccepted},
-    {name:this.translate.instant('dashboard.Requests.FinalApproval'), value: UserRequestsStatus.FinalApproval},
-    {name:this.translate.instant('dashboard.Requests.Rejected'), value: UserRequestsStatus.Rejected},
-    {name:this.translate.instant('dashboard.Requests.Canceled'), value: UserRequestsStatus.Canceled},
-
-  ]
-
-  reqsTypes=[
-    {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: requestTypeEnum.RegestrationApplicationRequest},
-    {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
-    {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
-    {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
-    {name:this.translate.instant('dashboard.Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},
-    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequest'), value: requestTypeEnum.ModifyIdentityRequest},
-    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
-    {name:this.translate.instant('dashboard.Requests.FlexibleHolidayRequest'), value: requestTypeEnum.FlexibleHolidayRequest},
-    {name:this.translate.instant('dashboard.Requests.MassTransferRequest'), value: requestTypeEnum.MassTransferRequest},
-    {name:this.translate.instant('dashboard.Requests.BoardCertificateRequest'), value: requestTypeEnum.BoardCertificateRequest},
-    {name:this.translate.instant('dashboard.Requests.GradesCertificateRequest'), value: requestTypeEnum.GradesCertificateRequest},
-
-    {name:this.translate.instant('dashboard.Requests.AcademicSequenceCertificateRequest'), value: requestTypeEnum.AcademicSequenceCertificateRequest},
-    {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
-    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
-    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
-
-  ]
-
-
   constructor(private http:HttpHandlerService,private tableLoaderService: LoaderService,private translate:TranslateService) {}
 
 
+  getStatusOptions(){
+    return [
+      {name:this.translate.instant('dashboard.Requests.Pending'), value: UserRequestsStatus.Pending},
+      {name:this.translate.instant('dashboard.Requests.Returned'), value: UserRequestsStatus.ModificationRequest},
+      {name:this.translate.instant('dashboard.Requests.Accepted'), value:[ UserRequestsStatus.Accepted,  UserRequestsStatus.Approved]},
+      {name:this.translate.instant('dashboard.Requests.TentativelyAccepted'), value: UserRequestsStatus.TentativelyAccepted},
+      {name:this.translate.instant('dashboard.Requests.FinalApproval'), value: UserRequestsStatus.FinalApproval},
+      {name:this.translate.instant('dashboard.Requests.Rejected'), value: UserRequestsStatus.Rejected},
+      {name:this.translate.instant('dashboard.Requests.Canceled'), value: UserRequestsStatus.Canceled},
+
+    ]
+  }
+
+  getReqsTypes(){
+    return [
+      {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: requestTypeEnum.RegestrationApplicationRequest},
+      {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
+      {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
+      {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
+      {name:this.translate.instant('dashboard.Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},
+      {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequest'), value: requestTypeEnum.ModifyIdentityRequest},
+      {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
+      {name:this.translate.instant('dashboard.Requests.FlexibleHolidayRequest'), value: requestTypeEnum.FlexibleHolidayRequest},
+      {name:this.translate.instant('dashboard.Requests.MassTransferRequest'), value: requestTypeEnum.MassTransferRequest},
+      {name:this.translate.instant('dashboard.Requests.BoardCertificateRequest'), value: requestTypeEnum.BoardCertificateRequest},
+      {name:this.translate.instant('dashboard.Requests.GradesCertificateRequest'), value: requestTypeEnum.GradesCertificateRequest},
+
+      {name:this.translate.instant('dashboard.Requests.AcademicSequenceCertificateRequest'), value: requestTypeEnum.AcademicSequenceCertificateRequest},
+      {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
+      {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
+      {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
+
+    ]
+  }
 
   getUserRequests(filter?:Filter){
   //  return of(this.requestArray)

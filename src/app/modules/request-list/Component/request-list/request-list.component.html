@@ -28,7 +28,7 @@
                                 <div class="col-4">
                                     <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
                                     <!-- <p-dropdown [showClear]="true" StopProp [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-dropdown> -->
-                                    <p-multiSelect [options]="statusOptions" display="chip" [(ngModel)]="filtration.RequestStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Requests.Status'|translate}}"></p-multiSelect>
+                                    <p-multiSelect [lazy]="true" [options]="statusOptions" display="chip" [(ngModel)]="filtration.RequestStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Requests.Status'|translate}}"></p-multiSelect>
                                 </div>
                                 <div class="col-5">
                                     <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>

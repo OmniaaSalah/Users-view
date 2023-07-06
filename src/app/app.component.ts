@@ -16,6 +16,7 @@ import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
 import { IndexesService } from './modules/indexes/service/indexes.service';
 import { SettingsService } from './modules/system-setting/services/settings/settings.service';
 import { FileTypeEnum } from './shared/enums/file/file.enum';
+import { SharedService } from './shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit {
   searchText='';
 
 
-
+  showContent$= this.translationService.showContent$
 
 
   display: boolean = false;
@@ -48,7 +49,9 @@ export class AppComponent implements OnInit {
   messagesTypes$ = this.index.getIndext(IndexesEnum.TtypeOfCommunicationMessage)
   imagesResult =[]
   isShown1:boolean=false;
+
   constructor(
+    private sharedService:SharedService,
     private translationService: TranslationService,
     private router:Router,
     private userService:UserService,
@@ -74,6 +77,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // setTimeout(() => {
+    //   this.showContent=true
+    // }, 1000);
     this.translationService.init();
     this.settingsService.initializeFileRules()
 

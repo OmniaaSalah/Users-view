@@ -27,6 +27,7 @@ export class SharedService {
   currentActiveStep$ = new BehaviorSubject(0)
 
 
+
   private allDivisions:Division[]
   private allCurriculum: Curriculum[]
   private allNationality;
