@@ -24,6 +24,7 @@ import { Subscription } from 'rxjs';
 import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { ArrayOperations } from 'src/app/core/helpers/array';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 
 @Component({
   selector: 'app-authentication-main',
@@ -257,9 +258,9 @@ export class AuthenticationMainComponent implements OnInit {
 
           this.showSuccess();
         },
-        (err) => {
+        (err:Error) => {
           this.isBtnLoading = false;
-          this.showError();
+          this.toastService.error(err?.message || this.translate.instant('login.Something is wrong,Pleaze login again'))
         }
       );
   }

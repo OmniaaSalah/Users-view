@@ -36,8 +36,8 @@ export class RequestListComponent implements OnInit {
 		breadCrump: []
 	}
 
-  statusOptions
-  reqsTypes
+  statusOptions = []
+  reqsTypes = []
 
 
     filtration = {
@@ -76,10 +76,11 @@ export class RequestListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.statusOptions=this.systemRequestService.getStatusOptions()
+      this.reqsTypes= this.systemRequestService.getReqsTypes()
+
       this.setDashboardHeaderData();
 
-      this.statusOptions=this.systemRequestService.statusOptions
-      this.reqsTypes= this.systemRequestService.reqsTypes
 
       if(this.currentUserScope == UserScope.Guardian) this.getMyRequests()
       if(this.currentUserScope == UserScope.SPEA ) this.getRequests()
