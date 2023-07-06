@@ -2,11 +2,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
-import {  BehaviorSubject, map,  take } from 'rxjs';
+import {  BehaviorSubject, catchError, map,  take } from 'rxjs';
 import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
 import { environment } from 'src/environments/environment';
 import { ClaimsService } from '../claims.service';
+import { TranslateService } from '@ngx-translate/core';
+import { getLocalizedValue } from '../../helpers/helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,7 @@ export class AuthenticationService {
     private http: HttpHandlerService,
     private userService:UserService,
     private claimsService:ClaimsService,
+    private translate:TranslateService,
     private router: Router) {
 
 
@@ -71,6 +74,13 @@ export class AuthenticationService {
   login(account)
   {
     return this.http.post("/User/Auth/Login", account)
+    .pipe(
+      catchError((error)=>{
+        let message = {ar: 'كلمة السر او الايميل غير صحيحة يرجى المحاولة مره اخرى' , en:'Invalid username and password combination'}
+        let err = error.Ar|| error.En ? getLocalizedValue(message)  : this.translate.instant('login.Something is wrong,Pleaze login again');
+        throw new Error(err)
+      }),
+      take(1))
 
   }
 

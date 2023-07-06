@@ -1,7 +1,7 @@
 
 <div id="app-version" class="color-gray-800 fs-4"><a href="https://www.blackstoneeit.com/" class="color-gray-800 fs-4 powered" target="_blank">Powered by BlackstoneEIT</a> | V.{{version}}</div>
 
-<router-outlet></router-outlet>
+<router-outlet *ngIf="showContent$ |async"></router-outlet>
 
 <app-confirm-model></app-confirm-model>
 
