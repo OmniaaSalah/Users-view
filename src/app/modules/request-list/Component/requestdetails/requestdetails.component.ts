@@ -18,6 +18,7 @@ import { SystemRequestService } from '../../services/system-request.service';
 import { Observable, delay, map, switchMap } from 'rxjs';
 import { Division } from 'src/app/core/models/global/global.model';
 import { GradesService } from 'src/app/modules/schools/services/grade/grade.service';
+import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
 
 
 @Component({
@@ -95,7 +96,8 @@ export class RequestdetailsComponent implements OnInit {
     private toaster:ToastrService,
     private indexesService:IndexesService,
     private userService:UserService,
-    private gradeService:GradesService
+    private gradeService:GradesService,
+    private certificatesService:IssuanceCertificaeService
   ) { }
 
   ngOnInit(): void {
@@ -358,6 +360,7 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     this.router.navigate(['/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestId: this.requestDetails.requestNumber, requestInstance: this.requestInstance}})
 
   }
+
 
   reSendCertificateReq(){
 
