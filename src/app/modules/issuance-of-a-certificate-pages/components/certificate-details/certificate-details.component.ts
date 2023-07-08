@@ -1,11 +1,9 @@
-import { Component, OnInit, Sanitizer, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
-import { MediaService } from 'src/app/shared/services/media/media.service';
 import { environment } from 'src/environments/environment';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 
@@ -89,12 +87,13 @@ export class CertificateDetailsComponent implements OnInit {
 
 
 
-
+  isLoading=false
 
   print() {
+    this.isLoading=true
     this.generatePdf().then(pdf=>{
       pdf.save(this.translate.instant('dashboard.issue of certificate.' +this.certificateType))
-
+      this.isLoading=false
 
     })
   }
