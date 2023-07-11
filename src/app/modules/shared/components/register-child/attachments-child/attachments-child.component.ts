@@ -127,7 +127,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   onFileUpload(file, i){
     console.log(file);
 
-    this.attachments[i].files = file
+    this.attachments[i].files = file.map(el => ({...el,isActive:true}))
 
     // if(this.currentUserScope==UserScope.Employee && !file[0]){
     //   file = {...this.attachments[i], isActive:false}
