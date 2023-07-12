@@ -416,7 +416,8 @@
         "youShouldSelectGradeAndSchool":"يجب ان تختار الصف والمدرسه لإظهار الشعب المتاحة",
         "degreesAccepted":"تم قبول الدرجات المرفقه بنجاح",
         "degreesRejected":"تم رفض الدرجات المرفقه بنجاح",
-        "DegreeImproved":"تم تحسين درجات الطالب بنجاح"
+        "DegreeImproved":"تم تحسين درجات الطالب بنجاح",
+        "upgradeStudents":"تم ترقيه الطلاب بنجاح"
     },
 
     "emptyList": {
@@ -961,7 +962,8 @@
             "from students":"من الطلاب",
             "you can select 10 top students at max":"يمكنك الاختيار حتى 10 طلاب ليكونو من الأوائل",
             "choose schoolyear":"أختر السنة الدراسية",
-            "SelectSchoolYearThatYouNeedcopyFrom":"أختر السنة الدراسية المراد النسخ منها"
+            "SelectSchoolYearThatYouNeedcopyFrom":"أختر السنة الدراسية المراد النسخ منها",
+            "upgradeStudents":"ترقية الطلاب"
 
         },
         "SystemSetting": {

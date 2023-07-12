@@ -1,11 +1,10 @@
 
-import { Component, inject, OnInit, } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { el } from 'date-fns/locale';
 import { ToastrService } from 'ngx-toastr';
-import { map, of, switchMap } from 'rxjs';
+import { map, of, Subject, switchMap, takeUntil } from 'rxjs';
 import {IHeader } from 'src/app/core/Models/header-dashboard';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { Student } from 'src/app/core/models/student/student.model';
@@ -23,7 +22,9 @@ import { StudentsService } from '../../services/students/students.service';
   templateUrl: './deleted-student.component.html',
   styleUrls: ['./deleted-student.component.scss']
 })
-export class DeletedStudentComponent implements OnInit {
+export class DeletedStudentComponent implements OnInit, OnDestroy {
+
+  Destroy$ = new Subject()
   lang = inject(TranslationService).lang
   studentGUID = this.route.snapshot.paramMap.get('id');
   get fileTypesEnum () {return FileTypeEnum}
@@ -34,7 +35,10 @@ export class DeletedStudentComponent implements OnInit {
 
   componentHeaderData:IHeader = {
     breadCrump: [
-      { label: this.translate.instant('Students List'),routerLink:'//schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
+      {
+        label: this.translate.instant('Students List'),
+        routerLink:'/student-management/students/',
+        routerLinkActiveOptions:{exact: true}},
       { label: this.translate.instant('dashboard.students.deletStudentFromSchool'),routerLink:`/student-management/students/delete-student/${this.studentGUID}` }
     ],
     mainTitle: { main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)' }
@@ -66,6 +70,7 @@ export class DeletedStudentComponent implements OnInit {
   ngOnInit(): void {
     this.registerChildService.Student$
     .pipe(
+      takeUntil(this.Destroy$),
       switchMap(res=>{
         if(!res) return this.studentService.getStudent(this.studentGUID).pipe(map(res => res?.result))
         return of(res)
@@ -130,5 +135,10 @@ export class DeletedStudentComponent implements OnInit {
   onFileUpload(files, fileTitle, index){
     this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
     this.attachmentCtr.setValue(this.uploadedFiles)
+  }
+
+  ngOnDestroy(): void {
+      this.Destroy$.next(null)
+      this.Destroy$.complete()
   }
 }

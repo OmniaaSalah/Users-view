@@ -28,6 +28,11 @@
           {{'shared.send'|translate}}
         </button>
 
+        <!-- Upgrade Students -->
+        <button type="submit" class="btn  btn-primary "  (click)="openUpgradeStudentModel=true ">
+          {{'dashboard.SchoolYear.upgradeStudents'|translate}}
+        </button>
+
         <button  ><a routerLink="/educational-settings/school-year/school-years-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
 
       </div>
@@ -634,5 +639,29 @@
 </p-dialog>
 
 
+<p-dialog header="{{'dashboard.SchoolYear.upgradeStudents'| translate}}"  styleClass="block"  [resizable]="false" [(visible)]="openUpgradeStudentModel" [draggable]="false" [modal]="true" [style]="{width: '40vw', height:'73vh'}">
+  <ng-template pTemplate="content">
 
+    <div class="custom-form mb-6">
+      <label class="label">{{'shared.SchoolYear'|translate}}</label>
+      <p-dropdown
+      [(ngModel)]="selectedYearToUpgradeTo"
+      [autoDisplayFirst]="false"
+      [options]="schoolYearsList"
+      optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
+      optionValue="id"></p-dropdown>
+      <!-- [(ngModel)]="schoolYearId" -->
+    </div>
+
+
+  </ng-template>
+
+      <ng-template pTemplate="footer">
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn  btn-primary "  (click)="upgradeStudents(selectedYearToUpgradeTo) ">
+            {{'dashboard.SchoolYear.upgradeStudents'|translate}}
+          </button>
+        </div>
+      </ng-template>
+</p-dialog>
 
