@@ -834,7 +834,8 @@
         "youShouldSelectGradeAndSchool":"You should select grade and school",
         "degreesAccepted":"uploaded Degrees Rejected Successfully",
         "degreesRejected":"uploaded Degrees Accepted Successfully",
-        "DegreeImproved":"Student Degrees Improved succssfully"
+        "DegreeImproved":"Student Degrees Improved succssfully",
+        "upgradeStudents":"Student Upgraded Successfully"
     },
     "dashboard": {
         "Assessment": {
@@ -1412,7 +1413,8 @@
             "from students":"From students",
             "you can select 10 top students at max": "You can select 10 top students at max",
             "choose schoolyear":"Choose school year",
-            "SelectSchoolYearThatYouNeedcopyFrom":"Select school year that you need a copy from"
+            "SelectSchoolYearThatYouNeedcopyFrom":"Select school year that you need a copy from",
+            "upgradeStudents":"Upgrade Students"
 
         },
         "SystemSetting": {

@@ -44,24 +44,24 @@ export class SchoolYearsService {
    }
 
    getAllSchoolYears(filter?:Partial<Filter>)
-   { 
+   {
      this.loaderService.isLoading$.next(true);
      return this.http.post('/SchoolYear/Search',filter).pipe(take(1),finalize(()=> {
        this.loaderService.isLoading$.next(false)
      }));
-     
+
    }
-  
+
    getSchoolYearByID(schoolYearId:number)
    {
      return this.http.get(`/SchoolYear/${schoolYearId}`).pipe(take(1))
    }
-   
+
    getAnnualCalenders()
    {
     return this.http.get(`/Holiday/annual-holiday/dropdown`).pipe(take(1))
    }
-   
+
    getCurriculumsInSchoolYear(schoolYearId:number)
    {
     return this.http.get(`/Curriculum/${schoolYearId}`).pipe(take(1))
@@ -83,7 +83,7 @@ export class SchoolYearsService {
    {
      return this.http.get(`/SchoolYear/grade/${schoolYearId}/${curriculumId}/${gradeId}`).pipe(take(1))
    }
- 
+
    addDraftSchoolYear(schoolYear)
    {
      return this.http.post(`/SchoolYear`,schoolYear).pipe(take(1))
@@ -92,7 +92,7 @@ export class SchoolYearsService {
    {
      return this.http.put(`/SchoolYear`,schoolYear).pipe(take(1))
    }
-  
+
    editSchoolYearStatus(schoolYearId)
    {
      return this.http.get(`/SchoolYear/${schoolYearId}/apply-sent`).pipe(take(1));
@@ -127,12 +127,12 @@ export class SchoolYearsService {
   }
 
   getAllTopStudents(schoolYearId,filter?:Partial<Filter>)
-  { 
+  {
     this.loaderService.isLoading$.next(true);
     return this.http.post(`/Student/top-students/${schoolYearId}`,filter).pipe(take(1),finalize(()=> {
       this.loaderService.isLoading$.next(false)
     }));
-    
+
   }
   getAllGradesInSchoolYear(schoolYearId)
   {
@@ -181,6 +181,11 @@ export class SchoolYearsService {
           }
         })
       }))
+  }
+
+
+  upgradeStudents(currYearId, nextYearId){
+    return this.http.get(`/SchoolYear/Upgrade-Students?currentSchoolYear=${currYearId}&nextSchoolYear=${nextYearId}`).pipe(take(1))
   }
 
 }

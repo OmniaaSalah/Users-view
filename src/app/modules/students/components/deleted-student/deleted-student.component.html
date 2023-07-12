@@ -7,7 +7,7 @@
             <div class="spinner-border text-light" role="status" *ngIf="loading"></div>
             <span>{{'shared.send' |translate}}</span>
         </button>
-        <span role="button" class="color-red-500 text-decoration-underline mt-3" routerLink="/schools-and-students/students/student/{{studentGUID}}">{{'shared.cancel' |translate}}</span>
+        <span role="button" class="color-red-500 text-decoration-underline mt-3" routerLink="/student-management/students/student/{{studentGUID}}">{{'shared.cancel' |translate}}</span>
     </div>
 
     <app-workflow [steps]="[{ar:'موافقة الهيئة', en:'SPEA Approval'}]"></app-workflow>
