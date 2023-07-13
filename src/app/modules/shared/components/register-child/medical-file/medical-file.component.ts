@@ -86,9 +86,9 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     this.isLoading =true
     this.studentsService.getStudentMedicalfile(studentId)
     .subscribe(res =>{
-      if(res?.fats || res?.fats < 1) res.fats = 1
-      if(res?.height || res?.height < 5) res.height = 5
-      if(res?.weight || res?.weight < 5) res.weight = 5
+      if((res?.fats && res?.fats < 1) || !res?.fats) res.fats = 1
+      if((res?.height && res?.height < 5 ) || !res?.height) res.height = 5
+      if((res?.weight && res?.weight < 5) || !res?.height) res.weight = 5
       this.medicalFileForm.patchValue(res)
       this.medicalFileForm.controls['listOfChronicDiseases'].setValue(res.chronicDiseases)
       this.medicalFileForm.controls['listOfAllergicDiseases'].setValue(res.allergicDiseases)

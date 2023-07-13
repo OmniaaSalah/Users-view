@@ -5,7 +5,7 @@ import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { SystemRequestService } from '../../../request-list/services/system-request.service';
+import { SystemRequestService } from '../../../../request-list/services/system-request.service';
 
 @Component({
   selector: 'app-child-requests',

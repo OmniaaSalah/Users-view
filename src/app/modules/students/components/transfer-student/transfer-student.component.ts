@@ -51,7 +51,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
 
   componentHeaderData: IHeader={
     breadCrump: [
-      { label: this.translate.instant('Students List') ,routerLink:'//schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('Students List') ,routerLink:'/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
       {
         label: this.translate.instant('dashboard.students.transferStudent') ,
         routerLink: `/schools-and-students/students/student/${this.studentGUID}/transfer`
