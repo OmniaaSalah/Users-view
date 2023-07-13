@@ -50,10 +50,9 @@
             <label class="fw-bold mt-6 mb-4">{{'dashboard.students.diplomeFile' | translate}} :- </label>
 
             <ng-container *ngIf="student?.attachments?.length">
-              <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
-                  <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
-
-                  <div class="elcardo">
+              <div class="col-md-4 my-4" *ngFor="let attachment of student.attachments; let k = index">
+                  <label class="fw-bold fs-4 mb-3">{{attachment?.titel | currentLang}}</label>
+                  <div class="elcardo" *ngFor="let file of attachment?.files">
                       <div class="elcardo-title d-flex">
                           <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="file" />
                           <p class="mx-5 my-2">{{ file?.name }}</p>

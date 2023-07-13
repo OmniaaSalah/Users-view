@@ -61,10 +61,10 @@
             <div class="row align-items-end" *ngIf="student?.attachments?.length">
                 <!-- <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p> -->
 
-                <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
-                    <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
+                <div class="col-md-4 my-4" *ngFor="let attachment of student.attachments; let k = index">
+                    <label class="fw-bold fs-4 mb-3">{{fiattachmentle?.titel | currentLang}}</label>
 
-                    <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }">
+                    <div class="elcardo" *ngFor="let file of attachment?.files">
                         <div class="elcardo-title d-flex">
                             <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="" alt="file" />
                             <p class="mx-5 my-2 word-break-all">{{ file?.name }}</p>

@@ -217,7 +217,49 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
 
    // << Students Attachment >> //
   getStudentAttachment(studentId){
+    // return of([
+    //   {
+    //     titel: {en: "new attach",ar: "مرفق جديد"},
+    //     indexId:null,
+    //     files:[
+    //         {
+    //          id: 1583,
+    //          url: "https://valsquad.blob.core.windows.net/daleel/f9dceaeb-744e-43be-91eb-ab10305c1a80.png",
+    //          name: "bip3.png",
+    //          uploader: { en: "Mohamed Kamal",ar: "محمد كمال"},
+    //          isActive: true,
+    //          comment: "",
+    //          createdDate:""
+    //        },
+    //        {
+    //         id: 1585,
+    //         url: "https://valsquad.blob.core.windows.net/daleel/f9dceaeb-744e-43be-91eb-ab10305c1a80.png",
+    //         name: "bip3.png",
+    //          uploader: { en: "Mohamed Kamal",ar: "محمد كمال"},
+    //          isActive: true,
 
+    //          comment: "",
+    //         createdDate:""
+    //       },
+    //     ]
+    //   },
+
+    //   {
+    //       titel: {en: "identity",ar: "الهويه"},
+    //       indexId:null,
+    //       files:[
+    //           {
+    //               id: 1581,
+    //               url: "https://valsquad.blob.core.windows.net/daleel/f9dceaeb-744e-43be-91eb-ab10305c1a80.png",
+    //               name: "bip3.png",
+    //               uploader: { en: "Mohamed Kamal",ar: "محمد كمال"},
+    //               isActive: true,
+    //               comment: "",
+    //               createdDate:""
+    //           },
+    //       ]
+    //   },
+    // ])
     return this.http.get(`/Student/attachment/${studentId}`)
     .pipe(take(1))
   }
@@ -236,7 +278,7 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       finalize(()=> {
         this.loaderService.isLoading$.next(false)
       }))
-  }
+  }1812
 
   getStudentSubjects(studentId,semester,filter){
     this.loaderService.isLoading$.next(true)

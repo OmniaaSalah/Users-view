@@ -289,9 +289,10 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
   removeFile(index){
 
-    this.files.splice(index, 1)
-    this.onFileDelete.emit(this.files)
-    this.onFileUpload.emit(this.files)
+    this.files = this.files.filter((el, i) => index != i)
+
+    this.onFileDelete.emit({files: this.files, index:index})
+    // this.onFileUpload.emit(this.files)
     this.imgUrl=''
   }
 

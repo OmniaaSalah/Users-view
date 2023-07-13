@@ -138,7 +138,7 @@ export class DiplomaCertificateComponent implements OnInit {
 
           this.diplomaCertificateForm[index] = {
               studentId: student.id,
-              attachmentId: attachments?.length && attachments[0]?.id,
+              attachmentId: attachments?.files?.length && attachments?.files[0]?.id,
           }
 
           student.attachments = attachments

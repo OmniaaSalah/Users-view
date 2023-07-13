@@ -141,7 +141,7 @@
 
     <div class="image-uploader__upload upload-btn">
       <app-file-upload (onFileUpload)="messageUpload($event)" [filesLimit]="4"
-        (onFileDelete)="messageDeleted($event)"></app-file-upload>
+        (onFileDelete)="messageDeleted($event?.files)"></app-file-upload>
     </div>
 
   </div>
@@ -197,7 +197,7 @@
 
 
       <app-file-upload (onFileUpload)="messageUpload($event)" [filesLimit]="4"
-        (onFileDelete)="messageDeleted($event)"></app-file-upload>
+        (onFileDelete)="messageDeleted($event?.files)"></app-file-upload>
     </div>
 
   </div>
@@ -279,7 +279,7 @@
     <div class="image-uploader__upload upload-btn">
 
       <app-file-upload (onFileUpload)="messageUpload($event)" [filesLimit]="4"
-        (onFileDelete)="messageDeleted($event)"></app-file-upload>
+        (onFileDelete)="messageDeleted($event?.files)"></app-file-upload>
     </div>
 
   </div>
