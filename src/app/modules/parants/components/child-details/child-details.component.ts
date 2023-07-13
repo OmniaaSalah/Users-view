@@ -20,7 +20,7 @@ export class ChildDetailsComponent implements OnInit {
   faClose = faClose
   currentUserScope = inject(UserService).getScope()
   isRegistered= this.route.snapshot.queryParamMap.get('registered')
-  childId= Number(this.route.snapshot.paramMap.get('childId'));
+  childId= this.route.snapshot.paramMap.get('childId');
   parentId = Number(this.route.snapshot.paramMap.get('parentId'));
   step = 1
   regestered:false
@@ -59,9 +59,9 @@ export class ChildDetailsComponent implements OnInit {
     {
         this.componentHeaderData={
           breadCrump: [
-            { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'//schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
-            { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-            { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}`}
+            { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+            { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+            { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}`}
 
           ],
           mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }

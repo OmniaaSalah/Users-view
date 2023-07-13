@@ -7,7 +7,6 @@ import { ChildDetailsComponent } from './components/child-details/child-details.
 import { ChildrenListComponent } from './components/children-list/children-list.component';
 import { ParantsComponent } from './components/parents-list/parants.component';
 import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';
-import { LayoutComponent } from 'src/app/layout/layout.component';
 import { Layout } from 'src/app/layout/layout-routing.service';
 
 const routes: Routes = [
