@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { RequestListComponent } from './Component/request-list/request-list.component';
 import { RequestdetailsComponent } from './Component/requestdetails/requestdetails.component';
-import { LayoutComponent } from 'src/app/layout/layout.component';
 import { Layout } from 'src/app/layout/layout-routing.service';
 
 const routes: Routes = [

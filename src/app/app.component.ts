@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {  NavigationEnd, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter } from 'rxjs';
@@ -16,21 +16,20 @@ import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
 import { IndexesService } from './modules/indexes/service/indexes.service';
 import { SettingsService } from './modules/system-setting/services/settings/settings.service';
 import { FileTypeEnum } from './shared/enums/file/file.enum';
-import { ClaimsService } from './core/services/claims.service';
+import { SharedService } from './shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit ,AfterViewInit{
+export class AppComponent implements OnInit {
   get fileTypesEnum () {return FileTypeEnum}
   currentUserName;
   version= environment.version
   currentUserScope ;
   lang = inject(TranslationService).lang
 
-  claimsLoaded = false
   showLogin = false
 
   get ClaimsEnum() {return ClaimsEnum}
@@ -42,24 +41,17 @@ export class AppComponent implements OnInit ,AfterViewInit{
   searchText='';
 
 
-
+  showContent$= this.translationService.showContent$
 
 
   display: boolean = false;
-  searchModel = {
-    "keyword": null,
-    "sortBy": null,
-    "page": 1,
-    "pageSize": 6,
-    "SortColumn": null,
-    "SortDirection": null,
-    "curricuulumId": null,
-    "StateId": null
-  }
-  messagesTypes = []
+
+  messagesTypes$ = this.index.getIndext(IndexesEnum.TtypeOfCommunicationMessage)
   imagesResult =[]
   isShown1:boolean=false;
+
   constructor(
+    private sharedService:SharedService,
     private translationService: TranslationService,
     private router:Router,
     private userService:UserService,
@@ -73,11 +65,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
     }
 
 
-  ngAfterViewInit(): void {
-
-
-  }
-
   firstChildHoverd = false
   lastChildHoverd = false
 
@@ -88,29 +75,20 @@ export class AppComponent implements OnInit ,AfterViewInit{
     switch2: [false, [Validators.required]],
   })
 
-  get elform(){
-
-    return this.parentForm.controls
-  }
-
   ngOnInit(): void {
 
+    // setTimeout(() => {
+    //   this.showContent=true
+    // }, 1000);
     this.translationService.init();
     this.settingsService.initializeFileRules()
 
     this.userService.isUserLogged$.subscribe((res)=>{
-
-      if(res)
-      {
+      if(res){
         // this.usersService.deleteUser(129).subscribe()
 
           this.currentUserName=this.userService.getCurrentUserName();
           this.currentUserScope=this.userService.getScope();
-          // this.coreSercice.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-          if(this.currentUserScope == this.userScope.Employee)
-          {
-          this.getMessagesTypes()
-          }
 
         }
 
@@ -120,9 +98,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     this.routeListenrService.initRouteListner(url)
 
     this.router.events
-    .pipe(
-      filter(event =>event instanceof NavigationEnd ),
-      )
+    .pipe(filter(event =>event instanceof NavigationEnd ))
       .subscribe((event: NavigationEnd) => {
 
         window.scrollTo(0, 0);
@@ -134,29 +110,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
 }
 
-showDialog() {
-
-  this.display = true;
-}
-getMessagesTypes(){
-  this.index.getIndext(IndexesEnum.TtypeOfCommunicationMessage).subscribe(res=>{
-    this.messagesTypes = res
-  })
-  }
-
-uploadedFiles: any[] = [];
-messageUpload(files){
-  this.imagesResult = files
-  // console.log(this.imagesResult);
-
- }
-
-  messageDeleted(event){
-    this.imagesResult = event
-    // console.log(event);
-  // console.log(this.imagesResult);
-
- }
 
   isToggleLabel1(e) {
     if(e.checked)  this.isShown1=true;
@@ -171,7 +124,7 @@ messageUpload(files){
 
       this.onSubmit =true
       const form ={
-        "senderId": Number(localStorage.getItem('$AJ$userId')),
+        "senderId": this.userService.getCurrentUserId(),
         // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
         "title": this.parentForm.value.title,
         "messegeText": this.parentForm.value.description,
@@ -195,11 +148,8 @@ messageUpload(files){
 
 
   logout(){
-
-   this.authService.logOut();
-   this.userService.isUserLogged$.next(false);
-
-
+    this.authService.logOut();
+    this.userService.isUserLogged$.next(false);
   }
 
 

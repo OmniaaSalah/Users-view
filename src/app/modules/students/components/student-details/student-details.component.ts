@@ -15,64 +15,69 @@ import { StudentsService } from '../../services/students/students.service';
 @Component({
   selector: 'app-student-details',
   templateUrl: './student-details.component.html',
-  styleUrls: ['./student-details.component.scss']
+  styleUrls: ['./student-details.component.scss'],
 })
 export class StudentDetailsComponent implements OnInit {
-
   // << ICONS >> //
-  faCheck= faCheck
-  faChevronDown= faChevronDown
+  faCheck = faCheck;
+  faChevronDown = faChevronDown;
   studentId = this.route.snapshot.paramMap.get('id');
-  currentUserScope = inject(UserService).getScope()
-  get userScope() { return UserScope }
+  currentUserScope = inject(UserService).getScope();
+  get userScope() {
+    return UserScope;
+  }
   // << ICONS >> //
-  componentHeaderData: IHeader={
-		breadCrump: [],
-    mainTitle:{main: this.translate.instant('dashboard.students.StudentInfo')}
-	}
-
+  componentHeaderData: IHeader = {
+    breadCrump: [],
+    mainTitle: {
+      main: this.translate.instant('dashboard.students.StudentInfo'),
+    },
+  };
 
   // << DATA PLACEHOLDER >> //
 
-
   // << CONDITIONS >> //
-  step =1
-
-
+  step = 1;
 
   constructor(
     private translate: TranslateService,
-    private headerService:HeaderService,
+    private headerService: HeaderService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.checkDashboardHeader();
+  }
+  checkDashboardHeader() {
+    if (this.currentUserScope == UserScope.Employee) {
+      console.log('breatcrunb');
+
+      this.componentHeaderData.breadCrump = [
+        {
+          label: this.translate.instant('dashboard.students.studentsList'),
+          routerLink: '/student-management/students',
+          routerLinkActiveOptions: { exact: true },
+        },
+        {
+          label: this.translate.instant('dashboard.students.StudentInfo'),
+          routerLink: '/student-management/students/student/' + this.studentId,
+        },
+      ];
+    } else if (this.currentUserScope == UserScope.SPEA) {
+      this.componentHeaderData.breadCrump = [
+        {
+          label: this.translate.instant('dashboard.students.studentsList'),
+          routerLink: '/schools-and-students/students',
+          routerLinkActiveOptions: { exact: true },
+        },
+        {
+          label: this.translate.instant('dashboard.students.StudentInfo'),
+          routerLink:
+            '/schools-and-students/students/student/' + this.studentId,
+        },
+      ];
+    }
+
     this.headerService.changeHeaderdata(this.componentHeaderData)
-
   }
-  checkDashboardHeader()
-  {
-      if(this.currentUserScope==UserScope.Employee)
-    {
-      this.componentHeaderData.breadCrump=
-      [
-        {label: this.translate.instant('dashboard.students.studentsList'),routerLink:'/student-management/students',routerLinkActiveOptions:{exact: true}},
-        {label: this.translate.instant('dashboard.students.StudentInfo'),routerLink:'/student-management/students/student/'+this.studentId }
-      ]
-
-
-    }
-    else if (this.currentUserScope==UserScope.SPEA)
-    {
-      this.componentHeaderData.breadCrump=
-         [
-          {label: this.translate.instant('dashboard.students.studentsList'),routerLink:'/schools-and-students/students',routerLinkActiveOptions:{exact: true}},
-          {label: this.translate.instant('dashboard.students.StudentInfo'),routerLink:'/schools-and-students/students/student/'+this.studentId }
-        ]
-
-
-    }
-  }
-
 }

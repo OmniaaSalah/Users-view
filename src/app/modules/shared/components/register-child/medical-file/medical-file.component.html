@@ -255,23 +255,23 @@
 
               <div class="form-set">
                 <label class="label required">{{'dashboard.students.childWithDisabilities'| translate}}</label>
-                <p-dropdown [options]="booleanOptions" formControlName="isSpecialAbilities" optionValue="value"  optionLabel="name"></p-dropdown>
+                <p-dropdown  [options]="booleanOptions" formControlName="isSpecialAbilities" optionValue="value"  optionLabel="name"></p-dropdown>
               </div>
 
               <div class="form-set" *ngIf="getCtr('isSpecialAbilities').value">
                   <label class="label required">{{'dashboard.students.disabilities'| translate}}</label>
-                  <input type="text" id="trackId" formControlName="disabilities" pInputText placeholder="{{'dashboard.students.disabilities'|translate}}" />
+                  <input  type="text" id="trackId" formControlName="disabilities" pInputText placeholder="{{'dashboard.students.disabilities'|translate}}" />
                   <!-- <p-dropdown [options]="booleanOptions"  optionValue="value" optionLabel="name"></p-dropdown> -->
               </div>
 
               <div class="form-set">
                 <label class="label required">{{'dashboard.students.exemptionFromTraining'|translate}}</label>
-                <p-dropdown [options]="booleanOptions" formControlName="isAthletic" optionValue="value"  optionLabel="name"></p-dropdown>
+                <p-dropdown  [options]="booleanOptions" formControlName="isAthletic" optionValue="value"  optionLabel="name"></p-dropdown>
               </div>
 
               <div class="form-set">
                 <label class="label required">{{'dashboard.parents.shadowerExist'|translate}}</label>
-                <p-dropdown formControlName="hasShadower" [options]="booleanOptions" optionValue="value"  optionLabel="name"></p-dropdown>
+                <p-dropdown  formControlName="hasShadower" [options]="booleanOptions" optionValue="value"  optionLabel="name"></p-dropdown>
 
                 <!-- <p-inputNumber formControlName="iq" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber> -->
               </div>
@@ -285,30 +285,30 @@
 
                   <div class="form-set">
                       <label class="label required">{{'dashboard.students.fats'|translate}}</label>
-                      <p-inputNumber formControlName="fats" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
+                      <p-inputNumber  formControlName="fats" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
                   </div>
 
                   <div class="form-set">
                     <label class="label required">{{'dashboard.students.increase'|translate}}</label>
                     <!-- <input type="text" id="trackId" formControlName="raise" pInputText placeholder="{{'dashboard.students.writeIncrease'|translate}}" /> -->
-                    <p-inputNumber formControlName="raise" [showButtons]="true" placeholder="{{'dashboard.students.writeIncrease'|translate}}"></p-inputNumber>
+                    <p-inputNumber  formControlName="raise" [showButtons]="true" placeholder="{{'dashboard.students.writeIncrease'|translate}}"></p-inputNumber>
                   </div>
                   <div class="form-set">
                       <label class="label required">{{'dashboard.students.decrease'| translate}}</label>
-                      <p-inputNumber formControlName="shortage" [showButtons]="true" placeholder="{{'dashboard.students.writeDecrease'|translate}}"></p-inputNumber>
+                      <p-inputNumber  formControlName="shortage" [showButtons]="true" placeholder="{{'dashboard.students.writeDecrease'|translate}}"></p-inputNumber>
                       <!-- <input type="text" id="trackId" formControlName="shortage" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" /> -->
                   </div>
 
                   <div class="form-set">
                       <label class="label required">{{'dashboard.students.weight'| translate}}</label>
                       <!-- <input type="number" id="trackId" formControlName="weight" pInputText placeholder="{{'dashboard.students.weight'|translate}}" /> -->
-                      <p-inputNumber formControlName="weight" suffix=" kg" [min]="5" [max]="300" [showButtons]="true" placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
+                      <p-inputNumber  formControlName="weight" suffix=" kg" [min]="5" [max]="300" [showButtons]="true" placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
 
                   </div>
                   <div class="form-set">
                       <label class="label required">{{'dashboard.students.length'|translate}}</label>
                       <!-- <input type="number" id="trackId" formControlName="height" pInputText placeholder="{{'dashboard.students.length'|translate}}" /> -->
-                      <p-inputNumber formControlName="height" suffix=" cm" [min]="5" [max]="300" [showButtons]="true"  placeholder="{{'dashboard.students.length'|translate}}"></p-inputNumber>
+                      <p-inputNumber  formControlName="height" suffix=" cm" [min]="5" [max]="300" [showButtons]="true"  placeholder="{{'dashboard.students.length'|translate}}"></p-inputNumber>
 
                   </div>
             </div>
@@ -319,7 +319,7 @@
               <div class="form-set position-relative">
                 <label class="label required">{{'dashboard.students.followedDiet'|translate}}</label>
                 <!-- <input type="text" id="trackId" formControlName="dietFollowed" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" /> -->
-                <textarea class="diet-discription" formControlName="dietFollowed" pInputTextarea placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}"></textarea>
+                <textarea  class="diet-discription" formControlName="dietFollowed" pInputTextarea placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}"></textarea>
               </div>
 
                 <!-- <div class="form-set position-relative">
@@ -336,7 +336,7 @@
             <div class="row form-set bg-gray-30 p-5 radius-15">
                 <div class="col-md-12">
                     <label class="label required">{{'shared.note'|translate}}</label>
-                    <input type="text" id="trackId" formControlName="otherNotes" pInputText placeholder="{{'dashboard.students.writeAnotherNotes'|translate}}" />
+                    <input  type="text" id="trackId" formControlName="otherNotes" pInputText placeholder="{{'dashboard.students.writeAnotherNotes'|translate}}" />
                 </div>
             </div>
 

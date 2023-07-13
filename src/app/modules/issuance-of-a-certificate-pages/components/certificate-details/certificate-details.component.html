@@ -8,7 +8,10 @@
     </div>
 
     <div class="d-flex justify-self-end mb-4">
-      <button (click)="print()" class="btn btn-primary">{{'dashboard.issue of certificate.downloadCertificat' |translate}}</button>
+      <button (click)="print()" class="btn btn-primary" [disabled]="isLoading">
+        {{'dashboard.issue of certificate.downloadCertificat' |translate}}
+        <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+      </button>
     </div>
   </div>
 
@@ -92,7 +95,7 @@
                           <td class="text-center">{{year.GradeName.Name.Ar}}</td>
                           <td class="text-center">{{year.GradeName.Name.En}}</td>
                           <td>{{year.SchoolName.Name?.Ar}}</td>
-                          <td>{{year.SchoolYear.Name?.Ar}}</td>
+                          <td>{{addSpaceBtwStrAndNum(year.SchoolYear.Name?.Ar)}}</td>
                       </tr>
                     </ng-container>
                     <tr  *ngIf="!certificate?.StudyPhases?.length">
@@ -421,7 +424,7 @@
             </div>
             <div class="text-start fs-3">
                 <p class="text-decoration-underline mb-2 fw-bold font-en">CERTIFICATE TO WHOM IT MAY CONCERN</p>
-                <span class="font-en">STUDENT (  LEAVE /  TRANSFER )</span>
+                <span class="font-en">STUDENT -  LEAVE /  TRANSFER </span>
             </div>
         </div>
       </header>
@@ -488,7 +491,7 @@
 
       <tr>
           <td style="width: 25%;" class="font-ar">العام الدراسي</td>
-          <td class="text-center">{{certificate?.RegisterSchoolyear?.Ar}}</td>
+          <td class="text-center">{{addSpaceBtwStrAndNum(certificate?.RegisterSchoolyear?.Ar)}}</td>
           <td style="width: 25%;" class="font-en text-start">Academic Year </td>
       </tr>
       <tr>
@@ -524,7 +527,7 @@
 
       <tr>
           <td style="width: 25%;" class="font-ar">العام الدراسي</td>
-          <td colspan="2" class="text-center">{{certificate?.WithdrawalSchoolyear?.Ar}}</td>
+          <td colspan="2" class="text-center">{{addSpaceBtwStrAndNum(certificate?.WithdrawalSchoolyear?.Ar)}}</td>
           <td style="width: 25%;" class="font-en text-start">Academic Year </td>
       </tr>
       <tr>
@@ -535,8 +538,8 @@
 
       <tr>
         <td style="width: 25%;" class="font-ar">سبب الترك</td>
-        <td class="text-center">{{certificate?.WithdrawalReason?.Ar}}</td>
-        <td class="text-center">{{certificate?.WithdrawalReason?.En}}</td>
+        <td class="text-center">{{addSpaceBtwStrAndNum(certificate?.WithdrawalReason?.Ar)}}</td>
+        <td class="text-center">{{addSpaceBtwStrAndNum(certificate?.WithdrawalReason?.En)}}</td>
         <td style="width: 25%;" class="font-en text-start">Leave reason</td>
       </tr>
 
@@ -725,8 +728,8 @@
             </div>
 
             <div class="text-center">
-              <h1 class=" mb-3 font-ar">شهادة ﺗﻘﻴﻴﻢ ( {{reportingPeriods.ar[certificate?.ReportingPeriod]}} ) ﺍﻟﻌﺎﻡ ﺍﻟﺪﺭﺍﺳﻲ <span >{{certificate?.SchoolYearName?.Ar}}</span></h1>
-              <h1 class=" mb-3 font-en">Report Card ( {{ reportingPeriods.en[certificate?.ReportingPeriod] }} ) of  <span>{{certificate?.SchoolYearName?.Ar}}</span></h1>
+              <h1 class=" mb-3 font-ar">شهادة ﺗﻘﻴﻴﻢ ( {{reportingPeriods.ar[certificate?.ReportingPeriod]}} ) ﺍﻟﻌﺎﻡ ﺍﻟﺪﺭﺍﺳﻲ <span >{{addSpaceBtwStrAndNum(certificate?.SchoolYearName?.Ar)}}</span></h1>
+              <h1 class=" mb-3 font-en">{{addSpaceBtwStrAndNum(certificate?.SchoolYearName?.Ar)}} Report Card - {{ reportingPeriods.en[certificate?.ReportingPeriod] }} - of  </h1>
             </div>
 
           </div>
@@ -814,7 +817,7 @@
 
                   <td style="width: 10%;">{{subject?.Rate ||'-'}}</td>
                   <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
-                  <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
+                  <td style="width: 10%;">{{subject?.StudentHours || '-'}}</td>
 
                   <!-- <td colspan="3" style="width: 30%">{{subject?.Note}}</td> -->
               </tr>
@@ -851,7 +854,7 @@
 
                   <td style="width: 10%;">{{subject?.Rate || '-'}}</td>
                   <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
-                  <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
+                  <td style="width: 10%;">{{subject?.StudentHours || '-'}}</td>
               </tr>
             </ng-container>
 
@@ -1040,7 +1043,7 @@
 
               <td style="width: 10%;">{{subject?.Rate ||'-'}}</td>
               <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
-              <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
+              <td style="width: 10%;">{{subject?.StudentHours || '-'}}</td>
 
               <!-- <td colspan="3" style="width: 30%">{{subject?.Note}}</td> -->
           </tr>
@@ -1077,7 +1080,7 @@
 
               <td style="width: 10%;">{{subject?.Rate || '-'}}</td>
               <td style="width: 10%;">{{subject?.StudentGPA || '-'}}</td>
-              <td style="width: 10%;">{{subject?.StudentHour || '-'}}</td>
+              <td style="width: 10%;">{{subject?.StudentHours || '-'}}</td>
           </tr>
         </ng-container>
 

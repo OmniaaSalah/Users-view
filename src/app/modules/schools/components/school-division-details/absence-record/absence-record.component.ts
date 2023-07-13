@@ -29,6 +29,9 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
   lang = inject(TranslationService).lang
   get claimsEnum () {return ClaimsEnum}
   isSubmited
+
+  maxDate = new Date()
+
   absenceStudentsForm={
     date: null,
     studentAbsences:[]

@@ -48,7 +48,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       listOfAllergicDiseases: [[]],
       disabilities: ['dff'],
       isSpecialAbilities: ['', Validators.required],
-      fats: ['', Validators.required],
+      fats: ['', [Validators.required,Validators.min(1)]],
       hasShadower:['', Validators.required],
       bloc:[5, Validators.required],
       raise: ['', Validators.required],
@@ -56,8 +56,8 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       dietFollowed: ['',Validators.required],
       vaccinationBook:[''],
       isAthletic: ['',Validators.required],
-      weight: ['',Validators.required],
-      height:['',Validators.required],
+      weight: ['',[Validators.required, Validators.min(5)]],
+      height:['',[Validators.required, Validators.min(5)]],
       otherNotes:['', Validators.required],
       vaccineCertificates :[[]]
 
@@ -86,10 +86,12 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     this.isLoading =true
     this.studentsService.getStudentMedicalfile(studentId)
     .subscribe(res =>{
+      if(res?.fats || res?.fats < 1) res.fats = 1
+      if(res?.height || res?.height < 5) res.height = 5
+      if(res?.weight || res?.weight < 5) res.weight = 5
       this.medicalFileForm.patchValue(res)
       this.medicalFileForm.controls['listOfChronicDiseases'].setValue(res.chronicDiseases)
       this.medicalFileForm.controls['listOfAllergicDiseases'].setValue(res.allergicDiseases)
-
       this.isLoading =false
       this.medicalFile = res
     })

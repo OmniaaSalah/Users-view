@@ -1,5 +1,5 @@
 import { Component, OnInit,inject} from '@angular/core';
-import { FormBuilder,} from '@angular/forms';
+import { FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -15,10 +15,10 @@ import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.e
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { SystemRequestService } from '../../services/system-request.service';
-import { Observable, delay, map } from 'rxjs';
+import { Observable, delay, map, switchMap } from 'rxjs';
 import { Division } from 'src/app/core/models/global/global.model';
 import { GradesService } from 'src/app/modules/schools/services/grade/grade.service';
-// import { IunregisterChild } from '../../models/IunregisterChild';
+import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
 
 
 @Component({
@@ -90,14 +90,14 @@ export class RequestdetailsComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-    private fb:FormBuilder,
     private route: ActivatedRoute,
     private router:Router,
     private requestsService:SystemRequestService,
     private toaster:ToastrService,
     private indexesService:IndexesService,
     private userService:UserService,
-    private gradeService:GradesService
+    private gradeService:GradesService,
+    private certificatesService:IssuanceCertificaeService
   ) { }
 
   ngOnInit(): void {
@@ -130,6 +130,10 @@ export class RequestdetailsComponent implements OnInit {
 
   getRequestOptions(){
     this.requestsService.getRequestOptions(this.requestInstance)
+    .pipe(
+      switchMap(()=>{
+      return this.requestsService.getRequestOptions(this.requestInstance)
+    }))
     .subscribe(res=>{
       if(res.options)  this.requestOptions= res?.options?.map(el=>({...el,isLoading:false}))
     })
@@ -356,6 +360,7 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     this.router.navigate(['/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestId: this.requestDetails.requestNumber, requestInstance: this.requestInstance}})
 
   }
+
 
   reSendCertificateReq(){
 

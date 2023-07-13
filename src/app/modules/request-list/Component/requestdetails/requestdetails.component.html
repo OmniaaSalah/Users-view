@@ -166,7 +166,6 @@
 
             <ng-container *ngIf="requestDetails?.requestType==requestTypeEnum.DiplomaCertificateRequest  || requestDetails?.requestType==requestTypeEnum.AcademicSequenceCertificateRequest  || requestDetails?.requestType==requestTypeEnum.BoardCertificateRequest ||requestDetails?.requestType==requestTypeEnum.GradesCertificateRequest">
               <app-certificates-request-details [requestDetails]="requestDetails" (refresh)="getRequestDetails()"></app-certificates-request-details>
-                <!-- <ng-container *ngTemplateOutlet="certificatesRequests; context: {$implicit: requestDetails}" ></ng-container> -->
             </ng-container>
 
             <div >
@@ -482,80 +481,6 @@
 
 <app-request-chat [requestDetails]="requestDetails" (refresh)="getRequestDetails()"></app-request-chat>
 
-
-
-
-
-
-<ng-template #certificatesRequests let-requestDetails>
-    <div  [ngSwitch]="requestDetails.requestType">
-        <!-- NOTE :---------------- Case 1 شهاده الدرجات-->
-        <div class="row" *ngSwitchCase="requestTypeEnum.GradesCertificateRequest">
-            <div class="col-4 d-flex align-items-center gap-5">
-                <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
-                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
-            </div>
-
-            <div class="col-4 d-flex align-items-center gap-5">
-                <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
-                <h4 class="color-primary">{{requestDetails.schoolYear  |currentLang}}</h4>
-            </div>
-
-            <div class="col-4 d-flex align-items-center gap-5" *ngIf="requestDetails?.gradeCertificateType">
-                <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.degreesCertificateType' | translate}}</p>
-                <h4 class="color-primary">{{'dashboard.issue of certificate.' + requestDetails.gradeCertificateType | translate}}</h4>
-            </div>
-        </div>
-
-        <!-- NOTE :---------------- Case 2 شهاده التسلسل الدراسى  -->
-        <div class="row" *ngSwitchCase="requestTypeEnum.AcademicSequenceCertificateRequest">
-            <div class="col-4 d-flex align-items-center gap-5 mb-5">
-                <p class=" fs-4 fw-bold">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
-                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
-            </div>
-
-            <div class="row mb-4" *ngFor="let item of requestDetails?.schoolYears" >
-                <div class="col-4 d-flex align-items-center gap-5">
-                    <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
-                    <h4 class="color-primary">{{item.schoolYear?.name  |currentLang}}</h4>
-                </div>
-                <div class="col-4 d-flex align-items-center gap-5">
-                    <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
-                    <h4 class="color-primary">{{item.schoolName?.name |currentLang}}</h4>
-                </div>
-                <div class="col-4 d-flex align-items-center gap-5">
-                    <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
-                    <h4 class="color-primary">{{item.gradeName?.name |currentLang}}</h4>
-                </div>
-            </div>
-
-            <!-- <div class="col-md-12 d-flex align-items-center mt-5 gap-5">
-                <span class="flex-shrink-0">{{'dashboard.Requests.requestAttachments' | translate}} </span>
-                <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
-            </div> -->
-        </div>
-
-        <!-- NOTE :---------------- Case 2 بقيه الشهادات -->
-        <div *ngSwitchDefault>
-            <div class="row">
-                <div class="col-4 d-flex align-items-center gap-5">
-                    <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
-                    <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
-                </div>
-                <div class="col-4 d-flex align-items-center gap-5" *ngIf="requestDetails.cause">
-                    <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
-                    <h4 class="color-primary">{{requestDetails.cause}}</h4>
-                </div>
-
-                <div class="col-md-12 d-flex align-items-center mt-5 gap-5">
-                    <span class="flex-shrink-0">{{'dashboard.Requests.requestAttachments' | translate}} </span>
-                    <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</ng-template>
 
 
 <ng-template #studentProfile let-student>

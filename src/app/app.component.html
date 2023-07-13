@@ -1,7 +1,7 @@
 
 <div id="app-version" class="color-gray-800 fs-4"><a href="https://www.blackstoneeit.com/" class="color-gray-800 fs-4 powered" target="_blank">Powered by BlackstoneEIT</a> | V.{{version}}</div>
 
-<router-outlet></router-outlet>
+<router-outlet *ngIf="showContent$ |async"></router-outlet>
 
 <app-confirm-model></app-confirm-model>
 
@@ -49,7 +49,7 @@
                         <span>{{'settings' |translate}}</span>
                     </div>
                 </li>
-                <li class="panal__list__item"  (click)="showDialog()" *permit="ClaimsEnum.E_ContactWithSpea">
+                <li class="panal__list__item"  (click)="display = true;" *permit="ClaimsEnum.E_ContactWithSpea">
                     <div class="icon">
                         <img src="assets/images/home/panal/call.svg" alt="">
                     </div>
@@ -102,7 +102,7 @@
 
                 <div class="mb-5">
                     <label class="label" for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-                    <p-dropdown [options]="messagesTypes" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id"  [ngClass]="{'ng-invalid ng-dirty':parentForm.get('messageType')?.errors?.['required']&& parentForm.get('messageType')?.touched}"></p-dropdown>
+                    <p-dropdown [options]="messagesTypes$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id"  [ngClass]="{'ng-invalid ng-dirty':parentForm.get('messageType')?.errors?.['required']&& parentForm.get('messageType')?.touched}"></p-dropdown>
                     <div class="text-danger" *ngIf="this.parentForm.get('messageType')?.touched && this.parentForm.get('messageType')?.invalid && this.parentForm.get('messageType')?.errors">
                         <small *ngIf="this.parentForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
                     </div>
