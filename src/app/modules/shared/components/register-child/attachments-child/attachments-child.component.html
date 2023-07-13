@@ -23,14 +23,15 @@
 
         <div class="">
             <div class="row mt-5">
-                <ng-container *ngFor="let file of attachments; let i = index">
+                <ng-container *ngFor="let attachment of attachments; let i = index">
 
-                  <ng-container *ngFor="let file of file?.files; let i = index">
+                  <!-- <label for="label">{{attachment?.titel |currentLang}}</label> -->
+                  <ng-container *ngFor="let file of attachment?.files; let i = index">
 
                     <ng-container *ngIf="(!file.isActive && currentUserScope=='SPEA') || file.isActive ">
                       <div class="col-md-4 mt-4" *ngIf="file?.url">
-                          <app-file [showDeletedBy]="true" [file]="file" [hasFooter]="true" [clickable]="true"></app-file>
-                      </div>
+                          <app-file [titel]="attachment?.titel" [showDeletedBy]="true" [file]="file" [hasFooter]="true" [clickable]="true"></app-file>
+                    </div>
                     </ng-container>
 
                   </ng-container>

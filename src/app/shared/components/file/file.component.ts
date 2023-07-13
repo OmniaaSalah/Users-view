@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class FileComponent implements OnInit {
 
   @Input() file
+  @Input() titel
   @Input() clickable= true
   @Input() hasFooter= false
   @Input() showDeletedBy= false

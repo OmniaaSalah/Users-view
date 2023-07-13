@@ -146,7 +146,8 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     files[fileIndex] = {...files[fileIndex], isActive:false}
 
     if(this.currentUserScope==UserScope.SPEA){
-      files.splice(fileIndex,1)
+      files[fileIndex] = {...files[fileIndex] ,url:'', name:''}
+      // files.splice(fileIndex,1)
     }
 
   }
@@ -162,21 +163,33 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
   addNewAttachment(){
     let index = this.attachments.findIndex(el => el?.indexId && (el?.indexId === this.newAttachmentForm.value.indexId))
-    if(index > -1) this.attachments.splice(index, 1)
+    if(index > -1) this.attachments[index].files = this.attachments[index].files.map(file=> ({...file, url:'', name:''}))
 
 
     let attach = this.newAttachmentForm.get('attachments' as any).value[0]
 
-    this.attachments.unshift({
-      files:[{
+    if(index > -1){
+      this.attachments[index].titel = this.newAttachmentForm.value.titel
+      this.attachments[index]?.files.unshift({
         id: 0,
         url: attach?.url,
         name: attach?.name,
-        isActive:true
-      }],
-      titel:this.newAttachmentForm.value.titel, comment:'',
-      indexId:this.newAttachmentForm.value.indexId,
-    })
+        isActive:true,
+        comment:''
+      })
+    }else{
+      this.attachments.unshift({
+        files:[{
+          id: 0,
+          url: attach?.url,
+          name: attach?.name,
+          isActive:true,
+          comment:''
+        }],
+        titel : this.newAttachmentForm.value.titel,
+        indexId : this.newAttachmentForm.value.indexId,
+      })
+    }
 
     // this.attachments.unshift({id: 0, url: attach?.url, name: attach?.name, titel:this.newAttachmentForm.value.titel, comment:'', indexId:this.newAttachmentForm.value.indexId, isActive:true})
     this.addAttachModelOpened=false
