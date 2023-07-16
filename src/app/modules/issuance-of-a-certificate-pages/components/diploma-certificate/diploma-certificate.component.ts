@@ -32,7 +32,8 @@ export class DiplomaCertificateComponent implements OnInit {
   diplomaCertificateForm = [];
 
   get isFormValid(){
-    return this.diplomaCertificateForm.every(el => el.attachmentId)
+    return true
+    // return this.diplomaCertificateForm.every(el => el.attachmentId)
   }
 
   showError
@@ -56,7 +57,7 @@ export class DiplomaCertificateComponent implements OnInit {
     });
 
 
-    this.getAttachments();
+    // this.getAttachments();
   }
 
 
@@ -138,7 +139,7 @@ export class DiplomaCertificateComponent implements OnInit {
 
           this.diplomaCertificateForm[index] = {
               studentId: student.id,
-              attachmentId: attachments?.files?.length && attachments?.files[0]?.id,
+              attachmentId: attachments[0] && attachments[0]?.files?.length ?  attachments[0]?.files[0]?.id : null,
           }
 
           student.attachments = attachments

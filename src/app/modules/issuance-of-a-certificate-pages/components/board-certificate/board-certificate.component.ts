@@ -185,13 +185,15 @@ export class BoardCertificateComponent implements OnInit {
         .getStudentAttachment(student.studentGuid)
         .pipe(
           map(list=>{
-            list[0] = {...list[0], indexCode:AttachmentIndexCode.BoaredCertificate }
             return list.filter(el => el.indexCode==AttachmentIndexCode.BoaredCertificate)
           })
         )
         .subscribe((attachments) => {
 
-          this.boardCertificateData[index].attachments.push( attachments?.files?.length && attachments?.files[0]?.id )
+          if(attachments[0] && attachments[0]?.files?.length){
+
+            this.boardCertificateData[index].attachments.push(attachments[0]?.files[0]?.id )
+          }
 
           student.attachments = attachments
         });

@@ -110,23 +110,23 @@
 
 
     <div *ngIf="step==3" class="issune-certificate-content">
-        <app-academic-sequence [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-academic-sequence>
+        <app-academic-sequence [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1; choosenStudents=[];"></app-academic-sequence>
 
     </div>
 
 
     <div *ngIf="step==4" class="issune-certificate-content">
-        <app-board-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-board-certificate>
+        <app-board-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1; choosenStudents=[];"></app-board-certificate>
     </div>
 
 
     <div *ngIf="step==5" class="issune-certificate-content">
-        <app-degree-certificate [certificateType]="selectedCertificate?.value" [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-degree-certificate>
+        <app-degree-certificate [certificateType]="selectedCertificate?.value" [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1; choosenStudents=[];"></app-degree-certificate>
     </div>
 
 
     <div *ngIf="step==6" class="issune-certificate-content">
-        <app-diploma-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-diploma-certificate>
+        <app-diploma-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1; choosenStudents=[];"></app-diploma-certificate>
     </div>
 </div>
 
@@ -138,12 +138,12 @@
     [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
     <form class="custom-form">
         <div class="form-group">
-            <label for="">{{'dashboard.issue of certificate.The name of the entity' | translate}} <span class="star">*</span></label>
+            <label class="mb-4">{{'dashboard.issue of certificate.The name of the entity' | translate}}</label>
             <input type="text" class="form-control" name="destination" [(ngModel)]="destination"  placeholder="{{'dashboard.issue of certificate.Enter the name of the entity'|translate}}" >
         </div>
     </form>
     <ng-template pTemplate="footer">
-        <button type="submit"  (click)="onOtherCertificatesSubmitted()" class="btn btn-primary" style="float: left;"  [disabled]="!destination||isBtnLoading">
+        <button type="submit"  (click)="onOtherCertificatesSubmitted()" class="btn btn-primary" style="float: left;"  [disabled]="isBtnLoading">
             {{'dashboard.issue of certificate.Send a request' | translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
         </button>
