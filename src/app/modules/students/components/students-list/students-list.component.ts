@@ -20,7 +20,6 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { GradesService } from '../../../schools/services/grade/grade.service';
-import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SettingsService } from '../../../system-setting/services/settings/settings.service';
 import { StudentsService } from '../../services/students/students.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -158,7 +157,9 @@ export class StudentsListComponent implements OnInit {
           this.schoolSelected(id);
           this.isSchoolAllowToTransferGroup$=this.settings.isSchoolAllowToTransferGroup(this.schoolId)
         }
-        else{id=''}
+        else{
+          id=''
+        }
         this.AllDivisions$ =this.sharedService.getAllDivisions(id).pipe(shareReplay())
         this.AllGrades$ =this.sharedService.getAllGrades(id).pipe(shareReplay())
 
@@ -329,7 +330,9 @@ export class StudentsListComponent implements OnInit {
 
   checkStudentList(){
     if(this.currentUserScope==this.userScope.Employee){
-        this.userService.currentUserSchoolId$.subscribe(id => this.getStudentsInSpecificSchool(id))
+        this.userService.currentUserSchoolId$.subscribe(id => {
+          if(id) this.getStudentsInSpecificSchool(id)
+        })
     }else { this.getStudents() }
 
   }

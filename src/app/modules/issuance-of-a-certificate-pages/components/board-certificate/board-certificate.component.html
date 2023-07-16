@@ -64,8 +64,8 @@
                 <div class="col-md-4 my-4" *ngFor="let attachment of student.attachments; let k = index">
                     <label class="fw-bold fs-4 mb-3">{{fiattachmentle?.titel | currentLang}}</label>
 
-                    <div class="elcardo" *ngFor="let file of attachment?.files">
-                        <div class="elcardo-title d-flex">
+                    <div class="elcardo selectedCard" *ngFor="let file of attachment?.files">
+                        <div class="elcardo-title d-flex ">
                             <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="" alt="file" />
                             <p class="mx-5 my-2 word-break-all">{{ file?.name }}</p>
                         </div>
@@ -73,7 +73,7 @@
                 </div>
               </div>
 
-              <app-informative-block *ngIf="!student?.attachments?.length" size="sm" subTitle="{{'emptyList.missingBoardFile' |translate}}"></app-informative-block>
+              <app-informative-block *ngIf="!student?.attachments?.length || (student?.attachments?.length && !student?.attachments[0]?.files?.length)" size="sm" subTitle="{{'emptyList.missingBoardFile' |translate}}"></app-informative-block>
 
         </div>
     </ng-container>

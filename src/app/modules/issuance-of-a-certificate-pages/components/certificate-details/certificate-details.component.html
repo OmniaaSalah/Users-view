@@ -52,7 +52,7 @@
               <p class="mb-2 mt-6 fw-bold"> تشهد هيئه الشارقه للتعليم الخاص بأن :</p>
               <table class="blue-theme">
                   <tr>
-                      <td style="width: 25%;" class="font-ar">اسم الطالب بالغة العربية</td>
+                      <td style="width: 25%;" class="font-ar">اسم الطالب </td>
                       <td class="text-center">{{certificate?.StudentArabicName}}</td>
                       <td class="text-center"> {{certificate?.StudentEnglishName}}</td>
                       <td style="width: 25%;" class="font-en text-start">Student Name</td>
@@ -67,7 +67,7 @@
 
               <div class="d-flex justify-content-between mb-3 mt-6 ">
                 <p class="font-ar fw-bold">قد التحق بالمدارس على النحو التالى :</p>
-                <p class=" font-en fw-bold">He / She enrolled in schools as follows:</p>
+                <p class=" font-en fw-bold">: He / She enrolled in schools as follows</p>
               </div>
 
               <table class="blue-theme">
@@ -110,7 +110,8 @@
           <div class="d-flex justify-content-between align-items-center mt-6" >
 
             <div class="">
-              <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+              <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+              <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
               <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
             </div>
 
@@ -121,7 +122,7 @@
               </div>
                 <div class="d-flex flex-column align-items-center">
                   <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                    <span dir="ltr">+971 068041444</span>
+                    <span dir="ltr">+971 68041444</span>
                     <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
                   </p>
                   <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
@@ -135,43 +136,36 @@
 
           <footer class="my-6 ">
               <div class="d-grid grid-cols-2 justify-between">
-                  <div class=" justify-content-end color-primary ">
-                      <span class="font-en">SHJSPEA</span>
-                      <ul class="social d-flex align-center gap-2">
-                        <li>
-                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
-                        </li>
-                        <li>
-                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
-                        </li>
-                        <li>
-                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
-                        </li>
-                        <li>
-                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
-                        </li>
-                        <li>
-                            <a class="mt-2" href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
-                        </li>
-                    </ul>
-                      <a>web : spea.shj.ae</a>
-                  </div>
-
-                  <!-- <div class="d-flex gap-3 align-center justify-self-end">
-                      <span>010201202012</span>
-                      |
-                      <span>010201202012</span>
-                      <img src="assets/images/shared/call.svg" alt="">
-                  </div> -->
+                <div class=" justify-content-end color-primary ">
+                    <span class="font-en">SHJSPEA</span>
+                    <ul class="social d-flex align-center gap-2">
+                      <li>
+                          <a class="mt-2" href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
+                      </li>
+                      <li>
+                          <a class="mt-2" href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
+                      </li>
+                      <li>
+                          <a class="mt-2" href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
+                      </li>
+                      <li>
+                          <a class="mt-2" href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
+                      </li>
+                      <li>
+                          <a class="mt-2" href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
+                      </li>
+                  </ul>
+                    <a>web : spea.shj.ae</a>
+                </div>
 
                   <div class="d-flex gap-3 justify-content-end">
                     <div class="text-start color-primary font-en">
-                      <p>TEL : 065045444</p>
+                      <p>TEL : +971 68041444</p>
                       <p>BO.BOX : 30020</p>
                       <p>EMAIL : INFO@SPEA.SHJ.AE</p>
                     </div>
                     <img src="assets/images/shared/call.svg" alt="">
-                </div>
+                  </div>
 
               </div>
 
@@ -266,7 +260,8 @@
       <div class="d-flex justify-content-between align-items-center" >
 
         <div class="">
-          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
           <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
@@ -277,7 +272,7 @@
           </div>
             <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center gap-2  fs-3 mb-1">
-                <span dir="ltr">+971 068041444</span>
+                <span dir="ltr">+971 68041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
@@ -287,6 +282,43 @@
         </div>
       </div>
 
+
+      <footer class="my-6 ">
+        <div class="d-grid grid-cols-2 justify-between">
+          <div class=" justify-content-end color-primary ">
+              <span class="font-en">SHJSPEA</span>
+              <ul class="social d-flex align-center gap-2">
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
+                </li>
+            </ul>
+              <a>web : spea.shj.ae</a>
+          </div>
+
+            <div class="d-flex gap-3 justify-content-end">
+              <div class="text-start color-primary font-en">
+                <p>TEL : +971 68041444</p>
+                <p>BO.BOX : 30020</p>
+                <p>EMAIL : INFO@SPEA.SHJ.AE</p>
+              </div>
+              <img src="assets/images/shared/call.svg" alt="">
+            </div>
+
+        </div>
+
+      </footer>
 
     </div>
 
@@ -377,7 +409,8 @@
       <div class="py-6"></div>
       <div class="d-flex justify-content-between align-items-center">
         <div class="">
-          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
           <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
@@ -388,7 +421,7 @@
           </div>
             <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                <span dir="ltr">+971 068041444</span>
+                <span dir="ltr">+971 68041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
@@ -398,6 +431,44 @@
         </div>
       </div>
 
+
+
+      <footer class="my-6 ">
+        <div class="d-grid grid-cols-2 justify-between">
+          <div class=" justify-content-end color-primary ">
+              <span class="font-en">SHJSPEA</span>
+              <ul class="social d-flex align-center gap-2">
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
+                </li>
+            </ul>
+              <a>web : spea.shj.ae</a>
+          </div>
+
+            <div class="d-flex gap-3 justify-content-end">
+              <div class="text-start color-primary font-en">
+                <p>TEL : +971 68041444</p>
+                <p>BO.BOX : 30020</p>
+                <p>EMAIL : INFO@SPEA.SHJ.AE</p>
+              </div>
+              <img src="assets/images/shared/call.svg" alt="">
+            </div>
+
+        </div>
+
+      </footer>
 
     </div>
 
@@ -484,7 +555,7 @@
         </td>
       </tr>
       <tr>
-          <td style="width: 25%;" class="font-ar">تاريخ الالتحاق بالمدرسة : </td>
+          <td style="width: 25%;" class="font-ar">تاريخ الالتحاق بالمدرسة</td>
           <td class="text-center">{{certificate?.RegisterDate | LocalizeDate}}</td>
           <td style="width: 25%;" class="font-en text-start">Join date</td>
       </tr>
@@ -494,16 +565,19 @@
           <td class="text-center">{{addSpaceBtwStrAndNum(certificate?.RegisterSchoolyear?.Ar)}}</td>
           <td style="width: 25%;" class="font-en text-start">Academic Year </td>
       </tr>
+
       <tr>
-        <td style="width: 25%;" class="font-ar">الصف</td>
-        <td class="text-center">{{certificate?.RegisterGrade?.Ar}}</td>
+        <td style="width: 25%;" class="font-ar">بالصف</td>
+        <td  class="text-center">{{certificate?.RegisterGrade?.Ar}}</td>
+        <td  class="text-center">{{certificate?.RegisterGrade?.En}}</td>
         <td style="width: 25%;" class="font-en text-start">Grade</td>
-    </tr>
+      </tr>
 
     <tr>
       <td style="width: 25%;" class="font-ar">الشعبة</td>
       <td class="text-center">{{certificate?.RegisterDivision?.Ar}}</td>
-      <td style="width: 25%;" class="font-en text-start">Division</td>
+      <td class="text-center">{{certificate?.RegisterDivision?.En}}</td>
+      <td style="width: 25%;" class="font-en text-start">Section</td>
     </tr>
     </table>
 
@@ -515,12 +589,12 @@
         <td colspan="4" >
           <div class="d-flex justify-content-between">
             <div colspan="2" class="font-ar">بيانات الترك / الانتقال : </div>
-            <div colspan="2" class="font-en"> ( Leave / Transfer) statement: </div>
+            <div colspan="2" class="font-en">: ( Leave / Transfer) statement</div>
           </div>
         </td>
       </tr>
       <tr>
-          <td style="width: 25%;" class="font-ar">تاريخ ترك المدرسة : </td>
+          <td style="width: 25%;" class="font-ar">تاريخ ترك المدرسة </td>
           <td colspan="2" class="text-center">{{certificate?.WithdrawalDate |LocalizeDate}}</td>
           <td style="width: 25%;" class="font-en text-start">School leave date</td>
       </tr>
@@ -532,7 +606,8 @@
       </tr>
       <tr>
         <td style="width: 25%;" class="font-ar">بالصف</td>
-        <td colspan="2" class="text-center">{{certificate?.WithdrawalGrade?.Ar}}</td>
+        <td  class="text-center">{{certificate?.WithdrawalGrade?.Ar}}</td>
+        <td  class="text-center">{{certificate?.WithdrawalGrade?.En}}</td>
         <td style="width: 25%;" class="font-en text-start">Grade</td>
       </tr>
 
@@ -555,7 +630,8 @@
       <div class="">
         <div class="d-flex justify-content-between align-items-center">
           <div class="">
-            <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+            <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+            <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span></div>
             <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
           </div>
 
@@ -567,7 +643,7 @@
               </div>
               <div class="d-flex flex-column align-items-center">
                 <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                  <span dir="ltr">+971 068041444</span>
+                  <span dir="ltr">+971 68041444</span>
                   <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
                 </p>
                 <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
@@ -582,10 +658,47 @@
       </div>
 
 
-    <div class="text-center mt-6">
-      <p class="font-ar mb-3">المدرسة مرخصة من قبل هيئة الشارقة للتعليم الخاص – حكومة الشارقة – دولة الامارات العربية المتحدة</p>
-      <p class="font-en">The School Licensed by the Sharjah Private Education Authority- Government of Sharjah – United Arab Emirate</p>
-    </div>
+      <div class="text-center mt-6">
+        <p class="font-ar mb-3">المدرسة مرخصة من قبل هيئة الشارقة للتعليم الخاص – حكومة الشارقة – دولة الامارات العربية المتحدة</p>
+        <p class="font-en">The School Licensed by the Sharjah Private Education Authority- Government of Sharjah – United Arab Emirate</p>
+      </div>
+
+      <footer class="my-6 ">
+        <div class="d-grid grid-cols-2 justify-between">
+          <div class=" justify-content-end color-primary ">
+              <span class="font-en">SHJSPEA</span>
+              <ul class="social d-flex align-center gap-2">
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
+                </li>
+            </ul>
+              <a>web : spea.shj.ae</a>
+          </div>
+
+            <div class="d-flex gap-3 justify-content-end">
+              <div class="text-start color-primary font-en">
+                <p>TEL : +971 68041444</p>
+                <p>BO.BOX : 30020</p>
+                <p>EMAIL : INFO@SPEA.SHJ.AE</p>
+              </div>
+              <img src="assets/images/shared/call.svg" alt="">
+            </div>
+
+        </div>
+
+      </footer>
 
 
     </div>
@@ -595,7 +708,8 @@
 
       <div class="d-flex justify-content-between align-items-center">
         <div class="">
-          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span></div>
           <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
@@ -606,7 +720,7 @@
           </div>
             <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                <span dir="ltr">+971 068041444</span>
+                <span dir="ltr">+971 68041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
@@ -700,7 +814,7 @@
               </div>
                 <div class="d-flex flex-column align-items-center">
                   <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                    <span dir="ltr">+971 068041444</span>
+                    <span dir="ltr">+971 68041444</span>
                     <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
                   </p>
                   <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
@@ -896,10 +1010,10 @@
 
         <div class="border-black border-3 d-flex align-items-center my-5 p-3">
           <div class="col-md-3">النتيجة</div>
-          <div class="col-md-3" *ngIf="certificate?.FinalResult">{{('shared.allStatus.' + certificate?.FinalResult |translate)}}</div>
+          <div class="col-md-3" *ngIf="certificate?.FinalResult">{{(finalResult.ar[certificate?.FinalResult])}}</div>
           <div class="col-md-3" *ngIf="!certificate?.FinalResult">--</div>
-          <!-- <div class="col-md-3 text-start font-en">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
-          <div class="col-md-3 text-start font-en">Result</div> -->
+          <div class="col-md-3 text-start font-en" *ngIf="certificate?.FinalResult">{{finalResult.en[certificate?.FinalResult]}}</div>
+          <div class="col-md-3 text-start font-en">Result</div>
 
         </div>
 
@@ -909,7 +1023,8 @@
 
         <div class="d-flex justify-content-between align-items-center mt-6">
           <div class="">
-            <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+            <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+            <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
             <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
           </div>
 
@@ -920,7 +1035,7 @@
             </div>
               <div class="d-flex flex-column align-items-center">
                 <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                  <span dir="ltr">+971 068041444</span>
+                  <span dir="ltr">+971 68041444</span>
                   <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
                 </p>
                 <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
@@ -929,6 +1044,44 @@
               </div>
           </div>
         </div>
+
+
+      <footer class="my-6 ">
+        <div class="d-grid grid-cols-2 justify-between">
+          <div class=" justify-content-end color-primary ">
+              <span class="font-en">SHJSPEA</span>
+              <ul class="social d-flex align-center gap-2">
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
+                </li>
+            </ul>
+              <a>web : spea.shj.ae</a>
+          </div>
+
+            <div class="d-flex gap-3 justify-content-end">
+              <div class="text-start color-primary font-en">
+                <p>TEL : +971 68041444</p>
+                <p>BO.BOX : 30020</p>
+                <p>EMAIL : INFO@SPEA.SHJ.AE</p>
+              </div>
+              <img src="assets/images/shared/call.svg" alt="">
+            </div>
+
+        </div>
+
+      </footer>
 
       </div>
 
@@ -1121,19 +1274,21 @@
       </div>
 
 
-      <div class="border-black border-3 d-flex align-items-center mt-4 p-3">
+      <div class="border-black border-3 d-flex align-items-center my-5 p-3">
         <div class="col-md-3">النتيجة</div>
-        <div class="col-md-3" *ngIf="certificate?.FinalResult">{{('shared.allStatus.' + certificate?.FinalResult |translate)}}</div>
+        <div class="col-md-3" *ngIf="certificate?.FinalResult">{{(finalResult.ar[certificate?.FinalResult])}}</div>
         <div class="col-md-3" *ngIf="!certificate?.FinalResult">--</div>
-        <!-- <div class="col-md-3 text-start font-en">{{'shared.allStatus.' + certificate?.FinalResult |translate}}</div>
-        <div class="col-md-3 text-start font-en">Result</div> -->
+
+        <div class="col-md-3 text-start font-en" *ngIf="certificate?.FinalResult">{{finalResult.en[certificate?.FinalResult]}}</div>>
+        <div class="col-md-3 text-start font-en">Result</div>
 
       </div>
 
 
       <div class="d-flex justify-content-between align-items-center mt-6" >
         <div class="">
-          <div class="mb-5">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
+          <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
           <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
@@ -1144,7 +1299,7 @@
           </div>
             <div class="d-flex flex-column align-items-center">
               <p class="d-flex align-items-center justify-content-center gap-2  fs-3 mb-1">
-                <span dir="ltr">+971 068041444</span>
+                <span dir="ltr">+971 68041444</span>
                 <img src="assets/images/shared/call.svg" style="width: 1.75rem;" alt="">
               </p>
               <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L" margin="0"></qr-code>
@@ -1154,54 +1309,43 @@
         </div>
       </div>
 
-      <!-- <div class="fs-2 border-black p-4 border-2 fs-4 mt-4">
 
-        <div class="d-flex ">
-          <div class="col-md-6 ">
-            <div class="">
-              <div class="d-flex  mb-4 align-items-md-center gap-5">
-                <span class="">اسم الموظف المختص :</span>
-                <span></span>
-              </div>
-
-              <div class="d-flex  mb-4 align-items-md-center gap-5">
-                <span class="">تاريخ الاصدار:</span>
-                <span></span>
-              </div>
-
-              <div class="d-flex align-items-md-center gap-5 mb-4">
-                <span class="">يعتمد</span>
-                <span></span>
-              </div>
-
-            </div>
-
+      <footer class="my-6 ">
+        <div class="d-grid grid-cols-2 justify-between">
+          <div class=" justify-content-end color-primary ">
+              <span class="font-en">SHJSPEA</span>
+              <ul class="social d-flex align-center gap-2">
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
+                </li>
+                <li>
+                    <a class="mt-2" href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
+                </li>
+            </ul>
+              <a>web : spea.shj.ae</a>
           </div>
 
-          <div class="col-md-6  justify-content-end" dir="ltr">
-            <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-              <span class="">Issued By:</span>
-              <span></span>
+            <div class="d-flex gap-3 justify-content-end">
+              <div class="text-start color-primary font-en">
+                <p>TEL : +971 68041444</p>
+                <p>BO.BOX : 30020</p>
+                <p>EMAIL : INFO@SPEA.SHJ.AE</p>
+              </div>
+              <img src="assets/images/shared/call.svg" alt="">
             </div>
 
-            <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-              <span class="">Date of Issue:</span>
-              <span></span>
-            </div>
-
-            <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
-              <span class="">Approved</span>
-              <span></span>
-            </div>
-          </div>
         </div>
 
-        <div class="d-flex justify-content-between">
-          <span>مدير المدرسة</span>
-          <span class="font-en">Seal / الخاتم</span>
-          <span class="font-en">School Principal</span>
-        </div>
-      </div> -->
+      </footer>
 
     </div>
 

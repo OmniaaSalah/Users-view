@@ -108,12 +108,6 @@ export class IssueCertificateComponent implements OnInit {
 
 
 
-  // getRequestOptions(){
-  //   this.requestsService.getRequestTimline(this.requestInstance).subscribe(res=>{
-  //     this.actions = res?.task?.options
-  //   })
-  // }
-
 
 
   showChildreens(){

@@ -3,7 +3,9 @@
 <div class="custom-form mt-6">
 
 
-    <div class="d-flex align-items-center justify-content-end mb-5" >
+    <div class="d-flex align-items-center justify-content-between mb-5" >
+      <h3 class="color-primary fw-bold">{{'dashboard.Requests.DiplomaCertificateRequest' |translate}}</h3>
+
         <div class="d-flex">
             <button  type="submit" class="btn btn-primary mx-2" (click)="sendDiplomaCertificateReq()"
                 [disabled]="!isFormValid || onSubmit">
@@ -43,16 +45,16 @@
                 <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
                 <span class="color-gray-800">" يرجى إختيار ملف شهادة المعادلة من المرفقات التالية . "</span>
             </div> -->
-
-
             <!-- <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p> -->
 
-            <label class="fw-bold mt-6 mb-4">{{'dashboard.students.diplomeFile' | translate}} :- </label>
+
+
+            <!-- <label class="fw-bold mt-6 mb-4">{{'dashboard.students.diplomeFile' | translate}} :- </label>
 
             <ng-container *ngIf="student?.attachments?.length">
               <div class="col-md-4 my-4" *ngFor="let attachment of student.attachments; let k = index">
                   <label class="fw-bold fs-4 mb-3">{{attachment?.titel | currentLang}}</label>
-                  <div class="elcardo" *ngFor="let file of attachment?.files">
+                  <div class="elcardo selectedCard" *ngFor="let file of attachment?.files">
                       <div class="elcardo-title d-flex">
                           <img src="assets/images/shared/file.svg" [style.width.rem]="4.5" alt="file" />
                           <p class="mx-5 my-2">{{ file?.name }}</p>
@@ -62,7 +64,7 @@
               </div>
             </ng-container>
 
-            <app-informative-block *ngIf="!student?.attachments?.length" size="sm" subTitle="{{'emptyList.missingDiplomaFile' |translate}}"></app-informative-block>
+            <app-informative-block *ngIf="!student?.attachments?.length || (student?.attachments?.length && !student?.attachments[0]?.files?.length)" size="sm" subTitle="{{'emptyList.missingDiplomaFile' |translate}}"></app-informative-block> -->
 
         </div>
     </ng-container>

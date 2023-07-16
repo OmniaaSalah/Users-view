@@ -28,6 +28,22 @@ export class CertificateDetailsComponent implements OnInit {
       FinalResult:"Final Result",
     }
   }
+
+  finalResult={
+    ar:{
+      Failed:"راسب",
+      RetakeExam:"إعاده امتحان",
+      Passed:"ناجح",
+      FinalFaild:"راسب نهائى"
+    },
+    en:{
+      Failed:"Failed",
+      RetakeExam:"Retake Exam",
+      Passed:"Passed",
+      FinalFaild:"Final Faild"
+    }
+  }
+
   newDate = new Date()
 
   certificateType
