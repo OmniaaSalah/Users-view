@@ -116,8 +116,13 @@ export class SchoolGradesComponent implements OnInit {
 
 
   openDivisionTab(gradeId){
-    this.setActiveTab.emit(4)
-    this.router.navigate([],{queryParams:{gradeId:gradeId}})
+    if(this.currentUserScope == this.userScope.Employee){
+      window.open(`/grades-and-divisions/school/${this.schoolId}/divisions?gradeId=${gradeId}`)
+      // this.router.navigate(['/grades-and-divisions/school',this.schoolId,'divisions'],{queryParams:{gradeId:gradeId}})
+    }else{
+      this.setActiveTab.emit(4)
+      this.router.navigate([],{queryParams:{gradeId:gradeId}})
+    }
   }
 
 
