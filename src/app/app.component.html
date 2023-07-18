@@ -116,7 +116,7 @@
                     </div>
                 </div>
 
-                <app-file-upload *ngIf="display" view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event?.files)"></app-file-upload>
+                <app-file-upload *ngIf="display" view="full" (onFileUpload)="imagesResult=$event" (onFileDelete)="imagesResult=$event?.files"></app-file-upload>
 
             </div>
         </form>

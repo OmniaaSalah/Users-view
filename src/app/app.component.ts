@@ -51,7 +51,6 @@ export class AppComponent implements OnInit {
   isShown1:boolean=false;
 
   constructor(
-    private sharedService:SharedService,
     private translationService: TranslationService,
     private router:Router,
     private userService:UserService,
