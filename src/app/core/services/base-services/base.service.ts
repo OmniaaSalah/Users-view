@@ -95,7 +95,7 @@ export abstract class BaseService {
     });
 
     return this.http.request(request).pipe(
-      tap(e => {        
+      tap(e => {
         const progress = this.getEventMessage(e);
         this.progress$.next(progress);
       }),
@@ -103,18 +103,20 @@ export abstract class BaseService {
       map((res: HttpResponse<any>) => res.body),
       catchError((e:HttpErrorResponse) => {
         console.log(e.error instanceof ErrorEvent);
-         
-        console.log(e);
-        
-        switch (e.status) {
-          case 0:
-          case 401:
-            this.userService.clear();
-            this.router.navigate(['/auth/login']);
-            break;
-          default:
-            break;
+
+        console.log(e.type);
+        if(e?.error.type != 'abort') {
+          switch (e.status) {
+            case 0:
+            case 401:
+              this.userService.clear();
+              this.router.navigate(['/auth/login']);
+              break;
+            default:
+              break;
+          }
         }
+
         return throwError(e.error || 'Server error');
       }),
     );
