@@ -243,7 +243,7 @@
                                 <span class="color-primary mb-2">{{student.studentBehavior?.createdBy || (student.name |currentLang)}}</span>
 
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.discribeBehaviorDate'|translate }}</p>
-                                <span class="color-primary mb-2">{{student.studentBehavior?.updatedDate || student.birthDate|LocalizeDate}}</span>
+                                <span class="color-primary mb-2">{{student.studentBehavior?.createdDate || student.studentBehavior?.updatedDate|LocalizeDate}}</span>
 
                             </div>
                         </div>
@@ -270,7 +270,7 @@
                                 <span class="color-primary mb-2">{{student.name |currentLang}}</span>
 
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.discribeBehaviorDate'|translate }}</p>
-                                <span class="color-primary mb-2">{{student.birthDate |LocalizeDate}}</span>
+                                <span class="color-primary mb-2">{{student.studentBehavior?.createdDate || student.studentBehavior?.updatedDate|LocalizeDate}}</span>
 
                             </div>
 
