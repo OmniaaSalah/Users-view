@@ -124,7 +124,6 @@ export class FileUploadComponent implements OnInit,OnChanges {
   //   if(this.allowedFilesType instanceof Array){
   //     this.maxSize = Math.max(...this.allowedFilesType.map(el => this.filesRules[el]?.size))
   //   }else{
-  //     // console.log(this.filesRules[this.allowedFilesType]);
 
   //     if(!this.filesRules || !this.filesRules[this.allowedFilesType]){
   //       if(showError) this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
@@ -141,12 +140,17 @@ export class FileUploadComponent implements OnInit,OnChanges {
  uploadedFilesName:string[]=[]
  uploadedFilesFormData:FormData[]=[]
 
+ audioTypes =['Mp3','Mp4','FLAC','WAV','WMA','M4A']
+
  getMaxAllowedSizeForFileType(fileType: FileTypeEnum | FileTypeEnum[]) : number | null{
   if(fileType instanceof Array){
-
-    return  Math.max(...fileType.map(el => this.filesRules[el]?.size))
+    return  Math.max(...fileType.map(el => {
+      if(this.audioTypes.includes(el)) el = FileTypeEnum.Audio
+      return this.filesRules[el]?.size
+    }))
   }else{
 
+    if(this.audioTypes.includes(fileType)) fileType = FileTypeEnum.Audio
     if(!this.filesRules || !this.filesRules[fileType])  return null
 
     return this.filesRules[fileType]?.size || 3
@@ -158,6 +162,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
  getFileTypeEnum(fileName) :FileTypeEnum | null{
     const lastDot = fileName.lastIndexOf('.');
     const extention = fileName.substring(lastDot + 1);
+
      if(FileTypeEnum[capitalizeFirstLetter(extention)]) return FileTypeEnum[capitalizeFirstLetter(extention)]
      else return null
  }
@@ -173,6 +178,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
     //   maxFileSize = this.getMaxAllowedSizeForFileType(this.allowedFilesType)
 
     // }
+
     if(this.allowedFilesType && !maxFileSize) {
       this.toaster.error(`عذرا الملف المرفق غير مسموح به `)
       return;
@@ -182,8 +188,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
     if(!this.allowedFilesType){
 
       const fileType : FileTypeEnum = this.getFileTypeEnum(files[0]?.name)
+
       maxFileSize = this.getMaxAllowedSizeForFileType(fileType)
-      console.log(maxFileSize);
 
 
       if(!maxFileSize) {

@@ -235,7 +235,7 @@
 
     <hr class="my-5">
 
-    <div class="">
+    <div class="" *ngIf="currentUserScope!=userScope.Guardian || currentUserScope!=userScope.SPEA">
         <div class="d-flex align-items-center gap-3">
             <img class="mysons" src="assets/images/home/schools-students/parents.svg" alt="">
             <h3 class="heading heading--secondary color-primary">{{'dashboard.parentHome.graduatedChildren' | translate}}</h3>

@@ -6,7 +6,13 @@ export enum FileTypeEnum{
     Image = 'Image',
     Jpg = 'Image',
     Png='Image',
-    Audio = 'Audio'
+    Audio = 'Audio',
+    Mp3 = 'Mp3',
+    Mp4 = 'Mp4',
+    FLAC='FLAC',
+    WAV='WAV',
+    WMA='WMA',
+    M4A ='M4A'
 }
 
 export enum FileExtentions{
