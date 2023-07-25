@@ -150,7 +150,7 @@
                                     <div class="row gx-5 form-set" formGroupName="supervisior"  >
                                         <div class="col-md-4" >
                                             <label class="label required" for="manager">{{'dashboard.schools.sectionManager'|translate}}</label>
-                                            <p-dropdown [options]="schoolTeachers$|async" formControlName="id" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}"></p-dropdown>
+                                            <p-dropdown [options]="schoolTeachers$|async" formControlName="id" optionValue="id" [autoDisplayFirst]="false" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}"></p-dropdown>
 
                                         </div>
                                         <div class="col-md-8 d-flex justify-content-center align-self-end ">
