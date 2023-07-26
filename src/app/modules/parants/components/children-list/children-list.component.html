@@ -2,7 +2,7 @@
 
 
 
-    <div class="row gap-6 radius-15 border-dark p-5 mb-5 bg-white" *ngIf="currentUserScope!=userScope.Guardian">
+    <div class="row gap-6 radius-15 border-dark p-5 mb-5 bg-white" *ngIf="currentUserScope==userScope.SPEA">
         <ng-container *ngIf="guardianData">
             <div class="col-4 d-flex align-items-center gap-5 mb-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.parents.parentName' | translate}}</p>
@@ -235,7 +235,7 @@
 
     <hr class="my-5">
 
-    <div class="" *ngIf="currentUserScope!=userScope.Guardian || currentUserScope!=userScope.SPEA">
+    <div class="" *ngIf="currentUserScope==userScope.Guardian || currentUserScope==userScope.SPEA">
         <div class="d-flex align-items-center gap-3">
             <img class="mysons" src="assets/images/home/schools-students/parents.svg" alt="">
             <h3 class="heading heading--secondary color-primary">{{'dashboard.parentHome.graduatedChildren' | translate}}</h3>

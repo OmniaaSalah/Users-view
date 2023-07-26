@@ -82,9 +82,7 @@
                 <p class="color-gray-300">{{ 'shared.mostUsedLanguage'|translate }}</p>
                 <span class="color-primary mb-2">{{student?.mostUsedLanguage?.name | currentLang}}</span>
 
-                <p class="color-gray-300">{{'dashboard.students.isGifted'| translate}}</p>
-                <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
-                <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
+
 
 
                 <p class="color-gray-300">{{ 'dashboard.students.attendanceType'|translate }}</p>
@@ -117,7 +115,11 @@
                   <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
                 </ng-container>
 
+                <p class="color-gray-300">{{'dashboard.students.isGifted'| translate}}</p>
+                <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
+                <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
               </div>
+
 
               <div class="d-grid grid-col-8 even-gap gap-5 mt-5">
                 <ng-container *ngIf="student?.isGifted">
@@ -319,10 +321,12 @@
               <p-dropdown #isGifted formControlName="isGifted" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
           </div>
 
-          <div class="col-md-4 col-lg-3 " *ngIf="isGifted.value">
-              <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
-              <p-multiSelect formControlName="studentTalent" [options]="talents$ |async" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
-          </div>
+          <ng-container *ngIf="isGifted.value">
+            <div class="col-md-4 col-lg-3 " *ngIf="talents$ |async as talents" >
+                <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
+                <p-multiSelect formControlName="studentTalent" [options]="talents" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
+            </div>
+          </ng-container>
 
           <ng-container *ngIf="student.emiratesId">
             <div class="col-md-4 col-lg-3 d-flex gap-5 align-items-center align-self-end">
