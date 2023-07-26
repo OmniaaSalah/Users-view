@@ -203,7 +203,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   initStudentForm(res){
     this.studentForm.patchValue(res as any)
     this.studentForm.controls.prohibited.patchValue(res.studentProhibited)
-    this.studentForm.controls.nationalityId.setValue(res.nationality?.id)
+    this.studentForm.controls.nationalityId.setValue(res?.nationality?.id)
+    this.studentForm.controls.studentTalent.setValue(res?.studentTalents?.map(el => el?.talentId))
     this.studentForm.controls.religionId.setValue(res.religion?.id)
     // this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)
     this.studentForm.controls.specialEducation.patchValue({name:{ar:"",en:''}})
