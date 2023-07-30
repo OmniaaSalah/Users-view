@@ -88,7 +88,8 @@ export interface SchoolSubject{
     weekClassRoomNumber : number,
     maxGpa:number,
     gradeSubjectId?:number,
-    trackSubjectId?:number
+    trackSubjectId?:number,
+    isInternal:boolean
 }
 
 export interface GradeCalenderEvent extends CalendarEvent{

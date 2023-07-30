@@ -55,7 +55,6 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   activeAccordion=null
 
   // << DATA >>
-  tracks:GradeTrack[]=inject(GradesService).tracks ;
   subjects=inject(GradesService).subjects ;
   subjectsToDelete=[] //we will collect all subjects we are deleted and call delete API before calling PUT Api [Save Changes button]
 
@@ -262,7 +261,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
       maxGpa:[0],
       gradeSubjectId:[0],
       trackSubjectId:[0],
-      IsInternal:[false]
+      isInternal:[false]
     })
   }
 
@@ -303,7 +302,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         maxGpa:[subject.maxGpa??0],
         gradeSubjectId:[subject.gradeSubjectId??0],
         trackSubjectId:[subject.trackSubjectId??0],
-        IsInternal:[subject.trackSubjectId??false]
+        isInternal:[subject.isInternal??false]
       }))
     })
 
@@ -371,7 +370,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         maxGpa:[subject.maxGpa??0],
         gradeSubjectId:[subject.gradeSubjectId??0],
         trackSubjectId:[subject.trackSubjectId??0],
-        IsInternal:[subject.trackSubjectId??false]
+        isInternal:[subject.isInternal??false]
         })
       )
 

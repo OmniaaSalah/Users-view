@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { ClaimsService } from '../claims.service';
 import { TranslateService } from '@ngx-translate/core';
 import { getLocalizedValue } from '../../helpers/helpers';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,13 @@ export class AuthenticationService {
   sendOtpToUser(account)
   {
     return this.http.post("/Account/send-otp",account)
+    .pipe(
+      map(res=>{
+        if(res?.statusCode ===HttpStatusCodeEnum.Created) throw new Error(getLocalizedValue(res?.errorLocalized))
+        else return res
+      }),
+      take(1)
+    )
   }
   createUAEPassAutomaticAccount(account)
   {
