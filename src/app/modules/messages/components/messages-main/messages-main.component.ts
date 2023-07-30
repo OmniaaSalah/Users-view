@@ -100,12 +100,12 @@ export class MessagesMainComponent implements OnInit {
 
     this.filterationForm.get('DateFrom').valueChanges.subscribe((res) => {
       let utc = moment.utc(res[0]).toDate()
-      this.searchModel.DateFrom = moment(utc).local().format()
+      this.searchModel.DateFrom = moment(utc).local().format('YYYY-MM-DD')
       // this.filterationForm.value.DateFrom = new Date(res[0]).toISOString();
       // this.searchModel.DateFrom = this.filterationForm.value.DateFrom;
       if (res[1]) {
         let utc = moment.utc(res[1]).toDate()
-        this.searchModel.DateTo = moment(utc).local().format()
+        this.searchModel.DateTo = moment(utc).local().format('YYYY-MM-DD')
         this.getMessages(this.searchModel);
         // this.filterationForm.value.DateTo = new Date(res[1]).toISOString();
         // this.searchModel.DateTo = this.filterationForm.value.DateTo;
