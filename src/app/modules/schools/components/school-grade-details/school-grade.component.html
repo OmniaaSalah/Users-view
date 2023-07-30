@@ -156,8 +156,8 @@
 
                                                                                   <div class="d-flex align-items-center gap-4 fs-3" *ngIf="subject.value.isOptional">
                                                                                     <label class="" for="description">{{'dashboard.Subjects.IsInternalSubject'| translate}}</label>
-                                                                                    <p-inputSwitch formControlName="IsInternal" [binary]="true"></p-inputSwitch>
-                                                                                    <span class="mb-2">{{subject.value.IsInternal ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
+                                                                                    <p-inputSwitch formControlName="isInternal" [binary]="true"></p-inputSwitch>
+                                                                                    <span class="mb-2">{{subject.value.isInternal ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                                   </div>
                                                                               </div>
 
@@ -261,8 +261,8 @@
 
                                                         <div class="d-flex align-items-center gap-4 fs-3" *ngIf="subject.value.isOptional">
                                                           <label class="" for="description">{{'dashboard.Subjects.IsInternalSubject'| translate}}</label>
-                                                          <p-inputSwitch formControlName="IsInternal" [binary]="true"></p-inputSwitch>
-                                                          <span class="mb-2">{{subject.value.IsInternal ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
+                                                          <p-inputSwitch formControlName="isInternal" [binary]="true"></p-inputSwitch>
+                                                          <span class="mb-2">{{subject.value.isInternal ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                         </div>
                                                     </div>
 

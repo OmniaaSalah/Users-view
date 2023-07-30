@@ -5,5 +5,6 @@ export enum HttpStatusCodeEnum{
     BadRequest='BadRequest',  //connection error
     OK="OK",
     Ok="Ok",
-    Unauthorized="Unauthorized"
+    Unauthorized="Unauthorized",
+    Created='Created'
 }

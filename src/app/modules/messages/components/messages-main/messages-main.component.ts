@@ -11,6 +11,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { MessageStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { MessageService } from '../../service/message.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-messages-main',
@@ -97,19 +98,30 @@ export class MessagesMainComponent implements OnInit {
       DateTo : ''
     });
 
-    this.filterationForm.get('DateFrom').valueChanges.subscribe(res=>{
-      this.filterationForm.value.DateFrom = new Date(res[0]).toISOString()
-      this.searchModel.DateFrom =  this.filterationForm.value.DateFrom
-      if(res[1]){
-      this.filterationForm.value.DateTo = new Date(res[1]).toISOString()
-      this.searchModel.DateTo =  this.filterationForm.value.DateTo
+    this.filterationForm.get('DateFrom').valueChanges.subscribe((res) => {
+      let utc = moment.utc(res[0]).toDate()
+      this.searchModel.DateFrom = moment(utc).local().format()
+      // this.filterationForm.value.DateFrom = new Date(res[0]).toISOString();
+      // this.searchModel.DateFrom = this.filterationForm.value.DateFrom;
+      if (res[1]) {
+        let utc = moment.utc(res[1]).toDate()
+        this.searchModel.DateTo = moment(utc).local().format()
+        this.getMessages(this.searchModel);
+        // this.filterationForm.value.DateTo = new Date(res[1]).toISOString();
+        // this.searchModel.DateTo = this.filterationForm.value.DateTo;
+      }else{
+        this.searchModel.DateTo =null
       }
-      if(this.searchModel.DateTo != null){
-      this.getMessages(this.searchModel)
-      }
-    })
+    });
 
 
+  }
+
+  resetDateFilter(){
+    this.filterationForm.reset()
+    this.searchModel.DateTo=null
+    this.searchModel.DateFrom=null
+    this.getMessages(this.searchModel);
   }
 
   getMessages(searchModel){

@@ -42,8 +42,14 @@
                     "dashboard.Messages.date (from - to)" | translate
                     }}</label>
 
-                  <p-calendar formControlName="DateFrom" [showIcon]="true" inputId="icon" selectionMode="range"
-                     placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true">
+                  <p-calendar
+                  formControlName="DateFrom"
+                  [showClear]="true"
+                  [showIcon]="true"
+                  (onClear)="resetDateFilter()"
+                  inputId="icon"
+                  selectionMode="range"
+                  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true">
                   </p-calendar>
                 </div>
               </div>
