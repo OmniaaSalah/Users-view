@@ -13,7 +13,6 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SystemRequestService } from '../../services/system-request.service';
 import { UserRequestsStatus} from 'src/app/shared/enums/status/status.enum'
-import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ArrayOperations } from 'src/app/core/helpers/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
