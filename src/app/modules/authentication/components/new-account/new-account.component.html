@@ -398,30 +398,31 @@
           </ng-container> -->
 
 
-          <div class="row gx-5 mt-4">
-            <div class="col-md-7 custom-form custom-validation-form pt-0">
+          <div class="row gx-5 mt-4 custom-form custom-validation-form">
+            <label class=" label mb-5">{{ 'sign up.completePhoneNumber'|translate }}</label>
+            <div class="col-md-5  pt-0">
+              <!-- [ngClass]="UAEUnregisteredUser?.phone?.length==10?'d-flex':''" -->
+                <div  >
+                    <!-- <span class="color-primary mx-3 " *ngIf="UAEUnregisteredUser?.phone?.length==10">{{UAEUnregisteredUser?.phone}}</span> -->
 
-                <div  [ngClass]="UAEUnregisteredUser?.phone?.length==10?'d-flex':''">
-                    <label class=" label">{{ 'sign up.completePhoneNumber'|translate }}</label>
-                    <span class="color-primary mx-3 " *ngIf="UAEUnregisteredUser?.phone?.length==10">{{UAEUnregisteredUser?.phone}}</span>
-                    <ng-container  *ngIf="UAEUnregisteredUser?.phone?.length!=10">
-                        <input type="text" pInputText [formControl]="phoneNumber"  [LangRestrict]="'numb'" maxlength="10" class="form-control "  placeholder="{{'shared.Write phoneNumber'|translate}}">
-
-                        <div [hidden]="phoneNumber.valid || phoneNumber.untouched">
-                                <small *ngIf="phoneNumber.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                              {{'shared.This Field is Required'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
-
-                                <small *ngIf="phoneNumber.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
-                                {{'shared.Mobile Must Start With 05 and Contain 10 Numbers Only'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
-                        </div>
-                    </ng-container>
+                    <div class="d-flex gap-2 align-items-center">
+                      <input type="text" dir="ltr" pInputText [formControl]="phoneNumber"  [LangRestrict]="'numb'" maxlength="10" class="form-control "  placeholder="{{'shared.Write phoneNumber'|translate}}">
+                      <p class="color-primary fs-3">+971</p>
+                    </div>
                 </div>
+              </div>
 
-            </div>
+              <div [hidden]="phoneNumber.valid || phoneNumber.untouched">
+                      <small *ngIf="phoneNumber.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                    {{'shared.This Field is Required'|translate}}
+                      <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                  </small>
+
+                      <small *ngIf="phoneNumber.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                      {{'shared.Mobile Must Start With 05 and Contain 10 Numbers Only'|translate}}
+                      <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                  </small>
+              </div>
 
           </div>
 

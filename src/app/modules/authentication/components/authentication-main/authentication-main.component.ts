@@ -73,6 +73,7 @@ export class AuthenticationMainComponent implements OnInit {
     private routerListenr:RouteListenrService
   ) {}
 
+
   ngOnInit(): void {
     this.settingsService.initializeFileRules();
     this.checkUAEPassLogin();

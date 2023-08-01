@@ -34,6 +34,8 @@ import {BadgeModule} from 'primeng/badge';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {TooltipModule} from 'primeng/tooltip';
 import { ChartModule } from 'primeng/chart';
+import { InputMaskModule } from 'primeng/inputmask';
+
 
 const modules=[
   TableModule,
@@ -69,7 +71,8 @@ const modules=[
   BadgeModule,
   DynamicDialogModule,
   TooltipModule,
-  ChartModule
+  ChartModule,
+  InputMaskModule
 
 ]
 
