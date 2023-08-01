@@ -6,11 +6,13 @@ import { Filter } from 'src/app/core/Models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
@@ -18,7 +20,12 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class StudentsService {
   certificatesList;
-  constructor(private http:HttpHandlerService, private translate:TranslateService, private loaderService: LoaderService) {
+  constructor(
+    private http:HttpHandlerService,
+    private translate:TranslateService,
+    private loaderService: LoaderService,
+    private userService:UserService) {
+
     this.certificatesList = [
 
       {
@@ -63,11 +70,13 @@ export class StudentsService {
       }))
     }
 
-  studentsToExport(filter){
-    return this.http.post('/Student/Search',filter)
+  studentsToExport(filter, schoolId?){
+    let api = this.userService.getScope() ===UserScope.Employee ? `/Student/students/${schoolId}` : '/Student/Search'
+    return this.http.post(api , filter)
     .pipe(
       map(res=>{
-        return res.data.map(student =>{
+        let data = res?.data ? res?.data : res?.result?.data
+        return data.map(student =>{
           return {
             [this.translate.instant('dashboard.students.daleelNumber')]: student.studentDaleelNumber,
             [this.translate.instant('dashboard.students.studentName')]: student.name.ar,

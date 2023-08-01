@@ -238,6 +238,8 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     this.sendOtp();
   }
 
+  excludedLast3Digits
+  params
   sendOtp() {
     if (this.timeLeft) {
       this.isBtnLoading = true;
@@ -258,8 +260,10 @@ export class NewAccountComponent implements OnInit, OnDestroy {
               }
               this.step = 5;
               this.UAEUnregisteredUser = res?.result;
-              const excludedLast3Digits = res?.result?.phone.slice(-3);
-              this.phoneNumber.setValue(excludedLast3Digits.padStart(10,'*'))
+              this.excludedLast3Digits = res?.result?.phone.slice(-3);
+              this.phoneNumber.setValue(this.excludedLast3Digits.padStart(10,'*'))
+              this.params= {value: this.excludedLast3Digits}
+
             } else if (res?.statusCode == 'NotAcceptable') {
               this.toastService.error(this.translate.instant('EmiratesIdIsNotValid'));
             } else if (res?.statusCode == 'BadRequest') {
@@ -286,12 +290,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
         },
         (err: Error) => {
           this.isBtnLoading = false;
-          this.toastService.error(
-            err.message ||
-              this.translate.instant(
-                'dashboard.AnnualHoliday.error,please try again'
-              )
-          );
+          this.toastService.error(err.message ||this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
         }
       );
     }
