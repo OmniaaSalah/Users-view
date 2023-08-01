@@ -258,8 +258,8 @@ export class NewAccountComponent implements OnInit, OnDestroy {
               }
               this.step = 5;
               this.UAEUnregisteredUser = res?.result;
-              const excludedLast3Digits = res?.result?.phone.slice(0, 7);
-              this.phoneNumber.setValue(excludedLast3Digits.padEnd(10,'*'))
+              const excludedLast3Digits = res?.result?.phone.slice(-3);
+              this.phoneNumber.setValue(excludedLast3Digits.padStart(10,'*'))
             } else if (res?.statusCode == 'NotAcceptable') {
               this.toastService.error(this.translate.instant('EmiratesIdIsNotValid'));
             } else if (res?.statusCode == 'BadRequest') {
@@ -269,8 +269,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
           },
           (err) => {
             this.isBtnLoading = false;
-            this.toastService.error(
-              this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+            this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
           }
         );
     } else {
@@ -278,9 +277,8 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       this.authService.sendOtpToUser(this.account).subscribe(
         (res) => {
           this.isBtnLoading = false;
-          this.toastService.success(
-            this.translate.instant('shared.Otp send successfully')
-          );
+          this.toastService.success(this.translate.instant('shared.Otp send successfully'));
+
           this.tittle = this.translate.instant('sign up.confirmed with OTP');
           this.step = 2;
           this.startTimer();
