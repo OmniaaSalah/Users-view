@@ -399,7 +399,7 @@
 
 
           <div class="row gx-5 mt-4 custom-form custom-validation-form">
-            <label class=" label mb-5">{{ 'sign up.completePhoneNumber'|translate }}</label>
+            <label class=" label mb-5">{{ 'sign up.completePhoneNumber'|translate :params }}</label>
             <div class="col-md-5  pt-0">
               <!-- [ngClass]="UAEUnregisteredUser?.phone?.length==10?'d-flex':''" -->
                 <div  >
@@ -407,7 +407,7 @@
 
                     <div class="d-flex gap-2 align-items-center">
                       <input type="text" dir="ltr" pInputText [formControl]="phoneNumber"  [LangRestrict]="'numb'" maxlength="10" class="form-control "  placeholder="{{'shared.Write phoneNumber'|translate}}">
-                      <p class="color-primary fs-3">+971</p>
+                      <p class="color-primary fs-3" dir="ltr">+971</p>
                     </div>
                 </div>
               </div>
