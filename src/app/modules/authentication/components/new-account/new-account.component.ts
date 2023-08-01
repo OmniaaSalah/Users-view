@@ -39,6 +39,8 @@ export class NewAccountComponent implements OnInit, OnDestroy {
   timeLeft = 60;
   enableSendOtpAgain: boolean = true;
   interval;
+
+  showUserDetails = false;
   showPhoneField: boolean = false;
   showIdentityField: boolean = false;
   showEmailField: boolean = false;
@@ -177,6 +179,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     localStorage.removeItem('notificationSource');
     localStorage.removeItem('userAcountData');
   }
+
   changeRegistrationField(e) {
     if (e == RegistrationEnum.PhoneNumber) {
       this.showEmailField = false;
@@ -223,16 +226,14 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       this.account.notificationSource =
         this.registrationWayFormGrp.value.emairatesWay;
     }
-    console.log(this.account);
   }
+
   saveRegistrationWay() {
     this.account.accountWay = this.registrationWayFormGrp.value.registrationWay;
-    this.changeRegistrationField(
-      this.registrationWayFormGrp.value.registrationWay
-    );
+    this.changeRegistrationField(this.registrationWayFormGrp.value.registrationWay);
+
     localStorage.setItem('accountWay', this.account.accountWay);
     localStorage.setItem('notificationSource', this.account.notificationSource);
-    console.log(this.account);
     // this.openOTPModel=true;
     this.sendOtp();
   }
@@ -241,56 +242,62 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     if (this.timeLeft) {
       this.isBtnLoading = true;
     }
+
     if (this.account.accountWay == RegistrationEnum.EmiratesId) {
       this.authService
         .createUAEPassAccount(this.account.notificationSource)
         .subscribe(
           (res) => {
-            console.log(res);
+
             this.isBtnLoading = false;
+
             if (res?.statusCode == 'OK' || res?.statusCode == 'BadGateway') {
+              if(!res?.result?.phone){
+                this.toastService.error('.عزرا لا يمكن استكمال خطوات التسجيل حيث انه لايوحد رقم هاتف مرمبوط بالهوية')
+                return
+              }
               this.step = 5;
               this.UAEUnregisteredUser = res?.result;
+              const excludedLast3Digits = res?.result?.phone.slice(0, 7);
+              this.phoneNumber.setValue(excludedLast3Digits.padEnd(10,'*'))
             } else if (res?.statusCode == 'NotAcceptable') {
-              this.toastService.error(
-                this.translate.instant('EmiratesIdIsNotValid')
-              );
+              this.toastService.error(this.translate.instant('EmiratesIdIsNotValid'));
             } else if (res?.statusCode == 'BadRequest') {
               this.toastService.error(
-                this.translate.instant(
-                  'dashboard.AnnualHoliday.error,please try again'
-                )
-              );
+                this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
             }
           },
           (err) => {
             this.isBtnLoading = false;
             this.toastService.error(
-              this.translate.instant(
-                'dashboard.AnnualHoliday.error,please try again'
-              )
-            );
+              this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
           }
         );
     } else {
+
       this.authService.sendOtpToUser(this.account).subscribe(
         (res) => {
           this.isBtnLoading = false;
-          this.toastService.success(this.translate.instant('shared.Otp send successfully'));
+          this.toastService.success(
+            this.translate.instant('shared.Otp send successfully')
+          );
           this.tittle = this.translate.instant('sign up.confirmed with OTP');
           this.step = 2;
           this.startTimer();
           this.enableSendOtpAgain = true;
         },
-        (err:Error) => {
+        (err: Error) => {
           this.isBtnLoading = false;
-          this.toastService.error(err.message || this.translate.instant('dashboard.AnnualHoliday.error,please try again')
+          this.toastService.error(
+            err.message ||
+              this.translate.instant(
+                'dashboard.AnnualHoliday.error,please try again'
+              )
           );
         }
       );
     }
   }
-
 
   sendOtpAgain() {
     this.enableSendOtpAgain = false;
@@ -304,11 +311,9 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       localStorage.getItem('notificationSource');
   }
 
-
   setAttachment(files: CustomFile[]) {
     this.emiratesIdPath = files[0].url;
   }
-
 
   savePassword() {
     this.isBtnLoading = true;
@@ -383,7 +388,6 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     }
   }
 
-
   savePersonalInformation() {
     this.isBtnLoading = true;
     this.getCurrentRegistrationWay();
@@ -414,9 +418,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
           this.toastService.error(this.translate.instant(res.error));
           this.closeModel();
         } else {
-          this.toastService.success(
-            this.translate.instant('sign up.account saved successfully')
-          );
+          this.toastService.success(this.translate.instant('sign up.account saved successfully'));
           this.closeModel();
         }
       },
@@ -447,9 +449,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       },
       {
         value: RegistrationEnum.PhoneNumber,
-        name: this.translate.instant(
-          'sign up.phoneNumberInCaseNotHaveEmiratesID'
-        ),
+        name: this.translate.instant('sign up.phoneNumberInCaseNotHaveEmiratesID'),
       },
       {
         value: RegistrationEnum.EmiratesId,
@@ -467,6 +467,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {});
   }
+
   onOtpChange(userOtp) {
     this.otp = userOtp;
   }
@@ -477,6 +478,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     this.authService.confirmOtp(this.account, this.otp).subscribe(
       (res) => {
         this.isBtnLoading = false;
+
         if (res?.statusCode == 'OK') {
           this.toastService.success(
             this.translate.instant('sign up.confirmed successfully')
@@ -499,15 +501,13 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       }
     );
   }
+
   saveUserObj() {
     if (this.UAEUnregisteredUser?.phone?.length != 10) {
       this.UAEUnregisteredUser.phone = this.phoneNumber.value;
     }
 
-    localStorage.setItem(
-      'userAcountData',
-      JSON.stringify(this.UAEUnregisteredUser)
-    );
+    localStorage.setItem('userAcountData',JSON.stringify(this.UAEUnregisteredUser));
     this.account.accountWay = RegistrationEnum.PhoneNumber;
     this.account.notificationSource = this.UAEUnregisteredUser?.phone;
     localStorage.setItem('accountWay', this.account.accountWay);

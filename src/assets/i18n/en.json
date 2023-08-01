@@ -188,6 +188,7 @@
         "BackToLogin":  "Back to login",
         "select...": "select...",
         "phoneNumber":  "Phone number",
+        "completePhoneNumber":"Please complete the Phone number which Related to Emirates ID",
         "digitalIdentity":"Phone number inCase having emirates id",
         "email":"Email",
         "phoneNumberInCaseNotHaveEmiratesID": "Phone number in case not have emirates id",
