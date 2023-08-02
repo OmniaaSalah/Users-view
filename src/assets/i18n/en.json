@@ -836,7 +836,8 @@
         "degreesAccepted":"uploaded Degrees Rejected Successfully",
         "degreesRejected":"uploaded Degrees Accepted Successfully",
         "DegreeImproved":"Student Degrees Improved succssfully",
-        "upgradeStudents":"Student Upgraded Successfully"
+        "upgradeStudents":"Student Upgraded Successfully",
+        "techError":"sorry , seems their is a technical problem"
     },
     "dashboard": {
         "Assessment": {

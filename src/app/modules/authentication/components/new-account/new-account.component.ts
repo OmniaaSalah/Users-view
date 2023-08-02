@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { IRegistrationWay } from 'src/app/core/Models/account/registration-way';
+import { IRegistrationWay, SourceGatwayOTP } from 'src/app/core/Models/account/registration-way';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import Validation from 'src/app/modules/user-information/models/utils/validation';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
@@ -29,8 +29,14 @@ export class NewAccountComponent implements OnInit, OnDestroy {
   exclamationIcon = faExclamationCircle;
   @Input('openModel') openModel: boolean;
   @ViewChild('ngOtpInput') ngOtpInputRef: any;
-  account: IRegistrationWay = {} as IRegistrationWay;
-  signUpWaysList = [];
+
+  account: IRegistrationWay = {
+    accountWay:null,
+    notificationSource:null,
+    soursGetway:SourceGatwayOTP.ICA
+  };
+
+  signUpWaysList = this.authService.signUpWaysList;
   nationalityList = [];
   noIdentityReasonList = [];
   genderList = inject(SharedService).genderOptions;
@@ -56,7 +62,6 @@ export class NewAccountComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private router: Router,
     private indexService: IndexesService,
     private translate: TranslateService,
     private sharedService: SharedService,
@@ -64,12 +69,14 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     private authService: AuthenticationService,
     private formbuilder: FormBuilder
   ) {
+
     this.registrationWayFormGrp = formbuilder.group({
       registrationWay: ['', Validators.required],
       phoneWay: [''],
       emairatesWay: [''],
       emailWay: [''],
     });
+
     this.passwordsFormGrp = formbuilder.group(
       {
         newUserPassword: [
@@ -113,7 +120,6 @@ export class NewAccountComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.tittle = this.translate.instant('login.Create New User Account');
-    this.getAuthenticationWays();
     this.RemoveStorage();
   }
   get registrationWay() {
@@ -170,10 +176,14 @@ export class NewAccountComponent implements OnInit, OnDestroy {
   get identityReasonId() {
     return this.accountFormGrp.controls['identityReasonId'] as FormControl;
   }
+
+
   closeModel() {
     this.authService.isNewAccountOpened.next(false);
     this.RemoveStorage();
   }
+
+
   RemoveStorage() {
     localStorage.removeItem('accountWay');
     localStorage.removeItem('notificationSource');
@@ -189,12 +199,9 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       this.emairatesWay.updateValueAndValidity();
       this.emailWay.clearValidators();
       this.emailWay.updateValueAndValidity();
-      this.phoneWay.setValidators([
-        Validators.required,
-        Validators.pattern('(05)[0-9]{8}'),
-      ]);
-      this.account.notificationSource =
-        this.registrationWayFormGrp.value.phoneWay;
+      this.phoneWay.setValidators([ Validators.required, Validators.pattern('(05)[0-9]{8}'),]);
+      this.account.notificationSource =this.registrationWayFormGrp.value.phoneWay;
+
     } else if (e == RegistrationEnum.Email) {
       this.showEmailField = true;
       this.showPhoneField = false;
@@ -209,8 +216,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
           /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         ),
       ]);
-      this.account.notificationSource =
-        this.registrationWayFormGrp.value.emailWay;
+      this.account.notificationSource = this.registrationWayFormGrp.value.emailWay;
     } else if (e == RegistrationEnum.EmiratesId) {
       this.showEmailField = false;
       this.showPhoneField = false;
@@ -219,12 +225,9 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       this.phoneWay.updateValueAndValidity();
       this.emailWay.clearValidators();
       this.emailWay.updateValueAndValidity();
-      this.emairatesWay.setValidators([
-        Validators.required,
-        Validators.pattern('(784)[0-9]{12}'),
-      ]);
-      this.account.notificationSource =
-        this.registrationWayFormGrp.value.emairatesWay;
+      this.emairatesWay.setValidators([ Validators.required, Validators.pattern('(784)[0-9]{12}'),]);
+
+      this.account.notificationSource =this.registrationWayFormGrp.value.emairatesWay;
     }
   }
 
@@ -235,36 +238,79 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     localStorage.setItem('accountWay', this.account.accountWay);
     localStorage.setItem('notificationSource', this.account.notificationSource);
     // this.openOTPModel=true;
-    this.sendOtp();
+
+    if (this.account.accountWay == RegistrationEnum.EmiratesId) this.createUaePassAccount()
+    else this.sendOTP();
+
   }
 
-  excludedLast3Digits
-  params
-  sendOtp() {
+
+  sendOTP() {
     if (this.timeLeft) {
       this.isBtnLoading = true;
     }
 
-    if (this.account.accountWay == RegistrationEnum.EmiratesId) {
-      this.authService
+    let data
+    if(this.account.accountWay ==RegistrationEnum.EmiratesId){
+      data={
+        ...this.account,
+        soursGetway : SourceGatwayOTP.ICA,
+        phoneHashed:this.UAEUnregisteredUser?.phone
+      }
+    }else{
+      data={
+        ...this.account,
+        soursGetway :  SourceGatwayOTP.Registration,
+      }
+    }
+
+    this.authService.sendOtpToUser(data).subscribe(
+      (res) => {
+        this.isBtnLoading = false;
+        this.toastService.success(this.translate.instant('shared.Otp send successfully'));
+
+        this.tittle = this.translate.instant('sign up.confirmed with OTP');
+        this.step = 2;
+        this.startTimer();
+        this.enableSendOtpAgain = true;
+      },
+      (err: Error) => {
+        this.isBtnLoading = false;
+        this.toastService.error(err.message ||this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      }
+    );
+
+  }
+
+
+  excludedLast3Digits
+  params
+
+  createUaePassAccount(){
+    this.authService
         .createUAEPassAccount(this.account.notificationSource)
         .subscribe(
           (res) => {
 
             this.isBtnLoading = false;
 
-            if (res?.statusCode == 'OK' || res?.statusCode == 'BadGateway') {
-              if(!res?.result?.phone){
+            if (res?.statusCode == 'OK' || (res?.statusCode == 'BadGateway' && res?.result)) {
+              if(res && (!res?.result?.phone || !res?.result?.phoneLast3Digit)){
                 this.toastService.error('.عزرا لا يمكن استكمال خطوات التسجيل حيث انه لايوحد رقم هاتف مرمبوط بالهوية')
                 return
               }
               this.step = 5;
               this.UAEUnregisteredUser = res?.result;
-              this.excludedLast3Digits = res?.result?.phone.slice(-3);
-              this.phoneNumber.setValue(this.excludedLast3Digits.padStart(10,'*'))
-              this.params= {value: this.excludedLast3Digits}
+              // this.excludedLast3Digits = res?.result?.phone.slice(-3);
+              // this.phoneNumber.setValue(this.excludedLast3Digits.padStart(10,'*'))
+              // this.params= {value: this.excludedLast3Digits}
+              this.phoneNumber.setValue( res?.result?.phoneLast3Digit?.padStart(10,'*'))
+              this.params= {value: res?.result?.phoneLast3Digit}
 
-            } else if (res?.statusCode == 'NotAcceptable') {
+            } else if(res?.statusCode == 'BadGateway' && !res?.result){
+                this.toastService.error(this.translate.instant('toasterMessage.techError'));
+
+            }else if (res?.statusCode == 'NotAcceptable') {
               this.toastService.error(this.translate.instant('EmiratesIdIsNotValid'));
             } else if (res?.statusCode == 'BadRequest') {
               this.toastService.error(
@@ -276,33 +322,16 @@ export class NewAccountComponent implements OnInit, OnDestroy {
             this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
           }
         );
-    } else {
-
-      this.authService.sendOtpToUser(this.account).subscribe(
-        (res) => {
-          this.isBtnLoading = false;
-          this.toastService.success(this.translate.instant('shared.Otp send successfully'));
-
-          this.tittle = this.translate.instant('sign up.confirmed with OTP');
-          this.step = 2;
-          this.startTimer();
-          this.enableSendOtpAgain = true;
-        },
-        (err: Error) => {
-          this.isBtnLoading = false;
-          this.toastService.error(err.message ||this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
-        }
-      );
-    }
   }
+
 
   sendOtpAgain() {
     this.enableSendOtpAgain = false;
-    this.getCurrentRegistrationWay();
-    this.sendOtp();
+    this.setCurrentRegistrationWay();
+    this.sendOTP();
   }
 
-  getCurrentRegistrationWay() {
+  setCurrentRegistrationWay() {
     this.account.accountWay = localStorage.getItem('accountWay');
     this.account.notificationSource =
       localStorage.getItem('notificationSource');
@@ -314,21 +343,24 @@ export class NewAccountComponent implements OnInit, OnDestroy {
 
   savePassword() {
     this.isBtnLoading = true;
-    this.getCurrentRegistrationWay();
+    this.setCurrentRegistrationWay();
     var password = {
       registrationSource: this.account.notificationSource,
       password: this.passwordsFormGrp.value.newUserPassword,
     };
 
     if (localStorage.getItem('userAcountData')) {
-      this.UAEUnregisteredUser.registrationSource =
-        this.account.notificationSource;
+      this.UAEUnregisteredUser.registrationSource = this.account.notificationSource;
       this.UAEUnregisteredUser.emiratesIdPath = this.emiratesIdPath;
       this.authService
         .savePassword(password)
         .pipe(
           switchMap((res) => {
-            return this.authService.saveAccount(this.UAEUnregisteredUser);
+            if(this.account.accountWay ==RegistrationEnum.EmiratesId){
+              return this.authService.saveAccountEncrpted(this.UAEUnregisteredUser);
+            }else{
+              return this.authService.saveAccount(this.UAEUnregisteredUser);
+            }
           })
         )
         .subscribe(
@@ -346,11 +378,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
           },
           (err) => {
             this.isBtnLoading = false;
-            this.toastService.error(
-              this.translate.instant(
-                'Request cannot be processed, Please contact support.'
-              )
-            );
+            this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
           }
         );
     } else {
@@ -387,7 +415,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
 
   savePersonalInformation() {
     this.isBtnLoading = true;
-    this.getCurrentRegistrationWay();
+    this.setCurrentRegistrationWay();
     var information = {
       reasonForNotHavingEmiratesId: this.accountFormGrp.value.identityReasonId,
       guardianAccountWay: this.account.accountWay,
@@ -438,22 +466,6 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     }
   }
 
-  getAuthenticationWays() {
-    this.signUpWaysList = [
-      {
-        value: RegistrationEnum.Email,
-        name: this.translate.instant('sign up.emailInCaseNotHaveEmiratesID'),
-      },
-      {
-        value: RegistrationEnum.PhoneNumber,
-        name: this.translate.instant('sign up.phoneNumberInCaseNotHaveEmiratesID'),
-      },
-      {
-        value: RegistrationEnum.EmiratesId,
-        name: this.translate.instant('sign up.digitalIdentity'),
-      },
-    ];
-  }
 
   startTimer() {
     this.timeLeft = 60;
@@ -471,7 +483,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
 
   confirmOTP() {
     this.isBtnLoading = true;
-    this.getCurrentRegistrationWay();
+    this.setCurrentRegistrationWay();
     this.authService.confirmOtp(this.account, this.otp).subscribe(
       (res) => {
         this.isBtnLoading = false;
@@ -509,7 +521,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     this.account.notificationSource = this.UAEUnregisteredUser?.phone;
     localStorage.setItem('accountWay', this.account.accountWay);
     localStorage.setItem('notificationSource', this.account.notificationSource);
-    this.sendOtp();
+    this.sendOTP();
   }
 
   ngOnDestroy(): void {

@@ -418,7 +418,8 @@
         "degreesAccepted":"تم قبول الدرجات المرفقه بنجاح",
         "degreesRejected":"تم رفض الدرجات المرفقه بنجاح",
         "DegreeImproved":"تم تحسين درجات الطالب بنجاح",
-        "upgradeStudents":"تم ترقيه الطلاب بنجاح"
+        "upgradeStudents":"تم ترقيه الطلاب بنجاح",
+        "techError":"عزرا يبدو ان هناك مشكله تقنية"
     },
 
     "emptyList": {
