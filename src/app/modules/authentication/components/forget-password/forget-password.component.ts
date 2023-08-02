@@ -1,5 +1,10 @@
-import { Component, Input, OnInit,inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
@@ -7,132 +12,170 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import Validation from 'src/app/modules/user-information/models/utils/validation';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { SourceGatwayOTP } from 'src/app/core/Models/account/registration-way';
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
-  styleUrls: ['./forget-password.component.scss']
+  styleUrls: ['./forget-password.component.scss'],
 })
 export class ForgetPasswordComponent implements OnInit {
-  lang = inject(TranslationService).lang
+  lang = inject(TranslationService).lang;
   urlOtp;
   urlEmail;
   tittle;
-  step=1;
-  isEmail:boolean=false;
-  exclamationIcon=faExclamationCircle;
-  openForgetPasswordModel:boolean=false;
-  openChangePasswordModel:boolean=false;
+  step = 1;
+  isEmail: boolean = false;
+  exclamationIcon = faExclamationCircle;
+  openForgetPasswordModel: boolean = false;
+  openChangePasswordModel: boolean = false;
   resetPasswordFormGrp: FormGroup;
   changePasswordFormGrp: FormGroup;
-  @Input('openForgetPasswordModel')  openForgetModel:boolean;
-  @Input('openResetModel')  openResetModel:boolean;
-  constructor( private router: Router, private activatedRoute:ActivatedRoute,private toastService:ToastrService,private translate:TranslateService, private formbuilder: FormBuilder,private authService:AuthenticationService) {
-    this.resetPasswordFormGrp=formbuilder.group({
-
-      resetPasswordWay:['', [Validators.required,Validators.minLength(4)]],
-
+  @Input('openForgetPasswordModel') openForgetModel: boolean;
+  @Input('openResetModel') openResetModel: boolean;
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private toastService: ToastrService,
+    private translate: TranslateService,
+    private formbuilder: FormBuilder,
+    private authService: AuthenticationService
+  ) {
+    this.resetPasswordFormGrp = formbuilder.group({
+      resetPasswordWay: ['', [Validators.required, Validators.minLength(4)]],
     });
-    this.changePasswordFormGrp=formbuilder.group({
-
-      newPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
-      confirmedNewPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]]
-    },{validators: [Validation.match('newPassword', 'confirmedNewPassword')]});
+    this.changePasswordFormGrp = formbuilder.group(
+      {
+        newPassword: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              '(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}'
+            ),
+          ],
+        ],
+        confirmedNewPassword: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              '(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}'
+            ),
+          ],
+        ],
+      },
+      { validators: [Validation.match('newPassword', 'confirmedNewPassword')] }
+    );
   }
   ngOnInit(): void {
-    this.tittle=this.translate.instant('login.Are you Forget Password ?');
-
+    this.tittle = this.translate.instant('login.Are you Forget Password ?');
   }
 
   get resetPasswordWay() {
-    return this.resetPasswordFormGrp.controls['resetPasswordWay'] as FormControl;
+    return this.resetPasswordFormGrp.controls[
+      'resetPasswordWay'
+    ] as FormControl;
   }
-
 
   get newPassword() {
     return this.changePasswordFormGrp.controls['newPassword'] as FormControl;
   }
   get confirmedNewPassword() {
-    return this.changePasswordFormGrp.controls['confirmedNewPassword'] as FormControl;
+    return this.changePasswordFormGrp.controls[
+      'confirmedNewPassword'
+    ] as FormControl;
   }
 
-  closeModel()
-  {
-
+  closeModel() {
     this.authService.isForgetModelOpened.next(false);
-
   }
 
-  forgetPassword()
-  {
+  forgetPassword() {
     var account;
-    if(this.isEmail)
-   {
-     account={
-      "userName": this.resetPasswordFormGrp.value.resetPasswordWay
+    if (this.isEmail) {
+      account = {
+        userName: this.resetPasswordFormGrp.value.resetPasswordWay,
+      };
+    } else {
+      account = {
+        phoneNumber: this.resetPasswordFormGrp.value.resetPasswordWay,
+      };
     }
-  }
-  else{
-    account={
-      "phoneNumber": this.resetPasswordFormGrp.value.resetPasswordWay
-    }
-  }
 
-    this.authService.forgotPassword(account).subscribe((res)=>{
-
-      this.step=2;
-      this.tittle=""
-      this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
-
-    },(err)=>{
-
-      this.lang=='ar' ? this.toastService.error(err['Ar']) : this.toastService.error(err['En'])
-
-    })
+    this.authService.forgotPassword(account).subscribe(
+      (res) => {
+        this.step = 2;
+        this.tittle = '';
+        this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
+      },
+      (err) => {
+        this.lang == 'ar' ? this.toastService.error(err['Ar']) : this.toastService.error(err['En']);
+      }
+    );
   }
 
-  checkValidators(event)
-  {
+  checkValidators(event) {
+    var input = event;
+    this.resetPasswordWay.setValidators([
+      Validators.required,
+      Validators.pattern('(05)[0-9]{8}'),
+    ]);
 
-    var input=event;
-    this.resetPasswordWay.setValidators([Validators.required,Validators.pattern('(05)[0-9]{8}')]);
-
-    this.isEmail=false;
+    this.isEmail = false;
 
     for (let index = 0; index < input.length; index++) {
-     if( input[index]!=0&&input[index]!=1&&input[index]!=2&&input[index]!=3&&input[index]!=4&&input[index]!=5&&input[index]!=6&&input[index]!=7&&input[index]!=8&&input[index]!=9)
-     {
-
-         this.isEmail=true;
-
-     }
-   }
-   if(this.isEmail)
-   {
-
-   this.resetPasswordWay.clearValidators();
-   this.resetPasswordWay.setValidators([Validators.required,Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]);
-   }
- }
-
- ResetPassword()
- {
-  var account;
-  this.urlOtp=this.activatedRoute.snapshot.queryParamMap.get('otp');
-  this.urlEmail=this.activatedRoute.snapshot.queryParamMap.get('email');
-
-  account={
-    "otp": this.urlOtp,
-    "password":this.changePasswordFormGrp.value.newPassword,
-    "email": this.urlEmail
+      if (
+        input[index] != 0 &&
+        input[index] != 1 &&
+        input[index] != 2 &&
+        input[index] != 3 &&
+        input[index] != 4 &&
+        input[index] != 5 &&
+        input[index] != 6 &&
+        input[index] != 7 &&
+        input[index] != 8 &&
+        input[index] != 9
+      ) {
+        this.isEmail = true;
+      }
+    }
+    if (this.isEmail) {
+      this.resetPasswordWay.clearValidators();
+      this.resetPasswordWay.setValidators([
+        Validators.required,
+        Validators.pattern(
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        ),
+      ]);
+    }
   }
 
-  this.authService.resetPassword(account).subscribe((res)=>{
+  ResetPassword() {
+    var account;
+    this.urlOtp = this.activatedRoute.snapshot.queryParamMap.get('otp');
+    this.urlEmail = this.activatedRoute.snapshot.queryParamMap.get('email');
 
-    this.toastService.success(this.translate.instant('Password changed successfully'));
-    this.openResetModel=false;
-    this.router.navigate(['/auth/login']);
-  },(err)=>{
-    this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
-  })
- }
+    account = {
+      otp: this.urlOtp,
+      password: this.changePasswordFormGrp.value.newPassword,
+      email: this.urlEmail,
+    };
+
+    this.authService.resetPassword(account).subscribe(
+      (res) => {
+        this.toastService.success(
+          this.translate.instant('Password changed successfully')
+        );
+        this.openResetModel = false;
+        this.router.navigate(['/auth/login']);
+      },
+      (err) => {
+        this.toastService.error(
+          this.translate.instant(
+            'Request cannot be processed, Please contact support.'
+          )
+        );
+      }
+    );
+  }
 }

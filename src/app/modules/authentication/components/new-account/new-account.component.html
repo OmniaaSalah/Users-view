@@ -1,11 +1,12 @@
 <p-dialog header="{{tittle}}" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openModel" (onHide)="closeModel()" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
     <ng-template pTemplate="content">
-      <ng-container >
+
         <ng-container *ngIf="step==1">
           <div class="sign up">
             <div class=" mt-5 mb-5 custom-form custom-validation-form ">
 
               <form [formGroup]="registrationWayFormGrp">
+
                 <div class="row gx-5 form-set">
                   <div class="col-12">
 
@@ -29,8 +30,9 @@
                   </div>
 
                 </div>
-                <div class="row gx-5 form-set">
 
+
+                <div class="row gx-5 form-set">
                   <div class="col-12" *ngIf="showPhoneField">
                     <label class="label" for="precantage">{{'sign up.phoneNumber'|translate}} <span
                         class="star">*</span></label>
@@ -93,7 +95,6 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
 
                 <div class="row gx-5 form-set">
@@ -112,41 +113,26 @@
 
 
         <ng-container *ngIf="step==2">
-                  <div class="OTP pt-3 pb-5">
+            <div class="OTP pt-3 pb-5">
+                {{'sign up.Pleaze enter OTP that send to your Account'|translate}}
+                <div class="justify-content-center w-50 d-flex" [hidden]="!timeLeft">
+                    <span >{{'sign up.through'|translate}}</span>
+                    <span  ><b>{{timeLeft}} {{'sign up.second'|translate}}</b></span>
+                </div>
+            </div>
 
-                      {{'sign up.Pleaze enter OTP that send to your Account'|translate}}
-                      <div class="justify-content-center w-50 d-flex" [hidden]="!timeLeft">
-                          <span >{{'sign up.through'|translate}}</span>
-                          <span  ><b>{{timeLeft}} {{'sign up.second'|translate}}</b></span>
-                      </div>
+            <div class="mt-5 mb-5" >
+              <div class="otp-change d-flex  justify-content-center">
+                  <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)"   [config]="{length:6,placeholder:'*'}"></ng-otp-input>
+              </div>
+            </div>
 
-                  </div>
-                  <div class="mt-5 mb-5" >
-
-
-
-
-                                  <div class="otp-change d-flex  justify-content-center">
-
-                                      <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)"   [config]="{length:6,placeholder:'*'}"></ng-otp-input>
-
-                                  </div>
-
-
-
-                  </div>
-                  <div class="again-OTP pt-5 pb-5">
-
-                          <div  [hidden]="timeLeft">
-                              <span>{{'sign up.not have OTP yet ?'|translate}}</span>
-                              <button class="" (click)="sendOtpAgain()" [disabled]="!enableSendOtpAgain" ><a class="color-skyBlue-400">{{'sign up.send OTP again'|translate}}</a></button>
-
-                          </div>
-
-
-
-
-                  </div>
+            <div class="again-OTP pt-5 pb-5">
+              <div  [hidden]="timeLeft">
+                  <span>{{'sign up.not have OTP yet ?'|translate}}</span>
+                  <button class="" (click)="sendOtpAgain()" [disabled]="!enableSendOtpAgain" ><a class="color-skyBlue-400">{{'sign up.send OTP again'|translate}}</a></button>
+              </div>
+            </div>
 
         </ng-container>
 
@@ -428,8 +414,6 @@
 
         </ng-container>
 
-
-      </ng-container>
     </ng-template>
 
 
