@@ -57,6 +57,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
   passwordsFormGrp: FormGroup;
   accountFormGrp: FormGroup;
 
+  currentRegistrationWay
   get fileTypeEnum() {
     return FileTypeEnum;
   }
@@ -233,6 +234,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
 
   saveRegistrationWay() {
     this.account.accountWay = this.registrationWayFormGrp.value.registrationWay;
+    this.currentRegistrationWay = this.registrationWayFormGrp.value.registrationWay;
     this.changeRegistrationField(this.registrationWayFormGrp.value.registrationWay);
 
     localStorage.setItem('accountWay', this.account.accountWay);
@@ -251,7 +253,9 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     }
 
     let data
-    if(this.account.accountWay ==RegistrationEnum.EmiratesId){
+
+    if(this.currentRegistrationWay == RegistrationEnum.EmiratesId){
+
       data={
         ...this.account,
         soursGetway : SourceGatwayOTP.ICA,
@@ -293,19 +297,19 @@ export class NewAccountComponent implements OnInit, OnDestroy {
           (res) => {
 
             this.isBtnLoading = false;
-
-            if (res?.statusCode == 'OK' || (res?.statusCode == 'BadGateway' && res?.result)) {
-              if(res && (!res?.result?.phone || !res?.result?.phoneLast3Digit)){
-                this.toastService.error('.عزرا لا يمكن استكمال خطوات التسجيل حيث انه لايوحد رقم هاتف مرمبوط بالهوية')
-                return
-              }
+            // (res?.statusCode == 'BadGateway' && res?.result)
+            if (res?.statusCode == 'OK' || res?.statusCode == 'BadGateway') {
+              // if(res && (!res?.result?.phone || !res?.result?.phoneLast3Digit)){
+              //   this.toastService.error('.عزرا لا يمكن استكمال خطوات التسجيل حيث انه لايوحد رقم هاتف مرمبوط بالهوية')
+              //   return
+              // }
               this.step = 5;
               this.UAEUnregisteredUser = res?.result;
-              // this.excludedLast3Digits = res?.result?.phone.slice(-3);
-              // this.phoneNumber.setValue(this.excludedLast3Digits.padStart(10,'*'))
-              // this.params= {value: this.excludedLast3Digits}
-              this.phoneNumber.setValue( res?.result?.phoneLast3Digit?.padStart(10,'*'))
-              this.params= {value: res?.result?.phoneLast3Digit}
+              this.excludedLast3Digits = res?.result?.phone.slice(-3);
+              this.phoneNumber.setValue(this.excludedLast3Digits.padStart(10,'*'))
+              this.params= {value: this.excludedLast3Digits}
+              // this.phoneNumber.setValue( res?.result?.phoneLast3Digit?.padStart(10,'*'))
+              // this.params= {value: res?.result?.phoneLast3Digit}
 
             } else if(res?.statusCode == 'BadGateway' && !res?.result){
                 this.toastService.error(this.translate.instant('toasterMessage.techError'));
@@ -333,8 +337,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
 
   setCurrentRegistrationWay() {
     this.account.accountWay = localStorage.getItem('accountWay');
-    this.account.notificationSource =
-      localStorage.getItem('notificationSource');
+    this.account.notificationSource = localStorage.getItem('notificationSource');
   }
 
   setAttachment(files: CustomFile[]) {
@@ -356,7 +359,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
         .savePassword(password)
         .pipe(
           switchMap((res) => {
-            if(this.account.accountWay ==RegistrationEnum.EmiratesId){
+            if(this.currentRegistrationWay ==RegistrationEnum.EmiratesId){
               return this.authService.saveAccountEncrpted(this.UAEUnregisteredUser);
             }else{
               return this.authService.saveAccount(this.UAEUnregisteredUser);
@@ -427,8 +430,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
         ar: this.accountFormGrp.value.arabicNickName,
         en: this.accountFormGrp.value.englishNickName,
       },
-      havingNoEmiratesIdAttachment:
-        this.accountFormGrp.value.identityReasonFile,
+      havingNoEmiratesIdAttachment:this.accountFormGrp.value.identityReasonFile,
       gender: this.accountFormGrp.value.gender,
       nationalityId: this.accountFormGrp.value.nationality,
       birthDate: this.accountFormGrp.value.birthDay,
@@ -512,13 +514,15 @@ export class NewAccountComponent implements OnInit, OnDestroy {
   }
 
   saveUserObj() {
-    if (this.UAEUnregisteredUser?.phone?.length != 10) {
-      this.UAEUnregisteredUser.phone = this.phoneNumber.value;
-    }
+    // if (this.UAEUnregisteredUser?.phone?.length != 10) {
+    //   this.UAEUnregisteredUser.phone = this.phoneNumber.value;
+    // }
 
     localStorage.setItem('userAcountData',JSON.stringify(this.UAEUnregisteredUser));
+
     this.account.accountWay = RegistrationEnum.PhoneNumber;
     this.account.notificationSource = this.UAEUnregisteredUser?.phone;
+
     localStorage.setItem('accountWay', this.account.accountWay);
     localStorage.setItem('notificationSource', this.account.notificationSource);
     this.sendOTP();

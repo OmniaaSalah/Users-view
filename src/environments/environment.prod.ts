@@ -20,7 +20,7 @@ export const environment = {
    // logoutRedirectUrl: 'http://10.25.237.31:80/auth/login',
    // logoutRedirectUrl: 'http://10.25.237.35:80/auth/login',
     // logoutRedirectUrl: 'http://10.25.237.33:8082/auth/login',
-   clientUrl:"https://daleel-app.azurewebsites.net"
+  //  clientUrl:"https://daleel-app.azurewebsites.net"
   };
 
 

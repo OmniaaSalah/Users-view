@@ -1479,7 +1479,8 @@
             "diplomeFile":"مرفق شهادة المعادله",
             "boardFile":"مرفق شهادة البورد",
             "graduated":"أنهى السنوات الدراسية",
-            "studentHistoryDetails": "تفاصيل التعديل على معلومات الطالب"
+            "studentHistoryDetails": "تفاصيل التعديل على معلومات الطالب",
+            "studentSubjects":"مواد الطالب"
 
         },
         "Assignments": {
