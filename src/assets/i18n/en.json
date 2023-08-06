@@ -1786,7 +1786,9 @@
             "Physical":"Physical",
             "diplomeFile":"Equivalency certificate file",
             "boardFile":"Board certificate File",
-            "graduated":"Finish Academic years"
+            "graduated":"Finish Academic years",
+            "studentHistoryDetails": "Updates on student details ",
+            "studentSubjects":"Student Subjects"
 
         },
         "Requests": {
