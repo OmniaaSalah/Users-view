@@ -5,6 +5,7 @@ import { Table } from 'primeng/table';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable"
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 })
 export class ExportService {
   lang = inject(TranslationService).lang
+  showLoader$ = new BehaviorSubject(false)
   constructor() { }
 
 
@@ -28,7 +30,8 @@ export class ExportService {
       const worksheet = xlsx.utils.json_to_sheet(items);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      this.saveAsExcelFile(excelBuffer, fileName);
+      this.saveAsExcelFile(excelBuffer, fileName)
+
     });
   }
 
@@ -38,7 +41,8 @@ export class ExportService {
     const data: Blob = new Blob([buffer], {
         type: EXCEL_TYPE
     });
-    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION)
+    this.showLoader$.next(false)
   }
 
 
@@ -72,6 +76,7 @@ export class ExportService {
     });
 
     doc.save(fileName+'.pdf');
+    this.showLoader$.next(false)
 
   }
 
