@@ -117,6 +117,7 @@ export class AttendanceReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {
+    this.exportService.showLoader$.next(true)
     let exportedTable = []
     const myColumns = this.tableColumns.filter(el => el.isSelected)
     let filter = {...this.filtration, PageSize:this.studentsReport.totalAllData,Page:1}

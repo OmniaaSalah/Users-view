@@ -33,12 +33,12 @@ import { TranslateService } from '@ngx-translate/core';
     })
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFactory,
-      deps: [TranslateService],
-      multi: true
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: appInitializerFactory,
+    //   deps: [TranslateService],
+    //   multi: true
+    // },
     {
       provide: RouteReuseStrategy,
       useClass: CustomRouteReuseStrategy,
@@ -48,9 +48,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppModule { }
 
-export function appInitializerFactory(translate: TranslateService) {
-  return () => {
-    translate.setDefaultLang('ar');
-    return translate.use('ar').toPromise();
-  };
-}
+// export function appInitializerFactory(translate: TranslateService) {
+//   return () => {
+//     translate.setDefaultLang('ar');
+//     return translate.use('ar').toPromise();
+//   };
+// }

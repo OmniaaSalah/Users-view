@@ -145,6 +145,7 @@ export class ParentsReportsComponent implements OnInit {
 
 
     onExport(fileType: FileTypeEnum, table:Table){
+      this.exportService.showLoader$.next(true)
       let exportedTable = []
       const myColumns = this.tableColumns.filter(el => el.isSelected)
       let filter = {...this.filtration, PageSize:this.parentsReport.totalAllData,Page:1}

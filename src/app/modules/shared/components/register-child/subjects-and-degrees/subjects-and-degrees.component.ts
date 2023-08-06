@@ -97,6 +97,7 @@ export class SubjectsAndDegreesComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:null,Page:1}
     this.studentsService.studentSubjectsToExport(this.studentId||this.childId, this.filtration.semester,filter).subscribe( (res) =>{
 

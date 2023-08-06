@@ -58,6 +58,7 @@ export class GracePeriodsListComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.periods.totalAllData,Page:1}
     this.settingService.getGracePeriodListToExport(filter).subscribe( (res:any) =>{
 

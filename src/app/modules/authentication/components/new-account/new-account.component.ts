@@ -36,7 +36,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     soursGetway:SourceGatwayOTP.ICA
   };
 
-  signUpWaysList = this.authService.signUpWaysList;
+  signUpWaysList
   nationalityList = [];
   noIdentityReasonList = [];
   genderList = inject(SharedService).genderOptions;
@@ -120,9 +120,28 @@ export class NewAccountComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.getRegistrationWays()
     this.tittle = this.translate.instant('login.Create New User Account');
     this.RemoveStorage();
   }
+
+  getRegistrationWays(){
+    this.signUpWaysList = [
+      {
+        value: RegistrationEnum.Email,
+        name: this.translate.instant('sign up.emailInCaseNotHaveEmiratesID'),
+      },
+      {
+        value: RegistrationEnum.PhoneNumber,
+        name: this.translate.instant('sign up.phoneNumberInCaseNotHaveEmiratesID'),
+      },
+      {
+        value: RegistrationEnum.EmiratesId,
+        name: this.translate.instant('sign up.digitalIdentity'),
+      },
+    ];
+  }
+
   get registrationWay() {
     return this.registrationWayFormGrp.controls[
       'registrationWay'
@@ -297,6 +316,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
           (res) => {
 
             this.isBtnLoading = false;
+            // (res?.statusCode == 'BadGateway' && res?.result)
             if (res?.statusCode == 'OK' || (res?.statusCode == 'BadGateway' && res?.result)) {
               if(res && (!res?.result?.phone || !res?.result?.phoneLast3Digit)){
                 this.toastService.error('.عزرا لا يمكن استكمال خطوات التسجيل حيث انه لايوحد رقم هاتف مرمبوط بالهوية')
@@ -520,7 +540,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     localStorage.setItem('userAcountData',JSON.stringify(this.UAEUnregisteredUser));
 
     this.account.accountWay = RegistrationEnum.PhoneNumber;
-    this.account.notificationSource = this.UAEUnregisteredUser?.phone;
+    this.account.notificationSource = this.phoneNumber.value;
 
     localStorage.setItem('accountWay', this.account.accountWay);
     localStorage.setItem('notificationSource', this.account.notificationSource);

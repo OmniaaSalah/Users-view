@@ -162,9 +162,9 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
 
   onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration, PageSize:this.schools.totalAllData,Page:1}
     this.schoolsService.schoolsToExport(filter).subscribe( (res: School[]) =>{
-console.log(res);
 
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolsList'))
     })

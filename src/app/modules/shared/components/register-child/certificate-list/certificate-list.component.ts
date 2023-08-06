@@ -74,6 +74,7 @@ export class CertificateListComponent implements OnInit {
   }
 
   onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.certificates.totalAllData,Page:1}
     this.studentService.certificatesToExport(this.studentId||this.childId,filter).subscribe( (res) =>{
 

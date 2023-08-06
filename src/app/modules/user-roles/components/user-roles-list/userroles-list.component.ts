@@ -162,6 +162,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
 
   onExport(fileType: FileTypeEnum, table:Table){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.roles.totalAllData,Page:1}
     this.userRolesService.rolesToExport(filter).subscribe( (res) =>{
 
