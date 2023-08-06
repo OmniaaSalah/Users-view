@@ -297,19 +297,18 @@ export class NewAccountComponent implements OnInit, OnDestroy {
           (res) => {
 
             this.isBtnLoading = false;
-            // (res?.statusCode == 'BadGateway' && res?.result)
-            if (res?.statusCode == 'OK' || res?.statusCode == 'BadGateway') {
-              // if(res && (!res?.result?.phone || !res?.result?.phoneLast3Digit)){
-              //   this.toastService.error('.عزرا لا يمكن استكمال خطوات التسجيل حيث انه لايوحد رقم هاتف مرمبوط بالهوية')
-              //   return
-              // }
+            if (res?.statusCode == 'OK' || (res?.statusCode == 'BadGateway' && res?.result)) {
+              if(res && (!res?.result?.phone || !res?.result?.phoneLast3Digit)){
+                this.toastService.error('.عزرا لا يمكن استكمال خطوات التسجيل حيث انه لايوحد رقم هاتف مرمبوط بالهوية')
+                return
+              }
               this.step = 5;
               this.UAEUnregisteredUser = res?.result;
-              this.excludedLast3Digits = res?.result?.phone.slice(-3);
-              this.phoneNumber.setValue(this.excludedLast3Digits.padStart(10,'*'))
-              this.params= {value: this.excludedLast3Digits}
-              // this.phoneNumber.setValue( res?.result?.phoneLast3Digit?.padStart(10,'*'))
-              // this.params= {value: res?.result?.phoneLast3Digit}
+              // this.excludedLast3Digits = res?.result?.phone.slice(-3);
+              // this.phoneNumber.setValue(this.excludedLast3Digits.padStart(10,'*'))
+              // this.params= {value: this.excludedLast3Digits}
+              this.phoneNumber.setValue( res?.result?.phoneLast3Digit?.padStart(10,'*'))
+              this.params= {value: res?.result?.phoneLast3Digit}
 
             } else if(res?.statusCode == 'BadGateway' && !res?.result){
                 this.toastService.error(this.translate.instant('toasterMessage.techError'));
