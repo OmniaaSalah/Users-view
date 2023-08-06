@@ -79,13 +79,13 @@ export class StudentsService {
         return data.map(student =>{
           return {
             [this.translate.instant('dashboard.students.daleelNumber')]: student.studentDaleelNumber,
-            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
-            [this.translate.instant('dashboard.students.studentNickname')]: student.surName.ar,
-            [this.translate.instant('shared.nationality')]: student.nationality.ar,
-            [this.translate.instant('dashboard.students.schoolName')]: student.currentSchoolName.ar,
-            [this.translate.instant('dashboard.students.parent')]: student.guardianName.ar,
-            [this.translate.instant('shared.grade')]: student.gradeName.ar  ,
-            [this.translate.instant('shared.division')]: student.divisionName.ar,
+            [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student.name),
+            [this.translate.instant('dashboard.students.studentNickname')]: getLocalizedValue(student.surName),
+            [this.translate.instant('shared.nationality')]: getLocalizedValue(student.nationality),
+            [this.translate.instant('dashboard.students.schoolName')]: getLocalizedValue(student.currentSchoolName),
+            [this.translate.instant('dashboard.students.parent')]: getLocalizedValue(student.guardianName),
+            [this.translate.instant('shared.grade')]: getLocalizedValue(student.gradeName)  ,
+            [this.translate.instant('shared.division')]: getLocalizedValue(student.divisionName),
           }
         })
       })
