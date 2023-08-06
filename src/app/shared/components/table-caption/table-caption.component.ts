@@ -4,6 +4,7 @@ import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/helpers/filtration';
 import { FileTypeEnum } from '../../enums/file/file.enum';
 import { SharedService } from '../../services/shared/shared.service';
+import { ExportService } from '../../services/export/export.service';
 
 @Component({
   selector: 'app-table-caption',
@@ -12,6 +13,8 @@ import { SharedService } from '../../services/shared/shared.service';
 })
 export class TableCaptionComponent implements OnInit, OnDestroy {
   loadingFilter: boolean=false;
+  showExportLoader$= this.exportService.showLoader$
+
   @Input() hasFilter:boolean=true
   @Input() hasExport:boolean=true
   @Input() hasSearch:boolean=true
@@ -36,10 +39,13 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
   filterAppliedCount$ = this.sharedService.appliedFilterCount$
 
-  constructor(private sharedService:SharedService) { }
+  constructor(private sharedService:SharedService, private exportService:ExportService) { }
 
 
   ngOnInit(): void {
+    this.exportService.showLoader$.subscribe(val=>{
+      if(val) this.showExportModel = false
+    })
     this.sharedService.filterLoading.subscribe((res)=>this.loadingFilter=res)
     this.seachListener()
   }

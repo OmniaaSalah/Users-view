@@ -145,6 +145,7 @@ export class StudentsListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.checkDashboardHeader();
     this.genderList = this.sharedService.genderOptions
 
@@ -304,6 +305,7 @@ export class StudentsListComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration, PageSize:this.students.total,Page:1}
     this.studentsService.studentsToExport(filter, this.userService.getSchoolId()).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsList'))

@@ -33,10 +33,13 @@
 
 
         <div class="export" *ngIf="hasExport" (clickOutside)="showExportModel=false" [ngClass]="small?'sm':''">
-            <button class="btn btn--sm btn-secondary" (click)="showExportModel=!showExportModel">
-                <img class="icon" src="assets/images/shared/download.svg" alt="">
+
+            <button class="btn btn--sm btn-secondary" [disabled]="showExportLoader$|async" (click)="showExportModel=!showExportModel">
+                <img class="icon" src="assets/images/shared/download.svg" alt="" *ngIf="!(showExportLoader$ |async)">
+                <div class="spinner-border text-light" role="status" *ngIf="showExportLoader$ |async"></div>
                 <span>{{'shared.downloadFiles'|translate}}</span>
             </button>
+
             <div class="export__model " [class.show]="showExportModel">
                 <div role="button" (click)="exportPdf()">
                     <p>{{'shared.export file as'|translate}}.Pdf</p>
@@ -46,6 +49,7 @@
                     <p>{{'shared.export file as'|translate}}.xslx</p>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
