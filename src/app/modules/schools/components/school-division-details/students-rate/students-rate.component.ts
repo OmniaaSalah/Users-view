@@ -95,6 +95,7 @@ export class StudentsRateComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.students?.total,Page:1}
     this.divisionService.studentsRateToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsRate'))

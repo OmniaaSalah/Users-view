@@ -194,6 +194,7 @@ export class DegreesComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.degrees.totalAllData,Page:1}
     this.divisionService.degreesToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualDegrees'))

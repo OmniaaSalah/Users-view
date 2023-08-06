@@ -165,6 +165,7 @@ export class SchoolSubjectsComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.subjectsObj.totalAllData,Page:1}
     this.schoolsService.subjectsToExport(filter).subscribe( (res) =>{
 

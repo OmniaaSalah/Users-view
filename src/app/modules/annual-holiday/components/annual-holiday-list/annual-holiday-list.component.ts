@@ -149,6 +149,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
 
   onExport(fileType: FileTypeEnum, table:Table){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.annualHolidays.totalAllData,Page:1}
     this.annualHolidayService.annualToExport(filter).subscribe( (res) =>{
 

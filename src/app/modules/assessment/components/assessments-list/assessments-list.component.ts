@@ -119,6 +119,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     this.getRate()
   }
   onExport(fileType: FileTypeEnum, table: Table) {
+    this.exportService.showLoader$.next(true)
     this.exportService.exportFile(fileType, this.assessmentList.list,'')
   }
   clearFilter() {

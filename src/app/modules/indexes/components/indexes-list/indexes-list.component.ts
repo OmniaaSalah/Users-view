@@ -110,6 +110,7 @@ export class IndexesComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum, table:Table){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration, PageSize:this.indexes.totalAllData,Page:1}
     this.indexesService.indexesToExport(filter).subscribe( (res) =>{
 

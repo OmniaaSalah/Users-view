@@ -146,6 +146,7 @@ componentHeaderData: IHeader = {
 
 
    onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration, PageSize:this.divisions.totalAllData,Page:1}
     this.divisionService.divisionsToExport(filter).subscribe( (res) =>{
 

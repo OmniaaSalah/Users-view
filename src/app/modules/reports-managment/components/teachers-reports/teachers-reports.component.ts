@@ -99,6 +99,7 @@ export class TeachersReportsComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum, table:Table){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.teachersReport.totalAllData,Page:1}
     this.teachersReportService.teachersToExport(filter).subscribe( (res) =>{
 

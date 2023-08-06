@@ -66,6 +66,7 @@ export class TopStudentsComponent implements OnInit {
 
 
  onExport(fileType: FileTypeEnum, table:Table){
+  this.exportService.showLoader$.next(true)
   let filter = {...this.filtration, PageSize:this.allTopStudentsList.totalAllData,Page:1}
   this.schoolYearService.topStudentsToExport(Number(this.schoolYearId),this.filtration).subscribe( (res) =>{
 

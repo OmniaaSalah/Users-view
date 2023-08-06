@@ -125,6 +125,7 @@ export class AssignmentsListComponent implements OnInit {
    }
 
    onExport(fileType: FileTypeEnum){
+    this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.assignments.totalAllData,Page:1}
     this.assignmentservice.assignmentsToExport(filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('Assignments List'))
