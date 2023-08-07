@@ -319,7 +319,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
             // (res?.statusCode == 'BadGateway' && res?.result)
             if (res?.statusCode == 'OK' || (res?.statusCode == 'BadGateway' && res?.result)) {
               if(res && (!res?.result?.phone || !res?.result?.phoneLast3Digit)){
-                this.toastService.error('.عزرا لا يمكن استكمال خطوات التسجيل حيث انه لايوحد رقم هاتف مرمبوط بالهوية')
+                this.toastService.error('.عذرا لا يمكن استكمال خطوات التسجيل حيث انه لايوحد رقم هاتف مرمبوط بالهوية')
                 return
               }
               this.step = 5;
@@ -379,7 +379,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
         .pipe(
           switchMap((res) => {
             if(this.currentRegistrationWay ==RegistrationEnum.EmiratesId){
-              return this.authService.saveAccountEncrpted(this.UAEUnregisteredUser);
+              return this.authService.saveAccountEncrpted(this.UAEUnregisteredUser?.encryptedInfo);
             }else{
               return this.authService.saveAccount(this.UAEUnregisteredUser);
             }
