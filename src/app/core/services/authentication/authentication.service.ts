@@ -70,8 +70,8 @@ export class AuthenticationService {
     return this.http.post(`/Account/guardian-account`, newAccount);
   }
 
-  saveAccountEncrpted(newAccount) {
-    return this.http.post(`/Account/guardian-account-encrpted`, newAccount);
+  saveAccountEncrpted(encryptedInfo) {
+    return this.http.post(`/Account/guardian-account-encrpted`, encryptedInfo);
   }
 
 
