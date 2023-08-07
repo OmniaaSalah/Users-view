@@ -71,7 +71,7 @@ export class AuthenticationService {
   }
 
   saveAccountEncrpted(encryptedInfo) {
-    return this.http.post(`/Account/guardian-account-encrpted`, encryptedInfo);
+    return this.http.post(`/Account/guardian-account-encrpted?guardianAccountDto=${encryptedInfo}`);
   }
 
 
