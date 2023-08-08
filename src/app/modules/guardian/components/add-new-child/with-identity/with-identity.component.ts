@@ -113,6 +113,7 @@ export class WithIdentityComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
+    this.onModelClose()
   }
 
 
@@ -161,7 +162,6 @@ export class WithIdentityComponent implements OnInit {
     }) )
     .subscribe({
       next: (res)=>{
-      console.log(res);
 
       this.onSubmit=false;
       this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
@@ -181,7 +181,6 @@ export class WithIdentityComponent implements OnInit {
 
 
    sendRelinkChildReq(){
-    console.warn('innnnnnnnnnnnnnnnnnnnnnnnnn');
 
     this.onSubmit=true;
     this.addChildService.sendRelinkChildReq(this.childToRelinkWithNewGuardian).subscribe(res=>{
@@ -206,8 +205,22 @@ export class WithIdentityComponent implements OnInit {
         this.sendRelinkChildReq()
       }
     })
-   }
 
+   }
+ onModelClose(){
+
+  this.confirmModelService.onClose$
+  .pipe(takeUntil(this.ngDestroy$))
+  .subscribe(val =>{
+    console.log(val);
+
+    if(val) {
+      this.confirmModelService.confirmed$.next(false)
+      this.ngDestroy$.next(null)
+      this.ngDestroy$.complete()
+    }
+  })
+ }
 
   ngOnDestroy(): void {
     this.ngDestroy$.next(null)

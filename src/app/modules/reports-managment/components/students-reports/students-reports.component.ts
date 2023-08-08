@@ -19,6 +19,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ActivatedRoute, Router } from '@angular/router';
+import { shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-students-reports',
@@ -109,6 +110,7 @@ export class StudentsReportsComponent implements OnInit {
     private studentsReportService: StudentsReportsService,
     private sharedService: SharedService,
     private schoolsService: SchoolsService,
+    private studentsService:StudentsService,
     private route:ActivatedRoute,
     private router:Router
   ) {
@@ -196,6 +198,12 @@ export class StudentsReportsComponent implements OnInit {
       if(report.isSelected) selectedItems.push(report)
     })
     !selectedItems.length? this.emptyTable=true : this.emptyTable=false
+  }
+
+
+  onCurriculumSelected(ids){
+    this.schools$ = this.studentsService.getSchools({curriculumId:ids}).pipe(shareReplay())
+
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {

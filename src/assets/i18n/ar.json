@@ -1701,10 +1701,10 @@
             "ImprovementSchoolYear":"السنة الدراسية للتحسين",
             "ImprovementDate":"تاريخ التعديل",
             "ImprovementBy":"تم التعديل بواسطة",
-            "Old Curriculum":"المنهج القديم",
-            "New Curriculum":"المنهج الجديد",
-            "Select Old Curriculum":"أختر المنهج القديم",
-            "Select New Curriculum":"أختر المنهج الجديد"
+            "Old Curriculum":"المنهج السابق",
+            "New Curriculum":"المنهج الحالى",
+            "Select Old Curriculum":"أختر المنهج السابق",
+            "Select New Curriculum":"أختر المنهج الحالى"
         },
 
 

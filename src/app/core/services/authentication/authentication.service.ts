@@ -46,7 +46,7 @@ export class AuthenticationService {
   sendOtpToUser(account) {
     return this.http.post('/Account/send-otp', account).pipe(
       map((res) => {
-        if (res?.statusCode === HttpStatusCodeEnum.Created)
+        if (res?.statusCode != HttpStatusCodeEnum.OK)
           throw new Error(getLocalizedValue(res?.errorLocalized));
         else return res;
       }),

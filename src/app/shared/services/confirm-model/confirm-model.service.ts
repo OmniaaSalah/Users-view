@@ -27,6 +27,7 @@ export class ConfirmModelService {
 
   closeModel(){
     this.isOpend$.next(false)
+    this.onClose$.next(true)
 
   }
 }

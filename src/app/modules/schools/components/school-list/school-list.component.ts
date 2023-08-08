@@ -80,6 +80,10 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   orgCount2; orgCount3; orgCount4; orgCount5; employeeLabel: any;
   employeeJIRAHoursData;
 
+  get searchModel(){
+    return {...this.filtration, PageSize:this.schools.total}
+  }
+
 
   constructor(
     private gradeService:GradesService,

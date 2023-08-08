@@ -12,9 +12,9 @@
                 <app-table-caption
                 [seachKeyword]="filtration.KeyWord"
                 (onExport)="onExport($event)"
-                (onFilter)="this.filtration.Page=1;getSchools(); chartsComp.getChartData(filtration)"
-                (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchools();chartsComp.getChartData(filtration)"
-                (onClear)="clearFilter();chartsComp.getChartData(filtration)">
+                (onFilter)="this.filtration.Page=1;getSchools(); chartsComp.getChartData(searchModel)"
+                (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchools();chartsComp.getChartData(searchModel)"
+                (onClear)="clearFilter();chartsComp.getChartData(searchModel)">
 
                     <div class="row gx-5 form-set">
                         <div class="col">
