@@ -167,6 +167,12 @@ export class NavbarComponent implements OnInit {
             url: '/schools-and-students/all-parents',
             claims: [ClaimsEnum.S_MenuItem_GuardianMenu],
           },
+          {
+            name: this.translate.get('dashboard.Requests.RequestList'),
+            url: '/schools-and-students/RequestList/',
+            isHidden: this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
+            claims: [ClaimsEnum.S_MenuItem_Request],
+          },
         ],
       },
 
@@ -191,6 +197,7 @@ export class NavbarComponent implements OnInit {
             url: '/student-management/students',
             claims: [ClaimsEnum.E_MenuItem_Students],
           },
+
         ],
       },
 
@@ -213,13 +220,13 @@ export class NavbarComponent implements OnInit {
                 : '/school-performance-managent/assignments/assignments-list',
             claims: [ClaimsEnum.SE_MenuItem_Exam],
           },
-          {
-            name: this.translate.get('dashboard.Requests.RequestList'),
-            url: '/performance-managment/RequestList/',
-            isHidden:
-              this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
-            claims: [ClaimsEnum.S_MenuItem_Request],
-          },
+          // {
+          //   name: this.translate.get('dashboard.Requests.RequestList'),
+          //   url: '/performance-managment/RequestList/',
+          //   isHidden:
+          //     this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
+          //   claims: [ClaimsEnum.S_MenuItem_Request],
+          // },
           {
             name: this.translate.get(
               'sideBar.educationalSettings.children.Subjects Assessments'
