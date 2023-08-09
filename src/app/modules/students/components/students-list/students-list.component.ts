@@ -216,11 +216,13 @@ export class StudentsListComponent implements OnInit {
 
     this.studentsService.getAllStudents(this.filtration)
     .subscribe(res=>{
-      this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
       this.students.total =res.total
       this.isSearching =false
+      this.students.loading=false
+      console.log(this.students);
+
 
     },err=> {
       this.students.loading=false

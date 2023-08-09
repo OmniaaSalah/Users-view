@@ -1,29 +1,32 @@
-<p-paginator
-[rows]="paginationState.rows"
-[first]="paginationState.first"
-[pageLinkSize]="3"
-[totalRecords]="totalItems"
-[templateLeft]="templateLeft"
-[templateRight]="templateRight"
-[showCurrentPageReport]="true"
-[showPageLinks]="false"
-currentPageReportTemplate="{{PageReport |currentLang}}"
-#pagination (onPageChange)="onPageChange($event)"></p-paginator>
 
-<!-- currentPageReportTemplate="عرض العناصر من {first} الى {last} من اصل {totalRecords} من العناصر" -->
 
+  <p-paginator
+  [rows]="paginationState.rows"
+  [first]="paginationState.first"
+  [pageLinkSize]="3"
+  [totalRecords]="totalItems"
+  [templateLeft]="templateLeft"
+  [templateRight]="templateRight"
+  [showCurrentPageReport]="true"
+  [showPageLinks]="false"
+  currentPageReportTemplate="{{PageReport |currentLang}}"
+  #pagination (onPageChange)="onPageChange($event)"></p-paginator>
+
+
+
+<!-- ---------------- Left Arrow Tempelate ---------------- -->
 <ng-template #templateLeft let-state>
     <span class="color-black fs-4">{{'pagination.previous'|translate}} - {{'pagination.next'|translate}}</span>
     <!-- *ngIf="pagesArrOptions?.length>0"  -->
     <p-dropdown [options]="pagesArrOptions" [(ngModel)]="currentPage" (onChange)="jupmToPage(state, $event.value)"></p-dropdown>
     <p-divider layout="vertical"></p-divider>
     <button [disabled]="isFirstPage||currentPage ===1" (click)="prev(state)" class="prev-btn color-gray-400 bg-transparent border-0 " type="button" role="button">
-        <!-- <img src="assets/images/shared/circle-arrow-right.svg"> -->
         <img src="{{'assets/images/shared/circle-arrow-' + ((lang=='ar') ? 'right' : 'left') + '.svg'}}">
     </button>
 </ng-template>
 
 
+<!-- ---------------- Right Arrow Tempelate ---------------- -->
 <ng-template #templateRight let-state >
     <button [disabled]="isLastPage" (click)="next(state)" class="color-gray-400 bg-transparent border-0 " type="button" role="button">
         <img src="{{'assets/images/shared/circle-arrow-' + ((lang=='ar') ? 'left' : 'right') + '.svg'}}">
