@@ -73,7 +73,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
     { field: 'establishmentDate', header: this.translate.instant('dashboard.schools.schoolStablishmentDate') },
     { field: 'status', header: this.translate.instant('dashboard.schools.schoolStatus') }
 
-];
+  ];
 
 
   employeeOrgData; orgCount1;
@@ -81,7 +81,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   employeeJIRAHoursData;
 
   get searchModel(){
-    return {...this.filtration, PageSize:this.schools.total}
+    return {...this.filtration, PageSize:this.schools.totalAllData}
   }
 
 
