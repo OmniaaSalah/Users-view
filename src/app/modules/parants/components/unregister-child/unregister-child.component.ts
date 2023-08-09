@@ -18,6 +18,7 @@ import { MediaService } from 'src/app/shared/services/media/media.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { ParentService } from '../../services/parent.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-unregister-child',
@@ -138,7 +139,11 @@ export class UnregisterChildComponent implements OnInit {
     this.parentService.getChild(this.childId).subscribe(response=>{
       this.child = response;
       this.childForm.patchValue({...response})
-      this.childForm.controls['birthDate'].patchValue(new Date(response?.birthDate))
+
+      let utc = moment.utc(response.birthDate.split('+')[0]).toDate()
+      response.birthDate = moment(utc).local().format('YYYY-MM-DD HH:mm:ss')
+
+      this.childForm.controls['birthDate'].patchValue(response?.birthDate)
       this.childForm.controls.nationlityId.setValue(response?.nationlity?.id)
       this.childForm.controls.religionId.setValue(response?.religion?.id)
 
