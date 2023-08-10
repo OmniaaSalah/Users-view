@@ -16,6 +16,7 @@ import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 
 @Component({
   selector: 'app-with-identity',
@@ -136,7 +137,7 @@ export class WithIdentityComponent implements OnInit {
         if(res.statusCode!=HttpStatusCodeEnum.OK){
 
           if(res.statusCode==HttpStatusCodeEnum.NotAcceptable){
-            console.log(res);
+
             this.confirmModelService.openModel({message: this.translate.instant('toasterMessage.childExistForAnotherGaurdian')})
             this.confirmModelLister()
             this.onSubmit=false;
@@ -147,6 +148,9 @@ export class WithIdentityComponent implements OnInit {
                   studentStatus: res.studentStatus
             };
             return EMPTY
+
+          }else if(res.statusCode==HttpStatusCodeEnum.BadRequest){
+            throw  new Error(this.translate.instant(getLocalizedValue(res?.errorMessage)))
 
           }else{
 
