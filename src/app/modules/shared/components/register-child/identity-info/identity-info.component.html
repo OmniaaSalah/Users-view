@@ -15,9 +15,6 @@
             <p class="color-gray-300">{{'shared.birthDay'|translate }}</p>
             <span class="color-primary mb-2">{{student.birthDate |LocalizeDate}}</span>
 
-            <p class="color-gray-300">{{'shared.placeOfBirth'|translate }}</p>
-            <span class="color-primary mb-2">{{student?.placeOfBirth }}</span>
-
             <p class="color-gray-300">{{ 'shared.gender'|translate }}</p>
             <span class="color-primary mb-2" *ngIf="student?.gender=='Female'">{{'shared.genderType.Female'|translate}}</span>
             <span class="color-primary mb-2" *ngIf="student?.gender=='Male'">{{'shared.genderType.Male'|translate}}</span>
@@ -28,6 +25,9 @@
 
             <p class="color-gray-300">{{ 'shared.nationality'|translate }}</p>
             <span class="color-primary mb-2">{{student.nationality?.name |currentLang}}</span>
+
+            <p class="color-gray-300">{{'shared.placeOfBirth'|translate }}</p>
+            <span class="color-primary mb-2">{{student?.placeOfBirth }}</span>
             <!--
             <p class="color-gray-300">{{'shared.nationalId'|translate }}</p>
             <span class="color-primary mb-2">2002/07/04</span>

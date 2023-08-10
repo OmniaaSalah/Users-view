@@ -136,7 +136,7 @@
                     <td style="min-width: 22rem;">{{student.name |currentLang}}</td>
                     <td style="min-width: 16rem;">{{student.surName |currentLang }}</td>
                     <td>{{student.studentMinisterialNumber}}</td>
-                    <td>{{student.studentNumber}}</td>
+                    <td>{{student?.studentDaleelNumber}}</td>
                     <td style="min-width: 15rem;" >{{student.studentEmiratesNumber}}</td>
                     <td>{{student.nationality |currentLang}}</td>
                     <td style="min-width: 22rem;" class="p-0" *ngIf="currentUserScope!=userScope.Employee" [routerLink]="['/schools-and-students/schools/school/2']">

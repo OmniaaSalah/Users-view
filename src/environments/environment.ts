@@ -8,12 +8,11 @@ export const environment = {
   production: false,
   serverUrl: "https://daleel-api.azurewebsites.net/api",
   env: 'Development',
-  // version: '1.0',
   version: packageJson.version,
   defaultLang: 'ar',
   logoutRedirectUrl: 'http://localhost:4200/auth/login',
   clientUrl:"http://localhost:4200/",
-  UAEPassLogout:"https://stg-id.uaepass.ae"
+  UAEPassLogout:"https://stg-id.uaepass.ae/idshub/logout/"
 };
 /*
  * For easier debugging in development mode, you can import the following file
