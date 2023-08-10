@@ -8,5 +8,7 @@ export const environment = {
   version: packageJson.version,
   defaultLang: 'ar',
   logoutRedirectUrl: 'https://daleel-qa-app.azurewebsites.net/auth/login',
-  clientUrl:"https://daleel-qa-app.azurewebsites.net"
+  clientUrl:"https://daleel-qa-app.azurewebsites.net",
+  UAEPassLogout:"https://stg-id.uaepass.ae"
+
 };
