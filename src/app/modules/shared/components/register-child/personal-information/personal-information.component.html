@@ -181,9 +181,9 @@
                     <div  class="mb-2 d-flex flex-wrap">
                         <span class="color-primary " *ngFor="let subject of student?.subjects;let i=index">
                             {{subject?.name|currentLang}}
-                            <span *ngIf="student?.subjects.length>i+1">  &nbsp; - &nbsp;</span>
+                            <span *ngIf="student?.subjects?.length>i+1">  &nbsp; - &nbsp;</span>
                         </span>
-                        <span class="color-red-500" *ngIf="!student?.subjects.length">{{'shared.notFound' |translate}}</span>
+                        <span class="color-red-500" *ngIf="!student?.subjects?.length">{{'shared.notFound' |translate}}</span>
                     </div>
 
                 </ng-container>
