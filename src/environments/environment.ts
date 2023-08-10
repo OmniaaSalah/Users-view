@@ -12,7 +12,8 @@ export const environment = {
   version: packageJson.version,
   defaultLang: 'ar',
   logoutRedirectUrl: 'http://localhost:4200/auth/login',
-  clientUrl:"http://localhost:4200/"
+  clientUrl:"http://localhost:4200/",
+  UAEPassLogout:"https://stg-id.uaepass.ae"
 };
 /*
  * For easier debugging in development mode, you can import the following file

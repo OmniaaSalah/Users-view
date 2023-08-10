@@ -218,7 +218,7 @@ export class StudentsListComponent implements OnInit {
     .subscribe(res=>{
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
-      this.students.total =res.total
+      this.students.total = res.total
       this.isSearching =false
       this.students.loading=false
       console.log(this.students);

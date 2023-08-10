@@ -41,6 +41,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   }
 
   initPaginationState(){
+    // this.currentPage = 1
     this.currentPage===1 ? this.paginationState.first=0 : this.paginationState.first = this.getFirstIndexInPages(this.currentPage)
     this.paginationState.page=this.currentPage
 
@@ -84,12 +85,14 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   }
 
   getPagesCountList(pageCount){
-    this.pagesArrOptions=[]
-    if(pageCount != Infinity){
-      for(let i=1; i<= pageCount; i++){
-        this.pagesArrOptions.push(i)
-      }
-    }
+    console.log(pageCount);
+    pageCount = pageCount > 500 ? 500 : pageCount
+    this.pagesArrOptions=  Array.from({length:pageCount},(v,k)=>k+1)
+    // if(pageCount != Infinity){
+    //   for(let i=1; i<= pageCount; i++){
+    //     this.pagesArrOptions.push(i)
+    //   }
+    // }
 
   }
 
