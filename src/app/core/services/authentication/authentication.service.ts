@@ -230,7 +230,7 @@ export class AuthenticationService {
     if (localStorage.getItem('UaeLogged')) {
       localStorage.removeItem('UaeLogged');
       localStorage.removeItem('schoolId');
-      window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
+      window.location.href = `${environment.UAEPassLogout}/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
     } else {
       this.router.navigate(['/auth/login']);
     }
