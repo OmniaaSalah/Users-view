@@ -128,7 +128,6 @@ export class HomeComponent implements OnInit {
         {label:this.translate.get('sideBar.schoolsAndStudents.chidren.schools'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:'/schools-and-students/schools',claims:[ClaimsEnum.S_MenuItem_SchoolMenu]},
         {label:this.translate.get('sideBar.schoolsAndStudents.chidren.students'), icon:'assets/images/home/schools-students/user-graduate.svg', url:'/schools-and-students/students',claims:[ClaimsEnum.S_MenuItem_StudentMenu]},
         {label:this.translate.get('sideBar.schoolsAndStudents.chidren.parents'), icon:'assets/images/home/schools-students/parents.svg',url:'/schools-and-students/all-parents',claims:[ClaimsEnum.S_MenuItem_GuardianMenu]},
-        {label:this.translate.get('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/schools-and-students/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
       ]
     },
     {
@@ -143,8 +142,10 @@ export class HomeComponent implements OnInit {
       },
       list: [
         {label:this.translate.get('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
-        // {label:this.translate.get('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
+        {label:this.translate.get('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
         {label:this.translate.get('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/educational-setting/note-marked.svg',url:'/performance-managment/assessments/assements-list',claims:[ClaimsEnum.SE_MenuItem_Rate]},
+
+
       ]
 
     },

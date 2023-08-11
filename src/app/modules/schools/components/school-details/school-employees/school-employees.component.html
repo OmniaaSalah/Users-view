@@ -83,6 +83,10 @@
                             <p-multiSelect  [filter]="true" [options]="jobTitleOptions$|async" p display="chip" [(ngModel)]="filtration.jobtitelid"   optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id"   placeholder="{{'dashboard.schools.employeeRole' |translate }}"></p-multiSelect>
                         </div>
                     </div>
+                    <span pTooltip="Some tooltip content" tooltipPosition="bottom"
+                    tabindex="0" tooltipEvent="focus" style="outline: 0;">
+                Whatever content you want here
+              </span>
                 </app-table-caption>
             </ng-template>
 
@@ -126,7 +130,21 @@
                     <td>{{employee?.surName |currentLang}}</td>
                     <td>{{'shared.genderType.' + employee.gender |translate}}</td>
                     <td>{{employee?.jobTitle | currentLang}}</td>
-                    <td ><span class="position-relative" pTooltip="{{employee?.email}}" [autoHide]="true" tooltipPosition="top">{{employee?.email | truncate:15}}</span></td>
+                    <td >
+                        <span
+                        class="position-relative d-inline-block"
+                        tabindex="0"
+                        style="outline: 0;"
+                        pTooltip="{{employee?.email}}"
+                        tooltipPosition="top"
+                        tooltipEvent="focus"
+                        showDelay="100"
+                        hideDelay="1000"
+                        #hint1
+                        (click)="$event.stopPropagation(); hint1.focus()"
+                        (mouseover)="$event.stopPropagation(); hint1.focus()">{{employee?.email | truncate:15}}</span>
+
+                    </td>
                     <td>{{employee?.phoneNumber}}</td>
                     <td>{{employee?.emiratesIdNumber}}</td>
                     <td>
