@@ -9,6 +9,6 @@ export const environment = {
   defaultLang: 'ar',
   logoutRedirectUrl: 'https://daleel-qa-app.azurewebsites.net/auth/login',
   clientUrl:"https://daleel-qa-app.azurewebsites.net",
-  UAEPassLogout:"https://stg-id.uaepass.ae"
+  UAEPassLogout:"https://stg-id.uaepass.ae/idshub/logout/"
 
 };

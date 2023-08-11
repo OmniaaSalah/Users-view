@@ -221,7 +221,6 @@ export class StudentsListComponent implements OnInit {
       this.students.total = res.total
       this.isSearching =false
       this.students.loading=false
-      console.log(this.students);
 
 
     },err=> {
