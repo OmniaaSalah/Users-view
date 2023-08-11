@@ -12,6 +12,8 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { MessageService } from 'src/app/modules/messages/service/message.service';
+import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
+import { SchoolYearsService } from 'src/app/modules/school-years/service/school-years.service';
 interface MenuItem {
   id: number;
   title: string | Observable<any>;
@@ -167,12 +169,6 @@ export class NavbarComponent implements OnInit {
             url: '/schools-and-students/all-parents',
             claims: [ClaimsEnum.S_MenuItem_GuardianMenu],
           },
-          {
-            name: this.translate.get('dashboard.Requests.RequestList'),
-            url: '/schools-and-students/RequestList/',
-            isHidden: this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
-            claims: [ClaimsEnum.S_MenuItem_Request],
-          },
         ],
       },
 
@@ -197,7 +193,6 @@ export class NavbarComponent implements OnInit {
             url: '/student-management/students',
             claims: [ClaimsEnum.E_MenuItem_Students],
           },
-
         ],
       },
 
@@ -220,13 +215,13 @@ export class NavbarComponent implements OnInit {
                 : '/school-performance-managent/assignments/assignments-list',
             claims: [ClaimsEnum.SE_MenuItem_Exam],
           },
-          // {
-          //   name: this.translate.get('dashboard.Requests.RequestList'),
-          //   url: '/performance-managment/RequestList/',
-          //   isHidden:
-          //     this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
-          //   claims: [ClaimsEnum.S_MenuItem_Request],
-          // },
+          {
+            name: this.translate.get('dashboard.Requests.RequestList'),
+            url: '/performance-managment/RequestList/',
+            isHidden:
+              this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
+            claims: [ClaimsEnum.S_MenuItem_Request],
+          },
           {
             name: this.translate.get(
               'sideBar.educationalSettings.children.Subjects Assessments'

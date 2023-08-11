@@ -41,12 +41,6 @@ export class SideNavigatorComponent implements OnInit {
           url:'/schools-and-students/all-parents',
           icon:'assets/images/sideBar/schools-students/parents.svg'
         },
-        {
-          title:'sideBar.performanceManagment.chidren.missions',
-          key: RouteEnums.Requests,
-          url:'/schools-and-students/RequestList/',
-          icon:'assets/images/sideBar/performance-managment/note-list.svg'
-        },
       ]
     },
 
@@ -59,12 +53,12 @@ export class SideNavigatorComponent implements OnInit {
           url:'/performance-managment/schools',
           icon:'assets/images/sideBar/performance-managment/list.svg'
         },
-        // {
-        //   title:'sideBar.performanceManagment.chidren.missions',
-        //   key: RouteEnums.Requests,
-        //   url:'/performance-managment/RequestList/',
-        //   icon:'assets/images/sideBar/performance-managment/note-list.svg'
-        // },
+        {
+          title:'sideBar.performanceManagment.chidren.missions',
+          key: RouteEnums.Requests,
+          url:'/performance-managment/RequestList/',
+          icon:'assets/images/sideBar/performance-managment/note-list.svg'
+        },
         {
           title:'sideBar.educationalSettings.children.Subjects Assessments',
           key: RouteEnums.Assessments,
