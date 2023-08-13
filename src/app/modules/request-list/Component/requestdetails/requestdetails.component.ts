@@ -263,7 +263,7 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
   reSendRegistrationReq(){
     // routerLink="{{'parent/child/'+child.id+'/register-request'}}" [queryParams]="{status:'Registered'}"
     let childRegistartionStatus= this.requestDetails.student.status || RegistrationStatus.Unregistered;
-    let childId =this.requestDetails.student.id
+    let childId =this.requestDetails?.student?.studentGuid
     this.saveReqData()
 
     if(childRegistartionStatus == RegistrationStatus.Withdrawal){

@@ -455,7 +455,7 @@
             <ng-container *ngIf="requestOptions" >
                 <button
                 *ngFor="let option of requestOptions;let i=index"
-                [class.d-none]="option?.label.en=='ModificationRequest' &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest"
+                [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest"
                 [disabled]="option.isLoading"
                 [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
                 (click)="onActionTaken(option,i)"
