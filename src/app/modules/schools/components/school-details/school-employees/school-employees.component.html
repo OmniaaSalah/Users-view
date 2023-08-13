@@ -83,10 +83,7 @@
                             <p-multiSelect  [filter]="true" [options]="jobTitleOptions$|async" p display="chip" [(ngModel)]="filtration.jobtitelid"   optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id"   placeholder="{{'dashboard.schools.employeeRole' |translate }}"></p-multiSelect>
                         </div>
                     </div>
-                    <span pTooltip="Some tooltip content" tooltipPosition="bottom"
-                    tabindex="0" tooltipEvent="focus" style="outline: 0;">
-                Whatever content you want here
-              </span>
+
                 </app-table-caption>
             </ng-template>
 
@@ -102,12 +99,12 @@
                     <th pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.employeeNickname'|translate }}
 
                     </th>
-                    <th pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'shared.gender'|translate }}
+                    <th style="min-width:8rem" pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'shared.gender'|translate }}
                     </th>
                     <th pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.jobTitle'|translate }}
 
                     </th>
-                    <th pSortableColumn="quantity"><p-sortIcon field="quantity"></p-sortIcon>{{'shared.email'|translate }}
+                    <th style="min-width:21rem" pSortableColumn="quantity"><p-sortIcon field="quantity"></p-sortIcon>{{'shared.email'|translate }}
 
                     </th>
 
@@ -128,9 +125,9 @@
                     <td>{{employee?.employeeIdNumber}}</td>
                     <td>{{employee?.name |currentLang}}</td>
                     <td>{{employee?.surName |currentLang}}</td>
-                    <td>{{'shared.genderType.' + employee.gender |translate}}</td>
+                    <td style="min-width:8rem">{{'shared.genderType.' + employee.gender |translate}}</td>
                     <td>{{employee?.jobTitle | currentLang}}</td>
-                    <td >
+                    <td style="overflow-x: auto; min-width:21rem">
                         <span
                         class="position-relative d-inline-block"
                         tabindex="0"
@@ -138,14 +135,12 @@
                         pTooltip="{{employee?.email}}"
                         tooltipPosition="top"
                         tooltipEvent="focus"
-                        showDelay="100"
-                        hideDelay="1000"
                         #hint1
-                        (click)="$event.stopPropagation(); hint1.focus()"
-                        (mouseover)="$event.stopPropagation(); hint1.focus()">{{employee?.email | truncate:15}}</span>
+                        (click)="onClick(hint1);$event.stopPropagation(); hint1.focus()"
+                        (mouseover)="$event.stopPropagation(); hint1.focus()">{{employee?.email}}</span>
 
                     </td>
-                    <td>{{employee?.phoneNumber}}</td>
+                    <td style="justify-content: center;">{{employee?.phoneNumber}}</td>
                     <td>{{employee?.emiratesIdNumber}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">

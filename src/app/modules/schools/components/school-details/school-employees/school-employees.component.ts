@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,6 +23,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-school-employees',
@@ -30,6 +31,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./school-employees.component.scss'],
 })
 export class SchoolEmployeesComponent implements OnInit {
+  @ViewChild(Tooltip)  tooltip:Tooltip
 	currentSchool="";
 	lang =inject(TranslationService).lang;
 	currentUserScope = inject(UserService).getScope()
@@ -245,6 +247,12 @@ export class SchoolEmployeesComponent implements OnInit {
 
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolEmployee'))
     })
+  }
+
+  onClick(e:ElementRef){
+    this.tooltip.hide()
+    console.log(e);
+
   }
 
 }

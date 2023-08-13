@@ -109,7 +109,7 @@ export class ForgetPasswordComponent implements OnInit {
         this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
       },
       (err) => {
-        this.lang == 'ar' ? this.toastService.error(err['Ar']) : this.toastService.error(err['En']);
+        this.toastService.error(err.message ||  this.translate.instant('Request cannot be processed, Please contact support.'));
       }
     );
   }
@@ -163,18 +163,12 @@ export class ForgetPasswordComponent implements OnInit {
 
     this.authService.resetPassword(account).subscribe(
       (res) => {
-        this.toastService.success(
-          this.translate.instant('Password changed successfully')
-        );
+        this.toastService.success(this.translate.instant('Password changed successfully'));
         this.openResetModel = false;
         this.router.navigate(['/auth/login']);
       },
       (err) => {
-        this.toastService.error(
-          this.translate.instant(
-            'Request cannot be processed, Please contact support.'
-          )
-        );
+        this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
       }
     );
   }

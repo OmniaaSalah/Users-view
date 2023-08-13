@@ -12,7 +12,7 @@ export const environment = {
   defaultLang: 'ar',
   logoutRedirectUrl: 'http://localhost:4200/auth/login',
   clientUrl:"http://localhost:4200/",
-  UAEPassLogout:"https://stg-id.uaepass.ae/idshub/logout/"
+  UAEPassLogout:"https://stg-id.uaepass.ae/idshub/logout"
 };
 /*
  * For easier debugging in development mode, you can import the following file

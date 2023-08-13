@@ -122,7 +122,9 @@
 
                                   <div class="col-md-4" *ngIf="OldSchools$ |async as allSchools">
                                       <label class="label">{{'dashboard.students.School Name'| translate}}</label>
-                                      <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}"
+                                      <p-dropdown
+                                      [filter]="true" [filterBy]="lang=='ar' ?'name.ar' :'name.en'"
+                                      placeholder="{{'dashboard.students.School Name'| translate}}"
                                           [options]="allSchools" formControlName="schoolId"
                                           optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
                                   </div>
