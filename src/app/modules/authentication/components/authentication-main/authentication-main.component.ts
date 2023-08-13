@@ -334,9 +334,8 @@ export class AuthenticationMainComponent implements OnInit {
       this.account.clearValidators();
       this.account.setValidators([
         Validators.required,
-        Validators.pattern(
-          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/
-        ),
+        Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+        // Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/),
       ]);
     }
   }

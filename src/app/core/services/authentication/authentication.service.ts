@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
 import { BehaviorSubject, catchError, map, take } from 'rxjs';
@@ -10,12 +10,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { getLocalizedValue } from '../../helpers/helpers';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { RegistrationEnum } from 'src/app/shared/enums/registration/registration-ways.enum';
+import { TranslationService } from '../translation/translation.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   MAIN_LINK: string = 'https://jobs-nodejs.herokuapp.com/api/users/signin/';
+  lang =  inject(TranslationService).lang
 
   public isNewAccountOpened = new BehaviorSubject<boolean>(false);
   public isForgetModelOpened = new BehaviorSubject<boolean>(false);
@@ -128,15 +130,25 @@ export class AuthenticationService {
   }
 
   forgotPassword(account) {
-    return this.http.post('/User/ForgotPassword', account);
+    return this.http.post('/User/ForgotPassword', account)
+    .pipe(
+      catchError((err) =>{
+        let message = this.lang == 'ar' ?  err?.Ar : err?.En
+        throw new Error(message)
+      })
+    );
   }
 
   resetPassword(account) {
-    return this.http.post('/User/ResetPassword', account);
+    return this.http.post('/User/ResetPassword', account)
+
   }
+
+
   signInWithIdentity(lang) {
     return this.http.get(`/Account/UAEPASS?language=${lang}`);
   }
+
   getUAEUSER(code) {
     return this.http
       .get(`/Account/UAEPASS/GetToken?authenticationCode=${code}`)

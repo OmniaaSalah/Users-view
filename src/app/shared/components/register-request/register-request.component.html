@@ -220,7 +220,7 @@
                             <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
                                 <img src="assets/images/shared/location.svg" alt="">
                                 <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
-                                <span class="color-gray-200 fs-5">دبي، {{school?.address |currentLang}}</span>
+                                <span class="color-gray-200 fs-5">{{school?.address |currentLang}}</span>
 
                             </div>
                         </div>
@@ -258,7 +258,8 @@
 
 
     <!-- Required Files -->
-    <div class="row gx-6 my-6 border-dark radius-15" *ngIf="requiredFiles && requiredFiles?.files?.length && childRegistrationStatus!=registrtionStatusEnum.Withdrawal">
+    <!-- && childRegistrationStatus!=registrtionStatusEnum.Withdrawal -->
+    <div class="row gx-6 my-6 border-dark radius-15" *ngIf="requiredFiles && requiredFiles?.files?.length">
         <h3 class="heading heading--tertiary">{{'dashboard.request-list.required attachments' | translate}} <span class="star">*</span></h3>
         <div class="col-md-4" *ngFor="let file of requiredFiles.files;let i = index">
             <div class="">

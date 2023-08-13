@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { shareReplay } from 'rxjs';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
 import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
@@ -18,7 +19,7 @@ export class CertificatesRequestDetailsComponent implements OnInit {
 
   @Input() requestDetails
   @Output() refresh = new EventEmitter()
-
+  lang = inject(TranslationService).lang
 
   requestInstance = this.route.snapshot.paramMap.get('id')
   get requestTypeEnum(){return requestTypeEnum}
