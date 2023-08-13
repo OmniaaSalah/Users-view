@@ -9,7 +9,7 @@ import { Localization, BaseEntity } from "../global/global.model"
 
 
 export interface WorkflowOptions{
-    
+
     id: number,
     title: Localization
     label: Localization
@@ -39,12 +39,13 @@ export interface UserRequest{
     requestType: requestTypeEnum,
     cause: string,
     requestAttachments: CustomFile[],
-   
+
     commonRequestId:number
     requestComments:any[]
 
     student:{
-        id:number
+        id:number,
+        studentGuid:string,
         parsonalImagePath:string,
         isChildOfAMartyr:boolean
         isTalented:boolean
@@ -53,7 +54,7 @@ export interface UserRequest{
         identityNum: number
         name:Localization,
         surname:Localization,
-        gender: GenderEnum, 
+        gender: GenderEnum,
         birthDate:Date,
         nationality:BaseEntity,
         relativeRelation: BaseEntity,
@@ -113,7 +114,7 @@ export interface UserRequest{
     nationalityName: Localization,
 
     // NOTE:- Relink child with new Guardian Request ------
-    
+
     // NOTE:- Flexable Holiday Request ------
 
 }

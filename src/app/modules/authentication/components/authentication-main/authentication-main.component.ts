@@ -125,7 +125,7 @@ export class AuthenticationMainComponent implements OnInit {
           );
           setTimeout(() => {
             this.router.navigate(['/auth/login'], { replaceUrl: true });
-            window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
+            window.location.href = `${environment.production ? 'https://id.uaepass.ae/idshub/logout/' :'https://id.uaepass.ae/idshub/logout/'}?redirect_uri=${environment.logoutRedirectUrl}`;
           }, 2500);
         }
       );
@@ -407,7 +407,7 @@ export class AuthenticationMainComponent implements OnInit {
   closeConfirmationModel() {
     this.openConfimModel = false;
     this.router.navigate(['/auth/login'], { replaceUrl: true });
-    window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`;
+    window.location.href = `${environment.production ? 'https://id.uaepass.ae/idshub/logout/' :'https://id.uaepass.ae/idshub/logout/'}?redirect_uri=${environment.logoutRedirectUrl}`;
   }
 
   loginWithUAEPass(res) {

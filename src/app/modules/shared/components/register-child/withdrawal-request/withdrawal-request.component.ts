@@ -38,8 +38,8 @@ export class WithdrawalRequestComponent implements OnInit {
 
   componentHeaderData:IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.parents.sonDetails'),routerLink:`/parent/${this.currentGuardianId}/child/${this.studentGUID}`,routerLinkActiveOptions:{exact: true},queryParams:{registered:true}},
-      { label: this.translate.instant('dashboard.students.withdrawalReq'),routerLink:`/parent/${this.currentGuardianId}/child/${this.studentGUID}/withdraw-request` }
+      { label: this.translate.instant('dashboard.parents.sonDetails'),routerLink:`/parent/${this.currentGuardianId}/child/${this.studentGUID || this.childId}`,routerLinkActiveOptions:{exact: true},queryParams:{registered:true}},
+      { label: this.translate.instant('dashboard.students.withdrawalReq'),routerLink:`/parent/${this.currentGuardianId}/child/${this.studentGUID || this.childId}/withdraw-request` }
     ],
     mainTitle: { main: this.translate.instant('dashboard.students.withdrawalReq'), sub: '' }
   }
@@ -75,7 +75,7 @@ export class WithdrawalRequestComponent implements OnInit {
     this.registerChildService.Student$
     .pipe(
       switchMap(res=>{
-        if(!res) return this.studentService.getStudent(this.studentGUID).pipe(map(res => res?.result))
+        if(!res) return this.studentService.getStudent(this.studentGUID || this.childId).pipe(map(res => res?.result))
         return of(res)
       })
     )
@@ -113,7 +113,8 @@ export class WithdrawalRequestComponent implements OnInit {
     .subscribe(()=>{
       this.isLoading=false
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
-      this.router.navigate(['/schools-and-students/students/student', this.studentGUID])
+      this.router.navigate(['/parent', this.currentGuardianId,'child', this.studentGUID||this.childId], {queryParams:{registered:true}})
+      // this.router.navigate(['/schools-and-students/students/student', this.studentGUID])
 
     },(error:Error)=>{
 
