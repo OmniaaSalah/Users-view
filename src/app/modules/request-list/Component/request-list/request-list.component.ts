@@ -17,6 +17,7 @@ import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ArrayOperations } from 'src/app/core/helpers/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import moment from 'moment';
 
 
 @Component({
@@ -109,6 +110,11 @@ export class RequestListComponent implements OnInit {
             this.requests.loading = false;
             this.requests.total=res.total;
             this.requests.totalAllData = res.totalAllData;
+            // res.data.forEach(el=>{
+            //   let utc = moment.utc(el.createdDate.split('+')[0]).toDate()
+            //   el.createdDate= moment(utc).local().format('YYYY-MM-DD HH:mm:ss')
+
+            // })
             this.requests.list=res.data;
           },(err)=>{
             this.requests.loading = false;

@@ -14,8 +14,10 @@
 
   .login-bg {
     // background-image: url("/assets/images/Login/loginSidebar.svg");
-    background-image: url("../../../../../assets/images//login-bg.jpg");
-    background-position: -520% 0%;    background-attachment: fixed;
+    background-image: url("../../../../../assets/images//login-bg-croped.jpg");
+    background-size: cover;
+    // background-position: -520% 0%;
+    // background-attachment: fixed;
     background-repeat: no-repeat;
     // position: relative;
     // overflow: hidden;

@@ -34,8 +34,7 @@
 <ng-container *ngIf="student$ |async as student">
 
     <ng-container *ngIf="mode=='view'">
-        <!-- *permit="claimsEnum.SEG_U_StudentAcceptanceInfo" -->
-        <div class="float-btn " (click)="mode='edit';modeChange.emit(mode)" >
+        <div class="float-btn " (click)="mode='edit';modeChange.emit(mode)" *permit="claimsEnum.SEG_U_StudentAcceptanceInfo">
             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
         </div>
 

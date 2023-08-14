@@ -289,7 +289,7 @@ initRegisterationForm(child){
 
     if(this.selectedGrade?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
     else if(this.selectedGrade?.code==FirstGradeCodeEnum.PrimarySchool) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
-
+    else this.getRegistrationRequiresFiles()
     this.selectedSchoolId =null
 
     this.getSchools()
@@ -319,6 +319,7 @@ initRegisterationForm(child){
 
   onSelectSchool(schoolId) {
     this.selectedSchoolId =schoolId
+    console.log(this.registerReqForm);
     this.registerReqForm.controls['schoolId'].setValue(schoolId)
   }
 

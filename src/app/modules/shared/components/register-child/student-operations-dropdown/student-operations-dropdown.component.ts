@@ -134,7 +134,8 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
       {
         label: this.translate.instant('breadcrumb.Request to issue a certificate'),
         disabled: this.student?.studentProhibited?.rCertificateFromSPEA || this.student?.studentProhibited?.certificateFromSchool,
-        icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,
+        icon:'assets/images/shared/file.svg',
+        claims:ClaimsEnum.G_CertificateIssuranceRequest,
         routerLink:`/certificates/ask-certificate/${this.student?.id}`
       }
     ];
