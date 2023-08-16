@@ -233,7 +233,7 @@
                         <div class="row gx-5 form-set">
                             <div class="col-6">
                                 <label class="label" for="nationality">{{'sign up.NickName (in Arabic)'|translate }} <span class="star">*</span> </label>
-                                <input type="text" pInputText  formControlName="arabicNickName" class="form-control " placeholder="{{'sign up.Enter NickName'|translate}}" >
+                                <input type="text" pInputText  formControlName="arabicNickName" class="form-control " placeholder="{{'sign up.NickName (in Arabic)'|translate}}" >
                                 <div [hidden]="arabicNickName.valid || arabicNickName.untouched">
                                     <small *ngIf="arabicNickName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                       {{'shared.This Field is Required'|translate}}
@@ -250,7 +250,7 @@
                             </div>
                             <div class="col-6">
                                 <label class="label" for="nationality">{{'sign up.NickName (in English)'|translate }} <span class="star">*</span> </label>
-                                <input type="text" pInputText formControlName="englishNickName"  class="form-control leftaction"  placeholder="{{'sign up.Enter NickName'|translate}}" >
+                                <input type="text" pInputText formControlName="englishNickName"  class="form-control leftaction"  placeholder="{{'sign up.NickName (in English)'|translate}}" >
                                 <div [hidden]="englishNickName.valid || englishNickName.untouched">
                                     <small *ngIf="englishNickName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                       {{'shared.This Field is Required'|translate}}
@@ -280,7 +280,7 @@
                             </div>
                             <div class="col-6">
                                 <label class="label" for="nationality">{{'sign up.Birthday'|translate }} <span class="star">*</span> </label>
-                                <p-calendar formControlName="birthDay"  [showIcon]="true" inputId="icon"   [maxDate]="currentDate"  [ngClass]="{'ng-invalid ng-dirty':birthDay.errors?.required && birthDay.touched}"  placeholder="yy-mm-dd"  dataType="string"  [readonlyInput]="true"    dateFormat="yy-mm-dd"  ></p-calendar>
+                                <p-calendar formControlName="birthDay"  [showIcon]="true" inputId="icon"   [maxDate]="currentDate"  [ngClass]="{'ng-invalid ng-dirty':birthDay.errors?.required && birthDay.touched}"  placeholder="{{'dd/mm/yy'|translate}}"  dataType="string"  [readonlyInput]="true"    dateFormat="yy-mm-dd"  ></p-calendar>
                                 <div [hidden]="birthDay.valid || birthDay.untouched">
                                     <small *ngIf="birthDay.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                       {{'shared.This Field is Required'|translate}}

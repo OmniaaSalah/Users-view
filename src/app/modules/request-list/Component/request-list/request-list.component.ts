@@ -99,6 +99,7 @@ export class RequestListComponent implements OnInit {
       this.router.navigate([], {
         queryParams: {searchQuery : JSON.stringify(this.filtration)},
         relativeTo: this.route,
+        queryParamsHandling: "preserve"
       });
 
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
@@ -141,6 +142,7 @@ export class RequestListComponent implements OnInit {
       this.router.navigate([], {
         queryParams: {searchQuery : JSON.stringify(this.filtration)},
         relativeTo: this.route,
+        queryParamsHandling: "preserve"
       });
 
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
