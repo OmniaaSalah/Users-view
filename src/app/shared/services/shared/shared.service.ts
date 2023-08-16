@@ -170,9 +170,9 @@ export class SharedService {
       {indexType:this.translate.instant('TheReasonForLackOfIdentification'),value:IndexesEnum.TheReasonForLackOfIdentification},
       {indexType:this.translate.instant('TheReasonForAbsent'),value:IndexesEnum.TheReasonForAbsent},
       {indexType:this.translate.instant('TheReasonForRegradingRequest'),value:IndexesEnum.TheReasonForRegradingRequest},
-      {indexType:this.translate.instant('TheReasonForWithdrawalRequest'),value:IndexesEnum.TheReasonForWithdrawalRequest},
+      // {indexType:this.translate.instant('TheReasonForWithdrawalRequest'),value:IndexesEnum.TheReasonForWithdrawalRequest},
       {indexType:this.translate.instant('ModifyStudentResult'),value:IndexesEnum.ModifyStudentResult},
-      {indexType:this.translate.instant('reEnrollmentTypes'),value:IndexesEnum.reEnrollmentTypes}
+      {indexType:this.translate.instant('reEnrollmentType'),value:IndexesEnum.reEnrollmentTypes}
 
     ]
   }

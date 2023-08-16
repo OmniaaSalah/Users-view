@@ -139,7 +139,7 @@
     "TheReasonForRegradingRequest" :"سبب إعادة مرحلة دراسية",
     "TheReasonForWithdrawalRequest" :"سبب سحب الطالب",
     "ModifyStudentResult" :"أنواع تحسين درجات الطالب",
-    "reEnrollmentTypes":"نوع الإلتحاق",
+    "reEnrollmentType":"نوع الإلتحاق",
     "Active": "فعال",
     "Inactive": "غير فعال",
     "mission Succeeded": "تمت العملية بنجاح",
