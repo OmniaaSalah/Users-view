@@ -1430,6 +1430,7 @@
             "ClassNumber": "Class number",
             "TimeFrom":"Time from",
             "TimeTo":   "Time to",
+            "period":"The Period",
             "CreatedDate": "Created date",
             "CreatedBy":  "Created by",
 

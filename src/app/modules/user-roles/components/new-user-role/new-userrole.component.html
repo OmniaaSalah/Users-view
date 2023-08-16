@@ -219,28 +219,37 @@
              </div>
 
            </div>
-           <div class=" row gx-4 form-set ">
+
+
+          <div class=" row gx-4 form-set ">
             <div class="col-xs-2 col-lg-12">
 
-              <label for="rolePowers" class="label">{{'dashboard.UserRole.RolePowers'|translate}} <span class="star">*</span></label>
+              <label for="rolePowers" class="label required">{{'dashboard.UserRole.RolePowers'|translate}}</label>
 
               <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto" style="width:66%">
                 <i class="pi pi-search fs-3 "></i>
-                <input class="input" type="text"  [formControl]="searchText"  pInputText placeholder="{{'shared.Search...'|translate}}" />
-             </div>
-              <div class="row gx-5 gy-4 form-set mt-5 contain"[ngClass]="rolePowersList?.length>32?'scroll':''">
-                <ng-container *ngFor="let item of rolePowersList | localizeSearch :searchText.value; let i = index">
-                    <div class="col-md-3 d-flex gap-4 align-items-center mb-3">
+                <input class="input" type="text" [formControl]="searchText" pInputText
+                  placeholder="{{'shared.Search...'|translate}}" />
+              </div>
 
-                        <p-checkbox  [value]="item.id"  name="parents" [ngModelOptions]="{standalone: true}"  [(ngModel)]="rolePowersIdList"></p-checkbox>
-                        <label class="label label--sm" for=""> {{item.name|currentLang}} </label>
-                    </div>
+              <div class=" d-flex align-items-center gap-3 my-4">
+                <p-checkbox  name="all" [binary]="true" ngModel (ngModelChange)="onSelectAllRoles($event)" [ngModelOptions]="{standalone: true}"></p-checkbox>
+                <label class="fw-bold" for="">{{'shared.selectAll'|translate}}</label>
+                <!-- <div class="spinner-border color-skyBlue-500" role="status" *ngIf="isLoading"></div> -->
+              </div>
+
+              <div class="row gx-5 gy-4 form-set mt-5 contain" [ngClass]="rolePowersList?.length>32?'scroll':''">
+                <ng-container *ngFor="let item of rolePowersList | localizeSearch :searchText.value; let i = index">
+                  <div class="col-md-3 d-flex gap-4 align-items-center mb-3">
+                    <p-checkbox [value]="item.id" name="parents" [ngModelOptions]="{standalone: true}"[(ngModel)]="rolePowersIdList"></p-checkbox>
+                    <label class="label label--sm" for=""> {{item.name|currentLang}} </label>
+                  </div>
                 </ng-container>
 
               </div>
 
             </div>
-           </div>
+          </div>
 
 
               <div class=" d-flex align-items-center justify-content-end ">

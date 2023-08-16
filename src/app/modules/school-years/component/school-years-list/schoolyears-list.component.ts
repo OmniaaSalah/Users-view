@@ -77,6 +77,7 @@ export class SchoolyearsListComponent implements OnInit {
     this.router.navigate([], {
       queryParams: {searchQuery : JSON.stringify(this.filtration)},
       relativeTo: this.route,
+      queryParamsHandling: "preserve"
     });
 
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));

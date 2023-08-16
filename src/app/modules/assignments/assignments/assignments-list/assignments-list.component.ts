@@ -87,6 +87,7 @@ export class AssignmentsListComponent implements OnInit {
     this.router.navigate([], {
       queryParams: {searchQuery : JSON.stringify(this.filtration)},
       relativeTo: this.route,
+      queryParamsHandling: "preserve"
     });
 
     this.assignments.loading=true;

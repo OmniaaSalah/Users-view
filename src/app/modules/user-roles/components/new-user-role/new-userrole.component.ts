@@ -1,5 +1,11 @@
-import { Component, OnInit,inject, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, inject, OnDestroy } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,105 +25,136 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 @Component({
   selector: 'app-new-user-role',
   templateUrl: './new-userrole.component.html',
-  styleUrls: ['./new-userrole.component.scss']
+  styleUrls: ['./new-userrole.component.scss'],
 })
-export class NewUserRoleComponent implements OnInit,OnDestroy {
-  get ClaimsEnum(){return ClaimsEnum}
+export class NewUserRoleComponent implements OnInit, OnDestroy {
+  get ClaimsEnum() {
+    return ClaimsEnum;
+  }
   exclamationIcon = faExclamationCircle;
   lang = inject(TranslationService).lang;
   schoolIds;
   curriculumIds;
   jobRole;
   dataRestrictionLevelList;
-  rolePowersList=[];
-  rolePowersAddedList=[];
-  rolePowersIdList=[];
+  rolePowersList = [];
+  rolePowersAddedList = [];
+  rolePowersIdList = [];
   curriculamList;
   schoolIsSelectedList;
-  selectedSchoolIds=[];
-  MarkedListLength:number=0;
-  showCurriculamList:boolean=false;
-  showSchoolList:boolean=false;
-  isBtnLoading: boolean=false;
-  selectSchoolModelOpened:boolean=false;
-  isShown:boolean=false;
-  notChecked:boolean=false;
-  checked:boolean=true;
-  urlParameter:string='';
-  filtration :Filter = {...Filtration,curriculumId:'',StateId: ''};
-  paginationState= {...paginationInitialState};
-  schools={
-    totalAllData:0,
-    total:0,
-    list:[],
-    loading:true
-  }
+  selectedSchoolIds = [];
+  MarkedListLength: number = 0;
+  showCurriculamList: boolean = false;
+  showSchoolList: boolean = false;
+  isBtnLoading: boolean = false;
+  selectSchoolModelOpened: boolean = false;
+  isShown: boolean = false;
+  notChecked: boolean = false;
+  checked: boolean = true;
+  urlParameter: string = '';
+  filtration: Filter = { ...Filtration, curriculumId: '', StateId: '' };
+  paginationState = { ...paginationInitialState };
+  schools = {
+    totalAllData: 0,
+    total: 0,
+    list: [],
+    loading: true,
+  };
   rolesPowers;
   roleFormGrp: FormGroup;
-  searchText = new FormControl('')
-  constructor(private fb: FormBuilder,private CountriesService:CountriesService,  private exportService: ExportService, private sharedService: SharedService,private router: Router,  private schoolsService:SchoolsService,private toastService: ToastService,private route: ActivatedRoute, private userRolesService: UserRolesService, private translate: TranslateService, private headerService: HeaderService) {
+  searchText = new FormControl('');
+  constructor(
+    private fb: FormBuilder,
+    private CountriesService: CountriesService,
+    private exportService: ExportService,
+    private sharedService: SharedService,
+    private router: Router,
+    private schoolsService: SchoolsService,
+    private toastService: ToastService,
+    private route: ActivatedRoute,
+    private userRolesService: UserRolesService,
+    private translate: TranslateService,
+    private headerService: HeaderService
+  ) {
     this.roleFormGrp = fb.group({
-
-      jobRoleNameInArabic: ['', [Validators.required, Validators.maxLength(65)]],
-      jobRoleNameInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
+      jobRoleNameInArabic: [
+        '',
+        [Validators.required, Validators.maxLength(65)],
+      ],
+      jobRoleNameInEnglish: [
+        '',
+        [Validators.required, Validators.maxLength(65)],
+      ],
       descriptionInArabic: ['', [Validators.maxLength(256)]],
       descriptionInEnglish: ['', [Validators.maxLength(256)]],
-      datarestrictionLevel: ['',[Validators.required]],
+      datarestrictionLevel: ['', [Validators.required]],
       status: [false],
-      curriculumSelected: fb.array([''])
-
-
+      curriculumSelected: fb.array(['']),
     });
   }
 
   ngOnInit(): void {
-
     this.getCurriculums();
-    this.sharedService.openSelectSchoolsModel.subscribe((res)=>{this.selectSchoolModelOpened=res;})
+    this.sharedService.openSelectSchoolsModel.subscribe((res) => {
+      this.selectSchoolModelOpened = res;
+    });
     this.userRolesService.schoolSelectedList.next([]);
     this.userRolesService.MarkedListLength.next(0);
-    this.userRolesService.schoolSelectedList.subscribe((res)=>{
-      this.schoolIsSelectedList=res;
-      console.log(res)
+    this.userRolesService.schoolSelectedList.subscribe((res) => {
+      this.schoolIsSelectedList = res;
+      console.log(res);
     });
-    this.userRolesService.MarkedListLength.subscribe((res)=>{this.MarkedListLength=res});
-    this.dataRestrictionLevelList=this.userRolesService.dataRestrictionLevelList;
-    this.userRolesService.getAllClaims().subscribe((res)=>{this.rolePowersList=res.result})
-    this.route.paramMap.subscribe(param => {
-      this.urlParameter =param.get('roleId');
-      if(this.urlParameter)
-      {
-        this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{
-        this.jobRole=res;
-        this.getSchoolList();
-
-        });
+    this.userRolesService.MarkedListLength.subscribe((res) => {
+      this.MarkedListLength = res;
+    });
+    this.dataRestrictionLevelList =
+      this.userRolesService.dataRestrictionLevelList;
+    this.userRolesService.getAllClaims().subscribe((res) => {
+      this.rolePowersList = res.result;
+    });
+    this.route.paramMap.subscribe((param) => {
+      this.urlParameter = param.get('roleId');
+      if (this.urlParameter) {
+        this.userRolesService
+          .getRoleByID(Number(this.urlParameter))
+          .subscribe((res) => {
+            this.jobRole = res;
+            this.getSchoolList();
+          });
       }
-
     });
 
-
-    this.headerService.Header.next(
-      {
-        'breadCrump': [
-          { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'), routerLink: '/manager-tools/user-roles/user-roles-list',routerLinkActiveOptions:{exact: true} },
-          {
-
-            label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('breadcrumb.Add Roles in The System'):this.translate.instant('breadcrumb.Edit Role'),
-            routerLink: (this.urlParameter==null||this.urlParameter=='')? '/manager-tools/user-roles/new-role':'/manager-tools/user-roles/edit-role/'+this.urlParameter
-          }
-       ],
-        'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('breadcrumb.Add Roles in The System'):this.translate.instant('breadcrumb.Edit Role')}
-      }
-
-    );
-
+    this.headerService.Header.next({
+      breadCrump: [
+        {
+          label: this.translate.instant('dashboard.UserRole.List Of Job Roles'),
+          routerLink: '/manager-tools/user-roles/user-roles-list',
+          routerLinkActiveOptions: { exact: true },
+        },
+        {
+          label:
+            this.urlParameter == null || this.urlParameter == ''
+              ? this.translate.instant('breadcrumb.Add Roles in The System')
+              : this.translate.instant('breadcrumb.Edit Role'),
+          routerLink:
+            this.urlParameter == null || this.urlParameter == ''
+              ? '/manager-tools/user-roles/new-role'
+              : '/manager-tools/user-roles/edit-role/' + this.urlParameter,
+        },
+      ],
+      mainTitle: {
+        main:
+          this.urlParameter == null || this.urlParameter == ''
+            ? this.translate.instant('breadcrumb.Add Roles in The System')
+            : this.translate.instant('breadcrumb.Edit Role'),
+      },
+    });
   }
   get curriculumSelectedArr(): FormArray {
     return this.roleFormGrp.get('curriculumSelected') as FormArray;
   }
   get curriculumSelected() {
-    return this.roleFormGrp.controls['curriculumSelected'] ;
+    return this.roleFormGrp.controls['curriculumSelected'];
   }
 
   get jobRoleNameInArabic() {
@@ -127,15 +164,12 @@ export class NewUserRoleComponent implements OnInit,OnDestroy {
     return this.roleFormGrp.controls['jobRoleNameInEnglish'] as FormControl;
   }
 
-
   get descriptionInArabic() {
     return this.roleFormGrp.controls['descriptionInArabic'] as FormControl;
   }
   get descriptionInEnglish() {
     return this.roleFormGrp.controls['descriptionInEnglish'] as FormControl;
   }
-
-
 
   get status() {
     return this.roleFormGrp.controls['status'] as FormControl;
@@ -145,320 +179,290 @@ export class NewUserRoleComponent implements OnInit,OnDestroy {
     return this.roleFormGrp.controls['datarestrictionLevel'] as FormControl;
   }
 
-
-  succeeded(){
+  succeeded() {
     this.isBtnLoading = true;
-    this.rolePowersList.forEach(element => {
-    this.rolePowersIdList.forEach(roleId => {
-      if(roleId==element.id)
-      {
-        this.rolePowersAddedList.push(element);
-      }
+    this.rolePowersList.forEach((element) => {
+      this.rolePowersIdList.forEach((roleId) => {
+        if (roleId == element.id) {
+          this.rolePowersAddedList.push(element);
+        }
+      });
     });
 
-  });
-
-  this.schoolIds=[];
-  this.curriculumIds=[];
-  if(this.roleFormGrp.value.datarestrictionLevel==RestrictionLevelEnum.AccessToInformationRelatedToSchool)
-   {this.schoolIsSelectedList.forEach(element => {
-
-      this.schoolIds.push(element.id);
-  });
-
-  if(this.schoolIds.length==0)
-  {
-    this.toastService.error(this.translate.instant('dashboard.UserRole.error,please add one school at least'));
-    this.isBtnLoading = false;
-  }
-  else
-  {
-    this.saveMe();
-  }
-  }
-
-  else if(this.roleFormGrp.value.datarestrictionLevel==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums)
-  {
-    this.curriculamList.forEach(element => {
-      if(element.isSelected==true)
-      {
-        this.curriculumIds.push(element.id);
-      }
-    });
-
-    if(this.curriculumIds.length==0)
-  {
-    this.toastService.error(this.translate.instant('dashboard.UserRole.error,please add one curriculum at least'));
-    this.isBtnLoading = false;
-  }
-  else
-  {
-    this.saveMe();
-  }
-  }
-
-  else
-  {
-    this.saveMe();
-  }
-
-  }
-
-  saveMe()
-  {
-
-    this.jobRole={};
-    this.jobRole.status=this.roleFormGrp.value.status?this.checked:this.notChecked;
-
-    this.jobRole={
-      jobRoleName:{ar:this.roleFormGrp.value.jobRoleNameInArabic,en:this.roleFormGrp.value.jobRoleNameInEnglish} ,
-      description:{ar:this.roleFormGrp.value.descriptionInArabic,en:this.roleFormGrp.value.descriptionInEnglish},
-      rolePowers:this.rolePowersAddedList,
-      status:this.jobRole.status,
-      schoolIds: this.schoolIds ,
-      curriculumIds:this.curriculumIds,
-      restrictionLevelId:this.roleFormGrp.value.datarestrictionLevel
-     };
-
-     if(this.urlParameter)
-      {
-        this.userRolesService.updateRole(this.jobRole,this.urlParameter).subscribe((res)=>{
-          this.isBtnLoading = false;
-
-          if(res.statusCode!='OK')
-          {
-            this.toastService.error(res.errorLocalized[this.lang]);
-          }
-          else
-          {
-            this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
-            this.router.navigate(['/manager-tools/user-roles/user-roles-list']);
-          }
-         },(err)=>{
-
-          this.isBtnLoading = false;
-          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
-
-
-        });
-      }
-      else
-      {
-
-        this.userRolesService.addRole(this.jobRole).subscribe((res)=>{
-          this.isBtnLoading = false;
-
-          if(res.statusCode=='BadRequest')
-          {
-            this.toastService.error(this.translate.instant(res.error));
-          }
-          else
-          {
-            this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
-            this.router.navigate(['/manager-tools/user-roles/user-roles-list']);
-          }
-         },(err)=>{
-
-          this.isBtnLoading = false;
-          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
-
-
-        })
-      }
-  }
-  isToggleLabel(e)
-  {
-    if(e.checked)
-    {
-      if(this.urlParameter)
-      {
-        this.jobRole.status=true;
-
-      }
-      else
-      {
-        this.isShown=true;
-      }
-
-    }
-    else{
-      if(this.urlParameter)
-      {
-        this.jobRole.status=false;
-
-      }
-      else
-      {
-        this.isShown=false;
-      }
-
-    }
-  }
-
-  bindOldRole(role)
-  {
-    if(this.urlParameter&&role)
-     { this.rolePowersIdList=[];
-
-      role.rolePowers.forEach(element => {
-
-        this.rolePowersIdList.push(element.id);
-
-
+    this.schoolIds = [];
+    this.curriculumIds = [];
+    if (
+      this.roleFormGrp.value.datarestrictionLevel ==
+      RestrictionLevelEnum.AccessToInformationRelatedToSchool
+    ) {
+      this.schoolIsSelectedList.forEach((element) => {
+        this.schoolIds.push(element.id);
       });
 
-
-      role.indexStatus=role.status?this.checked:this.notChecked;
-
-        this.roleFormGrp.patchValue({jobRoleNameInArabic:role.jobRoleName.ar,
-          jobRoleNameInEnglish:role.jobRoleName.en,
-          descriptionInArabic: role.description?.ar,
-          descriptionInEnglish: role.description?.en,
-          status:role?.indexStatus,
-          datarestrictionLevel:role.restrictionLevelId
-        });
-        this.changedRestriction(role.restrictionLevelId);
-        if(role.restrictionLevelId==RestrictionLevelEnum.AccessToInformationRelatedToSchool)
-
-        {
-
-          this.schoolIsSelectedList=[];
-          this.userRolesService.MarkedListLength.next(role.schoolIds.length);
-          this.schools.list.forEach(school => {
-            role.schoolIds.forEach(id => {
-              if(school.id==id)
-              {
-                this.schoolIsSelectedList.push(school)
-              }
-            });
-
-          });
-
+      if (this.schoolIds.length == 0) {
+        this.toastService.error(
+          this.translate.instant(
+            'dashboard.UserRole.error,please add one school at least'
+          )
+        );
+        this.isBtnLoading = false;
+      } else {
+        this.saveMe();
       }
-      else if(role.restrictionLevelId==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums)
-        {role.curriculumIds.forEach(selectedCurriculumId => {
-          this.curriculamList.forEach(curriculam => {
-          if(selectedCurriculumId==curriculam.id)
-          {
-            curriculam.isSelected=true;
-
-          }
-
-
-          });
-
-        });
-
-
-        this.roleFormGrp.value.curriculumSelected=[];
-        this.curriculamList.forEach((curriculam,i)=> {
-          if(curriculam.isSelected==true)
-          {
-
-            this.curriculumSelectedArr.at(i).setValue(true);
-          }
-          else
-          {
-
-          this.curriculumSelectedArr.at(i).setValue('');
+    } else if (
+      this.roleFormGrp.value.datarestrictionLevel ==
+      RestrictionLevelEnum.AccessToInformationRelatedToCurriculums
+    ) {
+      this.curriculamList.forEach((element) => {
+        if (element.isSelected == true) {
+          this.curriculumIds.push(element.id);
         }
+      });
 
+      if (this.curriculumIds.length == 0) {
+        this.toastService.error(
+          this.translate.instant(
+            'dashboard.UserRole.error,please add one curriculum at least'
+          )
+        );
+        this.isBtnLoading = false;
+      } else {
+        this.saveMe();
+      }
+    } else {
+      this.saveMe();
+    }
+  }
+
+  saveMe() {
+    this.jobRole = {};
+    this.jobRole.status = this.roleFormGrp.value.status
+      ? this.checked
+      : this.notChecked;
+
+    this.jobRole = {
+      jobRoleName: {
+        ar: this.roleFormGrp.value.jobRoleNameInArabic,
+        en: this.roleFormGrp.value.jobRoleNameInEnglish,
+      },
+      description: {
+        ar: this.roleFormGrp.value.descriptionInArabic,
+        en: this.roleFormGrp.value.descriptionInEnglish,
+      },
+      rolePowers: this.rolePowersAddedList,
+      status: this.jobRole.status,
+      schoolIds: this.schoolIds,
+      curriculumIds: this.curriculumIds,
+      restrictionLevelId: this.roleFormGrp.value.datarestrictionLevel,
+    };
+
+    if (this.urlParameter) {
+      this.userRolesService
+        .updateRole(this.jobRole, this.urlParameter)
+        .subscribe(
+          (res) => {
+            this.isBtnLoading = false;
+
+            if (res.statusCode != 'OK') {
+              this.toastService.error(res.errorLocalized[this.lang]);
+            } else {
+              this.toastService.success(
+                this.translate.instant(
+                  'dashboard.UserRole.JobRole edited Successfully'
+                )
+              );
+              this.router.navigate([
+                '/manager-tools/user-roles/user-roles-list',
+              ]);
+            }
+          },
+          (err) => {
+            this.isBtnLoading = false;
+            this.toastService.error(
+              this.translate.instant(
+                'dashboard.AnnualHoliday.error,please try again'
+              )
+            );
+          }
+        );
+    } else {
+      this.userRolesService.addRole(this.jobRole).subscribe(
+        (res) => {
+          this.isBtnLoading = false;
+
+          if (res.statusCode == 'BadRequest') {
+            this.toastService.error(this.translate.instant(res.error));
+          } else {
+            this.toastService.success(
+              this.translate.instant(
+                'dashboard.UserRole.JobRole added Successfully'
+              )
+            );
+            this.router.navigate(['/manager-tools/user-roles/user-roles-list']);
+          }
+        },
+        (err) => {
+          this.isBtnLoading = false;
+          this.toastService.error(
+            this.translate.instant(
+              'dashboard.AnnualHoliday.error,please try again'
+            )
+          );
+        }
+      );
+    }
+  }
+  isToggleLabel(e) {
+    if (e.checked) {
+      if (this.urlParameter) {
+        this.jobRole.status = true;
+      } else {
+        this.isShown = true;
+      }
+    } else {
+      if (this.urlParameter) {
+        this.jobRole.status = false;
+      } else {
+        this.isShown = false;
+      }
+    }
+  }
+
+  bindOldRole(role) {
+    if (this.urlParameter && role) {
+      this.rolePowersIdList = [];
+
+      role.rolePowers.forEach((element) => {
+        this.rolePowersIdList.push(element.id);
+      });
+
+      role.indexStatus = role.status ? this.checked : this.notChecked;
+
+      this.roleFormGrp.patchValue({
+        jobRoleNameInArabic: role.jobRoleName.ar,
+        jobRoleNameInEnglish: role.jobRoleName.en,
+        descriptionInArabic: role.description?.ar,
+        descriptionInEnglish: role.description?.en,
+        status: role?.indexStatus,
+        datarestrictionLevel: role.restrictionLevelId,
+      });
+      this.changedRestriction(role.restrictionLevelId);
+      if (
+        role.restrictionLevelId ==
+        RestrictionLevelEnum.AccessToInformationRelatedToSchool
+      ) {
+        this.schoolIsSelectedList = [];
+        this.userRolesService.MarkedListLength.next(role.schoolIds.length);
+        this.schools.list.forEach((school) => {
+          role.schoolIds.forEach((id) => {
+            if (school.id == id) {
+              this.schoolIsSelectedList.push(school);
+            }
+          });
+        });
+      } else if (
+        role.restrictionLevelId ==
+        RestrictionLevelEnum.AccessToInformationRelatedToCurriculums
+      ) {
+        role.curriculumIds.forEach((selectedCurriculumId) => {
+          this.curriculamList.forEach((curriculam) => {
+            if (selectedCurriculumId == curriculam.id) {
+              curriculam.isSelected = true;
+            }
+          });
         });
 
+        this.roleFormGrp.value.curriculumSelected = [];
+        this.curriculamList.forEach((curriculam, i) => {
+          if (curriculam.isSelected == true) {
+            this.curriculumSelectedArr.at(i).setValue(true);
+          } else {
+            this.curriculumSelectedArr.at(i).setValue('');
+          }
+        });
       }
-
-    }else
-    {
-      this.jobRole={}
+    } else {
+      this.jobRole = {};
     }
     this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
-
   }
 
-
-
-  changedRestriction(e)
-  {
-
-
-    if(e==RestrictionLevelEnum.AccessToAllSchoolInformation)
-    {
-      this.showCurriculamList=false;
-      this.showSchoolList=false;
-    }
-    else if(e==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums)
-    {
-      this.showCurriculamList=true;
-      this.showSchoolList=false;
-    }
-    else if(e==RestrictionLevelEnum.AccessToInformationRelatedToSchool)
-    {
-      this.showCurriculamList=false;
-      this.showSchoolList=true;
+  changedRestriction(e) {
+    if (e == RestrictionLevelEnum.AccessToAllSchoolInformation) {
+      this.showCurriculamList = false;
+      this.showSchoolList = false;
+    } else if (
+      e == RestrictionLevelEnum.AccessToInformationRelatedToCurriculums
+    ) {
+      this.showCurriculamList = true;
+      this.showSchoolList = false;
+    } else if (e == RestrictionLevelEnum.AccessToInformationRelatedToSchool) {
+      this.showCurriculamList = false;
+      this.showSchoolList = true;
     }
   }
 
-
-  getCurriculumsAdded(e,id)
-  {
-
-    this.curriculamList.forEach(element => {
-      if(id==element.id)
-      {
-        element.isSelected=e.checked;
+  getCurriculumsAdded(e, id) {
+    this.curriculamList.forEach((element) => {
+      if (id == element.id) {
+        element.isSelected = e.checked;
       }
     });
-
   }
 
-  getCurriculums(){
+  getCurriculums() {
+    this.sharedService.getAllCurriculum().subscribe((res) => {
+      this.curriculamList = res.map((curriculam) => {
+        return {
+          id: curriculam.id,
+          name: { ar: curriculam.name.ar, en: curriculam.name.en },
+          isSelected: false,
+        };
+      });
 
-    this.sharedService.getAllCurriculum().subscribe(
-      (res)=>{this.curriculamList=res.map(curriculam=>{return {
-        'id':curriculam.id,
-        'name':{'ar':curriculam.name.ar,'en':curriculam.name.en},
-        'isSelected':false
-        }});
-
-        this.curriculamList.forEach(element => {
-
-          {this.curriculumSelectedArr.push(this.fb.control(''));}
-        });
-      })
-
-
+      this.curriculamList.forEach((element) => {
+        {
+          this.curriculumSelectedArr.push(this.fb.control(''));
+        }
+      });
+    });
   }
 
-
-
-  getSchoolList()
-  {
-
-    this.filtration.PageSize=this.schools.totalAllData;
-    this.schoolsService.getAllSchoolsInPopUp(this.filtration).subscribe((res)=>{
-
-      this.schools.list=res.data;
+  getSchoolList() {
+    this.filtration.PageSize = this.schools.totalAllData;
+    this.schoolsService
+      .getAllSchoolsInPopUp(this.filtration)
+      .subscribe((res) => {
+        this.schools.list = res.data;
 
         this.bindOldRole(this.jobRole);
-
       });
-
   }
 
-
-  unSelectMe(schoolId)
-  {
-    this.userRolesService.MarkedListLength.next(this.MarkedListLength-=1);
-    let index =this.schoolIsSelectedList.findIndex(school => school.id==schoolId)
-    this.schoolIsSelectedList.splice(index, 1)
+  unSelectMe(schoolId) {
+    this.userRolesService.MarkedListLength.next((this.MarkedListLength -= 1));
+    let index = this.schoolIsSelectedList.findIndex(
+      (school) => school.id == schoolId
+    );
+    this.schoolIsSelectedList.splice(index, 1);
     this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
-    this.toastService.success(this.translate.instant('mission Succeeded'))
+    this.toastService.success(this.translate.instant('mission Succeeded'));
   }
 
-  openSelectSchoolsModel()
-  {
+  openSelectSchoolsModel() {
     this.sharedService.openSelectSchoolsModel.next(true);
   }
+
+
+
+  onSelectAllRoles(checked){
+    console.log(checked);
+
+    this.rolePowersIdList = []
+    if(checked) this.rolePowersIdList = this.rolePowersList.map(el => el.id)
+    else this.rolePowersIdList = []
+  }
+
   ngOnDestroy(): void {
     this.userRolesService.schoolSelectedList.next([]);
     this.userRolesService.MarkedListLength.next(0);

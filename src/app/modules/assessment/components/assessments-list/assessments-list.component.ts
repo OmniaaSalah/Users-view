@@ -95,6 +95,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     this.router.navigate([], {
       queryParams: {searchQuery : JSON.stringify(this.filtration)},
       relativeTo: this.route,
+      queryParamsHandling: "preserve"
     });
 
     this.assessmentList.loading = true
@@ -132,15 +133,12 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
 deleteRate(id)
 {
   this.assessmentService.deleteRate(id).subscribe((res)=>{
-    if(res.error)
-    {
+    if (res.error) {
       this.toastService.error(this.translate.instant(res.error));
-    }
-    else
-    {
+    } else {
       this.toastService.success(this.translate.instant('dashboard.Assessment.Assessment deleted Successfully'));
-      this.getRate()
-     }
+      this.getRate();
+    }
 
   },(err)=>{
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
