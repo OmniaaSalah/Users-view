@@ -99,8 +99,10 @@ export class AppComponent implements OnInit {
     this.router.events
     .pipe(filter(event =>event instanceof NavigationEnd ))
       .subscribe((event: NavigationEnd) => {
+        let prevUrl = this.routeListenrService.previousUrl.split('?')[0]
+        let currUrl = event.url.split('?')[0]
 
-        window.scrollTo(0, 0);
+        if(prevUrl !=currUrl) window.scrollTo(0, 0);
         event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
         // event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
         if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false

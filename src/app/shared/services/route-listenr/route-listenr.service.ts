@@ -47,7 +47,7 @@ routeHistory$ : BehaviorSubject<RouteInHistory[]> = new BehaviorSubject<RouteInH
     .subscribe((event: NavigationEnd) => {
       if(event instanceof NavigationEnd){
         this.previousUrl = this.currentUrl;
-        this.currentUrl = event.url;
+        this.currentUrl = event.url.split('?')[0];
         this.manageRouteHistory()
 
         this.setActiveRoute(event.url)

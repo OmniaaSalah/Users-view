@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { GradesService } from '../../../services/grade/grade.service';
+import { MediaService } from 'src/app/shared/services/media/media.service';
 
 @Component({
   selector: 'app-school-info',
@@ -35,7 +36,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
   schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
 
-  location="https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448"
+  location="https://goo.gl/maps/TMvCmm8PKwW5CZ8y7"
 
   componentHeaderData: IHeader = {
 		breadCrump: [
@@ -63,6 +64,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
     private headerService: HeaderService,
     private toaster:ToastrService,
     private gradeService:GradesService,
+    private mediaService:MediaService,
     private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
@@ -75,9 +77,7 @@ getSchool(id){
 
 	this.schoolsService.getSchool(id).subscribe((res) =>{
 		this.school = res
-    this.schoolAttacments.logo = res?.schoolLogoPath
-    this.schoolAttacments.reliableLogo = res?.diplomaLogoPath
-    this.schoolAttacments.stampSchoolLogoPath = res?.stampSchoolLogoPath
+    this.setSchoolLogos(res)
 
 		if(this.currentUserScope==UserScope.Employee) {
 			this.componentHeaderData.mainTitle.main = getLocalizedValue(res.name)
@@ -87,6 +87,33 @@ getSchool(id){
 
 		},(err)=>{})
 	}
+
+
+  setSchoolLogos(schoolData){
+    if(schoolData?.schoolLogoPath){
+      this.mediaService.getFTP_BlobFile(schoolData?.schoolLogoPath).subscribe(blob=>{
+        this.mediaService.blobToBase64(blob).then(base64 =>{
+          this.schoolAttacments.logo = base64 as string
+        })
+      })
+    }
+
+    if(schoolData?.diplomaLogoPath){
+      this.mediaService.getFTP_BlobFile(schoolData?.diplomaLogoPath).subscribe(blob=>{
+        this.mediaService.blobToBase64(blob).then(base64 =>{
+          this.schoolAttacments.reliableLogo = base64 as string
+        })
+      })
+    }
+
+    if(schoolData?.stampSchoolLogoPath){
+      this.mediaService.getFTP_BlobFile(schoolData?.stampSchoolLogoPath).subscribe(blob=>{
+        this.mediaService.blobToBase64(blob).then(base64 =>{
+          this.schoolAttacments.stampSchoolLogoPath  = base64 as string
+        })
+      })
+    }
+  }
 
 	showGrades(schoolId)
 	{

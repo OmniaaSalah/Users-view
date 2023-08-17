@@ -82,7 +82,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
 
   constructor(
-    private media: MediaService,
+    private mediaService: MediaService,
     private toaster:ToastrService,
     private translate:TranslateService,
     private settingService:SettingsService) { }
@@ -223,7 +223,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
         this.uploadedFilesName.push(file.name)
         this.uploadedFilesFormData.push(FORM_DATA)
 
-        let httpCall = this.media.uploadMedia(FORM_DATA)
+        let httpCall = this.mediaService.uploadMedia(FORM_DATA)
         .pipe(
           catchError(err=> {
             this.uploadedFilesName.splice(index,1)
@@ -310,7 +310,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
   openFile(fileUrl : string)
   {
       if (fileUrl) {
-        window.open(fileUrl, '_blank').focus();
+        // window.open(fileUrl, '_blank').focus();
+        this.mediaService.downloadFTPFile(fileUrl)
       }
 
   }

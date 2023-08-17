@@ -95,7 +95,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     this.router.navigate([], {
       queryParams: {searchQuery : JSON.stringify(this.filtration)},
       relativeTo: this.route,
-      queryParamsHandling: "preserve"
+
     });
 
     this.assessmentList.loading = true

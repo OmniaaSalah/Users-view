@@ -57,6 +57,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
 	// << Data Placeholder>> //
+  location="https://goo.gl/maps/TMvCmm8PKwW5CZ8y7"
 
 	componentHeaderData: IHeader = {
 		breadCrump: [

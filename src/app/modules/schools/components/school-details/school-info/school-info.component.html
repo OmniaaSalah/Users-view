@@ -168,7 +168,7 @@
             <!-- <img src="assets/images/shared/qrc.svg" alt=""> -->
             <!-- school?.address?.locationURL -->
             <!-- https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448 -->
-            <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+            <qr-code [value]="school?.address?.locationURL ||location" size="160" errorCorrectionLevel="L"></qr-code>
 
         </div>
         <p class="paragraph paragraph--sm color-gray-800">المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل</p>

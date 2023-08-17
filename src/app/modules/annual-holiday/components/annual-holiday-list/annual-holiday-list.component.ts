@@ -124,7 +124,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     this.router.navigate([], {
       queryParams: {searchQuery : JSON.stringify(this.filtration)},
       relativeTo: this.route,
-      queryParamsHandling: "preserve"
+
     });
 
     this.annualHolidayService.getAllHolidays(this.filtration).subscribe((res)=>{
