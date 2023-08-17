@@ -67,7 +67,7 @@ export class TeachersReportsComponent implements OnInit {
     this.router.navigate([], {
       queryParams: {searchQuery : JSON.stringify(this.filtration)},
       relativeTo: this.route,
-      queryParamsHandling: "preserve"
+
     });
 
     this.teachersReport.loading = true

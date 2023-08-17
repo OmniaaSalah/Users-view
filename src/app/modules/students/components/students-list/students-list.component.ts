@@ -211,7 +211,7 @@ export class StudentsListComponent implements OnInit {
     this.router.navigate([], {
       queryParams: {searchQuery : JSON.stringify(this.filtration)},
       relativeTo: this.route,
-      queryParamsHandling: "preserve"
+
     });
 
 
@@ -241,6 +241,7 @@ export class StudentsListComponent implements OnInit {
     this.router.navigate([], {
       queryParams: {searchQuery : JSON.stringify(this.filtration)},
       relativeTo: this.route,
+
     });
 
 

@@ -35,7 +35,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
   schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
 
-  location="https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448"
+  location="https://goo.gl/maps/TMvCmm8PKwW5CZ8y7"
 
   componentHeaderData: IHeader = {
 		breadCrump: [
