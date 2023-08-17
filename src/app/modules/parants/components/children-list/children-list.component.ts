@@ -61,7 +61,6 @@ export class ChildrenListComponent implements OnInit {
     private _router: ActivatedRoute,
     public translationService: TranslationService,
     private router: Router,
-    private schoolService:SchoolsService,
     private userService:UserService
   ) { }
 
@@ -99,7 +98,7 @@ export class ChildrenListComponent implements OnInit {
 
   displayUnregisterChild(chiledId : number){
     let parentId = Number(this._router.snapshot.paramMap.get('parentId'));
-    this.router.navigateByUrl(`//schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/register?status=Unregistered`);
+    this.router.navigateByUrl(`/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/register?status=Unregistered`);
   }
 
   checkDashboardHeader()

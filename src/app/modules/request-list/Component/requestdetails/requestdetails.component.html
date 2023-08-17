@@ -460,7 +460,7 @@
                 [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
                 (click)="onActionTaken(option,i)"
                 class="btn">
-                    {{option.title|currentLang}}
+                    {{option?.label|currentLang}}
                     <div class="spinner-border text-light" role="status" *ngIf="option.isLoading"></div>
                 </button>
             </ng-container>

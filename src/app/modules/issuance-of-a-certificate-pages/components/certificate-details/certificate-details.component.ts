@@ -6,7 +6,8 @@ import jsPDF from 'jspdf';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { environment } from 'src/environments/environment';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
-
+import * as FileSaver from 'file-saver';
+import { MediaService } from 'src/app/shared/services/media/media.service';
 @Component({
   selector: 'app-certificate-details',
   templateUrl: './certificate-details.component.html',
@@ -55,7 +56,10 @@ export class CertificateDetailsComponent implements OnInit {
   constructor(
     private route:ActivatedRoute,
     private issueCertificateService:IssuanceCertificaeService,
-    private translate :TranslateService) { }
+    private translate :TranslateService,
+    private mediaService:MediaService) { }
+
+    imgSrc
 
   ngOnInit(): void {
     this.getCertificate()
@@ -73,6 +77,30 @@ export class CertificateDetailsComponent implements OnInit {
       this.certificateType = res.result.certificateType
       this.certificateQrc= `${environment.clientUrl}/certificate/${this.certificateId}`
       this.certificate = this.isJSON(res?.result?.jsonObj) ? JSON.parse(res.result.jsonObj) :"npt"
+
+      if(this.certificate?.SchoolLogo){
+        this.mediaService.getFTP_BlobFile(this.certificate?.SchoolLogo).subscribe(val =>{
+          this.mediaService.blobToBase64(this.certificate?.SchoolLogo).then(base64=> this.certificate.SchoolLogo =base64)
+        })
+      }
+
+      if(this.certificate?.Attachments[0]){
+        this.mediaService.getFTP_BlobFile(this.certificate?.Attachments[0]).subscribe(blob =>{
+          this.mediaService.blobToBase64(blob).then(base64=> this.certificate.Attachments[0] =base64)
+        })
+      }
+
+      if(this.certificate?.schoolStampPath){
+        this.mediaService.getFTP_BlobFile(this.certificate?.schoolStampPath).subscribe(blob =>{
+          this.mediaService.blobToBase64(blob).then(base64=> this.certificate.schoolStampPath =base64)
+        })
+      }
+
+      if(this.certificate?.DiplomaLogoPath){
+        this.mediaService.getFTP_BlobFile(this.certificate?.DiplomaLogoPath).subscribe(blob =>{
+          this.mediaService.blobToBase64(blob).then(base64=> this.certificate.DiplomaLogoPath =base64)
+        })
+      }
 
       console.log(this.certificate);
       // this.generateQRC()

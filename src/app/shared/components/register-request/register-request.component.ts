@@ -119,7 +119,6 @@ export class RegisterRequestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getGrades()
     this.prepareHeaderData()
     this.getStudentInfo()
 
@@ -134,12 +133,14 @@ export class RegisterRequestComponent implements OnInit {
     if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
       this.studentService.getStudent(this.route.snapshot.params['childId']).subscribe(res=>{
         this.childData = res.result
+        this.getGrades()
         this.initRegisterationForm(res?.result)
       })
 
     }else{
       this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
         this.childData = res
+        this.getGrades()
         this.initRegisterationForm(res)
       })
     }
@@ -230,9 +231,10 @@ initRegisterationForm(child){
     if(reqData?.isSpecialAbilities) {
       reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
     }
+console.log(reqData);
 
-    this.onGradeSelected(reqData.gradeId)
-    this.onSelectSchool(reqData.schoolId)
+    this.onGradeSelected(reqData.grade?.id)
+    this.onSelectSchool(reqData.school?.id)
     this.registerReqForm.patchValue(reqData)
 
   }
@@ -393,6 +395,7 @@ initRegisterationForm(child){
     .subscribe(res=>{
       this.toaster.success(this.translate.instant('toasterMessage.requestResend'));
       this.onSubmit=false
+      localStorage.removeItem('returnedRequest')
       this.router.navigate(['/requests-list/details', this.reqInstantId])
     },err=>{
       this.toaster.error(this.translate.instant('toasterMessage.error'))
