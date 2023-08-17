@@ -79,12 +79,12 @@ export class CertificateDetailsComponent implements OnInit {
       this.certificate = this.isJSON(res?.result?.jsonObj) ? JSON.parse(res.result.jsonObj) :"npt"
 
       if(this.certificate?.SchoolLogo){
-        this.mediaService.getFTP_BlobFile(this.certificate?.SchoolLogo).subscribe(val =>{
-          this.mediaService.blobToBase64(this.certificate?.SchoolLogo).then(base64=> this.certificate.SchoolLogo =base64)
+        this.mediaService.getFTP_BlobFile(this.certificate?.SchoolLogo).subscribe(blob =>{
+          this.mediaService.blobToBase64(blob).then(base64=> this.certificate.SchoolLogo =base64)
         })
       }
 
-      if(this.certificate?.Attachments[0]){
+      if(this.certificate?.Attachments && this.certificate?.Attachments[0]){
         this.mediaService.getFTP_BlobFile(this.certificate?.Attachments[0]).subscribe(blob =>{
           this.mediaService.blobToBase64(blob).then(base64=> this.certificate.Attachments[0] =base64)
         })
