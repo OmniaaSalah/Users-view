@@ -177,6 +177,8 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
 
 
    setAttachment(attachRef, files:CustomFile[]){
+    console.log(files);
+
     files.length ?
     ((attachRef.url=files[0].url) && (attachRef.name=files[0].name) ) :
     (attachRef.url='') && (attachRef.name='' )

@@ -72,7 +72,8 @@ export class ParentService {
    }
 
   getChildernByParentId(id:number): Observable<any>{
-    return this.http.get(`/Guardian/${id}/Children`).pipe(take(1));
+    return this.http.get(`/Guardian/${id}/Children`)
+    .pipe(take(1));
   }
   getChildernByParentIdAndSchoolId(parentId:number,schoolId:number): Observable<any>{
     return this.http.get(`/Student/students/${parentId}/${schoolId}`).pipe(take(1));

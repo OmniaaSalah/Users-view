@@ -16,7 +16,6 @@
   </div>
 
 
-
   <div [ngSwitch]="certificateType" class="p-6" id="certificate">
 
     <div *ngSwitchCase="certificateTypeEnum.AcademicSequenceCertificate">
@@ -191,6 +190,7 @@
               <span class="font-en">Academic Year</span>
             </p>
           </div>
+
           <div class="col-md-3">
             <img class="logo" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
           </div>

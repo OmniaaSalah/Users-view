@@ -9,11 +9,11 @@
 
 
     .contain{
-        height:40rem;
+        height:45rem;
 
         &.scroll{
         overflow-y:scroll;
-        overflow-x: hidden;
+        overflow-x: auto;
 
 
         }
