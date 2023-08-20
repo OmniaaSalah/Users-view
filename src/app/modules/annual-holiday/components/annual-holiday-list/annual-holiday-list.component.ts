@@ -236,20 +236,19 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     this.subscription?.unsubscribe();
   }
 
-  openRow(annualCalenderId:number)
-  {
+  openRow(annualCalenderId:number){
 
     this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading = true;
-
      this.getHolidaysinAnnualCalender(annualCalenderId);
   }
 
-  getHolidaysinAnnualCalender(annualCalenderId:number)
-  {
+
+  getHolidaysinAnnualCalender(annualCalenderId:number) {
 
     this.annualHolidayService.getHolidaysByAnnualCalenderID(annualCalenderId).subscribe((res)=>{
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading = false;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).holidays=res.data;
+
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).total=res.total;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).totalAllData=res.totalAllData;
 
@@ -257,13 +256,8 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).total=0
     });
 
-
   }
-  closeRow()
-  {
 
-
-  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.confirmModelService.confirmed$.next(null);

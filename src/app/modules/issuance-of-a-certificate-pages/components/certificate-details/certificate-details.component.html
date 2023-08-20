@@ -28,7 +28,7 @@
                   <img class="logo" src="assets/images/home/tab-logo.png">
                   <h1 class="fw-bold">هيئة الشارقه للتعليم الخاص</h1>
                 </div>
-                <img class="logo-center" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
+                <img class="logo-center" [src]="certificate?.SchoolLogo |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
               </div>
 
                 <hr class="m-0 color-black my-1">
@@ -111,7 +111,7 @@
             <div class="">
               <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
               <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
-              <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
+              <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
             </div>
 
             <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
@@ -192,7 +192,7 @@
           </div>
 
           <div class="col-md-3">
-            <img class="logo" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
+            <img class="logo" [src]="certificate?.SchoolLogo |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
           </div>
         </div>
       </header>
@@ -262,7 +262,7 @@
         <div class="">
           <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
           <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
         <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
@@ -339,7 +339,7 @@
             </p>
           </div>
           <div class="col-md-3">
-            <img class="logo" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
+            <img class="logo" [src]="certificate?.SchoolLogo |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
           </div>
         </div>
       </header>
@@ -411,7 +411,7 @@
         <div class="">
           <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
           <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
         <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
@@ -480,7 +480,7 @@
         <div class="d-flex align-items-end justify-content-between">
           <h2>{{certificate?.SchoolName?.Ar}}</h2>
           <div class="">
-            <img class="logo-center" [src]="certificate?.SchoolLogoPath" onerror="this.src='assets/images/shared/image.svg'">
+            <img class="logo-center" [src]="certificate?.SchoolLogoPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
           </div>
 
           <h2>{{certificate?.SchoolName?.En}}</h2>
@@ -632,7 +632,7 @@
           <div class="">
             <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
             <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span></div>
-            <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
+            <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
           </div>
 
           <div class="d-flex justify-content-end align-items-center" *ngIf="showQRC">
@@ -704,13 +704,13 @@
     </div>
 
     <div *ngSwitchCase="certificateTypeEnum.BoardCertificate">
-      <img class="w-100" [src]="certificate?.Attachments[0]" onerror="this.src='assets/images/shared/image.svg'">
+      <img class="w-100" [src]="certificate?.Attachments[0] |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
 
       <div class="d-flex justify-content-between align-items-center">
         <div class="">
           <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
           <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span></div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
         <div class="fs-4 d-flex align-items-center "  *ngIf="showQRC">
@@ -739,7 +739,7 @@
       <header>
         <div class="border-skyBlue p-4 d-flex justify-content-between align-items-end">
           <span class="font-ar">{{certificate?.SchoolArabicName}}</span>
-          <img class="logo" [src]="certificate?.SchoolLogo" fullbackImage alt="">
+          <img class="logo" [src]="certificate?.SchoolLogo |blobToBase64 |async" fullbackImage alt="">
           <span class="font-en">{{certificate?.SchoolEnglishName}}</span>
         </div>
 
@@ -798,12 +798,12 @@
 
           <div class="d-flex flex-column gap-3">
             <span class=""> اختـــــام الإعتمــــاد</span>
-            <img style="width: 8rem;" [src]="certificate?.DiplomaLogoPath" onerror="this.src='assets/images/shared/image.svg'">
+            <img style="width: 8rem;" [src]="certificate?.DiplomaLogoPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
           </div>
 
           <div class="d-flex flex-column gap-3 align-content-center">
             <span class="">ختم المدرسه</span>
-            <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">
+            <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
           </div>
 
 
@@ -836,7 +836,7 @@
         <header>
           <div class="">
             <div class="mb-4 text-center">
-              <img class="logo-center" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
+              <img class="logo-center" [src]="certificate?.SchoolLogo |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
               <p class="font-ar">{{certificate?.SchoolName?.Ar}}</p>
               <p class="font-en">{{certificate?.SchoolName?.En}}</p>
             </div>
@@ -1025,7 +1025,7 @@
           <div class="">
             <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
             <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
-            <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
+            <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
           </div>
 
           <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
@@ -1108,7 +1108,7 @@
             <!-- <p class="fw-bold "> {{certificate?.StudentArabicName}} ( {{certificate?.StudentNumber}})</p> -->
           </div>
           <div class="col-md-3">
-            <img class="logo" [src]="certificate?.SchoolLogo" onerror="this.src='assets/images/shared/image.svg'">
+            <img class="logo" [src]="certificate?.SchoolLogo |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
           </div>
         </div>
       </header>
@@ -1289,7 +1289,7 @@
         <div class="">
           <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
           <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
-          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath" onerror="this.src='assets/images/shared/image.svg'">            </div>
+          <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
         <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">

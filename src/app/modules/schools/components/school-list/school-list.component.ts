@@ -138,7 +138,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
 
   onSort(e){
-    console.log(e);
+
     this.filtration.SortColumnName=e.field
 
     if(e.field=='EstablishmentDate'){

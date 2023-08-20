@@ -33,7 +33,7 @@ export class MediaService {
   }
 
 
-  blobToBase64(blob){
+  blobToBase64(blob):Promise<string | ArrayBuffer>{
     const reader = new FileReader();
     reader.readAsDataURL(blob);
 

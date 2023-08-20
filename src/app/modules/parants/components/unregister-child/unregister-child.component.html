@@ -16,7 +16,7 @@
                 <div class="loader" *ngIf="uploading">
                     <div class="spinner-border text-light" role="status"></div>
                 </div>
-                <img [src]="child?.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+                <img [src]="child?.imagePath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
             </div>
 
             <div class="profile__info">
