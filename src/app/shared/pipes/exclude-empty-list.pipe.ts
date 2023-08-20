@@ -17,7 +17,6 @@ export class ExcludeEmptyListPipe implements PipeTransform {
       return (item[keyName] as Array<any>).some(el=> {
 
         if(!el?.claims || !el?.claims?.length) return true
-        console.log('1111111111111111111111111111111111111');
 
         return this.userService.isUserAllowedTo(el?.claims)
       })

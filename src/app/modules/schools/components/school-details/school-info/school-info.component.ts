@@ -77,7 +77,10 @@ getSchool(id){
 
 	this.schoolsService.getSchool(id).subscribe((res) =>{
 		this.school = res
-    this.setSchoolLogos(res)
+    this.schoolAttacments.logo = res?.schoolLogoPath
+    this.schoolAttacments.reliableLogo = res?.diplomaLogoPath
+    this.schoolAttacments.stampSchoolLogoPath = res?.stampSchoolLogoPath
+    // this.setSchoolLogos(res)
 
 		if(this.currentUserScope==UserScope.Employee) {
 			this.componentHeaderData.mainTitle.main = getLocalizedValue(res.name)

@@ -56,6 +56,8 @@ import { SubHeaderComponent } from './components/sub-header/sub-header.component
 import { RequiredRolesDirective } from './directives/required-roles/required-roles.directive';
 import { ExcludeEmptyListPipe } from './pipes/exclude-empty-list.pipe';
 import { FormControlValidationMsgDirective } from './directives/validations/form-control-validation-msg.directive';
+import { ToLocalDatePipe } from './pipes/to-local-date.pipe';
+import { BlobToBase64Pipe } from './pipes/blob-to-base64.pipe';
 
 registerLocaleData(localeAr);
 
@@ -109,6 +111,8 @@ registerLocaleData(localeAr);
     RequiredRolesDirective,
     ExcludeEmptyListPipe,
     FormControlValidationMsgDirective,
+    ToLocalDatePipe,
+    BlobToBase64Pipe,
 
   ],
   imports: [
@@ -182,7 +186,9 @@ registerLocaleData(localeAr);
     SubHeaderComponent,
     RequiredRolesDirective,
     ExcludeEmptyListPipe,
-    FormControlValidationMsgDirective
+    FormControlValidationMsgDirective,
+    ToLocalDatePipe,
+    BlobToBase64Pipe
   ],
   providers:[SharedService]
 })

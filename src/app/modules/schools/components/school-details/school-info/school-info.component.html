@@ -23,7 +23,7 @@
             <div class=" box image-wrapper w px-5 d-flex flex-column" >
               <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.logo=''"></fa-icon>
               <!-- <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt=""> -->
-              <img  [src]="schoolAttacments.logo" fullbackImage>
+              <img  [src]="schoolAttacments.logo |blobToBase64 |async" fullbackImage>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
             <div class=" box image-wrapper w px-5 d-flex flex-column" >
               <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.reliableLogo=''"></fa-icon>
               <!-- <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt=""> -->
-              <img  [src]="schoolAttacments.reliableLogo" fullbackImage>
+              <img  [src]="schoolAttacments.reliableLogo | blobToBase64 |async" fullbackImage>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
           <div class=" box image-wrapper w px-5 d-flex flex-column" >
             <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.stampSchoolLogoPath=''"></fa-icon>
             <!-- <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt=""> -->
-            <img  [src]="schoolAttacments.stampSchoolLogoPath" fullbackImage>
+            <img  [src]="schoolAttacments.stampSchoolLogoPath | blobToBase64 |async" fullbackImage>
           </div>
       </div>
     </div>
