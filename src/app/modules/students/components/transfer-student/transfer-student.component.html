@@ -192,15 +192,17 @@
         <div class="prim-table">
             <app-table-caption [hasExport]="true" (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">
 
+
                 <div class="row gx-5 form-set">
-                    <div class="col-md-4">
-                        <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                        <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                        <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" inputId="curriculum" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
-                    </div>
+                  <div class="col-md-4">
+                    <label class="label" for="region">{{'shared.state'|translate }}  </label>
+                    <p-multiSelect [options]="(states$ |async)" display="chip" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"  placeholder="{{'shared.chooseState'|translate }}"></p-multiSelect>
+                  </div>
+                  <div class="col-md-4">
+                      <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                      <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
+
+                  </div>
                 </div>
             </app-table-caption>
         </div>

@@ -62,7 +62,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     }
   }
 
-  filtration :Filter = {...Filtration,curriculumId:'', StateId: ''}
+  filtration :Filter = {...Filtration,curriculumId:null, StateId: null}
   paginationState= {...paginationInitialState}
 
   schoolGrades$
@@ -179,7 +179,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
       let schoolsList =res.data.filter(val => val.id != this.studentSchoolId)
       return {
         data :schoolsList,
-        total: schoolsList.length,
+        total: res.total ? res.total -1 : res.total,
         totalAllData: res.totalAllData
       }
     }))

@@ -140,14 +140,14 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   onSort(e){
 
     this.filtration.SortColumnName=e.field
+    if(e.order==1) this.filtration.SortBy= 'Asc'
+    else if(e.order == -1) this.filtration.SortBy= 'Desc'
 
-    if(e.field=='EstablishmentDate'){
-      if(e.order==1) this.filtration.SortBy= 'old'
-      else if(e.order == -1) this.filtration.SortBy= 'update'
-    }else{
-      if(e.order==1) this.filtration.SortBy= 'Asc'
-      else if(e.order == -1) this.filtration.SortBy= 'Desc'
-    }
+    // if(e.field=='EstablishmentDate'){
+    //   if(e.order==1) this.filtration.SortBy= 'old'
+    //   else if(e.order == -1) this.filtration.SortBy= 'update'
+    // }else{
+    // }
 
 
     this.filtration.Page=1;

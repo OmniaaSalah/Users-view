@@ -34,10 +34,10 @@
                 <td>{{gracePeriod.gracePeriodType.name| currentLang}}</td>
                 <td>{{gracePeriod.allowedSchools.length}}</td>
                 <td>{{gracePeriod.allowedGradesCount}}</td>
-                <td>{{gracePeriod.dateFrom | LocalizeDate}}</td>
-                <td>{{gracePeriod.dateTo | LocalizeDate}}</td>
+                <td>{{gracePeriod.dateFrom |toLocalDate | LocalizeDate}}</td>
+                <td>{{gracePeriod.dateTo |toLocalDate | LocalizeDate}}</td>
                 <td>{{gracePeriod.createdBy |currentLang}}</td>
-                <td>{{gracePeriod.createdDate |LocalizeDate}}</td>
+                <td>{{gracePeriod.createdDate |toLocalDate |LocalizeDate}}</td>
                 <td class="actions">
                     <div role="button" class=" d-flex  align-items-center gap-3 justify-content-end mx-4" (click)="editGracePeriod(gracePeriod)">
                         <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
