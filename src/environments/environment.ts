@@ -6,7 +6,7 @@ import packageJson from '../../package.json';
 export const environment = {
   appName: 'Daleel System',
   production: false,
-  serverUrl: "https://daleel-api.azurewebsites.net/api",
+  serverUrl: "https://daleel-qa-api.azurewebsites.net/api",
   env: 'Development',
   version: packageJson.version,
   defaultLang: 'ar',

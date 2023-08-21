@@ -2,7 +2,7 @@ import { Injectable ,inject} from '@angular/core';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { take,BehaviorSubject,finalize,map } from 'rxjs';
+import { take,BehaviorSubject,finalize,map, of } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { IRestrictionSchool } from 'src/app/core/Models/user-roles/restriction-school';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -62,7 +62,7 @@ export class UserRolesService {
 
   addRole(role)
   {
-   
+
     return this.http.post('/role-details/add',role);
 
 
@@ -86,8 +86,7 @@ export class UserRolesService {
 
   }
 
-   getAllClaims()
-   {
+   getAllClaims(){
     return this.http.get(`/clams/dropdown`).pipe(take(1))
    }
 
@@ -102,7 +101,7 @@ export class UserRolesService {
     return this.http.post('/role-details',{},filter)
     .pipe(
       map(res=>{
-  
+
         return res.data.map(role=>{
           return {
 
@@ -111,8 +110,8 @@ export class UserRolesService {
             [this.translate.instant('dashboard.UserRole.Role Users')]: role?.roleUsers,
             [this.translate.instant('shared.Created Date')]: role?.createdDate,
             [this.translate.instant('dashboard.UserRole.Status')]: role?.status ? this.translate.instant('shared.allStatus.active'): this.translate.instant('shared.allStatus.inActive'),
-    
-   
+
+
 
           }
         })

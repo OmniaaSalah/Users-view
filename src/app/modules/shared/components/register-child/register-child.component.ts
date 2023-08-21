@@ -16,6 +16,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { RegisterChildService } from '../../services/register-child/register-child.service';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
+import { MediaService } from 'src/app/shared/services/media/media.service';
 
 @Component({
   selector: 'app-register-child',
@@ -136,7 +137,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       attendanceMode:[],
       reEnrollmentStatus:[],
       dateOfAcceptance:[],
-      studentReEnrollmentId:[]
+      studentReEnrollmentId:[],
+      parsonalImagePath:[]
     })
 
 
@@ -154,6 +156,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private toastr: ToastrService,
     private userService:UserService,
     private router:Router,
+    private mediaService:MediaService,
     private claimsService:ClaimsService) { }
 
 
@@ -356,4 +359,30 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       // this.router.navigate(['/messages/messages'])
     }
 
+
+    uploading=false
+
+    uploadProfileImage(event){
+      let file = event.target.files[0]
+      const FORM_DATA = new FormData()
+      FORM_DATA.append('file', file)
+
+      this.uploading = true
+
+      this.mediaService.uploadMedia(FORM_DATA).subscribe(res=>{
+
+        this.studentForm.controls['parsonalImagePath'].setValue(res.url)
+        this.toastr.success(this.translate.instant('toasterMessage.imageUploaded'))
+        this.updateStudent()
+        this.currentStudent.parsonalImagePath = res?.url
+        this.childService.Student$.next(this.currentStudent)
+
+        this.uploading = false
+      },()=>{
+        this.toastr.error(this.translate.instant('toasterMessage.error'))
+        this.uploading = false
+      })
+
+
+    }
 }

@@ -112,7 +112,7 @@
                   <span class="color-primary mb-2">{{'shared.notFound' |translate}}</span>
 
                   <p class="color-gray-300">{{ 'dashboard.addChild.The reason for the lack of identification'|translate }}</p>
-                  <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
+                  <span class="color-primary mb-2">{{student?.reasonForNotHavingEmirates |currentLang}}</span>
                 </ng-container>
 
                 <p class="color-gray-300">{{'dashboard.students.isGifted'| translate}}</p>

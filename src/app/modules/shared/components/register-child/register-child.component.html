@@ -41,9 +41,25 @@
 
     <div class="d-flex align-items-center justify-content-between bg-white">
         <div class="profile d-flex align-items-center ">
-            <div class="profile__avatar">
+          <input type="file"
+          #uploadImg
+          accept="image/*"
+          [hidden]="true"
+          (change)="uploadProfileImage($event)">
+          <!-- <div *ngIf="currentUserScope!=userScope.Guardian" class="profile__avatar position-relative" >
+              <img [src]="student?.parsonalImagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+          </div> -->
+
+          <div  class="profile__avatar position-relative"  (click)="uploadImg.value=null; uploadImg.click()">
+              <i class="pi pi-camera" style="font-size: 2.5rem"></i>
+              <div class="loader" *ngIf="uploading">
+                  <div class="spinner-border text-light" role="status"></div>
+              </div>
+              <img [src]="student?.parsonalImagePath | blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+          </div>
+            <!-- <div class="profile__avatar">
                 <img [src]="student?.parsonalImagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
-            </div>
+            </div> -->
             <div class="profile__info">
                 <div class="profile__name">
                     <h4 class="heading heading--tertiary">{{student.name | currentLang}}</h4>
