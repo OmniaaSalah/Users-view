@@ -153,7 +153,7 @@
                         </div>
                     </td>
 
-                    <td pFrozenColumn [frozen]="true" class="actions"  *ngIf="(currentUserScope ==userScope.SPEA)">
+                    <td pFrozenColumn [frozen]="true" class="actions"  *permit="claimsEnum.SE_U_SchoolEmployee">
                         <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4" (click)="patchForm(employee)">
                             <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                             <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
