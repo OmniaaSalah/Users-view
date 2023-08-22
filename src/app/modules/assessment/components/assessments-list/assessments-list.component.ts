@@ -130,8 +130,8 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     this.getRate()
   }
 
-deleteRate(id)
-{
+
+deleteRate(id){
   this.assessmentService.deleteRate(id).subscribe((res)=>{
     if (res.error) {
       this.toastService.error(this.translate.instant(res.error));
@@ -144,8 +144,12 @@ deleteRate(id)
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
   })
 }
+
+
 confirmDeleteListener(){
   this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
+    console.log(val);
+
     if (val) this.deleteRate(this.selectedRate)
 
   })
@@ -153,6 +157,7 @@ confirmDeleteListener(){
 
 ngOnDestroy(): void {
   this.subscription.unsubscribe();
+  this.confirmModelService.confirmed$.next(null)
 }
 checkDashboardHeader()
    {
