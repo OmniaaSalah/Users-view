@@ -116,7 +116,7 @@
 
                     </th>
                     <th pSortableColumn="actions"><p-sortIcon field="price"></p-sortIcon>{{'dashboard.schools.employeeStatus'|translate }}</th>
-                    <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions" *ngIf="(currentUserScope ==userScope.SPEA)"></th>
+                    <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions" *permit="claimsEnum.SE_U_SchoolEmployee"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-employee let-columns="columns">
