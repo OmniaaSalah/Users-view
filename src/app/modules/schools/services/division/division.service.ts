@@ -103,8 +103,8 @@ export class DivisionService {
   }
 
 
-  getStudentsWithoutDivision( schoolId){
-    return this.http.get(`/Student/${schoolId}/students-without-division`).pipe(take(1))
+  getStudentsWithoutDivision( schoolId, gradeId){
+    return this.http.get(`/Student/${schoolId}/students-without-division?gradeid=${gradeId}`).pipe(take(1))
   }
 
 

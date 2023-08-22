@@ -151,6 +151,8 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
   getRoleById(){
     this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res) => {
       this.jobRole = res;
+      this.bindOldRole(this.jobRole);
+
       this.getSchoolList();
     });
   }
@@ -336,20 +338,19 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
         datarestrictionLevel: role.restrictionLevelId,
       });
       this.changedRestriction(role.restrictionLevelId);
-      if (role.restrictionLevelId ==RestrictionLevelEnum.AccessToInformationRelatedToSchool) {
-        this.schoolIsSelectedList = [];
-        this.userRolesService.MarkedListLength.next(role.schoolIds.length);
-        this.schools.list.forEach((school) => {
-          role.schoolIds.forEach((id) => {
-            if (school.id == id) {
-              this.schoolIsSelectedList.push(school);
-            }
-          });
-        });
-      } else if (
-        role.restrictionLevelId ==
-        RestrictionLevelEnum.AccessToInformationRelatedToCurriculums
-      ) {
+
+      // if (role.restrictionLevelId ==RestrictionLevelEnum.AccessToInformationRelatedToSchool) {
+      //   this.schoolIsSelectedList = [];
+      //   this.userRolesService.MarkedListLength.next(role.schoolIds.length);
+      //   this.schools.list.forEach((school) => {
+      //     role.schoolIds.forEach((id) => {
+      //       if (school.id == id) {
+      //         this.schoolIsSelectedList.push(school);
+      //       }
+      //     });
+      //   });
+      // }
+      if (role.restrictionLevelId ==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums) {
         role.curriculumIds.forEach((selectedCurriculumId) => {
           this.curriculamList.forEach((curriculam) => {
             if (selectedCurriculumId == curriculam.id) {
@@ -407,10 +408,10 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
       });
 
       this.curriculamList.forEach((element) => {
-        {
-          this.curriculumSelectedArr.push(this.fb.control(''));
-        }
+        this.curriculumSelectedArr.push(this.fb.control(''));
+
       });
+
     });
   }
 
@@ -421,7 +422,18 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.schools.list = res.data;
 
-        this.bindOldRole(this.jobRole);
+        if (this.jobRole.restrictionLevelId ==RestrictionLevelEnum.AccessToInformationRelatedToSchool) {
+          this.schoolIsSelectedList = [];
+          this.userRolesService.MarkedListLength.next(this.jobRole.schoolIds.length);
+          this.schools.list.forEach((school) => {
+            this.jobRole.schoolIds.forEach((id) => {
+              if (school.id == id) {
+                this.schoolIsSelectedList.push(school);
+              }
+            });
+          });
+        }
+        // this.bindOldRole(this.jobRole);
       });
   }
 

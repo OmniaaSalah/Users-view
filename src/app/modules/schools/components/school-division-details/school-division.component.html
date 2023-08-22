@@ -206,7 +206,7 @@
 
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Students >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==3">
-                                <app-division-students [gradeId]="gradeId" [hasTracks]="this.divisionInfo?.hasTracks"></app-division-students>
+                                <app-division-students #divisionStudentsComp  [gradeId]="gradeId" [hasTracks]="this.divisionInfo?.hasTracks"></app-division-students>
                             </ng-container>
 
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Calendar >>>>>>>>>>>>>>>>>>>>>>>> -->

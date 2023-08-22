@@ -138,7 +138,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       reEnrollmentStatus:[],
       dateOfAcceptance:[],
       studentReEnrollmentId:[],
-      parsonalImagePath:[]
+      parsonalImagePath:[],
+      relativeRelationId:[]
     })
 
 
@@ -207,6 +208,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.studentForm.patchValue(res as any)
     this.studentForm.controls.prohibited.patchValue(res.studentProhibited)
     this.studentForm.controls.nationalityId.setValue(res?.nationality?.id)
+    this.studentForm.controls.relativeRelationId.setValue(res?.relativeRelation?.id)
     this.studentForm.controls.studentTalent.setValue(res?.studentTalents?.map(el => el?.talentId))
     this.studentForm.controls.religionId.setValue(res.religion?.id)
     // this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)

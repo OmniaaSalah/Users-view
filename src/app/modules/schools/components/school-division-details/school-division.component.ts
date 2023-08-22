@@ -1,4 +1,4 @@
-import { Component, OnInit ,inject} from '@angular/core';
+import { Component, OnInit ,ViewChild,inject} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {  faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +17,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../services/division/division.service';
 import { GradesService } from '../../services/grade/grade.service';
 import { SchoolsService } from '../../services/schools/schools.service';
+import { DivisionStudentsComponent } from './division-students/division-students.component';
 
 @Component({
   selector: 'app-school-division',
@@ -24,6 +25,8 @@ import { SchoolsService } from '../../services/schools/schools.service';
   styleUrls: ['./school-division.component.scss']
 })
 export class SchoolDivisionComponent implements OnInit {
+
+  @ViewChild('divisionStudentsComp') divisionStudentsComp:DivisionStudentsComponent
 
  currentUserScope = inject(UserService).getScope()
  faPlus=faPlus
@@ -280,6 +283,7 @@ addStudentToDivision(data){
     this.addStudentModelOpened = false
     this.toasterService.success(this.translate.instant('toasterMessage.addStudent'))
     this.addStudentForm.reset()
+    this.divisionStudentsComp.getStudents()
   },err =>{
     this.isSubmited = false
     this.toasterService.error('لا يمكن تجاوز العدد الاعظمي للطلاب في الشعبة.')
@@ -293,7 +297,7 @@ addStudentToDivision(data){
     optionalSubjects:[[]]
    })
 
-  this.studentsWithoutDivision$=this.divisionService.getStudentsWithoutDivision(this.schoolId).pipe(map(res=> res.result))
+  this.studentsWithoutDivision$=this.divisionService.getStudentsWithoutDivision(this.schoolId, this.gradeId).pipe(map(res=> res.result))
   this.setOptionalSubjects()
    this.addStudentModelOpened=true
  }
