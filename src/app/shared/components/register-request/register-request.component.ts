@@ -132,8 +132,6 @@ export class RegisterRequestComponent implements OnInit {
   getStudentInfo(){
     if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
       this.studentService.getStudent(this.route.snapshot.params['childId']).subscribe(res=>{
-        console.log(res);
-
         this.childData = res.result
         console.log(this.childData);
 
@@ -235,9 +233,9 @@ initRegisterationForm(child){
     if(reqData?.isSpecialAbilities) {
       reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
     }
-console.log(reqData);
 
     this.onGradeSelected(reqData.grade?.id)
+    this.registerReqForm.controls['gradeId'].setValue(reqData.grade?.id)
     this.onSelectSchool(reqData.school?.id)
     this.registerReqForm.patchValue(reqData)
 
@@ -288,9 +286,7 @@ console.log(reqData);
 
   onGradeSelected(gradeId){
 
-    // this.registerReqForm.controls['gradeId'].setValue(garde.id)
     this.selectedGrade = this.AllGrades.filter(el => el.id ==gradeId)[0]
-
     this.filtration.GradeId = gradeId
 
     if(this.selectedGrade?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)

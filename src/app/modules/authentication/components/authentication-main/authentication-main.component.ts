@@ -397,18 +397,12 @@ export class AuthenticationMainComponent implements OnInit {
         (err) => {
           this.isUAeAccountBtnLoading = false;
           this.closeConfirmationModel();
-          this.toastService.error(
-            this.translate.instant('dashboard.AnnualHoliday.error,please try again')
-          );
+          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
         }
       );
   }
 
-  closeConfirmationModel() {
-    this.openConfimModel = false;
-    this.router.navigate(['/auth/login'], { replaceUrl: true });
-    window.location.href = `${environment.production ? 'https://id.uaepass.ae/idshub/logout/' :'https://id.uaepass.ae/idshub/logout/'}?redirect_uri=${environment.logoutRedirectUrl}`;
-  }
+
 
   loginWithUAEPass(res) {
     this.userService.setToken(res?.user);
@@ -435,4 +429,20 @@ export class AuthenticationMainComponent implements OnInit {
 
     this.getCurrentYear();
   }
+
+  closeConfirmationModel() {
+    this.openConfimModel = false;
+    this.router.navigate(['/auth/login'], { replaceUrl: true });
+    window.location.href = `${environment.production ? 'https://id.uaepass.ae/idshub/logout/' :'https://stg-id.uaepass.ae/idshub/logout/'}?redirect_uri=${environment.logoutRedirectUrl}`;
+
+
+    // let URL = `${environment.production ? 'https://id.uaepass.ae/idshub/logout/' :'https://stg-id.uaepass.ae/idshub/logout/'}?redirect_uri=${environment.logoutRedirectUrl}`;
+
+    // let newWindow = open( URL , 'example', 'width=300,height=300');
+    // newWindow.onload = function() {
+    //   newWindow.close();
+    // };
+
+  }
+
 }
