@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
-import { BehaviorSubject, catchError, map, take } from 'rxjs';
+import { BehaviorSubject, catchError, map, of, take } from 'rxjs';
 import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
 import { environment } from 'src/environments/environment';
@@ -244,8 +244,10 @@ export class AuthenticationService {
       localStorage.removeItem('schoolId');
       console.log(`${environment.UAEPassLogout}/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`);
 
-      window.location.href = `${environment.production ? 'https://id.uaepass.ae/idshub/logout/' :'https://id.uaepass.ae/idshub/logout/'}?redirect_uri=${environment.logoutRedirectUrl}`;
-    } else {
+      window.location.href = `${environment.production ? 'https://id.uaepass.ae/idshub/logout/' :'https://stg-id.uaepass.ae/idshub/logout/'}?redirect_uri=${environment.logoutRedirectUrl}`;
+
+
+  } else {
       this.router.navigate(['/auth/login']);
     }
     this.userService.currentUserSchoolId$.next('');

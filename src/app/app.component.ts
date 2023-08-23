@@ -16,7 +16,7 @@ import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
 import { IndexesService } from './modules/indexes/service/indexes.service';
 import { SettingsService } from './modules/system-setting/services/settings/settings.service';
 import { FileTypeEnum } from './shared/enums/file/file.enum';
-import { SharedService } from './shared/services/shared/shared.service';
+import { UserInformationService } from './modules/user-information/service/user-information.service';
 
 @Component({
   selector: 'app-root',
@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
     private formbuilder:FormBuilder, private toastr:ToastrService,
     private authService:AuthenticationService,
     private messageService: MessageService,
+    private usersService:UserInformationService,
     private index:IndexesService,
     private settingsService:SettingsService,) {
     }
@@ -84,7 +85,7 @@ export class AppComponent implements OnInit {
 
     this.userService.isUserLogged$.subscribe((res)=>{
       if(res){
-        // this.usersService.deleteUser(129).subscribe()
+        // this.usersService.deleteUser(3081).subscribe()
 
           this.currentUserName=this.userService.getCurrentUserName();
           this.currentUserScope=this.userService.getScope();
