@@ -74,7 +74,6 @@ export class AuthenticationMainComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     this.settingsService.initializeFileRules();
     this.checkUAEPassLogin();
     this.initLoginForm();
@@ -435,6 +434,15 @@ export class AuthenticationMainComponent implements OnInit {
     this.openConfimModel = false;
     this.router.navigate(['/auth/login'], { replaceUrl: true });
     window.location.href = `${environment.production ? 'https://id.uaepass.ae/idshub/logout/' :'https://stg-id.uaepass.ae/idshub/logout/'}?redirect_uri=${environment.logoutRedirectUrl}`;
+
+
+    // let URL = `${environment.production ? 'https://id.uaepass.ae/idshub/logout/' :'https://stg-id.uaepass.ae/idshub/logout/'}?redirect_uri=${environment.logoutRedirectUrl}`;
+
+    // let newWindow = open( URL , 'example', 'width=300,height=300');
+    // newWindow.onload = function() {
+    //   newWindow.close();
+    // };
+
   }
 
 }

@@ -108,9 +108,8 @@
 
                     </th>
 
-                    <th pSortableColumn="phoneNumber"><p-sortIcon field="phoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate }}
-
-                  </th>
+                    <th pSortableColumn="phoneNumber"><p-sortIcon field="phoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate }} </th>
+                    <th pSortableColumn="registedDate"><p-sortIcon field="registedDate"></p-sortIcon>{{'dashboard.parents.registedDate'|translate }} </th>
 
                     <th pSortableColumn="price"><p-sortIcon field="price"></p-sortIcon>{{'shared.personalId'|translate }}
 
@@ -141,6 +140,7 @@
 
                     </td>
                     <td style="justify-content: center;">{{employee?.phoneNumber}}</td>
+                    <td>{{(employee?.registrationDate |toLocalDate|LocalizeDate) || 'shared.notFound' |translate}}</td>
                     <td>{{employee?.emiratesIdNumber}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">

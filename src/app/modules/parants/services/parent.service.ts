@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, finalize, map, Observable, take } from 'rxjs';
+import { BehaviorSubject, finalize, map, Observable, of, take } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';

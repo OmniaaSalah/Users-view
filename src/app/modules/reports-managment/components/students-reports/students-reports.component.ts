@@ -176,7 +176,6 @@ export class StudentsReportsComponent implements OnInit {
         this.emiratesStudentsCounts=res.emiratesStudents;
         this.studentCount=res.studentCount;
         this.studentsReport.loading = false
-        res.studentDetails.data[0].divisionName = null
         this.studentsReport.list = res.studentDetails.data
         this.studentsReport.totalAllData =res.studentDetails.totalAllData
         this.studentsReport.total =res.studentDetails.total
