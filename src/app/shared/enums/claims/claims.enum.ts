@@ -1,6 +1,6 @@
 export  enum ClaimsEnum{
-   
-     
+
+
     // SPEA Admin
 
     // Menu and Menu Items
@@ -50,10 +50,11 @@ export  enum ClaimsEnum{
     SE_U_ProhibitedFromIssueeCertificateFromSchool = 'SE_U_ProhibitedFromIssueeCertificateFromSchool',
     S_U_ProhibitedFromWithdrawingFromSpea = 'S_U_ProhibitedFromWithdrawingFromSpea',
     SE_U_ProhibitedFromWithdrawingFromSchool = 'SE_U_ProhibitedFromWithdrawingFromSchool',
-     
+
+    SE_U_SchoolEmployee='SE_U_SchoolEmployee',
     // S_Nurse ="S_Nurse",
     S_N_U_StudentHeightAndWeight ='S_N_U_StudentHeightAndWeight',
-    
+
     SEG_R_StudentInfo='SEG_R_StudentInfo',
     SEG_U_StudentInfo='SEG_U_StudentInfo',
     SEG_R_StudentAcceptanceInfo='SEG_R_StudentAcceptanceInfo',
@@ -70,7 +71,7 @@ export  enum ClaimsEnum{
     SEG_R_StudentSubjectsAndDegrees='SEG_R_StudentSubjectsAndDegrees',
     SEG_R_StudentRecord='SEG_R_StudentRecord',
 
-   
+
     S_UploadExam="S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
     S_EvaluationStatus="S_EvaluationStatus",
@@ -101,12 +102,12 @@ export  enum ClaimsEnum{
     S_C_Holiday="S_C_Holiday",
     S_U_Holiday="S_U_Holiday",
     S_D_Subject="S_D_Subject",
-    
+
     //childMenu
     S_TransferStudentToAnotherSchool="S_TransferStudentToAnotherSchool",
     E_TransferStudentToAnotherDivision="E_TransferStudentToAnotherDivision",
     S_StudentCertificateIssue="S_StudentCertificateIssue",
- 
+
     S_U_UserPassword="S_U_UserPassword",
     S_EditMangerInformation="S_EditMangerInformation",
 
@@ -177,8 +178,8 @@ export  enum ClaimsEnum{
     E_C_GradeSubject = "E_C_GradeSubject",
 
     E_DeleteStudentRequest = "E_DeleteStudentRequest",
-    
-    
+
+
 
 
     // =========================================================
@@ -192,7 +193,7 @@ export  enum ClaimsEnum{
     GE_ChangePersonalIdentityReqest='GE_ChangePersonalIdentityReqest',
     G_WithdrawingStudentFromCurrentSchool="G_WithdrawingStudentFromCurrentSchool",
     G_CertificateIssuranceRequest='G_CertificateIssuranceRequest',
-    
+
     G_DeleteChild = 'G_DeleteChild',
     GSE_R_ChildInfo ="GSE_R_ChildInfo",
     GSE_U_ChildInfo ="GSE_U_ChildInfo",
@@ -201,7 +202,7 @@ export  enum ClaimsEnum{
     GSE_R_ChildRequests = "GSE_R_ChildRequests",
     GS_RegisterChild ="GS_RegisterChild",
     G_C_Child="G_C_Child",
-    
+
 
     //===============================================================
     // Shared
@@ -212,7 +213,7 @@ export  enum ClaimsEnum{
     SE_MenuItem_Exam = "SE_MenuItem_Exam",
     SE_MenuItem_Rate="SE_MenuItem_Rate"
 
-    
+
 }
 
 
