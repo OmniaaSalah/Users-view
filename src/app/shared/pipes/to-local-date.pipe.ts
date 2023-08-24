@@ -7,8 +7,8 @@ import moment from 'moment';
 export class ToLocalDatePipe implements PipeTransform {
 
   transform(dateStr: string, format ='YYYY-MM-DD'): unknown {
-
-    let utc = moment.utc(dateStr.split('.')[0]).toDate()
+    dateStr = dateStr.toString()
+    let utc = moment.utc(dateStr.split(/[.|+]/)[0]).toDate()
     let localDate = moment(utc).local().format(format) //YYYY-MM-DD HH:mm:ss
 
     return localDate;

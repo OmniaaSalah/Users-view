@@ -28,18 +28,18 @@
 
   <ng-template pTemplate="header" >
         <tr  >
-          <th   pSortableColumn="subjectCode" ><p-sortIcon  field="ArabicName" ></p-sortIcon>{{'dashboard.Subjects.subject Code'|translate}}</th>
-          <th   pSortableColumn="subjectName" ><p-sortIcon  field="EnglishName" ></p-sortIcon>{{'dashboard.SchoolYear.Subject'|translate}}</th>
-          <th pSortableColumn="schoolName">{{'School'|translate}}<p-sortIcon field="SchoolArabicName"></p-sortIcon></th>
-          <th pSortableColumn="schoolName">{{'dashboard.schools.schoolNumber'|translate}}<p-sortIcon field="SchoolCode"></p-sortIcon></th>
-        <th pSortableColumn="schoolName">{{'dashboard.schools.SchoolCurriculum'|translate}}<p-sortIcon field="CurriculumsArabicName"></p-sortIcon></th>
+          <th   pSortableColumn="ArabicName" ><p-sortIcon  field="ArabicName" ></p-sortIcon>{{'dashboard.Subjects.subject Code'|translate}}</th>
+          <th   pSortableColumn="EnglishName" ><p-sortIcon  field="EnglishName" ></p-sortIcon>{{'dashboard.SchoolYear.Subject'|translate}}</th>
+          <th pSortableColumn="SchoolArabicName">{{'School'|translate}}<p-sortIcon field="SchoolArabicName"></p-sortIcon></th>
+          <th pSortableColumn="SchoolCode">{{'dashboard.schools.schoolNumber'|translate}}<p-sortIcon field="SchoolCode"></p-sortIcon></th>
+        <th pSortableColumn="CurriculumsArabicName">{{'dashboard.schools.SchoolCurriculum'|translate}}<p-sortIcon field="CurriculumsArabicName"></p-sortIcon></th>
           <th   pSortableColumn="evaluationType"><p-sortIcon  field="EvaluationSystem"></p-sortIcon>{{'dashboard.Subjects.Evaluation System'|translate}}</th>
-          <th   pSortableColumn="creatorName" ><p-sortIcon  field="CreatedBy" ></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
-          <th   pSortableColumn="createdDate"><p-sortIcon  field="CreatedDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-          <th   pSortableColumn="editorName"><p-sortIcon field="UpdatedBy"></p-sortIcon>{{'dashboard.Subjects.Edited by'|translate}}</th>
-          <th   pSortableColumn="lastEditedDate"><p-sortIcon field="UpdatedDate"></p-sortIcon>{{'dashboard.Subjects.Last EditDate'|translate}}</th>
-          <th   pSortableColumn="subjectMinmumDegree"><p-sortIcon field="MinimumDegree"></p-sortIcon>{{'dashboard.Assessment.Minmum Degree'|translate}}</th>
-          <th   pSortableColumn="subjectMinmumDegree"><p-sortIcon field="MaximumDegree"></p-sortIcon>{{'dashboard.Assessment.Maximum Degree'|translate}}</th>
+          <th   pSortableColumn="CreatedBy" ><p-sortIcon  field="CreatedBy" ></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
+          <th   pSortableColumn="CreatedDate"><p-sortIcon  field="CreatedDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+          <th   pSortableColumn="UpdatedBy"><p-sortIcon field="UpdatedBy"></p-sortIcon>{{'dashboard.Subjects.Edited by'|translate}}</th>
+          <th   pSortableColumn="UpdatedDate"><p-sortIcon field="UpdatedDate"></p-sortIcon>{{'dashboard.Subjects.Last EditDate'|translate}}</th>
+          <th   pSortableColumn="MinimumDegree"><p-sortIcon field="MinimumDegree"></p-sortIcon>{{'dashboard.Assessment.Minmum Degree'|translate}}</th>
+          <th   pSortableColumn="MaximumDegree"><p-sortIcon field="MaximumDegree"></p-sortIcon>{{'dashboard.Assessment.Maximum Degree'|translate}}</th>
           <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>
 
 
