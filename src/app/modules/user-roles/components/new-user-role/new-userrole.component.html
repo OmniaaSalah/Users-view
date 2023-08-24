@@ -270,7 +270,7 @@
                 <div class="row gx-5 gy-4 form-set mt-4" >
                   <ng-container *ngFor="let item of category.claims | localizeSearch :searchText.value; let i = index">
                     <div class="col-md-3 d-flex gap-4 align-items-center mb-3">
-                      <p-checkbox [value]="item.id" name="parents" [ngModelOptions]="{standalone: true}"[(ngModel)]="rolePowersIdList"></p-checkbox>
+                      <p-checkbox [value]="item.id" name="parents" [ngModelOptions]="{standalone: true}" [(ngModel)]="rolePowersIdList"></p-checkbox>
                       <label class="label label--sm" for=""> {{item.name|currentLang}} </label>
                     </div>
                   </ng-container>

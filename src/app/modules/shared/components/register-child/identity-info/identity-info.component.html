@@ -13,7 +13,7 @@
             <span class="color-primary mb-2">{{student.surname |currentLang}}</span>
 
             <p class="color-gray-300">{{'shared.birthDay'|translate }}</p>
-            <span class="color-primary mb-2">{{student.birthDate |LocalizeDate}}</span>
+            <span class="color-primary mb-2">{{student.birthDate |toLocalDate |LocalizeDate}}</span>
 
             <p class="color-gray-300">{{ 'shared.gender'|translate }}</p>
             <span class="color-primary mb-2" *ngIf="student?.gender=='Female'">{{'shared.genderType.Female'|translate}}</span>

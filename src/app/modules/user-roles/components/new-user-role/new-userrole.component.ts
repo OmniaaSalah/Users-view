@@ -453,7 +453,7 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
 
 
   onSelectAllRoles(checked,category:category){
-    this.rolePowersIdList = []
+    // this.rolePowersIdList = []
     let GUARDIAN_Claims_Ids = this.rolePowersList.find(el => el.category ==UserScope.Guardian)?.claims?.map(el=>el.id) || []
     let SPEA_Claims_Ids = this.rolePowersList.find(el => el.category ==UserScope.SPEA)?.claims?.map(el=>el.id) || []
     let EMPLOYEE_Claims_Ids = this.rolePowersList.find(el => el.category ==UserScope.Employee)?.claims?.map(el=>el.id) || []
@@ -461,16 +461,16 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
 
     switch (category) {
       case 'SPEA':
-        if(checked) this.rolePowersIdList = SPEA_Claims_Ids
+        if(checked) this.rolePowersIdList = [...this.rolePowersIdList,...SPEA_Claims_Ids]
         else this.rolePowersIdList = this.rolePowersIdList.filter(item => !SPEA_Claims_Ids.includes(item));
 
       break;
       case 'Employee':
-        if(checked) this.rolePowersIdList = EMPLOYEE_Claims_Ids
+        if(checked) this.rolePowersIdList = [...this.rolePowersIdList, ...EMPLOYEE_Claims_Ids]
         else this.rolePowersIdList = this.rolePowersIdList.filter(item => !EMPLOYEE_Claims_Ids.includes(item));
       break;
       case 'Guardian':
-        if(checked) this.rolePowersIdList = GUARDIAN_Claims_Ids
+        if(checked) this.rolePowersIdList = [...this.rolePowersIdList, ...GUARDIAN_Claims_Ids]
         else this.rolePowersIdList = this.rolePowersIdList.filter(item => !GUARDIAN_Claims_Ids.includes(item));
       break;
 

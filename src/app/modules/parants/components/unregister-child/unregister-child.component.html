@@ -98,7 +98,7 @@
 
             <ng-container *ngIf="!editMode && child">
                 <ng-container *permit="claimsEnum.GSE_U_ChildInfo">
-                    <div class="float-btn" *ngIf="!editMode" (click)="editMode=true">
+                    <div class="float-btn" *ngIf="!editMode &&  !child?.isEnterFromICA" (click)="editMode=true">
                         <img src="assets/images/shared/pen-blue-filled.svg" alt="">
                     </div>
                 </ng-container>
