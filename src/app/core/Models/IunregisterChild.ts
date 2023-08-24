@@ -12,7 +12,7 @@ export interface IunregisterChild {
     emiratesIdNumber: any
     age: number
     birthDate: string
-    imagePath: string
+    imagePath: string,
+    isEnterFromICA?:boolean
   }
-  
-  
+

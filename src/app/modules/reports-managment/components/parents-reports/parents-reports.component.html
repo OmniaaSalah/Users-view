@@ -106,16 +106,16 @@
                             {{parent?.parentName| currentLang}}
                         </td>
                         <td *ngIf="tableColumns[1].isSelected == true">
-                            {{parent?.parentNumber }}
+                            {{parent?.parentNumber ||'shared.notFound' | translate }}
                         </td>
                         <td *ngIf="tableColumns[2].isSelected == true">
-                            {{parent?.parentNationality | currentLang}}
+                            {{(parent?.parentNationality | currentLang) || ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[3].isSelected == true">
                             <span class="position-relative" pTooltip="{{parent?.parentEmail}}" [autoHide]="true" tooltipPosition="top">{{parent?.parentEmail | truncate:15 }}</span>
                         </td>
                         <td *ngIf="tableColumns[4].isSelected == true">
-                            {{parent?.relationType| currentLang }}
+                            {{(parent?.relationType| currentLang) || 'shared.notFound' | translate}}
                         </td>
 
                         <td class="lg d-flex gap-2" *ngIf="tableColumns[5].isSelected == true">
@@ -124,31 +124,32 @@
                         </td>
 
                         <td *ngIf="tableColumns[6].isSelected == true">
-                            {{parent?.studentNickName| currentLang}}
+                            {{(parent?.studentNickName| currentLang )|| ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[7].isSelected == true">
-                            {{parent?.studentIdInDaleel}}
+                            {{parent?.studentIdInDaleel || ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[8].isSelected == true">
                             {{parent?.student?.id}}
                         </td>
                         <td *ngIf="tableColumns[9].isSelected == true">
-                            {{parent?.studentIdInManhl}}
+                            {{parent?.studentIdInManhl || ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[10].isSelected == true">
-                            {{parent?.emiratesIdNumber}}
+                            {{parent?.emiratesIdNumber|| ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[11].isSelected == true">
-                            {{parent?.reasonForNotHavingEmirratesId| currentLang}}
+                            {{(parent?.reasonForNotHavingEmirratesId| currentLang) || ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[12].isSelected == true">
-                            {{'shared.genderType.'+parent?.parentGender|translate}}
+                            <span *ngIf="parent?.parentGender">{{'shared.genderType.'+parent?.parentGender|translate}}</span>
+                            <span *ngIf="!parent?.parentGender">{{'shared.notFound' | translate}}</span>
                         </td>
                         <td *ngIf="tableColumns[13].isSelected == true">
-                            {{parent?.studentState}}
+                            {{parent?.studentState || ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[14].isSelected == true">
-                            {{parent?.studentCity}}
+                            {{parent?.studentCity || ('shared.notFound' | translate)}}
                         </td>
 
 
