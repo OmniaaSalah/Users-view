@@ -15,8 +15,9 @@
 
         <!-- اعاده ارسال طلب التسجيل بعد ارجاعه من قبل الهيئه  -->
         <ng-container *ngFor="let action of actions">
+          <!-- && childRegistrationStatus!=registrtionStatusEnum.Withdrawal -->
             <button class="btn btn-primary "
-            [disabled]="!registerReqForm.valid || onSubmit || !selectedSchoolId || (isRequiredAttchmentsUploaded() && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"
+            [disabled]="!registerReqForm.valid || onSubmit || !selectedSchoolId || (isRequiredAttchmentsUploaded() )"
             *ngIf="scope ==ScopeEnum.Guardian && requestId"  (click)="updateRegistrationReq(action.id)">
 
                 <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>

@@ -138,14 +138,14 @@ export class RegisterRequestComponent implements OnInit {
         console.log(this.childData);
 
         this.getGrades()
-        this.initRegisterationForm(res?.result)
+        // this.initRegisterationForm(res?.result)
       })
 
     }else{
       this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
         this.childData = res
         this.getGrades()
-        this.initRegisterationForm(res)
+        // this.initRegisterationForm(res)
       })
     }
   }
@@ -235,7 +235,6 @@ initRegisterationForm(child){
     if(reqData?.isSpecialAbilities) {
       reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
     }
-console.log(reqData);
 
     this.onGradeSelected(reqData.grade?.id)
     this.onSelectSchool(reqData.school?.id)
@@ -269,7 +268,9 @@ console.log(reqData);
 
   getGrades(curriculumsId=''){
     this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
-      this.AllGrades=res || []
+    this.AllGrades=res || []
+
+    if(!this.registerReqForm) this.initRegisterationForm(this.childData)
 
       if(this.requestId) {
         this.patchReturnedRequestData(this.returnedReqData)
@@ -296,7 +297,8 @@ console.log(reqData);
     if(this.selectedGrade?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
     else if(this.selectedGrade?.code==FirstGradeCodeEnum.PrimarySchool) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
     else this.getRegistrationRequiresFiles()
-    this.selectedSchoolId =null
+    if(this.childRegistrationStatus!=RegistrationStatus.Withdrawal) this.selectedSchoolId =null
+
 
     this.getSchools()
   }
