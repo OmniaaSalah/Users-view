@@ -6,7 +6,7 @@
 
         <!-- ارسال طلب التسجيل من قبل ولى الامر -->
         <button class="btn btn-primary "
-        [disabled]="!registerReqForm.valid || onSubmit || !selectedSchoolId || (isRequiredAttchmentsUploaded() && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"
+        [disabled]="!registerReqForm.valid || onSubmit || !selectedSchoolId || (isRequiredAttchmentsUploaded())"
         *ngIf="scope ==ScopeEnum.Guardian && !requestId"  (click)="sendRegisterRequest()">
             <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
             <span>{{'dashboard.request-list.Submit a registration request' | translate}}</span>
