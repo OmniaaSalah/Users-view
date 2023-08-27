@@ -27,7 +27,7 @@
             <span class="color-primary mb-2">{{student.nationality?.name |currentLang}}</span>
 
             <p class="color-gray-300">{{'shared.placeOfBirth'|translate }}</p>
-            <span class="color-primary mb-2">{{student?.placeOfBirth }}</span>
+            <span class="color-primary mb-2" [class.color-red-500]="!student?.placeOfBirth">{{student?.placeOfBirth ||('shared.notFound' |translate) }}</span>
             <!--
             <p class="color-gray-300">{{'shared.nationalId'|translate }}</p>
             <span class="color-primary mb-2">2002/07/04</span>

@@ -112,7 +112,7 @@
                   <span class="color-primary mb-2">{{'shared.notFound' |translate}}</span>
 
                   <p class="color-gray-300">{{ 'dashboard.addChild.The reason for the lack of identification'|translate }}</p>
-                  <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
+                  <span class="color-primary mb-2">{{student?.reasonForNotHavingEmirates |currentLang}}</span>
                 </ng-container>
 
                 <p class="color-gray-300">{{'dashboard.students.isGifted'| translate}}</p>
@@ -451,15 +451,20 @@
             <a class="color-skyBlue-500" (click)="isGuardiansModelOpend=true; getGuardians()"> {{'shared.edit' | translate}} </a>
           </div>
 
-
+          <!--
           <p class="color-gray-300">{{ 'dashboard.parents.relatedType'|translate }}</p>
-          <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span>
+          <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span> -->
 
           <p class="color-gray-300">{{ 'shared.phoneNumber'|translate }}</p>
           <span class="color-primary mb-2">{{student?.relativeNumber || ('shared.notFound' |translate)}}</span>
 
           <p class="color-gray-300">{{ 'shared.email'|translate }}</p>
           <span class="color-primary mb-2">{{student?.relativeEmail || ('shared.notFound' |translate)}}</span>
+        </div>
+
+        <div class="col-md-4">
+          <label class="label">{{'dashboard.parents.relatedType'| translate}}</label>
+          <p-dropdown [showClear]="true" [options]="(relativeRelation$ | async)" formControlName="relativeRelationId" optionValue="id" optionLabel="{{lang=='ar' ? 'arabicName': 'englishName'}}" placeholder="{{'dashboard.parents.relatedType'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
         </div>
 
       </div>

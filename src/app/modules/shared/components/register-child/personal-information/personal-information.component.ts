@@ -68,6 +68,7 @@ export class PersonalInformationComponent implements OnInit {
   languages$ = this.indexService.getIndext(IndexesEnum.Language).pipe(share())
   countries$ = this.CountriesService.getCountries()
   religions$= this.sharedService.getReligion()
+  relativeRelation$= this.sharedService.getParentRelative()
   reasonForNotHaveIdentityOptions$=this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).pipe(debounceTime(1000))
 
 

@@ -139,7 +139,7 @@
     "TheReasonForRegradingRequest" :"سبب إعادة مرحلة دراسية",
     "TheReasonForWithdrawalRequest" :"سبب سحب الطالب",
     "ModifyStudentResult" :"أنواع تحسين درجات الطالب",
-    "reEnrollmentType":"نوع الإلتحاق",
+    "ReEnrollmentType":"نوع الإلتحاق",
     "Active": "فعال",
     "Inactive": "غير فعال",
     "mission Succeeded": "تمت العملية بنجاح",
@@ -1553,7 +1553,10 @@
             "AccessToInformationRelatedToCurriculums": "إمكانية وصول المستخدم إلى المعلومات التابعة لمنهج محدد أو أكثر",
             "AccessToInformationRelatedToSchool": "إمكانية وصول المستخدم إلى المعلومات التابعة لمدرسة معينة أو أكثر",
             "error,please add one school at least": "حدث خطأ. من فضلك  حدد مدرسة علي الأقل",
-            "error,please add one curriculum at least": "حدث خطأ. من فضلك  حدد منهج علي الأقل"
+            "error,please add one curriculum at least": "حدث خطأ. من فضلك  حدد منهج علي الأقل",
+            "SPEA":"صلاحيات موظفى الهيئة",
+            "Employee":"صلاحيات موظفى المدارس",
+            "Guardian":"صلاحيات أولياء الأمور"
 
         },
         "surveys": {
@@ -1847,7 +1850,8 @@
             "Canceled":"مُلغى",
             "FinalApproval":"موافقة النهائية",
             "SentForApproval":"أرسل للإعتماد",
-            "TentativelyAccepted":"مقبول بشكل مبدأى",
+            "_TentativelyAccepted":"مقبول بشكل مبدأى",
+            "TentativelyAccepted":"قيد الإنتظار",
             "myRequests":"الطلبات المرسلة",
             "waitingRequests":"طلبات قيد الإنتظار",
             "FlexibleHolidayRequest":"تعديل إجازة",

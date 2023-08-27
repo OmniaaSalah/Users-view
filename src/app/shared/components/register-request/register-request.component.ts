@@ -132,7 +132,11 @@ export class RegisterRequestComponent implements OnInit {
   getStudentInfo(){
     if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
       this.studentService.getStudent(this.route.snapshot.params['childId']).subscribe(res=>{
+        console.log(res);
+
         this.childData = res.result
+        console.log(this.childData);
+
         this.getGrades()
         this.initRegisterationForm(res?.result)
       })

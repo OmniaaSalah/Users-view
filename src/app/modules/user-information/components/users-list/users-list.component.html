@@ -71,13 +71,12 @@
             <ng-template pTemplate="body" let-e let-columns="columns">
                 <tr>
                     <!-- <td>{{translationService.lang=='ar'?e.fullName.ar :e.fullName.en}}</td> -->
-                    <td>{{e?.fullName|currentLang}}</td>
-                    <td>{{e?.roleName|currentLang}}</td>
-                    <td><span class="position-relative" pTooltip="{{e?.email}}" [autoHide]="true" tooltipPosition="top">{{e?.email | truncate:15}}</span></td>
-                    <td *ngIf="e?.lastLoginDate">{{e?.lastLoginDate|LocalizeDate}}</td>
-                    <td *ngIf="!e?.lastLoginDate" >-</td>
+                    <td>{{(e?.fullName|currentLang )|| ('shared.notFound'|translate)}}</td>
+                    <td>{{(e?.roleName|currentLang) || ('shared.notFound'|translate)}}</td>
+                    <td><span class="position-relative" pTooltip="{{e?.email}}" [autoHide]="true" tooltipPosition="top">{{(e?.email | truncate:15) || ('shared.notFound'|translate)}}</span></td>
+                    <td>{{(e?.lastLoginDate|LocalizeDate) || ('shared.notFound'|translate)}}</td>
                     <td>{{e?.emiratesIdNumber}}</td>
-                    <td>{{e?.phoneNumber}}</td>
+                    <td>{{e?.phoneNumber || ('shared.notFound'|translate)}}</td>
                     <td>{{e?.createdDate | LocalizeDate}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">

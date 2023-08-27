@@ -201,10 +201,10 @@
                             {{student?.daleelId}}
                         </td>
                         <td *ngIf="tableColumns[1].isSelected == true">
-                            {{student?.id}}
+                            {{student?.id }}
                         </td>
                         <td *ngIf="tableColumns[2].isSelected == true">
-                            {{student?.manhalNumber}}
+                            {{student?.manhalNumber || ('shared.notFound' |translate)}}
                         </td>
                         <td  class="lg d-flex gap-2" *ngIf="tableColumns[3].isSelected == true">
                             <app-student-badges [isTopStudent]="student.isTopStudent" [isGifted]="student.isGifted" [studentCategory]='student.studentCategory'></app-student-badges>
@@ -213,7 +213,7 @@
                            {{student?.surName | currentLang}}
                         </td>
                         <td *ngIf="tableColumns[5].isSelected == true">
-                            {{student?.guardianName | currentLang}}
+                            {{(student?.guardianName | currentLang) || ('shared.notFound' |translate)}}
                         </td>
                         <td *ngIf="tableColumns[6].isSelected == true">
                             {{student?.schoolName | currentLang}}
@@ -222,13 +222,13 @@
                             {{student?.gradeName | currentLang}}
                         </td>
                         <td *ngIf="tableColumns[8].isSelected == true">
-                            {{student?.divisionName | currentLang}}
+                            {{(student?.divisionName | currentLang) || ('shared.notFound' |translate)}}
                         </td>
                         <td *ngIf="tableColumns[9].isSelected == true">
-                            {{student?.emiratesId}}
+                            {{student?.emiratesId || ('shared.notFound' |translate)}}
                         </td>
                         <td *ngIf="tableColumns[10].isSelected == true">
-                            {{student?.reasonForNotHavingEmiratesId|currentLang}}
+                            {{(student?.reasonForNotHavingEmiratesId|currentLang) || ('shared.notFound' |translate)}}
                         </td>
                         <td *ngIf="tableColumns[11].isSelected == true">
                             {{student?.curriculumName| currentLang}}

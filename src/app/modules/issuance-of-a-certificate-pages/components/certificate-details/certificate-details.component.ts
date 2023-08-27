@@ -78,29 +78,29 @@ export class CertificateDetailsComponent implements OnInit {
       this.certificateQrc= `${environment.clientUrl}/certificate/${this.certificateId}`
       this.certificate = this.isJSON(res?.result?.jsonObj) ? JSON.parse(res.result.jsonObj) :"npt"
 
-      if(this.certificate?.SchoolLogo){
-        this.mediaService.getFTP_BlobFile(this.certificate?.SchoolLogo).subscribe(blob =>{
-          this.mediaService.blobToBase64(blob).then(base64=> this.certificate.SchoolLogo =base64)
-        })
-      }
+      // if(this.certificate?.SchoolLogo){
+      //   this.mediaService.getFTP_BlobFile(this.certificate?.SchoolLogo).subscribe(blob =>{
+      //     this.mediaService.blobToBase64(blob).then(base64=> this.certificate.SchoolLogo =base64)
+      //   })
+      // }
 
-      if(this.certificate?.Attachments && this.certificate?.Attachments[0]){
-        this.mediaService.getFTP_BlobFile(this.certificate?.Attachments[0]).subscribe(blob =>{
-          this.mediaService.blobToBase64(blob).then(base64=> this.certificate.Attachments[0] =base64)
-        })
-      }
+      // if(this.certificate?.Attachments && this.certificate?.Attachments[0]){
+      //   this.mediaService.getFTP_BlobFile(this.certificate?.Attachments[0]).subscribe(blob =>{
+      //     this.mediaService.blobToBase64(blob).then(base64=> this.certificate.Attachments[0] =base64)
+      //   })
+      // }
 
-      if(this.certificate?.schoolStampPath){
-        this.mediaService.getFTP_BlobFile(this.certificate?.schoolStampPath).subscribe(blob =>{
-          this.mediaService.blobToBase64(blob).then(base64=> this.certificate.schoolStampPath =base64)
-        })
-      }
+      // if(this.certificate?.schoolStampPath){
+      //   this.mediaService.getFTP_BlobFile(this.certificate?.schoolStampPath).subscribe(blob =>{
+      //     this.mediaService.blobToBase64(blob).then(base64=> this.certificate.schoolStampPath =base64)
+      //   })
+      // }
 
-      if(this.certificate?.DiplomaLogoPath){
-        this.mediaService.getFTP_BlobFile(this.certificate?.DiplomaLogoPath).subscribe(blob =>{
-          this.mediaService.blobToBase64(blob).then(base64=> this.certificate.DiplomaLogoPath =base64)
-        })
-      }
+      // if(this.certificate?.DiplomaLogoPath){
+      //   this.mediaService.getFTP_BlobFile(this.certificate?.DiplomaLogoPath).subscribe(blob =>{
+      //     this.mediaService.blobToBase64(blob).then(base64=> this.certificate.DiplomaLogoPath =base64)
+      //   })
+      // }
 
       console.log(this.certificate);
       // this.generateQRC()

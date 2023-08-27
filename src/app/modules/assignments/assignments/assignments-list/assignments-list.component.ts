@@ -20,6 +20,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { MediaService } from 'src/app/shared/services/media/media.service';
 
 @Component({
   selector: 'app-assignments-list',
@@ -67,6 +68,7 @@ export class AssignmentsListComponent implements OnInit {
     private assignmentservice: AssignmentServiceService,
     private toastrService:ToastService,
     private route:ActivatedRoute,
+    private mediaService:MediaService,
     private router:Router) { }
 
 
@@ -149,14 +151,17 @@ export class AssignmentsListComponent implements OnInit {
 
   exportPdf(fileUrl : string): void {
     if (fileUrl) {
-      window.open(fileUrl, '_blank').focus();
+      this.mediaService.downloadFTPFile(fileUrl)
+      // window.open(fileUrl, '_blank').focus();
     } else {
       this.notAvailable();
     }
    }
+
    exportAudio(fileUrl : string){
     if (fileUrl) {
-      window.open(fileUrl, '_blank').focus();
+      this.mediaService.downloadFTPFile(fileUrl)
+      // window.open(fileUrl, '_blank').focus();
     } else {
       this.notAvailable();
     }

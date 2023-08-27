@@ -50,7 +50,6 @@ export  enum ClaimsEnum{
     SE_U_ProhibitedFromIssueeCertificateFromSchool = 'SE_U_ProhibitedFromIssueeCertificateFromSchool',
     S_U_ProhibitedFromWithdrawingFromSpea = 'S_U_ProhibitedFromWithdrawingFromSpea',
     SE_U_ProhibitedFromWithdrawingFromSchool = 'SE_U_ProhibitedFromWithdrawingFromSchool',
-
     SE_U_SchoolEmployee='SE_U_SchoolEmployee',
     // S_Nurse ="S_Nurse",
     S_N_U_StudentHeightAndWeight ='S_N_U_StudentHeightAndWeight',

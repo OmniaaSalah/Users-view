@@ -53,7 +53,7 @@
 
     <app-workflow  *ngIf="scope !=ScopeEnum.SPEA" [steps]="[{ar:'موافقة المدرسة', en:'School Approval'},{ar:'إعتماد الهيئة', en:'Spea Approval'}]"></app-workflow>
 
-    <ng-container *ngIf="!childData">
+    <ng-container *ngIf="!childData && childData!=null">
         <div class="row mb-4">
             <div class="col-4 d-flex gap-4 align-items-center">
                 <app-skeleton size="7rem"></app-skeleton>
@@ -62,7 +62,7 @@
         </div>
     </ng-container>
 
-    <div class="radius-15 border p-5 mb-5 bg-white custom-form" >
+    <div class="radius-15 border p-5 mb-5 bg-white custom-form" *ngIf="childData!=null">
         <div class="d-flex align-items-center justify-content-between bg-white">
             <div class="profile d-flex align-items-center">
                 <div class="profile__avatar">

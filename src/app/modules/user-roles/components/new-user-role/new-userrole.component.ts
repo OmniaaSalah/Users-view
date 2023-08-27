@@ -16,17 +16,23 @@ import { UserRolesService } from '../../service/user-roles.service';
 import { Filtration } from 'src/app/core/helpers/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { CountriesService } from 'src/app/shared/services/countries/countries.service';
-import { ExportService } from 'src/app/shared/services/export/export.service';
+
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { RestrictionLevelEnum } from 'src/app/shared/enums/user/restriction-level.enum';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
+
+
+type category = 'SPEA'|'Employee'|'Guardian';
+
 @Component({
   selector: 'app-new-user-role',
   templateUrl: './new-userrole.component.html',
   styleUrls: ['./new-userrole.component.scss'],
 })
+
+
 export class NewUserRoleComponent implements OnInit, OnDestroy {
   get ClaimsEnum() {
     return ClaimsEnum;
@@ -36,7 +42,7 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
   schoolIds;
   curriculumIds;
   jobRole;
-  dataRestrictionLevelList;
+  dataRestrictionLevelList = this.userRolesService.dataRestrictionLevelList;;
   rolePowersList = [];
   rolePowersAddedList = [];
   rolePowersIdList = [];
@@ -51,7 +57,7 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
   isShown: boolean = false;
   notChecked: boolean = false;
   checked: boolean = true;
-  urlParameter: string = '';
+  urlParameter: string = this.route.snapshot.paramMap.get('roleId');
   filtration: Filter = { ...Filtration, curriculumId: '', StateId: '' };
   paginationState = { ...paginationInitialState };
   schools = {
@@ -65,8 +71,6 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
   searchText = new FormControl('');
   constructor(
     private fb: FormBuilder,
-    private CountriesService: CountriesService,
-    private exportService: ExportService,
     private sharedService: SharedService,
     private router: Router,
     private schoolsService: SchoolsService,
@@ -93,6 +97,8 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
     });
   }
 
+
+
   ngOnInit(): void {
     this.getCurriculums();
     this.sharedService.openSelectSchoolsModel.subscribe((res) => {
@@ -102,27 +108,17 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
     this.userRolesService.MarkedListLength.next(0);
     this.userRolesService.schoolSelectedList.subscribe((res) => {
       this.schoolIsSelectedList = res;
-      console.log(res);
     });
     this.userRolesService.MarkedListLength.subscribe((res) => {
       this.MarkedListLength = res;
     });
-    this.dataRestrictionLevelList =
-      this.userRolesService.dataRestrictionLevelList;
-    this.userRolesService.getAllClaims().subscribe((res) => {
-      this.rolePowersList = res.result;
-    });
-    this.route.paramMap.subscribe((param) => {
-      this.urlParameter = param.get('roleId');
-      if (this.urlParameter) {
-        this.userRolesService
-          .getRoleByID(Number(this.urlParameter))
-          .subscribe((res) => {
-            this.jobRole = res;
-            this.getSchoolList();
-          });
-      }
-    });
+
+
+    this.getClaims()
+
+    if (this.urlParameter) this.getRoleById()
+
+
 
     this.headerService.Header.next({
       breadCrump: [
@@ -150,6 +146,26 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
       },
     });
   }
+
+
+  getRoleById(){
+    this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res) => {
+      this.jobRole = res;
+      this.bindOldRole(this.jobRole);
+
+      this.getSchoolList();
+    });
+  }
+
+
+  getClaims(){
+
+    this.userRolesService.getAllClaims().subscribe((res) => {
+      this.rolePowersList = res.result;
+    });
+  }
+
+
   get curriculumSelectedArr(): FormArray {
     return this.roleFormGrp.get('curriculumSelected') as FormArray;
   }
@@ -179,9 +195,15 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
     return this.roleFormGrp.controls['datarestrictionLevel'] as FormControl;
   }
 
-  succeeded() {
+  createNewRole() {
     this.isBtnLoading = true;
-    this.rolePowersList.forEach((element) => {
+
+    let GUARDIAN_Claims = this.rolePowersList.find(el => el.category ==UserScope.Guardian)?.claims || []
+    let SPEA_Claims = this.rolePowersList.find(el => el.category ==UserScope.SPEA)?.claims || []
+    let EMPLOYEE_Claims = this.rolePowersList.find(el => el.category ==UserScope.Employee)?.claims || []
+    let allClaims = [...GUARDIAN_Claims, ...SPEA_Claims, ...EMPLOYEE_Claims]
+
+    allClaims.forEach((element) => {
       this.rolePowersIdList.forEach((roleId) => {
         if (roleId == element.id) {
           this.rolePowersAddedList.push(element);
@@ -191,20 +213,11 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
 
     this.schoolIds = [];
     this.curriculumIds = [];
-    if (
-      this.roleFormGrp.value.datarestrictionLevel ==
-      RestrictionLevelEnum.AccessToInformationRelatedToSchool
-    ) {
-      this.schoolIsSelectedList.forEach((element) => {
-        this.schoolIds.push(element.id);
-      });
+    if (this.roleFormGrp.value.datarestrictionLevel == RestrictionLevelEnum.AccessToInformationRelatedToSchool) {
+      this.schoolIsSelectedList.forEach((element) => this.schoolIds.push(element.id) );
 
       if (this.schoolIds.length == 0) {
-        this.toastService.error(
-          this.translate.instant(
-            'dashboard.UserRole.error,please add one school at least'
-          )
-        );
+        this.toastService.error(this.translate.instant('dashboard.UserRole.error,please add one school at least'));
         this.isBtnLoading = false;
       } else {
         this.saveMe();
@@ -220,11 +233,7 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
       });
 
       if (this.curriculumIds.length == 0) {
-        this.toastService.error(
-          this.translate.instant(
-            'dashboard.UserRole.error,please add one curriculum at least'
-          )
-        );
+        this.toastService.error(this.translate.instant('dashboard.UserRole.error,please add one curriculum at least'));
         this.isBtnLoading = false;
       } else {
         this.saveMe();
@@ -257,24 +266,16 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
     };
 
     if (this.urlParameter) {
-      this.userRolesService
-        .updateRole(this.jobRole, this.urlParameter)
-        .subscribe(
-          (res) => {
+      this.userRolesService.updateRole(this.jobRole, this.urlParameter)
+        .subscribe((res) => {
             this.isBtnLoading = false;
 
-            if (res.statusCode != 'OK') {
-              this.toastService.error(res.errorLocalized[this.lang]);
-            } else {
-              this.toastService.success(
-                this.translate.instant(
-                  'dashboard.UserRole.JobRole edited Successfully'
-                )
-              );
-              this.router.navigate([
-                '/manager-tools/user-roles/user-roles-list',
-              ]);
-            }
+            // if (res.statusCode != 'OK') {
+            //   this.toastService.error(res.errorLocalized[this.lang]);
+            // } else {
+            // }
+            this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
+            this.router.navigate(['/manager-tools/user-roles/user-roles-list',]);
           },
           (err) => {
             this.isBtnLoading = false;
@@ -293,40 +294,30 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
           if (res.statusCode == 'BadRequest') {
             this.toastService.error(this.translate.instant(res.error));
           } else {
-            this.toastService.success(
-              this.translate.instant(
-                'dashboard.UserRole.JobRole added Successfully'
-              )
-            );
+            this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
             this.router.navigate(['/manager-tools/user-roles/user-roles-list']);
           }
         },
         (err) => {
           this.isBtnLoading = false;
-          this.toastService.error(
-            this.translate.instant(
-              'dashboard.AnnualHoliday.error,please try again'
-            )
-          );
+          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
         }
       );
     }
   }
+
+
   isToggleLabel(e) {
     if (e.checked) {
-      if (this.urlParameter) {
-        this.jobRole.status = true;
-      } else {
-        this.isShown = true;
-      }
+      if (this.urlParameter)  this.jobRole.status = true;
+       else  this.isShown = true;
+
     } else {
-      if (this.urlParameter) {
-        this.jobRole.status = false;
-      } else {
-        this.isShown = false;
-      }
+      if (this.urlParameter) this.jobRole.status = false;
+       else this.isShown = false;
     }
   }
+
 
   bindOldRole(role) {
     if (this.urlParameter && role) {
@@ -347,23 +338,19 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
         datarestrictionLevel: role.restrictionLevelId,
       });
       this.changedRestriction(role.restrictionLevelId);
-      if (
-        role.restrictionLevelId ==
-        RestrictionLevelEnum.AccessToInformationRelatedToSchool
-      ) {
-        this.schoolIsSelectedList = [];
-        this.userRolesService.MarkedListLength.next(role.schoolIds.length);
-        this.schools.list.forEach((school) => {
-          role.schoolIds.forEach((id) => {
-            if (school.id == id) {
-              this.schoolIsSelectedList.push(school);
-            }
-          });
-        });
-      } else if (
-        role.restrictionLevelId ==
-        RestrictionLevelEnum.AccessToInformationRelatedToCurriculums
-      ) {
+
+      // if (role.restrictionLevelId ==RestrictionLevelEnum.AccessToInformationRelatedToSchool) {
+      //   this.schoolIsSelectedList = [];
+      //   this.userRolesService.MarkedListLength.next(role.schoolIds.length);
+      //   this.schools.list.forEach((school) => {
+      //     role.schoolIds.forEach((id) => {
+      //       if (school.id == id) {
+      //         this.schoolIsSelectedList.push(school);
+      //       }
+      //     });
+      //   });
+      // }
+      if (role.restrictionLevelId ==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums) {
         role.curriculumIds.forEach((selectedCurriculumId) => {
           this.curriculamList.forEach((curriculam) => {
             if (selectedCurriculumId == curriculam.id) {
@@ -421,10 +408,10 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
       });
 
       this.curriculamList.forEach((element) => {
-        {
-          this.curriculumSelectedArr.push(this.fb.control(''));
-        }
+        this.curriculumSelectedArr.push(this.fb.control(''));
+
       });
+
     });
   }
 
@@ -435,7 +422,18 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.schools.list = res.data;
 
-        this.bindOldRole(this.jobRole);
+        if (this.jobRole.restrictionLevelId ==RestrictionLevelEnum.AccessToInformationRelatedToSchool) {
+          this.schoolIsSelectedList = [];
+          this.userRolesService.MarkedListLength.next(this.jobRole.schoolIds.length);
+          this.schools.list.forEach((school) => {
+            this.jobRole.schoolIds.forEach((id) => {
+              if (school.id == id) {
+                this.schoolIsSelectedList.push(school);
+              }
+            });
+          });
+        }
+        // this.bindOldRole(this.jobRole);
       });
   }
 
@@ -454,13 +452,30 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
   }
 
 
-
-  onSelectAllRoles(checked){
-    console.log(checked);
-
+  onSelectAllRoles(checked,category:category){
     this.rolePowersIdList = []
-    if(checked) this.rolePowersIdList = this.rolePowersList.map(el => el.id)
-    else this.rolePowersIdList = []
+    let GUARDIAN_Claims_Ids = this.rolePowersList.find(el => el.category ==UserScope.Guardian)?.claims?.map(el=>el.id) || []
+    let SPEA_Claims_Ids = this.rolePowersList.find(el => el.category ==UserScope.SPEA)?.claims?.map(el=>el.id) || []
+    let EMPLOYEE_Claims_Ids = this.rolePowersList.find(el => el.category ==UserScope.Employee)?.claims?.map(el=>el.id) || []
+
+
+    switch (category) {
+      case 'SPEA':
+        if(checked) this.rolePowersIdList = SPEA_Claims_Ids
+        else this.rolePowersIdList = this.rolePowersIdList.filter(item => !SPEA_Claims_Ids.includes(item));
+
+      break;
+      case 'Employee':
+        if(checked) this.rolePowersIdList = EMPLOYEE_Claims_Ids
+        else this.rolePowersIdList = this.rolePowersIdList.filter(item => !EMPLOYEE_Claims_Ids.includes(item));
+      break;
+      case 'Guardian':
+        if(checked) this.rolePowersIdList = GUARDIAN_Claims_Ids
+        else this.rolePowersIdList = this.rolePowersIdList.filter(item => !GUARDIAN_Claims_Ids.includes(item));
+      break;
+
+    }
+
   }
 
   ngOnDestroy(): void {
