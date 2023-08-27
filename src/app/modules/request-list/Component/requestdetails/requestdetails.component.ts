@@ -303,8 +303,8 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
         id: this.requestDetails.requestNumber,
         studentId:this.requestDetails.student.id,
         guardianId:this.requestDetails.guardian.id,
-        schoolId:this.requestDetails.school,
-        gradeId: this.requestDetails.grade,
+        school:this.requestDetails.school,
+        grade: this.requestDetails.grade,
         studentStatus: RegistrationStatus.Withdrawal,
         attachments: this.requestDetails.requestAttachments,
       }
