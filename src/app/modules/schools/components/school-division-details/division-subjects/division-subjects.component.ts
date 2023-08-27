@@ -126,7 +126,7 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
 
   onExport(fileType: FileTypeEnum){
     this.exportService.showLoader$.next(true)
-    let filter = {...this.filtration,PageSize:this.subjects.totalAllData,Page:1}
+    let filter = {...this.filtration,PageSize:this.subjects.total,Page:1}
     this.divisionService.subjectsToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.divisionSubjects'))
     })

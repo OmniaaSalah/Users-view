@@ -320,10 +320,7 @@ const routes: Routes = [
         path: 'certificates',
         loadChildren: () =>
         import('./modules/issuance-of-a-certificate-pages/issue-certificate.module').then(
-          (a) => a.IssuanceCertificateModule),
-        data:{
-          title:{ar:'الشهادات',en: 'Certificates'}
-        }
+          (a) => a.IssuanceCertificateModule)
       },
 
       {

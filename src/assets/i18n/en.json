@@ -243,7 +243,10 @@
         "Write Email or MobileNumber":"Write email or mobile number",
         "change password":"Change password",
         "we send link to your account":"We send link to your account",
+        "we send link to your Number":"We send link to your Number",
         "Pleaze check your account":"Please check your account",
+        "Pleaze check your Number":"Please check your Number",
+
         "Reset new password": "Reset new password",
         "new password": "New password",
         "write new password":"Write new password",

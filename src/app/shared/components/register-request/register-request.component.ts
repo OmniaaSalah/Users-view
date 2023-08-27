@@ -21,7 +21,7 @@ import { CustomFile } from '../file-upload/file-upload.component';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SystemRequestService } from 'src/app/modules/request-list/services/system-request.service';
 import { WorkflowOptions } from 'src/app/core/models/system-requests/requests.model';
-import { catchError, map, switchMap, throwError } from 'rxjs';
+import { catchError, map, switchMap, throwError,combineLatest } from 'rxjs';
 import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { requestTypeEnum } from '../../enums/system-requests/requests.enum';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
@@ -131,19 +131,21 @@ export class RegisterRequestComponent implements OnInit {
 
   getStudentInfo(){
     if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
-      this.studentService.getStudent(this.route.snapshot.params['childId']).subscribe(res=>{
+      let streams$ = combineLatest([ this.studentService.getStudent(this.route.snapshot.params['childId']) , this.getGrades()])
+      this.studentService.getStudent(this.route.snapshot.params['childId'])
+      .subscribe(res=>{
         this.childData = res.result
-        console.log(this.childData);
-
         this.getGrades()
-        this.initRegisterationForm(res?.result)
+        // this.initRegisterationForm(res?.result)
       })
 
     }else{
-      this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
+      let streams$ = combineLatest([ this._parent.getChild(this.route.snapshot.params['childId']) , this.getGrades()])
+      this._parent.getChild(this.route.snapshot.params['childId'])
+      .subscribe(res=>{
         this.childData = res
         this.getGrades()
-        this.initRegisterationForm(res)
+        // this.initRegisterationForm(res)
       })
     }
   }
@@ -203,9 +205,9 @@ initRegisterationForm(child){
       map(res => res.result),
       )
     .subscribe(res=>{
+      this.selectedGrade=res
       this.registerReqForm.controls['gradeId'].setValue(res?.id)
       this.onGradeSelected(res.id)
-      this.selectedGrade=res
       // this.onGradeSelected(res.id)
     },err =>{
       // this.onGradeSelected(2)
@@ -267,6 +269,7 @@ initRegisterationForm(child){
 
   getGrades(curriculumsId=''){
     this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
+      this.initRegisterationForm(this.childData)
       this.AllGrades=res || []
 
       if(this.requestId) {

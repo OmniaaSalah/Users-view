@@ -91,7 +91,7 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   forgetPassword() {
-    var account;
+    let account;
     if (this.isEmail) {
       account = {
         userName: this.resetPasswordFormGrp.value.resetPasswordWay,

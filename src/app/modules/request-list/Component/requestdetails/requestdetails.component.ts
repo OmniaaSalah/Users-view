@@ -19,6 +19,7 @@ import { Observable, delay, map, switchMap } from 'rxjs';
 import { Division } from 'src/app/core/models/global/global.model';
 import { GradesService } from 'src/app/modules/schools/services/grade/grade.service';
 import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -408,6 +409,23 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
   }
 
 
+
+
+  goToChildPage(student){
+    console.log(this.requestDetails?.student?.status);
+
+    let id = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? student?.studentGuid :student?.id
+    let guardianId = this.requestDetails?.guardian?.id
+
+    if(this.currentUserScope==this.userScopeEnum.SPEA){
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? `${environment.clientUrl}schools-and-students/students/student/${id}` : `${environment.clientUrl}schools-and-students/all-parents/parent/${guardianId}/child/${1050}?registered=false`
+      window.open(url)
+
+    }else if(this.currentUserScope==this.userScopeEnum.Employee){
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? `${environment.clientUrl}student-management/students/student/${id}` : `${environment.clientUrl}schools-and-students/all-parents/parent/${guardianId}/child/${1050}?registered=false`
+      window.open(url)
+    }
+  }
 
 
    checkDashboardHeader()

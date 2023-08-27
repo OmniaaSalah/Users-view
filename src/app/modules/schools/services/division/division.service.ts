@@ -257,11 +257,11 @@ export class DivisionService {
     return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
     .pipe(
       map(res=>{
-        return res.data.map(subject =>{
+        return res?.result?.data.map(subject =>{
           return {
             [this.translate.instant('dashboard.schools.subjectNumber')]: subject.subjectCode,
             [this.translate.instant('dashboard.parents.subjectName')]: subject.subjectName.ar,
-            [this.translate.instant('shared.track')]: subject.trackName.ar,
+            [this.translate.instant('shared.track')]: subject.trackName.ar || this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.schools.speaSubjects')]: subject.isAcdmicSubject ? this.translate.instant("shared.no") : this.translate.instant("shared.yes"),
             [this.translate.instant('dashboard.schools.subjectDegreesStatus')]: this.translatedStatus(subject.subjecttStatus),
           }

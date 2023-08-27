@@ -116,6 +116,7 @@ routeHistory$ : BehaviorSubject<RouteInHistory[]> = new BehaviorSubject<RouteInH
         child = child.firstChild;
       } else if (child.snapshot.data && child.snapshot.data[key]) {
         return child.snapshot.data[key];
+
       } else {
         return null;
       }

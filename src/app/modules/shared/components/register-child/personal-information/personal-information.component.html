@@ -262,22 +262,22 @@
           <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
 
           <div class=" col-md-4 col-lg-3" formGroupName="nationalityCategory">
-            <label class="label required">{{'shared.nationalityCategory'|translate}}</label>
+            <label class="label">{{'shared.nationalityCategory'|translate}}</label>
             <p-dropdown formControlName="id" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
           </div>
 
           <div class="col-md-4 col-lg-3 " formGroupName="motherLanguage">
-            <label class="label required">{{'shared.nativeLanguage'|translate}}</label>
+            <label class="label">{{'shared.nativeLanguage'|translate}}</label>
             <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
           </div>
 
           <div class="col-md-4 col-lg-3 " formGroupName="languageAtHome">
-              <label class="label required">{{'shared.homeLanguage'|translate}}</label>
+              <label class="label">{{'shared.homeLanguage'|translate}}</label>
               <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
           </div>
 
           <div class="col-md-4 col-lg-3 "  formGroupName="mostUsedLanguage">
-              <label class="label required">{{'shared.mostUsedLanguage'|translate}}</label>
+              <label class="label">{{'shared.mostUsedLanguage'|translate}}</label>
               <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
           </div>
 

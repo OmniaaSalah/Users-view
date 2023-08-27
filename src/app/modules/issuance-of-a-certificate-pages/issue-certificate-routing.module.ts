@@ -7,8 +7,15 @@ import { Layout } from 'src/app/layout/layout-routing.service';
 
 const routes: Routes = [
   Layout.childRoutes([
+    {
+      path:"ask-certificate",
+      component:IssueCertificateComponent,
+      canActivate: [CheeckMandatoryServeyGuard],
+      data:{
+        title:{ar:'الشهادات',en: 'Certificates'}
+      }
+    },
     {path:"certificate-details",component:CertificateDetailsComponent},
-    {path:"ask-certificate",component:IssueCertificateComponent,canActivate: [CheeckMandatoryServeyGuard]},
     {path:"ask-certificate/:studentId",component:IssueCertificateComponent,canActivate:[CheeckMandatoryServeyGuard]},
   ])
 

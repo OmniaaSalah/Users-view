@@ -455,7 +455,7 @@
             <ng-container *ngIf="requestOptions" >
                 <button
                 *ngFor="let option of requestOptions;let i=index"
-                [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest"
+                [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned' || option?.label?.en=='return for correction') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest"
                 [disabled]="option.isLoading"
                 [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
                 (click)="onActionTaken(option,i)"
@@ -490,9 +490,10 @@
       </div>
       <div class="profile__info ">
           <div class="profile__name d-flex flex-wrap">
-                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.SPEA" target="_blank" [routerLink]="['//schools-and-students/students/student/'+student?.studentGuid]">{{student.name |currentLang}}</a>
-                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Employee" target="_blank" [routerLink]="['/student-management/students/student/'+student?.studentGuid]">{{student.name |currentLang}}</a>
-                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Guardian">{{student.name |currentLang}}</a>
+                <!-- <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.SPEA" target="_blank" [routerLink]="['/schools-and-students/students/student/'+student?.studentGuid]">{{student.name |currentLang}}</a>
+                <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Employee" target="_blank" [routerLink]="['/student-management/students/student/'+student?.studentGuid]">{{student.name |currentLang}}</a> -->
+                <!-- <a class="color-primary fw-bold fs-2" *ngIf="currentUserScope==userScopeEnum.Guardian">{{student.name |currentLang}}</a> -->
+                <a class="color-primary fw-bold fs-2" (click)="goToChildPage(student)">{{student.name |currentLang}}</a>
 
                 <div class="" *ngIf="student?.isGifted">
                     <img src="assets/images/shared/medal.svg" alt="">
