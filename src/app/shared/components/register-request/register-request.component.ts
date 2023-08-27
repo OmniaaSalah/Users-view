@@ -237,6 +237,8 @@ initRegisterationForm(child){
     }
 
     this.onGradeSelected(reqData.grade?.id)
+    this.registerReqForm.controls['gradeId'].setValue(reqData.grade?.id)
+
     this.onSelectSchool(reqData.school?.id)
     this.registerReqForm.patchValue(reqData)
 
