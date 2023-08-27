@@ -58,7 +58,7 @@
           <td>{{e?.creatorName || ('shared.notFound'|translate)}}</td>
           <td>{{e?.createdDate| LocalizeDate}}</td>
           <td>{{e?.editorName || ('shared.notFound'|translate)}}</td>
-          <td *ngIf="e?.lastEditedDate">{{(e?.lastEditedDate| LocalizeDate) || ('shared.notFound'|translate)}}</td>
+          <td >{{(e?.lastEditedDate| LocalizeDate) || ('shared.notFound'|translate)}}</td>
 
           <td class=" degree" *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.subjectMinmumDegree}}</td>
           <td class="degree" *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>

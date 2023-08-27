@@ -38,10 +38,17 @@
                                           <div class="p-0 mb-4" *ngFor="let notification of notificationsList; let i=index">
                                               <div *ngIf="notificationsList.length !==0" class="name-description" (click)="goToNotificationDetails(notification.pageLink,notification.id,notification.isRead)" [ngClass]="!notification.pageLink?'my-disabled':''">
                                                   <div class="title position-relative">
-                                                      <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!notification.isRead">
-                                                      <img class="cardimage " src="assets/images/shared/Person.jpg">
-                                                      <span class="fw-bold d-inline-block" >{{notification.userName |currentLang}}</span>
-                                                      <span class="color-primary fw-bold mx-3">{{notification.title|currentLang}}</span>
+                                                    <div class="d-flex">
+                                                        <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!notification.isRead">
+                                                        <div class="">
+                                                          <img class="cardimage " src="assets/images/shared/Person.jpg">
+                                                        </div>
+                                                        <div class="">
+                                                          <span class="fw-bold d-inline-block" >{{notification.userName |currentLang}}</span>
+                                                          <span class="color-primary fw-bold mx-3 text-wrap">{{notification.title|currentLang}}</span>
+                                                        </div>
+                                                      </div>
+
                                                   </div>
                                                   <div class="Description my-2">
                                                       <span class="">{{'Notifications.Description'|translate}}</span>

@@ -214,12 +214,14 @@ export class TransferedStudentsReportsComponent implements OnInit {
 
       res.forEach((student) => {
         let myObject = {}
-        for (let property in student)
-        {
-         var selected= myColumns.find(column => column.name==property)
+        for (let property in student) {
+          let selected = myColumns.find((column) => column.name == property);
 
-         if(selected)   myObject = { ...myObject, [selected?.name] :student[selected?.name]}
-
+          if (selected)
+            myObject = {
+              ...myObject,
+              [selected?.name]: student[selected?.name],
+            };
         }
 
         exportedTable.push(myObject)

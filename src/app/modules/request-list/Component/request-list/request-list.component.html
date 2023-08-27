@@ -77,7 +77,7 @@
                             </td>
                             <td>{{request.createdBy | currentLang}}</td>
                             <td style="min-width: 16rem;">{{request.createdDate | toLocalDate:'YYYY-MM-DD HH:mm' |LocalizeDate:'d MMMM y hh:mm a'}}</td>
-                            <td style="min-width: 16rem;"  *ngIf="currentUserScope==userScope.Guardian">{{(request?.lastUpdatedDate|LocalizeDate:'d MMMM y hh:mm a' ) || '--'}}</td>
+                            <td style="min-width: 16rem;"  *ngIf="currentUserScope==userScope.Guardian">{{(request?.lastUpdatedDate| toLocalDate:'YYYY-MM-DD HH:mm' |LocalizeDate:'d MMMM y hh:mm a' ) || '--'}}</td>
                             <td>
                                 <span [ngSwitch]="request.requestStatus">
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>

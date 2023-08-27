@@ -186,7 +186,7 @@
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
 
-                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true" [ngClass]="column==tableColumns[2]?'lg':''">
+                        <th [pSortableColumn]="column.sortField" *ngIf="column.isSelected == true" [ngClass]="column==tableColumns[2]?'lg':''">
                             <!-- studentsReportsArray -->
                        <ng-container >{{column.name }}</ng-container>
                        <p-sortIcon field="{{column.name }}"></p-sortIcon>

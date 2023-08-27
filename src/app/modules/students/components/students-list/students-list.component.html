@@ -132,7 +132,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-student >
                 <tr [routerLink]="['student/', student?.studentGuid]" class="clickable">
-                    <td>{{student.studentDaleelNumber}}</td>
+                    <td>{{student?.id}}</td>
                     <td style="min-width: 22rem;">{{student.name |currentLang}}</td>
                     <td style="min-width: 16rem;">{{student.surName |currentLang }}</td>
                     <td>{{student.studentMinisterialNumber}}</td>

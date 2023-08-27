@@ -117,14 +117,14 @@
 
           <div class="col-md-4">
             <div class="form-set" >
-                <label class="label required" for="description">{{'dashboard.parents.acceptanceDate'| translate}}</label>
+                <label class="label" for="description">{{'dashboard.parents.acceptanceDate'| translate}}</label>
                 <p-calendar formControlName="dateOfAcceptance"  dateFormat="DD dd-mm-yy" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="yyyy/mm/dd"></p-calendar>
               </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-set" >
-                <label class="label required" for="description">{{'dashboard.parents.studentEnrollmentType'| translate}}</label>
+                <label class="label" for="description">{{'dashboard.parents.studentEnrollmentType'| translate}}</label>
                 <p-dropdown formControlName="studentReEnrollmentId" [options]="reEnrollmentTypes$ |async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.studentEnrollmentType' |translate}}"></p-dropdown>
             </div>
           </div>
@@ -132,26 +132,26 @@
             <div class="col-md-4">
 
                 <div class="form-set">
-                    <label class="label required" for="description">{{'shared.internet'| translate}}</label>
+                    <label class="label" for="description">{{'shared.internet'| translate}}</label>
                     <p-dropdown formControlName="isHasInternet" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-set">
-                    <label class="label required" for="description">{{'shared.mobile'| translate}}</label>
+                    <label class="label" for="description">{{'shared.mobile'| translate}}</label>
                     <p-dropdown formControlName="isHasPhone" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-set">
-                    <label class="label required" for="description">{{'shared.publicTransport'| translate}}</label>
+                    <label class="label" for="description">{{'shared.publicTransport'| translate}}</label>
                     <p-dropdown formControlName="transportationType" [options]="transportaionTypes" optionValue="value" optionLabel="name" placeholder="{{'shared.SchoolBus/PrivateCar' |translate}}"></p-dropdown>
                 </div>
             </div>
             <!-- <div class="col-md-4">
                 <div class="form-set">
-                    <label class="label required" for="description">{{'dashboard.parents.specialEducation'| translate}}</label>
+                    <label class="label" for="description">{{'dashboard.parents.specialEducation'| translate}}</label>
                     <p-dropdown formControlName="isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" (ngModelChange)="onSpecialEducationChanged($event)" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
             </div> -->
@@ -161,7 +161,7 @@
 
             <div class="col-md-4">
                 <div class="form-set">
-                    <label class="label required" for="description">{{ 'dashboard.parents.hasShadower'| translate}}</label>
+                    <label class="label" for="description">{{ 'dashboard.parents.hasShadower'| translate}}</label>
                     <p-dropdown formControlName="hasShadower" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
             </div>
