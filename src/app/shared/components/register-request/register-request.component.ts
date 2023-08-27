@@ -131,7 +131,6 @@ export class RegisterRequestComponent implements OnInit {
 
   getStudentInfo(){
     if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
-      let streams$ = combineLatest([ this.studentService.getStudent(this.route.snapshot.params['childId']) , this.getGrades()])
       this.studentService.getStudent(this.route.snapshot.params['childId'])
       .subscribe(res=>{
         this.childData = res.result
@@ -140,7 +139,6 @@ export class RegisterRequestComponent implements OnInit {
       })
 
     }else{
-      let streams$ = combineLatest([ this._parent.getChild(this.route.snapshot.params['childId']) , this.getGrades()])
       this._parent.getChild(this.route.snapshot.params['childId'])
       .subscribe(res=>{
         this.childData = res
@@ -151,6 +149,8 @@ export class RegisterRequestComponent implements OnInit {
   }
 
 initRegisterationForm(child){
+  console.log(child);
+
   this.registerReqForm = this.fb.group({
     id:[],
     childId:[child?.id],
@@ -270,6 +270,8 @@ initRegisterationForm(child){
   getGrades(curriculumsId=''){
     this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
       this.AllGrades=res || []
+      console.log(this.childData);
+
       if(!this.registerReqForm) this.initRegisterationForm(this.childData)
 
       if(this.requestId) {
