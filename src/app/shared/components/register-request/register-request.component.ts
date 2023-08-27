@@ -269,8 +269,8 @@ initRegisterationForm(child){
 
   getGrades(curriculumsId=''){
     this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
-      this.initRegisterationForm(this.childData)
       this.AllGrades=res || []
+      if(!this.registerReqForm) this.initRegisterationForm(this.childData)
 
       if(this.requestId) {
         this.patchReturnedRequestData(this.returnedReqData)
@@ -295,7 +295,7 @@ initRegisterationForm(child){
     if(this.selectedGrade?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
     else if(this.selectedGrade?.code==FirstGradeCodeEnum.PrimarySchool) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
     else this.getRegistrationRequiresFiles()
-    this.selectedSchoolId =null
+    if(this.childRegistrationStatus!=RegistrationStatus.Withdrawal) this.selectedSchoolId =null
 
     this.getSchools()
   }
@@ -323,8 +323,8 @@ initRegisterationForm(child){
 
 
   onSelectSchool(schoolId) {
+
     this.selectedSchoolId =schoolId
-    console.log(this.registerReqForm);
     this.registerReqForm.controls['schoolId'].setValue(schoolId)
   }
 

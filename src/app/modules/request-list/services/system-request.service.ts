@@ -172,7 +172,6 @@ export class SystemRequestService {
       .pipe(
         take(1),
         map(res=>{
-          console.log(res);
 
           if(!res) return {options: []}
           else return res
