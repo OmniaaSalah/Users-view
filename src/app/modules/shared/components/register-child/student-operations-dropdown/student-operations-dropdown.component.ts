@@ -298,6 +298,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
     })
   }
 
+
   updateIdentityInfoReq(newIdentityInfo){
     this.onSubmit=true
     this.studentsService.updateStudentIdentityInfo(newIdentityInfo)

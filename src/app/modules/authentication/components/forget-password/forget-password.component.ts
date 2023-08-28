@@ -106,10 +106,17 @@ export class ForgetPasswordComponent implements OnInit {
       (res) => {
         this.step = 2;
         this.tittle = '';
-        this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
+        this.toastService.success(
+          this.translate.instant('sign up.confirmed successfully')
+        );
       },
       (err) => {
-        this.toastService.error(err.message ||  this.translate.instant('Request cannot be processed, Please contact support.'));
+        this.toastService.error(
+          err.message ||
+            this.translate.instant(
+              'Request cannot be processed, Please contact support.'
+            )
+        );
       }
     );
   }
@@ -157,18 +164,26 @@ export class ForgetPasswordComponent implements OnInit {
 
     account = {
       otp: this.urlOtp,
-      password: this.changePasswordFormGrp.value.newPassword,
+      password: this.changePasswordFormGrp?.value?.newPassword,
       email: this.urlEmail,
     };
 
     this.authService.resetPassword(account).subscribe(
       (res) => {
-        this.toastService.success(this.translate.instant('Password changed successfully'));
+        this.toastService.success(
+          this.translate.instant('Password changed successfully')
+        );
         this.openResetModel = false;
         this.router.navigate(['/auth/login']);
       },
       (err) => {
-        this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
+        let message = this.lang == 'ar' ? err['Ar'] : err['En'];
+        this.toastService.error(
+          message ||
+            this.translate.instant(
+              'Request cannot be processed, Please contact support.'
+            )
+        );
       }
     );
   }

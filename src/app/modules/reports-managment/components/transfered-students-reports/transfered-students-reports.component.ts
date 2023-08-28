@@ -215,7 +215,11 @@ export class TransferedStudentsReportsComponent implements OnInit {
       res.forEach((student) => {
         let myObject = {}
         for (let property in student) {
-          let selected = myColumns.find((column) => column.name == property);
+
+
+          let selected = myColumns.find((column) =>{
+            console.log(column.name,property);
+            return column.name == property});
 
           if (selected)
             myObject = {
