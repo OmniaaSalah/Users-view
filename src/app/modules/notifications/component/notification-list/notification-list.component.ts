@@ -26,10 +26,8 @@ export class NotificationListComponent implements OnInit {
   notificationsNames = [];
   receivers = [];
   lang = inject(TranslationService).lang;
-  @ViewChild('readBtn', { read: ElementRef, static: false })
-  readBtn: ElementRef;
-  @ViewChild('notReadBtn', { read: ElementRef, static: false })
-  notReadBtn: ElementRef;
+  @ViewChild('readBtn', { read: ElementRef, static: false })readBtn: ElementRef;
+  @ViewChild('notReadBtn', { read: ElementRef, static: false }) notReadBtn: ElementRef;
   notificationsList = [];
   notificationTotal!: number;
   currentNotifications;
@@ -160,17 +158,16 @@ export class NotificationListComponent implements OnInit {
       this.notificationService.unReadNotificationNumber.next(
         this.unreadNotificationNumbers--
       );
-      this.getNotifications();
       this.notificationService
-        .updateNotifications({ NotificationId: [id] })
-        .subscribe(
-          (res) => {},
+      .updateNotifications({ NotificationId: [id] })
+      .subscribe(
+        (res) => {
+
+          this.getNotifications();
+          },
           (err) => {
             this.toastr.error(
-              this.translate.instant(
-                'Request cannot be processed, Please contact support.'
-              )
-            );
+              this.translate.instant('Request cannot be processed, Please contact support.'));
           }
         );
     }

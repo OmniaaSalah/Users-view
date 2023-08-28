@@ -263,20 +263,20 @@
                            <span *ngIf="!student?.gender">{{'shared.notFound' | translate}}</span>
                         </td>
                         <td *ngIf="tableColumns[20].isSelected == true">
-                            {{student?.state }}
+                            {{student?.state || ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[21].isSelected == true">
-                            {{student?.city }}
+                            {{student?.city || ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[22].isSelected == true">
-                            {{student?.nationality | currentLang}}
+                            {{(student?.nationality | currentLang) || ('shared.notFound' | translate)}}
                         </td>
                         <td *ngIf="tableColumns[23].isSelected == true" style="flex-wrap:wrap">
                             <ng-container *ngFor="let item of student?.studentCategory let i=index">
                                 <span *ngIf="item">{{'shared.allStatus.'+item|translate}}<span  *ngIf="i<student?.studentCategory.length-1"> , </span></span>
                             </ng-container>
 
-                            <span *ngIf="!student?.studentCategory">{{'shared.notFound' | translate}}</span>
+                            <span *ngIf="!student?.studentCategory?.length">{{'shared.notFound' | translate}}</span>
                         </td>
 
                     </ng-container>
