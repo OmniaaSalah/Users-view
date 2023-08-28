@@ -269,10 +269,9 @@ initRegisterationForm(child){
 
   getGrades(curriculumsId=''){
     this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
-      this.AllGrades=res || []
-      console.log(this.childData);
+    this.AllGrades=res || []
 
-      if(!this.registerReqForm) this.initRegisterationForm(this.childData)
+    if(!this.registerReqForm) this.initRegisterationForm(this.childData)
 
       if(this.requestId) {
         this.patchReturnedRequestData(this.returnedReqData)
