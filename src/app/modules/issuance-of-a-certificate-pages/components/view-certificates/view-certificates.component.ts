@@ -58,8 +58,7 @@ export class ViewCertificatesComponent implements OnInit {
   }
 
 
-  getAllCertificates()
-  {
+  getAllCertificates(){
     this.allCertificates.loading = true
     this.allCertificates.list = []
     this.issuance.getAllCertificateOfGurdian(this.filtration).subscribe(res => {
@@ -73,8 +72,6 @@ export class ViewCertificatesComponent implements OnInit {
       this.allCertificates.total = 0
       this.sharedService.filterLoading.next(false);
     })
-
-
   }
 
   clearFilter(){

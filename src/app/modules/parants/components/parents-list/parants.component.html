@@ -72,7 +72,7 @@
                     <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
                         {{product[col.field]}}
                     </td> -->
-                    <td>{{parent.name|currentLang}}</td>
+                    <td style="white-space: pre-wrap;">{{parent.name|currentLang}}</td>
                     <td>{{parent.surname |currentLang}}</td>
                     <td>{{parent.emiratesIdNumber}}</td>
                     <td>{{'shared.genderType.'+parent.gender |translate}}</td>

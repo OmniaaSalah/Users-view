@@ -70,8 +70,8 @@
                 <span class="color-primary mb-2">{{student.ministerialId || ('shared.notFound' |translate)}}</span>
 
 
-                <p class="color-gray-300">{{ 'shared.nationalityCategory'|translate }}</p>
-                <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
+                <!-- <p class="color-gray-300">{{ 'shared.nationalityCategory'|translate }}</p>
+                <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span> -->
 
                 <p class="color-gray-300">{{ 'shared.nativeLanguage'|translate }}</p>
                 <span class="color-primary mb-2">{{student?.motherLanguage?.name | currentLang}}</span>
@@ -123,12 +123,15 @@
 
               <div class="d-grid grid-col-8 even-gap gap-5 mt-5">
                 <ng-container *ngIf="student?.isGifted">
-                    <p class="color-gray-300">{{'dashboard.students.talent'| translate}}</p>
-                    <div  class="mb-2 d-flex">
-                        <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
-                            {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
-                        </span>
-                    </div>
+
+                  <p class="color-gray-300">{{'dashboard.students.talent'| translate}}</p>
+                  <div  class="mb-2 d-flex">
+                    <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
+                      {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
+                    </span>
+                  </div>
+                  <p class="color-gray-300">{{ 'shared.nationalityCategory'|translate }}</p>
+                  <span class="color-primary mb-2">{{student?.nationalityCategory?.name | currentLang}}</span>
 
                 </ng-container>
               </div>

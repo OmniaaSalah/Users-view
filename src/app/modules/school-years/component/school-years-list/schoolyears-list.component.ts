@@ -109,7 +109,7 @@ export class SchoolyearsListComponent implements OnInit {
 
   onExport(fileType: FileTypeEnum, table:Table){
     this.exportService.showLoader$.next(true)
-    let filter = {...this.filtration, PageSize:this.schoolYears.totalAllData,Page:1}
+    let filter = {...this.filtration, PageSize:this.schoolYears.total,Page:1}
     this.schoolYearService.schoolYearsToExport(filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('breadcrumb.School Years List'))
