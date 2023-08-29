@@ -80,29 +80,24 @@ export class IssueCertificateComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-
     this.userService.currentGuardian.subscribe((res)=> {this.guardian=res;});
 
-    if(this.requestInstance){
-      // this.getRequestOptions()
-      this.step =3
-      this.choosenStudents.push(this.returnedReqData.student)
-      this.selectedCertificate= {
-        "value": CertificatesEnum.AcademicSequenceCertificate,
-        "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
-        }
-      }
+    // if(this.requestInstance){
+    //   // this.getRequestOptions()
+    //   this.step =3
+    //   this.choosenStudents.push(this.returnedReqData.student)
+    //   this.selectedCertificate= {
+    //     "value": CertificatesEnum.AcademicSequenceCertificate,
+    //     "name": {
+    //       "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
+    //       "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
+    //     }
+    //   }
 
-    }else this.goToFirst();
+    // }else this.goToFirst();
 
-
-
-
+    this.goToFirst();
     this.headerService.changeHeaderdata(this.componentHeaderData);
-
   }
 
 
