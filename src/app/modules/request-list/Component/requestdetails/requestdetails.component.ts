@@ -412,7 +412,6 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
 
 
   goToChildPage(student){
-    console.log(this.requestDetails?.student?.status);
 
     let id = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? student?.studentGuid :student?.id
     let guardianId = this.requestDetails?.guardian?.id

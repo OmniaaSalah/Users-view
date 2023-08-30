@@ -11,8 +11,8 @@
 
            <div class="row g-5 form-set" >
             <div class="col-md-4">
-                <label class="label">{{'dashboard.students.academic year'|translate}}</label>
-                <p-dropdown [options]="schoolYearsList" [(ngModel)]="filtration.SchoolYearId" [showClear]="true"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"  placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"></p-dropdown>
+                <label class="label required">{{'dashboard.students.academic year'|translate}}</label>
+                <p-dropdown [options]="schoolYearsList" [(ngModel)]="filtration.SchoolYearId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"  placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"></p-dropdown>
             </div>
 
             <div class="col-md-4">

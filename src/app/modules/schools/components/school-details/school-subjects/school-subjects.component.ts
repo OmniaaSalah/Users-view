@@ -1,8 +1,6 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { th } from 'date-fns/locale';
-import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/helpers/filtration';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -100,7 +98,11 @@ export class SchoolSubjectsComponent implements OnInit {
 
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
-    if(this.filtration.GradeId) this.getSubjects()
+    if(this.filtration.GradeId){
+      this.subjectsObj.isGradeSelected=true;
+      this.getTracks()
+      this.getSubjects()
+    }
   }
 
 

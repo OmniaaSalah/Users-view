@@ -58,7 +58,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       isAthletic: ['',Validators.required],
       weight: ['',[Validators.required, Validators.min(5)]],
       height:['',[Validators.required, Validators.min(5)]],
-      otherNotes:['', Validators.required],
+      otherNotes:[''],
       vaccineCertificates :[[]]
 
     })
@@ -86,16 +86,18 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     this.isLoading =true
     this.studentsService.getStudentMedicalfile(studentId)
     .subscribe(res =>{
-      if((res?.fats && res?.fats < 1) || !res?.fats) res.fats = 1
-      if((res?.height && res?.height < 5 ) || !res?.height) res.height = 5
-      if((res?.weight && res?.weight < 5) || !res?.height) res.weight = 5
-      this.medicalFileForm.patchValue(res)
-      this.medicalFileForm.controls['listOfChronicDiseases'].setValue(res.chronicDiseases)
-      this.medicalFileForm.controls['listOfAllergicDiseases'].setValue(res.allergicDiseases)
+      this.patchForm(res)
       this.isLoading =false
       this.medicalFile = res
     })
   }
+
+  patchForm(data){
+    this.medicalFileForm.patchValue(data)
+    this.medicalFileForm.controls['listOfChronicDiseases'].setValue(data.chronicDiseases)
+    this.medicalFileForm.controls['listOfAllergicDiseases'].setValue(data.allergicDiseases)
+  }
+
   onSubmit=false
   updateMedicalFile(studentId){
     console.log(this.medicalFileForm.value)

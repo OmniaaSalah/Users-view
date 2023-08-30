@@ -11,8 +11,6 @@ export class ToLocalDatePipe implements PipeTransform {
     let utc = moment.utc(dateStr.split(/[.|+]/)[0]).toDate()
 
     let localDate = moment(utc).local().format(format) //YYYY-MM-DD HH:mm:ss
-console.log(utc ,' =>',localDate);
-
     return localDate;
   }
 

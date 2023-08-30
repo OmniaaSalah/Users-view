@@ -245,7 +245,7 @@ export class AnnulHolidayListComponent implements OnInit {
 
   onExport(fileType: FileTypeEnum){
     this.exportService.showLoader$.next(true)
-    let filter = {...this.filtration,PageSize:this.holidays.totalAllData,Page:1}
+    let filter = {...this.filtration,PageSize:this.holidays.total,Page:1}
     this.schoolsService.holidaysToExport(this.schoolId,filter).subscribe( (res) =>{
 
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualHolidays'))
