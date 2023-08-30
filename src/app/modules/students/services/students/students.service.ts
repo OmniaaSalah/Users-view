@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { delay, finalize, map, Observable, of, take } from 'rxjs';
-import { getLocalizedValue } from 'src/app/core/helpers/helpers';
+import { finalize, map, Observable, of, take } from 'rxjs';
+import { getLocalizedValue,setMinValue } from 'src/app/core/helpers/helpers';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
@@ -200,8 +200,19 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
 
   // << Students Medical File >> //
   getStudentMedicalfile(id){
-    return this.http.get(`/Student/${id}/medicalRecord`).pipe(take(1))
+    return this.http.get(`/Student/${id}/medicalRecord`)
+    .pipe(
+      map(res=>{
+        res.fats = setMinValue(res?.fats, 1)
+        res.height = setMinValue(res?.height, 5)
+        res.weight = setMinValue(res?.weight, 5)
+        return res
+      }),
+      take(1)
+    )
   }
+
+
   updateStudentMedicalfile(id, data){
     return this.http.post(`/Student/medical-record/${id}`,data).pipe(take(1))
   }

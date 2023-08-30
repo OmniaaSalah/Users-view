@@ -20,6 +20,7 @@ import { IndexesService } from '../../../indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 import { shareReplay } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-students-reports',
@@ -112,6 +113,7 @@ export class StudentsReportsComponent implements OnInit {
     private schoolsService: SchoolsService,
     private studentsService:StudentsService,
     private route:ActivatedRoute,
+    private toaster:ToastrService,
     private router:Router
   ) {
     this.tableColumns = this.studentsReportService.tabelColumns
@@ -170,21 +172,25 @@ export class StudentsReportsComponent implements OnInit {
     this.studentsReport.list = []
     this.studentsReportService.getAllStudents(this.filtration)
       .subscribe(res => {
+        this.initReportState(res)
         this.isBtnLoading=false;
-        this.felmaleStudentCount=res.felmaleStudentCount;
-        this.maleStudentCount=res.maleStudentCount;
-        this.emiratesStudentsCounts=res.emiratesStudents;
-        this.studentCount=res.studentCount;
         this.studentsReport.loading = false
-        this.studentsReport.list = res.studentDetails.data
-        this.studentsReport.totalAllData =res.studentDetails.totalAllData
-        this.studentsReport.total =res.studentDetails.total
 
       }, err => {
         this.studentsReport.loading = false
         this.studentsReport.total = 0
          this.isBtnLoading=false;
       })
+  }
+
+  initReportState(data){
+    this.felmaleStudentCount=data.felmaleStudentCount;
+    this.maleStudentCount=data.maleStudentCount;
+    this.emiratesStudentsCounts=data.emiratesStudents;
+    this.studentCount=data.studentCount;
+    this.studentsReport.list = data.studentDetails.data
+    this.studentsReport.totalAllData =data.studentDetails.totalAllData
+    this.studentsReport.total =data.studentDetails.total
   }
 
   checkValueOfCheckbox(item, event) {
@@ -209,24 +215,36 @@ export class StudentsReportsComponent implements OnInit {
 
   onExport(fileType: FileTypeEnum, table: Table) {
     this.exportService.showLoader$.next(true)
-    let exportedTable = []
-    const myColumns = this.tableColumns.filter(el => el.isSelected)
-    let filter = {...this.filtration, PageSize:this.studentsReport.totalAllData,Page:1}
-    this.studentsReportService.studentsToExport(filter).subscribe( (res) =>{
-      res.forEach((student) => {
-        let myObject = {}
-        for (let property in student)
-        {
-         var selected= myColumns.find(column => column.name==property)
+    this.studentsReportService.getAllStudents(this.filtration)
+    .subscribe(res=>{
+      this.initReportState(res)
+      if(res.studentDetails.total > 10000) {
+        this.toaster.error('عذرا عدد العناصر المطلوب اصدارها اكبر من الحد المسموح .يرجى تغير معاير البحث لتقليل العناصر إلى اقل من 10 ألاف')
+        this.exportService.showLoader$.next(false)
+        return
+      }
+      let exportedTable = []
+      const myColumns = this.tableColumns.filter(el => el.isSelected)
+      let filter = {...this.filtration, PageSize:this.studentsReport.total,Page:1}
+      this.studentsReportService.studentsToExport(filter).subscribe( (res) =>{
+        res.forEach((student) => {
+          let myObject = {};
+          for (let property in student) {
+            var selected = myColumns.find((column) => column.name == property);
 
-         if(selected)   myObject = { ...myObject, [selected?.name] :student[selected?.name]}
+            if (selected)
+              myObject = {
+                ...myObject,
+                [selected?.name]: student[selected?.name],
+              };
+          }
 
-        }
+          exportedTable.push(myObject);
+        });
 
-        exportedTable.push(myObject)
+        this.exportService.exportFile(fileType, exportedTable, this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'))
       })
 
-      this.exportService.exportFile(fileType, exportedTable, this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'))
     })
 
   }
@@ -278,7 +296,12 @@ export class StudentsReportsComponent implements OnInit {
   }
 
   getSchoolYearsList(){
-    this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
+    this.sharedService.getSchoolYearsList().subscribe((res)=>{
+      this.schoolYearsList = res
+      res.forEach(el => {
+        el.status='Current' ? this.filtration.SchoolYearId=el.id : null
+      })
+    })
   }
 
   formateDate(date :Date)

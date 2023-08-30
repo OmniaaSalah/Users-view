@@ -57,6 +57,8 @@ export class ExportService {
     const doc = new jsPDF('l', 'pt', 'a2')
 
     doc.addFont("/assets/font/amiri/Amiri-Regular.ttf", "Amiri-Regular", "normal");
+    doc.addFileToVFS("/assets/font/amiri/Amiri-Regular.ttf", "Amiri-Regular");
+
     doc.setFont("Amiri-Regular");
 
     autoTable(doc, {
