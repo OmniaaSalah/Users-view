@@ -82,6 +82,8 @@ export class StudentsReportsComponent implements OnInit {
     list: [],
     loading: false
   }
+  isSearching=false
+
   isSchoolSelected = false
   isGradeSelected = false
   talents$ = inject(IndexesService).getIndext(IndexesEnum.TheTypeOfTalentOfTheStudent);
@@ -177,11 +179,13 @@ export class StudentsReportsComponent implements OnInit {
         this.initReportState(res)
         this.isBtnLoading=false;
         this.studentsReport.loading = false
+        this.isSearching = false
 
       }, err => {
         this.studentsReport.loading = false
         this.studentsReport.total = 0
          this.isBtnLoading=false;
+         this.isSearching = false
       })
   }
 
