@@ -141,7 +141,7 @@ export class UnregisterChildComponent implements OnInit {
       this.childForm.patchValue({...response})
 
       let utc = moment.utc(response.birthDate.split('+')[0]).toDate()
-      response.birthDate = moment(utc).local().format('YYYY-MM-DD HH:mm:ss')
+      response.birthDate = moment(utc).local().toDate()
 
       this.childForm.controls['birthDate'].patchValue(response?.birthDate)
       this.childForm.controls.nationlityId.setValue(response?.nationlity?.id)

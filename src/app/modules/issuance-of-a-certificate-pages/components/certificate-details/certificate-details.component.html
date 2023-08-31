@@ -106,7 +106,7 @@
               </table>
           </section>
 
-          <div class="d-flex justify-content-between align-items-center mt-6" >
+          <div class="d-flex align-items-center mt-6 flex-column-reverse flex-md-row gap-5 gap-md-0 justify-content-center justify-content-md-between" >
 
             <div class="">
               <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
@@ -114,7 +114,7 @@
               <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
             </div>
 
-            <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
+            <div class="fs-4 d-flex align-items-center gap-3 gap-lg-0" *ngIf="showQRC">
               <div class="text-start">
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
                 <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -257,7 +257,7 @@
         <div class="col-md-6 fs-2 text-start font-en" dir="ltr">This certificate is valid for one year from the date of issue.</div>
       </div>
 
-      <div class="d-flex justify-content-between align-items-center" >
+      <div class="d-flex  align-items-center flex-column-reverse flex-md-row gap-5 gap-md-0 justify-content-center justify-content-md-between" >
 
         <div class="">
           <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
@@ -265,7 +265,7 @@
           <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
-        <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
+        <div class="fs-4 d-flex align-items-center gap-3 gap-lg-0" *ngIf="showQRC">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -407,14 +407,14 @@
       </div>
 
       <div class="py-6"></div>
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex  align-items-center flex-column-reverse flex-md-row gap-5 gap-md-0 justify-content-center justify-content-md-between">
         <div class="">
           <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
           <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
           <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
-        <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
+        <div class="fs-4 d-flex align-items-center gap-3 gap-lg-0 "  *ngIf="showQRC">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -634,14 +634,14 @@
       <div class="py-4"></div>
 
       <div class="">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center flex-column-reverse flex-md-row gap-5 gap-md-0 justify-content-center justify-content-md-between">
           <div class="">
             <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
             <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span></div>
             <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
           </div>
 
-          <div class="d-flex justify-content-end align-items-center" *ngIf="showQRC">
+          <div class="d-flex justify-content-end align-items-center gap-3 gap-lg-0" *ngIf="showQRC">
             <div class="fs-4 d-flex align-items-center">
               <div class="text-start">
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
@@ -712,14 +712,14 @@
     <div *ngSwitchCase="certificateTypeEnum.BoardCertificate">
       <img class="w-100" [src]="certificate?.Attachments[0] |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">
 
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center flex-column-reverse flex-md-row gap-5 gap-md-0 justify-content-center justify-content-md-between">
         <div class="">
           <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
           <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span></div>
           <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
-        <div class="fs-4 d-flex align-items-center "  *ngIf="showQRC">
+        <div class="fs-4 d-flex align-items-center gap-3 gap-lg-0"  *ngIf="showQRC">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -813,7 +813,7 @@
           </div>
 
 
-            <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
+            <div class="fs-4 d-flex align-items-center gap-3 gap-lg-0" *ngIf="showQRC">
               <div class="text-start">
                 <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
                 <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -1027,14 +1027,14 @@
         <p class="font-en text-start ">The School is Licensed from Sharjah Private Education Authority – Sharjah Government – United Arab Emirates </p>
 
 
-        <div class="d-flex justify-content-between align-items-center mt-6">
+        <div class="d-flex align-items-center mt-6 flex-column-reverse flex-md-row gap-5 gap-md-0 justify-content-center justify-content-md-between">
           <div class="">
             <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
             <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
             <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
           </div>
 
-          <div class="fs-4 d-flex align-items-center"  *ngIf="showQRC">
+          <div class="fs-4 d-flex align-items-center gap-3 gap-lg-0"  *ngIf="showQRC">
             <div class="text-start">
               <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
               <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>
@@ -1291,14 +1291,14 @@
       </div>
 
 
-      <div class="d-flex justify-content-between align-items-center mt-6" >
+      <div class="d-flex align-items-center mt-6 flex-column-reverse flex-md-row gap-5 gap-md-0 justify-content-center justify-content-md-between" >
         <div class="">
           <div class="mb-3">تاريخ تحرير المستند : {{certificate?.CertificateIssuanceDate | LocalizeDate}}</div>
           <div class="mb-5">{{certificate?.CertificateIssuanceDate | LocalizeDate:'d MMMM y': 'en'}} <span class="d-inline-block">: Certificate Issue Date</span> </div>
           <div class="d-flex gap-4"> <span>ختم المدرسه : </span> <img style="width: 8rem;" [src]="certificate?.schoolStampPath |blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'">            </div>
         </div>
 
-        <div class="fs-4 d-flex align-items-center" *ngIf="showQRC">
+        <div class="fs-4 d-flex align-items-center gap-3 gap-lg-0" *ngIf="showQRC">
           <div class="text-start">
             <p class="font-ar">تم استخراج هذه الشهادة الكترونيا  <br> ، للتأكد من صحتها ، يرجى مسح رمز الاستجابة السريعة ( QR-code ) </p>
             <p class="font-en">This Certificate has been electronically extracted . <br> For authenticity, please scan the QR-code</p>

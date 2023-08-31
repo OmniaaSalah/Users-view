@@ -417,11 +417,11 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     let guardianId = this.requestDetails?.guardian?.id
 
     if(this.currentUserScope==this.userScopeEnum.SPEA){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? `${environment.clientUrl}schools-and-students/students/student/${id}` : `${environment.clientUrl}schools-and-students/all-parents/parent/${guardianId}/child/${1050}?registered=false`
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? `${environment.clientUrl}/schools-and-students/students/student/${id}` : `${environment.clientUrl}schools-and-students/all-parents/parent/${guardianId}/child/${1050}?registered=false`
       window.open(url)
 
     }else if(this.currentUserScope==this.userScopeEnum.Employee){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? `${environment.clientUrl}student-management/students/student/${id}` : `${environment.clientUrl}schools-and-students/all-parents/parent/${guardianId}/child/${1050}?registered=false`
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? `${environment.clientUrl}/student-management/students/student/${id}` : `${environment.clientUrl}schools-and-students/all-parents/parent/${guardianId}/child/${1050}?registered=false`
       window.open(url)
     }
   }

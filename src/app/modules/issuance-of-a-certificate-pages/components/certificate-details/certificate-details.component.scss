@@ -139,7 +139,17 @@ table.blue-theme{
 }
 footer{padding-top: 1rem; border-top: 1px solid #999;}
 
+::ng-deep qr-code {
+  @media screen and (max-width:780px) {
+    canvas{
 
+      width: 110px !important;
+      height: 110px !important;
+    }
+  }
+
+
+}
 
 // @media print  {
 //  .print{visibility: hidden;}

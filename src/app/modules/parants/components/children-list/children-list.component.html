@@ -126,7 +126,7 @@
 
                         <div class="profile d-flex align-items-center p-4">
                             <div class="profile__avatar">
-                                <img [src]="child.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+                                <img [src]="child.imagePath | blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
                             </div>
 
                             <div class="profile__info">
@@ -188,7 +188,7 @@
 
                         <div class="profile d-flex align-items-center p-4">
                             <div class="profile__avatar">
-                                <img [src]="child.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+                                <img [src]="child.imagePath | blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
                             </div>
 
                             <div class="profile__info">
@@ -255,7 +255,7 @@
 
                         <div class="profile d-flex align-items-center p-4">
                             <div class="profile__avatar">
-                                <img [src]="student?.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+                                <img [src]="student?.imagePath | blobToBase64 |async" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
                             </div>
 
                             <div class="profile__info">

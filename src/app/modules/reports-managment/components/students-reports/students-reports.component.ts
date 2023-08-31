@@ -21,6 +21,7 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 import { shareReplay } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-students-reports',
@@ -46,7 +47,7 @@ export class StudentsReportsComponent implements OnInit {
   filtration = {
     ...Filtration,
     IsActive:true,
-    SchoolYearId:null,
+    SchoolYearId: this.userService.schoolYearId,
     SchoolId: null,
     CurriculumId: null,
     GradeId: null,
@@ -114,7 +115,8 @@ export class StudentsReportsComponent implements OnInit {
     private studentsService:StudentsService,
     private route:ActivatedRoute,
     private toaster:ToastrService,
-    private router:Router
+    private router:Router,
+    private userService:UserService
   ) {
     this.tableColumns = this.studentsReportService.tabelColumns
   }
@@ -298,9 +300,11 @@ export class StudentsReportsComponent implements OnInit {
   getSchoolYearsList(){
     this.sharedService.getSchoolYearsList().subscribe((res)=>{
       this.schoolYearsList = res
-      res.forEach(el => {
-        el.status='Current' ? this.filtration.SchoolYearId=el.id : null
-      })
+      if(!this.filtration.SchoolYearId){
+        res.forEach(el => {
+          el.status='Current' ? this.filtration.SchoolYearId=el.id : null
+        })
+      }
     })
   }
 
