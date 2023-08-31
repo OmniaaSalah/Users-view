@@ -216,11 +216,9 @@ export class StudentsReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileTypeEnum, table: Table) {
-    this.exportService.showLoader$.next(true)
-    this.studentsReportService.getAllStudents(this.filtration)
-    .subscribe(res=>{
-      this.initReportState(res)
-      if(res.studentDetails.total > 10000) {
+      this.exportService.showLoader$.next(true)
+
+      if(this.studentsReport.total > 100) {
         this.toaster.error('عذرا عدد العناصر المطلوب اصدارها اكبر من الحد المسموح .يرجى تغير معاير البحث لتقليل العناصر إلى اقل من 10 ألاف')
         this.exportService.showLoader$.next(false)
         return
@@ -246,9 +244,6 @@ export class StudentsReportsComponent implements OnInit {
 
         this.exportService.exportFile(fileType, exportedTable, this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'))
       })
-
-    })
-
   }
 
   clearFilter() {
