@@ -32,6 +32,9 @@ export class ForgetPasswordComponent implements OnInit {
   changePasswordFormGrp: FormGroup;
   @Input('openForgetPasswordModel') openForgetModel: boolean;
   @Input('openResetModel') openResetModel: boolean;
+
+  isBtnLoading
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -91,14 +94,17 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   forgetPassword() {
+    this.isBtnLoading = true
     let account;
     if (this.isEmail) {
       account = {
-        userName: this.resetPasswordFormGrp.value.resetPasswordWay,
+        userName:this.resetPasswordFormGrp.value.resetPasswordWay,
       };
     } else {
       account = {
+        guardianAccountWay: 1,
         phoneNumber: this.resetPasswordFormGrp.value.resetPasswordWay,
+        email:''
       };
     }
 
@@ -106,17 +112,12 @@ export class ForgetPasswordComponent implements OnInit {
       (res) => {
         this.step = 2;
         this.tittle = '';
-        this.toastService.success(
-          this.translate.instant('sign up.confirmed successfully')
-        );
+        this.isBtnLoading = false
+        this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
       },
       (err) => {
-        this.toastService.error(
-          err.message ||
-            this.translate.instant(
-              'Request cannot be processed, Please contact support.'
-            )
-        );
+        this.isBtnLoading = false
+        this.toastService.error(err.message ||this.translate.instant('Request cannot be processed, Please contact support.'));
       }
     );
   }
