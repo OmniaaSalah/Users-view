@@ -218,7 +218,7 @@ export class StudentsReportsComponent implements OnInit {
   onExport(fileType: FileTypeEnum, table: Table) {
       this.exportService.showLoader$.next(true)
 
-      if(this.studentsReport.total > 100) {
+      if(this.studentsReport.total > 10000) {
         this.toaster.error('عذرا عدد العناصر المطلوب اصدارها اكبر من الحد المسموح .يرجى تغير معاير البحث لتقليل العناصر إلى اقل من 10 ألاف')
         this.exportService.showLoader$.next(false)
         return
