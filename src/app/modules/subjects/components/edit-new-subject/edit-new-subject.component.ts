@@ -393,15 +393,16 @@ export class EditNewSubjectComponent implements OnInit {
 
     if (this.schoolId) {
       this.gradeId = Number(localStorage.getItem('gradeId'));
-      if (localStorage.getItem('trackId')) {
-        this.trackId = Number(localStorage.getItem('trackId'));
-      }
+      if (localStorage.getItem('trackId'))  this.trackId = Number(localStorage.getItem('trackId'));
+
       if (!this.urlParameter) {
         this.subjectServise
           .addSubjectBySchool({
             schoolId: this.schoolId,
-            gradeId: this.gradeId,
-            trackId: this.trackId,
+            // gradeId: this.gradeId,
+            // trackId: this.trackId,
+            gradeId: 0,
+            trackId: 0,
             subject: this.addedSubject,
           })
           .subscribe(
@@ -431,8 +432,10 @@ export class EditNewSubjectComponent implements OnInit {
         this.subjectServise
           .editSubjectBySchool({
             schoolId: this.schoolId,
-            gradeId: this.gradeId,
-            trackId: this.trackId,
+            // gradeId: this.gradeId,
+            // trackId: this.trackId,
+            gradeId: 0,
+            trackId: 0,
             subject: this.addedSubject,
             speaSubject: this.isSpeaSubject,
           })

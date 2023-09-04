@@ -413,15 +413,15 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
 
   goToChildPage(student){
 
-    let id = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? student?.studentGuid :student?.id
+    let id = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ?  student?.id : student?.studentGuid
     let guardianId = this.requestDetails?.guardian?.id
 
     if(this.currentUserScope==this.userScopeEnum.SPEA){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? `${environment.clientUrl}/schools-and-students/students/student/${id}` : `${environment.clientUrl}/schools-and-students/all-parents/parent/${guardianId}/child/${1050}?registered=false`
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/schools-and-students/all-parents/parent/${guardianId}/child/${id}?registered=false` :  `${environment.clientUrl}/schools-and-students/students/student/${id}`;
       window.open(url)
 
     }else if(this.currentUserScope==this.userScopeEnum.Employee){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Withdrawal ? `${environment.clientUrl}/student-management/students/student/${id}` : `${environment.clientUrl}/student-management/all-parents/parent/${guardianId}/child/${1050}?registered=false`
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/student-management/all-parents/parent/${guardianId}/child/${id}?registered=false` : `${environment.clientUrl}/student-management/students/student/${id}`;
       window.open(url)
     }
   }

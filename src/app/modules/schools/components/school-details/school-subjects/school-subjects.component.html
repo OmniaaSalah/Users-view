@@ -1,7 +1,7 @@
 <div class="row custom-form gx-5 align-items-baseline mb-4">
   <div class="col-md-3">
       <div class="">
-          <label class="label required" for="description">{{'shared.grade'|translate }} </label>
+          <label class="label" for="description">{{'shared.grade'|translate }} </label>
           <p-dropdown
           [options]="(schoolGrades$ | async)?.data"
           [showClear]="true" StopProp

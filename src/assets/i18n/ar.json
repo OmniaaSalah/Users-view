@@ -1151,6 +1151,7 @@
             "studentNickname": "كنية الطالب",
             "studentId": "رقم الطالب ",
             "studentMinisterialId": "رقم الطالب الوزاري",
+            "studentNumberInSchool":"رقم الطالب بالمدرسة",
             "addStudent": "إضافة طالب",
             "addStudentToSection": "إضافة طالب إلى الشعبة",
             "updateStudentTrack":"تعديل مسار الطالب",

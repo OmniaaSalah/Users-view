@@ -130,7 +130,7 @@ export class UsersReportsComponent implements OnInit {
 
   getRolesList(){
     this.userInformation.GetRoleList().subscribe(res=>
-      this.roles = res
+      this.roles = res.filter(el => el.code!='Guardian')
 
     )}
 
