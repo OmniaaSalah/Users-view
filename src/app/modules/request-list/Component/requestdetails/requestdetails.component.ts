@@ -410,7 +410,6 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
 
 
 
-
   goToChildPage(student){
 
     let id = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ?  student?.id : student?.studentGuid
@@ -425,6 +424,7 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
       window.open(url)
     }
   }
+
 
 
    checkDashboardHeader()
