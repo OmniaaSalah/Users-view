@@ -990,6 +990,7 @@
             "studentNickname": "Student nickname",
             "studentId":"Student id",
             "studentMinisterialId": "Student ministerial id",
+            "studentNumberInSchool":"student Number In School",
             "addStudent": "Add student",
             "addStudentToSection": "Add student to division",
             "student": "Student",
