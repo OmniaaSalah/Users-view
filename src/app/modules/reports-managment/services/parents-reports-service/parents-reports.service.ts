@@ -16,7 +16,7 @@ export class ParentsReportsService {
     private tableLoaderService: LoaderService) { }
 
   getAllParents(filter?:Partial<Filter>) {
-    
+
     this.tableLoaderService.isLoading$.next(true)
     return this.http.post('/Guardian/report',filter)
     .pipe(
@@ -29,67 +29,82 @@ export class ParentsReportsService {
   getTableColumns()
   {
     return [
- 
+
       {
         name: this.translate.instant('dashboard.parents.parentName'),
         isSelected: true,
+        sortField: this.lang =='ar'? 'GuardianNameAr': 'GuardianNameEn'
       },
       {
         name:this.translate.instant('dashboard.parents.parentNumber'),
         isSelected: true,
+        sortField:'GuardianMobile'
       },
       {
         name: this.translate.instant('Nationality'),
         isSelected: true,
+        sortField: this.lang =='ar'? 'GuardianNationalityAr': 'GuardianNationalityEn'
       },
       {
         name: this.translate.instant('dashboard.parents.parentEmail'),
         isSelected: true,
+        sortField:'GuardianEmail'
       },
       {
         name:  this.translate.instant('dashboard.parents.relatedType'),
         isSelected: true,
+        sortField: this.lang =='ar'? 'GuardianRelationTypeAr': 'GuardianRelationTypeEn'
       },
-    
+
       {
         name:this.translate.instant('dashboard.schools.student'),
         isSelected: true,
+        sortField: this.lang =='ar'? 'StudentNameAr': 'StudentNameEn'
       },
       {
         name:this.translate.instant('Students nickname'),
         isSelected: false,
+        sortField: this.lang =='ar'? 'StudentSurNameAr': 'StudentSurNameEn'
       },
       {
         name:this.translate.instant('dashboard.students.daleelNumber1'),
         isSelected: false,
+        sortField:'StudentIdInDaleel'
       },
       {
         name:this.translate.instant('dashboard.students.daleelNumber2'),
         isSelected: false,
+        sortField:'StudentId'
       },
       {
         name:this.translate.instant('dashboard.students.manhalNumber'),
         isSelected: false,
+        sortField:'StudentIdInManhl'
       },
       {
         name: this.translate.instant('shared.Identity Number'),
         isSelected: false,
+        sortField:'GuardianEmiratesIdNumber'
       },
       {
         name: this.translate.instant('dashboard.parents.ChildWithoutNationality'),
         isSelected: false,
+        sortField: this.lang =='ar'? 'GuardianReasonForNotHavingEmirratesIdAr': 'GuardianReasonForNotHavingEmirratesIdEn'
       },
       {
         name: this.translate.instant('shared.gender'),
         isSelected: false,
+        sortField:'GuardianGender'
       },
       {
         name: this.translate.instant('shared.state'),
         isSelected: false,
+        sortField:'StudentState'
       },
       {
         name: this.translate.instant('shared.city'),
         isSelected: false,
+        sortField:'StudentCity'
       }
     ];
   }

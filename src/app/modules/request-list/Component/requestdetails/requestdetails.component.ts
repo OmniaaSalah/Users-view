@@ -422,6 +422,9 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     }else if(this.currentUserScope==this.userScopeEnum.Employee){
       let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/student-management/all-parents/parent/${guardianId}/child/${id}?registered=false` : `${environment.clientUrl}/student-management/students/student/${id}`;
       window.open(url)
+    } else if(this.currentUserScope==this.userScopeEnum.Guardian){
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/parent/${guardianId}/child/${id}?registered=false` : `${environment.clientUrl}/parent/${guardianId}/child/${id}?registered=true`;
+      window.open(url)
     }
   }
 

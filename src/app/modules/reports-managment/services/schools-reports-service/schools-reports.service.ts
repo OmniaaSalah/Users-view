@@ -32,53 +32,65 @@ export class SchoolsReportsService {
       {
         name:this.translate.instant('School'),
         isSelected: true,
+        sortField: this.lang =='ar'? 'SchoolArabicName': 'SchoolEnglishName'
       },
       {
         name:this.translate.instant('shared.state'),
         isSelected: true,
+        sortField: this.lang =='ar'? 'StatesEnglishName': 'StatesArabicName'
       },
       {
         name: this.translate.instant('dashboard.schools.TeachersNumbers'),
         isSelected: true,
+        sortField: 'SchoolTeachersCount'
       },
       {
         name:  this.translate.instant('dashboard.schools.StudentsNumbers'),
         isSelected: true,
+        sortField: 'SchoolStudentCount'
       },
       {
         name:this.translate.instant('dashboard.schools.SchoolStudentsPercentge'),
         isSelected: true,
+        sortField: 'SchoolStudentPercentage'
       },
       {
         name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
         isSelected: true,
+        sortField: this.lang =='ar'? 'CurriculumArabicName': 'CurriculumsEnglishName'
       },
       {
         name:this.translate.instant('shared.grade'),
         isSelected: false,
+        sortField: this.lang =='ar'? 'GradeArabicName': 'GradeEnglishName'
       },
       {
         name:this.translate.instant('shared.division'),
         isSelected: false,
+        sortField: this.lang =='ar'? 'DivisionArabicName': 'DivisionEnglishName'
       },
       {
         name:this.translate.instant('dashboard.schools.studentPercentgeInDivision'),
         isSelected: false,
+        sortField:'DivisionStudentCount'
       },
       {
         name:this.translate.instant('dashboard.schools.EnrolledStudentNumbers'),
         isSelected: false,
+        sortField:'WithdrawalStudentCount'
       },
       {
         name:this.translate.instant('dashboard.schools.SpecialClassesNumbers'),
         isSelected: false,
+        sortField:'SpecialClassesCountPerSchool'
       },
       {
         name:this.translate.instant('dashboard.schools.fusionStudentNumbers'),
         isSelected: false,
+        sortField:'SchoolFusionStudentCount  '
       }
-      
-     
+
+
     ];
   }
 
@@ -88,7 +100,7 @@ export class SchoolsReportsService {
     .pipe(
       map(res=>{
         return res.data.map(school =>{
-        
+
           return {
             [this.translate.instant('School')]: school?.schoolName[this.lang],
             [this.translate.instant('shared.state')]: school?.state[this.lang],
@@ -102,7 +114,7 @@ export class SchoolsReportsService {
             [this.translate.instant('dashboard.schools.EnrolledStudentNumbers')]: school?.withdrawalStudentCount,
             [this.translate.instant('dashboard.schools.SpecialClassesNumbers')]: school?.specialClassesCountPerSchool,
             [this.translate.instant('dashboard.schools.fusionStudentNumbers')]: school?.fusionStudentsCountInSchool
-            
+
           }
         })
       }))
