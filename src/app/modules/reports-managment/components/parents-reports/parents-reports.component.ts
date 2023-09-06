@@ -118,12 +118,10 @@ export class ParentsReportsComponent implements OnInit {
 
     onSort(e)
     {
-      if(e.order==-1)
-      {this.filtration.SortBy="update "+e.field;}
-      else
-      {this.filtration.SortBy="old "+e.field;}
+      this.filtration.SortColumnName=e.field
+      if(e.order==1) this.filtration.SortBy= 'Asc'
+      else if(e.order == -1) this.filtration.SortBy= 'Desc'
       this.filtration.Page=1;
-
       this.getParentReportList();
     }
     clearFilter(){

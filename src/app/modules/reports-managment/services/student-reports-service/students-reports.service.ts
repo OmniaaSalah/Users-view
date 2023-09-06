@@ -68,7 +68,7 @@ export class StudentsReportsService {
     {
       name:this.translate.instant('dashboard.students.daleelNumber2'),
       isSelected: true,
-      sortField:'StudentDaleelNumber'
+      sortField:'id'
     },
     {
       name:this.translate.instant('dashboard.students.manhalNumber'),

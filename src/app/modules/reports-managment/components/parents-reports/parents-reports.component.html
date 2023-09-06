@@ -92,7 +92,7 @@
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
-                        <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true" [ngClass]="column==tableColumns[5]?'lg':''">
+                        <th [pSortableColumn]="column.sortField" *ngIf="column.isSelected == true" [ngClass]="column==tableColumns[5]?'lg':''">
 
                             <p-sortIcon field="{{column.name }}"></p-sortIcon>{{column.name }}
                         </th>
