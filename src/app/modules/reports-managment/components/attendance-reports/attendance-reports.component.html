@@ -8,9 +8,9 @@
     <div class="custom-form p-5 " *ngIf="isCollapsed">
 
         <div class="row gx-5 form-set">
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="curriculums$ | async as curriculums">
                 <label class="label" mt-3>{{'dashboard.students.curriculum'| translate}}</label>
-                <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.currclaumId"  optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"  placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
+                <p-multiSelect [options]="curriculums" display="chip" [(ngModel)]="filtration.currclaumId"  optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"  placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
             </div>
 
             <div class="col-md-4">
@@ -59,7 +59,7 @@
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
-                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" 
+                <p-checkbox (onChange)="checkValueOfCheckbox($event,item)"
                     [(ngModel)]="item.isSelected" [binary]="true"></p-checkbox>
 
                 <label class="label label--sm" for=""> {{item.name}} </label>
@@ -74,7 +74,7 @@
 </div>
     <div class="parents">
         <div class="prim-table" *ngIf="(studentsReport.totalAllData|| studentsReport.loading)&& date && shownTable &&!emptyTable">
-            <p-table #dt [value]="studentsReport.list" sortMode="multiple"  [scrollable]="true" (onSort)="onSort($event)">
+            <p-table #dt [value]="studentsReport.list" sortMode="multiple" [lazy]="true"  [scrollable]="true" (onSort)="onSort($event)">
 
                 <ng-template pTemplate="caption">
                     <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" [hasFilter]="false"
@@ -88,7 +88,7 @@
                     <tr>
 
                         <ng-container *ngFor="let column of tableColumns">
-                            <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true" [ngClass]="column==tableColumns[6]?'lg':''">
+                            <th [pSortableColumn]="column.sortField" *ngIf="column.isSelected == true" [ngClass]="column==tableColumns[6]?'lg':''">
                                 <!-- studentsReportsArray -->
                                 <ng-container>{{column.name }}</ng-container>
                                 <p-sortIcon field="{{column.name }}"></p-sortIcon>

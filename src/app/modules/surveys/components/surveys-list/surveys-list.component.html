@@ -29,36 +29,36 @@
 
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="surveyNumber" class="lg">
-                        <p-sortIcon field="surveyNumber"></p-sortIcon>{{'dashboard.surveys.surveyNumber' | translate}}
+                    <th pSortableColumn="SurveyNumber" class="lg">
+                        <p-sortIcon field="SurveyNumber"></p-sortIcon>{{'dashboard.surveys.surveyNumber' | translate}}
                     </th>
 
-                    <th pSortableColumn="title.ar" class="lg">
+                    <th pSortableColumn="{{lang=='ar' ? 'ArabicTitle' : 'EnglishTitle'}}" class="lg">
                         <p-sortIcon field="title.ar"></p-sortIcon>{{'dashboard.surveys.surveyAddress' | translate}}
                     </th>
 
-                    <th pSortableColumn="surveyType" class="md">
+                    <th pSortableColumn="SurveyType" class="md">
                         <p-sortIcon field="surveyType"></p-sortIcon>{{'dashboard.surveys.surveyType' | translate}}
                     </th>
 
-                    <th   pSortableColumn="userName.ar" class="lg"><p-sortIcon  field="userName.ar" >
+                    <th   pSortableColumn="UserName" class="lg"><p-sortIcon  field="userName.ar" >
                         </p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}
                     </th>
 
-                    <th pSortableColumn="targetGuardians" class="min">
+                    <th pSortableColumn="TargetGuardians" class="min">
                         <p-sortIcon field="targetGuardians"></p-sortIcon>{{'dashboard.surveys.targets' | translate}}
                     </th>
 
-                    <th pSortableColumn="responsesTotalNumber" class="min">
+                    <th pSortableColumn=" ResponsesTotalNumber" class="min">
                         <p-sortIcon field="responsesTotalNumber"></p-sortIcon>{{'dashboard.surveys.responses' | translate}}
                     </th>
-                    <th pSortableColumn="surveyStatus" class="md">
+                    <th pSortableColumn="SurveyStatus" class="md">
                         <p-sortIcon field="surveyStatus"></p-sortIcon>{{'dashboard.surveys.surveyStatus' | translate}}
                     </th>
-                    <th  class="actions--lg" pSortableColumn="createdDate"><p-sortIcon  field="createdDate">
+                    <th  class="actions--lg" pSortableColumn="CreatedDate"><p-sortIcon  field="createdDate">
                          </p-sortIcon>{{'shared.Created Date'|translate}}
                     </th>
-                    <th  class="actions--lg" pSortableColumn="disAppearanceDate"><p-sortIcon  field="disAppearanceDate">
+                    <th  class="actions--lg" pSortableColumn="DisAppearanceDate"><p-sortIcon  field="disAppearanceDate">
                     </p-sortIcon>{{'shared.End Date'|translate}}
                     </th>
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions"></th>

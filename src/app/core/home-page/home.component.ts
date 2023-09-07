@@ -163,7 +163,7 @@ export class HomeComponent implements OnInit {
         {label:this.translate.get('sideBar.managerTools.children.Users'), icon:'assets/images/home/system-manager-tools/users.svg',url:'/manager-tools/user-information/users-list',claims:[ClaimsEnum.S_MenuItem_user]},
         {label: this.translate.get('sideBar.managerTools.children.Job Roles'), icon:'assets/images/home/system-manager-tools/user.svg', url:'/manager-tools/user-roles/user-roles-list',claims:[ClaimsEnum.S_MenuItem_Role]},
         {label:this.translate.get('sideBar.managerTools.children.systemSettings'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/manager-tools/settings',claims:[ClaimsEnum.S_MenuItem_Setting]},
-        {label: this.translate.get('sideBar.managerTools.children.System List'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/manager-tools/indexes/indexes-list',claims:[ClaimsEnum.S_MenuItem_Index]},
+        {label: this.translate.get('sideBar.managerTools.children.System List'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/manager-tools/indexes',claims:[ClaimsEnum.S_MenuItem_Index]},
         {label:this.translate.get('breadcrumb.NotificationsSettings'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/performance-managment/notifications/',claims:[ClaimsEnum.S_MenuItem_Setting]},
 
       ]

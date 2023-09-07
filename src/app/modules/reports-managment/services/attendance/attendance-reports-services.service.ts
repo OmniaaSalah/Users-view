@@ -13,69 +13,79 @@ export class AttendanceReportsServicesService {
   lang = inject(TranslationService).lang;
 
   constructor(private translate:TranslateService, private tableLoaderService: LoaderService ,private http: HttpHandlerService) { }
-  tabelColumns = [ 
-   
- 
- 
+  tabelColumns = [
     {
- 
+
       name:this.translate.instant('shared.division'),
       isSelected: true,
+      sortField: this.lang =='ar'? 'DevisionName.name.ar': 'DevisionName.name.en'
     },
     {
-   
+
       name: this.translate.instant('shared.grade'),
       isSelected: true,
+      sortField: this.lang =='ar'? 'GradeName.name.ar': 'GradeName.name.en'
     },
-  
+
     {
       name: this.translate.instant('dashboard.reports.AttendanceNumbers'),
       isSelected: true,
+      sortField:'AttendantCount'
     },
     {
       name: this.translate.instant('dashboard.reports.AbsenceNumbers'),
       isSelected: true,
+      sortField:'AbsenceCount'
     },
     {
       name: this.translate.instant('dashboard.parents.attendancePercentage'),
       isSelected: true,
+      sortField:'AttendantPersentage'
     },
     {
       name: this.translate.instant('dashboard.parents.absencePercentage'),
       isSelected: true,
+      sortField:'AbsencePersentage'
     },
     {
-  
+
       name: this.translate.instant('dashboard.schools.student') ,
       isSelected: false,
+      sortField: this.lang =='ar'? 'StudentName.name.ar': 'StudentName.name.en'
     },
     {
       name: this.translate.instant('shared.Identity Number'),
       isSelected: false,
+      sortField:'EmiratesId'
     },
     {
       name: this.translate.instant('dashboard.parents.ChildWithoutNationality'),
       isSelected: false,
+      sortField: ''
     },
     {
-   
+
       name:this.translate.instant('dashboard.students.daleelNumber1'),
       isSelected: false,
+      sortField:'DaleelId'
     },
     {
-   
+
       name:this.translate.instant('dashboard.students.daleelNumber2'),
       isSelected: false,
+      sortField:'DaleelId'
     },
     {
-     
+
       name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: false,
+      sortField:'ManhalNumber'
     },
     {
-      
+
       name:this.translate.instant('dashboard.parents.parentName'),
       isSelected: false,
+      sortField: this.lang =='ar'? 'GuardianName.name.ar': 'GuardianName.name.en'
     },
   ];
 

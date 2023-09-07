@@ -14,7 +14,7 @@ export class DegreeReportService {
   lang = inject(TranslationService).lang;
   constructor(private translate : TranslateService,private http: HttpHandlerService, private tableLoaderService: LoaderService) {
 
-   
+
    }
    getAllDegrees(filter?){
     this.tableLoaderService.isLoading$.next(true)
@@ -32,121 +32,167 @@ export class DegreeReportService {
     {
       name:this.translate.instant('School'),
       isSelected: true,
+      sortField: this.lang =='ar'? 'SchoolNameAr': 'SchoolNameEn'
+
     },
     {
       name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
       isSelected: true,
+      sortField: this.lang =='ar'? 'CurriculumArabicName': 'CurriculumEnglishName'
+
     },
     {
- 
+
       name:this.translate.instant('shared.division'),
       isSelected: true,
+      sortField: this.lang =='ar'? 'DivisionNameAr': 'DivisionNameEn'
+
     },
     {
-   
+
       name: this.translate.instant('shared.grade'),
       isSelected: true,
+      sortField: this.lang =='ar'? 'GradeNameAr': 'GradeNameEn'
+
     },
     {
       name:this.translate.instant('dashboard.SchoolYear.school year'),
       isSelected: true,
+      sortField: this.lang =='ar'? 'SchoolYearNameAr': 'SchoolYearNameEn'
+
     },
     {
-     
+
       name:this.translate.instant('dashboard.reports.SchoolYearStudentResult'),
       isSelected: true,
+      sortField: 'StudentSchoolYearResult'
+
     },
     {
- 
+
       name:this.translate.instant('dashboard.reports.semester'),
       isSelected: true,
+      sortField: 'Semester'
+
     },
     {
-     
+
       name:this.translate.instant('dashboard.reports.SemesterStudentResult'),
       isSelected: false,
+      sortField: 'Semester_Passed'
+
     },
     {
-      
+
       name:this.translate.instant('dashboard.reports.subjectCount'),
       isSelected: false,
+      sortField: ''
+
     },
     {
-  
+
       name: this.translate.instant('dashboard.schools.student') ,
       isSelected: false,
+      sortField: this.lang =='ar'? 'StudentNameAr': 'StudentNameEn'
+
     },
     {
-   
+
       name:this.translate.instant('dashboard.students.daleelNumber1'),
       isSelected: false,
+      sortField: 'StudentdDaleelId'
+
     },
     {
-   
+
       name:this.translate.instant('dashboard.students.daleelNumber2'),
       isSelected: false,
+      sortField: 'studentId'
+
     },
     {
-     
+
       name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: false,
+      sortField:'StudentManhalId'
     },
     {
-   
+
       name: this.translate.instant('dashboard.reports.successPercentage'),
       isSelected: false,
+      sortField: ''
+
     },
     {
-   
+
       name: this.translate.instant('dashboard.reports.failPercentage'),
       isSelected: false,
+      sortField: ''
+
     },
     {
-   
+
       name:this.translate.instant('dashboard.SchoolYear.Subject'),
       isSelected: false,
+      sortField: this.lang =='ar'? 'SubjecthNameAr': 'SubjecthNameEn'
+
     },
     {
-   
+
       name: this.translate.instant('dashboard.Subjects.Subject Minimum grade'),
       isSelected: false,
+      sortField: 'SubjectMinimumPassingScore'
+
     },
     {
-   
+
       name: this.translate.instant('dashboard.Subjects.Subject Maximum grade'),
       isSelected: false,
+      sortField: 'SubjectMaxPassingScore'
+
     },
     {
-     
+
       name:this.translate.instant('dashboard.reports.StudentDegree'),
       isSelected: false,
+      sortField: 'StudentDegree'
+
     },
     {
-     
+
       name:this.translate.instant('dashboard.reports.SubjectStudentResult'),
       isSelected: false,
+      sortField: 'StudentSubjectPassed '
+
     },
     {
-   
+
       name:this.translate.instant('dashboard.reports.ImprovementType'),
       isSelected: false,
+      sortField: this.lang=='ar' ? 'ImprovementTypeAr' :'ImprovementTypeEn'
+
     },
     {
-   
+
       name: this.translate.instant('dashboard.reports.ImprovementSchoolYear'),
       isSelected: false,
+      sortField: this.lang=='ar' ? 'ImprovementYearAr' :'ImprovementYearEn'
     },
     {
-   
+
       name: this.translate.instant('dashboard.reports.ImprovementDate'),
       isSelected: false,
+      sortField: 'ImprovementDate'
+
     },
     {
-     
+
       name:this.translate.instant('dashboard.reports.ImprovementBy'),
       isSelected: false,
+      sortField: 'ImprovedBy'
+
     }
-   
+
   ];
 }
 

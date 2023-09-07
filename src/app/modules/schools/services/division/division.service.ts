@@ -92,7 +92,7 @@ export class DivisionService {
       map(res=>{
         return res.result.data.map(student =>{
           return {
-            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
+            [this.translate.instant('dashboard.schools.studentId')]: student.id,
             [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student.name),
             [this.translate.instant('dashboard.students.studentNickname')]: getLocalizedValue(student.surname),
             [this.translate.instant('shared.track')]: getLocalizedValue(student.track?.name),
