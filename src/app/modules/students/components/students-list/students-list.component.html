@@ -120,7 +120,7 @@
                     <th style="min-width: 22rem;" pSortableColumn="{{lang=='ar' ? 'ArabicName' : 'EnglishName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicName' : 'EnglishName'}}"></p-sortIcon>{{'dashboard.schools.student'|translate}} </th>
                     <th style="min-width: 16rem;" pSortableColumn="{{lang=='ar' ? 'ArabicSurName' : 'EnglishSurName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicSurName' : 'EnglishSurName'}}"></p-sortIcon>{{'dashboard.students.studentNickname'|translate}}</th>
                     <th pSortableColumn="StudentMinisterialNumber"><p-sortIcon field="StudentMinisterialNumber"></p-sortIcon>{{ ('dashboard.parents.ministerialNumber' |translate)}}</th>
-                    <th pSortableColumn="StudentNumber"><p-sortIcon field="StudentNumber"></p-sortIcon>{{'dashboard.students.daleelNumber1'|translate}}</th>
+                    <th pSortableColumn="StudentDaleelNumber"><p-sortIcon field="StudentDaleelNumber"></p-sortIcon>{{'dashboard.students.daleelNumber1'|translate}}</th>
                     <th style="min-width: 15rem;" pSortableColumn="StudentEmiratesNumber"><p-sortIcon field="StudentEmiratesNumber"></p-sortIcon>{{'shared.Identity Number'|translate}} </th>
                     <th pSortableColumn="{{lang=='ar' ? 'ArabicNationalityName' : 'EnglishNationalityName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicNationalityName' : 'EnglishNationalityName'}}"></p-sortIcon>{{'shared.nationality'|translate}} </th>
                     <th style="min-width: 22rem;" pSortableColumn="{{lang=='ar' ? 'ArabicSchoolName' : 'EnglishSchoolName'}}" *ngIf="currentUserScope!=userScope.Employee"><p-sortIcon field="{{lang=='ar' ? 'ArabicSchoolName' : 'EnglishSchoolName'}}"></p-sortIcon>{{'School'|translate}} </th>

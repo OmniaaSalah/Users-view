@@ -43,7 +43,7 @@ export class EditNewIndexComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('sideBar.managerTools.children.System List'), routerLink: '/manager-tools/indexes/indexes-list',routerLinkActiveOptions:{exact: true} },
+          { label: this.translate.instant('sideBar.managerTools.children.System List'), routerLink: '/manager-tools/indexes',routerLinkActiveOptions:{exact: true} },
           {
 
             label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('dashboard.Indexes.Add Item'):this.translate.instant('dashboard.Indexes.Edit Item'),
@@ -97,7 +97,7 @@ export class EditNewIndexComponent implements OnInit {
        this.indexService.updateIndex(Number(this.urlParameter),this.index).subscribe((res)=>{
         this.isBtnLoading = false;
         this.toastService.success(this.translate.instant('dashboard.Indexes.old index edited Successfully'));
-        this.router.navigate(['/manager-tools/indexes/indexes-list']);
+        this.router.navigate(['/manager-tools/indexes']);
       },(err)=>{this.isBtnLoading = false;this.showErrorMessage();});
     }
     else
@@ -106,7 +106,7 @@ export class EditNewIndexComponent implements OnInit {
       this.indexService.addIndex(this.index).subscribe((res)=>{
           this.isBtnLoading = false;
           this.toastService.success(this.translate.instant('dashboard.Indexes.New index added Successfully'));
-          this.router.navigate(['/manager-tools/indexes/indexes-list']);
+          this.router.navigate(['/manager-tools/indexes']);
         },(err)=>{this.isBtnLoading = false;this.showErrorMessage();});
     }
   }

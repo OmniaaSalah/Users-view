@@ -272,7 +272,7 @@ export class NavbarComponent implements OnInit {
             name: this.translate.get(
               'sideBar.managerTools.children.System List'
             ),
-            url: '/manager-tools/indexes/indexes-list',
+            url: '/manager-tools/indexes',
             claims: [ClaimsEnum.S_MenuItem_Index],
           },
           {

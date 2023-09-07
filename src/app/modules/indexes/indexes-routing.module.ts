@@ -8,7 +8,7 @@ import { Layout } from 'src/app/layout/layout-routing.service';
 const routes: Routes = [
   Layout.childRoutes([
     {
-      path: 'indexes-list',
+      path: '',
       component: IndexesComponent,
       data: {
         RouteKey: RouteEnums.Indexes,

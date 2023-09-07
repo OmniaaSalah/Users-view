@@ -53,7 +53,7 @@ export class IndexesComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink: '/manager-tools/indexes/indexes-list' }],
+          { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink: '/manager-tools/indexes' }],
       }
     );
     this.indexListType=this.sharedService.getIndexesTypes();

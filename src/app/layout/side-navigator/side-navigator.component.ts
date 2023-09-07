@@ -89,7 +89,7 @@ export class SideNavigatorComponent implements OnInit {
         {
           title:'sideBar.managerTools.children.System List',
           key: RouteEnums.Indexes,
-          url:'/manager-tools/indexes/indexes-list',
+          url:'/manager-tools/indexes',
           icon:'assets/images/sideBar/system-manager-tools/list.svg'
         },
         {

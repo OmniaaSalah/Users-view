@@ -23,6 +23,7 @@ import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SettingsService } from '../../../system-setting/services/settings/settings.service';
 import { StudentsService } from '../../services/students/students.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-students-list',
@@ -141,7 +142,8 @@ export class StudentsListComponent implements OnInit {
     private settings:SettingsService,
     private indexService:IndexesService,
     private route:ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private toaster:ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -308,7 +310,15 @@ export class StudentsListComponent implements OnInit {
 
 
   onExport(fileType: FileTypeEnum){
+
     this.exportService.showLoader$.next(true)
+
+    if(this.students.total > 10000) {
+      this.toaster.error('عذرا عدد العناصر المطلوب اصدارها اكبر من الحد المسموح .يرجى تغير معاير البحث لتقليل العناصر إلى اقل من 10 ألاف')
+      this.exportService.showLoader$.next(false)
+      return
+    }
+
     let filter = {...this.filtration, PageSize:this.students.total,Page:1}
     this.studentsService.studentsToExport(filter, this.userService.getSchoolId()).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsList'))

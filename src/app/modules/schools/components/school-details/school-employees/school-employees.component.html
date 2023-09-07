@@ -90,31 +90,31 @@
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
 
-                    <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.schools.employeeId'|translate }}
+                    <th pSortableColumn="EmployeeIdNumber"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.schools.employeeId'|translate }}
 
                     </th>
-                    <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.employeeName'|translate }}
+                    <th pSortableColumn="{{lang=='ar' ? 'ArabicSurname' :'EnglishSurname'}}"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.employeeName'|translate }}
 
                     </th>
                     <th pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.employeeNickname'|translate }}
 
                     </th>
-                    <th style="min-width:8rem" pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'shared.gender'|translate }}
+                    <th style="min-width:8rem" pSortableColumn="Gender"><p-sortIcon ></p-sortIcon>{{'shared.gender'|translate }}
                     </th>
-                    <th pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.jobTitle'|translate }}
-
-                    </th>
-                    <th style="min-width:21rem" pSortableColumn="quantity"><p-sortIcon field="quantity"></p-sortIcon>{{'shared.email'|translate }}
+                    <th pSortableColumn="{{lang=='ar' ? 'NameAr' :'NameEn'}}"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.jobTitle'|translate }}
 
                     </th>
-
-                    <th pSortableColumn="phoneNumber"><p-sortIcon field="phoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate }} </th>
-                    <th pSortableColumn="registedDate"><p-sortIcon field="registedDate"></p-sortIcon>{{'dashboard.parents.registedDate'|translate }} </th>
-
-                    <th pSortableColumn="price"><p-sortIcon field="price"></p-sortIcon>{{'shared.personalId'|translate }}
+                    <th style="min-width:21rem" pSortableColumn="userEmail"><p-sortIcon field="quantity"></p-sortIcon>{{'shared.email'|translate }}
 
                     </th>
-                    <th pSortableColumn="actions"><p-sortIcon field="price"></p-sortIcon>{{'dashboard.schools.employeeStatus'|translate }}</th>
+
+                    <th pSortableColumn="PhoneNumber"><p-sortIcon field="phoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate }} </th>
+                    <th pSortableColumn="RegistrationDate"><p-sortIcon field="registedDate"></p-sortIcon>{{'dashboard.parents.registedDate'|translate }} </th>
+
+                    <th pSortableColumn="EmiratesIdNumber"><p-sortIcon field="price"></p-sortIcon>{{'shared.personalId'|translate }}
+
+                    </th>
+                    <th pSortableColumn="Status"><p-sortIcon field="price"></p-sortIcon>{{'dashboard.schools.employeeStatus'|translate }}</th>
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions" *permit="claimsEnum.SE_U_SchoolEmployee"></th>
                 </tr>
             </ng-template>
