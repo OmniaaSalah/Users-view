@@ -18,13 +18,13 @@ export class AttendanceReportsServicesService {
 
       name:this.translate.instant('shared.division'),
       isSelected: true,
-      sortField: this.lang =='ar'? 'DevisionName.name.ar': 'DevisionName.name.en'
+      sortField: this.lang =='ar'? 'DevisionName.ar': 'DevisionName.en'
     },
     {
 
       name: this.translate.instant('shared.grade'),
       isSelected: true,
-      sortField: this.lang =='ar'? 'GradeName.name.ar': 'GradeName.name.en'
+      sortField: this.lang =='ar'? 'GradeName.ar': 'GradeName.en'
     },
 
     {
@@ -51,7 +51,7 @@ export class AttendanceReportsServicesService {
 
       name: this.translate.instant('dashboard.schools.student') ,
       isSelected: false,
-      sortField: this.lang =='ar'? 'StudentName.name.ar': 'StudentName.name.en'
+      sortField: this.lang =='ar'? 'StudentName.ar': 'StudentName.en'
     },
     {
       name: this.translate.instant('shared.Identity Number'),
@@ -85,7 +85,7 @@ export class AttendanceReportsServicesService {
 
       name:this.translate.instant('dashboard.parents.parentName'),
       isSelected: false,
-      sortField: this.lang =='ar'? 'GuardianName.name.ar': 'GuardianName.name.en'
+      sortField: this.lang =='ar'? 'GuardianName.ar': 'GuardianName.en'
     },
   ];
 

@@ -135,9 +135,9 @@ export class SubjectsReportsComponent implements OnInit {
   }
 
   onSort(e) {
-    console.log(e);
-    if (e.order == 1) this.filtration.SortBy = 'old'
-    else if (e.order == -1) this.filtration.SortBy = 'update'
+    this.filtration.SortColumnName=e.field
+    if(e.order==1) this.filtration.SortBy= 'Asc'
+    else if(e.order == -1) this.filtration.SortBy= 'Desc'
     this.filtration.Page=1;
     this.getSubjects()
   }

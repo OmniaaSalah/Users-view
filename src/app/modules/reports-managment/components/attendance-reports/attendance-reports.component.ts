@@ -142,6 +142,8 @@ export class AttendanceReportsComponent implements OnInit {
   }
 
   onSort(e) {
+    console.log(e);
+
     this.filtration.SortColumnName=e.field
     if(e.order==1) this.filtration.SortBy= 'Asc'
     else if(e.order == -1) this.filtration.SortBy= 'Desc'

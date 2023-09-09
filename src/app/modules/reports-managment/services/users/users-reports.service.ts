@@ -21,25 +21,30 @@ export class UsersReportsService {
 
       name:this.translate.instant('dashboard.schools.employeeName'),
       isSelected: true,
+      sortField: this.lang=='ar' ? 'EmployeeArabicName' :'EmployeeEnglishName'
     },
     {
 
       name:this.translate.instant('dashboard.SystemSetting.Email'),
       isSelected: true,
+      sortField: 'EmployeeEmail'
+
     },
     {
       name:this.translate.instant('dashboard.reports.RequestsNumbers'),
       isSelected: true,
+      sortField: ''
     },
     {
-   
+
       name:this.translate.instant('shared.phoneNumber'),
       isSelected: true,
+      sortField: 'PhoneNumber'
     },
   ];
 
   getAllEmployees(filter) {
-    
+
     this.tableLoaderService.isLoading$.next(true)
     return this.http.post('/Request/employees-report',filter)
     .pipe(

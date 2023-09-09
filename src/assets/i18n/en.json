@@ -2148,7 +2148,11 @@
         "Clear all":"Reset",
         "Generate the report":"Generate the report",
         "Children of female citizens":"Children of female citizens",
-        "non-native":"Non-native"
+        "non-native":"Non-native",
+        "oldSchool":"Old School",
+        "newSchool":"New School",
+        "oldCurriculum":"Old Curriculum",
+        "newCurriculum":"New Curriculum"
     },
     "Notifications": {
         "Receiver":"Receiver",
