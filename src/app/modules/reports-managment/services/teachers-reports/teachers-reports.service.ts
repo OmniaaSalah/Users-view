@@ -19,28 +19,34 @@ export class TeachersReportsService {
       {
         name:this.translate.instant('School'),
         isSelected: true,
+        sortField: this.lang=='ar' ?  'SchoolArabicName': 'SchoolEnglishName'
       },
       {
         name:this.translate.instant('dashboard.SchoolYear.Subject'),
         isSelected: true,
+        sortField:this.lang=='ar' ?  'SubjectArabicName': 'SubjectEnglishName'
       },
       {
         name: this.translate.instant('dashboard.reports.SubjectsTeachersNumbers'),
         isSelected: true,
+        sortField:'TeachersCount'
       },
       {
         name:  this.translate.instant('dashboard.reports.TeacherName'),
         isSelected: true,
+        sortField:this.lang=='ar' ?  'TeccherArabicName': 'TeccherEnglishName'
       },
       {
         name:this.translate.instant('dashboard.reports.TeacherSpeciality'),
         isSelected: true,
+        sortField:''
       },
       {
         name:this.translate.instant('dashboard.reports.TeacherEquiivalent'),
         isSelected: true,
+        sortField:''
       }
-  
+
     ];
   }
 

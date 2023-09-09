@@ -44,106 +44,138 @@ export class TransferedStudentsService {
     {
       name:this.translate.instant('dashboard.students.daleelNumber1'),
       isSelected: true,
+      sortField:'StudentDaleelNumber'
     },
     {
       name:this.translate.instant('dashboard.students.daleelNumber2'),
       isSelected: true,
+      sortField:'id'
     },
     {
       name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: true,
+      sortField:'ManhalNumber'
     },
     {
 
       name: this.translate.instant('dashboard.schools.student') ,
       isSelected: true,
+      sortField: this.lang=='ar' ? 'ArabicName' :'EnglishName'
     },
     {
 
       name: this.translate.instant('Students nickname'),
       isSelected: true,
+      sortField: this.lang=='ar' ? 'ArabicSurName' :'EnglishSurName'
     },
     {
 
       name:this.translate.instant('dashboard.parents.parentName'),
       isSelected: true,
+      sortField: this.lang=='ar' ? 'ArabicGuardianName' :'EnglishGuardianName'
     },
     {
-
-      name: this.translate.instant('School'),
+      name: this.translate.instant('reports.newSchool'),
       isSelected: true,
+      sortField:  this.lang=='ar' ? 'ArabicSchoolName' :'EnglishSchoolName'
+    },
+    {
+      name: this.translate.instant('reports.oldSchool'),
+      isSelected: true,
+      sortField:  this.lang=='ar' ? 'OldSchoolNameAr' :'OldSchoolNameEn'
     },
     {
 
       name: this.translate.instant('shared.grade'),
       isSelected: false,
+      sortField: this.lang=='ar' ? 'ArabicGradeName' :'EnglishGradeName'
     },
     {
 
       name:this.translate.instant('shared.division'),
       isSelected: false,
+      sortField: this.lang=='ar' ? 'ArabicDivisionName' :'EnglishDivisionName'
     },
     {
       name: this.translate.instant('shared.Identity Number'),
       isSelected: false,
+      sortField:'StudentEmiratesNumber'
     },
     {
       name: this.translate.instant('dashboard.parents.ChildWithoutNationality'),
       isSelected: false,
+      sortField: this.lang=='ar' ? 'ReasonForNotHavingEmiratesArabicName' :'ReasonForNotHavingEmiratesEnglishName'
     },
     {
-
-      name: this.translate.instant('dashboard.schools.SchoolCurriculum'),
+      name: this.translate.instant('reports.newCurriculum'),
       isSelected: false,
+      sortField:  this.lang=='ar' ? 'CurriculumAr' :'CurriculumEn'
+    },
+    {
+      name: this.translate.instant('reports.oldCurriculum'),
+      isSelected: false,
+      sortField:  this.lang=='ar' ? 'CurriculumAr' :'CurriculumEn'
     },
     {
 
       name: this.translate.instant('dashboard.parents.registedDate'),
       isSelected: false,
+      sortField:'DateOfAcceptance'
     },
     {
       name: this.translate.instant('sign up.Birthday'),
       isSelected: false,
+      sortField:'BirthDate'
     },
     {
       name: this.translate.instant('shared.age') ,
       isSelected: false,
+      sortField:'BirthDate'
     },
     {
       name: this.translate.instant('shared.status') ,
       isSelected: false,
+      sortField:'StudentStatus'
     },
     {
       name: this.translate.instant('Active') ,
       isSelected: false,
+      sortField:''
     },
     {
       name: this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople'),
       isSelected: false,
+      sortField:'IsSpecialAbilities'
     },
     {
       name: this.translate.instant('dashboard.students.Citizen'),
       isSelected: false,
+      sortField:''
     },
     {
       name: this.translate.instant('shared.gender'),
       isSelected: false,
+      sortField:'Gender'
     },
     {
       name: this.translate.instant('shared.state'),
       isSelected: false,
+      sortField:  'AddressState'
     },
     {
       name: this.translate.instant('shared.city'),
       isSelected: false,
+      sortField: 'AddressCity'
     },
     {
       name: this.translate.instant('Nationality'),
       isSelected: false,
+      sortField: this.lang=='ar' ? 'NationalityCategoryAr' :'NationalityCategoryEn'
     },
     {
       name: this.translate.instant('dashboard.students.StudentCategory'),
       isSelected: false,
+      sortField: 'NationalityCategoryIndexCode'
     }
   ];
   getAllStudents(filter?:Partial<Filter>){

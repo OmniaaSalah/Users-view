@@ -74,7 +74,7 @@
 </div>
     <div class="parents">
         <div class="prim-table" *ngIf="(studentsReport.totalAllData|| studentsReport.loading)&& date && shownTable &&!emptyTable">
-            <p-table #dt [value]="studentsReport.list" sortMode="multiple" [lazy]="true"  [scrollable]="true" (onSort)="onSort($event)">
+            <p-table #dt [value]="studentsReport.list" [lazy]="true"  [scrollable]="true" (onSort)="onSort($event)">
 
                 <ng-template pTemplate="caption">
                     <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" [hasFilter]="false"

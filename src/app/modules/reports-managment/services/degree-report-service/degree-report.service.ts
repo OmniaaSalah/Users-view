@@ -65,7 +65,7 @@ export class DegreeReportService {
 
       name:this.translate.instant('dashboard.reports.SchoolYearStudentResult'),
       isSelected: true,
-      sortField: 'StudentSchoolYearResult'
+      sortField: 'StudentResultStatusPerScoolYear'
 
     },
     {

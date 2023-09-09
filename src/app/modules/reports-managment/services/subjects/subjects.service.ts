@@ -27,38 +27,46 @@ export class SubjectsService {
     {
       name:this.translate.instant('School'),
       isSelected: true,
+      sortField: this.lang=='ar' ?  'SchoolNameAr': 'SchoolNameEn'
     },
     {
       name:this.translate.instant('dashboard.schools.schoolNumber'),
       isSelected: true,
+      sortField:'SchoolNumber'
     },
     {
-     
+
       name:this.translate.instant('shared.state'),
       isSelected: true,
+      sortField:this.lang=='ar' ?  'StateNameAr': 'StateNameEn'
     },
     {
-      
+
       name:this.translate.instant('dashboard.reports.subjectCount'),
       isSelected: true,
+      sortField:'SubjectsCountPerSchool'
     },
     {
       name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
       isSelected: true,
+      sortField:this.lang=='ar' ?  'CurriculumNameAr': 'CurriculumNameEn'
     },
     {
       name:this.translate.instant('shared.grade'),
       isSelected: true,
+      sortField:this.lang=='ar' ?  'GradeNameAr': 'GradeNameEn'
     },
     {
       name:this.translate.instant('shared.division'),
       isSelected: true,
+      sortField:this.lang=='ar' ?  'DivisionNameAr': 'DivisionNameEn'
     },
     {
       name:this.translate.instant('shared.track'),
       isSelected: true,
+      sortField:this.lang=='ar' ?  'TrackNameAr': 'TrackNameEn'
     }
-    
+
   ];
 
   subjectsToExport(filter?:Partial<Filter>)
