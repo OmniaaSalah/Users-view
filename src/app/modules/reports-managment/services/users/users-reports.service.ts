@@ -18,8 +18,12 @@ export class UsersReportsService {
 
   tabelColumns = [
     {
-
       name:this.translate.instant('dashboard.schools.employeeName'),
+      isSelected: true,
+      sortField: this.lang=='ar' ? 'EmployeeArabicName' :'EmployeeEnglishName'
+    },
+    {
+      name:this.translate.instant('School'),
       isSelected: true,
       sortField: this.lang=='ar' ? 'EmployeeArabicName' :'EmployeeEnglishName'
     },

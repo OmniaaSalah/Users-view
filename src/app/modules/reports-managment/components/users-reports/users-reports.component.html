@@ -122,6 +122,7 @@
                 <tr>
 
                     <td>{{e?.employeeName | currentLang}}</td>
+                    <td>{{(e?.school | currentLang) || ('shared.notFound' |translate)}}</td>
                     <td>{{e?.email}}</td>
                     <td>{{e?.requestNumber}}</td>
                     <td>{{e?.phoneNumber}}</td>

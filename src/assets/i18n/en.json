@@ -1299,6 +1299,7 @@
             "relatedStudent":"Related student",
             "emirateUid":"Emirates id",
             "registedDate": "Registed date",
+            "transferDate":"Transfer Date",
             "requiredAttachment":"Required attachment",
             "registerInSchool":"Register child in school",
             "searchForParent":"Search for parent",
