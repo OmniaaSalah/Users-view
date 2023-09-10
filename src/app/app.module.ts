@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +10,7 @@ import { CoreModule } from './core/core.module';
 import { PrimngModule } from './primng/primeNg.module';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './core/strategies/route-reuse.strategy';
-import { TranslateService } from '@ngx-translate/core';
+import { GlobalErrorHandlerService } from './core/services/global-error-handler.service';
 
 
 
@@ -42,7 +42,8 @@ import { TranslateService } from '@ngx-translate/core';
     {
       provide: RouteReuseStrategy,
       useClass: CustomRouteReuseStrategy,
-    }
+    },
+    {provide: ErrorHandler, useClass: GlobalErrorHandlerService}
   ],
   bootstrap: [AppComponent]
 })
