@@ -105,6 +105,15 @@ export abstract class BaseService {
         console.log(e.error instanceof ErrorEvent);
 
         console.log(e.type);
+        console.log(e.message);
+        const chunkFailedMessage = /Loading chunk [\d]+ failed/;
+
+        if (chunkFailedMessage.test(e.message)) {
+          console.log('Relaoding');
+
+          window.location.reload();
+        }
+
         if(e?.error.type != 'abort') {
           switch (e.status) {
             case 0:

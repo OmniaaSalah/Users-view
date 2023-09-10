@@ -198,7 +198,9 @@
     <div class="history" *ngIf="routeListenrService?.routeHistory?.length">
       <hr >
       <ul class="history__list" >
-        <i class="pi pi-history color-primary" style="font-size: 1.5rem;"></i>
+        <!-- <i class="pi pi-history color-primary" style="font-size: 1.5rem;"></i> -->
+        <img [src]="'assets/images/shared/delete-busket.svg'" role="button" style="width: 1.7rem;" alt="clear" (click)="routeListenrService.clearRouteHistory()">
+
         <ng-container *ngFor="let item of routeListenrService?.routeHistory; let i =index; trackBy:item?.url">
           <span [class.d-none]="i==0">|</span>
           <li class="history__list__item">

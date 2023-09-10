@@ -61,7 +61,7 @@
 
     <h3 class="heading heading--tertiary ">{{'dashboard.schools.schoolEmployeeList'|translate }}</h3>
     <div class="prim-table  mt-4" *ngIf="employees.totalAllData || employees.loading">
-        <p-table #dt [value]="employees.list" [lazy]="true" [scrollable]="true">
+        <p-table #dt [value]="employees.list" [lazy]="true" [scrollable]="true" (onSort)="onSort($event)">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption

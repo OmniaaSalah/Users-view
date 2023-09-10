@@ -12,8 +12,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { MessageService } from 'src/app/modules/messages/service/message.service';
-import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
-import { SchoolYearsService } from 'src/app/modules/school-years/service/school-years.service';
+
 interface MenuItem {
   id: number;
   title: string | Observable<any>;

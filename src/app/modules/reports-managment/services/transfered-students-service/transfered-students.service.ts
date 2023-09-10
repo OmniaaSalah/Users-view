@@ -117,10 +117,14 @@ export class TransferedStudentsService {
       sortField:  this.lang=='ar' ? 'CurriculumAr' :'CurriculumEn'
     },
     {
-
       name: this.translate.instant('dashboard.parents.registedDate'),
       isSelected: false,
       sortField:'DateOfAcceptance'
+    },
+    {
+      name: this.translate.instant('dashboard.parents.transferDate'),
+      isSelected: false,
+      sortField:'CreatedDate'
     },
     {
       name: this.translate.instant('sign up.Birthday'),

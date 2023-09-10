@@ -51,7 +51,7 @@ export class AttendanceReportsServicesService {
 
       name: this.translate.instant('dashboard.schools.student') ,
       isSelected: false,
-      sortField: this.lang =='ar'? 'StudentName.ar': 'StudentName.en'
+      sortField: this.lang =='ar'? 'student.name.ar': 'student.name.en'
     },
     {
       name: this.translate.instant('shared.Identity Number'),

@@ -1334,6 +1334,7 @@
           "relatedStudent":"عدد الطلاب المرتبطة بي",
           "emirateUid":"رقم الهوية الإماراتية",
           "registedDate":"تاريخ التسجيل",
+          "transferDate":"تاريخ النقل",
           "requiredAttachment":"المرفقات المطلوبة",
           "registerInSchool":"سجل الإبن فى مدرسة",
           "searchForParent":"بحث عن ولي الأمر",
