@@ -18,7 +18,7 @@
                 <!-- Navigations Options -->
                 <ul class="tabView__nav">
                     <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==2" (click)="step=2; getGradeDetails()" ><span>{{'dashboard.schools.tracks'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==2" (click)="step=2; getGradeDetails()" ><span>{{'dashboard.schools.tracksAndSubjects'| translate}} </span></li>
                     <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeLecture" [class.active]="step==3" (click)="step=3; ngOnDestroy()"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
                     <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeStudents" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.gradeStudents'| translate}} </span></li>
                 </ul>

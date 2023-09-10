@@ -1094,6 +1094,7 @@
           "tracksNumber": "عدد المسارات",
           "sectionsNumber": "عدد الشعب",
           "tracks": "مسارات",
+          "tracksAndSubjects":"المسارات / المواد",
           "sectionName": "مُسمّى الشعبة",
           "gradeName": "مُسمّى الصف ",
           "roomNumber": "رقم الترخيص",

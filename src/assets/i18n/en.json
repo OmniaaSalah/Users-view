@@ -935,6 +935,7 @@
             "sectionsNumber":  "Divisions number",
             "studentNumber": "Student number",
             "tracks": "Tracks",
+            "tracksAndSubjects":"Tracks / Subjects",
             "sectionName":  "Division name",
             "gradeName": "Grade name",
             "roomNumber":  "Tarkhes number",
