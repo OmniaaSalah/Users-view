@@ -93,10 +93,10 @@
                     <th pSortableColumn="EmployeeIdNumber"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.schools.employeeId'|translate }}
 
                     </th>
-                    <th pSortableColumn="{{lang=='ar' ? 'ArabicSurname' :'EnglishSurname'}}"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.employeeName'|translate }}
+                    <th pSortableColumn="{{lang=='ar' ? 'NameAr' :'NameEn'}}"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.employeeName'|translate }}
 
                     </th>
-                    <th pSortableColumn="category"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.employeeNickname'|translate }}
+                    <th pSortableColumn="{{lang=='ar' ? 'ArabicSurname' :'EnglishSurname'}}"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.employeeNickname'|translate }}
 
                     </th>
                     <th style="min-width:8rem" pSortableColumn="Gender"><p-sortIcon ></p-sortIcon>{{'shared.gender'|translate }}
