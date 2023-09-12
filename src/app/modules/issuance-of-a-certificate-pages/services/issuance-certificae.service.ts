@@ -232,7 +232,7 @@ certificateStatusList;
   }
 
   completepaymentProcess(refId,receiptNo,queryParams){
-    return this.http.post(`/Certificate/payment-completed/${refId}/${receiptNo}?tahseelresponce?${queryParams}`)
+    return this.http.post(`/Certificate/payment-completed/${refId}/${receiptNo}?TahseelResponse=${queryParams}`,{},)
     .pipe(
       map(res=>{
         if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(this.lang=='ar' ? res.Ar :res.En)

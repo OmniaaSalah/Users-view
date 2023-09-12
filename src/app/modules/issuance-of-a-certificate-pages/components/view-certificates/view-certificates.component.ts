@@ -123,7 +123,10 @@ export class ViewCertificatesComponent implements OnInit {
    })
   }
   completePaymentProccess(){
-    let queryParams = JSON.stringify(this.route.queryParams)
+
+    let queryParams = this.router.url.split('?')[1]
+    console.log(queryParams);
+
     this.issuance.completepaymentProcess(this.paymentRef.toString(),this.receiptNo.toString(),queryParams)
     .subscribe(()=>{
       this.getAllCertificates()
