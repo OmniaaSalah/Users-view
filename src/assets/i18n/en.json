@@ -2028,6 +2028,7 @@
             "Payed":"Paid",
             "Rejected":"Rejected",
             "Canceled":"Canceled",
+            "PaymentStarted":"Trying Payment ",
             "ModificationRequest":"Update",
             "issueNewCertificate":"Issue new certificate",
             "downloadCertificat":"Download certificate",
@@ -2035,8 +2036,8 @@
             "certificateMinimized":" The certificate file has been reduced by 95% for authentication purposes.",
             "noDegreesForStudent":"There are no accredited grades for this student in the selected academic year.",
             "addNewAccademicYear":"Add New Accademic Year",
-            "issueDate":"Issurance Date"
-
+            "issueDate":"Issurance Date",
+            "RefNum":"Referance Number"
 
         },
         "parentHome":{

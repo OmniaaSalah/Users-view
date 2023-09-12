@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { map, of, take } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CertificateStatusEnum } from 'src/app/shared/enums/certficates/certificate-status.enum';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { DegreesCertificatesEnum } from 'src/app/shared/enums/certficates/degrees-certificates';
@@ -13,6 +14,7 @@ import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-s
   providedIn: 'root'
 })
 export class IssuanceCertificaeService {
+  lang = inject(TranslationService).lang
   allCertificates;
   certificatesList;
 
@@ -229,8 +231,15 @@ certificateStatusList;
     return this.http.post(`/Certificate/payment-link`,obj).pipe(take(1))
   }
 
-  completepaymentProcess(refId,receiptNo){
-    return this.http.post(`/Certificate/payment-completed/${refId}/${receiptNo}`).pipe(take(1))
+  completepaymentProcess(refId,receiptNo,queryParams){
+    return this.http.post(`/Certificate/payment-completed/${refId}/${receiptNo}?tahseelresponce?${queryParams}`)
+    .pipe(
+      map(res=>{
+        if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(this.lang=='ar' ? res.Ar :res.En)
+        else return res
+      }),
+      take(1)
+      )
   }
 
 

@@ -27,7 +27,7 @@ export class ViewCertificatesComponent implements OnInit {
   get certificateStatus() { return CertificateStatusEnum }
   paymentRef = this.route.snapshot.queryParamMap.get('TP_RefNo')
   receiptNo= this.route.snapshot.queryParamMap.get('TP_ReceiptNo')
-  certificatesIds=[];
+  certificatesIds=null;
   guardian={id:'',name:{}}
   allCertificates={
     totalAllData:0,
@@ -57,6 +57,10 @@ export class ViewCertificatesComponent implements OnInit {
     this.issuance.getParentsChild(this.guardian.id).subscribe((res)=>{this.studentList=[...res.students, ...res.studentsWithdrawal]})
   }
 
+  isPendingForPayment(status){
+    let pendingStatus = ['PendingForPayment','PaymentStarted']
+    return !pendingStatus.includes(status)
+  }
 
   getAllCertificates(){
     this.allCertificates.loading = true
@@ -104,7 +108,7 @@ export class ViewCertificatesComponent implements OnInit {
   goToPayment(){
     let obj={
       "guardianId":this.guardian.id,
-      "commonCertificateRequestIds":this.certificatesIds
+      "commonCertificateRequestIds":[this.certificatesIds]
     }
 
    this.issuance.payCertificates(obj).subscribe((res)=>{
@@ -119,10 +123,14 @@ export class ViewCertificatesComponent implements OnInit {
    })
   }
   completePaymentProccess(){
-
-    this.issuance.completepaymentProcess(this.paymentRef.toString(),this.receiptNo.toString()).subscribe(()=>{
+    let queryParams = JSON.stringify(this.route.queryParams)
+    this.issuance.completepaymentProcess(this.paymentRef.toString(),this.receiptNo.toString(),queryParams)
+    .subscribe(()=>{
       this.getAllCertificates()
       this.router.navigate([])
+    },(err:Error) =>{
+      this.toastr.error(err.message || this.translate.instant('toasterMessage.error'));
+
     })
   }
   getSchoolYearsList(){
