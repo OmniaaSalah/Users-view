@@ -72,7 +72,7 @@
                                 <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
                             </td>
                             <td class="actions">
-                                <div class="d-flex justify-content-end gap-4" role="button" (click)="navigateTo(request.id || 1501)" [routerLink]="['details',request.instanceId]">
+                                <div class="d-flex justify-content-end gap-4" role="button" (click)="navigateTo(request.instanceId)" [routerLink]="['details',request.instanceId]">
                                     <span class="color-skyBlue-400">تفاصيل</span>
                                     <img src="assets/images/shared/left-arrow.svg" alt="">
                                 </div>
