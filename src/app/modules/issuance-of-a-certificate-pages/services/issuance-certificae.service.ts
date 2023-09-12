@@ -231,8 +231,8 @@ certificateStatusList;
     return this.http.post(`/Certificate/payment-link`,obj).pipe(take(1))
   }
 
-  completepaymentProcess(refId,receiptNo,queryParams){
-    return this.http.post(`/Certificate/payment-completed/${refId}/${receiptNo}?TahseelResponse=${queryParams}`,{},)
+  completepaymentProcess(refId,receiptNo,body){
+    return this.http.post(`/Certificate/payment-completed/${refId}/${receiptNo}`,body,)
     .pipe(
       map(res=>{
         if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(this.lang=='ar' ? res.Ar :res.En)
