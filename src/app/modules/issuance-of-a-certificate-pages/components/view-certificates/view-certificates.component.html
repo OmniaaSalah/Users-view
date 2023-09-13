@@ -32,7 +32,7 @@
     </ng-container>
 
 
-    <div class="body  radius-15 bg-gray-30 p-5" *ngIf="allCertificates.list.length">
+    <div class="body  radius-15 bg-gray-30 p-4" *ngIf="allCertificates.list.length">
 
         <div class="d-flex justify-content-between mb-5">
             <div class="d-flex align-items-center gap-3">
@@ -41,7 +41,7 @@
             </div>
 
             <div class="buttons d-flex px-5">
-                <button class="btn btn-primary mx-2 mb-5" (click)="goToPayment()" [disabled]="!certificatesIds.length">{{'dashboard.issue of certificate.payment' | translate}}</button>
+                <button class="btn btn-primary mx-2 mb-5" (click)="goToPayment()" [disabled]="!certificatesIds">{{'dashboard.issue of certificate.payment' | translate}}</button>
             </div>
         </div>
 
@@ -53,9 +53,9 @@
         *ngFor="let certificate of allCertificates.list;let i = index">
             <div class="certificates-list d-flex  w-100">
 
-                <div class="user d-flex gap-3 custom-form">
+                <div class="user d-flex gap-2 custom-form">
                     <div class="mx-4 mt-3 " [class.opacity-0]="certificate.status==certificateStatus.Payed">
-                        <p-checkbox   [value]="certificate?.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
+                        <p-checkbox  [trueValue]="certificate?.commonCertificateRequestId" [binary]="true"  [name]="'name'+i" [disabled]="isPendingForPayment | wrapFn : certificate.status"  [(ngModel)]="certificatesIds"></p-checkbox>
                       </div>
                     <div class="elcard-img">
                         <img src="assets/images/shared/User male 2.png" alt="">
@@ -80,6 +80,11 @@
                   <span class="fw-bold fs-4">{{(certificate?.certificateIssuanceDate|LocalizeDate) || '--'}}</span>
               </div>
 
+              <div class="text-center">
+                <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.RefNum' | translate}}</p>
+                <span class="fw-bold fs-4">{{(certificate?.paymentRefNo) || '--'}}</span>
+              </div>
+
                 <div class=" mx-3 text-center">
                     <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.CertificateStatus' | translate}}</p>
                     <div class="fw-bold fs-4">
@@ -87,6 +92,7 @@
                             <div class="alerting dark " *ngSwitchCase="certificateStatus.PendingForApproval"> {{'dashboard.issue of certificate.'+certificateStatus.PendingForApproval| translate}}</div>
                             <div class="alerting dismissible " *ngSwitchCase="certificateStatus.ModificationRequest"> {{'dashboard.issue of certificate.'+certificateStatus.ModificationRequest| translate}}</div>
                             <div class="alerting success " *ngSwitchCase="certificateStatus.PendingForPayment "> {{'dashboard.issue of certificate.'+certificateStatus.PendingForPayment| translate}}</div>
+                            <div class="alerting  success" *ngSwitchCase="certificateStatus.PaymentStarted "> {{'dashboard.issue of certificate.'+certificateStatus.PaymentStarted | translate}}</div>
                             <div class="alerting  primary" *ngSwitchCase="certificateStatus.Payed"> {{'dashboard.issue of certificate.'+certificateStatus.Payed | translate}}</div>
                             <div class="alerting  danger" *ngSwitchCase="certificateStatus.Rejected "> {{'dashboard.issue of certificate.'+certificateStatus.Rejected | translate}}</div>
                             <div class="alerting  dark" *ngSwitchCase="certificateStatus.Canceled "> {{'dashboard.issue of certificate.'+certificateStatus.Canceled | translate}}</div>
@@ -94,6 +100,8 @@
                     </div>
 
                 </div>
+
+
 
 
                 <div class="actions d-flex justify-content-center align-self-center gap-5">

@@ -4,6 +4,7 @@ export enum CertificateStatusEnum{
   PendingForApproval='PendingForApproval',
   PendingForPayment='PendingForPayment',
   Payed='Payed',
+  PaymentStarted='PaymentStarted',
   Rejected='Rejected',
   Canceled='Canceled'
 }
