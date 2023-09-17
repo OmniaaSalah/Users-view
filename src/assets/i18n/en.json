@@ -411,7 +411,8 @@
         "Attendance and Abbsence List is empty":"Attendance and Abbsence list is empty",
         "divisionDegreeHint":"If division official not allowed to enter degrees ,The teacher is responsible to enter them for his subject.",
         "noLectures": "No lectures are defined",
-        "accessDenied":"Sorry . you are not allowed to visit this page"
+        "accessDenied":"Sorry . you are not allowed to visit this page",
+        "noAccadimicYearForStudent":"seem there is no finished School years for this student in the system"
 
     },
 
