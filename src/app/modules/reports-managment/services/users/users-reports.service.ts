@@ -66,6 +66,7 @@ export class UsersReportsService {
         return res.result.employeesPerformance.data.map(employee =>{
           return {
             [this.translate.instant('dashboard.schools.employeeName')]:employee?.employeeName ? employee?.employeeName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('School')]:employee?.school ? employee?.school[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.SystemSetting.Email')]:employee?.email ? employee?.email : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.reports.RequestsNumbers')]:employee?.requestNumber,
             [this.translate.instant('shared.phoneNumber')]: employee?.phoneNumber ? employee?.phoneNumber : this.translate.instant('shared.notFound')
