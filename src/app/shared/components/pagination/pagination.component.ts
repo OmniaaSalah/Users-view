@@ -40,6 +40,16 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.initPaginationState()
   }
 
+  onPageSizeChanged(pageSize){
+    this.paginationState.rows = pageSize
+    this.pagination.rows = pageSize
+    this.paginationState.page = 1
+    this.currentPage =1
+    this.paginationState.first=0
+    this.onPageChange()
+
+  }
+
   initPaginationState(){
     // this.currentPage = 1
     this.currentPage===1 ? this.paginationState.first=0 : this.paginationState.first = this.getFirstIndexInPages(this.currentPage)
@@ -135,6 +145,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
 
   onPageChange(event: paginationState=this.paginationState) {
+console.log(event);
 
     this.paginationState = { ...this.paginationState, ...event ,page:this.paginationState.page} ;
     this.paginationChanged.emit(this.paginationState)

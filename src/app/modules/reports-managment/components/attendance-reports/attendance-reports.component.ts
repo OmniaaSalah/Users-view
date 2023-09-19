@@ -36,7 +36,8 @@ export class AttendanceReportsComponent implements OnInit {
     currclaumId: null,
     gradeId: null,
     divisionId: null,
-    date:null,
+    from:null,
+    to:null,
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   }
   isSchoolSelected = false
@@ -160,10 +161,12 @@ export class AttendanceReportsComponent implements OnInit {
   getAllAbbsenceAndAttendance()
   {
     if(this.date){
-      this.filtration.date=this.formateDate(this.date)
+      this.filtration.from=this.formateDate(this.date[0])
+      this.filtration.to=this.formateDate(this.date[1])
     }
     if(this.filtration.date){
-      this.date= new Date(this.filtration.date)
+      this.date=[new Date(this.filtration.from), new Date(this.filtration.to)]
+
     }
 
 

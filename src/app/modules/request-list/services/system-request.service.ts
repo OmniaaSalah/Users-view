@@ -109,11 +109,19 @@ export class SystemRequestService {
      .pipe( map(res=>{
       return res.data.map(item =>{
           return {
-            [this.translate.instant('dashboard.Requests.requestNumber')]: getLocalizedValue(item?.name),
+            [this.translate.instant('dashboard.Requests.requestNumber')]: item?.requestNumber,
             [this.translate.instant('dashboard.Requests.requestType')]: this.translate.instant('dashboard.Requests.'+item.requestType),
             [this.translate.instant('dashboard.Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
             [this.translate.instant('shared.Created Date')]: item?.createdDate,
             [this.translate.instant('dashboard.Requests.Status')]: this.translate.instant('dashboard.Requests.'+item.requestStatus),
+
+            [this.translate.instant('shared.school')]: getLocalizedValue(item?.school?.name) || this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.curriculum')]: getLocalizedValue(item?.curriculum?.name) || this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.schools.student')]: getLocalizedValue(item?.student?.name) || this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.schools.studentId')]: getLocalizedValue(item?.student?.id) || this.translate.instant('shared.notFound'),
+
+
+            [this.translate.instant('dashboard.myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
             [this.translate.instant('dashboard.myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
 
 
@@ -138,8 +146,10 @@ export class SystemRequestService {
     .pipe( map(res=>{
       return res.data.map(item =>{
         return {
-          [this.translate.instant('dashboard.Requests.requestNumber')]: getLocalizedValue(item?.name),
+          [this.translate.instant('dashboard.Requests.requestNumber')]: item?.requestNumber,
           [this.translate.instant('dashboard.Requests.requestType')]: this.translate.instant('dashboard.Requests.'+item.requestType),
+          [this.translate.instant('shared.school')]: getLocalizedValue(item?.school?.name) || this.translate.instant('shared.notFound'),
+          [this.translate.instant('shared.curriculum')]: getLocalizedValue(item?.curriculum?.name) || this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
           [this.translate.instant('shared.Created Date')]: item?.createdDate,
           [this.translate.instant('dashboard.Requests.Status')]: this.translate.instant('dashboard.Requests.'+item.requestStatus),

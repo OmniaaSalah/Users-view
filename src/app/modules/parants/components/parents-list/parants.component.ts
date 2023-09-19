@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild,inject} from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Component, OnInit,inject} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -7,7 +7,6 @@ import { MenuItem } from 'primeng/api';
 import { Filtration } from 'src/app/core/helpers/filtration';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models';
-import { Filter } from 'src/app/core/models/filter/filter';
 import { Guardian } from 'src/app/core/models/guardian/guardian.model';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -58,6 +57,8 @@ export class ParantsComponent implements OnInit {
   ];
   booleanOptions = inject(SharedService).booleanOptions;
   componentHeaderData: IHeader;
+
+  searchByList=[this.translate.instant('dashboard.addChild.name'), this.translate.instant('dashboard.addChild.Identification Number'), this.translate.instant('shared.phoneNumber'), this.translate.instant('shared.email')]
 
   constructor(
     private exportService: ExportService,

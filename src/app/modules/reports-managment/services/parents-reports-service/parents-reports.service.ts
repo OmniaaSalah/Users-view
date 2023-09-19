@@ -105,6 +105,11 @@ export class ParentsReportsService {
         name: this.translate.instant('shared.city'),
         isSelected: false,
         sortField:'StudentCity'
+      },
+      {
+        name: this.translate.instant('shared.registrationDateAndTime'),
+        isSelected: false,
+        sortField:'StudentRegisterationDate'
       }
     ];
   }
@@ -131,6 +136,7 @@ export class ParentsReportsService {
             [this.translate.instant('shared.gender')]:parent?.parentGender ? this.translate.instant('shared.genderType.'+parent?.parentGender):this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.state')]:parent?.studentState,
             [this.translate.instant('shared.city')]:parent?.studentCity,
+            [this.translate.instant('shared.registrationDateAndTime')]:parent?.studentRegisterationDate,
 
           }
         })
