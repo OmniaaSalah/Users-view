@@ -3,7 +3,7 @@
     <div [ngClass]="template?'col-4':'col-8'" class="caption__filter caption__filter--actions position-relative" *ngIf="hasSearch">
         <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto ">
             <i class="pi pi-search fs-3 "></i>
-            <input class="input" type="text" [formControl]="searchInput" pInputText placeholder="{{'shared.Search...'|translate}}" />
+            <input class="input" type="text" [formControl]="searchInput" pInputText [placeholder]="serachPlacholder" />
           </div>
           <i (click)="searchInput.setValue('')" *ngIf="searchInput.value" class="pi pi-times fs-4 position-absolute"></i>
     </div>

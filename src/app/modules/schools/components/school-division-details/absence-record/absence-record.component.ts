@@ -179,7 +179,7 @@ lastDate
             studentId:el.id,
             name:el.name,
             studentNumber:el.studentNumber,
-            withCause: 0,
+            withCause: null,
             isAbsencent: false,
             cause:null
           }

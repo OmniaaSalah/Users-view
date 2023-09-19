@@ -22,6 +22,11 @@
 }
 
 
+.myInput .input::placeholder {
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
 .caption {
     display: flex;
     align-items: center;

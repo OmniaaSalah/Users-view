@@ -35,8 +35,9 @@
 
     .p-paginator-left-content{
         margin:0;
-        margin-inline-start: auto;
-        display: flex;
+        // margin-inline-start: auto;
+        // display: flex;
+        flex-grow: 1;
         align-items: center;
 
         span{ margin-inline-end: 1.3rem;}
@@ -78,5 +79,10 @@
             }
         }
     }
-    .p-paginator-current{order: -1; color: #9E9E9E; font-size: 1.4rem; margin-inline-end: auto;}
+    .p-paginator-current{
+      order: -1;
+      color: #9E9E9E;
+      font-size: 1.4rem;
+      // margin-inline-end: auto;
+    }
 }

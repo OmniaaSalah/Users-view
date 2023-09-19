@@ -55,6 +55,9 @@ export class SchoolsService {
     return this.http.get('/School/school/name').pipe(take(1))
   }
 
+  getSchoolsCategory(){
+    return this.http.get('/School/classifications-dropdown').pipe(take(1))
+  }
   getOldSchools(){
     return this.http.get('/certificate/academic/school/dropdown').pipe(take(1))
   }

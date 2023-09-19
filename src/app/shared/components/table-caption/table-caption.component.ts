@@ -5,6 +5,7 @@ import { Filtration } from 'src/app/core/helpers/filtration';
 import { FileTypeEnum } from '../../enums/file/file.enum';
 import { SharedService } from '../../services/shared/shared.service';
 import { ExportService } from '../../services/export/export.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table-caption',
@@ -15,12 +16,23 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   loadingFilter: boolean=false;
   showExportLoader$= this.exportService.showLoader$
 
+  serachPlacholder= this.translate.instant('shared.Search...')
+
   @Input() hasFilter:boolean=true
   @Input() hasExport:boolean=true
   @Input() hasSearch:boolean=true
   @Input() set seachKeyword(text){
     this.searchInput.setValue(text)
   }
+  @Input()  set searchByList(list:[]){
+    let prefex =  this.translate.instant('shared.Search...')
+    if(list && list.length ){
+      let searchByListStr = list.join(' , ')
+      this.serachPlacholder = `${prefex} ( ${searchByListStr} )`
+    }
+
+  }
+
   @Input() template :TemplateRef<any>
   @Input('size') small:string;
   @Input() styles ={};
@@ -39,7 +51,10 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
   filterAppliedCount$ = this.sharedService.appliedFilterCount$
 
-  constructor(private sharedService:SharedService, private exportService:ExportService) { }
+  constructor(
+    private sharedService:SharedService,
+    private exportService:ExportService,
+    private translate:TranslateService) { }
 
 
   ngOnInit(): void {

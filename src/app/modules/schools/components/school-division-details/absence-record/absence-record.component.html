@@ -189,18 +189,18 @@
                                <label class="label label--sm" >[ {{student.studentNumber}} ] {{student.name|currentLang}}</label>
                        </div>
                        <div class="col-md-6 d-flex align-items-center gap-5">
-                           <div class="d-flex align-items-center gap-4">
+                           <div class="d-flex align-items-center gap-4" *ngIf="student.isAbsencent">
                                <p-checkbox [name]="'withCause'+i"  [trueValue]="1" [falseValue]="1" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
                                <label class="label label--sm" > {{'dashboard.parents.withCause' | translate}}</label>
                            </div>
 
-                           <div class="d-flex align-items-center gap-4">
+                           <div class="d-flex align-items-center gap-4" *ngIf="student.isAbsencent">
                                <p-checkbox [name]="'withoutCause'+i"  [trueValue]="0" [falseValue]="0" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
                                <label class="label label--sm" > {{'dashboard.parents.withoutCause' | translate}}</label>
                            </div>
                        </div>
 
-                       <div class="my-4" *ngIf="student.withCause">
+                       <div class="my-4" *ngIf="student.withCause && student.isAbsencent">
                            <p-dropdown [options]="absenceReason$ |async" [(ngModel)]="student.cause" [required]="true" [name]="'cause'+i" optionLabel="{{lang=='ar' ?'name.ar':'name.en'}}" optionValue="id" placeholder="{{'dashboard.parents.chooseAbsenceCause'|translate}}"></p-dropdown>
                        </div>
 

@@ -37,14 +37,18 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   // cities = this.CountriesService.cities
   cities$ = this.CountriesService.getCities()
   states$ = this.CountriesService.getAllStates()
+  schoolCategory$ = this.schoolsService.getSchoolsCategory()
 
-
+  searchByList=[this.translate.instant('shared.city'), this.translate.instant('dashboard.SystemSetting.Email')]
   get StatusEnum() { return StatusEnum }
   filtration :Filter = {
     ...Filtration, Status: null,
     CityId:null,
     curriculumId:null,
     StateId: null,
+    schoolName:'',
+    schoolCategoryId :[],
+    schoolNumber:null,
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   }
   paginationState= {...paginationInitialState}

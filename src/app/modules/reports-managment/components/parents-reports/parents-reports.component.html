@@ -151,6 +151,9 @@
                         <td *ngIf="tableColumns[14].isSelected == true">
                             {{parent?.studentCity || ('shared.notFound' | translate)}}
                         </td>
+                        <td *ngIf="tableColumns[15].isSelected == true">
+                          {{(parent?.studentRegisterationDate | toLocalDate:'YYYY-MM-DD HH:mm' |LocalizeDate:'d MMMM y hh:mm a') || ('shared.notFound' | translate)}}
+                      </td>
 
 
                     </ng-container>

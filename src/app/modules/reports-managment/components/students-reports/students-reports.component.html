@@ -240,7 +240,7 @@
                             {{student?.birthDate | LocalizeDate}}
                         </td>
                         <td *ngIf="tableColumns[14].isSelected == true">
-                            {{student?.age | LocalizeDate}}
+                            {{student?.age}}
                         </td>
                         <td *ngIf="tableColumns[15].isSelected == true">
                            <span *ngIf="student?.registrationStatus">{{'shared.allStatus.'+student?.registrationStatus|translate}}</span>
