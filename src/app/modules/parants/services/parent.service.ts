@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, finalize, map, Observable, of, take } from 'rxjs';
+import { finalize, map, Observable, take } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Guardian } from 'src/app/core/models/guardian/guardian.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,6 @@ export class ParentService {
 
   constructor(private http: HttpHandlerService,
     private translate:TranslateService,
-    private sharedService:SharedService,
     private tableLoaderService: LoaderService) {
 
    }
@@ -87,7 +86,13 @@ export class ParentService {
   }
 
   deleteChild(id){
-    return this.http.delete(`/Child`,{},{id}).pipe(take(1))
+    return this.http.delete(`/Child`,{},{id})
+    .pipe(
+      map(res=>{
+        if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res.errorLocalized))
+        else return res
+      }),
+      take(1))
   }
 
   sendRegisterRequest(childData){

@@ -453,9 +453,10 @@
         <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Approved" -->
         <div class="d-flex justify-content-end mt-3 gap-3" >
             <ng-container *ngIf="requestOptions" >
+
                 <button
                 *ngFor="let option of requestOptions;let i=index"
-                [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned' || option?.label?.en=='return for correction') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest"
+                [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned' || option?.label?.en=='return for correction') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest && userScopeEnum=='Guardian'"
                 [disabled]="option.isLoading"
                 [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
                 (click)="onActionTaken(option,i)"
