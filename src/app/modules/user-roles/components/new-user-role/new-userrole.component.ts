@@ -270,19 +270,17 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
         .subscribe((res) => {
             this.isBtnLoading = false;
 
-            // if (res.statusCode != 'OK') {
-            //   this.toastService.error(res.errorLocalized[this.lang]);
-            // } else {
-            // }
-            this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
-            this.router.navigate(['/manager-tools/user-roles/user-roles-list',]);
+            if (res.statusCode != 'OK') {
+              this.toastService.error(res.errorLocalized[this.lang] || this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+            } else {
+              this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
+              this.router.navigate(['/manager-tools/user-roles/user-roles-list',]);
+            }
           },
           (err) => {
             this.isBtnLoading = false;
             this.toastService.error(
-              this.translate.instant(
-                'dashboard.AnnualHoliday.error,please try again'
-              )
+              this.translate.instant('dashboard.AnnualHoliday.error,please try again')
             );
           }
         );

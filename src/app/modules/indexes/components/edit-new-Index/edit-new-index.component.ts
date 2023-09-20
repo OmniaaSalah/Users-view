@@ -24,6 +24,7 @@ export class EditNewIndexComponent implements OnInit {
   indexListType;
   urlParameter: string = '';
   indexFormGrp: FormGroup;
+
   constructor(
     private sharedService: SharedService,
     private fb: FormBuilder,
@@ -164,17 +165,18 @@ export class EditNewIndexComponent implements OnInit {
   }
 
   bindOldIndex(index) {
-    index.indexStatus =
-      index.indexStatus == StatusEnum.Active
-        ? this.checkedStatus
-        : this.notCheckedStatus;
-
+    index.indexStatus = index.indexStatus == StatusEnum.Active ? this.checkedStatus: this.notCheckedStatus;
     this.indexFormGrp.patchValue({
       arabicIndexName: index.indexName.ar,
       englishIndexName: index.indexName.en,
       indexType: index.indexType,
       indexStatus: index.indexStatus,
     });
+
+    if(index.isPreDefined){
+      this.arabicIndexName.disable()
+      this.englishIndexName.disable()
+    }
   }
 
   back(){
