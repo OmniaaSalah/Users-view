@@ -8,9 +8,13 @@
                 <app-table-caption [seachKeyword]="filtration.KeyWord" [searchByList]="searchByList" (onExport)="onExport($event)" (onFilter)="checkParentList()"    (onSearch)="filtration.KeyWord = $event;filtration.page=1; checkParentList();" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="currentUserScope =='SPEA'">
                             <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
                             <p-multiSelect [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip"[(ngModel)]="filtration.NationalityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
+                        </div>
+                        <div class="col-md-3" *ngIf="currentUserScope =='Employee'">
+                          <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
+                          <p-dropdown [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip"[(ngModel)]="filtration.NationalityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
                         </div>
                         <div class="col-md-3">
                             <label class="label">{{'dashboard.parents.HaveChildreen'| translate}}</label>
