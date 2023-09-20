@@ -1916,7 +1916,9 @@
           "New index added Successfully":"تم إنشاء فهرس جديد بنجاح",
           "old index edited Successfully": "تم تعديل الفهرس بنجاح",
           "Select Index Status": "أختر حالة العنصر",
-          "You should enter Valid Data First": "لابد أن تدخل المعلومات بشكل صحيح أولاً"
+          "You should enter Valid Data First": "لابد أن تدخل المعلومات بشكل صحيح أولاً",
+          "indexNotEditable":"يرجى العلم ان هذا الفهرس أنشأَ من قبل النظام وغير مسموح بالتعديل عليه"
+
       },
       "Messages": {
           "messages": "المحادثات",

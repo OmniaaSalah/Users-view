@@ -1654,7 +1654,8 @@
             "New index added Successfully":"New index added successfully",
             "old index edited Successfully": "Old index edited successfully",
             "Select Index Status": "Select index status",
-            "You should enter Valid Data First": "You should enter valid data first"
+            "You should enter Valid Data First": "You should enter valid data first",
+            "indexNotEditable":"Please not that this endex was created by the system so you will not able to edit it"
         },
         "students": {
             "CitizenStudentNumbers":"Citizen student numbers",
