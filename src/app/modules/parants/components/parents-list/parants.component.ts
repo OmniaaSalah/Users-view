@@ -163,7 +163,7 @@ export class ParantsComponent implements OnInit {
     this.exportService.showLoader$.next(true);
     let filter = {
       ...this.filtration,
-      PageSize: this.parent.totalAllData,
+      PageSize: this.parent.total,
       Page: 1,
     };
     this.parentService.parentsToExport(filter).subscribe((res: Guardian[]) => {

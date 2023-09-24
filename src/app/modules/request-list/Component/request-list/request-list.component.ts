@@ -17,7 +17,6 @@ import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ArrayOperations } from 'src/app/core/helpers/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import moment from 'moment';
 
 
 @Component({
