@@ -293,7 +293,7 @@ export class StudentsListComponent implements OnInit {
     this.filtration.SchoolId= null
     this.filtration.curriculumId= null
     this.filtration.GradeId= null
-    this.filtration.DivisionId =''
+    this.filtration.DivisionId =null
     this.filtration.TrackId = null
     this.filtration.NationalityId= null
     this.filtration.IsChildOfAMartyr = null
