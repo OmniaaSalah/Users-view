@@ -6,9 +6,9 @@ import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { ChildrenListComponent } from './components/children-list/children-list.component';
 import { ChildDetailsComponent } from './components/child-details/child-details.component';
 import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';
-import { DashboardSharedModule } from '../shared/dashboard-shared.module';
 import { ParentService } from './services/parent.service';
 import { ChildRequestsComponent } from './components/unregister-child/child-requests/child-requests.component';
+import { FeaturesSharedModule } from '../shared/Features-shared.module';
 
 
 
@@ -24,7 +24,7 @@ import { ChildRequestsComponent } from './components/unregister-child/child-requ
     ParentsRoutingModule,
     SharedModule,
     PrimngModule,
-    DashboardSharedModule
+    FeaturesSharedModule
   ],
   providers: [ParentService]
 })

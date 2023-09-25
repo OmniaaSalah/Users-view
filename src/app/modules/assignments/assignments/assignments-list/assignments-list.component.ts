@@ -36,6 +36,7 @@ export class AssignmentsListComponent implements OnInit {
   paginationState: paginationState = { ...paginationInitialState }
   filtration = {
     ...Filtration,
+    schoolId: '',
     Status: '',
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   };
@@ -76,7 +77,11 @@ export class AssignmentsListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userService.currentUserSchoolId$.subscribe(id => {this.schoolId=id;this.getAssignmentList()});
+    this.userService.currentUserSchoolId$.subscribe(id => {
+      this.schoolId=id;
+      this.filtration.schoolId =id
+      this.getAssignmentList()
+    });
 
    this.checkDashboardHeader();
     this.examStatusList=this.assignmentservice.examStatusList;
@@ -129,7 +134,7 @@ export class AssignmentsListComponent implements OnInit {
 
    onExport(fileType: FileTypeEnum){
     this.exportService.showLoader$.next(true)
-    let filter = {...this.filtration,PageSize:this.assignments.totalAllData,Page:1}
+    let filter = {...this.filtration,PageSize:this.assignments.total,Page:1}
     this.assignmentservice.assignmentsToExport(filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('Assignments List'))
     })

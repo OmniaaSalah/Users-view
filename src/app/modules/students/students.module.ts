@@ -8,9 +8,9 @@ import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
-import { DashboardSharedModule } from '../shared/dashboard-shared.module';
 import { ManualCertificatesComponent } from './components/manual-certificates/manual-certificates.component';
 import { IssuanceCertificateModule } from '../issuance-of-a-certificate-pages/issue-certificate.module';
+import { FeaturesSharedModule } from '../shared/Features-shared.module';
 
 
 
@@ -29,7 +29,7 @@ import { IssuanceCertificateModule } from '../issuance-of-a-certificate-pages/is
     StudentsRoutingModule,
     PrimngModule,
     SharedModule,
-    DashboardSharedModule,
+    FeaturesSharedModule,
     IssuanceCertificateModule
   ]
 })

@@ -116,6 +116,7 @@ export class SchoolSubjectsComponent implements OnInit {
       this.getTracks();
       this.getSubjects();
     }
+
   }
 
   getSubjects() {

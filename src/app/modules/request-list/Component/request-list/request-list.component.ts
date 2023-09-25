@@ -43,7 +43,7 @@ export class RequestListComponent implements OnInit {
       ...Filtration,
        SortColumnName:'createdDate',
        SortBy: 'Desc',
-       RequestStatus: [UserRequestsStatus.Pending, UserRequestsStatus.TentativelyAccepted,UserRequestsStatus.ModificationRequest],
+       RequestStatus: [[UserRequestsStatus.Pending, UserRequestsStatus.TentativelyAccepted ] , [UserRequestsStatus.TentativelyAccepted,UserRequestsStatus.Pending], UserRequestsStatus.ModificationRequest],
        RequestType:null,
        ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
       };

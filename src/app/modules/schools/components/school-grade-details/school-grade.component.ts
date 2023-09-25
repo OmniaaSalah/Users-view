@@ -4,12 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { GradesService } from '../../services/grade/grade.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { GradeTrack, SchoolGrade, SchoolSubject } from 'src/app/core/models/schools/school.model';
+import { SchoolGrade, SchoolSubject } from 'src/app/core/models/schools/school.model';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import { SchoolsService } from '../../services/schools/schools.service';
@@ -22,7 +21,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 @Component({
   selector: 'app-school-class',
   templateUrl: './school-grade.component.html',
-  styleUrls: ['./school-grade.component.scss']
+  styleUrls: ['./school-grade.component.scss'],
 })
 export class SchoolGradeComponent implements OnInit, OnDestroy {
   faPlus=faPlus
