@@ -17,6 +17,7 @@ import { StudentProhibitedStatusComponent } from './components/register-child/st
 import { StudentOperationsDropdownComponent } from './components/register-child/student-operations-dropdown/student-operations-dropdown.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EditHistoryComponent } from './components/register-child/edit-history/edit-history.component';
+import { SpeaSubjectsComponent } from 'src/app/shared/components/spea-subjects/spea-subjects.component';
 
 
 
@@ -39,13 +40,16 @@ import { EditHistoryComponent } from './components/register-child/edit-history/e
     PaymentsComponent,
     StudentProhibitedStatusComponent,
     StudentOperationsDropdownComponent,
-    EditHistoryComponent
+    EditHistoryComponent,
+    SpeaSubjectsComponent,
+
   ],
   imports: [
     CommonModule,
     PrimngModule,
     SharedModule,
   ],
-  exports:[RegisterChildComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent]
+  exports:[RegisterChildComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent,SpeaSubjectsComponent,
+  ]
 })
-export class DashboardSharedModule { }
+export class FeaturesSharedModule { }

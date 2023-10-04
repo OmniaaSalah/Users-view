@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -25,6 +25,7 @@ import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
   styleUrls: ['./degrees.component.scss']
 })
 export class DegreesComponent implements OnInit {
+  @Input() gradeId=null
   @Output() onStepChanged = new EventEmitter();
   get fileTypesEnum () {return FileTypeEnum}
 

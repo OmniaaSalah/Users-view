@@ -200,7 +200,7 @@
                                 </ng-container>
                                 <app-informative-block *ngIf="!divisionTeachers?.subjectsTeachers.length" subTitle="{{'emptyList.Subject List is Empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 
-
+                                <app-spea-subjects [gradeId]="gradeId"></app-spea-subjects>
 
                             </ng-container>
 
@@ -219,6 +219,8 @@
                                 </div>
 
                                 <app-calender [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
+
+                                <app-spea-subjects [gradeId]="gradeId"></app-spea-subjects>
                               </ng-container>
 
 

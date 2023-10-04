@@ -11,6 +11,7 @@ import { SchoolDivisionComponent } from './school-division.component';
 import { StudentsRateComponent } from './students-rate/students-rate.component';
 import { SubjectDegreesComponent } from './subject-degrees/subject-degrees.component';
 import { DivisionSubjectsComponent } from './division-subjects/division-subjects.component';
+import { FeaturesSharedModule } from 'src/app/modules/shared/features-shared.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { DivisionSubjectsComponent } from './division-subjects/division-subjects
     CommonModule,
     SchoolDivisionRoutingModule,
     SharedModule,
-    PrimngModule
+    PrimngModule,
+    FeaturesSharedModule
   ],
   entryComponents:[SubjectDegreesComponent]
 })

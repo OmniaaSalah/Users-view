@@ -7,7 +7,7 @@ import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsRoutingModule } from './schools-routing.module';
 import { TransferGroupComponent } from './components/transfer-group/transfer-group.component';
-import { DashboardSharedModule } from '../shared/dashboard-shared.module';
+import { FeaturesSharedModule } from '../shared/features-shared.module';
 import { ChartModule } from 'primeng/chart';
 import {PanelModule} from 'primeng/panel';
 import {CardModule} from 'primeng/card';
@@ -45,7 +45,7 @@ import { SchoolLocationComponent } from './components/school-details/school-loca
     ChartModule,
     PanelModule,
     CardModule,
-    DashboardSharedModule,
+    FeaturesSharedModule,
     NgChartsModule,
     QrCodeModule
   ]
