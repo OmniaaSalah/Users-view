@@ -1,6 +1,6 @@
 import { Injectable ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
@@ -182,7 +182,7 @@ export class TransferedStudentsService {
       sortField: 'NationalityCategoryIndexCode'
     }
   ];
-  getAllStudents(filter?:Partial<Filter>){
+  getAllStudents(filter?:Partial<SearchModel>){
     this.tableLoaderService.isLoading$.next(true)
 
     return this.http.post(`/Student/transfered-student-report`,filter)
@@ -193,7 +193,7 @@ export class TransferedStudentsService {
       }))
   }
 
-  studentsToExport(filter?:Partial<Filter>)
+  studentsToExport(filter?:Partial<SearchModel>)
   {
     return this.http.post(`/Student/transfered-student-report`,filter)
     .pipe(

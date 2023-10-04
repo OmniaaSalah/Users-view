@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize, map, Observable, take } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Guardian } from 'src/app/core/models/guardian/guardian.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
@@ -21,11 +22,12 @@ export class ParentService {
   constructor(private http: HttpHandlerService,
     private translate:TranslateService,
     private userService:UserService,
+    private router: Router,
     private tableLoaderService: LoaderService) {
 
    }
 
-  getAllParents(filter?:Partial<Filter>):Observable<GenericResponse<Guardian[]>> {
+  getAllParents(filter?:Partial<SearchModel>):Observable<GenericResponse<Guardian[]>> {
     this.tableLoaderService.isLoading$.next(true)
     return this.http.post('/Guardian/Search',filter)
     .pipe(
@@ -63,7 +65,7 @@ export class ParentService {
       )
   }
 
-  getAllParentsInSpecificSchool(schoolId,filter?:Partial<Filter>) {
+  getAllParentsInSpecificSchool(schoolId,filter?:Partial<SearchModel>) {
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/Guardian/gurdians/${schoolId}`,filter)
     .pipe(
@@ -85,7 +87,15 @@ export class ParentService {
     return this.http.get(`/Student/students/${parentId}/${schoolId}`).pipe(take(1));
   }
   getChild(id:number): Observable<any>{
-    return this.http.get(`/Child/${id}`).pipe(take(1));
+    return this.http.get(`/Child/${id}`)
+    .pipe(
+      map(res=>{
+        if(res.statusCode==HttpStatusCodeEnum.NotFound) {
+          this.router.navigate(['/oops/page-not-allowed'])
+        }
+        else return res
+      }),
+      take(1));
   }
 
   updateChild(id, childData): Observable<any>{

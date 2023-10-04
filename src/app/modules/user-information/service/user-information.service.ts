@@ -95,6 +95,10 @@ usersToExport(filter){
 
 
   deleteUser(userId){
-    return this.http.delete(`/Guardian/delete-guardian/${userId}`).pipe(take(1))
+    return this.http.delete(`/Account/delete-spea-acount/${userId}`).pipe(take(1))
   }
+
+  // deleteUser(userId){
+  //   return this.http.delete(`/Guardian/delete-guardian/${userId}`).pipe(take(1))
+  // }
 }

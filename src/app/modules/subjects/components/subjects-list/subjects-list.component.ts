@@ -6,7 +6,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { SubjectService } from '../../service/subject.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { Table } from 'primeng/table';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -33,7 +33,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   deletedSubject;
   subscription: Subscription;
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     evaluation: null,
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null'),
   };
@@ -169,6 +169,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getAllSubjects();
   }
   ngOnDestroy(): void {

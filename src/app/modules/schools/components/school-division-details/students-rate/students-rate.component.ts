@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { DivisionService } from '../../../services/division/division.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
@@ -25,7 +25,7 @@ export class StudentsRateComponent implements OnInit {
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 
-  filtration:Filter = {...Filtration}
+  filtration:SearchModel = {...BaseSearchModel}
   paginationState= {...paginationInitialState}
 
   studentRateInput = new FormControl()
@@ -117,6 +117,7 @@ export class StudentsRateComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getStudentsRate();
 
   }

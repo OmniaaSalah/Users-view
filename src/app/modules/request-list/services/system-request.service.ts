@@ -1,7 +1,7 @@
 import { of, finalize, take, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
@@ -25,7 +25,7 @@ export class SystemRequestService {
 
   getStatusOptions(){
     return [
-      {name:this.translate.instant('dashboard.Requests.Pending'), value: [UserRequestsStatus.Pending, UserRequestsStatus.TentativelyAccepted,]},
+      {name:this.translate.instant('dashboard.Requests.Pending'), value: UserRequestsStatus.Pending},
       {name:this.translate.instant('dashboard.Requests.Returned'), value: UserRequestsStatus.ModificationRequest},
       {name:this.translate.instant('dashboard.Requests.Accepted'), value:[ UserRequestsStatus.Accepted,  UserRequestsStatus.Approved]},
       {name:this.translate.instant('dashboard.Requests._TentativelyAccepted'), value: [UserRequestsStatus.TentativelyAccepted,UserRequestsStatus.Pending]},
@@ -80,7 +80,7 @@ export class SystemRequestService {
     }
   }
 
-  getUserRequests(filter?:Filter){
+  getUserRequests(filter?:SearchModel){
   //  return of(this.requestArray)
   this.tableLoaderService.isLoading$.next(true)
    return this.http.post(`/Student/user-requests`,filter)
@@ -91,7 +91,7 @@ export class SystemRequestService {
     }))
   }
 
-  getChildRequests(childId, filter?:Filter ){
+  getChildRequests(childId, filter?:SearchModel ){
     //  return of(this.requestArray)
     this.tableLoaderService.isLoading$.next(true)
      return this.http.get(`/Child/child-requests-list/${childId}`,filter)
@@ -102,7 +102,7 @@ export class SystemRequestService {
       }))
     }
 
-  userRequestsToExport(filter?:Filter){
+  userRequestsToExport(filter?:SearchModel){
     //  return of(this.requestArray)
     this.tableLoaderService.isLoading$.next(true)
      return this.http.post(`/Student/user-requests`,filter)

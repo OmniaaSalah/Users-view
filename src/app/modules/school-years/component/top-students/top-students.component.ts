@@ -1,6 +1,6 @@
 import { Component, OnInit,Input,inject } from '@angular/core';
 import { ArrayOperations } from 'src/app/core/helpers/array';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
@@ -21,7 +21,7 @@ export class TopStudentsComponent implements OnInit {
   lang = inject(TranslationService).lang
   gradesList=[];
   curriculumClassList=[];
-  filtration = {...Filtration,GradeId:null,CurriculumId:null,NationlaityId:null};
+  filtration = {...BaseSearchModel,GradeId:null,CurriculumId:null,NationlaityId:null};
   paginationState= {...paginationInitialState};
   allTopStudentsList={
     total:0,
@@ -86,6 +86,7 @@ export class TopStudentsComponent implements OnInit {
 
  paginationChanged(event: paginationState) {
    this.filtration.Page = event.page;
+   this.filtration.PageSize = event.rows
    this.getAllTopStudents();
 
  }

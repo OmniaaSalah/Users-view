@@ -8,7 +8,7 @@ import { Component, OnInit,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -35,7 +35,7 @@ export class AssignmentsListComponent implements OnInit {
   get claimsEnum () {return ClaimsEnum}
   paginationState: paginationState = { ...paginationInitialState }
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     schoolId: '',
     Status: '',
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
@@ -143,7 +143,7 @@ export class AssignmentsListComponent implements OnInit {
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
-     console.log(event.page)
+     this.filtration.PageSize = event.rows
      this.getAssignmentList()
 
    }

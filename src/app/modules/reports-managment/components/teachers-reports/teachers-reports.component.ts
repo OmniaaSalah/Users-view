@@ -1,7 +1,7 @@
 import { Component, OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -27,7 +27,7 @@ export class TeachersReportsComponent implements OnInit {
   subjects$ = inject(SubjectService).getAllSubjectsWithoutDuplicated()
 
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     schoolIds:[],
     subjectIds:[],
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
@@ -120,6 +120,7 @@ export class TeachersReportsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getTeachersReportList();
 
   }

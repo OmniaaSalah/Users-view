@@ -4,7 +4,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models';
 import { Guardian } from 'src/app/core/models/guardian/guardian.model';
@@ -37,7 +37,7 @@ export class ParantsComponent implements OnInit {
   currentUserScope = inject(UserService).getScope();
 
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     NationalityId: '',
     hasChildreen: true,
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null'),
@@ -146,6 +146,7 @@ export class ParantsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.checkParentList();
   }
 

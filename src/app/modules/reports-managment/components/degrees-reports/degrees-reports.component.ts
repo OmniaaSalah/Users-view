@@ -1,6 +1,6 @@
 import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ToastrService } from 'ngx-toastr';
@@ -44,7 +44,7 @@ export class DegreesReportsComponent implements OnInit {
     ],
   }
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     StudentId:null,
     SchoolId:null,
     GradeId:null,
@@ -109,6 +109,7 @@ export class DegreesReportsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getDegreesList();
 
   }

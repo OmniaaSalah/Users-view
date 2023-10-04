@@ -2,7 +2,7 @@
 import { Injectable,inject } from '@angular/core';
 import {take,BehaviorSubject,finalize,map } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { Filter } from 'src/app/core/Models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -34,16 +34,16 @@ export class AnnualHolidayService {
         value:StatusEnum.NotFlexible,name:this.translate.instant("shared.allStatus.NotFlexible")
       }
     ];
-  
+
   }
 
-  getAllHolidays(filter:Partial<Filter>)
+  getAllHolidays(filter:Partial<SearchModel>)
   {
     this.loaderService.isLoading$.next(true);
     return this.http.get('/Holiday/annual-calenders',filter).pipe(take(1),finalize(()=> {
       this.loaderService.isLoading$.next(false)
     }));
-    
+
   }
   getAnnualHolidayByID(holidayId:number)
   {
@@ -70,10 +70,10 @@ export class AnnualHolidayService {
   }
   addAnnualHoliday(holiday)
   {
-   
+
     return this.http.post('/Holiday/holiday/annual',holiday);
-    
-      
+
+
   }
   updateAnnualHoliday(holidayId:number,holiday)
   {
@@ -82,22 +82,22 @@ export class AnnualHolidayService {
 
   updateHoliday(holidayId:number,holiday)
   {
- 
+
     return this.http.put(`/Holiday/holiday/${holidayId}`,holiday).pipe(take(1))
   }
 
   getAllcurriculumName()
   {
     return this.http.get('/Curriculum').pipe(take(1));
-    
+
   }
 
   getAllYears()
   {
     return this.http.get('/Holiday/calender-year').pipe(take(1));
-    
+
   }
- 
+
   annualToExport(filter){
     return this.http.get('/Holiday/annual-calenders',filter)
     .pipe(
@@ -106,11 +106,11 @@ export class AnnualHolidayService {
           return {
             [this.translate.instant('dashboard.AnnualHoliday.Annual Calender Name')]: annualHoliday?.annualCalenderName[this.lang],
             [this.translate.instant('dashboard.AnnualHoliday.Year')]: annualHoliday?.year,
-      
+
 
           }
         })
       }))
   }
- 
+
 }

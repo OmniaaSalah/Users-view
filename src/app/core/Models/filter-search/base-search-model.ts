@@ -1,7 +1,7 @@
 
-import { Filter } from "../models/filter/filter"
+import { SearchModel } from "./filter-search.model"
 
-export const Filtration : Filter={
+export const BaseSearchModel : SearchModel={
     KeyWord : "",
     Page: 1,
     PageSize: 6,

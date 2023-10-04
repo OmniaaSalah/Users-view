@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/helpers/array';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -47,7 +47,7 @@ componentHeaderData: IHeader = {
 }
 
   filtration={
-    ...Filtration,
+    ...BaseSearchModel,
     gradeid: [],
     schoolId:[this.schoolId],
     ...JSON.parse(localStorage.getItem('Div-SearchQuery') || 'null')
@@ -156,6 +156,7 @@ componentHeaderData: IHeader = {
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
+     this.filtration.PageSize = event.rows
      this.getSchoolDivisions()
 
    }

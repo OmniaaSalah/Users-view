@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize, map, Observable, of, take } from 'rxjs';
 import { getLocalizedValue,setMinValue } from 'src/app/core/helpers/helpers';
-import { Filter } from 'src/app/core/Models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
@@ -111,7 +111,7 @@ export class StudentsService {
     return this.http.post(`/Student/delete-request`,data).pipe(take(1))
   }
 
-  getSchools(filter?:Partial<Filter>){
+  getSchools(filter?:Partial<SearchModel>){
     this.loaderService.isLoading$.next(true)
 
     return this.http.post('/School/dropdowen',filter)

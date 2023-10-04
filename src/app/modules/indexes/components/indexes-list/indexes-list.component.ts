@@ -7,7 +7,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { ArrayOperations } from 'src/app/core/helpers/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -30,7 +30,7 @@ export class IndexesComponent implements OnInit {
     {'value':StatusEnum.Inactive,'name':this.translate.instant("Inactive")}
   ];
   indexListType;
-  filtration = {...Filtration,IndexType: null,IndexStatus:'',  ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')};
+  filtration = {...BaseSearchModel,IndexType: null,IndexStatus:'',  ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')};
   paginationState= {...paginationInitialState};
   indexes={
     totalAllData:0,
@@ -123,6 +123,7 @@ export class IndexesComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getAllIndexes();
 
   }

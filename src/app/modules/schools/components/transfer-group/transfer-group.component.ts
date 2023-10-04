@@ -15,8 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SettingsService } from '../../../system-setting/services/settings/settings.service';
-import { Filtration } from 'src/app/core/helpers/filtration';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { map } from 'rxjs';
 
 @Component({
@@ -32,9 +32,9 @@ export class TransferGroupComponent implements OnInit {
   schoolId= this.userService.getSchoolId()
   schoolCurriculumId= this.userService.getSchoolCurriculumId()
 
-  filteration:Filter ={...Filtration, curriculumId: this.schoolCurriculumId ,gradeId: null}
+  filteration:SearchModel ={...BaseSearchModel, curriculumId: this.schoolCurriculumId ,gradeId: null}
   // studentFilteration:Filter = {...Filtration,SchoolId:this.schoolId, GradeId:'',DivisionId:'',PageSize:null}
-  studentFilteration = {...Filtration,GradeId:'',DivisionId:null,PageSize:0}
+  studentFilteration = {...BaseSearchModel,GradeId:'',DivisionId:null,PageSize:0}
 
 
   schools={

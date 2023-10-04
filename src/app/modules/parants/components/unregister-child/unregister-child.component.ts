@@ -101,7 +101,10 @@ export class UnregisterChildComponent implements OnInit {
   addMode=false
   gurdiansAttachmentsTypes$=this.indexsService.getIndext(IndexesEnum.TheTypeOfFileAttachmentForTheParent)
 
-  get getDialogData() { return {img: this.child?.imagePath || 'assets/images/shared/image.svg',message:`هل أنت متأكد أنك تريد حذف "${getLocalizedValue(this.child?.name)}” من قائمة أبنائك؟`}}
+  get getDialogData() {
+    let msg = this.translate.instant('toasterMessage.deleteChild',{value: getLocalizedValue(this.child?.name)})
+    return {img: this.child?.imagePath || 'assets/images/shared/image.svg',message:msg}
+  }
 
 
   fileForm= this.fb.group({
@@ -125,7 +128,7 @@ export class UnregisterChildComponent implements OnInit {
      private toastr:ToastrService,
      private translate:TranslateService,
      private indexsService:IndexesService,
-     private mediaService:MediaService) { }
+     private mediaService:MediaService,) { }
 
   ngOnInit(): void {
     this.getUnregisterChild();

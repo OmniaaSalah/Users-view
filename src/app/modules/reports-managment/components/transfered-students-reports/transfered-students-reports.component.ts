@@ -2,7 +2,7 @@ import { Component, OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
@@ -42,7 +42,7 @@ export class TransferedStudentsReportsComponent implements OnInit {
     ],
   }
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     OldCurriculumId:null,
     NewCurriculumId:null,
     SchoolYearId:null,
@@ -276,6 +276,7 @@ export class TransferedStudentsReportsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getStudents()
 
   }

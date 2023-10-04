@@ -2,8 +2,8 @@ import { Component, OnInit ,Input, inject,OnDestroy} from '@angular/core';
 import { UserRolesService } from 'src/app/modules/user-roles/service/user-roles.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
-import { Filtration } from 'src/app/core/helpers/filtration';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -19,7 +19,7 @@ export class SelectSchoolsComponent implements OnInit,OnDestroy{
   @Input('selectSchoolModelOpened') selectSchoolModelOpened:boolean=false;
   selectAllStatus:boolean=false;
   MarkedListLength:number=0;
-  filtration :Filter = {...Filtration,curriculumId:null,StateId: null};
+  filtration :SearchModel = {...BaseSearchModel,curriculumId:null,StateId: null};
   schoolIsSelectedList=[];
   selectedSchoolIds=[];
   schools={
@@ -134,6 +134,7 @@ selectAllSchools(value)
 
 paginationChanged(event: paginationState) {
   this.filtration.Page = event.page;
+  this.filtration.PageSize = event.rows
   this.getSchools(this.filtration.Page);
 
 }

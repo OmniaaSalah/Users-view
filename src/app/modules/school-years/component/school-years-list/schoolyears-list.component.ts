@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
@@ -27,7 +27,7 @@ export class SchoolyearsListComponent implements OnInit {
   get ClaimsEnum(){return ClaimsEnum}
   faEllipsisVertical=faEllipsisVertical;
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     statusId:null,
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   };
@@ -128,6 +128,7 @@ export class SchoolyearsListComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getAllSchoolYears();
 
   }

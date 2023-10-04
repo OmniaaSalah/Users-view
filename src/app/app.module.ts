@@ -11,6 +11,8 @@ import { PrimngModule } from './primng/primeNg.module';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './core/strategies/route-reuse.strategy';
 import { GlobalErrorHandlerService } from './core/services/global-error-handler.service';
+import { ConfirmModelService } from './shared/services/confirm-model/confirm-model.service';
+import { ConfirmModalModule } from './shared/confirm-modal.module';
 
 
 
@@ -43,7 +45,7 @@ import { GlobalErrorHandlerService } from './core/services/global-error-handler.
       provide: RouteReuseStrategy,
       useClass: CustomRouteReuseStrategy,
     },
-    {provide: ErrorHandler, useClass: GlobalErrorHandlerService}
+    {provide: ErrorHandler, useClass: GlobalErrorHandlerService},
   ],
   bootstrap: [AppComponent]
 })

@@ -4,7 +4,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +31,7 @@ export class AttendanceReportsComponent implements OnInit {
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     schoolId: null,
     currclaumId: null,
     gradeId: null,
@@ -154,6 +154,7 @@ export class AttendanceReportsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getAllAbbsenceAndAttendance()
 
   }

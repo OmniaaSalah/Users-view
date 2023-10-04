@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
@@ -20,7 +20,7 @@ export class ChildRequestsComponent implements OnInit {
   childId = +this._route.snapshot.paramMap.get('childId');
 
 
-  filtration = {...Filtration,RequestStatus: '', RequestType:''};
+  filtration = {...BaseSearchModel,RequestStatus: '', RequestType:''};
   paginationState= {...paginationInitialState};
 
 

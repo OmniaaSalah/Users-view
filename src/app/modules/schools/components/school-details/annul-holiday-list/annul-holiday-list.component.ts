@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { map, switchMap } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/helpers/array';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { DateValidators } from 'src/app/core/helpers/validation';
 import { IHeader } from 'src/app/core/Models';
@@ -52,7 +52,7 @@ export class AnnulHolidayListComponent implements OnInit {
   actions
 
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     flexibilityStatus: '',
     ...JSON.parse(localStorage.getItem('Holiday-SearchQuery') || 'null')
   }
@@ -254,6 +254,7 @@ export class AnnulHolidayListComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getHolidays()
 
   }

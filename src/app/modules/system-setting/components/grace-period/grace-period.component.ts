@@ -5,7 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { delay, filter, map, shareReplay, Subject, take, takeUntil, tap } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -90,11 +90,11 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   gracePeriodMainData
   currentGracePeriodName
 
-  filtration={...Filtration,PageSize: 30,curriculumId: 0,gracePeriodId:0}
+  filtration={...BaseSearchModel,PageSize: 30,curriculumId: 0,gracePeriodId:0}
 
-  allowedSchoolsFiltration={...Filtration,PageSize: 6, gracePeriodId: this.gracePeriodId} //filteration for all grace periods table except  [transfer students]
-  fromSchoolsFiltration={...Filtration,PageSize: 6, gracePeriodId: this.gracePeriodId}  //filteration for grace periods [transfer students From] table
-  toSchoolsFiltration={...Filtration,PageSize: 6, gracePeriodId: this.gracePeriodId} //filteration for grace periods [transfer students To] table
+  allowedSchoolsFiltration={...BaseSearchModel,PageSize: 6, gracePeriodId: this.gracePeriodId} //filteration for all grace periods table except  [transfer students]
+  fromSchoolsFiltration={...BaseSearchModel,PageSize: 6, gracePeriodId: this.gracePeriodId}  //filteration for grace periods [transfer students From] table
+  toSchoolsFiltration={...BaseSearchModel,PageSize: 6, gracePeriodId: this.gracePeriodId} //filteration for grace periods [transfer students To] table
   paginationState= paginationInitialState
 
 
@@ -518,22 +518,26 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   allowedSchoolsPaginationChanged(event: paginationState) {
 
     this.allowedSchoolsFiltration.Page = event.page
+    this.allowedSchoolsFiltration.PageSize = event.rows
     this.getGracePeriodSchools()
   }
 
   fromSchoolsPaginationChanged(event: paginationState) {
     this.fromSchoolsFiltration.Page = event.page
+    this.fromSchoolsFiltration.PageSize = event.rows
     this.getGracePeriodFromSchools()
   }
 
   toSchoolsPaginationChanged(event: paginationState) {
     this.toSchoolsFiltration.Page = event.page
+    this.toSchoolsFiltration.PageSize = event.rows
     this.getGracePeriodToSchools()
   }
 
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getAvailableSchools()
 
   }

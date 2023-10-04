@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { Track } from 'src/app/core/Models/global/global.model';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -44,7 +44,7 @@ export class SchoolGradesComponent implements OnInit {
   isDialogOpened=false
 
   filtration={
-    ...Filtration,
+    ...BaseSearchModel,
     ...JSON.parse(localStorage.getItem('Div-SearchQuery') || 'null')
   }
   paginationState={...paginationInitialState}
@@ -152,6 +152,7 @@ export class SchoolGradesComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getSchoolGrades()
 
   }

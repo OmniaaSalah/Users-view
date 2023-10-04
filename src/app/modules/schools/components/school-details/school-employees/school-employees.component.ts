@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, map, shareReplay } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/helpers/array';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { passwordMatch } from 'src/app/core/helpers/validation';
 
@@ -54,10 +54,10 @@ export class SchoolEmployeesComponent implements OnInit {
 
 
 	// For Dropdown
-	searchModel={...Filtration}
+	searchModel={...BaseSearchModel}
 
 	filtration={
-    ...Filtration,
+    ...BaseSearchModel,
     jobtitelid:null,
     status:null,
     ...JSON.parse(localStorage.getItem('Emp-SearchQuery') || 'null')
@@ -239,6 +239,7 @@ export class SchoolEmployeesComponent implements OnInit {
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
+     this.filtration.PageSize = event.rows
      this.getEmployees()
 
    }

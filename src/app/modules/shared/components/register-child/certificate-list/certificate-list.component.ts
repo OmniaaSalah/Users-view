@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -20,7 +20,7 @@ export class CertificateListComponent implements OnInit {
   studentId = this.route.snapshot.paramMap.get('id')
   childId = this.route.snapshot.paramMap.get('childId')
 
-  filtration :Filter = {...Filtration}
+  filtration :SearchModel = {...BaseSearchModel}
   paginationState= {...paginationInitialState}
 
   certificates={
@@ -85,6 +85,7 @@ export class CertificateListComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getCertificate()
 
   }

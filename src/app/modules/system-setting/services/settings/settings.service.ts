@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, finalize, map, Observable, of, take } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { MapedFileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
@@ -157,7 +157,7 @@ export class SettingsService {
     return this.http.get('/system-settings/grace-period/types').pipe(map(res => res.result),take(1))
   }
 
-  getGracePeriodList(filter?:Filter): Observable<GenericResponse<any>>{
+  getGracePeriodList(filter?:SearchModel): Observable<GenericResponse<any>>{
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get('/system-settings/grace-period/search', filter)
     .pipe(
@@ -168,7 +168,7 @@ export class SettingsService {
   }
 
 
-  getGracePeriodListToExport(filter:Filter): Observable<GenericResponse<any>>{
+  getGracePeriodListToExport(filter:SearchModel): Observable<GenericResponse<any>>{
 
     return this.http.get('/system-settings/grace-period/search', filter)
     .pipe(
@@ -240,7 +240,7 @@ export class SettingsService {
   }
 
 
-  schoolsAllowedToAcceptStudentsGroup(filter:Filter): Observable<GenericResponse<any>>{
+  schoolsAllowedToAcceptStudentsGroup(filter:SearchModel): Observable<GenericResponse<any>>{
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/system-settings/grace-period/search-to-schools`, filter)
     .pipe(
@@ -250,7 +250,7 @@ export class SettingsService {
       }))
   }
 
-  schoolsAllowedForRegistration(filter:Filter): Observable<GenericResponse<any>>{
+  schoolsAllowedForRegistration(filter:SearchModel): Observable<GenericResponse<any>>{
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/system-settings/grace-period/search-allowed-schools`, filter)
     .pipe(
@@ -260,7 +260,7 @@ export class SettingsService {
       }))
   }
 
-  getSchools(filter:Partial<Filter>): Observable<GenericResponse<any>>{
+  getSchools(filter:Partial<SearchModel>): Observable<GenericResponse<any>>{
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/system-settings/schools/search/not-selected/`, filter)
     .pipe(

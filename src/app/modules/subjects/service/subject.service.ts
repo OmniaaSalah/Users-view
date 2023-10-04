@@ -1,6 +1,6 @@
 import { Injectable ,inject} from '@angular/core';
 import { ISubject } from 'src/app/core/Models/subjects/subject';
-import { Filter } from 'src/app/core/Models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
@@ -34,7 +34,7 @@ export class SubjectService {
 
   }
 
-  getAllSubjects(filter?:Partial<Filter>)
+  getAllSubjects(filter?:Partial<SearchModel>)
   {
     this.loaderService.isLoading$.next(true);
     return this.http.post('/Subject/Search',filter).pipe(take(1),finalize(()=> {
@@ -42,7 +42,7 @@ export class SubjectService {
     }));
   }
 
-  getAllSPEASubjects(filter?:Partial<Filter>)
+  getAllSPEASubjects(filter?:Partial<SearchModel>)
   {
     this.loaderService.isLoading$.next(true);
     return this.http.get('/Subject/organization-subject/dropdown',filter).pipe(take(1),finalize(()=> {

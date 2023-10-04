@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, SkipSelf, OnInit } from '@angular/core';
 import { ConfirmModelService } from '../../services/confirm-model/confirm-model.service';
 
 @Component({
   selector: 'app-confirm-model',
   templateUrl: './confirm-model.component.html',
-  styleUrls: ['./confirm-model.component.scss']
+  styleUrls: ['./confirm-model.component.scss'],
 })
 export class ConfirmModelComponent implements OnInit {
   isOpend
   modelData$ = this.confirmModelService.confirmModelData$
-  constructor(public confirmModelService: ConfirmModelService) { }
+  constructor(public confirmModelService: ConfirmModelService) {}
 
   ngOnInit(): void {
     this.confirmModelService.isOpend$.subscribe(val => this.isOpend = val)

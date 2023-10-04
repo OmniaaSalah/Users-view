@@ -1,7 +1,7 @@
 import { Injectable,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { delay, finalize, Observable, take,BehaviorSubject,map } from 'rxjs';
-import { Filter } from 'src/app/core/Models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { School, SchoolEmployee } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
@@ -29,7 +29,7 @@ export class SchoolsService {
     ) {}
 
   // << SCHOOLS >>
-  getAllSchools(filter?:Partial<Filter>){
+  getAllSchools(filter?:Partial<SearchModel>){
     this.tableLoaderService.isLoading$.next(true)
 
     return this.http.post('/School/Search',filter)
@@ -40,7 +40,7 @@ export class SchoolsService {
       }))
   }
 
-  getSchoolsDropdown(filter?:Partial<Filter>){
+  getSchoolsDropdown(filter?:Partial<SearchModel>){
     this.tableLoaderService.isLoading$.next(true)
 
     return this.http.get('/School/dropdowen',filter)
@@ -191,12 +191,12 @@ export class SchoolsService {
   // }
 
 
-  getCharts(filter?:Filter): Observable<ISchoolChart> {
+  getCharts(filter?:SearchModel): Observable<ISchoolChart> {
     return this.http.post('/School/Statistics',filter );
   }
 
 
-  getSchoolAnnualHolidays(schoolId, filter?:Filter){
+  getSchoolAnnualHolidays(schoolId, filter?:SearchModel){
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/Holiday/holiday/annual/${schoolId}`,filter)
     .pipe(
@@ -247,7 +247,7 @@ export class SchoolsService {
     return this.http.get(`/School/${schoolId}/manager`).pipe(take(1))
   }
 
-  getSchoolEmployees(schoolId, filter?:Filter): Observable<GenericResponse<SchoolEmployee[]>>{
+  getSchoolEmployees(schoolId, filter?:SearchModel): Observable<GenericResponse<SchoolEmployee[]>>{
     this.tableLoaderService.isLoading$.next(true)
     return this.http.post(`/School/${schoolId}/SchoolEmployee/Search`, filter)
     .pipe(
@@ -309,7 +309,7 @@ export class SchoolsService {
       )
     }
 
-    getAllSchoolsInPopUp(filter?:Partial<Filter>){
+    getAllSchoolsInPopUp(filter?:Partial<SearchModel>){
       this.tableLoaderService.isLoading$.next(true)
 
       return this.http.post('/School/Custom-Search',filter)

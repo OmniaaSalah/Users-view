@@ -3,7 +3,7 @@ import { FormBuilder } from "@angular/forms"
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons"
 import { TranslateService } from "@ngx-translate/core"
 import { ToastrService } from "ngx-toastr"
-import { Filtration } from "src/app/core/helpers/filtration"
+import { BaseSearchModel } from "src/app/core/models/filter-search/base-search-model"
 import { paginationInitialState } from "src/app/core/helpers/pagination"
 import { NotificationChannels } from "src/app/shared/enums/settings/settings.enum"
 import { SettingsService } from "../../system-setting/services/settings/settings.service"
@@ -32,7 +32,7 @@ export class NotificationsSettingComponent implements OnInit {
 
   selectedValue='val1'
 
-  filtration={...Filtration,recievedBy:null}
+  filtration={...BaseSearchModel,recievedBy:null}
   paginationState= {...paginationInitialState}
 
   notificationModelOpend = false
@@ -110,6 +110,7 @@ export class NotificationsSettingComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getNotifications()
 
   }

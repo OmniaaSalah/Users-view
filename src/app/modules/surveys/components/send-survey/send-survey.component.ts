@@ -10,7 +10,7 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
@@ -46,7 +46,7 @@ export class SendSurveyComponent implements OnInit, OnDestroy {
   schools$ = inject(SchoolsService).getAllSchools();
   AllGrades$ = inject(SharedService).getAllGrades('');
   surveyId = this.route.snapshot.paramMap.get('surveyId');
-  filtration = { ...Filtration, emiretesId: '', schoolId: null, gradeId: null };
+  filtration = { ...BaseSearchModel, emiretesId: '', schoolId: null, gradeId: null };
   subscription: Subscription;
 
   constructor(

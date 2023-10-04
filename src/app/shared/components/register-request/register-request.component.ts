@@ -2,10 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
@@ -68,7 +68,7 @@ export class RegisterRequestComponent implements OnInit {
 
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
 
-  filtration :Filter = {...Filtration, curriculumId:'', StateId: '',GradeId:''}
+  filtration :SearchModel = {...BaseSearchModel, curriculumId:'', StateId: '',GradeId:''}
   paginationState= {...paginationInitialState}
 
 
@@ -450,6 +450,7 @@ initRegisterationForm(child){
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getSchools()
 
   }

@@ -6,27 +6,33 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { UserInformationService } from '../../service/user-information.service';
 import { ArrayOperations } from 'src/app/core/helpers/array';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 
 
 
 @Component({
   selector: 'app-view-list-of-users',
   templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss']
+  styleUrls: ['./users-list.component.scss'],
+
 })
 export class ViewListOfUsersComponent implements OnInit {
   get ClaimsEnum(){return ClaimsEnum}
   lang = this.translationService.lang
 
+  currentUserId = this.userService.getCurrentUserId()
+
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     roleId:[],
     isactive:true,
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
@@ -51,6 +57,8 @@ export class ViewListOfUsersComponent implements OnInit {
     private sharedService: SharedService,
     public translationService: TranslationService,
     private route:ActivatedRoute,
+    private userService:UserService,
+    private toastr:ToastService,
     private router:Router) {}
 
 
@@ -100,13 +108,23 @@ export class ViewListOfUsersComponent implements OnInit {
       this.users.total=0;
     })
   }
-  onTableDataChange(event: paginationState) {
-    this.filtration.Page = event.page;
-    this.getUsersList();
 
+  paginationChanged(event: paginationState) {
+    this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
+    this.getUsersList();
   }
 
 
+  deleteUser(id){
+    this.userInformation.deleteUser(id).subscribe(res=>{
+      this.toastr.success(this.translate.instant('toasterMessage.deletedSuccessfully'))
+      this.getUsersList()
+    },err=>{
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
+      this.getUsersList()
+    })
+  }
 
 
   getRoleList(){

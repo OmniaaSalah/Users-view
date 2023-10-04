@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import {  NavigationEnd, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,6 +17,7 @@ import { IndexesService } from './modules/indexes/service/indexes.service';
 import { SettingsService } from './modules/system-setting/services/settings/settings.service';
 import { FileTypeEnum } from './shared/enums/file/file.enum';
 import { UserInformationService } from './modules/user-information/service/user-information.service';
+import { ConfirmDialogDirective } from './shared/directives/confirm-dialog/confirm-dialog.directive';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ import { UserInformationService } from './modules/user-information/service/user-
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   get fileTypesEnum () {return FileTypeEnum}
   currentUserName;
   version= environment.version

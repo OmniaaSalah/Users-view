@@ -2,7 +2,7 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ArrayOperations } from 'src/app/core/helpers/array';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -24,7 +24,7 @@ export class SpeaSubjectsComponent implements OnInit {
 
 
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     schoolid: null,
     gradeid: null,
     evaluation: null,
@@ -128,6 +128,7 @@ export class SpeaSubjectsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getAllSubjects();
   }
 

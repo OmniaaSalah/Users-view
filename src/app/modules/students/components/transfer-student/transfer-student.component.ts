@@ -5,9 +5,9 @@ import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter, finalize, map, Observable, of, share, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { Division, GenericResponse, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
@@ -62,7 +62,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     }
   }
 
-  filtration :Filter = {...Filtration,curriculumId:null, StateId: null}
+  filtration :SearchModel = {...BaseSearchModel,curriculumId:null, StateId: null}
   paginationState= {...paginationInitialState}
 
   schoolGrades$

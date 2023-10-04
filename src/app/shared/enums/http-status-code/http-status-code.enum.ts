@@ -6,5 +6,6 @@ export enum HttpStatusCodeEnum{
     OK="OK",
     Ok="Ok",
     Unauthorized="Unauthorized",
-    Created='Created'
+    Created='Created',
+    NotFound='NotFound'
 }

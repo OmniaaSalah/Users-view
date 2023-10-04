@@ -3,7 +3,7 @@ import { finalize, Observable, take } from 'rxjs';
 import {  HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
@@ -39,7 +39,7 @@ export class SurveyService {
 
   }
 
- 
+
 
   getSurveyList(filter?){
     this.tableLoaderService.isLoading$.next(true)
@@ -52,7 +52,7 @@ export class SurveyService {
       }))
   }
 
-  
+
   getSurveyById(id:number): Observable<any>{
     return this.http.get(`${'/Survey/'+id}`);
   }
@@ -77,9 +77,9 @@ sendSurvey(data: any): Observable<any> {
 sendParentSurvey(data){
   return this.http.post('/Survey/survey-response',data);
 }
-getGuardians(filter?:Partial<Filter>)
+getGuardians(filter?:Partial<SearchModel>)
 {
- 
+
   this.tableLoaderService.isLoading$.next(true)
 
   return this.http.post('/Survey/guardian/search',filter)
@@ -110,7 +110,7 @@ getAllResponeseOfSurvey(surveyId)
   return this.http.get(`${'/Survey/full-report/'+surveyId}`);
 }
 
-getResponeseOfSurvey(surveyId,filter?:Partial<Filter>)
+getResponeseOfSurvey(surveyId,filter?:Partial<SearchModel>)
 {
   return this.http.get(`/Survey/answers-datails/${surveyId}`,filter);
 }

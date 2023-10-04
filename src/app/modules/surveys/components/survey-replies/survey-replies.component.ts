@@ -1,8 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Filtration } from 'src/app/core/helpers/filtration';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.enum';
 import { SurveyService } from '../../service/survey.service';
 
@@ -13,7 +13,7 @@ import { SurveyService } from '../../service/survey.service';
 })
 export class SurveyRepliesComponent implements OnInit {
     showSpinner:boolean=false;
-    filtration :Filter = {...Filtration}
+    filtration :SearchModel = {...BaseSearchModel}
     get QuestionsTypeEnum () {return QuestionsTypeEnum}
     survey;
     surveyId=this.route.snapshot.paramMap.get('surveyId');

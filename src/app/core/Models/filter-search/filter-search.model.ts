@@ -1,6 +1,6 @@
 import { StatusEnum } from "src/app/shared/enums/status/status.enum"
 
-export interface Filter{
+export interface SearchModel{
     KeyWord:string
     SortBy: string,
     SortColumnName:string
@@ -22,6 +22,9 @@ export interface Filter{
     gradeId?:number
     subjectid?:number,
     gracePeriodId?:number
+    schoolName?:string
+    schoolCategoryId?:number
+    schoolNumber?:number
     // students
     schoolYearId?:number
     SchoolId?:string;

@@ -17,7 +17,7 @@ import { RegisterChildService } from '../../../services/register-child/register-
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsService } from 'src/app/core/services/claims.service';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { ParentService } from '../../../../parants/services/parent.service';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -85,7 +85,7 @@ export class PersonalInformationComponent implements OnInit {
     total:0,
     loading:false
   }
-  guardiansFilteration={...Filtration ,PageSize:30, NationalityId:'', emiratesId:''}
+  guardiansFilteration={...BaseSearchModel ,PageSize:30, NationalityId:'', emiratesId:''}
 	paginationState= paginationInitialState
 
   specialClassOptions = [
@@ -202,6 +202,7 @@ export class PersonalInformationComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
 		this.guardiansFilteration.Page = event.page
+    this.guardiansFilteration.PageSize = event.rows
 		this.getGuardians();
 	}
 }

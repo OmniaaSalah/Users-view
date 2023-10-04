@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { FileTypeEnum } from '../../enums/file/file.enum';
 import { SharedService } from '../../services/shared/shared.service';
 import { ExportService } from '../../services/export/export.service';
@@ -82,7 +82,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   onFilterActivated(){
     this.sharedService.filterLoading.next(true);
     this.showFilterModel=!this.showFilterModel
-    Filtration.Page = 1
+    BaseSearchModel.Page = 1
     this.onFilter.emit()
 
   }

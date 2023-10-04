@@ -12,7 +12,7 @@ import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { Subscription } from 'rxjs';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
@@ -37,7 +37,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
 
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     Curriculum:'',
     HolidayStatus: '',
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
@@ -161,6 +161,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getAllHolidays();
 
   }

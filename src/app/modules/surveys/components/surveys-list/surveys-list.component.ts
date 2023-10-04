@@ -4,7 +4,7 @@ import { Component,  OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -32,7 +32,7 @@ export class SurveysListComponent implements OnInit {
   surveyType;
   surveyStatus ;
   filtration  = {
-    ...Filtration,
+    ...BaseSearchModel,
     SurveyType: '',
     SurveyStatus:null,
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
