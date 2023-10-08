@@ -8,7 +8,7 @@ import { ChildDetailsComponent } from './components/child-details/child-details.
 import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';
 import { ParentService } from './services/parent.service';
 import { ChildRequestsComponent } from './components/unregister-child/child-requests/child-requests.component';
-import { FeaturesSharedModule } from '../shared/Features-shared.module';
+import { FeaturesSharedModule } from '../shared/features-shared.module';
 
 
 

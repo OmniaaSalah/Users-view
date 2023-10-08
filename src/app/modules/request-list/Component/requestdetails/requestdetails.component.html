@@ -456,7 +456,7 @@
 
                 <button
                 *ngFor="let option of requestOptions;let i=index"
-                [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned' || option?.label?.en=='return for correction') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest && userScopeEnum=='Guardian'"
+                [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned' || option?.label?.en=='return for correction') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest && currentUserScope==userScopeEnum.Guardian"
                 [disabled]="option.isLoading"
                 [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
                 (click)="onActionTaken(option,i)"

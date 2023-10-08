@@ -341,9 +341,11 @@ initRegisterationForm(child){
     // if(uploadedFiles.length) this.attachments[index]= {Titel:file.name, ...uploadedFiles[0]}
    }
 
-  //  onFileDelete(index){
-  //   this.attachments.splice(index,1)
-  //  }
+   onFileDelete(files, fileIndex, uploaderIndex){
+    this.requiredFiles.files[uploaderIndex].uploadedFiles.splice(fileIndex,1)
+    this.attachments= this.uploadedFiles
+
+   }
 
 
 

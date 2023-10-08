@@ -7,7 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { ClassScheduleComponent } from './class-schedule/class-schedule.component';
 import { GardeStudentsComponent } from './garde-students/garde-students.component';
-import { FeaturesSharedModule } from 'src/app/modules/shared/Features-shared.module';
+import { FeaturesSharedModule } from 'src/app/modules/shared/features-shared.module';
 
 
 @NgModule({

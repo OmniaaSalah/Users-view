@@ -57,7 +57,7 @@ export class ChildRequestsComponent implements OnInit {
   }
 
   navigateTo(id){
-    if(this.currentUserScope==this.userScope.Guardian) this.router.navigateByUrl(`/parent/requests-list/details/${id}`)
+    if(this.currentUserScope==this.userScope.Guardian) this.router.navigateByUrl(`/requests-list/details/${id}`)
     else this.router.navigateByUrl(`/performance-managment/RequestList/details/${id}`)
   }
 

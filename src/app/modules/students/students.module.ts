@@ -10,7 +10,7 @@ import { StudentDetailsComponent } from './components/student-details/student-de
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
 import { ManualCertificatesComponent } from './components/manual-certificates/manual-certificates.component';
 import { IssuanceCertificateModule } from '../issuance-of-a-certificate-pages/issue-certificate.module';
-import { FeaturesSharedModule } from '../shared/Features-shared.module';
+import { FeaturesSharedModule } from '../shared/features-shared.module';
 
 
 

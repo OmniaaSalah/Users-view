@@ -42,6 +42,7 @@ import { SpeaSubjectsComponent } from './components/spea-subjects/spea-subjects.
     StudentOperationsDropdownComponent,
     EditHistoryComponent,
     SpeaSubjectsComponent,
+
   ],
   imports: [
     CommonModule,
@@ -49,5 +50,6 @@ import { SpeaSubjectsComponent } from './components/spea-subjects/spea-subjects.
     SharedModule,
   ],
   exports:[RegisterChildComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent, SpeaSubjectsComponent]
+
 })
 export class FeaturesSharedModule { }
