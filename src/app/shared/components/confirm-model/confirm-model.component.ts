@@ -17,7 +17,8 @@ export class ConfirmModelComponent implements OnInit {
 
   confirm(){
     this.confirmModelService.confirmed$.next(true)
-    this.confirmModelService.closeModel()
+    this.confirmModelService.isOpend$.next(false)
+    // this.confirmModelService.closeModel()
   }
 
 }
