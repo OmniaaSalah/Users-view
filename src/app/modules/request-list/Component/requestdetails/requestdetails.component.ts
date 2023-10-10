@@ -212,6 +212,7 @@ export class RequestdetailsComponent implements OnInit {
       this.addStudentTodivisionModal = false
 
       if(err.message && err.message.includes('This student has financial obligations') )this.toaster.error(this.translate.instant('toasterMessage.This student has financial obligations'))
+      else if(err.message && err.message.includes('Request status is Cancelled'))  this.toaster.error(this.translate.instant('toasterMessage.Request status is Cancelled'))
       else this.toaster.error(this.translate.instant('toasterMessage.error'))
 
     })

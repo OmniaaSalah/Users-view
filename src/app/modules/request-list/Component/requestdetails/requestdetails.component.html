@@ -34,7 +34,9 @@
        <button class=" btn btn-primary btn--sm px-5"
        [disabled]="onSubmited"
        (click)="withdrawReq(requestDetails?.requestType)"
-       *ngIf="requestDetails?.requestStatus!=RequestStatusEnum.Rejected">
+       *ngIf="requestDetails?.requestStatus!=RequestStatusEnum.Rejected
+       || requestDetails?.requestStatus!=RequestStatusEnum.Accepted
+       || requestDetails?.requestStatus!=RequestStatusEnum.FinalApproval">
            <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
            <span>{{'dashboard.Requests.withdrawalReq' |translate}}</span>
        </button>

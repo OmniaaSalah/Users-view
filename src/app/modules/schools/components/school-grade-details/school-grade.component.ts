@@ -192,6 +192,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         this.confirmModelService.openModel({message: this.translate.instant('dashboard.schools.trackWillBeDeleted')})
 
       } else{
+
         this.hasTracks = this.willHasTrack
         this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
       }
@@ -229,6 +230,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     this.confirmModelService.onClose$
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(val=>{
+
       if(val) this.hasTracks= !this.willHasTrack
     })
   }
