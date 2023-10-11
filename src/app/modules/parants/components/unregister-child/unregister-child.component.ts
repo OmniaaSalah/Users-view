@@ -250,11 +250,11 @@ export class UnregisterChildComponent implements OnInit {
 
   deleteChild(){
     this.parentService.deleteChild(this.child.id).subscribe(res=>{
-      this.toastr.success(this.translate.instant('toasterMessage.deletedSuccessfully'))
+      this.toastr.success(getLocalizedValue(res?.errorLocalized) || this.translate.instant('toasterMessage.deletedSuccessfully'))
       this.router.navigate(['/'], {relativeTo:this._route})
-    },()=>{
-      this.toastr.error(this.translate.instant('toasterMessage.error'))
-      this.router.navigate(['/'], {relativeTo:this._route})
+    },(e :Error)=>{
+      this.toastr.error(e.message || this.translate.instant('toasterMessage.error'))
+      // this.router.navigate(['/'], {relativeTo:this._route})
       // this.toastr.error(this.translate.instant('toasterMessage.error'))
     })
   }

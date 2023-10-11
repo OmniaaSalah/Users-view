@@ -6,6 +6,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Guardian } from 'src/app/core/models/guardian/guardian.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -83,7 +84,13 @@ export class ParentService {
   }
 
   updateChild(id, childData): Observable<any>{
-    return this.http.put(`/Child`,childData).pipe(take(1));
+    return this.http.put(`/Child`,childData)
+    .pipe(
+      map(res=>{
+        if(res?.statusCode==HttpStatusCodeEnum.BadRequest ||res?.statusCode==HttpStatusCodeEnum.BadRequest) throw new Error(getLocalizedValue(res.errorLocalized))
+        else return res
+      }),
+      take(1))
   }
 
   deleteChild(id){
