@@ -18,6 +18,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   providedIn: 'root'
 })
 export class SharedService {
+  notFoundMessage = ''
   filterLoading = new BehaviorSubject(false);
   openSelectSchoolsModel = new BehaviorSubject(false);
   currentSchoolEmployee = new BehaviorSubject(0);

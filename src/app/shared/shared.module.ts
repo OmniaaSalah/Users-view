@@ -58,6 +58,7 @@ import { ExcludeEmptyListPipe } from './pipes/exclude-empty-list.pipe';
 import { FormControlValidationMsgDirective } from './directives/validations/form-control-validation-msg.directive';
 import { ToLocalDatePipe } from './pipes/to-local-date.pipe';
 import { BlobToBase64Pipe } from './pipes/blob-to-base64.pipe';
+import { NotAllowedComponent } from '../core/components/not-allowed/not-allowed.component';
 
 registerLocaleData(localeAr);
 
@@ -113,7 +114,7 @@ registerLocaleData(localeAr);
     FormControlValidationMsgDirective,
     ToLocalDatePipe,
     BlobToBase64Pipe,
-
+    NotAllowedComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -188,7 +189,8 @@ registerLocaleData(localeAr);
     ExcludeEmptyListPipe,
     FormControlValidationMsgDirective,
     ToLocalDatePipe,
-    BlobToBase64Pipe
+    BlobToBase64Pipe,
+    NotAllowedComponent
   ],
   providers:[SharedService]
 })

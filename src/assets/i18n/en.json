@@ -427,6 +427,7 @@
         "Total Number":"Total number",
         "gotothem":"Go to them",
         "notFound":"Not found",
+        "notFoundPage":"Not Found",
         "age": "Age",
         "SchoolBus":"School bus",
         "PrivateCar":"Private car",
@@ -841,7 +842,9 @@
         "degreesRejected":"uploaded Degrees Accepted Successfully",
         "DegreeImproved":"Student Degrees Improved succssfully",
         "upgradeStudents":"Student Upgraded Successfully",
-        "techError":"sorry , seems their is a technical problem"
+        "techError":"sorry , seems their is a technical problem",
+        "deleteChild":"Please note that once the child is deleted, all uncompleted requests would be canceled. Are you sure you want to delete ?"
+
     },
     "dashboard": {
         "Assessment": {
