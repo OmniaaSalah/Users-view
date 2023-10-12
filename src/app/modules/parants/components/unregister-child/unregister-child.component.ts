@@ -143,7 +143,7 @@ export class UnregisterChildComponent implements OnInit {
       this.child = response;
       this.childForm.patchValue({...response})
 
-      let utc = moment.utc(response.birthDate.split('+')[0]).toDate()
+      let utc = moment.utc(response?.birthDate.split('+')[0]).toDate()
       response.birthDate = moment(utc).local().toDate()
 
       this.childForm.controls['birthDate'].patchValue(response?.birthDate)
@@ -257,6 +257,7 @@ export class UnregisterChildComponent implements OnInit {
       this.router.navigate(['/'], {relativeTo:this._route})
     },(e :Error)=>{
       this.toastr.error(e.message || this.translate.instant('toasterMessage.error'))
+      this.confirmModelService.confirmed$.next(false)
       // this.router.navigate(['/'], {relativeTo:this._route})
       // this.toastr.error(this.translate.instant('toasterMessage.error'))
     })
