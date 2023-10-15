@@ -1,4 +1,4 @@
-import { Component, OnInit,inject} from '@angular/core';
+import { Component, OnInit,ViewChild,inject} from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,6 +20,7 @@ import { Division } from 'src/app/core/models/global/global.model';
 import { GradesService } from 'src/app/modules/schools/services/grade/grade.service';
 import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
 import { environment } from 'src/environments/environment';
+import { RequestStatesComponent } from './request-states/request-states.component';
 
 
 @Component({
@@ -28,6 +29,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./requestdetails.component.scss']
 })
 export class RequestdetailsComponent implements OnInit {
+  @ViewChild('requestStatesComp') requestStatesComp:RequestStatesComponent
   currentUserScope = inject(UserService).getScope()
   lang = inject(TranslationService).lang
   get userScopeEnum(){return UserScope}
@@ -197,6 +199,7 @@ export class RequestdetailsComponent implements OnInit {
       this.addStudentTodivisionModal = false
       this.getRequestDetails()
       this.getRequestOptions()
+      this.requestStatesComp.getRequestStates()
 
       this.reqActionsForm.comments=''
       // this.filesToUpload =[]
@@ -212,6 +215,7 @@ export class RequestdetailsComponent implements OnInit {
       this.addStudentTodivisionModal = false
 
       if(err.message && err.message.includes('This student has financial obligations') )this.toaster.error(this.translate.instant('toasterMessage.This student has financial obligations'))
+      else if(err.message && err.message.includes('Request status is Cancelled'))  this.toaster.error(this.translate.instant('toasterMessage.Request status is Cancelled'))
       else this.toaster.error(this.translate.instant('toasterMessage.error'))
 
     })
@@ -248,7 +252,8 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
       'RegestrationRequestForWithrawan',
       'WithdrawalRequest',
       'RelinkChildToGuardianRequestToScool',
-      'RelinkChildToGuardianRequestToSPEA'
+      'RelinkChildToGuardianRequestToSPEA',
+      'ExemptionFromSubjectRequest'
    ]
     return requests.includes(requestType)
   }

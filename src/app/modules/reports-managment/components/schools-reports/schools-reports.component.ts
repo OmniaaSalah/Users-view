@@ -2,7 +2,7 @@ import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
 import { ArrayOperations } from 'src/app/core/helpers/array';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -26,7 +26,7 @@ export class SchoolsReportsComponent implements OnInit {
   tableColumns = [];
 
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     CurriculumId:null,
     StateId:null,
     HasSpecialEducationClasses:null,
@@ -135,6 +135,7 @@ export class SchoolsReportsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getschoolsReportList();
 
   }

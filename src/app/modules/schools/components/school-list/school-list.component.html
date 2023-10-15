@@ -6,31 +6,31 @@
 
     </div>
     <div class="prim-table mt-4" *ngIf="schools.totalAllData || schools.loading">
-        <p-table #dt [columns]="cols" [lazy]="true" [value]="schools.list" (onSort)="onSort($event)" [scrollable]="true">
+        <p-table #dt  [lazy]="true" [value]="schools.list" (onSort)="onSort($event, this.getSchools.bind(this))" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption
-                [seachKeyword]="filtration.KeyWord"
+                [seachKeyword]="searchModel.KeyWord"
                 [searchByList]="searchByList"
                 (onExport)="onExport($event)"
-                (onFilter)="this.filtration.Page=1;getSchools(); chartsComp.getChartData(searchModel)"
-                (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchools();chartsComp.getChartData(searchModel)"
-                (onClear)="clearFilter();chartsComp.getChartData(searchModel)">
+                (onFilter)="this.searchModel.Page=1;getSchools(); chartsComp.getChartData(chartSearchModel)"
+                (onSearch)="this.searchModel.Page=1;searchModel.KeyWord = $event; getSchools();chartsComp.getChartData(chartSearchModel)"
+                (onClear)="resetFilter(this.getSchools.bind(this));chartsComp.getChartData(chartSearchModel)">
 
                 <div class="row gx-5 form-set">
                   <div class="col ">
                     <label class="label">{{'dashboard.schools.schoolName'|translate}}</label>
-                    <input [(ngModel)]="filtration.schoolName"  type="text"  pInputText placeholder="{{'dashboard.schools.schoolName'|translate}}" />
+                    <input [(ngModel)]="searchModel.schoolName"  type="text"  pInputText placeholder="{{'dashboard.schools.schoolName'|translate}}" />
                   </div>
 
                   <div class="col ">
                     <label class="label">{{'dashboard.schools.schoolNumber'|translate}}</label>
-                    <input [(ngModel)]="filtration.schoolNumber"  type="text"  pInputText placeholder="{{'dashboard.schools.schoolNumber'|translate}}" />
+                    <input [(ngModel)]="searchModel.schoolNumber"  type="text"  pInputText placeholder="{{'dashboard.schools.schoolNumber'|translate}}" />
                   </div>
 
                   <div class="col">
                     <label class="label" for="region">{{'dashboard.schools.schoolType'|translate }}  </label>
-                    <p-multiSelect [options]="(schoolCategory$ |async)" display="chip" [(ngModel)]="filtration.schoolCategoryId" optionValue="id" optionLabel="{{lang=='ar' ? 'arabicName': 'englishName'}}"  placeholder="{{'shared.chooseState'|translate }}"></p-multiSelect>
+                    <p-multiSelect [options]="(schoolCategory$ |async)" display="chip" [(ngModel)]="searchModel.schoolCategoryId" optionValue="id" optionLabel="{{lang=='ar' ? 'arabicName': 'englishName'}}"  placeholder="{{'shared.chooseState'|translate }}"></p-multiSelect>
                   </div>
 
                 </div>
@@ -38,19 +38,19 @@
                 <div class="row gx-5 form-set">
                     <div class="col">
                         <label class="label" for="status">{{'shared.status'|translate }} </label>
-                        <p-dropdown [options]="schoolStatus" [(ngModel)]="filtration.Status" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="schoolStatus" [(ngModel)]="searchModel.Status" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                     </div>
                     <div class="col">
                         <label class="label" for="city">{{'shared.city'|translate }} </label>
-                        <p-multiSelect [options]="(cities$ |async)" display="chip" [(ngModel)]="filtration.CityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-multiSelect>
+                        <p-multiSelect [options]="(cities$ |async)" display="chip" [(ngModel)]="searchModel.CityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-multiSelect>
                     </div>
                     <div class="col">
                         <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                        <p-multiSelect [options]="(states$ |async)" display="chip" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"  placeholder="{{'shared.chooseState'|translate }}"></p-multiSelect>
+                        <p-multiSelect [options]="(states$ |async)" display="chip" [(ngModel)]="searchModel.StateId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"  placeholder="{{'shared.chooseState'|translate }}"></p-multiSelect>
                     </div>
                     <div class="col">
                         <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                        <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
+                        <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="searchModel.curriculumId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
                     </div>
                 </div>
 
@@ -157,7 +157,7 @@
 
         </p-table>
         <div *ngIf="schools.total > paginationState.rows">
-            <app-pagination [currentPage]="filtration.Page" [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [currentPage]="searchModel.Page" [totalItems]="schools.total" (paginationChanged)="this.onPaginationChanged($event ,this.getSchools.bind(this))"></app-pagination>
         </div>
 
     </div>

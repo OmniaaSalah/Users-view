@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { finalize, map, Observable, take } from 'rxjs';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class SchoolsReportsService {
   constructor(private translate:TranslateService,private http: HttpHandlerService,
     private tableLoaderService: LoaderService) { }
 
-  getAllSchools(filter?:Partial<Filter>){
+  getAllSchools(filter?:Partial<SearchModel>){
     this.tableLoaderService.isLoading$.next(true)
 
     return this.http.post('/School/report',filter)
@@ -94,7 +94,7 @@ export class SchoolsReportsService {
     ];
   }
 
-  schoolsToExport(filter?:Partial<Filter>)
+  schoolsToExport(filter?:Partial<SearchModel>)
   {
     return this.http.post('/School/report',filter)
     .pipe(

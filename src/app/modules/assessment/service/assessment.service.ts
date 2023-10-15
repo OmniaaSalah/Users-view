@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { finalize, Observable, take } from 'rxjs';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -13,7 +13,7 @@ export class AssessmentService {
 
   constructor(private tableLoaderService: LoaderService,private http: HttpHandlerService) {}
 
-  getRates(filter?:Partial<Filter>) {
+  getRates(filter?:Partial<SearchModel>) {
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get('/Rate',filter)
     .pipe(

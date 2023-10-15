@@ -72,3 +72,8 @@
 <ng-container *ngIf="!subjects.totalAllData && !subjects.loading">
     <app-informative-block subTitle="{{'emptyList.Subject List is Empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>
+
+
+
+<app-spea-subjects [gradeId]="gradId"></app-spea-subjects>
+

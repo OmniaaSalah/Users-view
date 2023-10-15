@@ -13,6 +13,7 @@ import { ParentsReportsComponent } from './components/parents-reports/parents-re
 import { SchoolsReportsComponent } from './components/schools-reports/schools-reports.component';
 import { TeachersReportsComponent } from './components/teachers-reports/teachers-reports.component';
 import { TransferedStudentsReportsComponent } from './components/transfered-students-reports/transfered-students-reports.component';
+import { LocalizeDatePipe } from 'src/app/shared/pipes/localize-date.pipe';
 
 
 @NgModule({
@@ -31,6 +32,6 @@ import { TransferedStudentsReportsComponent } from './components/transfered-stud
     ReportsManagmentRoutingModule,
     SharedModule,
     PrimngModule,
-  ]
+  ],
 })
 export class ReportsManagmentModule { }

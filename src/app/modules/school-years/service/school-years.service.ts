@@ -1,7 +1,7 @@
 import { Injectable,inject } from '@angular/core';
 import { ISchoolYear } from 'src/app/core/Models/school-years/school-year';
 import { take,finalize, map } from 'rxjs';
-import { Filter } from 'src/app/core/Models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { BehaviorSubject } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -43,7 +43,7 @@ export class SchoolYearsService {
   ]
    }
 
-   getAllSchoolYears(filter?:Partial<Filter>)
+   getAllSchoolYears(filter?:Partial<SearchModel>)
    {
      this.loaderService.isLoading$.next(true);
      return this.http.post('/SchoolYear/Search',filter).pipe(take(1),finalize(()=> {
@@ -126,7 +126,7 @@ export class SchoolYearsService {
     return this.http.post(`/SchoolYear/top-students`,topStudents).pipe(take(1))
   }
 
-  getAllTopStudents(schoolYearId,filter?:Partial<Filter>)
+  getAllTopStudents(schoolYearId,filter?:Partial<SearchModel>)
   {
     this.loaderService.isLoading$.next(true);
     return this.http.post(`/Student/top-students/${schoolYearId}`,filter).pipe(take(1),finalize(()=> {

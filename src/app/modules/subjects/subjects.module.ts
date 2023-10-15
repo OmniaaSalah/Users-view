@@ -14,7 +14,7 @@ import { EditNewSubjectComponent } from './components/edit-new-subject/edit-new-
     CommonModule,
     SubjectsRoutingModule,
     PrimngModule,
-   SharedModule ,
+    SharedModule ,
 
   ]
 })

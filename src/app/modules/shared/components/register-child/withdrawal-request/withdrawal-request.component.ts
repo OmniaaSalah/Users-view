@@ -14,7 +14,7 @@ import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.e
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { SettingsService } from '../../../../system-setting/services/settings/settings.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
@@ -63,7 +63,7 @@ export class WithdrawalRequestComponent implements OnInit {
     private indexesService:IndexesService,
     private route: ActivatedRoute,
     private toastr:ToastrService,
-    public registerChildService:RegisterChildService,
+    public registerChildService:StudentService,
     private settingServcice:SettingsService,
     private router:Router,
     private userService:UserService,

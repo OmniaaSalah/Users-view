@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -41,8 +41,8 @@ export class DivisionStudentsComponent implements OnInit {
   selectedStudent:Student= null
   divisionTracks$= this.divisionService.getDivisionTracks(this.divisionId)
   optionalSubjects$
-  filtration:Filter = {
-    ...Filtration,
+  filtration:SearchModel = {
+    ...BaseSearchModel,
     schoolYearId:1,
     TrackId:''
   }
@@ -147,6 +147,7 @@ export class DivisionStudentsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getStudents();
 
   }

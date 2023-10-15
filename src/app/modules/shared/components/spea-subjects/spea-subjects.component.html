@@ -1,0 +1,172 @@
+
+<hr class="my-6">
+
+<h2 class="color-primary fw-bold">{{'dashboard.schools.speaSubjects' |translate}}</h2>
+
+<div class="prim-table mt-4" *ngIf="subjects.totalAllData || subjects.loading">
+  <p-table
+    #dt
+    [lazy]="true"
+    [value]="subjects.list"
+    (onSort)="onSort($event)"
+    [scrollable]="true"
+  >
+    <ng-template pTemplate="caption">
+      <app-table-caption
+        [seachKeyword]="filtration.KeyWord"
+        (onExport)="onExport($event)"
+        (onFilter)="filtration.Page = 1; getAllSubjects()"
+        (onSearch)="
+          filtration.Page = 1; filtration.KeyWord = $event; getAllSubjects()
+        "
+        (onClear)="clearFilter()"
+      >
+        <div class="row gx-5 form-set">
+          <div class="col-lg-4">
+            <label class="label" for="evaluationType"
+              >{{ "dashboard.Subjects.Evaluation System" | translate }}
+            </label>
+            <p-multiSelect
+              [options]="evaluationTypeList"
+              display="chip"
+              [(ngModel)]="filtration.evaluation"
+              optionLabel="name"
+              optionValue="value"
+              placeholder="{{
+                'dashboard.Subjects.select evaluation type' | translate
+              }}"
+            ></p-multiSelect>
+          </div>
+        </div>
+      </app-table-caption>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="ArabicName">
+          <p-sortIcon field="ArabicName"></p-sortIcon
+          >{{ "dashboard.Subjects.subject Code" | translate }}
+        </th>
+        <th pSortableColumn="EnglishName">
+          <p-sortIcon field="EnglishName"></p-sortIcon
+          >{{ "dashboard.SchoolYear.Subject" | translate }}
+        </th>
+        <th pSortableColumn="SchoolArabicName">
+          {{ "School" | translate
+          }}<p-sortIcon field="SchoolArabicName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="SchoolCode">
+          {{ "dashboard.schools.schoolNumber" | translate
+          }}<p-sortIcon field="SchoolCode"></p-sortIcon>
+        </th>
+        <th pSortableColumn="CurriculumsArabicName">
+          {{ "dashboard.schools.SchoolCurriculum" | translate
+          }}<p-sortIcon field="CurriculumsArabicName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="EvaluationSystem">
+          <p-sortIcon field="EvaluationSystem"></p-sortIcon
+          >{{ "dashboard.Subjects.Evaluation System" | translate }}
+        </th>
+        <th pSortableColumn="CreatedBy">
+          <p-sortIcon field="CreatedBy"></p-sortIcon
+          >{{ "dashboard.Subjects.Created by" | translate }}
+        </th>
+        <th pSortableColumn="CreatedDate">
+          <p-sortIcon field="CreatedDate"></p-sortIcon
+          >{{ "shared.Created Date" | translate }}
+        </th>
+        <th pSortableColumn="UpdatedBy">
+          <p-sortIcon field="UpdatedBy"></p-sortIcon
+          >{{ "dashboard.Subjects.Edited by" | translate }}
+        </th>
+        <th pSortableColumn="UpdatedDate">
+          <p-sortIcon field="UpdatedDate"></p-sortIcon
+          >{{ "dashboard.Subjects.Last EditDate" | translate }}
+        </th>
+        <th pSortableColumn="MinimumDegree">
+          <p-sortIcon field="MinimumDegree"></p-sortIcon
+          >{{ "dashboard.Assessment.Minmum Degree" | translate }}
+        </th>
+        <th pSortableColumn="MaximumDegree">
+          <p-sortIcon field="MaximumDegree"></p-sortIcon
+          >{{ "dashboard.Assessment.Maximum Degree" | translate }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-e>
+      <tr>
+        <td>{{ e?.subjectCode | translate }}#</td>
+        <td>{{ e?.subjectName | currentLang }}</td>
+        <td>
+          {{ (e?.schoolName | currentLang) || ("shared.notFound" | translate) }}
+        </td>
+
+        <td>{{ e?.schoolCode || ("shared.notFound" | translate) }}</td>
+        <td>
+          {{
+            (e?.curriculumsName | currentLang) ||
+              ("shared.notFound" | translate)
+          }}
+        </td>
+        <td>
+          {{
+            (e?.evaluationType | translate) || ("shared.notFound" | translate)
+          }}
+        </td>
+        <td>{{ e?.creatorName || ("shared.notFound" | translate) }}</td>
+        <td>{{ e?.createdDate | LocalizeDate }}</td>
+        <td>{{ e?.editorName || ("shared.notFound" | translate) }}</td>
+        <td>
+          {{
+            (e?.lastEditedDate | LocalizeDate) ||
+              ("shared.notFound" | translate)
+          }}
+        </td>
+
+        <td class="degree" *ngIf=" e?.evaluationType == 'IPpoints' || e?.evaluationType == 'Grades' " >
+          {{ e?.subjectMinmumDegree }}
+        </td>
+        <td
+          class="degree" *ngIf=" e?.evaluationType != 'IPpoints' && e?.evaluationType != 'Grades' " >
+          -
+        </td>
+        <td *ngIf=" e?.evaluationType == 'IPpoints' || e?.evaluationType == 'Grades' " >{{ e?.maximumDegree }}</td>
+        <td *ngIf=" e?.evaluationType != 'IPpoints' && e?.evaluationType != 'Grades' " >-</td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="20" class="search">
+          <ng-container
+            *ngIf="
+              subjects.totalAllData &&
+              subjects.list.length == 0 &&
+              !subjects.loading">
+            <app-informative-block
+              title="{{ 'emptyList.noDataMatch' | translate }}"
+              src="assets/images/empty-list/empty-list.svg"
+            ></app-informative-block>
+          </ng-container>
+
+          <app-loader></app-loader>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div *ngIf="paginationState.rows < subjects.total">
+    <app-pagination
+      [currentPage]="filtration.Page"
+      [totalItems]="subjects.total"
+      (paginationChanged)="paginationChanged($event)"
+    ></app-pagination>
+  </div>
+</div>
+<!-- emptymessage -->
+<ng-container *ngIf="!subjects.totalAllData && !subjects.loading">
+  <app-informative-block
+    title="{{ 'emptyList.Subject List is Empty' | translate }}"
+    src="assets/images/empty-list/empty-list.svg"
+  ></app-informative-block>
+</ng-container>

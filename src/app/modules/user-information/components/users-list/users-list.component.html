@@ -85,10 +85,19 @@
                         </div>
                     </td>
                     <td pFrozenColumn [frozen]="true" class="actions">
-                        <div  role="button" class=" d-flex align-items-center gap-3 justify-content-end mx-4" routerLink="/manager-tools/user-information/edit-user/{{e.id}}" *permit="ClaimsEnum.S_U_User">
+                      <div class="d-flex align-items-center gap-4" >
+                        <ng-container *ngIf="currentUserId!=e.userId">
+                          <button>
+                            <img  ConfirmDialog (onConfirm)="deleteUser(e.id)" src="assets/images/shared/rect-xmark.svg" alt="حذف">
+                          </button>
+                          <span>|</span>
+                        </ng-container>
+                        <div  role="button" class=" d-flex align-items-center gap-3 justify-content-end ms-4" routerLink="/manager-tools/user-information/edit-user/{{e.id}}" *permit="ClaimsEnum.S_U_User">
                            <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                            <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                         </div>
+
+                      </div>
 
                     </td>
                 </tr>
@@ -112,7 +121,7 @@
 
         <div>
             <div *ngIf="paginationState.rows<users.total">
-                <app-pagination [currentPage]="filtration.Page" [totalItems]="users.total" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+                <app-pagination [currentPage]="filtration.Page" [totalItems]="users.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
             </div>
         </div>
 

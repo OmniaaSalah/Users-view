@@ -428,6 +428,7 @@
         "Total Number":"Total number",
         "gotothem":"Go to them",
         "notFound":"Not found",
+        "notFoundPage":"Not Found",
         "age": "Age",
         "SchoolBus":"School bus",
         "PrivateCar":"Private car",
@@ -817,6 +818,7 @@
         "Request cannot be processed, Please contact support.":"Request cannot be processed, please contact support.",
         "This student is prohibited from withdrawing": "This student is prohibited from withdrawing",
         "This student has financial obligations":"This student has financial obligations",
+        "Request status is Cancelled":"Request status is Cancelled",
         "childExistForAnotherGaurdian":"This child is registered For Other Guardian. do you need to send a request for relink child to you?",
         "childAlreadyRegisted":"This child {{value}} had already registered for you",
         "gracePeriodCreated":"Grace period created succesfully",
@@ -843,7 +845,9 @@
         "degreesRejected":"uploaded Degrees Accepted Successfully",
         "DegreeImproved":"Student Degrees Improved succssfully",
         "upgradeStudents":"Student Upgraded Successfully",
-        "techError":"sorry , seems their is a technical problem"
+        "techError":"sorry , seems their is a technical problem",
+        "deleteChild":"Please note that once the child is deleted, all uncompleted requests would be canceled. Are you sure you want to delete ?"
+
     },
     "dashboard": {
         "Assessment": {

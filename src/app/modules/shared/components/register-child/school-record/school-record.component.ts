@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
@@ -22,7 +22,7 @@ export class SchoolRecordComponent implements OnInit {
 
   get statusEnum () {return StatusEnum}
 
-  filtration :Filter = {...Filtration,StudentId:this.studentId||this.childId}
+  filtration :SearchModel = {...BaseSearchModel,StudentId:this.studentId||this.childId}
   paginationState= {...paginationInitialState}
 
   record={
@@ -79,6 +79,7 @@ export class SchoolRecordComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getStudentRecord()
 
   }

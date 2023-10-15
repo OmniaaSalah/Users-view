@@ -8,7 +8,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 
 @Component({
   selector: 'app-identity-info',
@@ -31,7 +31,7 @@ export class IdentityInfoComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
     private countriesService:CountriesService,
-    public childService:RegisterChildService,
+    public childService:StudentService,
     private userService:UserService,
     private cliamsService:ClaimsService,
   ) { }

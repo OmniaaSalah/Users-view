@@ -3,9 +3,9 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
@@ -28,8 +28,8 @@ export class GardeStudentsComponent implements OnInit {
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   gradeId= this.route.snapshot.paramMap.get('gradeId')
 
-  filtration:Filter = {
-    ...Filtration,
+  filtration:SearchModel = {
+    ...BaseSearchModel,
     DivisionId:null
   }
 
@@ -116,6 +116,7 @@ export class GardeStudentsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getStudents();
 
   }

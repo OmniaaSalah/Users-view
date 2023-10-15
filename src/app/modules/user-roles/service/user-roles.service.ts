@@ -3,7 +3,7 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { take,BehaviorSubject,finalize,map, of } from 'rxjs';
-import { Filter } from 'src/app/core/Models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { IRestrictionSchool } from 'src/app/core/Models/user-roles/restriction-school';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
@@ -49,7 +49,7 @@ export class UserRolesService {
   }
 
 
-  getAllRoles(filter?:Partial<Filter>)
+  getAllRoles(filter?:Partial<SearchModel>)
   {
     this.loaderService.isLoading$.next(true);
     return this.http.post('/role-details',{},filter).pipe(take(1),finalize(()=> {

@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
 import { map } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
@@ -28,7 +28,7 @@ export class SubjectsAndDegreesComponent implements OnInit {
     {label:this.translate.instant('shared.finalResult'), active: false, value:SemesterEnum.FinalResult}
   ]
 
-  filtration :Filter = {...Filtration,semester:0}
+  filtration :SearchModel = {...BaseSearchModel,semester:0}
   paginationState= {...paginationInitialState}
 
   studentPerformanceModalOpend=false
@@ -107,6 +107,7 @@ export class SubjectsAndDegreesComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getSubjects()
 
   }

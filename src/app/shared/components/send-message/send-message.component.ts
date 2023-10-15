@@ -11,8 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { Filtration } from 'src/app/core/helpers/filtration';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { MessageService } from 'src/app/modules/messages/service/message.service';
 import { SchoolsService } from 'src/app/modules/schools/services/schools/schools.service';
 import { UserRolesService } from 'src/app/modules/user-roles/service/user-roles.service';
@@ -62,7 +62,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     loading: true,
   };
 
-  filtration: Filter = { ...Filtration, curriculumId: null, StateId: null };
+  filtration: SearchModel = { ...BaseSearchModel, curriculumId: null, StateId: null };
   selectSchoolModelOpened: boolean = false;
   MarkedListLength;
   autoCompleteForParent = [];

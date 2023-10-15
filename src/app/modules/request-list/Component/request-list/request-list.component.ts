@@ -2,7 +2,7 @@ import { Component, OnInit,inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models';
 
@@ -40,10 +40,10 @@ export class RequestListComponent implements OnInit {
 
 
     filtration = {
-      ...Filtration,
+      ...BaseSearchModel,
        SortColumnName:'createdDate',
        SortBy: 'Desc',
-       RequestStatus: [UserRequestsStatus.Pending, UserRequestsStatus.TentativelyAccepted,UserRequestsStatus.ModificationRequest],
+       RequestStatus: null,
        RequestType:null,
        ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
       };
@@ -104,7 +104,7 @@ export class RequestListComponent implements OnInit {
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
         this.requests.loading=true;
         this.requests.list=[];
-        let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus.flat()}
+        let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus?.flat()}
         this.systemRequestService.getUserRequests(filter).subscribe((res)=>{
           this.sharedService.filterLoading.next(false);
             this.requests.loading = false;
@@ -147,7 +147,7 @@ export class RequestListComponent implements OnInit {
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
       this.requests.loading=true;
       this.requests.list=[];
-      let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus.flat()}
+      let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus?.flat()}
       this.systemRequestService.getMyRequests(filter).subscribe(res=>{
         this.sharedService.filterLoading.next(false);
         this.requests.loading = false;
@@ -203,6 +203,7 @@ export class RequestListComponent implements OnInit {
 
     paginationChanged(event: paginationState) {
       this.filtration.Page = event.page;
+      this.filtration.PageSize = event.rows
      this.applyFilter()
 
     }

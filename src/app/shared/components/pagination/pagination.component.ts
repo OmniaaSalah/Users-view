@@ -46,6 +46,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.paginationState.page = 1
     this.currentPage =1
     this.paginationState.first=0
+    localStorage.setItem('ItemsPerPage', pageSize)
     this.onPageChange()
 
   }
@@ -145,11 +146,8 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
 
   onPageChange(event: paginationState=this.paginationState) {
-console.log(event);
-
     this.paginationState = { ...this.paginationState, ...event ,page:this.paginationState.page} ;
     this.paginationChanged.emit(this.paginationState)
-
   }
 
 }

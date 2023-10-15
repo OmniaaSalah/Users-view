@@ -2,7 +2,7 @@ import { Component, OnInit,inject} from '@angular/core';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { map, shareReplay } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -60,7 +60,7 @@ export class StudentsListComponent implements OnInit {
 
   filtration =
   {
-    ...Filtration,
+    ...BaseSearchModel,
     schoolYearId:1,
     SchoolId:null,
     curriculumId:null,
@@ -330,7 +330,6 @@ export class StudentsListComponent implements OnInit {
     this.filtration.Page = event.page
     this.filtration.PageSize = event.rows
     this.checkStudentList();
-
   }
   get userScope()
   {

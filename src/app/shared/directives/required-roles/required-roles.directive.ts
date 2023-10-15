@@ -23,7 +23,6 @@ export class RequiredRolesDirective {
 
 
   private validateAccess(): void {
-    console.log(this.IsAllowedTo);
 
     if (!this.IsAllowedTo) {
       this.renderer.setAttribute(this.elRef.nativeElement, 'disabled', 'true');

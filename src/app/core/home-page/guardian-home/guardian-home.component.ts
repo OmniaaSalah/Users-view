@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ParentService } from 'src/app/modules/parants/services/parent.service';

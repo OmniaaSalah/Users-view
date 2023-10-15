@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { map } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
@@ -37,7 +37,7 @@ export class SubjectDegreesComponent implements OnInit {
   gradeId=this.config.data.gradeId
   semester = this.config.data.semester
 
-  filtration:Filter = {...Filtration, schoolYearId:1,subjectid:this.subjectId, semester:this.semester}
+  filtration:SearchModel = {...BaseSearchModel, schoolYearId:1,subjectid:this.subjectId, semester:this.semester}
   paginationState= {...paginationInitialState}
 
   ImprovementOptions$=this.indexService.getIndext(IndexesEnum.ModifyStudentResult)
@@ -148,6 +148,7 @@ export class SubjectDegreesComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getSubjectDegrees();
 
   }

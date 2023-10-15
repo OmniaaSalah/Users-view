@@ -23,7 +23,7 @@ import {
   takeUntil,
 } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
@@ -84,7 +84,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
 
   schoolYearsDropdown$ =this.sharedService.getSchoolYearsList()
 
-  filtration = { ...Filtration, statusId: [] };
+  filtration = { ...BaseSearchModel, statusId: [] };
   constructor(
     private headerService: HeaderService,
     private userService: UserService,

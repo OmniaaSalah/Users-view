@@ -23,12 +23,10 @@ import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
 import { ButtonGroupComponent } from './components/button-group/button-group.component';
-import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 import { PermissionDirective } from './directives/permission/permission.directive';
 import { SendMessageComponent } from './components/send-message/send-message.component';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { CardStudentComponent } from './components/card-student/card-student.component';
-import { DialogModule } from 'primeng/dialog';
 import { LocalizeDatePipe } from './pipes/localize-date.pipe';
 import { SelectSchoolsComponent } from './components/select-schools/select-schools.component';
 import { RegisterRequestComponent } from './components/register-request/register-request.component';
@@ -42,7 +40,6 @@ import { FileComponent } from './components/file/file.component';
 import { TrauncateTextPipe } from './pipes/truncate-text/trauncate-text.pipe';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { SafePipe } from './pipes/safe.pipe';
-import { ConfirmDialogDirective } from './directives/confirm-dialog/confirm-dialog.directive';
 import { StudentBadgesComponent } from './components/student-badges/student-badges.component';
 import { WrapFuncPipe } from './pipes/wrapFunc/wrap-func.pipe';
 import { ClickOutsideDirective } from './directives/click-outside/click-outside.directive';
@@ -58,6 +55,9 @@ import { ExcludeEmptyListPipe } from './pipes/exclude-empty-list.pipe';
 import { FormControlValidationMsgDirective } from './directives/validations/form-control-validation-msg.directive';
 import { ToLocalDatePipe } from './pipes/to-local-date.pipe';
 import { BlobToBase64Pipe } from './pipes/blob-to-base64.pipe';
+import { ConfirmModalModule } from './confirm-modal.module';
+import { NotAllowedComponent } from '../core/components/not-allowed/not-allowed.component';
+import { ChildRequestsComponent } from '../modules/shared/components/child-requests/child-requests.component';
 
 registerLocaleData(localeAr);
 
@@ -80,9 +80,7 @@ registerLocaleData(localeAr);
     LocalizeDatePipe,
     LoaderComponent,
     SkeletonComponent,
-    ConfirmModelComponent,
     ButtonGroupComponent,
-    ConfirmModelComponent,
     SendMessageComponent,
     CurrentLangPipe,
     CardStudentComponent,
@@ -99,7 +97,6 @@ registerLocaleData(localeAr);
     TrauncateTextPipe,
     WorkflowComponent,
     SafePipe,
-    ConfirmDialogDirective,
     StudentBadgesComponent,
     StudentBadgesComponent,
     WrapFuncPipe,
@@ -113,7 +110,8 @@ registerLocaleData(localeAr);
     FormControlValidationMsgDirective,
     ToLocalDatePipe,
     BlobToBase64Pipe,
-
+    NotAllowedComponent,
+    ChildRequestsComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -122,7 +120,6 @@ registerLocaleData(localeAr);
     FontAwesomeModule,
     InfiniteScrollModule,
     PrimngModule,
-    DialogModule,
     NgxSkeletonLoaderModule,
     TranslateModule,
     CalendarModule.forRoot({
@@ -130,7 +127,8 @@ registerLocaleData(localeAr);
       useFactory: adapterFactory,
     }),
     RouterModule,
-    ToastrModule
+    ToastrModule,
+    ConfirmModalModule
 
   ],
   exports: [
@@ -153,9 +151,7 @@ registerLocaleData(localeAr);
     NgxSkeletonLoaderModule,
     LoaderComponent,
     SkeletonComponent,
-    ConfirmModelComponent,
     ButtonGroupComponent,
-    ConfirmModelComponent,
     SendMessageComponent,
     CurrentLangPipe,
     CardStudentComponent,
@@ -173,7 +169,6 @@ registerLocaleData(localeAr);
     TrauncateTextPipe,
     WorkflowComponent,
     SafePipe,
-    ConfirmDialogDirective,
     StudentBadgesComponent,
     WrapFuncPipe,
     ClickOutsideDirective,
@@ -188,8 +183,11 @@ registerLocaleData(localeAr);
     ExcludeEmptyListPipe,
     FormControlValidationMsgDirective,
     ToLocalDatePipe,
-    BlobToBase64Pipe
+    BlobToBase64Pipe,
+    NotAllowedComponent,
+    ConfirmModalModule,
+    ChildRequestsComponent
   ],
-  providers:[SharedService]
+  providers:[SharedService,LocalizeDatePipe]
 })
 export class SharedModule { }

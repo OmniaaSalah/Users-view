@@ -1,6 +1,6 @@
 import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ToastrService } from 'ngx-toastr';
@@ -35,7 +35,7 @@ export class ViewCertificatesComponent implements OnInit {
       list:[],
       loading:true
     }
-    filtration = {...Filtration,StudentId: null,CertificateStatus:null,SchoolYearId:null,CertificateType:null};
+    filtration = {...BaseSearchModel,StudentId: null,CertificateStatus:null,SchoolYearId:null,CertificateType:null};
   constructor(  private translate: TranslateService,
     private issuance: IssuanceCertificaeService,
     private toastr:ToastrService,
@@ -90,6 +90,7 @@ export class ViewCertificatesComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getAllCertificates();
   }
 

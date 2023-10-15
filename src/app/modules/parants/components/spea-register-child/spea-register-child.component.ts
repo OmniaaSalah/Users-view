@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
@@ -32,7 +32,7 @@ export class SpeaRegisterChildComponent implements OnInit {
     }
   }
 
-filtration :Filter = {...Filtration,curriculumId:'', StateId: '',GradeId:''}
+filtration :SearchModel = {...BaseSearchModel,curriculumId:'', StateId: '',GradeId:''}
 paginationState= {...paginationInitialState}
 
 

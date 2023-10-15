@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterChildComponent } from './components/register-child/register-child.component';
+import { StudentDetailsComponent } from './components/register-child/student-details.component';
 import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { AbsenceDetailsComponent } from './components/register-child/absence-details/absence-details.component';
 import { AcceptInformationComponent } from './components/register-child/accept-information/accept-information.component';
@@ -17,6 +17,7 @@ import { StudentProhibitedStatusComponent } from './components/register-child/st
 import { StudentOperationsDropdownComponent } from './components/register-child/student-operations-dropdown/student-operations-dropdown.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EditHistoryComponent } from './components/register-child/edit-history/edit-history.component';
+import { SpeaSubjectsComponent } from './components/spea-subjects/spea-subjects.component';
 
 
 
@@ -25,7 +26,7 @@ import { EditHistoryComponent } from './components/register-child/edit-history/e
 
 @NgModule({
   declarations: [
-    RegisterChildComponent,
+    StudentDetailsComponent,
     MedicalFileComponent,
     AttachmentsChildComponent,
     AbsenceDetailsComponent,
@@ -39,13 +40,16 @@ import { EditHistoryComponent } from './components/register-child/edit-history/e
     PaymentsComponent,
     StudentProhibitedStatusComponent,
     StudentOperationsDropdownComponent,
-    EditHistoryComponent
+    EditHistoryComponent,
+    SpeaSubjectsComponent,
+
   ],
   imports: [
     CommonModule,
     PrimngModule,
     SharedModule,
   ],
-  exports:[RegisterChildComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent]
+  exports:[StudentDetailsComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent, SpeaSubjectsComponent]
+
 })
-export class DashboardSharedModule { }
+export class FeaturesSharedModule { }

@@ -5,9 +5,9 @@ import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter, finalize, map, Observable, of, share, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { Division, GenericResponse, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
@@ -24,7 +24,7 @@ import { SchoolsService } from '../../../schools/services/schools/schools.servic
 import { StudentsService } from '../../services/students/students.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { RegisterChildService } from 'src/app/modules/shared/services/register-child/register-child.service';
+import { StudentService } from 'src/app/modules/shared/services/register-child/register-child.service';
 
 type transeferBy = 'parent' | 'commission';
 
@@ -62,7 +62,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     }
   }
 
-  filtration :Filter = {...Filtration,curriculumId:null, StateId: null}
+  filtration :SearchModel = {...BaseSearchModel,curriculumId:null, StateId: null}
   paginationState= {...paginationInitialState}
 
   schoolGrades$
@@ -118,7 +118,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     private gradeService: GradesService,
     private divisionService: DivisionService,
     private confirm :ConfirmModelService,
-    private registerChildService:RegisterChildService
+    private registerChildService:StudentService
   ) { }
 
 

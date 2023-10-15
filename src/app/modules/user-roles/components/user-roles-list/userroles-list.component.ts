@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -40,7 +40,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   subscription:Subscription;
 
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     isactive:'',
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   };
@@ -174,6 +174,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getAllRole();
 
   }

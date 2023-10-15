@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -13,7 +13,7 @@ import { StudentsService } from 'src/app/modules/students/services/students/stud
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 
 @Component({
   selector: 'app-edit-history',
@@ -34,7 +34,7 @@ export class EditHistoryComponent implements OnInit {
 
   faChevronCircleLeft = faChevronLeft
 
-  filtration={...Filtration}
+  filtration={...BaseSearchModel}
   paginationState={...paginationInitialState}
 
   editList={
@@ -50,7 +50,7 @@ export class EditHistoryComponent implements OnInit {
     private translate:TranslateService,
     private schoolsService:SchoolsService,
     private studentsService:StudentsService,
-    public childService:RegisterChildService,
+    public childService:StudentService,
     private exportService :ExportService
   ) { }
 
@@ -108,6 +108,7 @@ export class EditHistoryComponent implements OnInit {
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
+     this.filtration.PageSize = event.rows
      this.getStudentEditHistory()
 
    }

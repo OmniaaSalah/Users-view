@@ -5,7 +5,7 @@
         <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption [seachKeyword]="filtration.KeyWord" [searchByList]="searchByList" (onExport)="onExport($event)" (onFilter)="checkParentList()"    (onSearch)="filtration.KeyWord = $event;filtration.page=1; checkParentList();" (onClear)="clearFilter()">
+                <app-table-caption [seachKeyword]="filtration.KeyWord" [searchByList]="searchByList" (onExport)="onExport($event)" (onFilter)="checkParentList()"    (onSearch)="filtration.KeyWord = $event;filtration.Page=1; checkParentList();" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-3" *ngIf="currentUserScope =='SPEA'">

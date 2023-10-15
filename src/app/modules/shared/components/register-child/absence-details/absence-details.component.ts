@@ -2,12 +2,12 @@ import { Component,OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { AbsenceType, SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { StudentsService } from '../../../../students/services/students/students.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 
 @Component({
   selector: 'app-absence-details',
@@ -19,7 +19,7 @@ export class AbsenceDetailsComponent implements OnInit {
   studentId = this.route.snapshot.paramMap.get('id')
   childId = this.route.snapshot.paramMap.get('childId')
     // << DATA PLACEHOLDER >> //
-    filtration:Filter = {...Filtration, semester:0}
+    filtration:SearchModel = {...BaseSearchModel, semester:0}
     paginationState= {...paginationInitialState}
 
     get absenceType(){ return AbsenceType}
@@ -44,7 +44,7 @@ export class AbsenceDetailsComponent implements OnInit {
     ]
 
   constructor(
-    private registerChildService:RegisterChildService,
+    private registerChildService:StudentService,
     private studentService:StudentsService,
     private route: ActivatedRoute,
     private translate:TranslateService

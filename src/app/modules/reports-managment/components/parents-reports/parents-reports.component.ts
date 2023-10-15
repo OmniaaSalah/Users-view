@@ -1,8 +1,8 @@
 import { Component, OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { ParentsReportsService } from '../../services/parents-reports-service/parents-reports.service';
@@ -35,8 +35,8 @@ export class ParentsReportsComponent implements OnInit {
   faAngleDown = faAngleDown
   isCollapsed=true
 
-  filtration :Filter = {
-    ...Filtration,
+  filtration :SearchModel = {
+    ...BaseSearchModel,
     IsChildOfAMartyr:null,
     IsSpecialAbilities:null,
     RegisterationEndDate:'',
@@ -171,6 +171,7 @@ export class ParentsReportsComponent implements OnInit {
 
     paginationChanged(event: paginationState) {
       this.filtration.Page = event.page;
+      this.filtration.PageSize = event.rows
       this.getParentReportList();
 
     }

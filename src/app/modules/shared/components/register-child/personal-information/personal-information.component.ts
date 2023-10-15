@@ -13,11 +13,11 @@ import { CountriesService } from 'src/app/shared/services/countries/countries.se
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsService } from 'src/app/core/services/claims.service';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { ParentService } from '../../../../parants/services/parent.service';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -85,7 +85,7 @@ export class PersonalInformationComponent implements OnInit {
     total:0,
     loading:false
   }
-  guardiansFilteration={...Filtration ,PageSize:30, NationalityId:'', emiratesId:''}
+  guardiansFilteration={...BaseSearchModel ,PageSize:30, NationalityId:'', emiratesId:''}
 	paginationState= paginationInitialState
 
   specialClassOptions = [
@@ -109,7 +109,7 @@ export class PersonalInformationComponent implements OnInit {
     private route: ActivatedRoute,
     private cliamsService:ClaimsService,
     private studentsService: StudentsService,
-    public childService:RegisterChildService,
+    public childService:StudentService,
     private translate:TranslateService,
     private guardiansService:ParentService,
     private indexService:IndexesService) { }
@@ -190,7 +190,6 @@ export class PersonalInformationComponent implements OnInit {
 
 
   ngOnDestroy(): void {
-    this.childService.onEditMode$.next(false)
   }
 
   changeGuardian(){
@@ -202,6 +201,7 @@ export class PersonalInformationComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
 		this.guardiansFilteration.Page = event.page
+    this.guardiansFilteration.PageSize = event.rows
 		this.getGuardians();
 	}
 }

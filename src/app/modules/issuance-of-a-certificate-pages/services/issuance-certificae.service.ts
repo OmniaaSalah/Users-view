@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { map, of, take } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CertificateStatusEnum } from 'src/app/shared/enums/certficates/certificate-status.enum';

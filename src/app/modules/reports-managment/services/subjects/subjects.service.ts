@@ -1,6 +1,6 @@
 import { Injectable ,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { finalize, map, Observable, take } from 'rxjs';
@@ -13,7 +13,7 @@ export class SubjectsService {
   lang = inject(TranslationService).lang;
   constructor(private translate : TranslateService,private http: HttpHandlerService, private tableLoaderService: LoaderService) { }
 
-  getAllSubjects(filter?:Partial<Filter>){
+  getAllSubjects(filter?:Partial<SearchModel>){
     this.tableLoaderService.isLoading$.next(true)
     return this.http.post('/School/subject-report',filter)
     .pipe(
@@ -69,7 +69,7 @@ export class SubjectsService {
 
   ];
 
-  subjectsToExport(filter?:Partial<Filter>)
+  subjectsToExport(filter?:Partial<SearchModel>)
   {
     return this.http.post('/School/subject-report',filter)
     .pipe(

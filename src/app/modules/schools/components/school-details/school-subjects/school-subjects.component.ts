@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -65,7 +65,7 @@ export class SchoolSubjectsComponent implements OnInit {
   trackId = this.route.snapshot.queryParamMap.get('trackId');
 
   filtration = {
-    ...Filtration,
+    ...BaseSearchModel,
     GradeId: this.gardeId,
     TrackId: this.trackId,
     SchoolId: this.schoolId,
@@ -116,6 +116,7 @@ export class SchoolSubjectsComponent implements OnInit {
       this.getTracks();
       this.getSubjects();
     }
+
   }
 
   getSubjects() {
@@ -202,6 +203,7 @@ export class SchoolSubjectsComponent implements OnInit {
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getSubjects();
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
+import { ConfirmModalModule } from '../../confirm-modal.module';
 
 interface modelData{
   message?:string,
@@ -16,9 +17,11 @@ export class ConfirmModelService {
   confirmed$ = new BehaviorSubject(null)
   onClose$ = new BehaviorSubject(null)
 
+  random = 0
+  constructor(private translate:TranslateService) {
+    console.log(this.random);
 
-
-  constructor(private translate:TranslateService) { }
+   }
 
   openModel(config: modelData = this.confirmMessage){
     this.confirmModelData$.next(config)

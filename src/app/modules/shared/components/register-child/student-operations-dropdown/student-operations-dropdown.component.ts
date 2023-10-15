@@ -25,7 +25,7 @@ import { DivisionService } from '../../../../schools/services/division/division.
 import { GradesService } from '../../../../schools/services/grade/grade.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { SettingsService } from '../../../../system-setting/services/settings/settings.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 
 @Component({
   selector: 'app-student-operations-dropdown',
@@ -102,7 +102,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
     private divisionService:DivisionService,
     private gradeService:GradesService,
     private route: ActivatedRoute,
-    public childService:RegisterChildService,
+    public childService:StudentService,
     private sharedService: SharedService,
     private toastr: ToastrService,
     private settingServcice:SettingsService,

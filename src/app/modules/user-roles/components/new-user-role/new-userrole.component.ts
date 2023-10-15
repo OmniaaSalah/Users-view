@@ -13,8 +13,8 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { UserRolesService } from '../../service/user-roles.service';
-import { Filtration } from 'src/app/core/helpers/filtration';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -58,7 +58,7 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
   notChecked: boolean = false;
   checked: boolean = true;
   urlParameter: string = this.route.snapshot.paramMap.get('roleId');
-  filtration: Filter = { ...Filtration, curriculumId: '', StateId: '' };
+  filtration: SearchModel = { ...BaseSearchModel, curriculumId: '', StateId: '' };
   paginationState = { ...paginationInitialState };
   schools = {
     totalAllData: 0,

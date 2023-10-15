@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegisterChildComponent } from './register-child.component';
+import { SpeaSubjectsComponent } from './spea-subjects.component';
 
-describe('RegisterChildComponent', () => {
-  let component: RegisterChildComponent;
-  let fixture: ComponentFixture<RegisterChildComponent>;
+describe('SpeaSubjectsComponent', () => {
+  let component: SpeaSubjectsComponent;
+  let fixture: ComponentFixture<SpeaSubjectsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegisterChildComponent ]
+      declarations: [ SpeaSubjectsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RegisterChildComponent);
+    fixture = TestBed.createComponent(SpeaSubjectsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

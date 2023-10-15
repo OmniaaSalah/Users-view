@@ -14,16 +14,16 @@ import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { StudentsService } from '../../../students/services/students/students.service';
-import { RegisterChildService } from '../../services/register-child/register-child.service';
+import { StudentService } from '../../services/register-child/register-child.service';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { MediaService } from 'src/app/shared/services/media/media.service';
 
 @Component({
-  selector: 'app-register-child',
-  templateUrl: './register-child.component.html',
-  styleUrls: ['./register-child.component.scss']
+  selector: 'app-student-details',
+  templateUrl: './student-details.component.html',
+  styleUrls: ['./student-details.component.scss']
 })
-export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
+export class StudentDetailsComponent implements OnInit, AfterViewInit,OnDestroy {
 
   display:boolean = false;
   ngDestroy$ = new Subject()
@@ -57,7 +57,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   // << DATA PLACEHOLDER >> //
 
 
-  student$: Observable<Student> = this.childService.Student$
+  student$: Observable<Student> = this.studentService.Student$
   currentStudent:Student
 
 
@@ -153,7 +153,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private translate:TranslateService,
     private studentsService: StudentsService,
     private route: ActivatedRoute,
-    public childService:RegisterChildService,
+    public studentService:StudentService,
     private toastr: ToastrService,
     private userService:UserService,
     private router:Router,
@@ -180,7 +180,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   getStudent(studentId){
 
-    this.childService.Student$.next(null)
+    this.studentService.Student$.next(null)
     this.studentsService.getStudent(studentId)
     .pipe(map(res=>{
       if(res.statusCode==HttpStatusCodeEnum.Unauthorized){
@@ -191,7 +191,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     }))
     .subscribe((res:any) =>{
-      this.childService.Student$.next(res?.result)    // for Sharing between multiple components instead of make multiple Http Requests
+      this.studentService.Student$.next(res?.result)    // for Sharing between multiple components instead of make multiple Http Requests
       this.schoolId = res.result.school?.id
 
       res.result.birthDate = new Date(res?.result?.birthDate)
@@ -218,10 +218,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   }
 
   updateStudent(){
-    this.childService.loading$.next(true)
+    this.studentService.loading$.next(true)
     this.studentsService.updateStudent(this.studentId || this.childId,this.studentForm.value)
     .pipe(finalize(()=> {
-      this.childService.loading$.next(false)
+      this.studentService.loading$.next(false)
       this.currentMode='view'
       this.paymentCurrentMode='view'
       this.stdBehaviorMode='view'
@@ -295,6 +295,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 			index:9,
 			claims:[], //this.claimsEnum.SEG_R_StudentEditList
 			isActive:false
+		},
+    {
+			title: this.translate.instant('dashboard.parents.requests'),
+			index:10,
+			claims:[this.claimsEnum.GSE_R_StudentRequests], //
+			isActive:false
 		}
 
 	]
@@ -349,7 +355,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngOnDestroy(): void {
     this.ngDestroy$.next(null)
     this.ngDestroy$.complete()
-    this.childService.onEditMode$.next(false)
   }
 
   showDialog() {
@@ -377,7 +382,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         this.toastr.success(this.translate.instant('toasterMessage.imageUploaded'))
         this.updateStudent()
         this.currentStudent.parsonalImagePath = res?.url
-        this.childService.Student$.next(this.currentStudent)
+        this.studentService.Student$.next(this.currentStudent)
 
         this.uploading = false
       },()=>{

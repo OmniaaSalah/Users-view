@@ -102,9 +102,9 @@ export abstract class BaseService {
       filter(event => event instanceof HttpResponse),
       map((res: HttpResponse<any>) => res.body),
       catchError((e:HttpErrorResponse) => {
-        console.log(e.error instanceof ErrorEvent);
-        console.log(e.type);
-        console.log(e.message);
+        // console.log(e.error instanceof ErrorEvent);
+        // console.log(e.type);
+        // console.log(e.message);
 
         if(e?.error.type != 'abort') {
           switch (e.status) {

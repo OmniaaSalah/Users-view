@@ -13,10 +13,16 @@ export enum TransferType{
 
 
 export enum FirstGradeCodeEnum{
-    KG =  1,
-    PrimarySchool = 2,
+  FS1 = 'P0-FS1', //FoundationStage المرحله التمهيديه
+  KG1 =  'KG1',//رياض الاطفال
+  KG2 =  'KG1',//رياض الاطفال
+  FS2  =  'FS2',//رياض الاطفال
+  Y1 ='Y1',//رياض الاطفال
+  Y2 ='Y2', //رياض الاطفال
 }
 
+export const FoundationStage =['P0-FS1']
+export const preschools = ['KG1', 'KG2',1, 'FS2', 'Y1', 'Y2']
 
 export enum CurriculumCodeEnum{
     English = "EnCurr",

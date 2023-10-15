@@ -1,12 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
@@ -25,6 +25,7 @@ import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
   styleUrls: ['./degrees.component.scss']
 })
 export class DegreesComponent implements OnInit {
+  @Input() gradeId=null
   @Output() onStepChanged = new EventEmitter();
   get fileTypesEnum () {return FileTypeEnum}
 
@@ -40,7 +41,7 @@ export class DegreesComponent implements OnInit {
 
   subjects$=this.divisionService.getAllSubjects(this.divisionId)
 
-  filtration:Filter = {...Filtration, semester:0}
+  filtration:SearchModel = {...BaseSearchModel, semester:0}
   paginationState= {...paginationInitialState}
 
   btnGroupItems=[
@@ -202,7 +203,8 @@ export class DegreesComponent implements OnInit {
   }
 
   paginationChanged(event: paginationState) {
-    this.filtration.Page = event.page
+    this.filtration.Page = event.page;
+    this.filtration.PageSize = event.rows
     this.getDivisionDegrees()
 
   }

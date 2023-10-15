@@ -1,23 +1,18 @@
 import { Component, OnInit ,inject} from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-
 import { IHeader } from 'src/app/core/Models/header-dashboard';
-import { Student } from 'src/app/core/models/student/student.model';
-
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { StudentsService } from '../../services/students/students.service';
 
 @Component({
-  selector: 'app-student-details',
-  templateUrl: './student-details.component.html',
-  styleUrls: ['./student-details.component.scss'],
+  selector: 'app-student-details-container',
+  templateUrl: './student-details-container.component.html',
+  styleUrls: ['./student-details-container.component.scss'],
 })
-export class StudentDetailsComponent implements OnInit {
+export class StudentDetailsContainerComponent implements OnInit {
   // << ICONS >> //
   faCheck = faCheck;
   faChevronDown = faChevronDown;

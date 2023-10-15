@@ -7,7 +7,6 @@ export enum requestTypeEnum {
 
     RegestrationApplicationRequest = "RegestrationApplicationRequest",
     RegestrationRequestForWithrawan = "RegestrationRequestForWithrawan",
-
     KgRegestrationApplicationRequest = "KgRegestrationApplicationRequest",
     PrimarySchoolRegestrationApplicationRequest = "PrimarySchoolRegestrationApplicationRequest",
 

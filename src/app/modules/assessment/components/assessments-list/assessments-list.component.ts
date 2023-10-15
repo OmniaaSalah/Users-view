@@ -4,8 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import {  faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AssessmentService } from '../../service/assessment.service';
-import { Filter } from 'src/app/core/models/filter/filter';
-import { Filtration } from 'src/app/core/helpers/filtration';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -32,8 +32,8 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
   faEllipsisVertical = faEllipsisVertical;
   paginationState= {...paginationInitialState}
   plusIcon = faPlus;
-  filtration: Filter = {
-    ...Filtration ,
+  filtration: SearchModel = {
+    ...BaseSearchModel ,
     status : null,
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
    }
@@ -72,6 +72,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
+    this.filtration.PageSize = event.rows
     this.getRate();
   }
 
