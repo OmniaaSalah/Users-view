@@ -6,7 +6,7 @@ import { StudentsListComponent } from './components/students-list/students-list.
 import { DeletedStudentComponent } from './components/deleted-student/deleted-student.component';
 import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { StudentDetailsComponent } from './components/student-details/student-details.component';
+import { StudentDetailsContainerComponent } from './components/student-details-container/student-details-container.component';
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
 import { ManualCertificatesComponent } from './components/manual-certificates/manual-certificates.component';
 import { IssuanceCertificateModule } from '../issuance-of-a-certificate-pages/issue-certificate.module';
@@ -19,7 +19,7 @@ import { FeaturesSharedModule } from '../shared/features-shared.module';
   declarations: [
     StudentsListComponent,
     DeletedStudentComponent,
-    StudentDetailsComponent,
+    StudentDetailsContainerComponent,
     TransferStudentComponent,
     ManualCertificatesComponent,
 

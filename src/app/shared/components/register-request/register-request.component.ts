@@ -27,7 +27,7 @@ import { requestTypeEnum } from '../../enums/system-requests/requests.enum';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { HttpStatusCodeEnum } from '../../enums/http-status-code/http-status-code.enum';
 import { StudentsService } from 'src/app/modules/students/services/students/students.service';
-import { FirstGradeCodeEnum } from '../../enums/school/school.enum';
+import { FirstGradeCodeEnum, FoundationStage, preschools } from '../../enums/school/school.enum';
 
 type ClassType= 'FusionClass' | 'SpecialClass'
 
@@ -293,8 +293,8 @@ initRegisterationForm(child){
     this.selectedGrade = this.AllGrades.filter(el => el.id ==gradeId)[0]
     this.filtration.GradeId = gradeId
 
-    if(this.selectedGrade?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
-    else if(this.selectedGrade?.code==FirstGradeCodeEnum.PrimarySchool) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
+    if(FoundationStage.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
+    else if(preschools.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
     else this.getRegistrationRequiresFiles()
     if(this.childRegistrationStatus!=RegistrationStatus.Withdrawal) this.selectedSchoolId =null
 

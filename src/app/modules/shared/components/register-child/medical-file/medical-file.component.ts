@@ -8,7 +8,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 
 @Component({
   selector: 'app-medical-file',
@@ -71,7 +71,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     private fb:FormBuilder,
     private studentsService: StudentsService,
     private route: ActivatedRoute,
-    public childService:RegisterChildService,
+    public childService:StudentService,
     private toaster:ToastrService,
     private cliamsService:ClaimsService,
     private sharedService:SharedService) { }

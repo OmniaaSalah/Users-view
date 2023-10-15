@@ -10,7 +10,7 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
@@ -56,7 +56,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     private fb:FormBuilder,
     private translate:TranslateService,
     private studentService: StudentsService,
-    public childService :RegisterChildService,
+    public childService :StudentService,
     private toaster:ToastrService,
     private sharedService:SharedService,
     private indexsService:IndexesService,
@@ -210,6 +210,5 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.childService.onEditMode$.next(false)
   }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterChildComponent } from './components/register-child/register-child.component';
+import { StudentDetailsComponent } from './components/register-child/student-details.component';
 import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { AbsenceDetailsComponent } from './components/register-child/absence-details/absence-details.component';
 import { AcceptInformationComponent } from './components/register-child/accept-information/accept-information.component';
@@ -26,7 +26,7 @@ import { SpeaSubjectsComponent } from './components/spea-subjects/spea-subjects.
 
 @NgModule({
   declarations: [
-    RegisterChildComponent,
+    StudentDetailsComponent,
     MedicalFileComponent,
     AttachmentsChildComponent,
     AbsenceDetailsComponent,
@@ -49,7 +49,7 @@ import { SpeaSubjectsComponent } from './components/spea-subjects/spea-subjects.
     PrimngModule,
     SharedModule,
   ],
-  exports:[RegisterChildComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent, SpeaSubjectsComponent]
+  exports:[StudentDetailsComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent, SpeaSubjectsComponent]
 
 })
 export class FeaturesSharedModule { }

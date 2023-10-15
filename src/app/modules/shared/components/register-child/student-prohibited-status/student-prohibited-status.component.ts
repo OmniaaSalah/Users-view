@@ -9,7 +9,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 
 @Component({
   selector: 'app-student-prohibited-status',
@@ -37,7 +37,7 @@ export class StudentProhibitedStatusComponent implements OnInit {
 
   constructor(
     private claimsService:ClaimsService,
-    public childService:RegisterChildService,
+    public childService:StudentService,
     private sharedService: SharedService,) { }
 
   ngOnInit(): void {

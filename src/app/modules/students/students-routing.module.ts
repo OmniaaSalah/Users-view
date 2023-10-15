@@ -4,7 +4,7 @@ import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { WithdrawalRequestComponent } from '../shared/components/register-child/withdrawal-request/withdrawal-request.component';
 import { DeletedStudentComponent } from './components/deleted-student/deleted-student.component';
 import { ManualCertificatesComponent } from './components/manual-certificates/manual-certificates.component';
-import { StudentDetailsComponent } from './components/student-details/student-details.component';
+import { StudentDetailsContainerComponent } from './components/student-details-container/student-details-container.component';
 import { StudentsListComponent } from './components/students-list/students-list.component';
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
 import { LayoutComponent } from 'src/app/layout/layout.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
         },
       },
       {
-        path: "student/:id", component: StudentDetailsComponent ,
+        path: "student/:id", component: StudentDetailsContainerComponent ,
         data:{
           title:{ar:'تفاصيل الطالب',en: 'Student Details'}
         }

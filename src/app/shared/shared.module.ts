@@ -57,6 +57,7 @@ import { ToLocalDatePipe } from './pipes/to-local-date.pipe';
 import { BlobToBase64Pipe } from './pipes/blob-to-base64.pipe';
 import { ConfirmModalModule } from './confirm-modal.module';
 import { NotAllowedComponent } from '../core/components/not-allowed/not-allowed.component';
+import { ChildRequestsComponent } from '../modules/shared/components/child-requests/child-requests.component';
 
 registerLocaleData(localeAr);
 
@@ -109,7 +110,8 @@ registerLocaleData(localeAr);
     FormControlValidationMsgDirective,
     ToLocalDatePipe,
     BlobToBase64Pipe,
-    NotAllowedComponent
+    NotAllowedComponent,
+    ChildRequestsComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -182,8 +184,10 @@ registerLocaleData(localeAr);
     FormControlValidationMsgDirective,
     ToLocalDatePipe,
     BlobToBase64Pipe,
-    NotAllowedComponent
+    NotAllowedComponent,
+    ConfirmModalModule,
+    ChildRequestsComponent
   ],
-  providers:[SharedService]
+  providers:[SharedService,LocalizeDatePipe]
 })
 export class SharedModule { }

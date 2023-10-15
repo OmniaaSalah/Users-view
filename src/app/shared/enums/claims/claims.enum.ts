@@ -69,6 +69,7 @@ export  enum ClaimsEnum{
     SEG_R_StudentEditList='SEG_R_StudentEditList',
     SEG_R_StudentSubjectsAndDegrees='SEG_R_StudentSubjectsAndDegrees',
     SEG_R_StudentRecord='SEG_R_StudentRecord',
+    GSE_R_StudentRequests='GSE_R_StudentRequests',
 
 
     S_UploadExam="S_UploadExam",

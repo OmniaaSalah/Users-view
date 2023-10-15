@@ -13,7 +13,7 @@ import { StudentsService } from 'src/app/modules/students/services/students/stud
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 
 @Component({
   selector: 'app-edit-history',
@@ -50,7 +50,7 @@ export class EditHistoryComponent implements OnInit {
     private translate:TranslateService,
     private schoolsService:SchoolsService,
     private studentsService:StudentsService,
-    public childService:RegisterChildService,
+    public childService:StudentService,
     private exportService :ExportService
   ) { }
 

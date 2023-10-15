@@ -319,7 +319,10 @@
             </ng-container>
             <ng-container *ngIf="step==9">
               <app-edit-history></app-edit-history>
-          </ng-container>
+            </ng-container>
+            <ng-container *ngIf="step==10">
+              <app-child-requests requestsOwner="Student"></app-child-requests>
+            </ng-container>
         </form>
 
     </div>

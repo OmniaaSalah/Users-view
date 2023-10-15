@@ -102,6 +102,17 @@ export class SystemRequestService {
       }))
     }
 
+    getStudentRequests(studentId, filter?:SearchModel ){
+      //  return of(this.requestArray)
+      this.tableLoaderService.isLoading$.next(true)
+       return this.http.get(`/Student/student-requests-list/${studentId}`,filter)
+       .pipe(
+        take(1),
+        finalize(()=> {
+          this.tableLoaderService.isLoading$.next(false)
+      }))
+    }
+
   userRequestsToExport(filter?:SearchModel){
     //  return of(this.requestArray)
     this.tableLoaderService.isLoading$.next(true)

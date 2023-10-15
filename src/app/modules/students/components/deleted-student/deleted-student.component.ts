@@ -14,7 +14,7 @@ import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
-import { RegisterChildService } from '../../../shared/services/register-child/register-child.service';
+import { StudentService } from '../../../shared/services/register-child/register-child.service';
 import { SettingsService } from '../../../system-setting/services/settings/settings.service';
 import { StudentsService } from '../../services/students/students.service';
 @Component({
@@ -63,7 +63,7 @@ export class DeletedStudentComponent implements OnInit, OnDestroy {
     private route:ActivatedRoute,
     private router:Router,
     private toasterService: ToastrService,
-    private registerChildService:RegisterChildService,
+    private registerChildService:StudentService,
     private settingServcice:SettingsService
   ) { }
 

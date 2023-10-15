@@ -6,6 +6,7 @@ import { ProhabitionType, RegistrationStatus, StatusEnum } from 'src/app/shared/
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { finalize, map, Observable, take } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { LocalizeDatePipe } from 'src/app/shared/pipes/localize-date.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class StudentsReportsService {
   studentsStatus = []
   prohibitionTypeList=[]
   lang = inject(TranslationService).lang;
-  constructor(private translate:TranslateService,private http: HttpHandlerService,
-    private tableLoaderService: LoaderService) {
+  constructor(
+    private translate:TranslateService,
+    private http: HttpHandlerService,
+    private tableLoaderService: LoaderService,
+    private localizeDatePipe:LocalizeDatePipe) {
     this.studentsStatus = [
       {
         value:RegistrationStatus.Registered,
@@ -221,8 +225,8 @@ export class StudentsReportsService {
             [this.translate.instant('shared.Identity Number')]: student?.emiratesId ? student?.emiratesId :this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.ChildWithoutNationality')]:student?.reasonForNotHavingEmiratesId[this.lang] ? student?.reasonForNotHavingEmiratesId[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.schools.SchoolCurriculum')]:student?.curriculumName ? student?.curriculumName[this.lang] :this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.parents.registedDate')]: student?.dateOfAcceptance ? student?.dateOfAcceptance :this.translate.instant('shared.notFound'),
-            [this.translate.instant('sign up.Birthday')]: student?.birthDate ? student?.birthDate :this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.parents.registedDate')]: this.localizeDatePipe.transform(student?.dateOfAcceptance) ? student?.dateOfAcceptance :this.translate.instant('shared.notFound'),
+            [this.translate.instant('sign up.Birthday')]: student?.birthDate ? this.localizeDatePipe.transform(student?.birthDate) :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.age')]: student?.age ? student?.age :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.status')]: student?.registrationStatus ? this.translate.instant('shared.allStatus.'+student?.registrationStatus) :this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isSpecialAbilities ? this.translate.instant('true') :this.translate.instant('false'),

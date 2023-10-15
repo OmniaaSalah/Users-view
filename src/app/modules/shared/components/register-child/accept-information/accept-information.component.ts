@@ -10,7 +10,7 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ReEnrollmentType, RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
-import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { StudentService } from '../../../services/register-child/register-child.service';
 
 
 @Component({
@@ -50,7 +50,7 @@ export class AcceptInformationComponent implements OnInit {
 
   constructor(
     private translate:TranslateService,
-    public childService:RegisterChildService,
+    public childService:StudentService,
     private sharedService:SharedService,
     private indexService :IndexesService) { }
 

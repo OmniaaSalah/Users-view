@@ -24,7 +24,7 @@ import { SchoolsService } from '../../../schools/services/schools/schools.servic
 import { StudentsService } from '../../services/students/students.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { RegisterChildService } from 'src/app/modules/shared/services/register-child/register-child.service';
+import { StudentService } from 'src/app/modules/shared/services/register-child/register-child.service';
 
 type transeferBy = 'parent' | 'commission';
 
@@ -118,7 +118,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     private gradeService: GradesService,
     private divisionService: DivisionService,
     private confirm :ConfirmModelService,
-    private registerChildService:RegisterChildService
+    private registerChildService:StudentService
   ) { }
 
 

@@ -12,7 +12,7 @@ import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.e
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { StudentsService } from '../../services/students/students.service';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
-import { RegisterChildService } from 'src/app/modules/shared/services/register-child/register-child.service';
+import { StudentService } from 'src/app/modules/shared/services/register-child/register-child.service';
 import { map, of, switchMap } from 'rxjs';
 import { Student } from 'src/app/core/models/student/student.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -79,7 +79,7 @@ export class ManualCertificatesComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private headerService: HeaderService,
-    private registerChildService: RegisterChildService,
+    private registerChildService: StudentService,
     private certificateService: IssuanceCertificaeService
   ) {
     this.certificateFormGrp = fb.group({

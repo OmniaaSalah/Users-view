@@ -7,7 +7,6 @@ import { ChildrenListComponent } from './components/children-list/children-list.
 import { ChildDetailsComponent } from './components/child-details/child-details.component';
 import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';
 import { ParentService } from './services/parent.service';
-import { ChildRequestsComponent } from './components/unregister-child/child-requests/child-requests.component';
 import { FeaturesSharedModule } from '../shared/features-shared.module';
 
 
@@ -18,7 +17,7 @@ import { FeaturesSharedModule } from '../shared/features-shared.module';
     ChildrenListComponent,
     ChildDetailsComponent,
     UnregisterChildComponent,
-    ChildRequestsComponent
+
   ],
   imports: [
     ParentsRoutingModule,
