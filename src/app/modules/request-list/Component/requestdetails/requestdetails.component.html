@@ -606,7 +606,7 @@
 
 
 <ng-template #attachments let-attachments let-showText="showText">
-    <div class=" d-flex align-items-center flex-grow-1 mt-5 gap-5" *ngIf="attachments?.length">
+    <div class=" d-flex align-items-center flex-wrap flex-grow-1 mt-5 gap-3" *ngIf="attachments?.length">
         <span class="flex-shrink-0" *ngIf="showText">{{'dashboard.Requests.requestAttachments' | translate}} </span>
         <div  class="col-md-3" *ngFor="let item of attachments">
             <app-file [file]="item"></app-file>

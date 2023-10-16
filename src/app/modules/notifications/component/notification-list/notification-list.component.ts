@@ -12,7 +12,8 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { NotificationService } from '../../service/notification.service';
-import { take } from 'rxjs';
+import { delay, switchMap, take } from 'rxjs';
+import { BaseSearchModel } from 'src/app/core/models/filter-search/base-search-model';
 
 @Component({
   selector: 'app-view-notification-list',
@@ -93,18 +94,25 @@ export class NotificationListComponent implements OnInit {
     });
   }
 
+  filtration = { ...BaseSearchModel, PageSize:100, emiretesId: '', schoolId: null, gradeId: null };
   getReceivers() {
-    this.notificationService.getSendersNames().subscribe((res) => {
+    this.notificationService.getSendersNames(this.filtration)
+    .pipe(switchMap(res=>{
+      this.receivers = res.result;
+      return this.notificationService.getSendersNames({...this.filtration, PageSize: res.totalAllData ||70000}).pipe( delay(5000))
+    }))
+    .subscribe((res) => {
       this.receivers = res.result;
     });
   }
 
+
   getNotifications() {
     this.notificationsList = [];
     this.searchModel.arabicNotificationName =
-      this.lang == 'ar' ? this.notificationName : null;
+    this.lang == 'ar' ? this.notificationName : null;
     this.searchModel.englishNotificationName =
-      this.lang == 'en' ? this.notificationName : null;
+    this.lang == 'en' ? this.notificationName : null;
     this.skeletonLoading = true;
     this.showSpinner = false;
     this.notificationService.getAllNotifications(this.searchModel).subscribe(

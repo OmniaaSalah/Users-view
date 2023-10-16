@@ -19,7 +19,7 @@ export class ChildDetailsComponent implements OnInit {
   faCheck = faCheck
   faClose = faClose
   currentUserScope = inject(UserService).getScope()
-  isRegistered= this.route.snapshot.queryParamMap.get('registered')
+  isRegistered= this.route.snapshot.queryParamMap.get('registered') || 'false'
   childId= this.route.snapshot.paramMap.get('childId');
   parentId = Number(this.route.snapshot.paramMap.get('parentId'));
   step = 1

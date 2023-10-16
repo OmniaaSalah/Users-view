@@ -74,8 +74,8 @@
         <ng-template pTemplate="body" let-subject let-columns="columns">
             <tr >
                 <td>{{subject?.name|currentLang}}</td>
-                <td>{{subject?.gradeName|currentLang}}</td>
-                <td>{{subject?.trackName|currentLang}}</td>
+                <td>{{(subject?.gradeName|currentLang) || ('shared.notFound' |translate)}}</td>
+                <td>{{(subject?.trackName|currentLang )|| ('shared.notFound' |translate)}}</td>
                 <td>{{subject?.speaSubject ? ('shared.yes'|translate): ('shared.no'|translate)}}</td>
                 <td>{{''+subject?.evaluationSystem |translate}}</td>
                 <td>{{subject?.isElective ? ('shared.optional' |translate) : ('shared.mandatory' |translate) }}</td>
@@ -100,11 +100,11 @@
                         <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </div>
 
-                    <div class="w-100" *ngIf="!subjectsObj.isGradeSelected">
+                    <!-- <div class="w-100" *ngIf="!subjectsObj.isGradeSelected">
                         <app-informative-block subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                    </div>
+                    </div> -->
 
-                    <div class="w-100" *ngIf="subjectsObj.loading && subjectsObj.isGradeSelected">
+                    <div class="w-100" *ngIf="subjectsObj.loading">
                       <app-loader></app-loader>
                     </div>
                 </td>
