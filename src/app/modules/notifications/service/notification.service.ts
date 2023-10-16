@@ -21,12 +21,12 @@ export class NotificationService {
   getNotificationsNames()
   {
     return this.http.get('/Notification/names')
-    
+
   }
 
-  getSendersNames()
+  getSendersNames(searchModel)
   {
-    return this.http.get('/Notification/senders')
-    
+    return this.http.get('/Notification/senders',searchModel)
+
   }
 }

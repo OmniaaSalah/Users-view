@@ -164,7 +164,7 @@ export class RequestdetailsComponent implements OnInit {
     // this.currentState?.currentState?.isFinal &&
     let isRegistrationReqLastStep =(this.requestDetails?.requestType== this.requestTypeEnum.RegestrationApplicationRequest || this.requestDetails?.requestType== this.requestTypeEnum.RegestrationRequestForWithrawan) && this.requestDetails?.requestStatus==this.RequestStatusEnum.Approved
 
-    if(submittedOption.label?.en.includes('reject')){
+    if(submittedOption.label?.en.includes('reject') || submittedOption.label?.en.includes('Reject')){
       if(this.requestsTypes[this.requestDetails?.requestType]){
         this.rejectReason$ = this.indexesService.getIndext(this.requestsTypes[this.requestDetails?.requestType].rejectReasonType )
       }

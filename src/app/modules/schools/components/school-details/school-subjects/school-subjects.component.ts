@@ -111,10 +111,11 @@ export class SchoolSubjectsComponent implements OnInit {
     if (this.currentUserScope == UserScope.Employee)
       this.headerService.changeHeaderdata(this.componentHeaderData);
 
+      this.getSubjects();
+
     if (this.filtration.GradeId) {
       this.subjectsObj.isGradeSelected = true;
       this.getTracks();
-      this.getSubjects();
     }
 
   }
