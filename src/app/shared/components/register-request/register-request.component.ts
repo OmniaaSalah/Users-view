@@ -293,8 +293,8 @@ initRegisterationForm(child){
     this.selectedGrade = this.AllGrades.filter(el => el.id ==gradeId)[0]
     this.filtration.GradeId = gradeId
 
-    if(FoundationStage.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
-    else if(preschools.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
+    if(preschools.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
+    else if(FoundationStage.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
     else this.getRegistrationRequiresFiles()
     if(this.childRegistrationStatus!=RegistrationStatus.Withdrawal) this.selectedSchoolId =null
 
