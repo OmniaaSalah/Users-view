@@ -127,7 +127,7 @@
 
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Date of Birth' | translate}} <span class="star">*</span></label>
-                    <p-calendar formControlName="birthDate" [ngClass]="{'ng-invalid ng-dirty':birthDate.errors?.['required'] && birthDate.touched}" [showIcon]="true" inputId="icon"  placeholder="{{'dd/mm/yy'|translate}}"  dataType="string"  [readonlyInput]="true"    dateFormat="yy-mm-dd" ></p-calendar>
+                    <p-calendar formControlName="birthDate" [ngClass]="{'ng-invalid ng-dirty':birthDate.errors?.['required'] && birthDate.touched}" [showIcon]="true" inputId="icon"  placeholder="{{'dd/mm/yy'|translate}}"  dataType="string"  [readonlyInput]="true" [maxDate]="maxDate"   dateFormat="yy-mm-dd" ></p-calendar>
                     <div [hidden]="birthDate.valid || birthDate.untouched">
                     <small *ngIf="birthDate.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}

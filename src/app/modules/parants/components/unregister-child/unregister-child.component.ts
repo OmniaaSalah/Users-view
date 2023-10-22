@@ -19,6 +19,8 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { ParentService } from '../../services/parent.service';
 import moment from 'moment';
+import { IHeader } from 'src/app/core/Models';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
   selector: 'app-unregister-child',
@@ -32,7 +34,7 @@ export class UnregisterChildComponent implements OnInit {
   get claimsEnum () {return ClaimsEnum}
 
   child : IunregisterChild;
-  childId = +this._route.snapshot.paramMap.get('childId');
+  childId = +this.route.snapshot.paramMap.get('childId');
 
   genderOptions=this.sharedService.genderOptions
 
@@ -120,7 +122,7 @@ export class UnregisterChildComponent implements OnInit {
     private parentService : ParentService,
     private countriesService:CountriesService,
     private fb :FormBuilder,
-     private _route: ActivatedRoute,
+     private route: ActivatedRoute,
      private router: Router,
      private sharedService: SharedService,
      public confirmModelService:ConfirmModelService,
@@ -128,10 +130,12 @@ export class UnregisterChildComponent implements OnInit {
      private toastr:ToastrService,
      private translate:TranslateService,
      private indexsService:IndexesService,
+     private headerService:HeaderService,
      private mediaService:MediaService,) { }
 
   ngOnInit(): void {
     this.getUnregisterChild();
+    this.setPageHeader()
   }
 
 
@@ -254,7 +258,7 @@ export class UnregisterChildComponent implements OnInit {
   deleteChild(){
     this.parentService.deleteChild(this.child.id).subscribe(res=>{
       this.toastr.success(getLocalizedValue(res.errorLocalized) || this.translate.instant('toasterMessage.deletedSuccessfully'))
-      this.router.navigate(['/'], {relativeTo:this._route})
+      this.router.navigate(['/'], {relativeTo:this.route})
     },(e :Error)=>{
       this.toastr.error(e.message || this.translate.instant('toasterMessage.error'))
       this.confirmModelService.confirmed$.next(false)
@@ -265,7 +269,7 @@ export class UnregisterChildComponent implements OnInit {
 
   navigateToRequestPage(){
     if (this.currentUserScope==this.userScope.Guardian) this.router.navigate([`/parent/child/${this.childId}/register-request`],{queryParams:{status:RegistrationStatus.Unregistered}})
-    else this.router.navigate(['register'], {relativeTo:this._route,queryParams:{status:RegistrationStatus.Unregistered}})
+    else this.router.navigate(['register'], {relativeTo:this.route,queryParams:{status:RegistrationStatus.Unregistered}})
 
   }
 
@@ -290,6 +294,109 @@ export class UnregisterChildComponent implements OnInit {
       this.uploading = false
     })
 
+
+  }
+
+
+  studentId = this.route.snapshot.paramMap.get('id');
+  parentId = Number(this.route.snapshot.paramMap.get('parentId'));
+  componentHeaderData: IHeader;
+
+  setPageHeader() {
+
+    if(this.router.url.includes('/child/')){
+      if (this.currentUserScope == UserScope.Employee) {
+        this.componentHeaderData = {
+          breadCrump: [
+            {
+              label: this.translate.instant('dashboard.parents.parents'),
+              routerLink: '/student-management/all-parents/',
+              routerLinkActiveOptions: { exact: true },
+            },
+            {
+              label: this.translate.instant('dashboard.parents.childrenList'),
+              routerLink: `/student-management/all-parents/parent/${this.parentId}/all-children`,
+              routerLinkActiveOptions: { exact: true },
+            },
+            {
+              label: this.translate.instant('dashboard.parents.sonDetails'),
+              routerLink: `/student-management/all-parents/parent/${this.parentId}/child/${this.childId}`,
+            },
+          ],
+          mainTitle: {
+            main: this.translate.instant('dashboard.parents.sonDetails'),
+          },
+        };
+      } else if (this.currentUserScope == UserScope.SPEA) {
+        this.componentHeaderData = {
+          breadCrump: [
+            {
+              label: this.translate.instant('dashboard.parents.parents'),
+              routerLink: '/schools-and-students/all-parents/',
+              routerLinkActiveOptions: { exact: true },
+            },
+            {
+              label: this.translate.instant('dashboard.parents.childrenList'),
+              routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/all-children`,
+              routerLinkActiveOptions: { exact: true },
+            },
+            {
+              label: this.translate.instant('dashboard.parents.sonDetails'),
+              routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}`,
+            },
+          ],
+          mainTitle: {
+            main: this.translate.instant('dashboard.parents.sonDetails'),
+          },
+        };
+      } else if (this.currentUserScope == UserScope.Guardian) {
+
+        this.componentHeaderData = {
+          breadCrump: [
+            {
+              label: this.translate.instant('dashboard.parents.sonDetails'),
+              routerLink: `/parent/${this.parentId}/child/${this.childId}`,
+            },
+          ],
+          mainTitle: {
+            main: this.translate.instant('dashboard.parents.sonDetails'),
+          },
+        };
+      }
+
+
+    }else{
+      if (this.currentUserScope == UserScope.Employee) {
+        console.log('breatcrunb');
+
+        this.componentHeaderData.breadCrump = [
+          {
+            label: this.translate.instant('dashboard.students.studentsList'),
+            routerLink: '/student-management/students',
+            routerLinkActiveOptions: { exact: true },
+          },
+          {
+            label: this.translate.instant('dashboard.students.StudentInfo'),
+            routerLink: '/student-management/students/student/' + this.studentId,
+          },
+        ];
+      } else if (this.currentUserScope == UserScope.SPEA) {
+        this.componentHeaderData.breadCrump = [
+          {
+            label: this.translate.instant('dashboard.students.studentsList'),
+            routerLink: '/schools-and-students/students',
+            routerLinkActiveOptions: { exact: true },
+          },
+          {
+            label: this.translate.instant('dashboard.students.StudentInfo'),
+            routerLink:
+              '/schools-and-students/students/student/' + this.studentId,
+          },
+        ];
+      }
+    }
+
+    this.headerService.changeHeaderdata(this.componentHeaderData)
 
   }
 

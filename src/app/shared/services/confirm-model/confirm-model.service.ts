@@ -17,9 +17,7 @@ export class ConfirmModelService {
   confirmed$ = new BehaviorSubject(null)
   onClose$ = new BehaviorSubject(null)
 
-  random = 0
   constructor(private translate:TranslateService) {
-    console.log(this.random);
 
    }
 

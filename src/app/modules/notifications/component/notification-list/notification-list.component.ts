@@ -98,11 +98,11 @@ export class NotificationListComponent implements OnInit {
   getReceivers() {
     this.notificationService.getSendersNames(this.filtration)
     .pipe(switchMap(res=>{
-      this.receivers = res.result;
-      return this.notificationService.getSendersNames({...this.filtration, PageSize: res.totalAllData ||70000}).pipe( delay(5000))
+      this.receivers = res?.result?.data;
+      return this.notificationService.getSendersNames({...this.filtration, PageSize: res.result?.total}).pipe( delay(5000))
     }))
     .subscribe((res) => {
-      this.receivers = res.result;
+      this.receivers = res?.result?.data;
     });
   }
 

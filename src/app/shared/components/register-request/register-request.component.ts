@@ -24,10 +24,11 @@ import { WorkflowOptions } from 'src/app/core/models/system-requests/requests.mo
 import { catchError, map, switchMap, throwError,combineLatest } from 'rxjs';
 import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { requestTypeEnum } from '../../enums/system-requests/requests.enum';
-import { RequestRule } from 'src/app/core/models/settings/settings.model';
+import { FileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
 import { HttpStatusCodeEnum } from '../../enums/http-status-code/http-status-code.enum';
 import { StudentsService } from 'src/app/modules/students/services/students/students.service';
 import { FirstGradeCodeEnum, FoundationStage, preschools } from '../../enums/school/school.enum';
+import { StudentAttachments } from 'src/app/core/models/student/student.model';
 
 type ClassType= 'FusionClass' | 'SpecialClass'
 
@@ -220,6 +221,7 @@ initRegisterationForm(child){
     this.settingServcice.getRequestRquiredFiles(reqType).subscribe(res=>{
       this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
       this.requiredFiles.files = this.requiredFiles.files.map(el =>({...el, uploadedFiles:[]}))
+      if(this.requestId) this.setUploadedFiles()
     },err=>{
       this.requiredFiles = {filesCount: 0, isRequired: false, files:[]}
     })
@@ -239,6 +241,8 @@ initRegisterationForm(child){
     this.onGradeSelected(reqData.grade?.id)
     this.registerReqForm.controls['gradeId'].setValue(reqData.grade?.id)
     this.onSelectSchool(reqData.school?.id)
+    this.attachments = reqData?.attachments || []
+    this.setUploadedFiles()
     this.registerReqForm.patchValue(reqData)
 
   }
@@ -330,8 +334,8 @@ initRegisterationForm(child){
   }
 
 
-  attachments :CustomFile[] = []
-  get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
+  attachments :StudentAttachments[] = []
+  get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map((el:FileRule) => el.uploadedFiles.map((item:[]) => ({...item, ruleFileId: el.ruleFileId}) )))}
 
 
   onFileUpload(files, fileTitle, index){
@@ -340,6 +344,17 @@ initRegisterationForm(child){
     this.attachments= this.uploadedFiles
     // if(uploadedFiles.length) this.attachments[index]= {Titel:file.name, ...uploadedFiles[0]}
    }
+
+   setUploadedFiles(){
+
+    this.attachments.forEach((file:any , i) =>{
+      let index = this.requiredFiles.files.findIndex(el => el.ruleFileId == file.ruleFileId)
+
+      this.requiredFiles?.files[index]?.uploadedFiles.push(this.attachments[i])
+    })
+    this.requiredFiles.files =[...this.requiredFiles.files]
+   }
+
 
    onFileDelete(files, fileIndex, uploaderIndex){
     this.requiredFiles.files[uploaderIndex].uploadedFiles.splice(fileIndex,1)

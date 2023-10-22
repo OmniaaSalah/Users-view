@@ -92,6 +92,7 @@
                             <td style="min-width: 15rem;">
                                 <span [ngSwitch]="request.requestStatus">
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.FinalApproval">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Approved">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
                                     <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.SentForApproval">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
                                     <p  class="alerting success" *ngSwitchCase="requestStatusEnum.TentativelyAccepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>

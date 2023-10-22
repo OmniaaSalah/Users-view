@@ -8,6 +8,7 @@ import { ChildrenListComponent } from './components/children-list/children-list.
 import { ParantsComponent } from './components/parents-list/parants.component';
 import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';
 import { Layout } from 'src/app/layout/layout-routing.service';
+import { StudentDetailsComponent } from '../shared/components/register-child/student-details.component';
 
 const routes: Routes = [
 
@@ -27,12 +28,27 @@ const routes: Routes = [
       }
     },
 
+    // {
+    //    path: 'parent/:parentId/child/:childId', component: ChildDetailsComponent,
+    //    data:{
+    //     title:{ar:'تفاصيل الابن',en: 'Child Details'}
+    //   }
+    // },
+
+    // ---------------------------------------------
     {
-       path: 'parent/:parentId/child/:childId', component: ChildDetailsComponent,
-       data:{
+      path: 'parent/:parentId/child/:childId', component: UnregisterChildComponent,
+      data:{
         title:{ar:'تفاصيل الابن',en: 'Child Details'}
       }
     },
+    {
+      path: 'parent/:parentId/student/:childId', component: StudentDetailsComponent,
+      data:{
+        title:{ar:'تفاصيل الابن',en: 'Child Details'}
+      }
+    },
+    // ---------------------------------------------
 
     {
        path: 'parent/:parentId/child/:childId/IssuanceOfACertificateComponent', component:ManualCertificatesComponent ,

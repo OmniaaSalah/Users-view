@@ -8,7 +8,7 @@ export interface FileRule{
     type:string
     size:number,
     isMandatory:boolean
-    uploadedFiles? :[]
+    uploadedFiles? :any[]
 }
 
 

@@ -284,6 +284,7 @@
         <div class="col-md-4" *ngFor="let file of requiredFiles.files;let i = index">
             <div class="">
                 <app-file-upload
+                [files]="file?.uploadedFiles"
                 [isMandatory]="file?.isMandatory"
                 view="full"
                 (onFileUpload)="onFileUpload($event,file.name,i)"

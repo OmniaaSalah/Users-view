@@ -49,7 +49,6 @@ routeHistory$ : BehaviorSubject<RouteInHistory[]> = new BehaviorSubject<RouteInH
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url.split('?')[0];
         this.manageRouteHistory()
-
         this.setActiveRoute(event.url)
 
         this.activeChildRoute.next(this.getRoutData('RouteKey'))
@@ -65,6 +64,8 @@ routeHistory$ : BehaviorSubject<RouteInHistory[]> = new BehaviorSubject<RouteInH
   manageRouteHistory(){
     let currRouteTitle = this.getRoutData('title')
     let currRouteURL = this.currentUrl
+
+
 
     if(!currRouteTitle || !currRouteURL) return
 

@@ -192,13 +192,12 @@ export class ManualCertificatesComponent implements OnInit {
         },
         {
           label: this.translate.instant('dashboard.parents.sonDetails'),
-          routerLink: `/student-management/all-parents/parent/${this.parentId}/child/${this.studentId}`,
+          routerLink: `/student-management/all-parents/parent/${this.parentId}/student/${this.studentId}`,
         },
       ];
 
     } else if (this.currentUserScope == UserScope.SPEA) {
 
-      console.log(`/schools-and-students/all-parents/parent/${this.parentId}/child/${this.studentGUID}/IssuanceOfACertificateComponent`);
 
       if(this.router.url.includes('all-parents')){
         this.componentHeaderData.breadCrump = [
@@ -214,7 +213,7 @@ export class ManualCertificatesComponent implements OnInit {
           },
           {
             label: this.translate.instant('dashboard.parents.sonDetails'),
-            routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/child/${this.studentGUID}`,
+            routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/student/${this.studentGUID}`,
             queryParams:{registered:true},
             routerLinkActiveOptions: { exact: true },
           },
@@ -222,7 +221,7 @@ export class ManualCertificatesComponent implements OnInit {
             label: this.translate.instant(
               'dashboard.students.Issuing the certificate manually'
             ),
-            routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/child/${this.studentGUID}/IssuanceOfACertificateComponent`,
+            routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/student/${this.studentGUID}/IssuanceOfACertificateComponent`,
           },
         ];
       }else{

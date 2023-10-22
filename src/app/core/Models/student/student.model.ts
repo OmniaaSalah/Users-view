@@ -106,3 +106,16 @@ export interface Student{
         studentPayments:{}
 
 }
+
+export interface StudentAttachments{
+  comment: string
+  createdDate: null
+  id: number
+  indexCode: number
+  indexId: number
+  isActive: boolean
+  name: "twitter.png"
+  titel: Localization
+  uploader: Localization
+  url: string
+}

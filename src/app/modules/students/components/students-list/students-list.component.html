@@ -44,6 +44,11 @@
                     <p-multiSelect [lazy]="true" [options]="(gradeTracks$ | async)?.data"  [disabled]="(!this.isGradeSelected || !this.isSchoolSelected)"  display="chip"    [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooserack' |translate}}"></p-multiSelect>
                 </div>
 
+                <div class="col ">
+                  <label class="label">{{'dashboard.schools.studentId'|translate}}</label>
+                  <input [(ngModel)]="filtration.StudentDaleel2Id"  type="text"  pInputText placeholder="{{'dashboard.schools.studentId'|translate}}" />
+                </div>
+
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
                     <p-multiSelect [lazy]="true" [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
@@ -80,6 +85,8 @@
                     <label class="label"> {{'dashboard.addChild.gender' | translate}} </label>
                     <p-dropdown [lazy]="true" [options]="genderList"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.gender"  [showClear]="true"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
                 </div>
+
+
             </div>
 
 

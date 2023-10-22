@@ -78,6 +78,7 @@ export class StudentsListComponent implements OnInit {
     IsSpecialClass:null,
     StudentDegreeResultFilter:null,
     gender:null,
+    StudentDaleel2Id:null,
     ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
   }
   paginationState= {...paginationInitialState}
@@ -305,6 +306,8 @@ export class StudentsListComponent implements OnInit {
     this.filtration.StudentCategory=null
     this.filtration.StudentDegreeResultFilter=null
     this.filtration.gender=null
+    this.filtration.StudentDaleel2Id=null
+
     this.checkStudentList();
   }
 
