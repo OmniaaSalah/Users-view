@@ -9,6 +9,8 @@ import { MandatorySurveyComponent } from './components/mandatory-survey/mandator
 import { ProfileComponent } from './components/profile/profile.component';
 import { GuardianComponent } from './guardian.component';
 import { Layout } from 'src/app/layout/layout-routing.service';
+import { UnregisterChildComponent } from '../parants/components/unregister-child/unregister-child.component';
+import { StudentDetailsComponent } from '../shared/components/register-child/student-details.component';
 
 const routes: Routes = [
   Layout.childRoutes([
@@ -34,12 +36,28 @@ const routes: Routes = [
                 title:{ar:'حسابى',en: 'My Profile'}
               }
             },
+            // {
+            //   path: ':parentId/child/:childId'  , component:ChildDetailsComponent ,
+            //      data:{
+            //     title:{ar:'تفاصيل الابن',en: 'Child Details'}
+            //   }
+            // },
+
+             // ---------------------------------------------
             {
-              path: ':parentId/child/:childId'  , component:ChildDetailsComponent ,
-                 data:{
+              path: ':parentId/child/:childId', component: UnregisterChildComponent,
+              data:{
                 title:{ar:'تفاصيل الابن',en: 'Child Details'}
               }
             },
+            {
+              path: ':parentId/student/:childId', component: StudentDetailsComponent,
+              data:{
+                title:{ar:'تفاصيل الابن',en: 'Child Details'}
+              }
+            },
+            // ---------------------------------------------
+
             {
               path: ":parentId/child/:childId/withdraw-request", component: WithdrawalRequestComponent ,
               data:{

@@ -23,6 +23,8 @@ export class FileComponent implements OnInit {
     private translate:TranslateService) { }
 
   ngOnInit(): void {
+    console.log(this.file);
+
   }
 
   openFile(){

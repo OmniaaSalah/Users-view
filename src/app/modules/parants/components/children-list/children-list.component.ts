@@ -118,8 +118,8 @@ export class ChildrenListComponent implements OnInit {
     {
 		this.componentHeaderData={
       breadCrump: [
-        { label: this.translate.instant('dashboard.parents.parents'),routerLink:'//schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true} },
-        { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/all-children`}
+        { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true} },
+        { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/all-children`}
       ],
       mainTitle: { main: this.translate.instant('dashboard.parents.childrenList') }
     }

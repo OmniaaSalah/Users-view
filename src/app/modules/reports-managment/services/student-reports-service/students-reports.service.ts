@@ -225,8 +225,10 @@ export class StudentsReportsService {
             [this.translate.instant('shared.Identity Number')]: student?.emiratesId ? student?.emiratesId :this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.ChildWithoutNationality')]:student?.reasonForNotHavingEmiratesId[this.lang] ? student?.reasonForNotHavingEmiratesId[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.schools.SchoolCurriculum')]:student?.curriculumName ? student?.curriculumName[this.lang] :this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.parents.registedDate')]: this.localizeDatePipe.transform(student?.dateOfAcceptance) ? student?.dateOfAcceptance :this.translate.instant('shared.notFound'),
-            [this.translate.instant('sign up.Birthday')]: student?.birthDate ? this.localizeDatePipe.transform(student?.birthDate) :this.translate.instant('shared.notFound'),
+
+            [this.translate.instant('dashboard.parents.registedDate')]: student?.dateOfAcceptance ? this.localizeDatePipe.transform(student?.dateOfAcceptance,'d MMMM y','en') :this.translate.instant('shared.notFound'),
+            [this.translate.instant('sign up.Birthday')]: student?.birthDate ? this.localizeDatePipe.transform(student?.birthDate,'d MMMM y','en') :this.translate.instant('shared.notFound'),
+
             [this.translate.instant('shared.age')]: student?.age ? student?.age :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.status')]: student?.registrationStatus ? this.translate.instant('shared.allStatus.'+student?.registrationStatus) :this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isSpecialAbilities ? this.translate.instant('true') :this.translate.instant('false'),

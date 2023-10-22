@@ -18,6 +18,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
+import { sub, subMonths } from 'date-fns';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
   exclamationIcon = faExclamationCircle;
 
   currentGuardianId = this.userService.getCurrentGuardian()?.id
-
+  maxDate = subMonths(new Date(), 6)
   componentHeaderData: IHeader = {
     breadCrump: [
       {

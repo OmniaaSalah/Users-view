@@ -36,6 +36,7 @@
        (click)="withdrawReq(requestDetails?.requestType)"
        *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Pending
        || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest
+       || requestDetails?.requestStatus==RequestStatusEnum.SentForApproval
        || requestDetails?.requestStatus==RequestStatusEnum.TentativelyAccepted
        || requestDetails?.requestStatus==RequestStatusEnum.Approved">
            <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>

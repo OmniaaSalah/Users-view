@@ -216,6 +216,8 @@ export class RequestdetailsComponent implements OnInit {
 
       if(err.message && err.message.includes('This student has financial obligations') )this.toaster.error(this.translate.instant('toasterMessage.This student has financial obligations'))
       else if(err.message && err.message.includes('Request status is Cancelled'))  this.toaster.error(this.translate.instant('toasterMessage.Request status is Cancelled'))
+      else if(err.message && err.message.includes('The number of students is complete in this division'))  this.toaster.error(this.translate.instant('toasterMessage.The number of students is complete in this division'))
+      else if(err.message && err.message?.En.includes('This task is already performed'))  this.toaster.error(this.translate.instant('This task is already performed'))
       else this.toaster.error(this.translate.instant('toasterMessage.error'))
 
     })
@@ -421,14 +423,14 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     let guardianId = this.requestDetails?.guardian?.id
 
     if(this.currentUserScope==this.userScopeEnum.SPEA){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/schools-and-students/all-parents/parent/${guardianId}/child/${id}?registered=false` :  `${environment.clientUrl}/schools-and-students/students/student/${id}`;
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/schools-and-students/all-parents/parent/${guardianId}/child/${id}` :  `${environment.clientUrl}/schools-and-students/students/student/${id}`;
       window.open(url)
 
     }else if(this.currentUserScope==this.userScopeEnum.Employee){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/student-management/all-parents/parent/${guardianId}/child/${id}?registered=false` : `${environment.clientUrl}/student-management/students/student/${id}`;
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/student-management/all-parents/parent/${guardianId}/child/${id}` : `${environment.clientUrl}/student-management/students/student/${id}`;
       window.open(url)
     } else if(this.currentUserScope==this.userScopeEnum.Guardian){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/parent/${guardianId}/child/${id}?registered=false` : `${environment.clientUrl}/parent/${guardianId}/child/${id}?registered=true`;
+      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/parent/${guardianId}/child/${id}` : `${environment.clientUrl}/parent/${guardianId}/student/${id}`;
       window.open(url)
     }
   }

@@ -42,7 +42,7 @@
                             <!-- Registered Children -->
                             <div class="row g-5" *ngIf="!skeletonShown ">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of registerStudents">
-                                    <div  class="h-100 box-shadow radius-15 p-0" role="button" routerLink="/parent/{{guardian.id}}/child/{{student?.studentGuid}}" [queryParams]="{ registered: 'true' }">
+                                    <div  class="h-100 box-shadow radius-15 p-0" role="button" routerLink="/parent/{{guardian.id}}/student/{{student?.studentGuid}}" >
 
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
@@ -110,7 +110,7 @@
                             </div>
                             <div class="row g-5" *ngIf="!skeletonShown">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let child of studentsWithdrawal">
-                                    <div role="button" routerLink="/parent/{{guardian.id}}/child/{{child?.studentGuid}}"  [queryParams]="{ registered: 'true' }" class="h-100 box-shadow radius-15 p-0">
+                                    <div role="button" routerLink="/parent/{{guardian.id}}/student/{{child?.studentGuid}}" class="h-100 box-shadow radius-15 p-0">
 
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
@@ -171,7 +171,7 @@
                             </div>
                             <div class="row g-5" *ngIf="!skeletonShown">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let child of unRegisterStudents">
-                                    <div role="button" routerLink="/parent/{{guardian.id}}/child/{{child.id}}"  [queryParams]="{ registered: 'false' }" class="h-100 box-shadow radius-15 p-0">
+                                    <div role="button" routerLink="/parent/{{guardian.id}}/child/{{child.id}}"  class="h-100 box-shadow radius-15 p-0">
 
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
@@ -233,7 +233,7 @@
 
                           <div class="row g-5" *ngIf="!skeletonShown ">
                               <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of finalGraduatedStudents">
-                                  <div  class="h-100 box-shadow radius-15 p-0" role="button" routerLink="/parent/{{guardian.id}}/child/{{student?.studentGuid}}" [queryParams]="{ registered: 'true' }">
+                                  <div  class="h-100 box-shadow radius-15 p-0" role="button" routerLink="/parent/{{guardian.id}}/student/{{student?.studentGuid}}">
 
                                       <div class="profile d-flex align-items-center p-4">
                                           <div class="profile__avatar">
