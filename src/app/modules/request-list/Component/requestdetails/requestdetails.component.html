@@ -418,9 +418,9 @@
                         <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.The name of the new guardian' | translate}}</p>
                         <h4 class="color-primary">{{requestDetails.guardian.name |currentLang}}</h4>
                     </div>
-                    <div class="col-4 d-flex align-items-center gap-5 mt-5 ">
+                    <div class="col-4 d-flex align-items-center gap-5 mt-5 " *ngIf="requestDetails?.school">
                       <p class="color-gray-300 fs-4 ">{{'shared.school' | translate}}</p>
-                      <h4 class="color-primary">{{requestDetails?.school |currentLang}}</h4>
+                      <h4 class="color-primary">{{requestDetails?.school?.name |currentLang}}</h4>
                     </div>
                 </div>
 
@@ -430,9 +430,9 @@
                     <p class="color-gray-300 fs-4 ">{{'dashboard.myRequest.The name of the new guardian' | translate}}</p>
                     <h4 class="color-primary">{{requestDetails.guardian.name |currentLang}}</h4>
                   </div>
-                  <div class="col-4 d-flex align-items-center gap-5 mt-5 ">
+                  <div class="col-4 d-flex align-items-center gap-5 mt-5 " *ngIf="requestDetails?.school">
                     <p class="color-gray-300 fs-4 ">{{'shared.school' | translate}}</p>
-                    <h4 class="color-primary">{{requestDetails?.school |currentLang}}</h4>
+                    <h4 class="color-primary">{{requestDetails?.school?.name |currentLang}}</h4>
                   </div>
                 </div>
 
