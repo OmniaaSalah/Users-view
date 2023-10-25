@@ -59,7 +59,7 @@ const routes: Routes = [
             // ---------------------------------------------
 
             {
-              path: ":parentId/child/:childId/withdraw-request", component: WithdrawalRequestComponent ,
+              path: ":parentId/student/:childId/withdraw-request", component: WithdrawalRequestComponent ,
               data:{
                 title:{ar:'طلب انسحاب',en: 'Withdraw Request'}
               }
