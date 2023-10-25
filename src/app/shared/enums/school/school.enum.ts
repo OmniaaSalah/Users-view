@@ -23,7 +23,7 @@ export enum FirstGradeCodeEnum{
 }
 
 export const FoundationStage =['P0', 'FS1'] //المراحل التمهيديه
-export const preschools = ['KG1', 'KG2',1, 'FS2', 'Y1', 'Y2'] //مراحل رياض الاطفال
+export const preschools = ['KG1', 'KG2',"1", 'FS2', 'Y1', 'Y2'] //مراحل رياض الاطفال
 
 export enum CurriculumCodeEnum{
     English = "EnCurr",
