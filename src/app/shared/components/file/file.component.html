@@ -10,10 +10,10 @@
 <div
 *ngIf="file.name || file?.url"
 [style]="styles"
-(click)="openFile()"
+
 [style.cursor]="clickable?'pointer':'default'">
     <label class="fw-bold mb-3" [style.minHeight.rem]="'2'">{{(file?.titel || titel|currentLang )}}</label>
-    <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-4">
+    <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-4" (click)="openFile()">
         <div class="d-flex align-items-center gap-5">
             <img src="assets/images/shared/file.svg" [style.width.rem]="5" alt="">
             <span class="word-break-all"> {{file.name}}</span>
