@@ -104,7 +104,7 @@ export class RequestListComponent implements OnInit {
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
         this.requests.loading=true;
         this.requests.list=[];
-        let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus?.flat()}
+        let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus?.flat(), RequestType:this.filtration?.RequestType?.flat()}
         this.systemRequestService.getUserRequests(filter).subscribe((res)=>{
           this.sharedService.filterLoading.next(false);
             this.requests.loading = false;
