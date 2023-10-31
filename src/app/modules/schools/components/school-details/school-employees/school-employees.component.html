@@ -76,11 +76,11 @@
                             <p-dropdown [options]="statusOptions" [showClear]="true" [(ngModel)]="filtration.status" StopProp optionLabel="name" optionValue="value" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col-md-4">
-                            <label class="label">{{'dashboard.schools.employeeRole'|translate }} </label>
+                            <label class="label">{{'dashboard.schools.jobTitle'|translate }} </label>
                             <!-- <p-dropdown [filter]="true" StopProp [showClear]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}" p [options]="jobTitleOptions$|async" [(ngModel)]="filtration.jobtitelid" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.schools.employeeRole' |translate }}">
 
                             </p-dropdown> -->
-                            <p-multiSelect  [filter]="true" [options]="jobTitleOptions$|async" p display="chip" [(ngModel)]="filtration.jobtitelid"   optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id"   placeholder="{{'dashboard.schools.employeeRole' |translate }}"></p-multiSelect>
+                            <p-multiSelect  [filter]="true" [options]="jobTitleOptions$|async" p display="chip" [(ngModel)]="filtration.jobtitelid"   optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id"   placeholder="{{'dashboard.schools.jobTitle' |translate }}"></p-multiSelect>
                         </div>
                     </div>
 
@@ -334,17 +334,26 @@
                     </div>
 
                     <div class="row gx-5 form-set">
-                        <div class="col-md-6">
-                            <label class="label" for="jobTitle">{{'dashboard.schools.employeeRole' | translate}}</label>
-                            <!-- <input pInputText formControlName="jobTitle"> -->
+                        <!-- <div class="col-md-4 ">
+                            <label class="label" for="jobTitle">{{'dashboard.schools.jobTitle' | translate}}</label>
                             <p-dropdown
                             formControlName="jobTitleId"
                             [ngClass]="{'ng-invalid ng-dirty': employeeFormCtr.jobTitleId.errors && employeeFormCtr.jobTitleId.errors?.['required']}"
                             [options]="jobTitleOptions$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                            optionValue="id" placeholder="{{'dashboard.schools.employeeRole' | translate}}"></p-dropdown>
+                            optionValue="id" placeholder="{{'dashboard.schools.jobTitle' | translate}}"></p-dropdown>
+                        </div> -->
+
+                        <div class="col-md-6">
+                          <label class="label" for="jobTitle">{{'dashboard.schools.employeeRole' | translate}}</label>
+                          <!-- <input pInputText formControlName="jobTitle"> -->
+                          <p-dropdown
+                          formControlName="jobTitleId"
+                          [ngClass]="{'ng-invalid ng-dirty': employeeFormCtr.jobTitleId.errors && employeeFormCtr.jobTitleId.errors?.['required']}"
+                          [options]="getRoles$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
+                          optionValue="id" placeholder="{{'dashboard.schools.employeeRole' | translate}}"></p-dropdown>
 
 
-                        </div>
+                      </div>
 
                         <div class="col-md-4 align-self-end mb-3">
                             <!-- <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label> -->

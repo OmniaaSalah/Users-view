@@ -219,7 +219,8 @@ export class RequestdetailsComponent implements OnInit {
       if(err.message && err.message.includes('This student has financial obligations') )this.toaster.error(this.translate.instant('toasterMessage.This student has financial obligations'))
       else if(err.message && err.message.includes('Request status is Cancelled'))  this.toaster.error(this.translate.instant('toasterMessage.Request status is Cancelled'))
       else if(err.message && err.message.includes('The number of students is complete in this division'))  this.toaster.error(this.translate.instant('toasterMessage.The number of students is complete in this division'))
-      else if(err.message?.En?.includes('This task is already performed') || err?.En?.includes('This task is already performed'))  this.toaster.error(this.translate.instant('toasterMessage.This task is already performed'))
+      else if(err.message && err.message.includes('This task is already performed'))  this.toaster.error(this.translate.instant('This task is already performed'))
+      else if(err.message && err.message?.En?.includes('This task is already performed') || err?.En?.includes('This task is already performed'))  this.toaster.error(this.translate.instant('toasterMessage.This task is already performed'))
       else this.toaster.error(this.translate.instant('toasterMessage.error'))
 
     })

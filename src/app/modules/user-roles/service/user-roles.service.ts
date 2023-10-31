@@ -58,6 +58,18 @@ export class UserRolesService {
 
   }
 
+  getRolesDropdown(filter?:Partial<SearchModel>)
+  {
+    this.loaderService.isLoading$.next(true);
+    return this.http.post('/role-details',{},filter)
+    .pipe(
+      take(1),
+      map(res=> res.data.map(item => ({id:item?.id, name :item?.jobRoleName}) ))
+    );
+
+  }
+
+
 
 
   addRole(role)

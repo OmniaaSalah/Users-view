@@ -48,10 +48,10 @@
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
                             <th>{{'dashboard.Requests.requestNumber'|translate}}</th>
-                            <th style="min-width: 24rem;" pSortableColumn="requestTypeEnum">{{'dashboard.Requests.requestType'|translate}}</th>
+                            <th style="min-width: 22rem;" pSortableColumn="requestTypeEnum">{{'dashboard.Requests.requestType'|translate}}</th>
                             <th style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith"><p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
 
-                            <th style="min-width: 18rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.school'|translate}}</th>
+                            <th style="min-width: 20rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.school'|translate}}</th>
                             <th pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.curriculum'|translate}}</th>
                             <th  *ngIf="currentUserScope!=userScope.Guardian" style="min-width: 18rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'dashboard.schools.student'|translate}}</th>
                             <th  *ngIf="currentUserScope!=userScope.Guardian" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'dashboard.schools.studentId'|translate}}</th>
@@ -74,17 +74,21 @@
                       {{product[col.field]}}
                   </td> -->
                             <td >{{request.requestNumber}}</td>
-                            <td class="d-block" style="min-width: 24rem;">
-                                <div class="mb-2">{{'dashboard.Requests.'+request.requestType | translate}}</div>
-                             <div>
-                                <!-- <a *ngIf="request?.schoolCreator" routerLink="/schools-and-students/schools/school/{{request?.schoolCreator?.id}}" target="_blank" class="text color-skyBlue-500 fs-4 d-flex align-items-center">{{request?.schoolCreator?.name|currentLang}}</a>
-                                <a *ngIf="request?.school" routerLink="/schools-and-students/schools/school/{{request?.school?.id}}" target="_blank" class="text color-skyBlue-500 fs-4 d-flex align-items-center">{{request?.school?.name|currentLang}}</a> -->
-                                <span *ngIf="request?.grade"   class="text color-primary fs-4 d-flex align-items-center">{{request?.grade?.name|currentLang}}</span>
-                            </div>
+                            <td class="d-block" style="min-width: 22rem;">
+                                <div>{{'dashboard.Requests.'+request.requestType | translate}}</div>
                             </td>
 
                             <td style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian">{{request?.relatedSon | currentLang}}</td>
-                            <td style="min-width: 18rem;">{{(request.school?.name |currentLang) || ('shared.notFound'|translate)}}</td>
+                            <td style="min-width: 20rem;" class="d-block">
+                              <div>{{(request.school?.name |currentLang) || ('shared.notFound'|translate)}}</div>
+                              <hr class="w-75" *ngIf="request?.grade">
+                              <div>
+                                <!-- <a *ngIf="request?.schoolCreator" routerLink="/schools-and-students/schools/school/{{request?.schoolCreator?.id}}" target="_blank" class="text color-skyBlue-500 fs-4 d-flex align-items-center">{{request?.schoolCreator?.name|currentLang}}</a>
+                                <a *ngIf="request?.school" routerLink="/schools-and-students/schools/school/{{request?.school?.id}}" target="_blank" class="text color-skyBlue-500 fs-4 d-flex align-items-center">{{request?.school?.name|currentLang}}</a> -->
+                                <span *ngIf="request?.grade" class="text fw-bold color-primary fs-4 d-flex align-items-center">{{request?.grade?.name|currentLang}}</span>
+                              </div>
+                            </td>
+
                             <td>{{(request.curriculum?.name |currentLang) || ('shared.notFound'|translate)}}</td>
                             <td style="min-width: 18rem;"  *ngIf="currentUserScope!=userScope.Guardian">{{(request.student?.name |currentLang) || ('shared.notFound'|translate)}}</td>
                             <td  *ngIf="currentUserScope!=userScope.Guardian">{{(request.student?.id ) || ('shared.notFound'|translate)}}</td>

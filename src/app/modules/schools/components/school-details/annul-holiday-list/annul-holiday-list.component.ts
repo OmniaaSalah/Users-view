@@ -82,7 +82,7 @@ export class AnnulHolidayListComponent implements OnInit {
     description:['', Validators.maxLength(256)],
     requestStatus:[0]
   },{validators: [
-    DateValidators.greaterThan('dateFrom', 'dateTo')
+    DateValidators.greaterThanOrEqual('dateFrom', 'dateTo')
   ]})
 
   get holidayForm(){ return this.editHolidayForm.controls}

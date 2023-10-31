@@ -30,15 +30,18 @@
      </ng-container>
 
      <!-- (isRequestAllowedForWithdrawal | wrapFn : requestDetails?.requestType) &&  -->
-     <ng-container  *ngIf="(currentUserScope==userScopeEnum.Guardian || (currentUserScope==userScopeEnum.Employee && (isRequestRelatedToSchool|wrapFn : requestDetails?.requestType) ))">
+     <ng-container
+     *ngIf="(currentUserScope==userScopeEnum.Guardian || (currentUserScope==userScopeEnum.Employee
+            && (isRequestRelatedToSchool|wrapFn : requestDetails?.requestType) ))">
        <button class=" btn btn-primary btn--sm px-5"
-       [disabled]="onSubmited"
-       (click)="withdrawReq(requestDetails?.requestType)"
-       *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Pending
-       || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest
-       || requestDetails?.requestStatus==RequestStatusEnum.SentForApproval
-       || requestDetails?.requestStatus==RequestStatusEnum.TentativelyAccepted
-       || requestDetails?.requestStatus==RequestStatusEnum.Approved">
+                [disabled]="onSubmited"
+                (click)="withdrawReq(requestDetails?.requestType)"
+                *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Pending
+                || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest
+                || requestDetails?.requestStatus==RequestStatusEnum.SentForApproval
+                || requestDetails?.requestStatus==RequestStatusEnum.TentativelyAccepted
+                || requestDetails?.requestStatus==RequestStatusEnum.Approved
+                || (requestDetails?.requestStatus==RequestStatusEnum.Approved && currentUserScope==userScopeEnum.SPEA)">
            <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
            <span>{{'dashboard.Requests.withdrawalReq' |translate}}</span>
        </button>
@@ -466,38 +469,40 @@
 
 
 
-<ng-container *ngIf="!requestOptions then actionsLoader"></ng-container>
+<ng-container *ngIf="requestDetails?.requestStatus != RequestStatusEnum.Canceled">
+  <ng-container *ngIf="!requestOptions then actionsLoader"></ng-container>
 
-<div class="ms-4 mt-4">
-    <form  ngForm #f="ngForm">
+  <div class="ms-4 mt-4">
+      <form  ngForm #f="ngForm">
 
-        <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Approved" -->
-        <div class="d-flex justify-content-end mt-3 gap-3" >
-            <ng-container *ngIf="requestOptions" >
+          <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Approved" -->
+          <div class="d-flex justify-content-end mt-3 gap-3" >
+              <ng-container *ngIf="requestOptions" >
 
-                <button
-                *ngFor="let option of requestOptions;let i=index"
-                [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned' || option?.label?.en=='return for correction') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest && currentUserScope==userScopeEnum.Guardian"
-                [disabled]="option.isLoading"
-                [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
-                (click)="onActionTaken(option,i)"
-                class="btn">
-                    {{option?.label|currentLang}}
-                    <div class="spinner-border text-light" role="status" *ngIf="option.isLoading"></div>
-                </button>
-            </ng-container>
+                  <button
+                  *ngFor="let option of requestOptions;let i=index"
+                  [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned' || option?.label?.en=='return for correction') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest && currentUserScope==userScopeEnum.Guardian"
+                  [disabled]="option.isLoading"
+                  [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
+                  (click)="onActionTaken(option,i)"
+                  class="btn">
+                      {{option?.label|currentLang}}
+                      <div class="spinner-border text-light" role="status" *ngIf="option.isLoading"></div>
+                  </button>
+              </ng-container>
 
-            <button
-            *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Approved && currentUserScope==userScopeEnum.SPEA"
-            [disabled]="onSubmited"
-            (click)="reOpenRequest()"
-            class="btn btn-primary">
-                {{'dashboard.Requests.reopenReq'|translate}}
-                <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
-            </button>
-        </div>
-    </form>
-</div>
+              <button
+              *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Approved && currentUserScope==userScopeEnum.SPEA"
+              [disabled]="onSubmited"
+              (click)="reOpenRequest()"
+              class="btn btn-primary">
+                  {{'dashboard.Requests.reopenReq'|translate}}
+                  <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
+              </button>
+          </div>
+      </form>
+  </div>
+</ng-container>
 
 <hr class="my-6">
 

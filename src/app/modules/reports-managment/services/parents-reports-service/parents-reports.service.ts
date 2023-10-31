@@ -5,6 +5,7 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { finalize, map, Observable, take } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { LocalizeDatePipe } from 'src/app/shared/pipes/localize-date.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class ParentsReportsService {
   lang = inject(TranslationService).lang;
 
   constructor(private translate:TranslateService,private http: HttpHandlerService,
+    private localizeDatePipe:LocalizeDatePipe,
     private tableLoaderService: LoaderService) { }
 
   getAllParents(filter?:Partial<SearchModel>) {
@@ -136,7 +138,7 @@ export class ParentsReportsService {
             [this.translate.instant('shared.gender')]:parent?.parentGender ? this.translate.instant('shared.genderType.'+parent?.parentGender):this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.state')]:parent?.studentState,
             [this.translate.instant('shared.city')]:parent?.studentCity,
-            [this.translate.instant('shared.registrationDateAndTime')]:parent?.studentRegisterationDate,
+            [this.translate.instant('shared.registrationDateAndTime')]: this.localizeDatePipe.transform(parent?.studentRegisterationDate, 'd / MMMM / y HH:mm', 'en'),
 
           }
         })

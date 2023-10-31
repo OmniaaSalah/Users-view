@@ -72,7 +72,6 @@ export class AuthenticationMainComponent implements OnInit {
     private routerListenr:RouteListenrService
   ) {}
 
-
   ngOnInit(): void {
     this.settingsService.initializeFileRules();
     this.checkUAEPassLogin();
@@ -89,10 +88,6 @@ export class AuthenticationMainComponent implements OnInit {
   loginInProgress = false;
 
   checkUAEPassLogin() {
-    localStorage.setItem(
-      'Query',
-      JSON.stringify(this.activatedRoute.snapshot.queryParamMap)
-    );
     if (this.error_description) {
       this.openConfimModel = true;
       this.confirmationMessage = this.translate.instant('login.user not complete Login with UEA pass');
