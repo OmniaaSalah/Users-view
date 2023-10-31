@@ -824,8 +824,8 @@
       "Pdf":"Pdf",
       "Csv":"Csv",
       "Audio":"ملف صوتى",
-      "Xlsx":"إكسيل"
-
+      "Xlsx":"إكسيل",
+      "downloadFile":"تحميل الملف"
 
   },
   "Notifications": {
@@ -1872,7 +1872,7 @@
           "StudentRegradingRequest":"إعادة مرحله دراسية",
           "StudentRegradingRequestForSchool":"إعادة مرحله دراسية",
           "DeleteStudentRequest":"حذف الطالب",
-          "RegestrationApplicationRequest":"تسجيل",
+          "RegestrationApplicationRequest":"تسجيـــل",
           "KgRegestrationApplicationRequest":"تسجيل مرحلة رياض أطفال",
           "PrimarySchoolRegestrationApplicationRequest":"تسجيل المرحلة التمهيديه",
           "MassTransferRequest":"نقل جماعي",
@@ -1883,7 +1883,7 @@
           "AcademicSequenceCertificateRequest":"إصدار شهادة التسلسل الدراسي",
           "DiplomaCertificateRequest":"إصدار شهادة الدبلوم",
           "ModifyIdentityRequestCaseStudentNotHaveId":"تعديل بيانات الطالب لمن لا يملك الهوية",
-          "RegestrationRequestForWithrawan":"إعادة قيد",
+          "RegestrationRequestForWithrawan":"تسجيــــل",
           "WithdrawalRequest":"انسحاب الطالب من المدرسة",
           "exemptionFromSubjectRequest":"الاعفاء من ماده دراسية",
           "RelinkChildToGuardianRequestToScool":"إعادة ربط الأبن مع ولي الأمر للمدرسة",

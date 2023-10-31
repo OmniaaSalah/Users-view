@@ -121,7 +121,7 @@
                             [showIcon]="true" placeholder="--/--/--"></p-calendar>
 
                             <div class="errors" *ngIf="holidayForm.dateTo.invalid && (holidayForm.dateTo.dirty)">
-                                <div class="color-red-500" *ngIf="holidayForm.dateTo.errors?.['not']">تاريخ النهايه يجب ان يكون بعد تاريخ البدايه</div>
+                                <div class="color-red-500" *ngIf="holidayForm.dateTo.errors?.['not']">تاريخ النهاية يجب أن يكون مساوي أو بعد تاريخ البداية</div>
                             </div>
                         </div>
                     </div>

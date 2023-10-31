@@ -99,6 +99,31 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
     }
 
 
+    static greaterThanOrEqual(startDate:string , endDate:string): ValidatorFn{
+
+      return (formGroup: AbstractControl): ValidationErrors | null =>{
+
+        const startDateCtr = formGroup.get(startDate)
+        const endDateCtr = formGroup.get(endDate)
+
+        this.resetSeconds(formGroup.get(startDate).value)
+        this.resetSeconds(formGroup.get(endDate).value)
+
+        if(!endDateCtr.value || !startDateCtr.value) return null
+        // console.log(startDateCtr.value, endDateCtr.value);
+
+        if(endDateCtr.errors && !endDateCtr.errors['not']) return null;
+
+        if(endDateCtr.value < startDateCtr.value) endDateCtr.setErrors({not: true})
+        if(startDateCtr.value > endDateCtr.value) endDateCtr.setErrors({not: true})
+        if(startDateCtr.value < endDateCtr.value) endDateCtr.setErrors(null)
+
+        return  null
+
+      }
+    }
+
+
     static dateRange(startDate:string , endDate:string) : ValidatorFn{
       const DAY_START= addHours(startOfDay(new Date()), 8)
       const DAY_END = addHours(startOfDay(new Date()), 16)

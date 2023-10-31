@@ -17,21 +17,33 @@ export class FileComponent implements OnInit {
   @Input() showDeletedBy= false
   @Input() styles={}
 
+  blob_url
+  displayFile
   constructor(
     private toaster:ToastrService,
     private mediaService:MediaService,
     private translate:TranslateService) { }
 
   ngOnInit(): void {
-    console.log(this.file);
 
   }
 
   openFile(){
 
     // if(this.file.url) window.open(this.file.url,'_blank')
-    if(this.file.url) this.mediaService.downloadFTPFile(this.file?.url)
+    // if(this.file.url) this.mediaService.downloadFTPFile(this.file?.url)
+    if(this.file?.url) this.openMediaFile(this.file.url)
     else this.toaster.error(this.translate.instant('toasterMessage.noUrl'))
+  }
+
+
+  openMediaFile(url){
+    this.displayFile = false
+    this.mediaService.getFTP_BlobFile(url)
+    .subscribe((blob:Blob) =>{
+      this.blob_url = URL.createObjectURL(blob);
+      this.displayFile = true
+    })
   }
 
 }

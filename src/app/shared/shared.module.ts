@@ -58,6 +58,7 @@ import { BlobToBase64Pipe } from './pipes/blob-to-base64.pipe';
 import { ConfirmModalModule } from './confirm-modal.module';
 import { NotAllowedComponent } from '../core/components/not-allowed/not-allowed.component';
 import { ChildRequestsComponent } from '../modules/shared/components/child-requests/child-requests.component';
+import { MediaDisplayerComponent } from './components/media-displayer/media-displayer.component';
 
 registerLocaleData(localeAr);
 
@@ -111,7 +112,8 @@ registerLocaleData(localeAr);
     ToLocalDatePipe,
     BlobToBase64Pipe,
     NotAllowedComponent,
-    ChildRequestsComponent
+    ChildRequestsComponent,
+    MediaDisplayerComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -186,7 +188,8 @@ registerLocaleData(localeAr);
     BlobToBase64Pipe,
     NotAllowedComponent,
     ConfirmModalModule,
-    ChildRequestsComponent
+    ChildRequestsComponent,
+    MediaDisplayerComponent
   ],
   providers:[SharedService,LocalizeDatePipe]
 })

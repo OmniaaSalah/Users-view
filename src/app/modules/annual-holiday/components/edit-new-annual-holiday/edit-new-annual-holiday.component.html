@@ -96,134 +96,125 @@
                 </div>
 
                   <div class="prim-table mt-4 smallBlock" *ngIf="holidayFixedLength>0">
-                      <p-table  #dt [value]="holidayList" sortMode="single"  [scrollable]="true" scrollHeight="700px" [virtualScroll]="true" [virtualRowHeight]="95"  dataKey="id">
+                      <p-table #dt [value]="holidayList" sortMode="single" [scrollable]="true" scrollHeight="700px" [virtualScroll]="true"
+                        [virtualRowHeight]="95" dataKey="id">
 
-                              <!-- Table Caption -->
-                                  <ng-template pTemplate="caption">
-                                      <app-table-caption
-                                      [hasExport]="false"
-                                      (onFilter)="filter()"
-                                      (onSearch)="search($event)"
-                                      (onClear)="clearFilter()">
+                        <!-- Table Caption -->
+                        <ng-template pTemplate="caption">
+                          <app-table-caption [hasExport]="false" (onFilter)="filter()" (onSearch)="search($event)" (onClear)="clearFilter()">
 
-                                      <!-- <div class="row gx-5 form-set">
-                                          <div class="col-6">
-                                              <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
-                                              <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="id"    formControlName="curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
-                                          </div>
-                                      </div> -->
-                                      <div class="row gx-5 form-set">
-                                          <div class="col-4 mx-4">
-                                              <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
-                                              <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="value"     formControlName="status" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
-                                          </div>
+                            <!-- <div class="row gx-5 form-set">
+                                                                <div class="col-6">
+                                                                    <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
+                                                                    <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="id"    formControlName="curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                                                                </div>
+                                                            </div> -->
+                            <div class="row gx-5 form-set">
+                              <div class="col-4 mx-4">
+                                <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }} </label>
+                                <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="value" formControlName="status"
+                                  inputId="flexibilityStatus"
+                                  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                              </div>
 
-                                      </div>
-                                      </app-table-caption>
+                            </div>
+                          </app-table-caption>
 
-                                  </ng-template>
-
-
-                                          <ng-template pTemplate="header"  >
-                                              <tr >
-                                              <th style="max-width: 0rem"  ></th>
-                                                <th   pSortableColumn="name.ar" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
-                                                <th style="min-width:15rem"  pSortableColumn="name.ar" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'shared.User Name'|translate}}</th>
-                                                <th style="min-width:15rem"  pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
-                                                <th style="min-width:29rem"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
-                                                <th   pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-                                                <th   pSortableColumn="flexibilityStatus.id"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
-                                                <th   pSortableColumn="edit" class="actions "></th>
+                        </ng-template>
 
 
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th style="max-width: 0rem"></th>
+                            <th pSortableColumn="name.ar"><p-sortIcon field="arabicName"></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday
+                              Name'|translate}}</th>
+                            <th style="min-width:15rem" pSortableColumn="name.ar"><p-sortIcon field="arabicName"></p-sortIcon>{{'shared.User
+                              Name'|translate}}</th>
+                            <th style="min-width:15rem" pSortableColumn="curriculums"><p-sortIcon
+                                field="curriculumName"></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+                            <th style="min-width:29rem" pSortableColumn="dateFrom"><p-sortIcon
+                                field="dateFrom"></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
+                            <th pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}
+                            </th>
+                            <th pSortableColumn="flexibilityStatus.id"><p-sortIcon
+                                field="flexibilityStatus"></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
+                            <th pSortableColumn="edit" class="actions "></th>
 
-                                              </tr>
-                                          </ng-template>
-                                          <ng-template pTemplate="body" let-e let-expanded="expanded" >
+                          </tr>
+                        </ng-template>
 
-                                              <tr [ngClass]="expanded ? 'expandrow' : ''" >
+                      <ng-template pTemplate="body" let-e let-expanded="expanded">
+                        <tr [ngClass]="expanded ? 'expandrow' : ''">
+                          <td style="max-width:11rem">
 
-                                                  <td style="max-width:11rem">
+                            <button type="button" pButton pRipple [pRowToggler]="e" class="p-button-text p-button-rounded p-button-plain"
+                              [icon]="(expanded && e.curriculums.length>1) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                          </td>
+                          <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''">{{e.name|currentLang}}</td>
+                          <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''">{{e.userName|currentLang}}</td>
+                          <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''">{{e.curriculums[0].name|currentLang}}</td>
+                          <td style="min-width:29rem" [ngClass]="expanded ? 'action' : ''">{{'shared.From'|translate}} {{e.dateFrom | toLocalDate| LocalizeDate}} - {{'shared.To'|translate}} {{e.dateTo| toLocalDate|LocalizeDate}}</td>
+                          <td [ngClass]="expanded ? 'action' : ''">{{e.createdDate | toLocalDate|LocalizeDate}}</td>
+                          <td>
+                            <div class="d-flex align-items-center gap-4">
+                              <div [ngClass]="e.flexibilityStatus.value==statusEnum.Flexible?'alerting success':'alerting danger'">
+                                {{e.flexibilityStatus.name}}</div>
 
-                                                      <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="(expanded && e.curriculums.length>1) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-                                                  </td>
-                                                  <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''" >{{e.name|currentLang}}</td>
-                                                  <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''" >{{e.userName|currentLang}}</td>
-                                                  <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name|currentLang}}</td>
-                                                  <td style="min-width:29rem" [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom| LocalizeDate}} - {{'shared.To'|translate}} {{e.dateTo| LocalizeDate}}</td>
-                                                  <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate | LocalizeDate}}</td>
-                                                  <td >
-                                                              <div class="d-flex align-items-center gap-4">
-                                                                  <div [ngClass]="e.flexibilityStatus.value==statusEnum.Flexible?'alerting success':'alerting danger'">{{e.flexibilityStatus.name}}</div>
-
-                                                              </div>
-                                                  </td>
-
-
-
-                                                  <td class="actions d-flex gap-4">
-                                                                  <button   (click)="editHoliday(e)">
-                                                                      <img  src="assets/images/shared/rect-bluepen.svg" alt="">
-                                                                  </button>
-
-                                                                  <button   (click)="this.confirmModelService.openModel(); deletedHoliday=e.index">
-                                                                      <img  src="assets/images/shared/rect-xmark.svg" alt="">
-                                                                  </button>
-                                                  </td>
+                            </div>
+                          </td>
 
 
 
-                                              </tr>
-                                          </ng-template>
-                                          <ng-template  pTemplate="rowexpansion" let-e>
-                                              <tr >
-                                                  <td colspan="15"  class="expand " *ngIf="e.curriculums.length>1">
+                          <td class="actions d-flex gap-4">
+                            <button (click)="editHoliday(e)">
+                              <img src="assets/images/shared/rect-bluepen.svg" alt="">
+                            </button>
 
-                                                              <p-table  #dt [value]="e.curriculums" dataKey="name"    >
-
-
-
-                                                                  <ng-template pTemplate="body" let-curriculum  let-expanded="expanded">
-                                                                      <tr class="border-bottom-0" *ngIf="curriculum.id!=e.curriculums[0].id">
-
-                                                                          <td  style="min-width:24rem"></td>
-
-                                                                          <td  class=" action d-flex justify-content-end" style="min-width:20rem">{{curriculum.name|currentLang}}</td>
-                                                                          <td class="justify-content-center" style="min-width:24rem;" >-</td>
-                                                                          <td class="justify-content-center" style="min-width:16rem;" >-</td>
-                                                                          <td  style="min-width:16rem;"></td>
-                                                                          <td  style="min-width:16rem;"></td>
+                            <button (click)="this.confirmModelService.openModel(); deletedHoliday=e.index">
+                              <img src="assets/images/shared/rect-xmark.svg" alt="">
+                            </button>
+                          </td>
 
 
 
+                        </tr>
+                      </ng-template>
 
-                                                                      </tr>
-                                                                  </ng-template>
+                      <ng-template pTemplate="rowexpansion" let-e>
+                        <tr>
+                          <td colspan="15" class="expand " *ngIf="e.curriculums.length>1">
 
-
-                                                              </p-table>
-
-
-
-                                              </td>
-                                        </tr>
-
-
-                                          </ng-template>
-
-
-                                            <ng-template pTemplate="emptymessage" let-columns>
-                                              <tr>
-                                                  <td [attr.colspan]="20">
-                                                      <ng-container >
-                                                          <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                                                      </ng-container>
-
+                            <p-table #dt [value]="e.curriculums" dataKey="name">
+                              <ng-template pTemplate="body" let-curriculum let-expanded="expanded">
+                                <tr class="border-bottom-0" *ngIf="curriculum.id!=e.curriculums[0].id">
+                                  <td style="min-width:24rem"></td>
+                                  <td class=" action d-flex justify-content-end" style="min-width:20rem">{{curriculum.name|currentLang}}</td>
+                                  <td class="justify-content-center" style="min-width:24rem;">-</td>
+                                  <td class="justify-content-center" style="min-width:16rem;">-</td>
+                                  <td style="min-width:16rem;"></td>
+                                  <td style="min-width:16rem;"></td>
+                                </tr>
+                              </ng-template>
+                            </p-table>
+                          </td>
+                        </tr>
 
 
-                                                  </td>
-                                              </tr>
-                                          </ng-template>
+                      </ng-template>
+
+                      <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                          <td [attr.colspan]="20">
+                            <ng-container>
+                              <app-informative-block title="{{'emptyList.noDataMatch' |translate}}"
+                                src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                            </ng-container>
+
+
+
+                          </td>
+                        </tr>
+                      </ng-template>
                       </p-table>
 
 

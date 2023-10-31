@@ -24,6 +24,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 import { Tooltip } from 'primeng/tooltip';
+import { UserRolesService } from 'src/app/modules/user-roles/service/user-roles.service';
 
 @Component({
   selector: 'app-school-employees',
@@ -65,6 +66,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	paginationState={...paginationInitialState}
 
 	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle().pipe(filter(res=> res.name?.en != 'Manager'),shareReplay())
+  getRoles$ = this.userRoleService.getRolesDropdown().pipe(shareReplay())
 	statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ RegistrationStatus.Deleted), value:RegistrationStatus.Deleted}]
 	employees$=this.schoolsService.getSchoolEmployees(this.schoolId,this.searchModel).pipe(map(res=>res.data))
 
@@ -119,6 +121,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	private router: Router,
 	private userService:UserService,
 	private exportService: ExportService,
+  private userRoleService:UserRolesService
 	) { }
 
 	ngOnInit(): void {

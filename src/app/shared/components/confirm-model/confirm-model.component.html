@@ -5,7 +5,7 @@
            <div class="d-flex flex-column justify-content-center align-items-center gap-4">
 
             <img [src]="(modelData$ |async).img || 'assets/images/empty-list/basket.svg'" alt="">
-            <p class="fs-3 text-center" *ngIf="(modelData$ |async).message"> {{(modelData$ |async).message |translate}}</p>
+            <p class="fs-3 text-center" *ngIf="(modelData$ |async).message" [innerHTML]="(modelData$ |async).message |translate"></p>
 
             <!-- <p class="fs-3">{{'shared.confirmDelete' |translate}}</p> -->
             <div class="d-flex align-items-center gap-4 mt-5">

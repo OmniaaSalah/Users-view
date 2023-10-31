@@ -48,7 +48,6 @@ export class ExportService {
 
   // <<<<<<<<<<<<<<<<<<< PDF >>>>>>>>>>>>>>>>>>>>>>>
   exportPdf(data:any[], fileName) {
-
     let exportColumns = this.getColsHead(data).reverse()
     data= data.map(el=>{
       return Object.values(el).reverse()
@@ -73,7 +72,8 @@ export class ExportService {
       body: data,
       didDrawPage: (dataArg) => {
         doc.setFontSize(20);
-        this.lang=='ar'? doc.text(fileName,doc.internal.pageSize.width-40,25,{align: 'right'}):doc.text(fileName,dataArg.settings.margin.right,30);
+        this.lang=='ar' ?  doc.text(fileName, doc.internal.pageSize.width-40, 25,{align: 'right'}): //if
+            doc.text(fileName,dataArg.settings.margin.right,30); //else
       }
     });
 
