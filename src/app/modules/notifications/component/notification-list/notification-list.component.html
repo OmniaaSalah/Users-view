@@ -3,139 +3,139 @@
         <!-- <app-page-header></app-page-header> -->
     </div>
     <div class="left d-flex align-items-center ">
-        <button class="btn btn-primary " #notReadBtn (click)="getNotReadable()">{{'Notifications.Not
-            readable'|translate}}</button>
-        <button class="btn btn-primary " (click)="getReadable()"
-            #readBtn>{{'Notifications.Readable'|translate}}</button>
+        <button class="btn btn-primary activeBtn" [class.activeBtn]="status=='New'"  (click)="status='New';getNotReadable()">{{'Notifications.Not readable'|translate}}</button>
+        <button class="btn btn-primary " [class.activeBtn]="status=='Readed'" (click)="status='Readed';getReadable()">{{'Notifications.Readable'|translate}}</button>
     </div>
 
 </div>
 
-<div class="table-caption">
-  <app-table-caption [hasExport]="false" (onFilter)="searchModel.page=1;searchModel.pageSize=3;getNotifications()"
-    (onSearch)="searchModel.page=1;searchModel.keyword = $event;searchModel.pageSize=3; getNotifications()"
-    (onClear)="clearFilter()">
-    <div class="row gx-5 form-set panel">
-      <div class="col-4">
-        <label class="label" for="indexType">{{'Notifications.NotificationName'|translate}} </label>
-        <p-multiSelect [options]="notificationsNames" [filter]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
-          display="chip" [(ngModel)]="notificationName" optionValue="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
-          optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
-          placeholder="{{'Notifications.NotificationName'|translate}}"></p-multiSelect>
-      </div>
-      <div class="col-4">
-        <label class="label" for="indexType">{{'Notifications.Receiver'|translate}} </label>
-        <p-multiSelect [options]="receivers" [filter]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
-          display="chip" [(ngModel)]="searchModel.senderIds" optionValue="id"
-          [virtualScroll]="true"
-          [virtualScrollItemSize]="55"
-          optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
-          placeholder="{{'Notifications.Receiver'|translate}}"></p-multiSelect>
-      </div>
-    </div>
-  </app-table-caption>
-</div>
-
-<div id="notification-content">
-
-    <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500"
-        (scrolled)="onScroll()">
-
-        <div class="Notifications__cards mt-5">
-
-            <div class="container-fluid">
-                <div class="row">
-
-                    <div class="p-0 mb-4" *ngFor="let card of notificationsList; let i=index">
-                        <div class="cardd">
-                            <div class="card-body d-flex">
-                                <div class="name-description">
-                                    <div class="title">
-                                        <img class="NotReadable" src="assets/images/shared/bluecircle.svg"*ngIf="card.isRead">
-                                        <img class="NotReadable" src="assets/images/shared/redcircle.svg"*ngIf="!card.isRead">
-                                        <img class="cardimage" src="assets/images/shared/Person.jpg">
-                                        <span class="fw-bold mx-4 d-inline-block" *ngIf="checkLanguage && card.userName != null">{{card.userName | currentLang}}</span>
-                                        <span  *ngIf="checkLanguage && card.userName.ar == null">مستخدم</span>
-                                        <span  *ngIf="!checkLanguage && card.userName.en == null">user</span>
-                                        <span class="headerName d-inline-block" *ngIf="checkLanguage && card.title != null">{{card.title | currentLang}}</span>
-                                    </div>
-
-                                    <div class="Description">
-                                        <label class="fw-bold mb-3">{{'Notifications.Description'|translate}}</label>
-                                        <p class="color-gray-800 "*ngIf="checkLanguage">{{card.description | currentLang}}</p>
-                                    </div>
-                                    <p class="color-gray-300 mt-6">{{card.createdDate|customDate}}</p>
-                                </div>
-                                <div class="Details">
-
-                                    <button class=" d-flex  align-items-center gap-3 justify-content-end mx-4 btn-primary"
-                                    [ngClass]="!card.pageLink?'my-disabled':''"
-                                        (click)="showDetails(card.pageLink,card.id,card.isRead)">
-                                        <span>{{'shared.Show Details'|translate}}</span>
-                                        <img *ngIf="card.pageLink" [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
-                                        <img *ngIf="!card.pageLink" [class.rotate180]="lang=='en'" src="assets/images/shared/gray-left-arrow.svg" alt="">
-                                    </button>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </div>
-            </div>
+<div class="p-5 border-dark radius-15 bg-white">
+  <div class="table-caption">
+    <app-table-caption [hasExport]="false" (onFilter)="searchModel.page=1;searchModel.pageSize=3;getNotifications()"
+      (onSearch)="searchModel.page=1;searchModel.keyword = $event;searchModel.pageSize=3; getNotifications()"
+      (onClear)="clearFilter()">
+      <div class="row gx-5 form-set panel">
+        <div class="col-4">
+          <label class="label" for="indexType">{{'Notifications.NotificationName'|translate}} </label>
+          <p-multiSelect [options]="notificationsNames" [filter]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
+            display="chip" [(ngModel)]="notificationName" optionValue="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
+            optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
+            placeholder="{{'Notifications.NotificationName'|translate}}"></p-multiSelect>
         </div>
-
-
-        <button *ngIf="currentNotifications&&currentNotifications!=notificationTotal" class="btn btn-primary LoadMore" type="button"
-            disabled [ngClass]="showSpinner?'shown-spinner':'hidden-spineer'">
-
-            {{notificationsList?.length}} {{'shared.From'|translate}} {{notificationTotal}}
-
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        </button>
-    </div>
-
-</div>
-
-<div  *ngIf="notificationsList?.length==0 && !skeletonLoading ">
-        <app-informative-block title="{{'emptyList.Notifications List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-</div>
-
-<div *ngIf="skeletonLoading" id="notification-content">
-    <div class="Notifications__cards mt-5">
-        <div class="container-fluid">
-            <div class="row">
-                <div class=" col-11 p-0 mb-4" *ngFor="let card of [1,2,3] let i=index">
-                    <div class="cardd">
-                        <div class="card-body d-flex">
-                            <div class="name-description">
-                                <div class="title d-flex">
-                                    <p-skeleton width="4rem" height="4rem" shape="circle" class="cardimage">
-                                    </p-skeleton>
-                                    <p-skeleton width="15rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                    <p-skeleton width="5rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                    <p-skeleton width="15rem" styleClass="p-mb-2" class="headerName"></p-skeleton>
-                                </div>
-                                <div class="Description">
-                                    <p-skeleton width="7rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                    <p-skeleton width="62rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                    <p-skeleton width="50rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                                </div>
-                                <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                            </div>
-                            <div class="Details">
-
-                                <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+        <div class="col-4">
+          <label class="label" for="indexType">{{'Notifications.Receiver'|translate}} </label>
+          <p-multiSelect [options]="receivers" [filter]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
+            display="chip" [(ngModel)]="searchModel.senderIds" optionValue="id"
+            [virtualScroll]="true"
+            [virtualScrollItemSize]="55"
+            optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
+            placeholder="{{'Notifications.Receiver'|translate}}"></p-multiSelect>
         </div>
-    </div>
+      </div>
+    </app-table-caption>
+  </div>
 
+  <div id="notification-content">
+
+      <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500"
+          (scrolled)="onScroll()">
+
+          <div class="Notifications__cards mt-5">
+
+              <div class="container-fluid">
+                  <div class="row">
+
+                      <div class="p-0 mb-4" *ngFor="let card of notificationsList; let i=index">
+                          <div class="cardd">
+                              <div class="card-body d-flex">
+                                  <div class="name-description">
+                                      <div class="title">
+                                          <img class="NotReadable" src="assets/images/shared/bluecircle.svg"*ngIf="card.isRead">
+                                          <img class="NotReadable" src="assets/images/shared/redcircle.svg"*ngIf="!card.isRead">
+                                          <img class="cardimage" src="assets/images/shared/Person.jpg">
+                                          <span class="fw-bold mx-4 d-inline-block" *ngIf="checkLanguage && card.userName != null">{{card.userName | currentLang}}</span>
+                                          <span  *ngIf="checkLanguage && card.userName.ar == null">مستخدم</span>
+                                          <span  *ngIf="!checkLanguage && card.userName.en == null">user</span>
+                                          <span class="headerName d-inline-block" *ngIf="checkLanguage && card.title != null">{{card.title | currentLang}}</span>
+                                      </div>
+
+                                      <div class="Description">
+                                          <label class="fw-bold mb-3">{{'Notifications.Description'|translate}}</label>
+                                          <p class="color-gray-800 "*ngIf="checkLanguage">{{card.description | currentLang}}</p>
+                                      </div>
+                                      <p class="color-gray-300 mt-6">{{card.createdDate|customDate}}</p>
+                                  </div>
+                                  <div class="Details">
+
+                                      <button class=" d-flex  align-items-center gap-3 justify-content-end mx-4 btn-primary"
+                                      [ngClass]="!card.pageLink?'my-disabled':''"
+                                          (click)="showDetails(card.pageLink,card.id,card.isRead)">
+                                          <span>{{'shared.Show Details'|translate}}</span>
+                                          <img *ngIf="card.pageLink" [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
+                                          <img *ngIf="!card.pageLink" [class.rotate180]="lang=='en'" src="assets/images/shared/gray-left-arrow.svg" alt="">
+                                      </button>
+                                  </div>
+
+                              </div>
+                          </div>
+
+                      </div>
+
+
+                  </div>
+              </div>
+          </div>
+
+
+          <button *ngIf="currentNotifications&&currentNotifications!=notificationTotal" class="btn btn-primary LoadMore" type="button"
+              disabled [ngClass]="showSpinner?'shown-spinner':'hidden-spineer'">
+
+              {{notificationsList?.length}} {{'shared.From'|translate}} {{notificationTotal}}
+
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </button>
+      </div>
+
+  </div>
+
+  <div  *ngIf="notificationsList?.length==0 && !skeletonLoading ">
+          <app-informative-block title="{{'emptyList.Notifications List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+  </div>
+
+  <div *ngIf="skeletonLoading" id="notification-content">
+      <div class="Notifications__cards mt-5">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class=" col-11 p-0 mb-4" *ngFor="let card of [1,2,3] let i=index">
+                      <div class="cardd">
+                          <div class="card-body d-flex">
+                              <div class="name-description">
+                                  <div class="title d-flex">
+                                      <p-skeleton width="4rem" height="4rem" shape="circle" class="cardimage">
+                                      </p-skeleton>
+                                      <p-skeleton width="15rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                      <p-skeleton width="5rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                      <p-skeleton width="15rem" styleClass="p-mb-2" class="headerName"></p-skeleton>
+                                  </div>
+                                  <div class="Description">
+                                      <p-skeleton width="7rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                      <p-skeleton width="62rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                      <p-skeleton width="50rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                  </div>
+                                  <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                              </div>
+                              <div class="Details">
+
+                                  <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                              </div>
+
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
 </div>

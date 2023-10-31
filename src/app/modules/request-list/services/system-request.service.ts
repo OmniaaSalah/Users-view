@@ -41,8 +41,8 @@ export class SystemRequestService {
 
     if(scope ===UserScope.Guardian){
       return [
-        {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: requestTypeEnum.RegestrationApplicationRequest},
-        {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
+        {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: [requestTypeEnum.RegestrationApplicationRequest,requestTypeEnum.RegestrationRequestForWithrawan]},
+        // {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
         {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
         {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
         {name:this.translate.instant('dashboard.Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},
@@ -59,8 +59,8 @@ export class SystemRequestService {
       ]
     }else{
       return [
-        {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: requestTypeEnum.RegestrationApplicationRequest},
-        {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
+        {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: [requestTypeEnum.RegestrationApplicationRequest, requestTypeEnum.RegestrationRequestForWithrawan]},
+        // {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
         {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
         {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
         {name:this.translate.instant('dashboard.Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},

@@ -27,8 +27,10 @@ export class NotificationListComponent implements OnInit {
   notificationsNames = [];
   receivers = [];
   lang = inject(TranslationService).lang;
-  @ViewChild('readBtn', { read: ElementRef, static: false })readBtn: ElementRef;
-  @ViewChild('notReadBtn', { read: ElementRef, static: false }) notReadBtn: ElementRef;
+  @ViewChild('readBtn', { read: ElementRef, static: false })
+  readBtn: ElementRef;
+  @ViewChild('notReadBtn', { read: ElementRef, static: false })
+  notReadBtn: ElementRef;
   notificationsList = [];
   notificationTotal!: number;
   currentNotifications;
@@ -37,12 +39,14 @@ export class NotificationListComponent implements OnInit {
   checkLanguage: boolean = false;
   showSpinner: boolean = false;
   skeletonLoading: boolean = false;
+
+  status : 'New' | 'Readed'='New'
   searchModel = {
     keyword: null,
     sortBy: null,
     page: 1,
     pageSize: 3,
-    isRead: null,
+    isRead: false,
     senderIds: null,
     arabicNotificationName: null,
     englishNotificationName: null,
@@ -69,15 +73,19 @@ export class NotificationListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.notificationService.unReadNotificationNumber.pipe(take(1)).subscribe((response) => {
-      this.unreadNotificationNumbers = response;
-    });
+    this.notificationService.unReadNotificationNumber
+      .pipe(take(1))
+      .subscribe((response) => {
+        this.unreadNotificationNumbers = response;
+
+      });
     this.notificationService.notificationNumber.subscribe((response) => {
-      this.componentHeaderData.mainTitle.sub = `(${response})`;
-      this.headerService.changeHeaderdata(this.componentHeaderData);
+      // this.componentHeaderData.mainTitle.sub = `(${response})`;
+      // this.headerService.changeHeaderdata(this.componentHeaderData);
       this.notificationTotal = response;
     });
-    this.getNotifications();
+
+    this.getNotReadable();
 
     if (localStorage.getItem('preferredLanguage') == 'ar') {
       this.checkLanguage = true;
@@ -94,25 +102,38 @@ export class NotificationListComponent implements OnInit {
     });
   }
 
-  filtration = { ...BaseSearchModel, PageSize:100, emiretesId: '', schoolId: null, gradeId: null };
+  filtration = {
+    ...BaseSearchModel,
+    PageSize: 100,
+    emiretesId: '',
+    schoolId: null,
+    gradeId: null,
+  };
   getReceivers() {
-    this.notificationService.getSendersNames(this.filtration)
-    .pipe(switchMap(res=>{
-      this.receivers = res?.result?.data;
-      return this.notificationService.getSendersNames({...this.filtration, PageSize: res.result?.total}).pipe( delay(5000))
-    }))
-    .subscribe((res) => {
-      this.receivers = res?.result?.data;
-    });
+    this.notificationService
+      .getSendersNames(this.filtration)
+      .pipe(
+        switchMap((res) => {
+          this.receivers = res?.result?.data;
+          return this.notificationService
+            .getSendersNames({
+              ...this.filtration,
+              PageSize: res.result?.total,
+            })
+            .pipe(delay(5000));
+        })
+      )
+      .subscribe((res) => {
+        this.receivers = res?.result?.data;
+      });
   }
-
 
   getNotifications() {
     this.notificationsList = [];
     this.searchModel.arabicNotificationName =
-    this.lang == 'ar' ? this.notificationName : null;
+      this.lang == 'ar' ? this.notificationName : null;
     this.searchModel.englishNotificationName =
-    this.lang == 'en' ? this.notificationName : null;
+      this.lang == 'en' ? this.notificationName : null;
     this.skeletonLoading = true;
     this.showSpinner = false;
     this.notificationService.getAllNotifications(this.searchModel).subscribe(
@@ -122,6 +143,8 @@ export class NotificationListComponent implements OnInit {
         this.currentNotifications = res.total;
         this.showSpinner = true;
         this.sharedService.filterLoading.next(false);
+        this.componentHeaderData.mainTitle.sub = `(${this.currentNotifications})`;
+        this.headerService.changeHeaderdata(this.componentHeaderData);
       },
       (err) => {
         this.sharedService.filterLoading.next(false);
@@ -132,8 +155,6 @@ export class NotificationListComponent implements OnInit {
   }
 
   getNotReadable() {
-    this.readBtn.nativeElement.classList.remove('activeBtn');
-    this.notReadBtn.nativeElement.classList.add('activeBtn');
     this.searchModel.keyword = null;
     this.searchModel.page = 1;
     this.searchModel.pageSize = 3;
@@ -141,8 +162,6 @@ export class NotificationListComponent implements OnInit {
     this.getNotifications();
   }
   getReadable() {
-    this.readBtn.nativeElement.classList.add('activeBtn');
-    this.notReadBtn.nativeElement.classList.remove('activeBtn');
     this.searchModel.keyword = null;
     this.searchModel.page = 1;
     this.searchModel.pageSize = 3;
@@ -167,15 +186,17 @@ export class NotificationListComponent implements OnInit {
         this.unreadNotificationNumbers--
       );
       this.notificationService
-      .updateNotifications({ NotificationId: [id] })
-      .subscribe(
-        (res) => {
-
-          this.getNotifications();
+        .updateNotifications({ NotificationId: [id] })
+        .subscribe(
+          (res) => {
+            this.getNotifications();
           },
           (err) => {
             this.toastr.error(
-              this.translate.instant('Request cannot be processed, Please contact support.'));
+              this.translate.instant(
+                'Request cannot be processed, Please contact support.'
+              )
+            );
           }
         );
     }
