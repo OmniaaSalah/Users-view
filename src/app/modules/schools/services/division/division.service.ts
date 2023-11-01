@@ -197,8 +197,9 @@ export class DivisionService {
             [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student?.name),
             [this.translate.instant('dashboard.parents.subjectName')]: getLocalizedValue(student.subjectName),
             [this.translate.instant('dashboard.schools.optionalOrmandatory')]: student.isElective ? this.translate.instant("dashboard.Subjects.optional") : this.translate.instant("dashboard.Subjects.mandatory"),
-            [this.translate.instant('dashboard.parents.evaluation')]: student.evaluationSystem,
+            [this.translate.instant('dashboard.schools.evaluation')]: student.evaluationSystem,
             [this.translate.instant('dashboard.parents.Result')]: student.studentDegree,
+            [this.translate.instant('dashboard.parents.studentperformance')]: student?.studentPerformance || this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.parents.GPA')]: student.studentGPA,
             [this.translate.instant('dashboard.parents.Credithour')]: student.studentHour,
           }

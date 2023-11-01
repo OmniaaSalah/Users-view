@@ -59,6 +59,14 @@
                         class="star">*</span></label>
                     <input type="text" pInputText formControlName="emairatesWay" [LangRestrict]="'numb'" class="form-control "
                       placeholder="{{'sign up.enter personal digitalIdentity'|translate}}">
+                      <!-- <p-inputNumber
+                      name="identity"
+                      [ngClass]="{'ng-invalid ng-dirty': emairatesWay.errors && (emairatesWay.errors?.['required'] || emairatesWay.errors?.pattern)}"
+                      formControlName="emairatesWay"
+                      [useGrouping]="false" [maxlength]="15" [minlength]="15"
+                      [pattern]="'(784)[0-9]{12}'"
+                      (onInput)="emairatesWay?.setValue($event.value)"
+                      required placeholder="{{'sign up.enter personal digitalIdentity'|translate}}"></p-inputNumber> -->
                     <div>
                       <div [hidden]="emairatesWay.valid || emairatesWay.untouched">
                         <small *ngIf="emairatesWay.errors?.['required']" id="helpId" class="form-text text-muted d-block  "

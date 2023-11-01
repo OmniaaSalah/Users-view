@@ -170,35 +170,46 @@
             }
         }
         // for INPUT Number And DATE piker
-        .p-inputwrapper-focus {
-            .p-inputnumber {
-                border: 2px solid $color-primary;
-                background: #fff;
-            }
-            .p-password-input{ border: 2px solid $color-primary;
-                background: #fff;}
-            .p-calendar {
-                background: #fff;
-            }
-        }
 
 
         p-inputnumber {
 
+            &.ng-dirty.ng-invalid .p-inputnumber {
+              border-color: #EF525B;
+              background-color: #fff;
+              border-width: 1px;
+            }
+
+            &.p-inputwrapper-focus {
+                // .p-inputnumber {
+                //     border: 2px solid $color-primary;
+                //     background: #fff;
+                // }
+                .p-password-input{ border: 2px solid $color-primary;
+                    background: #fff;}
+                .p-calendar {
+                    background: #fff;
+                }
+            }
+
             display: flex;
             .p-inputnumber {
-                height: 55px;
+                height: 57px;
                 width: 100%;
                 border-radius: 12px;
                 overflow: hidden;
-                // background-color: $color-gray-150;
                 border: 1px solid $color-gray-150;
                 // overflow: hidden;
+
+                // &:focus{
+                //   border: 1px solid $color-primary;
+                // }
                 input {
                     border: none;
                     border-radius: 12px;
                     &:enabled:focus {
                         box-shadow: none;
+                        border: 2px solid $color-primary;
                     }
                 }
                 .p-button {

@@ -199,7 +199,6 @@ export class RequestdetailsComponent implements OnInit {
       this.addStudentTodivisionModal = false
       this.getRequestDetails()
       this.getRequestOptions()
-      this.requestStatesComp.getRequestStates()
 
       this.reqActionsForm.comments=''
       // this.filesToUpload =[]
@@ -207,6 +206,7 @@ export class RequestdetailsComponent implements OnInit {
       this.isLoading=false
       this.submittedOption.isLoading=false
       this.toaster.success(this.translate.instant('toasterMessage.requestStatusUpdated'))
+      this.requestStatesComp.getRequestStates()
 
     },(err)=>{
       this.isLoading=false

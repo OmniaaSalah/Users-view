@@ -7,6 +7,7 @@ import { UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SystemRequestService } from '../../../request-list/services/system-request.service';
 import { StudentService } from 'src/app/modules/shared/services/register-child/register-child.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-child-requests',
@@ -22,7 +23,7 @@ export class ChildRequestsComponent implements OnInit {
   childId = +this._route.snapshot.paramMap.get('childId');
   studentId
 
-  filtration = {...BaseSearchModel,RequestStatus: '', RequestType:''};
+  filtration = {...BaseSearchModel,RequestStatus: [], RequestType:[]};
   paginationState= {...paginationInitialState};
 
 
@@ -33,47 +34,75 @@ export class ChildRequestsComponent implements OnInit {
     loading:true
   }
 
+  statusOptions = []
+  reqsTypes = []
+
   constructor(
     private _route: ActivatedRoute,
     private systemRequestService: SystemRequestService,
     private router:Router,
-    private StudentService:StudentService
+    private StudentService:StudentService,
+    private sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
+    this.statusOptions=this.systemRequestService.getStatusOptions()
+    this.reqsTypes= this.systemRequestService.getReqsTypes()
+
     this.StudentService.Student$.subscribe(student => this.studentId = student?.id)
+
+    this.getRequestsList()
+  }
+
+  getRequestsList(){
     this.requestsOwner =='Child' ? this.getChildRequests() :  this.getStudentRequests()
+
   }
 
 
   getChildRequests(){
     this.requests.loading=true;
     this.requests.list=[];
-    this.systemRequestService.getChildRequests(this.childId,this.filtration, ).subscribe((res)=>{
+    let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus?.flat(), RequestType:this.filtration?.RequestType?.flat()}
+
+    this.systemRequestService.getChildRequests(this.childId,filter ).subscribe((res)=>{
         this.requests.loading = false;
         this.requests.total=res.total;
         this.requests.totalAllData = res.totalAllData;
         this.requests.list=res.data;
+        this.sharedService.filterLoading.next(false);
       },(err)=>{
         this.requests.loading = false;
         this.requests.total=0
+        this.sharedService.filterLoading.next(false);
       });
   }
 
   getStudentRequests(){
     this.requests.loading=true;
     this.requests.list=[];
-    this.systemRequestService.getStudentRequests(this.studentId,this.filtration, ).subscribe((res)=>{
+    let filter = {...this.filtration, RequestStatus: this.filtration.RequestStatus?.flat(), RequestType:this.filtration?.RequestType?.flat()}
+
+    this.systemRequestService.getStudentRequests(this.studentId,filter ).subscribe((res)=>{
         this.requests.loading = false;
         this.requests.total=res.total;
         this.requests.totalAllData = res.totalAllData;
         this.requests.list=res.data;
+        this.sharedService.filterLoading.next(false);
       },(err)=>{
         this.requests.loading = false;
         this.requests.total=0
+        this.sharedService.filterLoading.next(false);
       });
   }
 
+  clearFilter(){
+    this.filtration.Page=1
+    this.filtration.KeyWord =''
+    this.filtration.RequestStatus= [];
+    this.filtration.RequestType= [];
+    this.getRequestsList()
+  }
 
   navigateTo(id){
     if(this.currentUserScope==this.userScope.Guardian) this.router.navigateByUrl(`/requests-list/details/${id}`)

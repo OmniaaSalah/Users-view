@@ -13,6 +13,7 @@ import { StudentsService } from '../../../../students/services/students/students
 import { StudentService } from '../../../services/register-child/register-child.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { AttachmentIndexCode, FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 
 @Component({
   selector: 'app-attachments-child',
@@ -51,6 +52,8 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
   allowedFilesFor = this.currentUserScope ==UserScope.Guardian ?IndexesEnum.TheTypeOfFileAttachmentForTheParent: IndexesEnum.TypesOfFileAttachmentsForSchoolStaff
   gurdiansAttachmentsTypes$=this.indexsService.getIndext(this.allowedFilesFor)
+
+  allowedFileType
 
   constructor(
     private fb:FormBuilder,
@@ -125,19 +128,8 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
 
   onFileUpload(file, i){
-    console.log(file);
 
     this.attachments[i].files = file.map(el => ({...el,isActive:true}))
-
-    // if(this.currentUserScope==UserScope.Employee && !file[0]){
-    //   file = {...this.attachments[i], isActive:false}
-    // }else{
-    //   file= file[0] ? file[0] : {url:"", name:"",comment:"",isActive:true}
-
-    // }
-    // this.attachments[i] = {...this.attachments[i], url: file?.url,name:file?.name, comment: file?.comment, isActive: file?.isActive}
-
-    // this.attachments= [...this.attachments]
   }
 
   onFileDeleted(fileIndex, uploaderIndex){
@@ -152,11 +144,15 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
   }
 
-  fileTypeChanged(indexId){
-    let isExist= this.attachments.findIndex(el => (el?.indexId && el?.indexId === indexId)) > -1 ? true : false
+
+  fileTypeChanged(index){
+    let isExist= this.attachments.findIndex(el => (el?.indexId && el?.indexId === index?.id)) > -1 ? true : false
 
     if(isExist) this.showErrMess=true
     else this.showErrMess =false
+
+    if(index.indexCode == AttachmentIndexCode.BoaredCertificate) this.allowedFileType = FileTypeEnum.Image
+    else this.allowedFileType=null
   }
 
 

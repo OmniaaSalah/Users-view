@@ -94,7 +94,7 @@ export class SystemRequestService {
   getChildRequests(childId, filter?:SearchModel ){
     //  return of(this.requestArray)
     this.tableLoaderService.isLoading$.next(true)
-     return this.http.get(`/Child/child-requests-list/${childId}`,filter)
+     return this.http.post(`/Child/child-requests-list/${childId}`,filter)
      .pipe(
       take(1),
       finalize(()=> {
@@ -105,7 +105,7 @@ export class SystemRequestService {
     getStudentRequests(studentId, filter?:SearchModel ){
       //  return of(this.requestArray)
       this.tableLoaderService.isLoading$.next(true)
-       return this.http.get(`/Student/student-requests-list/${studentId}`,filter)
+       return this.http.post(`/Student/student-requests-list/${studentId}`,filter)
        .pipe(
         take(1),
         finalize(()=> {

@@ -33,12 +33,19 @@ export class MessageDetailsComponent implements OnInit {
 
   onSubmit
 
-  constructor(private headerService: HeaderService,private userService:UserService, private route: ActivatedRoute, private messageService: MessageService, private toastr: ToastrService, private formbuilder: FormBuilder, private router: Router, private translate: TranslateService) { }
+  constructor(
+    private headerService: HeaderService,
+    private userService:UserService,
+    private route: ActivatedRoute,
+    public messageService: MessageService,
+    private toastr: ToastrService,
+    private formbuilder: FormBuilder,
+    private router: Router,
+    private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.routeSub = params['MessageId'] //log the entire params object
-      console.log(this.routeSub);
 
     });
     this.replayForm = this.formbuilder.group({
@@ -74,7 +81,9 @@ export class MessageDetailsComponent implements OnInit {
   }
 
   getMessageDetailAfterReply(){
-    this.messageService.reduceReplyCount(this.routeSub).subscribe((res)=>{})
+    this.messageService.reduceReplyCount(this.routeSub).subscribe((res)=>{
+      this.messageService.unReadedMessagesCount$.next(this.messageService.unReadedMessagesCount$.getValue() - 1)
+    })
     this.getMessageDetail();
   }
 
