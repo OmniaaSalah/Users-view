@@ -51,7 +51,7 @@ export class MessageDetailsComponent implements OnInit {
     this.replayForm = this.formbuilder.group({
       messegeText: ['', [Validators.required, Validators.maxLength(512)]],
     });
-    this.getMessageDetailAfterReply();
+    this.getMessageDetail();
 
     this.headerService.Header.next(
       {
@@ -76,7 +76,9 @@ export class MessageDetailsComponent implements OnInit {
             element.color = "second-message"
         }
       })
+
       if(res.messageSatus ==MessageStatus.Pending&&(this.messageDetails.scope!=this.currentUserScope)) this.changeMessageStatus(res.id)
+      if(res.messageReplies.length)   this.getMessageDetailAfterReply()
     })
   }
 
@@ -84,7 +86,7 @@ export class MessageDetailsComponent implements OnInit {
     this.messageService.reduceReplyCount(this.routeSub).subscribe((res)=>{
       this.messageService.unReadedMessagesCount$.next(this.messageService.unReadedMessagesCount$.getValue() - 1)
     })
-    this.getMessageDetail();
+
   }
 
   showDialog() {
@@ -131,7 +133,9 @@ export class MessageDetailsComponent implements OnInit {
 
 
   changeMessageStatus(id){
-    this.messageService.changeMessageStatus({messageIds:[id]}).subscribe()
+    this.messageService.changeMessageStatus({messageIds:[id]}).subscribe(res =>{
+      this.messageService.unReadedMessagesCount$.next(this.messageService.unReadedMessagesCount$.getValue() - 1)
+    })
   }
 
 
