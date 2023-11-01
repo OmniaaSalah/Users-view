@@ -122,8 +122,10 @@
 
                 <div class="px-4 message" routerLink="/messages/messages">
                     <!-- <img src="assets/images/navBar/message.svg" alt=""> -->
-                    <i *ngIf="unReadedMessagesCount" class="pi pi-comments color-primary fs-2" pBadge style="font-size: 2rem;" severity="danger"  [value]="unReadedMessagesCount"></i>
-                    <i *ngIf="!unReadedMessagesCount" class="pi pi-comments color-primary fs-2" style="font-size: 2rem;" ></i>
+                    <ng-container *ngIf="messageService.unReadedMessagesCount$|async as unReadedMessagesCount">
+                      <i *ngIf="unReadedMessagesCount" class="pi pi-comments color-primary fs-2" pBadge style="font-size: 2rem;" severity="danger"  [value]="unReadedMessagesCount"></i>
+                      <i *ngIf="!unReadedMessagesCount " class="pi pi-comments color-primary fs-2" style="font-size: 2rem;" ></i>
+                    </ng-container>
 
                 </div>
             </div>

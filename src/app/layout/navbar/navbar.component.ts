@@ -73,7 +73,7 @@ export class NavbarComponent implements OnInit {
     private sharedService: SharedService,
     private authService: AuthenticationService,
     private translation: TranslationService,
-    private messageService: MessageService,
+    public messageService: MessageService,
   ) {}
 
   ngOnInit(): void {
@@ -459,6 +459,7 @@ export class NavbarComponent implements OnInit {
         })
         .subscribe((res) => {
           this.unReadedMessagesCount = res?.countPending;
+          this.messageService.unReadedMessagesCount$.next(res?.countPending)
         });
      }
   }

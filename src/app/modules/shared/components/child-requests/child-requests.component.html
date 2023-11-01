@@ -12,22 +12,22 @@
 
                         <app-table-caption
                         [seachKeyword]="filtration.KeyWord"
-                        [hasFilter]="false"
+                        [hasFilter]="true"
                         [hasExport]="false"
                         (onExport)="onExport($event)"
-                        (onFilter)="applyFilter()"
-                        (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; applyFilter()"
+                        (onFilter)="getRequestsList()"
+                        (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getRequestsList()"
                         (onClear)="clearFilter()">
 
 
                             <div class="row gx-5 form-set">
                                 <div class="col-4">
                                     <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
-                                    <p-dropdown [showClear]="true" StopProp [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-dropdown>
+                                    <p-multiSelect display="chip" [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-multiSelect>
                                 </div>
-                                <div class="col-8">
+                                <div class="col-4">
                                     <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>
-                                    <p-dropdown [showClear]="true" StopProp [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestType"  placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-dropdown>
+                                    <p-multiSelect display="chip" [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestType"  placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-multiSelect>
                                 </div>
                             </div>
 

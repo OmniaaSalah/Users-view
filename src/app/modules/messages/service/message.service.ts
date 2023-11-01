@@ -1,6 +1,6 @@
 import {HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { take } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { environment } from 'src/environments/environment';
@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MessageService {
+
+  unReadedMessagesCount$ = new BehaviorSubject(0)
 
  constructor(private http:HttpHandlerService) {
 

@@ -64,6 +64,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
   }
 
 
+  DEFAULT_FILE_SIZE = 3
+
   public filesRules
 
   public allowedFilesType: FileTypeEnum | FileTypeEnum[]
@@ -153,7 +155,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
     if(this.audioTypes.includes(fileType)) fileType = FileTypeEnum.Audio
     if(!this.filesRules || !this.filesRules[fileType])  return null
 
-    return this.filesRules[fileType]?.size || 3
+    return this.filesRules[fileType]?.size || this.DEFAULT_FILE_SIZE
 
   }
  }

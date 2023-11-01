@@ -74,7 +74,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     this.registrationWayFormGrp = formbuilder.group({
       registrationWay: ['', Validators.required],
       phoneWay: [''],
-      emairatesWay: [''],
+      emairatesWay: [null],
       emailWay: [''],
     });
 

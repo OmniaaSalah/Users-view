@@ -52,8 +52,8 @@ export class CertificatesRequestDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let academicSequence: any[] = this.academicYearsMapped(this.requestDetails.schoolYears.filter(el => !el.newSequence))
-    let addAcademicSequence: any[] = this.academicYearsMapped(this.requestDetails.schoolYears.filter(el => el.newSequence))
+    let academicSequence: any[] = this.academicYearsMapped(this.requestDetails.schoolYears?.filter(el => !el.newSequence))
+    let addAcademicSequence: any[] = this.academicYearsMapped(this.requestDetails.schoolYears?.filter(el => el.newSequence))
 
     this.fillAccademicYears(academicSequence)
     this.fillAddAccademicYears(addAcademicSequence)
@@ -61,7 +61,7 @@ export class CertificatesRequestDetailsComponent implements OnInit {
 
 
   fillAccademicYears(years:any[]){
-    years.forEach(el=>{
+    years?.forEach(el=>{
       this.getStudentAccademicArrCtr().push(this.fb.group({
         yearId: [el.yearId],
         schoolId: [el.schoolId],
@@ -71,7 +71,7 @@ export class CertificatesRequestDetailsComponent implements OnInit {
   }
 
   fillAddAccademicYears(years: any[]){
-    years.forEach(el=>{
+    years?.forEach(el=>{
       this.getStudentNewAccademicArrCtr().push(this.fb.group({
         yearId: [el.yearId],
         schoolId: [el.schoolId],
@@ -85,7 +85,7 @@ export class CertificatesRequestDetailsComponent implements OnInit {
 
 
   academicYearsMapped(AcademicSequence: any[]){
-    return AcademicSequence.map(el=>{
+    return AcademicSequence?.map(el=>{
       return {
         gradeId: el.gradeName?.id,
         yearId: el.schoolYear?.id,

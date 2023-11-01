@@ -98,7 +98,7 @@
     <div class="row gx-5 "  [formGroup]="newAttachmentForm">
         <div class="mb-5">
             <label class="label required">{{'dashboard.students.attachmentsToAdd'|translate}}</label>
-            <p-dropdown formControlName="indexId" (ngModelChange)="fileTypeChanged($event)" [options]="gurdiansAttachmentsTypes$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.chooseAttachment' |translate}}"></p-dropdown>
+            <p-dropdown formControlName="indexId" (ngModelChange)="fileTypeChanged($event)" [options]="gurdiansAttachmentsTypes$ | async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.chooseAttachment' |translate}}"></p-dropdown>
             <p *ngIf="showErrMess" class="color-red-500 fs-4 mt-3">هناك بالفعل مرفقات محفوظه لهذا النوع ، وبهذا الحفظ ستحل محل البيانات السابقة</p>
         </div>
           <ng-container formGroupName="titel">
@@ -113,7 +113,7 @@
               </div>
           </ng-container>
 
-          <app-file-upload [hasComment]="true" view="full" (onFileUpload)="onNewAttachmentUploaded($event)"></app-file-upload>
+          <app-file-upload [accept]="allowedFileType" [hasComment]="true" view="full" (onFileUpload)="onNewAttachmentUploaded($event)"></app-file-upload>
 
           <!-- <div class="col-md-2">
               <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
