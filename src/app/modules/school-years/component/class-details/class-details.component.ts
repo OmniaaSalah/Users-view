@@ -30,6 +30,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
   schoolYearUrlParameter: string='';
   classUrlParameter: string='';
   curriculumUrlParameter: string='';
+  currentDate=new Date();
   isLabelShown:boolean=false;
   schoolYearName;
   classSubjectsList;
@@ -55,10 +56,10 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
       classId:['',[Validators.required]],
       relatedCurriculumId: ['',[Validators.required]],
       minmumSubjectNumbers:[''],
-      minAgeInsideCountryFrom: [1],
-      minAgeInsideCountryTo: [1],
-      minAgeOutsideCountryFrom: [1],
-      minAgeOutsideCountryTo: [1],
+      minAgeInsideCountryFrom: [null ,[Validators.required]],
+      minAgeInsideCountryTo: [null ,[Validators.required]],
+      minAgeOutsideCountryFrom: [null ,[Validators.required]],
+      minAgeOutsideCountryTo: [null ,[Validators.required]],
       activateAge: [false],
 
 
@@ -248,10 +249,10 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
       'gradeId':this.schoolYearClassFormGrp.value.classId,
       'relatedCurriculum':this.schoolYearClassFormGrp.value.relatedCurriculumId,
       'minmumSubjectNumbers':Number(this.schoolYearClassFormGrp.value.minmumSubjectNumbers),
-      'minAgeInsideCountryFrom': Number(this.schoolYearClassFormGrp.value.minAgeInsideCountryFrom),
-      'minAgeInsideCountryTo': Number(this.schoolYearClassFormGrp.value.minAgeInsideCountryTo),
-      'minAgeOutsideCountryFrom':Number( this.schoolYearClassFormGrp.value.minAgeOutsideCountryFrom),
-      'minAgeOutsideCountryTo':Number(this.schoolYearClassFormGrp.value.minAgeOutsideCountryTo),
+      'minAgeInsideCountryFrom':this.formateDate(this.schoolYearClassFormGrp.value.minAgeInsideCountryFrom),
+      'minAgeInsideCountryTo': this.formateDate(this.schoolYearClassFormGrp.value.minAgeInsideCountryTo),
+      'minAgeOutsideCountryFrom':this.formateDate(this.schoolYearClassFormGrp.value.minAgeOutsideCountryFrom),
+      'minAgeOutsideCountryTo':this.formateDate(this.schoolYearClassFormGrp.value.minAgeOutsideCountryTo),
       'activateAge': this.schoolYearClassFormGrp.value.activateAge,
       'subjectList': this.classSubjectsList
      };
@@ -494,4 +495,11 @@ checkExistInGPA(valueChecked)
     }
 
   }
+
+  formateDate(date :Date)
+  {
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
+    return d.split('.')[0]
+  }
+
 }

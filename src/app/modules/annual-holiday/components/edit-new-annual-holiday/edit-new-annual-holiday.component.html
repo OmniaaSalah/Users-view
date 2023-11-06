@@ -245,12 +245,12 @@
 
 <div *ngIf="(!urlParameter&&parameterInAddHoliday=='')||(urlParameter&&parameterInAddHoliday=='')">
 
-        <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Add Holiday" isOpened="openModel"></app-holiday-model>
+        <app-holiday-model (onSave)="getHoliday($event)"  [title]="'dashboard.AnnualHoliday.Add Holiday'|translate" isOpened="openModel"></app-holiday-model>
 
 </div>
 <div *ngIf="(!urlParameter&&parameterInAddHoliday)||(urlParameter&&parameterInAddHoliday)">
 
-        <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="openModel"></app-holiday-model>
+        <app-holiday-model (onSave)="getHoliday($event)"  [title]="'dashboard.AnnualHoliday.Edit Holiday'|translate" isOpened="openModel"></app-holiday-model>
 
 </div>
 
