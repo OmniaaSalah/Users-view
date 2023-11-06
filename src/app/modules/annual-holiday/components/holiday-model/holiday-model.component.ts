@@ -20,7 +20,7 @@ export class HolidayModelComponent implements OnInit {
    isOpened:boolean=false;
    avaliableChangeStatus=true;
    get statusEnum () {return StatusEnum}
-  @Input('Title')  Title:string;
+  @Input('title')  title:string;
   @Output() onSave = new EventEmitter();
   holiday;
   editedStatus;
