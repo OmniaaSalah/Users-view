@@ -211,7 +211,8 @@ export  enum ClaimsEnum{
     SE_ShowUserIcon ="SE_ShowUserIcon",
     SE_TakeUndoAction="SE_TakeUndoAction",
     SE_MenuItem_Exam = "SE_MenuItem_Exam",
-    SE_MenuItem_Rate="SE_MenuItem_Rate"
+    SE_MenuItem_Rate="SE_MenuItem_Rate",
+    SE_A_Division="SE_A_Division"
 
 
 }

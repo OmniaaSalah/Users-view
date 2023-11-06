@@ -917,8 +917,8 @@
           "Are you need to Activate Age for this class": "هل تريد تفعيل شرط العمر لهذا الصف",
           "Select Activate Age": "أختر تفعيل شرط العمر",
           "Minmum Age for student from insidecountry": "شرط العمر لطلاب داخل الدولة",
-          "From year": "من عمر",
-          "to year":"إلى عمر",
+          "From Date": "من تاريخ",
+          "To Date":"إلى تاريخ",
           "Minmum Age for student from outsidecountry": "شرط العمر لطلاب خارج الدولة",
           "Related curriculum": "المنهج المرتبط",
           "Select Related curriculum": "أختر المنهج المرتبط",
@@ -1220,7 +1220,15 @@
           "SpecialClassesNumbers":"عدد الفصول الخاصة",
           "fusionStudentNumbers":"عدد طلاب الدمج",
           "trackWillBeDeleted":"يرجعى العلم انه سيتم حذف جميع المسارات والمواد المعرفه سابقا",
-          "subjectsWillBeDeleted":"يرجعى العلم انه سيتم حذف جميع المواد المعرفه سابقا"
+          "subjectsWillBeDeleted":"يرجعى العلم انه سيتم حذف جميع المواد المعرفه سابقا",
+          "addDivisionToschool":"إضافة شعبة للمدرسة",
+          "DivisionNameInArabic":"إسم الشعبة باللغة العربية",
+          "DivisionNameInEnglish":"إسم الشعبة باللغة الإنجليزية",
+          "WriteDivisionName":"اكتب إسم الشعبة",
+          "DivisionCode":"رمز الشعبة",
+          "WriteDivisionCode":"اكتب رمز الشعبة",
+          "WritesectionNumber":"اكتب رقم الشعبة",
+          "allowedStudentsNumber":"عدد الطلاب المسموح به"
 
       },
       "parents": {

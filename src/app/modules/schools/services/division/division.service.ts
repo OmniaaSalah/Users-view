@@ -1,7 +1,7 @@
 
 import { Injectable,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { finalize, take,map } from 'rxjs';
+import { finalize, take,map, BehaviorSubject } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -13,7 +13,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   providedIn: 'root'
 })
 export class DivisionService {
-
+  divisionModelOpened=new BehaviorSubject(false)
   lang = inject(TranslationService).lang;
   constructor(private http:HttpHandlerService,private translate:TranslateService, private tableLoaderService:LoaderService) { }
 
@@ -44,6 +44,11 @@ export class DivisionService {
         this.tableLoaderService.isLoading$.next(false)
       }))
 
+  }
+
+
+  addDivision(divisionData){
+    return this.http.post(`/Division`,divisionData).pipe(take(1))
   }
 
   // --------------------------------------------------------

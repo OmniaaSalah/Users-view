@@ -147,38 +147,49 @@
        <div class="col-xs-4 col-lg-4 ">
            <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}} </label>
          
-            <div class="d-flex gap-2">
-                
-                  <p-inputNumber formControlName="minAgeInsideCountryFrom" (onFocus)="minAgeInsideCountryFrom.markAsTouched()" (onBlur)="minAgeInsideCountryFrom.markAsUntouched()" [min]="1"  placeholder="{{'dashboard.SchoolYear.From year'| translate}}" [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value && minAgeInsideCountryFrom.untouched }" mode="decimal"  inputId="minmax-buttons"    ></p-inputNumber>
-        
-                  <p-inputNumber  formControlName="minAgeInsideCountryTo" (onFocus)="minAgeInsideCountryTo.markAsTouched()" (onBlur)="minAgeInsideCountryTo.markAsUntouched()" [max]="32" placeholder="{{'dashboard.SchoolYear.to year'| translate}}" [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryTo.value<minAgeInsideCountryFrom.value && minAgeInsideCountryTo.untouched}" mode="decimal"   inputId="minmax-buttons"    ></p-inputNumber>
-                   
+                <div class="d-flex gap-2">
+                    <div>
+                    <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeInsideCountryFrom" [maxDate]="minAgeInsideCountryTo?.value ? minAgeInsideCountryTo?.value:currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryFrom.errors?.['required'] && minAgeInsideCountryFrom.touched}"     placeholder="{{'dashboard.SchoolYear.From Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
+                    <div [hidden]="minAgeInsideCountryFrom.valid || minAgeInsideCountryFrom.untouched">
+                      <small *ngIf="minAgeInsideCountryFrom.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                        {{'shared.This Field is Required'|translate}}
+                        <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                      </small>
+                  </div>
+                  </div>
+                  <div>
+                    <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeInsideCountryTo" [minDate]="minAgeInsideCountryFrom?.value" [maxDate]="currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryTo.errors?.['required'] && minAgeInsideCountryTo.touched}"     placeholder="{{'dashboard.SchoolYear.To Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
+                    <div [hidden]="minAgeInsideCountryTo.valid || minAgeInsideCountryTo.untouched">
+                      <small *ngIf="minAgeInsideCountryTo.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                        {{'shared.This Field is Required'|translate}}
+                        <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                      </small>
+                    </div>
+                  </div>
                 </div>
-                <div [hidden]="minAgeInsideCountryFrom.value<=minAgeInsideCountryTo.value">
-                    <small   id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                      {{'dashboard.SchoolYear.you should enter ages correctly'|translate}}
-                       <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                    </small>
-
-                 </div>
     </div>
        <div class="col-xs-4 col-lg-4">
         <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from outsidecountry'|translate}} </label>
-     
-           <div class="d-flex gap-2">
-           
-                  <p-inputNumber formControlName="minAgeOutsideCountryFrom" (onFocus)="minAgeOutsideCountryFrom.markAsTouched()" (onBlur)="minAgeOutsideCountryFrom.markAsUntouched()" [min]="1" placeholder="{{'dashboard.SchoolYear.From year'| translate}}" [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryFrom.value>minAgeOutsideCountryTo.value &&  minAgeOutsideCountryFrom.untouched}" mode="decimal"  inputId="minmax-buttons"    ></p-inputNumber>
-           
-                  <p-inputNumber  formControlName="minAgeOutsideCountryTo" (onFocus)="minAgeOutsideCountryTo.markAsTouched()" (onBlur)="minAgeOutsideCountryTo.markAsUntouched()"  [max]="32" placeholder="{{'dashboard.SchoolYear.to year'| translate}}" [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryTo.value<minAgeOutsideCountryFrom.value && minAgeOutsideCountryTo.untouched}" mode="decimal"   inputId="minmax-buttons"    ></p-inputNumber>
-                
-        </div>
-        <div [hidden]="minAgeOutsideCountryFrom.value<=minAgeOutsideCountryTo.value">
-            <small   id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                {{'dashboard.SchoolYear.you should enter ages correctly'|translate}}
-               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+        <div class="d-flex gap-2">
+          <div>
+            <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeOutsideCountryFrom"   [maxDate]="minAgeOutsideCountryTo?.value ? minAgeOutsideCountryTo?.value:currentDate"     [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryFrom.errors?.['required'] && minAgeOutsideCountryFrom.touched}"  placeholder="{{'dashboard.SchoolYear.From Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
+          <div [hidden]="minAgeOutsideCountryFrom.valid || minAgeOutsideCountryFrom.untouched">
+            <small *ngIf="minAgeOutsideCountryFrom.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+              {{'shared.This Field is Required'|translate}}
+              <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
             </small>
-
-         </div>
+        </div>
+        </div>
+        <div>
+          <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeOutsideCountryTo"   [minDate]="minAgeOutsideCountryFrom?.value"  [maxDate]="currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryTo.errors?.['required'] && minAgeOutsideCountryTo.touched}"  placeholder="{{'dashboard.SchoolYear.To Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
+          <div [hidden]="minAgeOutsideCountryTo.valid || minAgeOutsideCountryTo.untouched">
+            <small *ngIf="minAgeOutsideCountryTo.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+              {{'shared.This Field is Required'|translate}}
+              <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+            </small>
+          </div>
+        </div>
+      </div>
       </div>
      </div>
   
