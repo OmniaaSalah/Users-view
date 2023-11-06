@@ -1073,7 +1073,15 @@
             "SpecialClassesNumbers":"Special classes numbers",
             "fusionStudentNumbers":"Fusion student numbers",
             "trackWillBeDeleted":"Please note that all predefined tracks and subjects will deleted",
-            "subjectsWillBeDeleted":"Please note that all predefined subjects will deleted"
+            "subjectsWillBeDeleted":"Please note that all predefined subjects will deleted",
+            "addDivisionToschool":"Add division to school",
+            "DivisionNameInArabic":"Division name in arabic",
+            "DivisionNameInEnglish":"Division name in english",
+            "WriteDivisionName":"Write division name",
+            "DivisionCode":"Division code",
+            "WriteDivisionCode":"Write division code",
+            "WritesectionNumber":"Write division number",
+            "allowedStudentsNumber":"Allowed students number"
 
 
         },
@@ -1374,8 +1382,8 @@
             "Are you need to Activate Age for this class": "Are you need to activate age for this class",
             "Select Activate Age":"Select activate age",
             "Minmum Age for student from insidecountry":  "Age for student from inside country",
-            "From year":"From year",
-            "to year": "To year",
+            "From Date":"From date",
+            "To Date": "To date",
             "Minmum Age for student from outsidecountry": "Age for student from outside country",
             "Related curriculum":  "Related curriculum",
             "Select Related curriculum": "Select related curriculum",

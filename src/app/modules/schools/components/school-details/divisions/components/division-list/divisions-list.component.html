@@ -1,3 +1,4 @@
+
 <div class="prim-table mt-4" *ngIf="divisions.totalAllData || divisions.loading">
     <p-table #dt [value]="divisions.list">
         <ng-template pTemplate="caption">
@@ -8,7 +9,11 @@
                         <label class="label" for="status">{{'shared.grade'|translate }} </label>
                         <p-multiSelect [lazy]="true" [options]="schoolGrades" display="chip"  [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.grade'|translate }}"></p-multiSelect>
                     </div>
-
+                    <div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
+                            <button  class="btn btn-primary btn--sm px-5" *permit="claimsEnum.SE_A_Division" (click)="addNewDivision()">
+                                <span>{{'dashboard.schools.addDivisionToschool'| translate}}</span>
+                            </button>
+                    </div>
                 </div>
             </app-table-caption>
 
@@ -90,3 +95,6 @@
 <ng-container *ngIf="!divisions.totalAllData && !divisions.loading">
     <app-informative-block subTitle="{{'emptyList.divisions' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>
+
+
+<app-division-modal [schoolId]="schoolId" [classId]="gardeId" (onDivisionModelClosed)="getSchoolDivisions()"></app-division-modal>
