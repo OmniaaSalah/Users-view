@@ -19,7 +19,6 @@ export class LanguageRestrictionDirective {
 
   @HostListener('keypress', ['$event']) onInput(event) {
     var charCode = event.which ? event.which : event.keyCode;
-    console.log(charCode);
 
     if (this.LangRestrict == 'ar') {
       if (

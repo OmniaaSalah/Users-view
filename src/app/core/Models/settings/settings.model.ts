@@ -24,6 +24,7 @@ export interface RequestRule{
     requestType: string
     isRequired: boolean
     filesCount: number
+    grade?:any
     files: FileRule[]
 }
 

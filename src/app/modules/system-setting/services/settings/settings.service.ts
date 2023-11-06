@@ -306,12 +306,16 @@ export class SettingsService {
 
 
   // NOTE:- (الطلبات)شروط الملفات المطلوبه -----------------------
-  getRequiredFiles(){
-    return this.http.get('/system-settings/request-attached-file-rules').pipe(take(1))
+  getRequiredFiles(filter?){
+    return this.http.get('/system-settings/request-attached-file-rules',filter).pipe(take(1))
   }
 
   getRequestRquiredFiles(requestType:requestTypeEnum){
     return this.http.get('/system-settings/request-attached-file-rules/'+ requestType).pipe(take(1))
+  }
+
+  getRegisterRequestRequiredAttach(gradeId){
+    return this.http.get(`/system-settings/request-attached-file-rules-by-grade/${gradeId}`)
   }
 
   updateRequiredFiles(body){

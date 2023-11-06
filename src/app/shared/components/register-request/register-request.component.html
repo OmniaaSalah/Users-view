@@ -254,7 +254,7 @@
       <ng-container *ngIf="!selectedGrade">
           <h2 class="heading heading--secondary mb-5 required">{{'dashboard.request-list.Available schools' | translate}}</h2>
 
-          <app-informative-block subTitle="{{'emptyList.youShouldSelectGarde' |translate}}"></app-informative-block>
+          <app-informative-block size="sm" subTitle="{{'emptyList.youShouldSelectGarde' |translate}}"></app-informative-block>
       </ng-container>
     </ng-container>
 
@@ -294,7 +294,7 @@
         </div>
     </div>
 
-    <ng-container *ngIf="!requiredFiles">
+    <!-- <ng-container *ngIf="!requiredFiles">
 
         <div class="row g-5">
             <div class="col-md-4">
@@ -307,6 +307,6 @@
                 <app-skeleton count="4" ></app-skeleton>
             </div>
         </div>
-    </ng-container>
+    </ng-container> -->
 
 </div>
