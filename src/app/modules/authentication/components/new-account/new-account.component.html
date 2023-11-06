@@ -57,7 +57,7 @@
                   <div class="col-12" *ngIf="showIdentityField">
                     <label class="label" for="precantage">{{'dashboard.parents.emirateUid'|translate}} <span
                         class="star">*</span></label>
-                    <input type="text" pInputText formControlName="emairatesWay" [LangRestrict]="'numb'" class="form-control "
+                    <input type="text" pInputText formControlName="emairatesWay" maxlength="15" [LangRestrict]="'numb'" class="form-control "
                       placeholder="{{'sign up.enter personal digitalIdentity'|translate}}">
                       <!-- <p-inputNumber
                       name="identity"
