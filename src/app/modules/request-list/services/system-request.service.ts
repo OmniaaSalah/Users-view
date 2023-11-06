@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
-import { UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
+import { StatusEnum, UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
@@ -85,33 +85,23 @@ export class SystemRequestService {
   this.tableLoaderService.isLoading$.next(true)
    return this.http.post(`/Student/user-requests`,filter)
    .pipe(
+    map(res=>{
+      res.data = res.data?.map(item =>{
+        return {
+          ...item,
+          requestStatus: item?.requestType ==requestTypeEnum.RegestrationApplicationRequest ? this.getMappedStatus(item?.requestStatus) : item?.requestStatus
+        }
+      })
+
+      return res
+    }),
     take(1),
     finalize(()=> {
       this.tableLoaderService.isLoading$.next(false)
     }))
   }
 
-  getChildRequests(childId, filter?:SearchModel ){
-    //  return of(this.requestArray)
-    this.tableLoaderService.isLoading$.next(true)
-     return this.http.post(`/Child/child-requests-list/${childId}`,filter)
-     .pipe(
-      take(1),
-      finalize(()=> {
-        this.tableLoaderService.isLoading$.next(false)
-      }))
-    }
 
-    getStudentRequests(studentId, filter?:SearchModel ){
-      //  return of(this.requestArray)
-      this.tableLoaderService.isLoading$.next(true)
-       return this.http.post(`/Student/student-requests-list/${studentId}`,filter)
-       .pipe(
-        take(1),
-        finalize(()=> {
-          this.tableLoaderService.isLoading$.next(false)
-      }))
-    }
 
   userRequestsToExport(filter?:SearchModel){
     //  return of(this.requestArray)
@@ -142,16 +132,33 @@ export class SystemRequestService {
     }
 
 
+
   getMyRequests(filter){
     this.tableLoaderService.isLoading$.next(true)
     return this.http.post(`/Guardian/my-requests-list`,filter)
     .pipe(
+      map(res=>{
+        res.data = res.data?.map(item =>{
+          return {
+            ...item,
+            requestStatus: item?.requestType ==requestTypeEnum.RegestrationApplicationRequest ? this.getMappedStatus(item?.requestStatus) : item?.requestStatus
+          }
+        })
+
+        return res
+      }),
       take(1),
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
       }))
   }
 
+
+  getMappedStatus(status:UserRequestsStatus){
+    return status==UserRequestsStatus.TentativelyAccepted ? UserRequestsStatus.Pending :
+            status==UserRequestsStatus.Approved ? UserRequestsStatus.TentativelyAccepted :
+            status
+  }
   myReqsToExport(filter){
     return this.http.post(`/Guardian/my-requests-list`,filter)
     .pipe( map(res=>{
@@ -171,8 +178,39 @@ export class SystemRequestService {
     }))
   }
 
+
+  getChildRequests(childId, filter?:SearchModel ){
+    //  return of(this.requestArray)
+    this.tableLoaderService.isLoading$.next(true)
+     return this.http.post(`/Child/child-requests-list/${childId}`,filter)
+     .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+    }
+
+    getStudentRequests(studentId, filter?:SearchModel ){
+      //  return of(this.requestArray)
+      this.tableLoaderService.isLoading$.next(true)
+       return this.http.post(`/Student/student-requests-list/${studentId}`,filter)
+       .pipe(
+        take(1),
+        finalize(()=> {
+          this.tableLoaderService.isLoading$.next(false)
+      }))
+    }
   getRequestDetails(instanceId){
-    return this.http.get(`/Student/request-details/${instanceId}`).pipe(take(1))
+    return this.http.get(`/Student/request-details/${instanceId}`)
+    .pipe(
+      map(res=>{
+        res.result = {
+            ...res.result,
+            requestStatus: res.result?.requestType ==requestTypeEnum.RegestrationApplicationRequest ? this.getMappedStatus(res.result?.requestStatus) : res.result?.requestStatus
+          }
+        return res
+      }),
+      take(1))
   }
 
   getRequestTimline(instanceId){

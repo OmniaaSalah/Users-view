@@ -1,18 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { FileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
+import { RequestRule, FileRule } from 'src/app/core/models/settings/settings.model';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
 @Component({
-  selector: 'app-required-attachment-settings',
-  templateUrl: './required-attachment-settings.component.html',
-  styleUrls: ['./required-attachment-settings.component.scss']
+  selector: 'app-registartion-required-attach',
+  templateUrl: './registartion-required-attach.component.html',
+  styleUrls: ['./registartion-required-attach.component.scss']
 })
-export class RequiredAttachmentSettingsComponent implements OnInit {
+export class RegistartionRequiredAttachComponent implements OnInit {
+
   @Input()step
   faPlus=faPlus
 
@@ -49,7 +50,7 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
 
   getRequiredFilesSettings(){
     this.loading = true
-    this.settingsService.getRequiredFiles({isRegReq:false}).subscribe(res=>{
+    this.settingsService.getRequiredFiles({isRegReq:true}).subscribe(res=>{
       this.loading = false
       this.fillRequestFiles(res)
     })
@@ -75,6 +76,10 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
         ruleId:[el.ruleId??0],
         filesCount:[el.filesCount, Validators.required],
         requestType: [el.requestType, Validators.required],
+        grade: this.fb.group({
+          id: [el?.grade?.id],
+          name: this.fb.group({ar: [el?.grade?.name?.ar ||'dfsssfs'], en: [el?.grade?.name?.en ||'zdvfsd']}),
+        }),
         isRequired:[el.isRequired, Validators.required],
         files: this.fillReqFilesConditions(el.files),
       }))
@@ -142,6 +147,5 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
   deleteRow(index){
   this.requestsFilesCtr.removeAt(index)
   }
-
 
 }

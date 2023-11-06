@@ -123,7 +123,7 @@ export class RegisterRequestComponent implements OnInit {
     this.prepareHeaderData()
     this.getStudentInfo()
 
-    this.getRegistrationRequiresFiles()
+    // this.getRegistrationRequiresFiles()
 
   }
 
@@ -216,9 +216,9 @@ initRegisterationForm(child){
     })
   }
 
-  getRegistrationRequiresFiles(reqType:requestTypeEnum = requestTypeEnum.RegestrationApplicationRequest ){
+  getRegistrationRequiresFiles(gradeId){
 
-    this.settingServcice.getRequestRquiredFiles(reqType).subscribe(res=>{
+    this.settingServcice.getRegisterRequestRequiredAttach(gradeId).subscribe(res=>{
       this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
       this.requiredFiles.files = this.requiredFiles.files.map(el =>({...el, uploadedFiles:[]}))
       if(this.requestId) this.setUploadedFiles()
@@ -297,9 +297,10 @@ initRegisterationForm(child){
     this.selectedGrade = this.AllGrades.filter(el => el.id ==gradeId)[0]
     this.filtration.GradeId = gradeId
 
-    if(preschools.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
-    else if(FoundationStage.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
-    else this.getRegistrationRequiresFiles()
+    // if(preschools.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
+    // else if(FoundationStage.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
+    // else this.getRegistrationRequiresFiles()
+    this.getRegistrationRequiresFiles(gradeId)
     if(this.childRegistrationStatus!=RegistrationStatus.Withdrawal) this.selectedSchoolId =null
 
     this.getSchools()
