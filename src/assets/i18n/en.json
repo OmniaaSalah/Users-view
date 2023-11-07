@@ -584,7 +584,11 @@
             "TransferredFromOutsideTheEmirate":"Transferred from outside the emirate",
             "TransferredFromOutsideTheCountry":"Transferred from outside the country",
             "Newbie":"Newbie",
-            "LevelSetting":"Level setting"
+            "LevelSetting":"Level setting",
+            "NewRegistered":"New registered",
+            "WithdrawalWithinTheEmirate":"Withdrawal within the emirate",
+            "WithdrawalOutsideTheEmirate":"Withdrawal outside the emirate",
+            "WithdrawalOutOfTheCountry":"Withdrawal out of the country"
 
         },
 
@@ -2177,7 +2181,8 @@
         "oldSchool":"Old School",
         "newSchool":"New School",
         "oldCurriculum":"Old Curriculum",
-        "newCurriculum":"New Curriculum"
+        "newCurriculum":"New Curriculum",
+        "registration status":"Registration status"
     },
     "Notifications": {
         "Receiver":"Receiver",
