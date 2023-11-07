@@ -73,7 +73,13 @@ export enum RegistrationStatus{
     Deleted="Deleted",
     Withdrawal="Withdrawal",
     //اعادة قيد
-    ReEnrolment='ReEnrolment'
+    ReEnrolment='ReEnrolment',
+    //انواع الانسحاب
+    WithdrawalWithinTheEmirate="WithdrawalWithinTheEmirate",
+    WithdrawalOutsideTheEmirate='WithdrawalOutsideTheEmirate',
+    WithdrawalOutOfTheCountry='WithdrawalOutOfTheCountry',
+
+    NewRegistered='NewRegistered',
 }
 
 export enum ReEnrollmentType{

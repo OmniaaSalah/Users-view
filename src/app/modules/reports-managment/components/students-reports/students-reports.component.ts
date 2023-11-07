@@ -62,6 +62,7 @@ export class StudentsReportsComponent implements OnInit {
     IsChildOfAMartyr: null,
     IsSpecialAbilities: null,
     StudentStatus: null,
+    RegistrationStatus:null,
     IsTopStudent: false,
     NationalityId:null,
     TalentId: null,
@@ -94,7 +95,7 @@ export class StudentsReportsComponent implements OnInit {
   schoolDivisions$ =inject(SharedService).getAllDivisions('')
   booleanOptions = this.sharedService.booleanOptions
   studentsStatus = []
-
+  registrationStatus= []
   tableColumns = []
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
@@ -126,6 +127,7 @@ export class StudentsReportsComponent implements OnInit {
   ngOnInit(): void {
     this.genderList = this.sharedService.genderOptions
     this.studentsStatus = this.studentsReportService.studentsStatus
+    this.registrationStatus=this.studentsReportService.registrationStatus
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getStudents()
     this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});
@@ -268,6 +270,7 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.AgeTo = null
     this.filtration.IsTopStudent = null
     this.filtration.StudentStatus= null
+    this.filtration.RegistrationStatus= null
     this.filtration.AcceptanceDateFrom = null
     this.filtration.AcceptanceDateTo = null
     this.filtration.IsActive=null;
