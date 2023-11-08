@@ -1,11 +1,15 @@
 ::ng-deep {
     .toast-container{ z-index: 10000000 !important;}
     .toast-container .ngx-toastr {
-        width: max-content;
-        max-width:60vw;
+        width: max-content !important;
+        max-width:60vw !important;
         color: #fff;
         // position: fixed !important;
         // bottom: 1%;
+        white-space: pre-line;
+        max-height: 80vh;
+        overflow-y: auto;
+
     }
     .toast-error {
         background-color: #f35154;
@@ -24,5 +28,14 @@
     }
     .toast-bottom-right {
         right: 0px !important;
+    }
+    
+    //center-toaster
+    .toast-center {
+    top: 30%;
+    bottom: 50%;
+    right: 25%;
+    left: 50%;
+
     }
 }

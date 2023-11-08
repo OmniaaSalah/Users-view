@@ -767,7 +767,11 @@
           "TransferredFromOutsideTheEmirate":"منقول من خارج الامارة",
           "TransferredFromOutsideTheCountry":"منقول من خارج الدولة",
           "Newbie":"مستجد",
-          "LevelSetting":"تحديد المستوى"
+          "LevelSetting":"تحديد المستوى",
+          "NewRegistered":"مستجد",
+          "WithdrawalWithinTheEmirate":"منتقل من خاص داخل الشارقة",
+          "WithdrawalOutsideTheEmirate":"منتقل من خاص خارج الشارقة",
+          "WithdrawalOutOfTheCountry":"منتقل من خارج الدولة"
       },
 
       "addNewFile":"إضافه ملف جديد",
@@ -1733,6 +1737,7 @@
           "New Curriculum":"المنهج الحالي",
           "Select Old Curriculum":"أختر المنهج السابق",
           "Select New Curriculum":"أختر المنهج الحالي"
+
       },
 
 
@@ -2169,7 +2174,8 @@
       "oldSchool":"المدرسة السابقة",
       "newSchool":"المدرسه الجديدة",
       "oldCurriculum":"المنهج القديم",
-      "newCurriculum":"المنهج الجديد"
+      "newCurriculum":"المنهج الجديد",
+      "registration status":"حالة التسجيل"
     },
 
   "cities": {

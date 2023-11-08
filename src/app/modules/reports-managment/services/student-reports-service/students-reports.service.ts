@@ -13,6 +13,7 @@ import { LocalizeDatePipe } from 'src/app/shared/pipes/localize-date.pipe';
 })
 export class StudentsReportsService {
   studentsStatus = []
+  registrationStatus= []
   prohibitionTypeList=[]
   lang = inject(TranslationService).lang;
   constructor(
@@ -60,6 +61,25 @@ export class StudentsReportsService {
         name: this.translate.instant("dashboard.students.ForbiddenFromWithdrowfromSchool")
       }
     ];
+    this.registrationStatus=[
+      {
+        value:RegistrationStatus.NewRegistered,
+        name:this.translate.instant("shared.allStatus.NewRegistered")
+      },
+      {
+        value: RegistrationStatus.WithdrawalWithinTheEmirate,
+        name: this.translate.instant("shared.allStatus.WithdrawalWithinTheEmirate")
+      },
+      {
+        value: RegistrationStatus.WithdrawalOutsideTheEmirate,
+        name: this.translate.instant("shared.allStatus.WithdrawalOutsideTheEmirate")
+      },
+      {
+        value: RegistrationStatus.WithdrawalOutOfTheCountry,
+        name: this.translate.instant("shared.allStatus.WithdrawalOutOfTheCountry")
+      }
+
+    ]
   }
 
 

@@ -280,7 +280,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
 
     },(err)=>{
       this.isBtnLoading=false;
-      this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      err?.errorLocalized ? this.toastService.error(err?.errorLocalized[this.lang]):this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
     })
     }
 
@@ -293,10 +293,10 @@ bindOldClass(item)
       classId:item.grade.id,
       relatedCurriculumId:item.relatedCurriculum.id,
       minmumSubjectNumbers:item.minmumSubjectNumbers,
-      minAgeInsideCountryFrom: item.minAgeInsideCountryFrom,
-      minAgeInsideCountryTo: item.minAgeInsideCountryTo,
-      minAgeOutsideCountryFrom:  item.minAgeOutsideCountryFrom,
-      minAgeOutsideCountryTo: item.minAgeOutsideCountryTo,
+      minAgeInsideCountryFrom: new Date(item.minAgeInsideCountryFrom),
+      minAgeInsideCountryTo: new Date(item.minAgeInsideCountryTo),
+      minAgeOutsideCountryFrom:  new Date(item.minAgeOutsideCountryFrom),
+      minAgeOutsideCountryTo: new Date(item.minAgeOutsideCountryTo),
       activateAge: item.activateAge,
   })
   this.onCurriculumChange(item.relatedCurriculum.id,item.grade.id);
