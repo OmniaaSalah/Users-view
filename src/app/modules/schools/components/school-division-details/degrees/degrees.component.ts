@@ -141,7 +141,7 @@ export class DegreesComponent implements OnInit {
     this.isSubmited=true
     this.divisionService.addSubjectDegrees(this.schoolId,this.divisionId,this.degreesFileUrl,{subjectid: this.selectedSubjectId,semester:this.filtration.semester})
     .pipe(map(res=>{
-      if(!res.result){
+      if(res.statusCode!=HttpStatusCodeEnum.OK){
         let error:any =this.toaster.error(this.translate.instant("toasterMessage.error"))
 
           switch (res.statusCode) {
@@ -157,7 +157,18 @@ export class DegreesComponent implements OnInit {
             break;
             case HttpStatusCodeEnum.NotAcceptable:
             // Created
-            error =  res?.errorLocalized ? res?.errorLocalized[this.lang] : this.toaster.error(this.translate.instant("toasterMessage.fileDataShouldBeReviewed"))
+            if(res?.result) {
+            var errorList;
+            res?.result.forEach(element => {
+             errorList? errorList+='<li>'+element[this.lang]+'</li>':errorList='<li>'+element[this.lang]+'</li>'
+            });
+            this.toaster.error(errorList, '', {
+             enableHtml:true,
+             timeOut: 20000
+            });
+            throw  new Error() 
+           }
+            else {error = this.toaster.error(this.translate.instant("toasterMessage.fileDataShouldBeReviewed"))}
             break;
 
           }
@@ -177,7 +188,7 @@ export class DegreesComponent implements OnInit {
 
     },(err)=>{
       this.isSubmited=false
-      this.toaster.error(err.message)
+      if(err?.message) this.toaster.error(err?.message)
     })
   }
 

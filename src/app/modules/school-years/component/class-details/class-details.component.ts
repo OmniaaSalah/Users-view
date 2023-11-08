@@ -280,7 +280,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
 
     },(err)=>{
       this.isBtnLoading=false;
-      this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      err?.errorLocalized ? this.toastService.error(err?.errorLocalized[this.lang]):this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
     })
     }
 
