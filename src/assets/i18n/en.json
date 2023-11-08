@@ -1843,6 +1843,8 @@
             "Rejected":"Rejected",
             "Approved":"Approved",
             "Canceled": "Canceled",
+            "ModificationRequestForSchool":"Modification From School",
+            "ModificationRequestForGuardian":"Modification From Guardian",
             "FinalApproval":"Final Approval",
             "SentForApproval":"Sent for approval",
             "SelectRequestType":"Select request type",

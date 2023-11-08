@@ -6,7 +6,10 @@
 
      <ng-container *ngIf="currentUserScope==userScopeEnum.Guardian">
        <button class=" btn btn-primary btn--sm px-5"
-       *ngIf="(requestDetails?.requestType==requestTypeEnum.RegestrationRequestForWithrawan || requestDetails?.requestType==requestTypeEnum.RegestrationApplicationRequest) && requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest &&requestOptions?.length"
+       *ngIf="
+          (requestDetails?.requestType==requestTypeEnum.RegestrationRequestForWithrawan || requestDetails?.requestType==requestTypeEnum.RegestrationApplicationRequest)
+          && (requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequestForGuardian)
+          && requestOptions?.length"
        (click)="reSendRegistrationReq()">
            <!-- <div class="spinner-border text-light" role="status" *ngIf="loading"></div> -->
            <span>{{'dashboard.Requests.resendRequest' |translate}}</span>
@@ -40,8 +43,10 @@
                 || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest
                 || requestDetails?.requestStatus==RequestStatusEnum.SentForApproval
                 || requestDetails?.requestStatus==RequestStatusEnum.TentativelyAccepted
-                || requestDetails?.requestStatus==RequestStatusEnum.Approved
-                || (requestDetails?.requestStatus==RequestStatusEnum.Approved && currentUserScope==userScopeEnum.SPEA)">
+                || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequestForGuardian
+                || requestDetails?.requestStatus==RequestStatusEnum.ModificationRequestForSchool">
+                <!-- || requestDetails?.requestStatus==RequestStatusEnum.Approved
+                || (requestDetails?.requestStatus==RequestStatusEnum.Approved && requestDetails?.requestType!=requestTypeEnum.RegestrationRequestForWithrawan) -->
            <div class="spinner-border text-light" role="status" *ngIf="onSubmited"></div>
            <span>{{'dashboard.Requests.withdrawalReq' |translate}}</span>
        </button>
@@ -481,7 +486,13 @@
 
                   <button
                   *ngFor="let option of requestOptions;let i=index"
-                  [class.d-none]="(option?.label?.en=='ModificationRequest' || option?.label?.en=='returned' || option?.label?.en=='return for correction') &&  requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest && currentUserScope==userScopeEnum.Guardian"
+                  [class.d-none]="
+                      (option?.label?.en=='ModificationRequest' ||
+                      option?.label?.en=='returned' ||
+                      option?.label?.en=='return for correction')
+                      &&  (requestDetails?.requestStatus==RequestStatusEnum.ModificationRequestForGuardian ||
+                           requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest)
+                      && currentUserScope==userScopeEnum.Guardian"
                   [disabled]="option.isLoading"
                   [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
                   (click)="onActionTaken(option,i)"
@@ -492,7 +503,7 @@
               </ng-container>
 
               <button
-              *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Approved && currentUserScope==userScopeEnum.SPEA"
+              *ngIf="requestDetails?.requestStatus==RequestStatusEnum.TentativelyAccepted && currentUserScope==userScopeEnum.SPEA"
               [disabled]="onSubmited"
               (click)="reOpenRequest()"
               class="btn btn-primary">

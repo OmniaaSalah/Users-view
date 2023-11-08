@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterRequestComponent } from 'src/app/shared/components/register-request/register-request.component';
 import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { ManualCertificatesComponent } from '../students/components/manual-certificates/manual-certificates.component';
-import { ChildDetailsComponent } from './components/child-details/child-details.component';
 import { ChildrenListComponent } from './components/children-list/children-list.component';
 import { ParantsComponent } from './components/parents-list/parants.component';
 import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';

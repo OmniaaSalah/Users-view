@@ -242,7 +242,7 @@ initRegisterationForm(child){
     this.registerReqForm.controls['gradeId'].setValue(reqData.grade?.id)
     this.onSelectSchool(reqData.school?.id)
     this.attachments = reqData?.attachments || []
-    this.setUploadedFiles()
+    // this.setUploadedFiles()
     this.registerReqForm.patchValue(reqData)
 
   }
@@ -294,13 +294,15 @@ initRegisterationForm(child){
 
   onGradeSelected(gradeId){
 
-    this.selectedGrade = this.AllGrades.filter(el => el.id ==gradeId)[0]
-    this.filtration.GradeId = gradeId
+    if(gradeId){
+      this.selectedGrade = this.AllGrades.filter(el => el.id ==gradeId)[0]
+      this.filtration.GradeId = gradeId
+      this.getRegistrationRequiresFiles(gradeId)
 
-    // if(preschools.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
-    // else if(FoundationStage.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
-    // else this.getRegistrationRequiresFiles()
-    this.getRegistrationRequiresFiles(gradeId)
+      // if(preschools.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
+      // else if(FoundationStage.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
+      // else this.getRegistrationRequiresFiles()
+    }
     if(this.childRegistrationStatus!=RegistrationStatus.Withdrawal) this.selectedSchoolId =null
 
     this.getSchools()

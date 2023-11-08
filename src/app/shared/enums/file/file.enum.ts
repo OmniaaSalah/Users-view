@@ -5,6 +5,7 @@ export enum FileTypeEnum{
     Pdf = 'Pdf',
     Image = 'Image',
     Jpg = 'Image',
+    Jpeg = 'Image',
     Png='Image',
     Audio = 'Audio',
     Mp3 = 'Mp3',

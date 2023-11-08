@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CheeckMandatoryServeyGuard } from 'src/app/core/guards/check-mandatory-servey.guard';
 import { RegisterRequestComponent } from 'src/app/shared/components/register-request/register-request.component';
-import { ChildDetailsComponent } from '../parants/components/child-details/child-details.component';
 import { WithdrawalRequestComponent } from '../shared/components/register-child/withdrawal-request/withdrawal-request.component';
 import { ParentReplySurveyComponent } from '../surveys/components/parent-reply-survey/parent-reply-survey.component';
 import { MandatorySurveyComponent } from './components/mandatory-survey/mandatory-survey.component';
@@ -11,6 +10,7 @@ import { GuardianComponent } from './guardian.component';
 import { Layout } from 'src/app/layout/layout-routing.service';
 import { UnregisterChildComponent } from '../parants/components/unregister-child/unregister-child.component';
 import { StudentDetailsComponent } from '../shared/components/register-child/student-details.component';
+import { ReturnRequestComponent } from './components/return-request/return-request.component';
 
 const routes: Routes = [
   Layout.childRoutes([
@@ -25,6 +25,12 @@ const routes: Routes = [
 
             {
               path:'child/:childId/register-request', component: RegisterRequestComponent,
+              data:{
+                title:{ar:'طلب تسجيل',en: 'Registed Request'}
+              }
+            },
+            {
+              path:'child/:childId/register-request/correct/:instanceId', component: ReturnRequestComponent,
               data:{
                 title:{ar:'طلب تسجيل',en: 'Registed Request'}
               }

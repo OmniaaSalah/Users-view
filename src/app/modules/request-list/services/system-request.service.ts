@@ -10,6 +10,7 @@ import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-s
 import { StatusEnum, UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { LocalizeDatePipe } from 'src/app/shared/pipes/localize-date.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class SystemRequestService {
     private http:HttpHandlerService,
     private tableLoaderService: LoaderService
     ,private translate:TranslateService,
+    private localizeDatePipe:LocalizeDatePipe,
     private userService:UserService) {}
 
 
@@ -89,7 +91,7 @@ export class SystemRequestService {
       res.data = res.data?.map(item =>{
         return {
           ...item,
-          requestStatus: item?.requestType ==requestTypeEnum.RegestrationApplicationRequest ? this.getMappedStatus(item?.requestStatus) : item?.requestStatus
+          // requestStatus: item?.requestType ==requestTypeEnum.RegestrationApplicationRequest ? this.getMappedStatus(item?.requestStatus) : item?.requestStatus
         }
       })
 
@@ -112,19 +114,14 @@ export class SystemRequestService {
           return {
             [this.translate.instant('dashboard.Requests.requestNumber')]: item?.requestNumber,
             [this.translate.instant('dashboard.Requests.requestType')]: this.translate.instant('dashboard.Requests.'+item.requestType),
-            [this.translate.instant('dashboard.Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
-            [this.translate.instant('shared.Created Date')]: item?.createdDate,
-            [this.translate.instant('dashboard.Requests.Status')]: this.translate.instant('dashboard.Requests.'+item.requestStatus),
-
             [this.translate.instant('shared.school')]: getLocalizedValue(item?.school?.name) || this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.grade')]: getLocalizedValue(item?.grade?.name) || this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.curriculum')]: getLocalizedValue(item?.curriculum?.name) || this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.schools.student')]: getLocalizedValue(item?.student?.name) || this.translate.instant('shared.notFound'),
             [this.translate.instant('dashboard.schools.studentId')]: getLocalizedValue(item?.student?.id) || this.translate.instant('shared.notFound'),
-
-
-            [this.translate.instant('dashboard.myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
-            [this.translate.instant('dashboard.myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
-
+            [this.translate.instant('dashboard.Requests.Status')]: this.translate.instant('dashboard.Requests.'+item.requestStatus),
+            [this.translate.instant('dashboard.Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
+            [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(item?.createdDate, 'd / MMMM / y', 'en'),
 
           }
         })
@@ -141,7 +138,7 @@ export class SystemRequestService {
         res.data = res.data?.map(item =>{
           return {
             ...item,
-            requestStatus: item?.requestType ==requestTypeEnum.RegestrationApplicationRequest ? this.getMappedStatus(item?.requestStatus) : item?.requestStatus
+            // requestStatus: item?.requestType ==requestTypeEnum.RegestrationApplicationRequest ? this.getMappedStatus(item?.requestStatus) : item?.requestStatus
           }
         })
 
@@ -167,9 +164,11 @@ export class SystemRequestService {
           [this.translate.instant('dashboard.Requests.requestNumber')]: item?.requestNumber,
           [this.translate.instant('dashboard.Requests.requestType')]: this.translate.instant('dashboard.Requests.'+item.requestType),
           [this.translate.instant('shared.school')]: getLocalizedValue(item?.school?.name) || this.translate.instant('shared.notFound'),
+          [this.translate.instant('shared.grade')]: getLocalizedValue(item?.grade?.name) || this.translate.instant('shared.notFound'),
           [this.translate.instant('shared.curriculum')]: getLocalizedValue(item?.curriculum?.name) || this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
-          [this.translate.instant('shared.Created Date')]: item?.createdDate,
+          [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(item?.createdDate, 'd / MMMM / y', 'en'),
+          [this.translate.instant('dashboard.Subjects.Last EditDate')]: this.localizeDatePipe.transform(item?.lastUpdatedDate, 'd / MMMM / y', 'en'),
           [this.translate.instant('dashboard.Requests.Status')]: this.translate.instant('dashboard.Requests.'+item.requestStatus),
           [this.translate.instant('dashboard.myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
 
@@ -206,7 +205,7 @@ export class SystemRequestService {
       map(res=>{
         res.result = {
             ...res.result,
-            requestStatus: res.result?.requestType ==requestTypeEnum.RegestrationApplicationRequest ? this.getMappedStatus(res.result?.requestStatus) : res.result?.requestStatus
+            // requestStatus: res.result?.requestType ==requestTypeEnum.RegestrationApplicationRequest ? this.getMappedStatus(res.result?.requestStatus) : res.result?.requestStatus
           }
         return res
       }),

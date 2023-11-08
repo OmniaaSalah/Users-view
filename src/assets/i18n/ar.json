@@ -1878,6 +1878,8 @@
           "Rejected":"رفض",
           "Approved":"اعتماد",
           "Canceled":"مُلغى",
+          "ModificationRequestForSchool":"تعديل من المدرسة",
+          "ModificationRequestForGuardian":"تعديل من ولي الأمر",
           "FinalApproval":"موافقة نهائية",
           "SentForApproval":"أرسل للإعتماد",
           "_TentativelyAccepted":"مقبول بشكل مبدأى",
