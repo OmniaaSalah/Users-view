@@ -1,8 +1,8 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { map, of, switchMap } from 'rxjs';
+import { map, of, Subscription, switchMap } from 'rxjs';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { Student } from 'src/app/core/models/student/student.model';
@@ -22,10 +22,11 @@ import { UserService } from 'src/app/core/services/user/user.service';
   templateUrl: './withdrawal-request.component.html',
   styleUrls: ['./withdrawal-request.component.scss']
 })
-export class WithdrawalRequestComponent implements OnInit {
+export class WithdrawalRequestComponent implements OnInit, OnDestroy {
   student
   lang= inject(TranslationService).lang
   get fileTypesEnum () {return FileTypeEnum}
+  currentUserScope = inject(UserService).getScope();
 
   currentGuardianId = this.userService.getCurrentGuardian()?.id
   // studentId = this.route.snapshot.paramMap.get('id') //in case the page reached throw students route
@@ -35,11 +36,19 @@ export class WithdrawalRequestComponent implements OnInit {
 
   reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.ReasonsForWithdrawingTheStudentFromTheCurrentSchool)
 
+  sub = new Subscription()
 
   componentHeaderData:IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.parents.sonDetails'),routerLink:`/parent/${this.currentGuardianId}/student/${this.studentGUID || this.childId}`,routerLinkActiveOptions:{exact: true},queryParams:{registered:true}},
-      { label: this.translate.instant('dashboard.students.withdrawalReq'),routerLink:`/parent/${this.currentGuardianId}/student/${this.studentGUID || this.childId}/withdraw-request` }
+      {
+        label: this.translate.instant('dashboard.parents.sonDetails'),
+        routerLink: this.currentUserScope == 'Guardian' ? `/parent/${this.currentGuardianId}/student/${this.studentGUID || this.childId}`: `/student-management/students/student/${this.studentGUID || this.childId}`,
+        routerLinkActiveOptions:{exact: true},queryParams:{registered:true}
+      },
+      {
+        label: this.translate.instant('dashboard.students.withdrawalReq'),
+        routerLink: this.currentUserScope == 'Guardian' ? `/parent/${this.currentGuardianId}/student/${this.studentGUID || this.childId}/withdraw-request` : `/student-management/students/student/${this.studentGUID || this.childId}/withdraw-request`
+       }
     ],
     mainTitle: { main: this.translate.instant('dashboard.students.withdrawalReq'), sub: '' }
   }
@@ -70,21 +79,23 @@ export class WithdrawalRequestComponent implements OnInit {
     private headerService:HeaderService,
     private studentService:StudentsService) { }
 
-  ngOnInit(): void {
 
-    this.registerChildService.Student$
-    .pipe(
-      switchMap(res=>{
-        if(!res) return this.studentService.getStudent(this.studentGUID || this.childId).pipe(map(res => res?.result))
-        return of(res)
+  ngOnInit(): void {
+    this.sub.add(
+      this.registerChildService.Student$
+      .pipe(
+        switchMap(res=>{
+          if(!res) return this.studentService.getStudent(this.studentGUID || this.childId).pipe(map(res => res?.result))
+          return of(res)
+        })
+      )
+      .subscribe((res:Student)=>{
+        this.student=res
+        this.componentHeaderData.mainTitle.sub = `(${res.name[this.lang]})`
+        this.headerService.changeHeaderdata(this.componentHeaderData)
+        this.initForm(res)
       })
     )
-    .subscribe((res:Student)=>{
-      this.student=res
-      this.componentHeaderData.mainTitle.sub = `(${res.name[this.lang]})`
-      this.headerService.changeHeaderdata(this.componentHeaderData)
-      this.initForm(res)
-    })
 
     this.getWithdrawRequestRequiresFiles()
   }
@@ -113,7 +124,8 @@ export class WithdrawalRequestComponent implements OnInit {
     .subscribe(()=>{
       this.isLoading=false
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
-      this.router.navigate(['/parent', this.currentGuardianId,'child', this.studentGUID||this.childId], {queryParams:{registered:true}})
+      if(this.currentUserScope =='Guardian') this.router.navigate(['/parent', this.currentGuardianId,'child', this.studentGUID||this.childId], {queryParams:{registered:true}})
+      else if(this.currentUserScope =='Employee') this.router.navigate(['/student-management/students/student', this.studentGUID||this.childId], {queryParams:{registered:true}})
       // this.router.navigate(['/schools-and-students/students/student', this.studentGUID])
 
     },(error:Error)=>{
@@ -139,6 +151,10 @@ export class WithdrawalRequestComponent implements OnInit {
   onFileUpload(files, fileTitle, index){
     this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
     this.reqForm.attachments = this.uploadedFiles
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
   }
 
 }

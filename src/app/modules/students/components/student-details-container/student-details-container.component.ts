@@ -45,8 +45,6 @@ export class StudentDetailsContainerComponent implements OnInit {
   }
   checkDashboardHeader() {
     if (this.currentUserScope == UserScope.Employee) {
-      console.log('breatcrunb');
-
       this.componentHeaderData.breadCrump = [
         {
           label: this.translate.instant('dashboard.students.studentsList'),

@@ -8,6 +8,7 @@ import { PrimngModule } from 'src/app/primng/primeNg.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MandatorySurveyComponent } from './components/mandatory-survey/mandatory-survey.component';
 import { SurveysModule } from '../surveys/surveys.module';
+import { ReturnRequestComponent } from './components/return-request/return-request.component';
 
 
 
@@ -16,6 +17,7 @@ import { SurveysModule } from '../surveys/surveys.module';
     GuardianComponent,
     ProfileComponent,
     MandatorySurveyComponent,
+    ReturnRequestComponent,
   ],
   imports: [
     CommonModule,

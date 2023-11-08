@@ -128,7 +128,9 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
         label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',
         disabled: this.student?.studentStatus === RegistrationStatus.Withdrawal ||this. student?.studentProhibited?.withdrawingFromSchool || this.student?.studentProhibited?.withdrawingFromSPEA,
         claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool,
-        routerLink:`${this.currentUserScope==this.userScope.Guardian ? 'withdraw-request' : ('/schools-and-students/students/student/' + (this.studentGUID) + '/withdraw-request')}`
+        routerLink:`${this.currentUserScope==this.userScope.Guardian ? 'withdraw-request'
+        : this.currentUserScope==this.userScope.Employee ? ('/student-management/students/student/' + (this.studentGUID) + '/withdraw-request')
+        :('/schools-and-students/students/student/' + (this.studentGUID) + '/withdraw-request')}`
       },
       {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
       {

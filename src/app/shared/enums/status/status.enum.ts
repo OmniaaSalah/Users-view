@@ -98,7 +98,9 @@ export enum UserRequestsStatus{
     //معتمد
     Approved = "Approved",
     SentForApproval  ="SentForApproval",
-    FinalApproval="FinalApproval"
+    FinalApproval="FinalApproval",
+    ModificationRequestForGuardian="ModificationRequestForGuardian",
+    ModificationRequestForSchool="ModificationRequestForSchool"
 }
 
 export enum TransportaionType{

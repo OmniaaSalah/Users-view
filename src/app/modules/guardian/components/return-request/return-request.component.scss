@@ -1,0 +1,34 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/forms.scss';
+@import 'src/assets/css/components/profile';
+
+:host{
+    position: relative;
+}
+
+.container{
+    padding-top: 15rem;
+}
+
+.gx-6{
+    --bs-gutter-x: 4rem;
+    --bs-gutter-y: 4rem;
+}
+
+.schoolSelected{
+    border: 1px solid #3052A1 !important;
+}
+
+.submitBtn{
+    position: absolute;
+    top: -7rem;
+    inset-inline-end: 3rem;
+}
+
+
+
+
+.star {
+    color: red;
+    font-size: 1.5rem;
+ }

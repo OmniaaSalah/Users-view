@@ -162,7 +162,13 @@ export class RequestdetailsComponent implements OnInit {
   onActionTaken(submittedOption: WorkflowOptions, index){
     this.submittedOption = submittedOption
     // this.currentState?.currentState?.isFinal &&
-    let isRegistrationReqLastStep =(this.requestDetails?.requestType== this.requestTypeEnum.RegestrationApplicationRequest || this.requestDetails?.requestType== this.requestTypeEnum.RegestrationRequestForWithrawan) && this.requestDetails?.requestStatus==this.RequestStatusEnum.Approved
+    let isRegistrationReqLastStep =
+    ( this.requestDetails?.requestType== this.requestTypeEnum.RegestrationApplicationRequest  &&
+       this.requestDetails?.requestStatus==this.RequestStatusEnum.TentativelyAccepted &&
+       !submittedOption.label?.en.includes('modify request'))
+    || (this.requestDetails?.requestType== this.requestTypeEnum.RegestrationRequestForWithrawan &&
+       this.requestDetails?.requestStatus==this.RequestStatusEnum.Pending &&
+       !submittedOption.label?.en.includes('modify request'))
 
     if(submittedOption.label?.en.includes('reject') || submittedOption.label?.en.includes('Reject')){
       if(this.requestsTypes[this.requestDetails?.requestType]){
@@ -277,13 +283,14 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     let childId = childRegistartionStatus == RegistrationStatus.Withdrawal ? this.requestDetails?.student?.studentGuid : this.requestDetails?.student?.id
     this.saveReqData()
 
-    if(childRegistartionStatus == RegistrationStatus.Withdrawal){
-      this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Withdrawal',requestId: this.requestDetails.requestNumber, instantId:this.requestInstance}})
+    this.router.navigate(['parent/child',childId,'register-request', 'correct', this.requestInstance])
+    // if(childRegistartionStatus == RegistrationStatus.Withdrawal){
+    //   this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Withdrawal',requestId: this.requestDetails.requestNumber, instantId:this.requestInstance}})
 
-    }else if(childRegistartionStatus == RegistrationStatus.Unregistered){
-      this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Unregistered',requestId: this.requestDetails.requestNumber, instantId:this.requestInstance}})
+    // }else if(childRegistartionStatus == RegistrationStatus.Unregistered){
+    //   this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Unregistered',requestId: this.requestDetails.requestNumber, instantId:this.requestInstance}})
 
-    }
+    // }
   }
 
 
