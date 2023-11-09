@@ -69,9 +69,9 @@
                                       <span class="fw-bold color-primary action-author" *ngIf="task?.assignedTo?.scope==ScopeEnum.SPEA && currentUserScope != ScopeEnum.SPEA">مسؤل الهيئة</span>
                                       <span class="fw-bold color-primary action-author" *ngIf="task?.assignedTo?.scope!=ScopeEnum.SPEA || (task?.assignedTo?.scope == ScopeEnum.SPEA && currentUserScope == ScopeEnum.SPEA)">{{task.assignedTo.fullName |currentLang}}</span>
 
-                                      <span class="color-black-500 fs-4 fw-bold color-skyBlue-500 action-name">{{task.action?.title | currentLang}} </span>
+                                      <span class="color-black-500 fs-4 fw-bold color-skyBlue-500 action-name">{{task.action?.label | currentLang}} </span>
                                       <span class="fw-bold ">{{'dashboard.Requests.' + requestDetails?.requestType |translate}}</span>
-                                      <span class="action color-skyBlue-500">  {{task?.action?.title | currentLang}}</span>
+                                      <span class="action color-skyBlue-500">  {{task?.action?.label | currentLang}}</span>
                                   </div>
                                   <p class="fs-4 mt-3 color-gray-800 w-75">{{task?.action?.comments}}</p>
 
