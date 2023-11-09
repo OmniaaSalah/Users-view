@@ -88,10 +88,17 @@
                                     </div>
 
                                     <div class="row gx-5 form-set">
-                                        <div class="col-md-4 px-5" formGroupName="name">
-                                            <label class="label required" for="name">{{'dashboard.schools.sectionName'|translate}} </label>
+                                      <ng-container formGroupName="name">
+                                        <div class="col-md-4 px-5" >
+                                            <label class="label required" for="name">{{'dashboard.schools.sectionNameAr'|translate}} </label>
                                             <input type="text" name="sectionName" id="name" formControlName="ar" pInputText />
                                         </div>
+
+                                        <div class="col-md-4 px-5" >
+                                          <label class="label required" for="name">{{'dashboard.schools.sectionNameEn'|translate}} </label>
+                                          <input type="text" name="sectionName" id="name" formControlName="en" pInputText />
+                                        </div>
+                                      </ng-container>
 
                                         <div class="col-md-3" *ngIf="currentUserScope==userScope.SPEA">
                                           <label class="label" for="name">{{'dashboard.schools.exceptionStudentNumber'|translate}} </label>

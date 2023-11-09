@@ -251,15 +251,29 @@
                 <div *ngSwitchCase="requestTypeEnum.RegestrationApplicationRequest">
                     <!-- <ng-container *ngTemplateOutlet="studentProfile; context: {$implicit: requestDetails.student}"></ng-container> -->
 
-                    <div class="row g-5">
+                    <div class="row g-5 custom-form">
                         <div class="col-md-4 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
                             <a  class="text color-skyBlue-500 fs-3 d-flex align-items-center" routerLink="/schools-and-students/schools/school/+{{request?.school?.id}}">{{requestDetails?.school?.name|currentLang}}</a>
                         </div>
-                        <div class="col-md-4 d-flex align-items-center gap-5">
+                        <!-- <div class="col-md-4 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
                             <h4 class="color-primary">{{requestDetails.grade.name|currentLang}}</h4>
-                        </div>
+                        </div> -->
+                        <div class="col-md-4 d-flex align-items-center gap-5 ">
+                          <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
+                          <h4 *ngIf="currentUserScope !=userScopeEnum.Employee" class="color-primary">{{requestDetails.grade.name|currentLang}}</h4>
+                          <p-dropdown
+                          *ngIf="currentUserScope ==userScopeEnum.Employee"
+                          style="flex-grow:1" name="grade"
+                          [options]="AllGrades$ |async"
+                          [(ngModel)]="reqActionsForm.gradeId"
+                          optionValue="id"
+                          [disabled]="requestDetails.requestStatus==RequestStatusEnum.FinalApproval || requestDetails.requestStatus==RequestStatusEnum.Approved"
+                          optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}"
+                          placeholder="{{'dashboard.students.chooseClasse' |translate}}"
+                          emptyMessage="لايوجد عناصر"></p-dropdown>
+                      </div>
                         <div class="col-md-4 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'dashboard.students.isChildOfAMartyr' | translate}}</p>
                             <h4 class="color-primary">{{requestDetails.isChildOfAMartyr ? ('shared.yes'|translate) : ('shared.no'|translate)}}</h4>
@@ -295,10 +309,21 @@
                             <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
                             <h4 class="color-primary">{{requestDetails.school.name|currentLang}}</h4>
                         </div>
-                        <div class="col-md-4 d-flex align-items-center gap-5">
+                        <div class="col-md-4 d-flex align-items-center gap-5 ">
+                          <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
+                          <h4 *ngIf="currentUserScope !=userScopeEnum.Employee" class="color-primary">{{requestDetails.grade.name|currentLang}}</h4>
+                          <p-dropdown
+                          *ngIf="currentUserScope ==userScopeEnum.Employee"
+                          style="flex-grow:1" name="grade"
+                          [options]="AllGrades$ |async"
+                          [(ngModel)]="reqActionsForm.gradeId"
+                          [disabled]="requestDetails.requestStatus==RequestStatusEnum.FinalApproval || requestDetails.requestStatus==RequestStatusEnum.Approved"
+                          optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}"
+                          placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>                      </div>
+                        <!-- <div class="col-md-4 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
                             <h4 class="color-primary">{{requestDetails.grade.name|currentLang}}</h4>
-                        </div>
+                        </div> -->
                         <div class="col-md-4 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'dashboard.students.isChildOfAMartyr' | translate}}</p>
                             <h4 class="color-primary">{{requestDetails.student.isChildOfAMartyr ? ('shared.yes'|translate) : ('shared.no'|translate)}}</h4>
@@ -738,7 +763,7 @@
         #target="ngModel"
         optionValue="id"
         optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-        emptyMessage="  لا يوجد شعب متاحه"
+        emptyMessage="لا يوجد شعب متاحه"
         placeholder="{{'shared.chooseDivition'|translate}}"
         [required]="true"></p-dropdown>
 
