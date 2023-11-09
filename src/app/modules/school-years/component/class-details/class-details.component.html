@@ -10,7 +10,7 @@
 
 
 <div class="justify-content-center status" *ngIf="schoolYearUrlParameter">
-    <span  class="heading--secondary">{{schoolYearName|currentLang}}</span>             
+    <span  class="heading--secondary">{{schoolYearName|currentLang}}</span>
     <div   *ngIf="schoolYearStatus?.en==schoolYearEnum.Current" class='alerting danger mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en==schoolYearEnum.Finished" class='alerting success mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en=='Sent'" class='alerting primary mx-4'>{{schoolYearStatus|currentLang}}</div>
@@ -18,19 +18,19 @@
     <ng-container *ngIf="!schoolYearStatus">
         <p-skeleton width="11.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
       </ng-container>
-  
+
 </div>
 <ng-container *ngIf="!class&&classUrlParameter">
     <div class="row g-5">
-       
+
             <app-skeleton count="10"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-    
+
     </div>
 
  </ng-container>
 
 <div class="content bg-white radius-15" *ngIf="class||!classUrlParameter">
-   
+
     <div class=" custom-form custom-validation-form " >
         <form [formGroup]="schoolYearClassFormGrp" class="container-fluid  ">
             <div class="row mb-5" *ngIf="schoolYearStatus?.en==schoolYearEnum.Finished||schoolYearStatus?.en==schoolYearEnum.Current">
@@ -39,30 +39,30 @@
                        <div class="row">
                                 <div class="col-4 label">{{'dashboard.SchoolYear.Related curriculum'|translate }}</div>
                                 <div class="col-6 value ">{{class?.curriculum|currentLang}}</div>
-                               
+
                        </div>
-                
+
                 </div>
                 <div class="col-4"  >
 
                        <div class="row">
                                 <div class="col-4 label">{{'dashboard.SchoolYear.Class'|translate}}</div>
                                 <div class="col-6 value ">{{class?.grade|currentLang}}</div>
-                               
+
                        </div>
-                
+
                 </div>
                 <div class="col-4"   >
 
                     <div class="row">
                                 <div class="col-8 label">{{'dashboard.SchoolYear.Minmum Subject Numbers that fails student'|translate}}</div>
                                 <div class="col-4 value " >{{class?.minmumSubjectNumbers}}</div>
-                              
+
                     </div>
-             
-               </div>     
-         
-           </div>  
+
+               </div>
+
+           </div>
            <div class="row mb-5"  *ngIf="schoolYearStatus?.en==schoolYearEnum.Finished||schoolYearStatus?.en==schoolYearEnum.Current" >
             <div class="col-4">
 
@@ -74,30 +74,38 @@
                              <span class="Label" *ngIf="!class?.activateAge">{{'shared.no'|translate}}</span>
                              <span class="Label" *ngIf="class?.activateAge">{{'shared.yes'|translate}}</span>
                              </div>
-                           
-                   </div>
-            
-            </div>
-            <div class="col-4">
 
-                   <div class="row">
-                            <div class="col-8 label">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}}</div>
-                            <div class="col-4 value ">{{'shared.From'|translate}}  {{class?.minAgeInsideCountryFrom}}  {{'shared.To'|translate}}  {{class?.minAgeOutsideCountryTo}}</div>
-                           
                    </div>
-            
-            </div>
-            <div class="col-4">
 
-                <div class="row">
-                            <div class="col-8 label">{{'dashboard.SchoolYear.Minmum Age for student from outsidecountry'|translate}}</div>
-                            <div class="col-4 value " >{{'shared.From'|translate}}  {{class?.minAgeOutsideCountryFrom}}  {{'shared.To'|translate}}  {{class?.minAgeOutsideCountryTo}}</div>
-                          
+            </div>
+            <div class="row my-5">
+              <div class="col-6">
+
+                <div class="d-flex gap-5">
+                  <div class=" label">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}}</div>
+                  <div class="value ">
+                    <span class="color-primary">{{'shared.From'|translate}}</span> {{class?.minAgeInsideCountryFrom | toLocalDate|LocalizeDate}}
+                    <span class="color-primary">{{'shared.To'|translate}}</span> {{class?.minAgeOutsideCountryTo | toLocalDate| LocalizeDate}}
+                  </div>
+
                 </div>
-         
-           </div>     
-     
-       </div>  
+
+              </div>
+              <div class="col-6">
+
+                <div class="d-flex gap-5">
+                  <div class="label">{{'dashboard.SchoolYear.Minmum Age for student from outsidecountry'|translate}}</div>
+                  <div class="value ">
+                    <span class="color-primary">{{'shared.From'|translate}}</span> {{class?.minAgeOutsideCountryFrom |toLocalDate |LocalizeDate}}
+                    <span class="color-primary">{{'shared.To'|translate}}</span> {{class?.minAgeOutsideCountryTo | toLocalDate |LocalizeDate }}
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+       </div>
     <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
            <div class="col-xs-4 col-lg-4" >
                <label class="label" for="nationality">{{'dashboard.SchoolYear.Related curriculum'|translate }} <span class="star">*</span> </label>
@@ -108,8 +116,8 @@
                   {{'shared.This Field is Required'|translate}}
                    <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                 </small>
-       
-               
+
+
              </div>
            </div>
            <div class="col-xs-4 col-lg-4">
@@ -121,14 +129,14 @@
                   {{'shared.This Field is Required'|translate}}
                    <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                 </small>
-       
-               
+
+
              </div>
               </div>
            <div class="col-xs-4 col-lg-4">
             <label class="label" for="nationality">{{'dashboard.SchoolYear.Minmum Subject Numbers that fails student'|translate}}</label>
-            <input type="text" pInputText formControlName="minmumSubjectNumbers"  class="form-control " [LangRestrict]="'numb'"  placeholder="{{'dashboard.SchoolYear.Enter Subject Numbers'|translate}}" name="PID" id="PID"> 
-          
+            <input type="text" pInputText formControlName="minmumSubjectNumbers"  class="form-control " [LangRestrict]="'numb'"  placeholder="{{'dashboard.SchoolYear.Enter Subject Numbers'|translate}}" name="PID" id="PID">
+
           </div>
      </div>
      <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
@@ -142,11 +150,11 @@
                     <span class="Label" *ngIf=" classUrlParameter&&!class.activateAge ">{{'shared.no'|translate}}</span>
                     <span class="Label" *ngIf="classUrlParameter&&class.activateAge">{{'shared.yes'|translate}}</span>
                     </div>
-       
+
         </div>
        <div class="col-xs-4 col-lg-4 ">
            <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}} </label>
-         
+
                 <div class="d-flex gap-2">
                     <div>
                     <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeInsideCountryFrom" [maxDate]="minAgeInsideCountryTo?.value ? minAgeInsideCountryTo?.value:currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryFrom.errors?.['required'] && minAgeInsideCountryFrom.touched}"     placeholder="{{'dashboard.SchoolYear.From Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
@@ -192,7 +200,7 @@
       </div>
       </div>
      </div>
-  
+
     </form>
    </div>
    <div  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current" role="button" class=" mb-5 color-primary d-flex color-gray-50 align-items-center justify-content-center gap-3 p-3" (click)="openSubjectModel()" >
@@ -202,7 +210,7 @@
    <div class="prim-table ">
     <p-table  #dt [value]="classSubjectsList"  sortMode="single"  [scrollable]="true" scrollHeight="480px" [virtualScroll]="true" [virtualRowHeight]="95" >
 
-      
+
       <ng-template pTemplate="header" >
             <tr  >
               <th  pSortableColumn="name.ar" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.Subject Name'|translate}}</th>
@@ -213,12 +221,12 @@
               <th  style="min-width:21.5rem" pSortableColumn="maxGPA"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.SchoolYear.Maximum GPA'|translate}}</th>
               <th pSortableColumn="edit" class="actions"  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current"></th>
 
-              
+
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-            
+
                 <td style="min-width:13rem">{{e?.name|currentLang}}</td>
                 <td  ><span *ngIf="e?.subjectHours">{{e?.subjectHours|translate}}</span><span *ngIf="!e?.subjectHours">{{'shared.not found'|translate}}</span></td>
                 <td >{{e?.numberOfCoursesPerWeek|translate}}</td>
@@ -226,18 +234,18 @@
                 <td ><span *ngIf="e?.isThereGPA">{{'true'|translate}}</span><span *ngIf="!e.isThereGPA">{{'false'|translate}}</span></td>
                 <td *ngIf="e?.maxGPA" >{{e?.maxGPA|translate}}</td>
                 <td *ngIf="!e?.maxGPA">{{'shared.notFound'|translate}}</td>
-              
-             
-          
+
+
+
                 <td class="actions"  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
                         <button class=" d-flex  align-items-center gap-3 justify-content-end mx-4" (click)="tittle='dashboard.SchoolYear.Edit subject to this class';editSubject(e)" >
                           <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                           <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                          </button>
                 </td>
-                
-              
-                
+
+
+
             </tr>
         </ng-template>
 
@@ -255,10 +263,10 @@
 
           </ng-template>
     </p-table>
-  
-  
-    
-    
+
+
+
+
     </div>
 </div>
 
@@ -268,12 +276,12 @@
 <!-- Add Subject -->
 
 <p-dialog [baseZIndex]="10000" header="{{tittle|translate}}" (onHide)="clearSubjectForm()"   [resizable]="false" [(visible)]="addSubjectModelOpened" [draggable]="false" [modal]="true" [style]="{width: '47vw'}">
-   
+
 <ng-template pTemplate="content">
     <div class=" custom-form custom-validation-form " >
         <form [formGroup]="schoolYearSubjectFormGrp" class="container-fluid  ">
 
- 
+
     <div class="row gx-5 form-set">
       <div class="col-6">
           <label class="label" for="nationality">{{'dashboard.SchoolYear.Subject'|translate}} <span class="star">*</span> </label>
@@ -283,13 +291,13 @@
               {{'shared.This Field is Required'|translate}}
                <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
             </small>
-           
+
          </div>
         </div>
       <div class="col-6">
           <label class="label" for="precantage">{{'dashboard.Subjects.Subject Hours'|translate}} (Credit Hours)</label>
           <p-inputNumber formControlName="subjectHours" [min]="1" [ngClass]="{'ng-invalid ng-dirty':subjectHours.errors?.['required'] && subjectHours.touched}" mode="decimal" [showButtons]="true"  inputId="minmax-buttons"    ></p-inputNumber>
-         
+
         </div>
     </div>
     <div class="row gx-5 form-set">
@@ -301,18 +309,18 @@
               {{'shared.This Field is Required'|translate}}
                <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
             </small>
-           
+
          </div>
         </div>
       <div class="col-6">
-      
+
         <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.Is in finalresult'|translate }} <span class="star">*</span> </label>
         <p-radioButton  [value]="true"   formControlName="inFinalResult" label="{{'true'|translate}}" ></p-radioButton>
         <p-radioButton  [value]="false"  formControlName="inFinalResult"  class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
-      
+
     </div>
     </div>
-  
+
     <div class="row gx-5 form-set">
       <div class="col-6">
           <label class="label mb-5" for="nationality">{{'dashboard.SchoolYear.is Mandatory'| translate}} <span class="star">*</span> </label>
@@ -320,7 +328,7 @@
           <p-radioButton [value]="false" (onClick)="checkMandatory($event.value)" formControlName="isMandatory" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
       </div>
       <div class="col-6">
-      
+
         <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.is there GPA'|translate }} <span class="star">*</span> </label>
         <p-radioButton  [value]="true" (onClick)="checkExistInGPA($event.value)" formControlName="isThereGPA" label="{{'true'|translate}}" ></p-radioButton>
         <p-radioButton [value]="false" (onClick)="checkExistInGPA($event.value)" formControlName="isThereGPA" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
@@ -336,30 +344,29 @@
               {{'shared.This Field is Required'|translate}}
                <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
             </small>
-           
+
          </div>
         </div>
-       
+
       </div>
         </form>
     </div>
-    
+
     </ng-template>
-    
-  
+
+
     <ng-template pTemplate="footer">
-      
+
       <div class="d-flex align-items-center justify-content-end  ">
-        
+
         <button class="btn btn-primary" (click)="saveSubjectList()" [disabled]="schoolYearSubjectFormGrp.invalid||minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value||minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value">
             <span>{{'shared.save'| translate}} </span>
         </button>
     </div>
-  
+
     </ng-template>
   </p-dialog>
 
 
 
 
-  
