@@ -21,6 +21,7 @@ import { GradesService } from 'src/app/modules/schools/services/grade/grade.serv
 import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
 import { environment } from 'src/environments/environment';
 import { RequestStatesComponent } from './request-states/request-states.component';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 
 @Component({
@@ -55,7 +56,8 @@ export class RequestdetailsComponent implements OnInit {
     rejectionReasonId: null,  // فى حاله سبب الرفض يكون من فهارس النظام
     rejectionReason:'', // فى حاله سبب الرفض يكون text
     attachments:[],
-    divisionIdForRegistrationRequest:'' // لطلب التسجيل فقط
+    divisionIdForRegistrationRequest:'', // لطلب التسجيل فقط
+    gradeId:''
   }
 
   step=1
@@ -90,6 +92,8 @@ export class RequestdetailsComponent implements OnInit {
   currentState
   states
 
+  AllGrades$ =this.sharedService.getAllGrades('')
+
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
@@ -100,7 +104,7 @@ export class RequestdetailsComponent implements OnInit {
     private indexesService:IndexesService,
     private userService:UserService,
     private gradeService:GradesService,
-    private certificatesService:IssuanceCertificaeService
+    private sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
@@ -116,6 +120,7 @@ export class RequestdetailsComponent implements OnInit {
   getRequestDetails(){
     this.requestsService.getRequestDetails(this.requestInstance).subscribe(res=>{
       this.requestDetails =res.result
+      this.reqActionsForm.gradeId = res.result?.grade?.id
       this.checkDashboardHeader();
 
       this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, res?.result?.grade?.id).pipe(map((res:any) => res?.data ||[]));

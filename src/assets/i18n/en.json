@@ -950,6 +950,8 @@
             "tracks": "Tracks",
             "tracksAndSubjects":"Tracks / Subjects",
             "sectionName":  "Division name",
+            "sectionNameAr": "Division name In Arabic",
+            "sectionNameEn": "Division name In English",
             "gradeName": "Grade name",
             "roomNumber":  "Tarkhes number",
             "spetialAbilities": "Spechial abilities",

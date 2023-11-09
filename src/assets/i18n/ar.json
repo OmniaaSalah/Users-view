@@ -1110,6 +1110,8 @@
           "tracks": "مسارات",
           "tracksAndSubjects":"المسارات / المواد",
           "sectionName": "مُسمّى الشعبة",
+          "sectionNameAr": "مُسمّى الشعبة باللغه العربيه",
+          "sectionNameEn": "مُسمّى الشعبة بالغة الانجليزية",
           "gradeName": "مُسمّى الصف ",
           "roomNumber": "رقم الترخيص",
           "spetialAbilities": "القدرات الخاصّة",
