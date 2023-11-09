@@ -29,6 +29,8 @@ export class SystemRequestService {
     return [
       {name:this.translate.instant('dashboard.Requests.Pending'), value: UserRequestsStatus.Pending},
       {name:this.translate.instant('dashboard.Requests.Returned'), value: UserRequestsStatus.ModificationRequest},
+      {name:this.translate.instant('dashboard.Requests.ModificationRequestForGuardian'), value: UserRequestsStatus.ModificationRequestForGuardian},
+      {name:this.translate.instant('dashboard.Requests.ModificationRequestForSchool'), value: UserRequestsStatus.ModificationRequestForSchool},
       {name:this.translate.instant('dashboard.Requests.Accepted'), value:[ UserRequestsStatus.Accepted,  UserRequestsStatus.Approved]},
       {name:this.translate.instant('dashboard.Requests._TentativelyAccepted'), value: UserRequestsStatus.TentativelyAccepted},
       {name:this.translate.instant('dashboard.Requests.FinalApproval'), value: UserRequestsStatus.FinalApproval},
