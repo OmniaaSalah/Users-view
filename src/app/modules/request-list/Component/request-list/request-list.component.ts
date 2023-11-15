@@ -45,14 +45,14 @@ export class RequestListComponent implements OnInit {
        SortBy: 'Desc',
        RequestStatus: null,
        RequestType:null,
-       userRequestType:'',
+       userRequestType:null,
        ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
       };
 
     paginationState= {...paginationInitialState};
 
     showOptions=[
-      {name: this.translate.instant('shared.all'), value:''},
+      {name: this.translate.instant('shared.all'), value:null},
       {name: this.translate.instant('dashboard.Requests.schoolRequests'), value:'Employee'},
       {name: this.translate.instant('dashboard.Requests.speaRequests'), value:'Spea'},
       {name: this.translate.instant('dashboard.Requests.guardianRequests'), value:'Guardian'}
