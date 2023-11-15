@@ -124,7 +124,7 @@ export class WithdrawalRequestComponent implements OnInit, OnDestroy {
     .subscribe(()=>{
       this.isLoading=false
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
-      if(this.currentUserScope =='Guardian') this.router.navigate(['/parent', this.currentGuardianId,'child', this.studentGUID||this.childId], {queryParams:{registered:true}})
+      if(this.currentUserScope =='Guardian') this.router.navigate(['/parent', this.currentGuardianId,'student', this.studentGUID||this.childId], {queryParams:{registered:true}})
       else if(this.currentUserScope =='Employee') this.router.navigate(['/student-management/students/student', this.studentGUID||this.childId], {queryParams:{registered:true}})
       // this.router.navigate(['/schools-and-students/students/student', this.studentGUID])
 
