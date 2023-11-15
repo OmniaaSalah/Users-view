@@ -25,7 +25,7 @@
 
 
                             <div class="row gx-5 form-set">
-                              <div class="col-3" *ngIf="currentUserScope == userScope.SPEA">
+                              <div class="col-3" *ngIf="currentUserScope != userScope.Guardian">
                                 <label class="label" for="evaluationType"> {{'dashboard.Requests.show'|translate}} </label>
                                 <p-dropdown [showClear]="true" [options]="showOptions" [(ngModel)]="filtration.userRequestType" optionLabel="name" optionValue="value" ></p-dropdown>
                             </div>
