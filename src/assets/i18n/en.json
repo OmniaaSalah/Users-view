@@ -1887,8 +1887,11 @@
             "certificatHint":"You can click here, pay the required fees, and complete the certificate issuance process.",
             "ActionOwner":"Action Owner",
             "ActionTaken":"Action Taken",
-            "reopenReq":"Reopen Request"
-
+            "reopenReq":"Reopen Request",
+            "speaRequests":"Spea Requests",
+            "guardianRequests":"Guardians Requests",
+            "schoolRequests":"School Requests",
+            "show":"Show"
 
         },
         "Messages": {
