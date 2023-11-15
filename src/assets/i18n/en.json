@@ -702,7 +702,8 @@
         "Csv":"Csv",
         "Audio":"Audio",
         "Xlsx":"Xlsx",
-        "downloadFile":"Download File"
+        "downloadFile":"Download File",
+        "all":"All"
     },
     "sideBar": {
 
