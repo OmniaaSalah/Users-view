@@ -22,12 +22,12 @@
 
                             <div class="row gx-5 form-set">
                                 <div class="col-4">
-                                    <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
-                                    <p-multiSelect display="chip" [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-multiSelect>
+                                    <label class="label" for="RequestStatus"> {{'Requests.Status'|translate}} </label>
+                                    <p-multiSelect display="chip" [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'Requests.Status'|translate}}"></p-multiSelect>
                                 </div>
                                 <div class="col-4">
-                                    <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>
-                                    <p-multiSelect display="chip" [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestType"  placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-multiSelect>
+                                    <label class="label" for="evaluationType"> {{'Requests.requestType'|translate}} </label>
+                                    <p-multiSelect display="chip" [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestType"  placeholder="{{'Requests.requestType'|translate}}"></p-multiSelect>
                                 </div>
                             </div>
 
@@ -42,11 +42,11 @@
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
                             <th pSortableColumn="requestNumber">
-                                <p-sortIcon field="requestNumber"></p-sortIcon>{{'dashboard.Requests.requestNumber'|translate}}</th>
+                                <p-sortIcon field="requestNumber"></p-sortIcon>{{'Requests.requestNumber'|translate}}</th>
                             <th pSortableColumn="requestType">
-                                <p-sortIcon field="requestType"></p-sortIcon>{{'dashboard.Requests.requestType'|translate}}</th>
+                                <p-sortIcon field="requestType"></p-sortIcon>{{'Requests.requestType'|translate}}</th>
                             <th pSortableColumn="Status">
-                                <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
+                                <p-sortIcon field="Status"></p-sortIcon>{{'Requests.Status'|translate}}</th>
                             <th class="actions"></th>
                         </tr>
                     </ng-template>
@@ -58,18 +58,18 @@
                       {{product[col.field]}}
                   </td> -->
                             <td>{{request.requestNumber}}</td>
-                            <td>{{'dashboard.Requests.'+request.requestType | translate}}</td>
+                            <td>{{'Requests.'+request.requestType | translate}}</td>
                             <td>
                                 <span [ngSwitch]="request.requestStatus">
-                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Approved">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.TentativelyAccepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p class="alerting success"  *ngSwitchCase="requestStatusEnum.Pending">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p class="alerting danger"  *ngSwitchCase="requestStatusEnum.Rejected">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.ModificationRequest">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting dark" *ngSwitchCase="requestStatusEnum.Canceled">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Approved">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.TentativelyAccepted">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting success"  *ngSwitchCase="requestStatusEnum.Pending">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting danger"  *ngSwitchCase="requestStatusEnum.Rejected">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.ModificationRequest">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dark" *ngSwitchCase="requestStatusEnum.Canceled">{{'Requests.'+request.requestStatus |translate}}</p>
                                 </span>
-                                <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
+                                <!-- <div class="alerting success">{{'Requests.'+request.requestStatus |translate}}</div> -->
                             </td>
                             <td class="actions">
                                 <div class="d-flex justify-content-end gap-4" role="button" (click)="navigateTo(request.instanceId)" [routerLink]="['details',request.instanceId]">

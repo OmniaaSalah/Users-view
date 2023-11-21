@@ -14,10 +14,10 @@
 
         <ng-template pTemplate="header" let-columns="columns">
             <tr>
-                <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
-                <th *permit="claimsEnum.E_U_DivisionStudentRate" pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="surname">{{'dashboard.schools.studentDegree'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
-                <th pSortableColumn="track">{{'dashboard.schools.failedSubjecteNumber'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
+                <th pSortableColumn="studentNumber">{{'schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
+                <th *permit="claimsEnum.E_U_DivisionStudentRate" pSortableColumn="name">{{'students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="surname">{{'schools.studentDegree'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
+                <th pSortableColumn="track">{{'schools.failedSubjecteNumber'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student let-rowIndex="rowIndex">

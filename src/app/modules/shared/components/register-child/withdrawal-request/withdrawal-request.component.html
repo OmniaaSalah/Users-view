@@ -11,24 +11,24 @@
         <span role="button" class="color-red-500 text-decoration-underline" routerLink="../" [queryParams]="{registered:true}">{{'shared.cancel' |translate}}</span>
     </div>
 
-    <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.withdrawalReq'|translate}} <span class="color-gray-300">({{student?.school?.name |currentLang}})</span></h3>
+    <h3 class="heading heading--tertiary mb-6">{{'students.withdrawalReq'|translate}} <span class="color-gray-300">({{student?.school?.name |currentLang}})</span></h3>
 
     <app-workflow [steps]="[{ar:'موافقة الهيئة / المدرسة', en:'Spea / School Approval'}]"></app-workflow>
 
     <div class="row gx-5 custom-form mt-6">
         <div class="col-md-4 form-set">
-            <label class="label required" for="description">{{'dashboard.students.withdrawalType'| translate}}</label>
-            <p-dropdown  [options]="transferType" [(ngModel)]="reqForm.withdrawalType" name="type" optionValue="value" optionLabel="name" [required]="true" placeholder="{{'dashboard.students.withdrawalType' |translate}}"></p-dropdown>
+            <label class="label required" for="description">{{'students.withdrawalType'| translate}}</label>
+            <p-dropdown  [options]="transferType" [(ngModel)]="reqForm.withdrawalType" name="type" optionValue="value" optionLabel="name" [required]="true" placeholder="{{'students.withdrawalType' |translate}}"></p-dropdown>
         </div>
         <div class="col-md-4 form-set">
-            <label class="label required" for="description">{{'dashboard.students.withdrawalCause'| translate}}</label>
-            <p-dropdown  [options]="reasonForRepeateStudyPhase$|async" name="cause" [(ngModel)]="reqForm.withdrawalReasonId"  optionValue="id"  optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" [required]="true" placeholder="{{'dashboard.students.withdrawalCause' |translate}}"></p-dropdown>
+            <label class="label required" for="description">{{'students.withdrawalCause'| translate}}</label>
+            <p-dropdown  [options]="reasonForRepeateStudyPhase$|async" name="cause" [(ngModel)]="reqForm.withdrawalReasonId"  optionValue="id"  optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" [required]="true" placeholder="{{'students.withdrawalCause' |translate}}"></p-dropdown>
          </div>
     </div>
 
     <div class="row mt-6">
         <!-- <div class="col-md-5">
-            <app-file-upload (onFileUpload)="onFileUpload($event)" [accept]="fileTypesEnum.Pdf" view="full" title="{{'dashboard.students.attachmentsToDefineWithdrawalCause'| translate}}"></app-file-upload>
+            <app-file-upload (onFileUpload)="onFileUpload($event)" [accept]="fileTypesEnum.Pdf" view="full" title="{{'students.attachmentsToDefineWithdrawalCause'| translate}}"></app-file-upload>
         </div> -->
         <ng-container *ngIf="requiredFiles">
             <div class="col-md-4 mt-6" *ngFor="let file of requiredFiles.files; let i =index">

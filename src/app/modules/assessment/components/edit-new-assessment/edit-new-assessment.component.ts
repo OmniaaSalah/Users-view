@@ -31,17 +31,17 @@ export class EditNewAssessmentComponent implements OnInit {
   assesmentFormGrp: FormGroup;
   statusList: Array<KeyValue<string, boolean>> = [
     {
-      key: this.getTranslateValue('dashboard.Assessment.successful'),
+      key: this.getTranslateValue('Assessment.successful'),
       value: true
     },
     {
-      key: this.getTranslateValue('dashboard.Assessment.Try again'),
+      key: this.getTranslateValue('Assessment.Try again'),
       value: false
     }
   ];
   componentHeaderData: IHeader={
     breadCrump: [],
-    'mainTitle':{main:(this.assessmtId==null||this.assessmtId=='')? this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System')}
+    'mainTitle':{main:(this.assessmtId==null||this.assessmtId=='')? this.translate.instant('Assessment.Add Assessment System'):this.translate.instant('Assessment.Edit Assessment System')}
   }
   private readonly assementsListUrl = '/performance-managment/assessments/assements-list';
 
@@ -230,7 +230,7 @@ checkRating(i)
        [
         { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
         {
-          label: (this.assessmtId==null||this.assessmtId=='')?  this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System'),
+          label: (this.assessmtId==null||this.assessmtId=='')?  this.translate.instant('Assessment.Add Assessment System'):this.translate.instant('Assessment.Edit Assessment System'),
           routerLink: (this.assessmtId==null||this.assessmtId=='')? '/school-performance-managent/assessments/new-assessment':'/school-performance-managent/assessments/edit-assessment/'+this.assessmtId
         }]
 
@@ -242,7 +242,7 @@ checkRating(i)
        [
         { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
         {
-          label: (this.assessmtId==null||this.assessmtId=='')?  this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System'),
+          label: (this.assessmtId==null||this.assessmtId=='')?  this.translate.instant('Assessment.Add Assessment System'):this.translate.instant('Assessment.Edit Assessment System'),
           routerLink: (this.assessmtId==null||this.assessmtId=='')? '/performance-managment/assessments/new-assessment':'/performance-managment/assessments/edit-assessment/'+this.assessmtId
         }]
 

@@ -140,7 +140,7 @@
                                 <label class="label" for="">
                                     {{'Exam duration (in minutes)' | translate}} <span class="star">*</span>
                                 </label>
-                                <p-inputNumber formControlName="ExamDuration"  [showButtons]="true" [min]="1" suffix="{{' '+('Minute'|translate)}}" [max]="300" [ngClass]="{'ng-invalid ng-dirty':ExamDuration.errors?.['required'] &&ExamDuration.touched}"  placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
+                                <p-inputNumber formControlName="ExamDuration"  [showButtons]="true" [min]="1" suffix="{{' '+('Minute'|translate)}}" [max]="300" [ngClass]="{'ng-invalid ng-dirty':ExamDuration.errors?.['required'] &&ExamDuration.touched}"  placeholder="{{'students.weight'|translate}}"></p-inputNumber>
                                 <!-- <input formControlName="ExamDuration" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Minute' | translate}}"> -->
                                 <div>
                                     <div [hidden]="ExamDuration.valid || ExamDuration.untouched">
@@ -157,7 +157,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'dashboard.Assignments.Exam Date' | translate}} <span class="star">*</span>
+                                    {{'Assignments.Exam Date' | translate}} <span class="star">*</span>
                                 </label>
                                 <div class="field col-12 md:col-4">
                                     <p-calendar formControlName="ExamDate" [ngClass]="{'ng-invalid ng-dirty':ExamDate.errors?.['required'] &&ExamDate.touched}" [showIcon]="true" inputId="icon" [minDate]="currentDate"  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
@@ -180,7 +180,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'dashboard.Assignments.Exam Time' | translate}} <span class="star">*</span>
+                                    {{'Assignments.Exam Time' | translate}} <span class="star">*</span>
                                 </label>
                                 <!-- <input class="form-control basicinput" appValidatorsInput selectionMode="range" type="time" > -->
                                 <p-calendar formControlName="ExamTime"  [ngClass]="{'ng-invalid ng-dirty':ExamTime.errors?.['required'] &&ExamTime.touched}"  icon="pi pi-clock" [timeOnly]="true"   showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>

@@ -45,7 +45,7 @@ export class SchoolsReportsComponent implements OnInit {
   states$ = this.countriesService.getAllStates()
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generateschoolsReport'),routerLink:'/reports-managment/schools-reports' },
+      { label: this.translate.instant('reports.generateschoolsReport'),routerLink:'/reports-managment/schools-reports' },
     ],
   }
 

@@ -78,38 +78,38 @@
 
 
 <div class="here">
-    <p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+    <p-dialog header="{{'Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
         <form [formGroup]="parentForm">
             <div class="custom-form custom-validation-form">
                 <div class="mb-5">
-                    <label class="label" for="">{{'dashboard.Messages.Enter the message title' | translate}} <span class="star">*</span></label>
-                    <input class="form-control py-3 my-3" type="text" formControlName="title" placeholder="{{'dashboard.Messages.Enter the message title' | translate}}">
+                    <label class="label" for="">{{'Messages.Enter the message title' | translate}} <span class="star">*</span></label>
+                    <input class="form-control py-3 my-3" type="text" formControlName="title" placeholder="{{'Messages.Enter the message title' | translate}}">
                     <div class="text-danger" *ngIf="parentForm.get('title')?.touched && parentForm.get('title')?.invalid && parentForm.get('title')?.errors">
-                        <small *ngIf="parentForm.get('title')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
-                        <small *ngIf="parentForm.get('title')?.errors?.['maxlength']">{{'dashboard.Messages.maxLengtho' | translate}}</small>
+                        <small *ngIf="parentForm.get('title')?.errors?.['required']">{{'Messages.descriptionMessage' | translate}}</small>
+                        <small *ngIf="parentForm.get('title')?.errors?.['maxlength']">{{'Messages.maxLengtho' | translate}}</small>
                     </div>
 
                 </div>
 
                 <div class="mb-5">
-                    <label class="label" for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span class="star">*</span></label>
-                    <textarea class="form-control" formControlName="description" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
+                    <label class="label" for="">{{'Messages.Enter the text of the message' | translate}} <span class="star">*</span></label>
+                    <textarea class="form-control" formControlName="description" placeholder="{{'Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
                     <div class="text-danger" *ngIf="parentForm.get('description')?.touched && parentForm.get('description')?.invalid && parentForm.get('description')?.errors">
-                        <small *ngIf="parentForm.get('description')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
-                        <small *ngIf="parentForm.get('description')?.errors?.['maxlength']">{{'dashboard.Messages.maxLength' | translate}}</small>
+                        <small *ngIf="parentForm.get('description')?.errors?.['required']">{{'Messages.descriptionMessage' | translate}}</small>
+                        <small *ngIf="parentForm.get('description')?.errors?.['maxlength']">{{'Messages.maxLength' | translate}}</small>
                     </div>
                 </div>
 
                 <div class="mb-5">
-                    <label class="label" for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-                    <p-dropdown [options]="messagesTypes$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id"  [ngClass]="{'ng-invalid ng-dirty':parentForm.get('messageType')?.errors?.['required']&& parentForm.get('messageType')?.touched}"></p-dropdown>
+                    <label class="label" for="">{{'Messages.MessageType' | translate}} <span class="star">*</span></label>
+                    <p-dropdown [options]="messagesTypes$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" formControlName="messageType" placeholder="{{'Messages.MessageType' | translate}}" optionValue="id"  [ngClass]="{'ng-invalid ng-dirty':parentForm.get('messageType')?.errors?.['required']&& parentForm.get('messageType')?.touched}"></p-dropdown>
                     <div class="text-danger" *ngIf="this.parentForm.get('messageType')?.touched && this.parentForm.get('messageType')?.invalid && this.parentForm.get('messageType')?.errors">
-                        <small *ngIf="this.parentForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+                        <small *ngIf="this.parentForm.get('messageType')?.errors?.['required']">{{'Messages.descriptionMessage' | translate}}</small>
                     </div>
                 </div>
                 <div class="d-flex El-form my-4">
                     <div class="form-group d-flex align-items-baseline">
-                        <label class="px-3" for="">  {{'dashboard.Messages.Possibility to reply' | translate}} <span class="star">*</span></label>
+                        <label class="px-3" for="">  {{'Messages.Possibility to reply' | translate}} <span class="star">*</span></label>
                         <p-inputSwitch (onChange)="isToggleLabel1($event)" class="px-3" formControlName="switch2"></p-inputSwitch>
                         <span class="Label" *ngIf="!isShown1">{{'shared.no'|translate}}</span>
                         <span class="Label" *ngIf="isShown1">{{'shared.yes'|translate}}</span>
@@ -122,7 +122,7 @@
         </form>
         <ng-template pTemplate="footer">
             <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="parentForm.invalid || onSubmit">
-                {{'dashboard.Messages.Send' | translate}}
+                {{'Messages.Send' | translate}}
                 <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
 
             </button>

@@ -19,7 +19,7 @@
         <ng-container *permit="claimsEnum.E_C_DivisionStudents">
             <button class="btn btn-primary btn--md" *ngIf="step==3" (click)="openAddStudentModel()">
                 <fa-icon [icon]="faPlus"></fa-icon>
-                <span>{{'dashboard.schools.addStudent'|translate}}</span>
+                <span>{{'schools.addStudent'|translate}}</span>
             </button>
         </ng-container>
 
@@ -34,14 +34,14 @@
             <div class="tabView">
                 <!-- Navigations Options -->
                 <ul class="tabView__nav">
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionInfo" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.sectionInfo'|translate}}</span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionTeachers" [class.active]="step==2" (click)="step=2;getDivisionTeachers()"><span> {{'dashboard.schools.sectionTeachers'|translate}}</span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionStudents" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.sectionStudents'|translate}}</span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionLecuture" [class.active]="step==4" (click)="getGradeClassEvents(); getGradeSubjects();step=4"><span>{{'dashboard.schools.schedule'|translate}}</span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionAbsenceRecord" [class.active]="step==5" (click)="step=5"><span>{{'dashboard.schools.absenceRecord'|translate}}</span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionDegrees" [class.active]="step==6" (click)="step=6"><span>{{'dashboard.schools.annualDegrees'|translate}}</span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionSubjects" [class.active]="step==7" (click)="step=7"><span>{{'dashboard.schools.divisionSubjects'|translate}}</span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionStudentRate" [class.active]="step==8" (click)="step=8"><span>{{'dashboard.schools.studentsRate'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionInfo" [class.active]="step==1" (click)="step=1"><span>{{'schools.sectionInfo'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionTeachers" [class.active]="step==2" (click)="step=2;getDivisionTeachers()"><span> {{'schools.sectionTeachers'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionStudents" [class.active]="step==3" (click)="step=3"><span>{{'schools.sectionStudents'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionLecuture" [class.active]="step==4" (click)="getGradeClassEvents(); getGradeSubjects();step=4"><span>{{'schools.schedule'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionAbsenceRecord" [class.active]="step==5" (click)="step=5"><span>{{'schools.absenceRecord'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionDegrees" [class.active]="step==6" (click)="step=6"><span>{{'schools.annualDegrees'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionSubjects" [class.active]="step==7" (click)="step=7"><span>{{'schools.divisionSubjects'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionStudentRate" [class.active]="step==8" (click)="step=8"><span>{{'schools.studentsRate'|translate}}</span></li>
                 </ul>
                     <!-- Navigations Options -->
 
@@ -68,7 +68,7 @@
                                     <div class="row gx-5 form-set">
                                         <div class="col-md-4 px-5">
                                             <div class="grid-container">
-                                                <p class="color-gray-300 ">{{'dashboard.schools.sectionNumber'| translate}}</p>
+                                                <p class="color-gray-300 ">{{'schools.sectionNumber'| translate}}</p>
                                                 <span class="color-primary mb-2">{{divisionInfo?.divisionNumber}} </span>
                                             </div>
                                         </div>
@@ -81,7 +81,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="grid-container">
-                                                <p class="color-gray-300">{{'dashboard.schools.sectionForSpetialAbilitiesStudents'| translate}}</p>
+                                                <p class="color-gray-300">{{'schools.sectionForSpetialAbilitiesStudents'| translate}}</p>
                                                 <span class="color-primary mb-2">{{divisionInfo?.forDisabilities? ('shared.yes' |translate):('shared.no' |translate)}} </span>
                                             </div>
                                         </div>
@@ -90,24 +90,24 @@
                                     <div class="row gx-5 form-set">
                                       <ng-container formGroupName="name">
                                         <div class="col-md-4 px-5" >
-                                            <label class="label required" for="name">{{'dashboard.schools.sectionNameAr'|translate}} </label>
+                                            <label class="label required" for="name">{{'schools.sectionNameAr'|translate}} </label>
                                             <input type="text" name="sectionName" id="name" formControlName="ar" pInputText />
                                         </div>
 
                                         <div class="col-md-4 px-5" >
-                                          <label class="label required" for="name">{{'dashboard.schools.sectionNameEn'|translate}} </label>
+                                          <label class="label required" for="name">{{'schools.sectionNameEn'|translate}} </label>
                                           <input type="text" name="sectionName" id="name" formControlName="en" pInputText />
                                         </div>
                                       </ng-container>
 
                                         <div class="col-md-3" *ngIf="currentUserScope==userScope.SPEA">
-                                          <label class="label" for="name">{{'dashboard.schools.exceptionStudentNumber'|translate}} </label>
+                                          <label class="label" for="name">{{'schools.exceptionStudentNumber'|translate}} </label>
                                           <input type="text" name="sectionName" id="name" formControlName="studentToleranceCount" pInputText [disabled]="true" />
                                         </div>
                                         <div class="col-md-3 align-self-end">
 
                                             <div class="grid-container">
-                                              <p class="color-gray-300 ">{{'dashboard.schools.maxStudentsNumber'| translate}}</p>
+                                              <p class="color-gray-300 ">{{'schools.maxStudentsNumber'| translate}}</p>
                                               <span class="color-primary mb-2">{{divisionInfo?.maxStudentCount}} </span>
                                             </div>
 
@@ -118,7 +118,7 @@
 
                                     <ng-container  *ngIf="divisionInfo.hasTracks">
                                         <ng-container *ngIf=" tracks$ |async as tracks">
-                                            <label class="label " for="">{{'dashboard.schools.tracks'|translate}}</label>
+                                            <label class="label " for="">{{'schools.tracks'|translate}}</label>
                                             <div class="row gx-5 gy-4 mb-4">
                                                 <ng-container *ngFor="let track of tracks; let i=index">
                                                     <div class="col-md-3 d-flex align-items-center gap-4">
@@ -156,14 +156,14 @@
 
                                     <div class="row gx-5 form-set" formGroupName="supervisior"  >
                                         <div class="col-md-4" >
-                                            <label class="label required" for="manager">{{'dashboard.schools.sectionManager'|translate}}</label>
+                                            <label class="label required" for="manager">{{'schools.sectionManager'|translate}}</label>
                                             <p-dropdown [options]="schoolTeachers$|async" formControlName="id" optionValue="id" [autoDisplayFirst]="false" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}"></p-dropdown>
 
                                         </div>
                                         <div class="col-md-8 d-flex justify-content-center align-self-end ">
                                             <div class="d-flex align-items-center gap-4">
                                                 <!-- <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch> -->
-                                                <label class="mb-2" for="description">{{'dashboard.schools.abilityToEnterDegree'|translate}}</label>
+                                                <label class="mb-2" for="description">{{'schools.abilityToEnterDegree'|translate}}</label>
                                                 <p-inputSwitch name="addDegreesAvilability" formControlName="abilityToAddDegrees" (ngModelChange)="abilityToAddDegreesChanged($event)"></p-inputSwitch>
                                                 <span class="mb-2" for="name">{{isAllowToAddDegrees.value ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
 
@@ -178,25 +178,25 @@
                                         <span class="color-gray-800">" {{'emptyList.divisionDegreeHint' |translate}} "</span>
                                     </div>
 
-                                    <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.subjectsTeachers'|translate}}</h3>
+                                    <h3 class="heading heading--tertiary mb-4">{{'schools.subjectsTeachers'|translate}}</h3>
                                     <ng-container formArrayName="subjectsTeachers">
                                         <div class="row gx-5 mb-4  align-items-center" *ngFor="let obj of subjectsTeachersCtr.controls; let i=index" [formGroupName]="i">
                                             <div class="col-md-4 px-5">
                                                 <div class="grid-container">
-                                                    <p class="color-gray-300 fs-4">{{'dashboard.schools.subject'| translate}}</p>
+                                                    <p class="color-gray-300 fs-4">{{'schools.subject'| translate}}</p>
                                                     <span class="color-primary mb-2">{{obj.value.subject.name | currentLang}}</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-5 px-5" formGroupName="teacher">
-                                                <!-- <label class="label" for="name">{{'dashboard.schools.subjectsTeachers'|translate}} </label> -->
+                                                <!-- <label class="label" for="name">{{'schools.subjectsTeachers'|translate}} </label> -->
                                                 <div class="grid-container align-items-center">
-                                                    <p class="color-gray-300 fs-4" [class.required]="!isAllowToAddDegrees.value">{{'dashboard.schools.subjectTeacher'| translate}}</p>
+                                                    <p class="color-gray-300 fs-4" [class.required]="!isAllowToAddDegrees.value">{{'schools.subjectTeacher'| translate}}</p>
                                                     <p-dropdown
                                                     [options]="schoolTeachers$|async"
                                                     formControlName="id" optionValue="id"
                                                     [showClear]="true"
                                                     optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}"
-                                                    placeholder="{{'dashboard.students.ChooseTeacher'|translate}}"></p-dropdown>
+                                                    placeholder="{{'students.ChooseTeacher'|translate}}"></p-dropdown>
                                                 </div>
                                             </div>
                                         </div>
@@ -222,7 +222,7 @@
                               <ng-container  *ngIf="events.length" >
                                 <div class="d-flex align-items-center gap-3 mb-6" *permit="claimsEnum.E_U_DivisionLecuture">
                                     <img src="assets/images/shared/info-skyBlue.svg" alt="">
-                                    <p class="color-primary">{{'dashboard.schools.abilityToClickOnClassAndAddSubjects'|translate}}</p>
+                                    <p class="color-primary">{{'schools.abilityToClickOnClassAndAddSubjects'|translate}}</p>
                                 </div>
 
                                 <app-calender [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
@@ -287,12 +287,12 @@
 
 
 <!-- Add Student to division Dialog -->
-<p-dialog header="{{'dashboard.schools.addStudentToSection'|translate}}" [(visible)]="addStudentModelOpened" [modal]="true" [style]="{width: '35vw', height:'70vh'}">
+<p-dialog header="{{'schools.addStudentToSection'|translate}}" [(visible)]="addStudentModelOpened" [modal]="true" [style]="{width: '35vw', height:'70vh'}">
     <ng-template pTemplate="content">
         <form class="custom-form" [formGroup]="addStudentForm">
             <div class="row form-set">
                 <div class="col">
-                    <label class="label" for="student">{{'dashboard.schools.student'|translate}} </label>
+                    <label class="label" for="student">{{'schools.student'|translate}} </label>
                     <p-dropdown
                     [options]="(studentsWithoutDivision$ | async)"
                     [filter]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}"
@@ -306,7 +306,7 @@
 
             <div class="row form-set" *ngIf="divisionInfo?.hasTracks">
                 <div class="col-md-12">
-                    <label class="label" for="track">{{'dashboard.schools.track'|translate}} </label>
+                    <label class="label" for="track">{{'schools.track'|translate}} </label>
                     <p-dropdown [options]=" tracks$|async" formControlName="trackId" (ngModelChange)="onTrackChange($event)" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" placeholder="{{'shared.chooseTrack'|translate}}"></p-dropdown>
                 </div>
             </div>
@@ -337,7 +337,7 @@
 
 
 <!-- add Subjects to clendar -->
-<p-dialog header="{{'dashboard.schools.chooseScheduleSubjects'|translate}}" [(visible)]="openSubjectsModel" [modal]="true" [style]="{width: '50vw'}">
+<p-dialog header="{{'schools.chooseScheduleSubjects'|translate}}" [(visible)]="openSubjectsModel" [modal]="true" [style]="{width: '50vw'}">
     <ng-template pTemplate="content">
         <form class="custom-form">
 

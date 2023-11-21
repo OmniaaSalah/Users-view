@@ -33,7 +33,7 @@ export class EditListComponent implements OnInit {
   componentHeaderData: IHeader = {
 		breadCrump: [
 
-			{ label: this.translate.instant('dashboard.schools.editableList'), routerLink: `/school-management/school/${this.schoolId}/edit-list`},
+			{ label: this.translate.instant('schools.editableList'), routerLink: `/school-management/school/${this.schoolId}/edit-list`},
 		],
 		mainTitle: { main: this.currentSchool }
 	}
@@ -114,7 +114,7 @@ export class EditListComponent implements OnInit {
     let filter = {...this.filtration,PageSize:this.editList.totalAllData,Page:1}
     this.schoolsService.editListToExport(filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.editableList'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('schools.editableList'))
     })
   }
 

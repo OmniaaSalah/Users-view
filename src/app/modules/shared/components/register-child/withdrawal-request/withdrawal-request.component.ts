@@ -41,23 +41,23 @@ export class WithdrawalRequestComponent implements OnInit, OnDestroy {
   componentHeaderData:IHeader = {
     breadCrump: [
       {
-        label: this.translate.instant('dashboard.parents.sonDetails'),
+        label: this.translate.instant('parents.sonDetails'),
         routerLink: this.currentUserScope == 'Guardian' ? `/parent/${this.currentGuardianId}/student/${this.studentGUID || this.childId}`: `/student-management/students/student/${this.studentGUID || this.childId}`,
         routerLinkActiveOptions:{exact: true},queryParams:{registered:true}
       },
       {
-        label: this.translate.instant('dashboard.students.withdrawalReq'),
+        label: this.translate.instant('students.withdrawalReq'),
         routerLink: this.currentUserScope == 'Guardian' ? `/parent/${this.currentGuardianId}/student/${this.studentGUID || this.childId}/withdraw-request` : `/student-management/students/student/${this.studentGUID || this.childId}/withdraw-request`
        }
     ],
-    mainTitle: { main: this.translate.instant('dashboard.students.withdrawalReq'), sub: '' }
+    mainTitle: { main: this.translate.instant('students.withdrawalReq'), sub: '' }
   }
 
 
   transferType= [
-    {name:this.translate.instant('dashboard.students.insideEmara'), value: 0},
-    {name:this.translate.instant('dashboard.students.outSideEmara'), value: 1},
-    {name:this.translate.instant('dashboard.students.outsideCountry'), value: 2},
+    {name:this.translate.instant('students.insideEmara'), value: 0},
+    {name:this.translate.instant('students.outSideEmara'), value: 1},
+    {name:this.translate.instant('students.outsideCountry'), value: 2},
   ]
 
   isLoading=false

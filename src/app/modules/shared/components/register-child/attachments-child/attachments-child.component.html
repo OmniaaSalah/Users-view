@@ -97,18 +97,18 @@
 
     <div class="row gx-5 "  [formGroup]="newAttachmentForm">
         <div class="mb-5">
-            <label class="label required">{{'dashboard.students.attachmentsToAdd'|translate}}</label>
-            <p-dropdown formControlName="indexId" (ngModelChange)="fileTypeChanged($event)" [options]="gurdiansAttachmentsTypes$ | async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.chooseAttachment' |translate}}"></p-dropdown>
+            <label class="label required">{{'students.attachmentsToAdd'|translate}}</label>
+            <p-dropdown formControlName="indexId" (ngModelChange)="fileTypeChanged($event)" [options]="gurdiansAttachmentsTypes$ | async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'SystemSetting.chooseAttachment' |translate}}"></p-dropdown>
             <p *ngIf="showErrMess" class="color-red-500 fs-4 mt-3">هناك بالفعل مرفقات محفوظه لهذا النوع ، وبهذا الحفظ ستحل محل البيانات السابقة</p>
         </div>
           <ng-container formGroupName="titel">
 
               <div class="col-md-6">
-                  <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
+                  <label  class="label">{{'SystemSetting.fileNameAr'|translate}}</label>
                   <input pInputText formControlName="ar" >
               </div>
               <div class="col-md-6">
-                  <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
+                  <label  class="label">{{'SystemSetting.fileNameEn'|translate}}</label>
                   <input pInputText formControlName="en" >
               </div>
           </ng-container>
@@ -116,8 +116,8 @@
           <app-file-upload [accept]="allowedFileType" [hasComment]="true" view="full" (onFileUpload)="onNewAttachmentUploaded($event)"></app-file-upload>
 
           <!-- <div class="col-md-2">
-              <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
-              <p-dropdown formControlName="fileType" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.attachmentType'|translate}}"></p-dropdown>
+              <label  class="label">{{'SystemSetting.attachmentType'|translate}}</label>
+              <p-dropdown formControlName="fileType" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'SystemSetting.attachmentType'|translate}}"></p-dropdown>
           </div> -->
 
             <div class="col mb-2 gap-3 align-self-end d-flex justify-content-end mt-4">

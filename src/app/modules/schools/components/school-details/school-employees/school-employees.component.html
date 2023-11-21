@@ -17,7 +17,7 @@
             </ng-container>
 
             <div class="" *ngIf="schoolManager">
-              <h3 class=" heading heading--tertiary mb-3 color-primary">{{'dashboard.schools.SchoolManager' |translate}} </h3>
+              <h3 class=" heading heading--tertiary mb-3 color-primary">{{'schools.SchoolManager' |translate}} </h3>
               <ng-container  *ngIf="schoolManager?.name">
                 <div class="d-flex justify-content-between align-items-baseline">
                     <button class="btn btn-primary" (click)="patchManagerForm(schoolManager); isManagerModelOpened=true" *permit="claimsEnum.S_EditMangerInformation" >
@@ -59,7 +59,7 @@
     <hr class="my-6">
 
 
-    <h3 class="heading heading--tertiary ">{{'dashboard.schools.schoolEmployeeList'|translate }}</h3>
+    <h3 class="heading heading--tertiary ">{{'schools.schoolEmployeeList'|translate }}</h3>
     <div class="prim-table  mt-4" *ngIf="employees.totalAllData || employees.loading">
         <p-table #dt [value]="employees.list" [lazy]="true" [scrollable]="true" (onSort)="onSort($event)">
             <!-- Table Caption -->
@@ -76,11 +76,11 @@
                             <p-dropdown [options]="statusOptions" [showClear]="true" [(ngModel)]="filtration.status" StopProp optionLabel="name" optionValue="value" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col-md-4">
-                            <label class="label">{{'dashboard.schools.jobTitle'|translate }} </label>
-                            <!-- <p-dropdown [filter]="true" StopProp [showClear]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}" p [options]="jobTitleOptions$|async" [(ngModel)]="filtration.jobtitelid" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.schools.employeeRole' |translate }}">
+                            <label class="label">{{'schools.jobTitle'|translate }} </label>
+                            <!-- <p-dropdown [filter]="true" StopProp [showClear]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}" p [options]="jobTitleOptions$|async" [(ngModel)]="filtration.jobtitelid" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'schools.employeeRole' |translate }}">
 
                             </p-dropdown> -->
-                            <p-multiSelect  [filter]="true" [options]="jobTitleOptions$|async" p display="chip" [(ngModel)]="filtration.jobtitelid"   optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id"   placeholder="{{'dashboard.schools.jobTitle' |translate }}"></p-multiSelect>
+                            <p-multiSelect  [filter]="true" [options]="jobTitleOptions$|async" p display="chip" [(ngModel)]="filtration.jobtitelid"   optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id"   placeholder="{{'schools.jobTitle' |translate }}"></p-multiSelect>
                         </div>
                     </div>
 
@@ -90,18 +90,18 @@
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
 
-                    <th pSortableColumn="EmployeeIdNumber"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.schools.employeeId'|translate }}
+                    <th pSortableColumn="EmployeeIdNumber"><p-sortIcon field="code"></p-sortIcon>{{'schools.employeeId'|translate }}
 
                     </th>
-                    <th pSortableColumn="{{lang=='ar' ? 'NameAr' :'NameEn'}}"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.employeeName'|translate }}
+                    <th pSortableColumn="{{lang=='ar' ? 'NameAr' :'NameEn'}}"><p-sortIcon field="name"></p-sortIcon>{{'schools.employeeName'|translate }}
 
                     </th>
-                    <th pSortableColumn="{{lang=='ar' ? 'ArabicSurname' :'EnglishSurname'}}"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.employeeNickname'|translate }}
+                    <th pSortableColumn="{{lang=='ar' ? 'ArabicSurname' :'EnglishSurname'}}"><p-sortIcon ></p-sortIcon>{{'schools.employeeNickname'|translate }}
 
                     </th>
                     <th style="min-width:8rem" pSortableColumn="Gender"><p-sortIcon ></p-sortIcon>{{'shared.gender'|translate }}
                     </th>
-                    <th pSortableColumn="{{lang=='ar' ? 'NameAr' :'NameEn'}}"><p-sortIcon ></p-sortIcon>{{'dashboard.schools.jobTitle'|translate }}
+                    <th pSortableColumn="{{lang=='ar' ? 'NameAr' :'NameEn'}}"><p-sortIcon ></p-sortIcon>{{'schools.jobTitle'|translate }}
 
                     </th>
                     <th style="min-width:21rem" pSortableColumn="userEmail"><p-sortIcon field="quantity"></p-sortIcon>{{'shared.email'|translate }}
@@ -109,12 +109,12 @@
                     </th>
 
                     <th pSortableColumn="PhoneNumber"><p-sortIcon field="phoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate }} </th>
-                    <th pSortableColumn="RegistrationDate"><p-sortIcon field="registedDate"></p-sortIcon>{{'dashboard.parents.registedDate'|translate }} </th>
+                    <th pSortableColumn="RegistrationDate"><p-sortIcon field="registedDate"></p-sortIcon>{{'parents.registedDate'|translate }} </th>
 
                     <th pSortableColumn="EmiratesIdNumber"><p-sortIcon field="price"></p-sortIcon>{{'shared.personalId'|translate }}
 
                     </th>
-                    <th pSortableColumn="Status"><p-sortIcon field="price"></p-sortIcon>{{'dashboard.schools.employeeStatus'|translate }}</th>
+                    <th pSortableColumn="Status"><p-sortIcon field="price"></p-sortIcon>{{'schools.employeeStatus'|translate }}</th>
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions" *permit="claimsEnum.SE_U_SchoolEmployee"></th>
                 </tr>
             </ng-template>
@@ -192,7 +192,7 @@
 
 
 
-<p-dialog header="{{'dashboard.schools.editSchoolManager' | translate}}" [(visible)]="isManagerModelOpened" [modal]="true" [style]="{width: '48vw', height:'80%'}">
+<p-dialog header="{{'schools.editSchoolManager' | translate}}" [(visible)]="isManagerModelOpened" [modal]="true" [style]="{width: '48vw', height:'80%'}">
     <ng-template pTemplate="content">
         <div class="employee">
 
@@ -248,19 +248,19 @@
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-6">
-                            <label class="label" for="jobTitle">{{'dashboard.schools.newManager' | translate}}</label>
+                            <label class="label" for="jobTitle">{{'schools.newManager' | translate}}</label>
                             <!-- <input pInputText formControlName="jobTitle"> -->
                             <p-dropdown formControlName="newManagerId"
                             [filter]="true"
                             filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                             (onFilter)="searchModel.KeyWord =$event"
                             [ngClass]="{'ng-invalid ng-dirty': managerFormCtr.jobTitleId.errors && managerFormCtr.jobTitleId.errors?.['required']}"
-                             [options]="employees$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id" placeholder="{{'dashboard.schools.newManager' | translate}}">
+                             [options]="employees$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id" placeholder="{{'schools.newManager' | translate}}">
                             </p-dropdown>
                         </div>
 
                         <div class="col-md-4 align-self-end mb-3">
-                            <!-- <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label> -->
+                            <!-- <label class="label" for="status">{{'schools.employeeStatus' | translate}} </label> -->
                             <div class="d-flex align-items-center gap-4">
                                 <div class="fs-4">{{'shared.allStatus.active'|translate}}</div>
                                 <span class="fs-4" *ngIf="managerFormCtr.status.value === statusEnum.Active">{{'shared.yes' |translate}}</span>
@@ -285,7 +285,7 @@
 
 
 
-<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened" [modal]="true" [style]="{width: '54vw',height:'85vh'}">
+<p-dialog header="{{'schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened" [modal]="true" [style]="{width: '54vw',height:'85vh'}">
     <ng-template pTemplate="content">
         <div class="employee">
 
@@ -335,28 +335,28 @@
 
                     <div class="row gx-5 form-set">
                         <!-- <div class="col-md-4 ">
-                            <label class="label" for="jobTitle">{{'dashboard.schools.jobTitle' | translate}}</label>
+                            <label class="label" for="jobTitle">{{'schools.jobTitle' | translate}}</label>
                             <p-dropdown
                             formControlName="jobTitleId"
                             [ngClass]="{'ng-invalid ng-dirty': employeeFormCtr.jobTitleId.errors && employeeFormCtr.jobTitleId.errors?.['required']}"
                             [options]="jobTitleOptions$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                            optionValue="id" placeholder="{{'dashboard.schools.jobTitle' | translate}}"></p-dropdown>
+                            optionValue="id" placeholder="{{'schools.jobTitle' | translate}}"></p-dropdown>
                         </div> -->
 
                         <div class="col-md-6">
-                          <label class="label" for="jobTitle">{{'dashboard.schools.employeeRole' | translate}}</label>
+                          <label class="label" for="jobTitle">{{'schools.employeeRole' | translate}}</label>
                           <!-- <input pInputText formControlName="jobTitle"> -->
                           <p-dropdown
                           formControlName="jobTitleId"
                           [ngClass]="{'ng-invalid ng-dirty': employeeFormCtr.jobTitleId.errors && employeeFormCtr.jobTitleId.errors?.['required']}"
                           [options]="getRoles$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                          optionValue="id" placeholder="{{'dashboard.schools.employeeRole' | translate}}"></p-dropdown>
+                          optionValue="id" placeholder="{{'schools.employeeRole' | translate}}"></p-dropdown>
 
 
                       </div>
 
                         <div class="col-md-4 align-self-end mb-3">
-                            <!-- <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label> -->
+                            <!-- <label class="label" for="status">{{'schools.employeeStatus' | translate}} </label> -->
                             <div class="d-flex align-items-center gap-4">
                                 <div class="fs-4">{{'shared.allStatus.active'|translate}}</div>
                                 <span class="fs-4" *ngIf="employeeFormCtr.status.value === statusEnum.Active">{{'shared.yes' |translate}}</span>

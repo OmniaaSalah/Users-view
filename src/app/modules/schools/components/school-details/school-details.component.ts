@@ -136,49 +136,49 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
 
 	steps=[
 		{
-			title: this.translate.instant('dashboard.schools.generalInfo'),
+			title: this.translate.instant('schools.generalInfo'),
 			index:0,
 			claims:[],
 			isActive:true
 		},
 		{
-			title: this.translate.instant('dashboard.schools.schoolAddress'),
+			title: this.translate.instant('schools.schoolAddress'),
 			index:1,
 			claims:[],
 			isActive:false
 		},
 		{
-			title: this.translate.instant('dashboard.schools.schoolEmployee'),
+			title: this.translate.instant('schools.schoolEmployee'),
 			index:2,
 			claims:[this.claimsEnum.E_MenuItem_SchoolEmployee],
 			isActive:false
 		},
 		{
-			title: this.translate.instant('dashboard.schools.schoolClasses'),
+			title: this.translate.instant('schools.schoolClasses'),
 			index:3,
 			claims:[this.claimsEnum.E_MenuItem_SchoolGrades],
 			isActive:false
 		},
 		{
-			title: this.translate.instant('dashboard.schools.schoolTracks'),
+			title: this.translate.instant('schools.schoolTracks'),
 			index:4,
 			claims:[this.claimsEnum.E_MenuItem_SchoolDivisions],
 			isActive:false
 		},
 		{
-			title: this.translate.instant('dashboard.schools.editableList'),
+			title: this.translate.instant('schools.editableList'),
 			index:5,
 			claims:[this.claimsEnum.SE_MenuItem_EditList],
 			isActive:false
 		},
 		{
-			title: this.translate.instant('dashboard.schools.schoolSubjects'),
+			title: this.translate.instant('schools.schoolSubjects'),
 			index:6,
 			claims:[this.claimsEnum.E_MenuItem_Subjects],
 			isActive:false
 		},
 		{
-			title: this.translate.instant('dashboard.schools.annualHolidays'),
+			title: this.translate.instant('schools.annualHolidays'),
 			index:7,
 			claims:[this.claimsEnum.E_MenuItem_AnnualHolidays],
 			isActive:false

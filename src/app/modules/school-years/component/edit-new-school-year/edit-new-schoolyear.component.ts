@@ -312,7 +312,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
           this.isSentYearBtnLoading = false;
           this.toastService.success(
             this.translate.instant(
-              'dashboard.SchoolYear.old SchoolYear edited Successfully'
+              'SchoolYear.old SchoolYear edited Successfully'
             )
           );
         },
@@ -320,7 +320,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
           this.isSentYearBtnLoading = false;
           this.toastService.error(
             this.translate.instant(
-              'dashboard.SchoolYear.error,please try again'
+              'SchoolYear.error,please try again'
             )
           );
         }
@@ -346,7 +346,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
           if (res.statusCode != 'BadRequest') {
             this.toastService.success(
               this.translate.instant(
-                'dashboard.SchoolYear.old SchoolYear edited Successfully'
+                'SchoolYear.old SchoolYear edited Successfully'
               )
             );
             if (continueId == 1) {
@@ -363,7 +363,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
             this.isSaveBtnLoading = false;
             this.toastService.error(
               this.translate.instant(
-                'dashboard.SchoolYear.SchoolYear already exist'
+                'SchoolYear.SchoolYear already exist'
               )
             );
           }
@@ -373,7 +373,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
           this.isSaveBtnLoading = false;
           this.toastService.error(
             this.translate.instant(
-              'dashboard.SchoolYear.error,please try again'
+              'SchoolYear.error,please try again'
             )
           );
         }
@@ -387,7 +387,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
             this.urlParameter = res.result.id;
             this.toastService.success(
               this.translate.instant(
-                'dashboard.SchoolYear.New SchoolYear added Successfully'
+                'SchoolYear.New SchoolYear added Successfully'
               )
             );
             if (continueId == 1) {
@@ -409,7 +409,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
             this.isSaveBtnLoading = false;
             this.toastService.error(
               this.translate.instant(
-                'dashboard.SchoolYear.SchoolYear already exist'
+                'SchoolYear.SchoolYear already exist'
               )
             );
           }
@@ -419,7 +419,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
           this.isSaveBtnLoading = false;
           this.toastService.error(
             this.translate.instant(
-              'dashboard.AnnualHoliday.error,please try again'
+              'AnnualHoliday.error,please try again'
             )
           );
         }
@@ -451,7 +451,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
       this.topStudentIds.pop();
       this.toastService.error(
         this.translate.instant(
-          'dashboard.SchoolYear.you can select 10 top students at max'
+          'SchoolYear.you can select 10 top students at max'
         )
       );
     }
@@ -468,7 +468,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
         (res) => {
           this.toastService.success(
             this.translate.instant(
-              'dashboard.SchoolYear.Top Students added Successfully'
+              'SchoolYear.Top Students added Successfully'
             )
           );
           this.openRow(this.schoolYearCurriculum.curriculumId);
@@ -476,7 +476,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
         (err) => {
           this.toastService.error(
             this.translate.instant(
-              'dashboard.AnnualHoliday.error,please try again'
+              'AnnualHoliday.error,please try again'
             )
           );
         }
@@ -587,7 +587,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
           this.addCurriculumsModelOpened = false;
           this.toastService.success(
             this.translate.instant(
-              'dashboard.SchoolYear.Curriculums added Successfully'
+              'SchoolYear.Curriculums added Successfully'
             )
           );
           this.getCurriculumsInSchoolYear();
@@ -596,7 +596,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
           this.isCurriculumBtnLoading = false;
           this.toastService.error(
             this.translate.instant(
-              'dashboard.AnnualHoliday.error,please try again'
+              'AnnualHoliday.error,please try again'
             )
           );
         }
@@ -622,7 +622,7 @@ export class EditNewSchoolyearComponent implements OnInit, OnDestroy {
     } else {
       this.toastService.warning(
         this.translate.instant(
-          'dashboard.SchoolYear.You should save SchoolYear first to add curriculum to it'
+          'SchoolYear.You should save SchoolYear first to add curriculum to it'
         )
       );
     }

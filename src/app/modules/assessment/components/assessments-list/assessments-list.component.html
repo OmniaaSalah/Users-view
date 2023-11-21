@@ -21,7 +21,7 @@
                 <div class="row gx-5 form-set">
                     <div class="col-lg-4">
                         <label class="label">{{'shared.activated'|translate}}</label>
-                        <p-dropdown [(ngModel)]="filtration.status" [showClear]="true" StopProp [options]="filteration_status" optionValue="code" optionLabel="name" placeholder="{{'dashboard.Assessment.AssessmentStatus'|translate }}"></p-dropdown>
+                        <p-dropdown [(ngModel)]="filtration.status" [showClear]="true" StopProp [options]="filteration_status" optionValue="code" optionLabel="name" placeholder="{{'Assessment.AssessmentStatus'|translate }}"></p-dropdown>
                     </div>
                 </div>
 
@@ -51,11 +51,11 @@
                         </ng-template>
                         <div class="row gx-5 mt-3   radius-5">
                             <div class="col-md-6 text-center">
-                                <div class="color-skyBlue-500">{{'dashboard.Assessment.Minmum Degree'|translate}}</div>
+                                <div class="color-skyBlue-500">{{'Assessment.Minmum Degree'|translate}}</div>
                                 <div class="color-skyBlue-500 fw-bold"> {{rate.min}} </div>
                             </div>
                             <div class="col-md-6 text-center">
-                                <div class="color-skyBlue-500"> {{'dashboard.Assessment.Maximum Degree'|translate}}</div>
+                                <div class="color-skyBlue-500"> {{'Assessment.Maximum Degree'|translate}}</div>
                                 <div class="color-skyBlue-500  fw-bold">{{rate.max}}</div>
                             </div>
                         </div>
@@ -69,20 +69,20 @@
                             </div>
                         </div> -->
                         <div class="row gx-5 p-3   radius-5">
-                        <span class="mt-4  fw-bold">{{'dashboard.Assessment.AssessmentTable'|translate}}</span>
+                        <span class="mt-4  fw-bold">{{'Assessment.AssessmentTable'|translate}}</span>
                         </div>
                         <div class=" px-3 " id="cardSize">
 
                             <ng-container  *ngIf="rate.rateScores.length > 0">
                               <div class="d-flex my-3">
                                 <div class="col-md-4 fw-bold">
-                                    <p class="color-skyBlue-300 fs-5">{{'dashboard.Assessment.RatingCode'|translate}}</p>
+                                    <p class="color-skyBlue-300 fs-5">{{'Assessment.RatingCode'|translate}}</p>
                                 </div>
                                 <div class="col-md-3 fw-bold">
-                                    <p class="color-skyBlue-300 fs-5">{{'dashboard.reports.result'|translate}}</p>
+                                    <p class="color-skyBlue-300 fs-5">{{'reports.result'|translate}}</p>
                                 </div>
                                 <div class="col-md-4 fw-bold">
-                                    <p class="color-skyBlue-300 fs-5">{{'dashboard.Assessment.degreeLimit'|translate}}</p>
+                                    <p class="color-skyBlue-300 fs-5">{{'Assessment.degreeLimit'|translate}}</p>
                                 </div>
                               </div>
                                 <ng-container *ngFor="let sc of rate.rateScores">
@@ -95,15 +95,15 @@
                                     <div class="col-md-3">
                                         <ul>
                                             <li class="color-primary m-3 pt-3 fs-4 fw-700">
-                                                {{ 'dashboard.Assessment.' + (sc.isSuccess ? 'successful' : 'unSuccessful') | translate}}
+                                                {{ 'Assessment.' + (sc.isSuccess ? 'successful' : 'unSuccessful') | translate}}
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-4">
                                         <ul>
                                             <li class="m-3 pt-3 fs-4">
-                                                <!-- <p class="color-gray-300 fs-4">{{'dashboard.Assessment.Deserving Degrees'|translate}}</p> -->
-                                                <span class="color-black mb-4 degrees">  {{'dashboard.Assessment.From'|translate}} {{sc.from}} {{'dashboard.Assessment.To'|translate}}{{sc.to}}</span>
+                                                <!-- <p class="color-gray-300 fs-4">{{'Assessment.Deserving Degrees'|translate}}</p> -->
+                                                <span class="color-black mb-4 degrees">  {{'Assessment.From'|translate}} {{sc.from}} {{'Assessment.To'|translate}}{{sc.to}}</span>
                                             </li>
                                         </ul>
                                     </div>

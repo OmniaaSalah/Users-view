@@ -18,8 +18,8 @@
                             <p-dropdown [showClear]="true" StopProp [options]="usersStatus" [(ngModel)]="filtration.isactive" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col-lg-4">
-                            <label class="label" for="city">{{'dashboard.UserInformation.Select Private Role'|translate }} </label>
-                            <p-multiSelect [options]="roles" display="chip" [(ngModel)]="filtration.roleId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}"></p-multiSelect>
+                            <label class="label" for="city">{{'UserInformation.Select Private Role'|translate }} </label>
+                            <p-multiSelect [options]="roles" display="chip" [(ngModel)]="filtration.roleId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'UserInformation.Select Private Role' | translate}}"></p-multiSelect>
                         </div>
 
                     </div>
@@ -35,7 +35,7 @@
                     </th>
 
                     <th pSortableColumn="{{lang=='ar' ? 'RoleArabicName' : 'RoleEnglishName'}}">
-                        <p-sortIcon field="{{lang=='ar' ? 'RoleArabicName' : 'RoleEnglishName'}}"></p-sortIcon>{{'dashboard.UserInformation.Private Role'|translate}}
+                        <p-sortIcon field="{{lang=='ar' ? 'RoleArabicName' : 'RoleEnglishName'}}"></p-sortIcon>{{'UserInformation.Private Role'|translate}}
                     </th>
 
                     <th pSortableColumn="Email">
@@ -43,7 +43,7 @@
                     </th>
 
                     <th pSortableColumn="LastLoginDate">
-                            <p-sortIcon field="LastLoginDate"></p-sortIcon>{{'dashboard.UserInformation.lastLoginDate'|translate}}
+                            <p-sortIcon field="LastLoginDate"></p-sortIcon>{{'UserInformation.lastLoginDate'|translate}}
                     </th>
 
                     <th pSortableColumn="EmiratesIdNumber">
@@ -59,7 +59,7 @@
                     </th>
 
                     <th pSortableColumn="IsActive">
-                        <p-sortIcon field="IsActive"></p-sortIcon>{{'dashboard.UserInformation.User Status'|translate}}
+                        <p-sortIcon field="IsActive"></p-sortIcon>{{'UserInformation.User Status'|translate}}
                     </th>
 
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>

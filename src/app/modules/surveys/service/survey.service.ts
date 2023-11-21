@@ -20,21 +20,21 @@ export class SurveyService {
   surveyStatus=[];
   constructor(private translate:TranslateService,private http: HttpHandlerService, private tableLoaderService: LoaderService) {
     this.surveyType = [
-      { name:this.translate.instant('dashboard.surveys.mandatory'), value:StatusEnum.Mandatory },
-      { name:this.translate.instant('dashboard.surveys.optional'), value: StatusEnum.Optional }
+      { name:this.translate.instant('surveys.mandatory'), value:StatusEnum.Mandatory },
+      { name:this.translate.instant('surveys.optional'), value: StatusEnum.Optional }
     ];
     this.questionType=[
-      { name:this.translate.instant('dashboard.surveys.SurveyAttachmentQuestion'), value:QuestionsTypeEnum.SurveyAttachmentQuestion },
-      { name:this.translate.instant('dashboard.surveys.SurveyFreeTextQuestion'), value: QuestionsTypeEnum.SurveyFreeTextQuestion },
-      { name:this.translate.instant('dashboard.surveys.SurveyMultiChoiceQuestion'), value:QuestionsTypeEnum.SurveyMultiChoiceQuestion },
-      { name:this.translate.instant('dashboard.surveys.SurveyRateQuestion'), value: QuestionsTypeEnum.SurveyRateQuestion }
+      { name:this.translate.instant('surveys.SurveyAttachmentQuestion'), value:QuestionsTypeEnum.SurveyAttachmentQuestion },
+      { name:this.translate.instant('surveys.SurveyFreeTextQuestion'), value: QuestionsTypeEnum.SurveyFreeTextQuestion },
+      { name:this.translate.instant('surveys.SurveyMultiChoiceQuestion'), value:QuestionsTypeEnum.SurveyMultiChoiceQuestion },
+      { name:this.translate.instant('surveys.SurveyRateQuestion'), value: QuestionsTypeEnum.SurveyRateQuestion }
     ]
     this.surveyStatus= [
-      { name:this.translate.instant('dashboard.surveys.Draft'), value:StatusEnum.Draft },
-      { name:this.translate.instant('dashboard.surveys.Sent'), value: StatusEnum.Sent },
-      { name:this.translate.instant('dashboard.surveys.Closed'), value:StatusEnum.Closed },
-      { name:this.translate.instant('dashboard.surveys.Apparent'), value: StatusEnum.Apparent},
-      { name:this.translate.instant('dashboard.surveys.Canceled'), value: StatusEnum.Canceled}
+      { name:this.translate.instant('surveys.Draft'), value:StatusEnum.Draft },
+      { name:this.translate.instant('surveys.Sent'), value: StatusEnum.Sent },
+      { name:this.translate.instant('surveys.Closed'), value:StatusEnum.Closed },
+      { name:this.translate.instant('surveys.Apparent'), value: StatusEnum.Apparent},
+      { name:this.translate.instant('surveys.Canceled'), value: StatusEnum.Canceled}
     ]
 
   }
@@ -125,13 +125,13 @@ getDetailsOfResponeseOfSurvey(surveyId,questionId)
       map(res=>{
         return res.result.data.map(survey =>{
           return {
-            [this.translate.instant('dashboard.surveys.surveyNumber')]: survey?.surveyNumber,
-            [this.translate.instant('dashboard.surveys.surveyAddress')]: survey?.title[this.lang],
-            [this.translate.instant('dashboard.surveys.surveyType')]: survey?.surveyType==StatusEnum.Mandatory ? this.translate.instant('dashboard.surveys.mandatory'):this.translate.instant('dashboard.surveys.optional'),
-            [this.translate.instant('dashboard.Subjects.Created by')]: survey?.userName[this.lang],
-            [this.translate.instant('dashboard.surveys.targets')]: survey?.targetGuardians,
-            [this.translate.instant('dashboard.surveys.responses')]: survey?.responsesTotalNumber,
-            [this.translate.instant('dashboard.surveys.surveyStatus')]: this.translate.instant('dashboard.surveys.'+survey?.surveyStatus)
+            [this.translate.instant('surveys.surveyNumber')]: survey?.surveyNumber,
+            [this.translate.instant('surveys.surveyAddress')]: survey?.title[this.lang],
+            [this.translate.instant('surveys.surveyType')]: survey?.surveyType==StatusEnum.Mandatory ? this.translate.instant('surveys.mandatory'):this.translate.instant('surveys.optional'),
+            [this.translate.instant('Subjects.Created by')]: survey?.userName[this.lang],
+            [this.translate.instant('surveys.targets')]: survey?.targetGuardians,
+            [this.translate.instant('surveys.responses')]: survey?.responsesTotalNumber,
+            [this.translate.instant('surveys.surveyStatus')]: this.translate.instant('surveys.'+survey?.surveyStatus)
 
           }
         })

@@ -63,7 +63,7 @@
                                           <label class="fw-bold mb-3">{{'Notifications.Description'|translate}}</label>
                                           <p class="color-gray-800 "*ngIf="checkLanguage">{{card.description | currentLang}}</p>
                                       </div>
-                                      <p class="color-gray-300 mt-6">{{card.createdDate|customDate}}</p>
+                                      <p class="color-gray-300 mt-6">{{card.createdDate|toLocalDate:'YYYY-MM-DD HH:mm'|LocalizeDate:'d MMMM y hh:mm a'}}</p>
                                   </div>
                                   <div class="Details">
 

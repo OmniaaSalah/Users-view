@@ -50,7 +50,7 @@ export class SpeaSubjectsComponent implements OnInit {
     this.headerService.Header.next({
       breadCrump: [
         {
-          label: this.translate.instant('dashboard.Subjects.List Of Subjects'),
+          label: this.translate.instant('Subjects.List Of Subjects'),
           routerLink: '/educational-settings/subject/subjects-list',
         },
       ],

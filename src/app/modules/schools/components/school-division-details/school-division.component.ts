@@ -44,7 +44,7 @@ export class SchoolDivisionComponent implements OnInit {
  componentHeaderData: IHeader={
    breadCrump: [],
    mainTitle:{ main:this.currentSchool },
-   subTitle: {main: this.translate.instant('dashboard.schools.editTrack'), sub:'(B 1)'}
+   subTitle: {main: this.translate.instant('schools.editTrack'), sub:'(B 1)'}
  }
 
 
@@ -365,7 +365,7 @@ getGradeClassEvents(){
       this.componentHeaderData.breadCrump=
       [
 
-        { label: this.translate.instant('dashboard.schools.schoolTracks'), routerLink: `/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true},visible:false},
+        { label: this.translate.instant('schools.schoolTracks'), routerLink: `/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true},visible:false},
         { label: this.translate.instant('breadcrumb.editTrack'), routerLink: `/grades-and-divisions/school/${this.schoolId}/divisions/division/${this.divisionId}`},
       ]
 

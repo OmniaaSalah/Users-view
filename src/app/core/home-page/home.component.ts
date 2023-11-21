@@ -142,7 +142,7 @@ export class HomeComponent implements OnInit {
       },
       list: [
         {label:this.translate.get('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.SE_MenuItem_Exam]},
-        {label:this.translate.get('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
+        {label:this.translate.get('Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
         {label:this.translate.get('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/educational-setting/note-marked.svg',url:'/performance-managment/assessments/assements-list',claims:[ClaimsEnum.SE_MenuItem_Rate]},
 
 
@@ -219,7 +219,7 @@ export class HomeComponent implements OnInit {
       claims:[ClaimsEnum.E_menu_ManageStudents],
       content:{
         header: {
-          title:this.translate.get('dashboard.students.studentsMangement'),
+          title:this.translate.get('students.studentsMangement'),
           bgColor:'#EF8071'
         },
 
@@ -243,8 +243,8 @@ export class HomeComponent implements OnInit {
 
       },
       list: [
-        {label: this.translate.get('dashboard.schools.schoolClasses'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:`/grades-and-divisions/school/${currentSchoolId}/grades`,claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
-        {label:this.translate.get('dashboard.schools.schoolTracks'), icon:'assets/images/home/schools-students/user-graduate.svg', url:`/grades-and-divisions/school/${currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
+        {label: this.translate.get('schools.schoolClasses'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:`/grades-and-divisions/school/${currentSchoolId}/grades`,claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
+        {label:this.translate.get('schools.schoolTracks'), icon:'assets/images/home/schools-students/user-graduate.svg', url:`/grades-and-divisions/school/${currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
 
       ]
     },
@@ -253,7 +253,7 @@ export class HomeComponent implements OnInit {
       claims:[ClaimsEnum.E_menu_ManageSchoolEmployee],
       content:{
         header: {
-          title: this.translate.get('dashboard.schools.schoolEmployeeMangement'),
+          title: this.translate.get('schools.schoolEmployeeMangement'),
           bgColor:'#CD578A'
         },
 
@@ -283,17 +283,17 @@ export class HomeComponent implements OnInit {
       claims:[ClaimsEnum.E_Menu_ManageSchool],
       content:{
         header: {
-          title:this.translate.get('dashboard.schools.schoolMangement'),
+          title:this.translate.get('schools.schoolMangement'),
           bgColor:'#F8C073'
         },
       },
       list: [
-        {label:this.translate.get('dashboard.schools.generalInfo'), icon:'assets/images/home/performance-managment/list.svg', url:`/school-management/school/${currentSchoolId}`,claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
+        {label:this.translate.get('schools.generalInfo'), icon:'assets/images/home/performance-managment/list.svg', url:`/school-management/school/${currentSchoolId}`,claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
         {label:this.translate.get('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/school-management/school/${currentSchoolId}/subjects`,claims:[ClaimsEnum.E_MenuItem_Subjects]},
         {label:this.translate.get('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/performance-managment/list.svg', url:`/school-management/school/${currentSchoolId}/annual-holidays`,claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
-        {label:this.translate.get('dashboard.schools.editableList'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/school-management/school/${currentSchoolId}/edit-list`, claims:[ClaimsEnum.SE_MenuItem_EditList]},
-        {label:this.translate.get('dashboard.Requests.myRequests'), icon:'assets/images/home/educational-setting/micro.svg',url:'/school-management/requests-list/my-requests', queryParams:{isMyRequests:true} ,claims:[ClaimsEnum.E_MenuItem_Requests]},
-        {label:this.translate.get('dashboard.Requests.requestsToMe'), icon:'assets/images/home/educational-setting/micro.svg',url:'/school-management/requests-list', claims:[ClaimsEnum.E_MenuItem_Requests]},
+        {label:this.translate.get('schools.editableList'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/school-management/school/${currentSchoolId}/edit-list`, claims:[ClaimsEnum.SE_MenuItem_EditList]},
+        {label:this.translate.get('Requests.myRequests'), icon:'assets/images/home/educational-setting/micro.svg',url:'/school-management/requests-list/my-requests', queryParams:{isMyRequests:true} ,claims:[ClaimsEnum.E_MenuItem_Requests]},
+        {label:this.translate.get('Requests.requestsToMe'), icon:'assets/images/home/educational-setting/micro.svg',url:'/school-management/requests-list', claims:[ClaimsEnum.E_MenuItem_Requests]},
 
       ]
 

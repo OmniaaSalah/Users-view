@@ -3,32 +3,32 @@
     <!-- NOTE :---------------- Case 1 شهاده الدرجات-->
     <div class="row" *ngSwitchCase="requestTypeEnum.GradesCertificateRequest">
         <div class="col-4 d-flex align-items-center gap-5">
-            <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
-            <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
+            <p class="color-gray-300 fs-4">{{'issue of certificate.type of certificate' | translate}}</p>
+            <h4 class="color-primary">{{'Requests.' + requestDetails.requestType | translate}}</h4>
         </div>
 
         <div class="col-4 d-flex align-items-center gap-5">
-            <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
+            <p class="color-gray-300 fs-4">{{'students.academic year' | translate}}</p>
             <h4 class="color-primary">{{requestDetails.schoolYear  |currentLang}}</h4>
         </div>
 
         <div class="col-4 d-flex align-items-center gap-5" *ngIf="requestDetails?.gradeCertificateType">
-            <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.degreesCertificateType' | translate}}</p>
-            <h4 class="color-primary">{{'dashboard.issue of certificate.' + requestDetails.gradeCertificateType | translate}}</h4>
+            <p class="color-gray-300 fs-4">{{'issue of certificate.degreesCertificateType' | translate}}</p>
+            <h4 class="color-primary">{{'issue of certificate.' + requestDetails.gradeCertificateType | translate}}</h4>
         </div>
     </div>
 
     <!-- NOTE :---------------- Case 2 شهاده التسلسل الدراسى  -->
     <div class="row" *ngSwitchCase="requestTypeEnum.AcademicSequenceCertificateRequest">
         <div class="col-4 d-flex align-items-center gap-5 mb-5">
-            <p class=" fs-4 fw-bold">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
-            <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
+            <p class=" fs-4 fw-bold">{{'issue of certificate.type of certificate' | translate}}</p>
+            <h4 class="color-primary">{{'Requests.' + requestDetails.requestType | translate}}</h4>
         </div>
 
         <div class="row g-4" *ngFor="let item of requestDetails?.schoolYears" >
           <ng-container *ngIf="!item?.newSequence">
             <div class="col-4 d-flex align-items-center gap-5">
-                <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
+                <p class="color-gray-300 fs-4">{{'students.academic year' | translate}}</p>
                 <h4 class="color-primary">{{item.schoolYear?.name  |currentLang}}</h4>
             </div>
             <div class="col-4 d-flex align-items-center gap-5">
@@ -49,21 +49,21 @@
             <div class="row gx-5 mb-4 custom-form" *ngFor="let student of getStudentNewAccademicArrCtr().controls; let ctrIndex=index" [formGroupName]="ctrIndex">
 
                 <div class=" col-md-3" *ngIf="oldSchoolYears$ |async as schoolYears">
-                    <label class="label">{{'dashboard.students.academic year'|translate}}</label>
-                    <p-dropdown [options]="schoolYears" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" ></p-dropdown>
+                    <label class="label">{{'students.academic year'|translate}}</label>
+                    <p-dropdown [options]="schoolYears" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'SchoolYear.Select School Year' | translate}}" ></p-dropdown>
                 </div>
 
 
                 <div class="col-md-4" *ngIf="OldSchools$ |async as allSchools">
-                    <label class="label">{{'dashboard.students.School Name'| translate}}</label>
-                    <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}"
+                    <label class="label">{{'students.School Name'| translate}}</label>
+                    <p-dropdown placeholder="{{'students.School Name'| translate}}"
                         [options]="allSchools" formControlName="schoolId"
                         optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
                 </div>
 
                 <div class="col-md-3" *ngIf="allGrades$ |async as allGrades">
-                    <label class="label">{{'dashboard.students.Class'|translate}}</label>
-                    <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}"
+                    <label class="label">{{'students.Class'|translate}}</label>
+                    <p-dropdown placeholder="{{'students.Class'|translate}}"
                     [options]="allGrades"
                         formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
                         optionValue="id"></p-dropdown>
@@ -86,8 +86,8 @@
     <div *ngSwitchDefault>
         <div class="row">
             <div class="col-4 d-flex align-items-center gap-5">
-                <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
-                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
+                <p class="color-gray-300 fs-4">{{'issue of certificate.type of certificate' | translate}}</p>
+                <h4 class="color-primary">{{'Requests.' + requestDetails.requestType | translate}}</h4>
             </div>
             <div class="col-4 d-flex align-items-center gap-5" *ngIf="requestDetails.cause">
                 <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
@@ -95,7 +95,7 @@
             </div>
 
             <div class="col-md-12 d-flex align-items-center mt-5 gap-5">
-                <span class="flex-shrink-0">{{'dashboard.Requests.requestAttachments' | translate}} </span>
+                <span class="flex-shrink-0">{{'Requests.requestAttachments' | translate}} </span>
                 <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
             </div>
         </div>
@@ -106,7 +106,7 @@
 
 <ng-template #attachments let-attachments let-showText="showText">
   <div class=" d-flex align-items-center flex-grow-1 mt-5 gap-5" *ngIf="attachments?.length">
-      <span class="flex-shrink-0" *ngIf="showText">{{'dashboard.Requests.requestAttachments' | translate}} </span>
+      <span class="flex-shrink-0" *ngIf="showText">{{'Requests.requestAttachments' | translate}} </span>
       <div  class="col-md-3" *ngFor="let item of attachments">
           <app-file [file]="item"></app-file>
       </div>

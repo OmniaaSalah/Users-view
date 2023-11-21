@@ -18,14 +18,14 @@
 
                     <div class="row gx-5 form-set">
                         <div class="col-4">
-                            <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
+                            <label class="label">{{'students.schoolName'| translate}}</label>
                             <p-multiSelect [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(schools$| async)" display="chip" [(ngModel)]="filtration.schoolIds"   optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
                         </div>
 
                         <div class="col-4">
-                            <label class="label" for="curriculum">{{'dashboard.SchoolYear.Subject'|translate}}  </label>
+                            <label class="label" for="curriculum">{{'SchoolYear.Subject'|translate}}  </label>
 
-                            <p-multiSelect [options]="(subjects$| async)" display="chip" [(ngModel)]="filtration.subjectIds"   optionValue="id" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
+                            <p-multiSelect [options]="(subjects$| async)" display="chip" [(ngModel)]="filtration.subjectIds"   optionValue="id" placeholder="{{'SchoolYear.Select Subject'|translate}}" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
 
                         </div>
 

@@ -3,7 +3,7 @@
       <div class="StudentGroup position-relative" *ngIf="(isSchoolAllowToTransferGroup$ | async)">
           <div class=" submit-btn d-flex justify-content-end position-absolute bottom-100">
               <button class="btn btn-primary btn--md" routerLink="/school-management/school/{{schoolId}}/transfer-students">
-                  <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
+                  <span>{{'students.TransferStudentGroup'| translate}}</span>
               </button>
           </div>
       </div>
@@ -15,7 +15,7 @@
 
     <div class="search-box bg-gray-30 mb-5 border-dark radius-15">
         <div class="d-flex justify-content-between p-5 " role="button" (click)="isCollapsed = !isCollapsed">
-            <span class="fs-2 color-primary">{{'dashboard.students.searchCriteria' |translate}}</span>
+            <span class="fs-2 color-primary">{{'students.searchCriteria' |translate}}</span>
             <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
         </div>
 
@@ -23,7 +23,7 @@
 
            <div class="row g-5 form-set" >
                 <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
-                    <label class="label">{{'dashboard.schools.SchoolCurriculum'| translate}}</label>
+                    <label class="label">{{'schools.SchoolCurriculum'| translate}}</label>
                     <p-multiSelect [lazy]="true" [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" (ngModelChange)="onCurriculumSelected($event)" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
                 </div>
                 <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
@@ -33,57 +33,57 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'shared.grade'| translate}}</label>
-                     <p-multiSelect [lazy]="true" [options]="(AllGrades$ | async)" display="chip" (ngModelChange)="onGradeSelected($event)"  (onClear)="isGradeSelected=false" [(ngModel)]="filtration.GradeId"   optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseClasse' |translate}}"></p-multiSelect>
+                     <p-multiSelect [lazy]="true" [options]="(AllGrades$ | async)" display="chip" (ngModelChange)="onGradeSelected($event)"  (onClear)="isGradeSelected=false" [(ngModel)]="filtration.GradeId"   optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'students.chooseClasse' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'shared.division'| translate}}</label>
-                    <p-multiSelect [lazy]="true" [disabled]="!isSchoolSelected"    [options]="(schoolDivisions$ | async)" display="chip"   [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"    placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-multiSelect>
+                    <p-multiSelect [lazy]="true" [disabled]="!isSchoolSelected"    [options]="(schoolDivisions$ | async)" display="chip"   [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"    placeholder="{{'students.choosedivision' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'shared.track'| translate}}</label>
-                    <p-multiSelect [lazy]="true" [options]="(gradeTracks$ | async)?.data"  [disabled]="(!this.isGradeSelected || !this.isSchoolSelected)"  display="chip"    [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooserack' |translate}}"></p-multiSelect>
+                    <p-multiSelect [lazy]="true" [options]="(gradeTracks$ | async)?.data"  [disabled]="(!this.isGradeSelected || !this.isSchoolSelected)"  display="chip"    [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'students.chooserack' |translate}}"></p-multiSelect>
                 </div>
 
                 <div class="col ">
-                  <label class="label">{{'dashboard.schools.studentId'|translate}}</label>
-                  <input [(ngModel)]="filtration.StudentDaleel2Id"  type="text"  pInputText placeholder="{{'dashboard.schools.studentId'|translate}}" />
+                  <label class="label">{{'schools.studentId'|translate}}</label>
+                  <input [(ngModel)]="filtration.StudentDaleel2Id"  type="text"  pInputText placeholder="{{'schools.studentId'|translate}}" />
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                    <p-multiSelect [lazy]="true" [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
+                    <label class="label">{{'students.nationalities'| translate}}</label>
+                    <p-multiSelect [lazy]="true" [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip" [(ngModel)]="filtration.NationalityId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'students.chooseNationalitie' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.StudentCategory'| translate}}</label>
-                    <p-multiSelect  [lazy]="true"  [options]="studentCategoryList"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.StudentCategory" optionValue="value" optionLabel="name" placeholder="{{'dashboard.students.SelectStudentCategory' |translate}}"></p-multiSelect>
+                    <label class="label">{{'students.StudentCategory'| translate}}</label>
+                    <p-multiSelect  [lazy]="true"  [options]="studentCategoryList"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.StudentCategory" optionValue="value" optionLabel="name" placeholder="{{'students.SelectStudentCategory' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4" *ngIf="filtration.StudentCategory==statusEnum.IsSpecialAbilities">
                     <label class="label">{{'shared.classroom'| translate}}</label>
-                    <p-dropdown [lazy]="true" [options]="specialClassOptions"  [showClear]="true"  ngModel (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
+                    <p-dropdown [lazy]="true" [options]="specialClassOptions"  [showClear]="true"  ngModel (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'schools.SelectClassType' |translate}}"></p-dropdown>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.finalScore'| translate}}</label>
+                    <label class="label">{{'students.finalScore'| translate}}</label>
                     <p-dropdown [lazy]="true" [options]="passedOptions" [showClear]="true"  [(ngModel)]="filtration.StudentDegreeResultFilter" optionValue="value" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
                 </div>
 
                 <!-- <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.forbiddenFromWithdrow'| translate}}</label>
+                    <label class="label">{{'students.forbiddenFromWithdrow'| translate}}</label>
                     <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsSpecialAbilities" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.forbiddenFromCertificate'| translate}}</label>
+                    <label class="label">{{'students.forbiddenFromCertificate'| translate}}</label>
                     <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsSpecialAbilities" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div> -->
 
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.talent'| translate}}</label>
-                    <p-multiSelect [lazy]="true" [options]="(talents$|async)"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.talentId"    optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"    placeholder="{{'dashboard.students.chooseTalent' |translate}}"></p-multiSelect>
+                    <label class="label">{{'students.talent'| translate}}</label>
+                    <p-multiSelect [lazy]="true" [options]="(talents$|async)"     [ngModelOptions]="{standalone: true}"  display="chip"     [(ngModel)]="filtration.talentId"    optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"    placeholder="{{'students.chooseTalent' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
-                    <label class="label"> {{'dashboard.addChild.gender' | translate}} </label>
-                    <p-dropdown [lazy]="true" [options]="genderList"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.gender"  [showClear]="true"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
+                    <label class="label"> {{'addChild.gender' | translate}} </label>
+                    <p-dropdown [lazy]="true" [options]="genderList"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.gender"  [showClear]="true"  optionLabel="name" optionValue="value" placeholder="{{'addChild.gender' | translate}}"></p-dropdown>
                 </div>
 
 
@@ -123,15 +123,15 @@
                         {{col.header}}
                     </th>
                     <th pSortableColumn="actions"></th> -->
-                    <th pSortableColumn="Id"><p-sortIcon field="Id"></p-sortIcon>{{'dashboard.schools.studentId'|translate}}</th>
-                    <th style="min-width: 22rem;" pSortableColumn="{{lang=='ar' ? 'ArabicName' : 'EnglishName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicName' : 'EnglishName'}}"></p-sortIcon>{{'dashboard.schools.student'|translate}} </th>
-                    <th style="min-width: 16rem;" pSortableColumn="{{lang=='ar' ? 'ArabicSurName' : 'EnglishSurName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicSurName' : 'EnglishSurName'}}"></p-sortIcon>{{'dashboard.students.studentNickname'|translate}}</th>
-                    <th pSortableColumn="StudentMinisterialNumber"><p-sortIcon field="StudentMinisterialNumber"></p-sortIcon>{{ ('dashboard.parents.ministerialNumber' |translate)}}</th>
-                    <th pSortableColumn="StudentDaleelNumber"><p-sortIcon field="StudentDaleelNumber"></p-sortIcon>{{'dashboard.students.daleelNumber1'|translate}}</th>
+                    <th pSortableColumn="Id"><p-sortIcon field="Id"></p-sortIcon>{{'schools.studentId'|translate}}</th>
+                    <th style="min-width: 22rem;" pSortableColumn="{{lang=='ar' ? 'ArabicName' : 'EnglishName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicName' : 'EnglishName'}}"></p-sortIcon>{{'schools.student'|translate}} </th>
+                    <th style="min-width: 16rem;" pSortableColumn="{{lang=='ar' ? 'ArabicSurName' : 'EnglishSurName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicSurName' : 'EnglishSurName'}}"></p-sortIcon>{{'students.studentNickname'|translate}}</th>
+                    <th pSortableColumn="StudentMinisterialNumber"><p-sortIcon field="StudentMinisterialNumber"></p-sortIcon>{{ ('parents.ministerialNumber' |translate)}}</th>
+                    <th pSortableColumn="StudentDaleelNumber"><p-sortIcon field="StudentDaleelNumber"></p-sortIcon>{{'students.daleelNumber1'|translate}}</th>
                     <th style="min-width: 15rem;" pSortableColumn="StudentEmiratesNumber"><p-sortIcon field="StudentEmiratesNumber"></p-sortIcon>{{'shared.Identity Number'|translate}} </th>
                     <th pSortableColumn="{{lang=='ar' ? 'ArabicNationalityName' : 'EnglishNationalityName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicNationalityName' : 'EnglishNationalityName'}}"></p-sortIcon>{{'shared.nationality'|translate}} </th>
                     <th style="min-width: 22rem;" pSortableColumn="{{lang=='ar' ? 'ArabicSchoolName' : 'EnglishSchoolName'}}" *ngIf="currentUserScope!=userScope.Employee"><p-sortIcon field="{{lang=='ar' ? 'ArabicSchoolName' : 'EnglishSchoolName'}}"></p-sortIcon>{{'School'|translate}} </th>
-                    <th pSortableColumn="{{lang=='ar' ? 'ArabicGuardianName' : 'EnglishGuardianName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicGuardianName' : 'EnglishGuardianName'}}"></p-sortIcon>{{'dashboard.students.parent'|translate}}  </th>
+                    <th pSortableColumn="{{lang=='ar' ? 'ArabicGuardianName' : 'EnglishGuardianName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicGuardianName' : 'EnglishGuardianName'}}"></p-sortIcon>{{'students.parent'|translate}}  </th>
                     <th pSortableColumn="{{lang=='ar' ? 'ArabicGradeName' : 'EnglishGradeName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicGradeName' : 'EnglishGradeName'}}"></p-sortIcon>{{'shared.grade'|translate}}</th>
                     <th pSortableColumn="{{lang=='ar' ? 'ArabicDivisionName' : 'EnglishDivisionName'}}"><p-sortIcon field="{{lang=='ar' ? 'ArabicDivisionName' : 'EnglishDivisionName'}}"></p-sortIcon>{{'shared.division'|translate}}</th>
                     <!-- <th class="actions"></th> -->

@@ -3,14 +3,14 @@
     <div class="radius-15 border p-5 mb-5 bg-white">
         <div class="row gx-5 form-set  custom-form  ">
             <div class="col-md-4">
-                <label class="label" for="day">{{'dashboard.addChild.Identification Number' | translate}} <span class="star">*</span></label>
+                <label class="label" for="day">{{'addChild.Identification Number' | translate}} <span class="star">*</span></label>
                 <!-- <p-inputNumber
                 name="identity"
                 [ngClass]="{'ng-invalid ng-dirty': IdentityNumCtr.errors && IdentityNumCtr.errors?.['pattern']}"
                 formControlName="identityNumber"
                 [useGrouping]="false" [maxlength]="15" [minlength]="15"
                 (onInput)="IdentityNumCtr.setValue($event.value)"
-                required placeholder="{{'dashboard.addChild.Identification Number' | translate}}"></p-inputNumber> -->
+                required placeholder="{{'addChild.Identification Number' | translate}}"></p-inputNumber> -->
 
                 <input
                 [LangRestrict]="'numb'"
@@ -18,17 +18,17 @@
                 [ngClass]="{'ng-invalid ng-dirty': IdentityNumCtr.errors && IdentityNumCtr.errors?.['pattern']}"
                 id="day"
                 pInputText
-                placeholder="{{'dashboard.addChild.Identification Number' | translate}}" />
+                placeholder="{{'addChild.Identification Number' | translate}}" />
                 <div *ngIf="IdentityNumCtr.errors?.['pattern']" class="mt-2 color-red-500 fs-4"> {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}</div>
             </div>
 
             <div class="col-md-4">
-                <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}} <span class="star">*</span></label>
-                <p-dropdown  [options]="relativeityTypes$ |async" formControlName="RelativeRelationId" optionLabel="{{lang == 'ar'?'arabicName' : 'englishName'}}" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+                <label class="label" for="day">{{'addChild.Relevance Type' | translate}} <span class="star">*</span></label>
+                <p-dropdown  [options]="relativeityTypes$ |async" formControlName="RelativeRelationId" optionLabel="{{lang == 'ar'?'arabicName' : 'englishName'}}" optionValue="id" placeholder="{{'addChild.Relevance Type' | translate}}"></p-dropdown>
             </div>
 
             <!-- <div class="col-md-4">
-                <label class="label" for="day">{{'dashboard.addChild.ID expiration date' | translate}} <span class="star">*</span></label>
+                <label class="label" for="day">{{'addChild.ID expiration date' | translate}} <span class="star">*</span></label>
                 <p-calendar formControlName="EmiratesIdExpirationDate" [minDate]="minimumDate" [showIcon]="true" inputId="icon" appValidation
                 placeholder="يوم / شهر / سنه" [readonlyInput]="true" >
                 </p-calendar>
@@ -39,19 +39,19 @@
     <!-----------------------------add row------------------------------->
     <hr class="my-5">
 
-    <h3 class="mb-5 fw-bold">{{'dashboard.addChild.required attachments' | translate}}</h3>
+    <h3 class="mb-5 fw-bold">{{'addChild.required attachments' | translate}}</h3>
 
     <div class="row gx-5 form-set mt-5">
       
            
             <div class="col-md-6 gap-3">
-                    <P>{{'dashboard.addChild.identityPhoto' | translate}} <span class="star">*</span></P>
+                    <P>{{'addChild.identityPhoto' | translate}} <span class="star">*</span></P>
                     <app-file-upload
                     view="full"
                     (onFileUpload)="setAttachment(identityAttach,$event)"></app-file-upload>
             </div>
             <div class="col-md-6 ">
-                    <P>{{'dashboard.addChild.personalPicture' | translate}}</P>
+                    <P>{{'addChild.personalPicture' | translate}}</P>
                     <app-file-upload
                     view="full"
                     (onFileUpload)="setAttachment(personalPhoto,$event)" ></app-file-upload>
@@ -62,7 +62,7 @@
     <div class="row gx-5 form-set mt-5 subjects">
           
             <div class="col-md-6 gap-3">
-                    <P>{{'dashboard.addChild.birthCertificate' | translate}} <span class="star">*</span></P>
+                    <P>{{'addChild.birthCertificate' | translate}} <span class="star">*</span></P>
                     <app-file-upload  view="full" (onFileUpload)="setAttachment(birthDate,$event)"></app-file-upload>
             </div>
             <div class="col-md-6 ">
@@ -76,7 +76,7 @@
         <div class="Btn-group d-flex align-items-center justify-content-end gap-3">
             <button class="btn btn-primary"
             [disabled]="!newChildForm.valid|| !birthDate.url.length ||  !identityAttach.url.length || onSubmit">
-                {{'dashboard.issue of certificate.Save' | translate}}
+                {{'issue of certificate.Save' | translate}}
                 <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
             </button>
             <button  ><a routerLink="/" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>

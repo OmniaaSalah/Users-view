@@ -16,7 +16,7 @@ export class MandatorySurveyComponent implements OnInit {
   faListDots=faListDots;
 componentHeaderData: IHeader = {
   breadCrump: [
-    { label: this.translate.instant('dashboard.surveys.Mandatory Surveies') ,routerLink:'/parent/mandatory-survey',routerLinkActiveOptions:{exact: true}},
+    { label: this.translate.instant('surveys.Mandatory Surveies') ,routerLink:'/parent/mandatory-survey',routerLinkActiveOptions:{exact: true}},
   ]
 }
   constructor(private userService:UserService,private router: Router,private translate:TranslateService,private headerService:HeaderService) {

@@ -48,7 +48,7 @@ export class SurveysListComponent implements OnInit {
   componentHeaderData: IHeader = {
 
       'breadCrump': [
-        { label: this.translate.instant('dashboard.surveys.surveyList'),routerLink:'/educational-settings/surveys' }],
+        { label: this.translate.instant('surveys.surveyList'),routerLink:'/educational-settings/surveys' }],
 
   };
   constructor(
@@ -73,7 +73,7 @@ export class SurveysListComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.surveys.surveyList'), routerLink: '/educational-settings/surveys', routerLinkActiveOptions: { exact: true } }],
+          { label: this.translate.instant('surveys.surveyList'), routerLink: '/educational-settings/surveys', routerLinkActiveOptions: { exact: true } }],
       }
     );
     localStorage.removeItem('addedSurveyStatus');
@@ -133,7 +133,7 @@ export class SurveysListComponent implements OnInit {
     let filter = {...this.filtration, PageSize:this.surveyList.totalAllData,Page:1}
     this.Surveyservice.surveyToExport(filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.surveys.surveyList'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('surveys.surveyList'))
     })
   }
   clearFilter(){

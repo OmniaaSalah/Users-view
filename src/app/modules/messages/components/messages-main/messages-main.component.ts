@@ -58,8 +58,8 @@ export class MessagesMainComponent implements OnInit {
 
 
   btnGroupItems=[
-    {label:this.translate.instant('dashboard.Messages.answered'), active: false, value:1},
-    {label:this.translate.instant('dashboard.Messages.pending'), active: false, value:0},
+    {label:this.translate.instant('Messages.answered'), active: false, value:1},
+    {label:this.translate.instant('Messages.pending'), active: false, value:0},
   ]
 
 
@@ -69,10 +69,10 @@ export class MessagesMainComponent implements OnInit {
   filterationForm: FormGroup
   componentHeaderData: IHeader={
 		breadCrump: [
-			{label: this.translate.instant('dashboard.Messages.messages'), routerLink:'/messages/messages' }
+			{label: this.translate.instant('Messages.messages'), routerLink:'/messages/messages' }
 
 		],
-		mainTitle:{ main:this.translate.instant('dashboard.Messages.messages'),sub:this.messages.total},
+		mainTitle:{ main:this.translate.instant('Messages.messages'),sub:this.messages.total},
 	}
 
   constructor(

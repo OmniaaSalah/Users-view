@@ -16,7 +16,7 @@ import { UserScope } from '../../enums/user/user.enum';
 import { ParentService } from 'src/app/modules/parants/services/parent.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ToastrService } from 'ngx-toastr';
-import { RegistrationStatus } from '../../enums/status/status.enum';
+import { RegistraterRequestStatus, StudentStatus } from '../../enums/status/status.enum';
 import { CustomFile } from '../file-upload/file-upload.component';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SystemRequestService } from 'src/app/modules/request-list/services/system-request.service';
@@ -42,7 +42,7 @@ export class RegisterRequestComponent implements OnInit {
   lang = this.translationService.lang
   scope = inject(UserService).getScope()
   get ScopeEnum(){ return UserScope}
-  get registrtionStatusEnum () {return RegistrationStatus}
+  get registrtionStatusEnum () {return StudentStatus}
   get currentUserScope (){return this.userService.getScope()}
 
   parentId = +this.route.snapshot.paramMap.get('parentId')
@@ -50,16 +50,18 @@ export class RegisterRequestComponent implements OnInit {
   studentId =  this.route.snapshot.paramMap.get('studentId')
   childRegistrationStatus = this.route.snapshot.queryParamMap.get('status')
 
-  // NOTE:- incase the Request is returned Form Spea
-  requestId = this.route.snapshot.queryParamMap.get('requestId')
-  returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
-  reqInstantId = this.route.snapshot.queryParamMap.get('instantId')
-  actions:WorkflowOptions[]
-  //-------------------------------------
-
   componentHeaderData: IHeader
 
+  registrationStatusOptions=[
+    {name:this.translate.instant('shared.allStatus.NewRegistered'), value: RegistraterRequestStatus.NewRegistered},
+    {name:this.translate.instant('shared.allStatus.Withdrawal'), value: RegistraterRequestStatus.Withdrawal},
+    {name:this.translate.instant('shared.allStatus.TransferInTheEmirategovernmental'), value: RegistraterRequestStatus.TransferInTheEmirategovernmental},
+    {name:this.translate.instant('shared.allStatus.TransferInTheEmirateprivate'), value: RegistraterRequestStatus.TransferInTheEmirateprivate},
+    {name:this.translate.instant('shared.allStatus.TransferOutsideTheEmirategovernmental'), value: RegistraterRequestStatus.TransferOutsideTheEmirategovernmental},
+    {name:this.translate.instant('shared.allStatus.TransferOutsideTheEmirateprivate'), value: RegistraterRequestStatus.TransferOutsideTheEmirateprivate},
+    {name:this.translate.instant('shared.allStatus.TransferOutOfTheCountry'), value: RegistraterRequestStatus.TransferOutOfTheCountry},
 
+  ]
 
   booleanOptions = this.sharedService.booleanOptions
   disabilitiesOptions = [
@@ -112,7 +114,6 @@ export class RegisterRequestComponent implements OnInit {
     private _parent:ParentService,
     private userService:UserService,
     private toaster:ToastrService,
-    private requestsService:SystemRequestService,
     private router:Router,
     private settingServcice:SettingsService,
     private studentService:StudentsService
@@ -122,21 +123,17 @@ export class RegisterRequestComponent implements OnInit {
 
     this.prepareHeaderData()
     this.getStudentInfo()
-
-    // this.getRegistrationRequiresFiles()
-
   }
 
 
 
 
   getStudentInfo(){
-    if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
+    if(this.childRegistrationStatus==StudentStatus.Withdrawal){
       this.studentService.getStudent(this.route.snapshot.params['childId'])
       .subscribe(res=>{
         this.childData = res.result
         this.getGrades()
-        // this.initRegisterationForm(res?.result)
       })
 
     }else{
@@ -144,22 +141,20 @@ export class RegisterRequestComponent implements OnInit {
       .subscribe(res=>{
         this.childData = res
         this.getGrades()
-        // this.initRegisterationForm(res)
       })
     }
   }
 
 initRegisterationForm(child){
-  console.log(child);
 
   this.registerReqForm = this.fb.group({
     id:[],
     childId:[child?.id],
-    studentId:[this.childRegistrationStatus==RegistrationStatus.Withdrawal ? child?.id : null],
+    studentId:[this.childRegistrationStatus==StudentStatus.Withdrawal ? child?.id : null],
     guardianId:[this.parentId],
     schoolId:[null,Validators.required],
     gradeId: [null,Validators.required],
-    studentStatus:[this.childRegistrationStatus==RegistrationStatus.Withdrawal?RegistrationStatus.Withdrawal : RegistrationStatus.Unregistered ],
+    studentStatus:[this.childRegistrationStatus==StudentStatus.Withdrawal?StudentStatus.Withdrawal : StudentStatus.Unregistered ],
     isChildOfAMartyr:[null,Validators.required],
     isSpecialAbilities:[null,Validators.required],
     isSpecialClass:[null],
@@ -167,6 +162,7 @@ initRegisterationForm(child){
     // isSpecialEducation:[null,Validators.required],
     specialEducationId:[null],
     attachments:[[]],
+    registrationStatus:[null,Validators.required]
   })
 
 
@@ -175,7 +171,7 @@ initRegisterationForm(child){
     this.registerReqForm.controls['guardianId'].setValue(this.parentId)
   }
 
-  this.childRegistrationStatus==RegistrationStatus.Withdrawal && this.setSelectedGradeForWithdrawalStudent()
+  this.childRegistrationStatus==StudentStatus.Withdrawal && this.setSelectedGradeForWithdrawalStudent()
 
   this.initValidation()
 
@@ -184,7 +180,7 @@ initRegisterationForm(child){
   initValidation(){
     let ctrs = ['isChildOfAMartyr','isSpecialAbilities']
     ctrs.forEach(el => {
-      if(this.childRegistrationStatus==RegistrationStatus.Withdrawal || this.scope ==this.ScopeEnum.SPEA) {
+      if(this.childRegistrationStatus==StudentStatus.Withdrawal || this.scope ==this.ScopeEnum.SPEA) {
         let ctr = this.registerReqForm.controls[el] as FormControl
         ctr.removeValidators(Validators.required)
         ctr.updateValueAndValidity()
@@ -221,32 +217,10 @@ initRegisterationForm(child){
     this.settingServcice.getRegisterRequestRequiredAttach(gradeId).subscribe(res=>{
       this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
       this.requiredFiles.files = this.requiredFiles.files.map(el =>({...el, uploadedFiles:[]}))
-      if(this.requestId) this.setUploadedFiles()
     },err=>{
       this.requiredFiles = {filesCount: 0, isRequired: false, files:[]}
     })
   }
-
-  getRequestOptions(){
-    this.requestsService.getRequestOptions(this.reqInstantId).subscribe(res=>{
-      this.actions = res?.options
-    })
-  }
-
-  patchReturnedRequestData(reqData){
-    if(reqData?.isSpecialAbilities) {
-      reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
-    }
-
-    this.onGradeSelected(reqData.grade?.id)
-    this.registerReqForm.controls['gradeId'].setValue(reqData.grade?.id)
-    this.onSelectSchool(reqData.school?.id)
-    this.attachments = reqData?.attachments || []
-    // this.setUploadedFiles()
-    this.registerReqForm.patchValue(reqData)
-
-  }
-
 
   onClassTypeChange(value:ClassType){
     if(value== 'FusionClass') {
@@ -274,13 +248,7 @@ initRegisterationForm(child){
   getGrades(curriculumsId=''){
     this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
     this.AllGrades=res || []
-
     if(!this.registerReqForm) this.initRegisterationForm(this.childData)
-
-      if(this.requestId) {
-        this.patchReturnedRequestData(this.returnedReqData)
-        this.getRequestOptions()
-      }
     })
   }
 
@@ -303,7 +271,7 @@ initRegisterationForm(child){
       // else if(FoundationStage.includes(this.selectedGrade?.code)) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
       // else this.getRegistrationRequiresFiles()
     }
-    if(this.childRegistrationStatus!=RegistrationStatus.Withdrawal) this.selectedSchoolId =null
+    if(this.childRegistrationStatus!=StudentStatus.Withdrawal) this.selectedSchoolId =null
 
     this.getSchools()
   }
@@ -348,16 +316,6 @@ initRegisterationForm(child){
     // if(uploadedFiles.length) this.attachments[index]= {Titel:file.name, ...uploadedFiles[0]}
    }
 
-   setUploadedFiles(){
-
-    this.attachments.forEach((file:any , i) =>{
-      let index = this.requiredFiles.files.findIndex(el => el.ruleFileId == file.ruleFileId)
-
-      this.requiredFiles?.files[index]?.uploadedFiles.push(this.attachments[i])
-    })
-    this.requiredFiles.files =[...this.requiredFiles.files]
-   }
-
 
    onFileDelete(files, fileIndex, uploaderIndex){
     this.requiredFiles.files[uploaderIndex].uploadedFiles.splice(fileIndex,1)
@@ -397,35 +355,6 @@ initRegisterationForm(child){
       this.onSubmit=false
     })
 
-  }
-
-  updateRegistrationReq(optionId){
-    this.onSubmit=true
-    this.registerReqForm.controls['attachments'].setValue(this.attachments)
-
-    this._parent.updateRegisterRequest(this.registerReqForm.value)
-    .pipe(
-      switchMap(()=>{
-        let reqActionsForm={
-          comments:'',
-          optionId: optionId,
-          rejectionReasonId: null,
-          rejectionReason:'',
-          attachments:[]
-        }
-        return this.requestsService.changeRequestState(reqActionsForm)
-      })
-    )
-    .subscribe(res=>{
-      this.toaster.success(this.translate.instant('toasterMessage.requestResend'));
-      this.onSubmit=false
-      localStorage.removeItem('returnedRequest')
-      this.router.navigate(['/requests-list/details', this.reqInstantId])
-    },err=>{
-      this.toaster.error(this.translate.instant('toasterMessage.error'))
-      this.onSubmit=false
-        // this.router.navigate(['/'])
-    })
   }
 
 
@@ -480,21 +409,21 @@ initRegisterationForm(child){
     if(this.currentUserScope== this.ScopeEnum.Guardian){
       this.componentHeaderData = {
         breadCrump: [
-          { label: this.translate.instant('dashboard.parents.sendRegisterReq') ,routerLink:`/parent/child/${this.childId}/register-request`,},
+          { label: this.translate.instant('parents.sendRegisterReq') ,routerLink:`/parent/child/${this.childId}/register-request`,},
         ],
-        mainTitle: { main: this.translate.instant('dashboard.parents.sendRegisterReq') }
+        mainTitle: { main: this.translate.instant('parents.sendRegisterReq') }
       }
 
     }else{
 
       this.componentHeaderData={
         breadCrump: [
-          { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'//schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-          {label: this.translate.instant('dashboard.students.registerChildByCommission'), routerLink: `//schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}/register`}
+          { label: this.translate.instant('parents.parents') ,routerLink:'//schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('parents.childrenList') ,routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+          {label: this.translate.instant('students.registerChildByCommission'), routerLink: `//schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}/register`}
         ],
         mainTitle: {
-          main: this.translate.instant('dashboard.students.registerChildByCommission')
+          main: this.translate.instant('students.registerChildByCommission')
         }
       }
     };

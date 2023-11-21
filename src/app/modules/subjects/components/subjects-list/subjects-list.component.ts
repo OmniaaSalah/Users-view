@@ -65,7 +65,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     this.headerService.Header.next({
       breadCrump: [
         {
-          label: this.translate.instant('dashboard.Subjects.List Of Subjects'),
+          label: this.translate.instant('Subjects.List Of Subjects'),
           routerLink: '/educational-settings/subject/subjects-list',
         },
       ],
@@ -118,7 +118,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
         this.getAllSubjects();
         this.toastService.success(
           this.translate.instant(
-            'dashboard.Subjects.Subject deleted Successfully'
+            'Subjects.Subject deleted Successfully'
           )
         );
         // this.confirmModelService.confirmed$.next(null);
@@ -126,7 +126,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       (err) => {
         this.getAllSubjects();
         this.toastService.error(
-          this.translate.instant('dashboard.Subjects.error happened,try again')
+          this.translate.instant('Subjects.error happened,try again')
         );
         // this.confirmModelService.confirmed$.next(null);
       }
@@ -151,7 +151,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       this.exportService.exportFile(
         fileType,
         res,
-        this.translate.instant('dashboard.Subjects.List Of Subjects')
+        this.translate.instant('Subjects.List Of Subjects')
       );
     });
   }

@@ -10,7 +10,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { RegistrationStatus, StatusEnum, UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
+import { StudentStatus, StatusEnum, UserRequestsStatus, RegistraterRequestStatus } from 'src/app/shared/enums/status/status.enum';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
@@ -38,7 +38,7 @@ export class RequestdetailsComponent implements OnInit {
   get requestTypeEnum(){return requestTypeEnum}
   get certificateEnum() { return CertificatesEnum}
   get statusEnum(){return StatusEnum}
-  get registrationStatusEnum() { return RegistrationStatus}
+  get registrationStatusEnum() { return StudentStatus}
 
   get currentUserSchoolId() { return this. userService.getSchoolId()}
 
@@ -49,6 +49,16 @@ export class RequestdetailsComponent implements OnInit {
   rejectReasonModel
   addStudentTodivisionModal
 
+  registrationStatusOptions=[
+    {name:this.translate.instant('shared.allStatus.NewRegistered'), value: RegistraterRequestStatus.NewRegistered},
+    {name:this.translate.instant('shared.allStatus.Withdrawal'), value: RegistraterRequestStatus.Withdrawal},
+    {name:this.translate.instant('shared.allStatus.TransferInTheEmirategovernmental'), value: RegistraterRequestStatus.TransferInTheEmirategovernmental},
+    {name:this.translate.instant('shared.allStatus.TransferInTheEmirateprivate'), value: RegistraterRequestStatus.TransferInTheEmirateprivate},
+    {name:this.translate.instant('shared.allStatus.TransferOutsideTheEmirategovernmental'), value: RegistraterRequestStatus.TransferOutsideTheEmirategovernmental},
+    {name:this.translate.instant('shared.allStatus.TransferOutsideTheEmirateprivate'), value: RegistraterRequestStatus.TransferOutsideTheEmirateprivate},
+    {name:this.translate.instant('shared.allStatus.TransferOutOfTheCountry'), value: RegistraterRequestStatus.TransferOutOfTheCountry},
+
+  ]
 
   reqActionsForm={
     comments:'',
@@ -57,14 +67,15 @@ export class RequestdetailsComponent implements OnInit {
     rejectionReason:'', // فى حاله سبب الرفض يكون text
     attachments:[],
     divisionIdForRegistrationRequest:'', // لطلب التسجيل فقط
-    gradeId:''
+    gradeId:'',
+    registrationStatus:''
   }
 
   step=1
   componentHeaderData: IHeader={
 		breadCrump: [
-			{label: this.translate.instant('dashboard.myRequest.My requests'),routerLink:'/performance-managment/RequestList',routerLinkActiveOptions:{exact: true} },
-      // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/performance-managment/RequestList/Requestdetails',routerLinkActiveOptions:{exact: true}}
+			{label: this.translate.instant('myRequest.My requests'),routerLink:'/performance-managment/RequestList',routerLinkActiveOptions:{exact: true} },
+      // {label: this.translate.instant('myRequest.School enrollment application'),routerLink:'/performance-managment/RequestList/Requestdetails',routerLinkActiveOptions:{exact: true}}
 		],
 	}
 
@@ -121,6 +132,7 @@ export class RequestdetailsComponent implements OnInit {
     this.requestsService.getRequestDetails(this.requestInstance).subscribe(res=>{
       this.requestDetails =res.result
       this.reqActionsForm.gradeId = res.result?.grade?.id
+      this.reqActionsForm.registrationStatus = res.result?.registrationStatus
       this.checkDashboardHeader();
 
       this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, res?.result?.grade?.id).pipe(map((res:any) => res?.data ||[]));
@@ -284,8 +296,8 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
 
   reSendRegistrationReq(){
     // routerLink="{{'parent/child/'+child.id+'/register-request'}}" [queryParams]="{status:'Registered'}"
-    let childRegistartionStatus= this.requestDetails?.student?.status || RegistrationStatus.Unregistered;
-    let childId = childRegistartionStatus == RegistrationStatus.Withdrawal ? this.requestDetails?.student?.studentGuid : this.requestDetails?.student?.id
+    let childRegistartionStatus= this.requestDetails?.student?.status || StudentStatus.Unregistered;
+    let childId = childRegistartionStatus == StudentStatus.Withdrawal ? this.requestDetails?.student?.studentGuid : this.requestDetails?.student?.id
     this.saveReqData()
 
     this.router.navigate(['parent/child',childId,'register-request', 'correct', this.requestInstance])
@@ -302,7 +314,7 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
   saveReqData(){
     let reqData
 
-    if(!(this.requestDetails.student.status ==RegistrationStatus.Withdrawal)){
+    if(!(this.requestDetails.student.status ==StudentStatus.Withdrawal)){
 
       reqData = {
         id: this.requestDetails.requestNumber,
@@ -311,7 +323,7 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
         guardianId:this.requestDetails.guardian.id,
         school: this.requestDetails.school,
         grade: this.requestDetails.grade,
-        studentStatus: RegistrationStatus.Unregistered,
+        studentStatus: StudentStatus.Unregistered,
         isChildOfAMartyr:this.requestDetails.isChildOfAMartyr,
         isSpecialAbilities:this.requestDetails.isSpecialAbilities,
         isSpecialClass:this.requestDetails?.isSpecialClass,
@@ -334,7 +346,7 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
         guardianId:this.requestDetails.guardian.id,
         school:this.requestDetails.school,
         grade: this.requestDetails.grade,
-        studentStatus: RegistrationStatus.Withdrawal,
+        studentStatus: StudentStatus.Withdrawal,
         attachments: this.requestDetails.requestAttachments,
       }
     }
@@ -441,18 +453,18 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
 
   goToChildPage(student){
 
-    let id = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ?  student?.id : student?.studentGuid
+    let id = this.requestDetails?.student?.status ==StudentStatus.Unregistered ?  student?.id : student?.studentGuid
     let guardianId = this.requestDetails?.guardian?.id
 
     if(this.currentUserScope==this.userScopeEnum.SPEA){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/schools-and-students/all-parents/parent/${guardianId}/child/${id}` :  `${environment.clientUrl}/schools-and-students/students/student/${id}`;
+      let url = this.requestDetails?.student?.status ==StudentStatus.Unregistered ? `${environment.clientUrl}/schools-and-students/all-parents/parent/${guardianId}/child/${id}` :  `${environment.clientUrl}/schools-and-students/students/student/${id}`;
       window.open(url)
 
     }else if(this.currentUserScope==this.userScopeEnum.Employee){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/student-management/all-parents/parent/${guardianId}/child/${id}` : `${environment.clientUrl}/student-management/students/student/${id}`;
+      let url = this.requestDetails?.student?.status ==StudentStatus.Unregistered ? `${environment.clientUrl}/student-management/all-parents/parent/${guardianId}/child/${id}` : `${environment.clientUrl}/student-management/students/student/${id}`;
       window.open(url)
     } else if(this.currentUserScope==this.userScopeEnum.Guardian){
-      let url = this.requestDetails?.student?.status ==RegistrationStatus.Unregistered ? `${environment.clientUrl}/parent/${guardianId}/child/${id}` : `${environment.clientUrl}/parent/${guardianId}/student/${id}`;
+      let url = this.requestDetails?.student?.status ==StudentStatus.Unregistered ? `${environment.clientUrl}/parent/${guardianId}/child/${id}` : `${environment.clientUrl}/parent/${guardianId}/student/${id}`;
       window.open(url)
     }
   }
@@ -464,12 +476,12 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
      if (this.currentUserScope == UserScope.Employee) {
        this.componentHeaderData.breadCrump = [
          {
-           label: this.translate.instant('dashboard.Requests.RequestList'),
+           label: this.translate.instant('Requests.RequestList'),
            routerLink: '/performance-managment/RequestList',
            routerLinkActiveOptions: { exact: true },
          },
          {
-           label: this.translate.instant('dashboard.myRequest.Order details'),
+           label: this.translate.instant('myRequest.Order details'),
            routerLink: `/performance-managment/RequestList/details/${this.requestInstance}`,
          },
        ];
@@ -477,28 +489,28 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
      } else if (this.currentUserScope == UserScope.SPEA) {
        this.componentHeaderData.breadCrump = [
          {
-           label: this.translate.instant('dashboard.Requests.RequestList'),
+           label: this.translate.instant('Requests.RequestList'),
            routerLink: '/performance-managment/RequestList',
            routerLinkActiveOptions: { exact: true },
          },
          {
-           label: this.translate.instant('dashboard.myRequest.Order details'),
+           label: this.translate.instant('myRequest.Order details'),
            routerLink: `/performance-managment/RequestList/details/${this.requestInstance}`,
          },
-         // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/performance-managment/RequestList/Requestdetails'}
+         // {label: this.translate.instant('myRequest.School enrollment application'),routerLink:'/performance-managment/RequestList/Requestdetails'}
        ];
      } else if (this.currentUserScope == UserScope.Guardian) {
        this.componentHeaderData.breadCrump = [
          {
-           label: this.translate.instant('dashboard.myRequest.My requests'),
+           label: this.translate.instant('myRequest.My requests'),
            routerLink: `/requests-list`,
            routerLinkActiveOptions: { exact: true },
          },
          {
-           label: this.translate.instant('dashboard.myRequest.Order details'),
+           label: this.translate.instant('myRequest.Order details'),
            routerLink: `/requests-list/details/${this.requestInstance}`,
          },
-         // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),}
+         // {label: this.translate.instant('myRequest.School enrollment application'),}
        ];
      }
 

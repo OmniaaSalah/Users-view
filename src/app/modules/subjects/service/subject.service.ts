@@ -17,9 +17,9 @@ export class SubjectService {
  evaluationTypeList;
 
  successStatus= [
-  {name:this.translate.instant('dashboard.Subjects.successed'),status:DescriptionStatusEnum.Successful},
-  {name:this.translate.instant('dashboard.Subjects.retry'),status:DescriptionStatusEnum.Fail},
-  {name:this.translate.instant('dashboard.Subjects.donotShow'),status:DescriptionStatusEnum.DonotShow}
+  {name:this.translate.instant('Subjects.successed'),status:DescriptionStatusEnum.Successful},
+  {name:this.translate.instant('Subjects.retry'),status:DescriptionStatusEnum.Fail},
+  {name:this.translate.instant('Subjects.donotShow'),status:DescriptionStatusEnum.DonotShow}
   ];
 
 
@@ -97,15 +97,15 @@ export class SubjectService {
         return res.data.map(subject =>{
           return {
             [' ']: "# "+subject?.subjectCode,
-            [this.translate.instant('dashboard.Subjects.Subject Name')]: subject?.subjectName[this.lang],
-            [this.translate.instant('dashboard.schools.schoolName')]: subject?.schoolName[this.lang],
-            [this.translate.instant('dashboard.Subjects.Evaluation System')]: this.getEvaluationType(subject?.evaluationType),
-            [this.translate.instant('dashboard.Subjects.Created by')]: subject?.creatorName,
+            [this.translate.instant('Subjects.Subject Name')]: subject?.subjectName[this.lang],
+            [this.translate.instant('schools.schoolName')]: subject?.schoolName[this.lang],
+            [this.translate.instant('Subjects.Evaluation System')]: this.getEvaluationType(subject?.evaluationType),
+            [this.translate.instant('Subjects.Created by')]: subject?.creatorName,
             [this.translate.instant('shared.Created Date')]: subject?.createdDate,
-            [this.translate.instant('dashboard.Subjects.Edited by')]: subject?.editorName,
-            [this.translate.instant('dashboard.Subjects.Last EditDate')]: subject?.lastEditedDate,
-            [this.translate.instant('dashboard.Subjects.Subject Minimum grade')]: subject?.subjectMinmumDegree ? subject?.subjectMinmumDegree:'-',
-            [this.translate.instant('dashboard.Subjects.Subject Maximum grade')]: subject?.maximumDegree ? subject?.maximumDegree:'-'
+            [this.translate.instant('Subjects.Edited by')]: subject?.editorName,
+            [this.translate.instant('Subjects.Last EditDate')]: subject?.lastEditedDate,
+            [this.translate.instant('Subjects.Subject Minimum grade')]: subject?.subjectMinmumDegree ? subject?.subjectMinmumDegree:'-',
+            [this.translate.instant('Subjects.Subject Maximum grade')]: subject?.maximumDegree ? subject?.maximumDegree:'-'
 
 
 

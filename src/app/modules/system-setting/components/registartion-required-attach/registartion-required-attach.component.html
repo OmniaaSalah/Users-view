@@ -1,4 +1,4 @@
-<h3 class="heading heading--secondary mb-6 color-primary"> {{'dashboard.SystemSetting.registartionFileSettingList'|translate}}</h3>
+<h3 class="heading heading--secondary mb-6 color-primary"> {{'SystemSetting.registartionFileSettingList'|translate}}</h3>
 <hr class="py-3">
 <div class="actions-btn">
   <button (click)="updateRequiredFiles()" class="btn btn-primary" [disabled]="onSubmitForm">
@@ -12,13 +12,13 @@
   <ng-container  formArrayName="requestsFiles">
       <div class="pt-4 custom-form" *ngFor="let req of requestsFilesCtr.controls; let reqIndex=index" [formGroupName]="reqIndex">
           <div class="d-flex align-items-center gap-4 mb-6">
-              <span class="fs-3 fw-bold">{{'dashboard.SystemSetting.registerStudents'|translate}} : </span>
+              <span class="fs-3 fw-bold">{{'SystemSetting.registerStudents'|translate}} : </span>
               <span class="">{{req?.value?.grade?.name |currentLang}}</span>
           </div>
 
           <div class="row gx-5 mb-6">
               <div class="col-md-3">
-                  <label  class="label">{{'dashboard.SystemSetting.maxFilesAllowedToUpload'|translate}}</label>
+                  <label  class="label">{{'SystemSetting.maxFilesAllowedToUpload'|translate}}</label>
                   <p-inputNumber formControlName="filesCount" [showButtons]="true" [min]="0" [max]="100" (onInput)="filesCountChange($event.value, reqIndex)" placeholder="0" inputId="classCount"></p-inputNumber>
               </div>
               <div class="col-md-4 d-flex align-items-center gap-4 align-self-end mb-3">
@@ -36,33 +36,33 @@
 
           <div class="" formArrayName="files">
               <!-- <div class="col-md-4">
-                  <label  class="label">{{'dashboard.SystemSetting.requestName'|translate}}</label>
-                  <p-dropdown formControlName="request" [options]="diseases" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseRequest'|translate}}"></p-dropdown>
+                  <label  class="label">{{'SystemSetting.requestName'|translate}}</label>
+                  <p-dropdown formControlName="request" [options]="diseases" optionLabel="name" placeholder="{{'SystemSetting.chooseRequest'|translate}}"></p-dropdown>
               </div> -->
               <div class="mb-6 row gx-4" *ngFor="let file of reqFilesCtr(reqIndex).controls; let i=index" [formGroupName]="i">
                   <ng-container formGroupName="name">
                       <div class="col-md-3">
-                          <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
+                          <label  class="label">{{'SystemSetting.fileNameAr'|translate}}</label>
                           <input pInputText formControlName="ar" [LangRestrict]="'ar'">
                       </div>
                       <div class="col-md-3">
-                          <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
+                          <label  class="label">{{'SystemSetting.fileNameEn'|translate}}</label>
                           <input pInputText formControlName="en" [LangRestrict]="'en'">
                       </div>
                   </ng-container>
 
                   <!-- <div class="col-md-1">
                       <label  class="label">{{'shared.fileType'|translate}}</label>
-                      <p-dropdown formControlName="type" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
+                      <p-dropdown formControlName="type" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
                   </div> -->
 
                   <!-- <div class="col-md-3">
-                      <label  class="label">{{'dashboard.SystemSetting.maxSizeAllowed'|translate}}</label>
-                      <p-inputNumber formControlName="size" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'dashboard.SystemSetting.mb'|translate}}"></p-inputNumber>
+                      <label  class="label">{{'SystemSetting.maxSizeAllowed'|translate}}</label>
+                      <p-inputNumber formControlName="size" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'SystemSetting.mb'|translate}}"></p-inputNumber>
                   </div> -->
 
                   <div class="col-md-2 d-flex align-items-center gap-4 align-self-end mb-3">
-                    <label class="mb-2" for="description">{{'dashboard.surveys.mandatory'|translate}}</label>
+                    <label class="mb-2" for="description">{{'surveys.mandatory'|translate}}</label>
                     <p-inputSwitch formControlName="isMandatory" [binary]="true"></p-inputSwitch>
                     <span class="mb-2" *ngIf="file.get('isMandatory')?.value">{{'shared.yes' |translate}}</span>
                     <span class="mb-2" *ngIf="!file.get('isMandatory')?.value">{{'shared.no' |translate}}</span>
@@ -72,7 +72,7 @@
               class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
               (click)="addNewFileConditionToReq(reqIndex, i)">
                   <fa-icon [icon]="faPlus"></fa-icon>
-                  <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
+                  <span>{{'SystemSetting.addNewCondition' |translate}}</span>
               </div> -->
 
 

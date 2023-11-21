@@ -41,7 +41,7 @@ export class StudentsReportsComponent implements OnInit {
   acceptanceDate;
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generatestudentsReport'),routerLink:"/reports-managment/students-reports" },
+      { label: this.translate.instant('reports.generatestudentsReport'),routerLink:"/reports-managment/students-reports" },
     ],
   }
   filtration = {

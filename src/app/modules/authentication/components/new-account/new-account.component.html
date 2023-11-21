@@ -55,7 +55,7 @@
                   </div>
 
                   <div class="col-12" *ngIf="showIdentityField">
-                    <label class="label" for="precantage">{{'dashboard.parents.emirateUid'|translate}} <span
+                    <label class="label" for="precantage">{{'parents.emirateUid'|translate}} <span
                         class="star">*</span></label>
                     <input type="text" pInputText formControlName="emairatesWay" maxlength="15" [LangRestrict]="'numb'" class="form-control "
                       placeholder="{{'sign up.enter personal digitalIdentity'|translate}}">
@@ -107,7 +107,7 @@
 
                 <div class="row gx-5 form-set">
                   <div class="col-12" *ngIf="showIdentityField">
-                    <p for="precantage">{{'dashboard.addChild.identityPhoto' | translate}} <span class="star">*</span></p>
+                    <p for="precantage">{{'addChild.identityPhoto' | translate}} <span class="star">*</span></p>
                     <app-file-upload [accept]="fileTypeEnum.Image" [maxFileSize]="3" view="full"
                       (onFileUpload)="setAttachment($event)"></app-file-upload>
                   </div>
@@ -344,13 +344,13 @@
             <div class="row gx-5 mt-5">
               <div class="col-md-6">
                   <div class="d-flex ">
-                      <p class="color-gray-300 ">{{ 'dashboard.addChild.name'|translate }}</p>
+                      <p class="color-gray-300 ">{{ 'addChild.name'|translate }}</p>
                       <span class="color-primary mx-3">{{UAEUnregisteredUser?.name|currentLang}}</span>
                   </div>
               </div>
               <div class="col-md-6">
                 <div class="d-flex ">
-                    <p class="color-gray-300 ">{{ 'dashboard.parents.nickname'|translate }}</p>
+                    <p class="color-gray-300 ">{{ 'parents.nickname'|translate }}</p>
                     <span class="color-primary mx-3">{{UAEUnregisteredUser?.surname|currentLang}}</span>
                 </div>
               </div>
@@ -383,7 +383,7 @@
 
               <div class="col-md-6">
                   <div class="d-flex ">
-                      <p class="color-gray-300 ">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                      <p class="color-gray-300 ">{{ 'parents.emirateUid'|translate }}</p>
                       <span class="color-primary mx-3 ">{{UAEUnregisteredUser?.emiratesIdNumber}}</span>
                   </div>
               </div>

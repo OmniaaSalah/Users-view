@@ -39,9 +39,9 @@ export class DeletedStudentComponent implements OnInit, OnDestroy {
         label: this.translate.instant('Students List'),
         routerLink:'/student-management/students/',
         routerLinkActiveOptions:{exact: true}},
-      { label: this.translate.instant('dashboard.students.deletStudentFromSchool'),routerLink:`/student-management/students/delete-student/${this.studentGUID}` }
+      { label: this.translate.instant('students.deletStudentFromSchool'),routerLink:`/student-management/students/delete-student/${this.studentGUID}` }
     ],
-    mainTitle: { main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)' }
+    mainTitle: { main: this.translate.instant('students.deletStudentFromSchool'), sub: '(محمود عامر)' }
   }
 
   loading=false

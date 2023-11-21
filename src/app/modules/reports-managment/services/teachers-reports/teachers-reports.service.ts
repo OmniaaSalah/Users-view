@@ -22,27 +22,27 @@ export class TeachersReportsService {
         sortField: this.lang=='ar' ?  'SchoolArabicName': 'SchoolEnglishName'
       },
       {
-        name:this.translate.instant('dashboard.SchoolYear.Subject'),
+        name:this.translate.instant('SchoolYear.Subject'),
         isSelected: true,
         sortField:this.lang=='ar' ?  'SubjectArabicName': 'SubjectEnglishName'
       },
       {
-        name: this.translate.instant('dashboard.reports.SubjectsTeachersNumbers'),
+        name: this.translate.instant('reports.SubjectsTeachersNumbers'),
         isSelected: true,
         sortField:'TeachersCount'
       },
       {
-        name:  this.translate.instant('dashboard.reports.TeacherName'),
+        name:  this.translate.instant('reports.TeacherName'),
         isSelected: true,
         sortField:this.lang=='ar' ?  'TeccherArabicName': 'TeccherEnglishName'
       },
       {
-        name:this.translate.instant('dashboard.reports.TeacherSpeciality'),
+        name:this.translate.instant('reports.TeacherSpeciality'),
         isSelected: true,
         sortField:''
       },
       {
-        name:this.translate.instant('dashboard.reports.TeacherEquiivalent'),
+        name:this.translate.instant('reports.TeacherEquiivalent'),
         isSelected: true,
         sortField:''
       }
@@ -69,11 +69,11 @@ export class TeachersReportsService {
         return res.data.map(teacher =>{
           return {
             [this.translate.instant('School')]: teacher?.schoolName ? teacher?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.SchoolYear.Subject')]: teacher?.subjectName ? teacher?.subjectName[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.reports.SubjectsTeachersNumbers')]: teacher?.teachersCount,
-            [this.translate.instant('dashboard.reports.TeacherName')]:teacher?.teacherName ? teacher?.teacherName[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.reports.TeacherSpeciality')]: teacher?.teacherField ? teacher?.teacherField[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.reports.TeacherEquiivalent')]: teacher?.sbjectWeeklyHours
+            [this.translate.instant('SchoolYear.Subject')]: teacher?.subjectName ? teacher?.subjectName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('reports.SubjectsTeachersNumbers')]: teacher?.teachersCount,
+            [this.translate.instant('reports.TeacherName')]:teacher?.teacherName ? teacher?.teacherName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('reports.TeacherSpeciality')]: teacher?.teacherField ? teacher?.teacherField[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('reports.TeacherEquiivalent')]: teacher?.sbjectWeeklyHours
 
           }
         })

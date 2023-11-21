@@ -30,7 +30,7 @@ export class SubjectsReportsComponent implements OnInit {
   lang = inject(TranslationService).lang
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generateSubjectsReport'),routerLink: '/reports-managment/subjects-reports' },
+      { label: this.translate.instant('reports.generateSubjectsReport'),routerLink: '/reports-managment/subjects-reports' },
     ],
   }
   filtration = {

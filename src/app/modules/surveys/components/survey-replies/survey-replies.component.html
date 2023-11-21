@@ -7,20 +7,20 @@
 
                 <div class="col-4">
                     <div class="grid-container gap-5">
-                        <p class="color-gray-300">{{'dashboard.surveys.questions numbers'| translate}}</p>
+                        <p class="color-gray-300">{{'surveys.questions numbers'| translate}}</p>
                         <span class="color-primary">{{survey?.questionsCount}}</span>
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="grid-container gap-5">
-                        <p class="color-gray-300">{{'dashboard.surveys.answers numbers'| translate}}</p>
+                        <p class="color-gray-300">{{'surveys.answers numbers'| translate}}</p>
                         <span class="color-primary">{{survey?.responsesCount}}</span>
 
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="grid-container gap-5">
-                        <p class="color-gray-300">{{'dashboard.surveys.Percentge'| translate}}</p>
+                        <p class="color-gray-300">{{'surveys.Percentge'| translate}}</p>
                         <div class="d-flex w-75" *ngIf="survey?.responsePercentage<=20">
                             <p-progressBar id="optionA" [value]="survey?.responsePercentage"></p-progressBar>
                            {{survey?.responsePercentage}} %
@@ -52,10 +52,10 @@
                     <td  >
                         <button type="button" pButton pRipple [pRowToggler]="item" (click)="expanded ? closeRow():openRow(item?.id);" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                     </td>
-                    <td>{{'dashboard.surveys.questionText'| translate}} </td>
+                    <td>{{'surveys.questionText'| translate}} </td>
                     <td class="  fs-3  questions">{{item.questionText|currentLang}} </td>
-                    <td>{{'dashboard.surveys.questionType'| translate}}</td>
-                    <td class=" fs-3 type">{{'dashboard.surveys.'+item.questionType| translate}}</td>
+                    <td>{{'surveys.questionType'| translate}}</td>
+                    <td class=" fs-3 type">{{'surveys.'+item.questionType| translate}}</td>
                 </tr>
             </ng-template>
          
@@ -108,16 +108,16 @@
                             <p-table [value]="question?.parents" dataKey="guardianId">
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th pSortableColumn="category"  >{{'dashboard.surveys.parentName'|translate }}
+                                        <th pSortableColumn="category"  >{{'surveys.parentName'|translate }}
                                             
                                         </th>
                                         <th pSortableColumn="quantity">{{'shared.phoneNumber'|translate }}
                                             
                                         </th>
-                                        <th pSortableColumn="price" class="answer">{{'dashboard.surveys.answer'|translate }}
+                                        <th pSortableColumn="price" class="answer">{{'surveys.answer'|translate }}
                                          
                                         </th>
-                                        <th pSortableColumn="time" >{{'dashboard.surveys.answerDateAndTime'|translate }}
+                                        <th pSortableColumn="time" >{{'surveys.answerDateAndTime'|translate }}
                                            
                                         </th>
                                     </tr>
@@ -131,7 +131,7 @@
                                         <td class="action" *ngIf="question.questionType==QuestionsTypeEnum.SurveyMultiChoiceQuestion">{{parent.choiceAnswer|currentLang}}</td>
                                         <td class="action" *ngIf="question.questionType==QuestionsTypeEnum.SurveyAttachmentQuestion">
                                             <button class="link" (click)="exportPdf(parent?.answer)" [di]>
-                                                <a class="color-skyBlue-400">{{'dashboard.surveys.Open File'|translate}}</a>
+                                                <a class="color-skyBlue-400">{{'surveys.Open File'|translate}}</a>
                                             </button>
                                         </td>
                                         <td class="action" *ngIf="question.questionType==QuestionsTypeEnum.SurveyRateQuestion">

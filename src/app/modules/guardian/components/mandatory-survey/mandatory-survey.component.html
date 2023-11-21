@@ -6,7 +6,7 @@
             <ng-container *ngFor="let survey  of surveys; let i=index">
               <div class="mb-4 mx-5 mt-5">
                  <a routerLink='reply-survey/{{survey.surveyId}}' class="color-primary" >
-                   <b><fa-icon [icon]="faListDots" class="icon mx-4"></fa-icon>{{'dashboard.surveys.Survey'|translate}} {{i+1}}</b>
+                   <b><fa-icon [icon]="faListDots" class="icon mx-4"></fa-icon>{{'surveys.Survey'|translate}} {{i+1}}</b>
                  </a>
               </div>
             </ng-container>

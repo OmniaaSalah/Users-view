@@ -168,7 +168,7 @@ export class AcademicSequenceComponent implements OnInit {
 
     this.certificatesService.postSequenceCertificate({studentEducationCertificates: body}, this.activateSpeaView).subscribe(result=>{
       this.isBtnLoading=false;
-      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+      this.toastr.success(this.translate.instant('issue of certificate.success message'));
       this.onCancel.emit();
 
       if(this.activateSpeaView) this.location.back()

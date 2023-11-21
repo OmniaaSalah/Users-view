@@ -15,7 +15,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
-import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
+import { StudentStatus } from 'src/app/shared/enums/status/status.enum';
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
@@ -41,7 +41,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
   get userScope() { return UserScope }
   currentUserScope = inject(UserService).getScope();
   get claimsEnum(){ return ClaimsEnum }
-  get registrationStatusEnum() {return RegistrationStatus}
+  get registrationStatusEnum() {return StudentStatus}
   get fileTypesEnum () {return FileTypeEnum}
 
   studentGUID = this.route.snapshot.paramMap.get('id')
@@ -60,7 +60,15 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
   religions$= this.sharedService.getReligion()
   reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.TheReasonForRegradingRequest)
   subjectsExemption$//المواد القابله للاعفاء
+  languages$ = this.indexesService.getIndext(IndexesEnum.Language).pipe(share())
 
+
+  attendanceType = [
+    {name: this.translate.instant('students.Physical'), value:'Physical'},
+    {name: this.translate.instant('students.Mixed'), value:'Mixed'},
+    {name: this.translate.instant('students.Remote'), value:'Remote'},
+
+  ]
 
   RepeateStudyPhaseModelOpend =false
   transferStudentModelOpened=false
@@ -73,7 +81,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
     // Forms
     requiredFiles:RequestRule
-    get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
+    get uploadedFiles(){ return [].concat(...this.requiredFiles?.files?.map(el => el?.uploadedFiles || []))}
     changeIdentityNumForm
     transferStudentForm
     changeStudentInfoReqForm
@@ -115,24 +123,24 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.items=[
-      {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/schools-and-students/students/student/${this.studentGUID}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
-      {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
-      {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentGUID}`,claims:ClaimsEnum.E_DeleteStudentRequest},
+      {label: this.translate.instant('students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`/schools-and-students/students/student/${this.studentGUID}/transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
+      {label: this.translate.instant('students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
+      {label: this.translate.instant('students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentGUID}`,claims:ClaimsEnum.E_DeleteStudentRequest},
       {
-        label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'),
+        label: this.translate.instant('students.sendRepeateStudyPhaseReqest'),
         isAllowed$ :this.settingServcice.isSchoolExistInGracePeriod({schoolId: this.student?.school?.id, code: GracePeriodEnum.repeatStudyPhase}),
         icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest
       },
-      {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
+      {label: this.translate.instant('students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
       {
-        label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',
-        disabled: this.student?.studentStatus === RegistrationStatus.Withdrawal ||this. student?.studentProhibited?.withdrawingFromSchool || this.student?.studentProhibited?.withdrawingFromSPEA,
+        label: this.translate.instant('students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',
+        disabled: this.student?.studentStatus === StudentStatus.Withdrawal ||this. student?.studentProhibited?.withdrawingFromSchool || this.student?.studentProhibited?.withdrawingFromSPEA,
         claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool,
         routerLink:`${this.currentUserScope==this.userScope.Guardian ? 'withdraw-request'
         : this.currentUserScope==this.userScope.Employee ? ('/student-management/students/student/' + (this.studentGUID) + '/withdraw-request')
         :('/schools-and-students/students/student/' + (this.studentGUID) + '/withdraw-request')}`
       },
-      {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
+      {label: this.translate.instant('students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
       {
         label: this.translate.instant('breadcrumb.Request to issue a certificate'),
         disabled: this.student?.studentProhibited?.rCertificateFromSPEA || this.student?.studentProhibited?.certificateFromSchool,
@@ -199,18 +207,28 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
       studentId: [student?.id, Validators.required],
       childId: [],
       studentName: this.fb.group({
-        ar:['', Validators.required],
-        en:['', Validators.required]
+        ar:[student?.name?.ar ?? '', Validators.required],
+        en:[student?.name?.en ?? '', Validators.required]
       }),
       studentSurName: this.fb.group({
-        ar: ['', Validators.required],
-        en: ['', Validators.required]
+        ar: [student?.surname?.ar ?? '', Validators.required],
+        en: [student?.surname?.en ?? '', Validators.required]
       }),
-      gender:["", Validators.required],
-      birthDate:["", Validators.required],
-      nationalityId:["", Validators.required],
-      religionId:["", Validators.required]
+      gender:[student?.gender ?? '', Validators.required],
+      birthDate:[student?.birthDate ?? '', Validators.required],
+      nationalityId:[student?.nationality?.id ?? '', Validators.required],
+      religionId:[student?.religion?.id ?? '', Validators.required],
+      // NationalityCategoryId:[student?.nationalityCategory?.id ?? '', Validators.required],
+      // motherLanguageId:[student?.motherLanguage?.id ?? ''],
+      // languageAtHomeId:[student?.languageAtHome?.id ?? ''],
+      // mostUsedLanguageId:[student?.mostUsedLanguage?.id ?? ''],
+      // isSpecialAbilities:[student?.isSpecialAbilities ?? false],
+      // isChildOfAMartyr:[student?.isChildOfAMartyr ?? false],
+      // isGifted:[student?.isGifted ?? false],
+      // reasonForNotHavingEmiratesId:[student?.reasonForNotHavingEmiratesId],
+      // attendanceMode:[student?.attendanceMode]
     })
+
     // --------------------------------------------------------
     this.repeateStudyPhaseReqForm={
       studentId: student?.id,
@@ -330,7 +348,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
 
   isRequiredAttchmentsUploaded(){
-    return !this.requiredFiles.files.filter(el => el.isMandatory).every(el=> el?.uploadedFiles?.length > 0)
+    return !this.requiredFiles?.files?.filter(el => el.isMandatory).every(el=> el?.uploadedFiles?.length > 0)
   }
 
   onFileUpload(files, fileTitle, index){

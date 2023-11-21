@@ -175,7 +175,7 @@ export class NavbarComponent implements OnInit {
       {
         id: 2,
         enum: RouteEnums.Student_Management,
-        title: this.translate.get('dashboard.students.studentsMangement'),
+        title: this.translate.get('students.studentsMangement'),
         claims: [ClaimsEnum.E_menu_ManageStudents],
         links: [
           {
@@ -215,7 +215,7 @@ export class NavbarComponent implements OnInit {
             claims: [ClaimsEnum.SE_MenuItem_Exam],
           },
           {
-            name: this.translate.get('dashboard.Requests.RequestList'),
+            name: this.translate.get('Requests.RequestList'),
             url: '/performance-managment/RequestList/',
             isHidden:
               this.currentUserScope == this.ScopeEnum.SPEA ? false : true,
@@ -346,12 +346,12 @@ export class NavbarComponent implements OnInit {
         claims: [ClaimsEnum.E_Menu_ManageGradesAndDivisions],
         links: [
           {
-            name: this.translate.get('dashboard.schools.schoolClasses'),
+            name: this.translate.get('schools.schoolClasses'),
             url: `/grades-and-divisions/school/${currentSchoolId}/grades`,
             claims: [ClaimsEnum.E_MenuItem_SchoolGrades],
           },
           {
-            name: this.translate.get('dashboard.schools.schoolTracks'),
+            name: this.translate.get('schools.schoolTracks'),
             url: `/grades-and-divisions/school/${currentSchoolId}/divisions`,
             claims: [ClaimsEnum.E_MenuItem_SchoolDivisions],
           },
@@ -360,7 +360,7 @@ export class NavbarComponent implements OnInit {
       {
         id: 8,
         enum: RouteEnums.SchoolEmployee_Management,
-        title: this.translate.get('dashboard.schools.schoolEmployeeMangement'),
+        title: this.translate.get('schools.schoolEmployeeMangement'),
         claims: [ClaimsEnum.E_menu_ManageSchoolEmployee],
         links: [
           {
@@ -383,11 +383,11 @@ export class NavbarComponent implements OnInit {
       {
         id: 9,
         enum: RouteEnums.School_Management,
-        title: this.translate.get('dashboard.schools.schoolMangement'),
+        title: this.translate.get('schools.schoolMangement'),
         claims: [ClaimsEnum.E_Menu_ManageSchool],
         links: [
           {
-            name: this.translate.get('dashboard.schools.generalInfo'),
+            name: this.translate.get('schools.generalInfo'),
             url: `/school-management/school/${currentSchoolId}`,
             claims: [ClaimsEnum.E_MenuItem_GeneralInfo],
           },
@@ -406,18 +406,18 @@ export class NavbarComponent implements OnInit {
             claims: [ClaimsEnum.E_MenuItem_AnnualHolidays],
           },
           {
-            name: this.translate.get('dashboard.schools.editableList'),
+            name: this.translate.get('schools.editableList'),
             url: `/school-management/school/${currentSchoolId}/edit-list`,
             claims: [ClaimsEnum.SE_MenuItem_EditList],
           },
           {
-            name: this.translate.get('dashboard.Requests.myRequests'),
+            name: this.translate.get('Requests.myRequests'),
             url: '/school-management/requests-list/my-requests',
             queryParams: { isMyRequests: true },
             claims: [ClaimsEnum.E_MenuItem_Requests],
           },
           {
-            name: this.translate.get('dashboard.Requests.requestsToMe'),
+            name: this.translate.get('Requests.requestsToMe'),
             url: '/school-management/requests-list',
             claims: [ClaimsEnum.E_MenuItem_Requests],
           },

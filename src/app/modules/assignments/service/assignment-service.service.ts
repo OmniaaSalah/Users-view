@@ -38,16 +38,16 @@ export class AssignmentServiceService {
       map(res=>{
         return res.data.map(assignment =>{
           return {
-            [this.translate.instant('dashboard.Assignments.Assignment Name')]: assignment.name.ar,
+            [this.translate.instant('Assignments.Assignment Name')]: assignment.name.ar,
             [this.translate.instant('shared.school')]: getLocalizedValue(assignment.schoolName),
-            [this.translate.instant('dashboard.Assignments.Class')]: getLocalizedValue(assignment.gradeName),
-            [this.translate.instant('dashboard.Assignments.curriculum')]: getLocalizedValue(assignment.curriculmName),
-            [this.translate.instant('dashboard.Assignments.schoolCount')]: assignment.schoolCount,
-            [this.translate.instant('dashboard.Assignments.Subject')]: getLocalizedValue(assignment.subjectName),
-            [this.translate.instant('dashboard.Assignments.Exam Date And Time')]: assignment.examShowDate,
-            [this.translate.instant('dashboard.surveys.createdDate')]: assignment.createdDate,
-            [this.translate.instant('dashboard.surveys.createdBefore')]: assignment.userFullName,
-            [this.translate.instant('dashboard.Assignments.Status')]: assignment.examStatus == StatusEnum.Available? this.translate.instant('Available') : this.translate.instant('Unavailable')  ,
+            [this.translate.instant('Assignments.Class')]: getLocalizedValue(assignment.gradeName),
+            [this.translate.instant('Assignments.curriculum')]: getLocalizedValue(assignment.curriculmName),
+            [this.translate.instant('Assignments.schoolCount')]: assignment.schoolCount,
+            [this.translate.instant('Assignments.Subject')]: getLocalizedValue(assignment.subjectName),
+            [this.translate.instant('Assignments.Exam Date And Time')]: assignment.examShowDate,
+            [this.translate.instant('surveys.createdDate')]: assignment.createdDate,
+            [this.translate.instant('surveys.createdBefore')]: assignment.userFullName,
+            [this.translate.instant('Assignments.Status')]: assignment.examStatus == StatusEnum.Available? this.translate.instant('Available') : this.translate.instant('Unavailable')  ,
 
           }
         })

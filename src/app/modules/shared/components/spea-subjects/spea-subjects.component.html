@@ -1,7 +1,7 @@
 
 <hr class="my-6">
 
-<h2 class="color-primary fw-bold">{{'dashboard.schools.speaSubjects' |translate}}</h2>
+<h2 class="color-primary fw-bold">{{'schools.speaSubjects' |translate}}</h2>
 
 <div class="prim-table mt-4" *ngIf="subjects.totalAllData || subjects.loading">
   <p-table
@@ -24,7 +24,7 @@
         <div class="row gx-5 form-set">
           <div class="col-lg-4">
             <label class="label" for="evaluationType"
-              >{{ "dashboard.Subjects.Evaluation System" | translate }}
+              >{{ "Subjects.Evaluation System" | translate }}
             </label>
             <p-multiSelect
               [options]="evaluationTypeList"
@@ -33,7 +33,7 @@
               optionLabel="name"
               optionValue="value"
               placeholder="{{
-                'dashboard.Subjects.select evaluation type' | translate
+                'Subjects.select evaluation type' | translate
               }}"
             ></p-multiSelect>
           </div>
@@ -45,31 +45,31 @@
       <tr>
         <th pSortableColumn="ArabicName">
           <p-sortIcon field="ArabicName"></p-sortIcon
-          >{{ "dashboard.Subjects.subject Code" | translate }}
+          >{{ "Subjects.subject Code" | translate }}
         </th>
         <th pSortableColumn="EnglishName">
           <p-sortIcon field="EnglishName"></p-sortIcon
-          >{{ "dashboard.SchoolYear.Subject" | translate }}
+          >{{ "SchoolYear.Subject" | translate }}
         </th>
         <th pSortableColumn="SchoolArabicName">
           {{ "School" | translate
           }}<p-sortIcon field="SchoolArabicName"></p-sortIcon>
         </th>
         <th pSortableColumn="SchoolCode">
-          {{ "dashboard.schools.schoolNumber" | translate
+          {{ "schools.schoolNumber" | translate
           }}<p-sortIcon field="SchoolCode"></p-sortIcon>
         </th>
         <th pSortableColumn="CurriculumsArabicName">
-          {{ "dashboard.schools.SchoolCurriculum" | translate
+          {{ "schools.SchoolCurriculum" | translate
           }}<p-sortIcon field="CurriculumsArabicName"></p-sortIcon>
         </th>
         <th pSortableColumn="EvaluationSystem">
           <p-sortIcon field="EvaluationSystem"></p-sortIcon
-          >{{ "dashboard.Subjects.Evaluation System" | translate }}
+          >{{ "Subjects.Evaluation System" | translate }}
         </th>
         <th pSortableColumn="CreatedBy">
           <p-sortIcon field="CreatedBy"></p-sortIcon
-          >{{ "dashboard.Subjects.Created by" | translate }}
+          >{{ "Subjects.Created by" | translate }}
         </th>
         <th pSortableColumn="CreatedDate">
           <p-sortIcon field="CreatedDate"></p-sortIcon
@@ -77,19 +77,19 @@
         </th>
         <th pSortableColumn="UpdatedBy">
           <p-sortIcon field="UpdatedBy"></p-sortIcon
-          >{{ "dashboard.Subjects.Edited by" | translate }}
+          >{{ "Subjects.Edited by" | translate }}
         </th>
         <th pSortableColumn="UpdatedDate">
           <p-sortIcon field="UpdatedDate"></p-sortIcon
-          >{{ "dashboard.Subjects.Last EditDate" | translate }}
+          >{{ "Subjects.Last EditDate" | translate }}
         </th>
         <th pSortableColumn="MinimumDegree">
           <p-sortIcon field="MinimumDegree"></p-sortIcon
-          >{{ "dashboard.Assessment.Minmum Degree" | translate }}
+          >{{ "Assessment.Minmum Degree" | translate }}
         </th>
         <th pSortableColumn="MaximumDegree">
           <p-sortIcon field="MaximumDegree"></p-sortIcon
-          >{{ "dashboard.Assessment.Maximum Degree" | translate }}
+          >{{ "Assessment.Maximum Degree" | translate }}
         </th>
       </tr>
     </ng-template>

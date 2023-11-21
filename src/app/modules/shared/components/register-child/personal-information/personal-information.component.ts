@@ -69,7 +69,7 @@ export class PersonalInformationComponent implements OnInit {
   countries$ = this.CountriesService.getCountries()
   religions$= this.sharedService.getReligion()
   relativeRelation$= this.sharedService.getParentRelative()
-  reasonForNotHaveIdentityOptions$=this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).pipe(debounceTime(1000))
+  reasonForNotHaveIdentityOptions$=this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification)
 
 
 
@@ -94,9 +94,9 @@ export class PersonalInformationComponent implements OnInit {
   ]
 
   attendanceType = [
-    {name: this.translate.instant('dashboard.students.Physical'), value:'Physical'},
-    {name: this.translate.instant('dashboard.students.Mixed'), value:'Mixed'},
-    {name: this.translate.instant('dashboard.students.Remote'), value:'Remote'},
+    {name: this.translate.instant('students.Physical'), value:'Physical'},
+    {name: this.translate.instant('students.Mixed'), value:'Mixed'},
+    {name: this.translate.instant('students.Remote'), value:'Remote'},
 
   ]
 

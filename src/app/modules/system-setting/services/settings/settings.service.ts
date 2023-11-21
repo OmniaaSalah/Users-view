@@ -175,13 +175,13 @@ export class SettingsService {
       map(res=>{
         return res.data.map(gracePeriod =>{
           return {
-            [this.translate.instant('dashboard.SystemSetting.Type')]: getLocalizedValue(gracePeriod.gracePeriodType.name),
-            [this.translate.instant('dashboard.SystemSetting.SchoolNumber')]: gracePeriod.allowedSchools.length,
-            [this.translate.instant('dashboard.SystemSetting.ClassNumber')]: gracePeriod.allowedGradesCount,
-            [this.translate.instant('dashboard.SystemSetting.TimeFrom')]: gracePeriod.dateFrom,
-            [this.translate.instant('dashboard.SystemSetting.TimeTo')]: gracePeriod.dateTo,
-            [this.translate.instant('dashboard.SystemSetting.CreatedBy')]: getLocalizedValue(gracePeriod.createdBy),
-            [this.translate.instant('dashboard.SystemSetting.CreatedDate')]: gracePeriod.createdDate  ,
+            [this.translate.instant('SystemSetting.Type')]: getLocalizedValue(gracePeriod.gracePeriodType.name),
+            [this.translate.instant('SystemSetting.SchoolNumber')]: gracePeriod.allowedSchools.length,
+            [this.translate.instant('SystemSetting.ClassNumber')]: gracePeriod.allowedGradesCount,
+            [this.translate.instant('SystemSetting.TimeFrom')]: gracePeriod.dateFrom,
+            [this.translate.instant('SystemSetting.TimeTo')]: gracePeriod.dateTo,
+            [this.translate.instant('SystemSetting.CreatedBy')]: getLocalizedValue(gracePeriod.createdBy),
+            [this.translate.instant('SystemSetting.CreatedDate')]: gracePeriod.createdDate  ,
 
           }
         })

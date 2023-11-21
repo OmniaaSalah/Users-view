@@ -13,9 +13,9 @@
 
             <div class="row gx-5 form-set">
                 <div class="col-lg-4">
-                    <label class="label" for="indexStatus">{{'dashboard.SchoolYear.SchoolYear Status'|translate }} </label>
-                    <!-- <p-dropdown [options]="schoolYearsStatus" [showClear]="true" StopProp [(ngModel)]="filtration.statusId" inputId="statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-dropdown> -->
-                    <p-multiSelect [options]="schoolYearsStatus" display="chip" [(ngModel)]="filtration.statusId" optionLabel="name" optionValue="value" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-multiSelect>
+                    <label class="label" for="indexStatus">{{'SchoolYear.SchoolYear Status'|translate }} </label>
+                    <!-- <p-dropdown [options]="schoolYearsStatus" [showClear]="true" StopProp [(ngModel)]="filtration.statusId" inputId="statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'SchoolYear.Select SchoolYear Status'|translate }}"></p-dropdown> -->
+                    <p-multiSelect [options]="schoolYearsStatus" display="chip" [(ngModel)]="filtration.statusId" optionLabel="name" optionValue="value" placeholder="{{'SchoolYear.Select SchoolYear Status'|translate }}"></p-multiSelect>
                 </div>
             </div>
 
@@ -28,13 +28,13 @@
 
       <ng-template pTemplate="header" >
             <tr  >
-              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.School Year Name'|translate}}</th>
-              <th   pSortableColumn="curriculumCount"><p-sortIcon  field="curriculumCount"></p-sortIcon>{{'dashboard.SchoolYear.curriculum Number'|translate}}</th>
-              <th   pSortableColumn="startDate"><p-sortIcon field="startDate"></p-sortIcon>{{'dashboard.SchoolYear.School Year StartDate'|translate}}</th>
-              <th   pSortableColumn="endDate"><p-sortIcon  field="endDate"></p-sortIcon>{{'dashboard.SchoolYear.School Year EndDate'|translate}}</th>
-              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'dashboard.SchoolYear.WeekEnd Days'|translate}}</th>
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'SchoolYear.School Year Name'|translate}}</th>
+              <th   pSortableColumn="curriculumCount"><p-sortIcon  field="curriculumCount"></p-sortIcon>{{'SchoolYear.curriculum Number'|translate}}</th>
+              <th   pSortableColumn="startDate"><p-sortIcon field="startDate"></p-sortIcon>{{'SchoolYear.School Year StartDate'|translate}}</th>
+              <th   pSortableColumn="endDate"><p-sortIcon  field="endDate"></p-sortIcon>{{'SchoolYear.School Year EndDate'|translate}}</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'SchoolYear.WeekEnd Days'|translate}}</th>
               <th   pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-              <th   pSortableColumn="status"><p-sortIcon  field="status" ></p-sortIcon>{{'dashboard.SchoolYear.Status'|translate}}</th>
+              <th   pSortableColumn="status"><p-sortIcon  field="status" ></p-sortIcon>{{'SchoolYear.Status'|translate}}</th>
               <th pSortableColumn="edit" class="actions "></th>
 
 

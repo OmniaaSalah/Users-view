@@ -232,8 +232,8 @@ export class TransferGroupComponent implements OnInit {
     {
       this.componentHeaderData.breadCrump=
       [
-        {label:this.translate.instant('dashboard.schools.studentsList') ,routerLink:'/student-management/students'},
-        { label: this.translate.instant('dashboard.students.TransferStudentGroup'), routerLink: `/school-management/school/${this.schoolId}/transfer-students`},
+        {label:this.translate.instant('schools.studentsList') ,routerLink:'/student-management/students'},
+        { label: this.translate.instant('students.TransferStudentGroup'), routerLink: `/school-management/school/${this.schoolId}/transfer-students`},
       ]
 
 
@@ -243,7 +243,7 @@ export class TransferGroupComponent implements OnInit {
       this.componentHeaderData.breadCrump=
          [
           { label: this.translate.instant('breadcrumb.schoolList') , routerLink: '/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.students.TransferStudentGroup'), routerLink: `/schools-and-students/schools/transfer-students`},
+          { label: this.translate.instant('students.TransferStudentGroup'), routerLink: `/schools-and-students/schools/transfer-students`},
         ]
 
 

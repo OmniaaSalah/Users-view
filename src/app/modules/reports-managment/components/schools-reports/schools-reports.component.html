@@ -6,7 +6,7 @@
 
 
     <div class="box-shadow bg-white raduis-12 my-3 p-5">
-        <h3 class="mb-5 heading heading-secondary fw-bold m-0">{{'dashboard.reports.The columns that you want to add to the table'|translate}}</h3>
+        <h3 class="mb-5 heading heading-secondary fw-bold m-0">{{'reports.The columns that you want to add to the table'|translate}}</h3>
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
@@ -38,13 +38,13 @@
                             <p-multiSelect [options]="(states$ |async)" display="chip" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-multiSelect>
                         </div>
                         <div class="col-lg-4">
-                            <label class="label" for="curriculum">{{'dashboard.schools.SchoolCurriculum'|translate }}  </label>
+                            <label class="label" for="curriculum">{{'schools.SchoolCurriculum'|translate }}  </label>
                             <p-multiSelect  [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.CurriculumId" optionValue="id"  optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
 
                         </div>
 
                         <div class="col-lg-4">
-                            <label class="label" for="curriculum">{{'dashboard.schools.hasSpecialClasses'|translate }}  </label>
+                            <label class="label" for="curriculum">{{'schools.hasSpecialClasses'|translate }}  </label>
                             <p-dropdown  [showClear]="true" StopProp [options]="booleanOptions" [(ngModel)]="filtration.HasSpecialEducationClasses" optionValue="value" inputId="curriculum" optionLabel="name" placeholder="{{'shared.yesOrNo'|translate }}"></p-dropdown>
 
                         </div>

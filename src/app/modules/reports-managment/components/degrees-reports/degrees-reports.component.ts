@@ -40,7 +40,7 @@ export class DegreesReportsComponent implements OnInit {
   faAngleDown = faAngleDown
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generateDegreesReport') ,routerLink:"/reports-managment/degrees-reports"},
+      { label: this.translate.instant('reports.generateDegreesReport') ,routerLink:"/reports-managment/degrees-reports"},
     ],
   }
   filtration = {
@@ -188,7 +188,7 @@ export class DegreesReportsComponent implements OnInit {
     }
     else
     {
-      this.toastr.warning(this.translate.instant('dashboard.reports.you should choose the school , schoolYear and grade that you need view it’s degrees data first'));
+      this.toastr.warning(this.translate.instant('reports.you should choose the school , schoolYear and grade that you need view it’s degrees data first'));
     }
   }
 }

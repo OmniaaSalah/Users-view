@@ -23,12 +23,12 @@
 
     <div class=" mb-4 border-dark radius-15  p-5 d-flex align-items-center" *ngIf="gracePeriodId">
         <div class="grid-container col-md-5">
-            <span class="color-gray-300 fs-4" >{{'dashboard.SystemSetting.CreatedBy'|translate}}</span>
+            <span class="color-gray-300 fs-4" >{{'SystemSetting.CreatedBy'|translate}}</span>
             <span class="color-primary"><a ></a>{{gracePeriodMainData?.createdBy |currentLang}}</span>
         </div>
 
         <div class="grid-container col-md-5">
-            <span class="color-gray-300 fs-4" >{{'dashboard.SystemSetting.CreatedDate'|translate}}</span>
+            <span class="color-gray-300 fs-4" >{{'SystemSetting.CreatedDate'|translate}}</span>
             <span class="color-primary">{{gracePeriodMainData?.createdDate | LocalizeDate}}</span>
         </div>
     </div>
@@ -36,26 +36,26 @@
     <div class=" mb-6 border-dark radius-15  p-5 bg-white">
         <div class="row gx-5">
             <div class="col-md-5 form-set"  *ngIf="!gracePeriodId">
-                <label  class="label required">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
+                <label  class="label required">{{'SystemSetting.gracePeriodType'|translate}}</label>
                 <p-dropdown
                 [options]="gracePeriodTypes$|async" name="type"
                 [(ngModel)]="selectedGracePeriod.currentValue"
                 (ngModelChange)="onGracePeriodChange($event)"
                 [ngModelOptions]="{standalone: true}" optionValue="code"
                 optionLabel="{{lang=='ar'? 'name.ar': 'name.en'}}"
-                placeholder="{{'dashboard.SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
+                placeholder="{{'SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
 
             </div>
 
             <div class="col-md-4" *ngIf="gracePeriodId">
                 <div class="">
-                    <label class="required color-gray-300 fs-4 mb-5" >{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
+                    <label class="required color-gray-300 fs-4 mb-5" >{{'SystemSetting.gracePeriodType'|translate}}</label>
                     <div class="color-primary">{{currentGracePeriodName |currentLang}}</div>
                 </div>
             </div>
 
             <div class="col-md-4">
-                    <label  class="label">{{'dashboard.SystemSetting.gracePeriodTimePeriod'|translate}}</label>
+                    <label  class="label">{{'SystemSetting.gracePeriodTimePeriod'|translate}}</label>
                     <p-calendar
                     [(ngModel)]="gracePeriodRange"
                     (ngModelChange)="onTimeRangeChanged($event)"
@@ -65,7 +65,7 @@
                     selectionMode="range"
                     [ngModelOptions]="{standalone: true}"
                     [showIcon]="true"
-                     placeholder="{{'dashboard.SystemSetting.period'|translate}}"></p-calendar>
+                     placeholder="{{'SystemSetting.period'|translate}}"></p-calendar>
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
     <div class="bg-white"  *ngIf="selectedGracePeriod.currentValue== gracePeriodEnum.transferStudents">
 
         <div class="form-set border-dark radius-15 p-5 ">
-            <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.chooseSchoolsThatAllowedToTransferGroup'|translate}}</h3>
+            <h3 class="heading heading--tertiary mb-5">{{'SystemSetting.chooseSchoolsThatAllowedToTransferGroup'|translate}}</h3>
             <div class="prim-table mt-4" >
                 <p-table #dt [lazy]="true" [value]="gracePeriodSchools.fromSchools.list.reverse()">
                     <!-- Table Caption -->
@@ -94,7 +94,7 @@
                             <div role="button" class="btn btn-primary  d-flex align-items-center justify-content-center gap-3 p-3"
                             (click)="openSchoolsModel('TransferFrom')">
                                 <fa-icon [icon]="faPlus"></fa-icon>
-                                <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
+                                <span>{{'SystemSetting.addSchool' |translate}}</span>
                             </div>
                         </div>
 
@@ -102,7 +102,7 @@
 
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
-                            <th pSortableColumn="name" style="width:300px">{{'dashboard.schools.schoolName'|translate}}</th>
+                            <th pSortableColumn="name" style="width:300px">{{'schools.schoolName'|translate}}</th>
                             <!-- <th pSortableColumn="city">{{'shared.grades'|translate}}</th> -->
                             <th class="actions" pFrozenColumn></th>
                         </tr>
@@ -141,7 +141,7 @@
 
 
         <div class="form-set border-dark radius-15 p-5 ">
-            <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.schoolsAllowedToTransferToIt'|translate}}</h3>
+            <h3 class="heading heading--tertiary mb-5">{{'SystemSetting.schoolsAllowedToTransferToIt'|translate}}</h3>
 
             <div class="prim-table mt-4" >
                 <p-table #dt [lazy]="true" [value]="gracePeriodSchools.toSchools.list.reverse()">
@@ -160,7 +160,7 @@
                             <div role="button" class="btn btn-primary  d-flex align-items-center justify-content-center gap-3 p-3"
                             (click)="openSchoolsModel('TransferTo')">
                                 <fa-icon [icon]="faPlus"></fa-icon>
-                                <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
+                                <span>{{'SystemSetting.addSchool' |translate}}</span>
                             </div>
                         </div>
 
@@ -168,7 +168,7 @@
 
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
-                            <th pSortableColumn="name" style="width:300px">{{'dashboard.schools.schoolName'|translate}}</th>
+                            <th pSortableColumn="name" style="width:300px">{{'schools.schoolName'|translate}}</th>
                             <!-- <th pSortableColumn="city">{{'shared.grades'|translate}}</th> -->
                             <th class="actions" pFrozenColumn></th>
 
@@ -230,7 +230,7 @@
                         <div role="button" class="btn btn-primary d-flex align-items-center justify-content-center gap-3 p-3"
                         (click)="openSchoolsModel()">
                             <fa-icon [icon]="faPlus"></fa-icon>
-                            <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
+                            <span>{{'SystemSetting.addSchool' |translate}}</span>
                         </div>
                     </div>
 
@@ -279,7 +279,7 @@
 
 
 
-<p-dialog header="{{'dashboard.SystemSetting.addSchools'|translate}}" (onHide)="paginationState.rows=8" [(visible)]="isSchoolsModelOpend" [modal]="true" [style]="{width: '70vw'}">
+<p-dialog header="{{'SystemSetting.addSchools'|translate}}" (onHide)="paginationState.rows=8" [(visible)]="isSchoolsModelOpend" [modal]="true" [style]="{width: '70vw'}">
     <ng-template pTemplate="content">
         <form class="custom-form">
 
@@ -305,7 +305,7 @@
             </div>
 
             <div class="row gx-5 gy-4 form-set">
-                <label class="fw-bold" for="">{{'dashboard.schools.schoolsList'|translate}} ({{availableSchools.total}})</label>
+                <label class="fw-bold" for="">{{'schools.schoolsList'|translate}} ({{availableSchools.total}})</label>
 
                 <ng-container *ngIf="!availableSchools.loading">
 

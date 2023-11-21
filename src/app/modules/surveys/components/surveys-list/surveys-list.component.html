@@ -15,12 +15,12 @@
 
                     <div class="row gx-5 form-set">
                         <div class="col-lg-4">
-                            <label class="label" for="day"> {{'dashboard.surveys.surveyType'|translate }} </label>
-                            <p-dropdown [options]="surveyType" [showClear]="true" StopProp [(ngModel)]="filtration.SurveyType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.surveyTypechoices'|translate }}"></p-dropdown>
+                            <label class="label" for="day"> {{'surveys.surveyType'|translate }} </label>
+                            <p-dropdown [options]="surveyType" [showClear]="true" StopProp [(ngModel)]="filtration.SurveyType" optionLabel="name" optionValue="value" placeholder="{{'surveys.surveyTypechoices'|translate }}"></p-dropdown>
                         </div>
                         <div class="col-lg-4">
-                            <label class="label" for="curriculum">{{'dashboard.surveys.surveyStatus'|translate }}  </label>
-                            <p-multiSelect [options]="surveyStatus" display="chip"  [(ngModel)]="filtration.SurveyStatus"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.Select surveyType'|translate }}"></p-multiSelect>
+                            <label class="label" for="curriculum">{{'surveys.surveyStatus'|translate }}  </label>
+                            <p-multiSelect [options]="surveyStatus" display="chip"  [(ngModel)]="filtration.SurveyStatus"  optionLabel="name" optionValue="value" placeholder="{{'surveys.Select surveyType'|translate }}"></p-multiSelect>
                         </div>
                     </div>
                 </app-table-caption>
@@ -30,30 +30,30 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th pSortableColumn="SurveyNumber" class="lg">
-                        <p-sortIcon field="SurveyNumber"></p-sortIcon>{{'dashboard.surveys.surveyNumber' | translate}}
+                        <p-sortIcon field="SurveyNumber"></p-sortIcon>{{'surveys.surveyNumber' | translate}}
                     </th>
 
                     <th pSortableColumn="{{lang=='ar' ? 'ArabicTitle' : 'EnglishTitle'}}" class="lg">
-                        <p-sortIcon field="title.ar"></p-sortIcon>{{'dashboard.surveys.surveyAddress' | translate}}
+                        <p-sortIcon field="title.ar"></p-sortIcon>{{'surveys.surveyAddress' | translate}}
                     </th>
 
                     <th pSortableColumn="SurveyType" class="md">
-                        <p-sortIcon field="surveyType"></p-sortIcon>{{'dashboard.surveys.surveyType' | translate}}
+                        <p-sortIcon field="surveyType"></p-sortIcon>{{'surveys.surveyType' | translate}}
                     </th>
 
                     <th   pSortableColumn="UserName" class="lg"><p-sortIcon  field="userName.ar" >
-                        </p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}
+                        </p-sortIcon>{{'Subjects.Created by'|translate}}
                     </th>
 
                     <th pSortableColumn="TargetGuardians" class="min">
-                        <p-sortIcon field="targetGuardians"></p-sortIcon>{{'dashboard.surveys.targets' | translate}}
+                        <p-sortIcon field="targetGuardians"></p-sortIcon>{{'surveys.targets' | translate}}
                     </th>
 
                     <th pSortableColumn=" ResponsesTotalNumber" class="min">
-                        <p-sortIcon field="responsesTotalNumber"></p-sortIcon>{{'dashboard.surveys.responses' | translate}}
+                        <p-sortIcon field="responsesTotalNumber"></p-sortIcon>{{'surveys.responses' | translate}}
                     </th>
                     <th pSortableColumn="SurveyStatus" class="md">
-                        <p-sortIcon field="surveyStatus"></p-sortIcon>{{'dashboard.surveys.surveyStatus' | translate}}
+                        <p-sortIcon field="surveyStatus"></p-sortIcon>{{'surveys.surveyStatus' | translate}}
                     </th>
                     <th  class="actions--lg" pSortableColumn="CreatedDate"><p-sortIcon  field="createdDate">
                          </p-sortIcon>{{'shared.Created Date'|translate}}
@@ -71,8 +71,8 @@
                     <td class="lg">{{product.surveyNumber}}</td>
                     <td class="lg">{{product.title| currentLang}}</td>
                     <td class="md">
-                        <span *ngIf="product.surveyType==StatusEnum.Mandatory">{{'dashboard.surveys.mandatory'| translate}}</span>
-                        <span *ngIf="product.surveyType==StatusEnum.Optional">{{'dashboard.surveys.optional'| translate}}</span>
+                        <span *ngIf="product.surveyType==StatusEnum.Mandatory">{{'surveys.mandatory'| translate}}</span>
+                        <span *ngIf="product.surveyType==StatusEnum.Optional">{{'surveys.optional'| translate}}</span>
                     </td>
                     <td class="lg">{{product.userName|currentLang}}</td>
                     <td class="min">{{product.targetGuardians}}</td>
@@ -81,11 +81,11 @@
                     <td class="md">
                         <div class="d-flex align-items-center">
                             <div [ngSwitch]="product.surveyStatus">
-                                <div class="alerting primary" *ngSwitchCase="StatusEnum.Draft"> {{'dashboard.surveys.'+StatusEnum.Draft| translate}}</div>
-                                <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
-                                <div class="alerting danger" *ngSwitchCase="StatusEnum.Closed "> {{'dashboard.surveys.'+StatusEnum.Closed | translate}}</div>
-                                <div class="alerting secondary" *ngSwitchCase="StatusEnum.Apparent "> {{'dashboard.surveys.'+StatusEnum.Apparent | translate}}</div>
-                                <div class="alerting dark" *ngSwitchCase="StatusEnum.Canceled "> {{'dashboard.surveys.'+StatusEnum.Canceled | translate}}</div>
+                                <div class="alerting primary" *ngSwitchCase="StatusEnum.Draft"> {{'surveys.'+StatusEnum.Draft| translate}}</div>
+                                <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'surveys.'+StatusEnum.Sent | translate}}</div>
+                                <div class="alerting danger" *ngSwitchCase="StatusEnum.Closed "> {{'surveys.'+StatusEnum.Closed | translate}}</div>
+                                <div class="alerting secondary" *ngSwitchCase="StatusEnum.Apparent "> {{'surveys.'+StatusEnum.Apparent | translate}}</div>
+                                <div class="alerting dark" *ngSwitchCase="StatusEnum.Canceled "> {{'surveys.'+StatusEnum.Canceled | translate}}</div>
                             </div>
 
                         </div>
@@ -93,9 +93,9 @@
                     <td>{{product.createdDate| LocalizeDate}}</td>
                     <td >
                         <span *ngIf="product.surveyStatus==StatusEnum.Sent||product.surveyStatus==StatusEnum.Apparent">{{product?.disAppearanceDate| LocalizeDate}}</span>
-                        <span *ngIf="product.surveyStatus==StatusEnum.Draft">{{'dashboard.surveys.NotDeterminedYet'| translate}}</span>
-                        <span *ngIf="product.surveyStatus==StatusEnum.Closed">{{'dashboard.surveys.Finished'| translate}}</span>
-                        <span *ngIf="product.surveyStatus==StatusEnum.Canceled">{{'dashboard.surveys.Closed'| translate}}</span>
+                        <span *ngIf="product.surveyStatus==StatusEnum.Draft">{{'surveys.NotDeterminedYet'| translate}}</span>
+                        <span *ngIf="product.surveyStatus==StatusEnum.Closed">{{'surveys.Finished'| translate}}</span>
+                        <span *ngIf="product.surveyStatus==StatusEnum.Canceled">{{'surveys.Closed'| translate}}</span>
                     </td>
                     <td pFrozenColumn [frozen]="true">
                         <div role="button" class=" d-flex gap-3 justify-content-end align-items-center mx-4" routerLink="/educational-settings/surveys/Survey/{{product.id}}">

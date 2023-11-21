@@ -102,7 +102,7 @@ export class EditHistoryComponent implements OnInit {
     let filter = {...this.filtration,PageSize:this.editList.totalAllData,Page:1}
     this.schoolsService.editListToExport(filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.editableList'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('schools.editableList'))
     })
   }
 

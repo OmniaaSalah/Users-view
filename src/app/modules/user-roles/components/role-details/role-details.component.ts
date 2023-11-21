@@ -52,7 +52,7 @@ export class RoleDetailsComponent implements OnInit {
   this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'), routerLink: '/manager-tools/user-roles/user-roles-list',routerLinkActiveOptions:{exact: true} },
+          { label: this.translate.instant('UserRole.List Of Job Roles'), routerLink: '/manager-tools/user-roles/user-roles-list',routerLinkActiveOptions:{exact: true} },
           { label: this.translate.instant('breadcrumb.Job Role Details') +" ("+this.userRoleTittle+")" ,routerLink:'/manager-tools/user-roles/role-details/'+this.urlParameter}],
         'mainTitle': { main: this.userRoleTittle}
       }

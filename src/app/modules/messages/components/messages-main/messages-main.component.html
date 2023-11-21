@@ -1,17 +1,17 @@
 <div class="main-message-header dashboard d-flex justify-content-between">
   <div class="left d-flex align-items-center">
     <button *ngIf="scope != 'Guardian'" class="btn btn-primary" (click)="showDialog()">
-      {{"dashboard.Messages.Send a new message" | translate}}
+      {{"Messages.Send a new message" | translate}}
     </button>
 
-    <p-dialog header="{{ 'dashboard.Messages.Send a new message' | translate }}" [draggable]="false" [resizable]="false"
+    <p-dialog header="{{ 'Messages.Send a new message' | translate }}" [draggable]="false" [resizable]="false"
       [modal]="true" [(visible)]="display" [style]="{ width: '50vw' }" class="dialog-header" [baseZIndex]="10000">
       <app-send-message (hiddenDialog)="closeDialog()"></app-send-message>
     </p-dialog>
   </div>
 </div>
 
-<div id="notification-content">
+<div id="notification-content" class=" radius-15 bg-white border-dark p-5">
   <!-- <div class="col-5">
     <div class="myInput myInput--full myInput--search p-input-icon-right mt-6">
       <i class="pi pi-search fs-3 "></i>
@@ -39,7 +39,7 @@
               <div class="col-md-4 g-5 form-set">
                 <div class="form-group">
                   <label class="label" for="">{{
-                    "dashboard.Messages.date (from - to)" | translate
+                    "Messages.date (from - to)" | translate
                     }}</label>
 
                   <p-calendar
@@ -57,10 +57,10 @@
 
               <div class="col-md-4 d-flex justify-content-end">
                 <!-- <button class="btn btn-primary" #notReadBtn (click)="getNotReadable()">
-                  {{ "dashboard.Messages.pending" | translate }}
+                  {{ "Messages.pending" | translate }}
                 </button>
                 <button class="btn btn-primary" #readBtn (click)="getReadable()">
-                  {{ "dashboard.Messages.answered" | translate }}
+                  {{ "Messages.answered" | translate }}
                 </button> -->
                 <app-button-group [items]="btnGroupItems"
                   (onClick)="searchModel.MessageStatus=$event; getMessages(searchModel)"></app-button-group>
@@ -103,8 +103,7 @@
                     <p class="paragraph" ><span *ngIf="message?.finalScope==currentUserScope">{{'shared.You'|translate}} : </span>{{ message?.messageText }}</p>
                   </div>
                   <span class="receviedTime">{{
-                    message.createdDate | date | translate
-                    }}</span>
+                    message.createdDate | toLocalDate:'YYYY-MM-DD HH:mm' |LocalizeDate:'d MMMM y hh:mm a' }}</span>
                 </div>
 
                 <div class="Details align-items-center py-3">
@@ -144,7 +143,7 @@
   </div>
 
   <div class="Empty" *ngIf="!messages.total && !messages.loading">
-    <app-informative-block subTitle="{{'dashboard.Messages.Messages List is empty' |translate}}"></app-informative-block>
+    <app-informative-block subTitle="{{'Messages.Messages List is empty' |translate}}"></app-informative-block>
   </div>
 
 

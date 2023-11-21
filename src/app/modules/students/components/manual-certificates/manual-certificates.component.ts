@@ -44,7 +44,7 @@ export class ManualCertificatesComponent implements OnInit {
     breadCrump: [],
     mainTitle: {
       main: this.translate.instant(
-        'dashboard.students.Issuance of certificate'
+        'students.Issuance of certificate'
       ),
     },
   };
@@ -138,7 +138,7 @@ export class ManualCertificatesComponent implements OnInit {
         if (result.statusCode != 'BadRequest') {
           this.toastr.success(
             this.translate.instant(
-              'dashboard.issue of certificate.success message'
+              'issue of certificate.success message'
             )
           );
         } else {
@@ -164,13 +164,13 @@ export class ManualCertificatesComponent implements OnInit {
   checkDashboardHeader() {
     // this.componentHeaderData.breadCrump = [
     //   {
-    //     label: this.translate.instant('dashboard.students.studentsList'),
+    //     label: this.translate.instant('students.studentsList'),
     //     routerLink: '/schools-and-students/students/',
     //     routerLinkActiveOptions: { exact: true },
     //   },
     //   {
     //     label: this.translate.instant(
-    //       'dashboard.students.Issuing the certificate manually'
+    //       'students.Issuing the certificate manually'
     //     ),
     //     routerLink: `/schools-and-students/students/student/${this.studentId}/IssuanceOfACertificateComponent`,
     //   },
@@ -181,17 +181,17 @@ export class ManualCertificatesComponent implements OnInit {
 
       this.componentHeaderData.breadCrump = [
         {
-          label: this.translate.instant('dashboard.parents.parents'),
+          label: this.translate.instant('parents.parents'),
           routerLink: '/student-management/all-parents/',
           routerLinkActiveOptions: { exact: true },
         },
         {
-          label: this.translate.instant('dashboard.parents.childrenList'),
+          label: this.translate.instant('parents.childrenList'),
           routerLink: `/student-management/all-parents/parent/${this.parentId}/all-children`,
           routerLinkActiveOptions: { exact: true },
         },
         {
-          label: this.translate.instant('dashboard.parents.sonDetails'),
+          label: this.translate.instant('parents.sonDetails'),
           routerLink: `/student-management/all-parents/parent/${this.parentId}/student/${this.studentId}`,
         },
       ];
@@ -202,24 +202,24 @@ export class ManualCertificatesComponent implements OnInit {
       if(this.router.url.includes('all-parents')){
         this.componentHeaderData.breadCrump = [
           {
-            label: this.translate.instant('dashboard.parents.parents'),
+            label: this.translate.instant('parents.parents'),
             routerLink: '/schools-and-students/all-parents/',
             routerLinkActiveOptions: { exact: true },
           },
           {
-            label: this.translate.instant('dashboard.parents.childrenList'),
+            label: this.translate.instant('parents.childrenList'),
             routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/all-children`,
             routerLinkActiveOptions: { exact: true },
           },
           {
-            label: this.translate.instant('dashboard.parents.sonDetails'),
+            label: this.translate.instant('parents.sonDetails'),
             routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/student/${this.studentGUID}`,
             queryParams:{registered:true},
             routerLinkActiveOptions: { exact: true },
           },
           {
             label: this.translate.instant(
-              'dashboard.students.Issuing the certificate manually'
+              'students.Issuing the certificate manually'
             ),
             routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/student/${this.studentGUID}/IssuanceOfACertificateComponent`,
           },
@@ -230,13 +230,13 @@ export class ManualCertificatesComponent implements OnInit {
 
 
           {
-            label: this.translate.instant('dashboard.students.StudentInfo'),
+            label: this.translate.instant('students.StudentInfo'),
             routerLink: '/schools-and-students/students/student/' + this.studentGUID,
             routerLinkActiveOptions:{exact: true}
           },
           {
             label: this.translate.instant(
-              'dashboard.students.Issuing the certificate manually'
+              'students.Issuing the certificate manually'
             ),
             routerLink: `/schools-and-students/students/student/${this.studentGUID}/IssuanceOfACertificateComponent`,
           },

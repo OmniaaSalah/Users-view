@@ -2,7 +2,7 @@
 
     <div class="search-box bg-gray-30 mb-5 border-dark radius-15">
         <div class="d-flex justify-content-between p-5 " role="button" (click)="isCollapsed = !isCollapsed">
-            <span class="fs-2 color-primary">{{'dashboard.parents.searchForParent' |translate}}</span>
+            <span class="fs-2 color-primary">{{'parents.searchForParent' |translate}}</span>
             <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
         </div>
 
@@ -10,7 +10,7 @@
 
            <div class="row g-5 form-set" >
             <div class="col-md-4">
-                <label class="label">{{'dashboard.students.RegistrationDateAndTimeFrom-To'|translate}}</label>
+                <label class="label">{{'students.RegistrationDateAndTimeFrom-To'|translate}}</label>
                 <p-calendar  [(ngModel)]="date" [showIcon]="true" inputId="icon" selectionMode="range"
                      placeholder="{{'dd/mm/yy'|translate}} - {{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy">
                 </p-calendar>
@@ -19,7 +19,7 @@
 
 
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
+                    <label class="label">{{'students.curriculum'| translate}}</label>
                     <p-multiSelect  [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
                 </div>
 
@@ -29,20 +29,20 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                     <p-multiSelect      [options]="(AllGrades$ | async)"     [ngModelOptions]="{standalone: true}"  display="chip"       [(ngModel)]="filtration.GradeId"    optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"     placeholder="{{'dashboard.students.chooseClasse' |translate}}"></p-multiSelect>
+                    <label class="label">{{'students.classes'| translate}}</label>
+                     <p-multiSelect      [options]="(AllGrades$ | async)"     [ngModelOptions]="{standalone: true}"  display="chip"       [(ngModel)]="filtration.GradeId"    optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"     placeholder="{{'students.chooseClasse' |translate}}"></p-multiSelect>
                 </div>
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.divisions'| translate}}</label>
-                    <p-multiSelect       [options]="(schoolDivisions$ | async)"     [ngModelOptions]="{standalone: true}"  display="chip"    [(ngModel)]="filtration.DivisionId"    optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"      placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-multiSelect>
+                    <label class="label">{{'students.divisions'| translate}}</label>
+                    <p-multiSelect       [options]="(schoolDivisions$ | async)"     [ngModelOptions]="{standalone: true}"  display="chip"    [(ngModel)]="filtration.DivisionId"    optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"      placeholder="{{'students.choosedivision' |translate}}"></p-multiSelect>
 
                 </div>
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.sonsOfMartyrs'| translate}}</label>
+                    <label class="label">{{'students.sonsOfMartyrs'| translate}}</label>
                     <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsChildOfAMartyr" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.withDisabilities'| translate}}</label>
+                    <label class="label">{{'students.withDisabilities'| translate}}</label>
                     <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsSpecialAbilities" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
 
@@ -65,7 +65,7 @@
     </div>
 
     <div class="box-shadow bg-white raduis-12 my-3 p-5">
-        <h3 class="mb-5 heading heading-secondary fw-bold m-0">{{'dashboard.reports.The columns that you want to add to the table'|translate}}</h3>
+        <h3 class="mb-5 heading heading-secondary fw-bold m-0">{{'reports.The columns that you want to add to the table'|translate}}</h3>
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
@@ -151,8 +151,8 @@
                         <td *ngIf="tableColumns[14].isSelected == true">
                             {{parent?.studentCity || ('shared.notFound' | translate)}}
                         </td>
-                        <td *ngIf="tableColumns[15].isSelected == true">
-                          {{(parent?.studentRegisterationDate | toLocalDate:'YYYY-MM-DD HH:mm' |LocalizeDate:'d MMMM y hh:mm a') || ('shared.notFound' | translate)}}
+                        <td dir="ltr" class="justify-content-center" *ngIf="tableColumns[15].isSelected == true">
+                          {{(parent?.studentRegisterationDate | toLocalDate:'YYYY-MM-DD HH:mm' |LocalizeDate:'d/ M/ yyyy  hh:mm') || ('shared.notFound' | translate)}}
                       </td>
 
 

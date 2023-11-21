@@ -16,9 +16,9 @@
 
             <div class="row gx-5  mb-6">
                 <div class="col-md-4">
-                    <label class="label" for="day">{{'dashboard.addChild.The reason for the lack of identification' | translate}} <span class="star">*</span></label>
+                    <label class="label" for="day">{{'addChild.The reason for the lack of identification' | translate}} <span class="star">*</span></label>
                     <p-dropdown [options]="NoIdentityReason|async"
-                    [ngClass]="{'ng-invalid ng-dirty':reasonForNotHavingEmiratesId.errors?.['required'] && reasonForNotHavingEmiratesId.touched}" formControlName="reasonForNotHavingEmiratesId"  optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id"  placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
+                    [ngClass]="{'ng-invalid ng-dirty':reasonForNotHavingEmiratesId.errors?.['required'] && reasonForNotHavingEmiratesId.touched}" formControlName="reasonForNotHavingEmiratesId"  optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id"  placeholder="{{'addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
                     <div [hidden]="reasonForNotHavingEmiratesId.valid || reasonForNotHavingEmiratesId.untouched">
                         <small *ngIf="reasonForNotHavingEmiratesId.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
@@ -40,7 +40,7 @@
               <ng-container formGroupName="name">
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'sign up.Name (in Arabic)' | translate}} <span class="star">*</span></label>
-                    <input type="text"  id="day" formControlName="ar"  class="form-control" pInputText placeholder="{{'dashboard.addChild.name' | translate}}" />
+                    <input type="text"  id="day" formControlName="ar"  class="form-control" pInputText placeholder="{{'addChild.name' | translate}}" />
                     <div [hidden]="arabicName.valid || arabicName.untouched">
                         <small *ngIf="arabicName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'sign up.Name (in English)' | translate}} <span class="star">*</span></label>
-                    <input type="text" id="day" formControlName="en" class="form-control" pInputText placeholder="{{'dashboard.addChild.name' | translate}}" />
+                    <input type="text" id="day" formControlName="en" class="form-control" pInputText placeholder="{{'addChild.name' | translate}}" />
                     <div [hidden]="englishName.valid || englishName.untouched">
                         <small *ngIf="englishName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
@@ -66,11 +66,11 @@
 
 
                 <div class="col-md-4">
-                    <label class="label" for="day"> {{'dashboard.addChild.Nationality' | translate}} <span class="star">*</span> </label>
+                    <label class="label" for="day"> {{'addChild.Nationality' | translate}} <span class="star">*</span> </label>
                     <p-dropdown  [options]=" Nationalities$|async"
                     [filter]="true"
                     filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                    [ngClass]="{'ng-invalid ng-dirty':nationlityId.errors?.['required'] && nationlityId.touched}" formControlName="nationlityId" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
+                    [ngClass]="{'ng-invalid ng-dirty':nationlityId.errors?.['required'] && nationlityId.touched}" formControlName="nationlityId" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'addChild.Nationality' | translate}}"></p-dropdown>
                     <div [hidden]="nationlityId.valid || nationlityId.untouched">
                         <small *ngIf="nationlityId.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
@@ -85,7 +85,7 @@
               <ng-container formGroupName="surName">
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'sign up.NickName (in Arabic)' | translate}} <span class="star">*</span></label>
-                    <input type="text" id="day"  class="form-control" formControlName="ar" pInputText placeholder="{{'dashboard.addChild.nickname' | translate}}" />
+                    <input type="text" id="day"  class="form-control" formControlName="ar" pInputText placeholder="{{'addChild.nickname' | translate}}" />
                     <div [hidden]="arabicNickName.valid || arabicNickName.untouched">
                         <small *ngIf="arabicNickName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'sign up.NickName (in English)' | translate}} <span class="star">*</span></label>
-                    <input type="text" id="day"   class="form-control" formControlName="en" pInputText placeholder="{{'dashboard.addChild.nickname' | translate}}" />
+                    <input type="text" id="day"   class="form-control" formControlName="en" pInputText placeholder="{{'addChild.nickname' | translate}}" />
                     <div [hidden]="englishNickName.valid || englishNickName.untouched">
                         <small *ngIf="englishNickName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
@@ -111,8 +111,8 @@
 
 
                 <div class="col-md-4">
-                    <label class="label" for="day"> {{'dashboard.addChild.gender' | translate}} <span class="star">*</span> </label>
-                    <p-dropdown  [options]="genderList" [ngClass]="{'ng-invalid ng-dirty':gender.errors?.['required'] && gender.touched}" formControlName="gender"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
+                    <label class="label" for="day"> {{'addChild.gender' | translate}} <span class="star">*</span> </label>
+                    <p-dropdown  [options]="genderList" [ngClass]="{'ng-invalid ng-dirty':gender.errors?.['required'] && gender.touched}" formControlName="gender"  optionLabel="name" optionValue="value" placeholder="{{'addChild.gender' | translate}}"></p-dropdown>
                     <div [hidden]="gender.valid || gender.untouched">
                         <small *ngIf="gender.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
@@ -126,7 +126,7 @@
             <div class="row gx-5 form-set mb-5">
 
                 <div class="col-md-4">
-                    <label class="label" for="day">{{'dashboard.addChild.Date of Birth' | translate}} <span class="star">*</span></label>
+                    <label class="label" for="day">{{'addChild.Date of Birth' | translate}} <span class="star">*</span></label>
                     <p-calendar formControlName="birthDate" [ngClass]="{'ng-invalid ng-dirty':birthDate.errors?.['required'] && birthDate.touched}" [showIcon]="true" inputId="icon"  placeholder="{{'dd/mm/yy'|translate}}"  dataType="string"  [readonlyInput]="true" [maxDate]="maxDate"   dateFormat="yy-mm-dd" ></p-calendar>
                     <div [hidden]="birthDate.valid || birthDate.untouched">
                     <small *ngIf="birthDate.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -137,10 +137,10 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}} <span class="star">*</span></label>
+                    <label class="label" for="day">{{'addChild.Relevance Type' | translate}} <span class="star">*</span></label>
                     <p-dropdown [options]="relatives$|async"
                     [ngClass]="{'ng-invalid ng-dirty':relativeRelationId.errors?.['required'] && relativeRelationId.touched}"
-                    formControlName="relativeRelationId" optionLabel="{{lang == 'ar'?'arabicName' : 'englishName'}}" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+                    formControlName="relativeRelationId" optionLabel="{{lang == 'ar'?'arabicName' : 'englishName'}}" optionValue="id" placeholder="{{'addChild.Relevance Type' | translate}}"></p-dropdown>
                     <div [hidden]="relativeRelationId.valid || relativeRelationId.untouched">
                         <small *ngIf="relativeRelationId.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
@@ -149,10 +149,10 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <label class="label" for="day">{{'dashboard.addChild.Religion' | translate}} <span class="star">*</span></label>
+                    <label class="label" for="day">{{'addChild.Religion' | translate}} <span class="star">*</span></label>
                     <p-dropdown  [options]="religions$ |async"
                     [ngClass]="{'ng-invalid ng-dirty':religionId.errors?.['required'] && religionId.touched}"
-                    formControlName="religionId" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
+                    formControlName="religionId" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'addChild.Religion' | translate}}"></p-dropdown>
                     <div [hidden]="religionId.valid || religionId.untouched">
                         <small *ngIf="religionId.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
@@ -165,15 +165,15 @@
 
             <hr class="my-5">
 
-            <h3 class="mb-5 fw-bold">{{'dashboard.addChild.required attachments' | translate}}</h3>
+            <h3 class="mb-5 fw-bold">{{'addChild.required attachments' | translate}}</h3>
 
             <div class="row gx-5 form-set  subjects ">
                 <div class="col-md-6">
-                    <P>{{'dashboard.addChild.personalPicture' | translate}}</P>
+                    <P>{{'addChild.personalPicture' | translate}}</P>
                     <app-file-upload view="full" (onFileUpload)="setAttachment(personalPhoto,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-6">
-                    <P>{{'dashboard.addChild.PassportPicture' | translate}}</P>
+                    <P>{{'addChild.PassportPicture' | translate}}</P>
                     <app-file-upload view="full" (onFileUpload)="setAttachment(passportAttach,$event)"></app-file-upload>
                 </div>
             </div>
@@ -193,7 +193,7 @@
             </div>
             <div class="row gx-5 form-set  subjects ">
                 <div class="col-md-6">
-                    <P>{{'dashboard.addChild.birthCertificate' | translate}} <span class="star">*</span></P>
+                    <P>{{'addChild.birthCertificate' | translate}} <span class="star">*</span></P>
                     <app-file-upload view="full" (onFileUpload)="setAttachment(birthDateAttach,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-6">

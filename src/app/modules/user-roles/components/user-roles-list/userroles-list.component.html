@@ -1,6 +1,6 @@
 
 <ng-container *permit="ClaimsEnum.S_C_Role">
-    <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/manager-tools/user-roles/new-role'" [content]="'dashboard.UserRole.Add New Role'"></app-add-btn>
+    <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/manager-tools/user-roles/new-role'" [content]="'UserRole.Add New Role'"></app-add-btn>
 </ng-container>
 
 <div class="prim-table mt-4" *ngIf="roles.totalAllData || roles.loading">
@@ -12,8 +12,8 @@
 
                 <div class="row gx-5 form-set">
                     <div class="col-lg-4">
-                        <label class="label" for="roleStatus">{{'dashboard.UserRole.Status'|translate }} </label>
-                        <p-dropdown [options]="roleStatusList" [showClear]="true" StopProp [(ngModel)]="filtration.isactive" inputId="roleStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate }}"></p-dropdown>
+                        <label class="label" for="roleStatus">{{'UserRole.Status'|translate }} </label>
+                        <p-dropdown [options]="roleStatusList" [showClear]="true" StopProp [(ngModel)]="filtration.isactive" inputId="roleStatus" optionLabel="name" optionValue="value" placeholder="{{'UserRole.Select Job Role Status'|translate }}"></p-dropdown>
                     </div>
                 </div>
 
@@ -24,11 +24,11 @@
 
       <ng-template pTemplate="header" >
             <tr  >
-              <th   pSortableColumn="{{lang=='ar' ? 'arabicname' : 'name'}}" ><p-sortIcon  field="{{lang=='ar' ? 'arabicname' : 'name'}}" ></p-sortIcon>{{'dashboard.UserRole.JobRole Name'|translate}}</th>
+              <th   pSortableColumn="{{lang=='ar' ? 'arabicname' : 'name'}}" ><p-sortIcon  field="{{lang=='ar' ? 'arabicname' : 'name'}}" ></p-sortIcon>{{'UserRole.JobRole Name'|translate}}</th>
               <th   pSortableColumn="creatorname"><p-sortIcon  field="creatorname"></p-sortIcon>{{'shared.User Name'|translate}}</th>
-              <th   pSortableColumn="roleUsers"><p-sortIcon field="roleUsers"></p-sortIcon>{{'dashboard.UserRole.Role Users'|translate}}</th>
+              <th   pSortableColumn="roleUsers"><p-sortIcon field="roleUsers"></p-sortIcon>{{'UserRole.Role Users'|translate}}</th>
               <th   pSortableColumn="createddate"><p-sortIcon field="createddate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-              <th   pSortableColumn="status"><p-sortIcon field="status"></p-sortIcon>{{'dashboard.UserRole.Status'|translate}}</th>
+              <th   pSortableColumn="status"><p-sortIcon field="status"></p-sortIcon>{{'UserRole.Status'|translate}}</th>
               <th   pSortableColumn="nationality" class="actions"></th>
 
 
@@ -98,7 +98,7 @@
 
    <!-- popup to show userlist of this role  -->
    <div class="prim-table" >
-   <p-dialog header="{{'dashboard.UserInformation.List Of Users'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayUserList" [style]="{width: '28vw'}">
+   <p-dialog header="{{'UserInformation.List Of Users'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayUserList" [style]="{width: '28vw'}">
     <div class="container">
         <div class="mb-5" >
                 <div class="row" *ngIf="!showLoader">

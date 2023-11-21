@@ -23,12 +23,12 @@
 
         <ng-template pTemplate="header" let-columns="columns">
             <tr>
-                <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
-                <th pSortableColumn="surName">{{'dashboard.schools.evaluation'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
-                <th pSortableColumn="trackName">{{'dashboard.parents.Result'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
-                <th pSortableColumn="nationalityId">{{'dashboard.parents.GPA'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
-                <th pSortableColumn="nationalityId">{{'dashboard.parents.Credithour'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
+                <th pSortableColumn="studentNumber">{{'schools.studentId'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
+                <th pSortableColumn="surName">{{'schools.evaluation'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
+                <th pSortableColumn="trackName">{{'parents.Result'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
+                <th pSortableColumn="nationalityId">{{'parents.GPA'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
+                <th pSortableColumn="nationalityId">{{'parents.Credithour'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
                 <th *ngIf="subjectStatus=='Pending'" class="actions"></th>
                 <th *ngIf="subjectStatus=='Accepted'" class="actions"></th>
 
@@ -86,18 +86,18 @@
 
 
 
-<p-dialog header="{{'dashboard.schools.updateStudentDegree'| translate}}" [(visible)]="editDegreeModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw'}">
+<p-dialog header="{{'schools.updateStudentDegree'| translate}}" [(visible)]="editDegreeModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw'}">
     <ng-template pTemplate="content">
-        <!-- <p>{{'dashboard.schools.pleaseChooseImprovementType'| translate}}</p> -->
+        <!-- <p>{{'schools.pleaseChooseImprovementType'| translate}}</p> -->
         <div class="grid-container mb-5 ">
-            <p class="color-gray-300 fs-4">{{ 'dashboard.schools.student'|translate }}</p>
+            <p class="color-gray-300 fs-4">{{ 'schools.student'|translate }}</p>
             <span class="color-primary ">{{stuentToImproveDegree.name |currentLang}}</span>
         </div>
 
         <div class="custom-form">
             <div class="form-set">
-                <label class="label" for="description">{{'dashboard.reports.StudentDegree'| translate}}</label>
-                <input [LangRestrict]="'numb'" [(ngModel)]="stuentToImproveDegree.studentDegree" pInputText placeholder="{{'dashboard.reports.StudentDegree' | translate}}" />
+                <label class="label" for="description">{{'reports.StudentDegree'| translate}}</label>
+                <input [LangRestrict]="'numb'" [(ngModel)]="stuentToImproveDegree.studentDegree" pInputText placeholder="{{'reports.StudentDegree' | translate}}" />
             </div>
 
             <div class="form-set">

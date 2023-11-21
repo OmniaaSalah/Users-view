@@ -62,9 +62,9 @@ export class IndexesService {
       map(res=>{
         return res.data.map(index =>{
           return {
-            [this.translate.instant('dashboard.Indexes.List Type')]: this.translate.instant(index?.indexType),
-            [this.translate.instant('dashboard.Indexes.Index Name')]: index?.indexName[this.lang],
-            [this.translate.instant('dashboard.Indexes.Index Status')]: this.translate.instant(index?.indexStatus),
+            [this.translate.instant('Indexes.List Type')]: this.translate.instant(index?.indexType),
+            [this.translate.instant('Indexes.Index Name')]: index?.indexName[this.lang],
+            [this.translate.instant('Indexes.Index Status')]: this.translate.instant(index?.indexStatus),
 
           }
         })

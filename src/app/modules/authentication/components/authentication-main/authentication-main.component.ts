@@ -392,7 +392,7 @@ export class AuthenticationMainComponent implements OnInit {
         (err) => {
           this.isUAeAccountBtnLoading = false;
           this.closeConfirmationModel();
-          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+          this.toastService.error(this.translate.instant('AnnualHoliday.error,please try again'));
         }
       );
   }

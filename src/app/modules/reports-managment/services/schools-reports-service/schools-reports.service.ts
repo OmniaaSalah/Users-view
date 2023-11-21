@@ -40,22 +40,22 @@ export class SchoolsReportsService {
         sortField: this.lang =='ar'? 'StatesEnglishName': 'StatesArabicName'
       },
       {
-        name: this.translate.instant('dashboard.schools.TeachersNumbers'),
+        name: this.translate.instant('schools.TeachersNumbers'),
         isSelected: true,
         sortField: 'SchoolTeachersCount'
       },
       {
-        name:  this.translate.instant('dashboard.schools.StudentsNumbers'),
+        name:  this.translate.instant('schools.StudentsNumbers'),
         isSelected: true,
         sortField: 'SchoolStudentCount'
       },
       {
-        name:this.translate.instant('dashboard.schools.SchoolStudentsPercentge'),
+        name:this.translate.instant('schools.SchoolStudentsPercentge'),
         isSelected: true,
         sortField: 'SchoolStudentPercentage'
       },
       {
-        name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
+        name:this.translate.instant('schools.SchoolCurriculum'),
         isSelected: true,
         sortField: this.lang =='ar'? 'CurriculumArabicName': 'CurriculumsEnglishName'
       },
@@ -70,22 +70,22 @@ export class SchoolsReportsService {
         sortField: this.lang =='ar'? 'DivisionArabicName': 'DivisionEnglishName'
       },
       {
-        name:this.translate.instant('dashboard.schools.studentPercentgeInDivision'),
+        name:this.translate.instant('schools.studentPercentgeInDivision'),
         isSelected: false,
         sortField:'DivisionStudentCount'
       },
       {
-        name:this.translate.instant('dashboard.schools.EnrolledStudentNumbers'),
+        name:this.translate.instant('schools.EnrolledStudentNumbers'),
         isSelected: false,
         sortField:'WithdrawalStudentCount'
       },
       {
-        name:this.translate.instant('dashboard.schools.SpecialClassesNumbers'),
+        name:this.translate.instant('schools.SpecialClassesNumbers'),
         isSelected: false,
         sortField:'SpecialClassesCountPerSchool'
       },
       {
-        name:this.translate.instant('dashboard.schools.fusionStudentNumbers'),
+        name:this.translate.instant('schools.fusionStudentNumbers'),
         isSelected: false,
         sortField:'SchoolFusionStudentCount  '
       }
@@ -104,16 +104,16 @@ export class SchoolsReportsService {
           return {
             [this.translate.instant('School')]: school?.schoolName[this.lang],
             [this.translate.instant('shared.state')]: school?.state[this.lang],
-            [this.translate.instant('dashboard.schools.TeachersNumbers')]: school?.teachersNumbers,
-            [this.translate.instant('dashboard.schools.StudentsNumbers')]: school?.studentsNumber,
-            [this.translate.instant('dashboard.schools.SchoolStudentsPercentge')]: school?.studentsCountInSchool,
-            [this.translate.instant('dashboard.schools.SchoolCurriculum')]: school?.curriculumName[this.lang],
+            [this.translate.instant('schools.TeachersNumbers')]: school?.teachersNumbers,
+            [this.translate.instant('schools.StudentsNumbers')]: school?.studentsNumber,
+            [this.translate.instant('schools.SchoolStudentsPercentge')]: school?.studentsCountInSchool,
+            [this.translate.instant('schools.SchoolCurriculum')]: school?.curriculumName[this.lang],
             [this.translate.instant('shared.grade')]: school?.gradeName[this.lang],
             [this.translate.instant('shared.division')]: school?.divisionName[this.lang],
-            [this.translate.instant('dashboard.schools.studentPercentgeInDivision')]: school?.studentsCountInDivision,
-            [this.translate.instant('dashboard.schools.EnrolledStudentNumbers')]: school?.withdrawalStudentCount,
-            [this.translate.instant('dashboard.schools.SpecialClassesNumbers')]: school?.specialClassesCountPerSchool,
-            [this.translate.instant('dashboard.schools.fusionStudentNumbers')]: school?.fusionStudentsCountInSchool
+            [this.translate.instant('schools.studentPercentgeInDivision')]: school?.studentsCountInDivision,
+            [this.translate.instant('schools.EnrolledStudentNumbers')]: school?.withdrawalStudentCount,
+            [this.translate.instant('schools.SpecialClassesNumbers')]: school?.specialClassesCountPerSchool,
+            [this.translate.instant('schools.fusionStudentNumbers')]: school?.fusionStudentsCountInSchool
 
           }
         })

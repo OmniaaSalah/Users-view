@@ -48,7 +48,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   componentHeaderData: IHeader={
     breadCrump: [],
     mainTitle:{ main: this.currentSchool },
-    subTitle: {main: this.translate.instant('dashboard.schools.editClass') , sub:'(الصف الرابع)'}
+    subTitle: {main: this.translate.instant('schools.editClass') , sub:'(الصف الرابع)'}
   }
 
   activeAccordion=null
@@ -189,7 +189,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
     if(!isChecked){ //لايوجد مسارات
       if(this.gradeData.tracks?.length){
-        this.confirmModelService.openModel({message: this.translate.instant('dashboard.schools.trackWillBeDeleted')})
+        this.confirmModelService.openModel({message: this.translate.instant('schools.trackWillBeDeleted')})
 
       } else{
 
@@ -199,7 +199,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     }
     else if(isChecked) { // يوجد مسارات
       if(this.gradeData.subjects?.length){
-        this.confirmModelService.openModel({message:this.translate.instant('dashboard.schools.subjectsWillBeDeleted')})
+        this.confirmModelService.openModel({message:this.translate.instant('schools.subjectsWillBeDeleted')})
 
         // this.hasTracks= false
       }else{
@@ -399,7 +399,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
     if(this.currentUserScope==UserScope.Employee){
       this.componentHeaderData.breadCrump=[
-        { label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/grades-and-divisions/school/${this.schoolId}/grades`,routerLinkActiveOptions:{exact: true},visible:false},
+        { label: this.translate.instant('schools.schoolClasses'), routerLink: `/grades-and-divisions/school/${this.schoolId}/grades`,routerLinkActiveOptions:{exact: true},visible:false},
         { label: this.translate.instant('breadcrumb.editClass'), routerLink: `/grades-and-divisions/school/${this.schoolId}/grades/grade/${this.gradeId}`},
       ]
 

@@ -53,12 +53,12 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     breadCrump: [
       { label: this.translate.instant('Students List') ,routerLink:'/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
       {
-        label: this.translate.instant('dashboard.students.transferStudent') ,
+        label: this.translate.instant('students.transferStudent') ,
         routerLink: `/schools-and-students/students/student/${this.studentGUID}/transfer`
       }
     ],
     mainTitle: {
-      main: this.translate.instant('dashboard.students.transferStudent')
+      main: this.translate.instant('students.transferStudent')
     }
   }
 
@@ -75,9 +75,9 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   optionalSubjectsList:OptionalSubjects[]
 
   transferType= [
-    {name:this.translate.instant('dashboard.students.insideEmara'), value: TransferType.TransferWithinTheEmirate},
-    {name:this.translate.instant('dashboard.students.outSideEmara'), value: TransferType.TransferOutsideTheEmirate},
-    {name:this.translate.instant('dashboard.students.outsideCountry'), value: TransferType.TransferOutOfTheCountry},
+    {name:this.translate.instant('students.insideEmara'), value: TransferType.TransferWithinTheEmirate},
+    {name:this.translate.instant('students.outSideEmara'), value: TransferType.TransferOutsideTheEmirate},
+    {name:this.translate.instant('students.outsideCountry'), value: TransferType.TransferOutOfTheCountry},
   ]
 
   // filter

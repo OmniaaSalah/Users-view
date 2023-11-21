@@ -98,12 +98,12 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
 
       if(this.schoolYearUrlParameter&&!this.classUrlParameter)
       {
-        this.subTittle='dashboard.SchoolYear.Add Class';
+        this.subTittle='SchoolYear.Add Class';
         this.urlTittle='/educational-settings/school-year/display-school-year/'+this.schoolYearUrlParameter+'/class-details'
       }
       else if(!this.schoolYearUrlParameter&&!this.classUrlParameter)
       {
-        this.subTittle='dashboard.SchoolYear.Add Class';
+        this.subTittle='SchoolYear.Add Class';
         this.urlTittle='/educational-settings/school-year/new-school-year/class-details'
       }
       else if(this.schoolYearUrlParameter&&this.classUrlParameter)
@@ -262,25 +262,25 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
 
     this.schoolYearService.editGradeToCurriculum(this.class,this.classUrlParameter,this.schoolYearUrlParameter).subscribe((res)=>{
         this.isBtnLoading=false;
-        this.toastService.success(this.translate.instant('dashboard.SchoolYear.old Class edited Successfully'));
+        this.toastService.success(this.translate.instant('SchoolYear.old Class edited Successfully'));
         this.location.back();
 
     },(err)=>{
 
       this.isBtnLoading=false;
-      this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
+      this.toastService.error(this.translate.instant('SchoolYear.error,please try again'));
     })
     }
     else
     {
     this.schoolYearService.addGradeToCurriculum(this.class,this.schoolYearUrlParameter).subscribe((res)=>{
       this.isBtnLoading=false;
-      this.toastService.success(this.translate.instant('dashboard.SchoolYear.New Class added Successfully'));
+      this.toastService.success(this.translate.instant('SchoolYear.New Class added Successfully'));
       this.location.back();
 
     },(err)=>{
       this.isBtnLoading=false;
-      err?.errorLocalized ? this.toastService.error(err?.errorLocalized[this.lang]):this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      err?.errorLocalized ? this.toastService.error(err?.errorLocalized[this.lang]):this.toastService.error(this.translate.instant('AnnualHoliday.error,please try again'));
     })
     }
 
@@ -471,7 +471,7 @@ checkExistInGPA(valueChecked)
 
   openSubjectModel()
   {
-   this.tittle='dashboard.SchoolYear.Add subject to this class';
+   this.tittle='SchoolYear.Add subject to this class';
    this.addSubjectModelOpened=true
    this.inFinalResult.setValue(true);
   }

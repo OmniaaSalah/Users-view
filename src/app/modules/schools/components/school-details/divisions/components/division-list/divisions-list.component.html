@@ -11,7 +11,7 @@
                     </div>
                     <div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
                             <button  class="btn btn-primary btn--sm px-5" *permit="claimsEnum.SE_A_Division" (click)="addNewDivision()">
-                                <span>{{'dashboard.schools.addDivisionToschool'| translate}}</span>
+                                <span>{{'schools.addDivisionToschool'| translate}}</span>
                             </button>
                     </div>
                 </div>
@@ -27,16 +27,22 @@
                 <th pSortableColumn="name">{{'shared.grade' |translate}}
                     <p-sortIcon field="name"></p-sortIcon>
                 </th>
-                <th pSortableColumn="category">{{'dashboard.schools.roomNumber' |translate}}
+                <th pSortableColumn="category">{{'schools.roomNumber' |translate}}
                     <p-sortIcon field="category"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity">{{'dashboard.schools.StudentDensity' |translate}}
+                <th pSortableColumn="quantity">{{'schools.StudentDensity' |translate}}
                     <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th pSortableColumn="price">{{'dashboard.students.withDisabilities' |translate}}
+                <th pSortableColumn="quantity">{{'schools.maxStudentsNumber' |translate}}
+                  <p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity">{{'schools.exceptionStudentNumber' |translate}}
+                  <p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <th pSortableColumn="price">{{'students.withDisabilities' |translate}}
                     <p-sortIcon field="price"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity">{{'dashboard.schools.sectionManager' |translate}}
+                <th pSortableColumn="quantity">{{'schools.sectionManager' |translate}}
                     <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
                 <th class="actions" pSortableColumn="actions"></th>
@@ -48,6 +54,8 @@
                 <td>{{division?.gradeName |currentLang}}</td>
                 <td>{{division?.classRoomNumber}}</td>
                 <td><span class="color-gray-300">{{division?.studentCount ? division?.studentCount : ('shared.notFound' |translate)}}</span></td>
+                <td><span class="color-gray-300">{{division?.maxStudentCount ? division?.maxStudentCount : ('shared.notFound' |translate)}}</span></td>
+                <td><span class="color-gray-300">{{division?.studentToleranceCount ? division?.studentToleranceCount : ('shared.notFound' |translate)}}</span></td>
                 <td ><span *ngIf="division?.isSpecialAbilities">{{'true'|translate}}</span><span *ngIf="!division.isSpecialAbilities">{{'false'|translate}}</span></td>
                 <td>{{division?.teacherName |currentLang}}</td>
                 <td class="actions edit">

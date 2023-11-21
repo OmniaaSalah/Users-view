@@ -70,7 +70,7 @@ export class ViewListOfUsersComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('UserInformation.List Of Users'), routerLink: '/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
 
         ],
       }
@@ -148,7 +148,7 @@ export class ViewListOfUsersComponent implements OnInit {
     this.exportService.showLoader$.next(true)
     let filter = {...this.filtration, PageSize:this.users.totalAllData,Page:1}
     this.userInformation.usersToExport(filter).subscribe((res:any) =>{
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('UserInformation.List Of Users'))
     })
   }
   sortMe(e){

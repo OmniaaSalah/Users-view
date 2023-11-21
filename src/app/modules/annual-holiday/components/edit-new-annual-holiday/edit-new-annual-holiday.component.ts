@@ -93,13 +93,13 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLink:'/educational-settings/annual-holiday/annual-holiday-list',routerLinkActiveOptions:{exact: true} },
-          {label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar'),
+          { label: this.translate.instant('AnnualHoliday.List Of Annual Holidays'),routerLink:'/educational-settings/annual-holiday/annual-holiday-list',routerLinkActiveOptions:{exact: true} },
+          {label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('AnnualHoliday.Edit Annual Holidays Calendar'),
             routerLink: (this.urlParameter==null||this.urlParameter=='')? '/educational-settings/annual-holiday/new-holiday':'/educational-settings/annual-holiday/edit-holiday/'+this.urlParameter
           }
 
         ],
-        'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar')}
+        'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('AnnualHoliday.Edit Annual Holidays Calendar')}
 
       }
     );
@@ -171,7 +171,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
         this.isBtnLoading = false;
         if(res.statusCode=='OK')
         {
-          this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday edited Successfully'));
+          this.toastService.success(this.translate.instant('AnnualHoliday.Holiday edited Successfully'));
           this.router.navigate(['/educational-settings/annual-holiday/annual-holiday-list']);
         }
         else
@@ -189,7 +189,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
           this.isBtnLoading = false;
           if(res.statusCode=='OK')
           {
-            this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday added Successfully'));
+            this.toastService.success(this.translate.instant('AnnualHoliday.Holiday added Successfully'));
             this.router.navigate(['/educational-settings/annual-holiday/annual-holiday-list']);
           }
           else
@@ -204,7 +204,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
   showErrorMessage()
   {
-    this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+    this.toastService.error(this.translate.instant('AnnualHoliday.error,please try again'));
   }
 
 
@@ -309,7 +309,7 @@ deleteHoliday(id)
   else
      {this.holidayList =[];}
 
-  this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday deleted Successfully'));
+  this.toastService.success(this.translate.instant('AnnualHoliday.Holiday deleted Successfully'));
   this.saveInlocalStorage();
   this.annualHolidayService.holidayList.next(this.holidayList);
 }

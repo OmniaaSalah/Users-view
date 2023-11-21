@@ -29,9 +29,9 @@ export class ProfileComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.parents.parentInfo') ,routerLink:'/parent/profile',routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('parents.parentInfo') ,routerLink:'/parent/profile',routerLinkActiveOptions:{exact: true}},
     ],
-    mainTitle: { main: this.translate.instant('dashboard.parents.parentInfo') }
+    mainTitle: { main: this.translate.instant('parents.parentInfo') }
   }
 
 

@@ -73,7 +73,7 @@ export class SchoolRecordComponent implements OnInit {
     let filter = {...this.filtration,PageSize:this.record.totalAllData,Page:1}
     this.studentsService.recordesToExport(filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.studentRecord'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('parents.studentRecord'))
     })
   }
 

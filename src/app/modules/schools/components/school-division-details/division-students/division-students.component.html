@@ -17,9 +17,9 @@
                     {{col.header}}
                 </th>
                 <th pSortableColumn="actions"></th> -->
-                <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
-                <th pSortableColumn="name" class="lg">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="surname">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
+                <th pSortableColumn="studentNumber">{{'schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
+                <th pSortableColumn="name" class="lg">{{'students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="surname">{{'students.studentNickname'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
                 <th pSortableColumn="track" >{{'shared.track'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
                 <th pSortableColumn="nationalityId">{{'shared.personalId'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
                 <ng-container *ngIf="isGradeHaveTracks">
@@ -45,7 +45,7 @@
                 <td>{{student.nationalityId || '--'}}</td>
                 <td *ngIf="isGradeHaveTracks">
                     <div *permit="claimsEnum.E_U_StudentTrack" class="d-flex align-items-center gap-3 justify-content-end mx-4" role="button" (click)="openChangeTrackModel(student)">
-                        <span class="color-skyBlue-400">{{'dashboard.schools.updateStudentTrack'|translate}}</span>
+                        <span class="color-skyBlue-400">{{'schools.updateStudentTrack'|translate}}</span>
                         <img src="assets/images/shared/left-arrow.svg" alt="">
                     </div>
                 </td>
@@ -78,12 +78,12 @@
 
 
 <!-- change Student track Dialog -->
-<p-dialog header="{{'dashboard.schools.updateStudentTrack'|translate}}" [(visible)]="changeTrackModelOpened" [modal]="true" [style]="{width: '35vw'}">
+<p-dialog header="{{'schools.updateStudentTrack'|translate}}" [(visible)]="changeTrackModelOpened" [modal]="true" [style]="{width: '35vw'}">
     <ng-template pTemplate="content">
         <form class="custom-form" [formGroup]="changeTrackForm">
 
             <div class="grid-container mb-4">
-                <p class="color-gray-300 fs-4">{{ 'dashboard.schools.student'|translate }}</p>
+                <p class="color-gray-300 fs-4">{{ 'schools.student'|translate }}</p>
                 <span class="color-primary mb-2">{{selectedStudent.name |currentLang}}</span>
             </div>
 

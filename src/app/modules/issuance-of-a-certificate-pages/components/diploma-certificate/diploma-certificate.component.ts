@@ -72,7 +72,7 @@ export class DiplomaCertificateComponent implements OnInit {
       (result) => {
         this.onSubmit = false;
         if (result.statusCode != 'BadRequest') {
-          this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+          this.toastr.success(this.translate.instant('issue of certificate.success message'));
           this.onCancel.emit();
           if(this.activateSpeaView) this.location.back()
 

@@ -15,34 +15,34 @@
                 <p-multiSelect  [options]="(schools$| async)" display="chip" [(ngModel)]="filtration.SchoolId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseSchool'|translate }}" ></p-multiSelect>
             </div>
             <div class="col-md-4">
-                <label for="PName" class="label">{{'dashboard.SchoolYear.school year'|translate}} <span class="star">*</span></label>
-               <p-multiSelect  [options]="schoolYearsList"  [(ngModel)]="filtration.SchoolYearId"  display="chip" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" ></p-multiSelect>
+                <label for="PName" class="label">{{'SchoolYear.school year'|translate}} <span class="star">*</span></label>
+               <p-multiSelect  [options]="schoolYearsList"  [(ngModel)]="filtration.SchoolYearId"  display="chip" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'SchoolYear.Select School Year' | translate}}" ></p-multiSelect>
             </div>
             <div class="col-md-4">
-                <label class="label">{{'dashboard.reports.semester'| translate}}</label>
-                 <p-multiSelect  [options]="AllSemesters"   [(ngModel)]="filtration.Semester"   display="chip" optionValue="value"  optionLabel="label"  placeholder="{{'dashboard.reports.select semester' |translate}}" ></p-multiSelect>
+                <label class="label">{{'reports.semester'| translate}}</label>
+                 <p-multiSelect  [options]="AllSemesters"   [(ngModel)]="filtration.Semester"   display="chip" optionValue="value"  optionLabel="label"  placeholder="{{'reports.select semester' |translate}}" ></p-multiSelect>
             </div>
 
 
 
 
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.classes'| translate}} <span class="star">*</span></label>
-                     <p-multiSelect   [options]="(AllGrades$ | async)"   [(ngModel)]="filtration.GradeId"    display="chip" optionValue="id"     optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"    placeholder="{{'dashboard.students.chooseClasse' |translate}}"  ></p-multiSelect>
+                    <label class="label">{{'students.classes'| translate}} <span class="star">*</span></label>
+                     <p-multiSelect   [options]="(AllGrades$ | async)"   [(ngModel)]="filtration.GradeId"    display="chip" optionValue="id"     optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"    placeholder="{{'students.chooseClasse' |translate}}"  ></p-multiSelect>
                 </div>
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.divisions'| translate}}</label>
-                    <p-multiSelect       [options]="(schoolDivisions$ | async)"     [ngModelOptions]="{standalone: true}"  display="chip"    [(ngModel)]="filtration.DivisionlId"    optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"     placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-multiSelect>
+                    <label class="label">{{'students.divisions'| translate}}</label>
+                    <p-multiSelect       [options]="(schoolDivisions$ | async)"     [ngModelOptions]="{standalone: true}"  display="chip"    [(ngModel)]="filtration.DivisionlId"    optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"     placeholder="{{'students.choosedivision' |translate}}"></p-multiSelect>
 
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.schools.student'| translate}}</label>
-                    <p-multiSelect   [options]="(studentList | async)?.data"   [(ngModel)]="filtration.StudentId"    display="chip"  optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.Select StudentName'|translate }}" ></p-multiSelect>
+                    <label class="label">{{'schools.student'| translate}}</label>
+                    <p-multiSelect   [options]="(studentList | async)?.data"   [(ngModel)]="filtration.StudentId"    display="chip"  optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'students.Select StudentName'|translate }}" ></p-multiSelect>
                 </div>
                 <div class="col-md-4">
-                    <label class="label" for="nationality">{{'dashboard.SchoolYear.Subject'|translate}} </label>
-                    <p-multiSelect  [options]="subjectList"  optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" optionValue="id" [(ngModel)]="filtration.SubjectId"   display="chip"   placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}" ></p-multiSelect>
+                    <label class="label" for="nationality">{{'SchoolYear.Subject'|translate}} </label>
+                    <p-multiSelect  [options]="subjectList"  optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" optionValue="id" [(ngModel)]="filtration.SubjectId"   display="chip"   placeholder="{{'SchoolYear.Select Subject'|translate}}" ></p-multiSelect>
                 </div>
 
 
@@ -67,7 +67,7 @@
 
 
     <div class="box-shadow bg-white raduis-12 my-3 p-5">
-        <h3 class="mb-5 heading heading-secondary text-underline m-0">{{'dashboard.reports.The columns that you want to add to the table'|translate}}</h3>
+        <h3 class="mb-5 heading heading-secondary text-underline m-0">{{'reports.The columns that you want to add to the table'|translate}}</h3>
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
@@ -82,7 +82,7 @@
 
     <div class="bg-orange-50 p-3 radius-15 mb-5 mt-5">
         <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-        <span class="color-gray-800">" {{'dashboard.reports.you should choose the school , schoolYear and grade that you need view it’s degrees data first'|translate}} "</span>
+        <span class="color-gray-800">" {{'reports.you should choose the school , schoolYear and grade that you need view it’s degrees data first'|translate}} "</span>
     </div>
 
 

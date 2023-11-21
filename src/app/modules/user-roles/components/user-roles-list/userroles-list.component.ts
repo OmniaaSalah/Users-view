@@ -54,7 +54,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   }
   items: MenuItem[]=[
     {label: this.translate.instant('shared.Show Details'), icon:'assets/images/shared/file.svg'},
-    {label: this.translate.instant('dashboard.UserRole.Delete Job Role'), icon:'assets/images/shared/delete.svg'}
+    {label: this.translate.instant('UserRole.Delete Job Role'), icon:'assets/images/shared/delete.svg'}
   ]
   constructor(
     private exportService: ExportService,
@@ -74,7 +74,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'),routerLink:'/manager-tools/user-roles/user-roles-list'}],
+          { label: this.translate.instant('UserRole.List Of Job Roles'),routerLink:'/manager-tools/user-roles/user-roles-list'}],
       }
     );
 
@@ -101,14 +101,14 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
           else
             {
               this.getAllRole();
-              this.toastService.success(this.translate.instant('dashboard.UserRole.Job Role deleted Successfully'));
+              this.toastService.success(this.translate.instant('UserRole.Job Role deleted Successfully'));
             }
 
           this.confirmModelService.confirmed$.next(null);
           },(err)=>{
 
             this.getAllRole();
-            this.toastService.error(this.translate.instant('dashboard.UserRole.error,please try again'));
+            this.toastService.error(this.translate.instant('UserRole.error,please try again'));
             this.confirmModelService.confirmed$.next(null);
 
           });
@@ -167,7 +167,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     let filter = {...this.filtration,PageSize:this.roles.totalAllData,Page:1}
     this.userRolesService.rolesToExport(filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserRole.List Of Job Roles'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('UserRole.List Of Job Roles'))
     })
   }
 
