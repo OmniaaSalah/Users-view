@@ -775,7 +775,7 @@
           "TransferInTheEmirategovernmental":" نقل من حكومي  داخل الشارقة",
           "TransferInTheEmirateprivate":"نقل من خاص داخل الشارقة",
           "TransferOutsideTheEmirategovernmental":"نقل من حكومي خارج الشارقة",
-          "TransferOutsideTheEmirateprivate":"قل من خاص خارج الشارقة",
+          "TransferOutsideTheEmirateprivate":"نقل من خاص خارج الشارقة",
           "TransferOutOfTheCountry":"نقل من خارج الدولة"
       },
       "addNewFile":"إضافه ملف جديد",
