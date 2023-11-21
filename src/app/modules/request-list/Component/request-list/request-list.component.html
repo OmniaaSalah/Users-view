@@ -29,14 +29,14 @@
                                   <label class="label" for="evaluationType"> {{'Requests.show'|translate}} </label>
                                   <p-dropdown [showClear]="true" [options]="showOptions" [(ngModel)]="filtration.userRequestType" optionLabel="name" optionValue="value" ></p-dropdown>
                                 </div>
+                                <div class="col-4">
+                                    <label class="label" for="evaluationType"> {{'Requests.requestType'|translate}} </label>
+                                    <p-multiSelect [options]="reqsTypes" display="chip" [(ngModel)]="filtration.RequestType" optionLabel="name" optionValue="value" placeholder="{{'Requests.requestType'|translate}}"></p-multiSelect>
+                                </div>
                                 <div class="col-3">
                                     <label class="label" for="RequestStatus"> {{'Requests.Status'|translate}} </label>
                                     <!-- <p-dropdown [showClear]="true"  [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'Requests.Status'|translate}}"></p-dropdown> -->
                                     <p-multiSelect [lazy]="true" [options]="statusOptions" display="chip" [(ngModel)]="filtration.RequestStatus" optionLabel="name" optionValue="value" placeholder="{{'Requests.Status'|translate}}"></p-multiSelect>
-                                </div>
-                                <div class="col-4">
-                                    <label class="label" for="evaluationType"> {{'Requests.requestType'|translate}} </label>
-                                    <p-multiSelect [options]="reqsTypes" display="chip" [(ngModel)]="filtration.RequestType" optionLabel="name" optionValue="value" placeholder="{{'Requests.requestType'|translate}}"></p-multiSelect>
                                 </div>
                             </div>
 
@@ -45,7 +45,7 @@
                                 <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
                                 <p-multiSelect display="chip"  [options]="(curriculums$ | async)"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" [(ngModel)]="filtration.curriculumId" placeholder="{{'shared.chooseCurriculum'|translate}}"></p-multiSelect>
                               </div>
-                              <div class="col-md-3">
+                              <div class="col-md-4">
                                 <label class="label">{{'shared.grade'| translate}}</label>
                                 <p-multiSelect display="chip"  [lazy]="true" [options]="(AllGrades$ | async)"  [(ngModel)]="filtration.gradeId"   optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'students.chooseClasse' |translate}}"></p-multiSelect>
                               </div>

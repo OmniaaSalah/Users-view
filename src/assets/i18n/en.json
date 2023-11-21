@@ -588,7 +588,12 @@
             "NewRegistered":"New registered",
             "WithdrawalWithinTheEmirate":"Withdrawal within the emirate",
             "WithdrawalOutsideTheEmirate":"Withdrawal outside the emirate",
-            "WithdrawalOutOfTheCountry":"Withdrawal out of the country"
+            "WithdrawalOutOfTheCountry":"Withdrawal out of the country",
+            "TransferInTheEmirategovernmental":"Transfer In The Emirate governmental",
+            "TransferInTheEmirateprivate":"Transfer In The Emirate private",
+            "TransferOutsideTheEmirategovernmental":"Transfer Outside The Emirate governmental",
+            "TransferOutsideTheEmirateprivate":"Transfer Outside The Emirate private",
+            "TransferOutOfTheCountry":"Transfer Out Of The Country"
 
         },
 
@@ -995,7 +1000,7 @@
         "schedule":"Schedule",
         "sectionNumber": "Division number",
         "maxStudentsNumber": "Max students number",
-        "exceptionStudentNumber":"Exception Student sNumber",
+        "exceptionStudentNumber":"Exception Students Number",
         "sectionForSpetialAbilitiesStudents": "Division for spechial abilities students",
         "sectionManager":"Division teacher",
         "abilityToEnterDegree":  "Ability to enter degree",
@@ -1788,6 +1793,7 @@
         "WithdrawalWithinTheEmirate":"Withdrawal within the emirate",
         "studentStatus": "Student status",
         "sendChangeIdentityReq": "Send change identity request",
+        "sendUpdateStudentDataReq":"Send Update Student Data Req",
         "writeNewIdentityNumber": "write new identity number",
         "studentBehavior":   "Student behavior",
         "behaviorDescription":"Behavior description",
@@ -1816,6 +1822,7 @@
         "RegistrationDateAndTimeFrom-To":"Registration date and time from-to",
         "exemptionFromSubjectStudey":"Exemption from subject",
         "newIdentityInfo":"New identity info",
+        "updatedStudentData":"Updated Student Data",
         "attachmentsToAdd":"Attachments to adding",
         "attendanceType":"Attendance Type",
         "Remote":"Remote",

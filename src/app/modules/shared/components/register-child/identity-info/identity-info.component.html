@@ -1,7 +1,8 @@
 
 <!-- !allowToEditIdentityInfo || -->
 <ng-container *ngIf="(student$ |async) as student">
-      <ng-container *ngIf="student.isEnterFromICA || mode=='view'">
+  <!-- *ngIf="student.isEnterFromICA || mode=='view'" -->
+      <ng-container>
 
       <!-- <sub-header title="{{'parents.parentInfo'|translate}}" img="assets/images/home/student/student.svg"></sub-header> -->
 
@@ -41,7 +42,7 @@
 
 
       <!-- allowToEditIdentityInfo &&  -->
-      <ng-container *ngIf="mode=='edit' && !student.isEnterFromICA">
+      <!-- <ng-container *ngIf="mode=='edit' && !student.isEnterFromICA">
           <div class="row g-5 custom-form" [formGroup]="studentForm">
             <ng-container formGroupName="name">
               <div class="col-md-4 col-lg-3  " >
@@ -94,6 +95,6 @@
               </div>
 
           </div>
-      </ng-container>
+      </ng-container> -->
 </ng-container>
 

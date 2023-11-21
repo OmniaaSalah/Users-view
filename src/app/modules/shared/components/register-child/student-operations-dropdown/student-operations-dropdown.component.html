@@ -197,7 +197,7 @@
 
 
 <!-- طلب تعديل هويه فى حاله الطالب لا يملك هويه -->
-<p-dialog header="{{'students.sendChangeIdentityReq' | translate}}" [(visible)]="changeStudentIdentityInfoModelOpened" [draggable]="false" [modal]="true" [style]="{width: '60vw', height:'87vh'}">
+<p-dialog header="{{'students.sendUpdateStudentDataReq' | translate}}" [(visible)]="changeStudentIdentityInfoModelOpened" [draggable]="false" [modal]="true" [style]="{width: '60vw', height:'87vh'}">
   <ng-template pTemplate="content">
       <ng-container>
           <app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
@@ -234,17 +234,12 @@
                           </div>
                       </div>
                   </ng-container>
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                       <div class="">
                           <label class="label required">{{'shared.birthDay'|translate}}</label>
                           <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
                       </div>
                   </div>
-                  <!-- <div class="col-md-6 ">
-                    <label class="label required">{{ 'addChild.The reason for the lack of identification'|translate }}</label>
-                    <p-dropdown [options]="reasonForNotHaveIdentityOptions$ | async" formControlName="reasonForNotHavingEmiratesId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar':'name.en'}}" placeholder="{{ 'shared.cause'|translate }}" ></p-dropdown>
-                  </div> -->
-
                   <div class="col-md-4">
                       <div class="">
                           <label class="label required">{{'shared.gender'|translate}}</label>
@@ -260,76 +255,32 @@
                           [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
                       </div>
                   </div>
-                  <!-- <div class=" col-md-4">
-                    <label class="label required">{{'shared.nationalityCategory'|translate}}</label>
-                    <p-dropdown formControlName="NationalityCategoryId" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
-                  </div> -->
 
-                  <!-- <div class="col-md-4 ">
-                    <label class="label">{{'shared.nativeLanguage'|translate}}</label>
-                    <p-dropdown formControlName="motherLanguageId" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
-                  </div>
-
-                  <div class="col-md-4 ">
-                      <label class="label">{{'shared.homeLanguage'|translate}}</label>
-                      <p-dropdown formControlName="languageAtHomeId" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
-                  </div>
-
-                  <div class="col-md-4 ">
-                      <label class="label">{{'shared.mostUsedLanguage'|translate}}</label>
-                      <p-dropdown formControlName="mostUsedLanguageId" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
-                  </div> -->
                   <div class="col-md-4">
                       <div class="">
                           <label class="label required">{{'shared.religion'|translate}}</label>
                           <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
                       </div>
                   </div>
-                  <!-- <div class="col-md-4 "  >
-                    <label class="label ">{{ 'students.attendanceType'|translate }}</label>
-                    <p-dropdown [options]="attendanceType" formControlName="attendanceMode" optionValue="value" optionLabel="name" placeholder="{{'students.attendanceType' |translate}}"></p-dropdown>
-                  </div>
-
-                  <div class="col-md-4 ">
-                      <label class="label " for="description">{{'students.withDisabilities'| translate}}</label>
-                      <p-dropdown formControlName="isSpecialAbilities" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                  </div> -->
-
-                  <!-- <div class="col-md-4 "*ngIf="isSpecialAbilities.value">
-                      <label class="label" for="description">{{'shared.classroom'| translate}}</label>
-                      <p-dropdown [(ngModel)]="classType" [ngModelOptions]="{standalone: true}" [options]="specialClassOptions" optionValue="value" (onChange)="onSpecialClassSelected($event.value)" optionLabel="name" placeholder="{{'schools.SelectClassType' |translate}}"></p-dropdown>
-                  </div>
-
-                  <div class="col-md-4 "*ngIf="isSpecialClass.value"  formGroupName="specialEducation">
-                    <label class="label" for="description">{{'shared.classroom'| translate}}</label>
-                    <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="value" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'parents.specialEducationtype' |translate}}"></p-dropdown>
-                  </div> -->
-
-                  <!-- <div class="col-md-4 ">
-                      <label class="label" for="description">{{'students.isChildOfAMartyr'| translate}}</label>
-                      <p-dropdown formControlName="isChildOfAMartyr" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                  </div>
-                  <div class="col-md-4 ">
-                      <label class="label" for="description">{{'students.isGifted'| translate}}</label>
-                      <p-dropdown #isGifted formControlName="isGifted" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                  </div> -->
-
-                  <!-- <ng-container *ngIf="isGifted.value">
-                    <div class="col-md-4 " *ngIf="talents$ |async as talents" >
-                        <label class="label" for="description">{{'students.chooseTalent'| translate}}</label>
-                        <p-multiSelect formControlName="studentTalent" [options]="talents" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
-                    </div>
-                  </ng-container> -->
 
               </div>
           </div>
+
+          <div class="row" *ngIf="requiredFiles">
+            <div class="mt-6 col-6" *ngFor="let file of requiredFiles.files; let i =index">
+                <!-- <label class="label fw-bold" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label> -->
+                <app-file-upload [isMandatory]="file?.isMandatory" [title]="file.name |currentLang" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" ></app-file-upload>
+            </div>
+
+        </div>
+
 
           <div class="py-6"></div>
           <div class="d-flex justify-content-end mt-4" >
               <button
               class="btn btn-primary"
               (click)="updateIdentityInfoReq(changeStudentInfoReqForm.value)"
-               [disabled]="!changeStudentInfoReqForm.valid || onSubmit">
+               [disabled]="!changeStudentInfoReqForm.valid || onSubmit || isRequiredAttchmentsUploaded()">
                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
                {{'shared.send'| translate}}</button>
           </div>
