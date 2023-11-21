@@ -254,7 +254,9 @@
                     <div class="row g-5 custom-form">
                         <div class="col-md-4 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
-                            <a  class="text color-skyBlue-500 fs-3 d-flex align-items-center" routerLink="/schools-and-students/schools/school/+{{request?.school?.id}}">{{requestDetails?.school?.name|currentLang}}</a>
+                            <a  *ngIf="currentUserScope ==userScopeEnum.SPEA" class="text color-skyBlue-500 fs-3 d-flex align-items-center" target="_blank" [routerLink]="['/schools-and-students/schools/school', requestDetails?.school?.id]">{{requestDetails?.school?.name|currentLang}}</a>
+                            <a  *ngIf="currentUserScope ==userScopeEnum.Employee" class="text color-skyBlue-500 fs-3 d-flex align-items-center" target="_blank" [routerLink]="['/school-management/school', requestDetails?.school?.id]">{{requestDetails?.school?.name|currentLang}}</a>
+                            <h4 *ngIf="currentUserScope ==userScopeEnum.Guardian" class="color-primary">{{requestDetails?.school?.name|currentLang}}</h4>
                         </div>
                         <!-- <div class="col-md-4 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
@@ -434,7 +436,7 @@
 
                 <!-- NOTE:-------------- طلب تعديل هويه للطالب الذى لايملك هويه-->
                 <div *ngSwitchCase="requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId">
-                    <div class="fw-bold fs-4 mb-5">{{'students.newIdentityInfo' | translate}}</div>
+                    <div class="fw-bold fs-4 mb-5">{{'students.updatedStudentData' | translate}}</div>
                     <div class="row  g-4">
                         <div class="col-md-4 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'parents.studentName' | translate}}</p>
@@ -461,10 +463,13 @@
                             <p class="color-gray-300 fs-4">{{'shared.religion' | translate}}</p>
                             <h4 class="color-primary">{{requestDetails.nationalityName |currentLang}}</h4>
                         </div>
-                        <div class="col-md-4 d-flex align-items-center gap-5">
+
+                        <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
+
+                        <!-- <div class="col-md-4 d-flex align-items-center gap-5">
                           <p class="color-gray-300 fs-4">{{'shared.nativeLanguage' | translate}}</p>
                           <h4 class="color-primary">{{requestDetails?.motherLanguage?.name |currentLang}}</h4>
-                        </div>
+                        </div> -->
                         <!-- <div class="col-md-4 d-flex align-items-center gap-5">
                           <p class="color-gray-300 fs-4">{{'shared.homeLanguage' | translate}}</p>
                           <h4 class="color-primary">{{requestDetails.languageAtHome?.name |currentLang}}</h4>

@@ -54,7 +54,7 @@ export class RegisterRequestComponent implements OnInit {
 
   registrationStatusOptions=[
     {name:this.translate.instant('shared.allStatus.NewRegistered'), value: RegistraterRequestStatus.NewRegistered},
-    {name:this.translate.instant('shared.allStatus.Withdrawal'), value: RegistraterRequestStatus.Withdrawal},
+    {name:this.lang=='ar' ? 'عادة قيد': 'Re Enrolment', value: RegistraterRequestStatus.Withdrawal},
     {name:this.translate.instant('shared.allStatus.TransferInTheEmirategovernmental'), value: RegistraterRequestStatus.TransferInTheEmirategovernmental},
     {name:this.translate.instant('shared.allStatus.TransferInTheEmirateprivate'), value: RegistraterRequestStatus.TransferInTheEmirateprivate},
     {name:this.translate.instant('shared.allStatus.TransferOutsideTheEmirategovernmental'), value: RegistraterRequestStatus.TransferOutsideTheEmirategovernmental},

@@ -139,10 +139,16 @@
 
 
     <div *ngIf="childRegistrationStatus==registrtionStatusEnum.Withdrawal">
-        <div class=" d-flex align-items-center gap-5 radius-15 border-dark p-5 mb-6">
+      <div class="row radius-15 border-dark p-5 mb-6 g-5 align-items-end">
+        <div class="col-md-4">
+          <label class="label">{{'reports.registration status' | translate}} <span class="star">*</span></label>
+          <p-dropdown [options]="registrationStatusOptions" formControlName="registrationStatus" optionValue="value"  optionLabel="name" placeholder="{{'reports.registration status' |translate}}"></p-dropdown>
+        </div>
+        <div class="col-md-4 d-flex align-items-center gap-5 mb-3">
             <p class="color-gray-300">{{'shared.grade' | translate}}</p>
             <h4 class="color-primary">{{(selectedGrade?.name | currentLang) ||'لم يحدد'}}</h4>
         </div>
+      </div>
     </div>
 
 

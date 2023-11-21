@@ -1,6 +1,6 @@
 
 <div class="prim-table mt-4" *ngIf="divisions.totalAllData || divisions.loading">
-    <p-table #dt [value]="divisions.list">
+    <p-table #dt [value]="divisions.list" [scrollable]="true">
         <ng-template pTemplate="caption">
             <app-table-caption [seachKeyword]="filtration.KeyWord" (onExport)="onExport($event)" (onFilter)="this.filtration.Page=1;getSchoolDivisions()" (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchoolDivisions()" (onClear)="clearFilter()">
 
@@ -21,44 +21,44 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="code">{{'shared.division' |translate}}
+                <th style="min-width: 15rem;" pSortableColumn="code">{{'shared.division' |translate}}
                     <p-sortIcon field="code"></p-sortIcon>
                 </th>
                 <th pSortableColumn="name">{{'shared.grade' |translate}}
                     <p-sortIcon field="name"></p-sortIcon>
                 </th>
-                <th pSortableColumn="category">{{'schools.roomNumber' |translate}}
+                <th style="min-width: 15rem;" pSortableColumn="category">{{'schools.roomNumber' |translate}}
                     <p-sortIcon field="category"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity">{{'schools.StudentDensity' |translate}}
+                <th style="min-width: 15rem;" pSortableColumn="quantity">{{'schools.StudentDensity' |translate}}
                     <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity">{{'schools.maxStudentsNumber' |translate}}
+                <th style="min-width: 18rem;" pSortableColumn="quantity">{{'schools.maxStudentsNumber' |translate}}
                   <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity">{{'schools.exceptionStudentNumber' |translate}}
+                <th style="min-width: 20rem;" pSortableColumn="quantity">{{'schools.exceptionStudentNumber' |translate}}
                   <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th pSortableColumn="price">{{'students.withDisabilities' |translate}}
+                <th style="min-width: 15rem;" pSortableColumn="price">{{'students.withDisabilities' |translate}}
                     <p-sortIcon field="price"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity">{{'schools.sectionManager' |translate}}
+                <th style="min-width: 15rem;" pSortableColumn="quantity">{{'schools.sectionManager' |translate}}
                     <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th class="actions" pSortableColumn="actions"></th>
+                <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions" pSortableColumn="actions"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-division>
             <tr [routerLink]="['division/',division.id]">
-                <td>{{division?.name |currentLang}}</td>
+                <td style="min-width: 15rem;">{{division?.name |currentLang}}</td>
                 <td>{{division?.gradeName |currentLang}}</td>
-                <td>{{division?.classRoomNumber}}</td>
-                <td><span class="color-gray-300">{{division?.studentCount ? division?.studentCount : ('shared.notFound' |translate)}}</span></td>
-                <td><span class="color-gray-300">{{division?.maxStudentCount ? division?.maxStudentCount : ('shared.notFound' |translate)}}</span></td>
-                <td><span class="color-gray-300">{{division?.studentToleranceCount ? division?.studentToleranceCount : ('shared.notFound' |translate)}}</span></td>
-                <td ><span *ngIf="division?.isSpecialAbilities">{{'true'|translate}}</span><span *ngIf="!division.isSpecialAbilities">{{'false'|translate}}</span></td>
-                <td>{{division?.teacherName |currentLang}}</td>
-                <td class="actions edit">
+                <td style="min-width: 15rem;">{{division?.classRoomNumber}}</td>
+                <td style="min-width: 15rem;">{{division?.studentCount ? division?.studentCount : 0}}</td>
+                <td style="min-width: 18rem;">{{division?.maxStudentCount ? division?.maxStudentCount : 0}}</td>
+                <td style="min-width: 20rem;"> {{division?.studentToleranceCount ? division?.studentToleranceCount :0}}</td>
+                <td style="min-width: 15rem;"><span *ngIf="division?.isSpecialAbilities">{{'true'|translate}}</span><span *ngIf="!division.isSpecialAbilities">{{'false'|translate}}</span></td>
+                <td style="min-width: 15rem;">{{division?.teacherName |currentLang}}</td>
+                <td class="actions edit"  pFrozenColumn [frozen]="true">
                    <!-- <button class="btn btn--sm btn-outline-none" routerLink="/grades-and-divisions/school/{{schoolId}}/divisions/division/{{division.id}}" >
                         <span>{{'shared.edit' |translate}}</span>
                         <img  src="assets/images/shared/arrow.svg" alt="">

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -84,7 +84,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
     get uploadedFiles(){ return [].concat(...this.requiredFiles?.files?.map(el => el?.uploadedFiles || []))}
     changeIdentityNumForm
     transferStudentForm
-    changeStudentInfoReqForm
+    changeStudentInfoReqForm:FormGroup
     repeateStudyPhaseReqForm
     exemptionFromStudySubjectReqForm
 
@@ -218,6 +218,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
       birthDate:[student?.birthDate ?? '', Validators.required],
       nationalityId:[student?.nationality?.id ?? '', Validators.required],
       religionId:[student?.religion?.id ?? '', Validators.required],
+      attachments:[[]]
       // NationalityCategoryId:[student?.nationalityCategory?.id ?? '', Validators.required],
       // motherLanguageId:[student?.motherLanguage?.id ?? ''],
       // languageAtHomeId:[student?.languageAtHome?.id ?? ''],
@@ -338,8 +339,8 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
     })
   }
 
-  getModifyIdentityRequestRequiresFiles(){
-    this.settingServcice.getRequestRquiredFiles(requestTypeEnum.ModifyIdentityRequest).subscribe(res=>{
+  getRequiredFiles(type:requestTypeEnum){
+    this.settingServcice.getRequestRquiredFiles(type).subscribe(res=>{
       this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
       this.requiredFiles.files = this.requiredFiles.files.map(el =>({...el, uploadedFiles:[]}))
     })
@@ -353,7 +354,7 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
   onFileUpload(files, fileTitle, index){
     this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
-    this.changeIdentityNumForm.attachments = this.uploadedFiles
+    this.setUploadedAttachments(this.uploadedFiles)
   }
 
   // ==============================================
@@ -390,14 +391,24 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
 
 
 
+    setUploadedAttachments(attachments){
+      if (!this.student?.emiratesId){
+        this.changeStudentInfoReqForm.controls['attachments'].setValue(attachments)
+      }else{
+        this.changeIdentityNumForm.attachments = attachments
+      }
+    }
 
 
   dropdownItemClicked(index){
     if (index== 3) this.RepeateStudyPhaseModelOpend=true
     if (index== 4) {
-      if (!this.student?.emiratesId)this.changeStudentIdentityInfoModelOpened=true
+      if (!this.student?.emiratesId){
+        this.getRequiredFiles(requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId)
+        this.changeStudentIdentityInfoModelOpened=true
+      }
       else {
-        this.getModifyIdentityRequestRequiresFiles()
+        this.getRequiredFiles(requestTypeEnum.ModifyIdentityRequest)
         this.changeIdentityNumModelOpened=true
       }
 
