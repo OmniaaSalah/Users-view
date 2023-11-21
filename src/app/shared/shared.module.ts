@@ -32,7 +32,6 @@ import { SelectSchoolsComponent } from './components/select-schools/select-schoo
 import { RegisterRequestComponent } from './components/register-request/register-request.component';
 import { SharedService } from './services/shared/shared.service';
 import { NumberToWordsPipe } from './pipes/numbers-to-words/number-to-words.pipe';
-import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
 import { StopPropagationDirective } from './directives/stop-propagation/stop-propagation.directive';
 import { LanguageRestrictionDirective } from './directives/language-restriction/language-restriction.directive';
 import { LocalizeSearchPipe } from './pipes/localize-search.pipe';
@@ -88,7 +87,6 @@ registerLocaleData(localeAr);
     RegisterRequestComponent,
     SelectSchoolsComponent,
     NumberToWordsPipe,
-    CustomDatePipe,
     StopPropagationDirective,
     LocalizeSearchPipe,
     FileComponent,
@@ -161,7 +159,6 @@ registerLocaleData(localeAr);
     RegisterRequestComponent,
     SelectSchoolsComponent,
     NumberToWordsPipe,
-    CustomDatePipe,
     StopPropagationDirective,
     LocalizeSearchPipe,
     FileComponent,

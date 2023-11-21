@@ -9,15 +9,15 @@
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-3" *ngIf="currentUserScope =='SPEA'">
-                            <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                            <p-multiSelect [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip"[(ngModel)]="filtration.NationalityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-multiSelect>
+                            <label class="label">{{'students.nationalities'| translate}}</label>
+                            <p-multiSelect [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip"[(ngModel)]="filtration.NationalityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'students.chooseNationalitie' |translate}}"></p-multiSelect>
                         </div>
                         <div class="col-md-3" *ngIf="currentUserScope =='Employee'">
-                          <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                          <p-dropdown [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip"[(ngModel)]="filtration.NationalityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
+                          <label class="label">{{'students.nationalities'| translate}}</label>
+                          <p-dropdown [filter]="true" panelStyleClass="showHeader"  [showToggleAll]="false" [filterBy]="lang=='ar' ?'name.ar' :'name.en'" [options]="(countries$ | async)" display="chip"[(ngModel)]="filtration.NationalityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'students.chooseNationalitie' |translate}}"></p-dropdown>
                         </div>
                         <div class="col-md-3">
-                            <label class="label">{{'dashboard.parents.HaveChildreen'| translate}}</label>
+                            <label class="label">{{'parents.HaveChildreen'| translate}}</label>
                             <p-dropdown [options]="booleanOptions" optionValue="value" [showClear]="true" StopProp  [(ngModel)]="filtration.hasChildreen" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                         </div>
                     </div>
@@ -30,12 +30,12 @@
                     <th pSortableColumn="{{lang=='ar' ? 'GuardianArabicName' : 'GuardianEnglishName'}}" >
                         <div class="content">
 
-                            <p-sortIcon field="{{lang=='ar' ? 'GuardianArabicName' : 'GuardianEnglishName'}}"></p-sortIcon>{{'dashboard.parents.parentName'|translate }}
+                            <p-sortIcon field="{{lang=='ar' ? 'GuardianArabicName' : 'GuardianEnglishName'}}"></p-sortIcon>{{'parents.parentName'|translate }}
                         </div>
                     </th>
                     <th pSortableColumn="{{lang=='ar' ? 'ArabicSurname' : 'EnglishSurname'}}">
 
-                        <p-sortIcon field="{{lang=='ar' ? 'ArabicSurname' : 'EnglishSurname'}}"></p-sortIcon>{{'dashboard.parents.parentNickname'|translate }}
+                        <p-sortIcon field="{{lang=='ar' ? 'ArabicSurname' : 'EnglishSurname'}}"></p-sortIcon>{{'parents.parentNickname'|translate }}
                     </th>
                     <th pSortableColumn="EmiratesIdNumber">
 
@@ -47,7 +47,7 @@
                     </th>
                     <th pSortableColumn="{{lang=='ar' ? 'RelativeRelationAr' : 'RelativeRelationEn'}}">
 
-                        <p-sortIcon field="{{lang=='ar' ? 'RelativeRelationAr' : 'RelativeRelationEn'}}"></p-sortIcon>{{'dashboard.parents.relativeRelation'|translate }}
+                        <p-sortIcon field="{{lang=='ar' ? 'RelativeRelationAr' : 'RelativeRelationEn'}}"></p-sortIcon>{{'parents.relativeRelation'|translate }}
                     </th>
                     <th pSortableColumn="BirthDate">
 
@@ -60,13 +60,13 @@
                         <p-sortIcon field="Mobile"></p-sortIcon>{{'shared.phoneNumber'|translate }}
                     </th>
                     <th pSortableColumn="ChildrenCount">
-                        <p-sortIcon field="ChildrenCount"></p-sortIcon>{{'dashboard.parents.childrenNumber'|translate }}
+                        <p-sortIcon field="ChildrenCount"></p-sortIcon>{{'parents.childrenNumber'|translate }}
                     </th>
                     <th  pSortableColumn="Email">
                         <p-sortIcon field="Email"></p-sortIcon>{{'shared.email'|translate }}
                     </th>
                     <th pSortableColumn="RequestCount">
-                        <p-sortIcon field="RequestCount"></p-sortIcon>{{'dashboard.parents.pendingRequests'|translate }}
+                        <p-sortIcon field="RequestCount"></p-sortIcon>{{'parents.pendingRequests'|translate }}
                     </th>
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>
                 </tr>
@@ -97,7 +97,7 @@
                             <a role="button"
                             [ngClass]="{'my-disable':parent.childrenCount === 0 ,'shown':parent.childrenCount> 0}"
                             class="gap-2 fs-4" (click)="navigatToChildren(parent)">
-                                <p><span class=""></span>&nbsp;<span>{{'dashboard.parents.viewChildrenList'|translate }}</span></p>
+                                <p><span class=""></span>&nbsp;<span>{{'parents.viewChildrenList'|translate }}</span></p>
                             </a>
                         </div>
                     </td>

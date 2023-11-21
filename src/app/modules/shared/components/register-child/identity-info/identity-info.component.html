@@ -3,13 +3,13 @@
 <ng-container *ngIf="(student$ |async) as student">
       <ng-container *ngIf="student.isEnterFromICA || mode=='view'">
 
-      <!-- <sub-header title="{{'dashboard.parents.parentInfo'|translate}}" img="assets/images/home/student/student.svg"></sub-header> -->
+      <!-- <sub-header title="{{'parents.parentInfo'|translate}}" img="assets/images/home/student/student.svg"></sub-header> -->
 
         <div class="d-grid grid-col-8 even-gap gap-5">
-            <p class="color-gray-300">{{ 'dashboard.parents.studentName'|translate }}</p>
+            <p class="color-gray-300">{{ 'parents.studentName'|translate }}</p>
             <span class="color-primary mb-2">{{student.name |currentLang}}</span>
 
-            <p class="color-gray-300">{{ 'dashboard.parents.studentNickname'|translate }}</p>
+            <p class="color-gray-300">{{ 'parents.studentNickname'|translate }}</p>
             <span class="color-primary mb-2">{{student.surname |currentLang}}</span>
 
             <p class="color-gray-300">{{'shared.birthDay'|translate }}</p>
@@ -45,26 +45,26 @@
           <div class="row g-5 custom-form" [formGroup]="studentForm">
             <ng-container formGroupName="name">
               <div class="col-md-4 col-lg-3  " >
-                  <label class="label required">{{'dashboard.students.studentNameAr'|translate}}</label>
-                  <input type="text" formControlName="ar" appFormControlValidationMsg  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                  <label class="label required">{{'students.studentNameAr'|translate}}</label>
+                  <input type="text" formControlName="ar" appFormControlValidationMsg  pInputText placeholder="{{'students.studentName'|translate}}" />
               </div>
 
               <div class="col-md-4 col-lg-3  ">
-                <label class="label required">{{'dashboard.students.studentNameEn'|translate}}</label>
-                <input type="text" formControlName="en" appFormControlValidationMsg  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                <label class="label required">{{'students.studentNameEn'|translate}}</label>
+                <input type="text" formControlName="en" appFormControlValidationMsg  pInputText placeholder="{{'students.studentName'|translate}}" />
               </div>
             </ng-container>
 
 
             <ng-container formGroupName="surname">
               <div class="col-md-4 col-lg-3 ">
-                  <label class="label required">{{'dashboard.students.studentsurnameAr'|translate}}</label>
-                  <input type="text" formControlName="ar" appFormControlValidationMsg pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                  <label class="label required">{{'students.studentsurnameAr'|translate}}</label>
+                  <input type="text" formControlName="ar" appFormControlValidationMsg pInputText placeholder="{{'students.studentNickname'|translate}}" />
               </div>
 
               <div class="col-md-4 col-lg-3 ">
-                <label class="label required">{{'dashboard.students.studentsurnameEn'|translate}}</label>
-                <input type="text" formControlName="en" appFormControlValidationMsg pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                <label class="label required">{{'students.studentsurnameEn'|translate}}</label>
+                <input type="text" formControlName="en" appFormControlValidationMsg pInputText placeholder="{{'students.studentNickname'|translate}}" />
               </div>
             </ng-container>
 

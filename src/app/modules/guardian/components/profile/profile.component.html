@@ -17,11 +17,11 @@
         <div class="row gx-58 mt-5">
             <div class="col-md-5">
                 <div class="d-flex mb-5">
-                    <p class="color-gray-300 ">{{ 'dashboard.parents.parentName'|translate }}</p>
+                    <p class="color-gray-300 ">{{ 'parents.parentName'|translate }}</p>
                     <span class="color-primary mx-3 mb-2">{{parent?.name |currentLang}}</span>
                 </div>
                 <div class="d-flex mb-5">
-                    <p class="color-gray-300 ">{{ 'dashboard.parents.parentNickname'|translate }}</p>
+                    <p class="color-gray-300 ">{{ 'parents.parentNickname'|translate }}</p>
                     <span class="color-primary mx-3 mb-2">{{parent?.nickName |currentLang}}</span>
                 </div>
                 <!-- <div class="d-flex mb-5">
@@ -37,7 +37,7 @@
                     <span class="color-primary mx-3 mb-2">{{'shared.genderType.'+parent?.gender|translate}}</span>
                 </div>
                 <div class="d-flex mb-5">
-                    <p class="color-gray-300 ">{{ 'dashboard.parents.pendingRequestNum'|translate }}</p>
+                    <p class="color-gray-300 ">{{ 'parents.pendingRequestNum'|translate }}</p>
                     <span class="color-primary mx-3 mb-2">{{parent?.releatedPendingRequestNumber}}</span>
                 </div>
               
@@ -50,7 +50,7 @@
                     <span class="color-primary mx-3 mb-2">{{parent?.email}}</span>
                 </div>
                 <div class="d-flex mb-5">
-                    <p class="color-gray-300 ">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                    <p class="color-gray-300 ">{{ 'parents.emirateUid'|translate }}</p>
                     <span class="color-primary mx-3 mb-2">{{parent?.emiratesId}}</span>
                 </div>  
                 <div class="d-flex mb-5">
@@ -58,11 +58,11 @@
                     <span class="color-primary mx-3 mb-2">{{parent?.phone}}</span>
                 </div> 
                 <div class="d-flex mb-5">
-                    <p class="color-gray-300 ">{{ 'dashboard.parents.registedDate'|translate }}</p>
+                    <p class="color-gray-300 ">{{ 'parents.registedDate'|translate }}</p>
                     <span class="color-primary mx-3 mb-2">{{parent?.registrationDate|LocalizeDate}}</span>
                 </div>
                 <div class="d-flex mb-5">
-                    <p class="color-gray-300 ">{{ 'dashboard.parents.relatedStudent'|translate }}</p>
+                    <p class="color-gray-300 ">{{ 'parents.relatedStudent'|translate }}</p>
                     <span class="color-primary mx-3 mb-2">{{parent?.releatedChildreensNumber}}</span>
                 </div>
             </div>
@@ -202,7 +202,7 @@
                 </div>
                 </div>
                 <div class="col-4 mb-5">
-                    <p class="color-gray-300  label">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                    <p class="color-gray-300  label">{{ 'parents.emirateUid'|translate }}</p>
                     <input type="text" pInputText   formControlName="emiratesId" [LangRestrict]="'numb'"  class="form-control "  placeholder="{{'sign up.enter personal digitalIdentity'|translate}}" >
                     <div>
                         <div [hidden]="emiratesId.valid || emiratesId.untouched">
@@ -218,15 +218,15 @@
                     </div>
                 </div>
                 <div class="col-4 mb-5"> 
-                    <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.registedDate'|translate }}</p>
+                    <p class="color-gray-300  label mb-5">{{ 'parents.registedDate'|translate }}</p>
                     <span class="color-primary mx-3 ">{{parent?.registrationDate|LocalizeDate}}</span>
                 </div>
                 <div class="col-4 mb-5">
-                    <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.pendingRequestNum'|translate }}</p>
+                    <p class="color-gray-300  label mb-5">{{ 'parents.pendingRequestNum'|translate }}</p>
                     <span class="color-primary mx-3 ">{{parent?.releatedPendingRequestNumber}}</span>
                 </div>
                 <div class="col-4 mb-5">
-                    <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.relatedStudent'|translate }}</p>
+                    <p class="color-gray-300  label mb-5">{{ 'parents.relatedStudent'|translate }}</p>
                     <span class="color-primary mx-3 ">{{parent?.releatedChildreensNumber}}</span>
                 </div>
             </div>

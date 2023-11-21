@@ -104,8 +104,8 @@ export class AnnualHolidayService {
       map(res=>{
         return res.data.map(annualHoliday =>{
           return {
-            [this.translate.instant('dashboard.AnnualHoliday.Annual Calender Name')]: annualHoliday?.annualCalenderName[this.lang],
-            [this.translate.instant('dashboard.AnnualHoliday.Year')]: annualHoliday?.year,
+            [this.translate.instant('AnnualHoliday.Annual Calender Name')]: annualHoliday?.annualCalenderName[this.lang],
+            [this.translate.instant('AnnualHoliday.Year')]: annualHoliday?.year,
 
 
           }

@@ -142,7 +142,7 @@ export class SubjectDegreesComponent implements OnInit {
     })
     // let filter = {...this.filtration, PageSize:null}
     // this.divisionService.subjectsDegreesToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
-    //   this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsRate'))
+    //   this.exportService.exportFile(fileType, res, this.translate.instant('schools.studentsRate'))
     // })
   }
 

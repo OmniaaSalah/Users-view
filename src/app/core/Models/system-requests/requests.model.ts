@@ -2,7 +2,7 @@ import { CustomFile } from "src/app/shared/components/file-upload/file-upload.co
 import { CertificatesEnum } from "src/app/shared/enums/certficates/certificate.enum"
 import { DegreesCertificatesEnum } from "src/app/shared/enums/certficates/degrees-certificates"
 import { GenderEnum } from "src/app/shared/enums/global/global.enum"
-import { RegistrationStatus, StatusEnum, UserRequestsStatus } from "src/app/shared/enums/status/status.enum"
+import { StudentStatus, StatusEnum, UserRequestsStatus } from "src/app/shared/enums/status/status.enum"
 import { requestTypeEnum } from "src/app/shared/enums/system-requests/requests.enum"
 import { Localization, BaseEntity } from "../global/global.model"
 
@@ -61,7 +61,7 @@ export interface UserRequest{
         passportNum:string,
         religion: BaseEntity,
         attachments: CustomFile[]
-        status:RegistrationStatus
+        status:StudentStatus
     },
 
     // NOTE:- Certificate Requests ------

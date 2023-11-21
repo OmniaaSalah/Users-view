@@ -53,12 +53,12 @@ export class ParantsComponent implements OnInit {
 
   // breadCrumb
   items: MenuItem[] = [
-    { label: this.translate.instant('dashboard.parents.parents') },
+    { label: this.translate.instant('parents.parents') },
   ];
   booleanOptions = inject(SharedService).booleanOptions;
   componentHeaderData: IHeader;
 
-  searchByList=[this.translate.instant('dashboard.addChild.name'), this.translate.instant('dashboard.addChild.Identification Number'), this.translate.instant('shared.phoneNumber'), this.translate.instant('shared.email')]
+  searchByList=[this.translate.instant('addChild.name'), this.translate.instant('addChild.Identification Number'), this.translate.instant('shared.phoneNumber'), this.translate.instant('shared.email')]
 
   constructor(
     private exportService: ExportService,
@@ -171,7 +171,7 @@ export class ParantsComponent implements OnInit {
       this.exportService.exportFile(
         fileType,
         res,
-        this.translate.instant('dashboard.parents.parents')
+        this.translate.instant('parents.parents')
       );
     });
   }
@@ -202,7 +202,7 @@ export class ParantsComponent implements OnInit {
       this.componentHeaderData = {
         breadCrump: [
           {
-            label: this.translate.instant('dashboard.parents.parents'),
+            label: this.translate.instant('parents.parents'),
             routerLink: '/student-management/all-parents',
             routerLinkActiveOptions: { exact: true },
           },
@@ -212,7 +212,7 @@ export class ParantsComponent implements OnInit {
       this.componentHeaderData = {
         breadCrump: [
           {
-            label: this.translate.instant('dashboard.parents.parents'),
+            label: this.translate.instant('parents.parents'),
             routerLink: '//schools-and-students/all-parents',
             routerLinkActiveOptions: { exact: true },
           },

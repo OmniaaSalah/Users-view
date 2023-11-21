@@ -78,7 +78,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     this.headerService.Header.next(
       {
         breadCrump: [
-          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays') ,routerLink:'/educational-settings/annual-holiday/annual-holiday-list'}
+          { label: this.translate.instant('AnnualHoliday.List Of Annual Holidays') ,routerLink:'/educational-settings/annual-holiday/annual-holiday-list'}
         ]
       }
     );
@@ -99,10 +99,10 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
    this.annualHolidayService.deleteHoliday(id).subscribe((res)=>{
     this.getHolidaysinAnnualCalender(this.annualCalenderId);
-    this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday deleted Successfully'));
+    this.toastService.success(this.translate.instant('AnnualHoliday.Holiday deleted Successfully'));
 
    },(err)=>{
-    this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+    this.toastService.error(this.translate.instant('AnnualHoliday.error,please try again'));
    })
 
   }
@@ -154,7 +154,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     let filter = {...this.filtration,PageSize:this.annualHolidays.totalAllData,Page:1}
     this.annualHolidayService.annualToExport(filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('AnnualHoliday.List Of Annual Holidays'))
     })
   }
 
@@ -223,7 +223,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
         if(res.statusCode=='OK')
         {
           this.openRow(this.annualCalenderId);
-          this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday edited Successfully'));
+          this.toastService.success(this.translate.instant('AnnualHoliday.Holiday edited Successfully'));
         }
         else
         {
@@ -231,7 +231,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
         }
       },(err)=>{
         // this.isBtnLoading=false;
-        this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+        this.toastService.error(this.translate.instant('AnnualHoliday.error,please try again'));
       })
     });
     this.subscription?.unsubscribe();

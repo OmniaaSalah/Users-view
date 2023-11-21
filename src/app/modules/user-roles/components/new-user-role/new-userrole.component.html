@@ -18,8 +18,8 @@
             <form [formGroup]="roleFormGrp" class="container-fluid  "  *ngIf="jobRole||!urlParameter">
                 <div class=" row gx-5 form-set ">
                     <div class="col-xs-2 col-lg-4">
-                        <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name In Arabic'|translate}} <span class="star">*</span></label>
-                        <input type="text" pInputText formControlName="jobRoleNameInArabic" [LangRestrict]="'ar'"  class="form-control"   name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
+                        <label for="PID" class="label">{{'UserRole.JobRole Name In Arabic'|translate}} <span class="star">*</span></label>
+                        <input type="text" pInputText formControlName="jobRoleNameInArabic" [LangRestrict]="'ar'"  class="form-control"   name="PID" id="PID" placeholder="{{'UserRole.Write Job Role Name'|translate}}">
                         <div>
                           <div [hidden]="jobRoleNameInArabic.valid || jobRoleNameInArabic.untouched">
                               <small *ngIf="jobRoleNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -39,8 +39,8 @@
                           </div>
                     </div>
                     <div class="col-xs-2 col-lg-4">
-                      <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name In English'|translate}} <span class="star">*</span></label>
-                      <input type="text" pInputText formControlName="jobRoleNameInEnglish"  class="form-control leftaction" [LangRestrict]="'en'" name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
+                      <label for="PID" class="label">{{'UserRole.JobRole Name In English'|translate}} <span class="star">*</span></label>
+                      <input type="text" pInputText formControlName="jobRoleNameInEnglish"  class="form-control leftaction" [LangRestrict]="'en'" name="PID" id="PID" placeholder="{{'UserRole.Write Job Role Name'|translate}}">
                       <div>
                         <div [hidden]="jobRoleNameInEnglish.valid || jobRoleNameInEnglish.untouched">
                             <small *ngIf="jobRoleNameInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -61,7 +61,7 @@
                   </div>
                   <div class="col-xs-2 col-lg-2  switch">
 
-                    <label for="PID2" class="label">{{'dashboard.UserRole.JobRole Status'|translate}} <span class="star">*</span></label>
+                    <label for="PID2" class="label">{{'UserRole.JobRole Status'|translate}} <span class="star">*</span></label>
                     <div class="d-flex gap-3 status">
 
                         <span class="text">{{'shared.activated'|translate}}</span>
@@ -81,9 +81,9 @@
 
                <div class="col-xs-2 col-lg-4" >
 
-                <label for="PID5" class="label">{{'dashboard.UserRole.Description In Arabic'|translate}}</label>
+                <label for="PID5" class="label">{{'UserRole.Description In Arabic'|translate}}</label>
 
-                <input type="text" pInputText formControlName="descriptionInArabic" class="form-control "  [LangRestrict]="'ar'"  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
+                <input type="text" pInputText formControlName="descriptionInArabic" class="form-control "  [LangRestrict]="'ar'"  name="PID5" id="PID5" placeholder="{{'UserRole.Write Description'|translate}}">
                 <div>
                     <div [hidden]="descriptionInArabic.valid || descriptionInArabic.untouched">
 
@@ -99,9 +99,9 @@
             </div>
             <div class="col-xs-2 col-lg-4">
 
-              <label for="PID5" class="label">{{'dashboard.UserRole.Description In English'|translate}}</label>
+              <label for="PID5" class="label">{{'UserRole.Description In English'|translate}}</label>
 
-              <input type="text" pInputText formControlName="descriptionInEnglish" class="form-control  leftaction"  [LangRestrict]="'en'" name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
+              <input type="text" pInputText formControlName="descriptionInEnglish" class="form-control  leftaction"  [LangRestrict]="'en'" name="PID5" id="PID5" placeholder="{{'UserRole.Write Description'|translate}}">
               <div>
                   <div [hidden]="descriptionInEnglish.valid || descriptionInEnglish.untouched">
 
@@ -122,9 +122,9 @@
 
               <div class="col-xs-2 col-lg-8">
 
-                <label for="PID3" class="label">{{'dashboard.UserRole.DataRestrictionLevel'|translate}} <span class="star">*</span></label>
+                <label for="PID3" class="label">{{'UserRole.DataRestrictionLevel'|translate}} <span class="star">*</span></label>
 
-                  <p-dropdown [options]="dataRestrictionLevelList" (onChange)="changedRestriction($event.value)" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="name.en" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}"      [ngClass]="{'ng-invalid ng-dirty':datarestrictionLevel.errors?.required && datarestrictionLevel.touched}" name="PID3" id="PID3"  ></p-dropdown>
+                  <p-dropdown [options]="dataRestrictionLevelList" (onChange)="changedRestriction($event.value)" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="name.en" formControlName="datarestrictionLevel"   placeholder="{{'UserRole.Select Data Restriction Level'|translate}}"      [ngClass]="{'ng-invalid ng-dirty':datarestrictionLevel.errors?.required && datarestrictionLevel.touched}" name="PID3" id="PID3"  ></p-dropdown>
                   <div>
                     <div [hidden]="datarestrictionLevel.valid || datarestrictionLevel.untouched">
                         <small *ngIf="datarestrictionLevel.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -140,7 +140,7 @@
 
              <div class="row gx-4 gy-5 form-set "  *ngIf="showCurriculamList">
 
-                    <p class="heading heading--tertiary mb-3 mt-5">{{'dashboard.UserRole.Select curriculums' | translate}}</p>
+                    <p class="heading heading--tertiary mb-3 mt-5">{{'UserRole.Select curriculums' | translate}}</p>
                     <div  formArrayName="curriculumSelected" class="d-flex curriclums " [ngClass]="curriculamList?.length>20?'scroll':''">
                     <ng-container  *ngFor="let cu of curriculumSelectedArr.controls let i=index">
 
@@ -159,7 +159,7 @@
 
               <div class="d-flex align-items-center   ">
                 <div class="btn btn-primary" role="button" (click)="openSelectSchoolsModel()">
-                    {{'dashboard.UserRole.Select School'|translate}}
+                    {{'UserRole.Select School'|translate}}
                 </div>
                 </div>
 
@@ -171,7 +171,7 @@
 
                               <th pSortableColumn="name.ar" style="min-width:27rem">
                                 <p-sortIcon field="name"></p-sortIcon>
-                                {{'dashboard.schools.schoolName'|translate}}
+                                {{'schools.schoolName'|translate}}
 
                               </th>
                               <th pSortableColumn="state.ar">
@@ -215,7 +215,7 @@
                   <app-informative-block title="{{'emptyList.Schools not selected yet' |translate}}" subTitle="{{'emptyList.Pleaze, Select School' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
               </ng-container>
               <div class="alert col-lg-8" *ngIf="MarkedListLength&&!selectSchoolModelOpened">
-                <p>{{'dashboard.UserRole.exist'|translate}} {{MarkedListLength}} {{'dashboard.UserRole.school selected for this role'|translate}}</p>
+                <p>{{'UserRole.exist'|translate}} {{MarkedListLength}} {{'UserRole.school selected for this role'|translate}}</p>
              </div>
 
            </div>
@@ -224,7 +224,7 @@
           <div class=" row gx-4 form-set ">
             <div class="col-xs-2 col-lg-12">
 
-              <label for="rolePowers" class="label required">{{'dashboard.UserRole.RolePowers'|translate}}</label>
+              <label for="rolePowers" class="label required">{{'UserRole.RolePowers'|translate}}</label>
 
               <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto" style="width:66%">
                 <i class="pi pi-search fs-3 "></i>
@@ -241,7 +241,7 @@
                 <div [ngSwitch]="category.category" class="color-primary fw-bold  my-4">
                   <div *ngSwitchCase="'SPEA'">
                     <hr class="py-3">
-                    {{'dashboard.UserRole.' + category.category |translate}}
+                    {{'UserRole.' + category.category |translate}}
                     <div class=" d-flex align-items-center gap-3 mt-4">
                       <p-checkbox  name="all" [binary]="true" ngModel (ngModelChange)="onSelectAllRoles($event, category.category)" [ngModelOptions]="{standalone: true}"></p-checkbox>
                       <label class="fw-bold color-black" for="">{{'shared.selectAll'|translate}}</label>
@@ -250,7 +250,7 @@
 
                   <div *ngSwitchCase="'Employee'">
                     <hr class="py-3">
-                    {{'dashboard.UserRole.' + category.category |translate}}
+                    {{'UserRole.' + category.category |translate}}
                     <div class=" d-flex align-items-center gap-3 mt-4">
                       <p-checkbox  name="all" [binary]="true" ngModel (ngModelChange)="onSelectAllRoles($event, category.category)" [ngModelOptions]="{standalone: true}"></p-checkbox>
                       <label class="fw-bold color-black" for="">{{'shared.selectAll'|translate}}</label>
@@ -259,7 +259,7 @@
 
                   <div *ngSwitchCase="'Guardian'">
                     <hr class="py-3">
-                    {{'dashboard.UserRole.' + category.category |translate}}
+                    {{'UserRole.' + category.category |translate}}
                     <div class=" d-flex align-items-center gap-3 mt-4">
                       <p-checkbox  name="all" [binary]="true" ngModel (ngModelChange)="onSelectAllRoles($event, category.category)" [ngModelOptions]="{standalone: true}"></p-checkbox>
                       <label class="fw-bold color-black" for="">{{'shared.selectAll'|translate}}</label>

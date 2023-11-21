@@ -45,13 +45,13 @@ export class IssueCertificateComponent implements OnInit {
   componentHeaderData: IHeader = {
     breadCrump: [
       {
-        label: this.translate.instant('dashboard.parentHome.Request certificates'),
+        label: this.translate.instant('parentHome.Request certificates'),
         routerLink: '/certificates/ask-certificate',
         routerLinkActiveOptions: { exact: true },
       },
     ],
     mainTitle: {
-      main: this.translate.instant('dashboard.parentHome.Request certificates'),
+      main: this.translate.instant('parentHome.Request certificates'),
     },
   };
 
@@ -89,8 +89,8 @@ export class IssueCertificateComponent implements OnInit {
     //   this.selectedCertificate= {
     //     "value": CertificatesEnum.AcademicSequenceCertificate,
     //     "name": {
-    //       "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
-    //       "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
+    //       "en": this.translate.instant("issue of certificate.AcademicSequenceCertificate"),
+    //       "ar": this.translate.instant("issue of certificate.AcademicSequenceCertificate")
     //     }
     //   }
 
@@ -209,7 +209,7 @@ export class IssueCertificateComponent implements OnInit {
       this.isBtnLoading=false;
       this.display=false;
       if(result.statusCode != 'BadRequest'){
-      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+      this.toastr.success(this.translate.instant('issue of certificate.success message'));
       this.goToFirst();
       }else{
         if(result?.errorLocalized)

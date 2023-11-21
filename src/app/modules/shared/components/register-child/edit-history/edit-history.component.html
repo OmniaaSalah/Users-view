@@ -14,10 +14,10 @@
 
       <ng-template pTemplate="header">
           <tr>
-              <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.schools.editBy' |translate}} </th>
-              <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.schools.jobTitle' |translate}} </th>
-              <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.editionDate' |translate}} </th>
-              <th pSortableColumn="category"><p-sortIcon field="category"></p-sortIcon>{{'dashboard.schools.editSummary' |translate}} </th>
+              <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'schools.editBy' |translate}} </th>
+              <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'schools.jobTitle' |translate}} </th>
+              <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>{{'schools.editionDate' |translate}} </th>
+              <th pSortableColumn="category"><p-sortIcon field="category"></p-sortIcon>{{'schools.editSummary' |translate}} </th>
               <th class="actions" pSortableColumn="category"></th>
           </tr>
       </ng-template>
@@ -68,9 +68,9 @@
 <p-dialog [(visible)]="openEditListModel"  [modal]="true" [style]="{width: '45vw', fontSize:'2rem'}">
   <ng-template pTemplate="header">
       <div class="">
-          <div class="fw-bold">{{'dashboard.students.studentHistoryDetails' | translate}}</div>
+          <div class="fw-bold">{{'students.studentHistoryDetails' | translate}}</div>
        <ng-container  *ngIf="editItem?.createdBy">
-          <p class="paragraph paragraph--sm color-skyBlue-400 mt-3">{{'dashboard.schools.editBy'|translate}} <span class="color-primary text-decoration-underline">{{editItem?.createdBy|currentLang}}</span> {{'shared.in date'|translate}} <span>{{editItem?.createdDate|LocalizeDate}}</span></p>
+          <p class="paragraph paragraph--sm color-skyBlue-400 mt-3">{{'schools.editBy'|translate}} <span class="color-primary text-decoration-underline">{{editItem?.createdBy|currentLang}}</span> {{'shared.in date'|translate}} <span>{{editItem?.createdDate|LocalizeDate}}</span></p>
         </ng-container>
         <ng-container *ngIf="!editItem?.createdBy">
           <div class="row g-5">

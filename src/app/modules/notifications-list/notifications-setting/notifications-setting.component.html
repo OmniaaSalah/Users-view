@@ -1,5 +1,5 @@
 
-<!-- <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.notificationList' |translate}}</h3> -->
+<!-- <h3 class="heading heading--tertiary mb-5">{{'SystemSetting.notificationList' |translate}}</h3> -->
 
 <div class="prim-table" *ngIf="notifications.totalAllData || notifications.loading">
     <p-table #dt [value]="notifications.list" [lazy]="true">
@@ -13,8 +13,8 @@
             (onClear)="clearFilter()">
             <div class="row gx-5 form-set">
                 <div class="col-4">
-                    <label class="label" for="indexType">{{'dashboard.SystemSetting.Receiver'|translate}} </label>
-                    <p-multiSelect [options]="roles" display="chip" [(ngModel)]="filtration.recievedBy" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.Receiver'|translate}}"></p-multiSelect>
+                    <label class="label" for="indexType">{{'SystemSetting.Receiver'|translate}} </label>
+                    <p-multiSelect [options]="roles" display="chip" [(ngModel)]="filtration.recievedBy" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'SystemSetting.Receiver'|translate}}"></p-multiSelect>
                 </div>
 
             </div>
@@ -23,11 +23,11 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="cause"> {{'dashboard.SystemSetting.NotficationReason'|translate}}</th>
-                <th pSortableColumn="receivedBy" >{{'dashboard.SystemSetting.Receiver'|translate}} </th>
-                <th pSortableColumn="content.en" >{{'dashboard.SystemSetting.NotificationContentAr'|translate}}</th>
-                <th pSortableColumn="content.ar" >{{'dashboard.SystemSetting.NotificationContentEN'|translate}}</th>
-                <th pSortableColumn="channal" >{{'dashboard.SystemSetting.NotificationChannel'|translate}}</th>
+                <th pSortableColumn="cause"> {{'SystemSetting.NotficationReason'|translate}}</th>
+                <th pSortableColumn="receivedBy" >{{'SystemSetting.Receiver'|translate}} </th>
+                <th pSortableColumn="content.en" >{{'SystemSetting.NotificationContentAr'|translate}}</th>
+                <th pSortableColumn="content.ar" >{{'SystemSetting.NotificationContentEN'|translate}}</th>
+                <th pSortableColumn="channal" >{{'SystemSetting.NotificationChannel'|translate}}</th>
                 <th class="actions"></th>
             </tr>
         </ng-template>
@@ -37,7 +37,7 @@
                 <td>{{notification.receivedBy |currentLang}}</td>
                 <td>{{notification.content.ar |truncate}}</td>
                 <td dir="ltr" class="text-end">{{notification.content.en |truncate}}</td>
-                <td>{{'dashboard.SystemSetting.' + notification.channal | translate}}</td>
+                <td>{{'SystemSetting.' + notification.channal | translate}}</td>
                 <td>
                     <div class="d-flex align-items-center gap-3 justify-content-end mx-4" role="button" (click)="openNotificationModel(notification)">
                         <span class="color-skyBlue-400">{{'shared.edit' |translate}}</span>
@@ -79,46 +79,46 @@
 
 
 
-<p-dialog header="{{'dashboard.SystemSetting.editNotification' |translate}}" [(visible)]="notificationModelOpend" [modal]="true" [style]="{width: '50vw'}">
+<p-dialog header="{{'SystemSetting.editNotification' |translate}}" [(visible)]="notificationModelOpend" [modal]="true" [style]="{width: '50vw'}">
     <ng-template pTemplate="content">
 
         <ng-container [formGroup]="notificationForm">
             <div class="row gx-5 mb-6 mt-4">
                 <div class="col d-flex align-items-center gap-5">
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.SystemSetting.NotficationReason'|translate }}</p>
+                    <p class="color-gray-300 fs-4">{{ 'SystemSetting.NotficationReason'|translate }}</p>
                     <span class="color-primary mb-2">{{selectedNotification?.cause |currentLang}}</span>
                 </div>
 
                 <div class="col d-flex align-items-center gap-5">
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.SystemSetting.Receiver'|translate }}</p>
+                    <p class="color-gray-300 fs-4">{{ 'SystemSetting.Receiver'|translate }}</p>
                     <span class="color-primary mb-2">{{selectedNotification?.receivedBy|currentLang}} </span>
                 </div>
             </div>
 
             <div class="row mb-5 gx-5 custom-form" formGroupName="content" *ngIf="selectedNotification?.channal !=channelEnum.SMS || selectedNotification?.channal !=channelEnum.Email ">
                 <div class="col">
-                    <label class="label">{{ 'dashboard.SystemSetting.NotificationContentAr'|translate }}</label>
+                    <label class="label">{{ 'SystemSetting.NotificationContentAr'|translate }}</label>
                     <textarea [rows]="4" formControlName="ar" pInputTextarea placeholder="{{'shared.addText' |translate}}"></textarea>
 
                 </div>
                 <div class="col">
-                    <label class="label">{{ 'dashboard.SystemSetting.NotificationContentEN'|translate }}</label>
+                    <label class="label">{{ 'SystemSetting.NotificationContentEN'|translate }}</label>
                     <textarea [rows]="4" formControlName="en" pInputTextarea placeholder="{{'shared.addText' |translate}}"></textarea>
 
                 </div>
             </div>
 
             <div class="row mb-5  custom-form">
-                <h3 class="heading heading--tertiary mb-4">{{'dashboard.SystemSetting.NotificationChannel'|translate}}</h3>
+                <h3 class="heading heading--tertiary mb-4">{{'SystemSetting.NotificationChannel'|translate}}</h3>
                 <div class="col d-flex align-items-center gap-3">
-                    <p-radioButton label="{{'dashboard.SystemSetting.shortMessage'|translate}}" formControlName="channelId"  [value]="channelEnum.SMS"></p-radioButton>
-                    <!-- <span>{{'dashboard.SystemSetting.shortMessage'|translate}}</span> -->
+                    <p-radioButton label="{{'SystemSetting.shortMessage'|translate}}" formControlName="channelId"  [value]="channelEnum.SMS"></p-radioButton>
+                    <!-- <span>{{'SystemSetting.shortMessage'|translate}}</span> -->
                 </div>
                 <div class="col d-flex align-items-center gap-3">
                     <p-radioButton label="{{'shared.email'|translate}}" formControlName="channelId"  [value]="channelEnum.Email" ></p-radioButton>
                 </div>
                 <div class="col d-flex align-items-center gap-3">
-                    <p-radioButton  label="{{'dashboard.SystemSetting.throwSystem'|translate}}" formControlName="channelId"  [value]="channelEnum.System"></p-radioButton>
+                    <p-radioButton  label="{{'SystemSetting.throwSystem'|translate}}" formControlName="channelId"  [value]="channelEnum.System"></p-radioButton>
                 </div>
 
                 <div class="col d-flex align-items-center gap-3 color-red-500 fw-bold">

@@ -1,10 +1,10 @@
 <p-dialog styleClass="select-school" (onHide)="closeModel()"  [closable]="false" [baseZIndex]="10000" [resizable]="false" [(visible)]="selectSchoolModelOpened" [draggable]="false" [modal]="true" [style]="{width: '70vw'}">
 
     <ng-template pTemplate="header">
-     <span class="headeritem mb-5">{{'dashboard.UserRole.Select School'|translate}}</span>
+     <span class="headeritem mb-5">{{'UserRole.Select School'|translate}}</span>
      <button (click)="closeModel()" ><i class="pi pi-times" ></i></button>
      <div class="alert" style="display: fixed;">
-       <p>{{'dashboard.UserRole.You Select'|translate}}{{MarkedListLength}}{{'dashboard.UserRole.From School'|translate}}</p>
+       <p>{{'UserRole.You Select'|translate}}{{MarkedListLength}}{{'UserRole.From School'|translate}}</p>
    
     </div>
    </ng-template>

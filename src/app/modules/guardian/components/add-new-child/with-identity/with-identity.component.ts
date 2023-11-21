@@ -92,14 +92,14 @@ export class WithIdentityComponent implements OnInit {
     breadCrump: [
       {
         label: this.translate.instant(
-          'dashboard.parentHome.newStudent'
+          'parentHome.newStudent'
         ),
         routerLink: '/parent/AddChild/Addchild-WithNationality',
         routerLinkActiveOptions: { exact: true },
       },
     ],
     mainTitle: {
-      main: this.translate.instant('dashboard.parentHome.newStudent'),
+      main: this.translate.instant('parentHome.newStudent'),
     },
   };
 
@@ -168,7 +168,7 @@ export class WithIdentityComponent implements OnInit {
       next: (res)=>{
 
       this.onSubmit=false;
-      this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
+      this.toastr.success(this.translate.instant("parents.child saved successfully"));
 
       this.router.navigate(['/'])
       },

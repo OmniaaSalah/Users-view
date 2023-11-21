@@ -1,5 +1,5 @@
 <div class="prim-table mt-4" *ngIf="holidays.totalAllData || holidays.loading">
-    <!-- <div class="color-red-500 mb-4" *ngIf="currentUserScope==userScope.Employee">{{'dashboard.AnnualHoliday.you can request to edit flexible holiday only'|translate}}</div> -->
+    <!-- <div class="color-red-500 mb-4" *ngIf="currentUserScope==userScope.Employee">{{'AnnualHoliday.you can request to edit flexible holiday only'|translate}}</div> -->
     <p-table  [lazy]="true" [value]="holidays.list" (onSort)="onSort($event)" >
         <ng-template pTemplate="caption">
             <app-table-caption
@@ -10,8 +10,8 @@
             (onClear)="clearFilter()">
             <div class="row gx-5 form-set">
                 <div class="col-md-3">
-                    <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
-                    <p-dropdown [options]="holidayStatusList" StopProp [showClear]="true" optionLabel="name" optionValue="value" [(ngModel)]="filtration.flexibilityStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                    <label class="label" for="flexibilityStatus">{{'AnnualHoliday.Holiday Status'|translate }}  </label>
+                    <p-dropdown [options]="holidayStatusList" StopProp [showClear]="true" optionLabel="name" optionValue="value" [(ngModel)]="filtration.flexibilityStatus" inputId="flexibilityStatus"  placeholder="{{'AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
 
                 </div>
 
@@ -21,13 +21,13 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="{{lang=='ar' ? 'AnnualCalenderAr' : 'AnnualCalenderEn'}}"> <p-sortIcon field="{{lang=='ar' ? 'AnnualCalenderAr' : 'AnnualCalenderEn'}}"></p-sortIcon>{{'dashboard.schools.annulCalendarName' |translate}}</th>
-                <th pSortableColumn="Year"><p-sortIcon field="Year"></p-sortIcon>{{'dashboard.schools.SchoolYear' |translate}} </th>
-                <th pSortableColumn="{{lang=='ar' ? 'HolidayArabicName' : 'HolidayEnglishName'}}"><p-sortIcon field="{{lang=='ar' ? 'HolidayArabicName' : 'HolidayEnglishName'}}"></p-sortIcon>{{'dashboard.schools.holidayName' |translate}} </th>
-                <th pSortableColumn="DateFrom"><p-sortIcon field="DateFrom"></p-sortIcon>{{'dashboard.AnnualHoliday.HolidayStartDate' |translate}} </th>
-                <th pSortableColumn="DateTo"><p-sortIcon field="DateTo"></p-sortIcon>{{'dashboard.AnnualHoliday.HolidayEndDate' |translate}} </th>
+                <th pSortableColumn="{{lang=='ar' ? 'AnnualCalenderAr' : 'AnnualCalenderEn'}}"> <p-sortIcon field="{{lang=='ar' ? 'AnnualCalenderAr' : 'AnnualCalenderEn'}}"></p-sortIcon>{{'schools.annulCalendarName' |translate}}</th>
+                <th pSortableColumn="Year"><p-sortIcon field="Year"></p-sortIcon>{{'schools.SchoolYear' |translate}} </th>
+                <th pSortableColumn="{{lang=='ar' ? 'HolidayArabicName' : 'HolidayEnglishName'}}"><p-sortIcon field="{{lang=='ar' ? 'HolidayArabicName' : 'HolidayEnglishName'}}"></p-sortIcon>{{'schools.holidayName' |translate}} </th>
+                <th pSortableColumn="DateFrom"><p-sortIcon field="DateFrom"></p-sortIcon>{{'AnnualHoliday.HolidayStartDate' |translate}} </th>
+                <th pSortableColumn="DateTo"><p-sortIcon field="DateTo"></p-sortIcon>{{'AnnualHoliday.HolidayEndDate' |translate}} </th>
                 <th pSortableColumn="CreatedDate"><p-sortIcon field="CreatedDate"></p-sortIcon>{{'shared.Created Date' |translate}} </th>
-                <th class="expand"  pSortableColumn="FlexibilityStatus"><p-sortIcon  field="FlexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
+                <th class="expand"  pSortableColumn="FlexibilityStatus"><p-sortIcon  field="FlexibilityStatus" ></p-sortIcon>{{'AnnualHoliday.Holiday Status'|translate}}</th>
                 <th class="actions"></th>
             </tr>
         </ng-template>
@@ -54,7 +54,7 @@
 
                         <div role="button" class=" color-skyBlue-500 d-flex align-items-center gap-3 justify-content-end mx-4 "
                         [ngClass]="holiday.flexibilityStatus==statusEnum.Flexible ? '':'my-disable'" (click)="editFlexableHoliday(holiday)"  *permit="claimsEnum.E_EditFlexableHoliday">
-                            {{'dashboard.schools.sendEditHolidayReq'|translate}}
+                            {{'schools.sendEditHolidayReq'|translate}}
                         </div>
                     </ng-container>
 
@@ -93,7 +93,7 @@
 <p-dialog [(visible)]="openHolidaytModel" [closable]="!reqInstance" [modal]="true" [style]="{width: '48vw',height:'83vh', fontSize:'2rem'}">
     <ng-template pTemplate="header">
         <div class="">
-            <div class="fw-bold fs-3">{{'dashboard.schools.editHolidayReq' | translate}}</div>
+            <div class="fw-bold fs-3">{{'schools.editHolidayReq' | translate}}</div>
             <div class="paragraph paragraph--sm color-gray-200 mt-2">
                 يرجى تحديد تاريخ بداية الاجازة المرنة وتاريخ نهاية الاجازة المرنة بحيث لا تتجاوز عدد أيام العطلة عدد الأيام المحددة مُسبقاً من قبل هيئة الشارقة للتعليم الخاص
             </div>
@@ -149,7 +149,7 @@
 
                             <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
                             <span>{{action.title | currentLang}}</span>
-                            <!-- <span>{{'dashboard.Requests.resendRegstrationRequest' | translate}}</span> -->
+                            <!-- <span>{{'Requests.resendRegstrationRequest' | translate}}</span> -->
 
                         </button>
                     </div>

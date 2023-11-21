@@ -35,6 +35,8 @@ export class RequestListComponent implements OnInit {
 		breadCrump: []
 	}
 
+  curriculums$ = this.sharedService.getAllCurriculum()
+  AllGrades$ =this.sharedService.getAllGrades()
   statusOptions = []
   reqsTypes = []
 
@@ -45,7 +47,12 @@ export class RequestListComponent implements OnInit {
        SortBy: 'Desc',
        RequestStatus: null,
        RequestType:null,
-       userRequestType:null,
+       gradeId:null,
+       curriculumId:null,
+       userRequestType:
+            this.currentUserScope == this.userScope.Employee ?  'Employee' :
+            this.currentUserScope == this.userScope.SPEA ?  'Spea' :
+            null,
        ...JSON.parse(this.route.snapshot.queryParams['searchQuery'] || 'null')
       };
 
@@ -53,9 +60,9 @@ export class RequestListComponent implements OnInit {
 
     showOptions=[
       {name: this.translate.instant('shared.all'), value:null},
-      {name: this.translate.instant('dashboard.Requests.schoolRequests'), value:'Employee'},
-      {name: this.translate.instant('dashboard.Requests.speaRequests'), value:'Spea'},
-      {name: this.translate.instant('dashboard.Requests.guardianRequests'), value:'Guardian'}
+      {name: this.translate.instant('Requests.schoolRequests'), value:'Employee'},
+      {name: this.translate.instant('Requests.speaRequests'), value:'Spea'},
+      {name: this.translate.instant('Requests.guardianRequests'), value:'Guardian'}
     ]
 
 
@@ -125,6 +132,7 @@ export class RequestListComponent implements OnInit {
             this.requests.loading = false;
             this.requests.total=0
             this.sharedService.filterLoading.next(false);
+            this.router.navigate([])
           });
     }
 
@@ -207,7 +215,7 @@ export class RequestListComponent implements OnInit {
       }
 
       requestsList$.subscribe( (res: any[]) =>{
-        this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.Requests.RequestList'))
+        this.exportService.exportFile(fileType, res, this.translate.instant('Requests.RequestList'))
       })
     }
 
@@ -221,15 +229,15 @@ export class RequestListComponent implements OnInit {
     setDashboardHeaderData(){
 
       if(this.currentUserScope==UserScope.Employee){
-        let label = this.isMyRequests ? this.translate.instant('dashboard.Requests.myRequests') : this.translate.instant('dashboard.Requests.requestsToMe')
+        let label = this.isMyRequests ? this.translate.instant('Requests.myRequests') : this.translate.instant('Requests.requestsToMe')
         let link = this.isMyRequests ? '/school-management/requests-list/my-requests' : '/school-management/requests-list'
         this.componentHeaderData.breadCrump= [{label: label, routerLink: link,queryParams:{isMyRequests:this.isMyRequests} }]
       }
       else if (this.currentUserScope==UserScope.SPEA){
-        this.componentHeaderData.breadCrump= [{label: this.translate.instant('dashboard.Requests.RequestList'), routerLink:'/performance-managment/RequestList' }]
+        this.componentHeaderData.breadCrump= [{label: this.translate.instant('Requests.RequestList'), routerLink:'/performance-managment/RequestList' }]
       }
       else if (this.currentUserScope==UserScope.Guardian){
-        this.componentHeaderData.breadCrump= [{label: this.translate.instant('dashboard.myRequest.My requests'), routerLink:'/requests-list' }]
+        this.componentHeaderData.breadCrump= [{label: this.translate.instant('myRequest.My requests'), routerLink:'/requests-list' }]
       }
 
       this.headerService.changeHeaderdata(this.componentHeaderData)

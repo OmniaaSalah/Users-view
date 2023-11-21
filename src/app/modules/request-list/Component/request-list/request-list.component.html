@@ -2,7 +2,7 @@
 <div class="mb-6">
     <!-- <div class="d-flex gap-5 mx-5 custom-form" *ngIf="currentUserScope==userScope.Employee">
         <div class="d-flex gap-4">
-            <label class="fs-4 fw-bold color-primary" for="description">{{'dashboard.Requests.myRequests'|translate}}</label>
+            <label class="fs-4 fw-bold color-primary" for="description">{{'Requests.myRequests'|translate}}</label>
             <p-inputSwitch name="'myRequests" [(ngModel)]="showMyReqs.currentValue" (ngModelChange)="applyFilter()" [binary]="true"></p-inputSwitch>
         </div>
 
@@ -25,19 +25,30 @@
 
 
                             <div class="row gx-5 form-set">
-                              <div class="col-3" *ngIf="currentUserScope != userScope.Guardian">
-                                <label class="label" for="evaluationType"> {{'dashboard.Requests.show'|translate}} </label>
-                                <p-dropdown [showClear]="true" [options]="showOptions" [(ngModel)]="filtration.userRequestType" optionLabel="name" optionValue="value" ></p-dropdown>
-                            </div>
+                                <div class="col-3" *ngIf="currentUserScope != userScope.Guardian">
+                                  <label class="label" for="evaluationType"> {{'Requests.show'|translate}} </label>
+                                  <p-dropdown [showClear]="true" [options]="showOptions" [(ngModel)]="filtration.userRequestType" optionLabel="name" optionValue="value" ></p-dropdown>
+                                </div>
                                 <div class="col-3">
-                                    <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
-                                    <!-- <p-dropdown [showClear]="true" StopProp [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-dropdown> -->
-                                    <p-multiSelect [lazy]="true" [options]="statusOptions" display="chip" [(ngModel)]="filtration.RequestStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Requests.Status'|translate}}"></p-multiSelect>
+                                    <label class="label" for="RequestStatus"> {{'Requests.Status'|translate}} </label>
+                                    <!-- <p-dropdown [showClear]="true"  [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'Requests.Status'|translate}}"></p-dropdown> -->
+                                    <p-multiSelect [lazy]="true" [options]="statusOptions" display="chip" [(ngModel)]="filtration.RequestStatus" optionLabel="name" optionValue="value" placeholder="{{'Requests.Status'|translate}}"></p-multiSelect>
                                 </div>
                                 <div class="col-4">
-                                    <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>
-                                    <p-multiSelect [options]="reqsTypes" display="chip" [(ngModel)]="filtration.RequestType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-multiSelect>
+                                    <label class="label" for="evaluationType"> {{'Requests.requestType'|translate}} </label>
+                                    <p-multiSelect [options]="reqsTypes" display="chip" [(ngModel)]="filtration.RequestType" optionLabel="name" optionValue="value" placeholder="{{'Requests.requestType'|translate}}"></p-multiSelect>
                                 </div>
+                            </div>
+
+                            <div class="row gx-5 form-set" *ngIf="currentUserScope != userScope.Guardian && !this.isMyRequests">
+                              <div class="col-3">
+                                <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                                <p-multiSelect display="chip"  [options]="(curriculums$ | async)"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" [(ngModel)]="filtration.curriculumId" placeholder="{{'shared.chooseCurriculum'|translate}}"></p-multiSelect>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="label">{{'shared.grade'| translate}}</label>
+                                <p-multiSelect display="chip"  [lazy]="true" [options]="(AllGrades$ | async)"  [(ngModel)]="filtration.gradeId"   optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  placeholder="{{'students.chooseClasse' |translate}}"></p-multiSelect>
+                              </div>
                             </div>
 
                         </app-table-caption>
@@ -50,21 +61,21 @@
 
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
-                            <th>{{'dashboard.Requests.requestNumber'|translate}}</th>
-                            <th style="min-width: 22rem;" pSortableColumn="requestTypeEnum">{{'dashboard.Requests.requestType'|translate}}</th>
-                            <th style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith"><p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
+                            <th>{{'Requests.requestNumber'|translate}}</th>
+                            <th style="min-width: 22rem;" pSortableColumn="requestTypeEnum">{{'Requests.requestType'|translate}}</th>
+                            <th style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith"><p-sortIcon field="Status"></p-sortIcon> {{'myRequest.The request is associated with' | translate}} </th>
 
                             <th style="min-width: 20rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.school'|translate}}</th>
                             <th pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.curriculum'|translate}}</th>
-                            <th  *ngIf="currentUserScope!=userScope.Guardian" style="min-width: 18rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'dashboard.schools.student'|translate}}</th>
-                            <th  *ngIf="currentUserScope!=userScope.Guardian" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'dashboard.schools.studentId'|translate}}</th>
+                            <th  *ngIf="currentUserScope!=userScope.Guardian" style="min-width: 18rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'schools.student'|translate}}</th>
+                            <th  *ngIf="currentUserScope!=userScope.Guardian" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'schools.studentId'|translate}}</th>
 
 
-                            <th style="min-width: 15rem;" pSortableColumn="requestStatus"><p-sortIcon field="requestStatus"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
+                            <th style="min-width: 15rem;" pSortableColumn="requestStatus"><p-sortIcon field="requestStatus"></p-sortIcon>{{'Requests.Status'|translate}}</th>
 
-                            <th pSortableColumn="createdNameAr">{{'dashboard.Subjects.Created by'|translate}}</th>
+                            <th pSortableColumn="createdNameAr">{{'Subjects.Created by'|translate}}</th>
                             <th style="min-width: 16rem;" pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-                            <th style="min-width: 16rem;" *ngIf="currentUserScope==userScope.Guardian">{{'dashboard.Subjects.Last EditDate'|translate}}</th>
+                            <th style="min-width: 16rem;" *ngIf="currentUserScope==userScope.Guardian">{{'Subjects.Last EditDate'|translate}}</th>
                             <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions"></th>
 
                         </tr>
@@ -78,7 +89,7 @@
                   </td> -->
                             <td >{{request.requestNumber}}</td>
                             <td class="d-block" style="min-width: 22rem;">
-                                <div>{{'dashboard.Requests.'+request.requestType | translate}}</div>
+                                <div>{{'Requests.'+request.requestType | translate}}</div>
                             </td>
 
                             <td style="min-width: 18rem;" *ngIf="currentUserScope==userScope.Guardian">{{request?.relatedSon | currentLang}}</td>
@@ -98,19 +109,19 @@
 
                             <td style="min-width: 15rem;">
                                 <span [ngSwitch]="request.requestStatus">
-                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.FinalApproval">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Approved">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.SentForApproval">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting success" *ngSwitchCase="requestStatusEnum.TentativelyAccepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p class="alerting success"  *ngSwitchCase="requestStatusEnum.Pending">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p class="alerting danger"  *ngSwitchCase="requestStatusEnum.Rejected">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.ModificationRequest">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.ModificationRequestForSchool">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.ModificationRequestForGuardian">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting dark" *ngSwitchCase="requestStatusEnum.Canceled">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.FinalApproval">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Approved">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.SentForApproval">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting success" *ngSwitchCase="requestStatusEnum.TentativelyAccepted">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting success"  *ngSwitchCase="requestStatusEnum.Pending">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting danger"  *ngSwitchCase="requestStatusEnum.Rejected">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.ModificationRequest">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.ModificationRequestForSchool">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.ModificationRequestForGuardian">{{'Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dark" *ngSwitchCase="requestStatusEnum.Canceled">{{'Requests.'+request.requestStatus |translate}}</p>
                                 </span>
-                                <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
+                                <!-- <div class="alerting success">{{'Requests.'+request.requestStatus |translate}}</div> -->
                             </td>
                             <td>{{request.createdBy | currentLang}}</td>
                             <td style="min-width: 16rem;">{{request.createdDate | toLocalDate:'YYYY-MM-DD HH:mm' |LocalizeDate:'d MMMM y hh:mm a'}}</td>

@@ -28,13 +28,13 @@
           <div class="d-flex gap-5  mb-6">
             <div class="d-flex align-items-center gap-3">
               <img  style="width:1.75rem" src="assets/images/home/student/student.svg" alt="">
-              <h3 class="heading heading--secondary color-primary">{{ 'dashboard.parents.HealthStatus'|translate }} :- </h3>
+              <h3 class="heading heading--secondary color-primary">{{ 'parents.HealthStatus'|translate }} :- </h3>
               <span class="color-skyBlue-500 fw-bold">{{student?.name |currentLang}}</span>
             </div>
 
             <div class="col-7 bg-orange-50 p-3 fs-3 radius-15 " >
               <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-              <span class="color-gray-800">{{ 'dashboard.SchoolYear.last editeddate'|translate }} {{medicalFile?.updatedDate |LocalizeDate }}</span>
+              <span class="color-gray-800">{{ 'SchoolYear.last editeddate'|translate }} {{medicalFile?.updatedDate |LocalizeDate }}</span>
             </div>
 
             <!-- <div class="d-flex gap-4 align-content-center">
@@ -42,16 +42,16 @@
               <span class="color-primary mb-2">{{medicalFile?.updatedDate |LocalizeDate }}</span>
             </div> -->
           </div>
-            <!-- <h3 class="heading heading--tertiary mb-5">{{ 'dashboard.parents.HealthStatus'|translate }} :</h3> -->
+            <!-- <h3 class="heading heading--tertiary mb-5">{{ 'parents.HealthStatus'|translate }} :</h3> -->
 
 
             <div class="d-flex  mb-5">
               <div class="col-md-4 grid-container">
-                <p class="color-gray-300">{{'dashboard.parents.SufferFromChronicdiseases'| translate}}</p>
+                <p class="color-gray-300">{{'parents.SufferFromChronicdiseases'| translate}}</p>
                 <span class="color-primary mb-2">{{medicalFile.chronicDiseases.length? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
                 <ng-container *ngIf="medicalFile.chronicDiseases.length">
-                        <p class="color-gray-300">{{ 'dashboard.parents.Chronicdiseases'|translate }}</p>
+                        <p class="color-gray-300">{{ 'parents.Chronicdiseases'|translate }}</p>
                         <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
                         <ul class="d-flex flex-wrap">
                             <li class="d-flex color-primary" *ngFor="let val of medicalFile.chronicDiseases; let i= index">
@@ -64,11 +64,11 @@
               </div>
 
               <div class="col-md-4 grid-container">
-                <p class="color-gray-300">{{'dashboard.students.sufferFromAllergiesFromFoodOrMedicine'| translate}}</p>
+                <p class="color-gray-300">{{'students.sufferFromAllergiesFromFoodOrMedicine'| translate}}</p>
                 <span class="color-primary mb-2">{{medicalFile?.allergicDiseases.length? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
                 <ng-container *ngIf="medicalFile?.allergicDiseases.length">
-                        <p class="color-gray-300">{{ 'dashboard.students.AllergiesFromFoodOrMedicine'|translate }}</p>
+                        <p class="color-gray-300">{{ 'students.AllergiesFromFoodOrMedicine'|translate }}</p>
                         <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
                         <ul class="d-flex flex-wrap">
                             <li class="d-flex color-primary" *ngFor="let val of medicalFile?.allergicDiseases; let i= index">
@@ -86,11 +86,11 @@
 
                 <div class="grid-container">
 
-                    <!-- <p class="color-gray-300">{{'dashboard.parents.SufferFromChronicdiseases'| translate}}</p>
+                    <!-- <p class="color-gray-300">{{'parents.SufferFromChronicdiseases'| translate}}</p>
                     <span class="color-primary mb-2">{{medicalFile.chronicDiseases.length? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
                     <ng-container *ngIf="medicalFile.chronicDiseases.length">
-                            <p class="color-gray-300">{{ 'dashboard.parents.Chronicdiseases'|translate }}</p>
+                            <p class="color-gray-300">{{ 'parents.Chronicdiseases'|translate }}</p>
                             <ul class="d-flex flex-wrap">
                                 <li class="d-flex color-primary" *ngFor="let val of medicalFile.chronicDiseases; let i= index">
                                 <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
@@ -102,17 +102,17 @@
 
 
 
-                    <p class="color-gray-300">{{ 'dashboard.students.withDisabilities'|translate }}</p>
+                    <p class="color-gray-300">{{ 'students.withDisabilities'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.isSpecialAbilities ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
 
-                    <p class="color-gray-300">{{'dashboard.parents.shadowerExist'|translate }}</p>
+                    <p class="color-gray-300">{{'parents.shadowerExist'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.hasShadower ?('shared.yes' | translate): ('shared.no' | translate)}}</span>
 
-                    <p class="color-gray-300">{{ 'dashboard.parents.increasement'|translate }}</p>
+                    <p class="color-gray-300">{{ 'parents.increasement'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.raise}}</span>
 
                     <ng-container *ngIf="!weightEditMode">
-                        <p class="color-gray-300">{{'dashboard.parents.weight'|translate }}</p>
+                        <p class="color-gray-300">{{'parents.weight'|translate }}</p>
                         <div class="d-flex gap-3">
                             <span class="color-primary mb-2">{{medicalFile.weight}} {{'Kg'|translate}}</span>
                             <img *ngIf="isSpeaNurse" (click)="weightEditMode=true;editMode=true" src="assets/images/shared/rect-bluepen.svg"  alt="edit" role="button">
@@ -123,8 +123,8 @@
 
                 <ng-container *ngIf="weightEditMode" [formGroup]="medicalFileForm">
                     <div class="mt-5">
-                        <label class="label">{{'dashboard.students.weight'| translate}}</label>
-                        <p-inputNumber formControlName="weight" suffix="kg" [showButtons]="true" [min]="5" [max]="300" placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
+                        <label class="label">{{'students.weight'| translate}}</label>
+                        <p-inputNumber formControlName="weight" suffix="kg" [showButtons]="true" [min]="5" [max]="300" placeholder="{{'students.weight'|translate}}"></p-inputNumber>
                     </div>
                 </ng-container>
 
@@ -138,11 +138,11 @@
 
               <div class="grid-container gap-y-5">
 
-                <!-- <p class="color-gray-300">{{'dashboard.students.AllergiesFromFoodOrMedicine'| translate}}</p>
+                <!-- <p class="color-gray-300">{{'students.AllergiesFromFoodOrMedicine'| translate}}</p>
                 <span class="color-primary mb-2">{{medicalFile?.allergicDiseases.length? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
                 <ng-container *ngIf="medicalFile?.allergicDiseases.length">
-                        <p class="color-gray-300">{{ 'dashboard.students.AllergiesFromFoodOrMedicine'|translate }}</p>
+                        <p class="color-gray-300">{{ 'students.AllergiesFromFoodOrMedicine'|translate }}</p>
                         <ul class="d-flex flex-wrap">
                             <li class="d-flex color-primary" *ngFor="let val of medicalFile?.allergicDiseases; let i= index">
                             <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
@@ -154,21 +154,21 @@
 
 
                     <ng-container *ngIf="getCtr('isSpecialAbilities').value">
-                        <p class="color-gray-300">{{ 'dashboard.parents.Disabilities'|translate }}</p>
+                        <p class="color-gray-300">{{ 'parents.Disabilities'|translate }}</p>
                         <span class="color-primary mb-2">{{medicalFile.disabilities || 'لم يَذْكُر'}}</span>
                     </ng-container>
 
 
-                    <p class="color-gray-300">{{ 'dashboard.parents.fats'|translate }}</p>
+                    <p class="color-gray-300">{{ 'parents.fats'|translate }}</p>
                     <span class="color-primary mb-2">
                         {{medicalFile.fats}} %
                       </span>
 
-                    <p class="color-gray-300">{{ 'dashboard.parents.Weightloss'|translate }}</p>
+                    <p class="color-gray-300">{{ 'parents.Weightloss'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.shortage}}</span>
 
                     <ng-container *ngIf="!heightEditMode">
-                        <p class="color-gray-300">{{ 'dashboard.parents.Length'|translate }}</p>
+                        <p class="color-gray-300">{{ 'parents.Length'|translate }}</p>
                         <div class="d-flex gap-3">
                             <span class="color-primary mb-2">{{medicalFile.height}} {{'shared.cm' |translate}} </span>
                             <img *ngIf="isSpeaNurse" (click)="heightEditMode=true;editMode=true" src="assets/images/shared/rect-bluepen.svg" alt="edit" role="button">
@@ -179,8 +179,8 @@
 
                 <ng-container *ngIf="heightEditMode" [formGroup]="medicalFileForm">
                     <div class="mt-5">
-                        <label class="label">{{'dashboard.students.length'|translate}}</label>
-                        <p-inputNumber formControlName="height" suffix="cm" [showButtons]="true" [min]="5" [max]="300" placeholder="{{'dashboard.students.length'|translate}}"></p-inputNumber>
+                        <label class="label">{{'students.length'|translate}}</label>
+                        <p-inputNumber formControlName="height" suffix="cm" [showButtons]="true" [min]="5" [max]="300" placeholder="{{'students.length'|translate}}"></p-inputNumber>
                     </div>
                 </ng-container>
             </div>
@@ -189,25 +189,25 @@
 
             <div class="col-md-4">
                 <div class="grid-container mb-5">
-                    <p class="color-gray-300">{{'dashboard.students.exemptionFromTraining'|translate }}</p>
+                    <p class="color-gray-300">{{'students.exemptionFromTraining'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.isAthletic ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                 </div>
                 <div  class="mb-5">
-                    <p class="color-gray-300 mb-2">{{ 'dashboard.parents.Diet'|translate }}</p>
+                    <p class="color-gray-300 mb-2">{{ 'parents.Diet'|translate }}</p>
                     <!-- <span class="color-primary mb-2">{{medicalFile.dietFollowed}}</span> -->
                     <div class="d-flex align-items-center gap-3">
                         <p class="color-primary mb-2 w-75">{{medicalFile.dietFollowed || '--'}}</p>
                     </div>
                 </div>
                 <!-- <div class="mb-5">
-                    <p class="color-gray-300 mb-2">{{'dashboard.parents.VaccinationBook'|translate }}</p>
+                    <p class="color-gray-300 mb-2">{{'parents.VaccinationBook'|translate }}</p>
                     <div class="d-flex align-items-center gap-3">
                         <p class="color-primary mb-2 w-75">{{medicalFile.vaccinationBook || '--'}}</p>
                     </div>
                 </div> -->
 
                 <div class="mb-5">
-                  <p class="color-gray-300">{{'dashboard.parents.VaccineCertificate'|translate}}</p>
+                  <p class="color-gray-300">{{'parents.VaccineCertificate'|translate}}</p>
                   <ng-container *ngFor="let file of medicalFile?.vaccineCertificates||[] ; let i = index">
                     <div class="" *ngIf="file?.url">
                         <app-file [file]="file" [clickable]="true"></app-file>
@@ -239,38 +239,38 @@
           <div class="row gx-5">
             <div class="col-md-4">
               <div class="form-set">
-                  <label class="label ">{{'dashboard.students.chronicDiseases'|translate}}</label>
+                  <label class="label ">{{'students.chronicDiseases'|translate}}</label>
                   <p-chips name="chronicDiseases" [addOnBlur]="true" formControlName="listOfChronicDiseases"  placeholder=""></p-chips>
               </div>
               <!-- <div class="form-set">
-                  <label class="label required">{{'dashboard.students.feelingDiseases'|translate}}</label>
+                  <label class="label required">{{'students.feelingDiseases'|translate}}</label>
                   <p-dropdown [options]="booleanOptions" optionValue="value"  optionLabel="name"></p-dropdown>
               </div> -->
 
               <div class="form-set">
-                <label class="label">{{'dashboard.students.AllergiesFromFoodOrMedicine'|translate}}</label>
+                <label class="label">{{'students.AllergiesFromFoodOrMedicine'|translate}}</label>
                 <p-chips name="feelingDiseases" [addOnBlur]="true" formControlName="listOfAllergicDiseases" placeholder=""></p-chips>
               </div>
 
 
               <div class="form-set">
-                <label class="label required">{{'dashboard.students.childWithDisabilities'| translate}}</label>
+                <label class="label required">{{'students.childWithDisabilities'| translate}}</label>
                 <p-dropdown  [options]="booleanOptions" formControlName="isSpecialAbilities" optionValue="value"  optionLabel="name"></p-dropdown>
               </div>
 
               <div class="form-set" *ngIf="getCtr('isSpecialAbilities').value">
-                  <label class="label required">{{'dashboard.students.disabilities'| translate}}</label>
-                  <input  type="text" id="trackId" formControlName="disabilities" pInputText placeholder="{{'dashboard.students.disabilities'|translate}}" />
+                  <label class="label required">{{'students.disabilities'| translate}}</label>
+                  <input  type="text" id="trackId" formControlName="disabilities" pInputText placeholder="{{'students.disabilities'|translate}}" />
                   <!-- <p-dropdown [options]="booleanOptions"  optionValue="value" optionLabel="name"></p-dropdown> -->
               </div>
 
               <div class="form-set">
-                <label class="label required">{{'dashboard.students.exemptionFromTraining'|translate}}</label>
+                <label class="label required">{{'students.exemptionFromTraining'|translate}}</label>
                 <p-dropdown  [options]="booleanOptions" formControlName="isAthletic" optionValue="value"  optionLabel="name"></p-dropdown>
               </div>
 
               <div class="form-set">
-                <label class="label required">{{'dashboard.parents.shadowerExist'|translate}}</label>
+                <label class="label required">{{'parents.shadowerExist'|translate}}</label>
                 <p-dropdown  formControlName="hasShadower" [options]="booleanOptions" optionValue="value"  optionLabel="name"></p-dropdown>
 
                 <!-- <p-inputNumber formControlName="iq" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber> -->
@@ -284,31 +284,31 @@
             <div class="col-md-4">
 
                   <div class="form-set">
-                      <label class="label required">{{'dashboard.students.fats'|translate}}</label>
+                      <label class="label required">{{'students.fats'|translate}}</label>
                       <p-inputNumber  formControlName="fats" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
                   </div>
 
                   <div class="form-set">
-                    <label class="label required">{{'dashboard.students.increase'|translate}}</label>
-                    <!-- <input type="text" id="trackId" formControlName="raise" pInputText placeholder="{{'dashboard.students.writeIncrease'|translate}}" /> -->
-                    <p-inputNumber  formControlName="raise" [showButtons]="true" placeholder="{{'dashboard.students.writeIncrease'|translate}}"></p-inputNumber>
+                    <label class="label required">{{'students.increase'|translate}}</label>
+                    <!-- <input type="text" id="trackId" formControlName="raise" pInputText placeholder="{{'students.writeIncrease'|translate}}" /> -->
+                    <p-inputNumber  formControlName="raise" [showButtons]="true" placeholder="{{'students.writeIncrease'|translate}}"></p-inputNumber>
                   </div>
                   <div class="form-set">
-                      <label class="label required">{{'dashboard.students.decrease'| translate}}</label>
-                      <p-inputNumber  formControlName="shortage" [showButtons]="true" placeholder="{{'dashboard.students.writeDecrease'|translate}}"></p-inputNumber>
-                      <!-- <input type="text" id="trackId" formControlName="shortage" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" /> -->
+                      <label class="label required">{{'students.decrease'| translate}}</label>
+                      <p-inputNumber  formControlName="shortage" [showButtons]="true" placeholder="{{'students.writeDecrease'|translate}}"></p-inputNumber>
+                      <!-- <input type="text" id="trackId" formControlName="shortage" pInputText placeholder="{{'students.writeDecrease'|translate}}" /> -->
                   </div>
 
                   <div class="form-set">
-                      <label class="label required">{{'dashboard.students.weight'| translate}}</label>
-                      <!-- <input type="number" id="trackId" formControlName="weight" pInputText placeholder="{{'dashboard.students.weight'|translate}}" /> -->
-                      <p-inputNumber  formControlName="weight" suffix=" kg" [min]="5" [max]="300" [showButtons]="true" placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
+                      <label class="label required">{{'students.weight'| translate}}</label>
+                      <!-- <input type="number" id="trackId" formControlName="weight" pInputText placeholder="{{'students.weight'|translate}}" /> -->
+                      <p-inputNumber  formControlName="weight" suffix=" kg" [min]="5" [max]="300" [showButtons]="true" placeholder="{{'students.weight'|translate}}"></p-inputNumber>
 
                   </div>
                   <div class="form-set">
-                      <label class="label required">{{'dashboard.students.length'|translate}}</label>
-                      <!-- <input type="number" id="trackId" formControlName="height" pInputText placeholder="{{'dashboard.students.length'|translate}}" /> -->
-                      <p-inputNumber  formControlName="height" suffix=" cm" [min]="5" [max]="300" [showButtons]="true"  placeholder="{{'dashboard.students.length'|translate}}"></p-inputNumber>
+                      <label class="label required">{{'students.length'|translate}}</label>
+                      <!-- <input type="number" id="trackId" formControlName="height" pInputText placeholder="{{'students.length'|translate}}" /> -->
+                      <p-inputNumber  formControlName="height" suffix=" cm" [min]="5" [max]="300" [showButtons]="true"  placeholder="{{'students.length'|translate}}"></p-inputNumber>
 
                   </div>
             </div>
@@ -317,17 +317,17 @@
 
             <div class="col-md-4">
               <div class="form-set position-relative">
-                <label class="label required">{{'dashboard.students.followedDiet'|translate}}</label>
-                <!-- <input type="text" id="trackId" formControlName="dietFollowed" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" /> -->
-                <textarea  class="diet-discription" formControlName="dietFollowed" pInputTextarea placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}"></textarea>
+                <label class="label required">{{'students.followedDiet'|translate}}</label>
+                <!-- <input type="text" id="trackId" formControlName="dietFollowed" pInputText placeholder="{{'students.writeFollowedDiet'|translate}}" /> -->
+                <textarea  class="diet-discription" formControlName="dietFollowed" pInputTextarea placeholder="{{'students.writeFollowedDiet'|translate}}"></textarea>
               </div>
 
                 <!-- <div class="form-set position-relative">
-                  <label class="label required">{{'dashboard.parents.VaccinationBook'|translate}}</label>
-                  <textarea formControlName="vaccinationBook" pInputTextarea placeholder="{{'dashboard.parents.VaccinationBook'|translate}}"></textarea>
+                  <label class="label required">{{'parents.VaccinationBook'|translate}}</label>
+                  <textarea formControlName="vaccinationBook" pInputTextarea placeholder="{{'parents.VaccinationBook'|translate}}"></textarea>
                 </div> -->
 
-                <app-file-upload [filesLimit]="5" [files]="getCtr('vaccineCertificates').value || []" (onFileUpload)="onFileUpload($event)" title="{{'dashboard.parents.VaccineCertificate'|translate}}"></app-file-upload>
+                <app-file-upload [filesLimit]="5" [files]="getCtr('vaccineCertificates').value || []" (onFileUpload)="onFileUpload($event)" title="{{'parents.VaccineCertificate'|translate}}"></app-file-upload>
             </div>
 
           </div>
@@ -336,7 +336,7 @@
             <div class="row form-set bg-gray-30 p-5 radius-15">
                 <div class="col-md-12">
                     <label class="label required">{{'shared.note'|translate}}</label>
-                    <input  type="text" id="trackId" formControlName="otherNotes" pInputText placeholder="{{'dashboard.students.writeAnotherNotes'|translate}}" />
+                    <input  type="text" id="trackId" formControlName="otherNotes" pInputText placeholder="{{'students.writeAnotherNotes'|translate}}" />
                 </div>
             </div>
 

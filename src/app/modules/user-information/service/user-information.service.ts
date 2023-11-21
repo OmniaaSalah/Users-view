@@ -51,13 +51,13 @@ usersToExport(filter){
       .data.map(user =>{
         return {
           [this.translate.instant('shared.Full Name')]: user?.fullName[this.lang],
-          [this.translate.instant('dashboard.UserInformation.Private Role')]: user?.roleName[this.lang],
+          [this.translate.instant('UserInformation.Private Role')]: user?.roleName[this.lang],
           [this.translate.instant('shared.email')]: user?.email,
-          [this.translate.instant('dashboard.UserInformation.lastLoginDate')]: user?.lastLoginDate ? user?.lastLoginDate : '-',
+          [this.translate.instant('UserInformation.lastLoginDate')]: user?.lastLoginDate ? user?.lastLoginDate : '-',
           [this.translate.instant('shared.Identity Number')]: user?.emiratesIdNumber,
           [this.translate.instant('shared.phoneNumber')]: user?.phoneNumber,
           [this.translate.instant('shared.Created Date')]: user?.createdDate,
-          [this.translate.instant('dashboard.UserInformation.User Status')]: user?.isActive? this.translate.instant('Active') : this.translate.instant('Inactive')  ,
+          [this.translate.instant('UserInformation.User Status')]: user?.isActive? this.translate.instant('Active') : this.translate.instant('Inactive')  ,
 
         }
       })

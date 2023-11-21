@@ -31,15 +31,15 @@ export class StudentsService {
       {
         "value": CertificatesEnum.AcademicSequenceCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
+          "en": this.translate.instant("issue of certificate.AcademicSequenceCertificate"),
+          "ar": this.translate.instant("issue of certificate.AcademicSequenceCertificate")
         }
       },
       {
         "value": CertificatesEnum.GradesCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.GradesCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.GradesCertificate")
+          "en": this.translate.instant("issue of certificate.GradesCertificate"),
+          "ar": this.translate.instant("issue of certificate.GradesCertificate")
         }
       }
     ];
@@ -78,12 +78,12 @@ export class StudentsService {
         let data = res?.data ? res?.data : res?.result?.data
         return data.map(student =>{
           return {
-            [this.translate.instant('dashboard.students.daleelNumber')]: student.studentDaleelNumber,
-            [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student.name),
-            [this.translate.instant('dashboard.students.studentNickname')]: getLocalizedValue(student.surName),
+            [this.translate.instant('students.daleelNumber')]: student.studentDaleelNumber,
+            [this.translate.instant('students.studentName')]: getLocalizedValue(student.name),
+            [this.translate.instant('students.studentNickname')]: getLocalizedValue(student.surName),
             [this.translate.instant('shared.nationality')]: getLocalizedValue(student.nationality),
-            [this.translate.instant('dashboard.students.schoolName')]: getLocalizedValue(student.currentSchoolName),
-            [this.translate.instant('dashboard.students.parent')]: getLocalizedValue(student.guardianName),
+            [this.translate.instant('students.schoolName')]: getLocalizedValue(student.currentSchoolName),
+            [this.translate.instant('students.parent')]: getLocalizedValue(student.guardianName),
             [this.translate.instant('shared.grade')]: getLocalizedValue(student.gradeName)  ,
             [this.translate.instant('shared.division')]: getLocalizedValue(student.divisionName),
           }
@@ -317,13 +317,13 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       map(res=>{
         return res.result?.data.map(subject =>{
           return {
-            [this.translate.instant('dashboard.parents.subjectName')]: getLocalizedValue(subject.subject),
-            [this.translate.instant('dashboard.parents.Mandatory/Optional')]: subject.isElective ? this.translate.instant('dashboard.Subjects.optional') : this.translate.instant('dashboard.Subjects.mandatory'),
-            [this.translate.instant('dashboard.parents.Evaluation')]: this.translate.instant(''+subject.evaluationSystem),
-            [this.translate.instant('dashboard.parents.Result')]: subject.studentDegree,
-            [this.translate.instant('dashboard.parents.studentperformance')]: subject?.studentPerformance || 'لايوجد',
-            [this.translate.instant('dashboard.parents.GPA')]: subject.studentGPA ,
-            [this.translate.instant('dashboard.parents.Credithour')]: subject.studentHour,
+            [this.translate.instant('parents.subjectName')]: getLocalizedValue(subject.subject),
+            [this.translate.instant('parents.Mandatory/Optional')]: subject.isElective ? this.translate.instant('Subjects.optional') : this.translate.instant('Subjects.mandatory'),
+            [this.translate.instant('parents.Evaluation')]: this.translate.instant(''+subject.evaluationSystem),
+            [this.translate.instant('parents.Result')]: subject.studentDegree,
+            [this.translate.instant('parents.studentperformance')]: subject?.studentPerformance || 'لايوجد',
+            [this.translate.instant('parents.GPA')]: subject.studentGPA ,
+            [this.translate.instant('parents.Credithour')]: subject.studentHour,
 
           }
 
@@ -349,11 +349,11 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       map(res=>{
         return res?.result?.data.map(record =>{
           return {
-            [this.translate.instant('dashboard.schools.SchoolYear')]: getLocalizedValue(record.schoolYear),
-            [this.translate.instant('dashboard.schools.schoolName')]: getLocalizedValue(record.grade),
+            [this.translate.instant('schools.SchoolYear')]: getLocalizedValue(record.schoolYear),
+            [this.translate.instant('schools.schoolName')]: getLocalizedValue(record.grade),
             [this.translate.instant('shared.grade')]: record.finalResult==StatusEnum.Passed? this.translate.instant('shared.allStatus.Passed'): this.translate.instant('shared.allStatus.Failed'),
             [this.translate.instant('shared.divisionName')]: getLocalizedValue(record.division),
-            [this.translate.instant('dashboard.students.finalScore')]: this.translate.instant('shared.allStatus.' + record.finalResult),
+            [this.translate.instant('students.finalScore')]: this.translate.instant('shared.allStatus.' + record.finalResult),
           }
         })
       }))
@@ -375,9 +375,9 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       map(res=>{
         return res.data.map(certificate =>{
           return {
-            [this.translate.instant('dashboard.schools.Typeofcertificate')]: getLocalizedValue(certificate.certificate),
-            [this.translate.instant('dashboard.schools.SchoolYear')]: getLocalizedValue(certificate.schoolYear),
-            [this.translate.instant('dashboard.schools.Dateofapplicationforthecertificate')]: certificate.issuanceDate,
+            [this.translate.instant('schools.Typeofcertificate')]: getLocalizedValue(certificate.certificate),
+            [this.translate.instant('schools.SchoolYear')]: getLocalizedValue(certificate.schoolYear),
+            [this.translate.instant('schools.Dateofapplicationforthecertificate')]: certificate.issuanceDate,
             '':certificate?.url,
 
           }

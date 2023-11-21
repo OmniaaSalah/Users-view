@@ -76,7 +76,7 @@ export class UsersReportsComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.reports.generateEmployeesReport'), routerLink: '/reports-managment/users-reports' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('reports.generateEmployeesReport'), routerLink: '/reports-managment/users-reports' ,routerLinkActiveOptions:{exact: true}},
         ],
       }
     );
@@ -185,7 +185,7 @@ export class UsersReportsComponent implements OnInit {
     }
     else
     {
-      this.toastr.warning(this.translate.instant('dashboard.reports.you should choose the Date that you need view Employee Performance During It'));
+      this.toastr.warning(this.translate.instant('reports.you should choose the Date that you need view Employee Performance During It'));
     }
   }
 }

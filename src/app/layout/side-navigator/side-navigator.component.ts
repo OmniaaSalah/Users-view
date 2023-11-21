@@ -247,14 +247,14 @@ export class SideNavigatorComponent implements OnInit {
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         },
         {
-          title:this.translate.instant('dashboard.Requests.myRequests'),
+          title:this.translate.instant('Requests.myRequests'),
           key: RouteEnums.MyRequests,
           queryParams:{isMyRequests:true},
           url:`/school-management/requests-list/my-requests`,
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         },
         {
-          title:this.translate.instant('dashboard.Requests.requestsToMe'),
+          title:this.translate.instant('Requests.requestsToMe'),
           key: RouteEnums.Requests,
           url:`/school-management/requests-list`,
 

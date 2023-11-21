@@ -25,7 +25,7 @@ export class StudentDetailsContainerComponent implements OnInit {
   componentHeaderData: IHeader = {
     breadCrump: [],
     mainTitle: {
-      main: this.translate.instant('dashboard.students.StudentInfo'),
+      main: this.translate.instant('students.StudentInfo'),
     },
   };
 
@@ -47,24 +47,24 @@ export class StudentDetailsContainerComponent implements OnInit {
     if (this.currentUserScope == UserScope.Employee) {
       this.componentHeaderData.breadCrump = [
         {
-          label: this.translate.instant('dashboard.students.studentsList'),
+          label: this.translate.instant('students.studentsList'),
           routerLink: '/student-management/students',
           routerLinkActiveOptions: { exact: true },
         },
         {
-          label: this.translate.instant('dashboard.students.StudentInfo'),
+          label: this.translate.instant('students.StudentInfo'),
           routerLink: '/student-management/students/student/' + this.studentId,
         },
       ];
     } else if (this.currentUserScope == UserScope.SPEA) {
       this.componentHeaderData.breadCrump = [
         {
-          label: this.translate.instant('dashboard.students.studentsList'),
+          label: this.translate.instant('students.studentsList'),
           routerLink: '/schools-and-students/students',
           routerLinkActiveOptions: { exact: true },
         },
         {
-          label: this.translate.instant('dashboard.students.StudentInfo'),
+          label: this.translate.instant('students.StudentInfo'),
           routerLink:
             '/schools-and-students/students/student/' + this.studentId,
         },

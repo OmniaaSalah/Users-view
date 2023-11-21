@@ -4,7 +4,7 @@
         <button (click)="sendRequestData()" class="btn btn-primary "
         [disabled]="!this.requestForm.valid || !selectedStudents.length || spinner">
             <div class="spinner-border text-light" role="status" *ngIf="spinner"></div>
-            <p >    {{'dashboard.request-group.Submit a collective transfer request' | translate}}</p>
+            <p >    {{'request-group.Submit a collective transfer request' | translate}}</p>
         </button>
         <button class="fs-3" ><a routerLink="/student-management/students" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
     </div>
@@ -38,7 +38,7 @@
     <div class=" mt-5 p-5 bg-color-30 radius-15 border-dark">
         <div class="">
 
-            <label class="label fw-bold mb-4" for="" >{{'dashboard.request-group.Select the students to be transferred'|translate}}</label>
+            <label class="label fw-bold mb-4" for="" >{{'request-group.Select the students to be transferred'|translate}}</label>
 
             <ng-container *ngIf="studentFilteration.GradeId && students.total" >
                 <div class="prim-table">
@@ -60,9 +60,9 @@
                         </div>
                     </ng-container>
                     <span class="fs-4 fw-bold color-primary">
-                        {{'dashboard.issue of certificate.choose children' | translate}}
+                        {{'issue of certificate.choose children' | translate}}
                         <span class="color-skyBlue-600">{{selectedStudents.length}}</span>
-                        {{'dashboard.request-group.from Students' | translate}}
+                        {{'request-group.from Students' | translate}}
                     </span>
 
                 </div>
@@ -78,10 +78,10 @@
     <hr class="my-5">
 
     <!-- NOTE:- Available Schools--------------- -->
-    <h2 class="heading heading--secondary mb-3">{{'dashboard.request-group.Available schools'|translate}}({{schools.total}})</h2>
+    <h2 class="heading heading--secondary mb-3">{{'request-group.Available schools'|translate}}({{schools.total}})</h2>
     <div class="border p-5 radius-12 mt-5" *ngIf="studentFilteration.GradeId">
 
-        <div class="mb-4">{{'dashboard.request-group.Please choose from the following schools' | translate}}</div>
+        <div class="mb-4">{{'request-group.Please choose from the following schools' | translate}}</div>
 
             <div class="prim-table">
                 <app-table-caption

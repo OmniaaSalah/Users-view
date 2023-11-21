@@ -36,10 +36,10 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   dashboardHeaderData:IHeader ={
     breadCrump:[
       { label: this.translate.instant('sideBar.managerTools.children.systemSettings'),routerLink: '/manager-tools/settings',routerLinkActiveOptions:{exact: true} },
-      { label: this.translate.instant('dashboard.SystemSetting.manageGracePeriod'),routerLink: '/manager-tools/settings/grace-period/new' }
+      { label: this.translate.instant('SystemSetting.manageGracePeriod'),routerLink: '/manager-tools/settings/grace-period/new' }
 
     ],
-    mainTitle: {main:this.translate.instant('dashboard.SystemSetting.manageGracePeriod')}
+    mainTitle: {main:this.translate.instant('SystemSetting.manageGracePeriod')}
   }
 
   isLoading

@@ -13,19 +13,19 @@
   <div class="row gx-5" formGroupName="prohibited">
     <div class="col-md-4">
 
-        <h3 class="heading heading--tertiary mb-5" *ngIf="isAllowedToUpdateWithdraw  || mode=='view'">{{'dashboard.students.forbiddenFromWithdrow' | translate}}</h3>
+        <h3 class="heading heading--tertiary mb-5" *ngIf="isAllowedToUpdateWithdraw  || mode=='view'">{{'students.forbiddenFromWithdrow' | translate}}</h3>
         <div class="grid-container align-items-center">
             <!-- Edit Mode -->
             <ng-container *ngIf="mode=='edit'">
                 <ng-container *permit="claimsEnum.S_U_ProhibitedFromWithdrawingFromSpea">
                   <ng-container *ngIf="currentUserScope==scopeEnum.SPEA">
-                    <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                    <p class=" fs-4">{{ 'students.fromAuthority'|translate }}</p>
                     <p-dropdown [style]="{'width': '75%'}" formControlName="withdrawingFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                   </ng-container>
                 </ng-container>
 
                 <ng-container *permit="claimsEnum.SE_U_ProhibitedFromWithdrawingFromSchool">
-                    <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                    <p class=" fs-4">{{ 'students.fromSchool'|translate }}</p>
                     <p-dropdown [style]="{'width': '75%'}" formControlName="withdrawingFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </ng-container>
 
@@ -34,10 +34,10 @@
             <!-- View Mode -->
             <ng-container *ngIf="mode=='view'">
               <ng-container *ngIf="currentUserScope!=scopeEnum.Employee">
-                <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                <p class="color-gray-300 fs-4">{{ 'students.fromAuthority'|translate }}</p>
                 <span class="fw-bold" [ngClass]="student.studentProhibited?.withdrawingFromSPEA ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.withdrawingFromSPEA ?('shared.yes' |translate ): ('shared.no' |translate)}}</span>
               </ng-container>
-                <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                <p class="color-gray-300 fs-4">{{ 'students.fromSchool'|translate }}</p>
                 <span class="fw-bold" [ngClass]="student.studentProhibited?.withdrawingFromSchool ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.withdrawingFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
             </ng-container>
 
@@ -45,7 +45,7 @@
     </div>
 
     <div class="col-md-4">
-        <h3 class="heading heading--tertiary mb-5" *ngIf="isAllowedToUpdateIssueCertificate|| mode=='view'">{{'dashboard.students.forbiddenFromCertificate' | translate}}</h3>
+        <h3 class="heading heading--tertiary mb-5" *ngIf="isAllowedToUpdateIssueCertificate|| mode=='view'">{{'students.forbiddenFromCertificate' | translate}}</h3>
 
         <div class="grid-container align-items-center">
 
@@ -53,13 +53,13 @@
             <ng-container *ngIf="mode=='edit'">
                 <ng-container *permit="claimsEnum.S_U_ProhibitedFromIssueeCertificateFromSpea">
                   <ng-container *ngIf="currentUserScope==scopeEnum.SPEA">
-                    <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                    <p class=" fs-4">{{ 'students.fromAuthority'|translate }}</p>
                     <p-dropdown [style]="{'width': '75%'}" formControlName="rCertificateFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                   </ng-container>
                 </ng-container>
 
                 <ng-container *permit="claimsEnum.SE_U_ProhibitedFromIssueeCertificateFromSchool">
-                    <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                    <p class=" fs-4">{{ 'students.fromSchool'|translate }}</p>
                     <p-dropdown [style]="{'width': '75%'}" formControlName="certificateFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </ng-container>
             </ng-container>
@@ -67,10 +67,10 @@
             <!-- View -->
             <ng-container *ngIf="mode=='view'">
               <ng-container *ngIf="currentUserScope!=scopeEnum.Employee">
-                <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                <p class="color-gray-300 fs-4">{{ 'students.fromAuthority'|translate }}</p>
                 <span class="fw-bold" [ngClass]="student.studentProhibited?.rCertificateFromSPEA ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.rCertificateFromSPEA ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
                </ng-container>
-                <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                <p class="color-gray-300 fs-4">{{ 'students.fromSchool'|translate }}</p>
                 <span class="fw-bold" [ngClass]="student.studentProhibited?.certificateFromSchool ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.certificateFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
             </ng-container>
 

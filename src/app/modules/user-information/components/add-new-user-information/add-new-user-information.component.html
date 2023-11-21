@@ -9,7 +9,7 @@
 
         <div class="col-7 bg-orange-50 p-3 fs-3 radius-15" *ngIf="accountModel?.roleCode==='Teacher'">
           <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-          <span class="color-gray-800">{{ 'dashboard.UserInformation.teacherNotEditable'|translate }}</span>
+          <span class="color-gray-800">{{ 'UserInformation.teacherNotEditable'|translate }}</span>
         </div>
 
           <div class=" mt-5 custom-form custom-validation-form ">
@@ -22,7 +22,7 @@
               <form [formGroup]="userFormGrp" class="container-fluid  " *ngIf="accountModel||!userId">
                   <div class=" row gx-5 form-set">
                       <div class="col-xs-2 col-lg-4">
-                          <label for="PID" class="label">{{'dashboard.UserInformation.UserName (in Arabic)'|translate}} <span class="star">*</span></label>
+                          <label for="PID" class="label">{{'UserInformation.UserName (in Arabic)'|translate}} <span class="star">*</span></label>
                           <input type="text" pInputText formControlName="arabicFullName" [LangRestrict]="'ar'" class="form-control "  placeholder="{{'shared.Write User Name'|translate}}">
                           <div [hidden]="arabicFullName.valid || arabicFullName.untouched">
                               <small *ngIf="arabicFullName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -39,7 +39,7 @@
 
                       </div>
                       <div class="col-xs-2 col-lg-4">
-                          <label for="PID" class="label">{{'dashboard.UserInformation.UserName (in English)'|translate}} <span class="star">*</span></label>
+                          <label for="PID" class="label">{{'UserInformation.UserName (in English)'|translate}} <span class="star">*</span></label>
                           <input type="text" pInputText formControlName="englishFullName" [LangRestrict]="'en'" class="form-control leftaction"  placeholder="{{'shared.Write User Name'|translate}}">
                           <div [hidden]="englishFullName.valid || englishFullName.untouched">
                               <small *ngIf="englishFullName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -158,9 +158,9 @@
 
                       </div>
                       <div class="col-xs-4 col-lg-4">
-                          <label for="PID8" class="label">{{'dashboard.UserInformation.Determine Private Role'|translate}} <span class="star">*</span></label>
+                          <label for="PID8" class="label">{{'UserInformation.Determine Private Role'|translate}} <span class="star">*</span></label>
 
-                          <p-dropdown  [options]="roles" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" formControlName="privateRole"    [ngClass]="{'ng-invalid ng-dirty':privateRole.errors?.['required'] && privateRole.touched}"   placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}"></p-dropdown>
+                          <p-dropdown  [options]="roles" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" formControlName="privateRole"    [ngClass]="{'ng-invalid ng-dirty':privateRole.errors?.['required'] && privateRole.touched}"   placeholder="{{'UserInformation.Select Private Role' | translate}}"></p-dropdown>
 
                           <div>
                               <div [hidden]="privateRole.valid || privateRole.untouched">
@@ -175,7 +175,7 @@
                       </div>
                       <div class="col-xs-1 col-lg-2">
 
-                          <label for="PID8" class="label mb-5">{{'dashboard.UserInformation.User Status'|translate}} <span class="star">*</span></label>
+                          <label for="PID8" class="label mb-5">{{'UserInformation.User Status'|translate}} <span class="star">*</span></label>
                           <div class="d-flex gap-3 align-items-center">
                               <span>{{'shared.activated'|translate}}</span>
                               <p-inputSwitch  formControlName="userStatus"   id="switchbtn" ></p-inputSwitch>
@@ -245,7 +245,7 @@
                   </div>
 
                   <div class=" row gx-5 form-set " *ngIf="accountModel?.roleCode=='SchoolEmployee'">
-                      <span>{{'dashboard.UserInformation.ThisUserIsRelatedToSchool'|translate}} :
+                      <span>{{'UserInformation.ThisUserIsRelatedToSchool'|translate}} :
                           <a  [routerLink]="['/schools-and-students/schools/school/'+ accountModel?.school?.id]" target="_blank"  [style.height.rem]="'8'"  class="text color-skyBlue-500 fs-3 align-items-center">{{accountModel?.school?.name|currentLang}}</a>
                       </span>
                   </div>

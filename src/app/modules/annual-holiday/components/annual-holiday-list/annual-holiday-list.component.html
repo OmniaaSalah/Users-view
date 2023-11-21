@@ -1,6 +1,6 @@
 
 <ng-container *permit="ClaimsEnum.S_C_Holiday">
-    <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/educational-settings/annual-holiday/new-holiday'" [content]="'dashboard.AnnualHoliday.Define Annual Holidays Calendar'"></app-add-btn>
+    <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/educational-settings/annual-holiday/new-holiday'" [content]="'AnnualHoliday.Define Annual Holidays Calendar'"></app-add-btn>
 </ng-container>
  <div class="prim-table mt-4" *ngIf="annualHolidays.totalAllData || annualHolidays.loading">
     <p-table  #dt [value]="annualHolidays.list" [lazy]="true" (onSort)="sortMe($event)"   dataKey="id"   >
@@ -20,14 +20,14 @@
                     <!-- <div class="row gx-5 form-set">
 
                         <div class="col-6">
-                            <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
-                            <p-dropdown [options]="curriculumList" [showClear]="true" Stop optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.Curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                            <label class="label" for="curriculumName">{{'AnnualHoliday.curriculum'|translate }} </label>
+                            <p-dropdown [options]="curriculumList" [showClear]="true" Stop optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.Curriculum" inputId="curriculumName"  placeholder="{{'AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
                         </div>
 
 
                         <div class="col-6">
-                            <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
-                            <p-dropdown [options]="holidayStatusList" [showClear]="true" StopProp optionLabel="name" optionValue="value" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                            <label class="label" for="flexibilityStatus">{{'AnnualHoliday.Holiday Status'|translate }}  </label>
+                            <p-dropdown [options]="holidayStatusList" [showClear]="true" StopProp optionLabel="name" optionValue="value" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
                         </div>
 
                     </div> -->
@@ -41,8 +41,8 @@
       <ng-template pTemplate="header"  >
             <tr  >
               <th style="width: 3rem"  ></th>
-              <th   pSortableColumn="annualCalenderName.ar" ><p-sortIcon  field="annualCalendarName" ></p-sortIcon><b>{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</b></th>
-              <th   pSortableColumn="year"><p-sortIcon  field="year" ></p-sortIcon><b>{{'dashboard.AnnualHoliday.Year'|translate}}</b></th>
+              <th   pSortableColumn="annualCalenderName.ar" ><p-sortIcon  field="annualCalendarName" ></p-sortIcon><b>{{'AnnualHoliday.Annual Calender Name'|translate}}</b></th>
+              <th   pSortableColumn="year"><p-sortIcon  field="year" ></p-sortIcon><b>{{'AnnualHoliday.Year'|translate}}</b></th>
               <th   pSortableColumn="edit" class="actions"></th>
 
 
@@ -75,12 +75,12 @@
                       <ng-template pTemplate="header"  >
                             <tr class="expand"  >
                               <th style="width: 3rem" class="expand" ></th>
-                              <th  class="expand" pSortableColumn="name.ar" ><p-sortIcon  field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
+                              <th  class="expand" pSortableColumn="name.ar" ><p-sortIcon  field="arabicName" ></p-sortIcon>{{'AnnualHoliday.Holiday Name'|translate}}</th>
                               <th  class="expand" pSortableColumn="userName"><p-sortIcon  field="userName"></p-sortIcon>{{'shared.User Name'|translate}}</th>
-                              <th class="expand" style="min-width: 15rem" pSortableColumn="curriculums[0].name.ar"><p-sortIcon field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
-                              <th class="expand"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
+                              <th class="expand" style="min-width: 15rem" pSortableColumn="curriculums[0].name.ar"><p-sortIcon field="curriculumName" ></p-sortIcon>{{'AnnualHoliday.curriculum'|translate}}</th>
+                              <th class="expand"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'AnnualHoliday.Date'|translate}}</th>
                               <th class="expand"  pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-                              <th class="expand"  pSortableColumn="flexibilityStatus"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
+                              <th class="expand"  pSortableColumn="flexibilityStatus"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'AnnualHoliday.Holiday Status'|translate}}</th>
                               <th   pSortableColumn="edit" class="actions expand"></th>
                             </tr>
                       </ng-template>
@@ -203,7 +203,7 @@
 
 
 
-   <app-holiday-model (onSave)="saveHoliday($event)"  [title]="'dashboard.AnnualHoliday.Edit Holiday'|translate" isOpened="openModel"></app-holiday-model>
+   <app-holiday-model (onSave)="saveHoliday($event)"  [title]="'AnnualHoliday.Edit Holiday'|translate" isOpened="openModel"></app-holiday-model>
 
 
 

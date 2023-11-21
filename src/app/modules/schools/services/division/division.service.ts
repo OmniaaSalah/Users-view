@@ -23,12 +23,12 @@ export class DivisionService {
       map(res=>{
         return res.data.map(division =>{
           return {
-            [this.translate.instant('dashboard.schools.sectionName')]:division?.name[this.lang],
-            [this.translate.instant('dashboard.schools.gradeName')]: division?.gradeName[this.lang],
-            [this.translate.instant('dashboard.schools.roomNumber')]:division?.classRoomNumber,
-            [this.translate.instant('dashboard.schools.studentsNumber')]: division?.studentCount,
-            [this.translate.instant('dashboard.students.withDisabilities')]:division?.isSpecialAbilities?this.translate.instant('true'):this.translate.instant('false'),
-            [this.translate.instant('dashboard.schools.sectionManager')]: division?.teacherName[this.lang],
+            [this.translate.instant('schools.sectionName')]:division?.name[this.lang],
+            [this.translate.instant('schools.gradeName')]: division?.gradeName[this.lang],
+            [this.translate.instant('schools.roomNumber')]:division?.classRoomNumber,
+            [this.translate.instant('schools.studentsNumber')]: division?.studentCount,
+            [this.translate.instant('students.withDisabilities')]:division?.isSpecialAbilities?this.translate.instant('true'):this.translate.instant('false'),
+            [this.translate.instant('schools.sectionManager')]: division?.teacherName[this.lang],
 
           }
         })
@@ -97,9 +97,9 @@ export class DivisionService {
       map(res=>{
         return res.result.data.map(student =>{
           return {
-            [this.translate.instant('dashboard.schools.studentId')]: student.id,
-            [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student.name),
-            [this.translate.instant('dashboard.students.studentNickname')]: getLocalizedValue(student.surname),
+            [this.translate.instant('schools.studentId')]: student.id,
+            [this.translate.instant('students.studentName')]: getLocalizedValue(student.name),
+            [this.translate.instant('students.studentNickname')]: getLocalizedValue(student.surname),
             [this.translate.instant('shared.track')]: getLocalizedValue(student.track?.name),
             [this.translate.instant('shared.personalId')]: student.nationalityId,
           }
@@ -160,11 +160,11 @@ export class DivisionService {
       map(res=>{
         return res.data.map(student =>{
           return {
-            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
-            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
-            [this.translate.instant('dashboard.students.studentNickname')]: student.surname.ar,
-            [this.translate.instant('dashboard.parents.track')]: student.withCause=='withCause' ? this.translate.instant("dashboard.parents.withCause") : this.translate.instant("dashboard.parents.withoutCause"),
-            [this.translate.instant('dashboard.parents.absenceCause')]: student.cause ||'-----',
+            [this.translate.instant('schools.studentId')]: student.studentNumber,
+            [this.translate.instant('students.studentName')]: student.name.ar,
+            [this.translate.instant('students.studentNickname')]: student.surname.ar,
+            [this.translate.instant('parents.track')]: student.withCause=='withCause' ? this.translate.instant("parents.withCause") : this.translate.instant("parents.withoutCause"),
+            [this.translate.instant('parents.absenceCause')]: student.cause ||'-----',
           }
         })
       }))
@@ -198,17 +198,17 @@ export class DivisionService {
       map(res=>{
         return res.result?.data.map(student =>{
           let obj= {
-            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
-            [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student?.name),
-            [this.translate.instant('dashboard.parents.subjectName')]: getLocalizedValue(student.subjectName),
-            [this.translate.instant('dashboard.schools.optionalOrmandatory')]: student.isElective ? this.translate.instant("dashboard.Subjects.optional") : this.translate.instant("dashboard.Subjects.mandatory"),
-            [this.translate.instant('dashboard.schools.evaluation')]: student.evaluationSystem,
-            [this.translate.instant('dashboard.parents.Result')]: student.studentDegree,
-            [this.translate.instant('dashboard.parents.studentperformance')]: student?.studentPerformance || this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.parents.GPA')]: student.studentGPA,
-            [this.translate.instant('dashboard.parents.Credithour')]: student.studentHour,
+            [this.translate.instant('schools.studentId')]: student.studentNumber,
+            [this.translate.instant('students.studentName')]: getLocalizedValue(student?.name),
+            [this.translate.instant('parents.subjectName')]: getLocalizedValue(student.subjectName),
+            [this.translate.instant('schools.optionalOrmandatory')]: student.isElective ? this.translate.instant("Subjects.optional") : this.translate.instant("Subjects.mandatory"),
+            [this.translate.instant('schools.evaluation')]: student.evaluationSystem,
+            [this.translate.instant('parents.Result')]: student.studentDegree,
+            [this.translate.instant('parents.studentperformance')]: student?.studentPerformance || this.translate.instant('shared.notFound'),
+            [this.translate.instant('parents.GPA')]: student.studentGPA,
+            [this.translate.instant('parents.Credithour')]: student.studentHour,
           }
-          if(student.isHaveStudentPerformance) obj[this.translate.instant('dashboard.parents.studentperformance')] = student.studentPerformance
+          if(student.isHaveStudentPerformance) obj[this.translate.instant('parents.studentperformance')] = student.studentPerformance
 
           return obj
         })
@@ -265,11 +265,11 @@ export class DivisionService {
       map(res=>{
         return res?.result?.data.map(subject =>{
           return {
-            [this.translate.instant('dashboard.schools.subjectNumber')]: subject.subjectCode,
-            [this.translate.instant('dashboard.parents.subjectName')]: subject.subjectName.ar,
+            [this.translate.instant('schools.subjectNumber')]: subject.subjectCode,
+            [this.translate.instant('parents.subjectName')]: subject.subjectName.ar,
             [this.translate.instant('shared.track')]: subject.trackName.ar || this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.schools.speaSubjects')]: subject.isAcdmicSubject ? this.translate.instant("shared.no") : this.translate.instant("shared.yes"),
-            [this.translate.instant('dashboard.schools.subjectDegreesStatus')]: this.translatedStatus(subject.subjecttStatus),
+            [this.translate.instant('schools.speaSubjects')]: subject.isAcdmicSubject ? this.translate.instant("shared.no") : this.translate.instant("shared.yes"),
+            [this.translate.instant('schools.subjectDegreesStatus')]: this.translatedStatus(subject.subjecttStatus),
           }
 
         })
@@ -314,12 +314,12 @@ export class DivisionService {
       map(res=>{
         return res.data.map(student =>{
           return {
-            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
-            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
-            [this.translate.instant('dashboard.parents.evaluation')]: student.evaluationSystem,
-            [this.translate.instant('dashboard.parents.Result')]: student.studentDegree,
-            [this.translate.instant('dashboard.parents.GPA')]: student.studentGPA,
-            [this.translate.instant('dashboard.parents.Credithour')]: student.studentHour,
+            [this.translate.instant('schools.studentId')]: student.studentNumber,
+            [this.translate.instant('students.studentName')]: student.name.ar,
+            [this.translate.instant('parents.evaluation')]: student.evaluationSystem,
+            [this.translate.instant('parents.Result')]: student.studentDegree,
+            [this.translate.instant('parents.GPA')]: student.studentGPA,
+            [this.translate.instant('parents.Credithour')]: student.studentHour,
           }
 
         })
@@ -343,10 +343,10 @@ export class DivisionService {
       map(res=>{
         return res.result.data.map(student =>{
           return {
-            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
-            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
-            [this.translate.instant('dashboard.schools.studentDegree')]: student.isFinalPass ? this.translate.instant('shared.allStatus.Passed') : this.translate.instant('shared.allStatus.notPassed'),
-            [this.translate.instant('dashboard.schools.failedSubjecteNumber')]: student.numberOfFaildSubject,
+            [this.translate.instant('schools.studentId')]: student.studentNumber,
+            [this.translate.instant('students.studentName')]: student.name.ar,
+            [this.translate.instant('schools.studentDegree')]: student.isFinalPass ? this.translate.instant('shared.allStatus.Passed') : this.translate.instant('shared.allStatus.notPassed'),
+            [this.translate.instant('schools.failedSubjecteNumber')]: student.numberOfFaildSubject,
           }
 
         })

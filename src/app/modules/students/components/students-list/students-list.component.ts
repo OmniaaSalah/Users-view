@@ -51,7 +51,7 @@ export class StudentsListComponent implements OnInit {
   componentHeaderData: IHeader={
 		breadCrump: [],
     mainTitle: {
-      main: this.translate.instant('dashboard.schools.studentsList'),
+      main: this.translate.instant('schools.studentsList'),
     },
 	}
 
@@ -324,7 +324,7 @@ export class StudentsListComponent implements OnInit {
 
     let filter = {...this.filtration, PageSize:this.students.total,Page:1}
     this.studentsService.studentsToExport(filter, this.userService.getSchoolId()).subscribe( (res) =>{
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsList'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('schools.studentsList'))
     })
   }
 
@@ -340,8 +340,8 @@ export class StudentsListComponent implements OnInit {
   }
 
   checkDashboardHeader(){
-    if(this.currentUserScope==UserScope.Employee) this.componentHeaderData.breadCrump = [{label:this.translate.instant('dashboard.schools.studentsList') ,routerLink:'/student-management/students'},]
-    else if (this.currentUserScope==UserScope.SPEA) this.componentHeaderData.breadCrump = [{label:this.translate.instant('dashboard.schools.studentsList'),routerLink:'/schools-and-students/students'},]
+    if(this.currentUserScope==UserScope.Employee) this.componentHeaderData.breadCrump = [{label:this.translate.instant('schools.studentsList') ,routerLink:'/student-management/students'},]
+    else if (this.currentUserScope==UserScope.SPEA) this.componentHeaderData.breadCrump = [{label:this.translate.instant('schools.studentsList'),routerLink:'/schools-and-students/students'},]
 
     this.headerService.changeHeaderdata(this.componentHeaderData)
   }

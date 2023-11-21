@@ -144,13 +144,13 @@ export class SchoolYearsService {
       map(res=>{
         return res.data.map(schoolYear =>{
           return {
-            [this.translate.instant('dashboard.SchoolYear.School Year Name')]: schoolYear?.name[this.lang],
-            [this.translate.instant('dashboard.SchoolYear.curriculum Number')]: schoolYear?.curriculumCount,
-            [this.translate.instant('dashboard.SchoolYear.School Year StartDate')]:  schoolYear?.startDate,
-            [this.translate.instant('dashboard.SchoolYear.School Year EndDate')]: schoolYear?.endDate,
-            [this.translate.instant('dashboard.SchoolYear.WeekEnd Days')]: this.convertWeekEnds(schoolYear?.weekEndDays).join(', '),
+            [this.translate.instant('SchoolYear.School Year Name')]: schoolYear?.name[this.lang],
+            [this.translate.instant('SchoolYear.curriculum Number')]: schoolYear?.curriculumCount,
+            [this.translate.instant('SchoolYear.School Year StartDate')]:  schoolYear?.startDate,
+            [this.translate.instant('SchoolYear.School Year EndDate')]: schoolYear?.endDate,
+            [this.translate.instant('SchoolYear.WeekEnd Days')]: this.convertWeekEnds(schoolYear?.weekEndDays).join(', '),
             [this.translate.instant('shared.Created Date')]: schoolYear?.createdDate,
-            [this.translate.instant('dashboard.SchoolYear.Status')]: schoolYear?.status.name[this.lang],
+            [this.translate.instant('SchoolYear.Status')]: schoolYear?.status.name[this.lang],
 
           }
         })
@@ -172,11 +172,11 @@ export class SchoolYearsService {
       map(res=>{
         return res.result.data.map(student =>{
           return {
-            [this.translate.instant('dashboard.SchoolYear.StudentName')]: student?.student[this.lang],
-            [this.translate.instant('dashboard.SchoolYear.Nationality')]: student?.nationality[this.lang],
-            [this.translate.instant('dashboard.SchoolYear.Class')]:  student?.grade[this.lang],
-            [this.translate.instant('dashboard.SchoolYear.Curriculum')]: student?.curricuulm[this.lang],
-            [this.translate.instant('dashboard.SchoolYear.Precantage')]: student?.studentFinalPercentage
+            [this.translate.instant('SchoolYear.StudentName')]: student?.student[this.lang],
+            [this.translate.instant('SchoolYear.Nationality')]: student?.nationality[this.lang],
+            [this.translate.instant('SchoolYear.Class')]:  student?.grade[this.lang],
+            [this.translate.instant('SchoolYear.Curriculum')]: student?.curricuulm[this.lang],
+            [this.translate.instant('SchoolYear.Precantage')]: student?.studentFinalPercentage
 
           }
         })

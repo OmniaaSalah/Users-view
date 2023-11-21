@@ -1,9 +1,9 @@
 <div class="profile__name d-flex gap-2">
     <div class="" *ngIf="isTopStudent">
-        <span class="position-relative" pTooltip="{{'dashboard.students.isFromTheFirst'|translate}}" [autoHide]="true" tooltipPosition="top"><img src="assets/images/shared/medal.svg" alt=""></span>
+        <span class="position-relative" pTooltip="{{'students.isFromTheFirst'|translate}}" [autoHide]="true" tooltipPosition="top"><img src="assets/images/shared/medal.svg" alt=""></span>
     </div>
     <div *ngIf="isGifted">
-        <span class="position-relative" pTooltip="{{'dashboard.students.isGifted' |translate}}" [autoHide]="true" tooltipPosition="top"><img src="assets/images/shared/medal-cup.svg" alt=""></span>
+        <span class="position-relative" pTooltip="{{'students.isGifted' |translate}}" [autoHide]="true" tooltipPosition="top"><img src="assets/images/shared/medal-cup.svg" alt=""></span>
     </div>
     <ng-container *ngFor="let item of studentCategory">
         <div *ngIf="item==statusEnum.IsChildOfAMartyr">

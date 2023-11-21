@@ -1,7 +1,7 @@
 
 <div class="search-box bg-gray-30 mb-5 border-dark radius-15">
     <div class="d-flex justify-content-between p-5 " role="button" (click)="isCollapsed = !isCollapsed">
-        <span class="fs-2 color-primary">{{'dashboard.reports.Search for Student Attendance and Abbsence' |translate}}</span>
+        <span class="fs-2 color-primary">{{'reports.Search for Student Attendance and Abbsence' |translate}}</span>
         <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
     </div>
 
@@ -9,7 +9,7 @@
 
         <div class="row gx-5 form-set">
             <div class="col-md-4" *ngIf="curriculums$ | async as curriculums">
-                <label class="label" mt-3>{{'dashboard.students.curriculum'| translate}}</label>
+                <label class="label" mt-3>{{'students.curriculum'| translate}}</label>
                 <p-multiSelect [options]="curriculums" display="chip" [(ngModel)]="filtration.currclaumId"  optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"  placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
             </div>
 
@@ -19,18 +19,18 @@
             </div>
 
             <div class="col-md-4">
-                <label class="label mt-3">{{'dashboard.students.classes'| translate}}</label>
-                <p-multiSelect [options]="(AllGrades$ | async)" display="chip"    [(ngModel)]="filtration.gradeId"   optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"  placeholder="{{'dashboard.students.chooseClasse' |translate}}"></p-multiSelect>
+                <label class="label mt-3">{{'students.classes'| translate}}</label>
+                <p-multiSelect [options]="(AllGrades$ | async)" display="chip"    [(ngModel)]="filtration.gradeId"   optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"  placeholder="{{'students.chooseClasse' |translate}}"></p-multiSelect>
             </div>
             <div class="col-md-4">
-                <label class="label mt-3">{{'dashboard.students.divisions'| translate}}</label>
-                <p-multiSelect    [options]="(schoolDivisions$ | async)" display="chip"   [(ngModel)]="filtration.divisionId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"    placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-multiSelect>
+                <label class="label mt-3">{{'students.divisions'| translate}}</label>
+                <p-multiSelect    [options]="(schoolDivisions$ | async)" display="chip"   [(ngModel)]="filtration.divisionId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"    placeholder="{{'students.choosedivision' |translate}}"></p-multiSelect>
 
 
             </div>
 
             <div class="col-md-4">
-                <label class="label mt-3"> {{'dashboard.Messages.date (from - to)'|translate}} <span class="star">*</span></label>
+                <label class="label mt-3"> {{'Messages.date (from - to)'|translate}} <span class="star">*</span></label>
                 <p-calendar [(ngModel)]="date" [showIcon]="true" selectionMode="range" inputId="icon"
                     placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy">
                 </p-calendar>
@@ -55,7 +55,7 @@
 </div>
 
 <div class="box-shadow bg-white raduis-12 my-3 p-5">
-    <h3 class="mb-5 heading heading-secondary fw-bold m-0">{{'dashboard.reports.The columns that you want to add to the table'|translate}}</h3>
+    <h3 class="mb-5 heading heading-secondary fw-bold m-0">{{'reports.The columns that you want to add to the table'|translate}}</h3>
     <div class="row custom-form">
         <ng-container *ngFor="let item of tableColumns">
             <div class="col-12 col-md-2 d-flex align-items-center gap-4 mb-5 mx-2">
@@ -70,7 +70,7 @@
 
 <div class="bg-orange-50 p-3 radius-15 mb-5 mt-5">
     <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-    <span class="color-gray-800">" {{'dashboard.reports.you should choose the date that you need view it’s absence and attendance data first'|translate}} "</span>
+    <span class="color-gray-800">" {{'reports.you should choose the date that you need view it’s absence and attendance data first'|translate}} "</span>
 </div>
     <div class="parents">
         <div class="prim-table" *ngIf="(studentsReport.totalAllData|| studentsReport.loading)&& date && shownTable &&!emptyTable">

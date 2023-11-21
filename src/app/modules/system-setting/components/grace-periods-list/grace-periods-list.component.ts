@@ -62,7 +62,7 @@ export class GracePeriodsListComponent implements OnInit {
     let filter = {...this.filtration,PageSize:this.periods.totalAllData,Page:1}
     this.settingService.getGracePeriodListToExport(filter).subscribe( (res:any) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.SystemSetting.graceSession'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('SystemSetting.graceSession'))
     })
   }
 

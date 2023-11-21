@@ -17,10 +17,10 @@
             <div class="tabView">
                 <!-- Navigations Options -->
                 <ul class="tabView__nav">
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==2" (click)="step=2; getGradeDetails()" ><span>{{'dashboard.schools.tracksAndSubjects'| translate}} </span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeLecture" [class.active]="step==3" (click)="step=3; ngOnDestroy()"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
-                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeStudents" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.gradeStudents'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==1" (click)="step=1"><span>{{'schools.gradInfo'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==2" (click)="step=2; getGradeDetails()" ><span>{{'schools.tracksAndSubjects'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeLecture" [class.active]="step==3" (click)="step=3; ngOnDestroy()"><span>{{'schools.classesSchedule'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeStudents" [class.active]="step==4" (click)="step=4"><span>{{'schools.gradeStudents'| translate}} </span></li>
                 </ul>
                 <!-- Navigations Options -->
 
@@ -31,12 +31,12 @@
                         <ng-container *ngIf="step==1">
                             <div class="row gx-5 " *ngIf="gradeData">
                                 <div class="col-md-6 grid-container">
-                                    <p class="color-gray-300 fs-4">{{'dashboard.schools.gradeName'| translate}}</p>
+                                    <p class="color-gray-300 fs-4">{{'schools.gradeName'| translate}}</p>
                                     <span class="color-primary mb-2">{{gradeData.name | currentLang}}</span>
                                 </div>
                                 <div class="col-md-6 ">
                                     <div class="d-flex align-items-center gap-3">
-                                        <label class="ms-3" for="description">{{'dashboard.schools.abilityToWriteDescription'| translate}}</label>
+                                        <label class="ms-3" for="description">{{'schools.abilityToWriteDescription'| translate}}</label>
                                         <p-inputSwitch name="status" formControlName="addDegreesAndDescriptionPosiblity" ></p-inputSwitch>
                                         <span class="mb-2">
                                             {{ getCtr('addDegreesAndDescriptionPosiblity').value ? ('shared.yes' | translate): ('shared.no' | translate)}}
@@ -57,18 +57,18 @@
 
                                     <!-- formControlName="hasTracks" -->
                                     <div class="d-flex align-items-center gap-3">
-                                      <label class="ms-3" for="description">{{'dashboard.schools.includingTracks'| translate}}</label>
+                                      <label class="ms-3" for="description">{{'schools.includingTracks'| translate}}</label>
                                       <p-inputSwitch name="status" [(ngModel)]="hasTracks" (onChange)="onTracksModeChange($event?.checked)" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
                                       <span class="mb-2">
                                           {{ hasTracks ? ('shared.yes' | translate): ('shared.no' | translate)}}
                                       </span>
                                     </div>
 
-                                    <!-- <p-checkbox [(ngModel)]="hasTracks" (ngModelChange)="onTracksModeChange($event)" [ngModelOptions]="{standalone: true}" [binary]="true" label="{{'dashboard.schools.includingTracks'| translate}}"  [style]="{'font-size':'2rem'}"></p-checkbox> -->
+                                    <!-- <p-checkbox [(ngModel)]="hasTracks" (ngModelChange)="onTracksModeChange($event)" [ngModelOptions]="{standalone: true}" [binary]="true" label="{{'schools.includingTracks'| translate}}"  [style]="{'font-size':'2rem'}"></p-checkbox> -->
                                     <div class="" [class]="lang=='ar'? 'me-auto': 'ms-auto'">
                                         <button class="btn btn-primary btn--md " *ngIf="hasTracks" (click)="addTrack()">
                                             <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                                            <span>{{'dashboard.schools.addTrack'|translate}}</span>
+                                            <span>{{'schools.addTrack'|translate}}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -93,11 +93,11 @@
 
                                                       <div class=" content row w-100 align-items-center">
                                                           <div class="col-4 d-flex align-items-center fs-4 gap-3" formGroupName="name">
-                                                              <span class="flex-none">{{'dashboard.parents.trackNameAr'| translate}} </span>
+                                                              <span class="flex-none">{{'parents.trackNameAr'| translate}} </span>
                                                               <input class="w-75 required" pInputText [LangRestrict]="'ar'" formControlName="ar" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
                                                           </div>
                                                           <div class="col-2 d-flex align-items-center justify-content-center fs-4 gap-3">
-                                                              <span class="color-gray-700">{{'dashboard.schools.subjectsNumber'| translate}} </span>
+                                                              <span class="color-gray-700">{{'schools.subjectsNumber'| translate}} </span>
                                                               <span class="color-skyBlue-500 fw-bold"> {{track.value.subjects.length}}</span>
                                                           </div>
 
@@ -108,7 +108,7 @@
 
                                                           <!-- <div class="col-md-3">
                                                               <button class=" btn btn-outline-primary btn--sm px-5" (click)="deleteTrack()">
-                                                                  <span>{{'dashboard.schools.deletTrack' |translate}}</span>
+                                                                  <span>{{'schools.deletTrack' |translate}}</span>
                                                               </button>
                                                           </div> -->
                                                           <div  class="col-md-2 d-flex align-items-center justify-content-end color-red-500  ps-4" >
@@ -131,13 +131,13 @@
                                                                           <div class="row g-5 align-items-center mb-6">
 
                                                                               <div class="col-md-4" >
-                                                                                  <label for="" class="label required">{{'dashboard.Subjects.subjectName'| translate}}</label>
+                                                                                  <label for="" class="label required">{{'Subjects.subjectName'| translate}}</label>
                                                                                   <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'Choose Subject' |translate}}"></p-dropdown>
 
                                                                               </div>
 
                                                                               <div class="col-md-3">
-                                                                                  <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
+                                                                                  <label for="" class="label">{{'Subjects.sessionsPerWeek'| translate}}</label>
                                                                                   <p-inputNumber
                                                                                   formControlName="weekClassRoomNumber"
                                                                                   [showButtons]="true"
@@ -149,13 +149,13 @@
 
                                                                               <div class="col-md-4 align-self-end mb-3 d-flex align-items-center gap-5">
                                                                                   <div class="d-flex align-items-center gap-4 fs-3">
-                                                                                      <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
+                                                                                      <label class="" for="description">{{'Subjects.optional'| translate}}</label>
                                                                                       <p-inputSwitch formControlName="isOptional" [binary]="true"></p-inputSwitch>
                                                                                       <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                                   </div>
 
                                                                                   <div class="d-flex align-items-center gap-4 fs-3" *ngIf="subject.value.isOptional">
-                                                                                    <label class="" for="description">{{'dashboard.Subjects.IsInternalSubject'| translate}}</label>
+                                                                                    <label class="" for="description">{{'Subjects.IsInternalSubject'| translate}}</label>
                                                                                     <p-inputSwitch formControlName="isInternal" [binary]="true"></p-inputSwitch>
                                                                                     <span class="mb-2">{{subject.value.isInternal ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                                   </div>
@@ -170,14 +170,14 @@
                                                                           <div class="row gx-5">
                                                                               <div class="col-md-4 align-self-end mb-3">
                                                                                   <div class="d-flex align-items-center gap-4 fs-3">
-                                                                                      <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
+                                                                                      <label class="" for="description">{{'Subjects.hasGPA'| translate}}</label>
                                                                                       <p-inputSwitch formControlName="haveGpa" [binary]="true"></p-inputSwitch>
                                                                                       <span class="mb-2">{{subject.value.haveGpa ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                                   </div>
 
                                                                               </div>
                                                                               <div class="col-md-3">
-                                                                                  <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}} (Credit Hours)</label>
+                                                                                  <label for="" class="label">{{'Subjects.subjectHours'| translate}} (Credit Hours)</label>
                                                                                   <div class=" position-relative" >
                                                                                       <!-- <input type="number" pInputText placeholder="0" /> -->
                                                                                       <p-inputNumber formControlName="studyHour" ></p-inputNumber>
@@ -188,7 +188,7 @@
                                                                               <div class="col-md-4 align-self-end mb-3">
 
                                                                                   <div class="d-flex align-items-center gap-4 fs-3">
-                                                                                      <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
+                                                                                      <label class="" for="description">{{'Subjects.AddToFinalScore'| translate}}</label>
                                                                                       <p-inputSwitch formControlName="isAddToFinalScore" [binary]="true"></p-inputSwitch>
                                                                                       <span class="mb-2">{{subject.value.isAddToFinalScore ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                                   </div>
@@ -198,7 +198,7 @@
 
                                                                           <div class="row  mb-5 mt-6" *ngIf="subject.value.haveGpa">
                                                                               <div class="col-md-4">
-                                                                                  <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
+                                                                                  <label for="" class="label">{{'schools.maxValueForGpa'| translate}}</label>
                                                                                   <p-inputNumber
                                                                                   formControlName="maxGpa"
                                                                                   [showButtons]="true"
@@ -211,7 +211,7 @@
                                                                   <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-50 p-3 mt-4"
                                                                   (click)="addSubjectToTrack(trackIndex)">
                                                                       <fa-icon [icon]="faPlus"></fa-icon>
-                                                                      <span>{{'dashboard.schools.addSubject' |translate}}</span>
+                                                                      <span>{{'schools.addSubject' |translate}}</span>
                                                                   </div>
                                                               </ul>
                                                           </div>
@@ -236,13 +236,13 @@
                                                   <div class="row g-5 align-items-center mb-6">
 
                                                     <div class="col-md-4" >
-                                                        <label for="" class="label required">{{'dashboard.Subjects.subjectName'| translate}}</label>
+                                                        <label for="" class="label required">{{'Subjects.subjectName'| translate}}</label>
                                                         <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'Choose Subject' |translate}}"></p-dropdown>
 
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
+                                                        <label for="" class="label">{{'Subjects.sessionsPerWeek'| translate}}</label>
                                                         <p-inputNumber
                                                         formControlName="weekClassRoomNumber"
                                                         [showButtons]="true"
@@ -254,13 +254,13 @@
 
                                                     <div class="col-md-4 align-self-end mb-3 d-flex align-items-center gap-5">
                                                         <div class="d-flex align-items-center gap-4 fs-3">
-                                                            <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
+                                                            <label class="" for="description">{{'Subjects.optional'| translate}}</label>
                                                             <p-inputSwitch formControlName="isOptional" [binary]="true"></p-inputSwitch>
                                                             <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                         </div>
 
                                                         <div class="d-flex align-items-center gap-4 fs-3" *ngIf="subject.value.isOptional">
-                                                          <label class="" for="description">{{'dashboard.Subjects.IsInternalSubject'| translate}}</label>
+                                                          <label class="" for="description">{{'Subjects.IsInternalSubject'| translate}}</label>
                                                           <p-inputSwitch formControlName="isInternal" [binary]="true"></p-inputSwitch>
                                                           <span class="mb-2">{{subject.value.isInternal ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                         </div>
@@ -275,14 +275,14 @@
                                                 <div class="row gx-5">
                                                     <div class="col-md-4 align-self-end mb-3">
                                                         <div class="d-flex align-items-center gap-4 fs-3">
-                                                            <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
+                                                            <label class="" for="description">{{'Subjects.hasGPA'| translate}}</label>
                                                             <p-inputSwitch formControlName="haveGpa" [binary]="true"></p-inputSwitch>
                                                             <span class="mb-2">{{subject.value.haveGpa ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                         </div>
 
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}} (Credit Hours)</label>
+                                                        <label for="" class="label">{{'Subjects.subjectHours'| translate}} (Credit Hours)</label>
                                                         <div class=" position-relative" >
                                                             <!-- <input type="number" pInputText placeholder="0" /> -->
                                                             <p-inputNumber formControlName="studyHour" ></p-inputNumber>
@@ -293,7 +293,7 @@
                                                     <div class="col-md-4 align-self-end mb-3">
 
                                                         <div class="d-flex align-items-center gap-4 fs-3">
-                                                            <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
+                                                            <label class="" for="description">{{'Subjects.AddToFinalScore'| translate}}</label>
                                                             <p-inputSwitch formControlName="isAddToFinalScore" [binary]="true"></p-inputSwitch>
                                                             <span class="mb-2">{{subject.value.isAddToFinalScore ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                         </div>
@@ -303,7 +303,7 @@
 
                                                 <div class="row  mb-5 mt-6" *ngIf="subject.value.haveGpa">
                                                     <div class="col-md-4">
-                                                        <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
+                                                        <label for="" class="label">{{'schools.maxValueForGpa'| translate}}</label>
                                                         <p-inputNumber
                                                         formControlName="maxGpa"
                                                         [showButtons]="true"
@@ -318,7 +318,7 @@
                                             <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3"
                                             (click)="addSubject()">
                                                 <fa-icon [icon]="faPlus"></fa-icon>
-                                                <span>{{'dashboard.schools.addSubject' |translate}}</span>
+                                                <span>{{'schools.addSubject' |translate}}</span>
                                             </div>
                                         </ul>
 

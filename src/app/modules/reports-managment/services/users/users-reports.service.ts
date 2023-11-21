@@ -18,7 +18,7 @@ export class UsersReportsService {
 
   tabelColumns = [
     {
-      name:this.translate.instant('dashboard.schools.employeeName'),
+      name:this.translate.instant('schools.employeeName'),
       isSelected: true,
       sortField: this.lang=='ar' ? 'EmployeeArabicName' :'EmployeeEnglishName'
     },
@@ -29,13 +29,13 @@ export class UsersReportsService {
     },
     {
 
-      name:this.translate.instant('dashboard.SystemSetting.Email'),
+      name:this.translate.instant('SystemSetting.Email'),
       isSelected: true,
       sortField: 'EmployeeEmail'
 
     },
     {
-      name:this.translate.instant('dashboard.reports.RequestsNumbers'),
+      name:this.translate.instant('reports.RequestsNumbers'),
       isSelected: true,
       sortField: ''
     },
@@ -65,10 +65,10 @@ export class UsersReportsService {
       map(res=>{
         return res.result.employeesPerformance.data.map(employee =>{
           return {
-            [this.translate.instant('dashboard.schools.employeeName')]:employee?.employeeName ? employee?.employeeName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('schools.employeeName')]:employee?.employeeName ? employee?.employeeName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('School')]:employee?.school ? employee?.school[this.lang] : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.SystemSetting.Email')]:employee?.email ? employee?.email : this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.reports.RequestsNumbers')]:employee?.requestNumber,
+            [this.translate.instant('SystemSetting.Email')]:employee?.email ? employee?.email : this.translate.instant('shared.notFound'),
+            [this.translate.instant('reports.RequestsNumbers')]:employee?.requestNumber,
             [this.translate.instant('shared.phoneNumber')]: employee?.phoneNumber ? employee?.phoneNumber : this.translate.instant('shared.notFound')
 
 

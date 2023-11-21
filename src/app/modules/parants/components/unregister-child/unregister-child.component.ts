@@ -10,7 +10,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
+import { StudentStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
@@ -268,8 +268,8 @@ export class UnregisterChildComponent implements OnInit {
   }
 
   navigateToRequestPage(){
-    if (this.currentUserScope==this.userScope.Guardian) this.router.navigate([`/parent/child/${this.childId}/register-request`],{queryParams:{status:RegistrationStatus.Unregistered}})
-    else this.router.navigate(['register'], {relativeTo:this.route,queryParams:{status:RegistrationStatus.Unregistered}})
+    if (this.currentUserScope==this.userScope.Guardian) this.router.navigate([`/parent/child/${this.childId}/register-request`],{queryParams:{status:StudentStatus.Unregistered}})
+    else this.router.navigate(['register'], {relativeTo:this.route,queryParams:{status:StudentStatus.Unregistered}})
 
   }
 
@@ -309,44 +309,44 @@ export class UnregisterChildComponent implements OnInit {
         this.componentHeaderData = {
           breadCrump: [
             {
-              label: this.translate.instant('dashboard.parents.parents'),
+              label: this.translate.instant('parents.parents'),
               routerLink: '/student-management/all-parents/',
               routerLinkActiveOptions: { exact: true },
             },
             {
-              label: this.translate.instant('dashboard.parents.childrenList'),
+              label: this.translate.instant('parents.childrenList'),
               routerLink: `/student-management/all-parents/parent/${this.parentId}/all-children`,
               routerLinkActiveOptions: { exact: true },
             },
             {
-              label: this.translate.instant('dashboard.parents.sonDetails'),
+              label: this.translate.instant('parents.sonDetails'),
               routerLink: `/student-management/all-parents/parent/${this.parentId}/child/${this.childId}`,
             },
           ],
           mainTitle: {
-            main: this.translate.instant('dashboard.parents.sonDetails'),
+            main: this.translate.instant('parents.sonDetails'),
           },
         };
       } else if (this.currentUserScope == UserScope.SPEA) {
         this.componentHeaderData = {
           breadCrump: [
             {
-              label: this.translate.instant('dashboard.parents.parents'),
+              label: this.translate.instant('parents.parents'),
               routerLink: '/schools-and-students/all-parents/',
               routerLinkActiveOptions: { exact: true },
             },
             {
-              label: this.translate.instant('dashboard.parents.childrenList'),
+              label: this.translate.instant('parents.childrenList'),
               routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/all-children`,
               routerLinkActiveOptions: { exact: true },
             },
             {
-              label: this.translate.instant('dashboard.parents.sonDetails'),
+              label: this.translate.instant('parents.sonDetails'),
               routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}`,
             },
           ],
           mainTitle: {
-            main: this.translate.instant('dashboard.parents.sonDetails'),
+            main: this.translate.instant('parents.sonDetails'),
           },
         };
       } else if (this.currentUserScope == UserScope.Guardian) {
@@ -354,12 +354,12 @@ export class UnregisterChildComponent implements OnInit {
         this.componentHeaderData = {
           breadCrump: [
             {
-              label: this.translate.instant('dashboard.parents.sonDetails'),
+              label: this.translate.instant('parents.sonDetails'),
               routerLink: `/parent/${this.parentId}/child/${this.childId}`,
             },
           ],
           mainTitle: {
-            main: this.translate.instant('dashboard.parents.sonDetails'),
+            main: this.translate.instant('parents.sonDetails'),
           },
         };
       }
@@ -371,24 +371,24 @@ export class UnregisterChildComponent implements OnInit {
 
         this.componentHeaderData.breadCrump = [
           {
-            label: this.translate.instant('dashboard.students.studentsList'),
+            label: this.translate.instant('students.studentsList'),
             routerLink: '/student-management/students',
             routerLinkActiveOptions: { exact: true },
           },
           {
-            label: this.translate.instant('dashboard.students.StudentInfo'),
+            label: this.translate.instant('students.StudentInfo'),
             routerLink: '/student-management/students/student/' + this.studentId,
           },
         ];
       } else if (this.currentUserScope == UserScope.SPEA) {
         this.componentHeaderData.breadCrump = [
           {
-            label: this.translate.instant('dashboard.students.studentsList'),
+            label: this.translate.instant('students.studentsList'),
             routerLink: '/schools-and-students/students',
             routerLinkActiveOptions: { exact: true },
           },
           {
-            label: this.translate.instant('dashboard.students.StudentInfo'),
+            label: this.translate.instant('students.StudentInfo'),
             routerLink:
               '/schools-and-students/students/student/' + this.studentId,
           },

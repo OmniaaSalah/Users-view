@@ -69,13 +69,13 @@ export class SchoolsService {
       map(res=>{
         return res.data.map(school =>{
           return {
-            [this.translate.instant('dashboard.schools.schoolName')]:school.name? school.name[this.lang]:'',
+            [this.translate.instant('schools.schoolName')]:school.name? school.name[this.lang]:'',
             [this.translate.instant('shared.city')]:school.city? school.city[this.lang]:'',
             [this.translate.instant('shared.state')]:school.state? school.state[this.lang]:'',
             [this.translate.instant('shared.curriculum')]:school.curriculum? school.curriculum[this.lang]:'',
-            [this.translate.instant('dashboard.schools.studentsNumber')]: school.studentCount,
-            [this.translate.instant('dashboard.schools.schoolStablishmentDate')]: school.establishmentDate,
-            [this.translate.instant('dashboard.schools.schoolStatus')]: school.status == StatusEnum.Active? this.translate.instant('shared.allStatus.SchoolActive') : this.translate.instant('shared.allStatus.SchoolInactive')  ,
+            [this.translate.instant('schools.studentsNumber')]: school.studentCount,
+            [this.translate.instant('schools.schoolStablishmentDate')]: school.establishmentDate,
+            [this.translate.instant('schools.schoolStatus')]: school.status == StatusEnum.Active? this.translate.instant('shared.allStatus.SchoolActive') : this.translate.instant('shared.allStatus.SchoolInactive')  ,
 
           }
         })
@@ -88,13 +88,13 @@ export class SchoolsService {
       map(res=>{
         return res.data.map(employee =>{
           return {
-            [this.translate.instant('dashboard.schools.employeeId')]: employee?.employeeIdNumber,
-            [this.translate.instant('dashboard.schools.employeeName')]: employee?.name[this.lang],
-            [this.translate.instant('dashboard.schools.employeeNickname')]:employee?.surName[this.lang],
-            [this.translate.instant('dashboard.schools.jobTitle')]: employee?.jobTitle[this.lang],
+            [this.translate.instant('schools.employeeId')]: employee?.employeeIdNumber,
+            [this.translate.instant('schools.employeeName')]: employee?.name[this.lang],
+            [this.translate.instant('schools.employeeNickname')]:employee?.surName[this.lang],
+            [this.translate.instant('schools.jobTitle')]: employee?.jobTitle[this.lang],
             [this.translate.instant('shared.email')]:employee?.email,
             [this.translate.instant('shared.personalId')]: employee?.emiratesIdNumber,
-            [this.translate.instant('dashboard.schools.employeeStatus')]:  this.getEmployeeStatusToExport(employee.status)  ,
+            [this.translate.instant('schools.employeeStatus')]:  this.getEmployeeStatusToExport(employee.status)  ,
 
           }
         })
@@ -106,10 +106,10 @@ export class SchoolsService {
       map(res=>{
         return res.data.map(item =>{
           return {
-            [this.translate.instant('dashboard.schools.editBy')]:item?.createdBy[this.lang],
-            [this.translate.instant('dashboard.schools.jobTitle')]: item?.jobTitle[this.lang],
-            [this.translate.instant('dashboard.schools.editionDate')]: item?.createdDate,
-            [this.translate.instant('dashboard.schools.editSummary')]: this.translate.instant(item?.type),
+            [this.translate.instant('schools.editBy')]:item?.createdBy[this.lang],
+            [this.translate.instant('schools.jobTitle')]: item?.jobTitle[this.lang],
+            [this.translate.instant('schools.editionDate')]: item?.createdDate,
+            [this.translate.instant('schools.editSummary')]: this.translate.instant(item?.type),
 
           }
         })
@@ -122,12 +122,12 @@ export class SchoolsService {
       map(res=>{
         return res.data.map(item =>{
           return {
-            [this.translate.instant('dashboard.schools.annulCalendarName')]:item?.annualCalendarName[this.lang],
-            [this.translate.instant('dashboard.AnnualHoliday.Year')]: item?.year,
-            [this.translate.instant('dashboard.schools.holidayName')]: item?.name[this.lang],
+            [this.translate.instant('schools.annulCalendarName')]:item?.annualCalendarName[this.lang],
+            [this.translate.instant('AnnualHoliday.Year')]: item?.year,
+            [this.translate.instant('schools.holidayName')]: item?.name[this.lang],
             [this.translate.instant('shared.date' )]: this.translate.instant('shared.From')+" "+item?.dateFrom+" "+this.translate.instant('shared.To')+" "+item?.dateTo,
             [this.translate.instant('shared.Created Date')]: item?.createdDate,
-            [this.translate.instant('dashboard.AnnualHoliday.Holiday Status')]: item?.flexibilityStatus==StatusEnum.Flexible?this.translate.instant('shared.allStatus.Flexible'):this.translate.instant('shared.allStatus.NotFlexible'),
+            [this.translate.instant('AnnualHoliday.Holiday Status')]: item?.flexibilityStatus==StatusEnum.Flexible?this.translate.instant('shared.allStatus.Flexible'):this.translate.instant('shared.allStatus.NotFlexible'),
 
 
           }
@@ -140,11 +140,11 @@ export class SchoolsService {
       map(res=>{
         return res.data.map(item =>{
           return {
-            [this.translate.instant('dashboard.Subjects.subjectName')]:item?.name[this.lang],
+            [this.translate.instant('Subjects.subjectName')]:item?.name[this.lang],
             [this.translate.instant('shared.grade')]: item?.gradeName[this.lang],
             [this.translate.instant('shared.division')]: item?.trackName[this.lang],
-            [this.translate.instant('dashboard.schools.authoritySubjects')]: item?.speaSubject,
-            [this.translate.instant('dashboard.Subjects.gpaReliable')]: item?.evaluationSystem ,
+            [this.translate.instant('schools.authoritySubjects')]: item?.speaSubject,
+            [this.translate.instant('Subjects.gpaReliable')]: item?.evaluationSystem ,
             [this.translate.instant('shared.optionalOrMandatory')]: item?.isElective ?this.translate.instant('shared.optional'):this.translate.instant('shared.mandatory'),
 
 

@@ -19,7 +19,7 @@
                 <th pSortableColumn="name">{{'shared.grade'|translate}}
                     <p-sortIcon field="name"></p-sortIcon>
                 </th>
-                <!-- <th pSortableColumn="name">{{'dashboard.schools.classeNumberPerWeak'|translate}} <p-sortIcon field="name"></p-sortIcon></th> -->
+                <!-- <th pSortableColumn="name">{{'schools.classeNumberPerWeak'|translate}} <p-sortIcon field="name"></p-sortIcon></th> -->
                 <th pSortableColumn="trackCount">{{'shared.track'|translate}}
                     <p-sortIcon field="trackCount"></p-sortIcon>
                 </th>
@@ -41,7 +41,7 @@
                 <td>
                     <div class="color-skyBlue-700 " *ngIf="grade.trackCount">
                         <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="grade.trackCount? showTracks(grade.id):''">
-                            <p><span class="">{{grade?.trackCount}}</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
+                            <p><span class="">{{grade?.trackCount}}</span>&nbsp;<span>{{'schools.tracks' |translate}}</span></p>
                         </a>
                     </div>
                     <span *ngIf="!grade.trackCount" class="color-gray-300">{{'shared.notFound' |translate}}</span>
@@ -102,7 +102,7 @@
 </ng-container>
 
 
-<p-dialog header="{{'dashboard.students.tracks' |translate}} " [(visible)]="isDialogOpened" [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+<p-dialog header="{{'students.tracks' |translate}} " [(visible)]="isDialogOpened" [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
     <ng-template pTemplate="content">
         <ng-container *ngIf="!gradeTracks">
             <div class="row g-5">

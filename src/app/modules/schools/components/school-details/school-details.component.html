@@ -7,10 +7,10 @@
     <div class="school position-relative">
         <div class="actions-btn d-flex justify-content-end position-absolute bottom-100 gap-3">
             <!-- <button *ngIf="isSchoolAllowToTransferGroup$|async" class="btn  btn-primary btn--md" routerLink="/school-management/school/{{schoolId}}/transfer-students">
-                <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
+                <span>{{'students.TransferStudentGroup'| translate}}</span>
             </button> -->
             <button class="btn btn-primary btn--md" (click)="showDialog()">
-                <span>{{'dashboard.schools.contactWithShoolManagement'| translate}}</span>
+                <span>{{'schools.contactWithShoolManagement'| translate}}</span>
             </button>
         </div>
 
@@ -30,14 +30,14 @@
                 </ng-container>
 
 
-                <!-- <li class="tabView__nav__link" data-step="0" *permit="claimsEnum.E_MenuItem_EditList" [class.active]="step==0" (click)="setActiveTab(0)"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
-                <li class="tabView__nav__link" data-step="1" [class.active]="step==1" (click)="setActiveTab(1);loadMap()"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
-                <li class="tabView__nav__link" data-step="2" *permit="claimsEnum.E_MenuItem_SchoolEmployee" [class.active]="step==2" (click)="setActiveTab(2)"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
-                <li class="tabView__nav__link" data-step="3" *permit="claimsEnum.E_MenuItem_SchoolDivisions" [class.active]="step==3" (click)="setActiveTab(3)"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
-                <li class="tabView__nav__link" data-step="4" *permit="claimsEnum.E_MenuItem_SchoolGrades" [class.active]="step==4" (click)="setActiveTab(4)"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
-                <li class="tabView__nav__link" data-step="5"  *permit="claimsEnum.E_MenuItem_EditList"  [class.active]="step==5" (click)="setActiveTab(5)"><span>{{ 'dashboard.schools.editableList'|translate }}</span></li>
-                <li class="tabView__nav__link" data-step="6" *permit="claimsEnum.E_MenuItem_Subjects" [class.active]="step==6" (click)="setActiveTab(6)"><span>{{ 'dashboard.schools.schoolSubjects'|translate }}</span></li>
-                <li class="tabView__nav__link" data-step="7" *permit="claimsEnum.E_MenuItem_AnnualHolidays" [class.active]="step==7" (click)="setActiveTab(7)"><span>{{ 'dashboard.schools.annualHolidays'|translate }}</span></li> -->
+                <!-- <li class="tabView__nav__link" data-step="0" *permit="claimsEnum.E_MenuItem_EditList" [class.active]="step==0" (click)="setActiveTab(0)"><span>{{ 'schools.generalInfo'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="1" [class.active]="step==1" (click)="setActiveTab(1);loadMap()"><span>{{ 'schools.schoolAddress'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="2" *permit="claimsEnum.E_MenuItem_SchoolEmployee" [class.active]="step==2" (click)="setActiveTab(2)"><span> {{ 'schools.schoolEmployee'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="3" *permit="claimsEnum.E_MenuItem_SchoolDivisions" [class.active]="step==3" (click)="setActiveTab(3)"><span>{{ 'schools.schoolClasses'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="4" *permit="claimsEnum.E_MenuItem_SchoolGrades" [class.active]="step==4" (click)="setActiveTab(4)"><span>{{ 'schools.schoolTracks'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="5"  *permit="claimsEnum.E_MenuItem_EditList"  [class.active]="step==5" (click)="setActiveTab(5)"><span>{{ 'schools.editableList'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="6" *permit="claimsEnum.E_MenuItem_Subjects" [class.active]="step==6" (click)="setActiveTab(6)"><span>{{ 'schools.schoolSubjects'|translate }}</span></li>
+                <li class="tabView__nav__link" data-step="7" *permit="claimsEnum.E_MenuItem_AnnualHolidays" [class.active]="step==7" (click)="setActiveTab(7)"><span>{{ 'schools.annualHolidays'|translate }}</span></li> -->
             </ul>
             <!-- Navigations Options -->
 
@@ -56,7 +56,7 @@
 
                     <!-- school Location -->
                     <div class="row gx-5 ">
-                        <h4 class="heading heading--tertiary mb-5" [class.d-none]="step!=1">{{'dashboard.schools.schoolLocation'|translate }}</h4>
+                        <h4 class="heading heading--tertiary mb-5" [class.d-none]="step!=1">{{'schools.schoolLocation'|translate }}</h4>
                         <div class="col-md-6 px-5">
                             <div class="map-container" [class.hide]="step!=1">
 
@@ -70,7 +70,7 @@
                         <ng-container *ngIf="step==1">
                             <div class="col-md-3 align-self-center grid-container">
 
-                                <span class="paragraph paragraph--sm color-gray-200">{{'dashboard.schools.SchoolPhone'|translate }}</span>
+                                <span class="paragraph paragraph--sm color-gray-200">{{'schools.SchoolPhone'|translate }}</span>
                                 <p class="color-primary"> {{school?.number}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
@@ -150,32 +150,32 @@
     </div>
 </ng-container>
 
-<p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
+<p-dialog header="{{'Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
 [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
 <form [formGroup]="speaEmpForm">
     <div class="custom-form">
 <div class="form-group">
-    <label for="">{{'dashboard.Messages.Enter the message title' | translate}} <span class="star">*</span></label>
-    <input maxlength="32" class="form-control py-3 my-3" type="text" formControlName="title" placeholder="{{'dashboard.Messages.Enter the message title' | translate}}">
+    <label for="">{{'Messages.Enter the message title' | translate}} <span class="star">*</span></label>
+    <input maxlength="32" class="form-control py-3 my-3" type="text" formControlName="title" placeholder="{{'Messages.Enter the message title' | translate}}">
     <div class="text-danger"
     *ngIf="this.speaEmpForm.get('title')?.touched && this.speaEmpForm.get('title')?.invalid && this.speaEmpForm.get('title')?.errors">
-    <small *ngIf="this.speaEmpForm.get('title')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
-    <small *ngIf="this.speaEmpForm.get('title')?.errors?.['maxlength']">{{'dashboard.Messages.maxLengtho' | translate}}</small>
+    <small *ngIf="this.speaEmpForm.get('title')?.errors?.['required']">{{'Messages.descriptionMessage' | translate}}</small>
+    <small *ngIf="this.speaEmpForm.get('title')?.errors?.['maxlength']">{{'Messages.maxLengtho' | translate}}</small>
 </div>
 </div>
 
 <div class="form-group">
-    <label for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-    <p-dropdown  [options]="messagesTypes" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}"   ></p-dropdown>
+    <label for="">{{'Messages.MessageType' | translate}} <span class="star">*</span></label>
+    <p-dropdown  [options]="messagesTypes" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" formControlName="messageType" placeholder="{{'Messages.MessageType' | translate}}"   ></p-dropdown>
     <div class="text-danger"
     *ngIf="this.speaEmpForm.get('messageType')?.touched && this.speaEmpForm.get('messageType')?.invalid && this.speaEmpForm.get('messageType')?.errors">
-    <small *ngIf="this.speaEmpForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+    <small *ngIf="this.speaEmpForm.get('messageType')?.errors?.['required']">{{'Messages.descriptionMessage' | translate}}</small>
 </div>
 </div>
 
 <div class="d-flex El-form my-4">
     <div class="form-group d-flex field1">
-        <label  class="px-3" for="">{{'dashboard.Messages.Require confirmation of receipt' | translate}}</label>
+        <label  class="px-3" for="">{{'Messages.Require confirmation of receipt' | translate}}</label>
         <p-inputSwitch  (onChange)="isToggleLabel($event)"  class="px-3" formControlName="switch1"></p-inputSwitch>
 
         <!-- <span class="Label" *ngIf="!isShown">{{'shared.no'|translate}}</span>
@@ -183,7 +183,7 @@
 
     </div>
     <div class="form-group d-flex">
-        <label    class="px-3" for="">  {{'dashboard.Messages.Possibility to reply' | translate}} <span class="star">*</span></label>
+        <label    class="px-3" for="">  {{'Messages.Possibility to reply' | translate}} <span class="star">*</span></label>
         <p-inputSwitch  (onChange)="isToggleLabel1($event)"  class="px-3" formControlName="switch2"></p-inputSwitch>
         <!-- <span class="Label" *ngIf="!isShown1">{{'shared.no'|translate}}</span>
         <span class="Label" *ngIf="isShown1">{{'shared.yes'|translate}}</span> -->
@@ -191,19 +191,19 @@
 </div>
 
 <div class="form-group d-flex mb-3 mx-3">
-    <label for="">{{'dashboard.Messages.senderName' | translate}}</label>
+    <label for="">{{'Messages.senderName' | translate}}</label>
     <p-inputSwitch  (onChange)="isToggleLabel2($event)" class="px-5"  formControlName="switch3"></p-inputSwitch>
     <!-- <span class="Label" *ngIf="!isShown2">{{'shared.no'|translate}}</span>
     <span class="Label" *ngIf="isShown2">{{'shared.yes'|translate}}</span> -->
 </div>
 
 <div class="form-group">
-    <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span class="star">*</span></label>
-    <textarea maxlength="512" class="form-control my-3" formControlName="description" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
+    <label for="">{{'Messages.Enter the text of the message' | translate}} <span class="star">*</span></label>
+    <textarea maxlength="512" class="form-control my-3" formControlName="description" placeholder="{{'Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
     <div class="text-danger"
     *ngIf="this.speaEmpForm.get('description')?.touched && this.speaEmpForm.get('description')?.invalid && this.speaEmpForm.get('description')?.errors">
-    <small *ngIf="this.speaEmpForm.get('description')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
-    <small *ngIf="this.speaEmpForm.get('description')?.errors?.['maxlength']">{{'dashboard.Messages.maxLength' | translate}}</small>
+    <small *ngIf="this.speaEmpForm.get('description')?.errors?.['required']">{{'Messages.descriptionMessage' | translate}}</small>
+    <small *ngIf="this.speaEmpForm.get('description')?.errors?.['maxlength']">{{'Messages.maxLength' | translate}}</small>
 </div>
 </div>
 
@@ -217,7 +217,7 @@
 <div class="elbutton">
     <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="speaEmpForm.invalid || onSubmit">
         <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-        {{'dashboard.Messages.Send' | translate}}
+        {{'Messages.Send' | translate}}
     </button>
 </div>
 

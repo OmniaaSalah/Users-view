@@ -44,7 +44,7 @@ export class AnnulHolidayListComponent implements OnInit {
   componentHeaderData: IHeader = {
 		breadCrump: [
 
-			{ label: this.translate.instant('dashboard.schools.annualHolidays'), routerLink: `/school-management/school/${this.schoolId}/annual-holidays`},
+			{ label: this.translate.instant('schools.annualHolidays'), routerLink: `/school-management/school/${this.schoolId}/annual-holidays`},
 		],
 		mainTitle: { main: this.currentSchool}
 	}
@@ -63,7 +63,7 @@ export class AnnulHolidayListComponent implements OnInit {
 
   menuItems: MenuItem[]=[
     {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',claims:ClaimsEnum.S_EditAnnualHoliday},
-    {label: this.translate.instant('dashboard.schools.sendEditHolidayReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.E_EditFlexableHoliday},
+    {label: this.translate.instant('schools.sendEditHolidayReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.E_EditFlexableHoliday},
   ];
 
   holidays={
@@ -248,7 +248,7 @@ export class AnnulHolidayListComponent implements OnInit {
     let filter = {...this.filtration,PageSize:this.holidays.total,Page:1}
     this.schoolsService.holidaysToExport(this.schoolId,filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualHolidays'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('schools.annualHolidays'))
     })
   }
 

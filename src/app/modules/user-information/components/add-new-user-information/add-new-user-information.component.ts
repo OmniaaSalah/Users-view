@@ -67,14 +67,14 @@ export class AddNewUserInformationComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('UserInformation.List Of Users'), routerLink: '/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
           {
 
-            label: (this.userId==null||this.userId=='')?  this.translate.instant('dashboard.UserInformation.Add User'):this.translate.instant('dashboard.UserInformation.Edit User'),
+            label: (this.userId==null||this.userId=='')?  this.translate.instant('UserInformation.Add User'):this.translate.instant('UserInformation.Edit User'),
             routerLink: (this.userId==null||this.userId=='')? '/manager-tools/user-information/new-user': `/manager-tools/user-information/edit-user/${this.userId}`
           }
        ],
-        'mainTitle':{main:(this.userId==null||this.userId=='')? this.translate.instant('dashboard.UserInformation.Add User'):this.translate.instant('dashboard.UserInformation.Edit User')}
+        'mainTitle':{main:(this.userId==null||this.userId=='')? this.translate.instant('UserInformation.Add User'):this.translate.instant('UserInformation.Edit User')}
       }
 
     );
@@ -165,7 +165,7 @@ AddAccount(){
             }
 
          },(err)=>{
-            this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+            this.toastr.error(this.translate.instant('AnnualHoliday.error,please try again'));
             this.isBtnLoading=false;
         });
   }
@@ -178,7 +178,7 @@ AddAccount(){
 
      },(err:Error)=>{
 
-      this.toastr.error(err?.message ||  this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      this.toastr.error(err?.message ||  this.translate.instant('AnnualHoliday.error,please try again'));
       this.isBtnLoading=false;
 
     });

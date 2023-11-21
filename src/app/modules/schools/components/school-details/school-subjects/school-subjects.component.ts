@@ -43,7 +43,7 @@ export class SchoolSubjectsComponent implements OnInit {
     breadCrump: [
       {
         label: this.translate.instant(
-          'dashboard.schools.schoolSubjectMangement'
+          'schools.schoolSubjectMangement'
         ),
         routerLink: `/school-management/school/${this.schoolId}/subjects`,
       },
@@ -197,7 +197,7 @@ export class SchoolSubjectsComponent implements OnInit {
       this.exportService.exportFile(
         fileType,
         res,
-        this.translate.instant('dashboard.schools.schoolSubjectMangement')
+        this.translate.instant('schools.schoolSubjectMangement')
       );
     });
   }
@@ -216,7 +216,7 @@ export class SchoolSubjectsComponent implements OnInit {
     //   this.saveDataOfsubject();
     //   this.router.navigate([`/school-management/school/${this.schoolId}/subjects/new-subject`,]);
     // } else {
-    //   this.toastService.error(this.translate.instant('dashboard.schools.pleaze select class firstly'));
+    //   this.toastService.error(this.translate.instant('schools.pleaze select class firstly'));
     // }
   }
 

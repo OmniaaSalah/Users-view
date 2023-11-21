@@ -5,7 +5,7 @@
 <div  *ngIf="filtration.semester != 2" >
   <div class="submit-btn d-flex gap-4 justify-content-end position-absolute" *permit="claimsEnum.E_RaiseDivisionDegrees">
       <button [IsAllowedTo]="(isSchoolAllowToUploadDegrees$ | async)" class="btn btn-primary  btn--md" (click)="degreeseModelOpened=true">
-          <span>{{'dashboard.schools.raisDegrees'|translate}}</span>
+          <span>{{'schools.raisDegrees'|translate}}</span>
       </button>
   </div>
 </div>
@@ -29,24 +29,24 @@
                 </div>
                 <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentsModelOpened=true">
                     <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                    <span>{{'dashboard.schools.addStudent'|translate}}</span>
+                    <span>{{'schools.addStudent'|translate}}</span>
                 </button> -->
             </div>
         </ng-template>
 
     <ng-template pTemplate="header" let-columns="columns">
             <tr>
-                <th pSortableColumn="code">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="code">{{'dashboard.schools.studentName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.parents.subjectName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="code">{{'schools.studentId'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="code">{{'schools.studentName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'parents.subjectName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
 
-                <th pSortableColumn="code">{{'dashboard.schools.optionalOrmandatory'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="code">{{'dashboard.schools.evaluation'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.parents.Result'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="code">{{'schools.optionalOrmandatory'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="code">{{'schools.evaluation'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'parents.Result'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
 
-                <th *ngIf="degrees.isHaveStudentPerformance" pSortableColumn="code">{{'dashboard.parents.studentperformance'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="code">{{'dashboard.parents.GPA'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.parents.Credithour'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th *ngIf="degrees.isHaveStudentPerformance" pSortableColumn="code">{{'parents.studentperformance'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="code">{{'parents.GPA'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'parents.Credithour'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student let-columns="columns">
@@ -55,13 +55,13 @@
                 <td>{{student.name |currentLang}}</td>
 
                 <td>{{student.subjectName|currentLang}}</td>
-                <td>{{student.isElective ? ('dashboard.Subjects.optional'| translate) : ('dashboard.Subjects.mandatory'| translate)}}</td>
+                <td>{{student.isElective ? ('Subjects.optional'| translate) : ('Subjects.mandatory'| translate)}}</td>
                 <td>{{''+student.evaluationSystem |translate}}</td>
                 <td>{{student.studentDegree}}</td>
                 <td *ngIf="degrees.isHaveStudentPerformance">
                     <div class="color-skyBlue-500 ">
                         <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="openStudentPerformanceModal(student.studentPerformance)">
-                            {{'dashboard.parents.studentperformance'|translate }}
+                            {{'parents.studentperformance'|translate }}
                         </a>
                     </div>
                 </td>
@@ -105,7 +105,7 @@
 <p-dialog [(visible)]="degreeseModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw', minHeight:'90vh'}">
     <ng-template pTemplate="header">
         <div class="">
-            <h3 class="heading heading--tertiary">{{'dashboard.schools.raisDegrees'| translate}} ({{selectedSemesterLable}})</h3>
+            <h3 class="heading heading--tertiary">{{'schools.raisDegrees'| translate}} ({{selectedSemesterLable}})</h3>
 
         </div>
 
@@ -118,7 +118,7 @@
         </div>
 
         <div class="custom-form">
-            <label class="label">{{'dashboard.schools.subject'| translate}}</label>
+            <label class="label">{{'schools.subject'| translate}}</label>
             <p-dropdown
             [filter]="true"
             filterBy="{{lang=='ar'?'name.ar':'name.en'}}"
@@ -127,7 +127,7 @@
             (ngModelChange)="checkDegreesExist($event)"
             optionValue="id"
             optionLabel="{{lang=='ar'?'name.ar':'name.en'}}"
-            placeholder="{{'dashboard.schools.chooseSubject'| translate}}"></p-dropdown>
+            placeholder="{{'schools.chooseSubject'| translate}}"></p-dropdown>
             <p *ngIf="subjectDegreesStatus=='Rejected' || subjectDegreesStatus=='Pending' " class="color-red-500 fs-5 mt-2">هناك بالفعل درجات محفوظة لهذه المادة في هذا الفصل الدراسي ، وبهذا التحميل ستحل محل البيانات السابقة</p>
         </div>
         <div class="py-6" *ngIf="!selectedSubjectId"></div>
@@ -154,7 +154,7 @@
 </p-dialog>
 
 
-<p-dialog header="{{'dashboard.parents.studentperformance'|translate }}" [(visible)]="studentPerformanceModalOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+<p-dialog header="{{'parents.studentperformance'|translate }}" [(visible)]="studentPerformanceModalOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
 
     <ng-template pTemplate="content">
         <div class="custom-form mt-5">

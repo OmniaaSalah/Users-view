@@ -20,27 +20,27 @@
             <tr>
                 <th pSortableColumn="subjectName">
                     <div class="content">
-                        {{'dashboard.parents.subjectName'|translate }}
+                        {{'parents.subjectName'|translate }}
                         <p-sortIcon field="name"></p-sortIcon>
                     </div>
                 </th>
                 <th pSortableColumn="isElective">
-                    {{'dashboard.parents.Mandatory/Optional'|translate }}
+                    {{'parents.Mandatory/Optional'|translate }}
                     <p-sortIcon field="isElective"></p-sortIcon>
                 </th>
-                <th pSortableColumn="evaluationSystem">{{'dashboard.parents.Evaluation'|translate }}
+                <th pSortableColumn="evaluationSystem">{{'parents.Evaluation'|translate }}
                     <p-sortIcon field="evaluationSystem"></p-sortIcon>
                 </th>
-                <th pSortableColumn="result">{{'dashboard.parents.Result'|translate }}
+                <th pSortableColumn="result">{{'parents.Result'|translate }}
                     <p-sortIcon field="result"></p-sortIcon>
                 </th>
-                <th *ngIf="subjects.isHaveStudentPerformance" pSortableColumn="price">{{'dashboard.parents.studentperformance'|translate }}
+                <th *ngIf="subjects.isHaveStudentPerformance" pSortableColumn="price">{{'parents.studentperformance'|translate }}
                     <p-sortIcon field="price"></p-sortIcon>
                 </th>
-                <th pSortableColumn="gpa">{{'dashboard.parents.GPA'|translate }}
+                <th pSortableColumn="gpa">{{'parents.GPA'|translate }}
                     <p-sortIcon field="gpa"></p-sortIcon>
                 </th>
-                <th pSortableColumn="studyHour">{{'dashboard.parents.Credithour'|translate }}
+                <th pSortableColumn="studyHour">{{'parents.Credithour'|translate }}
                     <p-sortIcon field="studyHour"></p-sortIcon>
                 </th>
 
@@ -50,7 +50,7 @@
             <tr>
 
                 <td>{{subject.subject|currentLang}}</td>
-                <td>{{subject.isElective ? ('dashboard.Subjects.optional'| translate) : ('dashboard.Subjects.mandatory'| translate)}}</td>
+                <td>{{subject.isElective ? ('Subjects.optional'| translate) : ('Subjects.mandatory'| translate)}}</td>
                 <td>{{''+subject.evaluationSystem || 'تقيم' | translate}}</td>
                 <td>
                   {{subject.studentDegree}} -
@@ -60,7 +60,7 @@
                 <td *ngIf="subjects.isHaveStudentPerformance">
                     <div class="color-skyBlue-500 ">
                         <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="openStudentPerformanceModal(subject?.studentPerformance)">
-                            {{'dashboard.parents.studentperformance'|translate }}
+                            {{'parents.studentperformance'|translate }}
                         </a>
                     </div>
                 </td>
@@ -94,7 +94,7 @@
                 <td [attr.colspan]="subjects.isHaveStudentPerformance ? 3 : 2">
                     <div class="d-flex gap-4">
                       <span class="fw-bold">{{'shared.FinalResult'|translate}}</span>
-                        <!-- <span class="fw-bold">{{'dashboard.students.finalFirstSemesterResult'|translate}}</span> -->
+                        <!-- <span class="fw-bold">{{'students.finalFirstSemesterResult'|translate}}</span> -->
                         <span>{{subjects.finalResult}}</span>
                     </div>
                 </td>
@@ -116,7 +116,7 @@
 </ng-container>
 
 
-<p-dialog header="{{'dashboard.parents.studentperformance'|translate }}" [(visible)]="studentPerformanceModalOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+<p-dialog header="{{'parents.studentperformance'|translate }}" [(visible)]="studentPerformanceModalOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
 
     <ng-template pTemplate="content">
         <div class="custom-form mt-5">

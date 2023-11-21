@@ -28,21 +28,21 @@ export class UserRolesService {
         "id": 1,
         "name": {
             "en": "AccessToAllSchoolInformation",
-            "ar": this.translate.instant('dashboard.UserRole.AccessToAllSchoolInformation')
+            "ar": this.translate.instant('UserRole.AccessToAllSchoolInformation')
         }
       },
       {
         "id": 2,
         "name": {
             "en": "AccessToInformationRelatedToCurriculums",
-            "ar": this.translate.instant('dashboard.UserRole.AccessToInformationRelatedToCurriculums')
+            "ar": this.translate.instant('UserRole.AccessToInformationRelatedToCurriculums')
         }
       },
       {
         "id": 3,
         "name": {
             "en": "AccessToInformationRelatedToSchool",
-            "ar": this.translate.instant('dashboard.UserRole.AccessToInformationRelatedToSchool')
+            "ar": this.translate.instant('UserRole.AccessToInformationRelatedToSchool')
         }
       }
     ];
@@ -117,11 +117,11 @@ export class UserRolesService {
         return res.data.map(role=>{
           return {
 
-            [this.translate.instant('dashboard.UserRole.JobRole Name')]: role?.jobRoleName[this.lang],
+            [this.translate.instant('UserRole.JobRole Name')]: role?.jobRoleName[this.lang],
             [this.translate.instant('shared.User Name')]: role?.creatorName,
-            [this.translate.instant('dashboard.UserRole.Role Users')]: role?.roleUsers,
+            [this.translate.instant('UserRole.Role Users')]: role?.roleUsers,
             [this.translate.instant('shared.Created Date')]: role?.createdDate,
-            [this.translate.instant('dashboard.UserRole.Status')]: role?.status ? this.translate.instant('shared.allStatus.active'): this.translate.instant('shared.allStatus.inActive'),
+            [this.translate.instant('UserRole.Status')]: role?.status ? this.translate.instant('shared.allStatus.active'): this.translate.instant('shared.allStatus.inActive'),
 
 
 

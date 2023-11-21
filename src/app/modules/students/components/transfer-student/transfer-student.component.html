@@ -20,21 +20,21 @@
                         <h4 class="heading heading--tertiary">{{student.name|currentLang}}</h4>
                         <div class="" *ngIf="student.isGifted">
                             <img src="assets/images/shared/medal.svg" alt="">
-                            <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
+                            <span class="color-red-500">{{'students.talent' |translate}}</span>
                         </div>
                         <div  *ngIf="student.isGifted">
                             <img src="assets/images/shared/medal-cup.svg" alt="">
-                            <span class="color-yellow-400">{{'dashboard.students.fromTheFirst' |translate}}</span>
+                            <span class="color-yellow-400">{{'students.fromTheFirst' |translate}}</span>
                         </div>
                         <div *ngIf="student.isChildOfAMartyr">
                             <img src="assets/images/shared/medal-flag.svg" alt="">
-                            <span class="color-fuchsia-500">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
+                            <span class="color-fuchsia-500">{{'students.isChildOfAMartyr' |translate}}</span>
                         </div>
                     </div>
                     <div class="profile__details">
                         <div class="fs-4">
                             <img src="assets/images/shared/child.svg" alt="">
-                            <span class="color-gray-300">{{student.age}} {{'dashboard.issue of certificate.year' |translate}}</span>
+                            <span class="color-gray-300">{{student.age}} {{'issue of certificate.year' |translate}}</span>
                         </div>
                         <div >
                             <img  src="assets/images/shared/fingure.svg" alt="">
@@ -57,7 +57,7 @@
                     (!f.valid && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)||
                     (!selectedSchool.value && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)"
                     (click)="confirmTransferStudent()">
-                        <span>{{'dashboard.students.transferStudent' |translate}} </span>
+                        <span>{{'students.transferStudent' |translate}} </span>
                         <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
                     </button>
 
@@ -100,11 +100,11 @@
                       <div class="col-md-4 " >
                           <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
                           <label class="label">{{'shared.grade'| translate}}</label>
-                          <p-dropdown name="grade" #Grade [options]="(AllGrades$ | async)" [(ngModel)]="transferForm.gradeId" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
+                          <p-dropdown name="grade" #Grade [options]="(AllGrades$ | async)" [(ngModel)]="transferForm.gradeId" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" placeholder="{{'students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
                       </div>
                         <!-- <div class="col-md-4 ">
                             <label class="label" for="description">{{'shared.grade'| translate}}</label>
-                            <p-dropdown name="grade" #Grade [options]="(schoolGrades$ | async)" [(ngModel)]="transferForm.gradeId" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
+                            <p-dropdown name="grade" #Grade [options]="(schoolGrades$ | async)" [(ngModel)]="transferForm.gradeId" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
                         </div> -->
 
                         <div class="col-md-4 " >
@@ -116,7 +116,7 @@
                               [(ngModel)]="transferForm.divisionId"
                               (ngModelChange)="onDivisionSelected($event)"
                               optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
-                              placeholder="{{'dashboard.students.choosedivision' |translate}}"
+                              placeholder="{{'students.choosedivision' |translate}}"
                               emptyMessage="{{'emptyList.noDivisionsInGrade' |translate}}" [required]="availableGradeDivisions.length"></p-dropdown>
                           </div>
                           <div class="m-3 color-skyBlue-500 fs-4" *ngIf="!selectedSchool.value">{{'toasterMessage.youShouldSelectGradeAndSchool' |translate}}</div>
@@ -131,7 +131,7 @@
                             optionValue="id"
                             optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
                             [required]="selectedDivision?.hasTrack"
-                            placeholder="{{'dashboard.students.chooserack' |translate}}"
+                            placeholder="{{'students.chooserack' |translate}}"
                             emptyMessage="{{'emptyList.noTracksInDivisions' |translate}}"></p-dropdown>
                         </div>
                     </div>
@@ -210,7 +210,7 @@
         <div class="student__content border p-5 radius-12">
 
 
-            <h2 class="heading heading--secondary mb-5">{{'dashboard.students.availableSchools'| translate}}({{schools.total}})</h2>
+            <h2 class="heading heading--secondary mb-5">{{'students.availableSchools'| translate}}({{schools.total}})</h2>
             <div class="cards row" *ngIf="!schools.loading && schools.total">
                 <div
                     class="col-md-4" *ngFor="let school of schools.list; let i=index">

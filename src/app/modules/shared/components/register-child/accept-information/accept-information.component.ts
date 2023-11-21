@@ -7,7 +7,7 @@ import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { ReEnrollmentType, RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
+import { ReEnrollmentType, StudentStatus } from 'src/app/shared/enums/status/status.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentService } from '../../../services/register-child/register-child.service';
@@ -31,7 +31,7 @@ export class AcceptInformationComponent implements OnInit {
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
   reEnrollmentTypes$ = this.indexService.getIndext(IndexesEnum.reEnrollmentTypes)
 
-  get registrationStatusEnum() {return RegistrationStatus}
+  get registrationStatusEnum() {return StudentStatus}
   get reEnrollmentTypeEnum() {return ReEnrollmentType}
 
   disabilitiesOptions = [

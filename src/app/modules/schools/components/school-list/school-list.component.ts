@@ -36,7 +36,7 @@ export class SchoolListComponent extends FilterSearchService implements OnInit  
   states$ = this.CountriesService.getAllStates()
   schoolCategory$ = this.schoolsService.getSchoolsCategory()
 
-  searchByList=[this.translate.instant('shared.city'), this.translate.instant('dashboard.SystemSetting.Email')]
+  searchByList=[this.translate.instant('shared.city'), this.translate.instant('SystemSetting.Email')]
   get StatusEnum() { return StatusEnum }
   // filtration :ISearchState = {
   //   ...Filtration, Status: null,
@@ -54,7 +54,7 @@ export class SchoolListComponent extends FilterSearchService implements OnInit  
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.schools.schoolsList') ,routerLink: '/schools-and-students/schools'},
+      { label: this.translate.instant('schools.schoolsList') ,routerLink: '/schools-and-students/schools'},
     ],
   }
 
@@ -132,7 +132,7 @@ export class SchoolListComponent extends FilterSearchService implements OnInit  
     let filter = {...this.searchModel, PageSize:this.schools.total,Page:1}
     this.schoolsService.schoolsToExport(filter).subscribe( (res: School[]) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolsList'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('schools.schoolsList'))
     })
   }
 

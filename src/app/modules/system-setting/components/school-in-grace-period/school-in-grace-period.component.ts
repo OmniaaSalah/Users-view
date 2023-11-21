@@ -22,10 +22,10 @@ export class SchoolInGracePeriodComponent implements OnInit {
   dashboardHeaderData:IHeader ={
     breadCrump:[
       { label: this.translate.instant('sideBar.managerTools.children.systemSettings'),routerLink: '/manager-tools/settings',routerLinkActiveOptions:{exact: true} },
-      { label: this.translate.instant('dashboard.SystemSetting.gracePeriodDetails'),routerLink: '/manager-tools/settings/grace-period/new' }
+      { label: this.translate.instant('SystemSetting.gracePeriodDetails'),routerLink: '/manager-tools/settings/grace-period/new' }
 
     ],
-    mainTitle: {main:this.translate.instant('dashboard.SystemSetting.gracePeriodDetails')}
+    mainTitle: {main:this.translate.instant('SystemSetting.gracePeriodDetails')}
   }
 
   schoolDetails

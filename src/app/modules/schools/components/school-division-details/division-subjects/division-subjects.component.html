@@ -20,11 +20,11 @@
                     {{col.header}}
                 </th>
                 <th pSortableColumn="actions"></th> -->
-                <th pSortableColumn="studentNumber">{{'dashboard.schools.subjectNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.parents.subjectName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
+                <th pSortableColumn="studentNumber">{{'schools.subjectNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'parents.subjectName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
                 <th *ngIf="gradeHaveTracks" pSortableColumn="surName">{{'shared.track'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
-                <th  pSortableColumn="trackName">{{'dashboard.schools.speaSubjects'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
-                <th pSortableColumn="nationalityId">{{'dashboard.schools.subjectDegreesStatus'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
+                <th  pSortableColumn="trackName">{{'schools.speaSubjects'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
+                <th pSortableColumn="nationalityId">{{'schools.subjectDegreesStatus'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
                 <th *permit="claimsEnum.E_R_DivisionSubjectsDegrees" class="actions"></th>
             </tr>
         </ng-template>
@@ -43,7 +43,7 @@
                     </span>
                 <td *permit="claimsEnum.E_R_DivisionSubjectsDegrees">
                     <div class=" d-flex  align-items-center gap-3 justify-content-end mx-4" role="button" (click)="openSubjectDegrees(subject)">
-                        <span class="color-skyBlue-400">{{'dashboard.schools.subjectDegrees'|translate}}</span>
+                        <span class="color-skyBlue-400">{{'schools.subjectDegrees'|translate}}</span>
                         <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                     </div>
                 </td>

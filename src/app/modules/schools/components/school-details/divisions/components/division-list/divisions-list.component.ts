@@ -40,7 +40,7 @@ gardeId = +this.route.snapshot.queryParamMap.get('gradeId')
 componentHeaderData: IHeader = {
   breadCrump:  [
 
-    { label: this.translate.instant('dashboard.schools.schoolTracks'), routerLink: `/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true}}
+    { label: this.translate.instant('schools.schoolTracks'), routerLink: `/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true}}
 
   ],
   mainTitle: { main:  this.currentSchool  }
@@ -150,7 +150,7 @@ componentHeaderData: IHeader = {
     let filter = {...this.filtration, PageSize:this.divisions.totalAllData,Page:1}
     this.divisionService.divisionsToExport(filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolTracks'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('schools.schoolTracks'))
     })
   }
 

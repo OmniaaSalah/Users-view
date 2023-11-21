@@ -193,7 +193,7 @@ export class HolidayModelComponent implements OnInit {
   
   if(!this.avaliableChangeStatus)
   {
-   this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.you can change status in case not select Ministry Curriculum'));
+   this.toastService.error(this.translate.instant('AnnualHoliday.you can change status in case not select Ministry Curriculum'));
   }
  }
 
@@ -202,7 +202,7 @@ export class HolidayModelComponent implements OnInit {
  
  if(this.dateFrom.value&&this.dateTo.value&&(Math.ceil(Math.abs(this.dateFrom.value - this.dateTo.value) / (1000 * 60 * 60 * 24))>42))
   {
-    this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.YouCan’tAddHolidayMoreThan6Weeks'))
+    this.toastService.error(this.translate.instant('AnnualHoliday.YouCan’tAddHolidayMoreThan6Weeks'))
     this.dateTo.setValue('')
 
   }

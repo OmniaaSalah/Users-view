@@ -1,7 +1,7 @@
 
 <ng-container *permit="ClaimsEnum.S_C_Index">
 
-              <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'"></app-add-btn>
+              <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/manager-tools/indexes/new-index'" [content]="'Indexes.Add Item'"></app-add-btn>
 
 </ng-container>
 <div class="prim-table mt-4" *ngIf="indexes.totalAllData || indexes.loading">
@@ -13,13 +13,13 @@
              <div class="panel">
                 <div class="row gx-5 form-set">
                     <div class="col-4 panel">
-                        <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
-                        <p-multiSelect [options]="indexListType" [filter]="true" filterBy="indexType" display="chip" [(ngModel)]="filtration.IndexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-multiSelect>
+                        <label class="label" for="indexType">{{'Indexes.List Type'|translate }} </label>
+                        <p-multiSelect [options]="indexListType" [filter]="true" filterBy="indexType" display="chip" [(ngModel)]="filtration.IndexType" optionLabel="indexType" optionValue="value"  placeholder="{{'Indexes.Select Index Type'|translate }}"></p-multiSelect>
                     </div>
 
                     <div class="col-4">
-                        <label class="label" for="indexStatus">{{'dashboard.Indexes.Index Status'|translate }} </label>
-                        <p-dropdown [options]="indexStatusList" [showClear]="true" [(ngModel)]="filtration.IndexStatus" inputId="indexStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
+                        <label class="label" for="indexStatus">{{'Indexes.Index Status'|translate }} </label>
+                        <p-dropdown [options]="indexStatusList" [showClear]="true" [(ngModel)]="filtration.IndexStatus" inputId="indexStatus" optionLabel="name" optionValue="value" placeholder="{{'Indexes.Select Index Status'|translate }}"></p-dropdown>
                     </div>
                 </div>
             </div>
@@ -32,15 +32,15 @@
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="IndexType">
-                    <p-sortIcon field="IndexType"></p-sortIcon>{{'dashboard.Indexes.List Type'|translate}}
+                    <p-sortIcon field="IndexType"></p-sortIcon>{{'Indexes.List Type'|translate}}
                 </th>
 
                 <th class="mediumrow" pSortableColumn="{{lang=='ar' ? 'IndexArabicName' : 'IndexEnglishName'}}">
-                    <p-sortIcon field=" {{lang=='ar' ? 'IndexArabicName' : 'IndexEnglishName'}}"></p-sortIcon>{{'dashboard.Indexes.Index Name'|translate}}
+                    <p-sortIcon field=" {{lang=='ar' ? 'IndexArabicName' : 'IndexEnglishName'}}"></p-sortIcon>{{'Indexes.Index Name'|translate}}
                 </th>
 
                 <th class="longrow" pSortableColumn="IndexStatus">
-                    <p-sortIcon field="IndexStatus"></p-sortIcon>{{'dashboard.Indexes.Index Status'|translate}}
+                    <p-sortIcon field="IndexStatus"></p-sortIcon>{{'Indexes.Index Status'|translate}}
                 </th>
 
                 <th pSortableColumn="edit" class="actions "></th>

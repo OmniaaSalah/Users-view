@@ -25,8 +25,8 @@
                 (onClear)="clearFilter()">
                 <div class="row gx-5 form-set">
                     <div class="col-4">
-                        <label class="label" for="flexibilityStatus">{{'dashboard.Assignments.Assignment Status'|translate }}  </label>
-                        <p-dropdown [options]="examStatusList" [showClear]="true" optionLabel="name" optionValue="value" [(ngModel)]="filtration.Status" inputId="Status"  placeholder="{{'dashboard.Assignments.Select Assignment Status'|translate }}"></p-dropdown>
+                        <label class="label" for="flexibilityStatus">{{'Assignments.Assignment Status'|translate }}  </label>
+                        <p-dropdown [options]="examStatusList" [showClear]="true" optionLabel="name" optionValue="value" [(ngModel)]="filtration.Status" inputId="Status"  placeholder="{{'Assignments.Select Assignment Status'|translate }}"></p-dropdown>
                     </div>
 
                 </div>
@@ -37,38 +37,38 @@
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="{{lang=='ar'? 'ArabicName' : 'EnglishName'}}">
-                    <p-sortIcon field="{{lang=='ar'? 'ArabicName' : 'EnglishName'}}"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}
+                    <p-sortIcon field="{{lang=='ar'? 'ArabicName' : 'EnglishName'}}"></p-sortIcon>{{'Assignments.Assignment Name' | translate}}
                 </th>
                 <th style="min-width: 20rem;" pSortableColumn="{{lang=='ar'? 'schoolArabicName' : 'schoolEnglishName'}}" *ngIf="currentUserScope==userScope.SPEA">
                     <p-sortIcon field="{{lang=='ar'? 'schoolArabicName' : 'schoolEnglishName'}}"></p-sortIcon>{{'shared.school' | translate}}
                 </th>
                 <th pSortableColumn="{{lang=='ar'? 'GradeArabicName' : 'GradeEnglishName'}}">
-                    <p-sortIcon field="{{lang=='ar'? 'GradeArabicName' : 'GradeEnglishName'}}"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}
+                    <p-sortIcon field="{{lang=='ar'? 'GradeArabicName' : 'GradeEnglishName'}}"></p-sortIcon>{{'Assignments.Class' | translate}}
                 </th>
 
                 <th pSortableColumn="{{lang=='ar'? 'CurriculmArabicName' : 'CurriculmEnglishName'}}" *ngIf="currentUserScope!=userScope.Employee">
-                    <p-sortIcon field="{{lang=='ar'? 'CurriculmArabicName' : 'CurriculmEnglishName'}}"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}}
+                    <p-sortIcon field="{{lang=='ar'? 'CurriculmArabicName' : 'CurriculmEnglishName'}}"></p-sortIcon>{{'Assignments.curriculum' | translate}}
                 </th>
 
                 <th pSortableColumn="SchoolCount" *ngIf="currentUserScope!=userScope.Employee">
-                    <p-sortIcon field="SchoolCount"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}
+                    <p-sortIcon field="SchoolCount"></p-sortIcon>{{'Assignments.schoolCount' | translate}}
                 </th>
 
 
                 <th style="min-width: 15rem;" pSortableColumn="{{lang=='ar'? 'SubjectArabicName' : 'SubjectEnglishName'}}">
-                    <p-sortIcon field="{{lang=='ar'? 'SubjectArabicName' : 'SubjectEnglishName'}}"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}
+                    <p-sortIcon field="{{lang=='ar'? 'SubjectArabicName' : 'SubjectEnglishName'}}"></p-sortIcon>{{'Assignments.Subject' | translate}}
                 </th>
                 <th  style="min-width: 23rem;" pSortableColumn="ExamShowDate">
-                    <p-sortIcon field="ExamShowDate"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}}
+                    <p-sortIcon field="ExamShowDate"></p-sortIcon>{{'Assignments.Exam Date And Time' | translate}}
                 </th>
                 <th  style="min-width: 22rem;" pSortableColumn="CreatedDate">
-                    <p-sortIcon field="CreatedDate"></p-sortIcon>{{'dashboard.surveys.createdDate' | translate}}
+                    <p-sortIcon field="CreatedDate"></p-sortIcon>{{'surveys.createdDate' | translate}}
                 </th>
                 <th  pSortableColumn="UserFullName">
-                    <p-sortIcon field="UserFullName"></p-sortIcon>{{'dashboard.surveys.createdBefore' | translate}}
+                    <p-sortIcon field="UserFullName"></p-sortIcon>{{'surveys.createdBefore' | translate}}
                 </th>
                 <th pSortableColumn="examStatus">
-                    <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}
+                    <p-sortIcon field="examStatus"></p-sortIcon> {{'Assignments.Status' | translate}}
                 </th>
                 <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions" class="actions"></th>
                 <!-- <th style="min-width: 17rem;"></th> -->

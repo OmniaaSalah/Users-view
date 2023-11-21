@@ -38,7 +38,7 @@ export class TransferedStudentsReportsComponent implements OnInit {
   acceptanceDate;
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generateTransferedStudentsReport'),routerLink:"/reports-managment/transfered-students-reports" },
+      { label: this.translate.instant('reports.generateTransferedStudentsReport'),routerLink:"/reports-managment/transfered-students-reports" },
     ],
   }
   filtration = {
@@ -102,9 +102,9 @@ export class TransferedStudentsReportsComponent implements OnInit {
     { name: this.translate.instant('shared.fusionClass'), value: 'fusionClass' }
   ]
   transferType= [
-    {name:this.translate.instant('dashboard.students.insideEmara'), value: TransferType.TransferWithinTheEmirate},
-    {name:this.translate.instant('dashboard.students.outSideEmara'), value: TransferType.TransferOutsideTheEmirate},
-    {name:this.translate.instant('dashboard.students.outsideCountry'), value: TransferType.TransferOutOfTheCountry},
+    {name:this.translate.instant('students.insideEmara'), value: TransferType.TransferWithinTheEmirate},
+    {name:this.translate.instant('students.outSideEmara'), value: TransferType.TransferOutsideTheEmirate},
+    {name:this.translate.instant('students.outsideCountry'), value: TransferType.TransferOutOfTheCountry},
   ]
 
 

@@ -96,10 +96,10 @@ export class GradesService {
       map(res=>{
         return res.result.data.map(student =>{
           return {
-            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
-            [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student.name),
+            [this.translate.instant('schools.studentId')]: student.studentNumber,
+            [this.translate.instant('students.studentName')]: getLocalizedValue(student.name),
             [this.translate.instant('shared.division')]: getLocalizedValue(student.divisionName),
-            [this.translate.instant('dashboard.parents.ministerialNumber')]: student.ministerialNumber,
+            [this.translate.instant('parents.ministerialNumber')]: student.ministerialNumber,
             [this.translate.instant('shared.personalId')]: student.nationalityId,
           }
         })
@@ -149,9 +149,9 @@ export class GradesService {
       map(res=>{
         return res.data.map(grade =>{
           return {
-            [this.translate.instant('dashboard.schools.gradeName')]:grade?.name[this.lang],
-            [this.translate.instant('dashboard.schools.tracksNumber')]: grade?.trackCount,
-            [this.translate.instant('dashboard.schools.sectionsNumber')]:grade?.divisionCount,
+            [this.translate.instant('schools.gradeName')]:grade?.name[this.lang],
+            [this.translate.instant('schools.tracksNumber')]: grade?.trackCount,
+            [this.translate.instant('schools.sectionsNumber')]:grade?.divisionCount,
             [this.translate.instant('shared.students')]: grade?.studentCount,
 
           }

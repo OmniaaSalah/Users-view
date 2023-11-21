@@ -57,7 +57,7 @@ export class ParentsReportsComponent implements OnInit {
   }
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generateparentsReport'),routerLink:'/reports-managment/parents-reports' },
+      { label: this.translate.instant('reports.generateparentsReport'),routerLink:'/reports-managment/parents-reports' },
     ],
   }
 

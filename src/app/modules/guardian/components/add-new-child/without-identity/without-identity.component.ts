@@ -38,12 +38,12 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
   componentHeaderData: IHeader = {
     breadCrump: [
       {
-        label: this.translate.instant('dashboard.parentHome.newStudent'),
+        label: this.translate.instant('parentHome.newStudent'),
         routerLink: '/parent/AddChild/Addchild-WithoutNationality',
         routerLinkActiveOptions: { exact: true },
       },
     ],
-    mainTitle: {main: this.translate.instant('dashboard.parentHome.newStudent')},
+    mainTitle: {main: this.translate.instant('parentHome.newStudent')},
   };
 
   ngDestroy$ =new Subject()
@@ -231,7 +231,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
     .subscribe(res=>{
 
       this.isBtnLoading=false;
-      this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
+      this.toastr.success(this.translate.instant("parents.child saved successfully"));
 
       this.router.navigate(['/']);
 

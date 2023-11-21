@@ -2,7 +2,7 @@
   <div class="comments-wrapper ">
       <div class="d-flex align-items-center gap-3">
           <img style="width:2.5rem" src="assets/images/shared/contact-us.svg" alt="">
-          <h3 class="heading heading--secondary color-primary">{{'dashboard.Requests.commentsAndReplays' | translate}}</h3>
+          <h3 class="heading heading--secondary color-primary">{{'Requests.commentsAndReplays' | translate}}</h3>
       </div>
 
       <ul class="comments d-flex flex-column gap-4 my-5" *ngIf="requestDetails?.requestComments?.length">
@@ -73,7 +73,7 @@
       <ng-container *ngTemplateOutlet="attachments; context: {$implicit: filesToUpload}" ></ng-container>
 
       <div class="d-flex gap-4 align-items-center h-100 p-4">
-          <textarea   [(ngModel)]="comment"  [rows]="1" name="comment" pInputTextarea placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"></textarea>
+          <textarea   [(ngModel)]="comment"  [rows]="1" name="comment" pInputTextarea placeholder="{{'myRequest.You can add a comment here' | translate}}"></textarea>
           <!-- <i class="pi-cloud-upload" style="font-size: 2rem"></i> -->
           <app-file-upload
           theme="chat"

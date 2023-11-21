@@ -56,10 +56,10 @@ export class MessageDetailsComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.Messages.messages'), routerLink: '/messages/messages', routerLinkActiveOptions: { exact: true } },
-          { label: this.translate.instant('dashboard.Messages.MessageDetails') }
+          { label: this.translate.instant('Messages.messages'), routerLink: '/messages/messages', routerLinkActiveOptions: { exact: true } },
+          { label: this.translate.instant('Messages.MessageDetails') }
         ],
-        mainTitle: { main: this.translate.instant('dashboard.Messages.Chat Details') }
+        mainTitle: { main: this.translate.instant('Messages.Chat Details') }
       }
     );
   }
@@ -117,7 +117,7 @@ export class MessageDetailsComponent implements OnInit {
     }
 
     this.messageService.sendReply(this.routeSub, form).subscribe(res => {
-      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
+      this.toastr.success(this.translate.instant('issue of certificate.success message'))
       this.replayForm.reset();
       this.display = false
        this.onSubmit=false

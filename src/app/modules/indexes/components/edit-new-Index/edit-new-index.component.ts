@@ -61,8 +61,8 @@ export class EditNewIndexComponent implements OnInit {
         {
           label:
             this.urlParameter == null || this.urlParameter == ''
-              ? this.translate.instant('dashboard.Indexes.Add Item')
-              : this.translate.instant('dashboard.Indexes.Edit Item'),
+              ? this.translate.instant('Indexes.Add Item')
+              : this.translate.instant('Indexes.Edit Item'),
           routerLink:
             this.urlParameter == null || this.urlParameter == ''
               ? '/manager-tools/indexes/new-index'
@@ -72,8 +72,8 @@ export class EditNewIndexComponent implements OnInit {
       mainTitle: {
         main:
           this.urlParameter == null || this.urlParameter == ''
-            ? this.translate.instant('dashboard.Indexes.Add Item')
-            : this.translate.instant('dashboard.Indexes.Edit Item'),
+            ? this.translate.instant('Indexes.Add Item')
+            : this.translate.instant('Indexes.Edit Item'),
       },
     });
 
@@ -127,7 +127,7 @@ export class EditNewIndexComponent implements OnInit {
             this.isBtnLoading = false;
             this.toastService.success(
               this.translate.instant(
-                'dashboard.Indexes.old index edited Successfully'
+                'Indexes.old index edited Successfully'
               )
             );
             this.router.navigate(['/manager-tools/indexes']);
@@ -143,7 +143,7 @@ export class EditNewIndexComponent implements OnInit {
           this.isBtnLoading = false;
           this.toastService.success(
             this.translate.instant(
-              'dashboard.Indexes.New index added Successfully'
+              'Indexes.New index added Successfully'
             )
           );
           this.router.navigate(['/manager-tools/indexes']);
@@ -159,7 +159,7 @@ export class EditNewIndexComponent implements OnInit {
   showErrorMessage() {
     this.toastService.error(
       this.translate.instant(
-        'dashboard.Indexes.You should enter Valid Data First'
+        'Indexes.You should enter Valid Data First'
       )
     );
   }

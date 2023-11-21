@@ -27,15 +27,15 @@ export class SystemRequestService {
 
   getStatusOptions(){
     return [
-      {name:this.translate.instant('dashboard.Requests.Pending'), value: UserRequestsStatus.Pending},
-      {name:this.translate.instant('dashboard.Requests.Returned'), value: UserRequestsStatus.ModificationRequest},
-      {name:this.translate.instant('dashboard.Requests.ModificationRequestForGuardian'), value: UserRequestsStatus.ModificationRequestForGuardian},
-      {name:this.translate.instant('dashboard.Requests.ModificationRequestForSchool'), value: UserRequestsStatus.ModificationRequestForSchool},
-      {name:this.translate.instant('dashboard.Requests.Accepted'), value:[ UserRequestsStatus.Accepted,  UserRequestsStatus.Approved]},
-      {name:this.translate.instant('dashboard.Requests._TentativelyAccepted'), value: UserRequestsStatus.TentativelyAccepted},
-      {name:this.translate.instant('dashboard.Requests.FinalApproval'), value: UserRequestsStatus.FinalApproval},
-      {name:this.translate.instant('dashboard.Requests.Rejected'), value: UserRequestsStatus.Rejected},
-      {name:this.translate.instant('dashboard.Requests.Canceled'), value: UserRequestsStatus.Canceled},
+      {name:this.translate.instant('Requests.Pending'), value: UserRequestsStatus.Pending},
+      {name:this.translate.instant('Requests.Returned'), value: UserRequestsStatus.ModificationRequest},
+      {name:this.translate.instant('Requests.ModificationRequestForGuardian'), value: UserRequestsStatus.ModificationRequestForGuardian},
+      {name:this.translate.instant('Requests.ModificationRequestForSchool'), value: UserRequestsStatus.ModificationRequestForSchool},
+      {name:this.translate.instant('Requests.Accepted'), value:[ UserRequestsStatus.Accepted,  UserRequestsStatus.Approved]},
+      {name:this.translate.instant('Requests._TentativelyAccepted'), value: UserRequestsStatus.TentativelyAccepted},
+      {name:this.translate.instant('Requests.FinalApproval'), value: UserRequestsStatus.FinalApproval},
+      {name:this.translate.instant('Requests.Rejected'), value: UserRequestsStatus.Rejected},
+      {name:this.translate.instant('Requests.Canceled'), value: UserRequestsStatus.Canceled},
 
     ]
   }
@@ -45,40 +45,40 @@ export class SystemRequestService {
 
     if(scope ===UserScope.Guardian){
       return [
-        {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: [requestTypeEnum.RegestrationApplicationRequest,requestTypeEnum.RegestrationRequestForWithrawan]},
-        // {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
-        {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
-        {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
-        {name:this.translate.instant('dashboard.Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},
-        {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequest'), value: requestTypeEnum.ModifyIdentityRequest},
-        {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
-        {name:this.translate.instant('dashboard.Requests.BoardCertificateRequest'), value: requestTypeEnum.BoardCertificateRequest},
-        // {name:this.translate.instant('dashboard.Requests.GradesCertificateRequest'), value: requestTypeEnum.GradesCertificateRequest},
+        {name:this.translate.instant('Requests.RegestrationApplicationRequest'), value: [requestTypeEnum.RegestrationApplicationRequest,requestTypeEnum.RegestrationRequestForWithrawan]},
+        // {name:this.translate.instant('Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
+        {name:this.translate.instant('Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
+        {name:this.translate.instant('Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
+        {name:this.translate.instant('Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},
+        {name:this.translate.instant('Requests.ModifyIdentityRequest'), value: requestTypeEnum.ModifyIdentityRequest},
+        {name:this.translate.instant('Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
+        {name:this.translate.instant('Requests.BoardCertificateRequest'), value: requestTypeEnum.BoardCertificateRequest},
+        // {name:this.translate.instant('Requests.GradesCertificateRequest'), value: requestTypeEnum.GradesCertificateRequest},
 
-        {name:this.translate.instant('dashboard.Requests.AcademicSequenceCertificateRequest'), value: requestTypeEnum.AcademicSequenceCertificateRequest},
-        {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
-        {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
-        {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
+        {name:this.translate.instant('Requests.AcademicSequenceCertificateRequest'), value: requestTypeEnum.AcademicSequenceCertificateRequest},
+        {name:this.translate.instant('Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
+        {name:this.translate.instant('Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
+        {name:this.translate.instant('Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
 
       ]
     }else{
       return [
-        {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: [requestTypeEnum.RegestrationApplicationRequest, requestTypeEnum.RegestrationRequestForWithrawan]},
-        // {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
-        {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
-        {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
-        {name:this.translate.instant('dashboard.Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},
-        {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequest'), value: requestTypeEnum.ModifyIdentityRequest},
-        {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
-        {name:this.translate.instant('dashboard.Requests.FlexibleHolidayRequest'), value: requestTypeEnum.FlexibleHolidayRequest},
-        {name:this.translate.instant('dashboard.Requests.MassTransferRequest'), value: requestTypeEnum.MassTransferRequest},
-        {name:this.translate.instant('dashboard.Requests.BoardCertificateRequest'), value: requestTypeEnum.BoardCertificateRequest},
-        {name:this.translate.instant('dashboard.Requests.GradesCertificateRequest'), value: requestTypeEnum.GradesCertificateRequest},
+        {name:this.translate.instant('Requests.RegestrationApplicationRequest'), value: [requestTypeEnum.RegestrationApplicationRequest, requestTypeEnum.RegestrationRequestForWithrawan]},
+        // {name:this.translate.instant('Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
+        {name:this.translate.instant('Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
+        {name:this.translate.instant('Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
+        {name:this.translate.instant('Requests.exemptionFromSubjectRequest'), value: requestTypeEnum.ExemptionFromSubjectRequest},
+        {name:this.translate.instant('Requests.ModifyIdentityRequest'), value: requestTypeEnum.ModifyIdentityRequest},
+        {name:this.translate.instant('Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
+        {name:this.translate.instant('Requests.FlexibleHolidayRequest'), value: requestTypeEnum.FlexibleHolidayRequest},
+        {name:this.translate.instant('Requests.MassTransferRequest'), value: requestTypeEnum.MassTransferRequest},
+        {name:this.translate.instant('Requests.BoardCertificateRequest'), value: requestTypeEnum.BoardCertificateRequest},
+        {name:this.translate.instant('Requests.GradesCertificateRequest'), value: requestTypeEnum.GradesCertificateRequest},
 
-        {name:this.translate.instant('dashboard.Requests.AcademicSequenceCertificateRequest'), value: requestTypeEnum.AcademicSequenceCertificateRequest},
-        {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
-        {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
-        {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
+        {name:this.translate.instant('Requests.AcademicSequenceCertificateRequest'), value: requestTypeEnum.AcademicSequenceCertificateRequest},
+        {name:this.translate.instant('Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
+        {name:this.translate.instant('Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
+        {name:this.translate.instant('Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
 
       ]
     }
@@ -114,15 +114,15 @@ export class SystemRequestService {
      .pipe( map(res=>{
       return res.data.map(item =>{
           return {
-            [this.translate.instant('dashboard.Requests.requestNumber')]: item?.requestNumber,
-            [this.translate.instant('dashboard.Requests.requestType')]: this.translate.instant('dashboard.Requests.'+item.requestType),
+            [this.translate.instant('Requests.requestNumber')]: item?.requestNumber,
+            [this.translate.instant('Requests.requestType')]: this.translate.instant('Requests.'+item.requestType),
             [this.translate.instant('shared.school')]: getLocalizedValue(item?.school?.name) || this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.grade')]: getLocalizedValue(item?.grade?.name) || this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.curriculum')]: getLocalizedValue(item?.curriculum?.name) || this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.schools.student')]: getLocalizedValue(item?.student?.name) || this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.schools.studentId')]: getLocalizedValue(item?.student?.id) || this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.Requests.Status')]: this.translate.instant('dashboard.Requests.'+item.requestStatus),
-            [this.translate.instant('dashboard.Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
+            [this.translate.instant('schools.student')]: getLocalizedValue(item?.student?.name) || this.translate.instant('shared.notFound'),
+            [this.translate.instant('schools.studentId')]: getLocalizedValue(item?.student?.id) || this.translate.instant('shared.notFound'),
+            [this.translate.instant('Requests.Status')]: this.translate.instant('Requests.'+item.requestStatus),
+            [this.translate.instant('Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
             [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(item?.createdDate, 'd / MMMM / y', 'en'),
 
           }
@@ -163,16 +163,16 @@ export class SystemRequestService {
     .pipe( map(res=>{
       return res.data.map(item =>{
         return {
-          [this.translate.instant('dashboard.Requests.requestNumber')]: item?.requestNumber,
-          [this.translate.instant('dashboard.Requests.requestType')]: this.translate.instant('dashboard.Requests.'+item.requestType),
+          [this.translate.instant('Requests.requestNumber')]: item?.requestNumber,
+          [this.translate.instant('Requests.requestType')]: this.translate.instant('Requests.'+item.requestType),
           [this.translate.instant('shared.school')]: getLocalizedValue(item?.school?.name) || this.translate.instant('shared.notFound'),
           [this.translate.instant('shared.grade')]: getLocalizedValue(item?.grade?.name) || this.translate.instant('shared.notFound'),
           [this.translate.instant('shared.curriculum')]: getLocalizedValue(item?.curriculum?.name) || this.translate.instant('shared.notFound'),
-          [this.translate.instant('dashboard.Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
+          [this.translate.instant('Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
           [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(item?.createdDate, 'd / MMMM / y', 'en'),
-          [this.translate.instant('dashboard.Subjects.Last EditDate')]: this.localizeDatePipe.transform(item?.lastUpdatedDate, 'd / MMMM / y', 'en'),
-          [this.translate.instant('dashboard.Requests.Status')]: this.translate.instant('dashboard.Requests.'+item.requestStatus),
-          [this.translate.instant('dashboard.myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
+          [this.translate.instant('Subjects.Last EditDate')]: this.localizeDatePipe.transform(item?.lastUpdatedDate, 'd / MMMM / y', 'en'),
+          [this.translate.instant('Requests.Status')]: this.translate.instant('Requests.'+item.requestStatus),
+          [this.translate.instant('myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
 
         }
       })

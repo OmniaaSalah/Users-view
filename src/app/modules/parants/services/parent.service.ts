@@ -9,7 +9,7 @@ import { Guardian } from 'src/app/core/models/guardian/guardian.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
-import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
+import { StudentStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -51,16 +51,16 @@ export class ParentService {
       map(res=>{
         return res.map(el=>{
           return {
-            [this.translate.instant('dashboard.parents.parentName')]: getLocalizedValue(el.name),
-            [this.translate.instant('dashboard.parents.parentNickname')]: getLocalizedValue(el.surname),
+            [this.translate.instant('parents.parentName')]: getLocalizedValue(el.name),
+            [this.translate.instant('parents.parentNickname')]: getLocalizedValue(el.surname),
             [this.translate.instant('shared.Identity Number')]: el.emiratesIdNumber,
             [this.translate.instant('shared.gender')]: this.translate.instant('shared.genderType.'+el.gender),
             [this.translate.instant('shared.birthDay')]: el.birthDate,
             [this.translate.instant('shared.nationality')]: getLocalizedValue(el.nationalityName),
             [this.translate.instant('shared.phoneNumber')]: el.mobile || "لايوجد",
             [this.translate.instant('shared.email')]: el.email,
-            [this.translate.instant('dashboard.parents.pendingRequests')]: el.requestCount,
-            [this.translate.instant('dashboard.parents.childrenNumber')]: el.childrenCount || 'لايوجد',
+            [this.translate.instant('parents.pendingRequests')]: el.requestCount,
+            [this.translate.instant('parents.childrenNumber')]: el.childrenCount || 'لايوجد',
           }
         })
       })
@@ -133,7 +133,7 @@ export class ParentService {
 
 
   registerChildBySpea(studentRegistrationStatus,childId, childData){
-    if(studentRegistrationStatus===RegistrationStatus.Withdrawal){
+    if(studentRegistrationStatus===StudentStatus.Withdrawal){
       return this.http.post(`/Student/enroll-withdrawal-student/${childId}`,childData).pipe(take(1));
     }else{
 

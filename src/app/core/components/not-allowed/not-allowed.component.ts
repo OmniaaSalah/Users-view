@@ -13,7 +13,7 @@ export class NotAllowedComponent implements OnInit, OnDestroy {
   notFoundMessage
   componentHeaderData={
     breadCrump: [
-      // { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/student-management/all-parents/',routerLinkActiveOptions:{exact: true} },
+      // { label: this.translate.instant('parents.parents'),routerLink:'/student-management/all-parents/',routerLinkActiveOptions:{exact: true} },
       { label: this.translate.instant('shared.notFoundPage'),routerLink:`/oops/page-not-allowed` }
     ],
     mainTitle: { main: '' }

@@ -47,7 +47,7 @@
             </div>
 
             <div class="">
-              <sub-header title="{{'dashboard.students.StudentInfo'|translate}}" img="assets/images/home/student/graduation-student.svg"></sub-header>
+              <sub-header title="{{'students.StudentInfo'|translate}}" img="assets/images/home/student/graduation-student.svg"></sub-header>
 
               <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
 
@@ -57,16 +57,16 @@
 
 
 
-                <p class="color-gray-300">{{ 'dashboard.students.studentSchoolId'|translate }}</p>
+                <p class="color-gray-300">{{ 'students.studentSchoolId'|translate }}</p>
                 <span class="color-primary">{{student?.studentNumber}}</span>
 
-                <p class="color-gray-300">{{'dashboard.students.daleelNumber1' |translate}}</p>
+                <p class="color-gray-300">{{'students.daleelNumber1' |translate}}</p>
                 <span class="color-primary">{{student.daleelId}}</span>
 
-                <!-- <p class="color-gray-300">{{'dashboard.students.manhalNumber' |translate}}</p>
+                <!-- <p class="color-gray-300">{{'students.manhalNumber' |translate}}</p>
                 <span class="color-primary">{{student.manhalNumber}}</span> -->
 
-                <p class="color-gray-300">{{'dashboard.parents.ministerialNumber' |translate}}</p>
+                <p class="color-gray-300">{{'parents.ministerialNumber' |translate}}</p>
                 <span class="color-primary mb-2">{{student.ministerialId || ('shared.notFound' |translate)}}</span>
 
 
@@ -85,17 +85,20 @@
 
 
 
-                <p class="color-gray-300">{{ 'dashboard.students.attendanceType'|translate }}</p>
-                <span class="color-primary mb-2">{{'dashboard.students.' + student?.attendanceMode |translate}}</span>
+                <p class="color-gray-300">{{ 'students.attendanceType'|translate }}</p>
+                <span class="color-primary mb-2">{{'students.' + student?.attendanceMode |translate}}</span>
 
-                <p class="color-gray-300">{{'dashboard.students.withDisabilities'| translate}}</p>
+                <p class="color-gray-300">{{'students.isChildOfAMartyr'| translate}}</p>
+                <span class="color-primary mb-2">{{student?.isChildOfAMartyr? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
+
+                <p class="color-gray-300">{{'students.withDisabilities'| translate}}</p>
                 <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
                 <p class="color-gray-300" *ngIf="student?.isSpecialAbilities">{{'shared.classroom'| translate}}</p>
                 <span class="color-primary mb-2" *ngIf="student?.isSpecialAbilities">{{student?.isSpecialClass? ('shared.specialClass'| translate) : ('shared.fusionClass' | translate)}}</span>
 
                 <ng-container *ngIf="student?.isSpecialClass">
-                  <p class="color-gray-300 ">{{ 'dashboard.parents.specialEducation'|translate }}</p>
+                  <p class="color-gray-300 ">{{ 'parents.specialEducation'|translate }}</p>
                   <span class="color-primary mb-2 fs-3">{{student?.specialEducation?.name | currentLang}}</span>
                 </ng-container>
 
@@ -111,11 +114,11 @@
                   <p class="color-gray-300">{{ 'shared.Identity Number'|translate }}</p>
                   <span class="color-primary mb-2">{{'shared.notFound' |translate}}</span>
 
-                  <p class="color-gray-300">{{ 'dashboard.addChild.The reason for the lack of identification'|translate }}</p>
+                  <p class="color-gray-300">{{ 'addChild.The reason for the lack of identification'|translate }}</p>
                   <span class="color-primary mb-2">{{student?.reasonForNotHavingEmirates |currentLang}}</span>
                 </ng-container>
 
-                <p class="color-gray-300">{{'dashboard.students.isGifted'| translate}}</p>
+                <p class="color-gray-300">{{'students.isGifted'| translate}}</p>
                 <span class="color-primary mb-2" *ngIf="student?.isGifted">{{'shared.yes'|translate}}</span>
                 <span class="color-primary mb-2" *ngIf="!student?.isGifted">{{'shared.no'|translate}}</span>
               </div>
@@ -124,7 +127,7 @@
               <div class="d-grid grid-col-8 even-gap gap-5 mt-5">
                 <ng-container *ngIf="student?.isGifted">
 
-                  <p class="color-gray-300">{{'dashboard.students.talent'| translate}}</p>
+                  <p class="color-gray-300">{{'students.talent'| translate}}</p>
                   <div  class="mb-2 d-flex">
                     <span class="color-primary " *ngFor="let talent of student?.studentTalents;let i=index">
                       {{talent?.talentName|currentLang}}<span *ngIf="student?.studentTalents.length>i+1"> , </span>
@@ -140,7 +143,7 @@
             <hr class="my-6 w-75">
 
             <div class="">
-              <sub-header title="{{'dashboard.students.Student School Information'|translate}}" img="assets/images/home/student/school.svg"></sub-header>
+              <sub-header title="{{'students.Student School Information'|translate}}" img="assets/images/home/student/school.svg"></sub-header>
 
               <div class="d-grid grid-col-8 even-gap gap-5">
 
@@ -154,7 +157,7 @@
                 <p class="color-gray-300">{{ 'shared.state'|translate }}</p>
                 <span class="color-primary mb-2">{{student?.schoolState |currentLang}}</span>
 
-                <p class="color-gray-300">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
+                <p class="color-gray-300">{{ 'parents.schoolNumber'|translate }}</p>
                 <span class="color-primary mb-2">{{student?.schoolCode}}</span>
 
 
@@ -163,14 +166,14 @@
 
                 <p class="color-gray-300">{{'shared.division'| translate}}</p>
                 <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
-                <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
+                <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'students.notAddedToDivision'|translate }}</span>
 
                 <p class="color-gray-300">{{'shared.track'| translate}}</p>
                 <span *ngIf="student?.track?.id" class="color-primary mb-2">{{student.track.name |currentLang}}</span>
                 <span *ngIf="!student?.track?.id" class="color-red-500 mb-2">{{'shared.notFound' |translate}}</span>
 
 
-                <p class="color-gray-300">{{ 'dashboard.students.studentStatus'|translate }}</p>
+                <p class="color-gray-300">{{ 'students.studentStatus'|translate }}</p>
                 <span class="color-primary mb-2" *ngIf="student.isPassed!=null">{{student?.isPassed ? ('shared.allStatus.Passed'|translate) : ('shared.allStatus.Failed'|translate)}}</span>
                 <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
 
@@ -180,7 +183,7 @@
 
               <!-- <div class="d-grid grid-col-8 even-gap gap-5 mt-5">
                 <ng-container>
-                    <p class="color-gray-300">{{'dashboard.students.studentSubjects'| translate}}</p>
+                    <p class="color-gray-300">{{'students.studentSubjects'| translate}}</p>
                     <div  class="mb-2 d-flex flex-wrap">
                         <span class="color-primary " *ngFor="let subject of student?.subjects;let i=index">
                             {{subject?.name|currentLang}}
@@ -197,7 +200,7 @@
 
 
             <div class="">
-              <sub-header title="{{'dashboard.students.Student Address Information'|translate}}">
+              <sub-header title="{{'students.Student Address Information'|translate}}">
                 <i class="pi pi-globe color-orange" style="font-size: 2rem"></i>
               </sub-header>
 
@@ -217,13 +220,13 @@
             <hr class="my-6 w-75">
 
             <div class="">
-              <sub-header title="{{'dashboard.parents.parentInfo'|translate}}" img="assets/images/home/schools-students/Parentnew.svg"></sub-header>
+              <sub-header title="{{'parents.parentInfo'|translate}}" img="assets/images/home/schools-students/Parentnew.svg"></sub-header>
 
               <div class="d-grid grid-col-8 even-gap gap-5">
                 <p class="color-gray-300">{{ 'Guardian'|translate }}</p>
                 <span class="color-primary mb-2">{{student?.guardianName | currentLang}}</span>
 
-                <p class="color-gray-300">{{ 'dashboard.parents.relatedType'|translate }}</p>
+                <p class="color-gray-300">{{ 'parents.relatedType'|translate }}</p>
                 <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span>
 
                 <p class="color-gray-300">{{ 'shared.phoneNumber'|translate }}</p>
@@ -260,7 +263,7 @@
     <ng-container *ngIf="mode=='edit'"  [formGroup]="studentForm">
 
       <div class="row g-5 align-items-end">
-          <sub-header title="{{'dashboard.students.StudentInfo'|translate}}" img="assets/images/home/student/graduation-student.svg"></sub-header>
+          <sub-header title="{{'students.StudentInfo'|translate}}" img="assets/images/home/student/graduation-student.svg"></sub-header>
 
           <app-identity-info [(mode)]="mode" [formGroup]="studentForm"></app-identity-info>
 
@@ -285,69 +288,69 @@
           </div>
 
           <div class="col-md-4 col-lg-3 "  *ngIf="currentUserScope != scopeEnum.Guardian">
-            <label class="label">{{'dashboard.parents.ministerialNumber' |translate}}</label>
+            <label class="label">{{'parents.ministerialNumber' |translate}}</label>
             <p-inputNumber formControlName="ministerialId" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
           </div>
 
 
             <ng-container *ngIf="currentUserScope ==scopeEnum.SPEA">
               <div class="col-md-4 col-lg-3 ">
-                <label class="label required" for="description">{{'dashboard.students.daleelNumber1'| translate}}</label>
+                <label class="label required" for="description">{{'students.daleelNumber1'| translate}}</label>
                 <p-inputNumber formControlName="daleelId" appFormControlValidationMsg [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
               </div>
 
               <!-- <div class="col-md-4 col-lg-3 ">
-                <label class="label" for="description">{{'dashboard.students.manhalNumber'| translate}}</label>
+                <label class="label" for="description">{{'students.manhalNumber'| translate}}</label>
                 <p-inputNumber formControlName="manhalNumber" appFormControlValidationMsg [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
               </div> -->
             </ng-container>
 
             <div class="col-md-4 col-lg-3 " *ngIf="currentUserScope !=scopeEnum.Guardian">
-              <label class="label required" for="description">{{'dashboard.students.studentSchoolId'| translate}}</label>
+              <label class="label required" for="description">{{'students.studentSchoolId'| translate}}</label>
               <p-inputNumber formControlName="studentNumber" appFormControlValidationMsg [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
             </div>
 
 
 
           <div class="col-md-4 col-lg-3 "  >
-            <label class="label required">{{ 'dashboard.students.attendanceType'|translate }}</label>
-            <p-dropdown [options]="attendanceType" formControlName="attendanceMode" optionValue="value" optionLabel="name" placeholder="{{'dashboard.students.attendanceType' |translate}}"></p-dropdown>
+            <label class="label required">{{ 'students.attendanceType'|translate }}</label>
+            <p-dropdown [options]="attendanceType" formControlName="attendanceMode" optionValue="value" optionLabel="name" placeholder="{{'students.attendanceType' |translate}}"></p-dropdown>
           </div>
 
           <div class="col-md-4 col-lg-3 ">
-              <label class="label" for="description">{{'dashboard.students.withDisabilities'| translate}}</label>
+              <label class="label" for="description">{{'students.withDisabilities'| translate}}</label>
               <p-dropdown formControlName="isSpecialAbilities" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
           </div>
 
           <div class="col-md-4 col-lg-3 "*ngIf="isSpecialAbilities.value">
               <label class="label" for="description">{{'shared.classroom'| translate}}</label>
-              <p-dropdown [(ngModel)]="classType" [ngModelOptions]="{standalone: true}" [options]="specialClassOptions" optionValue="value" (onChange)="onSpecialClassSelected($event.value)" optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
+              <p-dropdown [(ngModel)]="classType" [ngModelOptions]="{standalone: true}" [options]="specialClassOptions" optionValue="value" (onChange)="onSpecialClassSelected($event.value)" optionLabel="name" placeholder="{{'schools.SelectClassType' |translate}}"></p-dropdown>
           </div>
 
           <div class="col-md-4 col-lg-3 "*ngIf="isSpecialClass.value"  formGroupName="specialEducation">
             <label class="label" for="description">{{'shared.classroom'| translate}}</label>
-            <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="value" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}"></p-dropdown>
+            <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="value" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'parents.specialEducationtype' |translate}}"></p-dropdown>
           </div>
 
           <div class="col-md-4 col-lg-3 ">
-              <label class="label" for="description">{{'dashboard.students.isChildOfAMartyr'| translate}}</label>
+              <label class="label" for="description">{{'students.isChildOfAMartyr'| translate}}</label>
               <p-dropdown formControlName="isChildOfAMartyr" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
           </div>
           <div class="col-md-4 col-lg-3 ">
-              <label class="label" for="description">{{'dashboard.students.isGifted'| translate}}</label>
+              <label class="label" for="description">{{'students.isGifted'| translate}}</label>
               <p-dropdown #isGifted formControlName="isGifted" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
           </div>
 
           <ng-container *ngIf="isGifted.value">
             <div class="col-md-4 col-lg-3 " *ngIf="talents$ |async as talents" >
-                <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
-                <p-multiSelect formControlName="studentTalent" [options]="talents" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
+                <label class="label" for="description">{{'students.chooseTalent'| translate}}</label>
+                <p-multiSelect formControlName="studentTalent" [options]="talents" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
             </div>
           </ng-container>
 
           <ng-container *ngIf="student.emiratesId">
             <div class="col-md-4 col-lg-3 d-flex gap-5 align-items-center align-self-end">
-                <p class="color-gray-300 ">{{'dashboard.addChild.Identification Number' |translate}}</p>
+                <p class="color-gray-300 ">{{'addChild.Identification Number' |translate}}</p>
                 <span class="color-primary">{{student.emiratesId}}</span>
                 <!-- <a class="color-skyBlue-500" (click)="openChangeIdentityModel.emit()">ارسال طلب تعديل </a> -->
             </div>
@@ -361,7 +364,7 @@
 
             <div class="col-md-4 col-lg-3 custom-form" *ngIf="reasonForNotHaveIdentityOptions$ | async as options">
                 <div class=" ">
-                    <label class="label">{{ 'dashboard.addChild.The reason for the lack of identification'|translate }}</label>
+                    <label class="label">{{ 'addChild.The reason for the lack of identification'|translate }}</label>
                     <p-dropdown [options]="options" formControlName="reasonForNotHavingEmiratesId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar':'name.en'}}" placeholder="{{ 'shared.cause'|translate }}" ></p-dropdown>
                 </div>
             </div>
@@ -372,7 +375,7 @@
       <hr class="my-6">
 
       <div class="row g-5">
-          <sub-header title="{{'dashboard.students.Student School Information'|translate}}" img="assets/images/home/student/school.svg"></sub-header>
+          <sub-header title="{{'students.Student School Information'|translate}}" img="assets/images/home/student/school.svg"></sub-header>
 
           <div class="d-grid grid-col-8 even-gap gap-5">
 
@@ -387,7 +390,7 @@
             <span class="color-primary mb-2">{{student?.schoolState |currentLang}}</span>
 
 
-            <p class="color-gray-300">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
+            <p class="color-gray-300">{{ 'parents.schoolNumber'|translate }}</p>
             <span class="color-primary mb-2">{{student?.schoolCode}}</span>
 
 
@@ -403,10 +406,10 @@
             <p class="color-gray-300">{{'shared.division'| translate}}</p>
 
             <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
-            <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
+            <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'students.notAddedToDivision'|translate }}</span>
 
 
-            <p class="color-gray-300">{{ 'dashboard.students.studentStatus'|translate }}</p>
+            <p class="color-gray-300">{{ 'students.studentStatus'|translate }}</p>
             <span class="color-primary mb-2" *ngIf="student.isPassed!=null">{{student?.isPassed ? ('shared.allStatus.Passed'|translate) : ('shared.allStatus.Failed'|translate)}}</span>
             <span class="color-primary mb-2" *ngIf="student.isPassed==null">{{'shared.NotDeterminedYet'|translate}}</span>
 
@@ -418,7 +421,7 @@
       <hr class="my-6">
 
       <div class="row g-5">
-        <sub-header title="{{'dashboard.students.Student Address Information'|translate}}">
+        <sub-header title="{{'students.Student Address Information'|translate}}">
           <i class="pi pi-globe color-orange" style="font-size: 2rem"></i>
         </sub-header>
 
@@ -444,7 +447,7 @@
       <div class="py-6"></div>
 
       <div class="row g-5">
-        <sub-header title="{{'dashboard.parents.parentInfo'|translate}}" img="assets/images/home/schools-students/Parentnew.svg"></sub-header>
+        <sub-header title="{{'parents.parentInfo'|translate}}" img="assets/images/home/schools-students/Parentnew.svg"></sub-header>
 
         <div class="d-grid grid-col-8 even-gap gap-5">
           <p class="color-gray-300">{{ 'Guardian'|translate }}</p>
@@ -455,7 +458,7 @@
           </div>
 
           <!--
-          <p class="color-gray-300">{{ 'dashboard.parents.relatedType'|translate }}</p>
+          <p class="color-gray-300">{{ 'parents.relatedType'|translate }}</p>
           <span class="color-primary mb-2">{{student?.relativeRelation?.name | currentLang}}</span> -->
 
           <p class="color-gray-300">{{ 'shared.phoneNumber'|translate }}</p>
@@ -466,8 +469,8 @@
         </div>
 
         <div class="col-md-4">
-          <label class="label">{{'dashboard.parents.relatedType'| translate}}</label>
-          <p-dropdown [showClear]="true" [options]="(relativeRelation$ | async)" formControlName="relativeRelationId" optionValue="id" optionLabel="{{lang=='ar' ? 'arabicName': 'englishName'}}" placeholder="{{'dashboard.parents.relatedType'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
+          <label class="label">{{'parents.relatedType'| translate}}</label>
+          <p-dropdown [showClear]="true" [options]="(relativeRelation$ | async)" formControlName="relativeRelationId" optionValue="id" optionLabel="{{lang=='ar' ? 'arabicName': 'englishName'}}" placeholder="{{'parents.relatedType'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
         </div>
 
       </div>
@@ -483,7 +486,7 @@
 
 
 
-<p-dialog header="{{'dashboard.SystemSetting.addSchools'|translate}}" (onHide)="paginationState.rows=6" [(visible)]="isGuardiansModelOpend" [modal]="true" [style]="{width: '70vw'}">
+<p-dialog header="{{'SystemSetting.addSchools'|translate}}" (onHide)="paginationState.rows=6" [(visible)]="isGuardiansModelOpend" [modal]="true" [style]="{width: '70vw'}">
   <ng-template pTemplate="content">
       <form class="custom-form">
 
@@ -496,19 +499,19 @@
               <div class="row gx-5">
                 <div class="col-md-4">
                     <!-- [ngClass]="{'ng-invalid ng-dirty': IdentityNumCtr.errors && IdentityNumCtr.errors?.['pattern']}" -->
-                    <label class="label" for="day">{{'dashboard.addChild.Identification Number' | translate}}</label>
+                    <label class="label" for="day">{{'addChild.Identification Number' | translate}}</label>
                     <input
                     [LangRestrict]="'numb'"
                     [(ngModel)]="guardiansFilteration.emiratesId"
                     name="emiratesId"
                     pInputText
-                    placeholder="{{'dashboard.addChild.Identification Number' | translate}}" />
+                    placeholder="{{'addChild.Identification Number' | translate}}" />
                     <!-- <div *ngIf="IdentityNumCtr.errors?.['pattern']" class="mt-2 color-red-500 fs-4"> {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}</div> -->
                   </div>
 
                   <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                      <p-dropdown [showClear]="true" [options]="(countries$ | async)" [(ngModel)]="guardiansFilteration.NationalityId" (onChange)="getGuardians()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.chooseNationalitie'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                    <label class="label">{{'students.nationalities'| translate}}</label>
+                      <p-dropdown [showClear]="true" [options]="(countries$ | async)" [(ngModel)]="guardiansFilteration.NationalityId" (onChange)="getGuardians()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'students.chooseNationalitie'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
                   </div>
               </div>
           </app-table-caption>
@@ -555,12 +558,12 @@
 
 
 
-<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeIdentityModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+<p-dialog header="{{'students.sendChangeIdentityReq' | translate}}" [(visible)]="changeIdentityModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
 
     <ng-template pTemplate="content">
 
         <div class="custom-form mt-5">
-            <input type="text"  pInputText placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}" />
+            <input type="text"  pInputText placeholder="{{'students.writeNewIdentityNumber'|translate}}" />
         </div>
         <!-- accept=".xlsx, .xls, .csv" -->
         <app-file-upload accept=".pdf" label="{{'shared.clickToUploadFile'| translate}}" view="full" ></app-file-upload>
@@ -573,11 +576,11 @@
 
 
 
-<p-dialog header="{{'dashboard.parents.accountantComment' | translate}}" [(visible)]="isAccountantCommentModel" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+<p-dialog header="{{'parents.accountantComment' | translate}}" [(visible)]="isAccountantCommentModel" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
 
     <ng-template pTemplate="content">
         <div class="custom-form mt-5" *ngIf="student$ |async as student" [formGroup]="studentForm">
-            <!-- <label class="label">{{'dashboard.parents.accountantComment' | translate}}</label> -->
+            <!-- <label class="label">{{'parents.accountantComment' | translate}}</label> -->
             <p class="paragraph paragraph--sm color-gray-800 mb-6 w-75">
                 {{student?.studentPayments?.accountantComment}}
             </p>

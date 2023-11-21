@@ -17,7 +17,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
-import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { StudentStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -44,7 +44,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	componentHeaderData: IHeader = {
 		breadCrump: [
 
-			{ label:this.translate.instant('dashboard.schools.schoolEmployee'), routerLink: `/schoolEmployee-management/school/${this.schoolId}/employees`},
+			{ label:this.translate.instant('schools.schoolEmployee'), routerLink: `/schoolEmployee-management/school/${this.schoolId}/employees`},
 		],
 		mainTitle: { main: this.currentSchool}
 	}
@@ -67,7 +67,7 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle().pipe(filter(res=> res.name?.en != 'Manager'),shareReplay())
   getRoles$ = this.userRoleService.getRolesDropdown().pipe(shareReplay())
-	statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ RegistrationStatus.Deleted), value:RegistrationStatus.Deleted}]
+	statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ StudentStatus.Deleted), value:StudentStatus.Deleted}]
 	employees$=this.schoolsService.getSchoolEmployees(this.schoolId,this.searchModel).pipe(map(res=>res.data))
 
 
@@ -252,7 +252,7 @@ export class SchoolEmployeesComponent implements OnInit {
     let filter = {...this.filtration, PageSize:this.employees.total,Page:1}
     this.schoolsService.employeesToExport(this.schoolId,filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolEmployee'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('schools.schoolEmployee'))
     })
   }
 

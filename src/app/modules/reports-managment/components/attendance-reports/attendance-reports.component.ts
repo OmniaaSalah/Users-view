@@ -76,7 +76,7 @@ export class AttendanceReportsComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.reports.generateAttendenceReport'), routerLink: '/reports-managment/attendance-reports' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('reports.generateAttendenceReport'), routerLink: '/reports-managment/attendance-reports' ,routerLinkActiveOptions:{exact: true}},
         ],
       }
     );
@@ -215,7 +215,7 @@ export class AttendanceReportsComponent implements OnInit {
     }
     else
     {
-      this.toastr.warning(this.translate.instant('dashboard.reports.you should choose the date that you need view it’s absence and attendance data first'));
+      this.toastr.warning(this.translate.instant('reports.you should choose the date that you need view it’s absence and attendance data first'));
     }
   }
 

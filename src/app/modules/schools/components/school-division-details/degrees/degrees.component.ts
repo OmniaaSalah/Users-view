@@ -209,7 +209,7 @@ export class DegreesComponent implements OnInit {
     this.exportService.showLoader$.next(true)
     let filter = {...this.filtration,PageSize:this.degrees.total,Page:1}
     this.divisionService.degreesToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualDegrees'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('schools.annualDegrees'))
     })
   }
 

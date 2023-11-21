@@ -122,12 +122,12 @@ export class SendSurveyComponent implements OnInit, OnDestroy {
         this.isBtnLoading = false;
         if (response.statusCode != 'BadRequest') {
           this.toastr.success(
-            this.translate.instant('dashboard.surveys.survey sent Successfully')
+            this.translate.instant('surveys.survey sent Successfully')
           );
           this.router.navigateByUrl('/educational-settings/surveys');
         } else {
           this.toastr.error(
-            this.translate.instant('dashboard.surveys.Survey is send before')
+            this.translate.instant('surveys.Survey is send before')
           );
         }
       },
@@ -144,7 +144,7 @@ export class SendSurveyComponent implements OnInit, OnDestroy {
   openMessage() {
     this.confirmModelService.openModel({
       message: this.translate.instant(
-        'dashboard.surveys.Are you sure you need yo send the survey ? You can’t edit on it later'
+        'surveys.Are you sure you need yo send the survey ? You can’t edit on it later'
       ),
       img: 'assets/images/',
     });

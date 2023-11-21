@@ -34,7 +34,7 @@
 </ng-container>
 
 <div class="position-relative justify-content-end" *ngIf="student$ |async as student">
-     <button *ngIf="scope == 'Guardian'" class="btn btn-primary contactBtn" (click)="showDialog()"> {{'dashboard.schools.contactWithSchool' |translate}}</button>
+     <button *ngIf="scope == 'Guardian'" class="btn btn-primary contactBtn" (click)="showDialog()"> {{'schools.contactWithSchool' |translate}}</button>
 </div>
 
 <div class="radius-15 border p-5 mb-5 bg-white custom-form" *ngIf="student$ |async as student">
@@ -65,21 +65,21 @@
                     <h4 class="heading heading--tertiary">{{student.name | currentLang}}</h4>
                     <div class="" *ngIf="student?.isGifted">
                         <img src="assets/images/shared/medal.svg" alt="">
-                        <span class="color-red-500 fs-4">{{'dashboard.students.talent' |translate}}</span>
+                        <span class="color-red-500 fs-4">{{'students.talent' |translate}}</span>
                     </div>
                     <div *ngIf="student?.isTopStudent">
                         <img src="assets/images/shared/medal-cup.svg" alt="">
-                        <span class="color-yellow-400 fs-4">{{'dashboard.students.isFromTheFirst' |translate}}</span>
+                        <span class="color-yellow-400 fs-4">{{'students.isFromTheFirst' |translate}}</span>
                     </div>
 
                     <ng-container *ngFor="let item of student?.studentCategory">
                         <div *ngIf="item==statusEnum.IsChildOfAMartyr">
                             <img src="assets/images/shared/medal-flag.svg" alt="">
-                            <span class="color-fuchsia-500 fs-4">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
+                            <span class="color-fuchsia-500 fs-4">{{'students.isChildOfAMartyr' |translate}}</span>
                         </div>
                         <div *ngIf="item==statusEnum.IsSpecialAbilities">
                             <img src="assets/images/shared/medal-green.svg" alt="">
-                            <span class="color-pink-500 fs-4">{{'dashboard.students.withDisabilities' |translate}}</span>
+                            <span class="color-pink-500 fs-4">{{'students.withDisabilities' |translate}}</span>
                         </div>
                        <div *ngIf="(item!=statusEnum.IsSpecialAbilities&&item!=statusEnum.IsChildOfAMartyr)">
                         <img src="assets/images/shared/medal-blue.svg" alt="">
@@ -90,7 +90,7 @@
                 <div class="profile__details">
                     <div class="fs-4">
                         <img src="assets/images/shared/child.svg" alt="">
-                        <span class="color-gray-300">{{student.age}} {{'dashboard.issue of certificate.year' |translate}}</span>
+                        <span class="color-gray-300">{{student.age}} {{'issue of certificate.year' |translate}}</span>
                     </div>
                     <div>
                         <img src="assets/images/shared/fingure.svg" alt="">
@@ -113,7 +113,7 @@
 
                     <div *ngIf="student.isFinalGraduated">
                       <img style="width:1.5rem" src="assets/images/shared/cup.svg" alt="">
-                      <span class="color-red-500 fs-4">{{'dashboard.students.graduated' |translate}}</span>
+                      <span class="color-red-500 fs-4">{{'students.graduated' |translate}}</span>
                   </div>
 
                 </div>
@@ -133,7 +133,7 @@
     <div class="row gx-5 p-4 bg-gray-30 mt-5">
 
         <div class="col-md-3 d-flex align-items-center  gap-4">
-            <span class="color-gray-300">{{'dashboard.students.daleelNumber2' |translate}}</span>
+            <span class="color-gray-300">{{'students.daleelNumber2' |translate}}</span>
             <span class="color-primary">{{student.id}}</span>
         </div>
 
@@ -164,16 +164,16 @@
       <ng-container *ngFor="let step of steps; let first=first">
         <li class="tabView__nav__link" *permit="step.claims" [class.active]="step.isActive" (click)="setActiveTab(step.index)"><span>{{step.title}}</span> </li>
     </ng-container>
-        <!-- <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentInfo" data-step="1" [class.active]="step==1" (click)="step=1; currentMode='view'"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAcceptanceInfo" data-step="2" [class.active]="step==2" (click)="step=2; currentMode='view'"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAbsenceAndAttendance" data-step="3" [class.active]="step==3" (click)="step=3; currentMode='view'"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAttachments" data-step="4" [class.active]="step==4" (click)="step=4; currentMode='view'"><span>{{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentCertificates" data-step="5" [class.active]="step==5" (click)="step=5; currentMode='view'"><span> {{ 'dashboard.parents.certificateList'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentBehavior" data-step="6" [class.active]="step==6" (click)="step=6; currentMode='view'"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentMedicalFile" data-step="7" [class.active]="step==7" (click)="step=7; currentMode='view'" ><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentEditList" data-step="8" [class.active]="step==8" (click)="step=8; currentMode='view'"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentSubjectsAndDegrees" data-step="9" [class.active]="step==9" (click)="step=9; currentMode='view'"><span>{{ 'dashboard.parents.subjectsAndDegrees'|translate }}</span></li>
-        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentRecord" data-step="10" [class.active]="step==10" (click)="step=10; currentMode='view'"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li> -->
+        <!-- <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentInfo" data-step="1" [class.active]="step==1" (click)="step=1; currentMode='view'"><span>{{ 'parents.personalInfo'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAcceptanceInfo" data-step="2" [class.active]="step==2" (click)="step=2; currentMode='view'"><span>{{ 'parents.acceptanceInfo'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAbsenceAndAttendance" data-step="3" [class.active]="step==3" (click)="step=3; currentMode='view'"><span> {{ 'parents.attendanceAndAbsence'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAttachments" data-step="4" [class.active]="step==4" (click)="step=4; currentMode='view'"><span>{{ 'students.studentAttachedment'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentCertificates" data-step="5" [class.active]="step==5" (click)="step=5; currentMode='view'"><span> {{ 'parents.certificateList'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentBehavior" data-step="6" [class.active]="step==6" (click)="step=6; currentMode='view'"><span>{{ 'students.studentBehavior'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentMedicalFile" data-step="7" [class.active]="step==7" (click)="step=7; currentMode='view'" ><span>{{ 'students.medicalFile'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentEditList" data-step="8" [class.active]="step==8" (click)="step=8; currentMode='view'"><span>{{ 'parents.editableList'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentSubjectsAndDegrees" data-step="9" [class.active]="step==9" (click)="step=9; currentMode='view'"><span>{{ 'parents.subjectsAndDegrees'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentRecord" data-step="10" [class.active]="step==10" (click)="step=10; currentMode='view'"><span>{{ 'parents.studentRecord'|translate }}</span></li> -->
 
     </ul>
     <!-- Table Caption -->
@@ -248,17 +248,17 @@
                         </div>
 
                         <div class="custom-form">
-                            <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.studentBehavior'| translate}}</h3>
-                            <label class="label">{{'dashboard.students.behaviorDescription' | translate}}</label>
+                            <h3 class="heading heading--tertiary mb-6">{{'students.studentBehavior'| translate}}</h3>
+                            <label class="label">{{'students.behaviorDescription' | translate}}</label>
                             <p class="paragraph paragraph--sm color-gray-800 mb-6 w-75">
                                 {{student.studentBehavior?.descrition || '--'}}
                             </p>
 
                             <div class="grid-container">
-                                <p class="color-gray-300 fs-4">{{ 'dashboard.students.employeeCreatedBehavior'|translate }}</p>
+                                <p class="color-gray-300 fs-4">{{ 'students.employeeCreatedBehavior'|translate }}</p>
                                 <span class="color-primary mb-2">{{student.studentBehavior?.createdBy || (student.name |currentLang)}}</span>
 
-                                <p class="color-gray-300 fs-4">{{ 'dashboard.students.discribeBehaviorDate'|translate }}</p>
+                                <p class="color-gray-300 fs-4">{{ 'students.discribeBehaviorDate'|translate }}</p>
                                 <span class="color-primary mb-2">{{student.studentBehavior?.createdDate || student.studentBehavior?.updatedDate|LocalizeDate}}</span>
 
                             </div>
@@ -280,18 +280,18 @@
                         <hr class="my-5">
 
                         <form [formGroup]="studentForm" class="custom-form">
-                            <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.studentBehavior'| translate}}</h3>
+                            <h3 class="heading heading--tertiary mb-6">{{'students.studentBehavior'| translate}}</h3>
                             <div class="grid-container mb-5">
-                                <p class="color-gray-300 fs-4">{{ 'dashboard.students.employeeCreatedBehavior'|translate }}</p>
+                                <p class="color-gray-300 fs-4">{{ 'students.employeeCreatedBehavior'|translate }}</p>
                                 <span class="color-primary mb-2">{{student.name |currentLang}}</span>
 
-                                <p class="color-gray-300 fs-4">{{ 'dashboard.students.discribeBehaviorDate'|translate }}</p>
+                                <p class="color-gray-300 fs-4">{{ 'students.discribeBehaviorDate'|translate }}</p>
                                 <span class="color-primary mb-2">{{student.studentBehavior?.createdDate || student.studentBehavior?.updatedDate|LocalizeDate}}</span>
 
                             </div>
 
                             <div class="col-md-6 form-set" formGroupName="studentBehavior">
-                                <label class="label">{{'dashboard.students.behaviorDescription' | translate}}</label>
+                                <label class="label">{{'students.behaviorDescription' | translate}}</label>
                                 <textarea formControlName="descrition" [rows]="6" pInputTextarea ></textarea>
                             </div>
                         </form>
@@ -336,7 +336,7 @@
 
 
 
-<p-dialog *ngIf="display" header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
+<p-dialog *ngIf="display" header="{{'Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
 [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
 
     <app-send-message [schoolId]="schoolId" (hiddenDialog)="closeDialog()"></app-send-message>

@@ -23,12 +23,12 @@ export class SpeaRegisterChildComponent implements OnInit {
 
   componentHeaderData: IHeader={
     breadCrump: [
-      { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'//schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
-      { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.students.registerChildByCommission'), routerLink: `//schools-and-students/all-parents/parent/${this.parentId}/all-children/child/${this.childId}/register`}
+      { label: this.translate.instant('parents.parents') ,routerLink:'//schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('parents.childrenList') ,routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+      {label: this.translate.instant('students.registerChildByCommission'), routerLink: `//schools-and-students/all-parents/parent/${this.parentId}/all-children/child/${this.childId}/register`}
     ],
     mainTitle: {
-      main: this.translate.instant('dashboard.students.registerChildByCommission')
+      main: this.translate.instant('students.registerChildByCommission')
     }
   }
 

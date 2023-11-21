@@ -19,17 +19,17 @@
 
                 <div class="row gx-5 form-set">
                   <div class="col ">
-                    <label class="label">{{'dashboard.schools.schoolName'|translate}}</label>
-                    <input [(ngModel)]="searchModel.schoolName"  type="text"  pInputText placeholder="{{'dashboard.schools.schoolName'|translate}}" />
+                    <label class="label">{{'schools.schoolName'|translate}}</label>
+                    <input [(ngModel)]="searchModel.schoolName"  type="text"  pInputText placeholder="{{'schools.schoolName'|translate}}" />
                   </div>
 
                   <div class="col ">
-                    <label class="label">{{'dashboard.schools.schoolNumber'|translate}}</label>
-                    <input [(ngModel)]="searchModel.schoolNumber"  type="text"  pInputText placeholder="{{'dashboard.schools.schoolNumber'|translate}}" />
+                    <label class="label">{{'schools.schoolNumber'|translate}}</label>
+                    <input [(ngModel)]="searchModel.schoolNumber"  type="text"  pInputText placeholder="{{'schools.schoolNumber'|translate}}" />
                   </div>
 
                   <div class="col">
-                    <label class="label" for="region">{{'dashboard.schools.schoolType'|translate }}  </label>
+                    <label class="label" for="region">{{'schools.schoolType'|translate }}  </label>
                     <p-multiSelect [options]="(schoolCategory$ |async)" display="chip" [(ngModel)]="searchModel.schoolCategoryId" optionValue="id" optionLabel="{{lang=='ar' ? 'arabicName': 'englishName'}}"  placeholder="{{'shared.chooseState'|translate }}"></p-multiSelect>
                   </div>
 
@@ -67,13 +67,13 @@
                     <th pSortableColumn="schoolname">{{'School'|translate}}
                         <p-sortIcon field="schoolname"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="cityname">{{'dashboard.schools.SchoolEmail'|translate}}
+                    <th pSortableColumn="cityname">{{'schools.SchoolEmail'|translate}}
                         <p-sortIcon field="cityname"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="cityname">{{'dashboard.schools.schoolNumber'|translate}}
+                    <th pSortableColumn="cityname">{{'schools.schoolNumber'|translate}}
                         <p-sortIcon field="cityname"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="cityname">{{'dashboard.schools.schoolGrades'|translate}}
+                    <th pSortableColumn="cityname">{{'schools.schoolGrades'|translate}}
                         <p-sortIcon field="cityname"></p-sortIcon>
                     </th>
                     <th pSortableColumn="cityname">{{'shared.city'|translate}}
@@ -82,16 +82,16 @@
                     <th pSortableColumn="statename">{{'shared.state'|translate}}
                         <p-sortIcon field="statename"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="curriculumname">{{'dashboard.schools.SchoolCurriculum'|translate}}
+                    <th pSortableColumn="curriculumname">{{'schools.SchoolCurriculum'|translate}}
                         <p-sortIcon field="curriculumname"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="StudentNumber">{{'dashboard.schools.studentsNumber'|translate}}
+                    <th pSortableColumn="StudentNumber">{{'schools.studentsNumber'|translate}}
                         <p-sortIcon field="StudentNumber"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="EstablishmentDate">{{'dashboard.Subjects.createdDate'|translate}}
+                    <th pSortableColumn="EstablishmentDate">{{'Subjects.createdDate'|translate}}
                         <p-sortIcon field="EstablishmentDate"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="actions">{{'dashboard.schools.schoolStatus'|translate}}</th>
+                    <th pSortableColumn="actions">{{'schools.schoolStatus'|translate}}</th>
                     <th alignFrozen="left" pFrozenColumn [frozen]="true" class="actions"></th>
                 </tr>
             </ng-template>
@@ -181,7 +181,7 @@
 
 <!-- gradesDialog -->
 
-<p-dialog header="{{'dashboard.schools.SchoolGradesList'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayGradesList" [style]="{width: '28vw'}">
+<p-dialog header="{{'schools.SchoolGradesList'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayGradesList" [style]="{width: '28vw'}">
     <div class="container">
         <div class="mb-5" >
                 <div class="row" *ngIf="!showLoader">

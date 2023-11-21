@@ -12,7 +12,7 @@
              <p-multiSelect [options]="curriculumClassList" display="chip"  [(ngModel)]="filtration.CurriculumId"  optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="curriculumId"  placeholder="{{'Choose Curriculum'|translate }}"></p-multiSelect>
          </div>
              <div class="col-4">
-                 <label class="label" for="roleStatus">{{'dashboard.SchoolYear.Class'|translate }} </label>
+                 <label class="label" for="roleStatus">{{'SchoolYear.Class'|translate }} </label>
                  <!-- <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp [options]="gradesList" [(ngModel)]="filtration.GradeId" optionLabel="name.ar" optionValue="id" placeholder="{{'Choose Class'|translate }}"></p-dropdown> -->
                  <p-multiSelect  [options]="gradesList" display="chip" [(ngModel)]="filtration.GradeId"  optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id"  placeholder="{{'Choose Class'|translate }}"></p-multiSelect>
              </div>
@@ -30,11 +30,11 @@
   </ng-template>
       <ng-template pTemplate="header" >
             <tr  >
-              <th   pSortableColumn="student" class="lg"><p-sortIcon  field="student" ></p-sortIcon>{{'dashboard.SchoolYear.StudentName'|translate}}</th>
-              <th   pSortableColumn="nationality"><p-sortIcon  field="nationality" ></p-sortIcon>{{'dashboard.SchoolYear.Nationality'|translate}}</th>
-              <th   pSortableColumn="grade"><p-sortIcon  field="grade" ></p-sortIcon>{{'dashboard.SchoolYear.Class'|translate}}</th>
-              <th   pSortableColumn="curricuulm"><p-sortIcon  field="curricuulm" ></p-sortIcon>{{'dashboard.SchoolYear.Curriculum'|translate}}</th>
-              <th   pSortableColumn="precantage"><p-sortIcon  field="precantage" ></p-sortIcon>{{'dashboard.SchoolYear.Precantage'|translate}}</th>
+              <th   pSortableColumn="student" class="lg"><p-sortIcon  field="student" ></p-sortIcon>{{'SchoolYear.StudentName'|translate}}</th>
+              <th   pSortableColumn="nationality"><p-sortIcon  field="nationality" ></p-sortIcon>{{'SchoolYear.Nationality'|translate}}</th>
+              <th   pSortableColumn="grade"><p-sortIcon  field="grade" ></p-sortIcon>{{'SchoolYear.Class'|translate}}</th>
+              <th   pSortableColumn="curricuulm"><p-sortIcon  field="curricuulm" ></p-sortIcon>{{'SchoolYear.Curriculum'|translate}}</th>
+              <th   pSortableColumn="precantage"><p-sortIcon  field="precantage" ></p-sortIcon>{{'SchoolYear.Precantage'|translate}}</th>
 
             </tr>
         </ng-template>

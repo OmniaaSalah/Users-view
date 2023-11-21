@@ -21,24 +21,24 @@ export class IssuanceCertificaeService {
   degreescertificates= [
     {
       value:DegreesCertificatesEnum.SpeaSubjects,
-      name: this.translate.instant("dashboard.issue of certificate.SpeaSubjects")
+      name: this.translate.instant("issue of certificate.SpeaSubjects")
 
     },
     {
       value:DegreesCertificatesEnum.SchoolSubjects,
-      name: this.translate.instant("dashboard.issue of certificate.SchoolSubjects")
+      name: this.translate.instant("issue of certificate.SchoolSubjects")
     },
     {
       value: DegreesCertificatesEnum.AllSubjects,
-      name: this.translate.instant("dashboard.issue of certificate.AllSubjects")
+      name: this.translate.instant("issue of certificate.AllSubjects")
     },
     // {
     //   value:DegreesCertificatesEnum.OptionalSubjects,
-    //   name: this.translate.instant("dashboard.issue of certificate.OptionalSubjects")
+    //   name: this.translate.instant("issue of certificate.OptionalSubjects")
     // },
     // {
     //   value: DegreesCertificatesEnum.MandatorySubjects,
-    //   name: this.translate.instant("dashboard.issue of certificate.MandatorySubjects")
+    //   name: this.translate.instant("issue of certificate.MandatorySubjects")
     // },
   ];
 
@@ -52,58 +52,58 @@ certificateStatusList;
       {
         "value": CertificatesEnum.BoardCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.BoardCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.BoardCertificate")
+          "en": this.translate.instant("issue of certificate.BoardCertificate"),
+          "ar": this.translate.instant("issue of certificate.BoardCertificate")
         }
       },
       {
         "value": CertificatesEnum.AcademicSequenceCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
+          "en": this.translate.instant("issue of certificate.AcademicSequenceCertificate"),
+          "ar": this.translate.instant("issue of certificate.AcademicSequenceCertificate")
         }
       },
       {
         "value": CertificatesEnum.GradesCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.GradesCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.GradesCertificate")
+          "en": this.translate.instant("issue of certificate.GradesCertificate"),
+          "ar": this.translate.instant("issue of certificate.GradesCertificate")
         }
       },
       {
         "value": CertificatesEnum.ContinuingEducationCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.ContinuingEducationCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.ContinuingEducationCertificate")
+          "en": this.translate.instant("issue of certificate.ContinuingEducationCertificate"),
+          "ar": this.translate.instant("issue of certificate.ContinuingEducationCertificate")
         }
       },
       {
         "value": CertificatesEnum.TransferCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.TransferCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.TransferCertificate")
+          "en": this.translate.instant("issue of certificate.TransferCertificate"),
+          "ar": this.translate.instant("issue of certificate.TransferCertificate")
         }
       },
       {
         "value": CertificatesEnum.GoodBehaviorCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.GoodBehaviorCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.GoodBehaviorCertificate")
+          "en": this.translate.instant("issue of certificate.GoodBehaviorCertificate"),
+          "ar": this.translate.instant("issue of certificate.GoodBehaviorCertificate")
         }
 
       },
       {
         "value": CertificatesEnum.DiplomaCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.DiplomaCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.DiplomaCertificate")
+          "en": this.translate.instant("issue of certificate.DiplomaCertificate"),
+          "ar": this.translate.instant("issue of certificate.DiplomaCertificate")
         }
       },
       {
         "value": CertificatesEnum.SchoolInternalSubjectsCertificate,
         "name": {
-          "en": this.translate.instant("dashboard.issue of certificate.SchoolInternalSubjectsCertificate"),
-          "ar": this.translate.instant("dashboard.issue of certificate.SchoolInternalSubjectsCertificate")
+          "en": this.translate.instant("issue of certificate.SchoolInternalSubjectsCertificate"),
+          "ar": this.translate.instant("issue of certificate.SchoolInternalSubjectsCertificate")
         }
       }
     ];
@@ -115,10 +115,10 @@ certificateStatusList;
     ]
 
     this.certificateStatusList=[
-      {name:this.translate.instant('dashboard.issue of certificate.'+CertificateStatusEnum.Payed),value:CertificateStatusEnum.Payed},
-      {name:this.translate.instant('dashboard.issue of certificate.'+CertificateStatusEnum.PendingForApproval),value:CertificateStatusEnum.PendingForApproval},
-      {name:this.translate.instant('dashboard.issue of certificate.'+CertificateStatusEnum.PendingForPayment),value:CertificateStatusEnum.PendingForPayment},
-      {name:this.translate.instant('dashboard.issue of certificate.'+CertificateStatusEnum.Rejected),value:CertificateStatusEnum.Rejected},
+      {name:this.translate.instant('issue of certificate.'+CertificateStatusEnum.Payed),value:CertificateStatusEnum.Payed},
+      {name:this.translate.instant('issue of certificate.'+CertificateStatusEnum.PendingForApproval),value:CertificateStatusEnum.PendingForApproval},
+      {name:this.translate.instant('issue of certificate.'+CertificateStatusEnum.PendingForPayment),value:CertificateStatusEnum.PendingForPayment},
+      {name:this.translate.instant('issue of certificate.'+CertificateStatusEnum.Rejected),value:CertificateStatusEnum.Rejected},
     ]
   }
 

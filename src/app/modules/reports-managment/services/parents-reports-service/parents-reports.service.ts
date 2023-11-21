@@ -33,12 +33,12 @@ export class ParentsReportsService {
     return [
 
       {
-        name: this.translate.instant('dashboard.parents.parentName'),
+        name: this.translate.instant('parents.parentName'),
         isSelected: true,
         sortField: this.lang =='ar'? 'GuardianNameAr': 'GuardianNameEn'
       },
       {
-        name:this.translate.instant('dashboard.parents.parentNumber'),
+        name:this.translate.instant('parents.parentNumber'),
         isSelected: true,
         sortField:'GuardianMobile'
       },
@@ -48,18 +48,18 @@ export class ParentsReportsService {
         sortField: this.lang =='ar'? 'GuardianNationalityAr': 'GuardianNationalityEn'
       },
       {
-        name: this.translate.instant('dashboard.parents.parentEmail'),
+        name: this.translate.instant('parents.parentEmail'),
         isSelected: true,
         sortField:'GuardianEmail'
       },
       {
-        name:  this.translate.instant('dashboard.parents.relatedType'),
+        name:  this.translate.instant('parents.relatedType'),
         isSelected: true,
         sortField: this.lang =='ar'? 'GuardianRelationTypeAr': 'GuardianRelationTypeEn'
       },
 
       {
-        name:this.translate.instant('dashboard.schools.student'),
+        name:this.translate.instant('schools.student'),
         isSelected: true,
         sortField: this.lang =='ar'? 'StudentNameAr': 'StudentNameEn'
       },
@@ -69,17 +69,17 @@ export class ParentsReportsService {
         sortField: this.lang =='ar'? 'StudentSurNameAr': 'StudentSurNameEn'
       },
       {
-        name:this.translate.instant('dashboard.students.daleelNumber1'),
+        name:this.translate.instant('students.daleelNumber1'),
         isSelected: false,
         sortField:'StudentIdInDaleel'
       },
       {
-        name:this.translate.instant('dashboard.students.daleelNumber2'),
+        name:this.translate.instant('students.daleelNumber2'),
         isSelected: false,
         sortField:'StudentId'
       },
       {
-        name:this.translate.instant('dashboard.students.manhalNumber'),
+        name:this.translate.instant('students.manhalNumber'),
         isSelected: false,
         sortField:'StudentIdInManhl'
       },
@@ -89,7 +89,7 @@ export class ParentsReportsService {
         sortField:'GuardianEmiratesIdNumber'
       },
       {
-        name: this.translate.instant('dashboard.parents.ChildWithoutNationality'),
+        name: this.translate.instant('parents.ChildWithoutNationality'),
         isSelected: false,
         sortField: this.lang =='ar'? 'GuardianReasonForNotHavingEmirratesIdAr': 'GuardianReasonForNotHavingEmirratesIdEn'
       },
@@ -123,22 +123,22 @@ export class ParentsReportsService {
       map(res=>{
       return res.data.map(parent =>{
       return {
-            [this.translate.instant('dashboard.parents.parentName')]: parent?.parentName[this.lang] ? parent?.parentName[this.lang]:this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.parents.parentNumber')]: parent?.parentNumber? parent?.parentNumber:this.translate.instant('shared.notFound'),
+            [this.translate.instant('parents.parentName')]: parent?.parentName[this.lang] ? parent?.parentName[this.lang]:this.translate.instant('shared.notFound'),
+            [this.translate.instant('parents.parentNumber')]: parent?.parentNumber? parent?.parentNumber:this.translate.instant('shared.notFound'),
             [this.translate.instant('Nationality')]: parent?.parentNationality[this.lang] ? parent?.parentNationality[this.lang]:this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.parents.parentEmail')]: parent?.parentEmail ? parent?.parentEmail:this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.parents.relatedType')]: parent?.relationType[this.lang] ? parent?.relationType[this.lang]:this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.schools.student')]: parent?.student?.name[this.lang] ? parent?.student?.name[this.lang]:this.translate.instant('shared.notFound'),
+            [this.translate.instant('parents.parentEmail')]: parent?.parentEmail ? parent?.parentEmail:this.translate.instant('shared.notFound'),
+            [this.translate.instant('parents.relatedType')]: parent?.relationType[this.lang] ? parent?.relationType[this.lang]:this.translate.instant('shared.notFound'),
+            [this.translate.instant('schools.student')]: parent?.student?.name[this.lang] ? parent?.student?.name[this.lang]:this.translate.instant('shared.notFound'),
             [this.translate.instant('Students nickname')]:parent?.studentNickName[this.lang] ? parent?.studentNickName[this.lang]:this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.students.daleelNumber1')]:parent?.studentIdInDaleel ? parent?.studentIdInDaleel:this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.students.daleelNumber2')]:parent?.student?.id ? parent?.student?.id:this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.students.manhalNumber')]:parent?.studentIdInManhl ?parent?.studentIdInManhl:this.translate.instant('shared.notFound'),
+            [this.translate.instant('students.daleelNumber1')]:parent?.studentIdInDaleel ? parent?.studentIdInDaleel:this.translate.instant('shared.notFound'),
+            [this.translate.instant('students.daleelNumber2')]:parent?.student?.id ? parent?.student?.id:this.translate.instant('shared.notFound'),
+            [this.translate.instant('students.manhalNumber')]:parent?.studentIdInManhl ?parent?.studentIdInManhl:this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.Identity Number')]:parent?.emiratesIdNumber ? parent?.emiratesIdNumber :this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.parents.ChildWithoutNationality')]:parent?.reasonForNotHavingEmirratesId[this.lang] ? parent?.reasonForNotHavingEmirratesId[this.lang]:this.translate.instant('shared.notFound'),
+            [this.translate.instant('parents.ChildWithoutNationality')]:parent?.reasonForNotHavingEmirratesId[this.lang] ? parent?.reasonForNotHavingEmirratesId[this.lang]:this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.gender')]:parent?.parentGender ? this.translate.instant('shared.genderType.'+parent?.parentGender):this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.state')]:parent?.studentState,
             [this.translate.instant('shared.city')]:parent?.studentCity,
-            [this.translate.instant('shared.registrationDateAndTime')]: this.localizeDatePipe.transform(parent?.studentRegisterationDate, 'd / MMMM / y HH:mm', 'en'),
+            [this.translate.instant('shared.registrationDateAndTime')]: this.localizeDatePipe.transform(parent?.studentRegisterationDate, 'd / M / yyyy HH:mm', 'en'),
 
           }
         })

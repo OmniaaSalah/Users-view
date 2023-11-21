@@ -30,7 +30,7 @@ export class SubjectsService {
       sortField: this.lang=='ar' ?  'SchoolNameAr': 'SchoolNameEn'
     },
     {
-      name:this.translate.instant('dashboard.schools.schoolNumber'),
+      name:this.translate.instant('schools.schoolNumber'),
       isSelected: true,
       sortField:'SchoolNumber'
     },
@@ -42,12 +42,12 @@ export class SubjectsService {
     },
     {
 
-      name:this.translate.instant('dashboard.reports.subjectCount'),
+      name:this.translate.instant('reports.subjectCount'),
       isSelected: true,
       sortField:'SubjectsCountPerSchool'
     },
     {
-      name:this.translate.instant('dashboard.schools.SchoolCurriculum'),
+      name:this.translate.instant('schools.SchoolCurriculum'),
       isSelected: true,
       sortField:this.lang=='ar' ?  'CurriculumNameAr': 'CurriculumNameEn'
     },
@@ -77,9 +77,9 @@ export class SubjectsService {
         return res.data.map(subject =>{
           return {
             [this.translate.instant('School')]: subject?.school[this.lang],
-            [this.translate.instant('dashboard.schools.schoolNumber')]: subject?.schoolCode,
+            [this.translate.instant('schools.schoolNumber')]: subject?.schoolCode,
             [this.translate.instant('shared.state')]: subject?.state[this.lang],
-            [this.translate.instant('dashboard.reports.subjectCount')]: subject?.subjectsCountPerSchool,
+            [this.translate.instant('reports.subjectCount')]: subject?.subjectsCountPerSchool,
             [this.translate.instant('shared.grade')]: subject?.grade[this.lang],
             [this.translate.instant('shared.division')]: subject?.division[this.lang],
             [this.translate.instant('shared.track')]: subject?.track[this.lang]

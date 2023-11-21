@@ -47,32 +47,32 @@ export class ChildDetailsComponent implements OnInit {
 
 		this.componentHeaderData={
       breadCrump: [
-        { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/student-management/all-parents/',routerLinkActiveOptions:{exact: true}},
-        { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/student-management/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-        { label: this.translate.instant('dashboard.parents.sonDetails'),routerLink:`/student-management/all-parents/parent/${this.parentId}/child/${this.childId}` }
+        { label: this.translate.instant('parents.parents') ,routerLink:'/student-management/all-parents/',routerLinkActiveOptions:{exact: true}},
+        { label: this.translate.instant('parents.childrenList') ,routerLink:`/student-management/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+        { label: this.translate.instant('parents.sonDetails'),routerLink:`/student-management/all-parents/parent/${this.parentId}/child/${this.childId}` }
 
       ],
-      mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }
+      mainTitle: { main: this.translate.instant('parents.sonDetails') }
     }
     }
     else if (this.currentUserScope==UserScope.SPEA)
     {
         this.componentHeaderData={
           breadCrump: [
-            { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
-            { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-            { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}`}
+            { label: this.translate.instant('parents.parents') ,routerLink:'/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+            { label: this.translate.instant('parents.childrenList') ,routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+            { label: this.translate.instant('parents.sonDetails')  ,routerLink:`/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}`}
 
           ],
-          mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }
+          mainTitle: { main: this.translate.instant('parents.sonDetails') }
         }
     } else if (this.currentUserScope==UserScope.Guardian){
       this.componentHeaderData={
         breadCrump: [
-          { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/parent/${this.parentId}/child/${this.childId}`}
+          { label: this.translate.instant('parents.sonDetails')  ,routerLink:`/parent/${this.parentId}/child/${this.childId}`}
 
         ],
-        mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }
+        mainTitle: { main: this.translate.instant('parents.sonDetails') }
       }
     }
   }

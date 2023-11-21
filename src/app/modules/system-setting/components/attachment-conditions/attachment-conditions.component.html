@@ -8,18 +8,18 @@
 
 <ng-container [formGroup]="attachementConditionsForm" >
 
-    <h3 class="heading heading--tertiary my-6"> {{'dashboard.SystemSetting.speaAttachmentConditions'|translate}}</h3>
+    <h3 class="heading heading--tertiary my-6"> {{'SystemSetting.speaAttachmentConditions'|translate}}</h3>
 
     <ng-container formArrayName="speaEmployees" *ngIf=" speaCtr?.controls?.length && !loading">
         <div class="row gx-5 mb-5 custom-form" *ngFor="let item of speaCtr.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
-                <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
-                <p-dropdown formControlName="fileType" [options]="speaTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.attachmentType'|translate}}"></p-dropdown>
+                <label  class="label">{{'SystemSetting.attachmentTypes'|translate}}</label>
+                <p-dropdown formControlName="fileType" [options]="speaTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'SystemSetting.attachmentType'|translate}}"></p-dropdown>
             </div>
 
             <div class="col-md-4">
-                <label  class="label">{{'dashboard.SystemSetting.attachmentSize'|translate}}</label>
-                <p-inputNumber formControlName="fileSize" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'dashboard.SystemSetting.mb'|translate}}"></p-inputNumber>
+                <label  class="label">{{'SystemSetting.attachmentSize'|translate}}</label>
+                <p-inputNumber formControlName="fileSize" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'SystemSetting.mb'|translate}}"></p-inputNumber>
             </div>
 
             <div role="button" class="col-md-3 mb-4 d-flex align-items-end justify-content-end">
@@ -34,24 +34,24 @@
     class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
     (click)="addConditionToSpea()">
         <fa-icon [icon]="faPlus"></fa-icon>
-        <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
+        <span>{{'SystemSetting.addNewCondition' |translate}}</span>
     </div>
 
 
     <!-- -------------------------------------------------------- -->
 
-    <h3 class="heading heading--tertiary my-6"> {{'dashboard.SystemSetting.schoolStaffAttachmentConditions'|translate}}</h3>
+    <h3 class="heading heading--tertiary my-6"> {{'SystemSetting.schoolStaffAttachmentConditions'|translate}}</h3>
 
     <ng-container formArrayName="employees" *ngIf=" employeesCtr?.controls?.length && !loading">
         <div class="row gx-5 mb-5 custom-form" *ngFor="let item of employeesCtr.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
-                <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
-                <p-dropdown formControlName="fileType" [options]="schoolTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.attachmentType'|translate}}"></p-dropdown>
+                <label  class="label">{{'SystemSetting.attachmentTypes'|translate}}</label>
+                <p-dropdown formControlName="fileType" [options]="schoolTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'SystemSetting.attachmentType'|translate}}"></p-dropdown>
             </div>
 
             <div class="col-md-4">
-                <label  class="label">{{'dashboard.SystemSetting.attachmentSize'|translate}}</label>
-                <p-inputNumber formControlName="fileSize" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'dashboard.SystemSetting.mb'|translate}}"></p-inputNumber>
+                <label  class="label">{{'SystemSetting.attachmentSize'|translate}}</label>
+                <p-inputNumber formControlName="fileSize" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'SystemSetting.mb'|translate}}"></p-inputNumber>
             </div>
             <div role="button" class="col-md-3 mb-4 d-flex align-items-end justify-content-end" >
                 <!-- <img (click)="deleteConditionFromSchool(i)" src="assets/images/shared/rect-xmark.svg" alt=""> -->
@@ -65,24 +65,24 @@
     class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
     (click)="addConditionToEmployees()">
         <fa-icon [icon]="faPlus"></fa-icon>
-        <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
+        <span>{{'SystemSetting.addNewCondition' |translate}}</span>
     </div>
 
 
 
 
-    <h3 class="heading heading--tertiary my-6"> {{'dashboard.SystemSetting.parentsAttachmentConditions'|translate}}</h3>
+    <h3 class="heading heading--tertiary my-6"> {{'SystemSetting.parentsAttachmentConditions'|translate}}</h3>
 
     <ng-container formArrayName="guardians" *ngIf=" guardiansCtr?.controls?.length && !loading">
         <div class="row gx-5 mb-5 custom-form" *ngFor="let item of guardiansCtr.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
-                <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
-                <p-dropdown formControlName="fileType" [options]="parentsTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.attachmentType'|translate}}"></p-dropdown>
+                <label  class="label">{{'SystemSetting.attachmentTypes'|translate}}</label>
+                <p-dropdown formControlName="fileType" [options]="parentsTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'SystemSetting.attachmentType'|translate}}"></p-dropdown>
             </div>
 
             <div class="col-md-4">
-                <label  class="label">{{'dashboard.SystemSetting.attachmentSize'|translate}}</label>
-                <p-inputNumber formControlName="fileSize" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'dashboard.SystemSetting.mb'|translate}}"></p-inputNumber>
+                <label  class="label">{{'SystemSetting.attachmentSize'|translate}}</label>
+                <p-inputNumber formControlName="fileSize" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'SystemSetting.mb'|translate}}"></p-inputNumber>
             </div>
 
             <div role="button" class="col-md-3 mb-4 d-flex align-items-end justify-content-end">
@@ -97,7 +97,7 @@
     class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
     (click)="addConditionToParents()">
         <fa-icon [icon]="faPlus"></fa-icon>
-        <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
+        <span>{{'SystemSetting.addNewCondition' |translate}}</span>
     </div>
 
 

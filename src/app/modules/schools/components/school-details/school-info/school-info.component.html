@@ -15,10 +15,10 @@
 
 <div class="general" *ngIf="school">
 
-    <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
+    <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'schools.SchoolLogo'|translate }}</h3> -->
     <div class=" row gx-5">
         <div class="col ">
-            <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [accept]="fileTypeEnum.Image" [imgUrl]="school?.schoolLogoPath" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" ></app-file-upload>
+            <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [accept]="fileTypeEnum.Image" [imgUrl]="school?.schoolLogoPath" view="box" title="{{ 'schools.SchoolLogo'|translate }}" ></app-file-upload>
 
             <div class=" box image-wrapper w px-5 d-flex flex-column" >
               <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.logo=''"></fa-icon>
@@ -34,7 +34,7 @@
 
 
         <div class="col">
-            <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [accept]="fileTypeEnum.Image" [imgUrl]="school?.diplomaLogoPath" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" ></app-file-upload>
+            <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [accept]="fileTypeEnum.Image" [imgUrl]="school?.diplomaLogoPath" view="box" title="{{'schools.reliableLogo'|translate }}" ></app-file-upload>
 
             <div class=" box image-wrapper w px-5 d-flex flex-column" >
               <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.reliableLogo=''"></fa-icon>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="col">
-          <app-file-upload (onFileUpload)="onCertificateLogoFileUpload($event)" [accept]="fileTypeEnum.Image"  view="box" title="{{'dashboard.schools.certificateReliableLogo'|translate }}" ></app-file-upload>
+          <app-file-upload (onFileUpload)="onCertificateLogoFileUpload($event)" [accept]="fileTypeEnum.Image"  view="box" title="{{'schools.certificateReliableLogo'|translate }}" ></app-file-upload>
 
           <div class=" box image-wrapper w px-5 d-flex flex-column" >
             <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="schoolAttacments.stampSchoolLogoPath=''"></fa-icon>
@@ -60,27 +60,27 @@
     </div>
 
 
-    <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
+    <h4 class="heading heading--tertiary my-5">{{'schools.schoolInfo'|translate }}</h4>
 
     <div class="general__info row ">
         <div class="col-md-5  grid-container">
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.enSchoolName'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.enSchoolName'|translate }}</span>
             <p class="color-primary">{{school?.name.ar}}</p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.arSchoolName'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.arSchoolName'|translate }}</span>
             <p class="color-primary">{{school?.name.en}}</p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolId'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.schoolId'|translate }}</span>
             <p class="color-primary">{{school?.code}}</p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolCategory'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.schoolCategory'|translate }}</span>
             <p class="color-primary">{{school?.classification?.name |currentLang}}</p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolEmail'|translate }} </span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.schoolEmail'|translate }} </span>
             <p class="color-primary">{{school?.email}}</p>
 
          <ng-container *ngIf="currentUserScope==userScope.Employee">
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolGrades'|translate }} </span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.schoolGrades'|translate }} </span>
 
             <div  *ngIf="school?.schoolGradeNumbers">
                 <a role="button"  (click)="showGrades(school.id)">
@@ -93,7 +93,7 @@
         </div>
         <div class="col-md-4   grid-container">
 
-            <!-- <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
+            <!-- <span class="paragraph paragraph--sm color-gray-300">{{'schools.schoolType'|translate }}</span>
             <p class="color-primary">{{school?.type}}</p> -->
 
              <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
@@ -102,24 +102,24 @@
                  <span class="status" *ngIf="school?.status!='Active'" >{{'shared.no'|translate}}</span>
               </p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.schoolLicenceNumber'|translate }}</span>
             <p class="color-primary">{{school?.terkhisNumber}}</p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.course'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.course'|translate }}</span>
             <p class="color-primary">{{school?.curriculum?.name |currentLang}}</p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolStudentNumber'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.schoolStudentNumber'|translate }}</span>
             <p class="color-primary">{{school?.studentCount}}</p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.educationalInstitution'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.educationalInstitution'|translate }}</span>
             <p class=" color-primary">{{school?.educationalInstitution|translate}}</p>
         </div>
 
         <div class="col-md-3 grid-container" *ngIf="currentUserScope!=userScope.Employee">
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.daleelNumber'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.daleelNumber'|translate }}</span>
             <p class="color-primary">{{school?.daleelId}}</p>
 
-            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.tamamNumber'|translate }}</span>
+            <span class="paragraph paragraph--sm color-gray-300">{{'schools.tamamNumber'|translate }}</span>
             <p class="color-primary">{{school?.tamamId}}</p>
         </div>
 
@@ -133,7 +133,7 @@
 
 
 <div class="row" *ngIf="currentUserScope==userScope.Employee">
-    <h4 class="heading heading--tertiary mb-5">{{'dashboard.schools.schoolLocation'|translate }}</h4>
+    <h4 class="heading heading--tertiary mb-5">{{'schools.schoolLocation'|translate }}</h4>
     <div class="col-md-8 offset-1">
         <div class="row bg-gray-30 radius-15 p-4">
             <div class="col-md-7 ps-5 pe-0 ">
@@ -148,7 +148,7 @@
             </div>
 
             <div class="col-md-5 align-self-center grid-container bg-gray-30 radius-15 p-4">
-                <span class="paragraph paragraph--sm color-gray-200">{{'dashboard.schools.SchoolPhone'|translate }}</span>
+                <span class="paragraph paragraph--sm color-gray-200">{{'schools.SchoolPhone'|translate }}</span>
                 <p class="color-primary"> {{school?.number}}</p>
 
                 <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
@@ -179,7 +179,7 @@
 
 
 
-<p-dialog header="{{'dashboard.schools.SchoolGradesList'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayGradesList" [style]="{width: '28vw'}">
+<p-dialog header="{{'schools.SchoolGradesList'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayGradesList" [style]="{width: '28vw'}">
     <div class="container">
         <div class="mb-5" >
                 <div class="row" *ngIf="!showLoader">

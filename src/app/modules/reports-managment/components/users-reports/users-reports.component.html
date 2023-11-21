@@ -14,30 +14,30 @@
 
 
                 <div class="col-4">
-                    <label class="label" for="city">{{'dashboard.Requests.requestType' |translate}} </label>
+                    <label class="label" for="city">{{'Requests.requestType' |translate}} </label>
                     <p-multiSelect
                     [options]="requestsList"
                    display="chip"
                    [(ngModel)]="filtration.requestType" optionValue="value" optionLabel="name"
                    [ngModelOptions]="{standalone: true}"
-                   placeholder="{{'dashboard.Requests.SelectRequestType' |translate}}"
+                   placeholder="{{'Requests.SelectRequestType' |translate}}"
                    ></p-multiSelect>
                 </div>
 
                 <div class="col-4">
-                    <label class="label" for="city">{{'dashboard.UserInformation.Select Private Role'|translate }} </label>
+                    <label class="label" for="city">{{'UserInformation.Select Private Role'|translate }} </label>
                     <p-multiSelect
                      [options]="roles"
                     display="chip"
                     [(ngModel)]="filtration.roleIds"
                     optionValue="id"
                     [ngModelOptions]="{standalone: true}"
-                    placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}"
+                    placeholder="{{'UserInformation.Select Private Role' | translate}}"
                     optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-multiSelect>
                 </div>
 
                 <div class="col-4">
-                    <label class="label"> {{'dashboard.reports.TimeFrom-To'|translate}} <span class="star">*</span></label>
+                    <label class="label"> {{'reports.TimeFrom-To'|translate}} <span class="star">*</span></label>
                     <p-calendar  [(ngModel)]="date" [showIcon]="true" inputId="icon" selectionMode="range"
                     placeholder="{{'dd/mm/yy'|translate}} - {{'dd/mm/yy'|translate}}" dateFormat="dd/mm/yy" [readonlyInput]="true" >
                    </p-calendar>
@@ -62,23 +62,23 @@
     </div>
 
     <div class="box-shadow bg-white raduis-12 p-5" *ngIf="(users.totalAllData|| users.loading)&& date && shownTable">
-        <h3 class="heading heading-secondary fw-bold m-0 mb-5">{{'dashboard.reports.ReportSummary'|translate}}</h3>
+        <h3 class="heading heading-secondary fw-bold m-0 mb-5">{{'reports.ReportSummary'|translate}}</h3>
         <div class="row mb-4">
 
-            <h4 class="heading heading--tertiary mb-3 col col-md-4">{{'dashboard.reports.RequestNumbersProcessedFromEmployees'|translate}} :</h4>
+            <h4 class="heading heading--tertiary mb-3 col col-md-4">{{'reports.RequestNumbersProcessedFromEmployees'|translate}} :</h4>
             <p class="paragraph paragraph--sm col col-md-8">{{allRequestsNumbers}}</p>
 
         </div>
         <div class="row">
 
                 <div class="row">
-                <h4 class="heading heading--tertiary mb-3 col col-md-4">{{'dashboard.reports.RequestNumbersProcessedFromEmployeesBasedOnRequestType'|translate}} :</h4>
+                <h4 class="heading heading--tertiary mb-3 col col-md-4">{{'reports.RequestNumbersProcessedFromEmployeesBasedOnRequestType'|translate}} :</h4>
                 <!-- <p class="paragraph paragraph--sm col col-md-8">{{requestsNumbersBasedOnRequestType}}</p> -->
                </div>
                 <div class="row" >
                         <ng-container *ngFor="let type of requestTypes">
                         <div class="col-md-6 mb-3  align-items-center">
-                        <span >{{'dashboard.Requests.'+type.requestType|translate}} : </span>
+                        <span >{{'Requests.'+type.requestType|translate}} : </span>
                         <span >{{type.count}}</span>
                        </div>
                         </ng-container>
@@ -92,7 +92,7 @@
 
     <div class="bg-orange-50 p-3 radius-15 mb-5 mt-5">
         <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-        <span class="color-gray-800">" {{'dashboard.reports.you should choose the Date that you need view Employee Performance During It'|translate}} "</span>
+        <span class="color-gray-800">" {{'reports.you should choose the Date that you need view Employee Performance During It'|translate}} "</span>
     </div>
 
     <div class="prim-table" *ngIf="(users.totalAllData|| users.loading)&& date && shownTable">

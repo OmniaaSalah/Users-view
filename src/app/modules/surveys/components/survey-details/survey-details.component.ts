@@ -120,14 +120,14 @@ get surveyQuestionType()
     this.headerService.Header.next(
       {
         breadCrump: [
-          { label: this.translate.instant('dashboard.surveys.surveyList'),routerLink:'/educational-settings/surveys' ,routerLinkActiveOptions:{exact: true}}
+          { label: this.translate.instant('surveys.surveyList'),routerLink:'/educational-settings/surveys' ,routerLinkActiveOptions:{exact: true}}
          ,{
 
-            label: (this.surveyId==null||this.surveyId=='')?  this.translate.instant('dashboard.surveys.createNewSurvey'):this.translate.instant('dashboard.surveys.Survey Details'),
+            label: (this.surveyId==null||this.surveyId=='')?  this.translate.instant('surveys.createNewSurvey'):this.translate.instant('surveys.Survey Details'),
             routerLink: (this.surveyId==null||this.surveyId=='')? '/educational-settings/surveys/new-survey':'/educational-settings/surveys/Survey/'+this.surveyId
           }
         ],
-        mainTitle:{main:(this.surveyId==null||this.surveyId=='')? this.translate.instant('dashboard.surveys.createNewSurvey'):this.translate.instant('dashboard.surveys.Survey Details')}
+        mainTitle:{main:(this.surveyId==null||this.surveyId=='')? this.translate.instant('surveys.createNewSurvey'):this.translate.instant('surveys.Survey Details')}
       }
     );
 
@@ -223,7 +223,7 @@ saveSurvey() {
 this.surveyService.addSurvey(this.savedSurvey).subscribe((res)=>{
 
   this.isBtnLoading=false;
-  this.toastr.success(this.translate.instant('dashboard.surveys.survey added Successfully'));
+  this.toastr.success(this.translate.instant('surveys.survey added Successfully'));
   this.router.navigateByUrl(`/educational-settings/surveys/Survey/${res.result.createdSurveyId}`);
   localStorage.setItem('addedSurveyStatus',"1");
 },(err)=>{ this.isBtnLoading=false;
@@ -233,7 +233,7 @@ this.surveyService.addSurvey(this.savedSurvey).subscribe((res)=>{
   {
     this.surveyService.editsurvey(this.savedSurvey,Number(this.surveyId)).subscribe((res)=>{
       this.isBtnLoading=false;
-      this.toastr.success(this.translate.instant('dashboard.surveys.survey edited Successfully'));
+      this.toastr.success(this.translate.instant('surveys.survey edited Successfully'));
         this.router.navigateByUrl('/educational-settings/surveys');
   },(err)=>{  this.isBtnLoading=false;
     this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));})
@@ -355,7 +355,7 @@ addNewQuestion(){
      let pdf = new jsPDF('p', 'mm', 'a4');
      let position = 0;
      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-     pdf.save(this.translate.instant('dashboard.surveys.Survey Report'));
+     pdf.save(this.translate.instant('surveys.Survey Report'));
    });
  }
   //exportExcel
@@ -429,7 +429,7 @@ addNewQuestion(){
       if(res.statusCode!='BadRequest')
       {
 
-        this.toastr.success(this.translate.instant('dashboard.surveys.Survey Status changed successfully'));
+        this.toastr.success(this.translate.instant('surveys.Survey Status changed successfully'));
         this.getSurveyById();
       }
       else
@@ -452,7 +452,7 @@ addNewQuestion(){
       }
       else
       {
-        this.toastService.warning(this.translate.instant('dashboard.surveys.You should save survey first to send it'))
+        this.toastService.warning(this.translate.instant('surveys.You should save survey first to send it'))
       }
     }
 

@@ -13,7 +13,7 @@
 
               <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
               <span>{{action.title | currentLang}}</span>
-              <!-- <span>{{'dashboard.Requests.resendRegstrationRequest' | translate}}</span> -->
+              <!-- <span>{{'Requests.resendRegstrationRequest' | translate}}</span> -->
 
           </button>
       </ng-container>
@@ -60,7 +60,7 @@
                   <div class="profile__details">
                       <div class="fs-4">
                           <img src="assets/images/shared/child.svg" alt="">
-                          <span class="color-gray-300">{{childData?.age}} {{'dashboard.issue of certificate.year' | translate}}</span>
+                          <span class="color-gray-300">{{childData?.age}} {{'issue of certificate.year' | translate}}</span>
                       </div>
                       <div >
                           <img  src="assets/images/shared/fingure-red.svg" alt="">
@@ -83,41 +83,36 @@
       <div class="mb-6 p-5 bg-color-30 radius-15 border-dark custom-form" *ngIf="registerReqForm">
         <form [formGroup]="registerReqForm">
               <div class="row g-5 form-set">
+                <div class="col-md-4">
+                  <label class="label">{{'reports.registration status' | translate}} <span class="star">*</span></label>
+                  <p-dropdown [options]="registrationStatusOptions" formControlName="registrationStatus" optionValue="value"  optionLabel="name" placeholder="{{'reports.registration status' |translate}}"></p-dropdown>
+                </div>
                   <div class="col-md-4">
-                      <label class="label">{{'dashboard.request-list.The children of the martyrs' | translate}} <span class="star">*</span></label>
+                      <label class="label">{{'request-list.The children of the martyrs' | translate}} <span class="star">*</span></label>
                       <p-dropdown [options]="booleanOptions" formControlName="isChildOfAMartyr" optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                   </div>
                   <div class="col-md-4">
-                      <label class="label">{{'dashboard.request-list.The student is a person of determination' | translate}} <span class="star">*</span></label>
+                      <label class="label">{{'request-list.The student is a person of determination' | translate}} <span class="star">*</span></label>
                       <p-dropdown [options]="booleanOptions" formControlName="isSpecialAbilities" (ngModelChange)="resetSpecialClass($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                   </div>
 
                   <div class="col-md-4" *ngIf="registerReqForm?.value.isSpecialAbilities">
-                      <label class="label">{{'dashboard.request-list.Special/merge classes' | translate}}</label>
-                      <p-dropdown [options]="disabilitiesOptions"  [showClear]="true" [(ngModel)]="classType"  (ngModelChange)="onClassTypeChange($event)"  [ngModelOptions]="{standalone: true}" optionValue="value"  optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
+                      <label class="label">{{'request-list.Special/merge classes' | translate}}</label>
+                      <p-dropdown [options]="disabilitiesOptions"  [showClear]="true" [(ngModel)]="classType"  (ngModelChange)="onClassTypeChange($event)"  [ngModelOptions]="{standalone: true}" optionValue="value"  optionLabel="name" placeholder="{{'schools.SelectClassType' |translate}}"></p-dropdown>
                   </div>
-
-              </div>
-
-              <div class="row gx-5 custom-form">
-                  <!-- <div class="col-md-4">
-                      <div class="form-set">
-                          <label class="label" for="description">{{'dashboard.request-list.special breeding' | translate}} <span class="star">*</span></label>
-                          <p-dropdown formControlName="isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                      </div>
-                  </div> -->
 
                   <div class="col-md-4" *ngIf="classType=='SpecialClass'">
                       <div class="form-set">
-                          <label class="label" for="description">{{'dashboard.request-list.type of special education' | translate}}</label>
+                          <label class="label" for="description">{{'request-list.type of special education' | translate}}</label>
                           <p-dropdown formControlName="specialEducationId"
                           [options]="educationType$|async" optionValue="id"
                           optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}"
-                          placeholder="{{'dashboard.parents.specialEducationtype' |translate}}"
+                          placeholder="{{'parents.specialEducationtype' |translate}}"
                           [required]="classType=='SpecialClass'"></p-dropdown>
                       </div>
                   </div>
               </div>
+
           </form>
 
       </div>
@@ -149,7 +144,7 @@
   <!-- Required Files -->
   <!-- && childRegistrationStatus!=registrtionStatusEnum.Withdrawal -->
   <div class="row gx-6 my-6 border-dark radius-15" *ngIf="requiredFiles && requiredFiles?.files?.length">
-      <h3 class="heading heading--tertiary">{{'dashboard.request-list.required attachments' | translate}} <span class="star">*</span></h3>
+      <h3 class="heading heading--tertiary">{{'request-list.required attachments' | translate}} <span class="star">*</span></h3>
       <div class="col-md-4" *ngFor="let file of requiredFiles.files;let i = index">
           <div class="">
               <app-file-upload

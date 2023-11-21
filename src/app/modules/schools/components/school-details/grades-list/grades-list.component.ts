@@ -36,7 +36,7 @@ export class SchoolGradesComponent implements OnInit {
   componentHeaderData: IHeader = {
 		breadCrump: [
 
-			{ label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/grades-and-divisions/school/${this.schoolId}/grades`},
+			{ label: this.translate.instant('schools.schoolClasses'), routerLink: `/grades-and-divisions/school/${this.schoolId}/grades`},
 		],
 		mainTitle: { main: this.currentSchool }
 	}
@@ -146,7 +146,7 @@ export class SchoolGradesComponent implements OnInit {
     let filter = {...this.filtration,PageSize:this.grades.totalAllData,Page:1}
     this.gradesService.gradesToExport(this.schoolId,filter).subscribe( (res) =>{
 
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolClasses'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('schools.schoolClasses'))
     })
   }
 

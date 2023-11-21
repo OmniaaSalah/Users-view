@@ -3,7 +3,7 @@
 <div class="submit-btn d-flex gap-4 justify-content-end position-absolute">
 
     <button *permit="claimsEnum.E_RaiseDivisionAbsenceRecord" class="btn btn-primary btn--md" (click)="openRaisAbsenceModel()">
-        <span>{{'dashboard.schools.raisAbsence'|translate}}</span>
+        <span>{{'schools.raisAbsence'|translate}}</span>
     </button>
 </div>
 
@@ -51,20 +51,20 @@
                 <div class="d-flex align-items-center gap-3 p-4">
                   <img src="assets/images/home/student/student.svg" class="bullet">
                   <span class="d-flex gap-3">
-                      {{ 'dashboard.schools.studentsNumber'|translate }} : <b>{{absenceRecord?.totalDivisionStudents}}</b>
+                      {{ 'schools.studentsNumber'|translate }} : <b>{{absenceRecord?.totalDivisionStudents}}</b>
                   </span>
                 </div>
 
                 <div class="d-flex align-items-center gap-3 p-4 color-skyBlue-500">
                     <img src="assets/images/shared/attendance.svg" class="bullet">
                     <span class="d-flex gap-3">
-                        {{ 'dashboard.schools.attendanceStudents'|translate }} : <b>{{absenceRecord?.totalAttendantStudents}}</b>
+                        {{ 'schools.attendanceStudents'|translate }} : <b>{{absenceRecord?.totalAttendantStudents}}</b>
                     </span>
                 </div>
                 <div class="d-flex align-items-center gap-3 color-red-500">
                     <img src="assets/images/shared/absence.svg" class="bullet">
                     <span class="d-flex gap-3">
-                        {{ 'dashboard.schools.absentStudents'|translate }} : <b>{{absenceRecord?.totalAbsenceStudents}}</b>
+                        {{ 'schools.absentStudents'|translate }} : <b>{{absenceRecord?.totalAbsenceStudents}}</b>
                     </span>
                 </div>
             </div>
@@ -81,18 +81,18 @@
                 </div>
                 <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentsModelOpened=true">
                     <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                    <span>{{'dashboard.schools.addStudent'|translate}}</span>
+                    <span>{{'schools.addStudent'|translate}}</span>
                 </button> -->
             </div>
         </ng-template>
 
     <ng-template pTemplate="header" let-columns="columns">
             <tr>
-                <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.schools.studentName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="surname">{{'dashboard.schools.studentNickname'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="withCause">{{'dashboard.parents.absenceType'|translate}}</th>
-                <th pSortableColumn="cause">{{'dashboard.parents.absenceCause'|translate}}</th>
+                <th pSortableColumn="studentNumber">{{'schools.studentId'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'schools.studentName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="surname">{{'schools.studentNickname'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="withCause">{{'parents.absenceType'|translate}}</th>
+                <th pSortableColumn="cause">{{'parents.absenceCause'|translate}}</th>
                 <th *permit="claimsEnum.E_D_AbsentStudent"></th>
             </tr>
         </ng-template>
@@ -101,13 +101,13 @@
                 <td>{{studentObj?.student?.id}}</td>
                 <td>{{studentObj?.student?.name |currentLang}}</td>
                 <td>{{studentObj?.student?.surname |currentLang}}</td>
-                <td>{{studentObj?.withCause=='WithCause' ? ("dashboard.parents.withCause"|translate) : ("dashboard.parents.withoutCause"|translate)}}</td>
+                <td>{{studentObj?.withCause=='WithCause' ? ("parents.withCause"|translate) : ("parents.withoutCause"|translate)}}</td>
                 <td *ngIf="studentObj?.cause">{{studentObj?.cause?.name | currentLang}}</td>
                 <td *ngIf="!studentObj?.cause">-----</td>
                 <td *permit="claimsEnum.E_D_AbsentStudent">
                     <div class="d-flex justify-content-end gap-5 ps-5">
                         <div class="alerting success">
-                            <span class="fw-bold color-skyBlue-600">{{'dashboard.schools.absent' |translate}}</span>
+                            <span class="fw-bold color-skyBlue-600">{{'schools.absent' |translate}}</span>
                         </div>
                         <div role="button" (click)="this.confirmModelService.openModel(); selectedRecord=studentObj">
                                 <img   src="assets/images/shared/rect-xmark.svg" alt="">
@@ -150,7 +150,7 @@
 
 
 <!-- Add absence Student Dialog -->
-<p-dialog header="{{'dashboard.schools.raisAbsence'| translate}}" [(visible)]="absenceModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw',height:'75vh'}">
+<p-dialog header="{{'schools.raisAbsence'| translate}}" [(visible)]="absenceModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw',height:'75vh'}">
     <ng-template pTemplate="content">
         <div class="custom-form parent-modal" #form="ngForm" ngForm>
             <label class="label required">{{'shared.date' | translate}}</label>
@@ -168,7 +168,7 @@
 
              <div class="d-flex align-items-center gap-4  my-5">
               <!-- <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch> -->
-              <label class="mb-2" for="description">{{'dashboard.schools.absenceStudentsExist'|translate}}</label>
+              <label class="mb-2" for="description">{{'schools.absenceStudentsExist'|translate}}</label>
               <p-inputSwitch name="isAbsence" #isAbsence ngModel (onChange)="resetSelectedStudents()"></p-inputSwitch>
               <span class="mb-2" for="name">{{(isAbsence.checked() )? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
             </div>
@@ -191,17 +191,17 @@
                        <div class="col-md-6 d-flex align-items-center gap-5">
                            <div class="d-flex align-items-center gap-4" *ngIf="student.isAbsencent">
                                <p-checkbox [name]="'withCause'+i"  [trueValue]="1" [falseValue]="1" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
-                               <label class="label label--sm" > {{'dashboard.parents.withCause' | translate}}</label>
+                               <label class="label label--sm" > {{'parents.withCause' | translate}}</label>
                            </div>
 
                            <div class="d-flex align-items-center gap-4" *ngIf="student.isAbsencent">
                                <p-checkbox [name]="'withoutCause'+i"  [trueValue]="0" [falseValue]="0" [(ngModel)]="student.withCause" [binary]="true" [required]="true"></p-checkbox>
-                               <label class="label label--sm" > {{'dashboard.parents.withoutCause' | translate}}</label>
+                               <label class="label label--sm" > {{'parents.withoutCause' | translate}}</label>
                            </div>
                        </div>
 
                        <div class="my-4" *ngIf="student.withCause && student.isAbsencent">
-                           <p-dropdown [options]="absenceReason$ |async" [(ngModel)]="student.cause" [required]="true" [name]="'cause'+i" optionLabel="{{lang=='ar' ?'name.ar':'name.en'}}" optionValue="id" placeholder="{{'dashboard.parents.chooseAbsenceCause'|translate}}"></p-dropdown>
+                           <p-dropdown [options]="absenceReason$ |async" [(ngModel)]="student.cause" [required]="true" [name]="'cause'+i" optionLabel="{{lang=='ar' ?'name.ar':'name.en'}}" optionValue="id" placeholder="{{'parents.chooseAbsenceCause'|translate}}"></p-dropdown>
                        </div>
 
                    </ng-container>

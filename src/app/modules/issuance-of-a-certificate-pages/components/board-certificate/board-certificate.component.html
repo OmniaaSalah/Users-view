@@ -3,9 +3,9 @@
 <div class="custom-form mt-6 bg-white p-5 radius-15">
 
     <h4 class="mb-4 color-primary" style="font-weight: 700" *ngIf="!activateSpeaView">
-        {{"dashboard.issue of certificate.Add the required information - board certification"| translate}}
+        {{"issue of certificate.Add the required information - board certification"| translate}}
     </h4>
-    <!-- <span class="mb-4" style="color: #afafaf">{{"dashboard.issue of certificate.please2" | translate}}</span> -->
+    <!-- <span class="mb-4" style="color: #afafaf">{{"issue of certificate.please2" | translate}}</span> -->
     <br />
 
 
@@ -13,13 +13,13 @@
         <div class="d-flex">
             <button type="submit" class="btn btn-primary mx-2" (click)="sendBoardCertificateReq()"
                 [disabled]="!saveBtn || isBtnLoading || !isBoardFileSelected()">
-                {{ "dashboard.issue of certificate.Save" | translate }}
+                {{ "issue of certificate.Save" | translate }}
                 <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
             </button>
 
             <ng-container *ngIf="!activateSpeaView">
-              <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">{{ "dashboard.issue of certificate.previous" | translate }}</button>
-              <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()">{{ "dashboard.issue of certificate.previous" | translate }}</button>
+              <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">{{ "issue of certificate.previous" | translate }}</button>
+              <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()">{{ "issue of certificate.previous" | translate }}</button>
             </ng-container>
         </div>
     </div>
@@ -33,18 +33,18 @@
 
             <div class="d-flex align-items-center gap-3 mb-6">
               <img  style="width:1.75rem" src="assets/images/home/student/student.svg" alt="">
-              <h3 class="heading heading--secondary color-primary">{{'dashboard.schools.student' | translate}} :- </h3>
+              <h3 class="heading heading--secondary color-primary">{{'schools.student' | translate}} :- </h3>
               <span class="color-skyBlue-500 fw-bold">{{student?.name |currentLang}}</span>
             </div>
 
 
             <div class="col-md-4">
                 <p class="label">
-                    {{ "dashboard.issue of certificate.Select reason" | translate }}
+                    {{ "issue of certificate.Select reason" | translate }}
                 </p>
                 <p-dropdown [options]="boardReasons$ | async"
                     optionLabel="{{ lang == 'ar' ? 'name.ar' : 'name.en' }}" (ngModelChange)="onReasonChange($event, i)"
-                    name="reason" ngModel optionValue="id" placeholder="{{'dashboard.issue of certificate.Enter the reason' |translate}}">
+                    name="reason" ngModel optionValue="id" placeholder="{{'issue of certificate.Enter the reason' |translate}}">
                 </p-dropdown>
             </div>
 
@@ -56,7 +56,7 @@
 
             </div> -->
 
-            <label class="fw-bold mt-6 mb-4">{{'dashboard.students.boardFile' | translate}} :- </label>
+            <label class="fw-bold mt-6 mb-4">{{'students.boardFile' | translate}} :- </label>
 
             <div class="row align-items-end" *ngIf="student?.attachments?.length">
                 <!-- <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p> -->

@@ -66,7 +66,7 @@ export enum StatusEnum {
 
 
 
-export enum RegistrationStatus{
+export enum StudentStatus{
     Unregistered='Unregistered',
     Registered="Registered",
     Transferd="Transferd",
@@ -80,6 +80,17 @@ export enum RegistrationStatus{
     WithdrawalOutOfTheCountry='WithdrawalOutOfTheCountry',
 
     NewRegistered='NewRegistered',
+}
+
+
+export enum RegistraterRequestStatus{
+  NewRegistered ='NewRegistered',
+  Withdrawal = 'Withdrawal',
+  TransferInTheEmirategovernmental ='TransferInTheEmirategovernmental',
+  TransferInTheEmirateprivate ='TransferInTheEmirateprivate',
+  TransferOutsideTheEmirategovernmental ='TransferOutsideTheEmirategovernmental',
+  TransferOutsideTheEmirateprivate ='TransferOutsideTheEmirateprivate',
+  TransferOutOfTheCountry ='TransferOutOfTheCountry' ,
 }
 
 export enum ReEnrollmentType{

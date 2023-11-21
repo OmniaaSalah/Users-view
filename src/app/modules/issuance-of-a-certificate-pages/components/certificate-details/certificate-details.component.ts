@@ -136,7 +136,7 @@ export class CertificateDetailsComponent implements OnInit {
   print() {
     this.isLoading=true
     this.generatePdf().then(pdf=>{
-      pdf.save(this.translate.instant('dashboard.issue of certificate.' +this.certificateType))
+      pdf.save(this.translate.instant('issue of certificate.' +this.certificateType))
       this.isLoading=false
 
     })

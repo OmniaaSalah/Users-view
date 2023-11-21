@@ -37,7 +37,7 @@
                 <div class="col-4">
 
                        <div class="row">
-                                <div class="col-4 label">{{'dashboard.SchoolYear.Related curriculum'|translate }}</div>
+                                <div class="col-4 label">{{'SchoolYear.Related curriculum'|translate }}</div>
                                 <div class="col-6 value ">{{class?.curriculum|currentLang}}</div>
 
                        </div>
@@ -46,7 +46,7 @@
                 <div class="col-4"  >
 
                        <div class="row">
-                                <div class="col-4 label">{{'dashboard.SchoolYear.Class'|translate}}</div>
+                                <div class="col-4 label">{{'SchoolYear.Class'|translate}}</div>
                                 <div class="col-6 value ">{{class?.grade|currentLang}}</div>
 
                        </div>
@@ -55,7 +55,7 @@
                 <div class="col-4"   >
 
                     <div class="row">
-                                <div class="col-8 label">{{'dashboard.SchoolYear.Minmum Subject Numbers that fails student'|translate}}</div>
+                                <div class="col-8 label">{{'SchoolYear.Minmum Subject Numbers that fails student'|translate}}</div>
                                 <div class="col-4 value " >{{class?.minmumSubjectNumbers}}</div>
 
                     </div>
@@ -67,7 +67,7 @@
             <div class="col-4">
 
                    <div class="row">
-                    <div class="col-8 label" for="nationality">{{'dashboard.SchoolYear.Are you need to Activate Age for this class'|translate}}</div>
+                    <div class="col-8 label" for="nationality">{{'SchoolYear.Are you need to Activate Age for this class'|translate}}</div>
                     <div class="col-4 statusvalue">
                              {{'shared.activated'|translate}}
                              <p-inputSwitch    formControlName="activateAge" readonly="true"></p-inputSwitch>
@@ -82,7 +82,7 @@
               <div class="col-6">
 
                 <div class="d-flex gap-5">
-                  <div class=" label">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}}</div>
+                  <div class=" label">{{'SchoolYear.Minmum Age for student from insidecountry'|translate}}</div>
                   <div class="value ">
                     <span class="color-primary">{{'shared.From'|translate}}</span> {{class?.minAgeInsideCountryFrom | toLocalDate|LocalizeDate}}
                     <span class="color-primary">{{'shared.To'|translate}}</span> {{class?.minAgeOutsideCountryTo | toLocalDate| LocalizeDate}}
@@ -94,7 +94,7 @@
               <div class="col-6">
 
                 <div class="d-flex gap-5">
-                  <div class="label">{{'dashboard.SchoolYear.Minmum Age for student from outsidecountry'|translate}}</div>
+                  <div class="label">{{'SchoolYear.Minmum Age for student from outsidecountry'|translate}}</div>
                   <div class="value ">
                     <span class="color-primary">{{'shared.From'|translate}}</span> {{class?.minAgeOutsideCountryFrom |toLocalDate |LocalizeDate}}
                     <span class="color-primary">{{'shared.To'|translate}}</span> {{class?.minAgeOutsideCountryTo | toLocalDate |LocalizeDate }}
@@ -108,9 +108,9 @@
        </div>
     <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
            <div class="col-xs-4 col-lg-4" >
-               <label class="label" for="nationality">{{'dashboard.SchoolYear.Related curriculum'|translate }} <span class="star">*</span> </label>
+               <label class="label" for="nationality">{{'SchoolYear.Related curriculum'|translate }} <span class="star">*</span> </label>
                <div class="col-6 value mt-5" *ngIf="classUrlParameter">{{class?.curriculum|currentLang}}</div>
-               <p-dropdown [options]="curriculumClassList"[showClear]="true"  StopProp *ngIf="!classUrlParameter" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="curriculumId" inputId="precantage" formControlName="relatedCurriculumId" (onChange)="onCurriculumChange($event.value)"  placeholder="{{'dashboard.SchoolYear.Select Related curriculum'|translate }}" name="PID5" id="PID5" [ngClass]="{'ng-invalid ng-dirty':relatedCurriculumId.errors?.['required'] && relatedCurriculumId.touched}" ></p-dropdown>
+               <p-dropdown [options]="curriculumClassList"[showClear]="true"  StopProp *ngIf="!classUrlParameter" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="curriculumId" inputId="precantage" formControlName="relatedCurriculumId" (onChange)="onCurriculumChange($event.value)"  placeholder="{{'SchoolYear.Select Related curriculum'|translate }}" name="PID5" id="PID5" [ngClass]="{'ng-invalid ng-dirty':relatedCurriculumId.errors?.['required'] && relatedCurriculumId.touched}" ></p-dropdown>
                <div [hidden]="relatedCurriculumId.valid || relatedCurriculumId.untouched">
                 <small *ngIf="relatedCurriculumId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                   {{'shared.This Field is Required'|translate}}
@@ -121,9 +121,9 @@
              </div>
            </div>
            <div class="col-xs-4 col-lg-4">
-               <label class="label" for="precantage">{{'dashboard.SchoolYear.Class'|translate}} <span class="star">*</span> </label>
+               <label class="label" for="precantage">{{'SchoolYear.Class'|translate}} <span class="star">*</span> </label>
                <div class="col-6 value mt-5" *ngIf="classUrlParameter">{{class?.grade|currentLang}}</div>
-               <p-dropdown [options]="classList" [showClear]="true" StopProp *ngIf="!classUrlParameter" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id"  inputId="precantage" formControlName="classId" [ngClass]="{'ng-invalid ng-dirty':classId.errors?.['required'] && classId.touched}"  placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID5" id="PID5"  ></p-dropdown>
+               <p-dropdown [options]="classList" [showClear]="true" StopProp *ngIf="!classUrlParameter" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id"  inputId="precantage" formControlName="classId" [ngClass]="{'ng-invalid ng-dirty':classId.errors?.['required'] && classId.touched}"  placeholder="{{'SchoolYear.Select Class'|translate}}" name="PID5" id="PID5"  ></p-dropdown>
                <div [hidden]="classId.valid || classId.untouched">
                 <small *ngIf="classId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                   {{'shared.This Field is Required'|translate}}
@@ -134,14 +134,14 @@
              </div>
               </div>
            <div class="col-xs-4 col-lg-4">
-            <label class="label" for="nationality">{{'dashboard.SchoolYear.Minmum Subject Numbers that fails student'|translate}}</label>
-            <input type="text" pInputText formControlName="minmumSubjectNumbers"  class="form-control " [LangRestrict]="'numb'"  placeholder="{{'dashboard.SchoolYear.Enter Subject Numbers'|translate}}" name="PID" id="PID">
+            <label class="label" for="nationality">{{'SchoolYear.Minmum Subject Numbers that fails student'|translate}}</label>
+            <input type="text" pInputText formControlName="minmumSubjectNumbers"  class="form-control " [LangRestrict]="'numb'"  placeholder="{{'SchoolYear.Enter Subject Numbers'|translate}}" name="PID" id="PID">
 
           </div>
      </div>
      <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
        <div class="col-xs-4 col-lg-4">
-           <label class="label" for="nationality">{{'dashboard.SchoolYear.Are you need to Activate Age for this class'|translate}} <span class="star">*</span></label>
+           <label class="label" for="nationality">{{'SchoolYear.Are you need to Activate Age for this class'|translate}} <span class="star">*</span></label>
            <div class="Status">
                     {{'shared.activated'|translate}}
                     <p-inputSwitch  (onChange)="isToggleLabel($event.checked)" formControlName="activateAge"></p-inputSwitch>
@@ -153,11 +153,11 @@
 
         </div>
        <div class="col-xs-4 col-lg-4 ">
-           <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}} </label>
+           <label class="label" for="precantage">{{'SchoolYear.Minmum Age for student from insidecountry'|translate}} </label>
 
                 <div class="d-flex gap-2">
                     <div>
-                    <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeInsideCountryFrom" [maxDate]="minAgeInsideCountryTo?.value ? minAgeInsideCountryTo?.value:currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryFrom.errors?.['required'] && minAgeInsideCountryFrom.touched}"     placeholder="{{'dashboard.SchoolYear.From Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
+                    <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeInsideCountryFrom" [maxDate]="minAgeInsideCountryTo?.value ? minAgeInsideCountryTo?.value:currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryFrom.errors?.['required'] && minAgeInsideCountryFrom.touched}"     placeholder="{{'SchoolYear.From Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
                     <div [hidden]="minAgeInsideCountryFrom.valid || minAgeInsideCountryFrom.untouched">
                       <small *ngIf="minAgeInsideCountryFrom.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                         {{'shared.This Field is Required'|translate}}
@@ -166,7 +166,7 @@
                   </div>
                   </div>
                   <div>
-                    <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeInsideCountryTo" [minDate]="minAgeInsideCountryFrom?.value" [maxDate]="currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryTo.errors?.['required'] && minAgeInsideCountryTo.touched}"     placeholder="{{'dashboard.SchoolYear.To Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
+                    <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeInsideCountryTo" [minDate]="minAgeInsideCountryFrom?.value" [maxDate]="currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryTo.errors?.['required'] && minAgeInsideCountryTo.touched}"     placeholder="{{'SchoolYear.To Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
                     <div [hidden]="minAgeInsideCountryTo.valid || minAgeInsideCountryTo.untouched">
                       <small *ngIf="minAgeInsideCountryTo.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                         {{'shared.This Field is Required'|translate}}
@@ -177,10 +177,10 @@
                 </div>
     </div>
        <div class="col-xs-4 col-lg-4">
-        <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from outsidecountry'|translate}} </label>
+        <label class="label" for="precantage">{{'SchoolYear.Minmum Age for student from outsidecountry'|translate}} </label>
         <div class="d-flex gap-2">
           <div>
-            <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeOutsideCountryFrom"   [maxDate]="minAgeOutsideCountryTo?.value ? minAgeOutsideCountryTo?.value:currentDate"     [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryFrom.errors?.['required'] && minAgeOutsideCountryFrom.touched}"  placeholder="{{'dashboard.SchoolYear.From Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
+            <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeOutsideCountryFrom"   [maxDate]="minAgeOutsideCountryTo?.value ? minAgeOutsideCountryTo?.value:currentDate"     [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryFrom.errors?.['required'] && minAgeOutsideCountryFrom.touched}"  placeholder="{{'SchoolYear.From Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
           <div [hidden]="minAgeOutsideCountryFrom.valid || minAgeOutsideCountryFrom.untouched">
             <small *ngIf="minAgeOutsideCountryFrom.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
               {{'shared.This Field is Required'|translate}}
@@ -189,7 +189,7 @@
         </div>
         </div>
         <div>
-          <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeOutsideCountryTo"   [minDate]="minAgeOutsideCountryFrom?.value"  [maxDate]="currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryTo.errors?.['required'] && minAgeOutsideCountryTo.touched}"  placeholder="{{'dashboard.SchoolYear.To Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
+          <p-calendar   [showIcon]="true" inputId="icon"    formControlName="minAgeOutsideCountryTo"   [minDate]="minAgeOutsideCountryFrom?.value"  [maxDate]="currentDate"    [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryTo.errors?.['required'] && minAgeOutsideCountryTo.touched}"  placeholder="{{'SchoolYear.To Date'| translate}}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
           <div [hidden]="minAgeOutsideCountryTo.valid || minAgeOutsideCountryTo.untouched">
             <small *ngIf="minAgeOutsideCountryTo.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
               {{'shared.This Field is Required'|translate}}
@@ -205,7 +205,7 @@
    </div>
    <div  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current" role="button" class=" mb-5 color-primary d-flex color-gray-50 align-items-center justify-content-center gap-3 p-3" (click)="openSubjectModel()" >
     <fa-icon [icon]="faPlus"></fa-icon>
-    <span>{{'dashboard.SchoolYear.add subject' |translate}}</span>
+    <span>{{'SchoolYear.add subject' |translate}}</span>
    </div>
    <div class="prim-table ">
     <p-table  #dt [value]="classSubjectsList"  sortMode="single"  [scrollable]="true" scrollHeight="480px" [virtualScroll]="true" [virtualRowHeight]="95" >
@@ -213,12 +213,12 @@
 
       <ng-template pTemplate="header" >
             <tr  >
-              <th  pSortableColumn="name.ar" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.Subject Name'|translate}}</th>
-              <th  style="min-width:18rem"  pSortableColumn="subjectHours"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.Subjects.subjectHours'|translate}}</th>
-              <th  style="min-width:19rem" pSortableColumn="numberOfCoursesPerWeek"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.SchoolYear.Number Of Courses Per Week'|translate}}</th>
-              <th  style="min-width:19rem" pSortableColumn="inFinalResult"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.SchoolYear.Is in finalresult'|translate}}</th>
-              <th   pSortableColumn="isThereGPA"><p-sortIcon field="isThereGPA"></p-sortIcon>{{'dashboard.SchoolYear.GPA'|translate}}</th>
-              <th  style="min-width:21.5rem" pSortableColumn="maxGPA"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.SchoolYear.Maximum GPA'|translate}}</th>
+              <th  pSortableColumn="name.ar" ><p-sortIcon  field="name" ></p-sortIcon>{{'SchoolYear.Subject Name'|translate}}</th>
+              <th  style="min-width:18rem"  pSortableColumn="subjectHours"><p-sortIcon  field="id"></p-sortIcon>{{'Subjects.subjectHours'|translate}}</th>
+              <th  style="min-width:19rem" pSortableColumn="numberOfCoursesPerWeek"><p-sortIcon field="phoneno"></p-sortIcon>{{'SchoolYear.Number Of Courses Per Week'|translate}}</th>
+              <th  style="min-width:19rem" pSortableColumn="inFinalResult"><p-sortIcon  field="email"></p-sortIcon>{{'SchoolYear.Is in finalresult'|translate}}</th>
+              <th   pSortableColumn="isThereGPA"><p-sortIcon field="isThereGPA"></p-sortIcon>{{'SchoolYear.GPA'|translate}}</th>
+              <th  style="min-width:21.5rem" pSortableColumn="maxGPA"><p-sortIcon field="nationality"></p-sortIcon>{{'SchoolYear.Maximum GPA'|translate}}</th>
               <th pSortableColumn="edit" class="actions"  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current"></th>
 
 
@@ -238,7 +238,7 @@
 
 
                 <td class="actions"  *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
-                        <button class=" d-flex  align-items-center gap-3 justify-content-end mx-4" (click)="tittle='dashboard.SchoolYear.Edit subject to this class';editSubject(e)" >
+                        <button class=" d-flex  align-items-center gap-3 justify-content-end mx-4" (click)="tittle='SchoolYear.Edit subject to this class';editSubject(e)" >
                           <span class="color-skyBlue-400">{{'shared.edit'|translate}}</span>
                           <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                          </button>
@@ -284,8 +284,8 @@
 
     <div class="row gx-5 form-set">
       <div class="col-6">
-          <label class="label" for="nationality">{{'dashboard.SchoolYear.Subject'|translate}} <span class="star">*</span> </label>
-          <p-dropdown [options]="subjectList"(onChange)="checkSubjectSelected($event.value)"  optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" formControlName="subject" [ngClass]="{'ng-invalid ng-dirty':subject.errors?.['required'] && subject.touched}" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}"></p-dropdown>
+          <label class="label" for="nationality">{{'SchoolYear.Subject'|translate}} <span class="star">*</span> </label>
+          <p-dropdown [options]="subjectList"(onChange)="checkSubjectSelected($event.value)"  optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" formControlName="subject" [ngClass]="{'ng-invalid ng-dirty':subject.errors?.['required'] && subject.touched}" inputId="nationality" placeholder="{{'SchoolYear.Select Subject'|translate}}"></p-dropdown>
           <div [hidden]="subject.valid || subject.untouched">
             <small *ngIf="subject.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
               {{'shared.This Field is Required'|translate}}
@@ -295,14 +295,14 @@
          </div>
         </div>
       <div class="col-6">
-          <label class="label" for="precantage">{{'dashboard.Subjects.Subject Hours'|translate}} (Credit Hours)</label>
+          <label class="label" for="precantage">{{'Subjects.Subject Hours'|translate}} (Credit Hours)</label>
           <p-inputNumber formControlName="subjectHours" [min]="1" [ngClass]="{'ng-invalid ng-dirty':subjectHours.errors?.['required'] && subjectHours.touched}" mode="decimal" [showButtons]="true"  inputId="minmax-buttons"    ></p-inputNumber>
 
         </div>
     </div>
     <div class="row gx-5 form-set">
       <div class="col-6">
-          <label class="label" for="nationality">{{'dashboard.SchoolYear.Number Of Courses Per Week'| translate}} <span class="star">*</span> </label>
+          <label class="label" for="nationality">{{'SchoolYear.Number Of Courses Per Week'| translate}} <span class="star">*</span> </label>
           <p-inputNumber formControlName="numberOfCoursesPerWeek"  mode="decimal" [showButtons]="true" [ngClass]="{'ng-invalid ng-dirty':numberOfCoursesPerWeek.errors?.['required'] && numberOfCoursesPerWeek.touched}" inputId="minmax-buttons"  [min]="1"  [max]="32"  ></p-inputNumber>
           <div [hidden]="numberOfCoursesPerWeek.valid || numberOfCoursesPerWeek.untouched">
             <small *ngIf="numberOfCoursesPerWeek.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -314,7 +314,7 @@
         </div>
       <div class="col-6">
 
-        <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.Is in finalresult'|translate }} <span class="star">*</span> </label>
+        <label class="label mb-5" for="precantage">{{'SchoolYear.Is in finalresult'|translate }} <span class="star">*</span> </label>
         <p-radioButton  [value]="true"   formControlName="inFinalResult" label="{{'true'|translate}}" ></p-radioButton>
         <p-radioButton  [value]="false"  formControlName="inFinalResult"  class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
 
@@ -323,13 +323,13 @@
 
     <div class="row gx-5 form-set">
       <div class="col-6">
-          <label class="label mb-5" for="nationality">{{'dashboard.SchoolYear.is Mandatory'| translate}} <span class="star">*</span> </label>
+          <label class="label mb-5" for="nationality">{{'SchoolYear.is Mandatory'| translate}} <span class="star">*</span> </label>
           <p-radioButton [value]="true" (onClick)="checkMandatory($event.value)" formControlName="isMandatory" label="{{'true'|translate}}" ></p-radioButton>
           <p-radioButton [value]="false" (onClick)="checkMandatory($event.value)" formControlName="isMandatory" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
       </div>
       <div class="col-6">
 
-        <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.is there GPA'|translate }} <span class="star">*</span> </label>
+        <label class="label mb-5" for="precantage">{{'SchoolYear.is there GPA'|translate }} <span class="star">*</span> </label>
         <p-radioButton  [value]="true" (onClick)="checkExistInGPA($event.value)" formControlName="isThereGPA" label="{{'true'|translate}}" ></p-radioButton>
         <p-radioButton [value]="false" (onClick)="checkExistInGPA($event.value)" formControlName="isThereGPA" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
 
@@ -337,7 +337,7 @@
     </div>
     <div class="row gx-5 form-set" *ngIf="isThereGPA.value">
         <div class="col-6">
-          <label class="label " for="precantage">{{'dashboard.SchoolYear.Maximum GPA'|translate }} <span class="star" *ngIf="maxGPA.errors?.['required']">*</span> </label>
+          <label class="label " for="precantage">{{'SchoolYear.Maximum GPA'|translate }} <span class="star" *ngIf="maxGPA.errors?.['required']">*</span> </label>
           <p-inputNumber formControlName="maxGPA"  mode="decimal" [showButtons]="false"  class=" form-control number b-0" inputId="minmax-buttons"  [min]="1"  ></p-inputNumber>
           <div [hidden]="maxGPA.valid || maxGPA.untouched">
             <small *ngIf="maxGPA.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">

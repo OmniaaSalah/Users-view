@@ -20,7 +20,7 @@ import { SystemRequestService } from 'src/app/modules/request-list/services/syst
 import { StudentsService } from 'src/app/modules/students/services/students/students.service';
 import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
+import { RegistraterRequestStatus, StudentStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -38,7 +38,7 @@ export class ReturnRequestComponent implements OnInit {
   lang = this.translationService.lang
   scope = inject(UserService).getScope()
   get ScopeEnum(){ return UserScope}
-  get registrtionStatusEnum () {return RegistrationStatus}
+  get registrtionStatusEnum () {return StudentStatus}
   get currentUserScope (){return this.userService.getScope()}
 
   parentId = +this.route.snapshot.paramMap.get('parentId')
@@ -57,6 +57,16 @@ export class ReturnRequestComponent implements OnInit {
   componentHeaderData: IHeader
 
 
+  registrationStatusOptions=[
+    {name:this.translate.instant('shared.allStatus.NewRegistered'), value: RegistraterRequestStatus.NewRegistered},
+    {name:this.translate.instant('shared.allStatus.Withdrawal'), value: RegistraterRequestStatus.Withdrawal},
+    {name:this.translate.instant('shared.allStatus.TransferInTheEmirategovernmental'), value: RegistraterRequestStatus.TransferInTheEmirategovernmental},
+    {name:this.translate.instant('shared.allStatus.TransferInTheEmirateprivate'), value: RegistraterRequestStatus.TransferInTheEmirateprivate},
+    {name:this.translate.instant('shared.allStatus.TransferOutsideTheEmirategovernmental'), value: RegistraterRequestStatus.TransferOutsideTheEmirategovernmental},
+    {name:this.translate.instant('shared.allStatus.TransferOutsideTheEmirateprivate'), value: RegistraterRequestStatus.TransferOutsideTheEmirateprivate},
+    {name:this.translate.instant('shared.allStatus.TransferOutOfTheCountry'), value: RegistraterRequestStatus.TransferOutOfTheCountry},
+
+  ]
 
   booleanOptions = this.sharedService.booleanOptions
   disabilitiesOptions = [
@@ -133,18 +143,19 @@ export class ReturnRequestComponent implements OnInit {
 
     this.registerReqForm = this.fb.group({
       id:[formValue?.requestNumber], //request id
-      childId:[formValue?.student?.status !=RegistrationStatus.Withdrawal ? formValue.student?.id :null],
-      studentId:[formValue?.student?.status ==RegistrationStatus.Withdrawal ? formValue?.student?.id : null],
+      childId:[formValue?.student?.status !=StudentStatus.Withdrawal ? formValue.student?.id :null],
+      studentId:[formValue?.student?.status ==StudentStatus.Withdrawal ? formValue?.student?.id : null],
       guardianId:[formValue?.guardian?.id],
       schoolId:[formValue?.school?.id,Validators.required],
       gradeId: [formValue?.grade?.id ,Validators.required],
-      studentStatus:[formValue?.student?.status || RegistrationStatus.Unregistered ],
+      studentStatus:[formValue?.student?.status || StudentStatus.Unregistered ],
       isChildOfAMartyr:[ formValue?.isChildOfAMartyr?? null,  this.isRequired() ? Validators.required :[]],
       isSpecialAbilities:[formValue?.isSpecialAbilities ?? null, this.isRequired() ? Validators.required :[]],
       isSpecialClass:[formValue?.isSpecialClass ?? null],
       isInFusionClass:formValue?.isInFusionClass ?? [null],
       specialEducationId:[formValue?.specialEducation?.id ?? null],
       attachments:[[]],
+      registrationStatus:[null, Validators.required]
     })
 
     if(formValue?.isSpecialAbilities) {
@@ -163,12 +174,12 @@ export class ReturnRequestComponent implements OnInit {
 
 
   isRequired(){
-    return !(this.childData?.status ==RegistrationStatus.Withdrawal || this.scope ==this.ScopeEnum.SPEA)
+    return !(this.childData?.status ==StudentStatus.Withdrawal || this.scope ==this.ScopeEnum.SPEA)
   }
 
 
   getStudentInfo(){
-    if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
+    if(this.childRegistrationStatus==StudentStatus.Withdrawal){
       this.studentService.getStudent(this.route.snapshot.params['childId'])
       .subscribe(res=>{
         this.childData = res.result
@@ -355,21 +366,21 @@ export class ReturnRequestComponent implements OnInit {
     if(this.currentUserScope== this.ScopeEnum.Guardian){
       this.componentHeaderData = {
         breadCrump: [
-          { label: this.translate.instant('dashboard.parents.sendRegisterReq') ,routerLink:`/parent/child/${this.childId}/register-request`,},
+          { label: this.translate.instant('parents.sendRegisterReq') ,routerLink:`/parent/child/${this.childId}/register-request`,},
         ],
-        mainTitle: { main: this.translate.instant('dashboard.parents.sendRegisterReq') }
+        mainTitle: { main: this.translate.instant('parents.sendRegisterReq') }
       }
 
     }else{
 
       this.componentHeaderData={
         breadCrump: [
-          { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'//schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-          {label: this.translate.instant('dashboard.students.registerChildByCommission'), routerLink: `//schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}/register`}
+          { label: this.translate.instant('parents.parents') ,routerLink:'//schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('parents.childrenList') ,routerLink:`//schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+          {label: this.translate.instant('students.registerChildByCommission'), routerLink: `//schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}/register`}
         ],
         mainTitle: {
-          main: this.translate.instant('dashboard.students.registerChildByCommission')
+          main: this.translate.instant('students.registerChildByCommission')
         }
       }
     };

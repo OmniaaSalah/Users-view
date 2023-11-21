@@ -193,7 +193,7 @@ isSameAnswer(el, index, arr) {
 
   this._survey.sendParentSurvey(data).subscribe(res=>{
     this.isBtnLoading=false;
-    this.toastr.success(this.translate.instant('dashboard.replySurvey.Survey is suibmitted successfully'))
+    this.toastr.success(this.translate.instant('replySurvey.Survey is suibmitted successfully'))
     this.router.navigateByUrl('/');
   },(err)=>{ this.isBtnLoading=false;
     this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));

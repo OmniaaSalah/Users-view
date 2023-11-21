@@ -1,4 +1,4 @@
-import { RegistrationStatus } from "src/app/shared/enums/status/status.enum"
+import { StudentStatus } from "src/app/shared/enums/status/status.enum"
 import { City } from "../cities/citiy.model"
 import { Curriculum, Division, Grade, Localization, Track } from "../global/global.model"
 
@@ -40,7 +40,7 @@ export interface Student{
 
         guardianId:number
         // registrationStatus: string
-        studentStatus: RegistrationStatus,
+        studentStatus: StudentStatus,
         isOwnsLaptop: boolean
         isHasInternet: boolean
         isUsePublicTransportation: boolean

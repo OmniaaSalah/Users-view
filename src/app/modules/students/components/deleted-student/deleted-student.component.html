@@ -14,7 +14,7 @@
 
         <div class="content  radius-15 border-dark custom-form" [formGroup]="deleteStudentForm">
             <div class="col-md-4 form-set">
-                <label class="label required" for="cause">{{'dashboard.students.reasonForDelete' |translate}} </label>
+                <label class="label required" for="cause">{{'students.reasonForDelete' |translate}} </label>
                 <p-dropdown [options]=" deletsCauseOptions$ | async" formControlName="deleteRequestReasonId" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'WriteDeleteReason'|translate}}"></p-dropdown>
             </div>
 

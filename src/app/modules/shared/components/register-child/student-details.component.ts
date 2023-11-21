@@ -11,7 +11,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileTypeEnum } from 'src/app/shared/enums/file/file.enum';
-import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { StudentStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { StudentService } from '../../services/register-child/register-child.service';
@@ -49,7 +49,7 @@ export class StudentDetailsComponent
     return ClaimsEnum;
   }
   get registrationStatusEnum() {
-    return RegistrationStatus;
+    return StudentStatus;
   }
   get fileTypesEnum() {
     return FileTypeEnum;
@@ -265,67 +265,67 @@ export class StudentDetailsComponent
 
   steps = [
     {
-      title: this.translate.instant('dashboard.parents.personalInfo'),
+      title: this.translate.instant('parents.personalInfo'),
       index: 0,
       claims: [this.claimsEnum.SEG_R_StudentInfo],
       isActive: true,
     },
     {
-      title: this.translate.instant('dashboard.parents.acceptanceInfo'),
+      title: this.translate.instant('parents.acceptanceInfo'),
       index: 1,
       claims: [this.claimsEnum.SEG_R_StudentAcceptanceInfo],
       isActive: false,
     },
     {
-      title: this.translate.instant('dashboard.parents.attendanceAndAbsence'),
+      title: this.translate.instant('parents.attendanceAndAbsence'),
       index: 2,
       claims: [this.claimsEnum.SEG_R_StudentAbsenceAndAttendance],
       isActive: false,
     },
     {
-      title: this.translate.instant('dashboard.students.studentAttachedment'),
+      title: this.translate.instant('students.studentAttachedment'),
       index: 3,
       claims: [this.claimsEnum.SEG_R_StudentAttachments],
       isActive: false,
     },
     {
-      title: this.translate.instant('dashboard.parents.certificateList'),
+      title: this.translate.instant('parents.certificateList'),
       index: 4,
       claims: [this.claimsEnum.SEG_R_StudentCertificates],
       isActive: false,
     },
     {
-      title: this.translate.instant('dashboard.students.studentBehavior'),
+      title: this.translate.instant('students.studentBehavior'),
       index: 5,
       claims: [this.claimsEnum.SEG_R_StudentBehavior],
       isActive: false,
     },
     {
-      title: this.translate.instant('dashboard.students.medicalFile'),
+      title: this.translate.instant('students.medicalFile'),
       index: 6,
       claims: [this.claimsEnum.SEG_R_StudentMedicalFile],
       isActive: false,
     },
     {
-      title: this.translate.instant('dashboard.parents.subjectsAndDegrees'),
+      title: this.translate.instant('parents.subjectsAndDegrees'),
       index: 7,
       claims: [this.claimsEnum.SEG_R_StudentSubjectsAndDegrees],
       isActive: false,
     },
     {
-      title: this.translate.instant('dashboard.parents.studentRecord'),
+      title: this.translate.instant('parents.studentRecord'),
       index: 8,
       claims: [this.claimsEnum.SEG_R_StudentRecord],
       isActive: false,
     },
     {
-      title: this.translate.instant('dashboard.parents.editableList'),
+      title: this.translate.instant('parents.editableList'),
       index: 9,
       claims: [], //this.claimsEnum.SEG_R_StudentEditList
       isActive: false,
     },
     {
-      title: this.translate.instant('dashboard.parents.requests'),
+      title: this.translate.instant('parents.requests'),
       index: 10,
       claims: [this.claimsEnum.GSE_R_StudentRequests], //
       isActive: false,
@@ -432,24 +432,24 @@ export class StudentDetailsComponent
       if (this.currentUserScope == UserScope.Employee) {
         this.componentHeaderData.breadCrump = [
           {
-            label: this.translate.instant('dashboard.students.studentsList'),
+            label: this.translate.instant('students.studentsList'),
             routerLink: '/student-management/students',
             routerLinkActiveOptions: { exact: true },
           },
           {
-            label: this.translate.instant('dashboard.students.StudentInfo'),
+            label: this.translate.instant('students.StudentInfo'),
             routerLink: '/student-management/students/student/' + this.studentId,
           },
         ];
       } else if (this.currentUserScope == UserScope.SPEA) {
         this.componentHeaderData.breadCrump = [
           {
-            label: this.translate.instant('dashboard.students.studentsList'),
+            label: this.translate.instant('students.studentsList'),
             routerLink: '/schools-and-students/students',
             routerLinkActiveOptions: { exact: true },
           },
           {
-            label: this.translate.instant('dashboard.students.StudentInfo'),
+            label: this.translate.instant('students.StudentInfo'),
             routerLink:
               '/schools-and-students/students/student/' + this.studentId,
           },
@@ -461,44 +461,44 @@ export class StudentDetailsComponent
         this.componentHeaderData = {
           breadCrump: [
             {
-              label: this.translate.instant('dashboard.parents.parents'),
+              label: this.translate.instant('parents.parents'),
               routerLink: '/student-management/all-parents/',
               routerLinkActiveOptions: { exact: true },
             },
             {
-              label: this.translate.instant('dashboard.parents.childrenList'),
+              label: this.translate.instant('parents.childrenList'),
               routerLink: `/student-management/all-parents/parent/${this.parentId}/all-children`,
               routerLinkActiveOptions: { exact: true },
             },
             {
-              label: this.translate.instant('dashboard.parents.sonDetails'),
+              label: this.translate.instant('parents.sonDetails'),
               routerLink: `/student-management/all-parents/parent/${this.parentId}/student/${this.childId}`,
             },
           ],
           mainTitle: {
-            main: this.translate.instant('dashboard.parents.sonDetails'),
+            main: this.translate.instant('parents.sonDetails'),
           },
         };
       } else if (this.currentUserScope == UserScope.SPEA) {
         this.componentHeaderData = {
           breadCrump: [
             {
-              label: this.translate.instant('dashboard.parents.parents'),
+              label: this.translate.instant('parents.parents'),
               routerLink: '/schools-and-students/all-parents/',
               routerLinkActiveOptions: { exact: true },
             },
             {
-              label: this.translate.instant('dashboard.parents.childrenList'),
+              label: this.translate.instant('parents.childrenList'),
               routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/all-children`,
               routerLinkActiveOptions: { exact: true },
             },
             {
-              label: this.translate.instant('dashboard.parents.sonDetails'),
+              label: this.translate.instant('parents.sonDetails'),
               routerLink: `/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}`,
             },
           ],
           mainTitle: {
-            main: this.translate.instant('dashboard.parents.sonDetails'),
+            main: this.translate.instant('parents.sonDetails'),
           },
         };
       } else if (this.currentUserScope == UserScope.Guardian) {
@@ -506,12 +506,12 @@ export class StudentDetailsComponent
         this.componentHeaderData = {
           breadCrump: [
             {
-              label: this.translate.instant('dashboard.parents.sonDetails'),
+              label: this.translate.instant('parents.sonDetails'),
               routerLink: `/parent/${this.parentId}/student/${this.childId}`,
             },
           ],
           mainTitle: {
-            main: this.translate.instant('dashboard.parents.sonDetails'),
+            main: this.translate.instant('parents.sonDetails'),
           },
         };
       }

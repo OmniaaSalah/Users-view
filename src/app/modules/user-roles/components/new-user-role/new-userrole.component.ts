@@ -123,7 +123,7 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
     this.headerService.Header.next({
       breadCrump: [
         {
-          label: this.translate.instant('dashboard.UserRole.List Of Job Roles'),
+          label: this.translate.instant('UserRole.List Of Job Roles'),
           routerLink: '/manager-tools/user-roles/user-roles-list',
           routerLinkActiveOptions: { exact: true },
         },
@@ -217,7 +217,7 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
       this.schoolIsSelectedList.forEach((element) => this.schoolIds.push(element.id) );
 
       if (this.schoolIds.length == 0) {
-        this.toastService.error(this.translate.instant('dashboard.UserRole.error,please add one school at least'));
+        this.toastService.error(this.translate.instant('UserRole.error,please add one school at least'));
         this.isBtnLoading = false;
       } else {
         this.saveMe();
@@ -233,7 +233,7 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
       });
 
       if (this.curriculumIds.length == 0) {
-        this.toastService.error(this.translate.instant('dashboard.UserRole.error,please add one curriculum at least'));
+        this.toastService.error(this.translate.instant('UserRole.error,please add one curriculum at least'));
         this.isBtnLoading = false;
       } else {
         this.saveMe();
@@ -271,16 +271,16 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
             this.isBtnLoading = false;
 
             if (res.statusCode != 'OK') {
-              this.toastService.error(res.errorLocalized[this.lang] || this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+              this.toastService.error(res.errorLocalized[this.lang] || this.translate.instant('AnnualHoliday.error,please try again'));
             } else {
-              this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
+              this.toastService.success(this.translate.instant('UserRole.JobRole edited Successfully'));
               this.router.navigate(['/manager-tools/user-roles/user-roles-list',]);
             }
           },
           (err) => {
             this.isBtnLoading = false;
             this.toastService.error(
-              this.translate.instant('dashboard.AnnualHoliday.error,please try again')
+              this.translate.instant('AnnualHoliday.error,please try again')
             );
           }
         );
@@ -292,13 +292,13 @@ export class NewUserRoleComponent implements OnInit, OnDestroy {
           if (res.statusCode == 'BadRequest') {
             this.toastService.error(this.translate.instant(res.error));
           } else {
-            this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
+            this.toastService.success(this.translate.instant('UserRole.JobRole added Successfully'));
             this.router.navigate(['/manager-tools/user-roles/user-roles-list']);
           }
         },
         (err) => {
           this.isBtnLoading = false;
-          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+          this.toastService.error(this.translate.instant('AnnualHoliday.error,please try again'));
         }
       );
     }

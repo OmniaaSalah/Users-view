@@ -40,13 +40,13 @@
                     <div class="d-flex align-items-center gap-3 p-4">
                         <img src="assets\images\home\schools-students/bullet2.svg" class="bullet">
                         <span class="d-flex">
-                            {{ 'dashboard.parents.attentDays'|translate }} : <b>{{absence.attendenceDays}}</b>
+                            {{ 'parents.attentDays'|translate }} : <b>{{absence.attendenceDays}}</b>
                         </span>
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <img src="assets\images\home\schools-students/bullet1.svg" class="bullet">
                         <span class="d-flex">
-                            {{ 'dashboard.parents.absencDays'|translate }} : <b>{{absence.absenceDays}}</b>
+                            {{ 'parents.absencDays'|translate }} : <b>{{absence.absenceDays}}</b>
                         </span>
                     </div>
                 </div>
@@ -56,26 +56,26 @@
 
 
         <div class="col-12">
-            <h3 class="heading heading--tertiary mb-4">{{ 'dashboard.parents.absenceDaysDetails'|translate }}</h3>
+            <h3 class="heading heading--tertiary mb-4">{{ 'parents.absenceDaysDetails'|translate }}</h3>
 
             <div class="prim-table" *ngIf="absence.totalAllData || absence.loading">
                 <p-table [value]="absence.list" (onSort)="onSort($event)">
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
-                            <th pSortableColumn="date">{{'dashboard.parents.absenceDate'|translate }}
+                            <th pSortableColumn="date">{{'parents.absenceDate'|translate }}
                                 <p-sortIcon field="date"></p-sortIcon>
                             </th>
-                            <th pSortableColumn="absenceType">{{'dashboard.parents.absenceWithCause'|translate }}
+                            <th pSortableColumn="absenceType">{{'parents.absenceWithCause'|translate }}
                                 <p-sortIcon field="absenceType"></p-sortIcon>
                             </th>
-                            <th pSortableColumn="absenceReson">{{'dashboard.parents.absenceCause'|translate }}</th>
+                            <th pSortableColumn="absenceReson">{{'parents.absenceCause'|translate }}</th>
                         </tr>
                     </ng-template>
 
                     <ng-template pTemplate="body" let-absence let-columns="columns">
                         <tr>
                             <td>{{absence.date | LocalizeDate}}</td>
-                            <td>{{absence.absenceType==absenceType.WithCause? ("dashboard.parents.withCause"|translate) : ("dashboard.parents.withoutCause"|translate)}}</td>
+                            <td>{{absence.absenceType==absenceType.WithCause? ("parents.withCause"|translate) : ("parents.withoutCause"|translate)}}</td>
                             <td>{{absence.absenceType==absenceType.WithCause ? (absence.absenceReson|currentLang ): '-----'}}</td>
                         </tr>
                     </ng-template>

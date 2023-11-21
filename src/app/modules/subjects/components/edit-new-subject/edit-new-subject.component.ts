@@ -134,7 +134,7 @@ export class EditNewSubjectComponent implements OnInit {
         breadCrump: [
           {
             label: this.translate.instant(
-              'dashboard.Subjects.List Of Subjects'
+              'Subjects.List Of Subjects'
             ),
             routerLink: '/educational-settings/subject/subjects-list',
             routerLinkActiveOptions: { exact: true },
@@ -142,8 +142,8 @@ export class EditNewSubjectComponent implements OnInit {
           {
             label:
               this.urlParameter == null || this.urlParameter == ''
-                ? this.translate.instant('dashboard.Subjects.Add New Subject')
-                : this.translate.instant('dashboard.Subjects.Edit Subject'),
+                ? this.translate.instant('Subjects.Add New Subject')
+                : this.translate.instant('Subjects.Edit Subject'),
             routerLink:
               this.urlParameter == null || this.urlParameter == ''
                 ? '/educational-settings/subject/new-subject'
@@ -154,8 +154,8 @@ export class EditNewSubjectComponent implements OnInit {
         mainTitle: {
           main:
             this.urlParameter == null || this.urlParameter == ''
-              ? this.translate.instant('dashboard.Subjects.Add New Subject')
-              : this.translate.instant('dashboard.Subjects.Edit Subject'),
+              ? this.translate.instant('Subjects.Add New Subject')
+              : this.translate.instant('Subjects.Edit Subject'),
         },
       });
     } else {
@@ -164,8 +164,8 @@ export class EditNewSubjectComponent implements OnInit {
           {
             label:
               this.urlParameter == null || this.urlParameter == ''
-                ? this.translate.instant('dashboard.Subjects.Add New Subject')
-                : this.translate.instant('dashboard.Subjects.Edit Subject'),
+                ? this.translate.instant('Subjects.Add New Subject')
+                : this.translate.instant('Subjects.Edit Subject'),
             routerLink:
               this.urlParameter == null || this.urlParameter == ''
                 ? `/school-management/school/${this.schoolId}/subjects/new-subject`
@@ -175,8 +175,8 @@ export class EditNewSubjectComponent implements OnInit {
         mainTitle: {
           main:
             this.urlParameter == null || this.urlParameter == ''
-              ? this.translate.instant('dashboard.Subjects.Add New Subject')
-              : this.translate.instant('dashboard.Subjects.Edit Subject'),
+              ? this.translate.instant('Subjects.Add New Subject')
+              : this.translate.instant('Subjects.Edit Subject'),
         },
       });
     }
@@ -409,7 +409,7 @@ export class EditNewSubjectComponent implements OnInit {
             (res) => {
               this.isBtnLoading = false;
               if (res.statusCode != 'BadRequest') {
-                this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
+                this.toastService.success(this.translate.instant('Subjects.Subject added Successfully'));
               } else {
                 this.toastService.error(this.translate.instant('This subject is already exist'));
               }
@@ -425,7 +425,7 @@ export class EditNewSubjectComponent implements OnInit {
             },
             (err) => {
               this.isBtnLoading = false;
-              this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
+              this.toastService.error(this.translate.instant('Subjects.error,please try again'));
             }
           );
       } else {
@@ -445,7 +445,7 @@ export class EditNewSubjectComponent implements OnInit {
               if (res.statusCode != 'BadRequest') {
                 this.toastService.success(
                   this.translate.instant(
-                    'dashboard.Subjects.Subject edited Successfully'
+                    'Subjects.Subject edited Successfully'
                   )
                 );
               } else {
@@ -464,7 +464,7 @@ export class EditNewSubjectComponent implements OnInit {
             (err) => {
               this.isBtnLoading = false;
               this.toastService.error(
-                this.translate.instant('dashboard.Subjects.error,please try again'));
+                this.translate.instant('Subjects.error,please try again'));
             }
           );
       }
@@ -473,7 +473,7 @@ export class EditNewSubjectComponent implements OnInit {
         this.subjectServise.updateSubject(this.addedSubject).subscribe((res) => {
             this.isBtnLoading = false;
             if (res.statusCode != 'BadRequest') {
-              this.toastService.success(this.translate.instant('dashboard.Subjects.Subject edited Successfully'));
+              this.toastService.success(this.translate.instant('Subjects.Subject edited Successfully'));
               this.router.navigate(['/educational-settings/subject/subjects-list',]);
             } else {
               this.toastService.error(this.translate.instant('This subject is already exist'));
@@ -482,7 +482,7 @@ export class EditNewSubjectComponent implements OnInit {
           (err) => {
             this.isBtnLoading = false;
             this.toastService.error(
-              this.translate.instant('dashboard.Subjects.error,please try again'));
+              this.translate.instant('Subjects.error,please try again'));
           }
         );
       } else {
@@ -490,7 +490,7 @@ export class EditNewSubjectComponent implements OnInit {
           (res) => {
             this.isBtnLoading = false;
             if (res.statusCode != 'BadRequest') {
-              this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
+              this.toastService.success(this.translate.instant('Subjects.Subject added Successfully'));
               this.router.navigate(['/educational-settings/subject/subjects-list',]);
             } else {
               this.toastService.error(
@@ -501,7 +501,7 @@ export class EditNewSubjectComponent implements OnInit {
           (err) => {
             this.isBtnLoading = false;
             this.toastService.error(
-              this.translate.instant('dashboard.Subjects.error,please try again'));
+              this.translate.instant('Subjects.error,please try again'));
           }
         );
       }

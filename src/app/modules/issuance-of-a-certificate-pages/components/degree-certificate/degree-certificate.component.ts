@@ -136,7 +136,7 @@ export class DegreeCertificateComponent implements OnInit, OnChanges {
 
       httpReq$.subscribe(result=>{
       this.onSubmit=false;
-      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+      this.toastr.success(this.translate.instant('issue of certificate.success message'));
       this.onCancel.emit();
       if(this.activateSpeaView) this.location.back()
 

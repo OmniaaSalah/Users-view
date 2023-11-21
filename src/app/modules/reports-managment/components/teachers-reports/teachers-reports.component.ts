@@ -41,7 +41,7 @@ export class TeachersReportsComponent implements OnInit {
   }
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generateteachersReport'),routerLink:'/reports-managment/teachers-reports' },
+      { label: this.translate.instant('reports.generateteachersReport'),routerLink:'/reports-managment/teachers-reports' },
     ],
   }
   constructor(
