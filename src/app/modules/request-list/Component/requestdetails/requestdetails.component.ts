@@ -135,7 +135,7 @@ export class RequestdetailsComponent implements OnInit {
       this.reqActionsForm.registrationStatus = res.result?.registrationStatus
       this.checkDashboardHeader();
 
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, res?.reqActionsForm?.gradeId).pipe(map((res:any) => res?.data ||[]));
+      // this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, this.reqActionsForm?.gradeId).pipe(map((res:any) => res?.data ||[]));
      })
   }
 
@@ -195,6 +195,7 @@ export class RequestdetailsComponent implements OnInit {
 
       return;
     }else if(isRegistrationReqLastStep){
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(this.requestDetails?.school?.id, this.reqActionsForm?.gradeId).pipe(map((res:any) => res?.data ||[]));
       this.addStudentTodivisionModal = true
       return
 
