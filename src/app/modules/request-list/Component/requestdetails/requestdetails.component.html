@@ -264,9 +264,18 @@
                         </div> -->
                         <div class="col-md-4 d-flex align-items-center gap-5">
                           <p class="color-gray-300 fs-4">{{'reports.registration status' | translate}}</p>
-                          <h4
+                          <ng-container *ngIf="requestDetails.registrationStatus=='Withdrawal'">
+                            <h4
+                            *ngIf="currentUserScope !=userScopeEnum.Employee" class="color-primary">
+                            {{'shared.allStatus.ReEnrolment'|translate}}</h4>
+                          </ng-container>
+                          <ng-container *ngIf="requestDetails.registrationStatus!='Withdrawal'">
+                            <h4
                             *ngIf="currentUserScope !=userScopeEnum.Employee" class="color-primary">
                             {{'shared.allStatus.'+requestDetails.registrationStatus |translate}}</h4>
+                          </ng-container>
+
+
                             <div class="flex-grow-1">
                               <p-dropdown
                                   *ngIf="currentUserScope ==userScopeEnum.Employee"
