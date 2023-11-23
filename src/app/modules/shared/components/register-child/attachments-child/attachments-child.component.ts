@@ -158,7 +158,9 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
 
   addNewAttachment(){
-    let index = this.attachments.findIndex(el => el?.indexId && (el?.indexId === this.newAttachmentForm.value.indexId))
+    console.log(this.newAttachmentForm.value);
+
+    let index = this.attachments.findIndex(el => el?.indexId && (el?.indexId === this.newAttachmentForm.value.indexId?.id))
     if(index > -1) this.attachments[index].files = this.attachments[index].files.map(file=> ({...file, url:'', name:''}))
 
 
@@ -183,7 +185,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
           comment:''
         }],
         titel : this.newAttachmentForm.value.titel,
-        indexId : this.newAttachmentForm.value.indexId,
+        indexId : this.newAttachmentForm.value.indexId?.id,
       })
     }
 
