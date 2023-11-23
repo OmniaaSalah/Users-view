@@ -1,109 +1,135 @@
-@import 'src/assets/css/utils/variables.scss';
-.custom-validation-form{
+@import "src/assets/css/utils/variables.scss";
+.custom-validation-form {
+  border-radius: 12px;
+  padding-top: 4rem;
+  padding-bottom: 8rem;
+  input {
+    border-radius: 15px !important;
+    &.basicinput {
+      height: 57px;
+    }
+    &.inputgroupfrom {
+      border-top-left-radius: 0px !important;
+      border-bottom-left-radius: 0px !important;
+      border-left: 2px solid #d1d1d1 !important;
+    }
+    &.inputgroupto {
+      border-bottom-right-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+    }
+    &.p-inputtext {
+      border: 0.1px solid #d8d8d8;
+      box-shadow: none;
+    }
+  }
 
-    border-radius: 12px;
-    padding-top: 4rem;
-    padding-bottom: 8rem;
-    input{
+  .alert-danger {
+    color: #ef525b;
+  }
+  .form-control:disabled {
+    background-color: $color-white;
+  }
+  .form-control.ng-touched.ng-invalid {
+    border-radius: 16px !important;
+    box-shadow: inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b,
+      inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b !important;
+    &.inputgroupfrom {
+      border-top-left-radius: 0px !important;
+      border-bottom-left-radius: 0px !important;
+    }
+    &.inputgroupto {
+      border-bottom-right-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+    }
+    &.number {
+      padding: 1px 1px;
+    }
+    &.p-inputwrapper-focus {
+      box-shadow: none !important;
+      border: none !important;
+      &:enabled:hover {
+        border:none;
+      }
+    }
+  }
 
-        border-radius: 15px !important;
-        &.basicinput{height: 57px;}
-        &.inputgroupfrom{border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important;border-left: 2px solid #D1D1D1 !important;}
-        &.inputgroupto{border-bottom-right-radius: 0px !important;border-top-right-radius: 0px !important}
-        &.p-inputtext{
-
-            border:0.1px solid  #d8d8d8 ;
-            box-shadow: none;
-
+  ::ng-deep {
+    input {
+      &.p-inputtext:focus {
+        box-shadow: none;
+        &.form-control {
+          // border: none;
         }
+      }
+    }
+    p-dropdown {
+      &.ng-dirty.ng-invalid > .p-dropdown {
+        box-shadow: inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b,
+          inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b !important;
+      }
 
+      .p-dropdown {
+        border: 0.1px solid #d8d8d8 !important;
+        background-color: #fff;
+      }
     }
 
-    .alert-danger{ color: #EF525B;}
-    .form-control:disabled {background-color: $color-white;}
-    .form-control.ng-touched.ng-invalid{
-        border-radius: 16px !important;
-        box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
-        &.inputgroupfrom{border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important}
-        &.inputgroupto{border-bottom-right-radius: 0px !important;border-top-right-radius: 0px !important}
-        &.number{
-            padding: 1px 1px;
-        }
-        &.p-inputwrapper-focus{box-shadow: none !important;border: none !important;  &:enabled:hover {
-            border:none;
-          }}
-      
+    p-multiselect {
+      &.ng-dirty.ng-invalid > .p-multiselect {
+        box-shadow: inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b,
+          inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b !important;
+      }
+      .p-multiselect {
+        border: 0.1px solid #d8d8d8 !important;
+        background-color: #fff;
+      }
     }
 
-    ::ng-deep{
-        input{&.p-inputtext:focus{box-shadow: none;&.form-control{border: none;}}}
-        p-dropdown{
+    .p-inputwrapper-focus {
+      .p-inputnumber {
+        // border: none;
+      }
+      .p-password {
+        box-shadow: none;
+        border: none;
+      }
 
-                    &.ng-dirty.ng-invalid>.p-dropdown {
-                        box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
-                    }
-
-            .p-dropdown{
-                border:0.1px solid  #d8d8d8 !important;
-                background-color: #fff ;
-
-
-            }
-        }
-
-        p-multiselect{
-
-            &.ng-dirty.ng-invalid>.p-multiselect {
-                box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
-            }
-            .p-multiselect{
-                border:0.1px solid  #d8d8d8 !important;
-                background-color: #fff ;
-
-            }
-
-        }
-
-        .p-inputwrapper-focus{
-            .p-inputnumber{
-                // border: none;
-            }
-            .p-password{box-shadow: none;border: none;}
-
-            .p-multiselect{box-shadow: none;border: none;}
-        }
-
-        p-inputnumber{
-
-            &.ng-dirty.ng-invalid  {
-                border-radius: 12px;
-                border: 2px solid #EF525B !important;
-
-            }
-        }
-
-        p-calendar{
-            &.ng-dirty.ng-invalid>.p-calendar {
-                box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
-            }
-
-            .p-calendar{
-                border:0.1px solid  #d8d8d8 !important;
-                background-color: #fff ;
-
-            }
-        }
-
-        p-password{
-            // &.ng-invalid.ng-dirty > .p-password > .p-inputtext{border:none;}
-            // &.ng-dirty.ng-invalid .p-password input.p-inputtext:focuS{box-shadow:none;}
-            &.ng-invalid.ng-dirty>.p-password>.p-inputtext {
-                border: none;
-                box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
-            }
-            
-        }
-        .p-chips{ box-shadow: none; }
+      .p-multiselect {
+        box-shadow: none;
+        border: none;
+      }
     }
 
+    p-inputnumber {
+      &.ng-dirty.ng-invalid {
+        border-radius: 12px;
+        border: 2px solid #ef525b !important;
+      }
+    }
+
+    p-calendar {
+      &.ng-dirty.ng-invalid > .p-calendar {
+        box-shadow: inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b,
+          inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b !important;
+      }
+
+      .p-calendar {
+        border: 0.1px solid #d8d8d8 !important;
+        background-color: #fff;
+      }
+    }
+
+    p-password {
+      // &.ng-invalid.ng-dirty > .p-password > .p-inputtext{border:none;}
+      // &.ng-dirty.ng-invalid .p-password input.p-inputtext:focuS{box-shadow:none;}
+      &.ng-invalid.ng-dirty > .p-password > .p-inputtext {
+        border: none;
+        box-shadow: inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b,
+          inset 0 0 0 1px #ef525b, inset 0 0 0 1px #ef525b !important;
+      }
+    }
+    .p-chips {
+      box-shadow: none;
+    }
+  }
 }

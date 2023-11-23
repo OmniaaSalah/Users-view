@@ -140,7 +140,7 @@
 
     <div *ngIf="childRegistrationStatus==registrtionStatusEnum.Withdrawal">
       <div class="row radius-15 border-dark p-5 mb-6 g-5 align-items-end">
-        <div class="col-md-4">
+        <div class="col-md-4" *ngIf="registerReqForm" [formGroup]="registerReqForm">
           <label class="label">{{'reports.registration status' | translate}} <span class="star">*</span></label>
           <p-dropdown [options]="registrationStatusOptions" formControlName="registrationStatus" optionValue="value"  optionLabel="name" placeholder="{{'reports.registration status' |translate}}"></p-dropdown>
         </div>

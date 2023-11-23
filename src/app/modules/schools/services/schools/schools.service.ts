@@ -13,6 +13,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ISchoolChart } from '../../components/school-list/school-charts/school-chart.models';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { getLocalizedValue } from 'src/app/core/helpers/helpers';
+import { LocalizeDatePipe } from 'src/app/shared/pipes/localize-date.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class SchoolsService {
   get userScope() { return UserScope };
   constructor(private http:HttpHandlerService,
     private tableLoaderService: LoaderService,
-    private userService:UserService,
+    private localizeDatePipe:LocalizeDatePipe,
     private translate:TranslateService
     ) {}
 
@@ -126,7 +127,7 @@ export class SchoolsService {
             [this.translate.instant('AnnualHoliday.Year')]: item?.year,
             [this.translate.instant('schools.holidayName')]: item?.name[this.lang],
             [this.translate.instant('shared.date' )]: this.translate.instant('shared.From')+" "+item?.dateFrom+" "+this.translate.instant('shared.To')+" "+item?.dateTo,
-            [this.translate.instant('shared.Created Date')]: item?.createdDate,
+            [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(item?.createdDate, 'd / M / yyyy', 'en') ,
             [this.translate.instant('AnnualHoliday.Holiday Status')]: item?.flexibilityStatus==StatusEnum.Flexible?this.translate.instant('shared.allStatus.Flexible'):this.translate.instant('shared.allStatus.NotFlexible'),
 
 

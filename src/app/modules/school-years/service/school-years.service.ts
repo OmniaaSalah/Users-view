@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
+import { LocalizeDatePipe } from 'src/app/shared/pipes/localize-date.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,11 @@ export class SchoolYearsService {
   // classSubjectsList;
   topStudentsList;
   schoolYearsStatus;
-  constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
+  constructor(
+    private http:HttpHandlerService,
+    private translate:TranslateService,
+    private localizeDatePipe:LocalizeDatePipe,
+    private loaderService: LoaderService) {
 
 
   this.schoolYearsStatus=[
@@ -146,10 +151,10 @@ export class SchoolYearsService {
           return {
             [this.translate.instant('SchoolYear.School Year Name')]: schoolYear?.name[this.lang],
             [this.translate.instant('SchoolYear.curriculum Number')]: schoolYear?.curriculumCount,
-            [this.translate.instant('SchoolYear.School Year StartDate')]:  schoolYear?.startDate,
-            [this.translate.instant('SchoolYear.School Year EndDate')]: schoolYear?.endDate,
+            [this.translate.instant('SchoolYear.School Year StartDate')]:  this.localizeDatePipe.transform(schoolYear?.startDate, 'd / M / yyyy', 'en') ,
+            [this.translate.instant('SchoolYear.School Year EndDate')]: this.localizeDatePipe.transform(schoolYear?.endDate, 'd / M / yyyy', 'en'),
             [this.translate.instant('SchoolYear.WeekEnd Days')]: this.convertWeekEnds(schoolYear?.weekEndDays).join(', '),
-            [this.translate.instant('shared.Created Date')]: schoolYear?.createdDate,
+            [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(schoolYear?.createdDate, 'd / M / yyyy', 'en'),
             [this.translate.instant('SchoolYear.Status')]: schoolYear?.status.name[this.lang],
 
           }

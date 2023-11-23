@@ -103,7 +103,7 @@ export class RequestdetailsComponent implements OnInit {
   currentState
   states
 
-  AllGrades$ =this.sharedService.getAllGrades('')
+  AllGrades$ =this.sharedService.getGradesByAge('')
 
   constructor(
     private translate: TranslateService,
@@ -135,7 +135,7 @@ export class RequestdetailsComponent implements OnInit {
       this.reqActionsForm.registrationStatus = res.result?.registrationStatus
       this.checkDashboardHeader();
 
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, res?.result?.grade?.id).pipe(map((res:any) => res?.data ||[]));
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, res?.reqActionsForm?.gradeId).pipe(map((res:any) => res?.data ||[]));
      })
   }
 

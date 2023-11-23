@@ -24,7 +24,7 @@
                         (onClear)="clearFilter()">
 
 
-                            <div class="row gx-5 form-set">
+                            <div class="row gx-3 form-set">
                                 <div class="col-3" *ngIf="currentUserScope != userScope.Guardian">
                                   <label class="label" for="evaluationType"> {{'Requests.show'|translate}} </label>
                                   <p-dropdown [showClear]="true" [options]="showOptions" [(ngModel)]="filtration.userRequestType" optionLabel="name" optionValue="value" ></p-dropdown>
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
 
-                            <div class="row gx-5 form-set" *ngIf="currentUserScope != userScope.Guardian && !this.isMyRequests">
+                            <div class="row gx-3 form-set" *ngIf="currentUserScope != userScope.Guardian && !this.isMyRequests">
                               <div class="col-3">
                                 <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
                                 <p-multiSelect display="chip"  [options]="(curriculums$ | async)"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" [(ngModel)]="filtration.curriculumId" placeholder="{{'shared.chooseCurriculum'|translate}}"></p-multiSelect>
