@@ -155,7 +155,7 @@ export class ReturnRequestComponent implements OnInit {
       isInFusionClass:formValue?.isInFusionClass ?? [null],
       specialEducationId:[formValue?.specialEducation?.id ?? null],
       attachments:[[]],
-      registrationStatus:[null, Validators.required]
+      registrationStatus:[formValue?.registrationStatus ?? null, Validators.required]
     })
 
     if(formValue?.isSpecialAbilities) {

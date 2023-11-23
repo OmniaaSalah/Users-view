@@ -51,7 +51,7 @@ export class RequestdetailsComponent implements OnInit {
 
   registrationStatusOptions=[
     {name:this.translate.instant('shared.allStatus.NewRegistered'), value: RegistraterRequestStatus.NewRegistered},
-    {name:this.translate.instant('shared.allStatus.Withdrawal'), value: RegistraterRequestStatus.Withdrawal},
+    {name:this.lang=='ar' ? 'إعادة قيد': 'Re Enrolment', value: RegistraterRequestStatus.Withdrawal},
     {name:this.translate.instant('shared.allStatus.TransferInTheEmirategovernmental'), value: RegistraterRequestStatus.TransferInTheEmirategovernmental},
     {name:this.translate.instant('shared.allStatus.TransferInTheEmirateprivate'), value: RegistraterRequestStatus.TransferInTheEmirateprivate},
     {name:this.translate.instant('shared.allStatus.TransferOutsideTheEmirategovernmental'), value: RegistraterRequestStatus.TransferOutsideTheEmirategovernmental},
@@ -103,7 +103,7 @@ export class RequestdetailsComponent implements OnInit {
   currentState
   states
 
-  AllGrades$ =this.sharedService.getGradesByAge('')
+  AllGrades$ =this.sharedService.getAllGrades('')
 
   constructor(
     private translate: TranslateService,
@@ -214,6 +214,9 @@ export class RequestdetailsComponent implements OnInit {
       optionId: this.submittedOption.id,
       // attachments:this.filesToUpload.map(file=> ({title: file.name, absolutePath: file.url.replace('https://valsquad.blob.core.windows.net', '') }))
     };
+    // console.log(action,this.reqActionsForm);
+
+    // return
 
     this.requestsService.changeRequestState(action)
     .subscribe(res=>{
