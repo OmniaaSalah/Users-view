@@ -123,7 +123,7 @@ export class SystemRequestService {
             [this.translate.instant('schools.studentId')]: getLocalizedValue(item?.student?.id) || this.translate.instant('shared.notFound'),
             [this.translate.instant('Requests.Status')]: this.translate.instant('Requests.'+item.requestStatus),
             [this.translate.instant('Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
-            [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(item?.createdDate, 'd / MMMM / y', 'en'),
+            [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(item?.createdDate, 'd / M / yyyy', 'en'),
 
           }
         })
@@ -169,8 +169,8 @@ export class SystemRequestService {
           [this.translate.instant('shared.grade')]: getLocalizedValue(item?.grade?.name) || this.translate.instant('shared.notFound'),
           [this.translate.instant('shared.curriculum')]: getLocalizedValue(item?.curriculum?.name) || this.translate.instant('shared.notFound'),
           [this.translate.instant('Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
-          [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(item?.createdDate, 'd / MMMM / y', 'en'),
-          [this.translate.instant('Subjects.Last EditDate')]: this.localizeDatePipe.transform(item?.lastUpdatedDate, 'd / MMMM / y', 'en'),
+          [this.translate.instant('shared.Created Date')]: this.localizeDatePipe.transform(item?.createdDate, 'd / M / yyyy', 'en'),
+          [this.translate.instant('Subjects.Last EditDate')]: this.localizeDatePipe.transform(item?.lastUpdatedDate, 'd / M / yyyy', 'en'),
           [this.translate.instant('Requests.Status')]: this.translate.instant('Requests.'+item.requestStatus),
           [this.translate.instant('myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
 

@@ -210,6 +210,11 @@ export class SharedService {
     }))
   }
 
+  getGradesByAge(schoolid ){
+    // if(this.allGrades) return of(this.allGrades)
+    return this.http.get(`/get-grade-bybirthdate/${schoolid}`)
+
+  }
   getAllNationalities(){
     if(this.allNationality) return of(this.allNationality)
     return this.http.get(`/Nationality?SortColumnName=${this.lang=='ar'?'ArName':'EnName'}`).pipe(take(1),map(val => {

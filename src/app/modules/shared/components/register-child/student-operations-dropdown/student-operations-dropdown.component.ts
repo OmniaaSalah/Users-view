@@ -131,7 +131,8 @@ export class StudentOperationsDropdownComponent implements OnInit, OnChanges {
         isAllowed$ :this.settingServcice.isSchoolExistInGracePeriod({schoolId: this.student?.school?.id, code: GracePeriodEnum.repeatStudyPhase}),
         icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest
       },
-      {label: this.translate.instant('students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
+      {
+        label: this.student?.emiratesId? this.translate.instant('students.sendRequestToEditPersonalInfo') : this.translate.instant('students.sendUpdateStudentDataReq'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
       {
         label: this.translate.instant('students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',
         disabled: this.student?.studentStatus === StudentStatus.Withdrawal ||this. student?.studentProhibited?.withdrawingFromSchool || this.student?.studentProhibited?.withdrawingFromSPEA,
