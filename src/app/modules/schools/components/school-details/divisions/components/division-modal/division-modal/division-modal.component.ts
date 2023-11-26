@@ -13,20 +13,20 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 export class DivisionModalComponent implements OnInit {
   @Input()schoolId;
   @Input()classId;
+  @Input() isOpen =false
   @Output() onDivisionModelClosed= new EventEmitter<any>();
+
   lang = inject(TranslationService).lang
   exclamtionIcon=faExclamationCircle;
-  divisionModelOpened:boolean=false;
   isBtnLoading:boolean=false;
   gradesList=[];
   divisionFormGrp:FormGroup;
-  constructor(private fb:FormBuilder,private divisionService:DivisionService,private gradesService:GradesService) { 
+  constructor(private fb:FormBuilder,private divisionService:DivisionService,private gradesService:GradesService) {
 
   }
 
   ngOnInit(): void {
     this.initForm();
-    this.divisionService.divisionModelOpened.subscribe((res)=>{this.divisionModelOpened=res;})
     this.gradesService.getSchoolGardes(this.schoolId).pipe(map(res=>res.data)).subscribe(res=>{this.gradesList=res;})
   }
 
@@ -73,25 +73,23 @@ export class DivisionModalComponent implements OnInit {
     });
   }
 
-  clearDivisionForm()
-  {
-    this.divisionService.divisionModelOpened.next(false)
+  onModelClosed(){
     this.divisionFormGrp.reset();
     Object.keys( this.divisionFormGrp.controls).forEach((key) => {
       const control = this.divisionFormGrp.controls[key];
       control.markAsPristine();
       control.markAsUntouched();
     });
-    
-   this.isSpecialAbilities.setValue(false);
-   if(this.classId) this.gradeId.setValue(this.classId);
+
+    this.isSpecialAbilities.setValue(false);
+    if(this.classId) this.gradeId.setValue(this.classId);
+    this.onDivisionModelClosed.emit()
   }
 
   saveDivision(){
    this.isBtnLoading=true;
    this.divisionService.addDivision(this.divisionFormGrp.value).subscribe((res)=>{
     this.isBtnLoading=false;
-    this.divisionService.divisionModelOpened.next(false)
     this.onDivisionModelClosed.emit()
    },(err)=>{
     this.isBtnLoading=false;

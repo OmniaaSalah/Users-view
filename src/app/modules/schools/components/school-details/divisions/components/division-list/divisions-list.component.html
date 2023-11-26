@@ -1,3 +1,8 @@
+<div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
+  <button  class="btn btn-primary btn--sm px-5" *permit="claimsEnum.SE_A_Division" (click)="addNewDivision()">
+      <span>{{'schools.addDivisionToschool'| translate}}</span>
+  </button>
+</div>
 
 <div class="prim-table mt-4" *ngIf="divisions.totalAllData || divisions.loading">
     <p-table #dt [value]="divisions.list" [scrollable]="true">
@@ -9,11 +14,7 @@
                         <label class="label" for="status">{{'shared.grade'|translate }} </label>
                         <p-multiSelect [lazy]="true" [options]="schoolGrades" display="chip"  [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.grade'|translate }}"></p-multiSelect>
                     </div>
-                    <div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
-                            <button  class="btn btn-primary btn--sm px-5" *permit="claimsEnum.SE_A_Division" (click)="addNewDivision()">
-                                <span>{{'schools.addDivisionToschool'| translate}}</span>
-                            </button>
-                    </div>
+
                 </div>
             </app-table-caption>
 
@@ -105,4 +106,9 @@
 </ng-container>
 
 
-<app-division-modal [schoolId]="schoolId" [classId]="gardeId" (onDivisionModelClosed)="getSchoolDivisions()"></app-division-modal>
+<app-division-modal
+*ngIf="modelOpened"
+[schoolId]="schoolId"
+[classId]="gardeId"
+[isOpen]="modelOpened"
+(onDivisionModelClosed)="getSchoolDivisions();modelOpened=false"></app-division-modal>
