@@ -62,7 +62,7 @@ componentHeaderData: IHeader = {
     loading:true
   }
 
-
+  modelOpened=false
 
 
    constructor(
@@ -161,9 +161,8 @@ componentHeaderData: IHeader = {
 
    }
 
-   addNewDivision()
-   {
-    this.divisionService.divisionModelOpened.next(true);
+   addNewDivision(){
+    this.modelOpened=true
    }
 
 

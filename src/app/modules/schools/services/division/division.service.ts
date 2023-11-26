@@ -13,7 +13,6 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   providedIn: 'root'
 })
 export class DivisionService {
-  divisionModelOpened=new BehaviorSubject(false)
   lang = inject(TranslationService).lang;
   constructor(private http:HttpHandlerService,private translate:TranslateService, private tableLoaderService:LoaderService) { }
 
