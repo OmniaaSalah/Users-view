@@ -584,7 +584,6 @@
                 display: flex;
 
                 &:lang(en){ transform: rotate(0);}
-
                 .p-inputswitch-slider {
                     border-radius: 30px;
                     background: rgba(91, 205, 219, 0.31);
@@ -606,6 +605,7 @@
                     // background: rgba(91, 205, 219, 0.31);
                     &::before {
                         left: 0.2rem;
+                        background-color: #fff
                     }
                 }
             }
