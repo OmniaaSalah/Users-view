@@ -211,9 +211,9 @@ export class SharedService {
     }))
   }
 
-  getGradesByAge(schoolid ){
+  getGradesByAge(query){
     // if(this.allGrades) return of(this.allGrades)
-    return this.http.get(`/Grade/get-grade-bybirthdate/${schoolid}`)
+    return this.http.get(`/Grade/get-grade-bybirthdate`,query)
 
   }
   getAllNationalities(){

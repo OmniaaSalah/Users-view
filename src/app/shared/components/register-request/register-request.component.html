@@ -117,8 +117,8 @@
 
                 <div class="row gx-5 custom-form mb-5" *ngIf="AllGrades">
                     <div class="col-md-4">
-                      <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                      <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" (ngModelChange)="onCurriculumSelected($event)" [(ngModel)]="filtration.curriculumId" [ngModelOptions]="{standalone: true}" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                      <label class="label required" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                      <p-dropdown [options]="(curriculums$ | async)" (ngModelChange)="onCurriculumSelected($event)" [(ngModel)]="filtration.curriculumId" [ngModelOptions]="{standalone: true}" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                     </div>
                     <div class="col-md-4 ">
                         <h2 class="heading heading--tertiary mb-3">{{'request-list.grade' | translate}} <span class="star">*</span></h2>

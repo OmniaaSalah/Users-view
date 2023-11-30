@@ -134,7 +134,8 @@ export class RequestdetailsComponent implements OnInit {
       this.reqActionsForm.gradeId = res.result?.grade?.id
       this.reqActionsForm.registrationStatus = res.result?.registrationStatus
       this.checkDashboardHeader();
-      this.AllGrades$ =this.sharedService.getGradesByAge(res.result?.school?.id)
+      let model = {birthdate: res.result?.student?.birthDate , schoolid:res.result?.school?.id}
+      this.AllGrades$ =this.sharedService.getGradesByAge(model )
       // this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, this.reqActionsForm?.gradeId).pipe(map((res:any) => res?.data ||[]));
      })
   }
