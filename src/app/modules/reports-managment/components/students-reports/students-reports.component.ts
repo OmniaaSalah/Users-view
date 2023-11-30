@@ -22,6 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { shareReplay } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { DivisionService } from 'src/app/modules/schools/services/division/division.service';
 
 @Component({
   selector: 'app-students-reports',
@@ -92,7 +93,7 @@ export class StudentsReportsComponent implements OnInit {
   schools$ = this.schoolsService.getSchoolsDropdown()
   AllTracks$ = this.sharedService.getAllTraks()
   AllGrades$ =this.sharedService.getAllGrades('');
-  schoolDivisions$ =inject(SharedService).getAllDivisions('')
+  schoolDivisions$ =inject(SharedService).getAllDivisions()
   booleanOptions = this.sharedService.booleanOptions
   studentsStatus = []
   registrationStatus= []
@@ -119,7 +120,8 @@ export class StudentsReportsComponent implements OnInit {
     private route:ActivatedRoute,
     private toaster:ToastrService,
     private router:Router,
-    private userService:UserService
+    private userService:UserService,
+    private divisionService :DivisionService
   ) {
     this.tableColumns = this.studentsReportService.tabelColumns
   }
@@ -221,14 +223,19 @@ export class StudentsReportsComponent implements OnInit {
 
   }
 
+  onGradeSelected(gradeId){
+    this.schoolDivisions$ = this.divisionService.getSchoolDivisions({gradeid:gradeId||null})
+
+  }
+
   onExport(fileType: FileTypeEnum, table: Table) {
       this.exportService.showLoader$.next(true)
 
-      if(this.studentsReport.total > 10000) {
-        this.toaster.error('عذرا عدد العناصر المطلوب اصدارها اكبر من الحد المسموح .يرجى تغير معاير البحث لتقليل العناصر إلى اقل من 10 ألاف')
-        this.exportService.showLoader$.next(false)
-        return
-      }
+      // if(this.studentsReport.total > 10000) {
+      //   this.toaster.error('عذرا عدد العناصر المطلوب اصدارها اكبر من الحد المسموح .يرجى تغير معاير البحث لتقليل العناصر إلى اقل من 10 ألاف')
+      //   this.exportService.showLoader$.next(false)
+      //   return
+      // }
       let exportedTable = []
       const myColumns = this.tableColumns.filter(el => el.isSelected)
       let filter = {...this.filtration, PageSize:this.studentsReport.total,Page:1}

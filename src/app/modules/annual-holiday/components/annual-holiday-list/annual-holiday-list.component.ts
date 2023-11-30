@@ -185,7 +185,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     dateFrom:new Date(holiday.dateFrom),
     dateTo:new Date(holiday.dateTo),
     flexibilityStatus:this.holidayStatusList.find(s=>s.value==holiday.flexibilityStatus),
-    curriculums:holiday.curriculums
+    schools:holiday?.schools
 
   });
    this.annualHolidayService.openModel.next(true);
@@ -204,9 +204,9 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
       this.editedHoliday=updatedHoliday;
       this.editedHoliday.flexibilityStatus=this.editedHoliday.flexibilityStatus.value;
-      this.editedHoliday.curriculumIds=[];
-      this.editedHoliday?.curriculums.forEach(element => {
-      this.editedHoliday.curriculumIds.push(element.id)
+      this.editedHoliday.schoolIds=[];
+      this.editedHoliday?.schools.forEach(element => {
+      this.editedHoliday.schoolIds.push(element.id)
       });
 
       this.editedHoliday={
@@ -215,7 +215,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
         'dateFrom':this.formateDate(this.editedHoliday?.dateFrom),
         'dateTo': this.formateDate(this.editedHoliday?.dateTo),
         'flexibilityStatus':this.editedHoliday?.flexibilityStatus,
-        'curriculumIds': this.editedHoliday?.curriculumIds,
+        'schoolIds': this.editedHoliday?.schoolIds,
         };
 
       this.annualHolidayService.updateHoliday(this.updatedHolidayId,this.editedHoliday).subscribe((res)=>{

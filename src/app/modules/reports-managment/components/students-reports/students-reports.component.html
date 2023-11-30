@@ -42,7 +42,7 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'students.classes'| translate}}</label>
-                     <p-multiSelect   [options]="(AllGrades$ | async)"   [(ngModel)]="filtration.GradeId"    display="chip" optionValue="id"     optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"     placeholder="{{'students.chooseClasse' |translate}}"  ></p-multiSelect>
+                     <p-multiSelect   [options]="(AllGrades$ | async)" (ngModelChange)="onGradeSelected($event)"  [(ngModel)]="filtration.GradeId"    display="chip" optionValue="id"     optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"     placeholder="{{'students.chooseClasse' |translate}}"  ></p-multiSelect>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'students.divisions'| translate}}</label>

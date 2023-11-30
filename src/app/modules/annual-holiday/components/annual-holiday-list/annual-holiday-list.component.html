@@ -77,7 +77,7 @@
                               <th style="width: 3rem" class="expand" ></th>
                               <th  class="expand" pSortableColumn="name.ar" ><p-sortIcon  field="arabicName" ></p-sortIcon>{{'AnnualHoliday.Holiday Name'|translate}}</th>
                               <th  class="expand" pSortableColumn="userName"><p-sortIcon  field="userName"></p-sortIcon>{{'shared.User Name'|translate}}</th>
-                              <th class="expand" style="min-width: 15rem" pSortableColumn="curriculums[0].name.ar"><p-sortIcon field="curriculumName" ></p-sortIcon>{{'AnnualHoliday.curriculum'|translate}}</th>
+                              <th class="expand" style="min-width: 15rem" pSortableColumn="curriculums[0].name.ar"><p-sortIcon field="curriculumName" ></p-sortIcon>{{'School'|translate}}</th>
                               <th class="expand"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'AnnualHoliday.Date'|translate}}</th>
                               <th class="expand"  pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                               <th class="expand"  pSortableColumn="flexibilityStatus"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'AnnualHoliday.Holiday Status'|translate}}</th>
@@ -95,7 +95,7 @@
                             </td>
                             <td [ngClass]="expanded ? 'boldaction' : ''" class="color-gray-50" style="min-width:15rem">{{holiday.name|currentLang}}</td>
                             <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" style="min-width:15rem">{{holiday.userName|currentLang}}</td>
-                            <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{holiday.curriculums[0].name|currentLang}}</td>
+                            <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{holiday?.schools ? (holiday?.schools[0]?.name|currentLang) : ''}}</td>
                             <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{'shared.From'|translate}} {{holiday.dateFrom| toLocalDate | LocalizeDate}} - {{'shared.To'|translate}} {{holiday.dateTo| toLocalDate |LocalizeDate}}</td>
                             <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" >{{holiday.createdDate | toLocalDate | LocalizeDate}}</td>
                             <td  class="color-gray-50">
