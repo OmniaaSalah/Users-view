@@ -13,6 +13,7 @@ import { StatusEnum, TransportaionType } from '../../enums/status/status.enum';
 import { IndexesEnum } from '../../enums/indexes/indexes.enum';
 import { SettingsService } from 'src/app/modules/system-setting/services/settings/settings.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { SearchModel } from 'src/app/core/models/filter-search/filter-search.model';
 
 @Injectable({
   providedIn: 'root'
@@ -212,7 +213,7 @@ export class SharedService {
 
   getGradesByAge(schoolid ){
     // if(this.allGrades) return of(this.allGrades)
-    return this.http.get(`/get-grade-bybirthdate/${schoolid}`)
+    return this.http.get(`/Grade/get-grade-bybirthdate/${schoolid}`)
 
   }
   getAllNationalities(){
@@ -235,14 +236,8 @@ export class SharedService {
     return this.http.get('/Subject/elective-subjects',params).pipe(take(1))
   }
 
-  getSchoolsByCurriculumId(curriculumId){
-    return this.http.get('/School/dropdowen?curriculumId='+curriculumId)
-    .pipe(
-      take(1),
-      map((res)=> {
-        this.allSchools = res
-        return res
-      }))
+  getSchoolsDropdown(filter?:Partial<SearchModel>){
+    return this.http.post('/School/dropdowen',filter)
   }
 
   getSchoolYearsList()

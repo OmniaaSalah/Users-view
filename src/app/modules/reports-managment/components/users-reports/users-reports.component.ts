@@ -30,7 +30,7 @@ export class UsersReportsComponent implements OnInit {
   faAngleDown = faAngleDown
   requestsNumbersBasedOnRequestType;
   lang = inject(TranslationService).lang
-  requestTypes=[]
+  requestTypes:any[]=[]
   date;
   requestsList=[];
   filtration = {
@@ -109,11 +109,12 @@ export class UsersReportsComponent implements OnInit {
     this.users.loading=true
     this.isBtnLoading=true;
     this.users.list =[];
-    this._report.getAllEmployees(this.filtration).subscribe(res => {
+    this._report.getAllEmployees({...this.filtration, requestType: this.filtration.requestType?.flat()}).subscribe(res => {
       this.sharedService.filterLoading.next(false);
       this.allRequestsNumbers=res.result?.rquestTotalNumber;
       this.requestsNumbersBasedOnRequestType=res.result?.rquestNumberByRequestType;
-      this.requestTypes=res.result?.countPerReuestTypes;
+
+      this.requestTypes=this.getMappedModel(res.result?.countPerReuestTypes)
       this.users.list = res.result.employeesPerformance.data;
       this.users.totalAllData = res.result.employeesPerformance.totalAllData
       this.users.total =res.result.employeesPerformance.total;
@@ -128,6 +129,21 @@ export class UsersReportsComponent implements OnInit {
     })
   }
 
+
+  getMappedModel(model:any[]){
+    let count=0
+    let arr = []
+    model.forEach(item =>{
+      if(item?.requestType=='RegestrationApplicationRequest' || item?.requestType=='RegestrationRequestForWithrawan'){
+        count += item?.count
+      }else {
+        arr.push(item)
+      }
+    });
+
+    arr.unshift({requestType:'RegestrationApplicationRequest', count:count})
+    return arr
+  }
   getRolesList(){
     this.userInformation.GetRoleList().subscribe(res=>
       this.roles = res.filter(el => el.code!='Guardian')

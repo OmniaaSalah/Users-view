@@ -85,7 +85,7 @@ export class RequestdetailsComponent implements OnInit {
   requestDetails:UserRequest
   requestOptions
 
-
+  AllGrades$
   rejectReason$
 
   getApprovedTask(tasks:any[]){
@@ -103,7 +103,7 @@ export class RequestdetailsComponent implements OnInit {
   currentState
   states
 
-  AllGrades$ =this.sharedService.getAllGrades('')
+
 
   constructor(
     private translate: TranslateService,
@@ -134,7 +134,7 @@ export class RequestdetailsComponent implements OnInit {
       this.reqActionsForm.gradeId = res.result?.grade?.id
       this.reqActionsForm.registrationStatus = res.result?.registrationStatus
       this.checkDashboardHeader();
-
+      this.AllGrades$ =this.sharedService.getGradesByAge(res.result?.school?.id)
       // this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, this.reqActionsForm?.gradeId).pipe(map((res:any) => res?.data ||[]));
      })
   }
@@ -247,6 +247,7 @@ export class RequestdetailsComponent implements OnInit {
       else if(err.message && err.message.includes('Request status is Cancelled'))  this.toaster.error(this.translate.instant('toasterMessage.Request status is Cancelled'))
       else if(err.message && err.message.includes('The number of students is complete in this division'))  this.toaster.error(this.translate.instant('toasterMessage.The number of students is complete in this division'))
       else if(err.message && err.message.includes('This task is already performed'))  this.toaster.error(this.translate.instant('This task is already performed'))
+      else if(err.message && err.message.includes('The student is already registered with another school'))  this.toaster.error(this.translate.instant('The student is already registered with another school'))
       else if(err.message && err.message?.En?.includes('This task is already performed') || err?.En?.includes('This task is already performed'))  this.toaster.error(this.translate.instant('toasterMessage.This task is already performed'))
       else this.toaster.error(this.translate.instant('toasterMessage.error'))
 
