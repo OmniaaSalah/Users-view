@@ -121,6 +121,7 @@ export class RegisterRequestComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.curriculums$.subscribe(res=> this.filtration.curriculumId = res?.length ? res[0]?.id : null)
     this.prepareHeaderData()
     this.getStudentInfo()
   }
@@ -246,7 +247,7 @@ initRegisterationForm(child){
 
 
   getGrades(curriculumsId=''){
-    this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
+    this.sharedService.getGradesByAge({curriculumId :  curriculumsId || this.filtration?.curriculumId, birthdate:this.childData?.birthDate}, ).subscribe(res=> {
     this.AllGrades=res || []
     if(!this.registerReqForm) this.initRegisterationForm(this.childData)
     })
