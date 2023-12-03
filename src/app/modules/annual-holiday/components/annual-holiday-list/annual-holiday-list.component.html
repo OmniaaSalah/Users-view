@@ -96,8 +96,8 @@
                             <td [ngClass]="expanded ? 'boldaction' : ''" class="color-gray-50" style="min-width:15rem">{{holiday.name|currentLang}}</td>
                             <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" style="min-width:15rem">{{holiday.userName|currentLang}}</td>
                             <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{holiday?.schools ? (holiday?.schools[0]?.name|currentLang) : ''}}</td>
-                            <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{'shared.From'|translate}} {{holiday.dateFrom| toLocalDate | LocalizeDate}} - {{'shared.To'|translate}} {{holiday.dateTo| toLocalDate |LocalizeDate}}</td>
-                            <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" >{{holiday.createdDate | toLocalDate | LocalizeDate}}</td>
+                            <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{'shared.From'|translate}} {{holiday.dateFrom| toLocalDate:'YYYY-MM-DD'| LocalizeDate:'d MMMM y'}} - {{'shared.To'|translate}} {{holiday.dateTo| toLocalDate:'YYYY-MM-DD'| LocalizeDate:'d MMMM y'}}</td>
+                            <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" >{{holiday.createdDate | toLocalDate:'YYYY-MM-DD'| LocalizeDate:'d MMMM y'}}</td>
                             <td  class="color-gray-50">
                                 <div class="d-flex align-items-center gap-4">
 

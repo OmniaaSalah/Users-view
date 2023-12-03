@@ -153,7 +153,7 @@
                           <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''">{{e.name|currentLang}}</td>
                           <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''">{{e.userName|currentLang}}</td>
                           <td style="min-width:15rem" [ngClass]="expanded ? 'action' : ''">{{e?.schools ? (e.schools[0]?.name|currentLang) : ''}}</td>
-                          <td style="min-width:29rem" [ngClass]="expanded ? 'action' : ''">{{'shared.From'|translate}} {{e.dateFrom | toLocalDate| LocalizeDate}} - {{'shared.To'|translate}} {{e.dateTo| toLocalDate|LocalizeDate}}</td>
+                          <td style="min-width:29rem" [ngClass]="expanded ? 'action' : ''">{{'shared.From'|translate}} {{e.dateFrom | toLocalDate:'YYYY-MM-DD'| LocalizeDate:'d MMMM y'}} - {{'shared.To'|translate}} {{e.dateTo| toLocalDate:'YYYY-MM-DD'|LocalizeDate:'d MMMM y'}}</td>
                           <td [ngClass]="expanded ? 'action' : ''">{{e.createdDate | toLocalDate|LocalizeDate}}</td>
                           <td>
                             <div class="d-flex align-items-center gap-4">

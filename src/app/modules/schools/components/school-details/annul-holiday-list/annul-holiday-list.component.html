@@ -36,10 +36,10 @@
                 <td>{{holiday?.annualCalendarName|currentLang}}</td>
                 <td>{{holiday?.year}}</td>
                 <td>{{holiday?.name |currentLang}}</td>
-                <td>{{holiday?.dateFrom | LocalizeDate}}</td>
-                <td>{{holiday?.dateTo | LocalizeDate}}</td>
+                <td>{{holiday?.dateFrom | toLocalDate:'YYYY-MM-DD'| LocalizeDate:'d MMMM y'}}</td>
+                <td>{{holiday?.dateTo | toLocalDate:'YYYY-MM-DD'| LocalizeDate:'d MMMM y'}}</td>
                 <td>
-                    {{holiday?.createdDate | LocalizeDate}}
+                    {{holiday?.createdDate | toLocalDate:'YYYY-MM-DD'| LocalizeDate:'d MMMM y'}}
                 </td>
                 <td  >
                     <div class="d-flex align-items-center gap-4">
