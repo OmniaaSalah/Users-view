@@ -101,7 +101,7 @@ export class RequestdetailsComponent implements OnInit {
 
 
   currentState
-  states
+  states:any[]
 
 
 
@@ -145,6 +145,13 @@ export class RequestdetailsComponent implements OnInit {
     .subscribe(res=>{
       this.currentState=res
       this.states = [...res.states?.map(el => ({...el, tasks:el.tasks || []})).reverse() ]
+      if(
+        this.requestDetails.requestType == requestTypeEnum.RegestrationApplicationRequest||
+        this.requestDetails.requestType == requestTypeEnum.RegestrationRequestForWithrawan||
+        this.requestDetails.requestType == requestTypeEnum.StudentRegradingRequest||
+        this.requestDetails.requestType == requestTypeEnum.StudentRegradingRequestForSchool){
+          this.states?.pop()
+        }
     })
   }
 

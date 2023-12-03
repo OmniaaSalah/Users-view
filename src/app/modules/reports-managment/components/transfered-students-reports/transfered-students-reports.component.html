@@ -251,13 +251,13 @@
                         <td *ngIf="tableColumns[13].isSelected == true">
                           {{(student?.oldCurriculum| currentLang) || ('shared.notFound' | translate)}}
                         </td>
-                        <td *ngIf="tableColumns[14].isSelected == true">
+                        <td dir="ltr" class="justify-content-end" *ngIf="tableColumns[14].isSelected == true">
                             {{student?.dateOfAcceptance | LocalizeDate : 'd/ M/ yyyy'}}
                         </td>
-                        <td *ngIf="tableColumns[15].isSelected == true">
+                        <td dir="ltr" class="justify-content-end" *ngIf="tableColumns[15].isSelected == true">
                           {{student?.createdDate | LocalizeDate : 'd/ M/ yyyy'}}
                       </td>
-                        <td *ngIf="tableColumns[16].isSelected == true">
+                        <td dir="ltr" class="justify-content-end" *ngIf="tableColumns[16].isSelected == true">
                             {{student?.birthDate | LocalizeDate : 'd/ M/ yyyy'}}
                         </td>
                         <td *ngIf="tableColumns[17].isSelected == true">
