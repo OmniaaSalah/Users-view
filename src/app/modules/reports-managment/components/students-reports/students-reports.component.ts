@@ -19,7 +19,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ActivatedRoute, Router } from '@angular/router';
-import { shareReplay } from 'rxjs';
+import { map, shareReplay } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { DivisionService } from 'src/app/modules/schools/services/division/division.service';
@@ -93,7 +93,7 @@ export class StudentsReportsComponent implements OnInit {
   schools$ = this.schoolsService.getSchoolsDropdown()
   AllTracks$ = this.sharedService.getAllTraks()
   AllGrades$ =this.sharedService.getAllGrades('');
-  schoolDivisions$ =inject(SharedService).getAllDivisions()
+  schoolDivisions$ =this.sharedService.getAllDivisions()
   booleanOptions = this.sharedService.booleanOptions
   studentsStatus = []
   registrationStatus= []
@@ -223,8 +223,25 @@ export class StudentsReportsComponent implements OnInit {
 
   }
 
+  selectedSchool
+  onSchoolSelected(schoolId){
+    if(!schoolId?.length) {
+      this.schoolDivisions$ =this.sharedService.getAllDivisions()
+      return
+    }
+    this.selectedSchool=schoolId
+    this.schoolDivisions$ = this.divisionService.getSchoolDivisions({gradeid:this.selectedGrade, schoolId:schoolId}).pipe(map(res=> res?.data))
+  }
+
+
+  selectedGrade
   onGradeSelected(gradeId){
-    this.schoolDivisions$ = this.divisionService.getSchoolDivisions({gradeid:gradeId||null})
+    if(!this.selectedSchool) {
+      this.schoolDivisions$ =this.sharedService.getAllDivisions()
+      return
+    }
+    this.selectedGrade=gradeId
+    this.schoolDivisions$ = this.divisionService.getSchoolDivisions({gradeid:gradeId||null,schoolId:this.selectedSchool}).pipe(map(res=> res?.data))
 
   }
 

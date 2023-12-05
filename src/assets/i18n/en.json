@@ -481,6 +481,8 @@
         "Created Date": "Created date",
         "End Date": "End date",
         "year":"Year",
+        "months":"months",
+        "and":"and",
         "Numbres Of Characters Must not More than 256 character": "Numbres of characters must not more than 256 character",
         "Numbres Of Characters must not more than 65 character": "Numbres of characters must not more than 500 character",
         "Numbres Of Characters must not more than 500 character": "Numbres of characters must not more than 500 character",

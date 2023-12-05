@@ -15,7 +15,7 @@ import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.e
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
 import { SystemRequestService } from '../../services/system-request.service';
-import { Observable, delay, map, switchMap } from 'rxjs';
+import { Observable, delay, finalize, map, switchMap } from 'rxjs';
 import { Division } from 'src/app/core/models/global/global.model';
 import { GradesService } from 'src/app/modules/schools/services/grade/grade.service';
 import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
@@ -135,7 +135,9 @@ export class RequestdetailsComponent implements OnInit {
       this.reqActionsForm.registrationStatus = res.result?.registrationStatus
       this.checkDashboardHeader();
       let model = {birthdate: res.result?.student?.birthDate , schoolid:res.result?.school?.id}
-      this.AllGrades$ =this.sharedService.getGradesByAge(model )
+      this.AllGrades$ =this.sharedService.getGradesByAge(model ).pipe(finalize(()=> {
+        this.reqActionsForm.gradeId = res.result?.grade?.id
+      }))
       // this.gradeDivisions$ = this.gradeService.getGradeDivision(res?.result?.school?.id, this.reqActionsForm?.gradeId).pipe(map((res:any) => res?.data ||[]));
      })
   }
@@ -248,14 +250,12 @@ export class RequestdetailsComponent implements OnInit {
       this.rejectReasonModel = false
       this.submittedOption.isLoading=false
       this.addStudentTodivisionModal = false
-      console.log(err);
-      console.log(err.message);
 
       if(err.message && err.message.includes('This student has financial obligations') )this.toaster.error(this.translate.instant('toasterMessage.This student has financial obligations'))
       else if(err.message && err.message.includes('Request status is Cancelled'))  this.toaster.error(this.translate.instant('toasterMessage.Request status is Cancelled'))
       else if(err.message && err.message.includes('The number of students is complete in this division'))  this.toaster.error(this.translate.instant('toasterMessage.The number of students is complete in this division'))
       else if(err.message && err.message.includes('This task is already performed'))  this.toaster.error(this.translate.instant('This task is already performed'))
-      else if(err.message && err.message.includes('The student is already registered with another school'))  this.toaster.error(this.translate.instant('The student is already registered with another school'))
+      else if(err.message && err.message.includes('The student is already registered with another school'))  this.toaster.error(this.translate.instant('toasterMessage.The student is already registered with another school'))
       else if(err.message && err.message?.En?.includes('This task is already performed') || err?.En?.includes('This task is already performed'))  this.toaster.error(this.translate.instant('toasterMessage.This task is already performed'))
       else this.toaster.error(this.translate.instant('toasterMessage.error'))
 

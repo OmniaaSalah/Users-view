@@ -644,6 +644,8 @@
       "End Date": "تاريخ الإنتهاء",
       "date": "التاريخ",
       "year":"سنة",
+      "months":"أشهر",
+      "and":"و",
       "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن 265 حرف",
       "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن 65 حرف",
       "Numbres Of Characters must not more than 500 character": "عدد الحروف يجب أن لا تزيد عن 500 حرف",
