@@ -195,7 +195,7 @@ export class SharedService {
       }))
   }
 
-  getAllDivisions(schoolid?){
+  getAllDivisions(schoolid=''){
     if(this.allDivisions) return of(this.allDivisions)
     return this.http.get(`/Division?schoolid=${schoolid}`).pipe(take(1),map(val => {
        this.allDivisions = val.data
