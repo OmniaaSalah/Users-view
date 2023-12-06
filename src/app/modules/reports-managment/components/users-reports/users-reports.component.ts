@@ -145,7 +145,7 @@ export class UsersReportsComponent implements OnInit {
     return arr
   }
   getRolesList(){
-    this.userInformation.GetRoleList().subscribe(res=>
+    this.userInformation.GetAllRoleList().subscribe(res=>
       this.roles = res.filter(el => el.code!='Guardian')
 
     )}

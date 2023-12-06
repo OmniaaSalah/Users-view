@@ -130,7 +130,7 @@ export class AddNewUserInformationComponent implements OnInit {
   }
 
   getRoleList(){
-    this.userInformation.GetAllRoleList().subscribe(response => {
+    this.userInformation.GetRoleList().subscribe(response => {
 		  this.roles = response;
 		})
   }
