@@ -130,7 +130,7 @@ export class AddNewUserInformationComponent implements OnInit {
   }
 
   getRoleList(){
-    this.userInformation.GetRoleList().subscribe(response => {
+    this.userInformation.GetAllRoleList().subscribe(response => {
 		  this.roles = response;
 		})
   }
@@ -189,7 +189,7 @@ AddAccount(){
 getUserById(){
   this.email.disable();
   this.userInformation.getUsersById(Number(this.userId)).subscribe(response => {
-   
+
    if(response?.statusCode=='OK')
     {  this.accountModel= response.result;
       this.userFormGrp.patchValue({
