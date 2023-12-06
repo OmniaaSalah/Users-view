@@ -22,6 +22,7 @@ import { SchoolChartsComponent } from './components/school-list/school-charts/sc
 import { SchoolInfoComponent } from './components/school-details/school-info/school-info.component';
 import { SchoolLocationComponent } from './components/school-details/school-location/school-location.component';
 import { DivisionModalComponent } from './components/school-details/divisions/components/division-modal/division-modal/division-modal.component';
+import { FeaturesSharedModule } from '../shared/features-shared.module';
 @NgModule({
   declarations: [
     SchoolDetailsComponent,
@@ -47,7 +48,8 @@ import { DivisionModalComponent } from './components/school-details/divisions/co
     PanelModule,
     CardModule,
     NgChartsModule,
-    QrCodeModule
+    QrCodeModule,
+    FeaturesSharedModule
   ]
 })
 export class SchoolsModule { }

@@ -311,7 +311,6 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     // routerLink="{{'parent/child/'+child.id+'/register-request'}}" [queryParams]="{status:'Registered'}"
     let childRegistartionStatus= this.requestDetails?.student?.status || StudentStatus.Unregistered;
     let childId = childRegistartionStatus == StudentStatus.Withdrawal ? this.requestDetails?.student?.studentGuid : this.requestDetails?.student?.id
-    this.saveReqData()
 
     this.router.navigate(['parent/child',childId,'register-request', 'correct', this.requestInstance])
     // if(childRegistartionStatus == RegistrationStatus.Withdrawal){
@@ -321,50 +320,6 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     //   this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Unregistered',requestId: this.requestDetails.requestNumber, instantId:this.requestInstance}})
 
     // }
-  }
-
-
-  saveReqData(){
-    let reqData
-
-    if(!(this.requestDetails.student.status ==StudentStatus.Withdrawal)){
-
-      reqData = {
-        id: this.requestDetails.requestNumber,
-        childId:this.requestDetails.childId,
-        studentId:null,
-        guardianId:this.requestDetails.guardian.id,
-        school: this.requestDetails.school,
-        grade: this.requestDetails.grade,
-        studentStatus: StudentStatus.Unregistered,
-        isChildOfAMartyr:this.requestDetails.isChildOfAMartyr,
-        isSpecialAbilities:this.requestDetails.isSpecialAbilities,
-        isSpecialClass:this.requestDetails?.isSpecialClass,
-        isInFusionClass:this.requestDetails?.isInFusionClass,
-        // isSpecialEducation:this.requestDetails.isSpecialEducation,
-        specialEducationId:this.requestDetails?.specialEducation?.id || null,
-        attachments: this.requestDetails.requestAttachments.map(el => {
-          Object.defineProperty(el, 'title',
-          Object.getOwnPropertyDescriptor(el, 'titel'));
-            delete el['titel'];
-            return el
-        }),
-      }
-
-    }else{
-      reqData = {
-        childId:null,
-        id: this.requestDetails.requestNumber,
-        studentId:this.requestDetails.student.id,
-        guardianId:this.requestDetails.guardian.id,
-        school:this.requestDetails.school,
-        grade: this.requestDetails.grade,
-        studentStatus: StudentStatus.Withdrawal,
-        attachments: this.requestDetails.requestAttachments,
-      }
-    }
-
-    localStorage.setItem('returnedRequest', JSON.stringify(reqData))
   }
 
 
@@ -403,16 +358,25 @@ isRequestAllowedForWithdrawal(requestType:requestTypeEnum){
     })
   }
 
+  openHolidayModel=false
+  holidayData
 
+  onClose(){
+    this.getRequestDetails()
+    this.getRequestOptions()
+    this.openHolidayModel=false
+  }
   reSendFlexableHolidayReq(){
-    let data={
-      id: this.requestDetails.requestNumber,
+    this.holidayData={
+      requestId: this.requestDetails.requestNumber,
+      holidayId:this.requestDetails?.holidayId,
       dateFrom: this.requestDetails.dateFrom,
       dateTo: this.requestDetails.dateTo,
       description: this.requestDetails.reason,
     }
-    localStorage.setItem('returnedRequest', JSON.stringify(data))
-    this.router.navigate(['/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestId: this.requestDetails.requestNumber, requestInstance: this.requestInstance}})
+    this.openHolidayModel=true
+    // localStorage.setItem('returnedRequest', JSON.stringify(data))
+    // this.router.navigate(['/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestId: this.requestDetails.requestNumber, requestInstance: this.requestInstance}})
 
   }
 

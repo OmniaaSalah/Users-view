@@ -104,7 +104,7 @@ export interface UserRequest{
     gradeTo : Localization
     divisionTo : Localization
     studentNumber:number
-
+    holidayId:number
     // NOTE:- Update Identity info Request ------
     name: Localization,
     nickName: Localization,

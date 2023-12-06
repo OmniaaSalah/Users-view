@@ -7,19 +7,22 @@ import { RequestdetailsComponent } from './Component/requestdetails/requestdetai
 import { RequestChatComponent } from './Component/requestdetails/request-chats/request-chats.component';
 import { RequestStatesComponent } from './Component/requestdetails/request-states/request-states.component';
 import { CertificatesRequestDetailsComponent } from './Component/requestdetails/certificates-request-details/certificates-request-details.component';
+import { FeaturesSharedModule } from '../shared/features-shared.module';
 
 @NgModule({
   declarations: [
     RequestdetailsComponent,
     RequestChatComponent,
     RequestStatesComponent,
-    CertificatesRequestDetailsComponent
+    CertificatesRequestDetailsComponent,
+
   ],
   imports: [
     CommonModule,
     RequestListRoutingModule,
     PrimngModule,
     SharedModule,
+    FeaturesSharedModule
   ]
 })
 export class RequestListModule { }
