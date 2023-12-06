@@ -89,6 +89,11 @@ usersToExport(filter){
   GetRoleList(): Observable<any> {
     return this.http.get(`/role-details/dropdown`).pipe(take(1));
   }
+
+  GetAllRoleList(): Observable<any> {
+    return this.http.get(`/role-details-employee-report/dropdown`).pipe(take(1));
+  }
+
   GetRoleById(id:number){
     return this.http.get('/role-details/'+id).pipe(take(1));
   }
