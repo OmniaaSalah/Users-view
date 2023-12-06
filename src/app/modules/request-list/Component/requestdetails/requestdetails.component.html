@@ -30,7 +30,16 @@
        (click)="reSendFlexableHolidayReq()">
          <span>{{'Requests.resendRequest' |translate}}</span>
        </button>
+
+       <!-- <button class=" btn btn-primary btn--sm px-5"
+       *ngIf="requestDetails?.requestType==requestTypeEnum.FlexibleHolidayRequest && requestDetails?.requestStatus==RequestStatusEnum.Rejected"
+       (click)="reSendFlexableHolidayReq()">
+         <span>{{'Requests.resendRequest' |translate}}</span>
+       </button> -->
+
      </ng-container>
+
+
 
      <!-- (isRequestAllowedForWithdrawal | wrapFn : requestDetails?.requestType) &&  -->
      <ng-container
@@ -594,20 +603,20 @@
           <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Approved" -->
           <div class="d-flex justify-content-end mt-3 gap-3" >
               <ng-container *ngIf="requestOptions" >
-
-                  <button
-                  *ngFor="let option of requestOptions;let i=index"
-                  [class.d-none]="
-                      (option?.label?.en=='ModificationRequest' ||
-                      option?.label?.en=='returned' ||
-                      option?.label?.en=='return for correction')
-                      &&  (requestDetails?.requestStatus==RequestStatusEnum.ModificationRequestForGuardian ||
-                           requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest)
-                      && currentUserScope==userScopeEnum.Guardian"
-                  [disabled]="option.isLoading"
-                  [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
-                  (click)="onActionTaken(option,i)"
-                  class="btn">
+                <button
+                *ngFor="let option of requestOptions;let i=index"
+                [class.d-none]="
+                (option?.label?.en=='ModificationRequest' ||
+                option?.label?.en=='returned' ||
+                option?.title?.en=='return for correction' ||
+                option?.label?.en=='return for correction')
+                &&  (requestDetails?.requestStatus==RequestStatusEnum.ModificationRequestForGuardian ||
+                requestDetails?.requestStatus==RequestStatusEnum.ModificationRequest)
+                && (currentUserScope==userScopeEnum.Guardian ||currentUserScope==userScopeEnum.Employee)"
+                [disabled]="option.isLoading"
+                [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
+                (click)="onActionTaken(option,i)"
+                class="btn">
                       {{option?.label|currentLang}}
                       <div class="spinner-border text-light" role="status" *ngIf="option.isLoading"></div>
                   </button>
@@ -874,3 +883,14 @@
   </ng-template>
 
 </p-dialog>
+
+
+<app-flexable-holiday-form
+*ngIf="openHolidayModel"
+[isOpen]="openHolidayModel"
+[mode]="!requestDetails?.requestStatus==RequestStatusEnum.Rejected? 'correct' : 'edit' "
+[selectedHoliday]="holidayData"
+[schoolId]="currentUserSchoolId"
+[reqInstance]="requestInstance"
+(onModelClosed)="onClose()"
+></app-flexable-holiday-form>

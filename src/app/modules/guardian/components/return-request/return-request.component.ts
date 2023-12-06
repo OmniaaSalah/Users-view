@@ -46,10 +46,6 @@ export class ReturnRequestComponent implements OnInit {
   studentId =  this.route.snapshot.paramMap.get('studentId')
   childRegistrationStatus = this.route.snapshot.queryParamMap.get('status')
 
-  // NOTE:- incase the Request is returned Form Spea
-  // requestId = this.route.snapshot.queryParamMap.get('instanceId')
-  returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
-  // instanceId = this.route.snapshot.queryParamMap.get('instantId')
   instanceId = this.route.snapshot.params['instanceId']
   actions:WorkflowOptions[]
   //-------------------------------------
@@ -197,22 +193,6 @@ export class ReturnRequestComponent implements OnInit {
     }
   }
 
-
-
-  // initValidation(){
-  //   let ctrs = ['isChildOfAMartyr','isSpecialAbilities']
-  //   ctrs.forEach(el => {
-  //     if(this.childRegistrationStatus==RegistrationStatus.Withdrawal || this.scope ==this.ScopeEnum.SPEA) {
-  //       let ctr = this.registerReqForm.controls[el] as FormControl
-  //       ctr.removeValidators(Validators.required)
-  //       ctr.updateValueAndValidity()
-  //     }
-
-  //   })
-
-  // }
-
-
   getRegistrationRequiresFiles(gradeId){
 
     this.settingServcice.getRegisterRequestRequiredAttach(gradeId).subscribe(res=>{
@@ -263,22 +243,6 @@ export class ReturnRequestComponent implements OnInit {
     }
 
   }
-
-
-
-
-  // getGrades(curriculumsId=''){
-  //   this.sharedService.getAllGrades('', curriculumsId).subscribe(res=> {
-  //   this.AllGrades=res || []
-
-  //   if(!this.registerReqForm) this.initRegisterationForm(this.childData)
-
-  //     if(this.instanceId) {
-  //       this.patchReturnedRequestData(this.returnedReqData)
-  //       this.getRequestOptions()
-  //     }
-  //   })
-  // }
 
   attachments :StudentAttachments[] = []
   isAllAttachmentsUploaded =false

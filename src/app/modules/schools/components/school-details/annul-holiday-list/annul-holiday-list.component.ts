@@ -59,7 +59,7 @@ export class AnnulHolidayListComponent implements OnInit {
   paginationState={...paginationInitialState}
 
   selectedHoliday
-  openHolidaytModel=false
+  openHolidayModel=false
 
   menuItems: MenuItem[]=[
     {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',claims:ClaimsEnum.S_EditAnnualHoliday},
@@ -72,6 +72,7 @@ export class AnnulHolidayListComponent implements OnInit {
     list:[],
     loading:true
   }
+  openHolidaytModel
 
 
   submitted=false
@@ -118,7 +119,7 @@ export class AnnulHolidayListComponent implements OnInit {
     if(this.reqInstance){
       this.patchReturnedRequestData(this.returnedReqData)
       this.getRequestOptions()
-      this.openHolidaytModel =true
+      this.openHolidayModel =true
     }
 
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
@@ -166,7 +167,12 @@ export class AnnulHolidayListComponent implements OnInit {
 
   editFlexableHoliday(holiday){
       this.selectedHoliday= holiday
-      this.openHolidaytModel=true
+      this.openHolidayModel=true
+  }
+
+  onClose(){
+    this.openHolidayModel=false;
+    this.selectedHoliday=null
   }
 
   editAnnualHoliday(holidayId){
@@ -179,7 +185,7 @@ export class AnnulHolidayListComponent implements OnInit {
       this.schoolsService.sendFlexableHolidayReq(this.selectedHoliday.id,this.editHolidayForm.value)
       .subscribe(res =>{
         this.submitted = false
-        this.openHolidaytModel= false
+        this.openHolidayModel= false
         this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
 
       },(error:Error)=>{
@@ -212,7 +218,7 @@ export class AnnulHolidayListComponent implements OnInit {
     )
     .subscribe(res =>{
       this.submitted = false
-      this.openHolidaytModel= false
+      this.openHolidayModel= false
       this.toastr.success(this.translate.instant('toasterMessage.requestResend'));
       this.router.navigate(['/performance-managment/RequestList/details', this.reqInstance])
 

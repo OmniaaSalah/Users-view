@@ -262,7 +262,9 @@
                         </td>
                         <td *ngIf="tableColumns[17].isSelected == true">
                             <!-- {{student?.age}} -->
-                            {{student?.ageYears}} <span *ngIf="student?.ageMonths">{{'shared.and' |translate}} {{student?.ageMonths}} {{'shared.months' |translate}}</span>
+                            <span *ngIf="student?.ageYears">{{student?.ageYears}}</span>&nbsp;
+                            <span *ngIf="student?.ageMonths && student?.ageYears">{{'shared.and' |translate}}</span>&nbsp;
+                            <span *ngIf="student?.ageMonths"> {{student?.ageMonths}} {{'shared.months' |translate}}</span>
                         </td>
                         <td *ngIf="tableColumns[18].isSelected == true">
                            <span *ngIf="student?.registrationStatus">{{'shared.allStatus.'+student?.registrationStatus|translate}}</span>

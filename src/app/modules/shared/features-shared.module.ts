@@ -18,6 +18,7 @@ import { StudentOperationsDropdownComponent } from './components/register-child/
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EditHistoryComponent } from './components/register-child/edit-history/edit-history.component';
 import { SpeaSubjectsComponent } from './components/spea-subjects/spea-subjects.component';
+import { FlexableHolidayFormComponent } from './components/flexable-holiday-form/flexable-holiday-form.component';
 
 
 
@@ -42,6 +43,7 @@ import { SpeaSubjectsComponent } from './components/spea-subjects/spea-subjects.
     StudentOperationsDropdownComponent,
     EditHistoryComponent,
     SpeaSubjectsComponent,
+    FlexableHolidayFormComponent,
 
   ],
   imports: [
@@ -49,7 +51,7 @@ import { SpeaSubjectsComponent } from './components/spea-subjects/spea-subjects.
     PrimngModule,
     SharedModule,
   ],
-  exports:[StudentDetailsComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent, SpeaSubjectsComponent]
+  exports:[StudentDetailsComponent, MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent, SpeaSubjectsComponent,FlexableHolidayFormComponent]
 
 })
 export class FeaturesSharedModule { }
