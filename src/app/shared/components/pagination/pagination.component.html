@@ -9,7 +9,7 @@
   [templateRight]="templateRight"
   [showCurrentPageReport]="true"
   [showPageLinks]="false"
-  currentPageReportTemplate="{{PageReport |currentLang}}"
+  currentPageReportTemplate="{{PageReport}}"
   #pagination (onPageChange)="onPageChange($event)"></p-paginator>
 
 
@@ -19,15 +19,10 @@
   <div class="d-flex align-items-center  justify-content-between gap-3">
 
     <div class="d-flex align-items-center gap-2 mx-4">
-      <span>|</span>
-      <p class="color-gray-400 fs-4">عدد العناصر فالصفحة</p>
-      <p-dropdown [options]="[6,12,18,24,30]" [(ngModel)]="pageSize" (onChange)="onPageSizeChanged($event.value)"></p-dropdown>
     </div>
 
     <div class="d-flex align-items-center">
-      <span class="color-black fs-4">{{'pagination.previous'|translate}} - {{'pagination.next'|translate}}</span>
-      <!-- *ngIf="pagesArrOptions?.length>0"  -->
-      <p-dropdown [options]="pagesArrOptions" [(ngModel)]="currentPage" (onChange)="jupmToPage(state, $event.value)"></p-dropdown>
+      <p-dropdown class="mx-5" [options]="pagesArrOptions" [(ngModel)]="currentPage" (onChange)="jupmToPage(state, $event.value)"></p-dropdown>
       <p-divider layout="vertical"></p-divider>
       <button [disabled]="isFirstPage||currentPage ===1" (click)="prev(state)" class="prev-btn color-gray-400 bg-transparent border-0 " type="button" role="button">
           <img src="{{'assets/images/shared/circle-arrow-' + ((lang=='ar') ? 'right' : 'left') + '.svg'}}">

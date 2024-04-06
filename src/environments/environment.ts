@@ -4,16 +4,9 @@
 import packageJson from '../../package.json';
 
 export const environment = {
-  appName: 'Daleel System',
+  appName: 'Users',
   production: false,
-  serverUrl: "https://daleel-qa-api.azurewebsites.net/api",
-  // serverUrl: "http://10.35.236.31:8082/api" //Staging,
-  env: 'Development',
-  version: packageJson.version,
-  defaultLang: 'ar',
-  logoutRedirectUrl: 'http://localhost:4200/auth/login',
-  clientUrl:"http://localhost:4200/",
-  UAEPassLogout:"https://stg-id.uaepass.ae/idshub/logout"
+
 };
 /*
  * For easier debugging in development mode, you can import the following file

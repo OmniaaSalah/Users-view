@@ -1,14 +1,7 @@
 import packageJson from '../../package.json';
 
 export const environment = {
-  appName: 'Daleel System',
+  appName: 'Users',
   production: true,
-  serverUrl: "https://daleel-qa-api.azurewebsites.net/api",
-  env: 'QA',
-  version: packageJson.version,
-  defaultLang: 'ar',
-  logoutRedirectUrl: 'https://daleel-qa-app.azurewebsites.net/auth/login',
-  clientUrl:"https://daleel-qa-app.azurewebsites.net",
-  UAEPassLogout:"https://stg-id.uaepass.ae/idshub/logout/"
 
 };

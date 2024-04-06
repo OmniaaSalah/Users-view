@@ -1,0 +1,80 @@
+<div class="">
+
+    <div class="home gardian">
+        <div class="home__header">
+            <div class="home__header__title text-center">
+
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="action-bar d-flex align-items-baseline justify-content-between mt-6">
+                <div class="d-flex align-items-center gap-3">
+                    <img class="mysons" src="assets/images/home/users.svg" alt="">
+                    <h3 class="heading heading--secondary color-primary">{{'Users'}}</h3>
+                    <div class="col-12 caption__filter caption__filter--actions">
+                        <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+                            <i class="pi pi-search fs-3 "></i>
+                            <input NumbRestrict class="input" [formControl]="searchInput" type="text"  pInputText placeholder="{{'Search...'}}"/>
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+
+            <!-- <hr class="my-5"> -->
+
+            <div class="mb-6">
+                    <div class="">
+                        <div class="cards mt-5">
+                            <div *ngIf="skeletonShown " class="row gx-5">
+                                <div class="col-md-4" *ngFor="let item of [1,2,3,4,5,6]" >
+                                    <app-skeleton size="15rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
+                                </div>
+                            </div>
+
+                            <!-- Registered Children -->
+                            <div class="row g-5" *ngIf="!skeletonShown ">
+                                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let user of users">
+                                    <div  class="h-100 box-shadow radius-15 p-0" role="button" routerLink="/user-details/{{user?.id}}" >
+
+                                        <div class="profile d-flex align-items-center p-4 gap-4">
+                                            <div class="profile__avatar">
+                                                <img [src]="user?.avatar" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+                                            </div>
+
+                                            <div class="profile__info">
+                                                <div class="profile__name ">
+                                                    <h4 class="heading heading--tertiary max-width-5 toolip mb-5 fs-3" pTooltip="{{user?.first_name +' '+user?.last_name}}">{{user?.first_name +' '+user?.last_name}}</h4>
+
+                                                </div>
+                                                <div class="profile__details mt-0">
+                                                    <div class="fs-4">
+                                                        <img src="assets/images/shared/email.svg" width="20px" height="20px" alt="">
+                                                        <span class="color-gray-300 max-width-5 toolip" pTooltip="{{user?.email}}">{{user?.email}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <app-informative-block *ngIf="users?.length == 0" title="{{'Users list is empty...!'}}"></app-informative-block>
+
+                                <div *ngIf="paginationState?.rows<totalUsers" class="mt-7">
+                                        <app-pagination [currentPage]="page" [totalItems]="totalUsers" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

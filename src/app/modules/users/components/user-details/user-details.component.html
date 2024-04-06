@@ -1,0 +1,61 @@
+
+
+
+<div class="">
+
+    <div class="home gardian">
+        <div class="home__header">
+            <div class="home__header__title text-center">
+
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="action-bar d-flex align-items-baseline justify-content-between mt-6">
+                <div class="back" role="button" [routerLink]="''" StopProp>
+                    <fa-icon [icon]="faArrowRight" class="icon color-primary"></fa-icon>
+                    Back
+                </div>
+            </div>
+
+
+            <hr class="my-5">
+
+            <div class="pb-6">
+                    <div class="">
+                        <div *ngIf="skeletonShown " class="row gx-5">
+                            <div class="col-md-6" *ngFor="let item of [1,2,3,4,5,6,7,8]" >
+                                <app-skeleton  [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
+                            </div>
+                        </div>
+                        <div *ngIf="!skeletonShown " >
+                            <div *ngIf="currentUser" class="d-flex gap-5">
+                                <div class="profile__avatar">
+                                        <img class="round-photo" [src]="currentUser?.avatar" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+                                </div>
+                                <div class="mt-3">
+                                <p class="mb-4"><span class="sub-title-bold">First Name:</span>&nbsp;{{currentUser?.first_name}}</p>
+                                <p class="mb-4"><span class="sub-title-bold">Last Name:</span>&nbsp;{{currentUser?.last_name}}</p>
+                                <p class="mb-4"><span class="sub-title-bold">Email:</span>&nbsp; 
+                                    <a [href]="'mailto:'+currentUser?.email">
+                                    {{currentUser?.email}}
+                                </a>
+                                </p>
+                                </div>
+                            </div>
+                            <div class="row g-5">
+                                <app-informative-block *ngIf="!currentUser" title="{{'No User Found with this id!'}}"></app-informative-block>
+                            </div>
+                         
+                        </div>
+           
+                    </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

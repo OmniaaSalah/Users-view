@@ -4,7 +4,6 @@ import { Paginator } from 'primeng/paginator';
 import { paginationInitialState } from 'src/app/core/helpers/pagination';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 @Component({
@@ -20,7 +19,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   @Input() currentPage: number = 1;
   @Output() paginationChanged = new EventEmitter();
 
-  lang = inject(TranslationService).lang
 
   PageReport
 
@@ -40,19 +38,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.initPaginationState()
   }
 
-  onPageSizeChanged(pageSize){
-    this.paginationState.rows = pageSize
-    this.pagination.rows = pageSize
-    this.paginationState.page = 1
-    this.currentPage =1
-    this.paginationState.first=0
-    localStorage.setItem('ItemsPerPage', pageSize)
-    this.onPageChange()
-
-  }
-
   initPaginationState(){
-    // this.currentPage = 1
     this.currentPage===1 ? this.paginationState.first=0 : this.paginationState.first = this.getFirstIndexInPages(this.currentPage)
     this.paginationState.page=this.currentPage
 
@@ -85,10 +71,8 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
 
   setPaginagationReport(){
-    this.PageReport={
-      ar:`إظهار {first} إلى {last} من أصل  ${this.totalItems}`,
-      en:`Show {first} - {last} from ${this.totalItems} Of total Items`
-    }
+    this.PageReport=`Show {first} - {last} from ${this.totalItems} Of total Items`
+    
   }
 
   ngAfterViewInit(): void {
@@ -98,11 +82,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   getPagesCountList(pageCount){
     pageCount = pageCount > 500 ? 500 : pageCount
     this.pagesArrOptions=  Array.from({length:pageCount},(v,k)=>k+1)
-    // if(pageCount != Infinity){
-    //   for(let i=1; i<= pageCount; i++){
-    //     this.pagesArrOptions.push(i)
-    //   }
-    // }
 
   }
 
@@ -126,22 +105,11 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.onPageChange(this.paginationState)
   }
 
-  // isLastPage(): boolean {
-  //   return this.pagination.isLastPage()
-  //   return this.totalItems ? (this.paginationState.first >= this.totalItems -  this.paginationState.rows) :true;
-  // }
-
-  // isFirstPage(): boolean {
-  //   return this.pagination.isFirstPage()
-  //   return this.totalItems ? this.paginationState.first === 0 : true;
-  // }
-
 
   jupmToPage(state, page){
     this.paginationState.page= page;
     this.pagination.changePage(page-1); // it will trigger onPageChange() implicitly
 
-    // this.onPageChange(this.paginationState);
   }
 
 
